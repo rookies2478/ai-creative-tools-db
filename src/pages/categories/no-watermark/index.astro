@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const tools = await getCollection('tools');
+const filtered = tools.filter((t) => t.data.watermark === 'no' || t.data.watermark === 'limited');
+
+type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+type TriState = boolean | 'partial' | 'unknown';
+type FreePlan = boolean | 'limited' | 'unknown';
+
+function freePlanBadge(val: FreePlan) {
+  if (val === true)      return { text: '無料あり',    cls: 'bg-green-100 text-green-700' };
+  if (val === false)     return { text: '無料なし',    cls: 'bg-red-100 text-red-700' };
+  if (val === 'limited') return { text: '制限付き無料', cls: 'bg-yellow-100 text-yellow-700' };
+                         return { text: '不明',        cls: 'bg-gray-100 text-gray-500' };
+}
+
+function commercialBadge(val: FourState) {
+  if (val === 'yes')     return { text: '○', cls: 'text-green-600' };
+  if (val === 'limited') return { text: '△', cls: 'text-yellow-600' };
+  if (val === 'no')      return { text: '×', cls: 'text-red-500' };
+                         return { text: '?', cls: 'text-gray-400' };
+}
+
+function triSymbol(val: TriState) {
+  if (val === true)      return { s: '○', cls: 'text-green-600' };
+  if (val === false)     return { s: '×', cls: 'text-red-500' };
+  if (val === 'partial') return { s: '△', cls: 'text-yellow-600' };
+                         return { s: '?', cls: 'text-gray-400' };
+}
+---
+
+<BaseLayout
+  title="透かしなしAI画像生成ツール一覧 | AI画像生成・動画生成ツール比較DB"
+  description="生成画像に透かし（ウォーターマーク）が入らないAI画像生成ツールを一覧比較。商用利用・料金も確認できます。"
+>
+  <div class="mx-auto max-w-4xl px-6 py-12">
+
+    <nav class="mb-6 text-sm text-gray-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <a href="/tools/" class="hover:underline">ツール一覧</a>
+      <span class="mx-1">/</span>
+      <span>透かしなし</span>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-bold text-gray-900">透かしなしAI画像生成ツール</h1>
+    <p class="mb-4 text-gray-500">
+      生成画像に透かし（ウォーターマーク）が入らないツール（{filtered.length}件）。
+    </p>
+    <div class="mb-8 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-600">
+      透かしの有無はプランによって異なる場合があります。詳細は各ツールのページでご確認ください。
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50 text-left text-xs text-gray-500">
+            <th class="px-4 py-2 font-medium">ツール名</th>
+            <th class="px-4 py-2 font-medium">無料</th>
+            <th class="px-4 py-2 font-medium">最安有料</th>
+            <th class="px-4 py-2 font-medium text-center">商用</th>
+            <th class="px-4 py-2 font-medium text-center">日本語UI</th>
+            <th class="px-4 py-2 font-medium text-center">日本語プロンプト</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          {filtered.map((tool) => {
+            const fp  = freePlanBadge(tool.data.freePlan);
+            const cu  = commercialBadge(tool.data.commercialUse);
+            const jui = triSymbol(tool.data.japaneseUi);
+            const jpr = triSymbol(tool.data.japanesePrompt);
+            return (
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <a href={`/tools/${tool.slug}/`} class="font-medium text-blue-600 hover:underline">
+                    {tool.data.name}
+                  </a>
+                </td>
+                <td class="px-4 py-3">
+                  <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
+                </td>
+                <td class="px-4 py-3 text-gray-600">
+                  {tool.data.lowestPaidPlan ?? '—'}
+                </td>
+                <td class={`px-4 py-3 text-center font-bold ${cu.cls}`}>{cu.text}</td>
+                <td class={`px-4 py-3 text-center font-bold ${jui.cls}`}>{jui.s}</td>
+                <td class={`px-4 py-3 text-center font-bold ${jpr.cls}`}>{jpr.s}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="mt-10 border-t border-gray-200 pt-6 text-sm">
+      <a href="/tools/" class="text-blue-600 hover:underline">← ツール一覧に戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

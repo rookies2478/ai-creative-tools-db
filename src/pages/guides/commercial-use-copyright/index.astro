@@ -1,0 +1,46 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const entry = await getEntry('guides', 'commercial-use-copyright');
+if (!entry) throw new Error('guide not found: commercial-use-copyright');
+
+const { data } = entry;
+const { Content } = await entry.render();
+---
+
+<BaseLayout title={`${data.title} | AI画像生成・動画生成ツール比較DB`} description={data.description}>
+  <div class="mx-auto max-w-3xl px-6 py-12">
+
+    <nav class="mb-6 text-sm text-gray-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <span>{data.title}</span>
+    </nav>
+
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900">{data.title}</h1>
+      <p class="mt-2 text-gray-500">{data.description}</p>
+    </header>
+
+    <div class="prose prose-gray mb-10 max-w-none text-sm leading-relaxed">
+      <Content />
+    </div>
+
+    <section class="mb-8 rounded-lg border border-yellow-200 bg-yellow-50 px-5 py-4 text-sm text-yellow-800">
+      <p>
+        <strong>情報の鮮度：</strong>最終確認日 {data.lastReviewed}（次回確認予定 {data.nextReviewDue}）
+      </p>
+      <p class="mt-1">
+        このガイドは情報提供を目的としており、法的アドバイスではありません。商用利用の判断は各ツールの最新利用規約と専門家への相談に基づいて行ってください。
+      </p>
+    </section>
+
+    <nav class="border-t border-gray-200 pt-6 text-sm">
+      <a href="/categories/commercial-use/" class="text-blue-600 hover:underline">
+        商用利用OKのツール一覧を見る →
+      </a>
+    </nav>
+
+  </div>
+</BaseLayout>

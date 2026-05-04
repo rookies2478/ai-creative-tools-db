@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const tools = await getCollection('tools');
+const filtered = tools.filter(
+  (t) =>
+    t.data.japaneseUi === true ||
+    t.data.japaneseUi === 'partial' ||
+    t.data.japanesePrompt === true ||
+    t.data.japanesePrompt === 'partial'
+);
+
+type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+type TriState = boolean | 'partial' | 'unknown';
+type FreePlan = boolean | 'limited' | 'unknown';
+
+function triLabel(val: TriState) {
+  if (val === true)      return { s: '○',    cls: 'text-green-600' };
+  if (val === 'partial') return { s: '△',    cls: 'text-yellow-600' };
+  if (val === false)     return { s: '×',    cls: 'text-red-500' };
+                         return { s: '不明', cls: 'text-gray-400' };
+}
+
+function freePlanBadge(val: FreePlan) {
+  if (val === true)      return { text: '無料あり',    cls: 'bg-green-100 text-green-700' };
+  if (val === false)     return { text: '無料なし',    cls: 'bg-red-100 text-red-700' };
+  if (val === 'limited') return { text: '制限付き無料', cls: 'bg-yellow-100 text-yellow-700' };
+                         return { text: '不明',        cls: 'bg-gray-100 text-gray-500' };
+}
+
+function commercialSymbol(val: FourState) {
+  if (val === 'yes')     return { s: '○', cls: 'text-green-600' };
+  if (val === 'limited') return { s: '△', cls: 'text-yellow-600' };
+  if (val === 'no')      return { s: '×', cls: 'text-red-500' };
+                         return { s: '?', cls: 'text-gray-400' };
+}
+---
+
+<BaseLayout
+  title="日本語対応AI画像生成ツール一覧 | AI画像生成・動画生成ツール比較DB"
+  description="日本語UIまたは日本語プロンプトに対応したAI画像生成ツールを一覧比較。日本語での操作・生成が可能なツールを確認できます。"
+>
+  <div class="mx-auto max-w-4xl px-6 py-12">
+
+    <nav class="mb-6 text-sm text-gray-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <a href="/tools/" class="hover:underline">ツール一覧</a>
+      <span class="mx-1">/</span>
+      <span>日本語対応</span>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-bold text-gray-900">日本語対応AI画像生成ツール</h1>
+    <p class="mb-4 text-gray-500">
+      日本語UIまたは日本語プロンプトに対応しているツール（{filtered.length}件）。
+    </p>
+    <div class="mb-8 flex gap-4 text-sm">
+      <span class="flex items-center gap-1"><span class="font-bold text-green-600">○</span>完全対応</span>
+      <span class="flex items-center gap-1"><span class="font-bold text-yellow-600">△</span>一部対応</span>
+      <span class="flex items-center gap-1"><span class="font-bold text-red-500">×</span>非対応</span>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50 text-left text-xs text-gray-500">
+            <th class="px-4 py-2 font-medium">ツール名</th>
+            <th class="px-4 py-2 font-medium text-center">日本語UI</th>
+            <th class="px-4 py-2 font-medium text-center">日本語プロンプト</th>
+            <th class="px-4 py-2 font-medium">無料</th>
+            <th class="px-4 py-2 font-medium text-center">商用</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          {filtered.map((tool) => {
+            const jui = triLabel(tool.data.japaneseUi);
+            const jpr = triLabel(tool.data.japanesePrompt);
+            const fp  = freePlanBadge(tool.data.freePlan);
+            const cu  = commercialSymbol(tool.data.commercialUse);
+            return (
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">
+                  <a href={`/tools/${tool.slug}/`} class="font-medium text-blue-600 hover:underline">
+                    {tool.data.name}
+                  </a>
+                </td>
+                <td class={`px-4 py-3 text-center text-lg font-bold ${jui.cls}`}>{jui.s}</td>
+                <td class={`px-4 py-3 text-center text-lg font-bold ${jpr.cls}`}>{jpr.s}</td>
+                <td class="px-4 py-3">
+                  <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
+                </td>
+                <td class={`px-4 py-3 text-center font-bold ${cu.cls}`}>{cu.s}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="mt-10 border-t border-gray-200 pt-6 text-sm">
+      <a href="/tools/" class="text-blue-600 hover:underline">← ツール一覧に戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

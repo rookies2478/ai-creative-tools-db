@@ -48,7 +48,7 @@ function wmText(val: FourState) {
     <table class="w-full min-w-[640px] text-sm">
       <thead>
         <tr class="bg-slate-50 text-left text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-          <th class="px-4 py-3">ツール名</th>
+          <th class="sticky left-0 z-10 bg-slate-50 px-4 py-3">ツール名</th>
           <th class="px-3 py-3">商用利用</th>
           <th class="px-3 py-3">無料枠</th>
           <th class="px-3 py-3">日本語</th>
@@ -65,7 +65,7 @@ function wmText(val: FourState) {
           const wm = wmText(tool.data.watermark);
           return (
             <tr class="bg-white even:bg-slate-50 hover:bg-slate-100">
-              <td class="px-4 py-3 font-medium text-slate-900">{tool.data.name}</td>
+              <td class="sticky left-0 z-10 bg-white px-4 py-3 font-medium text-slate-900 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.06)]">{tool.data.name}</td>
               <td class={`px-3 py-3 text-xs ${cu.cls}`}>{cu.text}</td>
               <td class="px-3 py-3">
                 <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>

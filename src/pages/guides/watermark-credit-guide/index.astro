@@ -1,0 +1,172 @@
+---
+import { getEntry, getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const entry = await getEntry('guides', 'watermark-credit-guide');
+if (!entry) throw new Error('guide not found: watermark-credit-guide');
+
+const { data } = entry;
+const { Content } = await entry.render();
+
+const allTools = await getCollection('tools');
+
+type FreePlan = boolean | 'limited' | 'unknown';
+type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+
+function freePlanLabel(val: FreePlan) {
+  if (val === true)      return { text: '無料プランあり', cls: 'bg-green-100 text-green-800' };
+  if (val === false)     return { text: '無料プランなし', cls: 'bg-red-100 text-red-800' };
+  if (val === 'limited') return { text: '制限付き無料',  cls: 'bg-yellow-100 text-yellow-800' };
+                         return { text: '不明',          cls: 'bg-gray-100 text-gray-600' };
+}
+
+function watermarkLabel(val: FourState) {
+  if (val === 'yes')     return { text: 'あり',    cls: 'bg-red-100 text-red-800' };
+  if (val === 'no')      return { text: 'なし',    cls: 'bg-green-100 text-green-800' };
+  if (val === 'limited') return { text: '条件付き', cls: 'bg-yellow-100 text-yellow-800' };
+                         return { text: '確認中',  cls: 'bg-gray-100 text-gray-600' };
+}
+
+function commercialUseLabel(val: FourState) {
+  if (val === 'yes')     return { text: '可',      cls: 'bg-green-100 text-green-800' };
+  if (val === 'no')      return { text: '不可',    cls: 'bg-red-100 text-red-800' };
+  if (val === 'limited') return { text: '条件付き', cls: 'bg-yellow-100 text-yellow-800' };
+                         return { text: '不明',    cls: 'bg-gray-100 text-gray-600' };
+}
+
+const sortedTools = [...allTools].sort((a, b) => a.data.name.localeCompare(b.data.name, 'ja'));
+---
+
+<BaseLayout
+  title={`${data.title} | AI画像生成・動画生成ツール比較DB`}
+  description={data.description}
+  canonicalPath="/guides/watermark-credit-guide/"
+  ogType="article"
+>
+  <div class="mx-auto max-w-3xl px-6 py-12">
+
+    <nav class="mb-6 text-sm text-gray-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <span>{data.title}</span>
+    </nav>
+
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900">{data.title}</h1>
+      <p class="mt-2 text-gray-500">{data.description}</p>
+    </header>
+
+    <div class="prose prose-gray mb-10 max-w-none text-sm leading-relaxed">
+      <Content />
+    </div>
+
+    <!-- 透かし確認表 -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-lg font-semibold text-gray-800">主要ツールの透かし状況（確認時点）</h2>
+      <p class="mb-4 text-xs text-gray-500">
+        以下は <strong>{data.lastReviewed}</strong> 時点の調査に基づく目安です。プランや時期によって変更される可能性があります。詳細は各ツールの詳細ページおよび公式サイトでご確認ください。
+      </p>
+
+      <div class="mb-3 flex flex-wrap gap-3 text-xs text-gray-600">
+        <span>透かし凡例：</span>
+        <span class="rounded bg-green-100 px-2 py-0.5 text-green-800">なし</span>
+        <span class="rounded bg-yellow-100 px-2 py-0.5 text-yellow-800">条件付き</span>
+        <span class="rounded bg-red-100 px-2 py-0.5 text-red-800">あり</span>
+        <span class="rounded bg-gray-100 px-2 py-0.5 text-gray-600">確認中</span>
+      </div>
+
+      <div class="overflow-x-auto rounded-lg border border-gray-200">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50 text-left text-xs font-medium text-gray-600">
+            <tr>
+              <th class="px-4 py-3">ツール名</th>
+              <th class="px-4 py-3">透かし</th>
+              <th class="px-4 py-3">無料プラン</th>
+              <th class="px-4 py-3">商用利用</th>
+              <th class="px-4 py-3">最終確認日</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            {sortedTools.map((tool) => {
+              const wm = watermarkLabel(tool.data.watermark);
+              const fp = freePlanLabel(tool.data.freePlan);
+              const cu = commercialUseLabel(tool.data.commercialUse);
+              return (
+                <tr class="hover:bg-gray-50">
+                  <td class="px-4 py-3 font-medium">
+                    <a href={`/tools/${tool.slug}/`} class="text-blue-600 hover:underline">
+                      {tool.data.name}
+                    </a>
+                  </td>
+                  <td class="px-4 py-3">
+                    <span class={`rounded px-2 py-0.5 text-xs font-medium ${wm.cls}`}>{wm.text}</span>
+                  </td>
+                  <td class="px-4 py-3">
+                    <span class={`rounded px-2 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
+                  </td>
+                  <td class="px-4 py-3">
+                    <span class={`rounded px-2 py-0.5 text-xs font-medium ${cu.cls}`}>{cu.text}</span>
+                  </td>
+                  <td class="px-4 py-3 text-gray-500">{tool.data.lastReviewed}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-lg font-semibold text-gray-800">よくある質問</h2>
+      <div class="space-y-5">
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">透かしなしなら商用利用できますか？</p>
+          <p class="mt-2 text-sm text-gray-600">
+            透かしなしで出力できることと、商用利用できることは別問題です。商用利用の可否は、ツールの利用規約、プラン、生成内容、用途によって変わる場合があります。
+          </p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">無料プランの透かしは消してもよいですか？</p>
+          <p class="mt-2 text-sm text-gray-600">
+            公式に認められていない方法で透かしを削除すると、規約違反になる場合があります。透かしなし出力が必要な場合は、公式に認められたプランや出力条件を確認してください。
+          </p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">クレジット表記は必ず必要ですか？</p>
+          <p class="mt-2 text-sm text-gray-600">
+            ツールやプラン、利用用途によって異なります。クレジット表記が必要な場合や、生成AIで作成したことを誤認させない表示が求められる場合があります。最新の公式規約をご確認ください。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 情報鮮度・免責 -->
+    <section class="mb-8 rounded-lg border border-yellow-200 bg-yellow-50 px-5 py-4 text-sm text-yellow-800">
+      <p>
+        <strong>情報の鮮度：</strong>最終確認日 {data.lastReviewed}（次回確認予定 {data.nextReviewDue}）
+      </p>
+      <p class="mt-1">
+        料金・利用規約は予告なく変更されます。商用利用の可否は必ず公式サイトの最新規約でご確認ください。本ページは法的アドバイスではありません。
+      </p>
+    </section>
+
+    <!-- 関連ページ -->
+    <section class="mb-8">
+      <h2 class="mb-3 text-sm font-semibold text-gray-600">関連ページ</h2>
+      <ul class="flex flex-wrap gap-3 text-sm">
+        <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">ツール一覧</a></li>
+        <li><a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">透かしなしツール</a></li>
+        <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>
+        <li><a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用OKのツール</a></li>
+        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用・著作権ガイド</a></li>
+        <li><a href="/guides/free-ai-image-tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料ツールの選び方</a></li>
+      </ul>
+    </section>
+
+    <nav class="border-t border-gray-200 pt-6 text-sm">
+      <a href="/" class="text-blue-600 hover:underline">← トップに戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

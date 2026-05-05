@@ -1,0 +1,164 @@
+---
+import { getEntry, getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const entry = await getEntry('guides', 'free-ai-image-tools');
+if (!entry) throw new Error('guide not found: free-ai-image-tools');
+
+const { data } = entry;
+const { Content } = await entry.render();
+
+const allTools = await getCollection('tools');
+const freeTools = allTools.filter(
+  (t) => t.data.freePlan === true || t.data.freePlan === 'limited'
+);
+
+type FreePlan = boolean | 'limited' | 'unknown';
+type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+
+function freePlanLabel(val: FreePlan) {
+  if (val === true)      return { text: '無料プランあり', cls: 'bg-green-100 text-green-800' };
+  if (val === 'limited') return { text: '制限付き無料',  cls: 'bg-yellow-100 text-yellow-800' };
+                         return { text: '不明',          cls: 'bg-gray-100 text-gray-600' };
+}
+
+function fourStateLabel(val: FourState) {
+  if (val === 'yes')     return { text: '可',       cls: 'bg-green-100 text-green-800' };
+  if (val === 'no')      return { text: '不可',     cls: 'bg-red-100 text-red-800' };
+  if (val === 'limited') return { text: '条件付き', cls: 'bg-yellow-100 text-yellow-800' };
+                         return { text: '不明',     cls: 'bg-gray-100 text-gray-600' };
+}
+---
+
+<BaseLayout
+  title={`${data.title} | AI画像生成・動画生成ツール比較DB`}
+  description={data.description}
+  canonicalPath="/guides/free-ai-image-tools/"
+  ogType="article"
+>
+  <div class="mx-auto max-w-3xl px-6 py-12">
+
+    <nav class="mb-6 text-sm text-gray-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <span>{data.title}</span>
+    </nav>
+
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900">{data.title}</h1>
+      <p class="mt-2 text-gray-500">{data.description}</p>
+    </header>
+
+    <div class="prose prose-gray mb-10 max-w-none text-sm leading-relaxed">
+      <Content />
+    </div>
+
+    <!-- 無料プランあり・制限付き無料ツール一覧 -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-lg font-semibold text-gray-800">無料プランがあるツール（確認時点）</h2>
+      <p class="mb-4 text-xs text-gray-500">
+        以下は <strong>{data.lastReviewed}</strong> 時点の調査に基づく目安です。プランや時期によって変更される可能性があります。詳細は各ツールの詳細ページおよび公式サイトでご確認ください。
+      </p>
+
+      {freeTools.length === 0 ? (
+        <p class="rounded-lg border border-gray-200 bg-gray-50 px-5 py-4 text-sm text-gray-600">
+          現在、公式情報確認前のため、この条件に該当するツールは未確定です。確認が完了したツールから順次掲載します。
+        </p>
+      ) : (
+        <div class="overflow-x-auto rounded-lg border border-gray-200">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50 text-left text-xs font-medium text-gray-600">
+              <tr>
+                <th class="px-4 py-3">ツール名</th>
+                <th class="px-4 py-3">無料プラン</th>
+                <th class="px-4 py-3">商用利用</th>
+                <th class="px-4 py-3">透かし</th>
+                <th class="px-4 py-3">最終確認日</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              {freeTools.map((tool) => {
+                const fp = freePlanLabel(tool.data.freePlan);
+                const cu = fourStateLabel(tool.data.commercialUse);
+                const wm = fourStateLabel(tool.data.watermark);
+                return (
+                  <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 font-medium">
+                      <a href={`/tools/${tool.slug}/`} class="text-blue-600 hover:underline">
+                        {tool.data.name}
+                      </a>
+                    </td>
+                    <td class="px-4 py-3">
+                      <span class={`rounded px-2 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
+                    </td>
+                    <td class="px-4 py-3">
+                      <span class={`rounded px-2 py-0.5 text-xs font-medium ${cu.cls}`}>{cu.text}</span>
+                    </td>
+                    <td class="px-4 py-3">
+                      <span class={`rounded px-2 py-0.5 text-xs font-medium ${wm.cls}`}>{wm.text}</span>
+                    </td>
+                    <td class="px-4 py-3 text-gray-500">{tool.data.lastReviewed}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-lg font-semibold text-gray-800">よくある質問</h2>
+      <div class="space-y-5">
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">無料プランだけで十分ですか？</p>
+          <p class="mt-2 text-sm text-gray-600">
+            用途によります。無料プランでは、クレジット数、解像度、透かし、商用利用条件に制限がある場合があります。継続利用や商用利用を考える場合は、公式の料金ページと利用規約を確認してください。
+          </p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">無料プランで作った画像は商用利用できますか？</p>
+          <p class="mt-2 text-sm text-gray-600">
+            ツールやプランによって異なります。無料プランでも商用利用できる場合がありますが、透かし、クレジット表記、用途制限などがある場合もあります。利用前に必ず公式規約をご確認ください。
+          </p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">透かしが入る無料ツールは避けるべきですか？</p>
+          <p class="mt-2 text-sm text-gray-600">
+            用途によります。個人利用や試用では問題ない場合がありますが、広告、納品物、販売物に使う場合は、透かし条件と商用利用条件を確認してください。透かしを消せることと商用利用できることは別問題です。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 情報鮮度・免責 -->
+    <section class="mb-8 rounded-lg border border-yellow-200 bg-yellow-50 px-5 py-4 text-sm text-yellow-800">
+      <p>
+        <strong>情報の鮮度：</strong>最終確認日 {data.lastReviewed}（次回確認予定 {data.nextReviewDue}）
+      </p>
+      <p class="mt-1">
+        料金・利用規約は予告なく変更されます。商用利用の可否は必ず公式サイトの最新規約でご確認ください。本ページは法的アドバイスではありません。
+      </p>
+    </section>
+
+    <!-- 関連ページ -->
+    <section class="mb-8 space-y-6">
+      <div>
+        <h2 class="mb-3 text-sm font-semibold text-gray-600">関連ページ</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">ツール一覧</a></li>
+          <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>
+          <li><a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用OKのツール</a></li>
+          <li><a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">透かしなしツール</a></li>
+          <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用・著作権ガイド</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="border-t border-gray-200 pt-6 text-sm">
+      <a href="/" class="text-blue-600 hover:underline">← トップに戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

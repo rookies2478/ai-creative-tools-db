@@ -4,32 +4,69 @@ slug: "leonardo-ai"
 category: "image"
 officialUrl: "https://leonardo.ai"
 freePlan: "limited"
-lowestPaidPlan: "$10/月（Apprenticeプラン）"
+lowestPaidPlan: "$10/月（Apprenticeプラン・年払い）／$12/月（月払い）"
 currency: "USD"
 commercialUse: "limited"
-commercialUseNote: "有料プランでは商用利用可。無料プランの商用利用可否は要確認。生成画像の権利はプランにより異なる。"
-japaneseUi: false
-japanesePrompt: true
-watermark: "no"
+commercialUseNote: "公式情報上、有料プランかつPrivate設定時にユーザーが画像の知的財産権を保有し商用利用できるとされています。無料プランでは生成画像の権利はLeonardo.AIが保持し、他ユーザーも同一画像を使用できる場合があります。商用利用前に最新の利用規約をご確認ください。"
+japaneseUi: "unknown"
+japanesePrompt: "partial"
+watermark: "unknown"
 bestFor:
-  - "ゲームアセット・キャラクター生成"
-  - "カスタムモデルの活用"
-  - "コスト抑えた高品質生成"
+  - "ゲームアセット・キャラクター系の画像生成"
+  - "カスタムモデルを活用した特化生成"
+  - "無料枠での高品質な試作"
 strengths:
-  - "無料枠が比較的多い"
-  - "ゲーム・イラスト系のモデルが豊富"
-  - "ControlNet相当の機能を搭載"
+  - "無料プランのトークン数が比較的多い"
+  - "ゲーム・イラスト向けのカスタムモデルが豊富"
+  - "有料プランでは画像の知的財産権がユーザーに帰属するとされる"
 weaknesses:
-  - "日本語UIなし"
-  - "商用利用条件をプラン別に確認が必要"
-  - "品質はMidjourneyより下の場合あり"
+  - "無料プランでは画像の権利がLeonardo.AIに帰属する場合がある"
+  - "商用利用には有料プラン＋Private設定が必要とされる"
+  - "日本語UIの有無は公式情報から未確認"
+  - "日本語プロンプトは英語より精度が低い傾向がある"
+  - "生成画像への透かし有無は公式情報から未確認"
 lastReviewed: "2026-05-04"
 nextReviewDue: "2026-08-04"
 sources:
-  - title: "Leonardo AI 公式サイト"
-    url: "https://leonardo.ai"
-  - title: "Leonardo AI 利用規約"
-    url: "https://leonardo.ai/terms-of-service"
+  - title: "Leonardo AI 料金プラン（公式）"
+    url: "https://leonardo.ai/pricing/"
+  - title: "Leonardo AI 利用規約（公式）"
+    url: "https://leonardo.ai/terms-of-service/"
+  - title: "Leonardo AI FAQ（公式）"
+    url: "https://leonardo.ai/faq/"
+  - title: "Leonardo AI 商用利用ガイド（公式）"
+    url: "https://leonardo.ai/news/can-you-use-ai-generated-images-commercially/"
 ---
 
-<!-- 詳細説明は後続タスクで記載 -->
+## Leonardo AIとは
+
+Leonardo AIはゲーム・イラスト・キャラクター画像の生成に強みを持つAI画像生成サービス。カスタムモデルやLoRAを活用した特化生成が特徴です。無料プランでも一定数のトークンが付与されます。
+
+## 料金プラン
+
+| プラン | 料金 | トークン |
+|---|---|---|
+| 無料 | 無料 | 1日150トークン程度（変更の可能性あり） |
+| Apprentice | $10/月〜（年払い） | 月8,500トークン程度 |
+
+- トークン数・料金はプランや時期により変更される可能性があります
+- **最新の料金・トークン数はLeonardo AI公式料金ページをご確認ください**
+
+## 商用利用について
+
+公式情報上、以下の条件が設けられています。
+
+- **無料プラン：** 生成画像の権利はLeonardo.AIが保持するとされており、他ユーザーも同一画像を使用できる場合があります
+- **有料プラン＋Private設定：** ユーザーが画像の知的財産権を保有し、商用利用できる場合があるとされています。利用前に最新の規約をご確認ください
+- 条件は変更される可能性があります
+
+> **免責事項：** このページは情報提供を目的としており、法的助言ではありません。商用利用前は[Leonardo AI利用規約](https://leonardo.ai/terms-of-service/)の最新版をご確認ください。
+
+## 日本語対応
+
+- **日本語UI：** 公式情報から現時点では確認できていません
+- **日本語プロンプト：** 一部対応。日本語プロンプトの入力は可能ですが、英語と比べて精度が低い傾向があります。専門用語・固有名詞は英語での入力が推奨される場合があります
+
+## 透かし（ウォーターマーク）
+
+通常は生成画像に透かしは入らないとされていますが、公式情報からの詳細な仕様は確認できていません。最新の条件は公式サイトでご確認ください。

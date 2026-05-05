@@ -38,8 +38,9 @@ function commercialSymbol(val: FourState) {
 ---
 
 <BaseLayout
-  title="日本語対応AI画像生成ツール一覧 | AI画像生成・動画生成ツール比較DB"
-  description="日本語UIまたは日本語プロンプトに対応したAI画像生成ツールを一覧比較。日本語での操作・生成が可能なツールを確認できます。"
+  title="日本語対応AI画像生成ツール | AI画像生成・動画生成ツール比較DB"
+  description="日本語UIまたは日本語プロンプトに対応したAI画像・動画生成ツールを比較。日本語での操作・生成が可能なツールを確認できます。"
+  canonicalPath="/categories/japanese/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
 
@@ -52,8 +53,12 @@ function commercialSymbol(val: FourState) {
     </nav>
 
     <h1 class="mb-2 text-3xl font-bold text-gray-900">日本語対応AI画像生成ツール</h1>
-    <p class="mb-4 text-gray-500">
-      日本語UIまたは日本語プロンプトに対応しているツール（{filtered.length}件）。
+    <p class="mb-2 text-gray-500">
+      日本語UIまたは日本語プロンプトに対応しているAI画像・動画生成ツール（確認時点で{filtered.length}件）。
+    </p>
+    <p class="mb-6 text-sm text-gray-500">
+      「一部対応（△）」は、UI全体ではなく設定・一部画面のみ日本語表示、または日本語プロンプトが受け付けられる場合があるものの英語推奨など、対応状況にばらつきがあることを示しています。
+      最新の対応状況は各ツールの公式情報でご確認ください。
     </p>
     <div class="mb-8 flex gap-4 text-sm">
       <span class="flex items-center gap-1"><span class="font-bold text-green-600">○</span>完全対応</span>
@@ -98,7 +103,18 @@ function commercialSymbol(val: FourState) {
       </table>
     </div>
 
-    <nav class="mt-10 border-t border-gray-200 pt-6 text-sm">
+    <!-- 関連ページ -->
+    <section class="mt-10">
+      <h2 class="mb-4 text-sm font-semibold text-gray-600">関連ページ</h2>
+      <ul class="flex flex-wrap gap-3 text-sm">
+        <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">ツール一覧</a></li>
+        <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>
+        <li><a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用OKのツール</a></li>
+        <li><a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">透かしなしツール</a></li>
+      </ul>
+    </section>
+
+    <nav class="mt-8 border-t border-gray-200 pt-6 text-sm">
       <a href="/tools/" class="text-blue-600 hover:underline">← ツール一覧に戻る</a>
     </nav>
 

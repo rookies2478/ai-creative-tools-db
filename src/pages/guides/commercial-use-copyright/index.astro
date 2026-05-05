@@ -9,7 +9,12 @@ const { data } = entry;
 const { Content } = await entry.render();
 ---
 
-<BaseLayout title={`${data.title} | AI画像生成・動画生成ツール比較DB`} description={data.description}>
+<BaseLayout
+  title={`${data.title} | AI画像生成・動画生成ツール比較DB`}
+  description={data.description}
+  canonicalPath="/guides/commercial-use-copyright/"
+  ogType="article"
+>
   <div class="mx-auto max-w-3xl px-6 py-12">
 
     <nav class="mb-6 text-sm text-gray-500">
@@ -36,10 +41,37 @@ const { Content } = await entry.render();
       </p>
     </section>
 
+    <!-- 関連ページ -->
+    <section class="mb-8 space-y-6">
+      <div>
+        <h2 class="mb-3 text-sm font-semibold text-gray-600">関連カテゴリ</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">ツール一覧</a></li>
+          <li><a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用OKのツール</a></li>
+          <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>
+          <li><a href="/categories/japanese/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">日本語対応ツール</a></li>
+          <li><a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">透かしなしツール</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="mb-3 text-sm font-semibold text-gray-600">主要ツール詳細</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          <li><a href="/tools/midjourney/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">Midjourney</a></li>
+          <li><a href="/tools/adobe-firefly/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">Adobe Firefly</a></li>
+          <li><a href="/tools/stable-diffusion/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">Stable Diffusion</a></li>
+          <li><a href="/tools/dalle/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">DALL·E</a></li>
+          <li><a href="/tools/canva-ai-image-generator/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">Canva AI画像生成</a></li>
+          <li><a href="/tools/leonardo-ai/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">Leonardo AI</a></li>
+          <li><a href="/tools/runway/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">Runway</a></li>
+          <li><a href="/tools/pika/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">Pika</a></li>
+          <li><a href="/tools/kling-ai/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">Kling AI</a></li>
+        </ul>
+      </div>
+    </section>
+
     <nav class="border-t border-gray-200 pt-6 text-sm">
-      <a href="/categories/commercial-use/" class="text-blue-600 hover:underline">
-        商用利用OKのツール一覧を見る →
-      </a>
+      <a href="/" class="text-blue-600 hover:underline">← トップに戻る</a>
     </nav>
 
   </div>

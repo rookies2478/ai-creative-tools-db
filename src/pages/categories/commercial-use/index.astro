@@ -34,8 +34,9 @@ function triSymbol(val: TriState) {
 ---
 
 <BaseLayout
-  title="商用利用OKのAI画像生成ツール一覧 | AI画像生成・動画生成ツール比較DB"
-  description="商用利用可または条件付きで商用利用できるAI画像生成ツールを一覧比較。利用規約・注意事項も確認できます。"
+  title="商用利用OKのAI画像生成ツール | AI画像生成・動画生成ツール比較DB"
+  description="商用利用可または条件付きで商用利用できるAI画像・動画生成ツールを比較。利用規約・注意事項も確認できます。"
+  canonicalPath="/categories/commercial-use/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
 
@@ -48,14 +49,26 @@ function triSymbol(val: TriState) {
     </nav>
 
     <h1 class="mb-2 text-3xl font-bold text-gray-900">商用利用OKのAI画像生成ツール</h1>
-    <p class="mb-4 text-gray-500">
-      商用利用可・条件付き商用利用可のツール（{filtered.length}件）。
+    <p class="mb-2 text-gray-500">
+      商用利用できる可能性があるAI画像・動画生成ツール（確認時点で{filtered.length}件）。
     </p>
-    <div class="mb-8 rounded-lg border border-yellow-200 bg-yellow-50 px-4 py-3 text-sm text-yellow-800">
-      利用規約は予告なく変更されます。商用利用前に必ず各ツールの最新規約をご確認ください。
-      <a href="/guides/commercial-use-copyright/" class="ml-1 underline hover:text-yellow-900">
-        商用利用・著作権ガイド →
-      </a>
+    <p class="mb-6 text-sm text-gray-500">
+      商用利用の可否は、利用するプラン・用途・生成コンテンツの内容・各ツールの利用規約によって異なる場合があります。
+      広告・YouTube収益化・クライアントワーク・商品パッケージへの使用などを検討している場合は、利用前に各ツールの最新公式情報をご確認ください。
+    </p>
+
+    <div class="mb-8 rounded-lg border border-yellow-200 bg-yellow-50 px-5 py-4 text-sm text-yellow-800">
+      <p class="font-medium">このページを利用する前にご確認ください</p>
+      <ul class="mt-2 space-y-1 list-disc list-inside">
+        <li>表示は確認時点の一般的な比較情報であり、法的助言ではありません</li>
+        <li>「商用可」の表示はツールの利用規約・プラン条件によって制限される場合があります</li>
+        <li>利用規約は予告なく変更されます。商用利用前に必ず最新の公式規約をご確認ください</li>
+      </ul>
+      <p class="mt-3">
+        <a href="/guides/commercial-use-copyright/" class="font-medium underline hover:text-yellow-900">
+          AI画像・動画生成ツールの商用利用・著作権ガイドを読む →
+        </a>
+      </p>
     </div>
 
     <div class="overflow-x-auto">
@@ -98,7 +111,47 @@ function triSymbol(val: TriState) {
       </table>
     </div>
 
-    <nav class="mt-10 border-t border-gray-200 pt-6 text-sm">
+    <!-- FAQ -->
+    <section class="mt-12">
+      <h2 class="mb-6 text-xl font-semibold text-gray-800">よくある質問</h2>
+
+      <div class="space-y-6">
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">商用利用OKと表示されていれば自由に使えますか？</p>
+          <p class="mt-2 text-sm text-gray-600">
+            自由に使えるとは限りません。プラン、用途、生成コンテンツの内容、利用規約によって条件が変わる場合があります。実際に使う前に、必ず各ツールの最新公式情報をご確認ください。
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">無料プランで作った画像や動画も商用利用できますか？</p>
+          <p class="mt-2 text-sm text-gray-600">
+            ツールによって異なります。無料プランでは、透かし、解像度、クレジット表記、利用範囲の制限がある場合があります。商用利用を検討する場合は、各ツールの無料プラン条件を公式情報で確認してください。
+          </p>
+        </div>
+
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">クライアント案件や広告に使う場合は何を確認すべきですか？</p>
+          <p class="mt-2 text-sm text-gray-600">
+            ツールの利用規約、プラン条件、生成コンテンツの内容、素材や入力画像の権利、納品先での利用範囲を確認してください。必要に応じて専門家への相談も検討してください。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 関連ページ -->
+    <section class="mt-10">
+      <h2 class="mb-4 text-sm font-semibold text-gray-600">関連ページ</h2>
+      <ul class="flex flex-wrap gap-3 text-sm">
+        <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">ツール一覧</a></li>
+        <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>
+        <li><a href="/categories/japanese/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">日本語対応ツール</a></li>
+        <li><a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">透かしなしツール</a></li>
+        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用・著作権ガイド</a></li>
+      </ul>
+    </section>
+
+    <nav class="mt-8 border-t border-gray-200 pt-6 text-sm">
       <a href="/tools/" class="text-blue-600 hover:underline">← ツール一覧に戻る</a>
     </nav>
 

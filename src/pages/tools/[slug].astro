@@ -53,8 +53,10 @@ const jpr = triLabel(data.japanesePrompt);
 ---
 
 <BaseLayout
-  title={`${data.name} レビュー・料金・商用利用 | AI画像生成・動画生成ツール比較DB`}
-  description={`${data.name}の料金、商用利用可否、日本語対応、透かし有無などを詳しく解説。`}
+  title={`${data.name}の料金・商用利用・日本語対応まとめ | AI画像生成・動画生成ツール比較DB`}
+  description={`${data.name}の料金プラン、商用利用の可否、日本語対応状況、透かしの有無などをまとめています。`}
+  canonicalPath={`/tools/${entry.slug}/`}
+  ogType="article"
 >
   <article class="mx-auto max-w-3xl px-6 py-12">
 
@@ -203,6 +205,19 @@ const jpr = triLabel(data.japanesePrompt);
         </ul>
       </section>
     )}
+
+    <!-- 関連ページ -->
+    <section class="mb-8">
+      <h2 class="mb-4 text-sm font-semibold text-gray-600">関連ページ</h2>
+      <ul class="flex flex-wrap gap-3 text-sm">
+        <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">ツール一覧</a></li>
+        <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>
+        <li><a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用OKのツール</a></li>
+        <li><a href="/categories/japanese/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">日本語対応ツール</a></li>
+        <li><a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">透かしなしツール</a></li>
+        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用・著作権ガイド</a></li>
+      </ul>
+    </section>
 
     <!-- ナビ -->
     <nav class="border-t border-gray-200 pt-6 text-sm">

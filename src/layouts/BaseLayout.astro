@@ -4,12 +4,20 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  canonicalPath?: string;
+  ogType?: string;
 }
 
 const {
   title,
   description = 'AI画像生成・動画生成ツールを比較できるDB型SEOメディア',
+  canonicalPath,
+  ogType = 'website',
 } = Astro.props;
+
+const canonicalUrl = canonicalPath && Astro.site
+  ? new URL(canonicalPath, Astro.site).href
+  : undefined;
 ---
 
 <!doctype html>
@@ -18,6 +26,13 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="robots" content="noindex,nofollow" />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta property="og:site_name" content="AI画像生成・動画生成ツール比較DB" />
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-gray-50 text-gray-900">

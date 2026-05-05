@@ -2,37 +2,83 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="AI画像生成・動画生成ツール比較DB">
-  <section class="mx-auto max-w-4xl px-6 py-16">
-    <h1 class="text-3xl font-bold text-gray-900">
-      AI画像生成・動画生成ツール比較DB
-    </h1>
-    <p class="mt-4 text-lg text-gray-600">
-      AI画像生成・動画生成ツールを比較できるDB型SEOメディア。
-    </p>
+<BaseLayout
+  title="AI画像生成・動画生成ツール比較DB"
+  description="Midjourney、Adobe Firefly、Runway、Pikaなど主要AI画像・動画生成ツールの料金・商用利用・日本語対応を比較できるDBメディア。"
+  canonicalPath="/"
+>
+  <div class="mx-auto max-w-4xl px-6 py-12">
 
-    <div class="mt-6 rounded-lg border border-yellow-200 bg-yellow-50 px-6 py-4">
-      <p class="text-sm font-medium text-yellow-800">現在MVP構築中です。</p>
-    </div>
+    <!-- ファーストビュー -->
+    <section class="mb-12">
+      <h1 class="text-3xl font-bold text-gray-900">
+        AI画像生成・動画生成ツールを比較できるDB
+      </h1>
+      <p class="mt-4 text-base text-gray-600">
+        Midjourney・DALL·E・Adobe Firefly・Runway・Pikaなど、主要なAI画像生成・動画生成ツールの料金・無料プラン・商用利用・日本語対応・透かしの有無を比較できます。
+      </p>
+      <p class="mt-2 text-sm text-gray-500">
+        各ツールの料金・利用条件は変更される可能性があります。最新情報は必ず各ツールの公式サイトでご確認ください。
+      </p>
 
-    <nav class="mt-12">
-      <h2 class="text-xl font-semibold text-gray-800">カテゴリ</h2>
-      <ul class="mt-4 space-y-2 text-blue-600">
-        <li><a href="/tools/" class="hover:underline">ツール一覧</a></li>
-        <li><a href="/categories/free/" class="hover:underline">無料で使えるAI画像生成ツール</a></li>
-        <li><a href="/categories/commercial-use/" class="hover:underline">商用利用OKのAI画像生成ツール</a></li>
-        <li><a href="/categories/japanese/" class="hover:underline">日本語対応AI画像生成ツール</a></li>
-        <li><a href="/categories/no-watermark/" class="hover:underline">透かしなしAI画像生成ツール</a></li>
-      </ul>
+      <div class="mt-6 rounded-lg border border-yellow-200 bg-yellow-50 px-5 py-3 text-sm text-yellow-800">
+        現在MVP検証公開中です。掲載情報は各ページの確認日時点のものです。
+      </div>
+    </section>
 
-      <h2 class="mt-8 text-xl font-semibold text-gray-800">ガイド</h2>
-      <ul class="mt-4 space-y-2 text-blue-600">
-        <li>
-          <a href="/guides/commercial-use-copyright/" class="hover:underline">
-            AI画像生成の商用利用・著作権ガイド
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </section>
+    <!-- ツール一覧への導線 -->
+    <section class="mb-10">
+      <a
+        href="/tools/"
+        class="flex items-center justify-between rounded-lg border border-blue-200 bg-blue-50 px-6 py-4 hover:bg-blue-100"
+      >
+        <div>
+          <p class="font-semibold text-blue-800">AI画像生成・動画生成ツール一覧</p>
+          <p class="mt-0.5 text-sm text-blue-600">全ツールを料金・商用利用・日本語対応で一覧比較</p>
+        </div>
+        <span class="text-blue-500">→</span>
+      </a>
+    </section>
+
+    <!-- カテゴリ -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-lg font-semibold text-gray-800">カテゴリから探す</h2>
+      <div class="grid gap-3 sm:grid-cols-2">
+        <a href="/categories/free/" class="rounded-lg border border-gray-200 bg-white px-5 py-4 hover:border-gray-300 hover:bg-gray-50">
+          <p class="font-medium text-gray-800">無料で使えるツール</p>
+          <p class="mt-0.5 text-sm text-gray-500">無料プラン・制限付き無料のあるツール</p>
+        </a>
+        <a href="/categories/commercial-use/" class="rounded-lg border border-gray-200 bg-white px-5 py-4 hover:border-gray-300 hover:bg-gray-50">
+          <p class="font-medium text-gray-800">商用利用OKのツール</p>
+          <p class="mt-0.5 text-sm text-gray-500">商用利用可・条件付き商用利用可のツール</p>
+        </a>
+        <a href="/categories/japanese/" class="rounded-lg border border-gray-200 bg-white px-5 py-4 hover:border-gray-300 hover:bg-gray-50">
+          <p class="font-medium text-gray-800">日本語対応ツール</p>
+          <p class="mt-0.5 text-sm text-gray-500">日本語UIまたは日本語プロンプト対応</p>
+        </a>
+        <a href="/categories/no-watermark/" class="rounded-lg border border-gray-200 bg-white px-5 py-4 hover:border-gray-300 hover:bg-gray-50">
+          <p class="font-medium text-gray-800">透かしなしツール</p>
+          <p class="mt-0.5 text-sm text-gray-500">生成画像・動画に透かしが入らないツール</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- ガイド -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-lg font-semibold text-gray-800">ガイド</h2>
+      <a href="/guides/commercial-use-copyright/" class="flex items-center justify-between rounded-lg border border-gray-200 bg-white px-5 py-4 hover:border-gray-300 hover:bg-gray-50">
+        <div>
+          <p class="font-medium text-gray-800">AI画像生成の商用利用・著作権ガイド</p>
+          <p class="mt-0.5 text-sm text-gray-500">商用利用の注意点・著作権の基本・ツール別まとめ</p>
+        </div>
+        <span class="text-gray-400">→</span>
+      </a>
+    </section>
+
+    <!-- 注意事項 -->
+    <section class="text-sm text-gray-400">
+      <p>掲載情報は各ページ記載の確認日時点のものです。料金・利用条件・商用利用可否は予告なく変更されます。商用利用前は必ず各ツールの最新公式情報をご確認ください。</p>
+    </section>
+
+  </div>
 </BaseLayout>

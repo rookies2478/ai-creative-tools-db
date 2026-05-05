@@ -32,8 +32,9 @@ function triSymbol(val: TriState) {
 ---
 
 <BaseLayout
-  title="透かしなしAI画像生成ツール一覧 | AI画像生成・動画生成ツール比較DB"
-  description="生成画像に透かし（ウォーターマーク）が入らないAI画像生成ツールを一覧比較。商用利用・料金も確認できます。"
+  title="透かしなしAI画像生成ツール | AI画像生成・動画生成ツール比較DB"
+  description="生成画像・動画に透かし（ウォーターマーク）が入らないAI画像・動画生成ツールを比較。商用利用・料金も確認できます。"
+  canonicalPath="/categories/no-watermark/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
 
@@ -46,11 +47,20 @@ function triSymbol(val: TriState) {
     </nav>
 
     <h1 class="mb-2 text-3xl font-bold text-gray-900">透かしなしAI画像生成ツール</h1>
-    <p class="mb-4 text-gray-500">
-      生成画像に透かし（ウォーターマーク）が入らないツール（{filtered.length}件）。
+    <p class="mb-2 text-gray-500">
+      生成画像・動画に透かし（ウォーターマーク）が入らないAI画像・動画生成ツール（確認時点で{filtered.length}件）。
     </p>
-    <div class="mb-8 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-600">
-      透かしの有無はプランによって異なる場合があります。詳細は各ツールのページでご確認ください。
+    <p class="mb-6 text-sm text-gray-500">
+      透かしの有無は利用するプランによって異なる場合があります。無料プランでは透かしが付与され、有料プランで除去できるケースが多く見られます。
+      詳細は各ツールの詳細ページおよび公式情報でご確認ください。
+    </p>
+    <div class="mb-8 rounded-lg border border-gray-200 bg-gray-50 px-5 py-4 text-sm text-gray-600">
+      <p>透かしを除去できることと、商用利用が許可されていることは別の問題です。商用利用を検討する場合は、透かし条件に加えて各ツールの利用規約も確認してください。</p>
+      <p class="mt-2">
+        <a href="/guides/commercial-use-copyright/" class="text-blue-600 underline hover:text-blue-800">
+          商用利用・著作権ガイドを読む →
+        </a>
+      </p>
     </div>
 
     <div class="overflow-x-auto">
@@ -94,7 +104,19 @@ function triSymbol(val: TriState) {
       </table>
     </div>
 
-    <nav class="mt-10 border-t border-gray-200 pt-6 text-sm">
+    <!-- 関連ページ -->
+    <section class="mt-10">
+      <h2 class="mb-4 text-sm font-semibold text-gray-600">関連ページ</h2>
+      <ul class="flex flex-wrap gap-3 text-sm">
+        <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">ツール一覧</a></li>
+        <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>
+        <li><a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用OKのツール</a></li>
+        <li><a href="/categories/japanese/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">日本語対応ツール</a></li>
+        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用・著作権ガイド</a></li>
+      </ul>
+    </section>
+
+    <nav class="mt-8 border-t border-gray-200 pt-6 text-sm">
       <a href="/tools/" class="text-blue-600 hover:underline">← ツール一覧に戻る</a>
     </nav>
 

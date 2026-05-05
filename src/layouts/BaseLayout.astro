@@ -35,17 +35,51 @@ const canonicalUrl = canonicalPath && Astro.site
     <meta property="og:site_name" content="AI画像生成・動画生成ツール比較DB" />
     <title>{title}</title>
   </head>
-  <body class="min-h-screen bg-gray-50 text-gray-900">
-    <header class="border-b border-gray-200 bg-white px-6 py-4">
-      <a href="/" class="text-lg font-bold hover:text-blue-600">
-        AI画像生成・動画生成ツール比較DB
-      </a>
+  <body class="min-h-screen bg-white text-slate-900 antialiased">
+
+    <!-- ===== HEADER ===== -->
+    <header class="sticky top-0 z-30 border-b border-slate-100 bg-white/95 backdrop-blur-sm">
+      <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-3.5">
+
+        <!-- Brand -->
+        <a href="/" class="flex items-center gap-1.5 font-black tracking-tight text-[#002B61]">
+          <span class="text-xl text-blue-600">Y</span><span class="text-base">-Labo</span>
+        </a>
+
+        <!-- Center nav — desktop only -->
+        <nav class="hidden items-center gap-6 text-sm text-slate-600 lg:flex">
+          <a href="/tools/"                           class="hover:text-[#0066FF]">ツールを探す</a>
+          <a href="/tools/"                           class="hover:text-[#0066FF]">比較表</a>
+          <a href="/categories/free/"                 class="hover:text-[#0066FF]">無料プランあり</a>
+          <a href="/guides/commercial-use-copyright/" class="hover:text-[#0066FF]">使い方ガイド</a>
+          <a href="/guides/free-ai-image-tools/"      class="hover:text-[#0066FF]">お役立ち記事</a>
+        </nav>
+
+        <!-- Right CTA -->
+        <a href="/tools/" class="rounded-lg bg-[#0066FF] px-3.5 py-2 text-xs font-semibold text-white hover:bg-blue-700 sm:px-5 sm:text-sm">
+          <span class="hidden sm:inline">目的に合うツールを探す</span>
+          <span class="sm:hidden">ツールを探す</span>
+        </a>
+
+      </div>
     </header>
+
     <main>
       <slot />
     </main>
-    <footer class="border-t border-gray-200 bg-white px-6 py-4 text-center text-sm text-gray-500">
-      © 2026 AI画像生成・動画生成ツール比較DB
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-slate-100 bg-slate-50 py-10 text-center">
+      <p class="mb-1 text-sm font-bold text-[#002B61]">Y-Labo</p>
+      <p class="mb-5 text-xs text-slate-400">AI画像生成・動画生成ツール比較DB</p>
+      <nav class="mb-4 flex flex-wrap justify-center gap-x-6 gap-y-1.5 text-xs text-slate-500">
+        <a href="/privacy-policy/"   class="hover:text-blue-600">プライバシーポリシー</a>
+        <a href="/contact/"          class="hover:text-blue-600">お問い合わせ</a>
+        <a href="/about/"            class="hover:text-blue-600">運営者情報</a>
+        <a href="/editorial-policy/" class="hover:text-blue-600">掲載方針・比較基準</a>
+      </nav>
+      <p class="text-xs text-slate-400">© 2026 Y-Labo / AI画像生成・動画生成ツール比較DB</p>
     </footer>
+
   </body>
 </html>

@@ -1,0 +1,49 @@
+---
+interface Props {
+  slug: string;
+  name: string;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { slug, name, size = 'md' } = Astro.props;
+
+// Add slug here after placing the file in public/logos/{slug}.svg (or .png)
+const hasLogo = new Set<string>([
+  // 'midjourney',
+  // 'adobe-firefly',
+  // 'stable-diffusion',
+  // 'dalle',
+  // 'canva',
+  // 'leonardo-ai',
+  // 'runway',
+  // 'pika',
+  // 'kling-ai',
+]);
+
+const logoExists = hasLogo.has(slug);
+const initial = name.charAt(0).toUpperCase();
+
+const sizeMap = {
+  sm: { box: 'h-8 w-8',   text: 'text-sm',  px: 28 },
+  md: { box: 'h-11 w-11', text: 'text-base', px: 44 },
+  lg: { box: 'h-14 w-14', text: 'text-lg',   px: 56 },
+};
+const s = sizeMap[size];
+---
+
+{logoExists ? (
+  <img
+    src={`/logos/${slug}.svg`}
+    alt={`${name} ロゴ`}
+    width={s.px}
+    height={s.px}
+    class={`${s.box} rounded-xl object-contain`}
+  />
+) : (
+  <div
+    class={`${s.box} ${s.text} flex shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white font-bold text-slate-600`}
+    aria-label={name}
+  >
+    {initial}
+  </div>
+)}

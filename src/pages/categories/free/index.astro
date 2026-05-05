@@ -12,7 +12,7 @@ type TriState = boolean | 'partial' | 'unknown';
 type FreePlan = boolean | 'limited' | 'unknown';
 
 function freePlanBadge(val: FreePlan) {
-  if (val === true)      return { text: '完全無料',    cls: 'bg-green-100 text-green-700' };
+  if (val === true)      return { text: '無料プランあり', cls: 'bg-green-100 text-green-700' };
   if (val === 'limited') return { text: '制限付き無料', cls: 'bg-yellow-100 text-yellow-700' };
                          return { text: '不明',        cls: 'bg-gray-100 text-gray-500' };
 }

@@ -1,41 +1,19 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NoticeBox from '../../../components/NoticeBox.astro';
+import CompareTablePreview from '../../../components/CompareTablePreview.astro';
+import ConditionChips from '../../../components/ConditionChips.astro';
 
 const tools = await getCollection('tools');
 const filtered = tools.filter(
   (t) => t.data.commercialUse === 'yes' || t.data.commercialUse === 'limited'
 );
-
-type FourState = 'yes' | 'no' | 'limited' | 'unknown';
-type TriState = boolean | 'partial' | 'unknown';
-type FreePlan = boolean | 'limited' | 'unknown';
-
-function commercialBadge(val: FourState) {
-  if (val === 'yes')     return { text: '商用可',    cls: 'bg-green-100 text-green-700' };
-  if (val === 'limited') return { text: '条件付き',  cls: 'bg-yellow-100 text-yellow-700' };
-  if (val === 'no')      return { text: '商用不可',  cls: 'bg-red-100 text-red-700' };
-                         return { text: '不明',      cls: 'bg-gray-100 text-gray-500' };
-}
-
-function freePlanBadge(val: FreePlan) {
-  if (val === true)      return { text: '無料あり',    cls: 'bg-green-100 text-green-700' };
-  if (val === false)     return { text: '無料なし',    cls: 'bg-red-100 text-red-700' };
-  if (val === 'limited') return { text: '制限付き無料', cls: 'bg-yellow-100 text-yellow-700' };
-                         return { text: '不明',        cls: 'bg-gray-100 text-gray-500' };
-}
-
-function triSymbol(val: TriState) {
-  if (val === true)      return { s: '○', cls: 'text-green-600' };
-  if (val === false)     return { s: '×', cls: 'text-red-500' };
-  if (val === 'partial') return { s: '△', cls: 'text-yellow-600' };
-                         return { s: '?', cls: 'text-gray-400' };
-}
 ---
 
 <BaseLayout
-  title="商用利用OKのAI画像生成ツール | AI画像生成・動画生成ツール比較DB"
-  description="商用利用可または条件付きで商用利用できるAI画像・動画生成ツールを比較。利用規約・注意事項も確認できます。"
+  title="商用利用を確認しやすいAI画像・動画生成ツール比較 | Y Labo"
+  description="AI画像生成・動画生成ツールを商用利用条件、著作権、透かし、料金で比較。副業・制作案件・SNS運用で使う前の確認に役立つ一覧です。"
   canonicalPath="/categories/commercial-use/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
@@ -45,91 +23,39 @@ function triSymbol(val: TriState) {
       <span class="mx-1">/</span>
       <a href="/tools/" class="hover:underline">ツール一覧</a>
       <span class="mx-1">/</span>
-      <span>商用利用OK</span>
+      <span>商用利用を確認しやすいツール</span>
     </nav>
 
-    <h1 class="mb-2 text-3xl font-bold text-gray-900">商用利用OKのAI画像生成ツール</h1>
-    <p class="mb-2 text-gray-500">
-      商用利用できる可能性があるAI画像・動画生成ツール（確認時点で{filtered.length}件）。
-    </p>
-    <p class="mb-6 text-sm text-gray-500">
-      商用利用の可否は、利用するプラン・用途・生成コンテンツの内容・各ツールの利用規約によって異なる場合があります。
-      広告・YouTube収益化・クライアントワーク・商品パッケージへの使用などを検討している場合は、利用前に各ツールの最新公式情報をご確認ください。
+    <h1 class="mb-3 text-3xl font-bold text-gray-900">商用利用を確認しやすいAI画像・動画生成ツール</h1>
+    <p class="mb-6 text-gray-600 leading-relaxed">
+      AI画像・動画生成ツールを仕事や副業で使う場合は、商用利用条件や著作権、透かしの扱いを事前に確認することが重要です。このページでは、商用利用の確認がしやすいツールを一覧で整理しています。
     </p>
 
-    <div class="mb-8 rounded-lg border border-yellow-200 bg-yellow-50 px-5 py-4 text-sm text-yellow-800">
-      <p class="font-medium">このページを利用する前にご確認ください</p>
-      <ul class="mt-2 space-y-1 list-disc list-inside">
-        <li>表示は確認時点の一般的な比較情報であり、法的助言ではありません</li>
-        <li>「商用可」の表示はツールの利用規約・プラン条件によって制限される場合があります</li>
-        <li>利用規約は予告なく変更されます。商用利用前に必ず最新の公式規約をご確認ください</li>
-      </ul>
-      <p class="mt-3">
-        <a href="/guides/commercial-use-copyright/" class="font-medium underline hover:text-yellow-900">
-          AI画像・動画生成ツールの商用利用・著作権ガイドを読む →
-        </a>
-      </p>
-    </div>
+    <ConditionChips currentPath="/categories/commercial-use/" />
 
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="bg-gray-50 text-left text-xs text-gray-500">
-            <th class="px-4 py-2 font-medium">ツール名</th>
-            <th class="px-4 py-2 font-medium">商用利用</th>
-            <th class="px-4 py-2 font-medium">注意事項</th>
-            <th class="px-4 py-2 font-medium">無料</th>
-            <th class="px-4 py-2 font-medium text-center">日本語UI</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-100">
-          {filtered.map((tool) => {
-            const cu  = commercialBadge(tool.data.commercialUse);
-            const fp  = freePlanBadge(tool.data.freePlan);
-            const jui = triSymbol(tool.data.japaneseUi);
-            return (
-              <tr class="hover:bg-gray-50">
-                <td class="px-4 py-3">
-                  <a href={`/tools/${tool.slug}/`} class="font-medium text-blue-600 hover:underline">
-                    {tool.data.name}
-                  </a>
-                </td>
-                <td class="px-4 py-3">
-                  <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${cu.cls}`}>{cu.text}</span>
-                </td>
-                <td class="px-4 py-3 text-xs text-gray-500 max-w-xs">
-                  {tool.data.commercialUseNote}
-                </td>
-                <td class="px-4 py-3">
-                  <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
-                </td>
-                <td class={`px-4 py-3 text-center font-bold ${jui.cls}`}>{jui.s}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <NoticeBox />
 
-    <!-- FAQ -->
+    <section class="mt-8">
+      <h2 class="mb-1 text-lg font-semibold text-gray-800">対象ツール一覧</h2>
+      <p class="mb-4 text-sm text-gray-500">確認時点で {filtered.length} 件。「△（条件あり）」はプラン・用途・生成内容によって条件が変わる場合があります。各ツールの詳細ページで注意事項を確認してください。</p>
+      <CompareTablePreview tools={filtered} limit={filtered.length} />
+    </section>
+
     <section class="mt-12">
       <h2 class="mb-6 text-xl font-semibold text-gray-800">よくある質問</h2>
-
       <div class="space-y-6">
         <div class="rounded-lg border border-gray-200 px-5 py-4">
-          <p class="font-medium text-gray-800">商用利用OKと表示されていれば自由に使えますか？</p>
+          <p class="font-medium text-gray-800">「条件あり」と表示されていれば商用利用できますか？</p>
           <p class="mt-2 text-sm text-gray-600">
-            自由に使えるとは限りません。プラン、用途、生成コンテンツの内容、利用規約によって条件が変わる場合があります。実際に使う前に、必ず各ツールの最新公式情報をご確認ください。
+            利用できる場合がありますが、プラン・用途・生成コンテンツの内容・利用規約によって条件が変わります。実際に使う前に、必ず各ツールの最新公式情報をご確認ください。
           </p>
         </div>
-
         <div class="rounded-lg border border-gray-200 px-5 py-4">
           <p class="font-medium text-gray-800">無料プランで作った画像や動画も商用利用できますか？</p>
           <p class="mt-2 text-sm text-gray-600">
-            ツールによって異なります。無料プランでは、透かし、解像度、クレジット表記、利用範囲の制限がある場合があります。商用利用を検討する場合は、各ツールの無料プラン条件を公式情報で確認してください。
+            ツールによって異なります。無料プランでは、透かし・解像度・クレジット表記・利用範囲の制限がある場合があります。商用利用を検討する場合は、各ツールの無料プラン条件を公式情報で確認してください。
           </p>
         </div>
-
         <div class="rounded-lg border border-gray-200 px-5 py-4">
           <p class="font-medium text-gray-800">クライアント案件や広告に使う場合は何を確認すべきですか？</p>
           <p class="mt-2 text-sm text-gray-600">
@@ -139,15 +65,15 @@ function triSymbol(val: TriState) {
       </div>
     </section>
 
-    <!-- 関連ページ -->
-    <section class="mt-10">
+    <section class="mt-12">
       <h2 class="mb-4 text-sm font-semibold text-gray-600">関連ページ</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
-        <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">ツール一覧</a></li>
+        <li><a href="/compare/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">全ツール比較表</a></li>
+        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用・著作権ガイド</a></li>
+        <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">すべてのツールを見る</a></li>
         <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>
         <li><a href="/categories/japanese/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">日本語対応ツール</a></li>
         <li><a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">透かしなしツール</a></li>
-        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用・著作権ガイド</a></li>
       </ul>
     </section>
 

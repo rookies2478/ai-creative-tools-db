@@ -1,0 +1,95 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  tools: CollectionEntry<'tools'>[];
+  limit?: number;
+}
+
+type FreePlan = boolean | 'limited' | 'unknown';
+type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+type TriState = boolean | 'partial' | 'unknown';
+
+const { tools, limit = 5 } = Astro.props;
+const preview = tools.slice(0, limit);
+
+function freeBadge(val: FreePlan) {
+  if (val === true)      return { text: '無料あり',  cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === 'limited') return { text: '制限あり',  cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === false)     return { text: '有料のみ',  cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+                         return { text: '要確認',    cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
+}
+
+function cuText(val: FourState) {
+  if (val === 'yes')     return { text: '可能な場合あり', cls: 'text-emerald-700 font-medium' };
+  if (val === 'limited') return { text: '条件確認',       cls: 'text-amber-700 font-medium' };
+  if (val === 'no')      return { text: '不可の場合あり', cls: 'text-red-500 font-medium' };
+                         return { text: '要確認',         cls: 'text-slate-400' };
+}
+
+function jpText(ui: TriState, prompt: TriState) {
+  if (ui === true)                                                 return { text: '○',  cls: 'text-emerald-600 font-bold' };
+  if (ui === 'partial' || prompt === true || prompt === 'partial') return { text: '△',  cls: 'text-amber-600 font-bold' };
+  if (ui === false && prompt === false)                            return { text: '×',  cls: 'text-slate-400 font-bold' };
+                                                                   return { text: '?',  cls: 'text-slate-400' };
+}
+
+function wmText(val: FourState) {
+  if (val === 'no')      return { text: 'なし',         cls: 'text-emerald-600 font-semibold' };
+  if (val === 'yes')     return { text: 'あり',         cls: 'text-slate-500' };
+  if (val === 'limited') return { text: 'プランによる', cls: 'text-amber-600' };
+                         return { text: '要確認',       cls: 'text-slate-400' };
+}
+---
+
+<div>
+  <p class="mb-2 text-sm text-slate-500">横にスクロールして全項目を比較できます →</p>
+  <div class="overflow-x-auto rounded-2xl border border-slate-100 shadow-sm">
+    <table class="w-full min-w-[640px] text-sm">
+      <thead>
+        <tr class="bg-slate-50 text-left text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+          <th class="px-4 py-3">ツール名</th>
+          <th class="px-3 py-3">商用利用</th>
+          <th class="px-3 py-3">無料枠</th>
+          <th class="px-3 py-3">日本語</th>
+          <th class="px-3 py-3">透かし</th>
+          <th class="px-3 py-3">料金目安</th>
+          <th class="px-3 py-3"></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-50">
+        {preview.map(tool => {
+          const fp = freeBadge(tool.data.freePlan);
+          const cu = cuText(tool.data.commercialUse);
+          const jp = jpText(tool.data.japaneseUi, tool.data.japanesePrompt);
+          const wm = wmText(tool.data.watermark);
+          return (
+            <tr class="bg-white even:bg-slate-50 hover:bg-slate-100">
+              <td class="px-4 py-3 font-medium text-slate-900">{tool.data.name}</td>
+              <td class={`px-3 py-3 text-xs ${cu.cls}`}>{cu.text}</td>
+              <td class="px-3 py-3">
+                <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
+              </td>
+              <td class={`px-3 py-3 text-xs ${jp.cls}`}>{jp.text}</td>
+              <td class={`px-3 py-3 text-xs ${wm.cls}`}>{wm.text}</td>
+              <td class="px-3 py-3 text-xs text-slate-500">
+                {tool.data.lowestPaidPlan ?? '—'}
+              </td>
+              <td class="px-3 py-3">
+                <a href={`/tools/${tool.slug}/`} class="text-xs font-medium text-blue-600 hover:underline">
+                  詳細 →
+                </a>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-4 text-right">
+    <a href="/compare/" class="text-sm font-semibold text-blue-600 hover:underline">
+      全ツールを比較表で見る →
+    </a>
+  </div>
+</div>

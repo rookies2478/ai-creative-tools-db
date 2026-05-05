@@ -1,41 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import NoticeBox from '../../components/NoticeBox.astro';
+import ConditionChips from '../../components/ConditionChips.astro';
 
 const allTools = await getCollection('tools');
-
 const imageTools = allTools.filter((t) => t.data.category === 'image' || t.data.category === 'both');
 const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.category === 'both');
-
-type FreePlan = boolean | 'limited' | 'unknown';
-type FourState = 'yes' | 'no' | 'limited' | 'unknown';
-type TriState = boolean | 'partial' | 'unknown';
-
-function freePlanBadge(val: FreePlan) {
-  if (val === true)      return { text: '無料あり',    cls: 'bg-green-100 text-green-700' };
-  if (val === false)     return { text: '無料なし',    cls: 'bg-red-100 text-red-700' };
-  if (val === 'limited') return { text: '制限付き無料', cls: 'bg-yellow-100 text-yellow-700' };
-                         return { text: '不明',        cls: 'bg-gray-100 text-gray-500' };
-}
-
-function commercialBadge(val: FourState) {
-  if (val === 'yes')     return { text: '商用○',    cls: 'bg-green-100 text-green-700' };
-  if (val === 'no')      return { text: '商用×',    cls: 'bg-red-100 text-red-700' };
-  if (val === 'limited') return { text: '商用△',    cls: 'bg-yellow-100 text-yellow-700' };
-                         return { text: '商用?',    cls: 'bg-gray-100 text-gray-500' };
-}
-
-function triSymbol(val: TriState) {
-  if (val === true)      return { s: '○', cls: 'text-green-600' };
-  if (val === false)     return { s: '×', cls: 'text-red-500' };
-  if (val === 'partial') return { s: '△', cls: 'text-yellow-600' };
-                         return { s: '?', cls: 'text-gray-400' };
-}
 ---
 
 <BaseLayout
-  title="AI画像生成・動画生成ツール一覧 | AI画像生成・動画生成ツール比較DB"
-  description="Midjourney、Adobe Firefly、Runway、Pikaなど主要AI画像・動画生成ツールの料金・商用利用・日本語対応を一覧比較。"
+  title="AI画像・動画生成ツール一覧 | Y Labo"
+  description="AI画像生成・動画生成ツールを一覧で比較。商用利用、無料枠、日本語対応、透かし、料金目安を確認しながら、仕事や副業に使うAIツールを探せます。"
   canonicalPath="/tools/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
@@ -46,135 +23,72 @@ function triSymbol(val: TriState) {
       <span>ツール一覧</span>
     </nav>
 
-    <h1 class="mb-2 text-3xl font-bold text-gray-900">AI画像生成・動画生成ツール一覧</h1>
-    <p class="mb-10 text-gray-500">全{allTools.length}件。料金・商用利用・日本語対応を比較できます。</p>
+    <h1 class="mb-2 text-3xl font-bold text-gray-900">AI画像・動画生成ツール一覧</h1>
+    <p class="mb-6 text-gray-500">
+      AI画像生成・動画生成ツールを、商用利用・無料枠・日本語対応・透かし・料金目安とあわせて一覧で確認できます。仕事や副業で使う前の比較にご活用ください。
+    </p>
+
+    <!-- 条件別チップ導線 -->
+    <ConditionChips currentPath="/tools/" />
+
+    <!-- NoticeBox -->
+    <div class="mb-8">
+      <NoticeBox />
+    </div>
 
     <!-- 画像生成ツール -->
     <section class="mb-12">
       <h2 class="mb-4 border-b border-gray-200 pb-2 text-xl font-semibold text-gray-800">
-        AI画像生成ツール
+        AI画像生成ツール（{imageTools.length}件）
       </h2>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="bg-gray-50 text-left text-xs text-gray-500">
-              <th class="px-4 py-2 font-medium">ツール名</th>
-              <th class="px-4 py-2 font-medium">無料</th>
-              <th class="px-4 py-2 font-medium">商用</th>
-              <th class="px-4 py-2 font-medium text-center">日本語UI</th>
-              <th class="px-4 py-2 font-medium text-center">日本語<br/>プロンプト</th>
-              <th class="px-4 py-2 font-medium text-center">透かし</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-100">
-            {imageTools.map((tool) => {
-              const fp = freePlanBadge(tool.data.freePlan);
-              const cu = commercialBadge(tool.data.commercialUse);
-              const wm = commercialBadge(tool.data.watermark as FourState);
-              const jui = triSymbol(tool.data.japaneseUi);
-              const jpr = triSymbol(tool.data.japanesePrompt);
-              return (
-                <tr class="hover:bg-gray-50">
-                  <td class="px-4 py-3">
-                    <a href={`/tools/${tool.slug}/`} class="font-medium text-blue-600 hover:underline">
-                      {tool.data.name}
-                    </a>
-                  </td>
-                  <td class="px-4 py-3">
-                    <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
-                  </td>
-                  <td class="px-4 py-3">
-                    <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${cu.cls}`}>{cu.text}</span>
-                  </td>
-                  <td class={`px-4 py-3 text-center font-bold ${jui.cls}`}>{jui.s}</td>
-                  <td class={`px-4 py-3 text-center font-bold ${jpr.cls}`}>{jpr.s}</td>
-                  <td class="px-4 py-3 text-center">
-                    <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${wm.cls}`}>
-                      {tool.data.watermark}
-                    </span>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {imageTools.map((tool) => <ToolCard tool={tool} />)}
       </div>
     </section>
 
     <!-- 動画生成ツール -->
     <section class="mb-12">
       <h2 class="mb-4 border-b border-gray-200 pb-2 text-xl font-semibold text-gray-800">
-        AI動画生成ツール
+        AI動画生成ツール（{videoTools.length}件）
       </h2>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="bg-gray-50 text-left text-xs text-gray-500">
-              <th class="px-4 py-2 font-medium">ツール名</th>
-              <th class="px-4 py-2 font-medium">無料</th>
-              <th class="px-4 py-2 font-medium">商用</th>
-              <th class="px-4 py-2 font-medium text-center">日本語UI</th>
-              <th class="px-4 py-2 font-medium text-center">日本語<br/>プロンプト</th>
-              <th class="px-4 py-2 font-medium text-center">透かし</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-100">
-            {videoTools.map((tool) => {
-              const fp = freePlanBadge(tool.data.freePlan);
-              const cu = commercialBadge(tool.data.commercialUse);
-              const wm = commercialBadge(tool.data.watermark as FourState);
-              const jui = triSymbol(tool.data.japaneseUi);
-              const jpr = triSymbol(tool.data.japanesePrompt);
-              return (
-                <tr class="hover:bg-gray-50">
-                  <td class="px-4 py-3">
-                    <a href={`/tools/${tool.slug}/`} class="font-medium text-blue-600 hover:underline">
-                      {tool.data.name}
-                    </a>
-                  </td>
-                  <td class="px-4 py-3">
-                    <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
-                  </td>
-                  <td class="px-4 py-3">
-                    <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${cu.cls}`}>{cu.text}</span>
-                  </td>
-                  <td class={`px-4 py-3 text-center font-bold ${jui.cls}`}>{jui.s}</td>
-                  <td class={`px-4 py-3 text-center font-bold ${jpr.cls}`}>{jpr.s}</td>
-                  <td class="px-4 py-3 text-center">
-                    <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${wm.cls}`}>
-                      {tool.data.watermark}
-                    </span>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {videoTools.map((tool) => <ToolCard tool={tool} />)}
       </div>
     </section>
 
-    <!-- カテゴリリンク -->
+    <!-- 比較表への導線 -->
+    <section class="mb-12 rounded-xl border border-slate-200 bg-slate-50 px-6 py-6">
+      <h2 class="mb-2 text-lg font-semibold text-gray-900">一覧で迷ったら、比較表で確認できます</h2>
+      <p class="mb-4 text-sm text-gray-600">
+        商用利用・無料枠・日本語対応・透かし・料金目安を横並びで確認したい場合は、比較表をご利用ください。
+      </p>
+      <a href="/compare/" class="inline-block rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">
+        全ツール比較表を見る →
+      </a>
+    </section>
+
+    <!-- 関連カテゴリリンク -->
     <section>
-      <h2 class="mb-4 text-lg font-semibold text-gray-800">カテゴリから探す</h2>
+      <h2 class="mb-4 text-lg font-semibold text-gray-800">条件別に探す</h2>
       <ul class="flex flex-wrap gap-3">
         <li>
-          <a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 text-sm hover:bg-gray-100">
-            無料で使えるツール
+          <a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+            無料で使えるAIツール
           </a>
         </li>
         <li>
-          <a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 text-sm hover:bg-gray-100">
-            商用利用OK
+          <a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+            商用利用を確認しやすいAIツール
           </a>
         </li>
         <li>
-          <a href="/categories/japanese/" class="rounded-full border border-gray-300 px-4 py-1.5 text-sm hover:bg-gray-100">
-            日本語対応
+          <a href="/categories/japanese/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+            日本語対応のAIツール
           </a>
         </li>
         <li>
-          <a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-1.5 text-sm hover:bg-gray-100">
-            透かしなし
+          <a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+            透かしなしで使いやすいAIツール
           </a>
         </li>
       </ul>

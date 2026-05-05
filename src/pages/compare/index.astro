@@ -1,0 +1,180 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NoticeBox from '../../components/NoticeBox.astro';
+import ConditionChips from '../../components/ConditionChips.astro';
+
+const allTools = await getCollection('tools');
+
+type FreePlan = boolean | 'limited' | 'unknown';
+type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+type TriState = boolean | 'partial' | 'unknown';
+
+function freeBadge(val: FreePlan) {
+  if (val === true)      return { text: '無料あり',  cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === 'limited') return { text: '制限あり',  cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === false)     return { text: '有料のみ',  cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+                         return { text: '要確認',    cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
+}
+
+function cuText(val: FourState) {
+  if (val === 'yes')     return { text: '可能な場合あり', cls: 'text-emerald-700 font-medium' };
+  if (val === 'limited') return { text: '条件確認',       cls: 'text-amber-700 font-medium' };
+  if (val === 'no')      return { text: '不可の場合あり', cls: 'text-red-500 font-medium' };
+                         return { text: '要確認',         cls: 'text-slate-400' };
+}
+
+function jpText(ui: TriState, prompt: TriState) {
+  if (ui === true)                                                 return { text: '○', cls: 'text-emerald-600 font-bold' };
+  if (ui === 'partial' || prompt === true || prompt === 'partial') return { text: '△', cls: 'text-amber-600 font-bold' };
+  if (ui === false && prompt === false)                            return { text: '×', cls: 'text-slate-400 font-bold' };
+                                                                   return { text: '?', cls: 'text-slate-400' };
+}
+
+function wmText(val: FourState) {
+  if (val === 'no')      return { text: 'なし',         cls: 'text-emerald-600 font-semibold' };
+  if (val === 'yes')     return { text: 'あり',         cls: 'text-slate-500' };
+  if (val === 'limited') return { text: 'プランによる', cls: 'text-amber-600' };
+                         return { text: '要確認',       cls: 'text-slate-400' };
+}
+
+function catLabel(cat: string) {
+  if (cat === 'image') return '画像生成';
+  if (cat === 'video') return '動画生成';
+  return '画像・動画';
+}
+---
+
+<BaseLayout
+  title="AI画像・動画生成ツール比較表 | Y Labo"
+  description="AI画像生成・動画生成ツールを、商用利用・無料枠・日本語対応・透かし・料金目安で一覧比較。仕事や副業で使う前の確認に役立つ比較表です。"
+  canonicalPath="/compare/"
+>
+  <div class="mx-auto max-w-5xl px-6 py-12">
+
+    <nav class="mb-6 text-sm text-slate-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <span>比較表</span>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-bold text-[#002B61]">AI画像・動画生成ツール比較表</h1>
+    <p class="mb-6 text-slate-500">AI画像生成・動画生成ツールを、商用利用・無料枠・日本語対応・透かし・料金目安で横並び比較できます。仕事や副業で使う前の確認にご活用ください。</p>
+
+    <ConditionChips currentPath="/compare/" />
+
+    <div class="mb-8">
+      <NoticeBox />
+    </div>
+
+    <section class="mb-8">
+      <h2 class="mb-3 text-base font-semibold text-slate-700">比較表の見方</h2>
+      <p class="mb-4 text-sm text-slate-500">各ツールの商用利用、無料枠、日本語対応、透かし、料金目安を一覧で確認できます。条件は変更される場合があるため、実務利用前には公式サイトの最新情報も確認してください。</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
+          <span class="font-bold text-emerald-600">○</span>
+          <span class="text-slate-600">対応または利用可能</span>
+        </span>
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
+          <span class="font-bold text-amber-600">△</span>
+          <span class="text-slate-600">条件あり、または一部対応</span>
+        </span>
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
+          <span class="font-bold text-slate-400">×</span>
+          <span class="text-slate-600">非対応</span>
+        </span>
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
+          <span class="font-medium text-slate-400">要確認</span>
+          <span class="text-slate-600">公式情報や条件の確認が必要</span>
+        </span>
+      </div>
+    </section>
+
+    <p class="mb-2 text-sm text-slate-500">横にスクロールして全項目を比較できます →</p>
+    <div class="overflow-x-auto rounded-2xl border border-slate-100 shadow-sm">
+      <table class="w-full min-w-[800px] text-sm">
+        <thead>
+          <tr class="bg-slate-50 text-left text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+            <th class="px-4 py-3">ツール名</th>
+            <th class="px-3 py-3">種別</th>
+            <th class="px-3 py-3">商用利用</th>
+            <th class="px-3 py-3">無料枠</th>
+            <th class="px-3 py-3">日本語</th>
+            <th class="px-3 py-3">透かし</th>
+            <th class="px-3 py-3">料金目安</th>
+            <th class="px-3 py-3">最終確認日</th>
+            <th class="px-3 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-50">
+          {allTools.map(tool => {
+            const fp = freeBadge(tool.data.freePlan);
+            const cu = cuText(tool.data.commercialUse);
+            const jp = jpText(tool.data.japaneseUi, tool.data.japanesePrompt);
+            const wm = wmText(tool.data.watermark);
+            return (
+              <tr class="bg-white even:bg-slate-50 hover:bg-slate-100">
+                <td class="px-4 py-3 font-medium text-slate-900">{tool.data.name}</td>
+                <td class="px-3 py-3 text-xs text-slate-500">{catLabel(tool.data.category)}</td>
+                <td class={`px-3 py-3 text-xs ${cu.cls}`}>{cu.text}</td>
+                <td class="px-3 py-3">
+                  <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
+                </td>
+                <td class={`px-3 py-3 text-xs ${jp.cls}`}>{jp.text}</td>
+                <td class={`px-3 py-3 text-xs ${wm.cls}`}>{wm.text}</td>
+                <td class="px-3 py-3 text-xs text-slate-500">{tool.data.lowestPaidPlan ?? '—'}</td>
+                <td class="px-3 py-3 text-xs text-slate-400">{tool.data.lastReviewed}</td>
+                <td class="px-3 py-3">
+                  <a href={`/tools/${tool.slug}/`} class="text-xs font-medium text-blue-600 hover:underline">
+                    詳細 →
+                  </a>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-3 text-xs text-slate-400">
+      ※ 商用利用の可否・著作権の取り扱いは各ツールの利用規約に基づきます。法的アドバイスではありません。最新情報は必ず公式サイトでご確認ください。
+    </p>
+
+    <section class="mt-10 border-t border-slate-100 pt-8">
+      <h2 class="mb-4 text-base font-semibold text-slate-700">条件別に探す</h2>
+      <ul class="flex flex-wrap gap-3">
+        <li>
+          <a href="/tools/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            すべてのツールを見る
+          </a>
+        </li>
+        <li>
+          <a href="/categories/free/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            無料で試せるAIツール
+          </a>
+        </li>
+        <li>
+          <a href="/categories/commercial-use/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            商用利用を確認しやすいAIツール
+          </a>
+        </li>
+        <li>
+          <a href="/categories/japanese/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            日本語対応のAIツール
+          </a>
+        </li>
+        <li>
+          <a href="/categories/no-watermark/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            透かしなしで使いやすいAIツール
+          </a>
+        </li>
+        <li>
+          <a href="/guides/commercial-use-copyright/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            商用利用・著作権ガイド
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+</BaseLayout>

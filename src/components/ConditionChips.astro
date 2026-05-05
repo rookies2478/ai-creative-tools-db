@@ -1,0 +1,38 @@
+---
+interface Props {
+  currentPath: string;
+}
+const { currentPath } = Astro.props;
+
+const chips = [
+  { label: 'すべて', href: '/tools/' },
+  { label: '無料で試せる', href: '/categories/free/' },
+  { label: '商用利用を確認', href: '/categories/commercial-use/' },
+  { label: '日本語対応', href: '/categories/japanese/' },
+  { label: '透かしなし', href: '/categories/no-watermark/' },
+  { label: '比較表で見る', href: '/compare/' },
+  { label: '商用利用・著作権ガイド', href: '/guides/commercial-use-copyright/' },
+];
+---
+
+<section class="mb-8">
+  <p class="mb-3 text-sm font-semibold text-gray-600">条件から探す</p>
+  <div class="flex flex-wrap gap-2">
+    {chips.map((chip) => {
+      const isActive = currentPath === chip.href;
+      return (
+        <a
+          href={chip.href}
+          aria-current={isActive ? 'page' : undefined}
+          class={
+            isActive
+              ? 'rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white'
+              : 'rounded-full border border-gray-300 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50'
+          }
+        >
+          {chip.label}
+        </a>
+      );
+    })}
+  </div>
+</section>

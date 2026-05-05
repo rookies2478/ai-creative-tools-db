@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ToolLogo from '../components/ToolLogo.astro';
+import ToolCard from '../components/ToolCard.astro';
+import CompareTablePreview from '../components/CompareTablePreview.astro';
+import NoticeBox from '../components/NoticeBox.astro';
 
 const FEATURED_SLUGS = [
   'midjourney',
@@ -16,63 +18,11 @@ const allTools = await getCollection('tools');
 const tools = FEATURED_SLUGS
   .map(slug => allTools.find(t => t.slug === slug))
   .filter((t): t is NonNullable<typeof t> => t !== undefined);
-
-type FreePlan  = boolean | 'limited' | 'unknown';
-type FourState = 'yes' | 'no' | 'limited' | 'unknown';
-type TriState  = boolean | 'partial' | 'unknown';
-
-function freeBadge(val: FreePlan) {
-  if (val === true)      return { text: '無料あり',  cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (val === 'limited') return { text: '制限あり',  cls: 'bg-amber-50   text-amber-700   ring-1 ring-inset ring-amber-200'   };
-  if (val === false)     return { text: '有料のみ',  cls: 'bg-slate-100  text-slate-500   ring-1 ring-inset ring-slate-200'   };
-                         return { text: '要確認',    cls: 'bg-slate-50   text-slate-400   ring-1 ring-inset ring-slate-100'   };
-}
-
-function cuText(val: FourState) {
-  if (val === 'yes')     return { text: '可能な場合あり', cls: 'text-emerald-700 font-medium' };
-  if (val === 'limited') return { text: '条件確認',       cls: 'text-amber-700   font-medium' };
-  if (val === 'no')      return { text: '不可の場合あり', cls: 'text-red-500     font-medium' };
-                         return { text: '要確認',         cls: 'text-slate-400'               };
-}
-
-function tri(val: TriState) {
-  if (val === true)      return { s: '○', text: '対応',    cls: 'text-emerald-600' };
-  if (val === 'partial') return { s: '△', text: '一部対応', cls: 'text-amber-600'   };
-  if (val === false)     return { s: '×', text: '非対応',  cls: 'text-red-500'     };
-                         return { s: '?', text: '要確認',  cls: 'text-slate-400'   };
-}
-
-function wmText(val: unknown) {
-  if (val === 'no')      return { t: 'なし',          cls: 'text-emerald-600 font-semibold' };
-  if (val === 'yes')     return { t: 'あり',          cls: 'text-slate-500'                 };
-  if (val === 'limited') return { t: 'プランによる',  cls: 'text-amber-600'                 };
-                         return { t: '要確認',        cls: 'text-slate-400'                 };
-}
-
-function jpCard(ui: TriState, prompt: TriState) {
-  if (ui === true)                                               return { text: '日本語○', cls: 'text-emerald-700' };
-  if (ui === 'partial' || prompt === true || prompt === 'partial') return { text: '日本語△', cls: 'text-amber-700'   };
-  if (ui === false && prompt === false)                          return { text: '日本語×', cls: 'text-slate-400'   };
-                                                                return { text: '日本語?', cls: 'text-slate-400'   };
-}
-
-function catLabel(cat: string) {
-  if (cat === 'image') return '画像生成';
-  if (cat === 'video') return '動画生成';
-  return '画像・動画';
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function toolDesc(data: any): string {
-  return (data.strengths as string[] | undefined)?.[0]
-      ?? (data.bestFor   as string[] | undefined)?.[0]
-      ?? 'AI生成ツールです。';
-}
 ---
 
 <BaseLayout
-  title="AI画像生成・動画生成ツール比較DB｜商用利用・著作権・無料枠を比較"
-  description="Midjourney・Adobe Firefly・Runway・Pikaなど主要AI画像・動画生成ツールの商用利用・著作権・透かし・無料枠・日本語対応を比較できます。"
+  title="AI画像・動画生成ツール比較【商用利用・著作権・料金】| Y Labo"
+  description="AI画像生成・動画生成ツールを商用利用・著作権・透かし・無料枠・日本語対応・料金で比較。副業・フリーランス・SNS運用者が仕事で使う前に確認できるAIツール比較DBです。"
   canonicalPath="/"
 >
 
@@ -92,24 +42,24 @@ function toolDesc(data: any): string {
 
           <!-- H1 -->
           <h1 class="text-[1.9rem] font-bold leading-snug text-[#002B61] sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
-            AI画像生成・動画生成ツールを、<br/>仕事で使う前に比較できる。
+            AI画像・動画ツールを、<br/>仕事で使う前に比較できる
           </h1>
 
           <!-- Description -->
           <p class="mt-5 text-base leading-relaxed text-slate-600">
-            商用利用、著作権、透かし、無料枠、日本語対応などを整理。<br class="hidden sm:inline"/>
-            個人・副業・小規模事業者の方が、安心して選べるようサポートします。
+            商用利用・著作権・透かし・無料枠・日本語対応まで、<br class="hidden sm:inline"/>
+            実務前に確認したいポイントを整理しています。
           </p>
 
           <!-- CTAs -->
           <div class="mt-7 flex flex-wrap gap-3">
             <a href="/tools/" class="primary-btn">
-              目的に合うツールを探す
+              条件でツールを探す
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
               </svg>
             </a>
-            <a href="/tools/" class="outline-btn">比較表を見る</a>
+            <a href="/compare/" class="outline-btn">比較表でまとめて見る</a>
           </div>
 
           <!-- Footnote -->
@@ -122,41 +72,21 @@ function toolDesc(data: any): string {
         <div class="rounded-2xl border border-blue-100 bg-white px-6 py-6 shadow-sm">
           <p class="mb-5 text-[10px] font-bold uppercase tracking-widest text-slate-400">比較できる項目</p>
           <ul class="space-y-4">
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">✓</span>
-              <div>
-                <p class="text-sm font-semibold text-slate-800">商用利用</p>
-                <p class="text-xs leading-relaxed text-slate-500">ビジネス・副業での活用可否を公式情報で確認</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">✓</span>
-              <div>
-                <p class="text-sm font-semibold text-slate-800">著作権</p>
-                <p class="text-xs leading-relaxed text-slate-500">生成物の利用条件を利用規約で確認</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">✓</span>
-              <div>
-                <p class="text-sm font-semibold text-slate-800">透かし</p>
-                <p class="text-xs leading-relaxed text-slate-500">出力画像・動画への透かし付与の有無</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">✓</span>
-              <div>
-                <p class="text-sm font-semibold text-slate-800">無料枠</p>
-                <p class="text-xs leading-relaxed text-slate-500">無料で試せる範囲・クレジット数など</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">✓</span>
-              <div>
-                <p class="text-sm font-semibold text-slate-800">日本語対応</p>
-                <p class="text-xs leading-relaxed text-slate-500">UIと日本語プロンプト対応状況</p>
-              </div>
-            </li>
+            {[
+              { label: '商用利用',   desc: 'ビジネス・副業での活用可否を公式情報で確認' },
+              { label: '著作権',     desc: '生成物の利用条件を利用規約で確認' },
+              { label: '透かし',     desc: '出力画像・動画への透かし付与の有無' },
+              { label: '無料枠',     desc: '無料で試せる範囲・クレジット数など' },
+              { label: '日本語対応', desc: 'UIと日本語プロンプト対応状況' },
+            ].map(item => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">✓</span>
+                <div>
+                  <p class="text-sm font-semibold text-slate-800">{item.label}</p>
+                  <p class="text-xs leading-relaxed text-slate-500">{item.desc}</p>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -165,179 +95,58 @@ function toolDesc(data: any): string {
   </section>
 
   <!-- ============================================================ -->
-  <!-- 2. 検索ボックス風UI                                           -->
+  <!-- 2. 条件フィルター                                             -->
   <!-- ============================================================ -->
   <section class="border-y border-slate-100 bg-white py-8">
     <div class="mx-auto max-w-5xl px-6">
-      <!-- Search box (visual only — no JS search implemented) -->
-      <div class="flex items-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm focus-within:border-blue-300 focus-within:ring-2 focus-within:ring-blue-100">
-        <svg xmlns="http://www.w3.org/2000/svg" class="ml-4 h-4 w-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-        <input
-          type="text"
-          placeholder="ツール名や特徴を検索（例：画像生成 無料 商用利用）"
-          class="flex-1 bg-transparent px-3 py-3.5 text-sm text-slate-700 outline-none placeholder:text-slate-400"
-          aria-label="ツール検索"
-        />
-        <a href="/tools/" class="m-1.5 rounded-lg bg-[#0066FF] px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700">
-          詳細検索
-        </a>
-      </div>
+      <p class="mb-4 text-sm font-semibold text-slate-700">条件からAIツールを探す</p>
 
-      <!-- Quick filters -->
-      <div class="mt-4 flex flex-wrap items-center gap-2">
-        <span class="text-xs text-slate-400">よく使われる条件：</span>
-        <a href="/tools/"                  class="chip">画像生成</a>
-        <a href="/tools/"                  class="chip">動画生成</a>
-        <a href="/categories/free/"        class="chip">無料あり</a>
-        <a href="/categories/commercial-use/" class="chip">商用利用可</a>
-        <a href="/categories/japanese/"    class="chip">日本語対応</a>
-        <a href="/categories/no-watermark/" class="chip">透かしなし</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- 3. カテゴリから探す                                           -->
-  <!-- ============================================================ -->
-  <section class="border-b border-slate-100 bg-white py-5">
-    <div class="mx-auto max-w-5xl px-6">
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="mr-1 text-xs font-semibold text-slate-400">カテゴリから探す：</span>
-        <a href="/tools/"                     class="chip">すべて</a>
-        <a href="/tools/"                     class="chip">画像生成</a>
-        <a href="/tools/"                     class="chip">動画生成</a>
-        <a href="/categories/free/"           class="chip">無料あり</a>
-        <a href="/categories/commercial-use/" class="chip">商用利用</a>
+      <div class="flex flex-wrap gap-2">
+        <a href="/categories/commercial-use/" class="chip">商用利用OK</a>
+        <a href="/categories/free/"           class="chip">無料で試せる</a>
         <a href="/categories/japanese/"       class="chip">日本語対応</a>
         <a href="/categories/no-watermark/"   class="chip">透かしなし</a>
+        <a href="/tools/"                     class="chip">画像生成</a>
+        <a href="/tools/"                     class="chip">動画生成</a>
+      </div>
+
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href="/tools/"    class="primary-btn">すべてのツールを見る</a>
+        <a href="/compare/"  class="outline-btn">比較表で見る</a>
       </div>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- 4. 注目のツール                                               -->
+  <!-- 3. 注目のツール                                               -->
   <!-- ============================================================ -->
   <section class="bg-slate-50 py-16">
     <div class="mx-auto max-w-5xl px-6">
       <div class="mb-7 flex items-baseline justify-between">
         <h2 class="flex items-center gap-3 text-2xl font-bold text-[#002B61]">
           注目のAI生成ツール
-          <span class="rounded-full bg-blue-50 px-3 py-0.5 text-xs font-semibold text-blue-600">全6件</span>
+          <span class="rounded-full bg-blue-50 px-3 py-0.5 text-xs font-semibold text-blue-600">全{tools.length}件</span>
         </h2>
         <a href="/tools/" class="text-sm text-blue-600 hover:underline">すべてのツールを見る →</a>
       </div>
 
-      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-        {tools.map(tool => {
-          const fp   = freeBadge(tool.data.freePlan);
-          const desc = toolDesc(tool.data);
-          return (
-            <a
-              href={`/tools/${tool.slug}/`}
-              class="group flex flex-col items-center rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-100 hover:shadow-md"
-            >
-              <!-- Logo (top, centered) -->
-              <div class="mb-3 flex justify-center">
-                <ToolLogo slug={tool.slug} name={tool.data.name} size="md" />
-              </div>
-
-              <!-- Name -->
-              <p class="text-center font-bold text-slate-900 group-hover:text-[#0066FF]">
-                {tool.data.name}
-              </p>
-
-              <!-- Category pill -->
-              <span class="mt-1.5 rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-medium text-blue-600">
-                {catLabel(tool.data.category)}
-              </span>
-
-              <!-- Description -->
-              <p class="mt-3 min-h-[4.5rem] line-clamp-3 text-center text-xs leading-relaxed text-slate-500">
-                {desc}
-              </p>
-
-              <!-- Free badge -->
-              <div class="mt-2 flex justify-center">
-                <span class={`rounded-md px-2 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
-              </div>
-
-              <!-- Link -->
-              <p class="mt-auto pt-4 text-center text-xs font-semibold text-blue-600 group-hover:underline">
-                詳しく見る →
-              </p>
-            </a>
-          );
-        })}
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {tools.map(tool => <ToolCard tool={tool} />)}
       </div>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- 5. ツール比較表                                               -->
+  <!-- 4. 比較表プレビュー                                           -->
   <!-- ============================================================ -->
   <section class="bg-white py-16">
     <div class="mx-auto max-w-5xl px-6">
       <div class="mb-7 flex items-baseline justify-between">
-        <h2 class="text-2xl font-bold text-[#002B61]">ツール比較表（人気ツール抜粋）</h2>
-        <a href="/tools/" class="text-sm text-blue-600 hover:underline">全ツール一覧 →</a>
+        <h2 class="text-2xl font-bold text-[#002B61]">ツール比較表（抜粋）</h2>
+        <a href="/compare/" class="text-sm text-blue-600 hover:underline">全ツールを比較表で見る →</a>
       </div>
 
-      <div class="overflow-x-auto rounded-2xl border border-slate-100 shadow-sm">
-        <table class="w-full min-w-[860px] text-sm">
-          <thead>
-            <tr class="bg-slate-50 text-left text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-              <th class="px-4 py-3">ツール名</th>
-              <th class="px-3 py-3">種別</th>
-              <th class="px-3 py-3">無料枠</th>
-              <th class="px-3 py-3">商用利用</th>
-              <th class="px-3 py-3">著作権・生成物</th>
-              <th class="px-3 py-3">日本語対応</th>
-              <th class="px-3 py-3">透かし</th>
-              <th class="px-3 py-3"></th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-50">
-            {tools.map(tool => {
-              const fp  = freeBadge(tool.data.freePlan);
-              const cu  = cuText(tool.data.commercialUse);
-              const jui = tri(tool.data.japaneseUi);
-              const jpr = tri(tool.data.japanesePrompt);
-              const wm  = wmText(tool.data.watermark);
-              return (
-                <tr class="bg-white hover:bg-slate-50">
-                  <td class="px-4 py-3">
-                    <div class="flex items-center gap-2.5">
-                      <ToolLogo slug={tool.slug} name={tool.data.name} size="sm" />
-                      <span class="font-medium text-slate-900">{tool.data.name}</span>
-                    </div>
-                  </td>
-                  <td class="px-3 py-3 text-xs text-slate-500">{catLabel(tool.data.category)}</td>
-                  <td class="px-3 py-3">
-                    <span class={`rounded px-1.5 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
-                  </td>
-                  <td class={`px-3 py-3 text-xs ${cu.cls}`}>{cu.text}</td>
-                  <td class="px-3 py-3 text-xs text-slate-400">公式規約確認</td>
-                  <td class="px-3 py-3">
-                    <div class="text-xs">
-                      <span class={jui.cls}>UI {jui.s}</span>
-                      <span class="mx-1 text-slate-200">/</span>
-                      <span class={jpr.cls}>入力 {jpr.s}</span>
-                    </div>
-                  </td>
-                  <td class={`px-3 py-3 text-xs ${wm.cls}`}>{wm.t}</td>
-                  <td class="px-3 py-3">
-                    <a href={`/tools/${tool.slug}/`} class="text-xs font-medium text-blue-600 hover:underline">
-                      詳細 →
-                    </a>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <CompareTablePreview tools={tools} limit={5} />
 
       <p class="mt-3 text-xs text-slate-400">
         ※ 商用利用の可否・著作権の取り扱いは各ツールの利用規約に基づきます。法的アドバイスではありません。最新情報は必ず公式サイトでご確認ください。
@@ -346,7 +155,7 @@ function toolDesc(data: any): string {
   </section>
 
   <!-- ============================================================ -->
-  <!-- 6. ガイドカード                                               -->
+  <!-- 5. ガイドカード                                               -->
   <!-- ============================================================ -->
   <section class="bg-slate-50 py-16">
     <div class="mx-auto max-w-5xl px-6">
@@ -395,34 +204,16 @@ function toolDesc(data: any): string {
   </section>
 
   <!-- ============================================================ -->
-  <!-- 7. ご利用前の確認ポイント                                      -->
+  <!-- 6. ご利用前の注意                                             -->
   <!-- ============================================================ -->
-  <section class="bg-white py-16">
+  <section class="bg-white py-12">
     <div class="mx-auto max-w-5xl px-6">
-      <div class="rounded-2xl border border-blue-100 bg-[#EAF2FF] px-8 py-8">
-        <h3 class="mb-4 text-lg font-bold text-[#002B61]">ご利用前の確認ポイント</h3>
-        <p class="mb-5 text-sm leading-relaxed text-slate-600">
-          本サイトの情報は、各ツールの公式サイト・ヘルプページ・利用規約・プラン情報などをもとに整理・掲載しています。内容は変更される可能性があるため、最新情報は必ず公式サイトでご確認のうえご利用ください。
-        </p>
-        <ul class="space-y-2.5">
-          {[
-            '商用利用の条件はツールごとに異なります',
-            '利用規約や著作権の確認を必ず行いましょう',
-            '無料プランは機能・出力に制限がある場合があります',
-          ].map(item => (
-            <li class="flex items-center gap-2.5 text-sm text-slate-700">
-              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white text-xs font-bold text-blue-600 shadow-sm">✓</span>
-              {item}
-            </li>
-          ))}
-        </ul>
-        <p class="mt-6 text-xs text-slate-500">
-          掲載情報は確認日時点のものです。法的アドバイスではありません。
-          <a href="/guides/commercial-use-copyright/" class="ml-1 font-medium text-blue-600 hover:underline">
-            商用利用・著作権ガイドを読む →
-          </a>
-        </p>
-      </div>
+      <NoticeBox />
+      <p class="mt-3 text-xs text-slate-400">
+        <a href="/guides/commercial-use-copyright/" class="font-medium text-blue-600 hover:underline">
+          商用利用・著作権ガイドを読む →
+        </a>
+      </p>
     </div>
   </section>
 

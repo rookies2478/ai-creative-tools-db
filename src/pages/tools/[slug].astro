@@ -1,6 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import NoticeBox from '../../components/NoticeBox.astro';
+import ToolSummaryTable from '../../components/ToolSummaryTable.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -14,42 +17,7 @@ const { entry } = Astro.props;
 const { data } = entry;
 const { Content } = await entry.render();
 
-type FreePlan = boolean | 'limited' | 'unknown';
-type TriState = boolean | 'partial' | 'unknown';
-type FourState = 'yes' | 'no' | 'limited' | 'unknown';
-
-function freePlanBadge(val: FreePlan) {
-  if (val === true)      return { text: '無料プランあり', cls: 'bg-green-100 text-green-800' };
-  if (val === false)     return { text: '無料プランなし', cls: 'bg-red-100 text-red-800' };
-  if (val === 'limited') return { text: '制限付き無料',  cls: 'bg-yellow-100 text-yellow-800' };
-                         return { text: '不明',          cls: 'bg-gray-100 text-gray-600' };
-}
-
-function triLabel(val: TriState) {
-  if (val === true)       return { symbol: '○', cls: 'text-green-600' };
-  if (val === false)      return { symbol: '×', cls: 'text-red-500' };
-  if (val === 'partial')  return { symbol: '△', cls: 'text-yellow-600' };
-                          return { symbol: '?', cls: 'text-gray-400' };
-}
-
-function fourStateBadge(val: FourState) {
-  if (val === 'yes')     return { text: '可',      cls: 'bg-green-100 text-green-800' };
-  if (val === 'no')      return { text: '不可',    cls: 'bg-red-100 text-red-800' };
-  if (val === 'limited') return { text: '条件付き', cls: 'bg-yellow-100 text-yellow-800' };
-                         return { text: '不明',    cls: 'bg-gray-100 text-gray-600' };
-}
-
-function categoryLabel(cat: 'image' | 'video' | 'both') {
-  if (cat === 'image') return '画像生成';
-  if (cat === 'video') return '動画生成';
-  return '画像・動画生成';
-}
-
-const fp  = freePlanBadge(data.freePlan);
-const cu  = fourStateBadge(data.commercialUse);
-const wm  = fourStateBadge(data.watermark);
-const jui = triLabel(data.japaneseUi);
-const jpr = triLabel(data.japanesePrompt);
+const leadText = `${data.name}の料金・商用利用・日本語対応・透かしの有無など、実務利用前に確認すべきポイントをまとめています。`;
 ---
 
 <BaseLayout
@@ -69,82 +37,19 @@ const jpr = triLabel(data.japanesePrompt);
       <span>{data.name}</span>
     </nav>
 
-    <!-- ヘッダー -->
-    <header class="mb-8">
-      <div class="mb-2 flex flex-wrap items-center gap-2">
-        <span class="rounded bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
-          {categoryLabel(data.category)}
-        </span>
-        <span class={`rounded px-2 py-0.5 text-xs font-medium ${fp.cls}`}>
-          {fp.text}
-        </span>
-      </div>
-      <h1 class="text-3xl font-bold text-gray-900">{data.name}</h1>
-      <a
-        href={data.officialUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mt-2 inline-block text-sm text-blue-600 hover:underline"
-      >
-        公式サイト →
-      </a>
-    </header>
+    <!-- H1 -->
+    <h1 class="mb-3 text-3xl font-bold text-gray-900">{data.name}</h1>
 
-    <!-- DBサマリーテーブル -->
-    <section class="mb-10 overflow-hidden rounded-lg border border-gray-200 bg-white">
-      <table class="w-full text-sm">
-        <tbody class="divide-y divide-gray-100">
-          <tr>
-            <th class="w-36 bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">無料プラン</th>
-            <td class="px-4 py-3">
-              <span class={`rounded px-2 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
-            </td>
-          </tr>
-          {data.lowestPaidPlan && (
-            <tr>
-              <th class="bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">最安有料プラン</th>
-              <td class="px-4 py-3">{data.lowestPaidPlan}</td>
-            </tr>
-          )}
-          <tr>
-            <th class="bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">商用利用</th>
-            <td class="px-4 py-3">
-              <span class={`rounded px-2 py-0.5 text-xs font-medium ${cu.cls}`}>{cu.text}</span>
-              <p class="mt-1 text-xs text-gray-500">{data.commercialUseNote}</p>
-            </td>
-          </tr>
-          <tr>
-            <th class="bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">透かし</th>
-            <td class="px-4 py-3">
-              <span class={`rounded px-2 py-0.5 text-xs font-medium ${wm.cls}`}>{wm.text}</span>
-            </td>
-          </tr>
-          <tr>
-            <th class="bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">日本語UI</th>
-            <td class={`px-4 py-3 font-bold ${jui.cls}`}>{jui.symbol}</td>
-          </tr>
-          <tr>
-            <th class="bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">日本語プロンプト</th>
-            <td class={`px-4 py-3 font-bold ${jpr.cls}`}>{jpr.symbol}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- リード文 -->
+    <p class="mb-6 text-sm leading-relaxed text-gray-600">{leadText}</p>
 
-    <!-- こんな人に向いている -->
-    {data.bestFor.length > 0 && (
-      <section class="mb-8">
-        <h2 class="mb-3 text-lg font-semibold text-gray-800">こんな人に向いている</h2>
-        <ul class="space-y-1">
-          {data.bestFor.map((item) => (
-            <li class="flex items-start gap-2 text-sm text-gray-700">
-              <span class="mt-0.5 text-blue-500">▶</span>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
+    <!-- NoticeBox -->
+    <div class="mb-6">
+      <NoticeBox />
+    </div>
+
+    <!-- ToolSummaryTable -->
+    <ToolSummaryTable tool={entry} />
 
     <!-- 強み・弱み -->
     <section class="mb-8 grid gap-4 sm:grid-cols-2">
@@ -206,9 +111,34 @@ const jpr = triLabel(data.japanesePrompt);
       </section>
     )}
 
-    <!-- 関連ページ -->
+    <!-- 関連ツール -->
+    <RelatedTools currentSlug={entry.slug} category={data.category} />
+
+    <!-- 内部リンク -->
+    <section class="mb-8 rounded-lg border border-blue-100 bg-blue-50 p-5">
+      <h2 class="mb-3 text-sm font-semibold text-blue-800">関連ページ</h2>
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a href="/compare/" class="font-medium text-blue-700 hover:underline">
+            全ツール比較表を見る →
+          </a>
+        </li>
+        <li>
+          <a href="/guides/commercial-use-copyright/" class="font-medium text-blue-700 hover:underline">
+            商用利用・著作権ガイド →
+          </a>
+        </li>
+        <li>
+          <a href="/categories/free/" class="font-medium text-blue-700 hover:underline">
+            無料で使えるAIツール →
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- その他のカテゴリリンク -->
     <section class="mb-8">
-      <h2 class="mb-4 text-sm font-semibold text-gray-600">関連ページ</h2>
+      <h2 class="mb-4 text-sm font-semibold text-gray-600">カテゴリで探す</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
         <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">ツール一覧</a></li>
         <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>

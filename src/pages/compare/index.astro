@@ -18,7 +18,7 @@ function freeBadge(val: FreePlan) {
 }
 
 function cuBadge(val: FourState) {
-  if (val === 'yes')     return { text: '条件確認で可', cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200', icon: '✓' };
+  if (val === 'yes')     return { text: '商用可能',     cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200', icon: '✓' };
   if (val === 'limited') return { text: '条件あり',     cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',   icon: '△' };
   if (val === 'no')      return { text: '不可の場合あり', cls: 'bg-red-50 text-red-600 ring-1 ring-inset ring-red-200',      icon: '✕' };
                          return { text: '要確認',       cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100',  icon: '?' };
@@ -33,7 +33,7 @@ function jpBadge(ui: TriState, prompt: TriState) {
 
 function wmBadge(val: FourState) {
   if (val === 'no')      return { text: '透かしなし',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200', icon: '✓' };
-  if (val === 'yes')     return { text: '透かしあり',   cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200',   icon: '△' };
+  if (val === 'yes')     return { text: '透かしあり',   cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200',   icon: '✕' };
   if (val === 'limited') return { text: 'プランによる', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',   icon: '△' };
                          return { text: '要確認',       cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100',   icon: '?' };
 }
@@ -104,19 +104,19 @@ function getTopFeatures(tool: typeof allTools[number], max = 5): string[] {
       <p class="mb-4 text-sm text-slate-500">各ツールの商用利用、無料枠、日本語対応、透かし、料金目安を一覧で確認できます。条件は変更される場合があるため、実務利用前には公式サイトの最新情報も確認してください。</p>
       <div class="flex flex-wrap gap-2">
         <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
-          <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200">✓ 対応</span>
+          <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200"><span aria-hidden="true">✓</span> 対応</span>
           <span class="text-slate-600">利用可能・対応</span>
         </span>
         <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
-          <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200">△ 条件あり</span>
+          <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200"><span aria-hidden="true">△</span> 条件あり</span>
           <span class="text-slate-600">条件付き・一部対応</span>
         </span>
         <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
-          <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200">✕ 非対応</span>
+          <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200"><span aria-hidden="true">✕</span> 非対応</span>
           <span class="text-slate-600">非対応</span>
         </span>
         <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
-          <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100">? 要確認</span>
+          <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100"><span aria-hidden="true">?</span> 要確認</span>
           <span class="text-slate-600">公式で要確認</span>
         </span>
       </div>
@@ -150,8 +150,8 @@ function getTopFeatures(tool: typeof allTools[number], max = 5): string[] {
               const wm = wmBadge(tool.data.watermark);
               const stickyBg = index % 2 === 1 ? 'bg-slate-50' : 'bg-white';
               return (
-                <tr class="bg-white even:bg-slate-50 hover:bg-slate-100">
-                  <td class={`sticky left-0 z-10 ${stickyBg} px-4 py-3 font-semibold text-slate-900 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.06)]`}>
+                <tr class="group bg-white even:bg-slate-50 hover:bg-slate-100">
+                  <td class={`sticky left-0 z-10 ${stickyBg} group-hover:bg-slate-100 px-4 py-3 font-semibold text-slate-900 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.06)]`}>
                     {tool.data.name}
                   </td>
                   <td class="px-3 py-3 text-xs text-slate-500 whitespace-nowrap">{catLabel(tool.data.category)}</td>

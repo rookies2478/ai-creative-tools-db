@@ -1,0 +1,15 @@
+---
+interface Props {
+  title?: string;
+}
+const { title = 'このガイドの結論' } = Astro.props;
+---
+
+<div class="rounded-xl border border-slate-200 bg-slate-50 px-6 py-5 my-6">
+  {title && (
+    <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-500">{title}</p>
+  )}
+  <div class="text-sm leading-relaxed text-slate-700">
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,35 @@
+---
+interface Props {
+  title?: string;
+  items: string[];
+  id?: string;
+}
+const { title = '実務利用前のチェックリスト', items, id = '{id}' } = Astro.props;
+---
+
+<div class="rounded-xl border border-slate-200 bg-white px-6 py-5 my-6">
+  {title && (
+    <h2 class="mb-4 text-base font-semibold text-slate-900" id="{id}">{title}</h2>
+  )}
+  <ul class="space-y-3" role="list" aria-labelledby="{id}">
+    {items.map((item) => (
+      <li class="flex items-start gap-3 text-sm text-slate-700">
+        <span
+          class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 bg-slate-50"
+          aria-hidden="true"
+        >
+          <svg class="h-3 w-3 text-slate-400" fill="none" viewBox="0 0 12 12" aria-hidden="true">
+            <path
+              d="M2 6l3 3 5-5"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+        <span>{item}</span>
+      </li>
+    ))}
+  </ul>
+</div>

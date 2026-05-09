@@ -29,7 +29,7 @@ Disallow: /
 # 本番切替後
 User-agent: *
 Allow: /
-Sitemap: https://y-labo.online/sitemap.xml
+Sitemap: https://aicreative-db.com/sitemap.xml
 ```
 
 - [ ] Disallow: / を削除し Allow: / に変更
@@ -41,9 +41,9 @@ Sitemap: https://y-labo.online/sitemap.xml
 
 **現状:** `public/sitemap.xml` は手動管理。主要ページ・全ツールページ・信頼性ページ（/disclaimer/ 含む）を記載済み。
 
-- [ ] 本番ドメイン `https://y-labo.online` が全 `<loc>` に使われていることを確認（現状済）
+- [ ] 本番ドメイン `https://aicreative-db.com` が全 `<loc>` に使われていることを確認（現状済）
 - [ ] 新規ツールページを追加した場合は sitemap.xml を手動更新
-- [ ] GSC から sitemap.xml を送信（`https://y-labo.online/sitemap.xml`）
+- [ ] GSC から sitemap.xml を送信（`https://aicreative-db.com/sitemap.xml`）
 
 ---
 
@@ -51,7 +51,7 @@ Sitemap: https://y-labo.online/sitemap.xml
 
 **現状:** 全ページで `canonicalPath` を渡しており canonical 設定済
 
-`astro.config.mjs` の `site: 'https://y-labo.online'` でドメインが決まるため、ドメイン変更時は同ファイルも更新する。
+`astro.config.mjs` の `site: 'https://aicreative-db.com'` でドメインが決まるため、ドメイン変更時は同ファイルも更新する。
 
 - [ ] 本番ドメイン確定後に `astro.config.mjs` の `site` 値が正しいか確認
 - [ ] 新規ページ追加時は `canonicalPath` を必ず渡す
@@ -80,7 +80,7 @@ Sitemap: https://y-labo.online/sitemap.xml
 
 ## 6. Google Search Console (GSC) 登録
 
-- [ ] GSC でプロパティを追加（URLプレフィックス: `https://y-labo.online/`）
+- [ ] GSC でプロパティを追加（URLプレフィックス: `https://aicreative-db.com/`）
 - [ ] 所有権確認（HTMLファイル配置 or メタタグ挿入）
 - [ ] sitemap.xml を GSC から送信
 - [ ] インデックス登録リクエスト（優先ページから）
@@ -100,12 +100,12 @@ Sitemap: https://y-labo.online/sitemap.xml
 
 ## 8. 独自ドメイン設定
 
-**想定ドメイン:** `https://y-labo.online`
+**想定ドメイン:** `https://aicreative-db.com`
 
 - [ ] ドメイン取得済みか確認
 - [ ] DNS を ConoHa WING のネームサーバーに向ける
 - [ ] SSL 証明書（自動発行）が有効になっていることを確認
-- [ ] `https://y-labo.online` でアクセスできることを確認
+- [ ] `https://aicreative-db.com` でアクセスできることを確認
 
 ---
 

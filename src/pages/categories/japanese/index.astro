@@ -13,11 +13,18 @@ const filtered = tools.filter(
     t.data.japanesePrompt === true ||
     t.data.japanesePrompt === 'partial'
 );
+
+function uiText(val: boolean | 'partial' | 'unknown') {
+  if (val === true)      return { text: '○',  cls: 'text-emerald-600 font-bold' };
+  if (val === 'partial') return { text: '△',  cls: 'text-amber-600 font-bold' };
+  if (val === false)     return { text: '×',  cls: 'text-slate-400 font-bold' };
+                         return { text: '?',  cls: 'text-slate-400' };
+}
 ---
 
 <BaseLayout
   title="日本語対応のAI画像・動画生成ツール比較 | AIクリエイティブツール比較DB"
-  description="日本語UIや日本語プロンプトに対応したAI画像生成・動画生成ツールを比較。初心者や副業ユーザーが使いやすいツールを探せます。"
+  description="日本語UIや日本語プロンプトに対応したAI画像生成・動画生成ツールを比較。日本語UI・プロンプト・ドキュメントの対応状況を整理しています。"
   canonicalPath="/categories/japanese/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
@@ -31,9 +38,13 @@ const filtered = tools.filter(
     </nav>
 
     <h1 class="mb-3 text-3xl font-bold text-gray-900">日本語対応のAI画像・動画生成ツール</h1>
-    <p class="mb-6 text-gray-600 leading-relaxed">
+    <p class="mb-4 text-gray-600 leading-relaxed">
       日本語UIや日本語プロンプトに対応しているAI画像・動画生成ツールを整理しています。英語が苦手な方や、国内向けの制作・SNS運用でAIツールを使いたい方に向いています。
     </p>
+
+    <div class="mb-6 rounded-lg border border-blue-200 bg-blue-50 px-5 py-3.5 text-sm text-blue-800 leading-relaxed">
+      日本語対応には<strong>「日本語UI」「日本語プロンプト」「日本語ドキュメント」</strong>の3種類があります。操作画面が日本語でも、プロンプトは英語の方が精度が高い場合があります。ツールごとに対応範囲が異なるため、詳細ページでご確認ください。
+    </div>
 
     <ConditionChips currentPath="/categories/japanese/" />
 
@@ -42,19 +53,55 @@ const filtered = tools.filter(
     <section class="mt-8">
       <h2 class="mb-1 text-lg font-semibold text-gray-800">対象ツール一覧</h2>
       <p class="mb-2 text-sm text-gray-500">確認時点で {filtered.length} 件。</p>
-      <div class="mb-4 flex gap-4 text-sm text-gray-500">
-        <span class="flex items-center gap-1"><span class="font-bold text-green-600">○</span>対応</span>
-        <span class="flex items-center gap-1"><span class="font-bold text-yellow-600">△</span>一部対応（設定・一部画面のみ、または英語推奨）</span>
-        <span class="flex items-center gap-1"><span class="font-bold text-red-500">×</span>非対応</span>
+      <div class="mb-4 flex flex-wrap gap-4 text-sm text-gray-500">
+        <span class="flex items-center gap-1"><span class="font-bold text-emerald-600">○</span>対応</span>
+        <span class="flex items-center gap-1"><span class="font-bold text-amber-600">△</span>一部対応（設定・一部画面のみ、または英語推奨）</span>
+        <span class="flex items-center gap-1"><span class="font-bold text-slate-400">×</span>非対応</span>
       </div>
       <CompareTablePreview tools={filtered} limit={filtered.length} />
+    </section>
+
+    <section class="mt-8">
+      <h2 class="mb-3 text-sm font-semibold text-gray-700">日本語対応詳細</h2>
+      <p class="mb-3 text-xs text-gray-500">確認時点の情報です。詳細は各ツールの詳細ページおよび公式情報でご確認ください。</p>
+      <div class="overflow-x-auto rounded-xl border border-slate-100 shadow-sm">
+        <table class="w-full min-w-[480px] text-sm">
+          <thead>
+            <tr class="bg-slate-50 text-left text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+              <th class="px-4 py-2.5 whitespace-nowrap">ツール名</th>
+              <th class="px-4 py-2.5 whitespace-nowrap">日本語UI</th>
+              <th class="px-4 py-2.5 whitespace-nowrap">日本語プロンプト</th>
+              <th class="px-4 py-2.5 whitespace-nowrap">日本語ドキュメント</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {filtered.map((tool) => {
+              const ui = uiText(tool.data.japaneseUi);
+              const prompt = uiText(tool.data.japanesePrompt);
+              const docs = tool.data.japaneseDocs === true ? { text: '○', cls: 'text-emerald-600 font-bold' }
+                         : tool.data.japaneseDocs === false ? { text: '×', cls: 'text-slate-400 font-bold' }
+                         : { text: '?', cls: 'text-slate-400' };
+              return (
+                <tr class="bg-white even:bg-slate-50">
+                  <td class="px-4 py-3 font-medium text-slate-900 whitespace-nowrap">
+                    <a href={`/tools/${tool.slug}/`} class="hover:text-blue-600 hover:underline">{tool.data.name}</a>
+                  </td>
+                  <td class={`px-4 py-3 ${ui.cls}`}>{ui.text}</td>
+                  <td class={`px-4 py-3 ${prompt.cls}`}>{prompt.text}</td>
+                  <td class={`px-4 py-3 ${docs.cls}`}>{docs.text}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section class="mt-12">
       <h2 class="mb-4 text-sm font-semibold text-gray-600">関連ページ</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
         <li><a href="/compare/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">全ツール比較表</a></li>
-        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用・著作権ガイド</a></li>
+        <li><a href="/guides/japanese-ai-image-tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">日本語対応ツールの選び方</a></li>
         <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">すべてのツールを見る</a></li>
         <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>
         <li><a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用を確認しやすいツール</a></li>

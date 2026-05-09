@@ -30,6 +30,96 @@ const tools = defineCollection({
         url: z.string().url(),
       })
     ),
+
+    pricingModel: z.enum([
+      "free",
+      "subscription",
+      "credit",
+      "subscription_credit",
+      "local_free",
+      "unknown"
+    ]).optional(),
+
+    freePlanNote: z.string().optional(),
+    paidPlanNote: z.string().optional(),
+
+    platforms: z.array(
+      z.enum([
+        "web",
+        "discord",
+        "ios",
+        "android",
+        "desktop",
+        "api",
+        "local"
+      ])
+    ).optional(),
+
+    signupRequired: z.boolean().optional(),
+
+    features: z.object({
+      textToImage: z.boolean().optional(),
+      imageToImage: z.boolean().optional(),
+      inpainting: z.boolean().optional(),
+      outpainting: z.boolean().optional(),
+      upscale: z.boolean().optional(),
+      backgroundRemoval: z.boolean().optional(),
+      stylePresets: z.boolean().optional(),
+      promptAssist: z.boolean().optional(),
+      textToVideo: z.boolean().optional(),
+      imageToVideo: z.boolean().optional(),
+      videoExtend: z.boolean().optional(),
+      apiAvailable: z.boolean().optional(),
+      maxResolution: z.string().optional(),
+      maxVideoDuration: z.string().optional()
+    }).optional(),
+
+    watermarkCondition: z.string().optional(),
+    japaneseDocs: z.boolean().optional(),
+
+    useCases: z.array(
+      z.enum([
+        "sns",
+        "blog",
+        "ad_creative",
+        "illustration",
+        "photo_real",
+        "product_image",
+        "design",
+        "video",
+        "youtube",
+        "business"
+      ])
+    ).optional(),
+
+    limitations: z.array(z.string()).optional(),
+
+    faqs: z.array(z.object({
+      question: z.string(),
+      answer: z.string(),
+    })).optional(),
+
+    reviewed: z.object({
+      pricing: z.string().optional(),
+      terms: z.string().optional(),
+      features: z.string().optional()
+    }).optional(),
+
+    sourceRefs: z.array(
+      z.object({
+        label: z.string(),
+        url: z.string().url(),
+        type: z.enum([
+          "official",
+          "pricing",
+          "terms",
+          "help",
+          "policy",
+          "commercial",
+          "docs"
+        ])
+      })
+    ).optional(),
   }),
 });
 

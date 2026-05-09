@@ -13,7 +13,7 @@ const filtered = tools.filter(
 
 <BaseLayout
   title="商用利用を確認しやすいAI画像・動画生成ツール比較 | AIクリエイティブツール比較DB"
-  description="AI画像生成・動画生成ツールを商用利用条件、著作権、透かし、料金で比較。副業・制作案件・SNS運用で使う前の確認に役立つ一覧です。"
+  description="AI画像生成・動画生成ツールを商用利用条件、著作権、透かし、料金で比較。プラン・生成内容・目的によって条件が変わるため、実務利用前に公式規約を確認することを推奨します。"
   canonicalPath="/categories/commercial-use/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
@@ -27,9 +27,13 @@ const filtered = tools.filter(
     </nav>
 
     <h1 class="mb-3 text-3xl font-bold text-gray-900">商用利用を確認しやすいAI画像・動画生成ツール</h1>
-    <p class="mb-6 text-gray-600 leading-relaxed">
-      AI画像・動画生成ツールを仕事や副業で使う場合は、商用利用条件や著作権、透かしの扱いを事前に確認することが重要です。このページでは、商用利用の確認がしやすいツールを一覧で整理しています。
+    <p class="mb-4 text-gray-600 leading-relaxed">
+      AI画像・動画生成ツールを仕事や副業で使う場合は、商用利用条件を事前に確認することが重要です。
     </p>
+
+    <div class="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-5 py-3.5 text-sm text-amber-800 leading-relaxed">
+      商用利用の可否は、<strong>プラン・生成内容・利用目的・各ツールの規約</strong>によって変わる場合があります。このページは公式情報をもとにした一般的な整理であり、実務利用前には必ず最新の公式規約をご確認ください。このページは法的助言ではありません。
+    </div>
 
     <ConditionChips currentPath="/categories/commercial-use/" />
 
@@ -37,8 +41,28 @@ const filtered = tools.filter(
 
     <section class="mt-8">
       <h2 class="mb-1 text-lg font-semibold text-gray-800">対象ツール一覧</h2>
-      <p class="mb-4 text-sm text-gray-500">確認時点で {filtered.length} 件。「△（条件あり）」はプラン・用途・生成内容によって条件が変わる場合があります。各ツールの詳細ページで注意事項を確認してください。</p>
+      <p class="mb-4 text-sm text-gray-500">確認時点で {filtered.length} 件。「条件確認」はプラン・用途・生成内容によって条件が変わる場合があります。各ツールの詳細ページで注意事項を確認してください。</p>
       <CompareTablePreview tools={filtered} limit={filtered.length} />
+    </section>
+
+    <section class="mt-8">
+      <h2 class="mb-3 text-sm font-semibold text-gray-700">各ツールの商用利用に関する注意点</h2>
+      <p class="mb-3 text-xs text-gray-500">確認時点の公式情報をもとにした整理です。条件・規約は変更される可能性があります。実務利用前に必ず公式情報をご確認ください。</p>
+      <div class="space-y-3">
+        {filtered.map((tool) => (
+          <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+            <div class="flex items-baseline gap-2 mb-1">
+              <a href={`/tools/${tool.slug}/`} class="font-semibold text-sm text-slate-900 hover:text-blue-600 hover:underline">{tool.data.name}</a>
+              <span class="text-xs text-slate-400">商用利用：{
+                tool.data.commercialUse === 'yes' ? '可能な場合あり' :
+                tool.data.commercialUse === 'limited' ? '条件確認' :
+                tool.data.commercialUse === 'no' ? '不可の場合あり' : '要確認'
+              }</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">{tool.data.commercialUseNote}</p>
+          </div>
+        ))}
+      </div>
     </section>
 
     <section class="mt-12">

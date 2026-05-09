@@ -28,6 +28,46 @@ weaknesses:
   - "ベータ機能は商用利用対象外とされている"
 lastReviewed: "2026-05-04"
 nextReviewDue: "2026-08-04"
+pricingModel: "subscription_credit"
+freePlanNote: "無料プランで一定数の生成クレジットあり（数量は変更の可能性あり）"
+paidPlanNote: "Firefly Standard $9.99/月〜。Creative Cloud All Appsに含まれる場合あり。"
+platforms:
+  - web
+signupRequired: true
+features:
+  textToImage: true
+  imageToImage: true
+  inpainting: true
+  outpainting: true
+  backgroundRemoval: true
+  stylePresets: true
+  apiAvailable: false
+watermarkCondition: "プランによっては可視透かしあり。全プランでC2PAメタデータ（コンテンツクレデンシャル）埋め込み"
+japaneseDocs: true
+useCases:
+  - ad_creative
+  - design
+  - blog
+  - sns
+  - business
+  - product_image
+limitations:
+  - "ベータ機能（β表示）は商用利用対象外"
+  - "表現の自由度・スタイルの幅が他ツールより狭い傾向"
+reviewed:
+  pricing: "2026-05-04"
+  terms: "2026-05-04"
+  features: "2026-05-04"
+sourceRefs:
+  - label: "Adobe Firefly料金プラン（公式）"
+    url: "https://www.adobe.com/products/firefly/plans.html"
+    type: pricing
+  - label: "Adobe生成AIユーザーガイドライン（公式）"
+    url: "https://www.adobe.com/legal/licenses-terms/adobe-gen-ai-user-guidelines.html"
+    type: policy
+  - label: "Adobe Firefly公式サイト"
+    url: "https://firefly.adobe.com"
+    type: official
 sources:
   - title: "Adobe Firefly 料金プラン（公式）"
     url: "https://www.adobe.com/products/firefly/plans.html"
@@ -35,6 +75,17 @@ sources:
     url: "https://www.adobe.com/legal/licenses-terms/adobe-gen-ai-user-guidelines.html"
   - title: "Adobe Firefly 公式サイト"
     url: "https://firefly.adobe.com"
+faqs:
+  - question: "無料で使えますか？"
+    answer: "無料プランで一定数の生成クレジットが提供される場合があります。クレジット数はプランや時期により変更される可能性があるため、最新の状況はAdobe公式FAQをご確認ください。"
+  - question: "商用利用できますか？"
+    answer: "Adobe公式情報上、商用利用を想定したサービスとして案内されています。ただしβ（ベータ）表示の機能は商用利用対象外とされています。利用前に最新のAdobe生成AIユーザーガイドラインをご確認ください。このページは法的助言ではありません。"
+  - question: "日本語で使えますか？"
+    answer: "日本語UIに対応しており、日本語プロンプトでの生成も可能です。"
+  - question: "透かしは入りますか？"
+    answer: "プランによっては可視透かしが入る場合があります。全プラン共通でC2PAの不可視メタデータが埋め込まれる場合があります。最新の条件は公式サイトでご確認ください。"
+  - question: "どの環境で使えますか？"
+    answer: "Webブラウザから利用できます。PhotoshopやIllustratorとの連携も可能です。"
 ---
 
 ## Adobe Fireflyとは
@@ -73,3 +124,4 @@ Adobe公式情報上、Fireflyは商用利用を想定したAI生成サービス
 - 透かしの有無・条件はプランや提供状況により変わる可能性があります
 - **全プラン共通：** C2PA標準の不可視メタデータ（コンテンツクレデンシャル）が埋め込まれる場合があります
 - 最新の条件はAdobe公式サイトでご確認ください
+

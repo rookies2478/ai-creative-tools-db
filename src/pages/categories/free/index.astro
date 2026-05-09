@@ -13,7 +13,7 @@ const filtered = tools.filter(
 
 <BaseLayout
   title="無料で使えるAI画像・動画生成ツール比較 | AIクリエイティブツール比較DB"
-  description="無料枠のあるAI画像生成・動画生成ツールを一覧比較。商用利用、透かし、日本語対応、料金の確認ポイントも整理しています。"
+  description="無料枠のあるAI画像生成・動画生成ツールを一覧比較。生成回数・クレジット・透かし・商用利用条件はツールごとに異なります。実務利用前に公式情報をご確認ください。"
   canonicalPath="/categories/free/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
@@ -27,9 +27,13 @@ const filtered = tools.filter(
     </nav>
 
     <h1 class="mb-3 text-3xl font-bold text-gray-900">無料で使えるAI画像・動画生成ツール</h1>
-    <p class="mb-6 text-gray-600 leading-relaxed">
-      無料枠のあるAI画像・動画生成ツールを、商用利用・透かし・日本語対応・料金目安とあわせて比較できます。無料プランは制限や透かし条件が変わることがあるため、実務利用前には公式情報をご確認ください。
+    <p class="mb-4 text-gray-600 leading-relaxed">
+      無料枠のあるAI画像・動画生成ツールを、商用利用・透かし・日本語対応・料金目安とあわせて比較できます。
     </p>
+
+    <div class="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-5 py-3.5 text-sm text-amber-800 leading-relaxed">
+      無料で使える場合でも、<strong>生成回数・クレジット・透かし・商用利用条件</strong>はツールによって大きく異なります。各ツールの無料枠メモと公式情報を確認してください。
+    </div>
 
     <ConditionChips currentPath="/categories/free/" />
 
@@ -39,6 +43,33 @@ const filtered = tools.filter(
       <h2 class="mb-1 text-lg font-semibold text-gray-800">対象ツール一覧</h2>
       <p class="mb-4 text-sm text-gray-500">確認時点で {filtered.length} 件。無料枠の内容（クレジット数・解像度・透かし・商用利用条件）はツールごとに異なります。</p>
       <CompareTablePreview tools={filtered} limit={filtered.length} />
+    </section>
+
+    <section class="mt-8">
+      <h2 class="mb-3 text-sm font-semibold text-gray-700">各ツールの無料枠・透かし条件</h2>
+      <p class="mb-3 text-xs text-gray-500">確認時点の情報です。詳細は各ツールの詳細ページおよび公式情報でご確認ください。</p>
+      <div class="overflow-x-auto rounded-xl border border-slate-100 shadow-sm">
+        <table class="w-full min-w-[520px] text-sm">
+          <thead>
+            <tr class="bg-slate-50 text-left text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+              <th class="px-4 py-2.5 whitespace-nowrap">ツール名</th>
+              <th class="px-4 py-2.5">無料枠の条件</th>
+              <th class="px-4 py-2.5">透かし条件</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {filtered.map((tool) => (
+              <tr class="bg-white even:bg-slate-50">
+                <td class="px-4 py-3 font-medium text-slate-900 whitespace-nowrap">
+                  <a href={`/tools/${tool.slug}/`} class="hover:text-blue-600 hover:underline">{tool.data.name}</a>
+                </td>
+                <td class="px-4 py-3 text-slate-600">{tool.data.freePlanNote ?? '—'}</td>
+                <td class="px-4 py-3 text-slate-600">{tool.data.watermarkCondition ?? '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section class="mt-12">

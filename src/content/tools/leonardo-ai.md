@@ -27,6 +27,48 @@ weaknesses:
   - "生成画像への透かし有無は公式情報から未確認"
 lastReviewed: "2026-05-04"
 nextReviewDue: "2026-08-04"
+pricingModel: "subscription_credit"
+freePlanNote: "1日150トークン程度（変更の可能性あり）"
+paidPlanNote: "Apprentice $10/月〜（年払い）。有料＋Private設定で商用利用可。"
+platforms:
+  - web
+  - api
+signupRequired: true
+features:
+  textToImage: true
+  imageToImage: true
+  inpainting: true
+  upscale: true
+  stylePresets: true
+  apiAvailable: true
+watermarkCondition: "通常は透かしなしとされているが公式情報から詳細未確認"
+japaneseDocs: false
+useCases:
+  - illustration
+  - design
+  - ad_creative
+  - blog
+limitations:
+  - "無料プランでは生成画像の権利がLeonardo.AIに帰属する場合あり"
+  - "商用利用には有料プラン＋Private設定が必要とされる"
+  - "日本語UIの有無は公式情報から未確認"
+reviewed:
+  pricing: "2026-05-04"
+  terms: "2026-05-04"
+  features: "2026-05-04"
+sourceRefs:
+  - label: "Leonardo AI料金プラン（公式）"
+    url: "https://leonardo.ai/pricing/"
+    type: pricing
+  - label: "Leonardo AI利用規約（公式）"
+    url: "https://leonardo.ai/terms-of-service/"
+    type: terms
+  - label: "Leonardo AI商用利用ガイド（公式）"
+    url: "https://leonardo.ai/news/can-you-use-ai-generated-images-commercially/"
+    type: commercial
+  - label: "Leonardo AI FAQ（公式）"
+    url: "https://leonardo.ai/faq/"
+    type: help
 sources:
   - title: "Leonardo AI 料金プラン（公式）"
     url: "https://leonardo.ai/pricing/"
@@ -36,6 +78,17 @@ sources:
     url: "https://leonardo.ai/faq/"
   - title: "Leonardo AI 商用利用ガイド（公式）"
     url: "https://leonardo.ai/news/can-you-use-ai-generated-images-commercially/"
+faqs:
+  - question: "無料で使えますか？"
+    answer: "無料プランで1日150トークン程度が付与される場合があります。トークン数はプランや時期により変更される可能性があるため、最新の状況は公式サイトでご確認ください。"
+  - question: "商用利用できますか？"
+    answer: "有料プランかつPrivate設定時にユーザーが画像の知的財産権を保有し商用利用できるとされています。無料プランでは画像の権利がLeonardo.AIに帰属する場合があります。利用前に最新の利用規約をご確認ください。このページは法的助言ではありません。"
+  - question: "日本語で使えますか？"
+    answer: "日本語UIの有無は公式情報から現時点で確認できていません。日本語プロンプトは入力可能ですが英語と比べて精度が低い傾向があります。"
+  - question: "透かしは入りますか？"
+    answer: "通常は透かしなしとされていますが、公式情報からの詳細な仕様は確認できていません。最新の条件は公式サイトでご確認ください。"
+  - question: "どの環境で使えますか？"
+    answer: "Webブラウザから利用できます。API経由での利用も可能です。"
 ---
 
 ## Leonardo AIとは
@@ -70,3 +123,4 @@ Leonardo AIはゲーム・イラスト・キャラクター画像の生成に強
 ## 透かし（ウォーターマーク）
 
 通常は生成画像に透かしは入らないとされていますが、公式情報からの詳細な仕様は確認できていません。最新の条件は公式サイトでご確認ください。
+

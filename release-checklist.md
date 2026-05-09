@@ -6,7 +6,7 @@
 |---|---|
 | フレームワーク | Astro（静的サイト） |
 | ホスティング | ConoHa WING |
-| 公開URL | https://y-labo.online/ |
+| 公開URL | https://aicreative-db.com/ |
 | URL設計 | 確定済み |
 | 実装ページ数 | **23ページ**（追加ガイド3本＋固定4ページ込み） |
 | noindex,nofollow | 設定中（全ページ）← **維持中** |
@@ -17,10 +17,10 @@
 
 | 確認項目 | 状況 |
 |---|---|
-| `dist/` → `public_html/y-labo.online/` アップロード | ✅ 完了 |
-| https://y-labo.online/ 表示確認 | ✅ 確認済み |
-| https://y-labo.online/robots.txt 確認 | ✅ `Disallow: /` 維持確認済み |
-| https://y-labo.online/sitemap.xml 確認 | ✅ 16URL 掲載確認済み（追加ガイド3本はFTP反映待ち） |
+| `dist/` → `public_html/aicreative-db.com/` アップロード | ✅ 完了 |
+| https://aicreative-db.com/ 表示確認 | ✅ 確認済み |
+| https://aicreative-db.com/robots.txt 確認 | ✅ `Disallow: /` 維持確認済み |
+| https://aicreative-db.com/sitemap.xml 確認 | ✅ 16URL 掲載確認済み（追加ガイド3本はFTP反映待ち） |
 | CSS反映確認 | ✅ 確認済み |
 | noindex,nofollow 維持 | ✅ 全ページ維持中 |
 | Google Search Console sitemap送信 | ⏸ 未実施（本番化後に実施） |
@@ -79,7 +79,7 @@
 
 - [x] `public/sitemap.xml` 作成済み（**23URL掲載**・追加ガイド3本＋固定4ページ含む）
 - [x] `npm run build` → `dist/sitemap.xml` 生成確認済み（23ページ）
-- [x] https://y-labo.online/sitemap.xml 公開確認済み（固定4ページ分はFTP反映後に23URL）
+- [x] https://aicreative-db.com/sitemap.xml 公開確認済み（固定4ページ分はFTP反映後に23URL）
 - [ ] Google Search Console へのサイトマップ送信（本番化後に実施）
 - **現状維持：** robots.txt は `Disallow: /` のまま／noindex 維持中
 
@@ -136,10 +136,10 @@
 
 | 確認項目 | 状況 |
 |---|---|
-| `https://y-labo.online/categories/free/` で `無料プランあり` 表示 | ✅ 確認済み |
-| `https://y-labo.online/categories/japanese/` で `対応 / 一部対応 / 非対応` 凡例 | ✅ 確認済み |
-| `https://y-labo.online/sitemap.xml` で19URL | ✅ 確認済み |
-| `https://y-labo.online/robots.txt` は `Disallow: /` 維持中 | ✅ 確認済み |
+| `https://aicreative-db.com/categories/free/` で `無料プランあり` 表示 | ✅ 確認済み |
+| `https://aicreative-db.com/categories/japanese/` で `対応 / 一部対応 / 非対応` 凡例 | ✅ 確認済み |
+| `https://aicreative-db.com/sitemap.xml` で19URL | ✅ 確認済み |
+| `https://aicreative-db.com/robots.txt` は `Disallow: /` 維持中 | ✅ 確認済み |
 
 ### 現在の総合状態
 
@@ -176,12 +176,12 @@
 
 | 確認項目 | 状況 |
 |---|---|
-| `https://y-labo.online/privacy-policy/` 表示 | ✅ 確認済み |
-| `https://y-labo.online/contact/` 表示 | ✅ 確認済み |
-| `https://y-labo.online/about/` 表示 | ✅ 確認済み |
-| `https://y-labo.online/editorial-policy/` 表示 | ✅ 確認済み |
-| `https://y-labo.online/sitemap.xml` で23URL | ✅ 確認済み |
-| `https://y-labo.online/robots.txt` は `Disallow: /` 維持中 | ✅ 確認済み |
+| `https://aicreative-db.com/privacy-policy/` 表示 | ✅ 確認済み |
+| `https://aicreative-db.com/contact/` 表示 | ✅ 確認済み |
+| `https://aicreative-db.com/about/` 表示 | ✅ 確認済み |
+| `https://aicreative-db.com/editorial-policy/` 表示 | ✅ 確認済み |
+| `https://aicreative-db.com/sitemap.xml` で23URL | ✅ 確認済み |
+| `https://aicreative-db.com/robots.txt` は `Disallow: /` 維持中 | ✅ 確認済み |
 | noindex,nofollow 維持 | ✅ 全ページ維持中 |
 
 ### 現在の総合状態
@@ -240,6 +240,17 @@
 - ロゴ未配置の場合は頭文字フォールバック（白カード＋イニシャル）で表示
 - **当面はフォールバック表示を正式運用とする**
 - ロゴ未配置でもビルド・表示に影響なし（確認済み）
+
+---
+
+## 3-E. お問い合わせ先メールアドレス設定完了（2026-05-07）
+
+### 実装内容
+
+- [x] `/contact/` の「準備中」表示を削除し、メールアドレスを設定済み
+- [x] 問い合わせ先：`contact@aicreative-db.com`（mailtoリンク）
+- [x] `npm run build` 成功（25ページ生成確認済み）
+- [x] `noindex,nofollow` 維持確認済み
 
 ---
 
@@ -312,8 +323,8 @@
 1. [ ] 全ページの `noindex,nofollow` を解除する（`BaseLayout.astro`）
 2. [ ] `robots.txt` の `Disallow: /` を解除する（クローラー許可）
 3. [ ] `npm run build` を実行し `dist/` を再生成する
-4. [ ] `dist/` を ConoHa WING の `public_html/y-labo.online/` へ再アップロード（FTP）
-5. [ ] 公開URL（https://y-labo.online/）で全ページ表示確認
+4. [ ] `dist/` を ConoHa WING の `public_html/aicreative-db.com/` へ再アップロード（FTP）
+5. [ ] 公開URL（https://aicreative-db.com/）で全ページ表示確認
 6. [ ] Google Search Console でサイトマップ（`/sitemap.xml`）を送信する
 
 ### その他（本番化後）

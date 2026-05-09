@@ -21,7 +21,7 @@ function freeBadge(val: FreePlan) {
 }
 
 function cuBadge(val: FourState) {
-  if (val === 'yes')     return { text: '商用OK',         cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === 'yes')     return { text: '商用利用を確認',         cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
   if (val === 'limited') return { text: '条件あり',        cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
   if (val === 'no')      return { text: '不可の場合あり',  cls: 'bg-red-50 text-red-500 ring-1 ring-inset ring-red-200' };
                          return { text: '要確認',          cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
@@ -46,6 +46,12 @@ function catLabel(cat: string) {
   if (cat === 'video') return '動画生成';
   return '画像・動画';
 }
+
+const platformLabels: Record<string, string> = {
+  web: 'Web', discord: 'Discord', ios: 'iOS', android: 'Android',
+  desktop: 'Desktop', api: 'API', local: 'Local',
+};
+const displayPlatforms = (data.platforms ?? []).slice(0, 3);
 
 const fp = freeBadge(data.freePlan);
 const cu = cuBadge(data.commercialUse);
@@ -75,6 +81,17 @@ const wm = wmBadge(data.watermark);
       </span>
     )}
   </div>
+
+  <!-- Platforms -->
+  {displayPlatforms.length > 0 && (
+    <div class="mt-2 flex flex-wrap gap-1.5">
+      {displayPlatforms.map((p) => (
+        <span class="rounded px-1.5 py-0.5 text-[10px] font-medium bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200">
+          {platformLabels[p] ?? p}
+        </span>
+      ))}
+    </div>
+  )}
 
   <!-- lastReviewed -->
   <p class="mt-3 text-xs text-slate-500">最終確認日: {data.lastReviewed}</p>

@@ -1,6 +1,6 @@
-# 固定ページ追加計画
+﻿# 固定ページ追加計画
 
-AI画像生成・動画生成ツール比較DB向け。AdSense申請前・本番化前の信頼性強化を目的とする。
+AIクリエイティブツール比較DB向け。AdSense申請前・本番化前の信頼性強化を目的とする。
 
 ---
 
@@ -31,7 +31,7 @@ AI議事録サイト（https://www.ai-gijiroku-navi.com/）のフッターに以
 - 運営者情報
 - プライバシーポリシー
 
-この構成を活用しつつ、**本文はコピーせず**、AI画像生成・動画生成ツール比較DB向けに新規作成する。
+この構成を活用しつつ、**本文はコピーせず**、AIクリエイティブツール比較DB向けに新規作成する。
 
 ---
 
@@ -90,7 +90,7 @@ AI議事録サイト（https://www.ai-gijiroku-navi.com/）のフッターに以
 **目的・記載内容：**
 
 - サイトの運営方針を説明する
-- AI画像生成・動画生成ツール比較DBとして、公式情報確認と免責を重視する姿勢を明記する
+- AIクリエイティブツール比較DBとして、公式情報確認と免責を重視する姿勢を明記する
 - 想定読者（AI画像・動画生成ツールの選定を検討している個人・クリエイター・事業者）を説明する
 - 比較情報は公式情報を優先して作成しているが、最新情報は各公式サイトで確認するよう促す
 
@@ -119,10 +119,10 @@ AI議事録サイト（https://www.ai-gijiroku-navi.com/）のフッターに以
 4ページ追加後、`public/sitemap.xml` に以下4URLを追記する。
 
 ```xml
-<url><loc>https://y-labo.online/privacy-policy/</loc></url>
-<url><loc>https://y-labo.online/contact/</loc></url>
-<url><loc>https://y-labo.online/about/</loc></url>
-<url><loc>https://y-labo.online/editorial-policy/</loc></url>
+<url><loc>https://aicreative-db.com/privacy-policy/</loc></url>
+<url><loc>https://aicreative-db.com/contact/</loc></url>
+<url><loc>https://aicreative-db.com/about/</loc></url>
+<url><loc>https://aicreative-db.com/editorial-policy/</loc></url>
 ```
 
 追加後：19URL → **23URL**
@@ -159,7 +159,7 @@ AI議事録サイト（https://www.ai-gijiroku-navi.com/）のフッターに以
 ## 注意点
 
 - 既存サイト（AI議事録サイト等）の本文をコピーしない
-- AI画像生成・動画生成ツール比較DB向けに新規作成する
+- AIクリエイティブツール比較DB向けに新規作成する
 - プライバシーポリシーは法的断定を避ける
 - AdSenseやGA4導入後にプライバシーポリシーの内容を再確認する
 - お問い合わせフォームは初期実装しない
@@ -178,7 +178,7 @@ AI議事録サイト（https://www.ai-gijiroku-navi.com/）のフッターに以
 | 4 | `public/sitemap.xml` に4URL追加（23URL） ← **完了** |
 | 5 | `npm run build`（23ページ確認） ← **完了** |
 | 6 | `dist/` を手動アップロード（FTP） ← **完了** |
-| 7 | 公開URL（https://y-labo.online/）で確認 ← **完了** |
+| 7 | 公開URL（https://aicreative-db.com/）で確認 ← **完了** |
 | 8 | noindex解除・robots許可の本番化判断 ← 判断待ち |
 
 ---

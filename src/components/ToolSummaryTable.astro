@@ -39,6 +39,57 @@ function categoryLabel(cat: 'image' | 'video' | 'both') {
   return '画像・動画生成';
 }
 
+const platformLabels: Record<string, string> = {
+  web: 'Web',
+  discord: 'Discord',
+  ios: 'iOS',
+  android: 'Android',
+  desktop: 'デスクトップ',
+  api: 'API',
+  local: 'ローカル',
+};
+
+const featureLabels: Record<string, string> = {
+  textToImage: 'テキスト→画像',
+  imageToImage: '画像→画像',
+  inpainting: '部分修正',
+  outpainting: '画像拡張',
+  upscale: '高解像度化',
+  backgroundRemoval: '背景削除',
+  stylePresets: 'スタイル選択',
+  promptAssist: 'プロンプト補助',
+  textToVideo: 'テキスト→動画',
+  imageToVideo: '画像→動画',
+  videoExtend: '動画延長',
+  apiAvailable: 'API対応',
+};
+
+const useCaseLabels: Record<string, string> = {
+  sns: 'SNS投稿',
+  blog: 'ブログ',
+  ad_creative: '広告クリエイティブ',
+  illustration: 'イラスト',
+  photo_real: '写真風',
+  product_image: '商品画像',
+  design: 'デザイン',
+  video: '動画',
+  youtube: 'YouTube',
+  business: 'ビジネス',
+};
+
+const featureOrder = [
+  'textToImage', 'imageToImage', 'inpainting', 'outpainting',
+  'upscale', 'backgroundRemoval', 'stylePresets', 'promptAssist',
+  'textToVideo', 'imageToVideo', 'videoExtend', 'apiAvailable',
+] as const;
+
+type FeatureKey = typeof featureOrder[number];
+
+const featuresObj = data.features;
+const trueFeatureLabels: string[] = featuresObj
+  ? featureOrder.filter(k => featuresObj[k as FeatureKey] === true).map(k => featureLabels[k]).slice(0, 8)
+  : [];
+
 const fp  = freePlanBadge(data.freePlan);
 const cu  = fourStateBadge(data.commercialUse);
 const wm  = fourStateBadge(data.watermark);
@@ -67,10 +118,22 @@ const jpr = triLabel(data.japanesePrompt);
             <span class={`rounded px-2 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
           </td>
         </tr>
+        {data.freePlanNote && (
+          <tr>
+            <th class="whitespace-nowrap bg-gray-50 px-4 py-3 align-top text-left font-medium text-gray-600">無料枠メモ</th>
+            <td class="px-4 py-3 text-xs leading-relaxed text-gray-600">{data.freePlanNote}</td>
+          </tr>
+        )}
         <tr>
           <th class="whitespace-nowrap bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">最安料金</th>
           <td class="px-4 py-3 text-sm text-gray-700">{data.lowestPaidPlan ?? '要確認'}</td>
         </tr>
+        {data.paidPlanNote && (
+          <tr>
+            <th class="whitespace-nowrap bg-gray-50 px-4 py-3 align-top text-left font-medium text-gray-600">有料プランメモ</th>
+            <td class="px-4 py-3 text-xs leading-relaxed text-gray-600">{data.paidPlanNote}</td>
+          </tr>
+        )}
         <tr>
           <th class="whitespace-nowrap bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">商用利用</th>
           <td class="px-4 py-3">
@@ -89,12 +152,56 @@ const jpr = triLabel(data.japanesePrompt);
           <th class="whitespace-nowrap bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">日本語プロンプト</th>
           <td class={`px-4 py-3 ${jpr.cls}`}>{jpr.text}</td>
         </tr>
+        {data.japaneseDocs !== undefined && (
+          <tr>
+            <th class="whitespace-nowrap bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">日本語資料</th>
+            <td class={`px-4 py-3 font-bold ${data.japaneseDocs ? 'text-green-600' : 'text-red-500'}`}>
+              {data.japaneseDocs ? '○' : '×'}
+            </td>
+          </tr>
+        )}
         <tr>
           <th class="whitespace-nowrap bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">透かし</th>
           <td class="px-4 py-3">
             <span class={`rounded px-2 py-0.5 text-xs font-medium ${wm.cls}`}>{wm.text}</span>
           </td>
         </tr>
+        {data.watermarkCondition && (
+          <tr>
+            <th class="whitespace-nowrap bg-gray-50 px-4 py-3 align-top text-left font-medium text-gray-600">透かし条件</th>
+            <td class="px-4 py-3 text-xs leading-relaxed text-gray-600">{data.watermarkCondition}</td>
+          </tr>
+        )}
+        {data.platforms && data.platforms.length > 0 && (
+          <tr>
+            <th class="whitespace-nowrap bg-gray-50 px-4 py-3 align-top text-left font-medium text-gray-600">対応環境</th>
+            <td class="px-4 py-3">
+              <div class="flex flex-wrap gap-1.5">
+                {data.platforms.map(p => (
+                  <span class="rounded bg-blue-50 px-2 py-0.5 text-xs text-blue-700">{platformLabels[p] ?? p}</span>
+                ))}
+              </div>
+            </td>
+          </tr>
+        )}
+        {trueFeatureLabels.length > 0 && (
+          <tr>
+            <th class="whitespace-nowrap bg-gray-50 px-4 py-3 align-top text-left font-medium text-gray-600">主な機能</th>
+            <td class="px-4 py-3">
+              <div class="flex flex-wrap gap-1.5">
+                {trueFeatureLabels.map(label => (
+                  <span class="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-700">{label}</span>
+                ))}
+                {data.features?.maxResolution && (
+                  <span class="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-700">最大解像度: {data.features.maxResolution}</span>
+                )}
+                {data.features?.maxVideoDuration && (
+                  <span class="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-700">最大動画尺: {data.features.maxVideoDuration}</span>
+                )}
+              </div>
+            </td>
+          </tr>
+        )}
         {data.bestFor.length > 0 && (
           <tr>
             <th class="whitespace-nowrap bg-gray-50 px-4 py-3 align-top text-left font-medium text-gray-600">向いている用途</th>
@@ -110,8 +217,20 @@ const jpr = triLabel(data.japanesePrompt);
             </td>
           </tr>
         )}
+        {data.useCases && data.useCases.length > 0 && (
+          <tr>
+            <th class="whitespace-nowrap bg-gray-50 px-4 py-3 align-top text-left font-medium text-gray-600">用途</th>
+            <td class="px-4 py-3">
+              <div class="flex flex-wrap gap-1.5">
+                {data.useCases.slice(0, 6).map(uc => (
+                  <span class="rounded bg-purple-50 px-2 py-0.5 text-xs text-purple-700">{useCaseLabels[uc] ?? uc}</span>
+                ))}
+              </div>
+            </td>
+          </tr>
+        )}
         <tr>
-          <th class="whitespace-nowrap bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">最終確認日</th>
+          <th class="whitespace-nowrap bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">情報確認日</th>
           <td class="px-4 py-3 text-xs text-gray-600">{data.lastReviewed}</td>
         </tr>
         <tr>

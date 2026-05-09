@@ -27,6 +27,53 @@ weaknesses:
   - "コストが比較的高め"
 lastReviewed: "2026-05-05"
 nextReviewDue: "2026-08-04"
+pricingModel: "subscription_credit"
+freePlanNote: "125クレジット（初回のみ・更新なし）"
+paidPlanNote: "Standard $12/月〜（年払い）。月625クレジット程度。"
+platforms:
+  - web
+  - api
+signupRequired: true
+features:
+  textToVideo: true
+  imageToVideo: true
+  videoExtend: true
+  backgroundRemoval: true
+  apiAvailable: true
+  textToImage: false
+watermarkCondition: "無料プランでは透かしあり。有料プランでは透かしなし"
+japaneseDocs: false
+useCases:
+  - video
+  - youtube
+  - ad_creative
+  - business
+limitations:
+  - "無料プランのクレジットは一度限りで更新なし"
+  - "コストが比較的高め"
+reviewed:
+  pricing: "2026-05-05"
+  terms: "2026-05-05"
+  features: "2026-05-05"
+sourceRefs:
+  - label: "Runway料金プラン（公式）"
+    url: "https://runwayml.com/pricing/"
+    type: pricing
+  - label: "Runway利用規約（公式）"
+    url: "https://runwayml.com/terms-of-use/"
+    type: terms
+  - label: "Runway利用権（使用権）について（公式ヘルプ）"
+    url: "https://help.runwayml.com/hc/en-us/articles/18927776141715-Usage-rights"
+    type: commercial
+  - label: "Runway：商用利用について（公式ヘルプ）"
+    url: "https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes"
+    type: commercial
+  - label: "Runway無料プラン詳細（公式ヘルプ）"
+    url: "https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details"
+    type: help
+  - label: "Runway公式サイト"
+    url: "https://runwayml.com"
+    type: official
 sources:
   - title: "Runway 料金プラン（公式）"
     url: "https://runwayml.com/pricing/"
@@ -42,6 +89,17 @@ sources:
     url: "https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details"
   - title: "Runway 公式サイト"
     url: "https://runwayml.com"
+faqs:
+  - question: "無料で使えますか？"
+    answer: "無料プランでは125クレジットが付与されますが、初回のみで更新はないとされています。長期的な利用や商用利用には有料プランへのアップグレードが必要です。"
+  - question: "商用利用できますか？"
+    answer: "公式ヘルプによると、すべてのプランでOutputの商用利用を制限していないとされています。ただし生成コンテンツの内容や第三者の権利によって制限される場合があります。無料プランでは透かしが入るため実用上の制約があります。利用前に最新の公式利用規約をご確認ください。このページは法的助言ではありません。"
+  - question: "日本語で使えますか？"
+    answer: "UIは英語のみです。音声ダビング機能では日本語を含む複数言語に対応しているとされています。"
+  - question: "透かしは入りますか？"
+    answer: "無料プランでは透かしが付与される場合があります。有料プランでは透かしが入らない場合があるとされています。最新の条件は公式サイトでご確認ください。"
+  - question: "どの環境で使えますか？"
+    answer: "Webブラウザから利用できます。API経由での利用も可能です。"
 ---
 
 ## Runwayとは
@@ -78,3 +136,4 @@ RunwayはAI動画生成・映像編集ツールを提供するサービス。テ
 ## 透かし（ウォーターマーク）
 
 公式情報上、無料プランでは生成動画に透かしが付与される場合があるとされています。有料プランでは透かしが入らない場合があるとされていますが、最新の条件はRunway公式サイトでご確認ください。
+

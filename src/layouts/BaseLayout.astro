@@ -26,7 +26,6 @@ const canonicalUrl = canonicalPath && Astro.site
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="robots" content="noindex,nofollow" />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:title" content={title} />
@@ -34,8 +33,30 @@ const canonicalUrl = canonicalPath && Astro.site
     <meta property="og:type" content={ogType} />
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
     <meta property="og:site_name" content="AIクリエイティブツール比較DB" />
-    <meta property="og:image" content="https://aicreative-db.com/og-image.png" />
+    <meta property="og:image" content="https://aicreative-db.com/ogp.png" />
     <title>{title}</title>
+    {import.meta.env.PROD && (
+      <>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTH7GM5ZG7"></script>
+        <script is:inline>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YTH7GM5ZG7');
+          `}
+        </script>
+        <script type="text/javascript" is:inline>
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "wo9noh1ex6");
+          `}
+        </script>
+      </>
+    )}
   </head>
   <body class="min-h-screen bg-white text-slate-900 antialiased">
 
@@ -97,7 +118,7 @@ const canonicalUrl = canonicalPath && Astro.site
             <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">目的別</p>
             <ul class="space-y-2 text-xs text-slate-500">
               <li><a href="/categories/free/"           class="hover:text-blue-600 hover:underline underline-offset-4">無料で試せるAIツール</a></li>
-              <li><a href="/categories/commercial-use/" class="hover:text-blue-600 hover:underline underline-offset-4">商用利用OKのAIツール</a></li>
+              <li><a href="/categories/commercial-use/" class="hover:text-blue-600 hover:underline underline-offset-4">商用利用を確認しやすいAIツール</a></li>
               <li><a href="/categories/japanese/"       class="hover:text-blue-600 hover:underline underline-offset-4">日本語対応AIツール</a></li>
               <li><a href="/categories/no-watermark/"   class="hover:text-blue-600 hover:underline underline-offset-4">透かしなしAIツール</a></li>
             </ul>

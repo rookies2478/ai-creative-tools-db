@@ -51,7 +51,7 @@ import NoticeBox from '../../../components/NoticeBox.astro';
             desc: 'SNS投稿やブログ収益化・広告利用を想定する場合、そのツールが商用利用を認めているか、プランによって条件が異なるかを確認します。無料プランでは商用利用不可とされているツールもあります。',
           },
           {
-            icon: '✨',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700 flex-shrink-0" aria-hidden="true"><path d="M12 2c-1 1.5-8 8-8 13a8 8 0 0 0 16 0c0-5-7-11.5-8-13z"/><line x1="3" y1="3" x2="21" y2="21"/></svg>',
             title: '透かしの有無',
             desc: 'アイキャッチ画像として使う場合は、生成画像に透かしが付くかどうかを確認します。無料プランでは透かし付きになる場合があります。透かしなしであっても商用利用条件は別途確認が必要です。',
           },
@@ -73,7 +73,7 @@ import NoticeBox from '../../../components/NoticeBox.astro';
         ].map(({ icon, title, desc }) => (
           <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
             <div class="mb-3 flex items-center gap-2">
-              <span class="text-2xl" aria-hidden="true">{icon}</span>
+              <span class="text-2xl flex-shrink-0" aria-hidden="true" set:html={icon}></span>
               <p class="text-sm font-bold text-slate-900">{title}</p>
             </div>
             <p class="text-xs leading-relaxed text-slate-600">{desc}</p>

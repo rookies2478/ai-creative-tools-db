@@ -62,7 +62,7 @@ import NoticeBox from '../../../components/NoticeBox.astro';
             desc: 'SNS・ブログ・広告・同人誌・グッズ販売などに生成画像を使う場合は、そのツールが商用利用を認めているか、プランによって条件が異なるかを確認します。無料プランでは商用利用不可とされているツールもあります。',
           },
           {
-            icon: '✨',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700 flex-shrink-0" aria-hidden="true"><path d="M12 2c-1 1.5-8 8-8 13a8 8 0 0 0 16 0c0-5-7-11.5-8-13z"/><line x1="3" y1="3" x2="21" y2="21"/></svg>',
             title: '透かしの有無',
             desc: '生成画像に透かしが付くかどうかを確認します。無料プランでは透かし付きになる場合があります。透かしなしであっても、商用利用条件は別途確認が必要です。',
           },
@@ -74,7 +74,7 @@ import NoticeBox from '../../../components/NoticeBox.astro';
         ].map(({ icon, title, desc }) => (
           <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
             <div class="mb-3 flex items-center gap-2">
-              <span class="text-2xl" aria-hidden="true">{icon}</span>
+              <span class="text-2xl flex-shrink-0" aria-hidden="true" set:html={icon}></span>
               <p class="text-sm font-bold text-slate-900">{title}</p>
             </div>
             <p class="text-xs leading-relaxed text-slate-600">{desc}</p>
@@ -309,14 +309,14 @@ import NoticeBox from '../../../components/NoticeBox.astro';
             desc: '生成画像をグッズ販売・広告・同人誌などに使う場合は、ツールの利用規約だけでなく、販売先・配布先のルールも確認が必要です。プランによって商用利用の条件が異なる場合があります。',
           },
           {
-            icon: '✨',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700 flex-shrink-0" aria-hidden="true"><path d="M12 2c-1 1.5-8 8-8 13a8 8 0 0 0 16 0c0-5-7-11.5-8-13z"/><line x1="3" y1="3" x2="21" y2="21"/></svg>',
             title: '透かしなしでも商用利用条件は別途確認',
             desc: '透かしが付いていないことと、商用利用が許可されていることは別の問題として扱われる場合があります。透かしなしのツールでも、商用利用条件は必ず公式情報でご確認ください。',
           },
         ].map(({ icon, title, desc }) => (
           <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
             <div class="mb-2 flex items-center gap-2">
-              <span class="text-xl" aria-hidden="true">{icon}</span>
+              <span class="text-xl flex-shrink-0" aria-hidden="true" set:html={icon}></span>
               <p class="text-sm font-bold text-slate-900">{title}</p>
             </div>
             <p class="text-xs leading-relaxed text-slate-600">{desc}</p>

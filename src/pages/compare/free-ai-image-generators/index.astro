@@ -1,0 +1,352 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NoticeBox from '../../../components/NoticeBox.astro';
+
+const tools = [
+  {
+    name: 'Canva AI画像生成',
+    slug: 'canva-ai-image-generator',
+    freeNote: '無料プランあり（生成回数に制限）',
+    point: '無料プランでも画像生成機能を試せます。ただし、生成できる回数やデザインテンプレートの利用範囲はプランによって異なります。',
+    bestFor: 'デザイン初心者・SNS用ビジュアル作成',
+    caution: '無料プランの生成回数・商用利用条件は変更される場合があります。公式サイト・利用規約をご確認ください。',
+  },
+  {
+    name: 'Adobe Firefly',
+    slug: 'adobe-firefly',
+    freeNote: '無料クレジットあり（月次リセット）',
+    point: '無料で一定量のクレジットが付与されます。クレジットを使い切った場合の扱いや有料プランへの移行条件は公式サイトでご確認ください。',
+    bestFor: 'Adobe製品ユーザー・商用利用を検討する方',
+    caution: 'クレジット数・商用利用条件・透かしの有無はプランや利用状況によって異なる場合があります。',
+  },
+  {
+    name: 'DALL·E',
+    slug: 'dalle',
+    freeNote: 'ChatGPTの無料プランから利用可能（制限あり）',
+    point: 'ChatGPT経由で利用できます。無料プランの生成制限・出力品質・利用可能な機能はプランによって異なります。',
+    bestFor: 'テキストから画像生成を試したい方',
+    caution: '利用できる機能・生成回数・商用利用条件はOpenAIの利用規約をご確認ください。',
+  },
+  {
+    name: 'Stable Diffusion',
+    slug: 'stable-diffusion',
+    freeNote: 'ローカル環境では基本無料（環境構築が必要）',
+    point: 'モデルをローカルで実行する場合は継続課金なしで利用できます。ただし、GPU環境の準備や技術的な知識が必要です。Web UIサービス経由では無料枠が設けられている場合があります。',
+    bestFor: '技術的な知識がある方・自由度の高い生成を求める方',
+    caution: 'ローカル実行時のライセンス条件・モデルごとの商用利用条件を確認してください。',
+  },
+  {
+    name: 'Leonardo AI',
+    slug: 'leonardo-ai',
+    freeNote: '無料プランあり（日次トークン制）',
+    point: '無料プランでも毎日一定量のトークンが付与されます。トークン数・出力品質・機能の制限は公式サイトでご確認ください。',
+    bestFor: 'ゲーム・キャラクター・コンセプトアート向け',
+    caution: '無料プランの商用利用条件・透かしの有無は利用規約をご確認ください。',
+  },
+];
+
+const tableRows = [
+  {
+    name: 'Canva AI画像生成',
+    slug: 'canva-ai-image-generator',
+    freeType: '無料プラン（回数制限あり）',
+    watermark: '要確認',
+    japanese: '◯',
+    commercialNote: '用途やプランによって条件が異なる場合があります。最新情報は公式サイトをご確認ください。',
+  },
+  {
+    name: 'Adobe Firefly',
+    slug: 'adobe-firefly',
+    freeType: '無料クレジット（月次）',
+    watermark: '要確認',
+    japanese: '◯',
+    commercialNote: '公式情報の確認が必要です。プランによって条件が変わる場合があります。',
+  },
+  {
+    name: 'DALL·E',
+    slug: 'dalle',
+    freeType: 'ChatGPT無料プラン経由（制限あり）',
+    watermark: '要確認',
+    japanese: '△',
+    commercialNote: '最新情報はOpenAI公式サイトをご確認ください。',
+  },
+  {
+    name: 'Stable Diffusion',
+    slug: 'stable-diffusion',
+    freeType: 'ローカル実行（環境構築が必要）',
+    watermark: '基本なし（設定による）',
+    japanese: '△',
+    commercialNote: 'モデルごとのライセンス条件を確認してください。',
+  },
+  {
+    name: 'Leonardo AI',
+    slug: 'leonardo-ai',
+    freeType: '無料プラン（日次トークン制）',
+    watermark: '要確認',
+    japanese: '△',
+    commercialNote: '有料プランでは条件が変わる場合があります。最新情報は公式サイトをご確認ください。',
+  },
+  {
+    name: 'Midjourney',
+    slug: 'midjourney',
+    freeType: '無料プランなし（有料のみ）',
+    watermark: '要確認',
+    japanese: '△',
+    commercialNote: '公式情報の確認が必要です。プランによって条件が異なります。',
+  },
+];
+
+const relatedLinks = [
+  { href: '/categories/free/', label: '無料枠あり・ツール一覧' },
+  { href: '/tools/', label: 'ツール一覧' },
+  { href: '/compare/', label: '比較表' },
+  { href: '/categories/no-watermark/', label: '透かしなしツール' },
+  { href: '/guides/commercial-use-copyright/', label: '商用利用と著作権ガイド' },
+  { href: '/use-cases/youtube-thumbnail/', label: 'YouTubeサムネ向け比較' },
+  { href: '/use-cases/sns-blog-eyecatch/', label: 'SNS・ブログアイキャッチ向け比較' },
+];
+
+const checkpoints = [
+  {
+    icon: '🆓',
+    title: '完全無料か、無料枠ありか',
+    desc: '「完全無料」「無料プラン」「無料クレジット」「期間限定無料」など、無料の種類は様々です。永続的に無料で使えるかどうかを確認しましょう。',
+  },
+  {
+    icon: '🔢',
+    title: '生成回数・クレジット数',
+    desc: '無料の場合でも、月あたり・日あたりの生成枚数やクレジット数に上限がある場合があります。使い切った後の扱いも確認してください。',
+  },
+  {
+    icon: '🔍',
+    title: '透かしの有無',
+    desc: '無料プランでは出力画像に透かし（ウォーターマーク）が付く場合があります。透かしがあると商用利用や公開用途では注意が必要です。',
+  },
+  {
+    icon: '💼',
+    title: '商用利用条件',
+    desc: '無料プランで生成した画像をビジネス・収益化・広告に使えるかどうかはツールや規約によって異なります。必ず公式の利用規約をご確認ください。',
+  },
+  {
+    icon: '🖼️',
+    title: '出力サイズ・画質・編集機能',
+    desc: '無料プランでは解像度・出力サイズが制限されていたり、高画質オプションや編集機能が使えない場合があります。用途に必要な仕様を確認しましょう。',
+  },
+];
+
+const faqs = [
+  {
+    q: '完全無料で使えるAI画像生成ツールはありますか？',
+    a: '無料で使えるツールや無料枠のあるツールはありますが、生成回数、機能、透かし、商用利用条件などに制限がある場合があります。最新情報は公式サイトをご確認ください。',
+  },
+  {
+    q: '無料プランでも商用利用できますか？',
+    a: 'ツールやプランによって条件が異なります。公式サイト・料金ページ・利用規約を確認してください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '無料プランでは透かしが入りますか？',
+    a: 'ツールによって異なります。無料プランでは透かしが入る場合や、出力サイズ・回数に制限がある場合があります。最新情報は公式サイトをご確認ください。',
+  },
+];
+---
+
+<BaseLayout
+  title="無料プランで比較するAI画像生成ツール【無料枠・透かし・商用利用】| AIクリエイティブツール比較DB"
+  description="AI画像生成ツールの無料枠を比較。完全無料・無料プラン・無料クレジットの違い、透かしの有無、商用利用条件、生成回数など、無料で使うときのチェックポイントを整理しています。"
+  canonicalPath="/compare/free-ai-image-generators/"
+>
+  <div class="mx-auto max-w-4xl px-6 py-12">
+
+    <!-- パンくずナビ -->
+    <nav class="mb-6 text-sm text-gray-500" aria-label="パンくずリスト">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <a href="/compare/" class="hover:underline">比較表</a>
+      <span class="mx-1">/</span>
+      <span>無料プランで比較するAI画像生成ツール</span>
+    </nav>
+
+    <!-- H1 -->
+    <h1 class="mb-4 text-3xl font-bold text-gray-900">無料プランで比較するAI画像生成ツール</h1>
+
+    <!-- 導入文 -->
+    <p class="mb-4 text-gray-600 leading-relaxed">
+      AI画像生成ツールの「無料」には、完全無料・無料プラン・無料クレジット・体験版など、いくつかの種類があります。
+      無料で使える場合でも、生成回数、出力サイズ、透かし、商用利用の条件、利用できる機能はツールごとに異なります。
+      このページでは、無料枠を比較するときに確認しておきたいポイントと、代表的なツールを整理しています。
+    </p>
+    <p class="mb-8 text-gray-600 leading-relaxed">
+      無料枠の内容・料金・生成回数・商用利用条件は変更される場合があります。
+      最新情報は各ツールの公式サイト・料金ページ・利用規約をご確認ください。
+    </p>
+
+    <!-- 注意ボックス -->
+    <div class="mb-10 rounded-lg border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800 leading-relaxed">
+      <p class="mb-1 font-semibold">ご確認ください</p>
+      <ul class="mt-2 space-y-1.5 list-disc list-inside">
+        <li>無料枠・料金・生成回数・商用利用条件は変更される場合があります。</li>
+        <li>最新情報は各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。</li>
+        <li>本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- チェックポイントセクション                                    -->
+    <!-- ============================================================ -->
+    <section class="mb-12">
+      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">無料プランを比較するときのチェックポイント</h2>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {checkpoints.map(({ icon, title, desc }) => (
+          <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
+            <div class="mb-3 flex items-center gap-2">
+              <span class="text-2xl" aria-hidden="true">{icon}</span>
+              <p class="text-sm font-bold text-slate-900">{title}</p>
+            </div>
+            <p class="text-xs leading-relaxed text-slate-600">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- おすすめツール紹介セクション                                  -->
+    <!-- ============================================================ -->
+    <section class="mb-12">
+      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">無料枠を確認したいAI画像生成ツール</h2>
+      <div class="space-y-6">
+        {tools.map(({ name, slug, freeNote, point, bestFor, caution }) => (
+          <div class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+            <div class="mb-3 flex flex-wrap items-start justify-between gap-2">
+              <h3 class="text-lg font-bold text-slate-900">{name}</h3>
+              <span class="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-600">{freeNote}</span>
+            </div>
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 mb-4">
+              <div class="rounded-lg bg-blue-50 px-4 py-3">
+                <p class="mb-1 text-xs font-semibold text-blue-700">無料枠を見るときのポイント</p>
+                <p class="text-xs leading-relaxed text-blue-800">{point}</p>
+              </div>
+              <div class="rounded-lg bg-amber-50 px-4 py-3">
+                <p class="mb-1 text-xs font-semibold text-amber-700">注意点</p>
+                <p class="text-xs leading-relaxed text-amber-800">{caution}</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <p class="text-xs text-slate-500">
+                <span class="font-medium text-slate-700">向いているユーザー：</span>{bestFor}
+              </p>
+              <a
+                href={`/tools/${slug}/`}
+                class="rounded-full border border-gray-300 px-4 py-1.5 text-xs text-gray-700 transition-colors hover:bg-gray-100"
+              >
+                詳細を見る →
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Midjourneyは無料プランなしの補足 -->
+      <div class="mt-6 rounded-lg border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-700 leading-relaxed">
+        <p class="font-semibold mb-1">Midjourneyについて</p>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          Midjourneyは現在、無料プランを提供していない場合があります（2024年以降、無料トライアルを終了しています）。
+          最新の料金・プラン情報は<a href="/tools/midjourney/" class="text-blue-600 hover:underline">Midjourney詳細ページ</a>または公式サイトをご確認ください。
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 簡易比較表                                                    -->
+    <!-- ============================================================ -->
+    <section class="mb-12">
+      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">簡易比較表</h2>
+      <p class="mb-4 text-sm text-slate-600">
+        以下は参考情報です。内容は変更される場合があります。最新情報は各ツールの公式サイトをご確認ください。
+      </p>
+      <div class="overflow-x-auto rounded-xl border border-slate-100 shadow-sm">
+        <table class="w-full min-w-[700px] text-sm">
+          <thead>
+            <tr class="bg-slate-50 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
+              <th class="px-4 py-3">ツール名</th>
+              <th class="px-4 py-3">無料枠の種類</th>
+              <th class="px-4 py-3">透かし</th>
+              <th class="px-4 py-3">日本語対応</th>
+              <th class="px-4 py-3">商用利用メモ</th>
+              <th class="px-4 py-3">詳細ページ</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableRows.map(({ name, slug, freeType, watermark, japanese, commercialNote }, i) => (
+              <tr class={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+                <td class="px-4 py-3 font-medium text-slate-900">{name}</td>
+                <td class="px-4 py-3 text-slate-600">{freeType}</td>
+                <td class="px-4 py-3 text-slate-600">{watermark}</td>
+                <td class="px-4 py-3 text-slate-600">{japanese}</td>
+                <td class="px-4 py-3 text-xs text-slate-500 leading-relaxed">{commercialNote}</td>
+                <td class="px-4 py-3">
+                  <a href={`/tools/${slug}/`} class="text-blue-600 hover:underline text-xs">詳細 →</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-slate-400">
+        ◯：UI・プロンプトとも対応、△：部分的に対応または英語中心。情報は確認時点のものです。
+      </p>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 既存ページとの違い                                            -->
+    <!-- ============================================================ -->
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-bold text-[#002B61]">無料カテゴリページとの違い</h2>
+      <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm text-sm text-slate-600 leading-relaxed space-y-2">
+        <p>
+          <a href="/categories/free/" class="text-blue-600 hover:underline font-medium">/categories/free/</a>
+          は、無料枠のあるAI画像・動画生成ツールを探すためのカテゴリ一覧ページです。
+        </p>
+        <p>
+          このページ（/compare/free-ai-image-generators/）は、無料枠の種類・生成回数・透かし・商用利用条件など、
+          無料で使うときの比較ポイントを整理するためのページです。
+        </p>
+        <p>
+          どちらのページも、掲載情報は確認時点のものであり、最新情報は各ツールの公式サイトで確認する必要があります。
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- FAQ                                                          -->
+    <!-- ============================================================ -->
+    <section class="mb-12">
+      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">よくある質問</h2>
+      <div class="space-y-4">
+        {faqs.map(({ q, a }) => (
+          <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+            <p class="mb-2 font-semibold text-slate-900 text-sm">Q. {q}</p>
+            <p class="text-sm leading-relaxed text-slate-600">A. {a}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 関連ページ                                                    -->
+    <!-- ============================================================ -->
+    <section>
+      <h2 class="mb-4 text-lg font-semibold text-slate-700">関連ページ</h2>
+      <div class="flex flex-wrap gap-2">
+        {relatedLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class="rounded-full border border-gray-300 px-4 py-1.5 text-sm text-gray-700 transition-colors hover:bg-gray-100"
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

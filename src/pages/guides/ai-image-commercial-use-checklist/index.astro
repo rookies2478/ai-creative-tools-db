@@ -1,0 +1,398 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideWarningBox from '../../../components/GuideWarningBox.astro';
+import GuideSummaryBox from '../../../components/GuideSummaryBox.astro';
+import GuideCheckList from '../../../components/GuideCheckList.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+import GuidePageHeader from '../../../components/GuidePageHeader.astro';
+
+const title = 'AI画像を商用利用する前に確認すべきチェックリスト';
+const description = 'AI画像生成ツールで作った画像をSNS・広告・YouTube・仕事で使う前に確認したい7つのポイントを整理しました。ツールごとの利用条件・公式情報の見方・用途別の注意点を解説します。';
+const lastReviewed = '2026-05-14';
+
+// ── チェックリスト ─────────────────────────────────────
+const checklistItems = [
+  '使用するツールの公式利用規約（Terms of Service）を確認した',
+  '利用するプランが商用利用を許可していることを確認した',
+  '生成画像の出力形式・解像度・利用可能な用途を確認した',
+  '透かし・クレジット表記の有無と条件を確認した',
+  '禁止用途・制限事項（再販・再頒布・広告等）を確認した',
+  '生成画像に人物・ブランド・キャラクター等の要素が含まれていないかを確認した',
+  '判断が難しい場合は公式サポートまたは専門家に確認した',
+];
+
+// ── FAQ ────────────────────────────────────────────────
+const faqItems = [
+  {
+    q: 'AI画像は商用利用できますか？',
+    a: 'ツールやプラン、用途によって条件が異なる場合があります。必ず各ツールの公式サイト・利用規約・料金ページをご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '無料プランで作った画像も仕事に使えますか？',
+    a: '無料プランでは、商用利用、透かし、出力サイズ、クレジット表記などに制限がある場合があります。最新情報は公式サイトをご確認ください。',
+  },
+  {
+    q: '透かしなしなら商用利用してもよいですか？',
+    a: '透かしの有無と商用利用条件は別の確認項目です。透かしがない場合でも、公式規約や利用条件の確認が必要です。',
+  },
+  {
+    q: '判断に迷った場合はどうすればよいですか？',
+    a: '公式サポートへ確認するか、権利関係に詳しい専門家へ相談することをおすすめします。本記事は法的助言ではありません。',
+  },
+];
+
+// ── 用途別確認ポイント ─────────────────────────────────
+const useCases = [
+  {
+    label: 'ブログ・メディア記事',
+    points: [
+      '商用利用を許可しているプランか確認する',
+      'クレジット表記・出典明示が必要かどうかを確認する',
+      '人物・ブランド・キャラクターが含まれていないか確認する',
+      'サードパーティのCMS・プラットフォームのポリシーも確認する',
+    ],
+  },
+  {
+    label: 'SNS投稿',
+    points: [
+      'ツールの利用規約で広告・プロモーション用途が制限されていないか確認する',
+      '投稿先のSNSプラットフォームのポリシーに抵触しないか確認する',
+      '人物・有名人の肖像が含まれていないか確認する',
+      '透かし・クレジット表記の有無を確認する',
+    ],
+  },
+  {
+    label: 'YouTubeサムネ',
+    points: [
+      '商用利用・広告利用が許可されているプランか確認する',
+      'ブランドロゴ・キャラクター・商標に関する要素が含まれていないか確認する',
+      'YouTubeの利用規約・著作権ポリシーも合わせて確認する',
+      '透かしが入らない出力設定か確認する',
+    ],
+  },
+  {
+    label: '広告バナー',
+    points: [
+      '広告利用を明示的に許可しているプランか確認する',
+      '掲載先（Google広告・SNS広告等）のポリシーに抵触しないか確認する',
+      '人物・肖像・ブランド要素が含まれていないか特に注意して確認する',
+      '規約変更に備え、利用時点の規約を保存しておくことを推奨する',
+    ],
+  },
+  {
+    label: '商品画像・EC',
+    points: [
+      '商品販売・EC利用が規約上許可されているか確認する',
+      '商品と一緒に掲載する場合の再販・素材販売の制限を確認する',
+      '出品先プラットフォーム（Amazon・メルカリ等）のガイドラインも確認する',
+      '画像の権利がユーザーに帰属するか、ツール側に帰属するか確認する',
+    ],
+  },
+  {
+    label: '企業資料・プレゼン',
+    points: [
+      '社内・社外問わず、ツールの商用利用条件に該当するか確認する',
+      '大企業（年間収益が一定額超）向けに異なる条件が設けられていないか確認する',
+      'ブランドロゴ・著名人・競合製品の要素が含まれていないか確認する',
+      '納品物に含める場合はクライアントへの権利関係の説明も検討する',
+    ],
+  },
+];
+
+// ── ツール別公式情報 ─────────────────────────────────
+const toolInfo = [
+  {
+    name: 'Adobe Firefly',
+    href: '/tools/adobe-firefly/',
+    checkPoints: '利用規約ページ・料金プラン・「コマーシャルセーフ」に関するヘルプページ',
+    notes: 'ベータ（β）機能は商用利用対象外とされています。プランによっては可視透かしが入る場合があります。C2PAメタデータが全プランで埋め込まれます。',
+  },
+  {
+    name: 'Midjourney',
+    href: '/tools/midjourney/',
+    checkPoints: '利用規約（Terms of Service）・プラン比較ページ',
+    notes: '有料プランで商用利用可とされています。年間収益が一定額を超える企業は上位プランへの移行が必要とされている場合があります。公式規約で最新条件をご確認ください。',
+  },
+  {
+    name: 'Stable Diffusion',
+    href: '/tools/stable-diffusion/',
+    checkPoints: 'モデルごとのライセンス（Stability AI公式・Hugging Face等）・バージョン別条件',
+    notes: 'バージョン・モデルごとにライセンスが異なります。SD 3.x以降は年間収益に関する条件が設けられているとされています。ローカル実行でも使用モデルのライセンス確認が必要です。',
+  },
+  {
+    name: 'DALL·E',
+    href: '/tools/dalle/',
+    checkPoints: 'OpenAI利用規約・ChatGPTの料金プランページ',
+    notes: 'ChatGPT経由での利用が一般的です。C2PA標準の不可視メタデータが埋め込まれる場合があります。プランによって生成数の制限があります。',
+  },
+  {
+    name: 'Canva AI画像生成',
+    href: '/tools/canva-ai-image-generator/',
+    checkPoints: 'Canva利用規約・コンテンツライセンス規約・プラン比較',
+    notes: 'AI生成コンテンツであることの明示が条件とされる場合があります。Canvaのテンプレート・素材を組み合わせる場合は、それぞれの素材ライセンスも個別に確認が必要です。',
+  },
+  {
+    name: 'Leonardo AI',
+    href: '/tools/leonardo-ai/',
+    checkPoints: '利用規約・プラン比較・Privateモード設定',
+    notes: '無料プランでは画像の権利がLeonardo.AIに帰属し商用利用不可とされています。有料プラン＋Privateモードが商用利用の条件とされています。公式規約で最新条件をご確認ください。',
+  },
+];
+---
+
+<BaseLayout
+  title={`${title} | AIクリエイティブツール比較DB`}
+  description={description}
+  canonicalPath="/guides/ai-image-commercial-use-checklist/"
+  ogType="article"
+>
+  <div class="mx-auto max-w-3xl px-6 py-12">
+
+    <GuidePageHeader
+      title={title}
+      description={description}
+      lastReviewed={lastReviewed}
+    />
+
+    <!-- 導入文 -->
+    <GuideSummaryBox title="このページについて">
+      <p>
+        AI画像生成ツールで作った画像を仕事・SNS運用・ブログ・広告・YouTubeサムネなどに使う場合は、
+        <strong class="font-semibold text-slate-900">ツールごとの利用条件を確認する必要があります。</strong>
+        商用利用の可否はツール・プラン・用途・生成物の扱いによって異なる場合があります。
+        このページでは、AI画像を使う前に確認したい項目をチェックリスト形式で整理しています。
+      </p>
+    </GuideSummaryBox>
+
+    <!-- 免責事項 -->
+    <GuideWarningBox variant="warning" title="免責事項">
+      本記事の情報は、各ツールの公式サイト・料金ページ・利用規約等をもとに整理したものです。掲載内容は確認時点の情報であり、最新情報や具体的な利用可否は必ず各公式サイトでご確認ください。本記事は法的助言ではありません。商用利用や権利関係について判断が難しい場合は、公式サポートまたは専門家へご相談ください。
+    </GuideWarningBox>
+
+    <!-- ── チェックリスト7項目 ── -->
+    <section class="my-10" aria-labelledby="checklist-heading">
+      <h2 class="mb-6 text-lg font-semibold text-slate-900" id="checklist-heading">
+        商用利用前に確認したい7つのポイント
+      </h2>
+
+      <ol class="space-y-5">
+        <li class="flex gap-4">
+          <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white" aria-hidden="true">1</span>
+          <div>
+            <h3 class="mb-1 text-sm font-semibold text-slate-900">公式利用規約を確認する</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              各AIツールの利用規約（Terms of Service）が商用利用を認めているかが最初の確認事項です。
+              規約は予告なく変更される場合があるため、利用前に最終更新日も確認することを推奨します。
+              利用時点の規約をスクリーンショット等で保存しておくと安心です。
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white" aria-hidden="true">2</span>
+          <div>
+            <h3 class="mb-1 text-sm font-semibold text-slate-900">無料プランと有料プランの違いを確認する</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              多くのAIツールでは、無料プランと有料プランで商用利用の条件が異なります。
+              無料プランでは透かし・解像度・クレジット表記・利用できる用途に制限がある場合があります。
+              「商用利用可」と記載されていても、プランによって追加条件がある場合があるため、料金ページと規約の両方を確認してください。
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white" aria-hidden="true">3</span>
+          <div>
+            <h3 class="mb-1 text-sm font-semibold text-slate-900">生成画像の商用利用条件を確認する</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              「生成した画像の権利がユーザーに帰属するか」「商用ライセンスが付与されているか」はツールによって異なります。
+              ツール側が生成コンテンツへの永続的なライセンスを保持する条項が設けられている場合もあります。
+              再販・再頒布・サブライセンスを予定している場合は、その用途が規約上許可されているかも確認してください。
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white" aria-hidden="true">4</span>
+          <div>
+            <h3 class="mb-1 text-sm font-semibold text-slate-900">透かし・クレジット表記の有無を確認する</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              透かしの有無と商用利用の可否は別の問題です。
+              有料プランで透かしを除去できる場合でも、利用規約上の商用利用条件を別途満たす必要がある場合があります。
+              また、ツール名のクレジット表記を求める規約が設けられている場合もあるため、事前に確認してください。
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white" aria-hidden="true">5</span>
+          <div>
+            <h3 class="mb-1 text-sm font-semibold text-slate-900">禁止用途・制限事項を確認する</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              規約には「商用利用可」と記載されていても、特定の用途（広告・素材販売・成人向けコンテンツ等）が別途禁止・制限されている場合があります。
+              規約内の「Prohibited Uses」や「制限事項」の項目も必ず確認してください。
+              使用する用途が明示的に許可されているか、または禁止されていないかを確認することを推奨します。
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white" aria-hidden="true">6</span>
+          <div>
+            <h3 class="mb-1 text-sm font-semibold text-slate-900">素材・人物・ブランド・キャラクターの扱いに注意する</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              AIが生成したコンテンツに、既存のキャラクター・ロゴ・商標・著名人の肖像・第三者の著作物の特徴が含まれている場合、著作権・商標権・肖像権等を侵害する可能性があります。
+              このリスクはどのツールを使用した場合にも生じる可能性があり、ツールの利用規約上の商用利用許可とは別に対応が必要です。
+              Canvaのようにテンプレート・素材を組み合わせるツールでは、各素材のライセンスも個別に確認してください。
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white" aria-hidden="true">7</span>
+          <div>
+            <h3 class="mb-1 text-sm font-semibold text-slate-900">判断が難しい場合は公式サポートや専門家に確認する</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              利用規約の解釈が難しい場合や、高リスクな商用利用（大規模広告・商品販売・企業のコンプライアンス要件等）を予定している場合は、各ツールの公式サポートへ確認することを推奨します。
+              権利関係についての重要な判断が必要な場合は、知財・著作権に詳しい専門家（弁護士等）への相談も検討してください。
+              本記事は法的助言ではありません。
+            </p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ── 実務チェックリスト ── -->
+    <section class="my-10">
+      <GuideCheckList
+        title="実務利用前のチェックリスト"
+        items={checklistItems}
+      />
+    </section>
+
+    <!-- ── 用途別確認ポイント ── -->
+    <section class="my-10" aria-labelledby="usecase-heading">
+      <h2 class="mb-6 text-lg font-semibold text-slate-900" id="usecase-heading">
+        用途別に確認したいこと
+      </h2>
+      <p class="mb-6 text-sm text-slate-500">
+        用途によって注意すべきポイントが異なります。以下の確認ポイントはあくまでも参考情報です。詳細は各ツールの公式規約でご確認ください。
+      </p>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        {useCases.map((uc) => (
+          <div class="rounded-lg border border-slate-200 bg-white p-4">
+            <h3 class="mb-3 text-sm font-semibold text-slate-800">{uc.label}</h3>
+            <ul class="space-y-1.5">
+              {uc.points.map((point) => (
+                <li class="flex gap-2 text-xs leading-relaxed text-slate-600">
+                  <span class="mt-0.5 shrink-0 text-blue-400" aria-hidden="true">›</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ── ツール別公式情報 ── -->
+    <section class="my-10" aria-labelledby="tool-info-heading">
+      <h2 class="mb-3 text-lg font-semibold text-slate-900" id="tool-info-heading">
+        ツール別に確認したい公式情報
+      </h2>
+      <p class="mb-6 text-sm text-slate-500">
+        以下は各確認時点の情報をもとにした参考情報です。最新の条件は必ず各ツールの公式サイトでご確認ください。
+      </p>
+
+      <div class="space-y-4">
+        {toolInfo.map((tool) => (
+          <div class="rounded-lg border border-slate-200 bg-white p-5">
+            <div class="mb-3 flex items-center justify-between gap-4">
+              <h3 class="text-sm font-semibold text-slate-900">{tool.name}</h3>
+              <a
+                href={tool.href}
+                class="shrink-0 rounded-full border border-slate-300 px-3 py-1 text-xs text-slate-600 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors"
+              >
+                詳細を見る
+              </a>
+            </div>
+            <div class="space-y-2">
+              <div class="text-xs text-slate-600">
+                <span class="font-medium text-slate-700">確認したい情報：</span>{tool.checkPoints}
+              </div>
+              <div class="rounded-md bg-amber-50 px-3 py-2 text-xs leading-relaxed text-amber-800">
+                <span class="font-medium">注意点：</span>{tool.notes}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ── 商用利用で避けたい思い込み ── -->
+    <section class="my-10" aria-labelledby="misconceptions-heading">
+      <h2 class="mb-6 text-lg font-semibold text-slate-900" id="misconceptions-heading">
+        商用利用で避けたい思い込み
+      </h2>
+
+      <div class="space-y-3">
+        <div class="rounded-lg border border-red-100 bg-red-50 p-4">
+          <p class="text-sm font-semibold text-red-800">「無料で使える＝商用利用できる」とは限らない</p>
+          <p class="mt-1 text-xs leading-relaxed text-red-700">
+            無料プランで利用できても、商用利用が規約上禁止されている場合があります。Leonardo AI・Pika・Kling AIの無料プランは商用利用不可とされています（確認時点）。料金ページと利用規約の両方を確認してください。
+          </p>
+        </div>
+        <div class="rounded-lg border border-red-100 bg-red-50 p-4">
+          <p class="text-sm font-semibold text-red-800">「透かしなし＝権利面も問題ない」とは限らない</p>
+          <p class="mt-1 text-xs leading-relaxed text-red-700">
+            透かしが入らないことと、商用利用ライセンスが付与されていることは別の話です。透かしを消せる有料プランでも、商用利用に関する別の条件が設けられている場合があります。
+          </p>
+        </div>
+        <div class="rounded-lg border border-red-100 bg-red-50 p-4">
+          <p class="text-sm font-semibold text-red-800">「有名ツールだから必ず安全」とは限らない</p>
+          <p class="mt-1 text-xs leading-relaxed text-red-700">
+            知名度の高いツールであっても、プラン・用途・企業規模によって商用利用の条件が設けられている場合があります。生成コンテンツに第三者の権利が含まれるリスクは、どのツールでも発生しえます。
+          </p>
+        </div>
+        <div class="rounded-lg border border-red-100 bg-red-50 p-4">
+          <p class="text-sm font-semibold text-red-800">「一度確認した規約がずっと同じ」とは限らない</p>
+          <p class="mt-1 text-xs leading-relaxed text-red-700">
+            AIツールの利用規約は予告なく変更される場合があります。継続して利用している場合も、定期的に最新の公式情報を確認することを推奨します。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="my-10">
+      <GuideFAQ items={faqItems} title="よくある質問（FAQ）" />
+    </section>
+
+    <!-- ── 注意事項 ── -->
+    <section class="my-10">
+      <GuideWarningBox variant="info">
+        <ul class="space-y-1.5 list-disc list-inside">
+          <li>各ツールの利用規約は予告なく変更されます。定期的に公式規約を確認してください</li>
+          <li>このサイトの情報は各ページの確認日時点のものです。最新情報は必ず公式サイトでご確認ください</li>
+          <li>AI生成コンテンツに関する著作権・知的財産の法的解釈は、日本を含む各国で整備・更新中です</li>
+          <li>重要な商用利用の場面では、法律の専門家（弁護士等）への相談を推奨します</li>
+        </ul>
+      </GuideWarningBox>
+    </section>
+
+    <!-- ── 関連ページ ── -->
+    <section class="mb-8 space-y-6" aria-labelledby="related-heading">
+      <h2 class="mb-3 text-sm font-semibold text-slate-600" id="related-heading">関連ページ</h2>
+      <ul class="flex flex-wrap gap-3 text-sm">
+        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用・著作権ガイド</a></li>
+        <li><a href="/compare/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">比較表</a></li>
+        <li><a href="/tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">ツール一覧</a></li>
+        <li><a href="/categories/free/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料で使えるツール</a></li>
+        <li><a href="/categories/no-watermark/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">透かしなしツール</a></li>
+        <li><a href="/compare/free-ai-image-generators/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料AI画像生成ツール比較</a></li>
+        <li><a href="/use-cases/youtube-thumbnail/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">YouTubeサムネ向けツール</a></li>
+        <li><a href="/use-cases/sns-blog-eyecatch/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">SNS・ブログアイキャッチ向けツール</a></li>
+      </ul>
+    </section>
+
+    <nav class="border-t border-slate-200 pt-6 text-sm" aria-label="ページナビゲーション">
+      <a href="/" class="text-blue-600 hover:underline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-sm">← トップに戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

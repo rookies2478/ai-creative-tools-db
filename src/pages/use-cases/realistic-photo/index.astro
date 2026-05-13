@@ -47,17 +47,17 @@ import NoticeBox from '../../../components/NoticeBox.astro';
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {[
           {
-            icon: '📷',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700 flex-shrink-0" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>',
             title: '写真風・リアル表現が得意か',
             desc: 'ツールによって得意な表現スタイルが異なります。実写・写真風の生成に強いモデルを搭載しているか、サンプル画像や公式情報を確認してから選ぶと、意図した表現に近い結果を得やすくなります。',
           },
           {
-            icon: '👤',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700 flex-shrink-0" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
             title: '人物・商品・背景の生成に向いているか',
             desc: '人物写真・商品画像・風景・背景素材など、用途に合った表現が得意なツールかを確認します。人物の生成には肖像権・モデルリリースに関するルールがある場合もあります。',
           },
           {
-            icon: '💼',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700 flex-shrink-0" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>',
             title: '商用利用条件を確認できるか',
             desc: '広告・商品ページ・SNS・企業資料などに使う場合は、そのツールが商用利用を認めているか、プランによって条件が異なるかを確認します。無料プランでは商用利用不可とされているツールもあります。',
           },
@@ -67,7 +67,7 @@ import NoticeBox from '../../../components/NoticeBox.astro';
             desc: '生成画像に透かしが付くかどうかを確認します。無料プランでは透かし付きになる場合があります。透かしなしであっても、商用利用条件は別途確認が必要です。',
           },
           {
-            icon: '🇯🇵',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700 flex-shrink-0" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><text x="12" y="16" text-anchor="middle" font-size="9" font-weight="700" font-family="sans-serif" fill="currentColor" stroke="none">JP</text></svg>',
             title: '日本語対応と編集機能',
             desc: 'UIが日本語か、日本語プロンプトで意図通りの画像が生成できるかを確認します。また、生成後に画像を編集・合成できる機能があるかどうかも、実務用途では重要なポイントになります。',
           },
@@ -294,22 +294,22 @@ import NoticeBox from '../../../components/NoticeBox.astro';
       <div class="space-y-4">
         {[
           {
-            icon: '👤',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700 flex-shrink-0" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
             title: '実在する人物に似た画像の利用',
             desc: '実在する人物に似せた画像の利用には、肖像権・プライバシー・名誉に関わる問題が生じる可能性があります。広告・商品ページ・SNSなどに使う場合は、利用先のルールも含めてご確認ください。',
           },
           {
-            icon: '®️',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700 flex-shrink-0" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 8h4a2 2 0 0 1 0 4H9v4"/><path d="M13 12l3 4"/></svg>',
             title: 'ブランドロゴや商品名を含む画像',
             desc: 'ブランドロゴ・商標・商品名を含む画像は権利関係を確認する必要があります。広告や商品ページで使用する場合は、商標法や広告媒体のルールも併せてご確認ください。',
           },
           {
-            icon: '📣',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700 flex-shrink-0" aria-hidden="true"><path d="M22 8s-4 1-8 1-8-1-8-1v8s4-1 8-1 8 1 8 1V8z"/><path d="M6 9v7"/><path d="M2 12a2 2 0 0 0 2-2V8"/><path d="M2 12a2 2 0 0 1 2 2v2"/></svg>',
             title: '広告・商品ページでの利用',
             desc: '広告や商品ページで使う場合は、ツールの利用規約だけでなく、広告媒体・販売先・掲載先のルールも確認が必要です。媒体によってAI生成画像に関するルールが定められている場合があります。',
           },
           {
-            icon: '🏷️',
+            icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700 flex-shrink-0" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>',
             title: 'AI生成画像の明示について',
             desc: '写真のように見える画像でも、生成AIで作成した画像であることを明示すべき場面がある可能性があります。プラットフォームや媒体のルールをご確認ください。',
           },

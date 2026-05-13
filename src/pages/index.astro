@@ -47,19 +47,27 @@ const tools = FEATURED_SLUGS
 
           <!-- Description -->
           <p class="mt-5 text-base leading-relaxed text-slate-600">
-            商用利用・著作権・透かし・無料枠・日本語対応まで、<br class="hidden sm:inline"/>
-            実務前に確認したいポイントを整理しています。
+            AI画像・動画生成ツールを、商用利用・無料枠・透かし・日本語対応で比較できるデータベースです。
           </p>
+
+          <!-- 比較軸ラベル -->
+          <div class="mt-4 flex flex-wrap gap-2">
+            {['商用利用', '無料枠', '透かし', '日本語対応'].map(label => (
+              <span class="inline-flex items-center rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                {label}
+              </span>
+            ))}
+          </div>
 
           <!-- CTAs -->
           <div class="mt-7 flex flex-wrap gap-3">
-            <a href="/compare/" class="primary-btn">
-              比較表で見る
+            <a href="/tools/" class="primary-btn">
+              AI画像生成ツール一覧を見る
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
               </svg>
             </a>
-            <a href="/tools/" class="outline-btn">条件から探す</a>
+            <a href="/guides/commercial-use-copyright/" class="outline-btn">商用利用ガイドを見る</a>
           </div>
 
           <!-- Flow guide -->
@@ -123,7 +131,83 @@ const tools = FEATURED_SLUGS
   </section>
 
   <!-- ============================================================ -->
-  <!-- 3. 注目のツール                                               -->
+  <!-- 3. 条件で探すカード                                           -->
+  <!-- ============================================================ -->
+  <section class="bg-slate-50 py-14">
+    <div class="mx-auto max-w-5xl px-6">
+      <h2 class="mb-2 text-2xl font-bold text-[#002B61]">目的に合わせて探す</h2>
+      <p class="mb-8 text-sm text-slate-500">よく使われる条件でツールを絞り込めます。</p>
+
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          {
+            href: '/categories/free/',
+            icon: '🆓',
+            tag: '無料',
+            title: '無料で使えるAI画像生成ツール',
+            desc: '無料プランや無料クレジットで試せるツールを確認できます。',
+          },
+          {
+            href: '/categories/commercial-use/',
+            icon: '💼',
+            tag: '商用利用',
+            title: '商用利用条件を確認できるAI画像生成ツール',
+            desc: '公式情報をもとに商用利用条件を確認できます。',
+          },
+          {
+            href: '/categories/japanese/',
+            icon: '🇯🇵',
+            tag: '日本語対応',
+            title: '日本語対応AI画像生成ツール',
+            desc: '日本語UIや日本語プロンプトに対応したツールを探せます。',
+          },
+          {
+            href: '/categories/no-watermark/',
+            icon: '✨',
+            tag: '透かしなし',
+            title: '透かしなしAI画像生成ツール',
+            desc: '出力画像に透かしが付かないツールを条件で絞り込めます。',
+          },
+        ].map(({ href, icon, tag, title, desc }) => (
+          <a
+            href={href}
+            class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md"
+          >
+            <div class="mb-3 flex items-center gap-2">
+              <span class="text-2xl" aria-hidden="true">{icon}</span>
+              <span class="inline-flex rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-600">
+                {tag}
+              </span>
+            </div>
+            <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-[#0066FF]">{title}</p>
+            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">{desc}</p>
+            <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">ツールを見る →</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 3.5 用途別ページ導線                                          -->
+  <!-- ============================================================ -->
+  <section class="bg-white py-8 border-b border-slate-100">
+    <div class="mx-auto max-w-5xl px-6">
+      <p class="mb-3 text-sm font-semibold text-slate-700">用途から探す</p>
+      <div class="flex flex-wrap gap-2">
+        <a
+          href="/use-cases/youtube-thumbnail/"
+          class="group inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-xs font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
+        >
+          <span aria-hidden="true">▶</span>
+          YouTubeサムネ向けツールを比較する
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 4. 注目のツール                                               -->
   <!-- ============================================================ -->
   <section class="bg-slate-50 py-16">
     <div class="mx-auto max-w-5xl px-6">
@@ -142,7 +226,7 @@ const tools = FEATURED_SLUGS
   </section>
 
   <!-- ============================================================ -->
-  <!-- 4. 比較表プレビュー                                           -->
+  <!-- 5. 比較表プレビュー                                           -->
   <!-- ============================================================ -->
   <section class="bg-white py-16">
     <div class="mx-auto max-w-5xl px-6">
@@ -160,7 +244,7 @@ const tools = FEATURED_SLUGS
   </section>
 
   <!-- ============================================================ -->
-  <!-- 5. ガイドカード                                               -->
+  <!-- 6. ガイドカード                                               -->
   <!-- ============================================================ -->
   <section class="bg-slate-50 py-16">
     <div class="mx-auto max-w-5xl px-6">
@@ -209,7 +293,7 @@ const tools = FEATURED_SLUGS
   </section>
 
   <!-- ============================================================ -->
-  <!-- 6. ご利用前の注意                                             -->
+  <!-- 7. ご利用前の注意                                             -->
   <!-- ============================================================ -->
   <section class="bg-white py-12">
     <div class="mx-auto max-w-5xl px-6">

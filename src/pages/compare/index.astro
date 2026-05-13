@@ -18,9 +18,9 @@ function freeBadge(val: FreePlan) {
 }
 
 function cuBadge(val: FourState) {
-  if (val === 'yes')     return { text: '商用可能',     cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200', icon: '✓' };
+  if (val === 'yes')     return { text: '商用利用可',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200', icon: '✓' };
   if (val === 'limited') return { text: '条件あり',     cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',   icon: '△' };
-  if (val === 'no')      return { text: '不可の場合あり', cls: 'bg-red-50 text-red-600 ring-1 ring-inset ring-red-200',      icon: '✕' };
+  if (val === 'no')      return { text: '非推奨',       cls: 'bg-red-50 text-red-600 ring-1 ring-inset ring-red-200',         icon: '✕' };
                          return { text: '要確認',       cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100',  icon: '?' };
 }
 
@@ -99,10 +99,38 @@ function getTopFeatures(tool: typeof allTools[number], max = 5): string[] {
     </div>
 
     <!-- 凡例 -->
-    <section class="mb-8" aria-label="バッジの見方">
-      <h2 class="mb-3 text-base font-semibold text-slate-700">比較表の見方</h2>
-      <p class="mb-4 text-sm text-slate-500">各ツールの商用利用、無料枠、日本語対応、透かし、料金目安を一覧で確認できます。条件は変更される場合があるため、実務利用前には公式サイトの最新情報も確認してください。</p>
-      <div class="flex flex-wrap gap-2">
+    <section class="mb-8" aria-label="この比較表の見方">
+      <h2 class="mb-4 text-base font-semibold text-slate-700">この比較表の見方</h2>
+
+      <!-- 項目定義 -->
+      <dl class="mb-5 grid gap-3 sm:grid-cols-2">
+        {[
+          {
+            term: '商用利用',
+            desc: '公式情報で商用利用可否や条件を確認できる項目です。用途やプランによって制限がある場合があります。',
+          },
+          {
+            term: '無料枠',
+            desc: '無料プラン、無料クレジット、体験版などを含みます。利用できる範囲はツールごとに異なります。',
+          },
+          {
+            term: '透かし',
+            desc: '生成画像・動画にウォーターマークが入るかどうかを示します。',
+          },
+          {
+            term: '日本語対応',
+            desc: '日本語UIまたは日本語プロンプトへの対応状況を示します。',
+          },
+        ].map(({ term, desc }) => (
+          <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+            <dt class="mb-1 text-xs font-bold text-slate-700">{term}</dt>
+            <dd class="text-xs leading-relaxed text-slate-500">{desc}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <!-- バッジ凡例 -->
+      <div class="mb-5 flex flex-wrap gap-2">
         <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
           <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200"><span aria-hidden="true">✓</span> 対応</span>
           <span class="text-slate-600">利用可能・対応</span>
@@ -120,12 +148,27 @@ function getTopFeatures(tool: typeof allTools[number], max = 5): string[] {
           <span class="text-slate-600">公式で要確認</span>
         </span>
       </div>
+
+      <!-- 免責文 -->
+      <div class="rounded-lg border border-amber-100 bg-amber-50 px-4 py-3">
+        <p class="text-xs leading-relaxed text-amber-800">
+          本ページの情報は、各ツールの公式サイト・料金ページ・利用規約等をもとに整理したものです。掲載内容は確認時点の情報であり、最新情報や具体的な利用可否は必ず各公式サイトでご確認ください。本記事は法的助言ではありません。
+        </p>
+      </div>
     </section>
 
-    <!-- ===== デスクトップ: テーブル ===== -->
-    <div class="hidden md:block">
-      <p class="mb-2 text-sm text-slate-500">横にスクロールして全項目を比較できます →</p>
-      <div class="overflow-x-auto rounded-2xl border border-slate-100 shadow-sm">
+    <!-- ===== 比較表 ===== -->
+    <div class="block">
+      <!-- スマホ向け案内（md以上では非表示） -->
+      <div class="mb-3 flex items-start gap-2 rounded-lg border border-blue-100 bg-blue-50 px-4 py-3 md:hidden">
+        <span class="shrink-0 text-blue-500" aria-hidden="true">←→</span>
+        <p class="text-xs leading-relaxed text-blue-700">
+          比較表は横にスクロールできます。商用利用・無料枠・透かし・日本語対応を確認しながら比較してください。
+        </p>
+      </div>
+      <!-- デスクトップ向け案内 -->
+      <p class="mb-2 hidden text-sm text-slate-500 md:block">横にスクロールして全項目を比較できます →</p>
+      <div class="overflow-x-auto [-webkit-overflow-scrolling:touch] rounded-2xl border border-slate-100 shadow-sm">
         <table class="w-full min-w-[1100px] text-sm" aria-label="AIツール比較表">
           <thead>
             <tr class="bg-slate-50 text-left text-[11px] font-semibold uppercase tracking-wide text-slate-500">
@@ -202,8 +245,8 @@ function getTopFeatures(tool: typeof allTools[number], max = 5): string[] {
       </div>
     </div>
 
-    <!-- ===== モバイル: カードグリッド ===== -->
-    <div class="md:hidden">
+    <!-- ===== モバイル: カードグリッド（テーブルに統合済みのため非表示） ===== -->
+    <div class="hidden">
       <p class="mb-4 text-sm text-slate-500">各ツールのステータスを確認できます。</p>
       <div class="space-y-4">
         {allTools.map((tool) => {

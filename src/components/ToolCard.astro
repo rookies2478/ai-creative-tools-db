@@ -21,10 +21,10 @@ function freeBadge(val: FreePlan) {
 }
 
 function cuBadge(val: FourState) {
-  if (val === 'yes')     return { text: '商用利用を確認',         cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (val === 'limited') return { text: '条件あり',        cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
-  if (val === 'no')      return { text: '不可の場合あり',  cls: 'bg-red-50 text-red-500 ring-1 ring-inset ring-red-200' };
-                         return { text: '要確認',          cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
+  if (val === 'yes')     return { text: '商用利用可',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === 'limited') return { text: '条件あり',     cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === 'no')      return { text: '非推奨',       cls: 'bg-red-50 text-red-500 ring-1 ring-inset ring-red-200' };
+                         return { text: '要確認',       cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
 }
 
 function jpBadge(ui: TriState, prompt: TriState) {

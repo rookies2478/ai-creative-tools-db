@@ -20,6 +20,27 @@ const { Content } = await entry.render();
 
 const leadText = `${data.name}の料金・商用利用・日本語対応・透かしの有無など、実務利用前に確認すべきポイントをまとめています。`;
 
+function commercialUseDesc(val: string): string {
+  if (val === 'yes')     return '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。';
+  if (val === 'limited') return '用途や条件によって制限がある可能性があります。最新情報は公式サイトをご確認ください。';
+  if (val === 'no')      return '商用利用は推奨されません。最新情報は公式サイトをご確認ください。';
+  return '公式情報の確認が必要です。最新情報は公式サイトをご確認ください。';
+}
+
+function commercialUseLabel(val: string): string {
+  if (val === 'yes')     return '商用利用可';
+  if (val === 'limited') return '条件あり';
+  if (val === 'no')      return '非推奨';
+  return '要確認';
+}
+
+function commercialUseBadgeCls(val: string): string {
+  if (val === 'yes')     return 'bg-emerald-100 text-emerald-800';
+  if (val === 'limited') return 'bg-amber-100 text-amber-800';
+  if (val === 'no')      return 'bg-red-100 text-red-800';
+  return 'bg-gray-100 text-gray-600';
+}
+
 function sourceTypeLabel(type: string) {
   const labels: Record<string, string> = {
     official: '公式サイト',
@@ -61,6 +82,139 @@ function sourceTypeLabel(type: string) {
     <div class="mb-6">
       <NoticeBox />
     </div>
+
+    <!-- 信頼性表示ボックス -->
+    <div class="mb-6 rounded-lg border border-slate-200 bg-slate-50 px-5 py-4 text-xs text-slate-600">
+      <dl class="flex flex-wrap gap-x-6 gap-y-1.5">
+        <div class="flex items-baseline gap-1.5">
+          <dt class="font-semibold text-slate-700 shrink-0">最終確認日：</dt>
+          <dd>{data.lastReviewed ?? '—'}</dd>
+        </div>
+        {data.nextReviewDue && (
+          <div class="flex items-baseline gap-1.5">
+            <dt class="font-semibold text-slate-700 shrink-0">次回確認予定：</dt>
+            <dd>{data.nextReviewDue}</dd>
+          </div>
+        )}
+      </dl>
+
+      {/* sourceRefs優先、なければsources */}
+      {data.sourceRefs && data.sourceRefs.length > 0 ? (
+        <div class="mt-2.5">
+          <p class="mb-1 font-semibold text-slate-700">参照元：</p>
+          <ul class="flex flex-wrap gap-x-3 gap-y-1">
+            {data.sourceRefs.map((ref) => (
+              <li>
+                <a
+                  href={ref.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 text-blue-600 hover:underline"
+                >
+                  <span class="rounded bg-slate-200 px-1.5 py-0.5 text-[10px] text-slate-500">{sourceTypeLabel(ref.type)}</span>
+                  {ref.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : data.sources && data.sources.length > 0 ? (
+        <div class="mt-2.5">
+          <p class="mb-1 font-semibold text-slate-700">参照元：</p>
+          <ul class="flex flex-wrap gap-x-3 gap-y-1">
+            {data.sources.map((src) => (
+              <li>
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-blue-600 hover:underline"
+                >
+                  {src.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      <p class="mt-3 leading-relaxed text-slate-500">
+        本ページの情報は、各ツールの公式サイト・料金ページ・利用規約等をもとに整理したものです。掲載内容は確認時点の情報であり、最新情報や具体的な利用可否は必ず各公式サイトでご確認ください。本記事は法的助言ではありません。
+      </p>
+    </div>
+
+    <!-- このツールの要点 -->
+    <section class="mb-8 rounded-xl border border-blue-100 bg-blue-50 px-6 py-5">
+      <h2 class="mb-4 text-base font-bold text-[#002B61]">このツールの要点</h2>
+
+      <dl class="space-y-4 text-sm">
+        <!-- 概要 -->
+        <div>
+          <dt class="mb-0.5 font-semibold text-slate-700">概要</dt>
+          <dd class="leading-relaxed text-slate-600">{leadText}</dd>
+        </div>
+
+        <!-- 向いている用途 -->
+        {data.bestFor && data.bestFor.length > 0 && (
+          <div>
+            <dt class="mb-1.5 font-semibold text-slate-700">向いている用途</dt>
+            <dd class="flex flex-wrap gap-2">
+              {data.bestFor.map((item: string) => (
+                <span class="inline-flex rounded-full border border-blue-200 bg-white px-3 py-0.5 text-xs font-medium text-blue-700">
+                  {item}
+                </span>
+              ))}
+            </dd>
+          </div>
+        )}
+
+        <!-- 強み -->
+        {data.strengths && data.strengths.length > 0 && (
+          <div>
+            <dt class="mb-1 font-semibold text-slate-700">強み</dt>
+            <dd>
+              <ul class="space-y-1">
+                {data.strengths.slice(0, 3).map((item: string) => (
+                  <li class="flex items-start gap-1.5 text-green-900">
+                    <span class="mt-0.5 shrink-0 text-green-600">○</span>{item}
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        )}
+
+        <!-- 注意点 -->
+        {data.weaknesses && data.weaknesses.length > 0 && (
+          <div>
+            <dt class="mb-1 font-semibold text-slate-700">注意点</dt>
+            <dd>
+              <ul class="space-y-1">
+                {data.weaknesses.slice(0, 3).map((item: string) => (
+                  <li class="flex items-start gap-1.5 text-red-900">
+                    <span class="mt-0.5 shrink-0 text-red-500">×</span>{item}
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        )}
+
+        <!-- 商用利用 -->
+        <div>
+          <dt class="mb-1 font-semibold text-slate-700">商用利用</dt>
+          <dd>
+            <span class={`inline-block rounded px-2 py-0.5 text-xs font-medium ${commercialUseBadgeCls(data.commercialUse)}`}>
+              {commercialUseLabel(data.commercialUse)}
+            </span>
+            <p class="mt-1 text-sm leading-relaxed text-slate-600">{commercialUseDesc(data.commercialUse)}</p>
+            {data.commercialUseNote && (
+              <p class="mt-1 text-sm leading-relaxed text-slate-500">{data.commercialUseNote}</p>
+            )}
+          </dd>
+        </div>
+      </dl>
+    </section>
 
     <!-- ToolSummaryTable -->
     <ToolSummaryTable tool={entry} />
@@ -184,26 +338,27 @@ function sourceTypeLabel(type: string) {
     <!-- 関連ツール -->
     <RelatedTools currentSlug={entry.slug} category={data.category} />
 
-    <!-- 内部リンク -->
-    <section class="mb-8 rounded-lg border border-blue-100 bg-blue-50 p-5">
-      <h2 class="mb-3 text-sm font-semibold text-blue-800">関連ページ</h2>
-      <ul class="space-y-2 text-sm">
-        <li>
-          <a href="/compare/" class="font-medium text-blue-700 hover:underline">
-            全ツール比較表を見る →
-          </a>
-        </li>
-        <li>
-          <a href="/guides/commercial-use-copyright/" class="font-medium text-blue-700 hover:underline">
-            商用利用・著作権ガイド →
-          </a>
-        </li>
-        <li>
-          <a href="/categories/free/" class="font-medium text-blue-700 hover:underline">
-            無料で使えるAIツール →
-          </a>
-        </li>
-      </ul>
+    <!-- 次に読む -->
+    <section class="mb-8">
+      <h2 class="mb-4 text-base font-bold text-gray-800">次に読む</h2>
+      <div class="grid gap-3 sm:grid-cols-2">
+        <a href="/tools/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+          <span class="text-sm font-semibold text-blue-700">AI画像生成ツール一覧を見る →</span>
+          <span class="text-xs leading-relaxed text-slate-600">主要なAI画像・動画生成ツールを一覧で確認できます。</span>
+        </a>
+        <a href="/compare/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+          <span class="text-sm font-semibold text-blue-700">比較表でまとめて比較する →</span>
+          <span class="text-xs leading-relaxed text-slate-600">商用利用・無料枠・透かし・日本語対応を横断比較できます。</span>
+        </a>
+        <a href="/guides/commercial-use-copyright/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+          <span class="text-sm font-semibold text-blue-700">商用利用・著作権ガイドを見る →</span>
+          <span class="text-xs leading-relaxed text-slate-600">商用利用や著作権まわりの確認ポイントを整理しています。</span>
+        </a>
+        <a href="/categories/free/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+          <span class="text-sm font-semibold text-blue-700">無料で使えるAI画像生成ツールを見る →</span>
+          <span class="text-xs leading-relaxed text-slate-600">無料枠のあるAI画像生成ツールを確認できます。</span>
+        </a>
+      </div>
     </section>
 
     <!-- その他のカテゴリリンク -->

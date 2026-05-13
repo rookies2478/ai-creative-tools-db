@@ -33,6 +33,13 @@ function fourStateBadge(val: FourState) {
                          return { text: '要確認',   cls: 'bg-gray-100 text-gray-600' };
 }
 
+function commercialUseDetail(val: FourState): { badge: string; badgeCls: string; desc: string } {
+  if (val === 'yes')     return { badge: '商用利用可', badgeCls: 'bg-emerald-100 text-emerald-800', desc: '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。' };
+  if (val === 'limited') return { badge: '条件あり',   badgeCls: 'bg-amber-100 text-amber-800',     desc: '用途や条件によって制限がある可能性があります。最新情報は公式サイトをご確認ください。' };
+  if (val === 'no')      return { badge: '非推奨',     badgeCls: 'bg-red-100 text-red-800',         desc: '商用利用は推奨されません。最新情報は公式サイトをご確認ください。' };
+                         return { badge: '要確認',     badgeCls: 'bg-gray-100 text-gray-600',       desc: '公式情報の確認が必要です。最新情報は公式サイトをご確認ください。' };
+}
+
 function categoryLabel(cat: 'image' | 'video' | 'both') {
   if (cat === 'image') return '画像生成';
   if (cat === 'video') return '動画生成';
@@ -91,7 +98,7 @@ const trueFeatureLabels: string[] = featuresObj
   : [];
 
 const fp  = freePlanBadge(data.freePlan);
-const cu  = fourStateBadge(data.commercialUse);
+const cu  = commercialUseDetail(data.commercialUse);
 const wm  = fourStateBadge(data.watermark);
 const jui = triLabel(data.japaneseUi);
 const jpr = triLabel(data.japanesePrompt);
@@ -135,14 +142,14 @@ const jpr = triLabel(data.japanesePrompt);
           </tr>
         )}
         <tr>
-          <th class="whitespace-nowrap bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">商用利用</th>
+          <th class="whitespace-nowrap bg-gray-50 px-4 py-3 align-top text-left font-medium text-gray-600">商用利用</th>
           <td class="px-4 py-3">
-            <span class={`rounded px-2 py-0.5 text-xs font-medium ${cu.cls}`}>{cu.text}</span>
+            <span class={`rounded px-2 py-0.5 text-xs font-medium ${cu.badgeCls}`}>{cu.badge}</span>
+            <p class="mt-1 text-xs leading-relaxed text-gray-500">{cu.desc}</p>
+            {data.commercialUseNote && (
+              <p class="mt-1 text-xs leading-relaxed text-gray-600">{data.commercialUseNote}</p>
+            )}
           </td>
-        </tr>
-        <tr>
-          <th class="whitespace-nowrap bg-gray-50 px-4 py-3 align-top text-left font-medium text-gray-600">商用利用メモ</th>
-          <td class="px-4 py-3 text-xs leading-relaxed text-gray-600">{data.commercialUseNote}</td>
         </tr>
         <tr>
           <th class="whitespace-nowrap bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">日本語UI</th>

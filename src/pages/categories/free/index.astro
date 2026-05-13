@@ -39,6 +39,44 @@ const filtered = tools.filter(
 
     <NoticeBox />
 
+    <!-- 無料枠の見方 -->
+    <section class="mt-8 rounded-xl border border-slate-200 bg-slate-50 px-6 py-5">
+      <h2 class="mb-4 text-base font-bold text-[#002B61]">無料枠の見方</h2>
+      <p class="mb-4 text-xs leading-relaxed text-slate-600">
+        「無料」と書かれていても、商用利用・透かし・生成回数・出力品質・利用条件はツールごとに異なります。<br/>
+        無料枠や利用条件は変更される場合があります。最新情報は各ツールの公式サイト・料金ページをご確認ください。本記事は法的助言ではありません。
+      </p>
+      <dl class="grid gap-3 sm:grid-cols-2">
+        {[
+          {
+            term: '完全無料',
+            desc: '料金なしで継続利用できるもの。ただし機能制限がある場合があります。',
+          },
+          {
+            term: '無料プランあり',
+            desc: '無料アカウントで一部機能を使えるもの。生成回数や解像度に制限がある場合があります。',
+          },
+          {
+            term: '無料クレジット制',
+            desc: '登録時や定期的に付与されるクレジット内で使えるもの。上限を超えると有料になります。',
+          },
+          {
+            term: '体験版・トライアル',
+            desc: '一定期間または一部機能を試せるもの。期間終了後は有料プランへの移行が必要です。',
+          },
+          {
+            term: '制限あり無料',
+            desc: '透かし、商用利用条件、出力サイズ、待ち時間などの制限があるもの。',
+          },
+        ].map(({ term, desc }) => (
+          <div class="rounded-lg border border-slate-100 bg-white px-4 py-3">
+            <dt class="mb-0.5 text-xs font-bold text-slate-800">{term}</dt>
+            <dd class="text-xs leading-relaxed text-slate-500">{desc}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
     <section class="mt-8">
       <h2 class="mb-1 text-lg font-semibold text-gray-800">対象ツール一覧</h2>
       <p class="mb-4 text-sm text-gray-500">確認時点で {filtered.length} 件。無料枠の内容（クレジット数・解像度・透かし・商用利用条件）はツールごとに異なります。</p>

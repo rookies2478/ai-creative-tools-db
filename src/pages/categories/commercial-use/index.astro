@@ -51,7 +51,7 @@ const filtered = tools.filter(
 
     <section class="mt-8">
       <h2 class="mb-1 text-lg font-semibold text-gray-800">対象ツール一覧</h2>
-      <p class="mb-4 text-sm text-gray-500">確認時点で {filtered.length} 件。「条件確認」はプラン・用途・生成内容によって条件が変わる場合があります。各ツールの詳細ページで注意事項を確認してください。</p>
+      <p class="mb-4 text-sm text-gray-500">確認時点で {filtered.length} 件。「条件あり」はプラン・用途・生成内容によって条件が変わる場合があります。各ツールの詳細ページで注意事項を確認してください。</p>
       <CompareTablePreview tools={filtered} limit={filtered.length} />
     </section>
 
@@ -66,7 +66,7 @@ const filtered = tools.filter(
               <span class="text-xs text-slate-400">商用利用：{
                 tool.data.commercialUse === 'ok'        ? '公式情報で可能' :
                 tool.data.commercialUse === 'paid-only' ? '有料プラン向け' :
-                tool.data.commercialUse === 'limited'   ? '条件確認' :
+                tool.data.commercialUse === 'limited'   ? '条件あり' :
                 tool.data.commercialUse === 'no'        ? '不可の場合あり' : '要確認'
               }</span>
             </div>

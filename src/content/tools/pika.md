@@ -26,7 +26,7 @@ weaknesses:
   - "日本語プロンプトでの動画生成の対応状況は不明確"
   - "生成動画の長さ・解像度に制限がある場合がある"
 lastReviewed: "2026-05-05"
-nextReviewDue: "2026-08-04"
+nextReviewDue: "2026-06-05"
 pricingModel: "subscription_credit"
 freePlanNote: "月80クレジット程度（毎月更新・商用利用不可）"
 paidPlanNote: "Standard $8/月〜（年払い）。月700クレジット程度。商用利用可能。"

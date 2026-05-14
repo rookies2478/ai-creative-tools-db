@@ -27,7 +27,7 @@ weaknesses:
   - "中国系サービスのためデータポリシーを要確認"
   - "日本語UIはネイティブ対応ではなく拡張機能に依存する場合がある"
 lastReviewed: "2026-05-05"
-nextReviewDue: "2026-08-04"
+nextReviewDue: "2026-06-05"
 pricingModel: "subscription_credit"
 freePlanNote: "1日66クレジット程度（翌日繰越なし・透かしあり・商用利用不可）"
 paidPlanNote: "Standard 約$5.99〜$6.99/月〜（年払い）。有料プランで商用利用可。"

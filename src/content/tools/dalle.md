@@ -27,7 +27,7 @@ weaknesses:
   - "画像内への日本語テキスト生成は精度が低い傾向がある"
   - "API利用は別途従量課金（料金は公式ページで要確認）"
 lastReviewed: "2026-05-04"
-nextReviewDue: "2026-08-04"
+nextReviewDue: "2026-06-04"
 pricingModel: "subscription_credit"
 freePlanNote: "ChatGPT無料プランで制限付き利用できる場合あり"
 paidPlanNote: "ChatGPT Plus等の有料プランで利用枠が拡大。API利用は従量課金。"

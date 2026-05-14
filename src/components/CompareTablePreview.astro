@@ -24,8 +24,8 @@ function freeBadge(val: FreePlan) {
 function cuText(val: CommercialUse) {
   if (val === 'ok')        return { text: '公式情報で可能',   cls: 'text-emerald-700 font-medium' };
   if (val === 'paid-only') return { text: '有料プラン向け',   cls: 'text-sky-700 font-medium' };
-  if (val === 'limited')   return { text: '条件確認',         cls: 'text-amber-700 font-medium' };
-  if (val === 'no')        return { text: '不可の場合あり',   cls: 'text-red-500 font-medium' };
+  if (val === 'limited')   return { text: '条件あり',         cls: 'text-amber-700 font-medium' };
+  if (val === 'no')        return { text: '不可または非推奨', cls: 'text-red-500 font-medium' };
                            return { text: '要確認',           cls: 'text-slate-400' };
 }
 

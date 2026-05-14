@@ -28,7 +28,7 @@ weaknesses:
   - "他ツールと比べて表現の自由度・スタイルの幅が狭い傾向"
   - "ベータ機能は商用利用対象外とされている"
 lastReviewed: "2026-05-04"
-nextReviewDue: "2026-08-04"
+nextReviewDue: "2026-06-04"
 pricingModel: "subscription_credit"
 freePlanNote: "無料プランで一定数の生成クレジットあり（数量は変更の可能性あり）"
 paidPlanNote: "Firefly Standard $9.99/月〜。Creative Cloud All Appsに含まれる場合あり。"

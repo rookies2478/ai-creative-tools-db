@@ -26,7 +26,7 @@ weaknesses:
   - "日本語対応は拡張機能に依存する"
   - "生成画像に不可視透かしが埋め込まれている場合がある"
 lastReviewed: "2026-05-04"
-nextReviewDue: "2026-08-04"
+nextReviewDue: "2026-06-04"
 pricingModel: "local_free"
 freePlanNote: "ローカル実行は無料（GPU搭載PCと環境構築が必要）"
 paidPlanNote: "クラウドサービス経由（Dream Studio等）は別途課金"

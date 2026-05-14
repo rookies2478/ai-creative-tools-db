@@ -27,7 +27,7 @@ weaknesses:
   - "専門的な画像生成ツールと比べて表現の自由度が限定的"
   - "生成画像への透かし有無は公式情報から未確認"
 lastReviewed: "2026-05-04"
-nextReviewDue: "2026-08-04"
+nextReviewDue: "2026-06-04"
 pricingModel: "subscription_credit"
 freePlanNote: "無料プランで一定回数の生成が可能（回数は変更の可能性あり）"
 paidPlanNote: "Canva Pro $15/月〜（月払い）／$120/年（年払い）。生成回数が拡大。"

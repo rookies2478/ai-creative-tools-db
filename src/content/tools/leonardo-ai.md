@@ -27,7 +27,7 @@ weaknesses:
   - "日本語プロンプトは英語より精度が低い傾向がある"
   - "生成画像への透かし有無は公式情報から未確認"
 lastReviewed: "2026-05-04"
-nextReviewDue: "2026-08-04"
+nextReviewDue: "2026-06-04"
 pricingModel: "subscription_credit"
 freePlanNote: "1日150トークン程度（変更の可能性あり）"
 paidPlanNote: "Apprentice $10/月〜（年払い）。有料＋Private設定で商用利用可。"

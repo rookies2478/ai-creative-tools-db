@@ -27,7 +27,7 @@ weaknesses:
   - "無料プランは透かしあり・クレジット一度限りのため実用に制限がある"
   - "コストが比較的高め"
 lastReviewed: "2026-05-05"
-nextReviewDue: "2026-08-04"
+nextReviewDue: "2026-06-05"
 pricingModel: "subscription_credit"
 freePlanNote: "125クレジット（初回のみ・更新なし）"
 paidPlanNote: "Standard $12/月〜（年払い）。月625クレジット程度。"

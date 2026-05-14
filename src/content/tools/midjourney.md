@@ -27,7 +27,7 @@ weaknesses:
   - "ローカル実行不可、クラウドのみ"
   - "大企業（年間総収益100万ドル超）は上位プランが必要とされる"
 lastReviewed: "2026-05-04"
-nextReviewDue: "2026-08-04"
+nextReviewDue: "2026-06-04"
 pricingModel: "subscription"
 paidPlanNote: "Basic $10/月〜。年払いで割引あり。"
 platforms:

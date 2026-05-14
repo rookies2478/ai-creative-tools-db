@@ -29,6 +29,9 @@ const filtered = tools.filter(
     <h1 class="mb-3 text-3xl font-bold text-gray-900">無料で使えるAI画像生成ツール比較</h1>
     <p class="mb-4 text-gray-600 leading-relaxed">
       無料枠のあるAI画像・動画生成ツールを、商用利用・透かし・日本語対応・料金目安とあわせて比較できます。
+      「無料」と書かれていても、生成できる回数・クレジット上限・透かしの有無・<a href="/categories/commercial-use/" class="text-blue-600 hover:underline">商用利用条件</a>はツールごとに大きく異なります。
+      <a href="/categories/japanese/" class="text-blue-600 hover:underline">日本語プロンプト</a>に対応しているかどうかも、初心者が選ぶ際の重要な基準です。
+      無料枠や利用条件は変更される可能性があるため、最新情報は各ツールの公式サイトでご確認ください。
     </p>
 
     <div class="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-5 py-3.5 text-sm text-amber-800 leading-relaxed">
@@ -85,12 +88,34 @@ const filtered = tools.filter(
     </div>
 
     <section class="mt-8 rounded-xl border border-slate-200 bg-white px-6 py-5">
-      <h2 class="mb-3 text-base font-bold text-[#002B61]">比較時に見るポイント</h2>
-      <ul class="space-y-2 text-sm text-slate-700">
-        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>無料枠で生成できる回数やクレジット上限</li>
-        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>無料プランでの商用利用条件（規約により異なります）</li>
-        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>透かしの有無と出力品質の制限</li>
+      <h2 class="mb-3 text-base font-bold text-[#002B61]">無料で使えるAI画像生成ツールを選ぶポイント</h2>
+      <ul class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>無料枠の有無：</strong>完全無料・無料プランあり・クレジット制など、形態はツールによって異なります。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>生成回数・クレジット制限：</strong>1日あたり・月あたりの上限があるツールが多く、上限を超えると有料プランへの移行が必要な場合があります。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>透かしの有無：</strong>無料プランでは透かしが入る場合があります。<a href="/categories/no-watermark/" class="text-blue-600 hover:underline">透かしなしのツール</a>は別ページでまとめています。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>商用利用条件：</strong>無料プランでの商用利用が可能かはツールと規約によって異なります。<a href="/categories/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール</a>も参照してください。商用利用を前提にする場合は、最新の公式規約をご確認ください。本記事は法的助言ではありません。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>日本語対応：</strong>日本語プロンプトで思い通りの画像を生成できるかは、ツールのモデルによって精度が異なります。<a href="/categories/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>はこちらからご確認いただけます。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>初心者向けか：</strong>GUIの使いやすさ・プリセットの充実度・日本語UIの有無など、操作ハードルもツールごとに大きく異なります。<a href="/tools/" class="text-blue-600 hover:underline">各ツールの詳細ページ</a>で強み・弱みを確認できます。</span>
+        </li>
       </ul>
+      <p class="mt-4 text-xs text-slate-500">料金・無料枠・商用利用条件は変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
     </section>
 
     <section class="mt-8">
@@ -130,16 +155,28 @@ const filtered = tools.filter(
       <h2 class="mb-6 text-xl font-semibold text-gray-800">よくある質問</h2>
       <div class="space-y-6">
         <div class="rounded-lg border border-gray-200 px-5 py-4">
-          <p class="font-medium text-gray-800">無料プランでも商用利用できますか？</p>
-          <p class="mt-2 text-sm text-gray-600">ツールによって異なります。無料プランでの商用利用が認められている場合もありますが、透かし・クレジット表記・利用範囲の制限がある場合があります。最新情報は各ツールの公式規約をご確認ください。</p>
+          <p class="font-medium text-gray-800">無料のAI画像生成ツールでも商用利用できますか？</p>
+          <p class="mt-2 text-sm text-gray-600">ツールや利用規約によって異なります。無料プランでの商用利用が認められている場合もありますが、透かし・クレジット表記・利用範囲の制限がある場合があります。商用利用を前提にする場合は、最新の公式規約をご確認ください。本記事は法的助言ではありません。詳しくは<a href="/categories/commercial-use/" class="text-blue-600 hover:underline">商用利用を確認しやすいツール</a>のページもご参照ください。</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">無料プランでは透かしが入りますか？</p>
+          <p class="mt-2 text-sm text-gray-600">ツールによって異なります。無料プランで透かしなしの出力ができるものもあれば、有料プランへの移行が必要なものもあります。上の表の「透かし条件」欄で各ツールの状況を確認できます。詳しくは<a href="/categories/no-watermark/" class="text-blue-600 hover:underline">透かしなしツール</a>のページもご参照ください。</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">日本語プロンプトでも使えますか？</p>
+          <p class="mt-2 text-sm text-gray-600">日本語プロンプトを受け付けるツールは多いですが、精度はツールやモデルによって異なります。英語プロンプトの方が精度が高い場合が多く、固有名詞・専門用語は英語入力が推奨されることもあります。<a href="/categories/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>のページでまとめて確認できます。</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">無料ツールと有料ツールは何が違いますか？</p>
+          <p class="mt-2 text-sm text-gray-600">多くのツールで、有料プランに移行すると解像度・生成速度・月間クレジット数・追加機能が解放されます。また、有料プランでのみ商用利用が可能とされているツールもあります。用途に合わせて<a href="/tools/" class="text-blue-600 hover:underline">各ツールの詳細ページ</a>で比較してください。</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">YouTubeサムネやSNS画像に無料ツールで生成した画像を使う場合の注意点は？</p>
+          <p class="mt-2 text-sm text-gray-600">収益化を伴う用途（YouTube広告、アフィリエイト、有料サービスのSNS告知など）は商用利用と判断される場合があります。無料プランの商用利用可否、透かし条件、クレジット表記義務を各ツールの公式規約で事前に確認することを推奨します。無料枠や利用条件は変更される可能性があります。本記事は法的助言ではありません。</p>
         </div>
         <div class="rounded-lg border border-gray-200 px-5 py-4">
           <p class="font-medium text-gray-800">無料で使い続けることはできますか？</p>
           <p class="mt-2 text-sm text-gray-600">クレジット制のツールは上限に達すると課金が必要になる場合があります。また、無料枠の内容はサービス側の方針変更により変わる場合があります。利用前に公式の料金ページをご確認ください。</p>
-        </div>
-        <div class="rounded-lg border border-gray-200 px-5 py-4">
-          <p class="font-medium text-gray-800">無料プランと有料プランで画質や機能は変わりますか？</p>
-          <p class="mt-2 text-sm text-gray-600">多くのツールで、有料プランに移行すると解像度・生成速度・追加機能が解放されます。用途に合わせて各ツールの詳細ページで比較してください。</p>
         </div>
       </div>
     </section>

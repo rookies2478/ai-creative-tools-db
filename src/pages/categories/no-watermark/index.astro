@@ -4,9 +4,37 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import NoticeBox from '../../../components/NoticeBox.astro';
 import CompareTablePreview from '../../../components/CompareTablePreview.astro';
 import ConditionChips from '../../../components/ConditionChips.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
 
 const tools = await getCollection('tools');
 const filtered = tools.filter((t) => t.data.watermark === 'no' || t.data.watermark === 'limited');
+
+const faqs = [
+  {
+    q: '透かしなしで使えるAI画像生成ツールはありますか？',
+    a: '透かし条件はプランや機能によって変わる可能性があります。無料プランでも透かしなしで出力できるツールがある一方、有料プランへの移行で透かしが外れるツールもあります。上の一覧表の「透かし条件」欄で各ツールの状況を確認し、実際の出力画面で透かしの有無をご確認ください。',
+  },
+  {
+    q: '無料プランでは透かしが入りますか？',
+    a: 'ツールによって異なります。無料プランで透かしなしの出力ができるものもあれば、透かしが入るものもあります。透かし条件はプランや出力形式によって変わる可能性があるため、各ツールの公式情報でご確認ください。無料プランの詳細は<a href="/categories/free/" class="text-blue-600 hover:underline">無料で使えるツール</a>のページも参照してください。',
+  },
+  {
+    q: '有料プランにすると透かしは消えますか？',
+    a: '有料プランでは透かしなしになる場合があります。ただし、出力形式（静止画・動画・編集機能など）によって透かし条件が異なる可能性があります。最新の公式情報で対象プランと機能を確認したうえで、実際の出力画面で透かしの有無をご確認ください。',
+  },
+  {
+    q: 'YouTubeサムネやSNS画像で透かしは問題になりますか？',
+    a: 'YouTubeサムネイル・SNS画像・広告バナー・商品画像などで透かし入りの画像を使うと、見栄えや信頼性に影響する場合があります。収益化を伴う用途では特に注意が必要です。透かしの有無に加え、商用利用条件も公式規約で事前に確認することを推奨します。<a href="/categories/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール</a>のページもご参照ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '商用利用では透かし以外に何を確認すべきですか？',
+    a: '透かしを除去できることと商用利用が許可されていることは別の問題です。商用利用を前提にする場合は、①利用規約における商用利用の定義と許可範囲、②プランごとの条件、③クレジット表記義務、④禁止コンテンツ・用途の制限、を最新の公式規約でご確認ください。<a href="/categories/commercial-use/" class="text-blue-600 hover:underline">商用利用条件のまとめページ</a>も参考にしてください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '透かしの有無はどこで確認すればいいですか？',
+    a: '公式情報や実際の出力画面で確認する必要があります。本サイトの一覧表は確認時点の情報をまとめたものですが、ツール側の方針変更により条件が変わる場合があります。<a href="/tools/" class="text-blue-600 hover:underline">各ツールの詳細ページ</a>に公式情報へのリンクを掲載していますので、あわせてご活用ください。',
+  },
+];
 ---
 
 <BaseLayout
@@ -24,9 +52,14 @@ const filtered = tools.filter((t) => t.data.watermark === 'no' || t.data.waterma
       <span>透かしなし</span>
     </nav>
 
-    <h1 class="mb-3 text-3xl font-bold text-gray-900">透かしなしAI画像生成ツール比較</h1>
+    <h1 class="mb-3 text-3xl font-bold text-gray-900">透かし条件を確認しやすいAI画像生成ツール比較</h1>
     <p class="mb-4 text-gray-600 leading-relaxed">
-      AI生成画像や動画を広告、SNS、LP素材などで使う場合、透かしの有無は重要な確認ポイントです。このページでは、透かしなし、または条件付きで透かしを外せるツールを整理しています。
+      AI生成画像や動画をSNS画像・YouTubeサムネイル・広告バナー・商品画像などに使う場合、透かしの有無は重要な確認ポイントです。
+      このページでは、透かしなし、または条件付きで透かしを外せる可能性のあるツールを整理しています。
+      ただし、<strong>透かし条件はプランや機能によって変わる可能性があります</strong>。
+      <a href="/categories/free/" class="text-blue-600 hover:underline">無料プランでは透かしが入る場合があり</a>、
+      有料プランに移行すると透かしなしになる場合があります。
+      また、生成画像・編集画像・動画生成で透かし条件が異なる可能性があるため、公式情報や実際の出力画面でご確認ください。
     </p>
 
     <div class="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-5 py-3.5 text-sm text-amber-800 leading-relaxed">
@@ -39,11 +72,28 @@ const filtered = tools.filter((t) => t.data.watermark === 'no' || t.data.waterma
     <NoticeBox />
 
     <section class="mt-8 rounded-xl border border-slate-200 bg-white px-6 py-5">
-      <h2 class="mb-3 text-base font-bold text-[#002B61]">比較時に見るポイント</h2>
-      <ul class="space-y-2 text-sm text-slate-700">
-        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>無料プランでも透かしなしで使えるか</li>
-        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>透かし除去が有料プラン限定かどうか</li>
-        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>透かし条件と商用利用条件をあわせて確認できるか</li>
+      <h2 class="mb-3 text-base font-bold text-[#002B61]">透かし条件を比較するときのポイント</h2>
+      <ul class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>プランごとの透かし条件：</strong><a href="/categories/free/" class="text-blue-600 hover:underline">無料プランでは透かしが入る場合があります</a>。有料プランでは透かしなしになる場合があります。プランごとの条件を公式情報で確認してください。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>機能・出力形式ごとの違い：</strong>生成画像・編集画像・動画生成で透かし条件が異なる可能性があります。使いたい機能に対応した条件を個別に確認してください。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>用途別の注意点：</strong>SNS画像・YouTubeサムネイル・広告バナー・商品画像など、透かしが問題になりやすい用途では特に注意が必要です。実際の出力画面で透かしの有無をご確認ください。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>商用利用条件は別問題：</strong>透かしを除去できることと商用利用が許可されていることは別の問題です。<a href="/categories/commercial-use/" class="text-blue-600 hover:underline">商用利用条件</a>はツールの公式規約で確認する必要があります。本記事は法的助言ではありません。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>公式情報で最終確認：</strong>本サイトの情報は確認時点のものです。ツール側の方針変更により条件が変わる場合があります。<a href="/tools/" class="text-blue-600 hover:underline">各ツールの詳細ページ</a>の公式リンクから最新情報をご確認ください。</span>
+        </li>
       </ul>
       <p class="mt-4 text-xs text-slate-500">料金・無料枠・商用利用条件は変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
     </section>
@@ -81,23 +131,7 @@ const filtered = tools.filter((t) => t.data.watermark === 'no' || t.data.waterma
       </div>
     </section>
 
-    <section class="mt-12">
-      <h2 class="mb-6 text-xl font-semibold text-gray-800">よくある質問</h2>
-      <div class="space-y-6">
-        <div class="rounded-lg border border-gray-200 px-5 py-4">
-          <p class="font-medium text-gray-800">透かしなしなら商用利用もできますか？</p>
-          <p class="mt-2 text-sm text-gray-600">透かしを除去できることと商用利用が認められていることは別の問題です。商用利用条件はツールの公式規約で確認する必要があります。有料プランでは商用利用可能と案内されている場合がありますが、用途によって制限がある可能性があります。</p>
-        </div>
-        <div class="rounded-lg border border-gray-200 px-5 py-4">
-          <p class="font-medium text-gray-800">無料プランで透かしを外せるツールはありますか？</p>
-          <p class="mt-2 text-sm text-gray-600">ツールによって条件が異なります。無料プランでも透かしなしで出力できるものもあれば、有料プラン限定のものもあります。各ツールの詳細ページおよび公式情報でご確認ください。</p>
-        </div>
-        <div class="rounded-lg border border-gray-200 px-5 py-4">
-          <p class="font-medium text-gray-800">透かし条件は変わることがありますか？</p>
-          <p class="mt-2 text-sm text-gray-600">はい、サービス側の方針変更により透かし条件が変わる場合があります。最新情報は各ツールの公式サイトをご確認ください。本記事は法的助言ではありません。</p>
-        </div>
-      </div>
-    </section>
+    <GuideFAQ items={faqs} title="よくある質問" />
 
     <section class="mt-12">
       <h2 class="mb-4 text-sm font-semibold text-gray-600">関連ページ</h2>

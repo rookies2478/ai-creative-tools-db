@@ -12,8 +12,8 @@ const filtered = tools.filter(
 ---
 
 <BaseLayout
-  title="無料で使えるAI画像・動画生成ツール比較 | AIクリエイティブツール比較DB"
-  description="無料枠のあるAI画像生成・動画生成ツールを一覧比較。生成回数・クレジット・透かし・商用利用条件はツールごとに異なります。実務利用前に公式情報をご確認ください。"
+  title="無料で使えるAI画像生成ツール比較｜無料枠・商用利用・透かしを確認"
+  description="無料枠のあるAI画像生成・AI動画生成ツールを比較。無料プランの生成回数・透かし・商用利用条件はツールごとに異なります。最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/free/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
@@ -26,7 +26,7 @@ const filtered = tools.filter(
       <span>無料で使えるツール</span>
     </nav>
 
-    <h1 class="mb-3 text-3xl font-bold text-gray-900">無料で使えるAI画像・動画生成ツール</h1>
+    <h1 class="mb-3 text-3xl font-bold text-gray-900">無料で使えるAI画像生成ツール比較</h1>
     <p class="mb-4 text-gray-600 leading-relaxed">
       無料枠のあるAI画像・動画生成ツールを、商用利用・透かし・日本語対応・料金目安とあわせて比較できます。
     </p>
@@ -84,6 +84,15 @@ const filtered = tools.filter(
       </a>
     </div>
 
+    <section class="mt-8 rounded-xl border border-slate-200 bg-white px-6 py-5">
+      <h2 class="mb-3 text-base font-bold text-[#002B61]">比較時に見るポイント</h2>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>無料枠で生成できる回数やクレジット上限</li>
+        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>無料プランでの商用利用条件（規約により異なります）</li>
+        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>透かしの有無と出力品質の制限</li>
+      </ul>
+    </section>
+
     <section class="mt-8">
       <h2 class="mb-1 text-lg font-semibold text-gray-800">対象ツール一覧</h2>
       <p class="mb-4 text-sm text-gray-500">確認時点で {filtered.length} 件。無料枠の内容（クレジット数・解像度・透かし・商用利用条件）はツールごとに異なります。</p>
@@ -114,6 +123,24 @@ const filtered = tools.filter(
             ))}
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="mb-6 text-xl font-semibold text-gray-800">よくある質問</h2>
+      <div class="space-y-6">
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">無料プランでも商用利用できますか？</p>
+          <p class="mt-2 text-sm text-gray-600">ツールによって異なります。無料プランでの商用利用が認められている場合もありますが、透かし・クレジット表記・利用範囲の制限がある場合があります。最新情報は各ツールの公式規約をご確認ください。</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">無料で使い続けることはできますか？</p>
+          <p class="mt-2 text-sm text-gray-600">クレジット制のツールは上限に達すると課金が必要になる場合があります。また、無料枠の内容はサービス側の方針変更により変わる場合があります。利用前に公式の料金ページをご確認ください。</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">無料プランと有料プランで画質や機能は変わりますか？</p>
+          <p class="mt-2 text-sm text-gray-600">多くのツールで、有料プランに移行すると解像度・生成速度・追加機能が解放されます。用途に合わせて各ツールの詳細ページで比較してください。</p>
+        </div>
       </div>
     </section>
 

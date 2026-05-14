@@ -1,12 +1,13 @@
 ---
 name: "Adobe Firefly"
+shortDescription: "Adobe公式のAI画像生成サービス。商用利用を想定した設計で、Photoshop・Illustratorとの連携が可能。"
 slug: "adobe-firefly"
 category: "image"
 officialUrl: "https://firefly.adobe.com"
 freePlan: "limited"
 lowestPaidPlan: "$9.99/月（Firefly Standardプラン、プロモ価格適用時）"
 currency: "USD"
-commercialUse: "yes"
+commercialUse: "paid-only"
 commercialUseNote: "Adobe公式情報上、Fireflyは商用利用を想定したAI生成サービスとして案内されています。ただしベータ機能（β表示）、第三者素材、利用プランや用途によって扱いが変わる可能性があります。商用利用前に最新のAdobe公式利用条件をご確認ください。"
 japaneseUi: true
 japanesePrompt: true

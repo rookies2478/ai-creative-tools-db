@@ -23,8 +23,8 @@ function uiText(val: boolean | 'partial' | 'unknown') {
 ---
 
 <BaseLayout
-  title="日本語対応のAI画像・動画生成ツール比較 | AIクリエイティブツール比較DB"
-  description="日本語UIや日本語プロンプトに対応したAI画像生成・動画生成ツールを比較。日本語UI・プロンプト・ドキュメントの対応状況を整理しています。"
+  title="日本語対応AI画像生成ツール比較｜日本語UI・日本語プロンプト対応を確認"
+  description="日本語UIや日本語プロンプトに対応したAI画像生成・AI動画生成ツールを比較。日本語対応の範囲はツールごとに異なります。最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/japanese/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
@@ -37,7 +37,7 @@ function uiText(val: boolean | 'partial' | 'unknown') {
       <span>日本語対応</span>
     </nav>
 
-    <h1 class="mb-3 text-3xl font-bold text-gray-900">日本語対応のAI画像・動画生成ツール</h1>
+    <h1 class="mb-3 text-3xl font-bold text-gray-900">日本語対応AI画像生成ツール比較</h1>
     <p class="mb-4 text-gray-600 leading-relaxed">
       日本語UIや日本語プロンプトに対応しているAI画像・動画生成ツールを整理しています。英語が苦手な方や、国内向けの制作・SNS運用でAIツールを使いたい方に向いています。
     </p>
@@ -49,6 +49,15 @@ function uiText(val: boolean | 'partial' | 'unknown') {
     <ConditionChips currentPath="/categories/japanese/" />
 
     <NoticeBox />
+
+    <section class="mt-8 rounded-xl border border-slate-200 bg-white px-6 py-5">
+      <h2 class="mb-3 text-base font-bold text-[#002B61]">比較時に見るポイント</h2>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>日本語UIに対応しているか（操作画面の言語）</li>
+        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>日本語プロンプトで意図が通りやすいか</li>
+        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>ヘルプや料金ページが日本語で確認できるか</li>
+      </ul>
+    </section>
 
     <section class="mt-8">
       <h2 class="mb-1 text-lg font-semibold text-gray-800">対象ツール一覧</h2>
@@ -94,6 +103,24 @@ function uiText(val: boolean | 'partial' | 'unknown') {
             })}
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="mb-6 text-xl font-semibold text-gray-800">よくある質問</h2>
+      <div class="space-y-6">
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">日本語UIと日本語プロンプト対応は何が違いますか？</p>
+          <p class="mt-2 text-sm text-gray-600">日本語UIは操作画面・メニューが日本語で表示される機能です。日本語プロンプト対応は、日本語で書いた指示（プロンプト）を画像生成に活用できる機能を指します。UIが日本語でもプロンプトは英語の方が精度が高い場合があります。</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">日本語プロンプトで英語と同じ精度が出ますか？</p>
+          <p class="mt-2 text-sm text-gray-600">ツールや生成内容によって異なります。多くのツールでは英語プロンプトの方が意図が通りやすい場合があります。「一部対応（△）」と表示されているツールは、英語プロンプトも試すことをおすすめします。</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">日本語対応の情報は最新ですか？</p>
+          <p class="mt-2 text-sm text-gray-600">このページは確認時点の情報をもとに整理しています。ツールの日本語対応状況はアップデートにより変わる場合があります。最新情報は各ツールの公式サイトでご確認ください。</p>
+        </div>
       </div>
     </section>
 

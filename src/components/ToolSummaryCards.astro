@@ -1,0 +1,125 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  data: CollectionEntry<'tools'>['data'];
+}
+
+const { data } = Astro.props;
+
+type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+type CommercialUse = 'ok' | 'paid-only' | 'limited' | 'no' | 'unknown';
+type TriState = boolean | 'partial' | 'unknown';
+type FreePlan = boolean | 'limited' | 'unknown';
+
+function cuBadge(val: CommercialUse): { text: string; cls: string; desc: string } {
+  if (val === 'ok')        return { text: '商用利用：公式情報で可能',   cls: 'bg-emerald-100 text-emerald-800', desc: '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。' };
+  if (val === 'paid-only') return { text: '商用利用：有料プラン向け',   cls: 'bg-sky-100 text-sky-800',         desc: '有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。' };
+  if (val === 'limited')   return { text: '商用利用：条件あり',         cls: 'bg-amber-100 text-amber-800',     desc: '用途やプランによって制限がある可能性があります。公式規約をご確認ください。' };
+  if (val === 'no')        return { text: '商用利用：不可または非推奨', cls: 'bg-red-100 text-red-800',         desc: '商用利用はできない、または推奨されない可能性があります。最新の公式情報をご確認ください。' };
+                           return { text: '商用利用：要確認',           cls: 'bg-gray-100 text-gray-600',       desc: '公式情報の確認が必要です。利用前に公式サイトをご確認ください。' };
+}
+
+function fpBadge(val: FreePlan): { text: string; cls: string } {
+  if (val === true)      return { text: '無料プランあり', cls: 'bg-green-100 text-green-800' };
+  if (val === false)     return { text: '無料プランなし', cls: 'bg-red-100 text-red-800' };
+  if (val === 'limited') return { text: '制限付き無料',   cls: 'bg-yellow-100 text-yellow-800' };
+                         return { text: '要確認',          cls: 'bg-gray-100 text-gray-600' };
+}
+
+function wmBadge(val: FourState): { text: string; cls: string } {
+  if (val === 'yes')     return { text: 'あり',     cls: 'bg-red-100 text-red-800' };
+  if (val === 'no')      return { text: 'なし',     cls: 'bg-green-100 text-green-800' };
+  if (val === 'limited') return { text: '条件付き', cls: 'bg-yellow-100 text-yellow-800' };
+                         return { text: '要確認',   cls: 'bg-gray-100 text-gray-600' };
+}
+
+function triText(val: TriState): { text: string; cls: string } {
+  if (val === true)      return { text: '○', cls: 'font-bold text-green-600' };
+  if (val === false)     return { text: '×', cls: 'font-bold text-red-500' };
+  if (val === 'partial') return { text: '△', cls: 'font-bold text-yellow-600' };
+                         return { text: '要確認', cls: 'text-gray-400' };
+}
+
+function currencySymbol(c?: string): string {
+  if (c === 'JPY') return '¥';
+  if (c === 'USD') return '$';
+  if (c === 'EUR') return '€';
+  return '';
+}
+
+const cu  = cuBadge(data.commercialUse);
+const fp  = fpBadge(data.freePlan);
+const wm  = wmBadge(data.watermark);
+const jui = triText(data.japaneseUi);
+const jpr = triText(data.japanesePrompt);
+
+const priceText = data.lowestPaidPlan
+  ? `${currencySymbol(data.currency)}${data.lowestPaidPlan}`
+  : '要確認';
+---
+
+<section class="mb-8" aria-label="結論サマリー">
+  <h2 class="mb-3 text-sm font-bold text-gray-700">このツールの結論サマリー</h2>
+
+  <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+
+    <!-- 商用利用 -->
+    <div class="rounded-lg border border-gray-200 bg-white px-3 py-2.5 sm:col-span-3">
+      <p class="mb-1 text-xs font-semibold text-gray-500">商用利用</p>
+      <span class={`rounded px-2 py-0.5 text-xs font-medium ${cu.cls}`}>{cu.text}</span>
+      <p class="mt-1 text-xs leading-relaxed text-gray-600">{cu.desc}。最新情報は公式サイトをご確認ください。</p>
+      {data.commercialUseNote && (
+        <p class="mt-0.5 text-xs leading-relaxed text-gray-500">{data.commercialUseNote}</p>
+      )}
+    </div>
+
+    <!-- 料金 -->
+    <div class="rounded-lg border border-gray-200 bg-white px-3 py-2.5">
+      <p class="mb-1 text-xs font-semibold text-gray-500">料金（最安）</p>
+      <p class="text-sm font-medium text-gray-800">{priceText}</p>
+    </div>
+
+    <!-- 無料枠 -->
+    <div class="rounded-lg border border-gray-200 bg-white px-3 py-2.5">
+      <p class="mb-1 text-xs font-semibold text-gray-500">無料枠</p>
+      <span class={`rounded px-2 py-0.5 text-xs font-medium ${fp.cls}`}>{fp.text}</span>
+    </div>
+
+    <!-- 透かし -->
+    <div class="rounded-lg border border-gray-200 bg-white px-3 py-2.5">
+      <p class="mb-1 text-xs font-semibold text-gray-500">透かし</p>
+      <span class={`rounded px-2 py-0.5 text-xs font-medium ${wm.cls}`}>{wm.text}</span>
+    </div>
+
+    <!-- 日本語UI -->
+    <div class="rounded-lg border border-gray-200 bg-white px-3 py-2.5">
+      <p class="mb-1 text-xs font-semibold text-gray-500">日本語UI</p>
+      <span class={`text-sm ${jui.cls}`}>{jui.text}</span>
+    </div>
+
+    <!-- 日本語プロンプト -->
+    <div class="rounded-lg border border-gray-200 bg-white px-3 py-2.5">
+      <p class="mb-1 text-xs font-semibold text-gray-500">日本語プロンプト</p>
+      <span class={`text-sm ${jpr.cls}`}>{jpr.text}</span>
+    </div>
+
+    <!-- 向いている用途 -->
+    {data.bestFor && data.bestFor.length > 0 && (
+      <div class="col-span-2 rounded-lg border border-gray-200 bg-white px-3 py-2.5 sm:col-span-3">
+        <p class="mb-1.5 text-xs font-semibold text-gray-500">向いている用途</p>
+        <div class="flex flex-wrap gap-1.5">
+          {data.bestFor.map((item: string) => (
+            <span class="rounded-full border border-blue-200 bg-blue-50 px-2.5 py-0.5 text-xs text-blue-700">{item}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+  </div>
+
+  <!-- 注記 -->
+  <p class="mt-2 text-[11px] leading-relaxed text-gray-400">
+    料金・商用利用条件は変更される場合があります。最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。
+  </p>
+</section>

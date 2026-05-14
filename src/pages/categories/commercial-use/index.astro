@@ -7,13 +7,13 @@ import ConditionChips from '../../../components/ConditionChips.astro';
 
 const tools = await getCollection('tools');
 const filtered = tools.filter(
-  (t) => t.data.commercialUse === 'yes' || t.data.commercialUse === 'limited'
+  (t) => t.data.commercialUse === 'ok' || t.data.commercialUse === 'paid-only' || t.data.commercialUse === 'limited'
 );
 ---
 
 <BaseLayout
-  title="商用利用を確認しやすいAI画像・動画生成ツール比較 | AIクリエイティブツール比較DB"
-  description="AI画像生成・動画生成ツールを商用利用条件、著作権、透かし、料金で比較。プラン・生成内容・目的によって条件が変わるため、実務利用前に公式規約を確認することを推奨します。"
+  title="商用利用向けAI画像生成ツール比較｜公式規約・料金・利用条件を確認"
+  description="AI画像生成・AI動画生成ツールを商用利用条件・料金・透かしで比較。プラン・用途によって条件が変わるため、実務利用前に公式規約を確認することを推奨します。最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/commercial-use/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
@@ -26,7 +26,7 @@ const filtered = tools.filter(
       <span>商用利用を確認しやすいツール</span>
     </nav>
 
-    <h1 class="mb-3 text-3xl font-bold text-gray-900">商用利用を確認しやすいAI画像・動画生成ツール</h1>
+    <h1 class="mb-3 text-3xl font-bold text-gray-900">商用利用向けAI画像生成ツール比較</h1>
     <p class="mb-4 text-gray-600 leading-relaxed">
       AI画像・動画生成ツールを仕事や副業で使う場合は、商用利用条件を事前に確認することが重要です。
     </p>
@@ -38,6 +38,16 @@ const filtered = tools.filter(
     <ConditionChips currentPath="/categories/commercial-use/" />
 
     <NoticeBox />
+
+    <section class="mt-8 rounded-xl border border-slate-200 bg-white px-6 py-5">
+      <h2 class="mb-3 text-base font-bold text-[#002B61]">比較時に見るポイント</h2>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>公式規約で商用利用がどう案内されているか</li>
+        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>商用利用が有料プラン限定かどうか</li>
+        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>生成物の利用範囲や禁止事項（用途によって制限がある可能性があります）</li>
+      </ul>
+      <p class="mt-4 text-xs text-slate-500">料金・商用利用条件は変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
+    </section>
 
     <section class="mt-8">
       <h2 class="mb-1 text-lg font-semibold text-gray-800">対象ツール一覧</h2>
@@ -54,9 +64,10 @@ const filtered = tools.filter(
             <div class="flex items-baseline gap-2 mb-1">
               <a href={`/tools/${tool.slug}/`} class="font-semibold text-sm text-slate-900 hover:text-blue-600 hover:underline">{tool.data.name}</a>
               <span class="text-xs text-slate-400">商用利用：{
-                tool.data.commercialUse === 'yes' ? '可能な場合あり' :
-                tool.data.commercialUse === 'limited' ? '条件確認' :
-                tool.data.commercialUse === 'no' ? '不可の場合あり' : '要確認'
+                tool.data.commercialUse === 'ok'        ? '公式情報で可能' :
+                tool.data.commercialUse === 'paid-only' ? '有料プラン向け' :
+                tool.data.commercialUse === 'limited'   ? '条件確認' :
+                tool.data.commercialUse === 'no'        ? '不可の場合あり' : '要確認'
               }</span>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed">{tool.data.commercialUseNote}</p>

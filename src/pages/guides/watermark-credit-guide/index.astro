@@ -18,6 +18,7 @@ const sortedTools = [...allTools].sort((a, b) => a.data.name.localeCompare(b.dat
 
 type FreePlan = boolean | 'limited' | 'unknown';
 type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+type CommercialUse = 'ok' | 'paid-only' | 'limited' | 'no' | 'unknown';
 
 function watermarkLabel(val: FourState): string {
   if (val === 'yes')     return '× あり';
@@ -33,11 +34,12 @@ function freePlanLabel(val: FreePlan): string {
                          return '不明';
 }
 
-function commercialLabel(val: FourState): string {
-  if (val === 'yes')     return '〇 可';
-  if (val === 'no')      return '× 不可';
-  if (val === 'limited') return '△ 条件付き';
-                         return '不明';
+function commercialLabel(val: CommercialUse): string {
+  if (val === 'ok')        return '〇 可能（公式情報）';
+  if (val === 'paid-only') return '★ 有料プラン向け';
+  if (val === 'no')        return '× 不可または非推奨';
+  if (val === 'limited')   return '△ 条件付き';
+                           return '要確認';
 }
 
 const platformDisplayMap: Record<string, string> = {

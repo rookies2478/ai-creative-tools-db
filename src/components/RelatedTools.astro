@@ -11,6 +11,7 @@ const { currentSlug, category } = Astro.props;
 const allTools = await getCollection('tools');
 const related = allTools
   .filter((t) => t.slug !== currentSlug && t.data.category === category)
+  .sort((a, b) => a.slug.localeCompare(b.slug))
   .slice(0, 3);
 ---
 

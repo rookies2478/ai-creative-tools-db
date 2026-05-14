@@ -1,5 +1,6 @@
 ---
 name: "Pika"
+shortDescription: "テキストや画像からAI短尺動画を生成するサービス。操作がシンプルで、無料プランでも毎月一定数の生成が可能。"
 slug: "pika"
 category: "video"
 officialUrl: "https://pika.art"

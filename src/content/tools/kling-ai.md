@@ -1,5 +1,6 @@
 ---
 name: "Kling AI"
+shortDescription: "中国Kuaishouが開発したAI動画生成サービス。テキスト・画像から高品質な動画を生成でき、無料枠あり。"
 slug: "kling-ai"
 category: "video"
 officialUrl: "https://klingai.com"

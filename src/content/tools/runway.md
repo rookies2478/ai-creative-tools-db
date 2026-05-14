@@ -1,12 +1,13 @@
 ---
 name: "Runway"
+shortDescription: "AI動画生成・映像編集ツールを提供するサービス。Gen-4など最新モデルと多機能な映像制作環境を統合。"
 slug: "runway"
 category: "video"
 officialUrl: "https://runwayml.com"
 freePlan: "limited"
 lowestPaidPlan: "$12/月（Standardプラン・年払い）／$14/月（月払い）"
 currency: "USD"
-commercialUse: "yes"
+commercialUse: "limited"
 commercialUseNote: "公式情報によると、RunwayはすべてのプランでOutputの商用利用を制限していないとされています。ただし、利用するプラン、生成コンテンツの内容、利用規約の変更、第三者の権利、Runwayのポリシーによっては商用利用が制限される可能性があります。無料プランでは透かしやクレジット数など実用上の制約があります。利用前にRunway公式ヘルプおよび利用規約の最新版をご確認ください。"
 japaneseUi: false
 japanesePrompt: "partial"

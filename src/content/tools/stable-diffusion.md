@@ -1,5 +1,6 @@
 ---
 name: "Stable Diffusion"
+shortDescription: "Stability AIが公開したオープンソースのAI画像生成モデル。ローカル環境で無料実行でき、高度なカスタマイズが可能。"
 slug: "stable-diffusion"
 category: "image"
 officialUrl: "https://stability.ai"

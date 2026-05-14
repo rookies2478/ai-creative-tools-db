@@ -8,6 +8,7 @@ interface Props {
 
 type FreePlan = boolean | 'limited' | 'unknown';
 type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+type CommercialUse = 'ok' | 'paid-only' | 'limited' | 'no' | 'unknown';
 type TriState = boolean | 'partial' | 'unknown';
 
 const { tools, limit = 5 } = Astro.props;
@@ -20,11 +21,12 @@ function freeBadge(val: FreePlan) {
                          return { text: '要確認',    cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
 }
 
-function cuText(val: FourState) {
-  if (val === 'yes')     return { text: '可能な場合あり', cls: 'text-emerald-700 font-medium' };
-  if (val === 'limited') return { text: '条件確認',       cls: 'text-amber-700 font-medium' };
-  if (val === 'no')      return { text: '不可の場合あり', cls: 'text-red-500 font-medium' };
-                         return { text: '要確認',         cls: 'text-slate-400' };
+function cuText(val: CommercialUse) {
+  if (val === 'ok')        return { text: '公式情報で可能',   cls: 'text-emerald-700 font-medium' };
+  if (val === 'paid-only') return { text: '有料プラン向け',   cls: 'text-sky-700 font-medium' };
+  if (val === 'limited')   return { text: '条件確認',         cls: 'text-amber-700 font-medium' };
+  if (val === 'no')        return { text: '不可の場合あり',   cls: 'text-red-500 font-medium' };
+                           return { text: '要確認',           cls: 'text-slate-400' };
 }
 
 function jpText(ui: TriState, prompt: TriState) {

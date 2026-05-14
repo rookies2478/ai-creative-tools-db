@@ -1,5 +1,6 @@
 ---
 name: "Canva AI画像生成"
+shortDescription: "Canvaのデザインツールに統合されたAI画像生成機能。日本語UI対応で、SNS素材やバナー制作に手軽に使える。"
 slug: "canva-ai-image-generator"
 category: "image"
 officialUrl: "https://www.canva.com"

@@ -1,5 +1,6 @@
 ---
 name: "Leonardo AI"
+shortDescription: "ゲーム・イラスト向けのカスタムモデルが豊富なAI画像生成サービス。無料枠のトークン数が比較的多い。"
 slug: "leonardo-ai"
 category: "image"
 officialUrl: "https://leonardo.ai"

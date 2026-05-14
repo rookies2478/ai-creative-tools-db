@@ -1,12 +1,13 @@
 ---
 name: "DALL·E"
+shortDescription: "OpenAI開発のAI画像生成モデル。ChatGPTと統合されており、プロンプトへの忠実度が高い画像生成が可能。"
 slug: "dalle"
 category: "image"
 officialUrl: "https://openai.com/dall-e-3"
 freePlan: "limited"
 lowestPaidPlan: "有料プランで利用枠が拡大する場合があります（例：ChatGPT Plus等）"
 currency: "USD"
-commercialUse: "yes"
+commercialUse: "ok"
 commercialUseNote: "OpenAI公式情報上、生成画像の商用利用ができる場合があります。ただし用途・生成内容・第三者の権利・OpenAIポリシーにより制限される場合があります。このページは法的助言ではありません。利用前にOpenAIの最新規約・ポリシーをご確認ください。"
 japaneseUi: true
 japanesePrompt: "partial"

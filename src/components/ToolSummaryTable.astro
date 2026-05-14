@@ -11,6 +11,7 @@ const { data } = tool;
 type FreePlan = boolean | 'limited' | 'unknown';
 type TriState = boolean | 'partial' | 'unknown';
 type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+type CommercialUse = 'ok' | 'paid-only' | 'limited' | 'no' | 'unknown';
 
 function freePlanBadge(val: FreePlan) {
   if (val === true)      return { text: '無料プランあり', cls: 'bg-green-100 text-green-800' };
@@ -33,11 +34,12 @@ function fourStateBadge(val: FourState) {
                          return { text: '要確認',   cls: 'bg-gray-100 text-gray-600' };
 }
 
-function commercialUseDetail(val: FourState): { badge: string; badgeCls: string; desc: string } {
-  if (val === 'yes')     return { badge: '商用利用可', badgeCls: 'bg-emerald-100 text-emerald-800', desc: '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。' };
-  if (val === 'limited') return { badge: '条件あり',   badgeCls: 'bg-amber-100 text-amber-800',     desc: '用途や条件によって制限がある可能性があります。最新情報は公式サイトをご確認ください。' };
-  if (val === 'no')      return { badge: '非推奨',     badgeCls: 'bg-red-100 text-red-800',         desc: '商用利用は推奨されません。最新情報は公式サイトをご確認ください。' };
-                         return { badge: '要確認',     badgeCls: 'bg-gray-100 text-gray-600',       desc: '公式情報の確認が必要です。最新情報は公式サイトをご確認ください。' };
+function commercialUseDetail(val: CommercialUse): { badge: string; badgeCls: string; desc: string } {
+  if (val === 'ok')        return { badge: '公式情報で可能',   badgeCls: 'bg-emerald-100 text-emerald-800', desc: '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。' };
+  if (val === 'paid-only') return { badge: '有料プラン向け',   badgeCls: 'bg-sky-100 text-sky-800',         desc: '有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。' };
+  if (val === 'limited')   return { badge: '条件あり',         badgeCls: 'bg-amber-100 text-amber-800',     desc: '用途やプランによって制限がある可能性があります。公式規約をご確認ください。' };
+  if (val === 'no')        return { badge: '不可または非推奨', badgeCls: 'bg-red-100 text-red-800',         desc: '商用利用はできない、または推奨されない可能性があります。最新の公式情報をご確認ください。' };
+                           return { badge: '要確認',           badgeCls: 'bg-gray-100 text-gray-600',       desc: '公式情報の確認が必要です。最新情報は公式サイトをご確認ください。' };
 }
 
 function categoryLabel(cat: 'image' | 'video' | 'both') {

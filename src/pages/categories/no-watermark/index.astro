@@ -10,8 +10,8 @@ const filtered = tools.filter((t) => t.data.watermark === 'no' || t.data.waterma
 ---
 
 <BaseLayout
-  title="透かしなしで使いやすいAI画像・動画生成ツール比較 | AIクリエイティブツール比較DB"
-  description="透かしなし、または有料プランで透かしを外せるAI画像生成・動画生成ツールを比較。透かし条件は無料・有料プランで異なるため、各ツールの公式情報をご確認ください。"
+  title="透かしなしAI画像生成ツール比較｜無料枠・商用利用条件も確認"
+  description="透かしなし、または有料プランで透かしを外せるAI画像生成・AI動画生成ツールを比較。透かし条件と商用利用条件は別問題のため、公式情報を確認してください。最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/no-watermark/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
@@ -24,7 +24,7 @@ const filtered = tools.filter((t) => t.data.watermark === 'no' || t.data.waterma
       <span>透かしなし</span>
     </nav>
 
-    <h1 class="mb-3 text-3xl font-bold text-gray-900">透かしなしで使いやすいAI画像・動画生成ツール</h1>
+    <h1 class="mb-3 text-3xl font-bold text-gray-900">透かしなしAI画像生成ツール比較</h1>
     <p class="mb-4 text-gray-600 leading-relaxed">
       AI生成画像や動画を広告、SNS、LP素材などで使う場合、透かしの有無は重要な確認ポイントです。このページでは、透かしなし、または条件付きで透かしを外せるツールを整理しています。
     </p>
@@ -37,6 +37,16 @@ const filtered = tools.filter((t) => t.data.watermark === 'no' || t.data.waterma
     <ConditionChips currentPath="/categories/no-watermark/" />
 
     <NoticeBox />
+
+    <section class="mt-8 rounded-xl border border-slate-200 bg-white px-6 py-5">
+      <h2 class="mb-3 text-base font-bold text-[#002B61]">比較時に見るポイント</h2>
+      <ul class="space-y-2 text-sm text-slate-700">
+        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>無料プランでも透かしなしで使えるか</li>
+        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>透かし除去が有料プラン限定かどうか</li>
+        <li class="flex gap-2"><span class="mt-0.5 text-slate-400">▸</span>透かし条件と商用利用条件をあわせて確認できるか</li>
+      </ul>
+      <p class="mt-4 text-xs text-slate-500">料金・無料枠・商用利用条件は変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
+    </section>
 
     <section class="mt-8">
       <h2 class="mb-1 text-lg font-semibold text-gray-800">対象ツール一覧</h2>
@@ -68,6 +78,24 @@ const filtered = tools.filter((t) => t.data.watermark === 'no' || t.data.waterma
             ))}
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="mb-6 text-xl font-semibold text-gray-800">よくある質問</h2>
+      <div class="space-y-6">
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">透かしなしなら商用利用もできますか？</p>
+          <p class="mt-2 text-sm text-gray-600">透かしを除去できることと商用利用が認められていることは別の問題です。商用利用条件はツールの公式規約で確認する必要があります。有料プランでは商用利用可能と案内されている場合がありますが、用途によって制限がある可能性があります。</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">無料プランで透かしを外せるツールはありますか？</p>
+          <p class="mt-2 text-sm text-gray-600">ツールによって条件が異なります。無料プランでも透かしなしで出力できるものもあれば、有料プラン限定のものもあります。各ツールの詳細ページおよび公式情報でご確認ください。</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 px-5 py-4">
+          <p class="font-medium text-gray-800">透かし条件は変わることがありますか？</p>
+          <p class="mt-2 text-sm text-gray-600">はい、サービス側の方針変更により透かし条件が変わる場合があります。最新情報は各ツールの公式サイトをご確認ください。本記事は法的助言ではありません。</p>
+        </div>
       </div>
     </section>
 

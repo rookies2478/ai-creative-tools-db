@@ -8,6 +8,7 @@ const allTools = await getCollection('tools');
 
 type FreePlan = boolean | 'limited' | 'unknown';
 type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+type CommercialUse = 'ok' | 'paid-only' | 'limited' | 'no' | 'unknown';
 type TriState = boolean | 'partial' | 'unknown';
 
 function freeBadge(val: FreePlan) {
@@ -17,11 +18,12 @@ function freeBadge(val: FreePlan) {
                          return { text: '要確認',      cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100',   icon: '?' };
 }
 
-function cuBadge(val: FourState) {
-  if (val === 'yes')     return { text: '商用利用可',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200', icon: '✓' };
-  if (val === 'limited') return { text: '条件あり',     cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',   icon: '△' };
-  if (val === 'no')      return { text: '非推奨',       cls: 'bg-red-50 text-red-600 ring-1 ring-inset ring-red-200',         icon: '✕' };
-                         return { text: '要確認',       cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100',  icon: '?' };
+function cuBadge(val: CommercialUse) {
+  if (val === 'ok')        return { text: '公式情報で可能',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200', icon: '✓' };
+  if (val === 'paid-only') return { text: '有料プラン向け',   cls: 'bg-sky-50 text-sky-700 ring-1 ring-inset ring-sky-200',             icon: '★' };
+  if (val === 'limited')   return { text: '条件あり',         cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',       icon: '△' };
+  if (val === 'no')        return { text: '不可または非推奨', cls: 'bg-red-50 text-red-600 ring-1 ring-inset ring-red-200',             icon: '✕' };
+                           return { text: '要確認',           cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100',       icon: '?' };
 }
 
 function jpBadge(ui: TriState, prompt: TriState) {

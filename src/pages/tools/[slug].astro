@@ -5,6 +5,7 @@ import NoticeBox from '../../components/NoticeBox.astro';
 import ToolSummaryTable from '../../components/ToolSummaryTable.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
 import ToolFAQ from '../../components/ToolFAQ.astro';
+import ToolSummaryCards from '../../components/ToolSummaryCards.astro';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -21,23 +22,26 @@ const { Content } = await entry.render();
 const leadText = `${data.name}の料金・商用利用・日本語対応・透かしの有無など、実務利用前に確認すべきポイントをまとめています。`;
 
 function commercialUseDesc(val: string): string {
-  if (val === 'yes')     return '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。';
-  if (val === 'limited') return '用途や条件によって制限がある可能性があります。最新情報は公式サイトをご確認ください。';
-  if (val === 'no')      return '商用利用は推奨されません。最新情報は公式サイトをご確認ください。';
-  return '公式情報の確認が必要です。最新情報は公式サイトをご確認ください。';
+  if (val === 'ok')        return '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。';
+  if (val === 'paid-only') return '有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。';
+  if (val === 'limited')   return '用途やプランによって制限がある可能性があります。公式規約をご確認ください。';
+  if (val === 'no')        return '商用利用はできない、または推奨されない可能性があります。最新の公式情報をご確認ください。';
+  return '公式情報の確認が必要です。利用前に公式サイトをご確認ください。';
 }
 
 function commercialUseLabel(val: string): string {
-  if (val === 'yes')     return '商用利用可';
-  if (val === 'limited') return '条件あり';
-  if (val === 'no')      return '非推奨';
-  return '要確認';
+  if (val === 'ok')        return '商用利用：公式情報で可能';
+  if (val === 'paid-only') return '商用利用：有料プラン向け';
+  if (val === 'limited')   return '商用利用：条件あり';
+  if (val === 'no')        return '商用利用：不可または非推奨';
+  return '商用利用：要確認';
 }
 
 function commercialUseBadgeCls(val: string): string {
-  if (val === 'yes')     return 'bg-emerald-100 text-emerald-800';
-  if (val === 'limited') return 'bg-amber-100 text-amber-800';
-  if (val === 'no')      return 'bg-red-100 text-red-800';
+  if (val === 'ok')        return 'bg-emerald-100 text-emerald-800';
+  if (val === 'paid-only') return 'bg-sky-100 text-sky-800';
+  if (val === 'limited')   return 'bg-amber-100 text-amber-800';
+  if (val === 'no')        return 'bg-red-100 text-red-800';
   return 'bg-gray-100 text-gray-600';
 }
 
@@ -56,8 +60,8 @@ function sourceTypeLabel(type: string) {
 ---
 
 <BaseLayout
-  title={`${data.name}の料金・無料枠・商用利用・透かし・日本語対応まとめ | AIクリエイティブツール比較DB`}
-  description={`${data.name}の料金プラン・無料枠・商用利用の可否・透かしの有無・日本語対応状況をまとめています。実務利用前の確認にご活用ください。`}
+  title={`${data.name}の商用利用・料金・無料枠を比較｜AI生成ツールDB`}
+  description={`${data.name}の商用利用条件・料金プラン・無料枠・透かし・日本語対応状況をまとめています。最新情報は公式サイトをご確認ください。`}
   canonicalPath={`/tools/${entry.slug}/`}
   ogType="article"
 >
@@ -73,10 +77,13 @@ function sourceTypeLabel(type: string) {
     </nav>
 
     <!-- H1 -->
-    <h1 class="mb-3 text-3xl font-bold text-gray-900">{data.name}</h1>
+    <h1 class="mb-3 text-3xl font-bold text-gray-900">{data.name}の商用利用・料金・無料枠まとめ</h1>
 
     <!-- リード文 -->
     <p class="mb-6 text-sm leading-relaxed text-gray-600">{leadText}</p>
+
+    <!-- 結論サマリーカード -->
+    <ToolSummaryCards data={data} />
 
     <!-- NoticeBox -->
     <div class="mb-6">
@@ -214,6 +221,20 @@ function sourceTypeLabel(type: string) {
           </dd>
         </div>
       </dl>
+
+      <!-- 公式サイト確認導線 -->
+      <div class="mt-5 border-t border-blue-100 pt-4">
+        <p class="mb-2 text-xs text-slate-600">最新の料金・商用利用条件は公式サイトで確認してください。</p>
+        <a
+          href={data.officialUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 rounded-md bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 transition-colors"
+        >
+          公式サイトで確認する
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
     </section>
 
     <!-- ToolSummaryTable -->

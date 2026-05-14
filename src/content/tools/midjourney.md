@@ -1,5 +1,6 @@
 ---
 name: "Midjourney"
+shortDescription: "高品質なアート・イラスト生成に定評のあるAI画像生成サービス。Discord・Web版で利用可能で、有料プランのみ提供。"
 category: "image"
 officialUrl: "https://www.midjourney.com"
 freePlan: false

@@ -1,7 +1,6 @@
 ---
 name: "Adobe Firefly"
 shortDescription: "Adobe公式のAI画像生成サービス。商用利用を想定した設計で、Photoshop・Illustratorとの連携が可能。"
-slug: "adobe-firefly"
 category: "image"
 officialUrl: "https://firefly.adobe.com"
 freePlan: "limited"
@@ -113,6 +112,12 @@ Adobe公式情報上、Fireflyは商用利用を想定したAI生成サービス
 - 第三者素材の使用、利用プラン、用途によって条件が変わる可能性があります
 
 > **免責事項：** このページは情報提供を目的としており、法的助言ではありません。商用利用前は[Adobe生成AIユーザーガイドライン](https://www.adobe.com/legal/licenses-terms/adobe-gen-ai-user-guidelines.html)の最新版をご確認ください。
+
+## 比較記事
+
+[Adobe FireflyとMicrosoft Designerを比較する →](/compare/adobe-firefly-vs-microsoft-designer/)
+
+[Canva AIとAdobe Fireflyを比較する →](/compare/canva-ai-vs-adobe-firefly/)
 
 ## 日本語対応
 

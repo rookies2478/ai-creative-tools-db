@@ -1,0 +1,175 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import GuideFAQ from '../../components/GuideFAQ.astro';
+import NoticeBox from '../../components/NoticeBox.astro';
+
+const allTools = await getCollection('tools');
+const videoTools = allTools.filter(
+  (t) => t.data.category === 'video' || t.data.category === 'both'
+);
+
+const faqs = [
+  {
+    q: '無料で使えるAI動画生成ツールはありますか？',
+    a: 'Runway・Pika・Kling AI・Luma AI・Haiper・CapCut AIはいずれも無料枠が用意されています。ただし無料プランの生成回数・クレジット上限・透かし条件はツールごとに大きく異なります。無料枠・透かし・商用利用条件の詳細な比較は<a href="/categories/free-video/" class="text-blue-600 hover:underline">無料で使えるAI動画生成ツール比較ページ</a>をご参照ください。最新情報は各ツールの公式サイトをご確認ください。',
+  },
+  {
+    q: 'AI動画生成ツールは商用利用できますか？',
+    a: 'ツールやプランによって条件が異なります。無料プランでの商用利用が不可とされているものや、有料プラン限定のもの、条件付きで可能とされるものがあります。商用利用を前提にする場合は、各ツールの最新の公式利用規約を必ずご確認ください。本ページは法的助言ではありません。',
+  },
+  {
+    q: '透かしなしで使えるAI動画生成ツールはありますか？',
+    a: '多くのツールでは無料プランで透かしが付与される場合があります。有料プランでは透かしが入らない場合があるとされているツールもありますが、条件はプランや利用状況によって異なります。最新の条件は各ツールの公式サイトでご確認ください。',
+  },
+];
+---
+
+<BaseLayout
+  title="AI動画生成ツール一覧｜無料・商用利用・日本語対応で比較"
+  description="AI動画生成ツールを無料プラン、商用利用条件、日本語対応、透かしの有無などで比較できる一覧ページです。Runway、Pika、Kling AIなどの特徴を整理しています。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/video-generators/"
+>
+  <div class="mx-auto max-w-4xl px-6 py-12">
+
+    <nav class="mb-6 text-sm text-gray-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <a href="/tools/" class="hover:underline">ツール一覧</a>
+      <span class="mx-1">/</span>
+      <span>AI動画生成ツール一覧</span>
+    </nav>
+
+    <h1 class="mb-3 text-3xl font-bold text-gray-900">AI動画生成ツール一覧</h1>
+
+    <p class="mb-4 leading-relaxed text-gray-600">
+      AI動画生成ツールを、無料プランの有無、商用利用条件、日本語対応、透かしの有無、用途別の特徴で比較できる一覧ページです。
+      Runway・Pika・Kling AIなど主要ツールの情報を整理しています。
+    </p>
+    <p class="mb-6 text-sm text-amber-700 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3">
+      掲載情報は公式サイト・利用規約をもとに整理していますが、内容は変更される可能性があります。<strong>最新情報は必ず公式サイトをご確認ください。</strong>商用利用・著作権に関しては断定的な記載を避けており、法的助言ではありません。
+    </p>
+
+    <!-- NoticeBox -->
+    <div class="mb-8">
+      <NoticeBox />
+    </div>
+
+    <!-- ツール一覧 -->
+    <section class="mb-12">
+      <h2 class="mb-4 border-b border-gray-200 pb-2 text-xl font-semibold text-gray-800">
+        AI動画生成ツール（{videoTools.length}件）
+      </h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {videoTools.map((tool) => <ToolCard tool={tool} />)}
+      </div>
+    </section>
+
+    <!-- 選び方セクション -->
+    <section class="mb-12 rounded-xl border border-slate-200 bg-white px-6 py-6">
+      <h2 class="mb-4 text-lg font-semibold text-gray-900">AI動画生成ツールの選び方</h2>
+      <ul class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
+          <span>
+            <strong>無料で試せるか：</strong>クレジット制・月更新・初回限り など、無料枠の形態はツールによって異なります。長期利用や本格利用には有料プランへの移行が必要になる場合があります。
+          </span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
+          <span>
+            <strong>商用利用条件を確認できるか：</strong>広告・クライアントワーク・収益化コンテンツへの利用を前提にする場合、各ツールの公式利用規約で商用利用の条件を事前に確認することを推奨します。無料プランでは商用利用が不可とされているツールも多くあります。
+          </span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
+          <span>
+            <strong>透かしの有無：</strong>多くのツールで無料プランでは透かしが付与される場合があります。透かしの条件はプランや利用状況によって変わるため、公式情報をご確認ください。
+          </span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
+          <span>
+            <strong>日本語で使いやすいか：</strong>日本語UIに対応しているツールは限られています（確認時点ではCapCut AIが対応）。日本語プロンプトについてはKling AI・Haiper・CapCut AIが対応しているとされています。英語UIのツールでも日本語プロンプトを試せる場合があります。
+          </span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
+          <span>
+            <strong>画像から動画を作れるか：</strong>Runway・Pika・Kling AI・Luma AI・Haiperはimage-to-video（画像→動画）に対応しているとされています。静止画にモーションを加えたい場合に活用できます。
+          </span>
+        </li>
+      </ul>
+      <p class="mt-4 text-xs text-slate-500">各条件の詳細は各ツールの詳細ページおよび公式サイトでご確認ください。</p>
+    </section>
+
+    <!-- 関連ページリンク -->
+    <section class="mb-12">
+      <h2 class="mb-4 text-lg font-semibold text-gray-800">関連ページ</h2>
+
+      <div class="mb-4">
+        <p class="mb-2 text-sm font-semibold text-slate-700">ツール別詳細ページ</p>
+        <ul class="flex flex-wrap gap-3">
+          {['runway', 'pika', 'kling-ai', 'luma-ai', 'haiper', 'capcut-ai'].map((slug) => {
+            const tool = videoTools.find((t) => t.slug === slug);
+            return tool ? (
+              <li>
+                <a
+                  href={`/tools/${slug}/`}
+                  class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100"
+                >
+                  {tool.data.name}
+                </a>
+              </li>
+            ) : null;
+          })}
+        </ul>
+      </div>
+
+      <div>
+        <p class="mb-2 text-sm font-semibold text-slate-700">カテゴリ・まとめページ</p>
+        <ul class="flex flex-wrap gap-3">
+          <li>
+            <a href="/categories/free-video/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+              無料で使えるAI動画生成ツール比較
+            </a>
+          </li>
+          <li>
+            <a href="/tools/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+              AI画像生成・動画生成ツール一覧
+            </a>
+          </li>
+          <li>
+            <a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+              商用利用を確認しやすいAIツール
+            </a>
+          </li>
+          <li>
+            <a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+              透かしなしで使いやすいAIツール
+            </a>
+          </li>
+          <li>
+            <a href="/compare/runway-vs-pika/" class="rounded-full border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
+              Runway vs Pika 比較
+            </a>
+          </li>
+          <li>
+            <a href="/compare/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+              全ツール比較表
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <GuideFAQ items={faqs} title="よくある質問" />
+
+    <nav class="mt-8 border-t border-gray-200 pt-6 text-sm">
+      <a href="/tools/" class="text-blue-600 hover:underline">← ツール一覧に戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

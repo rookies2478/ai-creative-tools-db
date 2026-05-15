@@ -1,165 +1,136 @@
 ---
 name: "SeaArt AI"
-shortDescription: "アニメ調・イラスト・モデル選択・LoRA系の表現に強いAI画像生成プラットフォーム。豊富なモデルライブラリと無料枠が特徴。"
+shortDescription: "画像生成・画像編集・キャラクター作成などを含むクリエイティブAIプラットフォーム。アニメ風・イラスト系の制作と相性がよい。"
+slug: "seaart-ai"
 category: "image"
 officialUrl: "https://www.seaart.ai/"
 freePlan: true
-freePlanNote: "無料ユーザーにも生成枠（Stamina / Credits）が案内されています。ただし仕組みや生成回数は変更される可能性があるため、最新情報は公式サイトでご確認ください。"
-commercialUse: "limited"
-commercialUseNote: "公式FAQでは、自分が生成したコンテンツの知的財産権はユーザーに帰属し、SeaArtは商用利用を禁止していないと案内されています。ただし、他者作品・モデル・素材を利用する場合は、権利者の許諾や利用条件の確認が必要です。商用利用に伴うリスクと責任はユーザー側にあると案内されています。商用利用を前提にする場合は、最新の公式規約をご確認ください。本記事は法的助言ではありません。"
+lowestPaidPlan: "要公式確認"
+currency: "USD"
+commercialUse: "unknown"
+commercialUseNote: "SeaArt AIは画像生成・動画生成・キャラクター作成などを含むクリエイティブプラットフォームです。商用利用条件や生成物の扱いは、利用規約・プラン・利用するモデルにより異なる可能性があるため、公式情報をご確認ください。"
 japaneseUi: "unknown"
-japanesePrompt: true
+japanesePrompt: "unknown"
 watermark: "unknown"
 bestFor:
-  - "アニメイラストの生成"
-  - "キャラクター画像の作成"
-  - "SNSアイコン・プロフィール画像"
-  - "モデル選択を活用した画像生成"
-  - "LoRA系の表現・スタイル指定"
-  - "クリエイター向け画像生成"
+  - "イラスト"
+  - "キャラクター画像"
+  - "アニメ風画像"
+  - "画像編集"
 strengths:
-  - "無料枠（Stamina / Credits）があり始めやすい"
-  - "モデルライブラリが豊富でスタイルの選択肢が広い"
-  - "初心者でも使いやすいUI設計"
-  - "アニメ・イラスト系の表現と相性がよい"
+  - "画像生成・画像編集・モデル利用などの機能がまとまっている"
+  - "アニメ風・キャラクター系の制作と相性がよい"
+  - "コミュニティ上の作品やモデルを参考にしやすい"
 weaknesses:
-  - "商用利用時は使用モデルや素材の権利確認が必要"
-  - "他者作品・モデルを利用する場合のリスクはユーザー負担"
-  - "Credits / Staminaの仕組みや生成回数が変更される可能性がある"
-  - "透かし・日本語UI対応など、公式情報だけで断定できない項目がある"
-lastReviewed: "2026-05-14"
-nextReviewDue: "2026-06-14"
-pricingModel: "subscription_credit"
+  - "商用利用条件やモデルごとの権利確認が必要"
+  - "機能が多く、初心者には確認項目が多い"
+lastReviewed: "2026-05-16"
+nextReviewDue: "2026-06-16"
+pricingModel: "unknown"
+freePlanNote: "無料プランの詳細は公式サイトをご確認ください。"
 platforms:
   - web
 signupRequired: true
 features:
   textToImage: true
   imageToImage: true
-  inpainting: true
   stylePresets: true
+  promptAssist: false
   apiAvailable: false
-watermarkCondition: "公式情報のみでは透かしの有無・条件を断定できません。最新の条件は公式サイトでご確認ください。"
+japaneseDocs: false
 useCases:
   - illustration
-  - sns
   - design
-  - business
+  - sns
 limitations:
-  - "商用利用時は使用モデル・素材ごとに権利確認が必要"
-  - "Credits / Staminaの仕組みは予告なく変更される可能性がある"
-  - "透かし・日本語UI対応は公式情報のみでは確認不可"
+  - "商用利用条件は利用規約・プラン・利用モデルにより異なる"
+  - "利用するモデルごとに権利確認が必要な場合がある"
 reviewed:
-  pricing: "2026-05-14"
-  terms: "2026-05-14"
-  features: "2026-05-14"
+  pricing: "2026-05-16"
+  terms: "2026-05-16"
+  features: "2026-05-16"
 sourceRefs:
-  - label: "SeaArt AI公式サイト"
+  - label: "SeaArt AI 公式サイト"
     url: "https://www.seaart.ai/"
     type: official
-  - label: "SeaArt AIモール（料金・プラン）"
-    url: "https://www.seaart.ai/mall"
-    type: pricing
-  - label: "SeaArt AI利用規約（公式PDF）"
-    url: "https://image.cdn2.seaart.me/static/SeaArt-Terms-of-Service.pdf"
+  - label: "SeaArt AI 利用規約（公式）"
+    url: "https://image.cdn2.seaart.me/terms"
     type: terms
-  - label: "SeaArt AI著作権ポリシー（公式PDF）"
-    url: "https://image.cdn2.seaart.me/static/SeaArt-Copyright-Policy.pdf"
-    type: policy
-  - label: "SeaArt AIプライバシーポリシー（公式）"
-    url: "https://www.seaart.ai/privacy"
+  - label: "SeaArt AI プライバシーポリシー（公式）"
+    url: "https://image.cdn2.seaart.me/privacy"
     type: policy
 sources:
-  - title: "SeaArt AI公式サイト"
+  - title: "SeaArt AI 公式サイト"
     url: "https://www.seaart.ai/"
-  - title: "SeaArt AIモール（料金・プラン）"
-    url: "https://www.seaart.ai/mall"
-  - title: "SeaArt AI利用規約（公式PDF）"
-    url: "https://image.cdn2.seaart.me/static/SeaArt-Terms-of-Service.pdf"
-  - title: "SeaArt AI著作権ポリシー（公式PDF）"
-    url: "https://image.cdn2.seaart.me/static/SeaArt-Copyright-Policy.pdf"
-  - title: "SeaArt AIプライバシーポリシー（公式）"
-    url: "https://www.seaart.ai/privacy"
+  - title: "SeaArt AI 利用規約（公式）"
+    url: "https://image.cdn2.seaart.me/terms"
+  - title: "SeaArt AI プライバシーポリシー（公式）"
+    url: "https://image.cdn2.seaart.me/privacy"
 faqs:
-  - question: "無料で使えますか？"
-    answer: "無料ユーザー向けにStamina / Creditsが案内されています。ただし仕組みや生成回数は変更される可能性があるため、最新情報はSeaArt AI公式サイトでご確認ください。"
-  - question: "商用利用できますか？"
-    answer: "公式ポリシーでは、自分が生成したコンテンツの知的財産権はユーザーに帰属し、商用利用を禁止していないと案内されています。ただし、他者作品・モデル・素材を利用する場合は、権利者の許諾や利用条件の確認が必要です。商用利用を前提にする場合は最新の公式規約をご確認ください。このページは法的助言ではありません。"
-  - question: "日本語プロンプトは使えますか？"
-    answer: "日本語プロンプトでの生成は可能です。ただしモデルや用途によっては英語プロンプトの方が安定する場合があります。"
-  - question: "透かしは入りますか？"
-    answer: "公式情報のみでは透かしの有無・条件を断定できません。最新の条件はSeaArt AI公式サイトでご確認ください。"
-  - question: "どの環境で使えますか？"
-    answer: "Webブラウザから利用できます。インストールは不要です。"
+  - question: "SeaArt AIは無料で使えますか？"
+    answer: "無料プランが提供されている場合があります。利用可能な機能や制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。"
+  - question: "SeaArt AIは商用利用できますか？"
+    answer: "商用利用条件や生成物の扱いは、利用規約・プラン・利用するモデルにより異なる可能性があります。利用前に公式利用規約の最新版をご確認ください。このページは法的助言ではありません。"
+  - question: "SeaArt AIは日本語で使えますか？"
+    answer: "日本語UIの対応状況は公式情報では確認できていません。最新の状況は公式サイトでご確認ください。"
+  - question: "SeaArt AIに透かしは入りますか？"
+    answer: "透かしの有無・条件は公式情報では確認できていません。最新の条件は公式サイトでご確認ください。"
 ---
 
 ## SeaArt AIとは
 
-SeaArt AIは、アニメ調・イラスト・キャラクター画像の生成に強いAI画像生成プラットフォームです。多様なモデルライブラリからスタイルを選べるため、LoRAや独自スタイルを使った表現にも対応しており、クリエイターやイラスト系の用途に向いています。無料枠（Stamina / Credits）があり、登録後すぐに試すことができます。
+SeaArt AIは画像生成・画像編集・キャラクター作成・動画生成などの機能を備えたクリエイティブAIプラットフォームです。アニメ風・イラスト系のビジュアル制作と相性がよく、コミュニティ上で公開されているモデルや作品を参考にしながら利用できる環境が整っています。
 
-## 主な機能
+## 料金プラン
 
-- テキストから画像生成（Text to Image）
-- 画像から画像生成（Image to Image）
-- インペインティング（部分修正）
-- 豊富なモデルライブラリ・スタイルプリセット
-- LoRA対応スタイル指定
+無料プランが提供されている場合があります。詳細なプラン・クレジット数は変更される可能性があるため、**最新の情報は[公式サイト](https://www.seaart.ai/)でご確認ください。**
 
-## 向いている用途
+[無料・低コストのAI画像ツールを比較する](/categories/free/)
 
-- アニメイラスト・キャラクター画像の生成
-- SNSアイコンやプロフィール画像の作成
-- モデル選択・LoRAを使った独自スタイルの表現
-- イラスト・デザイン系クリエイターの制作補助
+## 商用利用について
 
-## 無料プラン・Credits・Staminaに関する注意点
+商用利用条件や生成物の扱いは、利用規約・プラン・利用するモデルにより異なる可能性があります。コミュニティモデルを使用する場合は、そのモデルごとの権利・ライセンス条件についても確認が必要です。
 
-SeaArt AIには無料ユーザー向けの生成枠（Stamina / Credits）が案内されています。
+> **免責事項：** このページは情報提供を目的としており、法的助言ではありません。利用前に[SeaArt AI利用規約](https://image.cdn2.seaart.me/terms)の最新版をご確認ください。
 
-> **注意：** Stamina / Creditsの仕組み・生成回数・有料プランの料金は変更される可能性があります。最新の情報は[SeaArt AIモール（公式）](https://www.seaart.ai/mall)でご確認ください。
+[商用利用できるAI画像ツールを比較する](/categories/commercial-use/)
 
-## 商用利用・著作権に関する注意点
+## 日本語対応
 
-[公式著作権ポリシー](https://image.cdn2.seaart.me/static/SeaArt-Copyright-Policy.pdf)では、自分が生成したコンテンツの知的財産権はユーザーに帰属し、SeaArtは商用利用を禁止していないと案内されています。
+- **日本語UI：** 対応状況は公式情報では確認できていません
+- **日本語プロンプト：** 対応状況は公式情報では確認できていません
 
-ただし、以下の点に注意が必要です。
+最新の状況は[公式サイト](https://www.seaart.ai/)でご確認ください。
 
-- 他者作品・モデル・素材を利用する場合は、権利者の許諾や利用条件の確認が必要です
-- 商用利用に伴うリスクと責任はユーザー側にあると案内されています
-- 商用利用を前提にする場合は、最新の[利用規約](https://image.cdn2.seaart.me/static/SeaArt-Terms-of-Service.pdf)をご確認ください
+[日本語対応AIツールを比較する](/categories/japanese/)
 
-> **免責事項：** このページは情報提供を目的としており、法的助言ではありません。
+## 透かし（ウォーターマーク）条件
 
-## 日本語プロンプトに関する確認メモ
+透かしの有無・条件は現時点での公式情報では確認できていません。最新の条件は[公式サイト](https://www.seaart.ai/)でご確認ください。
 
-日本語プロンプトでの画像生成は可能です。ただし、モデルや用途によっては英語プロンプトの方が安定した結果が得られる場合があります。特にテキストの精度やスタイル指定が重要な用途では、英語プロンプトも試すことをお勧めします。
+[透かしなしのAI画像ツールを比較する](/categories/no-watermark/)
 
-## 透かしに関する確認メモ
+## こんな人に向いている
 
-公式情報のみでは、生成画像への透かし（ウォーターマーク）の有無・条件を断定できません。プランや仕様の変更により条件が変わる可能性があります。最新の状況は[SeaArt AI公式サイト](https://www.seaart.ai/)でご確認ください。
+- アニメ風・イラスト系の画像を生成したい
+- キャラクター画像の制作に取り組んでいる
+- コミュニティモデルを活用して幅広いスタイルを試したい
+- 画像生成と画像編集をまとめて使えるプラットフォームを探している
 
-## どんな人に向いているか
+## よくある質問
 
-- **アニメ・イラスト系の画像**を生成したいクリエイター
-- モデル選択やLoRAを使って**独自スタイルを表現**したい人
-- 無料枠でAI画像生成を試してみたい初心者
-- SNSアイコンやキャラクター画像を手軽に作りたい人
+### SeaArt AIは無料で使えますか？
 
-写真リアル系よりもアニメ・イラスト・デザイン系の用途に向いており、豊富なモデルライブラリが表現の幅を広げます。
+無料プランが提供されている場合があります。利用可能な機能や制限は変更される可能性があるため、最新の状況は[公式サイト](https://www.seaart.ai/)でご確認ください。
 
-## FAQ
+### SeaArt AIは商用利用できますか？
 
-**Q. 無料で使えますか？**
-無料ユーザー向けにStamina / Creditsが案内されています。ただし仕組みや生成回数は変更される可能性があるため、最新情報は[公式サイト](https://www.seaart.ai/)でご確認ください。
+商用利用条件や生成物の扱いは、利用規約・プラン・利用するモデルにより異なる可能性があります。利用前に[公式利用規約](https://image.cdn2.seaart.me/terms)の最新版をご確認ください。このページは法的助言ではありません。
 
-**Q. 商用利用できますか？**
-公式ポリシーでは、自分が生成したコンテンツの知的財産権はユーザーに帰属し、商用利用を禁止していないと案内されています。ただし、他者作品・モデル・素材を利用する場合は権利確認が必要です。商用利用前に最新の[公式規約](https://image.cdn2.seaart.me/static/SeaArt-Terms-of-Service.pdf)をご確認ください。このページは法的助言ではありません。
+### SeaArt AIは日本語で使えますか？
 
-**Q. 日本語プロンプトは使えますか？**
-日本語プロンプトでの生成は可能ですが、モデルや用途によっては英語の方が安定する場合があります。
+日本語UIの対応状況は公式情報では確認できていません。最新の状況は[公式サイト](https://www.seaart.ai/)でご確認ください。
 
-**Q. 透かしは入りますか？**
-公式情報のみでは断定できません。最新の条件は公式サイトでご確認ください。
+---
 
-**Q. どの環境で使えますか？**
-Webブラウザから利用できます。インストールは不要です。
+> **免責事項：** このページの情報は公式ソースをもとに作成していますが、内容は変更される可能性があります。法的助言ではありません。利用前に必ず最新の公式情報をご確認ください。

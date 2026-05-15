@@ -126,3 +126,7 @@ Stability AIが開発・公開したオープンソースのAI画像生成モデ
 
 Stable Diffusionの一部バージョン・実装では、人間の目には見えない不可視の透かし（invisible watermark）が生成画像に埋め込まれる場合があるとされています。SDXLなど一部モデルでは可視的なアーティファクトが報告されたケースもあります。詳細な仕様は利用するバージョン・実装ごとに異なる場合があります。
 
+## 比較記事
+
+[Stable DiffusionとMidjourneyを比較する](/compare/stable-diffusion-vs-midjourney/)：無料利用・商用利用条件・カスタマイズ性・用途別の選び方をまとめています。
+

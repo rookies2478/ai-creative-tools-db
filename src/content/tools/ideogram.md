@@ -1,168 +1,146 @@
 ---
 name: "Ideogram"
-shortDescription: "文字入り画像・ロゴ・ポスター・SNSデザインに強いAI画像生成ツール。テキストレンダリング精度が特徴。"
+shortDescription: "テキスト入り画像やタイポグラフィ表現に強いAI画像生成サービス。ロゴ風デザイン・ポスター・SNS画像の作成に活用されている。"
+slug: "ideogram"
 category: "image"
 officialUrl: "https://ideogram.ai/"
 freePlan: true
-commercialUse: "ok"
-commercialUseNote: "公式FAQでは、生成画像についてIdeogram側が所有権を主張せず、利用を制限しないと案内されています。ただし、法律・第三者の権利・利用規約に反しない形で利用する責任はユーザー側にあります。商用利用を前提にする場合は、最新の公式規約をご確認ください。本記事は法的助言ではありません。"
+lowestPaidPlan: "要公式確認"
+currency: "USD"
+commercialUse: "limited"
+commercialUseNote: "Ideogram公式FAQでは、生成画像について所有権を主張せず、利用を制限しない旨が説明されています。ただし、法律・第三者の権利・利用規約に違反しないことは利用者側で確認する必要があります。最新情報は公式FAQと利用規約をご確認ください。"
 japaneseUi: false
-japanesePrompt: true
+japanesePrompt: "unknown"
 watermark: "unknown"
 bestFor:
-  - "ロゴ案の作成"
-  - "ポスターデザイン"
-  - "SNS画像"
   - "文字入り画像"
-  - "Tシャツデザイン"
-  - "広告・販促ビジュアル"
+  - "ロゴ風デザイン"
+  - "ポスター"
+  - "SNS画像"
 strengths:
-  - "文字入り画像のテキストレンダリング精度が高い"
-  - "ブラウザのみで利用可能（インストール不要）"
-  - "無料枠あり"
-  - "ロゴ・ポスター・デザイン用途と相性がよい"
+  - "画像内テキストやタイポグラフィ表現に強い"
+  - "ロゴ風・ポスター風のビジュアルを作りやすい"
+  - "無料アカウントから試せる"
 weaknesses:
-  - "日本語の画像内テキストは崩れる可能性がある"
-  - "無料枠や仕様は変更される可能性がある"
-  - "商用利用時は第三者の権利・公式規約の確認が必要"
-lastReviewed: "2026-05-14"
-nextReviewDue: "2026-06-14"
-pricingModel: "subscription_credit"
-freePlanNote: "無料枠あり（クレジット数・制限は変更の可能性あり。最新情報は公式サイトで確認）"
+  - "日本語UIや日本語テキスト生成の扱いは確認が必要"
+  - "商用利用時は第三者権利や利用規約の確認が必要"
+lastReviewed: "2026-05-16"
+nextReviewDue: "2026-06-16"
+pricingModel: "unknown"
+freePlanNote: "無料アカウントでクレジットが提供される場合があります。詳細は公式サイトをご確認ください。"
 platforms:
   - web
 signupRequired: true
 features:
   textToImage: true
+  imageToImage: false
   stylePresets: true
+  promptAssist: false
   apiAvailable: true
-watermarkCondition: "公式情報のみでは透かしの有無を断定できません。最新の条件は公式サイトでご確認ください。"
+japaneseDocs: false
 useCases:
   - design
   - sns
+  - blog
   - ad_creative
-  - illustration
-  - business
 limitations:
-  - "日本語の画像内テキストは崩れる可能性がある"
-  - "無料枠・クレジット数は予告なく変更される可能性がある"
+  - "日本語UIなし（英語インターフェース）"
+  - "商用利用時は第三者権利・利用規約の確認が必要"
 reviewed:
-  pricing: "2026-05-14"
-  terms: "2026-05-14"
-  features: "2026-05-14"
+  pricing: "2026-05-16"
+  terms: "2026-05-16"
+  features: "2026-05-16"
 sourceRefs:
-  - label: "Ideogram公式サイト"
+  - label: "Ideogram 公式サイト"
     url: "https://ideogram.ai/"
     type: official
-  - label: "Ideogram料金プラン（公式）"
-    url: "https://ideogram.ai/pricing?tab=personal"
-    type: pricing
-  - label: "Ideogram FAQ（公式）"
+  - label: "Ideogram ドキュメント（公式）"
+    url: "https://docs.ideogram.ai/"
+    type: docs
+  - label: "Ideogram よくある質問（公式）"
     url: "https://docs.ideogram.ai/frequently-asked-questions"
     type: help
-  - label: "Ideogramプロンプトガイド（公式）"
-    url: "https://docs.ideogram.ai/using-ideogram/prompting-guide"
-    type: docs
-  - label: "Ideogramプロンプトの基礎（公式）"
-    url: "https://docs.ideogram.ai/using-ideogram/prompting-guide/2-prompting-fundamentals"
-    type: docs
-  - label: "Ideogram利用規約（公式）"
+  - label: "Ideogram 利用規約（公式）"
     url: "https://ideogram.ai/legal/tos"
     type: terms
+  - label: "Ideogram 料金プラン（公式）"
+    url: "https://ideogram.ai/pricing"
+    type: pricing
 sources:
-  - title: "Ideogram公式サイト"
+  - title: "Ideogram 公式サイト"
     url: "https://ideogram.ai/"
-  - title: "Ideogram料金プラン（公式）"
-    url: "https://ideogram.ai/pricing?tab=personal"
-  - title: "Ideogram FAQ（公式）"
+  - title: "Ideogram よくある質問（公式）"
     url: "https://docs.ideogram.ai/frequently-asked-questions"
-  - title: "Ideogramプロンプトガイド（公式）"
-    url: "https://docs.ideogram.ai/using-ideogram/prompting-guide"
-  - title: "Ideogramプロンプトの基礎（公式）"
-    url: "https://docs.ideogram.ai/using-ideogram/prompting-guide/2-prompting-fundamentals"
-  - title: "Ideogram利用規約（公式）"
+  - title: "Ideogram 利用規約（公式）"
     url: "https://ideogram.ai/legal/tos"
+  - title: "Ideogram 料金プラン（公式）"
+    url: "https://ideogram.ai/pricing"
 faqs:
-  - question: "無料で使えますか？"
-    answer: "無料枠があります。ただしクレジット数・生成制限は変更される可能性があるため、最新の情報はIdeogram公式サイトでご確認ください。"
-  - question: "商用利用できますか？"
-    answer: "公式FAQでは、生成画像についてIdeogram側が所有権を主張せず、利用を制限しないと案内されています。ただし、法律・第三者の権利・利用規約に反しない形で利用する責任はユーザー側にあります。商用利用前に最新の公式規約をご確認ください。このページは法的助言ではありません。"
-  - question: "日本語プロンプトは使えますか？"
-    answer: "公式プロンプトガイド上、好みの言語で入力できるとされています。ただし、画像内に日本語テキストを正確に出したい場合は英語プロンプトの方が安定しやすい傾向があります。"
-  - question: "透かし（ウォーターマーク）は入りますか？"
-    answer: "公式情報のみでは透かしの有無を断定できません。最新の条件はIdeogram公式サイトでご確認ください。"
-  - question: "どの環境で使えますか？"
-    answer: "Webブラウザから利用できます。インストールは不要です。APIも提供されています。"
+  - question: "Ideogramは無料で使えますか？"
+    answer: "無料アカウントでクレジットが提供される場合があります。クレジット数や利用制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。"
+  - question: "Ideogramは商用利用できますか？"
+    answer: "Ideogram公式FAQでは、生成画像について所有権を主張せず利用を制限しない旨が説明されています。ただし、法律・第三者の権利・利用規約に違反しないことは利用者側で確認する必要があります。利用前に公式FAQと利用規約の最新版をご確認ください。このページは法的助言ではありません。"
+  - question: "Ideogramは日本語で使えますか？"
+    answer: "UIは英語のみです。日本語テキストの生成精度については公式情報での確認をおすすめします。"
+  - question: "Ideogramに透かしは入りますか？"
+    answer: "透かしの有無・条件は公式情報では確認できていません。最新の条件は公式サイトでご確認ください。"
 ---
 
 ## Ideogramとは
 
-IdeogramはAI画像生成ツールで、**画像内の文字（テキスト）レンダリング精度**が特徴として知られています。ロゴ・ポスター・SNS画像・Tシャツデザインなど、テキストを含むビジュアル制作との相性がよいツールです。ブラウザのみで利用でき、無料枠から始められます。
+Ideogramは画像内のテキスト表現やタイポグラフィに強みを持つAI画像生成サービスです。ロゴ風デザイン・ポスター・文字入りSNS画像の作成に活用されており、無料アカウントから試すことができます。APIも提供されており、開発用途にも利用されています。
 
-## 主な機能
+## 料金プラン
 
-- テキスト入りAI画像生成（テキストレンダリングに強い）
-- スタイルプリセット（フォトリアル、アニメ、イラストなど）
-- Magic Prompt（プロンプト補助機能）
-- APIアクセス（有料プラン）
+無料アカウントでクレジットが提供される場合があります。有料プランの詳細は変更される可能性があるため、**最新の情報は[公式料金ページ](https://ideogram.ai/pricing)でご確認ください。**
 
-## 向いている用途
+[無料・低コストのAI画像ツールを比較する](/categories/free/)
 
-- ロゴ案・ブランドビジュアルの検討
-- ポスター・フライヤーのデザイン案
-- SNS投稿用の文字入り画像
-- Tシャツ・グッズのデザイン
-- 広告・販促ビジュアルのラフ案
+## 商用利用について
 
-## 無料プラン・料金に関する注意点
+Ideogram公式FAQでは、生成画像について所有権を主張せず、利用を制限しない旨が説明されています。ただし以下の点に注意が必要です。
 
-Ideogramには無料枠があり、登録後すぐに画像生成を試すことができます。
+- 法律・第三者の権利・利用規約に違反しないことは利用者側で確認する必要があります
+- 規約・条件は変更される可能性があります
 
-> **注意：** 無料枠のクレジット数・生成制限・有料プランの料金は変更される可能性があります。最新の情報は[Ideogram公式料金ページ](https://ideogram.ai/pricing?tab=personal)でご確認ください。
+> **免責事項：** このページは情報提供を目的としており、法的助言ではありません。利用前に[Ideogram利用規約](https://ideogram.ai/legal/tos)および[公式FAQ](https://docs.ideogram.ai/frequently-asked-questions)の最新版をご確認ください。
 
-## 商用利用・著作権に関する注意点
+[商用利用できるAI画像ツールを比較する](/categories/commercial-use/)
 
-[公式FAQ](https://docs.ideogram.ai/frequently-asked-questions)では、生成画像についてIdeogram側が所有権を主張せず、利用を制限しないと案内されています。
+## 日本語対応
 
-ただし、以下の点にご注意ください。
+- **日本語UI：** 非対応（英語インターフェースのみ）
+- **日本語プロンプト：** 対応状況は公式情報でご確認ください
 
-- 法律・第三者の権利・利用規約に反しない形で利用する責任はユーザー側にあります
-- 商用利用を前提にする場合は、最新の[公式利用規約](https://ideogram.ai/legal/tos)をご確認ください
+[日本語対応AIツールを比較する](/categories/japanese/)
 
-> **免責事項：** このページは情報提供を目的としており、法的助言ではありません。
+## 透かし（ウォーターマーク）条件
 
-## 日本語プロンプト・画像内テキストに関する注意点
+透かしの有無・条件は現時点での公式情報では確認できていません。最新の条件は[公式サイト](https://ideogram.ai/)でご確認ください。
 
-[公式プロンプトガイド](https://docs.ideogram.ai/using-ideogram/prompting-guide)では、好みの言語でプロンプトを入力できるとされています。日本語でのプロンプト入力は可能です。
+[透かしなしのAI画像ツールを比較する](/categories/no-watermark/)
 
-ただし、**画像内に日本語テキストを正確に出したい場合は、英語プロンプトの方が安定しやすい傾向があります**。日本語の画像内テキストは文字が崩れる可能性があるため、重要なテキスト表現には英語を使うことを検討してください。
+## こんな人に向いている
 
-## 透かしに関する確認メモ
+- 画像内に文字を入れたデザインを作りたい
+- ロゴ風・ポスター風のビジュアルを生成したい
+- 無料で試してから有料プランを検討したい
+- SNS投稿用のテキスト入り画像を手軽に作りたい
 
-公式情報のみでは、生成画像への透かし（ウォーターマーク）の有無・条件を断定できません。プランや仕様の変更により条件が変わる可能性があります。最新の状況は[Ideogram公式サイト](https://ideogram.ai/)でご確認ください。
+## よくある質問
 
-## どんな人に向いているか
+### Ideogramは無料で使えますか？
 
-- **ロゴやポスターのデザイン案**を素早く出したい人
-- **文字入り画像**をAIで生成したい人
-- 無料で試しながらAI画像生成を探求したい人
-- SNS用のビジュアルを手軽に作りたいクリエイター・個人事業主
+無料アカウントでクレジットが提供される場合があります。クレジット数や利用制限は変更される可能性があるため、最新の状況は[公式サイト](https://ideogram.ai/)でご確認ください。
 
-Photoshopなどの本格的なデザインツールを使う前のラフ案出しや、アイデア検討フェーズにも適しています。
+### Ideogramは商用利用できますか？
 
-## FAQ
+Ideogram公式FAQでは、生成画像について所有権を主張せず利用を制限しない旨が説明されています。ただし、法律・第三者の権利・利用規約に違反しないことは利用者側で確認する必要があります。利用前に[公式FAQ](https://docs.ideogram.ai/frequently-asked-questions)と[利用規約](https://ideogram.ai/legal/tos)の最新版をご確認ください。
 
-**Q. 無料で使えますか？**
-無料枠があります。ただしクレジット数・生成制限は変更される可能性があるため、最新情報は[公式料金ページ](https://ideogram.ai/pricing?tab=personal)でご確認ください。
+### Ideogramは日本語で使えますか？
 
-**Q. 商用利用できますか？**
-公式FAQでは、生成画像についてIdeogram側が所有権を主張せず、利用を制限しないと案内されています。ただし、法律・第三者の権利・利用規約に反しない形で利用する責任はユーザー側にあります。商用利用前に最新の[公式利用規約](https://ideogram.ai/legal/tos)をご確認ください。このページは法的助言ではありません。
+UIは英語のみです。日本語テキスト生成の精度については公式情報での確認をおすすめします。
 
-**Q. 日本語プロンプトは使えますか？**
-公式プロンプトガイド上、好みの言語で入力できるとされています。ただし、画像内の日本語テキストは崩れる可能性があるため、画像内テキストを正確に出したい場合は英語プロンプトが安定しやすい傾向があります。
+---
 
-**Q. 透かしは入りますか？**
-公式情報のみでは断定できません。最新の条件は公式サイトでご確認ください。
-
-**Q. どの環境で使えますか？**
-Webブラウザから利用できます。インストールは不要です。
+> **免責事項：** このページの情報は公式ソースをもとに作成していますが、内容は変更される可能性があります。法的助言ではありません。利用前に必ず最新の公式情報をご確認ください。

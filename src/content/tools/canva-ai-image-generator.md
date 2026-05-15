@@ -91,6 +91,10 @@ faqs:
     answer: "WebブラウザのほかiOS・Androidアプリからも利用できます。"
 ---
 
+## 比較記事
+
+[Canva AIとAdobe Fireflyを比較する →](/compare/canva-ai-vs-adobe-firefly/)
+
 ## Canva AI画像生成とは
 
 Canvaに統合されたAI画像生成機能。テキストプロンプトから画像を生成でき、Canvaのデザインエディター上でそのままデザインに活用できます。日本語UIに対応しており、日本語プロンプトでの生成も可能です。

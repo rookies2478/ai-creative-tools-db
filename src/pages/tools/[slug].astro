@@ -363,10 +363,33 @@ function sourceTypeLabel(type: string) {
     <section class="mb-8">
       <h2 class="mb-4 text-base font-bold text-gray-800">次に読む</h2>
       <div class="grid gap-3 sm:grid-cols-2">
-        <a href="/tools/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
-          <span class="text-sm font-semibold text-blue-700">AI画像生成ツール一覧を見る →</span>
-          <span class="text-xs leading-relaxed text-slate-600">主要なAI画像・動画生成ツールを一覧で確認できます。</span>
-        </a>
+        {(data.category === 'video' || data.category === 'both') ? (
+          <>
+            <a href="/video-generators/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+              <span class="text-sm font-semibold text-blue-700">AI動画生成ツール一覧を見る →</span>
+              <span class="text-xs leading-relaxed text-slate-600">主要なAI動画生成ツールを無料プラン・商用利用条件などで比較できます。</span>
+            </a>
+            <a href="/categories/free-video/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+              <span class="text-sm font-semibold text-blue-700">無料で使えるAI動画生成ツールを見る →</span>
+              <span class="text-xs leading-relaxed text-slate-600">無料枠・透かし・商用利用条件をまとめて比較できます。</span>
+            </a>
+            <a href="/compare/runway-vs-pika/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+              <span class="text-sm font-semibold text-blue-700">RunwayとPikaを比較する →</span>
+              <span class="text-xs leading-relaxed text-slate-600">主要AI動画生成ツールの料金・商用利用条件を詳しく比較しています。</span>
+            </a>
+          </>
+        ) : (
+          <>
+            <a href="/tools/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+              <span class="text-sm font-semibold text-blue-700">AI画像生成ツール一覧を見る →</span>
+              <span class="text-xs leading-relaxed text-slate-600">主要なAI画像・動画生成ツールを一覧で確認できます。</span>
+            </a>
+            <a href="/categories/free/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+              <span class="text-sm font-semibold text-blue-700">無料で使えるAI画像生成ツールを見る →</span>
+              <span class="text-xs leading-relaxed text-slate-600">無料枠のあるAI画像生成ツールを確認できます。</span>
+            </a>
+          </>
+        )}
         <a href="/compare/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
           <span class="text-sm font-semibold text-blue-700">比較表でまとめて比較する →</span>
           <span class="text-xs leading-relaxed text-slate-600">商用利用・無料枠・透かし・日本語対応を横断比較できます。</span>
@@ -374,10 +397,6 @@ function sourceTypeLabel(type: string) {
         <a href="/guides/commercial-use-copyright/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
           <span class="text-sm font-semibold text-blue-700">商用利用・著作権ガイドを見る →</span>
           <span class="text-xs leading-relaxed text-slate-600">商用利用や著作権まわりの確認ポイントを整理しています。</span>
-        </a>
-        <a href="/categories/free/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
-          <span class="text-sm font-semibold text-blue-700">無料で使えるAI画像生成ツールを見る →</span>
-          <span class="text-xs leading-relaxed text-slate-600">無料枠のあるAI画像生成ツールを確認できます。</span>
         </a>
       </div>
     </section>
@@ -387,6 +406,12 @@ function sourceTypeLabel(type: string) {
       <h2 class="mb-4 text-sm font-semibold text-gray-600">カテゴリで探す</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
         <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">ツール一覧</a></li>
+        {(data.category === 'video' || data.category === 'both') && (
+          <>
+            <li><a href="/video-generators/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">AI動画生成ツール一覧</a></li>
+            <li><a href="/categories/free-video/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるAI動画生成ツール</a></li>
+          </>
+        )}
         <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>
         <li><a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用を確認しやすいツール</a></li>
         <li><a href="/categories/japanese/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">日本語対応ツール</a></li>

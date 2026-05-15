@@ -23,7 +23,7 @@ function freePlanLabel(val: boolean | 'limited' | 'unknown'): string {
 }
 
 function commercialLabel(val: CommercialUse): string {
-  if (val === 'ok') return '〇 条件確認要';
+  if (val === 'ok') return '〇 公式情報で可能';
   if (val === 'paid-only') return '★ 有料のみ';
   if (val === 'no') return '× 不可';
   if (val === 'limited') return '△ 条件付き';
@@ -473,6 +473,7 @@ const faqs = [
     <section class="mt-10">
       <h2 class="mb-4 text-sm font-semibold text-gray-600">関連ページ</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
+        <li><a href="/video-generators/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">AI動画生成ツール一覧</a></li>
         <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるAI画像生成ツール</a></li>
         <li><a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用を確認しやすいツール</a></li>
         <li><a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">透かしなしツール</a></li>
@@ -490,8 +491,9 @@ const faqs = [
       <GuideFAQ items={faqs} title="よくある質問" />
     </div>
 
-    <nav class="mt-8 border-t border-gray-200 pt-6 text-sm">
-      <a href="/tools/" class="text-blue-600 hover:underline">← ツール一覧に戻る</a>
+    <nav class="mt-8 border-t border-gray-200 pt-6 text-sm flex flex-wrap gap-4">
+      <a href="/video-generators/" class="text-blue-600 hover:underline">← AI動画生成ツール一覧に戻る</a>
+      <a href="/tools/" class="text-blue-600 hover:underline">ツール一覧</a>
     </nav>
 
   </div>

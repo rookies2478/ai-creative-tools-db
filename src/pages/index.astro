@@ -5,19 +5,34 @@ import ToolCard from '../components/ToolCard.astro';
 import CompareTablePreview from '../components/CompareTablePreview.astro';
 import NoticeBox from '../components/NoticeBox.astro';
 
-const FEATURED_SLUGS = [
+const FEATURED_IMAGE_SLUGS = [
   'midjourney',
   'adobe-firefly',
-  'runway',
   'canva-ai-image-generator',
-  'kling-ai',
   'leonardo-ai',
+  'stable-diffusion',
+];
+
+const FEATURED_VIDEO_SLUGS = [
+  'runway',
+  'kling-ai',
+  'pika',
+  'luma-ai',
+  'capcut-ai',
 ];
 
 const allTools = await getCollection('tools');
-const tools = FEATURED_SLUGS
+
+const imageTools = FEATURED_IMAGE_SLUGS
   .map(slug => allTools.find(t => t.slug === slug))
   .filter((t): t is NonNullable<typeof t> => t !== undefined);
+
+const videoTools = FEATURED_VIDEO_SLUGS
+  .map(slug => allTools.find(t => t.slug === slug))
+  .filter((t): t is NonNullable<typeof t> => t !== undefined);
+
+// 注目ツール表示用（動画→画像の順）
+const tools = [...videoTools, ...imageTools].slice(0, 6);
 ---
 
 <BaseLayout
@@ -126,6 +141,134 @@ const tools = FEATURED_SLUGS
       <div class="mt-5 flex flex-wrap gap-3">
         <a href="/tools/"    class="primary-btn">すべてのツールを見る</a>
         <a href="/compare/"  class="outline-btn">比較表で見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 2.5 カテゴリから探す                                          -->
+  <!-- ============================================================ -->
+  <section class="bg-white py-14">
+    <div class="mx-auto max-w-5xl px-6">
+      <h2 class="mb-2 text-2xl font-bold text-[#002B61]">カテゴリから探す</h2>
+      <p class="mb-8 text-sm text-slate-500">AI動画生成・AI画像生成を中心に、周辺領域も目的別に探せます。</p>
+
+      <!-- 主役カテゴリ（AI動画生成 / AI画像生成） -->
+      <div class="mb-4 grid gap-4 sm:grid-cols-2">
+
+        <!-- AI動画生成 -->
+        <a href="/video-generators/" class="group relative flex flex-col rounded-2xl border-2 border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-md transition hover:border-blue-600 hover:shadow-lg">
+          <div class="mb-3 flex items-center gap-2 flex-wrap">
+            <span class="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
+              ★ 中心カテゴリ
+            </span>
+          </div>
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-600" aria-hidden="true">
+              <polygon points="23 7 16 12 23 17 23 7"/>
+              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+            </svg>
+            <p class="text-base font-bold text-slate-900 group-hover:text-blue-700">AI動画生成</p>
+          </div>
+          <p class="mt-1 flex-1 text-sm leading-relaxed text-slate-600">テキストや画像から動画を自動生成。Runway・Kling AI・Pika など主要ツールを商用利用・無料枠・透かしで比較できます。</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">Runway</span>
+            <span class="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">Kling AI</span>
+            <span class="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">Pika</span>
+          </div>
+          <p class="mt-4 text-right text-sm font-bold text-blue-600 group-hover:underline">ツール一覧を見る →</p>
+        </a>
+
+        <!-- AI画像生成 -->
+        <a href="/tools/" class="group relative flex flex-col rounded-2xl border-2 border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-md transition hover:border-blue-600 hover:shadow-lg">
+          <div class="mb-3 flex items-center gap-2 flex-wrap">
+            <span class="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
+              ★ 中心カテゴリ
+            </span>
+          </div>
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-600" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+            <p class="text-base font-bold text-slate-900 group-hover:text-blue-700">AI画像生成</p>
+          </div>
+          <p class="mt-1 flex-1 text-sm leading-relaxed text-slate-600">テキストプロンプトから画像を生成。Midjourney・Adobe Firefly など主要ツールを商用利用・無料枠・透かしで比較できます。</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">Midjourney</span>
+            <span class="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">Adobe Firefly</span>
+            <span class="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">Stable Diffusion</span>
+          </div>
+          <p class="mt-4 text-right text-sm font-bold text-blue-600 group-hover:underline">ツール一覧を見る →</p>
+        </a>
+
+      </div>
+
+      <!-- サポートカテゴリ（AI動画編集 / AIアバター動画） -->
+      <p class="mb-3 mt-6 text-xs font-semibold uppercase tracking-widest text-slate-400">動画制作を支えるカテゴリ</p>
+      <div class="mb-4 grid gap-4 sm:grid-cols-2">
+
+        <!-- AI動画編集 -->
+        <div class="flex flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-indigo-500" aria-hidden="true">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+            <p class="text-sm font-bold text-slate-800">AI動画編集</p>
+            <span class="ml-auto inline-flex rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
+          </div>
+          <p class="text-xs leading-relaxed text-slate-500">AIを使った動画トリミング・字幕追加・カット編集ツールの比較情報を準備中です。</p>
+        </div>
+
+        <!-- AIアバター動画 -->
+        <div class="flex flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-indigo-500" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <p class="text-sm font-bold text-slate-800">AIアバター動画</p>
+            <span class="ml-auto inline-flex rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
+          </div>
+          <p class="text-xs leading-relaxed text-slate-500">AIアバターを使った解説動画・プレゼン動画ツールの比較情報を準備中です。</p>
+        </div>
+
+      </div>
+
+      <!-- 制作補助カテゴリ（4つ） -->
+      <p class="mb-3 mt-6 text-xs font-semibold uppercase tracking-widest text-slate-400">制作補助ツール</p>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+
+        <!-- AIデザイン -->
+        <div class="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-4">
+          <p class="text-xs font-bold text-slate-600">AIデザイン</p>
+          <p class="mt-1 text-[11px] leading-relaxed text-slate-400">バナー・LP・SNS投稿デザイン自動化ツール。比較情報準備中。</p>
+          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
+        </div>
+
+        <!-- AI音声・ナレーション -->
+        <div class="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-4">
+          <p class="text-xs font-bold text-slate-600">AI音声・ナレーション</p>
+          <p class="mt-1 text-[11px] leading-relaxed text-slate-400">テキスト読み上げ・音声クローンツール。比較情報準備中。</p>
+          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
+        </div>
+
+        <!-- プロンプト活用 -->
+        <div class="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-4">
+          <p class="text-xs font-bold text-slate-600">プロンプト活用</p>
+          <p class="mt-1 text-[11px] leading-relaxed text-slate-400">画像・動画生成を高精度化するプロンプト集・テンプレート。準備中。</p>
+          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
+        </div>
+
+        <!-- 実務テンプレート -->
+        <div class="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-4">
+          <p class="text-xs font-bold text-slate-600">実務テンプレート</p>
+          <p class="mt-1 text-[11px] leading-relaxed text-slate-400">SNS・広告・EC向け実務利用テンプレート集。準備中。</p>
+          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -296,22 +439,99 @@ const tools = FEATURED_SLUGS
   </section>
 
   <!-- ============================================================ -->
-  <!-- 5. 比較表プレビュー                                           -->
+  <!-- 5. 比較表プレビュー（タブ切り替え）                           -->
   <!-- ============================================================ -->
   <section class="bg-white py-16">
     <div class="mx-auto max-w-5xl px-6">
-      <div class="mb-7 flex items-baseline justify-between">
+      <div class="mb-6 flex items-baseline justify-between">
         <h2 class="text-2xl font-bold text-[#002B61]">ツール比較表（抜粋）</h2>
         <a href="/compare/" class="text-sm text-blue-600 hover:underline">全ツールを比較表で見る →</a>
       </div>
 
-      <CompareTablePreview tools={tools} limit={5} />
+      <!-- タブ -->
+      <div class="mb-5 flex flex-wrap gap-2 border-b border-slate-100 pb-4">
+        <button
+          id="tab-video"
+          onclick="switchTab('video')"
+          class="tab-btn active rounded-full px-4 py-1.5 text-xs font-semibold transition"
+          data-tab="video"
+        >
+          AI動画生成
+        </button>
+        <button
+          id="tab-image"
+          onclick="switchTab('image')"
+          class="tab-btn rounded-full px-4 py-1.5 text-xs font-semibold transition"
+          data-tab="image"
+        >
+          AI画像生成
+        </button>
+        <span class="inline-flex cursor-not-allowed items-center rounded-full px-4 py-1.5 text-xs font-semibold text-slate-300" title="比較データ準備中">
+          AI動画編集
+          <span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[8px] text-slate-400">準備中</span>
+        </span>
+        <span class="inline-flex cursor-not-allowed items-center rounded-full px-4 py-1.5 text-xs font-semibold text-slate-300" title="比較データ準備中">
+          AIアバター動画
+          <span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[8px] text-slate-400">準備中</span>
+        </span>
+        <span class="inline-flex cursor-not-allowed items-center rounded-full px-4 py-1.5 text-xs font-semibold text-slate-300" title="比較データ準備中">
+          AIデザイン
+          <span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[8px] text-slate-400">準備中</span>
+        </span>
+      </div>
+
+      <!-- AI動画生成テーブル -->
+      <div id="panel-video">
+        <CompareTablePreview tools={videoTools} limit={5} />
+      </div>
+
+      <!-- AI画像生成テーブル -->
+      <div id="panel-image" class="hidden">
+        <CompareTablePreview tools={imageTools} limit={5} />
+      </div>
 
       <p class="mt-3 text-xs text-slate-400">
         ※ 商用利用の可否・著作権の取り扱いは各ツールの利用規約に基づきます。法的アドバイスではありません。最新情報は必ず公式サイトでご確認ください。
       </p>
     </div>
   </section>
+
+  <style>
+    .tab-btn {
+      background: transparent;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+    }
+    .tab-btn:hover {
+      background: #f1f5f9;
+      color: #1e40af;
+    }
+    .tab-btn.active {
+      background: #2563eb;
+      color: #fff;
+      border-color: #2563eb;
+    }
+  </style>
+
+  <script>
+    function switchTab(tab: string) {
+      const panels = ['video', 'image'];
+      panels.forEach(p => {
+        const panel = document.getElementById('panel-' + p);
+        const btn   = document.getElementById('tab-' + p);
+        if (!panel || !btn) return;
+        if (p === tab) {
+          panel.classList.remove('hidden');
+          btn.classList.add('active');
+        } else {
+          panel.classList.add('hidden');
+          btn.classList.remove('active');
+        }
+      });
+    }
+    // expose globally for onclick
+    (window as any).switchTab = switchTab;
+  </script>
 
   <!-- ============================================================ -->
   <!-- 6. ガイドカード                                               -->

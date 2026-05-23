@@ -42,7 +42,7 @@ function commercialUseBadgeCls(val: string): string {
   if (val === 'paid-only') return 'bg-sky-100 text-sky-800';
   if (val === 'limited')   return 'bg-amber-100 text-amber-800';
   if (val === 'no')        return 'bg-red-100 text-red-800';
-  return 'bg-gray-100 text-gray-600';
+  return 'bg-slate-100 text-slate-600';
 }
 
 function sourceTypeLabel(type: string) {
@@ -68,7 +68,7 @@ function sourceTypeLabel(type: string) {
   <article class="mx-auto max-w-3xl px-6 py-12">
 
     <!-- パンくず -->
-    <nav class="mb-6 text-sm text-gray-500">
+    <nav class="mb-6 text-sm text-slate-500">
       <a href="/" class="hover:underline">トップ</a>
       <span class="mx-1">/</span>
       <a href="/tools/" class="hover:underline">ツール一覧</a>
@@ -77,10 +77,10 @@ function sourceTypeLabel(type: string) {
     </nav>
 
     <!-- H1 -->
-    <h1 class="mb-3 text-3xl font-bold text-gray-900">{data.name}の商用利用・料金・無料枠まとめ</h1>
+    <h1 class="mb-3 text-3xl font-bold text-slate-900">{data.name}の商用利用・料金・無料枠まとめ</h1>
 
     <!-- リード文 -->
-    <p class="mb-6 text-sm leading-relaxed text-gray-600">{leadText}</p>
+    <p class="mb-6 text-sm leading-relaxed text-slate-600">{leadText}</p>
 
     <!-- 結論サマリーカード -->
     <ToolSummaryCards data={data} />
@@ -279,7 +279,7 @@ function sourceTypeLabel(type: string) {
     )}
 
     <!-- Markdown本文 -->
-    <div class="prose prose-gray mb-10 max-w-none text-sm leading-relaxed">
+    <div class="prose prose-slate mb-10 max-w-none text-sm leading-relaxed">
       <Content />
     </div>
 
@@ -316,11 +316,11 @@ function sourceTypeLabel(type: string) {
     <!-- 参照元（sourceRefsがある場合は優先表示） -->
     {data.sourceRefs && data.sourceRefs.length > 0 && (
       <section class="mb-8">
-        <h2 class="mb-2 text-sm font-semibold text-gray-600">参照元</h2>
+        <h2 class="mb-2 text-sm font-semibold text-slate-600">参照元</h2>
         <ul class="space-y-1.5">
           {data.sourceRefs.map((ref) => (
             <li class="flex items-baseline gap-2 text-sm">
-              <span class="shrink-0 rounded bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500">{sourceTypeLabel(ref.type)}</span>
+              <span class="shrink-0 rounded bg-slate-100 px-1.5 py-0.5 text-xs text-slate-500">{sourceTypeLabel(ref.type)}</span>
               <a
                 href={ref.url}
                 target="_blank"
@@ -338,7 +338,7 @@ function sourceTypeLabel(type: string) {
     <!-- 参照元（sourceRefsがない場合の既存sources） -->
     {(!data.sourceRefs || data.sourceRefs.length === 0) && data.sources.length > 0 && (
       <section class="mb-8">
-        <h2 class="mb-2 text-sm font-semibold text-gray-600">参照元</h2>
+        <h2 class="mb-2 text-sm font-semibold text-slate-600">参照元</h2>
         <ul class="space-y-1">
           {data.sources.map((src) => (
             <li class="text-sm">
@@ -361,7 +361,7 @@ function sourceTypeLabel(type: string) {
 
     <!-- 次に読む -->
     <section class="mb-8">
-      <h2 class="mb-4 text-base font-bold text-gray-800">次に読む</h2>
+      <h2 class="mb-4 text-base font-bold text-slate-800">次に読む</h2>
       <div class="grid gap-3 sm:grid-cols-2">
         {(data.category === 'video' || data.category === 'both') ? (
           <>
@@ -403,25 +403,25 @@ function sourceTypeLabel(type: string) {
 
     <!-- その他のカテゴリリンク -->
     <section class="mb-8">
-      <h2 class="mb-4 text-sm font-semibold text-gray-600">カテゴリで探す</h2>
+      <h2 class="mb-4 text-sm font-semibold text-slate-600">カテゴリで探す</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
-        <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">ツール一覧</a></li>
+        <li><a href="/tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">ツール一覧</a></li>
         {(data.category === 'video' || data.category === 'both') && (
           <>
-            <li><a href="/video-generators/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">AI動画生成ツール一覧</a></li>
-            <li><a href="/categories/free-video/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるAI動画生成ツール</a></li>
+            <li><a href="/video-generators/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">AI動画生成ツール一覧</a></li>
+            <li><a href="/categories/free-video/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">無料で使えるAI動画生成ツール</a></li>
           </>
         )}
-        <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>
-        <li><a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用を確認しやすいツール</a></li>
-        <li><a href="/categories/japanese/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">日本語対応ツール</a></li>
-        <li><a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">透かしなしツール</a></li>
-        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用・著作権ガイド</a></li>
+        <li><a href="/categories/free/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">無料で使えるツール</a></li>
+        <li><a href="/categories/commercial-use/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">商用利用を確認しやすいツール</a></li>
+        <li><a href="/categories/japanese/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">日本語対応ツール</a></li>
+        <li><a href="/categories/no-watermark/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">透かしなしツール</a></li>
+        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">商用利用・著作権ガイド</a></li>
       </ul>
     </section>
 
     <!-- ナビ -->
-    <nav class="border-t border-gray-200 pt-6">
+    <nav class="border-t border-slate-200 pt-6">
       <div class="flex flex-wrap gap-3">
         <a href="/tools/" class="rounded-lg border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">← ツール一覧に戻る</a>
         <a href="/compare/" class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">比較表で見る</a>

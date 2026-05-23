@@ -42,9 +42,9 @@ const faqs = [
   description="透かしなし、または有料プランで透かしを外せるAI画像生成・AI動画生成ツールを比較。透かし条件と商用利用条件は別問題のため、最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/no-watermark/"
 >
-  <div class="mx-auto max-w-4xl px-6 py-12">
+  <div class="mx-auto max-w-5xl px-6 py-12">
 
-    <nav class="mb-6 text-sm text-gray-500">
+    <nav class="mb-6 text-sm text-slate-500">
       <a href="/" class="hover:underline">トップ</a>
       <span class="mx-1">/</span>
       <a href="/tools/" class="hover:underline">ツール一覧</a>
@@ -52,8 +52,8 @@ const faqs = [
       <span>透かしなし</span>
     </nav>
 
-    <h1 class="mb-3 text-3xl font-bold text-gray-900">透かし条件を確認しやすいAI画像生成ツール比較</h1>
-    <p class="mb-4 text-gray-600 leading-relaxed">
+    <h1 class="mb-3 text-3xl font-bold text-slate-900">透かし条件を確認しやすいAI画像生成ツール比較</h1>
+    <p class="mb-4 text-slate-600 leading-relaxed">
       AI生成画像や動画をSNS画像・YouTubeサムネイル・広告バナー・商品画像などに使う場合、透かしの有無は重要な確認ポイントです。
       このページでは、透かしなし、または条件付きで透かしを外せる可能性のあるツールを整理しています。
       ただし、<strong>透かし条件はプランや機能によって変わる可能性があります</strong>。
@@ -99,14 +99,14 @@ const faqs = [
     </section>
 
     <section class="mt-8">
-      <h2 class="mb-1 text-lg font-semibold text-gray-800">対象ツール一覧</h2>
-      <p class="mb-4 text-sm text-gray-500">確認時点で {filtered.length} 件。「プランによる」は無料プランで透かしあり、有料プランで除去できる場合があることを示します。</p>
+      <h2 class="mb-1 text-lg font-semibold text-slate-800">対象ツール一覧</h2>
+      <p class="mb-4 text-sm text-slate-500">確認時点で {filtered.length} 件。「プランによる」は無料プランで透かしあり、有料プランで除去できる場合があることを示します。</p>
       <CompareTablePreview tools={filtered} limit={filtered.length} />
     </section>
 
     <section class="mt-8">
-      <h2 class="mb-3 text-sm font-semibold text-gray-700">各ツールの透かし・無料枠条件</h2>
-      <p class="mb-3 text-xs text-gray-500">確認時点の情報です。詳細は各ツールの詳細ページおよび公式情報でご確認ください。</p>
+      <h2 class="mb-3 text-sm font-semibold text-slate-700">各ツールの透かし・無料枠条件</h2>
+      <p class="mb-3 text-xs text-slate-500">確認時点の情報です。詳細は各ツールの詳細ページおよび公式情報でご確認ください。</p>
       <div class="overflow-x-auto rounded-xl border border-slate-100 shadow-sm">
         <table class="w-full min-w-[520px] text-sm">
           <thead>
@@ -134,19 +134,19 @@ const faqs = [
     <GuideFAQ items={faqs} title="よくある質問" />
 
     <section class="mt-12">
-      <h2 class="mb-4 text-sm font-semibold text-gray-600">関連ページ</h2>
+      <h2 class="mb-4 text-sm font-semibold text-slate-600">関連ページ</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
-        <li><a href="/compare/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">全ツール比較表</a></li>
-        <li><a href="/guides/watermark-credit-guide/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">透かし・クレジット表記ガイド</a></li>
-        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用・著作権ガイド</a></li>
-        <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">すべてのツールを見る</a></li>
-        <li><a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料で使えるツール</a></li>
-        <li><a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用を確認しやすいツール</a></li>
-        <li><a href="/categories/japanese/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">日本語対応ツール</a></li>
+        <li><a href="/compare/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">全ツール比較表</a></li>
+        <li><a href="/guides/watermark-credit-guide/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">透かし・クレジット表記ガイド</a></li>
+        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">商用利用・著作権ガイド</a></li>
+        <li><a href="/tools/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">すべてのツールを見る</a></li>
+        <li><a href="/categories/free/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">無料で使えるツール</a></li>
+        <li><a href="/categories/commercial-use/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">商用利用を確認しやすいツール</a></li>
+        <li><a href="/categories/japanese/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">日本語対応ツール</a></li>
       </ul>
     </section>
 
-    <nav class="mt-8 border-t border-gray-200 pt-6 text-sm">
+    <nav class="mt-8 border-t border-slate-200 pt-6 text-sm">
       <a href="/tools/" class="text-blue-600 hover:underline">← ツール一覧に戻る</a>
     </nav>
 

@@ -16,9 +16,9 @@ const filtered = tools.filter(
   description="無料枠のあるAI画像生成・AI動画生成ツールを比較。無料プランの生成回数・透かし・商用利用条件はツールごとに異なります。最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/free/"
 >
-  <div class="mx-auto max-w-4xl px-6 py-12">
+  <div class="mx-auto max-w-5xl px-6 py-12">
 
-    <nav class="mb-6 text-sm text-gray-500">
+    <nav class="mb-6 text-sm text-slate-500">
       <a href="/" class="hover:underline">トップ</a>
       <span class="mx-1">/</span>
       <a href="/tools/" class="hover:underline">ツール一覧</a>
@@ -26,8 +26,8 @@ const filtered = tools.filter(
       <span>無料で使えるツール</span>
     </nav>
 
-    <h1 class="mb-3 text-3xl font-bold text-gray-900">無料で使えるAI画像生成ツール比較</h1>
-    <p class="mb-4 text-gray-600 leading-relaxed">
+    <h1 class="mb-3 text-3xl font-bold text-slate-900">無料で使えるAI画像生成ツール比較</h1>
+    <p class="mb-4 text-slate-600 leading-relaxed">
       無料枠のあるAI画像・動画生成ツールを、商用利用・透かし・日本語対応・料金目安とあわせて比較できます。
       「無料」と書かれていても、生成できる回数・クレジット上限・透かしの有無・<a href="/categories/commercial-use/" class="text-blue-600 hover:underline">商用利用条件</a>はツールごとに大きく異なります。
       <a href="/categories/japanese/" class="text-blue-600 hover:underline">日本語プロンプト</a>に対応しているかどうかも、初心者が選ぶ際の重要な基準です。
@@ -119,14 +119,14 @@ const filtered = tools.filter(
     </section>
 
     <section class="mt-8">
-      <h2 class="mb-1 text-lg font-semibold text-gray-800">対象ツール一覧</h2>
-      <p class="mb-4 text-sm text-gray-500">確認時点で {filtered.length} 件。無料枠の内容（クレジット数・解像度・透かし・商用利用条件）はツールごとに異なります。</p>
+      <h2 class="mb-1 text-lg font-semibold text-slate-800">対象ツール一覧</h2>
+      <p class="mb-4 text-sm text-slate-500">確認時点で {filtered.length} 件。無料枠の内容（クレジット数・解像度・透かし・商用利用条件）はツールごとに異なります。</p>
       <CompareTablePreview tools={filtered} limit={filtered.length} />
     </section>
 
     <section class="mt-8">
-      <h2 class="mb-3 text-sm font-semibold text-gray-700">各ツールの無料枠・透かし条件</h2>
-      <p class="mb-3 text-xs text-gray-500">確認時点の情報です。詳細は各ツールの詳細ページおよび公式情報でご確認ください。</p>
+      <h2 class="mb-3 text-sm font-semibold text-slate-700">各ツールの無料枠・透かし条件</h2>
+      <p class="mb-3 text-xs text-slate-500">確認時点の情報です。詳細は各ツールの詳細ページおよび公式情報でご確認ください。</p>
       <div class="overflow-x-auto rounded-xl border border-slate-100 shadow-sm">
         <table class="w-full min-w-[520px] text-sm">
           <thead>
@@ -152,49 +152,49 @@ const filtered = tools.filter(
     </section>
 
     <section class="mt-12">
-      <h2 class="mb-6 text-xl font-semibold text-gray-800">よくある質問</h2>
+      <h2 class="mb-6 text-xl font-semibold text-slate-800">よくある質問</h2>
       <div class="space-y-6">
-        <div class="rounded-lg border border-gray-200 px-5 py-4">
-          <p class="font-medium text-gray-800">無料のAI画像生成ツールでも商用利用できますか？</p>
-          <p class="mt-2 text-sm text-gray-600">ツールや利用規約によって異なります。無料プランでの商用利用が認められている場合もありますが、透かし・クレジット表記・利用範囲の制限がある場合があります。商用利用を前提にする場合は、最新の公式規約をご確認ください。本記事は法的助言ではありません。詳しくは<a href="/categories/commercial-use/" class="text-blue-600 hover:underline">商用利用を確認しやすいツール</a>のページもご参照ください。</p>
+        <div class="rounded-lg border border-slate-200 px-5 py-4">
+          <p class="font-medium text-slate-800">無料のAI画像生成ツールでも商用利用できますか？</p>
+          <p class="mt-2 text-sm text-slate-600">ツールや利用規約によって異なります。無料プランでの商用利用が認められている場合もありますが、透かし・クレジット表記・利用範囲の制限がある場合があります。商用利用を前提にする場合は、最新の公式規約をご確認ください。本記事は法的助言ではありません。詳しくは<a href="/categories/commercial-use/" class="text-blue-600 hover:underline">商用利用を確認しやすいツール</a>のページもご参照ください。</p>
         </div>
-        <div class="rounded-lg border border-gray-200 px-5 py-4">
-          <p class="font-medium text-gray-800">無料プランでは透かしが入りますか？</p>
-          <p class="mt-2 text-sm text-gray-600">ツールによって異なります。無料プランで透かしなしの出力ができるものもあれば、有料プランへの移行が必要なものもあります。上の表の「透かし条件」欄で各ツールの状況を確認できます。詳しくは<a href="/categories/no-watermark/" class="text-blue-600 hover:underline">透かしなしツール</a>のページもご参照ください。</p>
+        <div class="rounded-lg border border-slate-200 px-5 py-4">
+          <p class="font-medium text-slate-800">無料プランでは透かしが入りますか？</p>
+          <p class="mt-2 text-sm text-slate-600">ツールによって異なります。無料プランで透かしなしの出力ができるものもあれば、有料プランへの移行が必要なものもあります。上の表の「透かし条件」欄で各ツールの状況を確認できます。詳しくは<a href="/categories/no-watermark/" class="text-blue-600 hover:underline">透かしなしツール</a>のページもご参照ください。</p>
         </div>
-        <div class="rounded-lg border border-gray-200 px-5 py-4">
-          <p class="font-medium text-gray-800">日本語プロンプトでも使えますか？</p>
-          <p class="mt-2 text-sm text-gray-600">日本語プロンプトを受け付けるツールは多いですが、精度はツールやモデルによって異なります。英語プロンプトの方が精度が高い場合が多く、固有名詞・専門用語は英語入力が推奨されることもあります。<a href="/categories/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>のページでまとめて確認できます。</p>
+        <div class="rounded-lg border border-slate-200 px-5 py-4">
+          <p class="font-medium text-slate-800">日本語プロンプトでも使えますか？</p>
+          <p class="mt-2 text-sm text-slate-600">日本語プロンプトを受け付けるツールは多いですが、精度はツールやモデルによって異なります。英語プロンプトの方が精度が高い場合が多く、固有名詞・専門用語は英語入力が推奨されることもあります。<a href="/categories/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>のページでまとめて確認できます。</p>
         </div>
-        <div class="rounded-lg border border-gray-200 px-5 py-4">
-          <p class="font-medium text-gray-800">無料ツールと有料ツールは何が違いますか？</p>
-          <p class="mt-2 text-sm text-gray-600">多くのツールで、有料プランに移行すると解像度・生成速度・月間クレジット数・追加機能が解放されます。また、有料プランでのみ商用利用が可能とされているツールもあります。用途に合わせて<a href="/tools/" class="text-blue-600 hover:underline">各ツールの詳細ページ</a>で比較してください。</p>
+        <div class="rounded-lg border border-slate-200 px-5 py-4">
+          <p class="font-medium text-slate-800">無料ツールと有料ツールは何が違いますか？</p>
+          <p class="mt-2 text-sm text-slate-600">多くのツールで、有料プランに移行すると解像度・生成速度・月間クレジット数・追加機能が解放されます。また、有料プランでのみ商用利用が可能とされているツールもあります。用途に合わせて<a href="/tools/" class="text-blue-600 hover:underline">各ツールの詳細ページ</a>で比較してください。</p>
         </div>
-        <div class="rounded-lg border border-gray-200 px-5 py-4">
-          <p class="font-medium text-gray-800">YouTubeサムネやSNS画像に無料ツールで生成した画像を使う場合の注意点は？</p>
-          <p class="mt-2 text-sm text-gray-600">収益化を伴う用途（YouTube広告、アフィリエイト、有料サービスのSNS告知など）は商用利用と判断される場合があります。無料プランの商用利用可否、透かし条件、クレジット表記義務を各ツールの公式規約で事前に確認することを推奨します。無料枠や利用条件は変更される可能性があります。本記事は法的助言ではありません。</p>
+        <div class="rounded-lg border border-slate-200 px-5 py-4">
+          <p class="font-medium text-slate-800">YouTubeサムネやSNS画像に無料ツールで生成した画像を使う場合の注意点は？</p>
+          <p class="mt-2 text-sm text-slate-600">収益化を伴う用途（YouTube広告、アフィリエイト、有料サービスのSNS告知など）は商用利用と判断される場合があります。無料プランの商用利用可否、透かし条件、クレジット表記義務を各ツールの公式規約で事前に確認することを推奨します。無料枠や利用条件は変更される可能性があります。本記事は法的助言ではありません。</p>
         </div>
-        <div class="rounded-lg border border-gray-200 px-5 py-4">
-          <p class="font-medium text-gray-800">無料で使い続けることはできますか？</p>
-          <p class="mt-2 text-sm text-gray-600">クレジット制のツールは上限に達すると課金が必要になる場合があります。また、無料枠の内容はサービス側の方針変更により変わる場合があります。利用前に公式の料金ページをご確認ください。</p>
+        <div class="rounded-lg border border-slate-200 px-5 py-4">
+          <p class="font-medium text-slate-800">無料で使い続けることはできますか？</p>
+          <p class="mt-2 text-sm text-slate-600">クレジット制のツールは上限に達すると課金が必要になる場合があります。また、無料枠の内容はサービス側の方針変更により変わる場合があります。利用前に公式の料金ページをご確認ください。</p>
         </div>
       </div>
     </section>
 
     <section class="mt-12">
-      <h2 class="mb-4 text-sm font-semibold text-gray-600">関連ページ</h2>
+      <h2 class="mb-4 text-sm font-semibold text-slate-600">関連ページ</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
-        <li><a href="/compare/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">全ツール比較表</a></li>
-        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用・著作権ガイド</a></li>
-        <li><a href="/tools/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">すべてのツールを見る</a></li>
-        <li><a href="/categories/free-video/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">無料AI動画生成ツールを比較</a></li>
-        <li><a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">商用利用を確認しやすいツール</a></li>
-        <li><a href="/categories/japanese/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">日本語対応ツール</a></li>
-        <li><a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-1.5 hover:bg-gray-100">透かしなしツール</a></li>
+        <li><a href="/compare/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">全ツール比較表</a></li>
+        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">商用利用・著作権ガイド</a></li>
+        <li><a href="/tools/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">すべてのツールを見る</a></li>
+        <li><a href="/categories/free-video/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">無料AI動画生成ツールを比較</a></li>
+        <li><a href="/categories/commercial-use/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">商用利用を確認しやすいツール</a></li>
+        <li><a href="/categories/japanese/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">日本語対応ツール</a></li>
+        <li><a href="/categories/no-watermark/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">透かしなしツール</a></li>
       </ul>
     </section>
 
-    <nav class="mt-8 border-t border-gray-200 pt-6 text-sm">
+    <nav class="mt-8 border-t border-slate-200 pt-6 text-sm">
       <a href="/tools/" class="text-blue-600 hover:underline">← ツール一覧に戻る</a>
     </nav>
 

@@ -15,16 +15,16 @@ const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.
   description="AI画像生成・AI動画生成ツールを一覧で比較。商用利用条件・料金・無料枠・透かし・日本語対応を確認しながら仕事や副業に使うツールを探せます。最新情報は公式サイトをご確認ください。"
   canonicalPath="/tools/"
 >
-  <div class="mx-auto max-w-4xl px-6 py-12">
+  <div class="mx-auto max-w-5xl px-6 py-12">
 
-    <nav class="mb-6 text-sm text-gray-500">
+    <nav class="mb-6 text-sm text-slate-500">
       <a href="/" class="hover:underline">トップ</a>
       <span class="mx-1">/</span>
       <span>ツール一覧</span>
     </nav>
 
-    <h1 class="mb-2 text-3xl font-bold text-gray-900">AI画像生成・AI動画生成ツール一覧</h1>
-    <p class="mb-6 text-gray-500">
+    <h1 class="mb-2 text-3xl font-bold text-slate-900">AI画像生成・AI動画生成ツール一覧</h1>
+    <p class="mb-6 text-slate-500">
       AI画像生成・動画生成ツールを、商用利用・無料枠・日本語対応・透かし・料金目安とあわせて一覧で確認できます。仕事や副業で使う前の比較にご活用ください。
     </p>
 
@@ -38,7 +38,7 @@ const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.
 
     <!-- 画像生成ツール -->
     <section class="mb-12">
-      <h2 class="mb-4 border-b border-gray-200 pb-2 text-xl font-semibold text-gray-800">
+      <h2 class="mb-4 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">
         AI画像生成ツール（{imageTools.length}件）
       </h2>
       <div class="grid gap-4 sm:grid-cols-2">
@@ -48,7 +48,7 @@ const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.
 
     <!-- 動画生成ツール -->
     <section class="mb-12">
-      <h2 class="mb-4 border-b border-gray-200 pb-2 text-xl font-semibold text-gray-800">
+      <h2 class="mb-4 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">
         AI動画生成ツール（{videoTools.length}件）
       </h2>
       <div class="grid gap-4 sm:grid-cols-2">
@@ -58,8 +58,8 @@ const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.
 
     <!-- 比較表への導線 -->
     <section class="mb-12 rounded-xl border border-slate-200 bg-slate-50 px-6 py-6">
-      <h2 class="mb-2 text-lg font-semibold text-gray-900">一覧で迷ったら、比較表で確認できます</h2>
-      <p class="mb-4 text-sm text-gray-600">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900">一覧で迷ったら、比較表で確認できます</h2>
+      <p class="mb-4 text-sm text-slate-600">
         商用利用・無料枠・日本語対応・透かし・料金目安を横並びで確認したい場合は、比較表をご利用ください。
       </p>
       <a href="/compare/" class="inline-block rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">
@@ -69,30 +69,30 @@ const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.
 
     <!-- 関連カテゴリリンク -->
     <section>
-      <h2 class="mb-4 text-lg font-semibold text-gray-800">条件別に探す</h2>
+      <h2 class="mb-4 text-lg font-semibold text-slate-800">条件別に探す</h2>
       <ul class="flex flex-wrap gap-3">
         <li>
-          <a href="/categories/free/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+          <a href="/categories/free/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
             無料で使えるAIツール
           </a>
         </li>
         <li>
-          <a href="/categories/commercial-use/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+          <a href="/categories/commercial-use/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
             商用利用を確認しやすいAIツール
           </a>
         </li>
         <li>
-          <a href="/categories/japanese/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+          <a href="/categories/japanese/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
             日本語対応のAIツール
           </a>
         </li>
         <li>
-          <a href="/categories/no-watermark/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+          <a href="/categories/no-watermark/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
             透かしなしで使いやすいAIツール
           </a>
         </li>
         <li>
-          <a href="/categories/free-video/" class="rounded-full border border-gray-300 px-4 py-2 text-sm hover:bg-gray-100">
+          <a href="/categories/free-video/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
             無料で使えるAI動画生成ツール比較
           </a>
         </li>

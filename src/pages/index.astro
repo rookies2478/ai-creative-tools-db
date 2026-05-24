@@ -334,74 +334,128 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
   </section>
 
   <!-- ============================================================ -->
-  <!-- 3.5 用途別ページ導線                                          -->
+  <!-- 3.5 目的から選ぶ                                              -->
   <!-- ============================================================ -->
-  <section class="bg-white py-8 border-b border-slate-100">
+  <section class="bg-white py-14 border-b border-slate-100">
     <div class="mx-auto max-w-5xl px-6">
-      <p class="mb-3 text-sm font-semibold text-slate-700">用途から探す</p>
-      <div class="flex flex-wrap gap-2">
-        <a
-          href="/use-cases/youtube-thumbnail/"
-          class="group inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-xs font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
-        >
-          <span aria-hidden="true">▶</span>
-          YouTubeサムネ向けツールを比較する
+      <p class="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">USE CASES</p>
+      <h2 class="mb-2 text-2xl font-bold text-[#002B61]">目的から選ぶ</h2>
+      <p class="mb-8 text-sm text-slate-500">制作したいアウトプットから、関連カテゴリの記事に案内します。未作成の用途は順次追加予定です。</p>
+
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
+        <!-- 1. YouTube動画（準備中） -->
+        <div class="flex flex-col rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-slate-400" aria-hidden="true">
+              <polygon points="23 7 16 12 23 17 23 7"/>
+              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+            </svg>
+          </div>
+          <p class="text-sm font-bold leading-snug text-slate-500">YouTube動画</p>
+          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-400">長尺・横型動画</p>
+          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
+        </div>
+
+        <!-- 2. Shorts・縦型動画（準備中） -->
+        <div class="flex flex-col rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-slate-400" aria-hidden="true">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+              <line x1="12" y1="18" x2="12.01" y2="18"/>
+            </svg>
+          </div>
+          <p class="text-sm font-bold leading-snug text-slate-500">Shorts・縦型動画</p>
+          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-400">短尺・縦型動画</p>
+          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
+        </div>
+
+        <!-- 3. YouTubeサムネイル（リンク） -->
+        <a href="/use-cases/youtube-thumbnail/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">YouTubeサムネイル</p>
+          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">クリックされるサムネ画像</p>
+          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
         </a>
-        <a
-          href="/use-cases/sns-post-image/"
-          class="group inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-xs font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
-        >
-          <span aria-hidden="true">▶</span>
-          SNS投稿画像向けツールを比較する
+
+        <!-- 4. SNS投稿（リンク） -->
+        <a href="/use-cases/sns-post-image/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">SNS投稿</p>
+          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">画像・動画投稿</p>
+          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
         </a>
-        <a
-          href="/use-cases/ad-banner/"
-          class="group inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-xs font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
-        >
-          <span aria-hidden="true">▶</span>
-          広告バナー向けツールを比較する
+
+        <!-- 5. 広告クリエイティブ（リンク） -->
+        <a href="/use-cases/ad-banner/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>
+          </div>
+          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">広告クリエイティブ</p>
+          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">バナー・動画広告</p>
+          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
         </a>
-        <a
-          href="/use-cases/sns-blog-eyecatch/"
-          class="group inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-xs font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
-        >
-          <span aria-hidden="true">▶</span>
-          SNS・ブログ画像向けツールを比較する
+
+        <!-- 6. ブログ・アイキャッチ（リンク） -->
+        <a href="/use-cases/blog-eyecatch/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">ブログ・アイキャッチ</p>
+          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">記事・メディア用画像</p>
+          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
         </a>
-        <a
-          href="/use-cases/anime-illustration/"
-          class="group inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-xs font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
-        >
-          <span aria-hidden="true">▶</span>
-          アニメ・イラスト向けツールを比較する
+
+        <!-- 7. EC商品画像（リンク） -->
+        <a href="/use-cases/ec-product-image/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+          </div>
+          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">EC商品画像</p>
+          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">商品写真・背景合成</p>
+          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
         </a>
-        <a
-          href="/use-cases/realistic-photo/"
-          class="group inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-xs font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
-        >
-          <span aria-hidden="true">▶</span>
-          実写・写真風向けツールを比較する
-        </a>
-        <a
-          href="/use-cases/ec-product-image/"
-          class="group inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-xs font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
-        >
-          <span aria-hidden="true">▶</span>
-          EC商品画像向けツールを比較する
-        </a>
-        <a
-          href="/use-cases/blog-eyecatch/"
-          class="group inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 text-xs font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
-        >
-          <span aria-hidden="true">▶</span>
-          ブログアイキャッチ向けツールを比較する
-        </a>
+
+        <!-- 8. 顔出しなし動画（準備中） -->
+        <div class="flex flex-col rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-slate-400" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <p class="text-sm font-bold leading-snug text-slate-500">顔出しなし動画</p>
+          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-400">アバター・読み上げ</p>
+          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
+        </div>
+
       </div>
-      <div class="mt-3">
-        <a
-          href="/use-cases/"
-          class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:underline"
-        >
+
+      <div class="mt-6">
+        <a href="/use-cases/" class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:underline">
           用途別ページを一覧で見る →
         </a>
       </div>

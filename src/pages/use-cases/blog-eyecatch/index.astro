@@ -1,4 +1,4 @@
-﻿---
+---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import NoticeBox from '../../../components/NoticeBox.astro';
 import GuideFAQ from '../../../components/GuideFAQ.astro';
@@ -19,7 +19,7 @@ const toolDetails = [
     caution: 'β（ベータ）表示の機能は商用利用対象外とされています。プランによっては可視透かしが付く場合があります。アフィリエイト・商用ブログ利用を前提とする場合は最新の公式規約をご確認ください。',
   },
   {
-    name: 'DALL·E',
+    name: 'DALL・E',
     href: '/tools/dalle/',
     desc: 'ChatGPT経由で利用できるOpenAIの画像生成ツールです。テキストから自然な画像を生成しやすく、プロンプトを会話形式で調整できます。可視透かしはないとされていますが、C2PA標準の不可視メタデータが埋め込まれる場合があります。',
     pros: 'ChatGPTとの連携でプロンプト調整がしやすい。可視透かしなし（確認時点）。多様な表現スタイルに対応しやすい。',
@@ -72,7 +72,7 @@ const toolDetails = [
 
 <BaseLayout
   title="ブログアイキャッチ向けAI画像生成ツール比較：無料・商用利用・日本語対応も確認 | AIクリエイティブナビ"
-  description="ブログ・オウンドメディア・note・アフィリエイト記事のアイキャッチ画像をAIで作りたい方向けに、Canva・Adobe Firefly・DALL·E・Microsoft Designer・Fotor AI・Ideogram・Playground AI・Midjourney・Stable Diffusionを比較。商用利用条件・透かし・日本語対応・テンプレートの使いやすさを整理しています。"
+  description="ブログ・オウンドメディア・note・アフィリエイト記事のアイキャッチ画像をAIで作りたい方向けに、Canva・Adobe Firefly・DALL・E・Microsoft Designer・Fotor AI・Ideogram・Playground AI・Midjourney・Stable Diffusionを比較。商用利用条件・透かし・日本語対応・テンプレートの使いやすさを整理しています。"
   canonicalPath="/use-cases/blog-eyecatch/"
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
@@ -167,7 +167,7 @@ const toolDetails = [
                 free: '無料枠あり（制限あり）',
               },
               {
-                name: 'DALL·E',
+                name: 'DALL・E',
                 href: '/tools/dalle/',
                 look: '自然な画像生成。多様な表現に対応',
                 text: '△ 文字入れは外部ツール必要',
@@ -269,6 +269,33 @@ const toolDetails = [
     </section>
 
     <!-- ============================================================ -->
+    <!-- 向いている人 / 向いていない人                                 -->
+    <!-- ============================================================ -->
+    <section class="mb-12">
+      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">向いている人 / 向いていない人</h2>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-blue-100 bg-blue-50 px-6 py-5">
+          <p class="mb-3 text-sm font-bold text-blue-900">向いている人</p>
+          <ul class="space-y-2 text-sm leading-relaxed text-blue-800 list-disc list-inside">
+            <li>ブログ記事のアイキャッチを短時間で作りたい人</li>
+            <li>記事テーマに合わせて複数のビジュアル案を比較したい人</li>
+            <li>CanvaやAdobeなどのツールで文字入れやレイアウト調整まで行いたい人</li>
+            <li>外注前にビジュアル案をざっくり試したい人</li>
+          </ul>
+        </div>
+        <div class="rounded-xl border border-amber-100 bg-amber-50 px-6 py-5">
+          <p class="mb-3 text-sm font-bold text-amber-900">向いていない人</p>
+          <ul class="space-y-2 text-sm leading-relaxed text-amber-800 list-disc list-inside">
+            <li>権利条件を確認せずに商用ブログへ使いたい人</li>
+            <li>人物・著名人・ブランドロゴを厳密に扱う必要がある人</li>
+            <li>毎回同じ人物や構図を完全に再現したい人</li>
+            <li>入稿用デザインデータまでAI画像生成だけで完結させたい人</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
     <!-- 選び方セクション                                              -->
     <!-- ============================================================ -->
     <section class="mb-12">
@@ -276,8 +303,8 @@ const toolDetails = [
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {[
           {
-            title: 'アイキャッチ向けの見栄え',
-            desc: '読者の目を引くアイキャッチを作るには、ビジュアルのクオリティと記事内容とのマッチングが重要です。高品質ビジュアル重視ならMidjourneyが候補。テンプレートを活用したいならCanvaやFotor AIが使いやすい傾向があります。',
+            title: 'アイキャッチ向けの見栄え・視認性',
+            desc: '読者の目を引くアイキャッチを作るには、ビジュアルのクオリティと記事内容とのマッチングが重要です。視認性が高くインパクトのある画像を作りやすいかも確認ポイントです。高品質ビジュアル重視ならMidjourneyが候補。テンプレートを活用したいならCanvaやFotor AIが使いやすい傾向があります。',
           },
           {
             title: '文字入れ・タイトル表現',
@@ -289,19 +316,27 @@ const toolDetails = [
           },
           {
             title: '日本語プロンプト対応',
-            desc: 'UIが日本語かどうかと、日本語プロンプトで意図通りの画像が生成できるかは別問題です。日本語UI対応はCanva・Adobe Firefly・Fotor AIなどが確認されています。<a href="/categories/japanese/" class="text-blue-600 hover:underline">日本語対応ツール一覧</a>もご参照ください。',
+            desc: 'UIが日本語かどうかと、日本語プロンプトで意図通りの画像が生成できるかは別問題です。日本語UI対応はCanva・Adobe Firefly・Fotor AIなどが確認されています。<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール一覧</a>もご参照ください。',
           },
           {
             title: '商用利用条件',
-            desc: 'アフィリエイト記事・収益ブログ・オウンドメディアを前提とする場合、各ツールの最新の商用利用条件を確認します。用途やプランによって条件が異なる可能性があります。<a href="/categories/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール一覧</a>もご参照ください。',
+            desc: 'アフィリエイト記事・収益ブログ・オウンドメディアを前提とする場合、各ツールの最新の商用利用条件を確認します。用途やプランによって条件が異なる可能性があります。<a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール一覧</a>もご参照ください。',
           },
           {
             title: '透かし条件',
-            desc: 'アイキャッチに透かしが入ると見栄えに影響します。無料プランでは透かし付きになる場合があります（例：Fotor AI無料プラン）。透かしなしのツールを確認したい場合は<a href="/categories/no-watermark/" class="text-blue-600 hover:underline">透かしなしツール一覧</a>もご覧ください。',
+            desc: 'アイキャッチに透かしが入ると見栄えに影響します。無料プランでは透かし付きになる場合があります（例：Fotor AI無料プラン）。透かしなしのツールを確認したい場合は<a href="/conditions/no-watermark/" class="text-blue-600 hover:underline">透かしなしツール一覧</a>もご覧ください。',
           },
           {
             title: '無料プランの有無',
-            desc: '無料で試せる範囲（生成枚数・クレジット数・出力サイズ）や有料プランの料金目安を確認します。<a href="/categories/free/" class="text-blue-600 hover:underline">無料で使えるツール一覧</a>もご覧ください。Midjourneyは現在無料プランがないとされています（2024年末時点）。',
+            desc: '無料で試せる範囲（生成枚数・クレジット数・出力サイズ）や有料プランの料金目安を確認します。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料で使えるツール一覧</a>もご覧ください。Midjourneyは現在無料プランがないとされています（2024年末時点）。',
+          },
+          {
+            title: '画像サイズ・比率を調整しやすいか',
+            desc: 'ブログアイキャッチは横長（例：1200×630px）が多いため、出力サイズや比率を指定・調整しやすいかを確認します。CanvaやFotor AIはアイキャッチ向けサイズをプリセットで設定しやすい傾向があります。生成後にCanvaやAdobe系ツールでトリミング・比率調整する方法も一般的です。',
+          },
+          {
+            title: '生成後に他ツールで編集しやすいか',
+            desc: 'AI画像生成で素材を作り、CanvaやAdobe Expressなどで文字入れ・レイアウト調整・書き出しを行うフローも有効です。生成した画像を別ツールに持ち込んで編集する場合、出力形式や解像度を確認しておくと作業しやすくなります。',
           },
           {
             title: '初心者向けか',
@@ -382,7 +417,7 @@ const toolDetails = [
           },
           {
             genre: 'ニュース・解説記事',
-            desc: '速報性が求められるニュース記事では、素早くアイキャッチを生成できるツールが向いています。DALL·EはChatGPT経由でプロンプト調整が会話形式でできるため、方向転換しながら素早く生成しやすい傾向があります。文字入れは別ツールとの組み合わせが必要になる場合があります。',
+            desc: '速報性が求められるニュース記事では、素早くアイキャッチを生成できるツールが向いています。DALL・EはChatGPT経由でプロンプト調整が会話形式でできるため、方向転換しながら素早く生成しやすい傾向があります。文字入れは別ツールとの組み合わせが必要になる場合があります。',
           },
         ].map(({ genre, desc }) => (
           <div class="rounded-xl border border-slate-100 bg-white px-6 py-4 shadow-sm">
@@ -405,9 +440,11 @@ const toolDetails = [
         <ul class="list-disc list-inside space-y-2">
           <li><strong>商用利用条件の確認：</strong> アフィリエイト記事・収益ブログ・オウンドメディアでの利用は商用利用に該当する場合があります。各ツールの最新の利用規約における商用利用条件を確認してください。用途やプランによって条件が異なる可能性があります。</li>
           <li><strong>β機能は要注意：</strong> Adobe Fireflyのようにβ（ベータ）表示の機能は商用利用対象外とされている場合があります。</li>
-          <li><strong>無料プランの制限：</strong> 無料プランでは商用利用が制限されているツールや、透かしが入るツールがあります（例：Fotor AI無料プラン）。</li>
+          <li><strong>無料プランの制限：</strong> 無料プランでは商用利用が制限されているツールや、透かしが入るツール、生成回数・保存条件に制限があるツールがあります（例：Fotor AI無料プラン）。</li>
           <li><strong>Microsoft Designerの利用条件：</strong> 公式FAQ・利用規約では個人的な非商用使用向けと案内されています。アフィリエイト記事や収益ブログを前提とする場合は特に公式規約を確認してください。</li>
-          <li><strong>著作権の扱い：</strong> AI生成画像の著作権の扱いは、各ツールの利用規約・国や地域の著作権法によって異なる場合があります。「著作権の問題はない」「法的に安全」と断言することはできません。</li>
+          <li><strong>人物・著名人・ブランドロゴへの注意：</strong> 人物画像、著名人に似た画像、ブランドロゴ、第三者素材を含む生成を行う場合は、肖像権・商標権・著作権などの観点から別途確認が必要です。本記事はこれらについて判断を保証するものではありません。</li>
+          <li><strong>著作権の扱い：</strong> AI生成画像の著作権の扱いは、各ツールの利用規約・国や地域の著作権法によって異なる場合があります。「著作権の問題はない」「法的に安全」と断言することはできません。詳細は<a href="/guides/commercial-use-copyright/" class="underline hover:text-amber-900">著作権・商用利用ガイド</a>もご参照ください。</li>
+          <li><strong>画像生成後の作業：</strong> AI生成画像をそのままアイキャッチとして使える場合もありますが、記事タイトルの文字入れ・トリミング・色調整・レイアウト調整が別途必要になる場合があります。</li>
           <li><strong>透かしとアイキャッチの品質：</strong> 透かしが入っているとアイキャッチとして見栄えに影響する場合があります。ただし、透かしなしであっても商用利用条件は別途確認が必要です。</li>
           <li><strong>ブログ・メディアプラットフォーム側のルール：</strong> note・WordPress・アメブロなど、利用先プラットフォームのルールも別途ご確認ください。</li>
         </ul>
@@ -417,15 +454,15 @@ const toolDetails = [
       </div>
 
       <div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3 text-sm">
-        <a href="/categories/commercial-use/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
+        <a href="/conditions/commercial-use/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
           <span class="font-medium text-slate-900">商用利用できるツール一覧</span>
           <span class="text-blue-600">→</span>
         </a>
-        <a href="/categories/no-watermark/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
+        <a href="/conditions/no-watermark/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
           <span class="font-medium text-slate-900">透かしなしツール一覧</span>
           <span class="text-blue-600">→</span>
         </a>
-        <a href="/categories/free/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
+        <a href="/conditions/free/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
           <span class="font-medium text-slate-900">無料で使えるツール一覧</span>
           <span class="text-blue-600">→</span>
         </a>
@@ -439,15 +476,15 @@ const toolDetails = [
       <h2 class="mb-4 text-xl font-bold text-[#002B61]">ツール同士の詳細比較</h2>
       <p class="mb-4 text-sm text-slate-500">2ツールを詳しく比べたい場合は以下の比較記事もご参考ください。</p>
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-3 text-sm">
-        <a href="/compare/midjourney-vs-adobe-firefly/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
+        <a href="/comparisons/midjourney-vs-adobe-firefly/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
           <span class="font-medium text-slate-900">Midjourney vs Adobe Firefly</span>
           <span class="text-blue-600">→</span>
         </a>
-        <a href="/compare/dalle-vs-midjourney/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
-          <span class="font-medium text-slate-900">DALL·E vs Midjourney</span>
+        <a href="/comparisons/dalle-vs-midjourney/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
+          <span class="font-medium text-slate-900">DALL・E vs Midjourney</span>
           <span class="text-blue-600">→</span>
         </a>
-        <a href="/compare/stable-diffusion-vs-midjourney/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
+        <a href="/comparisons/stable-diffusion-vs-midjourney/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
           <span class="font-medium text-slate-900">Stable Diffusion vs Midjourney</span>
           <span class="text-blue-600">→</span>
         </a>
@@ -458,7 +495,7 @@ const toolDetails = [
     <!-- 日本語対応ツール                                              -->
     <!-- ============================================================ -->
     <div class="mb-10 rounded-xl border border-slate-100 bg-slate-50 px-5 py-4 text-sm text-slate-600">
-      日本語プロンプトや日本語UIに対応したツールをまとめて確認したい場合は <a href="/categories/japanese/" class="text-blue-600 hover:underline font-medium">日本語対応ツール一覧</a> もご覧ください。
+      日本語プロンプトや日本語UIに対応したツールをまとめて確認したい場合は <a href="/conditions/japanese/" class="text-blue-600 hover:underline font-medium">日本語対応ツール一覧</a> もご覧ください。
     </div>
 
     <!-- ============================================================ -->
@@ -498,6 +535,14 @@ const toolDetails = [
           q: '初心者にはどのAI画像生成ツールが向いていますか？',
           a: 'CanvaやFotor AIは日本語UIに対応しており、AI画像生成からデザイン編集まで一体化しているため、初心者に使いやすい傾向があります。Microsoft DesignerもMicrosoftアカウントがあればすぐ試せる構成ですが、公式規約では個人的な非商用使用向けと案内されているため、アフィリエイト記事や収益ブログを前提とする場合は公式規約を必ずご確認ください。',
         },
+        {
+          q: '画像生成だけでブログアイキャッチは完成しますか？',
+          a: '生成した画像をそのまま使える場合もありますが、記事タイトルの文字入れ、トリミング、色調整、レイアウト調整が別途必要になる場合があります。CanvaやFotor AIのようにデザイン編集が一体化したツールを使うか、生成後にCanva・Adobe Expressなどの編集ツールと組み合わせるフローが多く取られています。',
+        },
+        {
+          q: 'CanvaとMidjourneyはどちらがブログアイキャッチ向きですか？',
+          a: '用途によって異なります。Canvaはテンプレート・文字入れ・サイズ調整・書き出しまで一体化しており、アイキャッチをすばやく仕上げたい場合に向いています。Midjourneyは雰囲気のある高品質な画像案やアート調ビジュアルの生成で比較されやすく、生成後に別のツールで文字入れを行うフローが一般的です。有料プランのみ・年間収益によって商用利用条件が異なる場合があります。最新情報は公式サイトをご確認ください。',
+        },
       ]}
     />
 
@@ -511,11 +556,11 @@ const toolDetails = [
       <h2 class="mb-4 text-sm font-semibold text-slate-600">次に読む</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
         <li><a href="/tools/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">すべてのツールを見る</a></li>
-        <li><a href="/compare/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">全ツール比較表</a></li>
-        <li><a href="/categories/free/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">無料で使えるツール</a></li>
-        <li><a href="/categories/commercial-use/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">商用利用できるツール</a></li>
-        <li><a href="/categories/japanese/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">日本語対応ツール</a></li>
-        <li><a href="/categories/no-watermark/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">透かしなしツール</a></li>
+        <li><a href="/comparisons/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">全ツール比較表</a></li>
+        <li><a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">無料で使えるツール</a></li>
+        <li><a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">商用利用できるツール</a></li>
+        <li><a href="/conditions/japanese/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">日本語対応ツール</a></li>
+        <li><a href="/conditions/no-watermark/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">透かしなしツール</a></li>
         <li><a href="/use-cases/sns-post-image/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">SNS投稿画像向けツールを比較</a></li>
         <li><a href="/use-cases/ad-banner/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">広告バナー向けツールを比較</a></li>
         <li><a href="/use-cases/ec-product-image/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">EC商品画像向けツールを比較</a></li>

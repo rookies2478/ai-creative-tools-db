@@ -1,10 +1,10 @@
-﻿---
+---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="掲載方針・比較基準 | AIクリエイティブナビ"
-  description="AIクリエイティブナビの掲載方針・比較基準・情報更新方針について説明します。"
+  title="編集方針｜AIクリエイティブナビ"
+  description="AIクリエイティブナビの記事作成・比較基準・情報確認方針について説明します。AI画像生成・AI動画生成ツールの料金、商用利用条件、著作権、透かし、日本語対応などは公式情報をもとに確認し、断定を避けて整理します。"
   canonicalPath="/editorial-policy/"
   ogType="website"
 >
@@ -13,125 +13,249 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <nav class="mb-6 text-sm text-slate-500">
       <a href="/" class="hover:underline">トップ</a>
       <span class="mx-1">/</span>
-      <span>掲載方針・比較基準</span>
+      <span>編集方針</span>
     </nav>
 
-    <h1 class="mb-8 text-3xl font-bold text-[#002B61]">掲載方針・比較基準</h1>
+    <h1 class="mb-4 text-3xl font-bold text-[#002B61]">編集方針</h1>
 
-    <div class="space-y-8 text-sm leading-relaxed text-slate-700">
+    <p class="mb-10 text-sm leading-relaxed text-slate-600">
+      AIクリエイティブナビは、AI画像生成・AI動画生成を中心に、クリエイティブ制作に使えるAIツールを比較・整理するメディアです。記事は情報提供を目的としており、法的助言ではありません。
+    </p>
 
-      <section>
-        <h2 class="mb-3 text-base font-semibold text-[#002B61]">掲載対象ツールの考え方</h2>
-        <p>
-          本サイトはAI画像生成ツールを中心に掲載しています。動画生成ツールについては、Runway・Pika・Kling AIなど主要サービスのみを対象としています。
-        </p>
-        <p class="mt-2">掲載基準の目安：</p>
-        <ul class="mt-2 list-disc space-y-1 pl-5">
-          <li>一般向けにサービスが公開されていること</li>
-          <li>公式サイト・料金ページ・利用規約が確認できること</li>
-          <li>AI画像生成または動画生成を主な機能とするツールであること</li>
+    <div class="space-y-6 text-sm leading-relaxed text-slate-700">
+
+      <!-- 1. 運営方針 -->
+      <section class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+        <h2 class="mb-4 flex items-center gap-2 text-base font-bold text-[#002B61]">
+          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-600">1</span>
+          運営方針
+        </h2>
+        <ul class="space-y-2 pl-1">
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400"></span>
+            AI動画生成・AI画像生成を中心に扱います。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400"></span>
+            クリエイティブ制作に直接関係するAIツールを対象にします。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400"></span>
+            業務効率化AI・AI議事録・会計・営業支援などは原則扱いません。
+          </li>
         </ul>
-        <p class="mt-2">
-          広告掲載・提携関係の有無は掲載判断に影響しません。
-        </p>
       </section>
 
-      <section>
-        <h2 class="mb-3 text-base font-semibold text-[#002B61]">情報収集の方針</h2>
-        <p>各ツールの情報は以下を優先して収集・確認しています。</p>
-        <ol class="mt-2 list-decimal space-y-1 pl-5">
-          <li>公式サイト・公式ブログ・プレスリリース</li>
-          <li>各ツールの料金ページ・プランページ</li>
-          <li>利用規約（Terms of Service）</li>
-          <li>ヘルプセンター・FAQページ</li>
+      <!-- 2. 情報確認の優先順位 -->
+      <section class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+        <h2 class="mb-4 flex items-center gap-2 text-base font-bold text-[#002B61]">
+          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-600">2</span>
+          情報確認の優先順位
+        </h2>
+        <p class="mb-3 text-slate-600">各ツールの情報は以下の順で確認・収集しています。</p>
+        <ol class="space-y-2 pl-1">
+          {[
+            '公式サイト',
+            '公式ヘルプ',
+            '利用規約（Terms of Service）',
+            '料金ページ',
+            '公式ブログ・リリース',
+            'その他の信頼できる情報',
+          ].map((item, i) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">{i + 1}</span>
+              <span>{item}</span>
+            </li>
+          ))}
         </ol>
-        <p class="mt-2">
-          口コミ・レビューサイト・非公式情報のみを根拠とした記載は行いません。公式情報で確認できない項目については「不明」として扱います。
-        </p>
+        <p class="mt-4 text-xs text-slate-500">公式情報で確認できない項目は「要確認」として扱います。口コミ・レビューサイト・非公式情報のみを根拠とした記載は行いません。</p>
       </section>
 
-      <section>
-        <h2 class="mb-3 text-base font-semibold text-[#002B61]">比較項目と判定基準</h2>
-
+      <!-- 3. 比較項目 -->
+      <section class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+        <h2 class="mb-4 flex items-center gap-2 text-base font-bold text-[#002B61]">
+          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-600">3</span>
+          比較項目
+        </h2>
+        <p class="mb-4 text-slate-600">以下の項目を主な比較軸として扱います。</p>
         <div class="overflow-x-auto">
-          <table class="w-full text-sm">
+          <table class="w-full text-xs">
             <thead>
-              <tr class="bg-slate-50 text-left text-xs text-slate-500">
-                <th class="px-3 py-2 font-medium">比較項目</th>
-                <th class="px-3 py-2 font-medium">判定の考え方</th>
+              <tr class="bg-slate-50 text-left text-slate-500">
+                <th class="px-3 py-2 font-semibold">比較項目</th>
+                <th class="px-3 py-2 font-semibold">確認内容・考え方</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
-              <tr>
-                <td class="px-3 py-2 font-medium text-slate-800">無料プラン</td>
-                <td class="px-3 py-2">無料プランあり／制限付き無料（limited）／なし。公式料金ページを参照</td>
-              </tr>
-              <tr>
-                <td class="px-3 py-2 font-medium text-slate-800">料金</td>
-                <td class="px-3 py-2">最安有料プランの月額料金（USD）。公式料金ページ確認時点の金額</td>
-              </tr>
-              <tr>
-                <td class="px-3 py-2 font-medium text-slate-800">商用利用</td>
-                <td class="px-3 py-2">○（可）／△（条件付き・プランによる）／×（不可）／?（不明）。公式利用規約を参照。法的判断ではなく情報整理として掲載</td>
-              </tr>
-              <tr>
-                <td class="px-3 py-2 font-medium text-slate-800">日本語UI</td>
-                <td class="px-3 py-2">○（対応）／△（一部対応）／×（非対応）。公式サイト・ヘルプを参照</td>
-              </tr>
-              <tr>
-                <td class="px-3 py-2 font-medium text-slate-800">日本語プロンプト</td>
-                <td class="px-3 py-2">○／△（英語推奨）／×。公式情報または確認時点の動作状況を参照</td>
-              </tr>
-              <tr>
-                <td class="px-3 py-2 font-medium text-slate-800">透かし</td>
-                <td class="px-3 py-2">○（あり）／△（プランによる）／×（なし）。公式情報・ヘルプを参照</td>
-              </tr>
-              <tr>
-                <td class="px-3 py-2 font-medium text-slate-800">向いている用途</td>
-                <td class="px-3 py-2">公式の特徴説明・機能を参考に整理。主観的表現を避け、特性の説明にとどめる</td>
-              </tr>
+              {[
+                ['無料枠', '無料プランあり・制限付き・なし。公式料金ページを参照'],
+                ['料金プラン', '最安有料プランの月額料金。公式料金ページ確認時点の金額'],
+                ['日本語対応', '日本語UI・日本語プロンプト対応状況。公式サイト・ヘルプを参照'],
+                ['商用利用条件', '公式利用規約をもとに整理。プランや用途によって条件が異なる場合があります'],
+                ['著作権・利用条件', '生成物の利用条件を利用規約で確認。断定的な判断は行いません'],
+                ['透かし・クレジット表記', '出力への透かし付与の有無。公式情報・ヘルプを参照'],
+                ['得意な用途', '公式の特徴説明・機能を参考に整理。主観的表現を避けます'],
+                ['確認日・更新日', '情報を確認した日付を記事内に明示します'],
+              ].map(([item, desc]) => (
+                <tr>
+                  <td class="px-3 py-2.5 font-semibold text-slate-800">{item}</td>
+                  <td class="px-3 py-2.5 text-slate-600">{desc}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
-
-        <p class="mt-3 text-slate-500">
-          情報が不明な場合は「不明（unknown）」または「条件付き（limited）」として扱い、断定的な記載を避けます。
-        </p>
       </section>
 
-      <section>
-        <h2 class="mb-3 text-base font-semibold text-[#002B61]">商用利用・著作権の取り扱い</h2>
-        <p>
-          商用利用可否の判定は、公式利用規約の確認時点における情報整理です。法的な保証・アドバイスではありません。
-        </p>
-        <p class="mt-2">
-          商用利用・著作権の取り扱いは各ツールのプラン・バージョン・生成方法によって異なる場合があります。業務・商用目的での利用前は、必ず各ツールの最新利用規約を確認し、必要に応じて専門家にご相談ください。
-        </p>
-      </section>
-
-      <section>
-        <h2 class="mb-3 text-base font-semibold text-[#002B61]">情報更新方針</h2>
-        <p>
-          各ツールページには「最終確認日（lastReviewed）」と「次回確認予定日（nextReviewDue）」を設けています。
-        </p>
-        <ul class="mt-2 list-disc space-y-1 pl-5">
-          <li>基本的に3ヶ月ごとを目安に情報を再確認します</li>
-          <li>料金改定・利用規約変更・機能変更が確認された場合は随時更新します</li>
-          <li>確認日時点で取得できた情報を掲載しており、最新性を保証するものではありません</li>
+      <!-- 4. 商用利用・著作権に関する方針 -->
+      <section class="rounded-xl border border-amber-100 bg-amber-50/40 p-6 shadow-sm">
+        <h2 class="mb-4 flex items-center gap-2 text-base font-bold text-[#002B61]">
+          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-100 text-xs font-bold text-amber-700">4</span>
+          商用利用・著作権に関する方針
+        </h2>
+        <ul class="space-y-2.5 pl-1">
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400"></span>
+            商用利用・著作権・肖像権・商標・第三者素材の利用は、それぞれ別の論点として扱います。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400"></span>
+            「商用利用できます」「安全です」「著作権的に問題ありません」といった断定は行いません。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400"></span>
+            公式情報で確認できないものは「要確認」として扱います。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400"></span>
+            プランや用途によって条件が異なる場合があります。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400"></span>
+            最終判断は各ツールの公式情報、または必要に応じて専門家への確認を推奨します。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400"></span>
+            本記事・本サイトの情報は法的助言ではありません。
+          </li>
         </ul>
-        <p class="mt-2">
-          最新の情報は必ず各ツールの公式サイトでご確認ください。
-        </p>
       </section>
 
-      <section>
-        <h2 class="mb-3 text-base font-semibold text-[#002B61]">広告・収益化について</h2>
-        <p>
-          本サイトでは将来的に広告掲載（Google AdSenseなど）を検討していますが、広告の有無・広告主との関係は掲載するツールの選定・比較内容・掲載順序に影響しません。
-        </p>
-        <p class="mt-2">
-          掲載情報の誤りや修正依頼については、<a href="/contact/" class="text-blue-600 hover:underline">お問い合わせページ</a>よりご連絡ください。
-        </p>
+      <!-- 5. 表記ルール -->
+      <section class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+        <h2 class="mb-4 flex items-center gap-2 text-base font-bold text-[#002B61]">
+          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-600">5</span>
+          表記ルール
+        </h2>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <p class="mb-2 text-xs font-bold text-emerald-700">使う表現</p>
+            <ul class="space-y-1.5 pl-1 text-xs text-slate-600">
+              {[
+                '公式情報では〜と案内されています',
+                'プランや用途によって条件が異なる場合があります',
+                '最新情報は公式サイトをご確認ください',
+                '要確認',
+                '公式情報を確認',
+              ].map(expr => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 text-emerald-500">✓</span>
+                  <span>{expr}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p class="mb-2 text-xs font-bold text-red-600">避ける表現</p>
+            <ul class="space-y-1.5 pl-1 text-xs text-slate-600">
+              {[
+                '商用利用OK',
+                '安全です',
+                '著作権の問題はありません',
+                '法的に問題ありません',
+              ].map(expr => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 text-red-400">✕</span>
+                  <span>{expr}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. 更新方針 -->
+      <section class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+        <h2 class="mb-4 flex items-center gap-2 text-base font-bold text-[#002B61]">
+          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-600">6</span>
+          更新方針
+        </h2>
+        <ul class="space-y-2 pl-1">
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400"></span>
+            料金や機能は変更されることがあります。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400"></span>
+            重要な比較記事やツール詳細ページは定期的に見直します。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400"></span>
+            記事内に確認日・更新日を明示します。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400"></span>
+            情報が古い可能性がある場合は、公式サイトでの確認を促します。
+          </li>
+        </ul>
+      </section>
+
+      <!-- 7. 掲載・非掲載の判断 -->
+      <section class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+        <h2 class="mb-4 flex items-center gap-2 text-base font-bold text-[#002B61]">
+          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-600">7</span>
+          掲載・非掲載の判断
+        </h2>
+        <ul class="space-y-2 pl-1">
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400"></span>
+            公式URLや情報源が確認できるものを優先して掲載します。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400"></span>
+            情報が少ないツールは「要確認」または掲載保留とします。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400"></span>
+            内容の薄いページを量産しません。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400"></span>
+            アフィリエイト案件の有無だけで過度に推奨しません。広告掲載・提携の有無は掲載判断に影響しません。
+          </li>
+        </ul>
+      </section>
+
+      <!-- 8. 免責 -->
+      <section class="rounded-xl border border-slate-200 bg-slate-50 p-6">
+        <h2 class="mb-4 flex items-center gap-2 text-base font-bold text-[#002B61]">
+          <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-200 text-xs font-bold text-slate-600">8</span>
+          免責
+        </h2>
+        <ul class="space-y-2 pl-1">
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>
+            本サイトは情報提供を目的としています。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>
+            掲載内容は法的・税務的・専門的助言ではありません。
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>
+            各ツールの利用前に、公式サイト・利用規約・料金ページを必ずご確認ください。
+          </li>
+        </ul>
       </section>
 
     </div>

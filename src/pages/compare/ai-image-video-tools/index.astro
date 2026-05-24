@@ -1,0 +1,371 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NoticeBox from '../../../components/NoticeBox.astro';
+import ConditionChips from '../../../components/ConditionChips.astro';
+
+const allTools = await getCollection('tools');
+
+type FreePlan = boolean | 'limited' | 'unknown';
+type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+type CommercialUse = 'ok' | 'paid-only' | 'limited' | 'no' | 'unknown';
+type TriState = boolean | 'partial' | 'unknown';
+
+function freeBadge(val: FreePlan) {
+  if (val === true)      return { text: '無料枠あり',  cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200', icon: '✓' };
+  if (val === 'limited') return { text: '制限あり',    cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',   icon: '△' };
+  if (val === false)     return { text: '有料のみ',    cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200',   icon: '¥' };
+                         return { text: '要確認',      cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100',   icon: '?' };
+}
+
+function cuBadge(val: CommercialUse) {
+  if (val === 'ok')        return { text: '公式情報で可能',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200', icon: '✓' };
+  if (val === 'paid-only') return { text: '有料プラン向け',   cls: 'bg-sky-50 text-sky-700 ring-1 ring-inset ring-sky-200',             icon: '★' };
+  if (val === 'limited')   return { text: '条件あり',         cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',       icon: '△' };
+  if (val === 'no')        return { text: '不可または非推奨', cls: 'bg-red-50 text-red-600 ring-1 ring-inset ring-red-200',             icon: '✕' };
+                           return { text: '要確認',           cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100',       icon: '?' };
+}
+
+function jpBadge(ui: TriState, prompt: TriState) {
+  if (ui === true)                                                 return { text: '日本語UI',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200', icon: '✓' };
+  if (ui === 'partial' || prompt === true || prompt === 'partial') return { text: '一部対応',   cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',   icon: '△' };
+  if (ui === false && prompt === false)                            return { text: '非対応',     cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200',   icon: '✕' };
+                                                                   return { text: '要確認',    cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100',   icon: '?' };
+}
+
+function wmBadge(val: FourState) {
+  if (val === 'no')      return { text: '透かしなし',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200', icon: '✓' };
+  if (val === 'yes')     return { text: '透かしあり',   cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200',   icon: '✕' };
+  if (val === 'limited') return { text: 'プランによる', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200',   icon: '△' };
+                         return { text: '要確認',       cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100',   icon: '?' };
+}
+
+function catLabel(cat: string) {
+  if (cat === 'image') return '画像生成';
+  if (cat === 'video') return '動画生成';
+  return '画像・動画';
+}
+
+const platformLabels: Record<string, string> = {
+  web: 'Web', discord: 'Discord', ios: 'iOS', android: 'Android',
+  desktop: 'デスクトップ', api: 'API', local: 'ローカル',
+};
+
+const featureLabels: Record<string, string> = {
+  textToImage: 'テキスト→画像', imageToImage: '画像→画像',
+  inpainting: '部分修正', outpainting: '画像拡張',
+  upscale: '高解像度化', backgroundRemoval: '背景削除',
+  stylePresets: 'スタイル選択', promptAssist: 'プロンプト補助',
+  textToVideo: 'テキスト→動画', imageToVideo: '画像→動画',
+  videoExtend: '動画延長', apiAvailable: 'API対応',
+};
+
+const featureOrder = [
+  'textToImage', 'imageToImage', 'inpainting', 'outpainting',
+  'upscale', 'backgroundRemoval', 'stylePresets', 'promptAssist',
+  'textToVideo', 'imageToVideo', 'videoExtend', 'apiAvailable',
+] as const;
+
+type FeatureKey = typeof featureOrder[number];
+
+function getTopFeatures(tool: typeof allTools[number], max = 5): string[] {
+  const f = tool.data.features;
+  if (!f) return [];
+  return featureOrder
+    .filter(k => f[k as FeatureKey] === true)
+    .slice(0, max)
+    .map(k => featureLabels[k]);
+}
+---
+
+<BaseLayout
+  title="AI画像・動画生成ツール比較表｜無料枠・日本語対応・商用利用条件で比較 | AIクリエイティブナビ"
+  description="AI画像生成・動画生成ツールを、商用利用・無料枠・日本語対応・透かし・料金目安で一覧比較。仕事や副業で使う前の確認に役立つ比較表です。"
+  canonicalPath="/compare/ai-image-video-tools/"
+>
+  <div class="mx-auto max-w-5xl px-6 py-12">
+
+    <nav aria-label="パンくずリスト" class="mb-6 text-sm text-slate-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1" aria-hidden="true">/</span>
+      <a href="/compare/" class="hover:underline">比較記事一覧</a>
+      <span class="mx-1" aria-hidden="true">/</span>
+      <span aria-current="page">比較表</span>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-bold text-[#002B61]">AI画像・動画生成ツール比較表</h1>
+    <p class="mb-6 text-slate-500">AI画像生成・動画生成ツールを、商用利用・無料枠・日本語対応・透かし・料金目安で横並び比較できます。仕事や副業で使う前の確認にご活用ください。</p>
+
+    <ConditionChips currentPath="/compare/ai-image-video-tools/" />
+
+    <div class="mb-8">
+      <NoticeBox />
+    </div>
+
+    <!-- 凡例 -->
+    <section class="mb-8" aria-label="この比較表の見方">
+      <h2 class="mb-4 text-base font-semibold text-slate-700">この比較表の見方</h2>
+
+      <!-- 項目定義 -->
+      <dl class="mb-5 grid gap-3 sm:grid-cols-2">
+        {[
+          {
+            term: '商用利用',
+            desc: '公式情報で商用利用可否や条件を確認できる項目です。用途やプランによって制限がある場合があります。',
+          },
+          {
+            term: '無料枠',
+            desc: '無料プラン、無料クレジット、体験版などを含みます。利用できる範囲はツールごとに異なります。',
+          },
+          {
+            term: '透かし',
+            desc: '生成画像・動画にウォーターマークが入るかどうかを示します。',
+          },
+          {
+            term: '日本語対応',
+            desc: '日本語UIまたは日本語プロンプトへの対応状況を示します。',
+          },
+        ].map(({ term, desc }) => (
+          <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+            <dt class="mb-1 text-xs font-bold text-slate-700">{term}</dt>
+            <dd class="text-xs leading-relaxed text-slate-500">{desc}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <!-- バッジ凡例 -->
+      <div class="mb-5 flex flex-wrap gap-2">
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
+          <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200"><span aria-hidden="true">✓</span> 対応</span>
+          <span class="text-slate-600">利用可能・対応</span>
+        </span>
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
+          <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200"><span aria-hidden="true">△</span> 条件あり</span>
+          <span class="text-slate-600">条件付き・一部対応</span>
+        </span>
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
+          <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200"><span aria-hidden="true">✕</span> 非対応</span>
+          <span class="text-slate-600">非対応</span>
+        </span>
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm">
+          <span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100"><span aria-hidden="true">?</span> 要確認</span>
+          <span class="text-slate-600">公式で要確認</span>
+        </span>
+      </div>
+
+      <!-- 免責文 -->
+      <div class="rounded-lg border border-amber-100 bg-amber-50 px-4 py-3">
+        <p class="text-xs leading-relaxed text-amber-800">
+          本ページの情報は、各ツールの公式サイト・料金ページ・利用規約等をもとに整理したものです。掲載内容は確認時点の情報であり、最新情報や具体的な利用可否は必ず各公式サイトでご確認ください。本記事は法的助言ではありません。
+        </p>
+      </div>
+      <p class="mt-3 text-xs text-slate-600">
+        <a href="/guides/ai-image-commercial-use-checklist/" class="font-medium text-blue-600 hover:underline">比較前に商用利用の確認ポイントを見る →</a>
+      </p>
+    </section>
+
+    <!-- ===== 比較表 ===== -->
+    <div class="block">
+      <!-- スマホ向け案内（md以上では非表示） -->
+      <div class="mb-3 flex items-start gap-2 rounded-lg border border-blue-100 bg-blue-50 px-4 py-3 md:hidden">
+        <span class="shrink-0 text-blue-500" aria-hidden="true">←→</span>
+        <p class="text-xs leading-relaxed text-blue-700">
+          比較表は横にスクロールできます。商用利用・無料枠・透かし・日本語対応を確認しながら比較してください。
+        </p>
+      </div>
+      <!-- デスクトップ向け案内 -->
+      <p class="mb-2 hidden text-sm text-slate-500 md:block">横にスクロールして全項目を比較できます →</p>
+      <div class="overflow-x-auto [-webkit-overflow-scrolling:touch] rounded-2xl border border-slate-100 shadow-sm">
+        <table class="w-full min-w-[1100px] text-sm" aria-label="AIツール比較表">
+          <thead>
+            <tr class="bg-slate-50 text-left text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+              <th scope="col" class="sticky left-0 z-10 bg-slate-50 px-4 py-3">ツール名</th>
+              <th scope="col" class="px-3 py-3">種別</th>
+              <th scope="col" class="px-3 py-3">商用利用</th>
+              <th scope="col" class="px-3 py-3">無料枠</th>
+              <th scope="col" class="px-3 py-3">日本語</th>
+              <th scope="col" class="px-3 py-3">透かし</th>
+              <th scope="col" class="px-3 py-3">対応環境</th>
+              <th scope="col" class="px-3 py-3">主な機能</th>
+              <th scope="col" class="px-3 py-3">料金目安</th>
+              <th scope="col" class="px-3 py-3">最終確認日</th>
+              <th scope="col" class="px-3 py-3"><span class="sr-only">詳細リンク</span></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-50">
+            {allTools.map((tool, index) => {
+              const fp = freeBadge(tool.data.freePlan);
+              const cu = cuBadge(tool.data.commercialUse);
+              const jp = jpBadge(tool.data.japaneseUi, tool.data.japanesePrompt);
+              const wm = wmBadge(tool.data.watermark);
+              const stickyBg = index % 2 === 1 ? 'bg-slate-50' : 'bg-white';
+              return (
+                <tr class="group bg-white even:bg-slate-50 hover:bg-slate-100">
+                  <td class={`sticky left-0 z-10 ${stickyBg} group-hover:bg-slate-100 px-4 py-3 font-semibold text-slate-900 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.06)]`}>
+                    {tool.data.name}
+                  </td>
+                  <td class="px-3 py-3 text-xs text-slate-500 whitespace-nowrap">{catLabel(tool.data.category)}</td>
+                  <td class="px-3 py-3">
+                    <span class={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium ${cu.cls}`}>
+                      <span aria-hidden="true">{cu.icon}</span>{cu.text}
+                    </span>
+                  </td>
+                  <td class="px-3 py-3">
+                    <span class={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium ${fp.cls}`}>
+                      <span aria-hidden="true">{fp.icon}</span>{fp.text}
+                    </span>
+                  </td>
+                  <td class="px-3 py-3">
+                    <span class={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium ${jp.cls}`}>
+                      <span aria-hidden="true">{jp.icon}</span>{jp.text}
+                    </span>
+                  </td>
+                  <td class="px-3 py-3">
+                    <span class={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium ${wm.cls}`}>
+                      <span aria-hidden="true">{wm.icon}</span>{wm.text}
+                    </span>
+                  </td>
+                  <td class="px-3 py-3 text-xs text-slate-500">
+                    {tool.data.platforms
+                      ? tool.data.platforms.map(p => platformLabels[p] ?? p).join(' / ')
+                      : '—'}
+                  </td>
+                  <td class="px-3 py-3 text-xs text-slate-500">
+                    {getTopFeatures(tool).join(' / ') || '—'}
+                  </td>
+                  <td class="px-3 py-3 text-xs text-slate-500 whitespace-nowrap">{tool.data.lowestPaidPlan ?? '—'}</td>
+                  <td class="px-3 py-3 text-xs text-slate-400 whitespace-nowrap">{tool.data.lastReviewed}</td>
+                  <td class="px-3 py-3">
+                    <a
+                      href={`/tools/${tool.slug}/`}
+                      aria-label={`${tool.data.name}の詳細を見る`}
+                      class="text-xs font-medium text-blue-600 hover:underline whitespace-nowrap"
+                    >
+                      詳細 →
+                    </a>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="mt-3 text-xs text-slate-400">
+      ※ 商用利用の可否・著作権の取り扱いは各ツールの利用規約に基づきます。法的アドバイスではありません。最新情報は必ず公式サイトでご確認ください。
+    </p>
+
+    <section class="mt-10 border-t border-slate-100 pt-8">
+      <h2 class="mb-4 text-base font-semibold text-slate-700">条件別に探す</h2>
+      <ul class="flex flex-wrap gap-3">
+        <li>
+          <a href="/compare/" class="inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 hover:border-blue-300">
+            ← 比較記事一覧に戻る
+          </a>
+        </li>
+        <li>
+          <a href="/tools/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            すべてのツールを見る
+          </a>
+        </li>
+        <li>
+          <a href="/categories/free/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            無料で試せるAIツール
+          </a>
+        </li>
+        <li>
+          <a href="/categories/free-video/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            無料で使えるAI動画生成ツール
+          </a>
+        </li>
+        <li>
+          <a href="/compare/free-ai-image-generators/" class="inline-block rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm text-emerald-700 hover:bg-emerald-100 hover:border-emerald-300">
+            無料枠・透かし・商用利用メモを比較する
+          </a>
+        </li>
+        <li>
+          <a href="/compare/midjourney-vs-adobe-firefly/" class="inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 hover:border-blue-300">
+            Midjourney vs Adobe Firefly — 商用利用・料金・日本語対応・用途の違いを比較
+          </a>
+        </li>
+        <li>
+          <a href="/compare/dalle-vs-midjourney/" class="inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 hover:border-blue-300">
+            DALL·E vs Midjourney — ChatGPT連携・画質・商用利用・用途の違いを比較
+          </a>
+        </li>
+        <li>
+          <a href="/compare/stable-diffusion-vs-midjourney/" class="inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 hover:border-blue-300">
+            Stable Diffusion vs Midjourney — 無料利用・画質・商用利用・自由度の違いを比較
+          </a>
+        </li>
+        <li>
+          <a href="/compare/runway-vs-pika/" class="inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 hover:border-blue-300">
+            Runway vs Pika — 料金・無料枠・商用利用・用途別の選び方を比較（動画生成）
+          </a>
+        </li>
+        <li>
+          <a href="/compare/adobe-firefly-vs-microsoft-designer/" class="inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 hover:border-blue-300">
+            Adobe Firefly vs Microsoft Designer — 商用利用・デザイン制作で選ぶAI画像生成ツール
+          </a>
+        </li>
+        <li>
+          <a href="/compare/canva-ai-vs-adobe-firefly/" class="inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 hover:border-blue-300">
+            Canva AI vs Adobe Firefly — デザイン制作に使いやすいAI画像生成ツールはどちら？
+          </a>
+        </li>
+        <li>
+          <a href="/categories/commercial-use/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            商用利用を確認しやすいAIツール
+          </a>
+        </li>
+        <li>
+          <a href="/categories/japanese/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            日本語対応のAIツール
+          </a>
+        </li>
+        <li>
+          <a href="/categories/no-watermark/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            透かしなしで使いやすいAIツール
+          </a>
+        </li>
+        <li>
+          <a href="/guides/commercial-use-copyright/" class="inline-block rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">
+            商用利用・著作権ガイド
+          </a>
+        </li>
+        <li>
+          <a href="/use-cases/" class="inline-block rounded-lg border border-blue-300 bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-800 hover:bg-blue-200 hover:border-blue-400">
+            用途別AI画像生成ツール記事一覧
+          </a>
+        </li>
+        <li>
+          <a href="/use-cases/youtube-thumbnail/" class="inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 hover:border-blue-300">
+            YouTubeサムネに向いているAI画像生成ツールを比較
+          </a>
+        </li>
+        <li>
+          <a href="/use-cases/sns-post-image/" class="inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 hover:border-blue-300">
+            SNS投稿画像向けAI画像生成ツールを比較
+          </a>
+        </li>
+        <li>
+          <a href="/use-cases/ad-banner/" class="inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 hover:border-blue-300">
+            広告バナー向けAI画像生成ツールを比較
+          </a>
+        </li>
+        <li>
+          <a href="/use-cases/ec-product-image/" class="inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 hover:border-blue-300">
+            EC商品画像に向いているAI画像生成ツールを比較
+          </a>
+        </li>
+        <li>
+          <a href="/use-cases/blog-eyecatch/" class="inline-block rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 hover:border-blue-300">
+            ブログアイキャッチに向いているAI画像生成ツールを比較
+          </a>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+</BaseLayout>

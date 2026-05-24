@@ -1,369 +1,142 @@
-﻿---
+---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import NoticeBox from '../../components/NoticeBox.astro';
-import GuideFAQ from '../../components/GuideFAQ.astro';
 ---
 
 <BaseLayout
-  title="用途別AI画像生成ツール比較：サムネ・SNS・広告・EC・ブログ向けに探す | AIクリエイティブナビ"
-  description="YouTubeサムネ・SNS投稿画像・広告バナー・EC商品画像・ブログアイキャッチ向けのAI画像生成ツールを用途別に比較。商用利用条件・透かし・日本語対応・無料枠を確認して、目的に合ったツールを選ぶ参考にしてください。"
+  title="用途別AIツール記事一覧｜AIクリエイティブナビ"
+  description="YouTubeサムネイル、SNS投稿、広告バナー、EC商品画像、ブログアイキャッチなど、制作目的別にAI画像生成・AI動画生成ツールを探せる用途別記事一覧です。"
   canonicalPath="/use-cases/"
 >
-  <div class="mx-auto max-w-4xl px-6 py-12">
+  <div class="mx-auto max-w-5xl px-6 py-12">
 
-    <!-- パンくずナビ -->
-    <nav class="mb-6 text-sm text-slate-500">
+    <nav aria-label="パンくずリスト" class="mb-6 text-sm text-slate-500">
       <a href="/" class="hover:underline">トップ</a>
-      <span class="mx-1">/</span>
-      <span>用途別AI画像生成ツール比較</span>
+      <span class="mx-1" aria-hidden="true">/</span>
+      <span aria-current="page">用途別記事一覧</span>
     </nav>
 
-    <!-- H1 -->
-    <h1 class="mb-4 text-3xl font-bold text-[#002B61]">用途別AI画像生成ツール比較：サムネ・SNS・広告・EC・ブログ向けに探す</h1>
-
-    <!-- 導入文 -->
-    <p class="mb-6 text-slate-600 leading-relaxed">
-      AI画像生成ツールを選ぶとき、「どれでも同じ」と思いがちですが、用途によって確認すべき条件は大きく異なります。
-      YouTubeサムネなら商用利用条件や文字入れのしやすさ、EC商品画像なら高解像度出力や背景除去機能、広告バナーなら商用利用条件と透かしの有無が重要になります。
-      このページでは、5つの主要用途ごとに特化した比較ページへ案内しています。条件はプランや時期によって変わる場合があるため、最新情報は各ツールの公式サイトでご確認ください。
+    <h1 class="mb-2 text-3xl font-bold text-[#002B61]">用途別AIツール記事一覧</h1>
+    <p class="mb-8 text-slate-600 leading-relaxed">
+      作りたいアウトプットから、関連するAI画像生成・AI動画生成ツールや選び方を探せます。用途によって必要な機能や確認すべき条件は異なります。
     </p>
 
-    <!-- 結論サマリー -->
-    <div class="mb-8 rounded-xl border border-blue-100 bg-blue-50 px-6 py-5">
-      <p class="mb-3 text-sm font-bold text-blue-900">用途別に選ぶと失敗しにくい理由</p>
-      <ul class="space-y-2 text-sm leading-relaxed text-blue-800">
-        <li>✔ <strong>商用利用条件</strong>はツールによって異なるため、用途を明確にして条件を絞り込むことが重要です</li>
-        <li>✔ <strong>透かしの有無</strong>は用途によって影響度が変わります（例：サムネ・広告では見た目に直結）</li>
-        <li>✔ <strong>文字入れ・編集機能</strong>の充実度は用途によって優先度が異なります</li>
-        <li>✔ <strong>日本語対応</strong>の深さ（UIのみか・プロンプトも対応か）を用途に合わせて確認できます</li>
-      </ul>
-      <p class="mt-3 text-xs text-blue-600">※ 本記事は情報提供を目的としており、法的助言ではありません。商用利用を前提にする場合は、最新の公式規約をご確認ください。</p>
+    <!-- 注意文 -->
+    <div class="mb-10 rounded-lg border border-amber-100 bg-amber-50 px-4 py-3">
+      <p class="text-xs leading-relaxed text-amber-800">
+        掲載内容は確認時点の情報です。最新情報や具体的な利用可否は必ず各公式サイトでご確認ください。本記事群は法的助言ではありません。プランや用途によって条件が異なる場合があります。
+      </p>
     </div>
 
-    <!-- 注意ボックス -->
-    <div class="mb-10 rounded-lg border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800 leading-relaxed">
-      <p class="mb-1 font-semibold">ご利用前にご確認ください</p>
-      <ul class="mt-2 space-y-1.5 list-disc list-inside">
-        <li>各ツールの<strong>公式サイト・料金ページ・利用規約・商用利用条件</strong>を必ずご確認ください。</li>
-        <li>本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。</li>
-        <li>用途やプランによって条件が異なる可能性があります。掲載情報は確認時点のものです。</li>
-      </ul>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- 用途別一覧カード                                              -->
-    <!-- ============================================================ -->
+    <!-- 用途別記事カード一覧 -->
     <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">用途別AI画像生成ツール一覧</h2>
-      <p class="mb-6 text-sm text-slate-500">各用途ページでは、主要ツールを複数の比較軸でまとめています。</p>
+      <h2 class="mb-6 text-xl font-bold text-[#002B61]">用途別記事</h2>
 
-      <div class="space-y-5">
+      <div class="grid gap-4 sm:grid-cols-2">
 
-        <!-- YouTubeサムネ -->
-        <a href="/use-cases/youtube-thumbnail/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-3 flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-50 text-lg">▶</span>
-              <h3 class="text-base font-bold text-slate-900 group-hover:text-[#0066FF]">YouTubeサムネ向けAI画像生成ツール比較</h3>
-            </div>
-            <span class="shrink-0 text-xs font-semibold text-blue-600 group-hover:underline">詳細を見る →</span>
+        <!-- 用途別AI画像生成ツール比較（まとめ） -->
+        <a href="/use-cases/ai-image-use-case-comparison/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <span class="inline-flex rounded-full bg-amber-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">まとめ</span>
           </div>
-          <p class="mb-4 text-sm leading-relaxed text-slate-600">
-            YouTube動画のクリック率を意識したサムネイル制作向けツールを比較。文字入れのしやすさ・商用利用条件・透かし有無・日本語対応を確認できます。
-          </p>
-          <div class="grid grid-cols-1 gap-2 sm:grid-cols-3 text-xs">
-            <div class="rounded-lg bg-slate-50 px-3 py-2">
-              <p class="font-semibold text-slate-700 mb-0.5">こんな方向け</p>
-              <p class="text-slate-500">YouTubeチャンネル運営者・動画クリエイター</p>
-            </div>
-            <div class="rounded-lg bg-slate-50 px-3 py-2">
-              <p class="font-semibold text-slate-700 mb-0.5">確認すべきポイント</p>
-              <p class="text-slate-500">商用利用条件・透かし・文字入れ・日本語対応</p>
-            </div>
-            <div class="rounded-lg bg-blue-50 px-3 py-2">
-              <p class="font-semibold text-blue-700 mb-0.5">主な候補ツール</p>
-              <p class="text-blue-600">Canva・Midjourney・Ideogram・Adobe Firefly</p>
-            </div>
-          </div>
+          <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">用途別AI画像生成ツール比較</p>
+          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">サムネ・SNS・広告・EC・ブログ向けに、確認すべき条件を用途ごとに整理した比較記事です。</p>
+          <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
         </a>
 
-        <!-- SNS投稿画像 -->
-        <a href="/use-cases/sns-post-image/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-3 flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-pink-50 text-lg">📱</span>
-              <h3 class="text-base font-bold text-slate-900 group-hover:text-[#0066FF]">SNS投稿画像向けAI画像生成ツール比較</h3>
-            </div>
-            <span class="shrink-0 text-xs font-semibold text-blue-600 group-hover:underline">詳細を見る →</span>
+        <!-- YouTubeサムネイル向け -->
+        <a href="/use-cases/youtube-thumbnail/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <span class="inline-flex rounded-full bg-red-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-red-600">YouTube</span>
           </div>
-          <p class="mb-4 text-sm leading-relaxed text-slate-600">
-            Instagram・X（Twitter）・TikTokなどのSNS投稿画像を制作する方向け。縦型・正方形対応・商用利用条件・透かしをまとめて確認できます。
-          </p>
-          <div class="grid grid-cols-1 gap-2 sm:grid-cols-3 text-xs">
-            <div class="rounded-lg bg-slate-50 px-3 py-2">
-              <p class="font-semibold text-slate-700 mb-0.5">こんな方向け</p>
-              <p class="text-slate-500">SNS運用担当・インフルエンサー・個人クリエイター</p>
-            </div>
-            <div class="rounded-lg bg-slate-50 px-3 py-2">
-              <p class="font-semibold text-slate-700 mb-0.5">確認すべきポイント</p>
-              <p class="text-slate-500">商用利用条件・縦横比・透かし・無料枠</p>
-            </div>
-            <div class="rounded-lg bg-blue-50 px-3 py-2">
-              <p class="font-semibold text-blue-700 mb-0.5">主な候補ツール</p>
-              <p class="text-blue-600">Canva・Adobe Firefly・Fotor AI・DALL·E</p>
-            </div>
-          </div>
+          <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">YouTubeサムネイル向け</p>
+          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">クリック率を意識したサムネイル制作向けツールを比較。文字入れ・商用利用条件・透かしを確認できます。</p>
+          <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
         </a>
 
-        <!-- 広告バナー -->
-        <a href="/use-cases/ad-banner/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-3 flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-yellow-50 text-lg">📢</span>
-              <h3 class="text-base font-bold text-slate-900 group-hover:text-[#0066FF]">広告バナー向けAI画像生成ツール比較</h3>
-            </div>
-            <span class="shrink-0 text-xs font-semibold text-blue-600 group-hover:underline">詳細を見る →</span>
+        <!-- SNS投稿向け -->
+        <a href="/use-cases/sns-post-image/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <span class="inline-flex rounded-full bg-pink-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-pink-600">SNS</span>
           </div>
-          <p class="mb-4 text-sm leading-relaxed text-slate-600">
-            Web広告・ディスプレイ広告・LP用バナーをAI画像生成ツールで制作する方向け。商用利用条件・透かし・文字入れ対応を比較できます。
-          </p>
-          <div class="grid grid-cols-1 gap-2 sm:grid-cols-3 text-xs">
-            <div class="rounded-lg bg-slate-50 px-3 py-2">
-              <p class="font-semibold text-slate-700 mb-0.5">こんな方向け</p>
-              <p class="text-slate-500">広告担当・マーケター・フリーランスデザイナー</p>
-            </div>
-            <div class="rounded-lg bg-slate-50 px-3 py-2">
-              <p class="font-semibold text-slate-700 mb-0.5">確認すべきポイント</p>
-              <p class="text-slate-500">商用利用条件・透かし・文字入れ・出力サイズ</p>
-            </div>
-            <div class="rounded-lg bg-amber-50 px-3 py-2">
-              <p class="font-semibold text-amber-700 mb-0.5">特に重要</p>
-              <p class="text-amber-600">広告用途は商用利用条件を必ず公式で確認を</p>
-            </div>
-          </div>
+          <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">SNS投稿向け</p>
+          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">Instagram・X・TikTokなど向け。縦型・正方形対応・商用利用条件・透かしを確認できます。</p>
+          <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
         </a>
 
-        <!-- EC商品画像 -->
-        <a href="/use-cases/ec-product-image/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-3 flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green-50 text-lg">🛒</span>
-              <h3 class="text-base font-bold text-slate-900 group-hover:text-[#0066FF]">EC商品画像向けAI画像生成ツール比較</h3>
-            </div>
-            <span class="shrink-0 text-xs font-semibold text-blue-600 group-hover:underline">詳細を見る →</span>
+        <!-- 広告クリエイティブ向け -->
+        <a href="/use-cases/ad-banner/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <span class="inline-flex rounded-full bg-yellow-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-yellow-700">広告</span>
           </div>
-          <p class="mb-4 text-sm leading-relaxed text-slate-600">
-            Amazon・楽天・自社ECサイト向けの商品画像制作に使えるツールを比較。背景除去・高解像度出力・商用利用条件を確認できます。
-          </p>
-          <div class="grid grid-cols-1 gap-2 sm:grid-cols-3 text-xs">
-            <div class="rounded-lg bg-slate-50 px-3 py-2">
-              <p class="font-semibold text-slate-700 mb-0.5">こんな方向け</p>
-              <p class="text-slate-500">ECショップ運営者・ネットショップオーナー</p>
-            </div>
-            <div class="rounded-lg bg-slate-50 px-3 py-2">
-              <p class="font-semibold text-slate-700 mb-0.5">確認すべきポイント</p>
-              <p class="text-slate-500">商用利用条件・背景除去・高解像度・透かし</p>
-            </div>
-            <div class="rounded-lg bg-blue-50 px-3 py-2">
-              <p class="font-semibold text-blue-700 mb-0.5">主な候補ツール</p>
-              <p class="text-blue-600">Adobe Firefly・Canva・Fotor AI</p>
-            </div>
-          </div>
+          <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">広告クリエイティブ向け</p>
+          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">Web広告・LP用バナー制作向け。商用利用条件・透かし・文字入れ対応を比較できます。</p>
+          <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
         </a>
 
-        <!-- ブログアイキャッチ -->
-        <a href="/use-cases/blog-eyecatch/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-3 flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-purple-50 text-lg">✍️</span>
-              <h3 class="text-base font-bold text-slate-900 group-hover:text-[#0066FF]">ブログアイキャッチ向けAI画像生成ツール比較</h3>
-            </div>
-            <span class="shrink-0 text-xs font-semibold text-blue-600 group-hover:underline">詳細を見る →</span>
+        <!-- ブログ・アイキャッチ向け -->
+        <a href="/use-cases/blog-eyecatch/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <span class="inline-flex rounded-full bg-purple-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-purple-600">ブログ</span>
           </div>
-          <p class="mb-4 text-sm leading-relaxed text-slate-600">
-            WordPressブログ・note・はてなブログなどのアイキャッチ画像制作向け。無料枠・商用利用条件・日本語対応を確認できます。
-          </p>
-          <div class="grid grid-cols-1 gap-2 sm:grid-cols-3 text-xs">
-            <div class="rounded-lg bg-slate-50 px-3 py-2">
-              <p class="font-semibold text-slate-700 mb-0.5">こんな方向け</p>
-              <p class="text-slate-500">ブロガー・アフィリエイター・ライター</p>
-            </div>
-            <div class="rounded-lg bg-slate-50 px-3 py-2">
-              <p class="font-semibold text-slate-700 mb-0.5">確認すべきポイント</p>
-              <p class="text-slate-500">無料枠・商用利用条件・日本語対応・透かし</p>
-            </div>
-            <div class="rounded-lg bg-blue-50 px-3 py-2">
-              <p class="font-semibold text-blue-700 mb-0.5">主な候補ツール</p>
-              <p class="text-blue-600">Canva・Fotor AI・DALL·E・Ideogram</p>
-            </div>
+          <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">ブログ・アイキャッチ向け</p>
+          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">WordPress・note・はてなブログ向け。無料枠・商用利用条件・日本語対応を確認できます。</p>
+          <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
+        </a>
+
+        <!-- EC商品画像向け -->
+        <a href="/use-cases/ec-product-image/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <span class="inline-flex rounded-full bg-green-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-green-700">EC</span>
           </div>
+          <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">EC商品画像向け</p>
+          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">Amazon・楽天・自社EC向け商品画像制作。背景除去・高解像度・商用利用条件を確認できます。</p>
+          <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
+        </a>
+
+        <!-- アニメイラスト向け -->
+        <a href="/use-cases/anime-illustration/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <span class="inline-flex rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">イラスト</span>
+          </div>
+          <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">アニメイラスト向け</p>
+          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">アニメ・イラスト調の画像生成に向いているツールを比較できます。</p>
+          <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
+        </a>
+
+        <!-- リアル写真風画像向け -->
+        <a href="/use-cases/realistic-photo/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <span class="inline-flex rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-600">写真風</span>
+          </div>
+          <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">リアル写真風画像向け</p>
+          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">写真に近いリアルな画像生成に向いているツールを比較できます。</p>
+          <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
+        </a>
+
+        <!-- SNS・ブログアイキャッチ向け -->
+        <a href="/use-cases/sns-blog-eyecatch/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-200 hover:shadow-md">
+          <div class="mb-2 flex items-center gap-2">
+            <span class="inline-flex rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-600">SNS・ブログ</span>
+          </div>
+          <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">SNS・ブログアイキャッチ向け</p>
+          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">SNSとブログ両方のアイキャッチ制作向けツールをまとめて比較できます。</p>
+          <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
         </a>
 
       </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- 用途別に見るべき比較ポイント                                  -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">用途別に見るべき比較ポイント</h2>
-      <p class="mb-4 text-sm text-slate-500">用途によって優先すべき確認項目が変わります。以下を参考に各用途ページを確認してください。</p>
-
-      <div class="overflow-x-auto rounded-xl border border-slate-100 shadow-sm">
-        <table class="w-full min-w-[640px] text-xs">
-          <thead>
-            <tr class="bg-slate-50 text-left text-[10px] font-semibold uppercase tracking-wide text-slate-500">
-              <th class="px-4 py-3 whitespace-nowrap">確認ポイント</th>
-              <th class="px-4 py-3 whitespace-nowrap">YouTubeサムネ</th>
-              <th class="px-4 py-3 whitespace-nowrap">SNS投稿画像</th>
-              <th class="px-4 py-3 whitespace-nowrap">広告バナー</th>
-              <th class="px-4 py-3 whitespace-nowrap">EC商品画像</th>
-              <th class="px-4 py-3 whitespace-nowrap">ブログアイキャッチ</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100 text-slate-600">
-            {[
-              { point: '商用利用条件', yt: '◎ 必須確認', sns: '◎ 必須確認', ad: '◎ 特に重要', ec: '◎ 必須確認', blog: '○ 収益化時は確認' },
-              { point: '透かし有無', yt: '◎ 見栄えに直結', sns: '○ 確認推奨', ad: '◎ 必須確認', ec: '○ 確認推奨', blog: '○ 確認推奨' },
-              { point: '日本語対応', yt: '○ あると便利', sns: '○ あると便利', ad: '○ あると便利', ec: '○ あると便利', blog: '◎ 重要' },
-              { point: '文字入れ・編集', yt: '◎ 重要', sns: '○ あると便利', ad: '◎ 重要', ec: '△ 用途次第', blog: '○ あると便利' },
-              { point: '編集のしやすさ', yt: '○ 確認推奨', sns: '○ 確認推奨', ad: '◎ 重要', ec: '◎ 重要', blog: '○ 確認推奨' },
-              { point: '無料プラン', yt: '○ 試してから判断', sns: '○ 試してから判断', ad: '△ 商用条件に注意', ec: '△ 商用条件に注意', blog: '◎ 重要' },
-            ].map((row) => (
-              <tr class="bg-white even:bg-slate-50">
-                <td class="px-4 py-3 font-medium text-slate-900 whitespace-nowrap">{row.point}</td>
-                <td class="px-4 py-3">{row.yt}</td>
-                <td class="px-4 py-3">{row.sns}</td>
-                <td class="px-4 py-3">{row.ad}</td>
-                <td class="px-4 py-3">{row.ec}</td>
-                <td class="px-4 py-3">{row.blog}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <p class="mt-3 text-xs text-slate-400">
-        ※ この表は目安です。各ツールの最新公式規約を必ずご確認ください。本記事は法的助言ではありません。
-      </p>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- 条件別ページへの案内                                          -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">条件で絞り込んで探す</h2>
-      <p class="mb-4 text-sm text-slate-500">
-        用途だけでなく、特定の条件でツールを探したい場合は以下のページもご活用ください。
-        用途やプランによって条件が異なる可能性があります。商用利用を前提にする場合は、最新の公式規約をご確認ください。
-      </p>
-
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <a href="/categories/free/" class="flex items-start gap-4 rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
-          <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-600">¥</span>
-          <div>
-            <p class="text-sm font-bold text-slate-900">無料で使えるツール</p>
-            <p class="mt-0.5 text-xs leading-relaxed text-slate-500">無料枠・クレジット制・無料プランのあるツールをまとめて確認できます。</p>
-          </div>
-        </a>
-        <a href="/categories/commercial-use/" class="flex items-start gap-4 rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
-          <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-600">商</span>
-          <div>
-            <p class="text-sm font-bold text-slate-900">商用利用条件を確認しやすいツール</p>
-            <p class="mt-0.5 text-xs leading-relaxed text-slate-500">副業・ビジネスでの利用前に公式情報をもとに確認できます。</p>
-          </div>
-        </a>
-        <a href="/categories/japanese/" class="flex items-start gap-4 rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
-          <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-600">日</span>
-          <div>
-            <p class="text-sm font-bold text-slate-900">日本語対応ツール</p>
-            <p class="mt-0.5 text-xs leading-relaxed text-slate-500">日本語UIや日本語プロンプトに対応したツールを確認できます。</p>
-          </div>
-        </a>
-        <a href="/categories/no-watermark/" class="flex items-start gap-4 rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
-          <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-600">透</span>
-          <div>
-            <p class="text-sm font-bold text-slate-900">透かしなしで使えるツール</p>
-            <p class="mt-0.5 text-xs leading-relaxed text-slate-500">出力画像に透かしが付かないツールを条件で絞り込めます。</p>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- 商用利用・著作権の注意                                        -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">商用利用・著作権について確認すること</h2>
-      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm space-y-4 text-sm leading-relaxed text-slate-600">
-        <ul class="list-disc list-inside space-y-2">
-          <li><strong>商用利用条件はツールやプランによって異なります。</strong> 用途（副業・法人利用・広告掲載など）によっても条件が変わる場合があります。最新の公式規約をご確認ください。</li>
-          <li><strong>無料プランでの商用利用は制限されている場合があります。</strong> 無料枠での商用利用可否は別途確認が必要です。</li>
-          <li><strong>透かしの有無と商用利用条件は別問題です。</strong> 透かしがないことは商用利用が許可されていることを意味しません。</li>
-          <li><strong>AI生成画像の著作権の扱い</strong>は、ツールの利用規約・国や地域の著作権法によって異なる場合があります。「著作権の問題はない」とは断言できません。</li>
-          <li><strong>広告・EC用途は特に慎重に確認してください。</strong> 商用目的が明確な用途では、ツールの商用利用条件を詳しく確認することが重要です。</li>
-        </ul>
-        <div class="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-800">
-          本記事は情報提供を目的としており、法的助言ではありません。商用利用を前提にする場合は、最新の公式規約をご確認ください。
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- FAQ                                                           -->
-    <!-- ============================================================ -->
-    <GuideFAQ
-      title="よくある質問（FAQ）"
-      items={[
-        {
-          q: '用途別にAI画像生成ツールを選ぶメリットは何ですか？',
-          a: '用途によって、確認すべき条件（商用利用条件・透かし・文字入れ・解像度）の優先度が大きく異なります。たとえば広告用途なら商用利用条件の確認が最重要で、ブログなら無料枠の充実度が優先されることが多いです。用途を軸に絞り込むことで、比較すべきポイントを絞り込んで効率よく選べます。',
-        },
-        {
-          q: 'YouTubeサムネとSNS投稿画像では選ぶツールが違いますか？',
-          a: '用途が似ているように見えても、確認すべきポイントは異なります。YouTubeサムネは収益化前提なら商用利用条件の確認が必須で、文字入れのしやすさも重要です。SNS投稿画像は縦型・正方形など出力アスペクト比や、各SNSプラットフォームのガイドラインも併せて確認することが重要です。各用途ページで詳しく比較しています。',
-        },
-        {
-          q: '商用利用する場合は何を確認すべきですか？',
-          a: '各ツールの最新の利用規約・商用利用ポリシーをご確認ください。プランや利用方法によって条件が異なる可能性があります。また、無料プランでの商用利用が制限されている場合もあります。本記事は法的助言ではありません。',
-        },
-        {
-          q: '無料ツールだけで用途別画像を作れますか？',
-          a: '無料枠のあるツールでも用途別画像を制作できる場合がありますが、生成回数・透かし・商用利用条件・出力サイズに制限があることがほとんどです。収益化を前提とする用途では、無料プランでの商用利用可否を必ず公式規約で確認してください。',
-        },
-        {
-          q: '透かしが入るツールは避けた方がいいですか？',
-          a: 'サムネイル・広告・EC商品画像など、見た目が重要な用途では透かしは見栄えに直接影響します。用途の性質上、透かしなしの出力ができるかを確認することが重要です。ただし、透かしなしであっても商用利用条件は別途確認が必要です。',
-        },
-        {
-          q: '初心者はどの用途から試すのがおすすめですか？',
-          a: 'ブログアイキャッチや個人SNS投稿画像は、商用利用への厳密な対応が必要なケースが他の用途より少なく、無料枠でも試しやすい傾向があります。まずは個人利用から始めて、ツールの使い勝手を確かめてから、商用利用が必要な用途（広告・EC・収益化YouTube）に移行するのが無理のない進め方です。',
-        },
-      ]}
-    />
-
-    <!-- NoticeBox -->
-    <NoticeBox />
-
-    <!-- ============================================================ -->
-    <!-- 関連ページリンク                                              -->
-    <!-- ============================================================ -->
-    <section class="mt-10 mb-8">
-      <h2 class="mb-4 text-sm font-semibold text-slate-600">次に読む</h2>
+    <!-- 関連ページ -->
+    <section class="border-t border-slate-100 pt-8">
+      <h2 class="mb-4 text-sm font-semibold text-slate-600">あわせて見る</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
-        <li><a href="/tools/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">すべてのツールを見る</a></li>
-        <li><a href="/compare/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">全ツール比較表</a></li>
-        <li><a href="/categories/free/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">無料で使えるツール</a></li>
-        <li><a href="/categories/commercial-use/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">商用利用できるツール</a></li>
-        <li><a href="/categories/japanese/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">日本語対応ツール</a></li>
-        <li><a href="/categories/no-watermark/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">透かしなしツール</a></li>
-        <li><a href="/use-cases/youtube-thumbnail/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">YouTubeサムネ向けを比較</a></li>
-        <li><a href="/use-cases/ad-banner/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">広告バナー向けを比較</a></li>
+        <li><a href="/compare/" class="rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 text-indigo-700 hover:bg-indigo-100 transition-colors">比較記事一覧</a></li>
+        <li><a href="/guides/" class="rounded-full border border-slate-200 px-4 py-1.5 text-slate-600 hover:bg-slate-100 transition-colors">ガイド一覧</a></li>
+        <li><a href="/tools/" class="rounded-full border border-slate-200 px-4 py-1.5 text-slate-600 hover:bg-slate-100 transition-colors">すべてのツール</a></li>
+        <li><a href="/categories/commercial-use/" class="rounded-full border border-slate-200 px-4 py-1.5 text-slate-600 hover:bg-slate-100 transition-colors">商用利用を確認</a></li>
+        <li><a href="/categories/free/" class="rounded-full border border-slate-200 px-4 py-1.5 text-slate-600 hover:bg-slate-100 transition-colors">無料で試せる</a></li>
       </ul>
     </section>
-
-    <nav class="border-t border-slate-200 pt-6 text-sm">
-      <a href="/" class="text-blue-600 hover:underline">← トップに戻る</a>
-    </nav>
 
   </div>
 </BaseLayout>

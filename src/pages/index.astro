@@ -240,9 +240,9 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
 
       </div>
 
-      <!-- 制作補助カテゴリ（4つ） -->
+      <!-- 制作補助カテゴリ（2つ） -->
       <p class="mb-3 mt-6 text-xs font-semibold uppercase tracking-widest text-slate-400">制作補助ツール</p>
-      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="grid gap-3 sm:grid-cols-2">
 
         <!-- AIデザイン -->
         <div class="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-4">
@@ -255,20 +255,6 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
         <div class="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-4">
           <p class="text-xs font-bold text-slate-600">AI音声・ナレーション</p>
           <p class="mt-1 text-[11px] leading-relaxed text-slate-400">テキスト読み上げ・音声クローンツール。比較情報準備中。</p>
-          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
-        </div>
-
-        <!-- プロンプト活用 -->
-        <div class="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-4">
-          <p class="text-xs font-bold text-slate-600">プロンプト活用</p>
-          <p class="mt-1 text-[11px] leading-relaxed text-slate-400">画像・動画生成を高精度化するプロンプト集・テンプレート。準備中。</p>
-          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
-        </div>
-
-        <!-- 実務テンプレート -->
-        <div class="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-4">
-          <p class="text-xs font-bold text-slate-600">実務テンプレート</p>
-          <p class="mt-1 text-[11px] leading-relaxed text-slate-400">SNS・広告・EC向け実務利用テンプレート集。準備中。</p>
           <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
         </div>
 
@@ -481,6 +467,10 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
           AIデザイン
           <span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[8px] text-slate-400">準備中</span>
         </span>
+        <span class="inline-flex cursor-not-allowed items-center rounded-full border border-slate-100 px-4 py-1.5 text-xs font-semibold text-slate-300" title="比較データ準備中">
+          AI音声・ナレーション
+          <span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[8px] text-slate-400">準備中</span>
+        </span>
       </div>
 
       <!-- AI動画生成テーブル -->
@@ -542,6 +532,8 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
   <section class="bg-slate-50 py-16">
     <div class="mx-auto max-w-5xl px-6">
       <h2 class="mb-7 text-2xl font-bold text-[#002B61]">使い方・選び方ガイド</h2>
+
+      <!-- 公開済みガイド -->
       <div class="grid gap-4 sm:grid-cols-2">
         {[
           {
@@ -552,20 +544,20 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
           },
           {
             href:  '/guides/free-ai-image-tools/',
-            tag:   '無料プラン',
+            tag:   '無料ツールの選び方',
             title: '無料で使えるAI画像生成ツールの選び方',
             desc:  '無料プランの比較・制限・用途別のおすすめポイントを解説',
           },
           {
             href:  '/guides/watermark-credit-guide/',
-            tag:   '透かし',
-            title: '透かし・クレジット表記ガイド',
+            tag:   '透かし・クレジット表記',
+            title: '透かし・クレジット表記の確認ガイド',
             desc:  '生成画像の透かし条件とクレジット表記の考え方を整理',
           },
           {
             href:  '/guides/japanese-ai-image-tools/',
             tag:   '日本語対応',
-            title: '日本語対応AI画像生成ツールの選び方',
+            title: '日本語対応ツールの選び方',
             desc:  '日本語UIと日本語プロンプト対応状況を比較・解説',
           },
         ].map(({ href, tag, title, desc }) => (
@@ -581,6 +573,44 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
             <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
           </a>
         ))}
+      </div>
+
+      <!-- 今後追加予定のガイド -->
+      <p class="mb-3 mt-8 text-xs font-semibold uppercase tracking-widest text-slate-400">今後追加予定</p>
+      <div class="grid gap-4 sm:grid-cols-2">
+
+        <!-- プロンプト活用ガイド（準備中） -->
+        <div class="flex flex-col rounded-xl border border-slate-100 bg-white p-6 shadow-sm opacity-70">
+          <span class="mb-3 inline-flex w-fit rounded-full bg-slate-100 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+            プロンプト活用
+          </span>
+          <p class="font-bold leading-snug text-slate-500">プロンプト活用ガイド</p>
+          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-400">AI動画生成・AI画像生成の出力品質を高めるための指示例・プロンプトテンプレートを解説予定。</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="inline-flex rounded-full bg-slate-100 px-2.5 py-1 text-[9px] font-semibold text-slate-400">準備中</span>
+            <div class="flex gap-2 text-[10px] text-blue-500">
+              <a href="/video-generators/" class="hover:underline">AI動画生成を見る →</a>
+              <a href="/tools/" class="hover:underline">AI画像生成を見る →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 実務テンプレート（準備中） -->
+        <div class="flex flex-col rounded-xl border border-slate-100 bg-white p-6 shadow-sm opacity-70">
+          <span class="mb-3 inline-flex w-fit rounded-full bg-slate-100 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+            実務テンプレート
+          </span>
+          <p class="font-bold leading-snug text-slate-500">実務テンプレート集</p>
+          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-400">制作フローや確認シートなど、AI動画・画像生成を実務で使うための補助資料を追加予定。</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="inline-flex rounded-full bg-slate-100 px-2.5 py-1 text-[9px] font-semibold text-slate-400">準備中</span>
+            <div class="flex gap-2 text-[10px] text-blue-500">
+              <a href="/video-generators/" class="hover:underline">AI動画生成を見る →</a>
+              <a href="/tools/" class="hover:underline">AI画像生成を見る →</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>

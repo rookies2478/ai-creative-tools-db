@@ -179,7 +179,7 @@ Runwayは主に3つの使い方があります。
 ## 関連ページ
 
 - [RunwayとPikaを比較](/compare/runway-vs-pika/) — 料金・無料枠・商用利用・用途別の選び方を比較
-- [AI動画生成ツール一覧](/video-generators/) — 主要AI動画生成ツールの比較
-- [無料で使えるAI動画生成ツール](/categories/free-video/) — 無料枠のあるツールをまとめて確認
+- [AI動画生成ツール一覧](/categories/video-generation/) — 主要AI動画生成ツールの比較
+- [無料で使えるAI動画生成ツール](/conditions/free/) — 無料枠のあるツールをまとめて確認
 - [AI商用利用の注意点](/guides/commercial-use-copyright/) — 商用利用前に確認すべきポイント
 

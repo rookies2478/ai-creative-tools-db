@@ -165,5 +165,5 @@ Leonardo AIはゲーム・イラスト・キャラクター画像の生成に強
 - **人物・ブランド・第三者素材：** 著名人、ブランドロゴ、第三者が権利を持つ素材を扱う場合は、別途確認が必要です
 - **本記事は法的助言ではありません**
 
-[AIツール一覧へ](/tools/) ／ [無料で使えるAIツール](/categories/free/) ／ [商用利用と著作権について](/guides/commercial-use-copyright/)
+[AIツール一覧へ](/tools/) ／ [無料で使えるAIツール](/conditions/free/) ／ [商用利用と著作権について](/guides/commercial-use-copyright/)
 

@@ -26,7 +26,7 @@ const toolPageUrl = `${siteUrl}/tools/${entry.slug}/`;
 
 // BreadcrumbList: category に応じて親カテゴリを切り替える
 const isVideo = data.category === 'video' || data.category === 'both';
-const categoryUrl = isVideo ? `${siteUrl}/video-generators/` : `${siteUrl}/tools/`;
+const categoryUrl = isVideo ? `${siteUrl}/categories/video-generation/` : `${siteUrl}/tools/`;
 const categoryName = isVideo ? 'AI動画生成ツール一覧' : 'AI画像生成ツール一覧';
 
 const breadcrumbJsonLd = {

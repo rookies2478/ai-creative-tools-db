@@ -93,7 +93,7 @@ Ideogramは画像内のテキスト表現やタイポグラフィに強みを持
 
 無料アカウントでクレジットが提供される場合があります。有料プランの詳細は変更される可能性があるため、**最新の情報は[公式料金ページ](https://ideogram.ai/pricing)でご確認ください。**
 
-[無料・低コストのAI画像ツールを比較する](/categories/free/)
+[無料・低コストのAI画像ツールを比較する](/conditions/free/)
 
 ## 商用利用について
 
@@ -104,20 +104,20 @@ Ideogram公式FAQでは、生成画像について所有権を主張せず、利
 
 > **免責事項：** このページは情報提供を目的としており、法的助言ではありません。利用前に[Ideogram利用規約](https://ideogram.ai/legal/tos)および[公式FAQ](https://docs.ideogram.ai/frequently-asked-questions)の最新版をご確認ください。
 
-[商用利用できるAI画像ツールを比較する](/categories/commercial-use/)
+[商用利用できるAI画像ツールを比較する](/conditions/commercial-use/)
 
 ## 日本語対応
 
 - **日本語UI：** 非対応（英語インターフェースのみ）
 - **日本語プロンプト：** 対応状況は公式情報でご確認ください
 
-[日本語対応AIツールを比較する](/categories/japanese/)
+[日本語対応AIツールを比較する](/conditions/japanese/)
 
 ## 透かし（ウォーターマーク）条件
 
 透かしの有無・条件は現時点での公式情報では確認できていません。最新の条件は[公式サイト](https://ideogram.ai/)でご確認ください。
 
-[透かしなしのAI画像ツールを比較する](/categories/no-watermark/)
+[透かしなしのAI画像ツールを比較する](/conditions/no-watermark/)
 
 ## こんな人に向いている
 

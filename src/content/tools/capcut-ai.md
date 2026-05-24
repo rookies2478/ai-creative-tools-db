@@ -215,8 +215,8 @@ CapCutの透かし（ウォーターマーク・ロゴ表示）の扱いは、**
 
 ## 関連ページ
 
-- [AI動画生成ツール一覧](/video-generators/) — 主要AI動画生成ツールの比較・選び方
-- [無料で使えるAI動画生成ツール比較](/categories/free-video/) — 無料枠・商用利用条件・透かしの比較
+- [AI動画生成ツール一覧](/categories/video-generation/) — 主要AI動画生成ツールの比較・選び方
+- [無料で使えるAI動画生成ツール比較](/conditions/free/) — 無料枠・商用利用条件・透かしの比較
 - [RunwayとPikaを比較](/compare/runway-vs-pika/) — 代表的な動画生成ツールの比較記事
 - [Runway](/tools/runway/) — 映像生成・映像編集に特化したAI動画生成ツール
 - [Kling AI](/tools/kling-ai/) — テキスト・画像からリアルな動画を生成するAIツール

@@ -1,7 +1,6 @@
 ---
 name: "DALL·E"
 shortDescription: "OpenAI開発のAI画像生成モデル。ChatGPTと統合されており、プロンプトへの忠実度が高い画像生成が可能。"
-slug: "dalle"
 category: "image"
 officialUrl: "https://openai.com/dall-e-3"
 freePlan: "limited"

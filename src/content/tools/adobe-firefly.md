@@ -26,8 +26,8 @@ weaknesses:
   - "プランによっては生成画像に可視透かしが入る場合がある"
   - "他ツールと比べて表現の自由度・スタイルの幅が狭い傾向"
   - "ベータ機能は商用利用対象外とされている"
-lastReviewed: "2026-05-04"
-nextReviewDue: "2026-06-04"
+lastReviewed: "2026-05-24"
+nextReviewDue: "2026-06-24"
 pricingModel: "subscription_credit"
 freePlanNote: "無料プランで一定数の生成クレジットあり（数量は変更の可能性あり）"
 paidPlanNote: "Firefly Standard $9.99/月〜。Creative Cloud All Appsに含まれる場合あり。"
@@ -76,12 +76,18 @@ sources:
   - title: "Adobe Firefly 公式サイト"
     url: "https://firefly.adobe.com"
 faqs:
-  - question: "無料で使えますか？"
-    answer: "無料プランで一定数の生成クレジットが提供される場合があります。クレジット数はプランや時期により変更される可能性があるため、最新の状況はAdobe公式FAQをご確認ください。"
-  - question: "商用利用できますか？"
-    answer: "Adobe公式情報上、商用利用を想定したサービスとして案内されています。ただしβ（ベータ）表示の機能は商用利用対象外とされています。利用前に最新のAdobe生成AIユーザーガイドラインをご確認ください。このページは法的助言ではありません。"
+  - question: "Adobe Fireflyは無料で使えますか？"
+    answer: "無料プランで一定数の生成クレジットが提供される場合があります。クレジット数・無料枠の条件はプランや時期により変更される可能性があるため、最新の状況はAdobe公式サイトをご確認ください。"
+  - question: "Adobe Fireflyで作成した画像は商用利用できますか？"
+    answer: "Adobe公式情報上、商用利用を想定したサービスとして案内されています。ただし商用利用条件はプランや用途によって異なる場合があります。β（ベータ）表示の機能は商用利用対象外とされています。利用前に最新のAdobe生成AIユーザーガイドラインをご確認ください。本記事は法的助言ではありません。"
+  - question: "Adobe Fireflyはどんな用途に向いていますか？"
+    answer: "SNS画像、広告バナー、ブログアイキャッチ、デザイン素材の案出しなどに向いています。Adobe製品（Photoshop・Illustratorなど）と組み合わせて使う場合は、各製品の利用条件も合わせてご確認ください。"
+  - question: "Adobe FireflyとMidjourneyはどう違いますか？"
+    answer: "Adobe FireflyはAdobe製品との連携やデザイン制作寄りの用途に向いているとされています。MidjourneyはアートStyling・雰囲気重視の画像生成で比較されやすいです。用途・目的に応じてご確認ください。"
+  - question: "Adobe FireflyとCanva AI Image Generatorはどう違いますか？"
+    answer: "Adobe FireflyはAdobe Creative Cloudとの連携・画像生成機能が中心です。Canva AI Image Generatorはテンプレートを使ったデザイン制作との組み合わせで比較されやすいです。利用目的に合わせて各公式サイトをご確認ください。"
   - question: "日本語で使えますか？"
-    answer: "日本語UIに対応しており、日本語プロンプトでの生成も可能です。"
+    answer: "日本語UIに対応しており、日本語プロンプトでの生成も可能です。ただし日本語プロンプトの精度は英語と異なる場合があります。"
   - question: "透かしは入りますか？"
     answer: "プランによっては可視透かしが入る場合があります。全プラン共通でC2PAの不可視メタデータが埋め込まれる場合があります。最新の条件は公式サイトでご確認ください。"
   - question: "どの環境で使えますか？"
@@ -92,6 +98,8 @@ faqs:
 
 Adobe FireflyはAdobeが提供するAI画像生成サービス。Photoshop・IllustratorなどAdobe Creative Cloudと統合されており、商用利用を想定した設計が特徴とされています。学習データには権利処理済みのコンテンツとパブリックドメイン素材を使用しているとAdobeは説明しています。
 
+SNS画像・広告バナー・ブログアイキャッチ・デザイン素材の案出しに向いており、生成後にPhotoshopやIllustratorで編集するワークフローとの親和性が高いとされています。
+
 ## 料金プラン
 
 | プラン | 料金 | 生成クレジット |
@@ -101,28 +109,61 @@ Adobe FireflyはAdobeが提供するAI画像生成サービス。Photoshop・Ill
 
 - Creative Cloud All Appsプランに含まれる場合があります
 - 料金・クレジット数はプランや時期により変わる可能性があります
-- **最新のクレジット数・料金はAdobe公式FAQをご確認ください**
+- **最新のクレジット数・料金はAdobe公式サイトをご確認ください**
 
 ## 商用利用について
 
-Adobe公式情報上、Fireflyは商用利用を想定したAI生成サービスとして案内されています。以下の点に注意してください。
+Adobe公式情報上、Fireflyは商用利用を想定したAI生成サービスとして案内されています。以下の点にご注意ください。
 
 - 学習データには契約済みのAdobe Stock素材とパブリックドメインコンテンツを使用しているとされています
 - **β（ベータ）表示の機能は商用利用の対象外とされています**
-- 第三者素材の使用、利用プラン、用途によって条件が変わる可能性があります
+- 商用利用条件はプランや用途によって異なる場合があります
+- 人物・著名人・ブランドロゴ・第三者素材を扱う場合は、別途確認が必要です
 
 > **免責事項：** このページは情報提供を目的としており、法的助言ではありません。商用利用前は[Adobe生成AIユーザーガイドライン](https://www.adobe.com/legal/licenses-terms/adobe-gen-ai-user-guidelines.html)の最新版をご確認ください。
 
-## 比較記事
+詳しくは → [商用利用・著作権の注意点ガイド](/guides/commercial-use-copyright/)
 
-[Adobe FireflyとMicrosoft Designerを比較する →](/compare/adobe-firefly-vs-microsoft-designer/)
+## 向いている人・向いていない人
 
-[Canva AIとAdobe Fireflyを比較する →](/compare/canva-ai-vs-adobe-firefly/)
+### 向いている人
+
+- Adobe製品（Photoshop・Illustratorなど）をすでに使っている人
+- SNS画像・広告バナーの案を素早く作りたい人
+- ブログアイキャッチやデザイン素材の叩き台が欲しい人
+- 生成後にAdobeツールで加工・編集したい人
+
+### 向いていない人
+
+- アート性の強い画像を大量に作りたい人（表現の幅が狭い傾向あり）
+- AdobeアカウントやAdobe製品連携を使いたくない人
+- 公式条件を確認せずに商用案件に使いたい人
+- 毎回同じ人物・構図を完全に再現したい人
+
+## Adobe製品との連携
+
+Adobe FireflyはAdobe Express・Photoshop・Illustratorと連携して利用できます。たとえばPhotoshopの「生成塗りつぶし」や「生成拡張」でFireflyのモデルを呼び出すことができます。生成した画像をそのまま編集ワークフローに組み込める点が他サービスとの違いとして挙げられます。
+
+各機能の利用可否はプランや製品バージョンによって異なります。最新の対応状況はAdobe公式サイトをご確認ください。
+
+## MidjourneyやCanva AI Image Generatorとの違い
+
+| 比較軸 | Adobe Firefly | Midjourney | Canva AI |
+|---|---|---|---|
+| 用途の傾向 | デザイン制作・Adobe連携 | アート調・雰囲気重視 | テンプレートデザイン |
+| 商用利用の案内 | 公式情報上、商用利用想定と案内 | プランによる（要確認） | プランによる（要確認） |
+| Adobe製品連携 | あり | なし | 限定的 |
+| 日本語UI | 対応 | 限定的 | 対応 |
+
+※各ツールの最新条件は公式サイトをご確認ください。
+
+他のツールと比較したい方は → [画像生成AIツール一覧](/tools/)
 
 ## 日本語対応
 
 - **日本語UI：** 対応（複数言語にローカライズされています）
 - **日本語プロンプト：** 対応（多言語のテキストプロンプトに対応しているとされています）
+- 日本語プロンプトの精度は英語と異なる場合があります
 
 ## 透かし（ウォーターマーク）
 
@@ -131,3 +172,10 @@ Adobe公式情報上、Fireflyは商用利用を想定したAI生成サービス
 - **全プラン共通：** C2PA標準の不可視メタデータ（コンテンツクレデンシャル）が埋め込まれる場合があります
 - 最新の条件はAdobe公式サイトでご確認ください
 
+透かしなしのツールを探している方は → [透かしなしツール一覧](/categories/no-watermark/)
+
+## 比較記事
+
+[Adobe FireflyとMicrosoft Designerを比較する →](/compare/adobe-firefly-vs-microsoft-designer/)
+
+[Canva AIとAdobe Fireflyを比較する →](/compare/canva-ai-vs-adobe-firefly/)

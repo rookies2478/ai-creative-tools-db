@@ -1,7 +1,6 @@
 ---
 name: "SeaArt AI"
 shortDescription: "画像生成・画像編集・キャラクター作成などを含むクリエイティブAIプラットフォーム。アニメ風・イラスト系の制作と相性がよい。"
-slug: "seaart-ai"
 category: "image"
 officialUrl: "https://www.seaart.ai/"
 freePlan: true

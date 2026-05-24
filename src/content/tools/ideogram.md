@@ -1,7 +1,6 @@
 ---
 name: "Ideogram"
 shortDescription: "テキスト入り画像やタイポグラフィ表現に強いAI画像生成サービス。ロゴ風デザイン・ポスター・SNS画像の作成に活用されている。"
-slug: "ideogram"
 category: "image"
 officialUrl: "https://ideogram.ai/"
 freePlan: true

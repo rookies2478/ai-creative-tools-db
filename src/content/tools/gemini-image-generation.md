@@ -1,7 +1,6 @@
 ---
 name: "Gemini画像生成"
 shortDescription: "Google GeminiアプリでAI画像生成・画像編集・テキスト入り画像・スタイル適用などができる機能。Googleアカウントで手軽に利用可能。"
-slug: "gemini-image-generation"
 category: "image"
 officialUrl: "https://gemini.google/jp/overview/image-generation/?hl=ja-JP"
 freePlan: true

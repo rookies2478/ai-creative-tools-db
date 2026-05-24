@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allTools = await getCollection('tools');
+const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.category === 'both');
+---
+
+<BaseLayout
+  title="AI動画編集ツール比較｜AIを使った動画編集・字幕・カット自動化"
+  description="AIを活用した動画編集ツールの比較ページです。AI動画生成との違い、選び方、比較ポイントを整理しています。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/categories/video-editing/"
+  noindex={true}
+>
+  <div class="mx-auto max-w-5xl px-6 py-12">
+
+    <nav class="mb-6 text-sm text-slate-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <span>AI動画編集</span>
+    </nav>
+
+    <!-- noindex中のため準備中バナー -->
+    <div class="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800">
+      このページは現在情報を整備中です。掲載内容は随時更新予定です。
+    </div>
+
+    <h1 class="mb-3 text-3xl font-bold text-slate-900">AI動画編集ツール比較</h1>
+    <p class="mb-6 text-slate-600 leading-relaxed">
+      AIを活用した動画編集ツールの比較・選び方を整理するページです。
+      <a href="/categories/video-generation/" class="text-blue-600 hover:underline">AI動画生成</a>との違いや、字幕追加・カット編集・トリミングなどの編集補助機能を持つツールを対象としています。
+    </p>
+
+    <!-- AI動画生成との違い -->
+    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-5">
+      <h2 class="mb-4 text-base font-bold text-[#002B61]">AI動画生成との違い</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-lg border border-blue-100 bg-blue-50 px-4 py-4">
+          <p class="mb-2 text-sm font-bold text-blue-800">AI動画生成</p>
+          <ul class="space-y-1.5 text-xs text-blue-700">
+            <li>▸ テキストや画像からゼロで動画を生成する</li>
+            <li>▸ Runway・Pika・Kling AIなどが代表例</li>
+            <li>▸ 撮影素材がなくても動画を作れる</li>
+            <li>▸ SNS・広告・試作向けの短尺動画が中心</li>
+          </ul>
+        </div>
+        <div class="rounded-lg border border-indigo-100 bg-indigo-50 px-4 py-4">
+          <p class="mb-2 text-sm font-bold text-indigo-800">AI動画編集</p>
+          <ul class="space-y-1.5 text-xs text-indigo-700">
+            <li>▸ 既存の動画素材をAIで編集・加工する</li>
+            <li>▸ 字幕自動生成・カット補助・BGM提案など</li>
+            <li>▸ 撮影した動画を素材として使う</li>
+            <li>▸ YouTube・解説動画・Vlog向けが中心</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 比較ポイント -->
+    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-5">
+      <h2 class="mb-4 text-base font-bold text-[#002B61]">AI動画編集ツールを選ぶ比較ポイント</h2>
+      <ul class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>字幕・テロップの自動生成：</strong>音声から自動で字幕を生成できるか、日本語対応の精度はどうか。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>カット・トリミングの補助：</strong>AIが動画の中から必要なシーンを自動選別・カットできるか。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>BGM・音声の自動調整：</strong>BGM生成・音量調整・ノイズ除去などの音声編集機能。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>書き出し形式・解像度：</strong>SNS・YouTube向けの形式に対応しているか。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>商用利用条件：</strong>生成・編集した動画を収益化コンテンツに使う場合は、利用規約を必ずご確認ください。本記事は法的助言ではありません。</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 関連ページ -->
+    <section class="mb-10">
+      <h2 class="mb-4 text-base font-bold text-[#002B61]">関連ページ</h2>
+      <ul class="flex flex-wrap gap-3 text-sm">
+        <li>
+          <a href="/categories/video-generation/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700 hover:bg-blue-100">
+            AI動画生成ツール一覧
+          </a>
+        </li>
+        <li>
+          <a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100">
+            無料で試せるAIツール
+          </a>
+        </li>
+        <li>
+          <a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100">
+            商用利用を確認しやすいAIツール
+          </a>
+        </li>
+        <li>
+          <a href="/comparisons/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100">
+            比較記事一覧
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-10">
+      <h2 class="mb-6 text-xl font-bold text-[#002B61]">よくある質問</h2>
+      <div class="space-y-4">
+        <div class="rounded-lg border border-slate-100 bg-white p-5">
+          <p class="font-semibold text-slate-900">AI動画編集とAI動画生成はどう違いますか？</p>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">AI動画生成はテキストや画像からゼロで動画を作るサービスです。AI動画編集は撮影済みの動画素材をAIで字幕追加・カット・加工するサービスです。用途によって向いているツールが異なります。</p>
+        </div>
+        <div class="rounded-lg border border-slate-100 bg-white p-5">
+          <p class="font-semibold text-slate-900">CapCut AIはAI動画編集ツールですか？</p>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">CapCut AIはテンプレート編集・字幕自動生成・AIエフェクトなど動画編集補助機能を多数持ちます。一方でAI動画生成機能も搭載されており、両方の性質を持つツールです。</p>
+        </div>
+        <div class="rounded-lg border border-slate-100 bg-white p-5">
+          <p class="font-semibold text-slate-900">商用利用前に確認すべきことは？</p>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">収益化コンテンツへの利用を前提にする場合は、各ツールの公式利用規約で商用利用条件を確認してください。本記事は法的助言ではありません。</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="text-xs text-slate-400">掲載情報は確認時点のものです。最新情報は各公式サイトをご確認ください。</p>
+
+  </div>
+</BaseLayout>

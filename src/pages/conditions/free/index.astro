@@ -1,0 +1,138 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+
+const tools = await getCollection('tools');
+const freePlanTools = tools.filter((t) => t.data.freePlan === true || t.data.freePlan === 'limited');
+
+const faqs = [
+  {
+    q: '無料プランで商用利用できますか？',
+    a: 'ツールによって異なります。無料プランでも商用利用が案内されているツールがある一方、無料プランでは商用利用が制限され有料プランへの移行が必要なツールもあります。また、無料プランでは透かしが入る場合があり、成果物の実務利用が難しい場面もあります。商用利用前は必ず最新の公式規約をご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '無料プランで出力できる画像・動画の数に制限はありますか？',
+    a: 'ほとんどのツールでは無料プランに出力回数・クレジット数・生成時間などの上限が設けられています。上限はツールやプランにより異なり、一定期間ごとにリセットされる場合や、使い切ったら追加課金が必要な場合があります。最新の無料枠条件は各公式サイトでご確認ください。',
+  },
+  {
+    q: '透かしが入るツールはどう見分けますか？',
+    a: '各ツールの詳細ページ（/tools/ から確認できます）や公式サイトの料金ページに透かし条件が記載されている場合があります。透かしなしで利用できるツールは /conditions/no-watermark/ でまとめています。ただし条件はプランや時期によって変わる可能性があるため、最新情報は公式サイトでご確認ください。',
+  },
+];
+---
+
+<BaseLayout
+  title="無料で使えるAIクリエイティブツール比較｜無料枠・透かし・商用利用条件を確認"
+  description="無料プランがあるAI画像生成・AI動画生成ツールの比較。無料枠の内容、透かしの有無、商用利用条件、日本語対応、出力制限などの条件を整理。実務利用前に公式規約を必ずご確認ください。本記事は法的助言ではありません。"
+  canonicalPath="/conditions/free/"
+>
+  <div class="mx-auto max-w-5xl px-6 py-12">
+
+    <nav class="mb-6 text-sm text-slate-500" aria-label="パンくずリスト">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <span>無料で使えるAIツール</span>
+    </nav>
+
+    <h1 class="mb-3 text-2xl font-bold text-slate-900 sm:text-3xl">
+      無料で使えるAIクリエイティブツール
+    </h1>
+    <p class="mb-8 text-sm leading-relaxed text-slate-500">
+      無料プランがあるAI画像生成・AI動画生成ツールの条件をまとめています。
+      無料枠の内容、透かし、商用利用条件、出力制限を確認してから利用を始めましょう。
+      条件はプランや時期によって変わる可能性があるため、実務利用前に必ず最新の公式情報をご確認ください。
+    </p>
+
+    <section class="mb-10">
+      <h2 class="mb-4 text-lg font-bold text-slate-800">無料プランで確認するポイント</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <p class="mb-1 font-semibold text-slate-800">透かし（ウォーターマーク）</p>
+          <p class="text-sm leading-relaxed text-slate-600">
+            無料プランでは生成画像・動画に透かしが自動で付与されるツールがあります。
+            透かしなしで利用したい場合は有料プランへの移行が必要なケースがほとんどです。
+            <a href="/conditions/no-watermark/" class="text-blue-600 hover:underline">透かしなしで使えるツール一覧</a>もご参照ください。
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <p class="mb-1 font-semibold text-slate-800">商用利用条件</p>
+          <p class="text-sm leading-relaxed text-slate-600">
+            無料プランでの商用利用可否はツールによって異なります。
+            SNSへの投稿や広告・ブログへの使用が商用と判断される場合があります。
+            <a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール一覧</a>で詳細をご確認ください。本記事は法的助言ではありません。
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <p class="mb-1 font-semibold text-slate-800">日本語対応</p>
+          <p class="text-sm leading-relaxed text-slate-600">
+            日本語UIやプロンプトへの対応状況はツールによって異なります。
+            日本語対応ツールは<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール一覧</a>でも確認できます。
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <p class="mb-1 font-semibold text-slate-800">出力制限</p>
+          <p class="text-sm leading-relaxed text-slate-600">
+            無料プランでは月あたりの生成回数・クレジット数・動画の長さなどに上限が設けられている場合があります。
+            制限の内容はツールや時期によって変わる可能性があるため、最新情報は各公式サイトでご確認ください。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {freePlanTools.length > 0 && (
+      <section class="mb-10">
+        <h2 class="mb-4 text-lg font-bold text-slate-800">無料枠があるAIツール一覧</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-sm">
+            <thead>
+              <tr class="bg-slate-50">
+                <th class="border border-slate-200 px-4 py-2 text-left font-semibold text-slate-700">ツール名</th>
+                <th class="border border-slate-200 px-4 py-2 text-left font-semibold text-slate-700">無料プラン</th>
+              </tr>
+            </thead>
+            <tbody>
+              {freePlanTools.map((t) => (
+                <tr class="hover:bg-slate-50">
+                  <td class="border border-slate-200 px-4 py-2">
+                    <a href={`/tools/${t.slug}/`} class="text-blue-600 hover:underline">{t.data.name}</a>
+                  </td>
+                  <td class="border border-slate-200 px-4 py-2 text-slate-600">
+                    {t.data.freePlan === 'limited' ? '制限あり' : 'あり'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-2 text-xs text-slate-400">※ 無料枠の条件は変更される場合があります。最新情報は各公式サイトでご確認ください。</p>
+      </section>
+    )}
+
+    <section class="mb-10">
+      <h2 class="mb-4 text-lg font-bold text-slate-800">カテゴリ別に探す</h2>
+      <div class="flex flex-wrap gap-3">
+        <a href="/categories/image-generation/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">AI画像生成ツール一覧</a>
+        <a href="/categories/video-generation/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">AI動画生成ツール一覧</a>
+        <a href="/conditions/commercial-use/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">商用利用条件を確認しやすいツール</a>
+        <a href="/conditions/no-watermark/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">透かしなしで使えるツール</a>
+        <a href="/conditions/japanese/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">日本語対応ツール</a>
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="mb-6 text-lg font-bold text-slate-800">よくある質問</h2>
+      <GuideFAQ items={faqs} />
+    </section>
+
+    <div class="rounded-xl border border-amber-100 bg-amber-50 p-5 text-sm leading-relaxed text-amber-800">
+      <p class="font-semibold mb-1">免責事項</p>
+      <p>
+        本ページの情報は公式サイト・公式規約を参考に整理したものですが、内容の正確性・完全性を保証するものではありません。
+        商用利用条件・著作権・透かし条件はプランや用途、時期によって変わる可能性があります。
+        実務利用前には必ず各ツールの最新公式情報をご確認ください。本ページは法的助言ではありません。
+      </p>
+    </div>
+
+  </div>
+</BaseLayout>

@@ -1,0 +1,183 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NoticeBox from '../../../components/NoticeBox.astro';
+import CompareTablePreview from '../../../components/CompareTablePreview.astro';
+import ConditionChips from '../../../components/ConditionChips.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+
+const tools = await getCollection('tools');
+const filtered = tools.filter(
+  (t) => t.data.commercialUse === 'ok' || t.data.commercialUse === 'paid-only' || t.data.commercialUse === 'limited'
+);
+
+const COMMERCIAL_LABEL: Record<string, string> = {
+  ok: '公式情報で可能',
+  'paid-only': '有料プラン向け',
+  limited: '条件あり',
+  no: '不可または非推奨',
+};
+
+const faqs = [
+  {
+    q: '商用利用できるAI画像生成ツールはどう選べばいいですか？',
+    a: 'まず公式規約で商用利用がどう案内されているかを確認し、次にプラン（無料・有料）、透かしの有無、用途ごとの制限を確認するのが基本の流れです。用途やプランによって条件が異なる可能性があるため、実務利用前には必ず最新の公式規約をご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '無料プランでも商用利用できますか？',
+    a: 'ツールによって異なります。無料プランでも商用利用が案内されているツールがある一方、無料プランでは商用利用が制限され有料プランへの移行が必要なツールもあります。また、無料プランでは透かしが入る場合があり、成果物の実務利用が難しい場面もあります。各ツールの無料枠条件は /categories/free/ ページでも確認できます。本記事は法的助言ではありません。',
+  },
+  {
+    q: '有料プランなら必ず商用利用できますか？',
+    a: '必ずしもそうとは限りません。有料プランでも生成内容・用途・入力素材によって制限が生じる場合があります。公式規約では利用禁止コンテンツや特定用途の制限が別途定められているケースがあります。用途やプランによって条件が異なる可能性があるため、最新の公式規約をご確認ください。',
+  },
+  {
+    q: 'AI生成画像の著作権は誰にありますか？',
+    a: 'AI生成画像の著作権の帰属は、ツールの利用規約・国・法律によって解釈が異なる場合があります。一部ツールは「ユーザーに権利を付与する」旨を規約に明記していますが、これは法的な著作権の確定を意味しない場合もあります。また、入力素材や参照画像に第三者の権利が含まれる場合は追加の注意が必要です。著作権に関しては法的断定を避け、必要に応じて専門家にご相談ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: 'YouTubeサムネや広告バナーに使う場合の注意点は？',
+    a: '収益化を伴うYouTubeチャンネルのサムネイルや広告バナーは、商用利用と判断される場合があります。プランごとの商用利用条件・透かし条件・クレジット表記義務を各ツールの公式規約で事前に確認することを推奨します。透かしなしツールは /categories/no-watermark/ ページで確認できます。本記事は法的助言ではありません。',
+  },
+  {
+    q: '商用利用前に確認すべき公式情報は何ですか？',
+    a: '主に以下の3点を確認することを推奨します：①利用規約（Terms of Service）における商用利用の定義と許可範囲、②プランごとの料金ページにおける商用利用の記載、③コンテンツポリシー（禁止コンテンツ・用途）。各ツールの詳細ページには公式情報へのリンクを掲載しています（/tools/ から確認できます）。本記事は法的助言ではありません。',
+  },
+  {
+    q: '「条件あり」と表示されていれば商用利用できますか？',
+    a: '利用できる場合がありますが、プラン・用途・生成コンテンツの内容・利用規約によって条件が変わります。実際に使う前に、必ず各ツールの最新公式情報をご確認ください。',
+  },
+];
+---
+
+<BaseLayout
+  title="商用利用条件を確認しやすいAI画像生成ツール比較｜公式規約・料金・透かしを整理"
+  description="AI画像・動画生成ツールの商用利用条件を比較。ok／paid-only／limited の違い、無料・有料プランの条件差、透かし、日本語対応を整理。実務利用前に公式規約を必ずご確認ください。本記事は法的助言ではありません。"
+  canonicalPath="/conditions/commercial-use/"
+>
+  <div class="mx-auto max-w-5xl px-6 py-12">
+
+    <nav class="mb-6 text-sm text-slate-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <a href="/tools/" class="hover:underline">ツール一覧</a>
+      <span class="mx-1">/</span>
+      <span>条件別：商用利用条件を確認したいAIクリエイティブツール</span>
+    </nav>
+
+    <h1 class="mb-3 text-3xl font-bold text-slate-900">商用利用条件を確認しやすいAI画像生成ツール比較</h1>
+    <p class="mb-4 text-slate-600 leading-relaxed">
+      AI画像・動画生成ツールを仕事や副業で使う場合は、<strong>商用利用条件を事前に確認すること</strong>が重要です。
+      このページでは、公式情報をもとに商用利用ステータスを整理しています。
+      ただし、用途・プラン・生成内容によって条件は異なる場合があり、規約はツール側の判断で随時変更されることがあります。
+      <a href="/conditions/free/" class="text-blue-600 hover:underline">無料で使えるツール</a>や
+      <a href="/conditions/no-watermark/" class="text-blue-600 hover:underline">透かしなしのツール</a>、
+      <a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>とあわせて比較する際もご活用ください。
+    </p>
+
+    <div class="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-5 py-3.5 text-sm text-amber-800 leading-relaxed">
+      商用利用の可否は、<strong>プラン・生成内容・利用目的・各ツールの規約</strong>によって変わる場合があります。このページは公式情報をもとにした一般的な整理であり、実務利用前には必ず最新の公式規約をご確認ください。<strong>本記事は法的助言ではありません。</strong>
+    </div>
+
+    <ConditionChips currentPath="/conditions/commercial-use/" />
+
+    <NoticeBox />
+
+    <section class="mt-8 rounded-xl border border-slate-200 bg-slate-50 px-6 py-5">
+      <h2 class="mb-4 text-base font-bold text-[#002B61]">商用利用ステータスの見方</h2>
+      <p class="mb-4 text-xs leading-relaxed text-slate-600">
+        各ツールの商用利用欄は、確認時点の公式情報をもとに以下の5段階で整理しています。
+        ステータスが「ok」であっても、用途・プラン・生成内容によって条件が変わる場合があります。
+        商用利用を前提にする場合は、最新の公式規約をご確認ください。本記事は法的助言ではありません。
+      </p>
+      <dl class="grid gap-3 sm:grid-cols-2">
+        {[
+          { term: 'ok',        desc: '公式規約で商用利用が案内されています。ただしプラン・用途・生成内容によって条件が変わる場合があります。' },
+          { term: 'paid-only', desc: '有料プランで商用利用が案内されています。無料プランでは商用利用に制限がある場合があります。' },
+          { term: 'limited',   desc: '一定の条件のもとで商用利用が案内されています。用途・生成内容・プランによって異なります。' },
+          { term: 'no',        desc: '公式規約で商用利用が禁止または制限されている、または不可の可能性があるツールです。' },
+          { term: 'unknown',   desc: '公式情報から商用利用条件を確認できていません。利用前に必ず公式規約をご確認ください。' },
+        ].map(({ term, desc }) => (
+          <div class="rounded-lg border border-slate-100 bg-white px-4 py-3">
+            <dt class="mb-0.5 text-xs font-bold text-slate-800 font-mono">{term}</dt>
+            <dd class="text-xs leading-relaxed text-slate-500">{desc}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class="mt-8 rounded-xl border border-slate-200 bg-white px-6 py-5">
+      <h2 class="mb-3 text-base font-bold text-[#002B61]">商用利用ツールを選ぶ際のポイント</h2>
+      <ul class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>公式規約の確認：</strong>「商用利用OK」と案内されていても、生成内容（第三者の肖像・ブランド・著作物が含まれる場合など）によっては別途権利処理が必要な場合があります。公式規約では〜と案内されています、という形で最新情報を確認する習慣が重要です。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>無料・有料プランの条件差：</strong>無料プランでは商用利用が制限され、有料プランに移行すると商用利用が可能になるツールがあります。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料で使えるツール</a>のページも参照し、プランごとの条件を確認してください。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>透かしの有無：</strong>無料プランでは透かしが入る場合があります。商用成果物に透かしが入ると実務利用が難しい場面もあるため、<a href="/conditions/no-watermark/" class="text-blue-600 hover:underline">透かしなしツール</a>のページも確認してください。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>日本語対応：</strong>日本語プロンプトや日本語UIに対応しているかは、国内での実務利用時の操作性に影響します。<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>のページで詳細を確認できます。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>生成物の権利・第三者権利：</strong>AI生成画像の著作権の帰属はツール・国・法律によって解釈が異なる場合があります。また、入力した素材・プロンプトに第三者の権利が含まれる場合は注意が必要です。各ツールの利用規約を確認したうえで、必要に応じて専門家への相談をご検討ください。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>用途別の注意点：</strong>YouTubeサムネイル、SNS投稿、広告バナー、商品画像など用途によって求められる条件が異なります。収益化を伴う用途は特に「商用利用」と判断されやすいため、<a href="/tools/" class="text-blue-600 hover:underline">各ツールの詳細ページ</a>で用途ごとの注意事項を確認してください。</span>
+        </li>
+      </ul>
+      <p class="mt-4 text-xs text-slate-500">料金・商用利用条件は変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="mb-1 text-lg font-semibold text-slate-800">対象ツール一覧</h2>
+      <p class="mb-4 text-sm text-slate-500">確認時点で {filtered.length} 件。「条件あり」はプラン・用途・生成内容によって条件が変わる場合があります。各ツールの詳細ページで注意事項を確認してください。</p>
+      <CompareTablePreview tools={filtered} limit={filtered.length} />
+    </section>
+
+    <section class="mt-8">
+      <h2 class="mb-3 text-sm font-semibold text-slate-700">各ツールの商用利用に関する注意点</h2>
+      <p class="mb-3 text-xs text-slate-500">確認時点の公式情報をもとにした整理です。条件・規約は変更される可能性があります。実務利用前に必ず公式情報をご確認ください。</p>
+      <div class="space-y-3">
+        {filtered.map((tool) => (
+          <div class="rounded-lg border border-slate-200 bg-white px-4 py-3">
+            <div class="flex items-baseline gap-2 mb-1">
+              <a href={`/tools/${tool.slug}/`} class="font-semibold text-sm text-slate-900 hover:text-blue-600 hover:underline">{tool.data.name}</a>
+              <span class="text-xs text-slate-400">商用利用：{COMMERCIAL_LABEL[tool.data.commercialUse] ?? '要確認'}</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">{tool.data.commercialUseNote}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <GuideFAQ items={faqs} title="よくある質問" />
+
+    <section class="mt-12">
+      <h2 class="mb-4 text-sm font-semibold text-slate-600">関連ページ</h2>
+      <ul class="flex flex-wrap gap-3 text-sm">
+        <li><a href="/comparisons/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">全ツール比較表</a></li>
+        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">商用利用・著作権ガイド</a></li>
+        <li><a href="/tools/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">すべてのツールを見る</a></li>
+        <li><a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">無料で使えるツール</a></li>
+        <li><a href="/conditions/japanese/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">日本語対応ツール</a></li>
+        <li><a href="/conditions/no-watermark/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 hover:border-slate-300">透かしなしツール</a></li>
+        <li><a href="/categories/video-generation/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700 hover:bg-blue-100">AI動画生成ツール一覧</a></li>
+      </ul>
+    </section>
+
+    <nav class="mt-8 border-t border-slate-200 pt-6 text-sm flex flex-wrap gap-4">
+      <a href="/tools/" class="text-blue-600 hover:underline">← AI画像生成ツール一覧に戻る</a>
+      <a href="/categories/video-generation/" class="text-blue-600 hover:underline">AI動画生成ツール一覧</a>
+    </nav>
+
+  </div>
+</BaseLayout>

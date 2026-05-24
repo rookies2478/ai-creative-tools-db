@@ -154,7 +154,7 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
   <section class="bg-white py-14">
     <div class="mx-auto max-w-5xl px-6">
       <h2 class="mb-2 text-2xl font-bold text-[#002B61]">カテゴリから探す</h2>
-      <p class="mb-8 text-sm text-slate-500">AI動画生成・AI画像生成を中心に、周辺領域も目的別に探せます。</p>
+      <p class="mb-8 text-sm text-slate-500">AI動画生成・AI画像生成を中心に、動画編集・アバター・デザイン・音声まで、制作に使えるAIツールカテゴリを整理しています。</p>
 
       <!-- 主役カテゴリ（AI動画生成 / AI画像生成） -->
       <div class="mb-4 grid gap-4 sm:grid-cols-2">
@@ -213,29 +213,29 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
       <div class="mb-4 grid gap-4 sm:grid-cols-2">
 
         <!-- AI動画編集 -->
-        <div class="flex flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div class="flex flex-col rounded-xl border border-indigo-100 bg-indigo-50/40 p-5 shadow-sm">
           <div class="mb-2 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-indigo-500" aria-hidden="true">
               <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
               <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
             </svg>
             <p class="text-sm font-bold text-slate-800">AI動画編集</p>
-            <span class="ml-auto inline-flex rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
+            <span class="ml-auto inline-flex rounded-full bg-indigo-100 px-2 py-0.5 text-[9px] font-semibold text-indigo-500">準備中</span>
           </div>
-          <p class="text-xs leading-relaxed text-slate-500">AIを使った動画トリミング・字幕追加・カット編集ツールの比較情報を準備中です。</p>
+          <p class="text-xs leading-relaxed text-slate-600">AIを使った動画トリミング・字幕追加・カット編集ツールの比較情報を準備中です。</p>
         </div>
 
         <!-- AIアバター動画 -->
-        <div class="flex flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div class="flex flex-col rounded-xl border border-indigo-100 bg-indigo-50/40 p-5 shadow-sm">
           <div class="mb-2 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-indigo-500" aria-hidden="true">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
               <circle cx="12" cy="7" r="4"/>
             </svg>
             <p class="text-sm font-bold text-slate-800">AIアバター動画</p>
-            <span class="ml-auto inline-flex rounded-full bg-slate-100 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
+            <span class="ml-auto inline-flex rounded-full bg-indigo-100 px-2 py-0.5 text-[9px] font-semibold text-indigo-500">準備中</span>
           </div>
-          <p class="text-xs leading-relaxed text-slate-500">AIアバターを使った解説動画・プレゼン動画ツールの比較情報を準備中です。</p>
+          <p class="text-xs leading-relaxed text-slate-600">AIアバターを使った解説動画・プレゼン動画ツールの比較情報を準備中です。</p>
         </div>
 
       </div>
@@ -585,16 +585,17 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
   <!-- ============================================================ -->
   <section class="bg-slate-50 py-16">
     <div class="mx-auto max-w-5xl px-6">
-      <h2 class="mb-7 text-2xl font-bold text-[#002B61]">使い方・選び方ガイド</h2>
+      <h2 class="mb-2 text-2xl font-bold text-[#002B61]">使い方・選び方ガイド</h2>
+      <p class="mb-7 text-sm text-slate-500">AIツールの選び方、商用利用条件の確認、プロンプト活用、制作フローの整理に役立つガイドをまとめています。</p>
 
       <!-- 公開済みガイド -->
       <div class="grid gap-4 sm:grid-cols-2">
         {[
           {
             href:  '/guides/commercial-use-copyright/',
-            tag:   '商用利用',
+            tag:   '商用利用ガイド',
             title: 'AI画像生成の商用利用・著作権ガイド',
-            desc:  '商用利用の注意点・著作権の基本・ツール別の利用条件を整理',
+            desc:  '商用利用の注意点・ツール別の利用条件を整理。プランや用途によって条件が異なる場合があります。公式情報をあわせてご確認ください。',
           },
           {
             href:  '/guides/free-ai-image-tools/',
@@ -603,16 +604,16 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
             desc:  '無料プランの比較・制限・用途別のおすすめポイントを解説',
           },
           {
-            href:  '/guides/watermark-credit-guide/',
-            tag:   '透かし・クレジット表記',
-            title: '透かし・クレジット表記の確認ガイド',
-            desc:  '生成画像の透かし条件とクレジット表記の考え方を整理',
-          },
-          {
             href:  '/guides/japanese-ai-image-tools/',
-            tag:   '日本語対応',
+            tag:   '日本語対応ツールの選び方',
             title: '日本語対応ツールの選び方',
             desc:  '日本語UIと日本語プロンプト対応状況を比較・解説',
+          },
+          {
+            href:  '/guides/watermark-credit-guide/',
+            tag:   '透かし・クレジット表記の確認ガイド',
+            title: '透かし・クレジット表記の確認ガイド',
+            desc:  '生成画像の透かし条件とクレジット表記の考え方を整理',
           },
         ].map(({ href, tag, title, desc }) => (
           <a

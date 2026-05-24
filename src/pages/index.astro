@@ -41,6 +41,22 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
 >
 
   <!-- ============================================================ -->
+  <!-- 0. ページ内アンカーナビ（トップページ専用）                    -->
+  <!-- ============================================================ -->
+  <nav aria-label="ページ内ナビゲーション" class="border-b border-slate-100 bg-white">
+    <div class="overflow-x-auto overflow-y-hidden">
+      <div class="flex min-w-max gap-1 px-6">
+        <a href="#categories"  class="inline-flex min-h-[44px] items-center whitespace-nowrap px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">カテゴリ</a>
+        <a href="#use-cases"   class="inline-flex min-h-[44px] items-center whitespace-nowrap px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">目的から選ぶ</a>
+        <a href="#comparison"  class="inline-flex min-h-[44px] items-center whitespace-nowrap px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">主要ツール比較</a>
+        <a href="#articles"    class="inline-flex min-h-[44px] items-center whitespace-nowrap px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">記事</a>
+        <a href="#pickup"      class="inline-flex min-h-[44px] items-center whitespace-nowrap px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">ピックアップ</a>
+        <a href="#faq"         class="inline-flex min-h-[44px] items-center whitespace-nowrap px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">FAQ</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
   <!-- 1. HERO                                                       -->
   <!-- ============================================================ -->
   <section class="hero-bg pb-20 pt-20">
@@ -49,19 +65,20 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
 
         <!-- Left -->
         <div>
-          <!-- Badge -->
-          <div class="mb-5 inline-flex items-center rounded-full border border-blue-200 bg-white px-4 py-1.5 text-xs font-semibold text-blue-700 shadow-sm">
-            AIクリエイティブナビ
+          <!-- Label -->
+          <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
+            <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+            <span>AI CREATIVE TOOL NAVI</span>
           </div>
 
           <!-- H1 -->
-          <h1 class="text-[1.9rem] font-bold leading-snug text-[#002B61] sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
-            AIクリエイティブツール比較ナビ｜動画生成・画像生成を中心に目的別で探せる
+          <h1 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
+            AIクリエイティブ<br>ツール比較ナビ
           </h1>
 
           <!-- Description -->
-          <p class="mt-5 text-base leading-relaxed text-slate-600">
-            AI画像・動画生成ツールを、商用利用・無料枠・透かし・日本語対応で比較できるデータベースです。
+          <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
+            AI動画生成・AI画像生成を中心に、目的別で探せる
           </p>
 
           <!-- 比較軸ラベル -->
@@ -150,10 +167,20 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
   <!-- ============================================================ -->
   <!-- 2.5 カテゴリから探す                                          -->
   <!-- ============================================================ -->
-  <section class="bg-white py-14">
+  <section id="categories" class="scroll-mt-24 bg-white py-14">
     <div class="mx-auto max-w-5xl px-6">
-      <h2 class="mb-2 text-2xl font-bold text-[#002B61]">カテゴリから探す</h2>
-      <p class="mb-8 text-sm text-slate-500">AI動画生成・AI画像生成を中心に、動画編集・アバター・デザイン・音声まで、制作に使えるAIツールカテゴリを整理しています。</p>
+      <div class="mb-8">
+        <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
+          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+          <span>CATEGORIES</span>
+        </div>
+        <h2 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
+          カテゴリから探す
+        </h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
+          AI動画生成・AI画像生成を中心に、動画編集・アバター・デザイン・音声まで、制作に使えるAIツールカテゴリを整理しています。
+        </p>
+      </div>
 
       <!-- 主役カテゴリ（AI動画生成 / AI画像生成） -->
       <div class="mb-4 grid gap-4 sm:grid-cols-2">
@@ -264,11 +291,20 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
   <!-- ============================================================ -->
   <!-- 3.5 目的から選ぶ                                              -->
   <!-- ============================================================ -->
-  <section class="bg-white py-14 border-b border-slate-100">
+  <section id="use-cases" class="scroll-mt-24 bg-white py-14 border-b border-slate-100">
     <div class="mx-auto max-w-5xl px-6">
-      <p class="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">USE CASES</p>
-      <h2 class="mb-2 text-2xl font-bold text-[#002B61]">目的から選ぶ</h2>
-      <p class="mb-8 text-sm text-slate-500">制作したいアウトプットから、関連カテゴリの記事に案内します。未作成の用途は順次追加予定です。</p>
+      <div class="mb-8">
+        <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
+          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+          <span>USE CASES</span>
+        </div>
+        <h2 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
+          目的から選ぶ
+        </h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
+          制作したいアウトプットから、関連カテゴリの記事に案内します。未作成の用途は順次追加予定です。
+        </p>
+      </div>
 
       <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 
@@ -393,14 +429,21 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
   <!-- ============================================================ -->
   <!-- 4. FEED / ピックアップ（タブ切り替え）                        -->
   <!-- ============================================================ -->
-  <section class="bg-slate-50 py-16">
+  <section id="pickup" class="scroll-mt-24 bg-slate-50 py-16">
     <div class="mx-auto max-w-5xl px-6">
 
       <!-- セクションヘッダー -->
-      <div class="mb-7">
-        <p class="mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">FEED</p>
-        <h2 class="mb-2 text-2xl font-bold text-[#002B61]">ピックアップ</h2>
-        <p class="text-sm leading-relaxed text-slate-500">編集部が確認した注目ツールや、最近更新した記事をまとめています。</p>
+      <div class="mb-8">
+        <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
+          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+          <span>FEED</span>
+        </div>
+        <h2 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
+          ピックアップ
+        </h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
+          編集部が確認した注目ツールや、最近更新した記事をまとめています。
+        </p>
       </div>
 
       <!-- タブバー -->
@@ -587,14 +630,21 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
   <!-- ============================================================ -->
   <!-- 5. 比較表プレビュー（タブ切り替え）                           -->
   <!-- ============================================================ -->
-  <section class="bg-slate-50 py-16">
+  <section id="comparison" class="scroll-mt-24 bg-slate-50 py-16">
     <div class="mx-auto max-w-5xl px-6">
 
       <!-- Section header -->
       <div class="mb-8">
-        <p class="mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">COMPARISON</p>
-        <h2 class="mb-2 text-2xl font-bold text-[#002B61]">主要ツールを横並びで比較</h2>
-        <p class="text-sm leading-relaxed text-slate-500">カテゴリごとに主要ツールを同じ観点で並べて確認できます。値はすべて要確認ベースで、プランや用途によって条件が異なる場合があります。</p>
+        <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
+          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+          <span>COMPARISON</span>
+        </div>
+        <h2 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
+          主要ツールを横並びで比較
+        </h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
+          カテゴリごとに主要ツールを同じ観点で並べて確認できます。値はすべて要確認ベースで、プランや用途によって条件が異なる場合があります。
+        </p>
       </div>
 
       <!-- タブバー（横スクロール可） -->
@@ -739,11 +789,20 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
   <!-- ============================================================ -->
   <!-- 6. 比較・ガイド記事                                           -->
   <!-- ============================================================ -->
-  <section class="bg-slate-50 py-16">
+  <section id="articles" class="scroll-mt-24 bg-slate-50 py-16">
     <div class="mx-auto max-w-5xl px-6">
-      <p class="mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">COMPARISON &amp; GUIDES</p>
-      <h2 class="mb-2 text-2xl font-bold text-[#002B61]">比較・ガイド記事</h2>
-      <p class="mb-8 text-sm text-slate-500">AIツールの選び方、比較ポイント、商用利用条件、用途別の活用例をまとめています。トップページでは代表的な記事だけを掲載しています。</p>
+      <div class="mb-8">
+        <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
+          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+          <span>COMPARISON &amp; GUIDES</span>
+        </div>
+        <h2 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
+          比較・ガイド記事
+        </h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
+          AIツールの選び方、比較ポイント、商用利用条件、用途別の活用例をまとめています。トップページでは代表的な記事だけを掲載しています。
+        </p>
+      </div>
 
       <!-- 特集記事 -->
       <a href="/compare/free-ai-image-generators/" class="group mb-8 flex flex-col gap-5 rounded-2xl border-2 border-indigo-200 bg-white p-7 shadow-md transition hover:border-indigo-400 hover:shadow-lg sm:flex-row sm:items-start">
@@ -851,9 +910,12 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
 
         <!-- 左：見出し・説明・リンク -->
         <div>
-          <p class="mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">EDITORIAL</p>
-          <h2 class="mb-3 text-xl font-bold text-[#002B61]">編集方針</h2>
-          <p class="text-sm leading-relaxed text-slate-600">
+          <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
+            <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+            <span>EDITORIAL</span>
+          </div>
+          <h2 class="mb-3 text-2xl font-black tracking-tight text-slate-950 sm:text-3xl">編集方針</h2>
+          <p class="mt-4 text-base leading-relaxed text-slate-600">
             本サイトは、AIクリエイティブ制作ツールを整理する比較DB型メディアです。記事は情報提供を目的としており、本記事は法的助言ではありません。
           </p>
           <div class="mt-5 flex flex-col gap-2">
@@ -900,11 +962,20 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
   <!-- ============================================================ -->
   <!-- 9. よくある質問（FAQ）                                        -->
   <!-- ============================================================ -->
-  <section class="bg-white py-16">
+  <section id="faq" class="scroll-mt-24 bg-white py-16">
     <div class="mx-auto max-w-5xl px-6">
-      <p class="mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">FAQ</p>
-      <h2 class="mb-2 text-2xl font-bold text-[#002B61]">よくある質問</h2>
-      <p class="mb-8 text-sm text-slate-500">AI画像生成・AI動画生成ツールを探している方からよくいただく質問をまとめました。</p>
+      <div class="mb-8">
+        <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
+          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+          <span>FAQ</span>
+        </div>
+        <h2 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
+          よくあるご質問
+        </h2>
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
+          掲載方針や更新頻度、AIツールの選び方に関する質問にお答えします。
+        </p>
+      </div>
 
       <div class="faq-list divide-y divide-slate-100 rounded-xl border border-slate-100 bg-white shadow-sm">
 

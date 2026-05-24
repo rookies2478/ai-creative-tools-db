@@ -484,84 +484,138 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
   <!-- ============================================================ -->
   <!-- 5. 比較表プレビュー（タブ切り替え）                           -->
   <!-- ============================================================ -->
-  <section class="bg-white py-16">
+  <section class="bg-slate-50 py-16">
     <div class="mx-auto max-w-5xl px-6">
-      <div class="mb-6 flex items-baseline justify-between">
-        <h2 class="text-2xl font-bold text-[#002B61]">ツール比較表（抜粋）</h2>
-        <a href="/compare/" class="text-sm text-blue-600 hover:underline">全ツールを比較表で見る →</a>
+
+      <!-- Section header -->
+      <div class="mb-8">
+        <p class="mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">COMPARISON</p>
+        <h2 class="mb-2 text-2xl font-bold text-[#002B61]">主要ツールを横並びで比較</h2>
+        <p class="text-sm leading-relaxed text-slate-500">カテゴリごとに主要ツールを同じ観点で並べて確認できます。値はすべて要確認ベースで、プランや用途によって条件が異なる場合があります。</p>
       </div>
 
-      <!-- タブ -->
-      <div class="mb-5 flex flex-wrap gap-2 border-b border-slate-100 pb-4">
-        <button
-          id="tab-video"
-          onclick="switchTab('video')"
-          class="tab-btn active rounded-full px-4 py-1.5 text-xs font-semibold transition"
-          data-tab="video"
-        >
-          AI動画生成
-        </button>
-        <button
-          id="tab-image"
-          onclick="switchTab('image')"
-          class="tab-btn rounded-full px-4 py-1.5 text-xs font-semibold transition"
-          data-tab="image"
-        >
-          AI画像生成
-        </button>
-        <span class="inline-flex cursor-not-allowed items-center rounded-full border border-slate-100 px-4 py-1.5 text-xs font-semibold text-slate-300" title="比較データ準備中">
-          AI動画編集
-          <span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[8px] text-slate-400">準備中</span>
-        </span>
-        <span class="inline-flex cursor-not-allowed items-center rounded-full border border-slate-100 px-4 py-1.5 text-xs font-semibold text-slate-300" title="比較データ準備中">
-          AIアバター動画
-          <span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[8px] text-slate-400">準備中</span>
-        </span>
-        <span class="inline-flex cursor-not-allowed items-center rounded-full border border-slate-100 px-4 py-1.5 text-xs font-semibold text-slate-300" title="比較データ準備中">
-          AIデザイン
-          <span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[8px] text-slate-400">準備中</span>
-        </span>
-        <span class="inline-flex cursor-not-allowed items-center rounded-full border border-slate-100 px-4 py-1.5 text-xs font-semibold text-slate-300" title="比較データ準備中">
-          AI音声・ナレーション
-          <span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[8px] text-slate-400">準備中</span>
-        </span>
+      <!-- タブバー（横スクロール可） -->
+      <div class="overflow-x-auto">
+        <div class="flex min-w-max border-b border-slate-200">
+          <button
+            id="tab-video"
+            onclick="switchCompTab('video')"
+            class="comp-tab active whitespace-nowrap px-5 py-3 text-sm font-semibold transition"
+          >
+            AI動画生成
+          </button>
+          <button
+            id="tab-image"
+            onclick="switchCompTab('image')"
+            class="comp-tab whitespace-nowrap px-5 py-3 text-sm font-semibold transition"
+          >
+            AI画像生成
+          </button>
+          <span class="comp-tab-disabled inline-flex cursor-not-allowed items-center whitespace-nowrap px-5 py-3 text-sm text-slate-300">
+            AI動画編集<span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-400">準備中</span>
+          </span>
+          <span class="comp-tab-disabled inline-flex cursor-not-allowed items-center whitespace-nowrap px-5 py-3 text-sm text-slate-300">
+            AIアバター動画<span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-400">準備中</span>
+          </span>
+          <span class="comp-tab-disabled inline-flex cursor-not-allowed items-center whitespace-nowrap px-5 py-3 text-sm text-slate-300">
+            AIデザイン<span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-400">準備中</span>
+          </span>
+          <span class="comp-tab-disabled inline-flex cursor-not-allowed items-center whitespace-nowrap px-5 py-3 text-sm text-slate-300">
+            AI音声・ナレーション<span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-400">準備中</span>
+          </span>
+        </div>
       </div>
 
-      <!-- AI動画生成テーブル -->
-      <div id="panel-video">
-        <CompareTablePreview tools={videoTools} limit={5} />
+      <!-- 白カード -->
+      <div class="rounded-b-2xl rounded-tr-2xl border border-slate-200 border-t-0 bg-white shadow-sm">
+
+        <!-- AI動画生成パネル -->
+        <div id="panel-video" class="p-6">
+          <CompareTablePreview tools={videoTools} limit={5} />
+
+          <!-- 凡例 -->
+          <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-[11px] text-slate-500">
+              <span class="inline-flex items-center gap-1.5">
+                <span class="inline-block h-2.5 w-2.5 rounded-full bg-emerald-200"></span>対応の案内あり・公式情報を確認
+              </span>
+              <span class="inline-flex items-center gap-1.5">
+                <span class="inline-block h-2.5 w-2.5 rounded-full bg-amber-200"></span>要確認・プラン差・条件あり
+              </span>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+            <p class="text-[11px] text-slate-400">※ 最新情報は必ず公式サイトでご確認ください。商用利用条件はプランや用途により異なります。</p>
+            <a
+              href="/video-generators/"
+              class="inline-flex items-center gap-1 rounded-lg bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 transition hover:bg-blue-100"
+            >
+              AI動画生成の全ツール一覧を見る →
+            </a>
+          </div>
+        </div>
+
+        <!-- AI画像生成パネル -->
+        <div id="panel-image" class="hidden p-6">
+          <CompareTablePreview tools={imageTools} limit={5} />
+
+          <!-- 凡例 -->
+          <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-[11px] text-slate-500">
+              <span class="inline-flex items-center gap-1.5">
+                <span class="inline-block h-2.5 w-2.5 rounded-full bg-emerald-200"></span>対応の案内あり・公式情報を確認
+              </span>
+              <span class="inline-flex items-center gap-1.5">
+                <span class="inline-block h-2.5 w-2.5 rounded-full bg-amber-200"></span>要確認・プラン差・条件あり
+              </span>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
+            <p class="text-[11px] text-slate-400">※ 最新情報は必ず公式サイトでご確認ください。商用利用条件はプランや用途により異なります。</p>
+            <a
+              href="/tools/"
+              class="inline-flex items-center gap-1 rounded-lg bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 transition hover:bg-blue-100"
+            >
+              AI画像生成の全ツール一覧を見る →
+            </a>
+          </div>
+        </div>
+
       </div>
 
-      <!-- AI画像生成テーブル -->
-      <div id="panel-image" class="hidden">
-        <CompareTablePreview tools={imageTools} limit={5} />
+      <!-- 比較表全体リンク -->
+      <div class="mt-4 text-right">
+        <a href="/compare/" class="text-xs font-semibold text-slate-500 hover:text-blue-600 hover:underline">
+          全カテゴリの比較表を見る →
+        </a>
       </div>
 
-      <p class="mt-3 text-xs text-slate-400">
-        ※ 商用利用の可否・著作権の取り扱いは各ツールの利用規約に基づきます。法的アドバイスではありません。最新情報は必ず公式サイトでご確認ください。
-      </p>
     </div>
   </section>
 
   <style>
-    .tab-btn {
-      background: transparent;
+    .comp-tab {
       color: #64748b;
-      border: 1px solid #e2e8f0;
+      border-bottom: 2px solid transparent;
+      background: transparent;
     }
-    .tab-btn:hover {
-      background: #f1f5f9;
+    .comp-tab:hover {
       color: #1e40af;
+      background: #f8fafc;
     }
-    .tab-btn.active {
-      background: #2563eb;
-      color: #fff;
-      border-color: #2563eb;
+    .comp-tab.active {
+      color: #2563eb;
+      border-bottom-color: #2563eb;
+      font-weight: 700;
     }
   </style>
 
   <script>
-    function switchTab(tab: string) {
+    function switchCompTab(tab: string) {
       const panels = ['video', 'image'];
       panels.forEach(p => {
         const panel = document.getElementById('panel-' + p);
@@ -576,8 +630,7 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
         }
       });
     }
-    // expose globally for onclick
-    (window as any).switchTab = switchTab;
+    (window as any).switchCompTab = switchCompTab;
   </script>
 
   <!-- ============================================================ -->

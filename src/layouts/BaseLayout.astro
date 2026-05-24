@@ -6,6 +6,8 @@ interface Props {
   description?: string;
   canonicalPath?: string;
   ogType?: string;
+  jsonLd?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -13,6 +15,8 @@ const {
   description = '生成AI画像・動画ツールを商用利用・料金・著作権で比較',
   canonicalPath,
   ogType = 'website',
+  jsonLd,
+  noindex = false,
 } = Astro.props;
 
 const canonicalUrl = canonicalPath && Astro.site
@@ -27,6 +31,7 @@ const canonicalUrl = canonicalPath && Astro.site
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -35,6 +40,7 @@ const canonicalUrl = canonicalPath && Astro.site
     <meta property="og:site_name" content="AIクリエイティブナビ" />
     <meta property="og:image" content="https://aicreative-db.com/ogp.png" />
     <title>{title}</title>
+    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
     {import.meta.env.PROD && (
       <>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTH7GM5ZG7"></script>
@@ -69,15 +75,15 @@ const canonicalUrl = canonicalPath && Astro.site
           <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-violet-600 text-sm font-black text-white shadow-sm">AI</span>
           <span class="flex flex-col leading-tight">
             <span class="text-sm font-black tracking-tight text-slate-900 sm:text-base">AIクリエイティブナビ</span>
-            <span class="text-[10px] tracking-widest text-slate-400 sm:text-xs">ai-creative-navi.com</span>
+            <span class="text-[10px] tracking-widest text-slate-400 sm:text-xs">aicreative-db.com</span>
           </span>
         </a>
 
         <!-- Center nav — desktop only -->
         <nav class="hidden items-center gap-5 text-sm text-slate-600 lg:flex">
-          <a href="/video-generators/"               class="hover:text-[#0066FF]">AI動画生成</a>
-          <a href="/tools/"                          class="hover:text-[#0066FF]">AI画像生成</a>
-          <a href="/compare/"                        class="hover:text-[#0066FF]">比較表</a>
+          <a href="/categories/video-generation/"      class="hover:text-[#0066FF]">AI動画生成</a>
+          <a href="/categories/image-generation/"    class="hover:text-[#0066FF]">AI画像生成</a>
+          <a href="/comparisons/"                    class="hover:text-[#0066FF]">比較表</a>
           <a href="/guides/commercial-use-copyright/" class="hover:text-[#0066FF]">商用利用ガイド</a>
         </nav>
 
@@ -101,7 +107,7 @@ const canonicalUrl = canonicalPath && Astro.site
         <!-- Brand -->
         <div class="mb-8">
           <p class="text-base font-bold text-[#002B61]">AIクリエイティブナビ</p>
-          <p class="mt-0.5 text-xs text-slate-400">生成AI画像・動画ツールを商用利用・料金・著作権で比較</p>
+          <p class="mt-0.5 text-xs text-slate-400">AI動画生成・AI画像生成を中心に、料金・無料枠・商用利用条件・日本語対応などを比較するAIクリエイティブツール比較メディアです。</p>
         </div>
 
         <!-- Link columns -->
@@ -111,9 +117,9 @@ const canonicalUrl = canonicalPath && Astro.site
           <div>
             <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">カテゴリ</p>
             <ul class="space-y-2 text-xs text-slate-500">
-              <li><a href="/tools/"                     class="hover:text-blue-600 hover:underline underline-offset-4">AI画像生成ツール</a></li>
-              <li><a href="/video-generators/"          class="hover:text-blue-600 hover:underline underline-offset-4">AI動画生成ツール</a></li>
-              <li><a href="/compare/"                   class="hover:text-blue-600 hover:underline underline-offset-4">比較表</a></li>
+              <li><a href="/categories/image-generation/" class="hover:text-blue-600 hover:underline underline-offset-4">AI画像生成ツール</a></li>
+              <li><a href="/categories/video-generation/" class="hover:text-blue-600 hover:underline underline-offset-4">AI動画生成ツール</a></li>
+              <li><a href="/comparisons/"               class="hover:text-blue-600 hover:underline underline-offset-4">比較表</a></li>
             </ul>
           </div>
 
@@ -121,10 +127,10 @@ const canonicalUrl = canonicalPath && Astro.site
           <div>
             <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">目的別</p>
             <ul class="space-y-2 text-xs text-slate-500">
-              <li><a href="/categories/free/"           class="hover:text-blue-600 hover:underline underline-offset-4">無料で試せるAIツール</a></li>
-              <li><a href="/categories/commercial-use/" class="hover:text-blue-600 hover:underline underline-offset-4">商用利用を確認しやすいAIツール</a></li>
-              <li><a href="/categories/japanese/"       class="hover:text-blue-600 hover:underline underline-offset-4">日本語対応AIツール</a></li>
-              <li><a href="/categories/no-watermark/"   class="hover:text-blue-600 hover:underline underline-offset-4">透かしなしAIツール</a></li>
+              <li><a href="/conditions/free/"            class="hover:text-blue-600 hover:underline underline-offset-4">無料で試せるAIツール</a></li>
+              <li><a href="/conditions/commercial-use/" class="hover:text-blue-600 hover:underline underline-offset-4">商用利用を確認しやすいAIツール</a></li>
+              <li><a href="/conditions/japanese/"       class="hover:text-blue-600 hover:underline underline-offset-4">日本語対応AIツール</a></li>
+              <li><a href="/conditions/no-watermark/"   class="hover:text-blue-600 hover:underline underline-offset-4">透かしなしAIツール</a></li>
             </ul>
           </div>
 

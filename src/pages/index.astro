@@ -32,12 +32,68 @@ const videoTools = FEATURED_VIDEO_SLUGS
 
 // 注目ツール表示用（動画→画像の順）
 const tools = [...videoTools, ...imageTools].slice(0, 6);
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "このサイトで紹介しているAIツールは商用利用できますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "商用利用の可否はツール・プラン・用途によって異なり、本サイトでは断定しません。掲載情報はあくまで参考用であり、本記事は法的助言ではありません。プランや用途によって条件が異なる場合があります。利用前に必ず各ツールの公式サイトおよび利用規約をご確認ください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "無料で使えるAIツールだけを探せますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ツール一覧ページでは料金タグ（無料プランあり・無料クレジットなど）で絞り込めます。ただし無料枠の内容や制限はプランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI画像生成ツールとAI動画生成ツールはどう選べばよいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "本サイトはクリエイティブ制作に直接関係するAIツール（画像・動画生成）を中心に扱っています。用途（SNS投稿・商用制作など）、料金、無料枠の有無、透かしの有無などの条件で絞り込むと選びやすくなります。比較記事も参考にしてください。最終的な選択は公式サイトをご確認ください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "日本語対応や透かしの有無はどこで確認できますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "各ツールの詳細ページおよびタグ一覧から確認できます。対応状況はアップデートにより変わる場合があります。確定できない項目は要確認として表示しており、公式サイトで最終確認されることをおすすめします。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "料金や条件タグはどのくらいの頻度で更新されますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "公式情報の更新を確認次第、随時見直しを行っています。ただし更新タイミングにはラグが生じる場合があります。最新の料金・条件は必ず公式サイトをご確認ください。記事ごとに最終確認日を記載しています。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "掲載されていないAIツールを追加依頼できますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "クリエイティブ制作（画像・動画生成）に直接関係するAIツールを対象に、掲載ご要望を受け付けています。ただし掲載はサイトの編集方針に基づき審査のうえ判断します。詳しくは編集方針ページをご覧ください。"
+      }
+    }
+  ]
+});
 ---
 
 <BaseLayout
-  title="AIクリエイティブツール比較ナビ｜動画生成・画像生成を中心に目的別で探せる"
+  title="AIクリエイティブナビ｜動画生成・画像生成を中心に目的別で探せる"
   description="AI画像生成・AI動画生成ツールを商用利用・料金・無料枠・透かし・日本語対応で比較できるDBです。副業・SNS運用・仕事での利用前に条件を確認できます。最新情報は公式サイトをご確認ください。"
   canonicalPath="/"
+  jsonLd={faqJsonLd}
 >
 
   <!-- ============================================================ -->
@@ -73,12 +129,12 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
 
           <!-- H1 -->
           <h1 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
-            AIクリエイティブ<br>ツール比較ナビ
+            AIクリエイティブナビ
           </h1>
 
           <!-- Description -->
           <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
-            AI動画生成・AI画像生成を中心に、目的別で探せる
+            AI動画生成・AI画像生成を中心に、目的別で探せるAIクリエイティブツール比較ナビ
           </p>
 
           <!-- 比較軸ラベル -->
@@ -92,7 +148,7 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
 
           <!-- CTAs -->
           <div class="mt-7 flex flex-wrap gap-3">
-            <a href="/video-generators/" class="primary-btn">
+            <a href="/categories/video-generation/" class="primary-btn">
               AI動画生成ツールを見る
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
@@ -147,19 +203,19 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
       <p class="mb-4 text-sm font-semibold text-slate-700">条件からAIツールを探す</p>
 
       <div class="flex flex-wrap gap-2">
-        <a href="/video-generators/"          class="chip">AI動画生成</a>
-        <a href="/tools/"                     class="chip">AI画像生成</a>
-        <a href="/categories/commercial-use/" class="chip">商用利用を確認</a>
-        <a href="/categories/free/"           class="chip">無料で試せる</a>
-        <a href="/categories/free-video/"     class="chip">動画無料プラン</a>
-        <a href="/categories/japanese/"       class="chip">日本語対応</a>
-        <a href="/categories/no-watermark/"   class="chip">透かしなし</a>
+        <a href="/categories/video-generation/"          class="chip">AI動画生成</a>
+        <a href="/categories/image-generation/"        class="chip">AI画像生成</a>
+        <a href="/conditions/commercial-use/" class="chip">商用利用を確認</a>
+        <a href="/conditions/free/"           class="chip">無料で試せる</a>
+        <a href="/conditions/free/"     class="chip">動画無料プラン</a>
+        <a href="/conditions/japanese/"       class="chip">日本語対応</a>
+        <a href="/conditions/no-watermark/"   class="chip">透かしなし</a>
       </div>
 
       <div class="mt-5 flex flex-wrap gap-3">
-        <a href="/video-generators/" class="primary-btn">AI動画生成ツール一覧</a>
-        <a href="/tools/"            class="outline-btn">AI画像生成ツール一覧</a>
-        <a href="/compare/"          class="outline-btn">比較表で見る</a>
+        <a href="/categories/video-generation/" class="primary-btn">AI動画生成ツール一覧</a>
+        <a href="/categories/image-generation/" class="outline-btn">AI画像生成ツール一覧</a>
+        <a href="/comparisons/"          class="outline-btn">比較表で見る</a>
       </div>
     </div>
   </section>
@@ -186,7 +242,7 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
       <div class="mb-4 grid gap-4 sm:grid-cols-2">
 
         <!-- AI動画生成 -->
-        <a href="/video-generators/" class="group relative flex flex-col rounded-2xl border-2 border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-md transition hover:border-blue-600 hover:shadow-lg">
+        <a href="/categories/video-generation/" class="group relative flex flex-col rounded-2xl border-2 border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-md transition hover:border-blue-600 hover:shadow-lg">
           <div class="mb-3 flex items-center gap-2 flex-wrap">
             <span class="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
               ★ 中心カテゴリ
@@ -209,7 +265,7 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
         </a>
 
         <!-- AI画像生成 -->
-        <a href="/tools/" class="group relative flex flex-col rounded-2xl border-2 border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-md transition hover:border-blue-600 hover:shadow-lg">
+        <a href="/categories/image-generation/" class="group relative flex flex-col rounded-2xl border-2 border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-md transition hover:border-blue-600 hover:shadow-lg">
           <div class="mb-3 flex items-center gap-2 flex-wrap">
             <span class="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
               ★ 中心カテゴリ
@@ -239,30 +295,30 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
       <div class="mb-4 grid gap-4 sm:grid-cols-2">
 
         <!-- AI動画編集 -->
-        <div class="flex flex-col rounded-xl border border-indigo-100 bg-indigo-50/40 p-5 shadow-sm">
+        <a href="/categories/video-editing/" class="group flex flex-col rounded-xl border border-indigo-100 bg-indigo-50/40 p-5 shadow-sm transition hover:border-indigo-300 hover:shadow-md">
           <div class="mb-2 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-indigo-500" aria-hidden="true">
               <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
               <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
             </svg>
-            <p class="text-sm font-bold text-slate-800">AI動画編集</p>
-            <span class="ml-auto inline-flex rounded-full bg-indigo-100 px-2 py-0.5 text-[9px] font-semibold text-indigo-500">準備中</span>
+            <p class="text-sm font-bold text-slate-800 group-hover:text-indigo-700">AI動画編集</p>
           </div>
-          <p class="text-xs leading-relaxed text-slate-600">AIを使った動画トリミング・字幕追加・カット編集ツールの比較情報を準備中です。</p>
-        </div>
+          <p class="flex-1 text-xs leading-relaxed text-slate-600">AIを使った動画トリミング・字幕追加・カット編集ツールの比較情報。</p>
+          <p class="mt-3 text-right text-xs font-semibold text-indigo-600 group-hover:underline">カテゴリを見る →</p>
+        </a>
 
         <!-- AIアバター動画 -->
-        <div class="flex flex-col rounded-xl border border-indigo-100 bg-indigo-50/40 p-5 shadow-sm">
+        <a href="/categories/avatar-video/" class="group flex flex-col rounded-xl border border-indigo-100 bg-indigo-50/40 p-5 shadow-sm transition hover:border-indigo-300 hover:shadow-md">
           <div class="mb-2 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-indigo-500" aria-hidden="true">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
               <circle cx="12" cy="7" r="4"/>
             </svg>
-            <p class="text-sm font-bold text-slate-800">AIアバター動画</p>
-            <span class="ml-auto inline-flex rounded-full bg-indigo-100 px-2 py-0.5 text-[9px] font-semibold text-indigo-500">準備中</span>
+            <p class="text-sm font-bold text-slate-800 group-hover:text-indigo-700">AIアバター動画</p>
           </div>
-          <p class="text-xs leading-relaxed text-slate-600">AIアバターを使った解説動画・プレゼン動画ツールの比較情報を準備中です。</p>
-        </div>
+          <p class="flex-1 text-xs leading-relaxed text-slate-600">AIアバターを使った解説動画・プレゼン動画ツールの比較情報。</p>
+          <p class="mt-3 text-right text-xs font-semibold text-indigo-600 group-hover:underline">カテゴリを見る →</p>
+        </a>
 
       </div>
 
@@ -308,33 +364,7 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
 
       <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 
-        <!-- 1. YouTube動画（準備中） -->
-        <div class="flex flex-col rounded-xl border border-slate-100 bg-slate-50 p-5">
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-slate-400" aria-hidden="true">
-              <polygon points="23 7 16 12 23 17 23 7"/>
-              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-            </svg>
-          </div>
-          <p class="text-sm font-bold leading-snug text-slate-500">YouTube動画</p>
-          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-400">長尺・横型動画</p>
-          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
-        </div>
-
-        <!-- 2. Shorts・縦型動画（準備中） -->
-        <div class="flex flex-col rounded-xl border border-slate-100 bg-slate-50 p-5">
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-slate-400" aria-hidden="true">
-              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-              <line x1="12" y1="18" x2="12.01" y2="18"/>
-            </svg>
-          </div>
-          <p class="text-sm font-bold leading-snug text-slate-500">Shorts・縦型動画</p>
-          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-400">短尺・縦型動画</p>
-          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
-        </div>
-
-        <!-- 3. YouTubeサムネイル（リンク） -->
+        <!-- 1. YouTubeサムネイル（リンク） -->
         <a href="/use-cases/youtube-thumbnail/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
           <div class="mb-2 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
@@ -413,7 +443,33 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
           </div>
           <p class="text-sm font-bold leading-snug text-slate-500">顔出しなし動画</p>
           <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-400">アバター・読み上げ</p>
-          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
+          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">今後拡張予定</span>
+        </div>
+
+        <!-- YouTube動画（今後拡張予定） -->
+        <div class="flex flex-col rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-slate-400" aria-hidden="true">
+              <polygon points="23 7 16 12 23 17 23 7"/>
+              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+            </svg>
+          </div>
+          <p class="text-sm font-bold leading-snug text-slate-500">YouTube動画</p>
+          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-400">長尺・横型動画</p>
+          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">今後拡張予定</span>
+        </div>
+
+        <!-- Shorts・縦型動画（今後拡張予定） -->
+        <div class="flex flex-col rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <div class="mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-slate-400" aria-hidden="true">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+              <line x1="12" y1="18" x2="12.01" y2="18"/>
+            </svg>
+          </div>
+          <p class="text-sm font-bold leading-snug text-slate-500">Shorts・縦型動画</p>
+          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-400">短尺・縦型動画</p>
+          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">今後拡張予定</span>
         </div>
 
       </div>
@@ -477,14 +533,14 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
       <div id="feed-panel-pickup" class="mt-6">
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
-          <a href="/compare/free-ai-image-generators/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">比較記事</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-indigo-700">無料AI画像生成ツール比較｜無料枠・透かし・商用利用を一覧で確認</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">無料プランや無料クレジットで試せるツールを条件で比較できます。</p>
-            <p class="mt-4 text-right text-xs font-semibold text-indigo-600 group-hover:underline">読む →</p>
+          <a href="/comparisons/ai-image-video-tools/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-100 hover:shadow-md">
+            <span class="mb-3 inline-flex w-fit rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-600">比較表</span>
+            <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">AI画像・動画生成ツール比較表</p>
+            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">主要ツールを商用利用・無料枠・透かしで横並びに整理</p>
+            <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
           </a>
 
-          <a href="/compare/runway-vs-pika/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
+          <a href="/comparisons/runway-vs-pika/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
             <span class="mb-3 inline-flex w-fit rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">比較記事</span>
             <p class="font-bold leading-snug text-slate-900 group-hover:text-indigo-700">Runway vs Pika｜AI動画生成ツール比較</p>
             <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用・無料枠・透かしなど主要条件を横並びで比較</p>
@@ -498,7 +554,7 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
             <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
           </a>
 
-          <a href="/compare/midjourney-vs-adobe-firefly/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
+          <a href="/comparisons/midjourney-vs-adobe-firefly/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
             <span class="mb-3 inline-flex w-fit rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">比較記事</span>
             <p class="font-bold leading-snug text-slate-900 group-hover:text-indigo-700">Midjourney vs Adobe Firefly｜AI画像生成比較</p>
             <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用・著作権・価格・品質の違いを比較</p>
@@ -512,16 +568,16 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
             <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
           </a>
 
-          <a href="/use-cases/sns-post-image/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-100 hover:shadow-md">
+          <a href="/use-cases/blog-eyecatch/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-100 hover:shadow-md">
             <span class="mb-3 inline-flex w-fit rounded-full bg-amber-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">用途別</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">SNS投稿向けAI画像生成ツール</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">Instagram・X（旧Twitter）など投稿画像に使えるツールを比較</p>
+            <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">ブログ・アイキャッチ向けAI画像生成ツール</p>
+            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">記事・メディア用アイキャッチ作成に使えるツールを条件で絞り込み</p>
             <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
           </a>
 
         </div>
         <div class="mt-5 flex flex-wrap gap-3">
-          <a href="/compare/" class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:underline">比較記事をすべて見る →</a>
+          <a href="/comparisons/" class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:underline">比較記事をすべて見る →</a>
           <a href="/guides/" class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:underline">ガイドをすべて見る →</a>
         </div>
       </div>
@@ -540,7 +596,7 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
       <div id="feed-panel-new" class="mt-6 hidden">
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
-          <a href="/video-generators/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+          <a href="/categories/video-generation/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
             <span class="mb-3 inline-flex w-fit rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-600">ツール一覧</span>
             <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">AI動画生成ツール一覧</p>
             <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">Runway・Kling AI・Pika など主要ツールを商用利用・無料枠・透かしで比較</p>
@@ -554,7 +610,7 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
             <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
           </a>
 
-          <a href="/compare/ai-image-video-tools/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
+          <a href="/comparisons/ai-image-video-tools/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
             <span class="mb-3 inline-flex w-fit rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">比較表</span>
             <p class="font-bold leading-snug text-slate-900 group-hover:text-indigo-700">全カテゴリの比較表</p>
             <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">AI画像・動画生成ツールを同じ観点で横並びに整理した比較表</p>
@@ -664,17 +720,8 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
           >
             AI画像生成
           </button>
-          <span class="comp-tab-disabled inline-flex cursor-not-allowed items-center whitespace-nowrap px-5 py-3 text-sm text-slate-300">
-            AI動画編集<span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-400">準備中</span>
-          </span>
-          <span class="comp-tab-disabled inline-flex cursor-not-allowed items-center whitespace-nowrap px-5 py-3 text-sm text-slate-300">
-            AIアバター動画<span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-400">準備中</span>
-          </span>
-          <span class="comp-tab-disabled inline-flex cursor-not-allowed items-center whitespace-nowrap px-5 py-3 text-sm text-slate-300">
-            AIデザイン<span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-400">準備中</span>
-          </span>
-          <span class="comp-tab-disabled inline-flex cursor-not-allowed items-center whitespace-nowrap px-5 py-3 text-sm text-slate-300">
-            AI音声・ナレーション<span class="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-400">準備中</span>
+          <span class="inline-flex cursor-default items-center whitespace-nowrap px-5 py-3 text-xs text-slate-400">
+            AI動画編集・AIアバター・AIデザイン・AI音声は今後拡張予定
           </span>
         </div>
       </div>
@@ -702,7 +749,7 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
           <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
             <p class="text-[11px] text-slate-400">※ 最新情報は必ず公式サイトでご確認ください。商用利用条件はプランや用途により異なります。</p>
             <a
-              href="/video-generators/"
+              href="/categories/video-generation/"
               class="inline-flex items-center gap-1 rounded-lg bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 transition hover:bg-blue-100"
             >
               AI動画生成の全ツール一覧を見る →
@@ -742,7 +789,7 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
 
       <!-- 比較表全体リンク -->
       <div class="mt-4 text-right">
-        <a href="/compare/ai-image-video-tools/" class="text-xs font-semibold text-slate-500 hover:text-blue-600 hover:underline">
+        <a href="/comparisons/ai-image-video-tools/" class="text-xs font-semibold text-slate-500 hover:text-blue-600 hover:underline">
           全カテゴリの比較表を見る →
         </a>
       </div>
@@ -805,16 +852,16 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
       </div>
 
       <!-- 特集記事 -->
-      <a href="/compare/free-ai-image-generators/" class="group mb-8 flex flex-col gap-5 rounded-2xl border-2 border-indigo-200 bg-white p-7 shadow-md transition hover:border-indigo-400 hover:shadow-lg sm:flex-row sm:items-start">
+      <a href="/comparisons/ai-image-video-tools/" class="group mb-8 flex flex-col gap-5 rounded-2xl border-2 border-blue-200 bg-white p-7 shadow-md transition hover:border-blue-400 hover:shadow-lg sm:flex-row sm:items-start">
         <div class="flex-1">
-          <span class="mb-3 inline-flex rounded-full bg-indigo-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white">比較記事</span>
-          <p class="mt-3 text-lg font-bold leading-snug text-slate-900 group-hover:text-indigo-700 sm:text-xl">無料AI画像生成ツール比較｜無料枠・透かし・商用利用を一覧で確認</p>
-          <p class="mt-3 text-sm leading-relaxed text-slate-500">無料プランや無料クレジットで試せるAI画像生成ツールを、透かしの有無・商用利用条件・生成枚数の制限で横並びに整理しています。ツール選びの出発点として活用できます。</p>
+          <span class="mb-3 inline-flex rounded-full bg-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white">比較表</span>
+          <p class="mt-3 text-lg font-bold leading-snug text-slate-900 group-hover:text-blue-700 sm:text-xl">AI画像・動画生成ツール比較表｜商用利用・無料枠・透かしを横並びで確認</p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-500">AI動画生成・AI画像生成の主要ツールを同じ観点で横並びに整理した比較表です。商用利用条件・無料枠・透かしの有無をまとめて確認できます。</p>
           <p class="mt-2 text-xs text-slate-400">最終確認：公式サイトでご確認ください</p>
         </div>
         <div class="flex shrink-0 items-end sm:items-center">
-          <span class="inline-flex items-center gap-1 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-bold text-white transition group-hover:bg-indigo-700">
-            この記事を読む
+          <span class="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-bold text-white transition group-hover:bg-blue-700">
+            比較表を見る
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
             </svg>
@@ -825,14 +872,14 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
       <!-- 厳選カード 6件（3列） -->
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
-        <a href="/compare/runway-vs-pika/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
+        <a href="/comparisons/runway-vs-pika/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
           <span class="mb-3 inline-flex w-fit rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">比較記事</span>
           <p class="font-bold leading-snug text-slate-900 group-hover:text-indigo-700">Runway vs Pika｜AI動画生成ツール比較</p>
           <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用・無料枠・透かしなど主要条件を横並びで比較</p>
           <p class="mt-4 text-right text-xs font-semibold text-indigo-600 group-hover:underline">読む →</p>
         </a>
 
-        <a href="/compare/midjourney-vs-adobe-firefly/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
+        <a href="/comparisons/midjourney-vs-adobe-firefly/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
           <span class="mb-3 inline-flex w-fit rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">比較記事</span>
           <p class="font-bold leading-snug text-slate-900 group-hover:text-indigo-700">Midjourney vs Adobe Firefly｜AI画像生成比較</p>
           <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用・著作権・価格・品質の違いを比較</p>
@@ -888,7 +935,7 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
 
       <!-- 下部CTA -->
       <div class="mt-10 flex flex-wrap gap-3">
-        <a href="/compare/" class="inline-flex items-center gap-1.5 rounded-lg border border-indigo-200 bg-indigo-50 px-5 py-2.5 text-sm font-semibold text-indigo-700 transition hover:bg-indigo-100">
+        <a href="/comparisons/" class="inline-flex items-center gap-1.5 rounded-lg border border-indigo-200 bg-indigo-50 px-5 py-2.5 text-sm font-semibold text-indigo-700 transition hover:bg-indigo-100">
           比較記事をすべて見る →
         </a>
         <a href="/guides/" class="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-5 py-2.5 text-sm font-semibold text-blue-700 transition hover:bg-blue-100">
@@ -924,9 +971,6 @@ const tools = [...videoTools, ...imageTools].slice(0, 6);
             </a>
             <a href="/guides/commercial-use-copyright/" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:underline">
               商用利用・著作権ガイドを読む →
-            </a>
-            <a href="/guides/ai-image-commercial-use-checklist/" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:underline">
-              商用利用前チェックリスト →
             </a>
           </div>
         </div>

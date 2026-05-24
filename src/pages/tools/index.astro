@@ -36,6 +36,56 @@ const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.
       <NoticeBox />
     </div>
 
+    <!-- AI画像生成ツールを選ぶ比較ポイント -->
+    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-5">
+      <h2 class="mb-3 text-base font-bold text-[#002B61]">AI画像生成ツールを選ぶ比較ポイント</h2>
+      <ul class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>生成の種類：</strong>テキストプロンプトから画像を生成する「テキスト→画像」、既存画像を変換・編集する「画像→画像」、テンプレートに合わせてデザインを作る「デザイン補助」では、向いているツールが異なります。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>無料枠・生成回数：</strong>完全無料・クレジット制・無料プランありなど形態はさまざまで、上限を超えると有料プランへの移行が必要な場合があります。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料枠のあるツール</a>はこちらで確認できます。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>透かしの有無：</strong>無料プランでは透かしが入る場合があります。SNS画像や商用成果物に使う場合は透かし条件の確認が重要です。<a href="/conditions/no-watermark/" class="text-blue-600 hover:underline">透かしなしツール</a>はこちらで確認できます。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>商用利用条件：</strong>プランや用途によって商用利用の可否が異なります。人物・ブランドロゴ・第三者素材が含まれる場合は、別途権利の確認も必要です。利用前に必ず最新の公式規約をご確認ください。本記事は法的助言ではありません。<a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール</a>はこちら。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-slate-400">▸</span>
+          <span><strong>日本語対応：</strong>日本語UIと日本語プロンプト対応は別問題です。UIが日本語でも、細かいスタイル指定では英語プロンプトの方が意図を伝えやすい場合があります。<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>はこちらで確認できます。</span>
+        </li>
+      </ul>
+      <p class="mt-4 text-xs text-slate-500">料金・無料枠・商用利用条件は変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
+    </section>
+
+    <!-- 向いている人 / 向いていない人 -->
+    <section class="mb-10 grid gap-4 sm:grid-cols-2">
+      <div class="rounded-xl border border-green-100 bg-green-50 px-5 py-4">
+        <h2 class="mb-3 text-sm font-bold text-green-900">向いている人</h2>
+        <ul class="space-y-2 text-sm text-green-900">
+          <li class="flex gap-2"><span>○</span><span>ブログアイキャッチやSNS画像を短時間で作りたい</span></li>
+          <li class="flex gap-2"><span>○</span><span>広告バナーやサムネイルの案を複数試したい</span></li>
+          <li class="flex gap-2"><span>○</span><span>デザイン案や構図案を素早く出したい</span></li>
+          <li class="flex gap-2"><span>○</span><span>画像素材をもとにバリエーションを作りたい</span></li>
+        </ul>
+      </div>
+      <div class="rounded-xl border border-red-100 bg-red-50 px-5 py-4">
+        <h2 class="mb-3 text-sm font-bold text-red-900">向いていない人</h2>
+        <ul class="space-y-2 text-sm text-red-900">
+          <li class="flex gap-2"><span>×</span><span>権利条件を確認せずに商用案件へ使いたい人</span></li>
+          <li class="flex gap-2"><span>×</span><span>人物・著名人・ブランドロゴを厳密に扱う必要がある人</span></li>
+          <li class="flex gap-2"><span>×</span><span>毎回同じ人物・同じ構図を完全に再現したい人</span></li>
+          <li class="flex gap-2"><span>×</span><span>細かなレイヤー編集や入稿データ制作まで完結させたい人</span></li>
+        </ul>
+      </div>
+    </section>
+
     <!-- 画像生成ツール -->
     <section class="mb-12">
       <h2 class="mb-4 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">
@@ -54,6 +104,11 @@ const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.
       <div class="grid gap-4 sm:grid-cols-2">
         {videoTools.map((tool) => <ToolCard tool={tool} />)}
       </div>
+      <div class="mt-4">
+        <a href="/categories/video-generation/" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:underline">
+          AI動画生成ツール一覧を見る →
+        </a>
+      </div>
     </section>
 
     <!-- 比較表への導線 -->
@@ -62,7 +117,7 @@ const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.
       <p class="mb-4 text-sm text-slate-600">
         商用利用・無料枠・日本語対応・透かし・料金目安を横並びで確認したい場合は、比較表をご利用ください。
       </p>
-      <a href="/compare/" class="inline-block rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">
+      <a href="/comparisons/" class="inline-block rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">
         全ツール比較表を見る →
       </a>
     </section>
@@ -72,27 +127,27 @@ const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.
       <h2 class="mb-4 text-lg font-semibold text-slate-800">条件別に探す</h2>
       <ul class="flex flex-wrap gap-3">
         <li>
-          <a href="/categories/free/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
+          <a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
             無料で使えるAIツール
           </a>
         </li>
         <li>
-          <a href="/categories/commercial-use/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
+          <a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
             商用利用を確認しやすいAIツール
           </a>
         </li>
         <li>
-          <a href="/categories/japanese/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
+          <a href="/conditions/japanese/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
             日本語対応のAIツール
           </a>
         </li>
         <li>
-          <a href="/categories/no-watermark/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
+          <a href="/conditions/no-watermark/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
             透かしなしで使いやすいAIツール
           </a>
         </li>
         <li>
-          <a href="/categories/free-video/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
+          <a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
             無料で使えるAI動画生成ツール比較
           </a>
         </li>
@@ -125,6 +180,25 @@ const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.
           </a>
         </li>
       </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mt-12">
+      <h2 class="mb-6 text-xl font-semibold text-slate-800">よくある質問</h2>
+      <div class="space-y-5">
+        <div class="rounded-lg border border-slate-200 px-5 py-4">
+          <p class="font-medium text-slate-800">AI画像生成ツールは無料でも使えますか？</p>
+          <p class="mt-2 text-sm text-slate-600">無料で試せるツールもありますが、生成回数・画像サイズ・透かし・商用利用条件などに制限がある場合があります。最新情報は各公式サイトをご確認ください。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料枠のあるツール一覧</a>もご参照ください。</p>
+        </div>
+        <div class="rounded-lg border border-slate-200 px-5 py-4">
+          <p class="font-medium text-slate-800">AI画像生成ツールを商用利用する前に何を確認すべきですか？</p>
+          <p class="mt-2 text-sm text-slate-600">料金プラン・生成物の利用条件・人物画像やブランドロゴ・第三者素材の扱い・利用規約の最新状況などを確認してください。本記事は法的助言ではありません。<a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール</a>や<a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用・著作権ガイド</a>もご参照ください。</p>
+        </div>
+        <div class="rounded-lg border border-slate-200 px-5 py-4">
+          <p class="font-medium text-slate-800">日本語プロンプトに対応していれば日本語で十分ですか？</p>
+          <p class="mt-2 text-sm text-slate-600">日本語で指示できるツールもありますが、細かい画風や構図の指定では英語プロンプトの方が意図を伝えやすい場合があります。ツールごとの対応状況は<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>のページでご確認ください。</p>
+        </div>
+      </div>
     </section>
 
   </div>

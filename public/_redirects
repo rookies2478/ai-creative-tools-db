@@ -1,0 +1,9 @@
+/video-generators/    /categories/video-generation/   301
+/image-generators/    /categories/image-generation/   301
+/categories/free/     /conditions/free/               301
+/categories/free-video/ /conditions/free/             301
+/categories/commercial-use/ /conditions/commercial-use/ 301
+/categories/japanese/ /conditions/japanese/           301
+/categories/no-watermark/ /conditions/no-watermark/   301
+/compare/             /comparisons/                   301
+/compare/*            /comparisons/:splat             301

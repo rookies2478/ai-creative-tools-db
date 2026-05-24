@@ -1,4 +1,4 @@
-﻿---
+---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GuideWarningBox from '../../../components/GuideWarningBox.astro';
 import GuideSummaryBox from '../../../components/GuideSummaryBox.astro';
@@ -17,7 +17,9 @@ const checklistItems = [
   '生成画像の出力形式・解像度・利用可能な用途を確認した',
   '透かし・クレジット表記の有無と条件を確認した',
   '禁止用途・制限事項（再販・再頒布・広告等）を確認した',
+  '入力・参照した画像・素材の権利関係を確認した',
   '生成画像に人物・ブランド・キャラクター等の要素が含まれていないかを確認した',
+  '公開先（ブログ・SNS・広告・ECプラットフォーム等）のポリシーを確認した',
   '判断が難しい場合は公式サポートまたは専門家に確認した',
 ];
 
@@ -28,8 +30,16 @@ const faqItems = [
     a: 'ツールやプラン、用途によって条件が異なる場合があります。必ず各ツールの公式サイト・利用規約・料金ページをご確認ください。本記事は法的助言ではありません。',
   },
   {
-    q: '無料プランで作った画像も仕事に使えますか？',
-    a: '無料プランでは、商用利用、透かし、出力サイズ、クレジット表記などに制限がある場合があります。最新情報は公式サイトをご確認ください。',
+    q: '無料プランで作ったAI画像もチェックが必要ですか？',
+    a: '無料プランでは、商用利用、透かし、出力サイズ、クレジット表記などに制限がある場合があります。無料プランでの商用利用が明確に不可とされているツールもあります。利用前に必ず公式サイトをご確認ください。',
+  },
+  {
+    q: 'このチェックリストだけで商用利用の判断はできますか？',
+    a: '本ページは確認項目を整理したものであり、法的助言ではありません。個別の案件について具体的な判断が必要な場合は、各ツールの最新公式規約を確認した上で、公式サポートまたは専門家へのご相談をお願いします。商用利用・著作権・肖像権・商標の詳しい考え方は<a href="/guides/commercial-use-copyright/" class="text-blue-600 underline underline-offset-2">商用利用・著作権ガイド</a>もあわせてご参照ください。',
+  },
+  {
+    q: '人物やブランドロゴが入る画像は何を確認すべきですか？',
+    a: '人物画像・著名人・ブランドロゴ・商品名・第三者のキャラクターが含まれる生成物については、ツールの商用利用条件とは別に、肖像権・商標権・著作権等の侵害リスクを個別に確認する必要があります。ツール側で商用利用が許可されていても、第三者の権利への配慮は別途必要です。',
   },
   {
     q: '透かしなしなら商用利用してもよいですか？',
@@ -120,7 +130,7 @@ const toolInfo = [
     notes: 'バージョン・モデルごとにライセンスが異なります。SD 3.x以降は年間収益に関する条件が設けられているとされています。ローカル実行でも使用モデルのライセンス確認が必要です。',
   },
   {
-    name: 'DALL·E',
+    name: 'DALL・E',
     href: '/tools/dalle/',
     checkPoints: 'OpenAI利用規約・ChatGPTの料金プランページ',
     notes: 'ChatGPT経由での利用が一般的です。C2PA標準の不可視メタデータが埋め込まれる場合があります。プランによって生成数の制限があります。',
@@ -157,10 +167,14 @@ const toolInfo = [
     <!-- 導入文 -->
     <GuideSummaryBox title="このページについて">
       <p>
-        AI画像生成ツールで作った画像を仕事・SNS運用・ブログ・広告・YouTubeサムネなどに使う場合は、
-        <strong class="font-semibold text-slate-900">ツールごとの利用条件を確認する必要があります。</strong>
+        このページは、AI画像を公開・商用利用する前に確認したい項目をチェックリスト形式で整理しています。
+        実務前の確認用ページとして、ブログ・SNS・広告・EC商品画像などで使う前に参照してください。
+      </p>
+      <p class="mt-3">
         商用利用の可否はツール・プラン・用途・生成物の扱いによって異なる場合があります。
-        このページでは、AI画像を使う前に確認したい項目をチェックリスト形式で整理しています。
+        <strong class="font-semibold text-slate-900">商用利用・著作権・肖像権・商標の詳しい考え方は</strong>
+        <a href="/guides/commercial-use-copyright/" class="text-blue-600 underline underline-offset-2 hover:text-blue-700">商用利用・著作権ガイド</a>をご確認ください。
+        本記事は法的助言ではありません。最新情報は各ツールの公式規約をご確認ください。
       </p>
     </GuideSummaryBox>
 
@@ -280,7 +294,7 @@ const toolInfo = [
             <ul class="space-y-1.5">
               {uc.points.map((point) => (
                 <li class="flex gap-2 text-xs leading-relaxed text-slate-600">
-                  <span class="mt-0.5 shrink-0 text-blue-400" aria-hidden="true">›</span>
+                  <span class="mt-0.5 shrink-0 text-blue-400" aria-hidden="true">?</span>
                   <span>{point}</span>
                 </li>
               ))}
@@ -288,6 +302,17 @@ const toolInfo = [
           </div>
         ))}
       </div>
+    </section>
+
+    <!-- ── 用途別ツール比較 ── -->
+    <section class="my-6" aria-labelledby="usecase-tools-heading">
+      <p class="mb-3 text-sm font-semibold text-slate-700" id="usecase-tools-heading">用途別のツール比較を見る</p>
+      <ul class="flex flex-wrap gap-3 text-sm">
+        <li><a href="/use-cases/blog-eyecatch/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">ブログアイキャッチ向けツール</a></li>
+        <li><a href="/use-cases/sns-post-image/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">SNS投稿画像向けツール</a></li>
+        <li><a href="/use-cases/ad-banner/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">広告バナー向けツール</a></li>
+        <li><a href="/use-cases/ec-product-image/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">EC商品画像向けツール</a></li>
+      </ul>
     </section>
 
     <!-- ── ツール別公式情報 ── -->
@@ -380,11 +405,11 @@ const toolInfo = [
       <h2 class="mb-3 text-sm font-semibold text-slate-600" id="related-heading">関連ページ</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
         <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用・著作権ガイド</a></li>
-        <li><a href="/compare/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">比較表</a></li>
+        <li><a href="/comparisons/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">比較表</a></li>
         <li><a href="/tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">ツール一覧</a></li>
-        <li><a href="/categories/free/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料で使えるツール</a></li>
-        <li><a href="/categories/no-watermark/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">透かしなしツール</a></li>
-        <li><a href="/compare/free-ai-image-generators/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料AI画像生成ツール比較</a></li>
+        <li><a href="/conditions/free/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料で使えるツール</a></li>
+        <li><a href="/conditions/no-watermark/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">透かしなしツール</a></li>
+        <li><a href="/comparisons/free-ai-image-generators/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料AI画像生成ツール比較</a></li>
         <li><a href="/use-cases/youtube-thumbnail/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">YouTubeサムネ向けツール</a></li>
         <li><a href="/use-cases/sns-blog-eyecatch/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">SNS・ブログアイキャッチ向けツール</a></li>
       </ul>

@@ -1,4 +1,4 @@
-﻿---
+---
 import { getEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GuidePageHeader from '../../../components/GuidePageHeader.astro';
@@ -48,7 +48,7 @@ const platformDisplayMap: Record<string, string> = {
 };
 
 function platformLabel(platforms: string[] | undefined): string {
-  if (!platforms || platforms.length === 0) return '—';
+  if (!platforms || platforms.length === 0) return '?';
   return platforms.map(p => platformDisplayMap[p] ?? p).join('、');
 }
 
@@ -182,10 +182,10 @@ const faqItems = [
         <div>
           <h3 class="mb-2 text-sm font-semibold text-slate-900">2. 可視透かしと不可視メタデータの違いを理解する</h3>
           <ul class="space-y-2 text-sm text-slate-600">
-            <li class="flex gap-2"><span class="text-slate-400 shrink-0">—</span><span><strong class="font-medium text-slate-700">可視透かし：</strong>生成画像・動画に直接表示されるロゴやテキスト</span></li>
-            <li class="flex gap-2"><span class="text-slate-400 shrink-0">—</span><span><strong class="font-medium text-slate-700">不可視メタデータ（C2PA等）：</strong>目には見えないが画像ファイルに埋め込まれるAI生成情報</span></li>
+            <li class="flex gap-2"><span class="text-slate-400 shrink-0">?</span><span><strong class="font-medium text-slate-700">可視透かし：</strong>生成画像・動画に直接表示されるロゴやテキスト</span></li>
+            <li class="flex gap-2"><span class="text-slate-400 shrink-0">?</span><span><strong class="font-medium text-slate-700">不可視メタデータ（C2PA等）：</strong>目には見えないが画像ファイルに埋め込まれるAI生成情報</span></li>
           </ul>
-          <p class="mt-2 text-sm leading-relaxed text-slate-600">DALL·EやAdobe Fireflyなど一部のツールでは、可視透かしがなくてもC2PA標準のメタデータが埋め込まれる場合があります。</p>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">DALL・EやAdobe Fireflyなど一部のツールでは、可視透かしがなくてもC2PA標準のメタデータが埋め込まれる場合があります。</p>
         </div>
 
         <div>
@@ -231,17 +231,17 @@ const faqItems = [
         <div class="rounded-xl border border-red-200 bg-red-50 p-4">
           <h3 class="mb-3 text-sm font-semibold text-red-900">無料プランで注意すること</h3>
           <ul class="space-y-2 text-xs text-red-800">
-            <li class="flex gap-2"><span class="shrink-0">—</span><span><strong>透かしあり：</strong>Runway、Pika、Kling AIなどは無料プランで透かしが入る場合があります</span></li>
-            <li class="flex gap-2"><span class="shrink-0">—</span><span><strong>商用利用不可：</strong>Pika、Kling AIなどは無料プランでは商用利用不可とされています</span></li>
-            <li class="flex gap-2"><span class="shrink-0">—</span><span><strong>権利の帰属：</strong>Leonardo AIの無料プランでは生成画像の権利がサービス側に帰属する場合があります</span></li>
+            <li class="flex gap-2"><span class="shrink-0">?</span><span><strong>透かしあり：</strong>Runway、Pika、Kling AIなどは無料プランで透かしが入る場合があります</span></li>
+            <li class="flex gap-2"><span class="shrink-0">?</span><span><strong>商用利用不可：</strong>Pika、Kling AIなどは無料プランでは商用利用不可とされています</span></li>
+            <li class="flex gap-2"><span class="shrink-0">?</span><span><strong>権利の帰属：</strong>Leonardo AIの無料プランでは生成画像の権利がサービス側に帰属する場合があります</span></li>
           </ul>
         </div>
         <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
           <h3 class="mb-3 text-sm font-semibold text-emerald-900">有料プランへの移行で変わること</h3>
           <ul class="space-y-2 text-xs text-emerald-800">
-            <li class="flex gap-2"><span class="shrink-0">—</span><span><strong>透かし除去：</strong>多くのツールで有料プランに移行すると透かしなし出力が可能になります</span></li>
-            <li class="flex gap-2"><span class="shrink-0">—</span><span><strong>商用利用許可：</strong>Pika、Kling AIなど、有料プランで初めて商用利用が許可されるツールがあります</span></li>
-            <li class="flex gap-2"><span class="shrink-0">—</span><span><strong>生成量の拡大：</strong>クレジット数や生成回数の上限が緩和される場合があります</span></li>
+            <li class="flex gap-2"><span class="shrink-0">?</span><span><strong>透かし除去：</strong>多くのツールで有料プランに移行すると透かしなし出力が可能になります</span></li>
+            <li class="flex gap-2"><span class="shrink-0">?</span><span><strong>商用利用許可：</strong>Pika、Kling AIなど、有料プランで初めて商用利用が許可されるツールがあります</span></li>
+            <li class="flex gap-2"><span class="shrink-0">?</span><span><strong>生成量の拡大：</strong>クレジット数や生成回数の上限が緩和される場合があります</span></li>
           </ul>
         </div>
       </div>
@@ -327,9 +327,9 @@ const faqItems = [
       <h2 class="mb-3 text-sm font-semibold text-slate-600">関連ページ</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
         <li><a href="/tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">ツール一覧</a></li>
-        <li><a href="/categories/no-watermark/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">透かしなしツール</a></li>
-        <li><a href="/categories/free/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料で使えるツール</a></li>
-        <li><a href="/categories/commercial-use/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用を確認しやすいツール</a></li>
+        <li><a href="/conditions/no-watermark/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">透かしなしツール</a></li>
+        <li><a href="/conditions/free/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料で使えるツール</a></li>
+        <li><a href="/conditions/commercial-use/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用を確認しやすいツール</a></li>
         <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用・著作権ガイド</a></li>
         <li><a href="/guides/free-ai-image-tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料ツールの選び方</a></li>
       </ul>

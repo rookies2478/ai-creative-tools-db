@@ -1,4 +1,4 @@
-﻿---
+---
 import { getEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GuidePageHeader from '../../../components/GuidePageHeader.astro';
@@ -59,7 +59,7 @@ const freePlanTypeRows = [
 
 const useCaseRows = [
   [{ text: '手軽にWebで試したい・日本語対応が必要' }, { text: 'Canva AI画像生成 / Adobe Firefly' }, { text: '日本語UI・プロンプト対応。登録後すぐ使える' }],
-  [{ text: 'ChatGPTと一緒に使いたい' }, { text: 'DALL·E', href: '/tools/dalle/' }, { text: 'ChatGPT統合。日本語UIはChatGPTに準拠' }],
+  [{ text: 'ChatGPTと一緒に使いたい' }, { text: 'DALL・E', href: '/tools/dalle/' }, { text: 'ChatGPT統合。日本語UIはChatGPTに準拠' }],
   [{ text: '商用素材として使いたい' }, { text: 'Adobe Firefly', href: '/tools/adobe-firefly/' }, { text: '商用利用を想定した設計とされている（条件要確認）' }],
   [{ text: 'プライバシー重視・ローカルで使いたい' }, { text: 'Stable Diffusion', href: '/tools/stable-diffusion/' }, { text: 'ローカル実行。標準的な構成ではデータが外部に送られにくい' }],
   [{ text: 'ゲーム・イラスト向けに無料枠での試作' }, { text: 'Leonardo AI', href: '/tools/leonardo-ai/' }, { text: '1日150トークン程度の無料枠（変更の可能性あり）' }],
@@ -78,19 +78,19 @@ const checklistItems = [
 const faqItems = [
   {
     q: '無料で使えるAI画像生成ツールはありますか？',
-    a: 'あります。Stable Diffusion（ローカル実行）・Adobe Firefly・Canva AI画像生成・DALL·E（ChatGPT経由）・Leonardo AIなどで無料プランまたは無料枠が提供されています（確認時点）。ただし生成枚数・機能・商用利用条件はツールによって異なります。最新の提供状況は各ツールの公式サイトでご確認ください。',
+    a: 'あります。Stable Diffusion（ローカル実行）・Adobe Firefly・Canva AI画像生成・DALL・E（ChatGPT経由）・Leonardo AIなどで無料プランまたは無料枠が提供されています（確認時点）。ただし生成枚数・機能・商用利用条件はツールによって異なります。最新の提供状況は各ツールの公式サイトでご確認ください。',
   },
   {
     q: '無料プランでも商用利用できますか？',
-    a: 'ツールによって異なります。Adobe Firefly・DALL·E（ChatGPT経由）は公式情報上、商用利用が案内されていますが、条件があります。Leonardo AIの無料プランでは生成画像の権利がLeonardo.AIに帰属する場合があるとされています。Stable Diffusionはモデルバージョンごとにライセンスが異なります。商用利用前は必ず各ツールの公式利用規約の最新版をご確認ください。このページは法的アドバイスではありません。',
+    a: 'ツールによって異なります。Adobe Firefly・DALL・E（ChatGPT経由）は公式情報上、商用利用が案内されていますが、条件があります。Leonardo AIの無料プランでは生成画像の権利がLeonardo.AIに帰属する場合があるとされています。Stable Diffusionはモデルバージョンごとにライセンスが異なります。商用利用前は必ず各ツールの公式利用規約の最新版をご確認ください。このページは法的アドバイスではありません。',
   },
   {
     q: '無料プランでは透かしが入りますか？',
-    a: 'ツールやプランによって異なります。無料プランで可視透かしが付与されるツールもあれば、透かしなしで利用できるツールもあります。また可視透かしがない場合でも、C2PAなどの不可視メタデータが埋め込まれる場合があります（Adobe Firefly・DALL·E 3など）。最新の条件は各ツールの公式サイトでご確認ください。',
+    a: 'ツールやプランによって異なります。無料プランで可視透かしが付与されるツールもあれば、透かしなしで利用できるツールもあります。また可視透かしがない場合でも、C2PAなどの不可視メタデータが埋め込まれる場合があります（Adobe Firefly・DALL・E 3など）。最新の条件は各ツールの公式サイトでご確認ください。',
   },
   {
     q: '日本語で使える無料AI画像生成ツールはありますか？',
-    a: '日本語UIに対応しているツールとして、Adobe Firefly・Canva AI画像生成（いずれも確認時点）が挙げられます。DALL·EはChatGPT経由のためChatGPTの日本語UIに準拠します。最新の対応状況は各ツールの公式サイトでご確認ください。',
+    a: '日本語UIに対応しているツールとして、Adobe Firefly・Canva AI画像生成（いずれも確認時点）が挙げられます。DALL・EはChatGPT経由のためChatGPTの日本語UIに準拠します。最新の対応状況は各ツールの公式サイトでご確認ください。',
   },
   {
     q: '無料プランから有料プランに切り替える目安はありますか？',
@@ -175,10 +175,10 @@ const faqItems = [
 
       <h3 class="mb-3 mt-8 text-sm font-semibold text-slate-700">商用利用条件のパターン</h3>
       <ul class="space-y-2 text-sm text-slate-600">
-        <li class="flex gap-2"><span class="text-slate-400 shrink-0">—</span><span><strong class="font-medium text-slate-700">無料プランでも商用利用できる場合がある：</strong>条件・注意事項を確認の上で利用する（Adobe Firefly・DALL·Eなど）</span></li>
-        <li class="flex gap-2"><span class="text-slate-400 shrink-0">—</span><span><strong class="font-medium text-slate-700">有料プランへのアップグレードが必要な場合：</strong>無料プランでは商用利用に制限がある（Leonardo AIなど）</span></li>
-        <li class="flex gap-2"><span class="text-slate-400 shrink-0">—</span><span><strong class="font-medium text-slate-700">追加の条件がある場合：</strong>AI生成コンテンツであることの明示が求められる場合がある（Canva AIなど）</span></li>
-        <li class="flex gap-2"><span class="text-slate-400 shrink-0">—</span><span><strong class="font-medium text-slate-700">モデルバージョンによって条件が異なる場合：</strong>利用するモデルごとに確認が必要（Stable Diffusionなど）</span></li>
+        <li class="flex gap-2"><span class="text-slate-400 shrink-0">?</span><span><strong class="font-medium text-slate-700">無料プランでも商用利用できる場合がある：</strong>条件・注意事項を確認の上で利用する（Adobe Firefly・DALL・Eなど）</span></li>
+        <li class="flex gap-2"><span class="text-slate-400 shrink-0">?</span><span><strong class="font-medium text-slate-700">有料プランへのアップグレードが必要な場合：</strong>無料プランでは商用利用に制限がある（Leonardo AIなど）</span></li>
+        <li class="flex gap-2"><span class="text-slate-400 shrink-0">?</span><span><strong class="font-medium text-slate-700">追加の条件がある場合：</strong>AI生成コンテンツであることの明示が求められる場合がある（Canva AIなど）</span></li>
+        <li class="flex gap-2"><span class="text-slate-400 shrink-0">?</span><span><strong class="font-medium text-slate-700">モデルバージョンによって条件が異なる場合：</strong>利用するモデルごとに確認が必要（Stable Diffusionなど）</span></li>
       </ul>
     </section>
 
@@ -274,9 +274,9 @@ const faqItems = [
         <h2 class="mb-3 text-sm font-semibold text-slate-600">関連ページ</h2>
         <ul class="flex flex-wrap gap-3 text-sm">
           <li><a href="/tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">ツール一覧</a></li>
-          <li><a href="/categories/free/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料で使えるツール</a></li>
-          <li><a href="/categories/commercial-use/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用を確認しやすいツール</a></li>
-          <li><a href="/categories/no-watermark/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">透かしなしツール</a></li>
+          <li><a href="/conditions/free/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料で使えるツール</a></li>
+          <li><a href="/conditions/commercial-use/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用を確認しやすいツール</a></li>
+          <li><a href="/conditions/no-watermark/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">透かしなしツール</a></li>
           <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用・著作権ガイド</a></li>
           <li><a href="/guides/watermark-credit-guide/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">透かし・クレジット表記ガイド</a></li>
         </ul>

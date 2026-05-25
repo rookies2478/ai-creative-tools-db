@@ -1,0 +1,29 @@
+Options -Indexes
+RewriteEngine On
+
+# /video-generators/ → /categories/video-generation/
+RewriteRule ^video-generators/$ /categories/video-generation/ [R=301,L]
+
+# /image-generators/ → /categories/image-generation/
+RewriteRule ^image-generators/$ /categories/image-generation/ [R=301,L]
+
+# /categories/free/ → /conditions/free/
+RewriteRule ^categories/free/$ /conditions/free/ [R=301,L]
+
+# /categories/free-video/ → /conditions/free/
+RewriteRule ^categories/free-video/$ /conditions/free/ [R=301,L]
+
+# /categories/commercial-use/ → /conditions/commercial-use/
+RewriteRule ^categories/commercial-use/$ /conditions/commercial-use/ [R=301,L]
+
+# /categories/japanese/ → /conditions/japanese/
+RewriteRule ^categories/japanese/$ /conditions/japanese/ [R=301,L]
+
+# /categories/no-watermark/ → /conditions/no-watermark/
+RewriteRule ^categories/no-watermark/$ /conditions/no-watermark/ [R=301,L]
+
+# /compare/ → /comparisons/
+RewriteRule ^compare/$ /comparisons/ [R=301,L]
+
+# /compare/[slug]/ → /comparisons/[slug]/
+RewriteRule ^compare/(.+)/$ /comparisons/$1/ [R=301,L]

@@ -54,9 +54,7 @@ const wm  = wmBadge(data.watermark);
 const jui = triText(data.japaneseUi);
 const jpr = triText(data.japanesePrompt);
 
-const priceText = data.lowestPaidPlan
-  ? `${currencySymbol(data.currency)}${data.lowestPaidPlan}`
-  : '要確認';
+const priceText = data.lowestPaidPlan ?? '要確認';
 ---
 
 <section class="mb-8" aria-label="結論サマリー">

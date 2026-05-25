@@ -6,4 +6,4 @@
 /categories/japanese/ /conditions/japanese/           301
 /categories/no-watermark/ /conditions/no-watermark/   301
 /compare/             /comparisons/                   301
-/compare/*            /comparisons/:splat             301
+/compare/:slug/       /comparisons/:slug/             301

@@ -7,6 +7,8 @@ const STATIC_PATHS = [
   '/',
   '/tools/',
   '/categories/video-generation/',
+  '/categories/video-editing/',
+  '/categories/avatar-video/',
   '/categories/image-generation/',
   '/comparisons/',
   '/comparisons/runway-vs-pika/',

@@ -3,10 +3,9 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="AIアバター動画ツール比較｜顔出しなし解説動画・プレゼン動画の作り方"
-  description="AIアバターを使った解説動画・プレゼン動画ツールの比較ページです。AI動画生成との違い、選び方、比較ポイントを整理しています。最新情報は公式サイトをご確認ください。"
+  title="AIアバター動画ツール比較｜顔出しなし解説動画・研修動画・営業動画の作り方"
+  description="AIアバターを使った解説動画・研修動画・営業動画ツールの比較ページです。AI動画生成との違い、選び方、肖像権・音声の注意点を整理しています。最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/avatar-video/"
-  noindex={true}
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
 
@@ -16,16 +15,12 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
       <span>AIアバター動画</span>
     </nav>
 
-    <!-- noindex中のため準備中バナー -->
-    <div class="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800">
-      このページは現在情報を整備中です。掲載内容は随時更新予定です。
-    </div>
-
     <h1 class="mb-3 text-3xl font-bold text-slate-900">AIアバター動画ツール比較</h1>
     <p class="mb-6 text-slate-600 leading-relaxed">
-      AIアバターを使った解説動画・プレゼン動画ツールの比較・選び方を整理するページです。
-      顔出しなしで動画を制作できるツールや、テキストから話すアバターを生成できるサービスを対象としています。
-      <a href="/categories/video-generation/" class="text-blue-600 hover:underline">AI動画生成</a>との違いについても整理しています。
+      AIアバターを使った解説動画・研修動画・営業動画ツールの比較・選び方を整理するページです。
+      顔出し不要でテキスト原稿からアバターが話す動画を生成できるサービスを対象としています。
+      <a href="/categories/video-generation/" class="text-blue-600 hover:underline">AI動画生成</a>や
+      <a href="/categories/video-editing/" class="text-blue-600 hover:underline">AI動画編集</a>との違いについても整理しています。
     </p>
 
     <!-- AI動画生成との違い -->
@@ -46,9 +41,47 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
           <ul class="space-y-1.5 text-xs text-indigo-700">
             <li>▸ テキスト原稿からAIアバターが話す動画を生成</li>
             <li>▸ 顔出し不要で解説・プレゼン動画を作れる</li>
-            <li>▸ YouTube・eラーニング・業務説明動画向け</li>
+            <li>▸ YouTube・eラーニング・研修・営業説明動画向け</li>
             <li>▸ アバターの外見・声・言語を選べる場合が多い</li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主要ツールについて -->
+    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-5">
+      <h2 class="mb-3 text-base font-bold text-[#002B61]">このカテゴリの主要ツール</h2>
+      <p class="mb-4 text-sm text-slate-600 leading-relaxed">
+        AIアバター動画の代表的なサービスにはHeyGen・Synthesia・D-IDなどがあります。
+        これらのツールは現在このデータベースへの掲載を準備中です。
+        掲載が完了次第、各ツールの詳細ページからご確認いただけます。
+      </p>
+      <p class="mb-0 text-sm text-slate-600 leading-relaxed">
+        テキストから解説動画・ナレーション動画を生成する機能を持つツールとして、
+        <a href="/tools/invideo-ai/" class="text-blue-600 hover:underline">InVideo AI</a>
+        もご参照ください（テンプレート動画・AIナレーション対応）。
+      </p>
+    </section>
+
+    <!-- 用途別の選び分け -->
+    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-5">
+      <h2 class="mb-4 text-base font-bold text-[#002B61]">用途別の選び分け</h2>
+      <div class="space-y-4 text-sm text-slate-700">
+        <div class="flex gap-3">
+          <span class="mt-0.5 shrink-0 font-bold text-indigo-600">顔出しなし解説動画</span>
+          <span>AIアバターがテキストを読み上げる形式で解説動画を作れます。YouTubeチャンネル運営や教材制作で顔出しを避けたい場合に活用されています。</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="mt-0.5 shrink-0 font-bold text-indigo-600">研修・eラーニング動画</span>
+          <span>業務マニュアルや研修資料をアバター動画化することで、講師不要で動画を量産できます。内部利用の場合も商用利用条件を確認することを推奨します。</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="mt-0.5 shrink-0 font-bold text-indigo-600">多言語対応の営業・説明動画</span>
+          <span>同じ原稿を複数言語のアバターに読み上げさせることで、多言語対応の説明動画を効率的に制作できます。対応言語・音声品質はツールによって異なります。</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="mt-0.5 shrink-0 font-bold text-indigo-600">SNS・プロモーション動画</span>
+          <span>アバターを使ったプロモーション動画もSNSで活用されています。使用するアバターや生成した動画の商用利用条件は各ツールの利用規約をご確認ください。</span>
         </div>
       </div>
     </section>
@@ -63,7 +96,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
         </li>
         <li class="flex gap-2">
           <span class="mt-0.5 text-slate-400">▸</span>
-          <span><strong>アバターの種類・カスタマイズ：</strong>選べるアバターの数、カスタムアバター（自分の顔を使う）への対応。</span>
+          <span><strong>アバターの種類・カスタマイズ：</strong>選べるアバターの数、カスタムアバター（自分の顔を使う）への対応。カスタムアバター生成を利用する際は、本人の同意なく他者の顔・音声を使用しないよう注意が必要です。</span>
         </li>
         <li class="flex gap-2">
           <span class="mt-0.5 text-slate-400">▸</span>
@@ -75,7 +108,30 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
         </li>
         <li class="flex gap-2">
           <span class="mt-0.5 text-slate-400">▸</span>
-          <span><strong>商用利用条件：</strong>YouTube収益化・クライアント案件での利用前に、必ず公式利用規約をご確認ください。本記事は法的助言ではありません。</span>
+          <span><strong>商用利用条件：</strong>YouTube収益化・クライアント案件・広告での利用前に、必ず公式利用規約をご確認ください。本記事は法的助言ではありません。</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 肖像権・音声・素材の注意点 -->
+    <section class="mb-10 rounded-xl border border-amber-100 bg-amber-50 px-6 py-5">
+      <h2 class="mb-4 text-base font-bold text-amber-900">肖像権・音声・第三者素材の確認ポイント</h2>
+      <ul class="space-y-3 text-sm text-amber-800">
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-amber-500">▸</span>
+          <span><strong>他者の顔・肖像を使わない：</strong>カスタムアバター機能で他者の顔や肖像を本人の同意なく使用することは、肖像権・プライバシーの観点から問題になる可能性があります。利用前に各ツールの利用規約と関連法令をご確認ください。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-amber-500">▸</span>
+          <span><strong>音声クローン・AI音声の利用：</strong>他者の声を無断でクローンしたり、AI音声に本人と誤解させるような使い方をすることは、声の権利（パブリシティ権等）の観点から問題になる場合があります。各ツールの利用規約と関連法令をご確認ください。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-amber-500">▸</span>
+          <span><strong>第三者素材の使用：</strong>動画内で使用する画像・音楽・映像素材が第三者の著作物である場合は、権利者からの許諾または商用利用可能なライセンスの確認が必要です。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 text-amber-500">▸</span>
+          <span><strong>このページは法的助言ではありません：</strong>掲載情報は参考情報です。具体的な利用可否については各ツールの公式規約および専門家にご確認ください。</span>
         </li>
       </ul>
     </section>
@@ -87,6 +143,11 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
         <li>
           <a href="/categories/video-generation/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700 hover:bg-blue-100">
             AI動画生成ツール一覧
+          </a>
+        </li>
+        <li>
+          <a href="/categories/video-editing/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100">
+            AI動画編集ツール
           </a>
         </li>
         <li>
@@ -118,6 +179,10 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
         <div class="rounded-lg border border-slate-100 bg-white p-5">
           <p class="font-semibold text-slate-900">日本語の解説動画を作れますか？</p>
           <p class="mt-2 text-sm text-slate-600 leading-relaxed">日本語対応のアバター動画ツールもありますが、対応状況はツールによって異なります。日本語の音声品質・字幕生成の精度は各ツールの公式情報でご確認ください。</p>
+        </div>
+        <div class="rounded-lg border border-slate-100 bg-white p-5">
+          <p class="font-semibold text-slate-900">他者の顔を使ってアバターを作ることはできますか？</p>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">ツールによってはカスタムアバター機能で自分の顔を使ったアバター生成ができます。ただし他者の顔を本人の同意なく使用することは肖像権の観点から問題になる場合があります。詳細は各ツールの利用規約と関連法令をご確認ください。本記事は法的助言ではありません。</p>
         </div>
         <div class="rounded-lg border border-slate-100 bg-white p-5">
           <p class="font-semibold text-slate-900">商用利用（YouTube収益化・クライアント案件）で使えますか？</p>

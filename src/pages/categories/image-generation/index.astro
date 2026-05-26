@@ -2,31 +2,82 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolCard from '../../../components/ToolCard.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
 import NoticeBox from '../../../components/NoticeBox.astro';
 import ConditionChips from '../../../components/ConditionChips.astro';
 
 const allTools = await getCollection('tools');
 const imageTools = allTools.filter((t) => t.data.category === 'image' || t.data.category === 'both');
 const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.category === 'both');
+
+const faqs = [
+  {
+    q: 'AI画像生成ツールは無料でも使えますか？',
+    a: '無料で試せるツールもありますが、生成回数・画像サイズ・透かし・商用利用条件などに制限がある場合があります。最新情報は各公式サイトをご確認ください。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料枠のあるツール一覧</a>もご参照ください。',
+  },
+  {
+    q: 'AI画像生成ツールを商用利用する前に何を確認すべきですか？',
+    a: '料金プラン・生成物の利用条件・人物画像やブランドロゴ・第三者素材の扱い・利用規約の最新状況などを確認してください。プランによって商用利用の条件が異なるツールも多くあります。本記事は法的助言ではありません。<a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール</a>や<a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用・著作権の考え方ガイド</a>もご参照ください。',
+  },
+  {
+    q: '日本語プロンプトに対応していれば日本語で十分ですか？',
+    a: '日本語で指示できるツールもありますが、細かい画風や構図の指定では英語プロンプトの方が意図を伝えやすい場合があります。ツールごとの対応状況は<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>のページでご確認ください。',
+  },
+  {
+    q: '人物や著名人・ブランドロゴを含む画像を生成しても問題ありませんか？',
+    a: '人物・著名人・ブランドロゴ・第三者の商標や著作物を含む画像の生成・利用については、各ツールの利用規約に加え、肖像権・著作権・商標権などの観点から個別に確認が必要です。本記事は法的助言ではなく、問題がないことを保証するものではありません。',
+  },
+  {
+    q: 'テキストから画像を生成する方式と画像を編集する方式の違いは何ですか？',
+    a: 'テキストプロンプトから画像を新規生成する「テキスト→画像（text-to-image）」と、既存画像を入力として加工・変換する「画像→画像（image-to-image）」では、向いているツールや使い方が異なります。また、Canva AIのようにデザインテンプレートと組み合わせて使う「デザイン補助」型のツールもあります。目的に合わせて選択することをおすすめします。',
+  },
+];
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a.replace(/<[^>]+>/g, '')
+    }
+  }))
+});
 ---
 
 <BaseLayout
-  title="AI画像生成・AI動画生成ツール一覧｜商用利用・料金・無料枠を比較"
-  description="AI画像生成・AI動画生成ツールを一覧で比較。商用利用条件・料金・無料枠・透かし・日本語対応を確認しながら仕事や副業に使うツールを探せます。最新情報は公式サイトをご確認ください。"
+  title="AI画像生成ツール一覧｜商用利用・料金・無料枠・用途別に比較"
+  description="AI画像生成ツールを商用利用条件・料金・無料枠・日本語対応・用途別の特徴で比較できる一覧ページです。Midjourney・Adobe Firefly・Canva AI・Leonardo AI・Stable Diffusionなど主要ツールを整理しています。最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/image-generation/"
+  jsonLd={faqJsonLd}
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
 
     <nav class="mb-6 text-sm text-slate-500">
       <a href="/" class="hover:underline">トップ</a>
       <span class="mx-1">/</span>
-      <span>ツール一覧</span>
+      <a href="/tools/" class="hover:underline">ツール一覧</a>
+      <span class="mx-1">/</span>
+      <span>AI画像生成ツール一覧</span>
     </nav>
 
-    <h1 class="mb-2 text-3xl font-bold text-slate-900">AI画像生成・AI動画生成ツール一覧</h1>
-    <p class="mb-6 text-slate-500">
-      AI画像生成・動画生成ツールを、商用利用・無料枠・日本語対応・透かし・料金目安とあわせて一覧で確認できます。仕事や副業で使う前の比較にご活用ください。
+    <h1 class="mb-3 text-3xl font-bold text-slate-900">AI画像生成ツール一覧</h1>
+
+    <p class="mb-4 leading-relaxed text-slate-600">
+      AI画像生成ツールを、商用利用条件・料金・無料枠・日本語対応・用途別の特徴で比較できる一覧ページです。
+      Midjourney・Adobe Firefly・Canva AI・Leonardo AI・Stable Diffusionなど主要ツールの情報を整理しています。
     </p>
+
+    <div class="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700 leading-relaxed">
+      <p class="mb-1.5">掲載情報は公式サイト・利用規約をもとに整理していますが、内容は変更される可能性があります。<strong>最新情報は必ず公式サイトをご確認ください。</strong>商用利用・著作権に関しては断定的な記載を避けており、法的助言ではありません。</p>
+      <ul class="mt-2 space-y-1 text-xs text-amber-700 list-disc list-inside">
+        <li>料金・無料枠・商用利用条件はプランや時期によって変更される場合があります</li>
+        <li>人物・著名人・ブランドロゴ・第三者素材を含む画像の利用は、別途権利の確認が必要です</li>
+        <li>無料プランでは透かしが付与される場合があります</li>
+      </ul>
+    </div>
 
     <!-- 条件別チップ導線 -->
     <ConditionChips currentPath="/tools/" />
@@ -36,63 +87,170 @@ const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.
       <NoticeBox />
     </div>
 
-    <!-- AI画像生成ツールを選ぶ比較ポイント -->
-    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-5">
-      <h2 class="mb-3 text-base font-bold text-[#002B61]">AI画像生成ツールを選ぶ比較ポイント</h2>
-      <ul class="space-y-3 text-sm text-slate-700">
-        <li class="flex gap-2">
-          <span class="mt-0.5 text-slate-400">▸</span>
-          <span><strong>生成の種類：</strong>テキストプロンプトから画像を生成する「テキスト→画像」、既存画像を変換・編集する「画像→画像」、テンプレートに合わせてデザインを作る「デザイン補助」では、向いているツールが異なります。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 text-slate-400">▸</span>
-          <span><strong>無料枠・生成回数：</strong>完全無料・クレジット制・無料プランありなど形態はさまざまで、上限を超えると有料プランへの移行が必要な場合があります。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料枠のあるツール</a>はこちらで確認できます。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 text-slate-400">▸</span>
-          <span><strong>透かしの有無：</strong>無料プランでは透かしが入る場合があります。SNS画像や商用成果物に使う場合は透かし条件の確認が重要です。<a href="/conditions/no-watermark/" class="text-blue-600 hover:underline">透かしなしツール</a>はこちらで確認できます。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 text-slate-400">▸</span>
-          <span><strong>商用利用条件：</strong>プランや用途によって商用利用の可否が異なります。人物・ブランドロゴ・第三者素材が含まれる場合は、別途権利の確認も必要です。利用前に必ず最新の公式規約をご確認ください。本記事は法的助言ではありません。<a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール</a>はこちら。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 text-slate-400">▸</span>
-          <span><strong>日本語対応：</strong>日本語UIと日本語プロンプト対応は別問題です。UIが日本語でも、細かいスタイル指定では英語プロンプトの方が意図を伝えやすい場合があります。<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>はこちらで確認できます。</span>
-        </li>
-      </ul>
-      <p class="mt-4 text-xs text-slate-500">料金・無料枠・商用利用条件は変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
-    </section>
-
-    <!-- 向いている人 / 向いていない人 -->
-    <section class="mb-10 grid gap-4 sm:grid-cols-2">
-      <div class="rounded-xl border border-green-100 bg-green-50 px-5 py-4">
-        <h2 class="mb-3 text-sm font-bold text-green-900">向いている人</h2>
-        <ul class="space-y-2 text-sm text-green-900">
-          <li class="flex gap-2"><span>○</span><span>ブログアイキャッチやSNS画像を短時間で作りたい</span></li>
-          <li class="flex gap-2"><span>○</span><span>広告バナーやサムネイルの案を複数試したい</span></li>
-          <li class="flex gap-2"><span>○</span><span>デザイン案や構図案を素早く出したい</span></li>
-          <li class="flex gap-2"><span>○</span><span>画像素材をもとにバリエーションを作りたい</span></li>
-        </ul>
-      </div>
-      <div class="rounded-xl border border-red-100 bg-red-50 px-5 py-4">
-        <h2 class="mb-3 text-sm font-bold text-red-900">向いていない人</h2>
-        <ul class="space-y-2 text-sm text-red-900">
-          <li class="flex gap-2"><span>×</span><span>権利条件を確認せずに商用案件へ使いたい人</span></li>
-          <li class="flex gap-2"><span>×</span><span>人物・著名人・ブランドロゴを厳密に扱う必要がある人</span></li>
-          <li class="flex gap-2"><span>×</span><span>毎回同じ人物・同じ構図を完全に再現したい人</span></li>
-          <li class="flex gap-2"><span>×</span><span>細かなレイヤー編集や入稿データ制作まで完結させたい人</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 画像生成ツール -->
+    <!-- AI画像生成ツール -->
     <section class="mb-12">
       <h2 class="mb-4 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">
         AI画像生成ツール（{imageTools.length}件）
       </h2>
       <div class="grid gap-4 sm:grid-cols-2">
         {imageTools.map((tool) => <ToolCard tool={tool} />)}
+      </div>
+    </section>
+
+    <!-- 選び方セクション -->
+    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900">AI画像生成ツールの選び方</h2>
+      <ul class="space-y-3 text-sm text-slate-700">
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
+          <span><strong>生成の種類：</strong>テキストプロンプトから画像を生成する「テキスト→画像」、既存画像を変換・編集する「画像→画像」、テンプレートに合わせてデザインを作る「デザイン補助」では、向いているツールが異なります。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
+          <span><strong>無料枠・生成回数：</strong>完全無料・クレジット制・無料プランありなど形態はさまざまで、上限を超えると有料プランへの移行が必要な場合があります。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料枠のあるツール</a>はこちらで確認できます。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
+          <span><strong>透かしの有無：</strong>無料プランでは透かしが入る場合があります。SNS画像や商用成果物に使う場合は透かし条件の確認が重要です。<a href="/conditions/no-watermark/" class="text-blue-600 hover:underline">透かしなしツール</a>はこちらで確認できます。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
+          <span><strong>商用利用条件：</strong>プランや用途によって商用利用の可否が異なります。人物・ブランドロゴ・第三者素材が含まれる場合は別途権利の確認も必要です。利用前に必ず最新の公式規約をご確認ください。<a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール</a>はこちら。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
+          <span><strong>日本語対応：</strong>日本語UIと日本語プロンプト対応は別問題です。UIが日本語でも、細かいスタイル指定では英語プロンプトの方が意図を伝えやすい場合があります。<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>はこちらで確認できます。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
+          <span><strong>生成品質・スタイル：</strong>フォトリアル・イラスト・アニメ調・ゲームグラフィックなど、ツールごとに得意なスタイルが異なります。目的の用途に合ったスタイルのサンプルを公式サイトで確認することをおすすめします。</span>
+        </li>
+      </ul>
+      <p class="mt-4 text-xs text-slate-500">料金・無料枠・商用利用条件は変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
+    </section>
+
+    <!-- 用途別の選び分け -->
+    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900">用途別のツール選び分け</h2>
+      <div class="space-y-4 text-sm text-slate-700">
+        <div class="flex gap-3">
+          <span class="shrink-0 font-semibold text-slate-600 w-36">SNS投稿画像</span>
+          <span>手軽にビジュアルを作りたい場合はCanva AI・Microsoft Designerが検討候補に挙がりやすいです。SNSフォーマットへのサイズ調整もデザインツール系の方がスムーズな場合があります。</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="shrink-0 font-semibold text-slate-600 w-36">ブログアイキャッチ</span>
+          <span>雰囲気重視の画像を生成する場合はMidjourney・DALL-E・Ideogramが候補に挙がります。商用利用前提の場合は各ツールの規約確認が先決です。</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="shrink-0 font-semibold text-slate-600 w-36">広告バナー</span>
+          <span>商用利用条件を公式規約で確認したうえで、Adobe Fireflyはアドビ製品との連携や商用利用条件の確認を重視する場合の候補になります。無料プランでの商用利用が制限されているツールも多いため、プラン確認が先決です。</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="shrink-0 font-semibold text-slate-600 w-36">サムネイル</span>
+          <span>YouTubeサムネイルやテキスト入り画像を作りたい場合はIdeogramがテキスト生成精度で候補に挙がることがあります。<a href="/use-cases/youtube-thumbnail/" class="text-blue-600 hover:underline">YouTube向け比較ページ</a>もご参照ください。</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="shrink-0 font-semibold text-slate-600 w-36">商品画像・EC</span>
+          <span>商品の見栄えを整えたい場合は背景除去・補正機能も備えたツールが便利です。商用利用条件・著作権の扱いを事前に確認することをおすすめします。<a href="/use-cases/ec-product-image/" class="text-blue-600 hover:underline">EC商品画像向け比較ページ</a>もご参照ください。</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="shrink-0 font-semibold text-slate-600 w-36">ゲーム・イラスト素材</span>
+          <span>ゲームグラフィックやイラスト素材の制作にはLeonardo AI・Stable Diffusion系が候補として挙がることがあります。スタイルの一貫性やモデル選択の柔軟性が特徴とされています。</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="shrink-0 font-semibold text-slate-600 w-36">プレゼン用ビジュアル</span>
+          <span>プレゼン資料用のビジュアル素材にはCanva AIのようにスライドデザインと一体化したツールが作業効率の観点から候補になります。</span>
+        </div>
+      </div>
+      <p class="mt-4 text-xs text-slate-500">ツールの対応状況・条件は変更される可能性があります。最新情報は各公式サイトでご確認ください。</p>
+    </section>
+
+    <!-- 主要ツールの特徴と違い -->
+    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900">主要ツールの特徴と違い</h2>
+      <div class="space-y-4 text-sm text-slate-700">
+        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/midjourney/" class="hover:underline">Midjourney</a></p>
+          <p>アーティスティックで高品質なビジュアル制作に強みがあるとされており、フォトリアルからイラスト調まで幅広いスタイルに対応しています。無料プランはなく、有料プランが基本です。商用利用条件は公式規約での確認が必要です。</p>
+        </div>
+        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/adobe-firefly/" class="hover:underline">Adobe Firefly</a></p>
+          <p>Adobe製品（Photoshop・Illustratorなど）との連携に強みがあります。商用利用条件をアドビの枠組みで確認しながら使いたい場合の候補です。ただし商用利用の可否は利用規約・プランによって異なるため、最新の公式情報を必ずご確認ください。</p>
+        </div>
+        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/canva-ai-image-generator/" class="hover:underline">Canva AI（Magic Media）</a></p>
+          <p>Canvaのデザイン制作フローの中でAI画像生成を使いたい場合の候補です。SNS画像・プレゼン資料・バナーなどのデザイン作業と一体化して利用できます。商用利用条件はCanvaの利用規約に準じます。</p>
+        </div>
+        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/leonardo-ai/" class="hover:underline">Leonardo AI</a></p>
+          <p>ゲームグラフィックやイラスト素材の制作候補として挙がることが多いツールです。カスタムモデルの選択や一貫したスタイルの維持に強みがあるとされています。無料枠もあります。商用利用条件は公式規約での確認が必要です。</p>
+        </div>
+        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/stable-diffusion/" class="hover:underline">Stable Diffusion系（DreamStudio等）</a></p>
+          <p>オープンソースモデルをベースにカスタマイズ性の高い生成ができるツール群です。ローカル環境での実行や独自モデルのファインチューニングも可能ですが、技術的な知識が必要な場合があります。商用利用はモデルのライセンス条件を個別に確認する必要があります。</p>
+        </div>
+        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/dalle/" class="hover:underline">DALL-E（ChatGPT経由）</a></p>
+          <p>OpenAIのDALL-EモデルをChatGPT経由で利用できます。テキスト指示による画像生成が手軽で、会話の流れで修正指示を出せる点が特徴とされています。商用利用条件はOpenAIの利用規約での確認が必要です。</p>
+        </div>
+        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/ideogram/" class="hover:underline">Ideogram</a></p>
+          <p>画像内にテキストを精度よく生成できる点が特徴とされています。サムネイルやタイトルロゴ入り画像の生成用途で候補に挙がることがあります。無料枠もあります。商用利用条件は公式規約での確認が必要です。</p>
+        </div>
+        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/microsoft-designer/" class="hover:underline">Microsoft Designer</a></p>
+          <p>MicrosoftアカウントでアクセスできるAI画像生成・デザインツールです。SNS投稿やプレゼン用ビジュアルを手軽に作りたい場合の候補になります。商用利用条件はMicrosoftの利用規約での確認が必要です。</p>
+        </div>
+      </div>
+      <p class="mt-4 text-xs text-slate-500">掲載内容は公式情報をもとに整理していますが、機能・条件は変更される可能性があります。最新情報は各公式サイトでご確認ください。本記載は法的助言ではありません。</p>
+    </section>
+
+    <!-- 商用利用前に確認すること -->
+    <section class="mb-10 rounded-xl border border-amber-100 bg-amber-50 px-6 py-5">
+      <h2 class="mb-3 text-base font-bold text-amber-900">商用利用・著作権・肖像権について確認すべきこと</h2>
+      <ul class="space-y-2 text-sm text-amber-800">
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0">▸</span>
+          <span><strong>利用規約の確認：</strong>無料プランで商用利用が禁止されているツールも多くあります。利用前に最新の公式規約を必ずご確認ください。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0">▸</span>
+          <span><strong>人物・肖像権：</strong>実在の人物・著名人を模した画像の生成・公開・商用利用には肖像権上のリスクがある場合があります。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0">▸</span>
+          <span><strong>ブランド・商標：</strong>他社のロゴ・商標・キャラクターを含む画像の利用には商標権・著作権上の注意が必要です。</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="mt-0.5 shrink-0">▸</span>
+          <span><strong>第三者素材：</strong>既存画像・写真・イラストを入力素材として使う場合は、その素材の権利関係を確認する必要があります。</span>
+        </li>
+      </ul>
+      <p class="mt-3 text-xs text-amber-700">本記事は法的助言ではありません。商用利用・権利関係については専門家へのご相談をおすすめします。<a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用・著作権の考え方ガイド</a>もご参照ください。</p>
+    </section>
+
+    <!-- 向いている人 / 向いていない人 -->
+    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
+      <h2 class="mb-5 text-lg font-semibold text-slate-900">AI画像生成ツールが向いている人・向いていない人</h2>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <h3 class="mb-3 text-sm font-bold text-emerald-700">向いている人</h3>
+          <ul class="space-y-2 text-sm text-slate-700">
+            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-emerald-500">✓</span><span>ブログアイキャッチやSNS画像を短時間で作りたい人</span></li>
+            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-emerald-500">✓</span><span>広告バナーやサムネイルの案を複数試したい人</span></li>
+            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-emerald-500">✓</span><span>デザイン案や構図案を素早く出したい人</span></li>
+            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-emerald-500">✓</span><span>画像素材をもとにバリエーションを作りたい人</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mb-3 text-sm font-bold text-rose-700">向いていない人</h3>
+          <ul class="space-y-2 text-sm text-slate-700">
+            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-rose-400">✗</span><span>利用条件を確認せずに商用案件へ使いたい人</span></li>
+            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-rose-400">✗</span><span>人物・著名人・ブランドロゴを厳密に扱う必要がある人</span></li>
+            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-rose-400">✗</span><span>毎回同じ人物・同じ構図を完全に再現したい人</span></li>
+            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-rose-400">✗</span><span>細かなレイヤー編集や入稿データ制作まで完結させたい人</span></li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -111,95 +269,102 @@ const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.
       </div>
     </section>
 
-    <!-- 比較表への導線 -->
-    <section class="mb-12 rounded-xl border border-slate-200 bg-slate-50 px-6 py-6">
-      <h2 class="mb-2 text-lg font-semibold text-slate-900">一覧で迷ったら、比較表で確認できます</h2>
-      <p class="mb-4 text-sm text-slate-600">
-        商用利用・無料枠・日本語対応・透かし・料金目安を横並びで確認したい場合は、比較表をご利用ください。
-      </p>
-      <a href="/comparisons/" class="inline-block rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">
-        全ツール比較表を見る →
-      </a>
-    </section>
+    <!-- 関連ページリンク -->
+    <section class="mb-12">
+      <h2 class="mb-4 text-lg font-semibold text-slate-800">関連ページ</h2>
 
-    <!-- 関連カテゴリリンク -->
-    <section>
-      <h2 class="mb-4 text-lg font-semibold text-slate-800">条件別に探す</h2>
-      <ul class="flex flex-wrap gap-3">
-        <li>
-          <a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-            無料で使えるAIツール
-          </a>
-        </li>
-        <li>
-          <a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-            商用利用を確認しやすいAIツール
-          </a>
-        </li>
-        <li>
-          <a href="/conditions/japanese/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-            日本語対応のAIツール
-          </a>
-        </li>
-        <li>
-          <a href="/conditions/no-watermark/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-            透かしなしで使いやすいAIツール
-          </a>
-        </li>
-        <li>
-          <a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-            無料で使えるAI動画生成ツール比較
-          </a>
-        </li>
-        <li>
-          <a href="/use-cases/" class="rounded-full border border-blue-300 bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-800 hover:bg-blue-200">
-            用途別AI画像生成ツール比較（一覧）
-          </a>
-          <a href="/use-cases/youtube-thumbnail/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-            YouTubeサムネ向けAI画像生成ツールを比較
-          </a>
-        </li>
-        <li>
-          <a href="/use-cases/sns-post-image/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-            SNS投稿画像向けAI画像生成ツールを比較
-          </a>
-        </li>
-        <li>
-          <a href="/use-cases/ad-banner/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-            広告バナー向けAI画像生成ツールを比較
-          </a>
-        </li>
-        <li>
-          <a href="/use-cases/ec-product-image/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-            EC商品画像向けAI画像生成ツールを比較
-          </a>
-        </li>
-        <li>
-          <a href="/use-cases/blog-eyecatch/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-            ブログアイキャッチ向けAI画像生成ツールを比較
-          </a>
-        </li>
-      </ul>
+      <div class="mb-4">
+        <p class="mb-2 text-sm font-semibold text-slate-700">ツール別詳細ページ</p>
+        <ul class="flex flex-wrap gap-3">
+          {['midjourney', 'adobe-firefly', 'canva-ai-image-generator', 'leonardo-ai', 'stable-diffusion', 'dalle', 'ideogram', 'microsoft-designer'].map((slug) => {
+            const tool = imageTools.find((t) => t.slug === slug);
+            return tool ? (
+              <li>
+                <a
+                  href={`/tools/${slug}/`}
+                  class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300"
+                >
+                  {tool.data.name}
+                </a>
+              </li>
+            ) : null;
+          })}
+        </ul>
+      </div>
+
+      <div>
+        <p class="mb-2 text-sm font-semibold text-slate-700">まとめ・ガイドページ</p>
+        <ul class="flex flex-wrap gap-3">
+          <li>
+            <a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
+              無料で使えるAIツール
+            </a>
+          </li>
+          <li>
+            <a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
+              商用利用を確認しやすいAIツール
+            </a>
+          </li>
+          <li>
+            <a href="/conditions/japanese/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
+              日本語対応のAIツール
+            </a>
+          </li>
+          <li>
+            <a href="/conditions/no-watermark/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
+              透かしなしで使いやすいAIツール
+            </a>
+          </li>
+          <li>
+            <a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
+              商用利用・著作権の考え方ガイド
+            </a>
+          </li>
+          <li>
+            <a href="/comparisons/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
+              全ツール比較表
+            </a>
+          </li>
+          <li>
+            <a href="/use-cases/" class="rounded-full border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
+              用途別AI画像生成ツール比較（一覧）
+            </a>
+          </li>
+          <li>
+            <a href="/use-cases/youtube-thumbnail/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
+              YouTubeサムネ向け比較
+            </a>
+          </li>
+          <li>
+            <a href="/use-cases/sns-post-image/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
+              SNS投稿画像向け比較
+            </a>
+          </li>
+          <li>
+            <a href="/use-cases/ad-banner/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
+              広告バナー向け比較
+            </a>
+          </li>
+          <li>
+            <a href="/use-cases/ec-product-image/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
+              EC商品画像向け比較
+            </a>
+          </li>
+          <li>
+            <a href="/use-cases/blog-eyecatch/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
+              ブログアイキャッチ向け比較
+            </a>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <!-- FAQ -->
-    <section class="mt-12">
-      <h2 class="mb-6 text-xl font-semibold text-slate-800">よくある質問</h2>
-      <div class="space-y-5">
-        <div class="rounded-lg border border-slate-200 px-5 py-4">
-          <p class="font-medium text-slate-800">AI画像生成ツールは無料でも使えますか？</p>
-          <p class="mt-2 text-sm text-slate-600">無料で試せるツールもありますが、生成回数・画像サイズ・透かし・商用利用条件などに制限がある場合があります。最新情報は各公式サイトをご確認ください。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料枠のあるツール一覧</a>もご参照ください。</p>
-        </div>
-        <div class="rounded-lg border border-slate-200 px-5 py-4">
-          <p class="font-medium text-slate-800">AI画像生成ツールを商用利用する前に何を確認すべきですか？</p>
-          <p class="mt-2 text-sm text-slate-600">料金プラン・生成物の利用条件・人物画像やブランドロゴ・第三者素材の扱い・利用規約の最新状況などを確認してください。本記事は法的助言ではありません。<a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール</a>や<a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用・著作権ガイド</a>もご参照ください。</p>
-        </div>
-        <div class="rounded-lg border border-slate-200 px-5 py-4">
-          <p class="font-medium text-slate-800">日本語プロンプトに対応していれば日本語で十分ですか？</p>
-          <p class="mt-2 text-sm text-slate-600">日本語で指示できるツールもありますが、細かい画風や構図の指定では英語プロンプトの方が意図を伝えやすい場合があります。ツールごとの対応状況は<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>のページでご確認ください。</p>
-        </div>
-      </div>
-    </section>
+    <GuideFAQ items={faqs} title="よくある質問" />
+
+    <nav class="mt-8 border-t border-slate-200 pt-6 text-sm">
+      <a href="/tools/" class="text-blue-600 hover:underline">← ツール一覧に戻る</a>
+    </nav>
 
   </div>
 </BaseLayout>

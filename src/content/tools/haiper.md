@@ -204,6 +204,6 @@ Haiperは、テキストから動画（text-to-video）、画像から動画（i
 
 - [AI動画生成ツール一覧](/categories/video-generation/) — 主要AI動画生成ツールの比較・選び方
 - [無料で使えるAI動画生成ツール比較](/conditions/free/) — 無料枠・商用利用条件・透かしの比較
-- [RunwayとPikaを比較](/compare/runway-vs-pika/) — 代表的な動画生成ツールの比較記事
+- [RunwayとPikaを比較](/comparisons/runway-vs-pika/) — 代表的な動画生成ツールの比較記事
 - [Kling AI](/tools/kling-ai/) — 画像から動画生成にも対応するAI動画生成ツール
 - [Luma AI](/tools/luma-ai/) — テキスト・画像から高品質な動画を生成するAIツール

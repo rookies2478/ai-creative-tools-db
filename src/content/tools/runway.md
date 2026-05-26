@@ -97,7 +97,7 @@ faqs:
   - question: "どんな用途に向いていますか？"
     answer: "SNS動画・広告動画の試作、画像素材から短い動画を生成する用途、映像表現のアイデア検証などに向いています。テキストから動画、画像から動画、動画編集補助の3つの使い方があります。ただし用途によって確認すべき条件が異なります。"
   - question: "RunwayとPikaはどちらを選ぶべきですか？"
-    answer: "本格的な映像表現や多機能な編集ツールを求める場合はRunwayが候補になります。手軽に短い動画生成を試したい場合はPikaも選択肢になります。料金・無料枠・機能の詳細は比較ページをご確認ください。"
+    answer: "本格的な映像表現や多機能な編集ツールを求める場合はRunwayが候補になります。手軽に短い動画生成を試したい場合はPikaも選択肢になります。料金・無料枠・機能の詳細は[RunwayとPikaの比較ページ](/comparisons/runway-vs-pika/)をご確認ください。"
   - question: "日本語で使えますか？"
     answer: "UIは英語のみです。音声ダビング機能では日本語を含む複数言語に対応しているとされています。"
   - question: "透かしは入りますか？"
@@ -178,7 +178,9 @@ Runwayは主に3つの使い方があります。
 
 ## 関連ページ
 
-- [RunwayとPikaを比較](/compare/runway-vs-pika/) — 料金・無料枠・商用利用・用途別の選び方を比較
+- [RunwayとPikaを比較](/comparisons/runway-vs-pika/) — 料金・無料枠・商用利用・用途別の選び方を比較
+- [Pika](/tools/pika/) — 手軽に短い動画生成を試したい場合の選択肢
+- [Kling AI](/tools/kling-ai/) — 中国発のAI動画生成ツール。Runwayとは異なる特性
 - [AI動画生成ツール一覧](/categories/video-generation/) — 主要AI動画生成ツールの比較
 - [無料で使えるAI動画生成ツール](/conditions/free/) — 無料枠のあるツールをまとめて確認
 - [AI商用利用の注意点](/guides/commercial-use-copyright/) — 商用利用前に確認すべきポイント

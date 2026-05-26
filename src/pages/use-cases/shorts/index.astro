@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NoticeBox from '../../../components/NoticeBox.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+---
+
+<BaseLayout
+  title="YouTube Shorts・縦型動画向けAIツール比較：動画生成・編集・字幕・ナレーションの選び方 | AIクリエイティブナビ"
+  description="YouTube Shorts・TikTok・Instagram Reelsなど縦型・短尺動画向けにAIツールを選びたい方向けに、AI動画生成・AI動画編集・字幕・ナレーションの役割と選び方を整理。Pika・Runway・CapCut AI・Hailuo AIなどを比較しています。"
+  canonicalPath="/use-cases/shorts/"
+>
+  <div class="mx-auto max-w-4xl px-6 py-12">
+
+    <!-- パンくずナビ -->
+    <nav class="mb-6 text-sm text-slate-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <a href="/use-cases/" class="hover:underline">用途別記事一覧</a>
+      <span class="mx-1">/</span>
+      <span>縦型・Shorts向けAIツール比較</span>
+    </nav>
+
+    <!-- H1 -->
+    <h1 class="mb-4 text-3xl font-bold text-[#002B61]">YouTube Shorts・縦型動画向けAIツール比較：動画生成・編集・字幕・ナレーションの選び方</h1>
+
+    <!-- 導入文 -->
+    <p class="mb-6 text-slate-600 leading-relaxed">
+      YouTube Shorts・TikTok・Instagram Reelsなど短尺・縦型動画の制作でAIツールを使いたい場合、動画生成・動画編集・字幕・ナレーションのどの部分にAIを活用するかで選ぶツールが変わります。
+      このページでは、縦型・短尺動画向けAIツールの役割の違いと選び方を整理しています。商用利用・BGM・素材・人物表現の注意点については断定できないため、最新の公式規約でご確認ください。
+    </p>
+
+    <!-- 注意ボックス -->
+    <div class="mb-10 rounded-lg border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800 leading-relaxed">
+      <p class="mb-1 font-semibold">ご利用前にご確認ください</p>
+      <ul class="mt-2 space-y-1.5 list-disc list-inside">
+        <li>商用利用・BGM・素材・人物表現の扱いは、各ツールの<strong>公式サイト・利用規約</strong>を必ずご確認ください。</li>
+        <li>本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。</li>
+        <li>掲載情報は確認時点のものです。最新情報は各ツールの公式サイトをご参照ください。</li>
+      </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ツールの役割の違い                                            -->
+    <!-- ============================================================ -->
+    <section class="mb-12">
+      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">縦型・短尺動画でAIツールを使う場面</h2>
+      <p class="mb-4 text-sm text-slate-500">
+        Shorts制作でAIを活用する場面はいくつかあります。目的に合わせてツールを選ぶことが重要です。
+      </p>
+      <div class="space-y-4">
+        <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+          <p class="mb-2 text-sm font-bold text-slate-900">映像クリップの生成（AI動画生成）</p>
+          <p class="text-sm leading-relaxed text-slate-600">
+            テキストや静止画から短尺映像クリップを生成するツールです。Bロール・イメージ映像・アニメーション的な映像を作る場面で使われます。Pika・Runway・Kling AI・Hailuo AI・Haiper・PixVerseなどが候補になります。
+            生成映像の商用利用条件はツールごとに異なるため、公式情報を確認してください。
+          </p>
+          <div class="mt-3 flex flex-wrap gap-2 text-xs">
+            <a href="/tools/pika/" class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-blue-700 hover:bg-blue-100">Pika</a>
+            <a href="/tools/runway/" class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-blue-700 hover:bg-blue-100">Runway</a>
+            <a href="/tools/kling-ai/" class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-blue-700 hover:bg-blue-100">Kling AI</a>
+            <a href="/tools/hailuo-ai/" class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-blue-700 hover:bg-blue-100">Hailuo AI</a>
+            <a href="/tools/haiper/" class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-blue-700 hover:bg-blue-100">Haiper</a>
+            <a href="/tools/pixverse/" class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-blue-700 hover:bg-blue-100">PixVerse</a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+          <p class="mb-2 text-sm font-bold text-slate-900">テンプレート・字幕・BGMの追加（AI動画編集）</p>
+          <p class="text-sm leading-relaxed text-slate-600">
+            縦型フォーマットのテンプレート・自動字幕・BGM・エフェクト追加などをAIで補助するツールです。撮影済み素材や生成クリップを仕上げる場面で使われます。CapCut AI・InVideo AIなどが候補になります。
+            テンプレートや内蔵素材・BGMの商用利用条件はツールの利用規約で確認してください。
+          </p>
+          <div class="mt-3 flex flex-wrap gap-2 text-xs">
+            <a href="/tools/capcut-ai/" class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-blue-700 hover:bg-blue-100">CapCut AI</a>
+            <a href="/tools/invideo-ai/" class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-blue-700 hover:bg-blue-100">InVideo AI</a>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+          <p class="mb-2 text-sm font-bold text-slate-900">アバター・ナレーション動画</p>
+          <p class="text-sm leading-relaxed text-slate-600">
+            顔出しなしでAIアバターやAI音声ナレーションを使った短尺動画を作る場合は、アバター動画系ツールが候補になります。アバターの商用利用条件や音声の扱いはツールによって異なるため、公式規約を確認してください。
+          </p>
+          <p class="mt-3 text-xs text-slate-500">→ <a href="/categories/avatar-video/" class="text-blue-600 hover:underline">AIアバター動画カテゴリを見る</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 選び方                                                        -->
+    <!-- ============================================================ -->
+    <section class="mb-12">
+      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">縦型・短尺動画向けツールの選び方</h2>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {[
+          {
+            title: '縦型フォーマット対応',
+            desc: '9:16縦型フォーマットに対応しているか確認します。CapCut AIはShortsやReels向けのテンプレートが豊富です。AI動画生成ツールでは出力比率を設定できるものが多いですが、設定方法はツールによって異なります。',
+          },
+          {
+            title: '字幕・テロップの自動生成',
+            desc: '音声から自動字幕を生成できると編集効率が上がります。CapCut AIは自動字幕機能があります。字幕スタイルの調整しやすさもツールによって異なります。',
+          },
+          {
+            title: 'BGM・効果音の扱い',
+            desc: '内蔵BGMや効果音をSNS投稿・収益化動画に使えるかはツールの利用規約で確認が必要です。外部のフリーBGM素材を使う場合も、各素材の商用利用条件を個別に確認してください。',
+          },
+          {
+            title: '短尺向けの生成時間',
+            desc: 'Shorts・Reelsは通常60秒以下です。AI動画生成ツールの最大生成時間はツールによって異なります（5〜10秒程度が多い）。複数クリップをつなぐ編集が必要になる場合があります。',
+          },
+          {
+            title: '人物・顔の表現',
+            desc: '実在の人物に似た顔をAIで生成・使用することは、肖像権・なりすましのリスクが伴う場合があります。特定の人物を意図せず生成しないよう注意し、各ツールの利用規約を確認してください。',
+          },
+          {
+            title: '商用利用条件',
+            desc: 'SNS動画で収益化（広告収益・ブランド案件等）を前提とする場合、各ツールの商用利用条件を確認します。無料プランでは商用利用が制限されている場合があります。',
+          },
+        ].map(({ title, desc }) => (
+          <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
+            <p class="mb-2 text-sm font-bold text-slate-900">{title}</p>
+            <p class="text-xs leading-relaxed text-slate-600">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- カテゴリリンク                                                -->
+    <!-- ============================================================ -->
+    <section class="mb-12">
+      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">カテゴリ別ツール一覧</h2>
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-3 text-sm">
+        <a href="/categories/video-generation/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
+          <span class="font-medium text-slate-900">AI動画生成ツール一覧</span>
+          <span class="text-blue-600">→</span>
+        </a>
+        <a href="/categories/video-editing/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
+          <span class="font-medium text-slate-900">AI動画編集ツール一覧</span>
+          <span class="text-blue-600">→</span>
+        </a>
+        <a href="/categories/avatar-video/" class="flex items-center justify-between rounded-xl border border-slate-100 bg-white px-5 py-4 shadow-sm hover:bg-slate-50 transition-colors">
+          <span class="font-medium text-slate-900">AIアバター動画ツール一覧</span>
+          <span class="text-blue-600">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 注意点                                                        -->
+    <!-- ============================================================ -->
+    <section class="mb-12">
+      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">短尺・縦型動画で確認すべき注意点</h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm space-y-4 text-sm leading-relaxed text-slate-600">
+        <ul class="list-disc list-inside space-y-2">
+          <li><strong>商用利用条件：</strong> SNS動画で広告収益・ブランドタイアップ等を前提とする場合、各ツールの商用利用条件を確認してください。無料プランでは制限がある場合があります。</li>
+          <li><strong>BGM・音楽素材：</strong> 内蔵BGMの商用利用条件はツールによって異なります。プラットフォーム（YouTube・TikTok等）の音楽ライブラリとは別の問題として扱われる場合があります。</li>
+          <li><strong>人物・顔の表現：</strong> 実在の人物に似た顔や著名人のビジュアルをAIで生成・使用することは、肖像権・なりすましのリスクが伴う場合があります。</li>
+          <li><strong>第三者素材：</strong> テンプレートや素材ライブラリに含まれる映像・音楽・画像の商用利用条件は別途確認が必要な場合があります。</li>
+          <li><strong>プラットフォームのポリシー：</strong> YouTube・TikTok・Instagram等が定めるAI生成コンテンツの表示義務やポリシーも別途ご確認ください。</li>
+        </ul>
+        <div class="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-800">
+          本記事は情報提供を目的としており、法的助言ではありません。商用利用を前提にする場合は、最新の公式規約をご確認ください。
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- FAQ                                                           -->
+    <!-- ============================================================ -->
+    <GuideFAQ
+      title="よくある質問（FAQ）"
+      items={[
+        {
+          q: 'YouTube ShortsにAI動画生成ツールを使ってもよいですか？',
+          a: '各ツールの公式サイト・利用規約・商用利用条件をご確認ください。YouTubeのショートへの投稿に利用できるかどうかは、ツールの条件やYouTube側のポリシーによっても異なります。本記事は法的助言ではありません。',
+        },
+        {
+          q: 'Shortsに向いているAI動画ツールはどれですか？',
+          a: 'CapCut AIは縦型フォーマットのテンプレートや自動字幕機能があり、Shorts・Reels向けの編集に使われやすいです。映像クリップを生成したい場合はPika・Runway・Kling AI・Hailuo AIなどが候補になります。商用利用条件はそれぞれ異なるため、公式規約をご確認ください。',
+        },
+        {
+          q: 'AI動画生成でShortsに使える縦型動画を作れますか？',
+          a: '多くのAI動画生成ツールは出力比率を設定できますが、9:16縦型フォーマットへの対応状況はツールによって異なります。生成できる動画の長さも5〜10秒程度が多く、複数クリップを組み合わせる編集が必要になる場合があります。',
+        },
+        {
+          q: 'BGMの商用利用条件はどう確認すればよいですか？',
+          a: 'ツールに内蔵されているBGMの商用利用条件は、ツールの利用規約または素材ライブラリの説明をご確認ください。プラットフォーム（YouTube・TikTok等）の音楽ライブラリとは別に確認が必要です。本記事は法的助言ではありません。',
+        },
+        {
+          q: 'Shortsで人物の顔をAI生成して使えますか？',
+          a: '実在の人物に似た顔の生成・使用は、肖像権・なりすましのリスクが伴う場合があります。特定の人物を意図せず生成しないよう注意し、各ツールの利用規約とプラットフォームのポリシーをご確認ください。本記事は法的助言ではありません。',
+        },
+        {
+          q: '無料ツールだけでShortsを作れますか？',
+          a: 'CapCut AI・Pika・Hailuo AI・PixVerseなど無料枠で利用できるツールがあります。ただし、生成回数・出力解像度・商用利用条件・透かしの有無などに制限がある場合があります。最新情報は各ツールの公式サイトをご確認ください。',
+        },
+      ]}
+    />
+
+    <!-- NoticeBox -->
+    <NoticeBox />
+
+    <!-- ============================================================ -->
+    <!-- 関連ページリンク                                              -->
+    <!-- ============================================================ -->
+    <section class="mt-10 mb-8">
+      <h2 class="mb-4 text-sm font-semibold text-slate-600">次に読む</h2>
+      <ul class="flex flex-wrap gap-3 text-sm">
+        <li><a href="/use-cases/youtube/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">YouTube動画向けAIツール</a></li>
+        <li><a href="/use-cases/faceless-video/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">顔出しなし動画向けAIツール</a></li>
+        <li><a href="/categories/video-generation/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">AI動画生成ツール一覧</a></li>
+        <li><a href="/categories/video-editing/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">AI動画編集ツール一覧</a></li>
+        <li><a href="/categories/avatar-video/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">AIアバター動画ツール一覧</a></li>
+        <li><a href="/tools/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">すべてのツールを見る</a></li>
+      </ul>
+    </section>
+
+    <nav class="border-t border-slate-200 pt-6 text-sm">
+      <a href="/" class="text-blue-600 hover:underline">← トップに戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

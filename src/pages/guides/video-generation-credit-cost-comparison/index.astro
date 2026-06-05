@@ -1,0 +1,841 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideWarningBox from '../../../components/GuideWarningBox.astro';
+import GuideSummaryBox from '../../../components/GuideSummaryBox.astro';
+import GuideCheckList from '../../../components/GuideCheckList.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+import GuideComparisonTable from '../../../components/GuideComparisonTable.astro';
+import GuidePageHeader from '../../../components/GuidePageHeader.astro';
+import GuideFreshnessBox from '../../../components/GuideFreshnessBox.astro';
+
+const entry = await getEntry('guides', 'video-generation-credit-cost-comparison');
+if (!entry) throw new Error('guide not found: video-generation-credit-cost-comparison');
+const { data } = entry;
+
+// ── 比較表1：基本情報 ─────────────────────────────────────
+const basicHeaders = ['ツール名', '無料枠', '最低有料プラン目安', '日本語UI', '透かし（無料）', '詳細'];
+const basicRows = [
+  [
+    { text: 'Runway' },
+    { text: '125クレジット（初回のみ）' },
+    { text: '$12/月（年払い）' },
+    { text: 'なし' },
+    { text: 'あり' },
+    { text: '詳細を見る', href: '/tools/runway/' },
+  ],
+  [
+    { text: 'Pika' },
+    { text: '月80クレジット程度（毎月更新）' },
+    { text: '$8/月（年払い）' },
+    { text: '一部あり' },
+    { text: 'あり' },
+    { text: '詳細を見る', href: '/tools/pika/' },
+  ],
+  [
+    { text: 'Luma AI' },
+    { text: '制限付き月間クレジット' },
+    { text: '$30/月（Plusプラン）' },
+    { text: '要確認' },
+    { text: 'あり（non-commercial）' },
+    { text: '詳細を見る', href: '/tools/luma-ai/' },
+  ],
+  [
+    { text: 'Kling AI' },
+    { text: '1日66クレジット程度（繰越なし）' },
+    { text: '要公式確認' },
+    { text: '一部あり' },
+    { text: 'あり' },
+    { text: '詳細を見る', href: '/tools/kling-ai/' },
+  ],
+  [
+    { text: 'Vidu AI' },
+    { text: 'あり（詳細は公式確認）' },
+    { text: '要公式確認' },
+    { text: 'なし' },
+    { text: 'あり' },
+    { text: '詳細を見る', href: '/tools/vidu-ai/' },
+  ],
+  [
+    { text: 'PixVerse' },
+    { text: 'あり（詳細は公式確認）' },
+    { text: '要確認' },
+    { text: '要確認' },
+    { text: 'あり' },
+    { text: '詳細を見る', href: '/tools/pixverse/' },
+  ],
+  [
+    { text: 'Hailuo AI' },
+    { text: 'あり（詳細は公式確認）' },
+    { text: '$14.99/月' },
+    { text: '要確認' },
+    { text: 'あり' },
+    { text: '詳細を見る', href: '/tools/hailuo-ai/' },
+  ],
+  [
+    { text: 'Haiper' },
+    { text: 'あり（詳細は公式確認）' },
+    { text: '要公式確認' },
+    { text: '要確認' },
+    { text: 'あり' },
+    { text: '詳細を見る', href: '/tools/haiper/' },
+  ],
+];
+
+// ── 比較表2：月額料金・クレジット付与数 ──────────────────
+const pricingHeaders = ['ツール名', 'プラン', '月額費用目安', '月間クレジット付与目安', '確認時点'];
+const pricingRows = [
+  [
+    { text: 'Runway' },
+    { text: '無料（初回のみ）' },
+    { text: '$0' },
+    { text: '125クレジット（初回限り・更新なし）', muted: true },
+    { text: '2026-06-04', muted: true },
+  ],
+  [
+    { text: 'Runway' },
+    { text: 'Standard（年払い）' },
+    { text: '$12/月' },
+    { text: '月625クレジット程度' },
+    { text: '2026-06-04', muted: true },
+  ],
+  [
+    { text: 'Pika' },
+    { text: '無料' },
+    { text: '$0' },
+    { text: '月80クレジット程度（毎月更新・商用利用不可）', muted: true },
+    { text: '2026-06-04', muted: true },
+  ],
+  [
+    { text: 'Pika' },
+    { text: 'Standard（年払い）' },
+    { text: '$8/月' },
+    { text: '月700クレジット程度' },
+    { text: '2026-06-04', muted: true },
+  ],
+  [
+    { text: 'Luma AI' },
+    { text: '無料' },
+    { text: '$0' },
+    { text: '制限付き月間クレジット（詳細は公式確認）', muted: true },
+    { text: '2026-06-04', muted: true },
+  ],
+  [
+    { text: 'Luma AI' },
+    { text: 'Plus' },
+    { text: '$30/月' },
+    { text: '詳細は公式確認' },
+    { text: '2026-06-04', muted: true },
+  ],
+  [
+    { text: 'Kling AI' },
+    { text: '無料' },
+    { text: '$0' },
+    { text: '1日66クレジット程度（翌日繰越なし）', muted: true },
+    { text: '2026-06-04', muted: true },
+  ],
+  [
+    { text: 'Kling AI' },
+    { text: '有料プラン' },
+    { text: '要公式確認' },
+    { text: '要公式確認' },
+    { text: '2026-06-04', muted: true },
+  ],
+  [
+    { text: 'Hailuo AI' },
+    { text: '有料プラン' },
+    { text: '$14.99/月〜' },
+    { text: '詳細は公式確認' },
+    { text: '2026-06-04', muted: true },
+  ],
+  [
+    { text: 'Vidu AI' },
+    { text: '有料プラン' },
+    { text: '要公式確認' },
+    { text: '要公式確認' },
+    { text: '2026-06-04', muted: true },
+  ],
+  [
+    { text: 'PixVerse' },
+    { text: '有料プラン' },
+    { text: '要確認' },
+    { text: '要確認' },
+    { text: '2026-06-04', muted: true },
+  ],
+  [
+    { text: 'Haiper' },
+    { text: '有料プラン' },
+    { text: '要公式確認' },
+    { text: '要公式確認' },
+    { text: '2026-06-04', muted: true },
+  ],
+];
+
+// ── 比較表3：動画5秒あたり消費クレジット ─────────────────
+const credit5sHeaders = ['ツール名', '5秒動画・消費クレジット目安', '解像度・品質', '備考'];
+const credit5sRows = [
+  [
+    { text: 'Runway' },
+    { text: '5〜10クレジット程度（モデル・品質設定による）' },
+    { text: '480p〜1080p（プランによる）' },
+    { text: 'Gen-4 Turbo vs Gen-4 Standard で異なる。最新情報は公式ヘルプを確認', muted: true },
+  ],
+  [
+    { text: 'Pika' },
+    { text: '詳細は公式確認' },
+    { text: '詳細は公式確認' },
+    { text: 'クレジット消費量は解像度・動画長・スタイル設定によって異なる', muted: true },
+  ],
+  [
+    { text: 'Luma AI' },
+    { text: '詳細は公式確認' },
+    { text: '詳細は公式確認' },
+    { text: 'クレジット消費量はプランと品質設定に依存する', muted: true },
+  ],
+  [
+    { text: 'Kling AI' },
+    { text: '10クレジット程度（標準品質・720p目安・要公式確認）' },
+    { text: '720p〜1080p（プランによる）' },
+    { text: 'モデル（Standard / Professional）・解像度・秒数で大きく異なる。要公式確認', muted: true },
+  ],
+  [
+    { text: 'Vidu AI' },
+    { text: '要公式確認' },
+    { text: '要公式確認' },
+    { text: '詳細はVidu AI公式ドキュメントをご確認ください', muted: true },
+  ],
+  [
+    { text: 'PixVerse' },
+    { text: '要確認' },
+    { text: '要確認' },
+    { text: '詳細はPixVerse公式サイトをご確認ください', muted: true },
+  ],
+  [
+    { text: 'Hailuo AI' },
+    { text: '詳細は公式確認' },
+    { text: '詳細は公式確認' },
+    { text: '詳細はHailuo AI公式サイトをご確認ください', muted: true },
+  ],
+  [
+    { text: 'Haiper' },
+    { text: '詳細は公式確認' },
+    { text: '詳細は公式確認' },
+    { text: 'クレジット消費量は公式ドキュメントで案内されている場合があります。要確認', muted: true },
+  ],
+];
+
+// ── 比較表4：動画10秒あたり消費クレジット ────────────────
+const credit10sHeaders = ['ツール名', '10秒動画・消費クレジット目安', '解像度・品質', '備考'];
+const credit10sRows = [
+  [
+    { text: 'Runway' },
+    { text: '10〜20クレジット程度（モデル・品質設定による）' },
+    { text: '480p〜1080p（プランによる）' },
+    { text: '5秒×2クリップまたは10秒連続生成で異なる場合あり', muted: true },
+  ],
+  [
+    { text: 'Pika' },
+    { text: '詳細は公式確認' },
+    { text: '詳細は公式確認' },
+    { text: '10秒以上の生成対応はプラン・モデルによって異なる場合あり', muted: true },
+  ],
+  [
+    { text: 'Luma AI' },
+    { text: '詳細は公式確認' },
+    { text: '詳細は公式確認' },
+    { text: 'Extend（動画延長）機能でクレジットが追加消費される場合あり', muted: true },
+  ],
+  [
+    { text: 'Kling AI' },
+    { text: '10〜35クレジット程度（品質設定による）' },
+    { text: '720p〜1080p（プランによる）' },
+    { text: 'Professional モデル使用時はクレジット消費が増加する場合あり。要公式確認', muted: true },
+  ],
+  [
+    { text: 'Vidu AI' },
+    { text: '要公式確認' },
+    { text: '要公式確認' },
+    { text: '詳細はVidu AI公式ドキュメントをご確認ください', muted: true },
+  ],
+  [
+    { text: 'PixVerse' },
+    { text: '要確認' },
+    { text: '要確認' },
+    { text: '詳細はPixVerse公式サイトをご確認ください', muted: true },
+  ],
+  [
+    { text: 'Hailuo AI' },
+    { text: '詳細は公式確認' },
+    { text: '詳細は公式確認' },
+    { text: '詳細はHailuo AI公式サイトをご確認ください', muted: true },
+  ],
+  [
+    { text: 'Haiper' },
+    { text: '詳細は公式確認' },
+    { text: '詳細は公式確認' },
+    { text: '要公式確認', muted: true },
+  ],
+];
+
+// ── 比較表5：透かし除去条件 ───────────────────────────────
+const watermarkHeaders = ['ツール名', '無料プランの透かし', '透かし除去の条件', '備考'];
+const watermarkRows = [
+  [
+    { text: 'Runway' },
+    { text: 'あり' },
+    { text: 'Standard以上の有料プランで透かしなし' },
+    { text: '最新情報は公式料金ページを確認', muted: true },
+  ],
+  [
+    { text: 'Pika' },
+    { text: 'あり' },
+    { text: '有料プランで透かしなし' },
+    { text: '最新情報は公式料金ページを確認', muted: true },
+  ],
+  [
+    { text: 'Luma AI' },
+    { text: 'あり（non-commercial use only）' },
+    { text: 'Plus以上（$30/月〜）でno watermarksと案内' },
+    { text: '透かし除去と商用利用はセット。詳細は公式確認', muted: true },
+  ],
+  [
+    { text: 'Kling AI' },
+    { text: 'あり（場合による）' },
+    { text: '有料プランで透かしなし（詳細は公式確認）' },
+    { text: '最新情報は公式サイトを確認', muted: true },
+  ],
+  [
+    { text: 'Vidu AI' },
+    { text: 'あり' },
+    { text: '有料プランで条件変更（詳細は公式確認）' },
+    { text: '要公式確認', muted: true },
+  ],
+  [
+    { text: 'PixVerse' },
+    { text: 'あり' },
+    { text: '有料プランで条件変更（詳細は公式確認）' },
+    { text: '要確認', muted: true },
+  ],
+  [
+    { text: 'Hailuo AI' },
+    { text: 'あり' },
+    { text: '有料プランで条件変更（詳細は公式確認）' },
+    { text: '要確認', muted: true },
+  ],
+  [
+    { text: 'Haiper' },
+    { text: 'あり' },
+    { text: '有料プランで条件変更（詳細は公式確認）' },
+    { text: '要確認', muted: true },
+  ],
+];
+
+// ── 比較表6：商用利用条件確認ポイント ────────────────────
+const commercialHeaders = ['ツール名', '無料プランの商用利用', '有料プランの商用利用', '確認優先度'];
+const commercialRows = [
+  [
+    { text: 'Runway' },
+    { text: '透かしあり・クレジット一度限りのため実用に制限あり' },
+    { text: '全プランでOutput商用利用を制限しないと案内（最新規約要確認）' },
+    { text: '最新の公式ヘルプ・利用規約を確認', muted: true },
+  ],
+  [
+    { text: 'Pika' },
+    { text: '商用利用不可とされている' },
+    { text: '商用利用可能なプランが案内されている（詳細は公式確認）' },
+    { text: '有料プランへの移行が必要。利用規約を確認', muted: true },
+  ],
+  [
+    { text: 'Luma AI' },
+    { text: 'non-commercial use onlyと案内' },
+    { text: 'Plus以上でcommercial use allowedと案内' },
+    { text: 'Plus（$30/月〜）以上が商用利用の前提', muted: true },
+  ],
+  [
+    { text: 'Kling AI' },
+    { text: '商用利用不可（公式確認には制限あり）' },
+    { text: '要公式確認（本DBではunknownとして扱っている）' },
+    { text: '商用利用前に公式規約を直接確認すること', muted: true },
+  ],
+  [
+    { text: 'Vidu AI' },
+    { text: '要確認' },
+    { text: '有料ユーザーへの商用利用拡張が案内されている旨（詳細は公式確認）' },
+    { text: '最新の公式利用規約を確認', muted: true },
+  ],
+  [
+    { text: 'PixVerse' },
+    { text: '要確認' },
+    { text: '有料プランで商用利用が案内されている可能性あり（詳細は公式確認）' },
+    { text: '要公式確認', muted: true },
+  ],
+  [
+    { text: 'Hailuo AI' },
+    { text: '要確認' },
+    { text: '有料プランで商用利用が案内されている可能性あり（詳細は公式確認）' },
+    { text: '要公式確認', muted: true },
+  ],
+  [
+    { text: 'Haiper' },
+    { text: '要確認' },
+    { text: '有料プランで商用利用が案内されている可能性あり（詳細は公式確認）' },
+    { text: '要公式確認', muted: true },
+  ],
+];
+
+// ── 比較表7：用途別選び方 ─────────────────────────────────
+const useCaseHeaders = ['用途', '候補ツール', '選び方のポイント'];
+const useCaseRows = [
+  [
+    { text: 'YouTube Shorts・縦型短尺動画' },
+    { text: 'Pika・Kling AI・Hailuo AI' },
+    { text: '短尺・縦型フォーマット（9:16）対応を確認。無料プランの商用利用条件を事前確認（Pikaの無料プランは商用利用不可）' },
+  ],
+  [
+    { text: '広告動画・SNS広告素材' },
+    { text: 'Runway・Luma AI' },
+    { text: '商用利用条件が確認しやすいツールを優先。Runwayは全プランで商用利用可と案内。Luma AIはPlus以上（$30/月〜）が条件。有料プランへの移行と最新規約確認が必須' },
+  ],
+  [
+    { text: 'SNS動画（収益化なし）' },
+    { text: 'Pika・Kling AI・Haiper・PixVerse' },
+    { text: '収益化を伴わない投稿でも商用利用条件を確認することを推奨。無料プランの透かし条件に注意' },
+  ],
+  [
+    { text: 'YouTube長尺動画のBロール' },
+    { text: 'Runway・Luma AI・Kling AI' },
+    { text: '収益化チャンネルへの利用は商用利用に該当する場合がある。各ツールの公式規約と収益化条件を事前確認' },
+  ],
+  [
+    { text: '映像プロトタイプ・試作（非公開）' },
+    { text: '各ツールの無料枠で試用可' },
+    { text: '非商用・社内確認用途では無料枠での試用が有効。公開・商用化前にプラン変更と規約確認を推奨' },
+  ],
+  [
+    { text: 'コスト重視の商用利用' },
+    { text: 'Pika（有料・$8/月〜）' },
+    { text: '最低有料プランが比較的低価格。ただし商用利用条件・クレジット消費・出力品質は最新情報を要確認' },
+  ],
+];
+
+// ── チェックリスト ─────────────────────────────────────────
+const checklistItems = [
+  '利用するツールの最新利用規約（Terms of Service）を確認した',
+  '利用プラン（無料・有料）が商用利用を許可していることを確認した',
+  '生成動画の透かし条件（有料プランで透かし除去可かどうか）を確認した',
+  '月間クレジット付与数と1動画あたりの消費クレジット目安を確認した',
+  '月間生成本数の目安を計算し、プランの費用対効果を公式情報ベースで確認した',
+  '収益化を伴う利用（YouTube収益化・広告配信・クライアント納品）の場合は商用利用条件を別途確認した',
+  '生成動画に人物・著名人の肖像・ブランドロゴ・商標が含まれていないかを確認した',
+  '広告媒体（Google広告・Meta広告等）のAI生成コンテンツポリシーを確認した',
+  'クレジット条件・料金プランは変更される場合があるため最終確認日を記録した',
+];
+
+// ── FAQ ────────────────────────────────────────────────────
+const faqItems = [
+  {
+    q: 'AI動画生成ツールの無料プランで商用利用できますか？',
+    a: 'ツールによって異なります。Pikaの無料プランは商用利用不可と明確に案内されています。Luma AIの無料プランもnon-commercial use onlyとされています。Runwayの無料プランは全プランで商用利用可と案内されていますが、クレジットが初回125のみで実用に制限があります。Kling AIは商用利用条件が公式情報から確認しにくい状況です。いずれも最新の公式規約を確認してください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '1動画あたりのクレジット消費はどのくらいですか？',
+    a: 'ツール・モデル・解像度・動画の長さによって大きく異なります。Runwayは5秒動画でおおよそ5〜10クレジット程度（Gen-4 Turbo vs Standard、解像度で変動）。Kling AIは標準品質の5秒動画でおおよそ10クレジット程度（要公式確認）。他のツールは公式ドキュメントを都度確認することを推奨します。クレジット消費の仕様は更新されることがあるため、利用前に各ツールの最新ヘルプページをご確認ください。',
+  },
+  {
+    q: '月額料金が低いツールはどれですか？',
+    a: '確認時点での最低有料プラン目安はPika（$8/月・年払い）が最も低く、次いでRunway（$12/月・年払い）、Hailuo AI（$14.99/月）、Luma AI（$30/月）の順です。ただし月額料金はクレジット付与数・出力品質・商用利用条件とセットで評価することが重要です。最新の料金情報は各ツールの公式料金ページでご確認ください。',
+  },
+  {
+    q: 'YouTube収益化チャンネルにAI動画生成ツールで作った動画を使えますか？',
+    a: 'YouTube収益化への利用は商用利用に該当する場合があります。各ツールの商用利用条件（プランごとの可否）と、YouTubeのAI生成コンテンツに関するポリシーを別途確認してください。無料プランでは商用利用が制限されているツールが多く、有料プランへの移行が前提となる場合がほとんどです。本記事は法的助言ではありません。',
+  },
+  {
+    q: '広告動画に使う場合はどのツールが確認しやすいですか？',
+    a: 'Runwayは公式ヘルプで全プランのOutput商用利用を制限しないと案内しており、条件が比較的確認しやすいとされています。Luma AIはPlus以上でcommercial use allowedと明記されています。Kling AIは公式情報から条件を確認しにくいため慎重な事前確認が必要です。ただし広告利用には各ツールの利用規約に加え、広告媒体のポリシーも別途確認が必要です。本記事は法的助言ではありません。',
+  },
+  {
+    q: 'クレジット制とサブスクリプション制の違いは何ですか？',
+    a: 'クレジット制はプランごとに月間クレジットが付与され、動画生成のたびに消費する仕組みです。生成した動画の秒数・解像度・品質設定によって消費量が変わります。サブスクリプション制は月額固定費を支払うことで一定の生成権利が得られる仕組みです。多くのAI動画生成ツールはサブスクリプション＋クレジット制の組み合わせ（subscription_credit型）を採用しています。月間クレジットを超過した場合は追加購入が必要な場合があります。',
+  },
+  {
+    q: 'クレジットを追加購入できますか？',
+    a: 'ツールによって対応が異なります。Runwayなど一部のツールはクレジットの追加購入に対応しています。月間クレジットが不足した場合の追加購入の可否・単価は各ツールの公式料金ページでご確認ください。追加購入の単価は通常プランに含まれるクレジットより割高になる場合があります。',
+  },
+  {
+    q: '透かしを除去すれば商用利用できますか？',
+    a: '透かしの除去と商用利用の許可は別の問題です。有料プランで透かしを除去できても、商用利用が許可されているかどうかはプランと利用規約で別途確認が必要です。また、透かしを別ツールで除去することは利用規約に違反する場合があります。商用利用前に必ず各ツールの最新利用規約をご確認ください。本記事は法的助言ではありません。',
+  },
+];
+---
+
+<BaseLayout
+  title={`${data.title}｜Runway・Pika・Luma AI・Kling AI等を比較`}
+  description={data.description}
+  canonicalPath="/guides/video-generation-credit-cost-comparison/"
+  ogType="article"
+>
+  <div class="mx-auto max-w-3xl px-6 py-12">
+
+    <GuidePageHeader
+      title={data.title}
+      description={data.description}
+      lastReviewed={data.lastReviewed}
+    />
+
+    <!-- パンくずナビ -->
+    <nav class="mb-6 text-sm text-slate-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <a href="/guides/" class="hover:underline">ガイド一覧</a>
+      <span class="mx-1">/</span>
+      <span>AI動画生成ツールの料金・クレジット消費比較</span>
+    </nav>
+
+    <!-- 結論サマリー -->
+    <GuideSummaryBox title="このガイドの結論">
+      <p>
+        AI動画生成ツールのコストは<strong class="font-semibold text-slate-900">月額料金・クレジット付与数・1動画あたり消費クレジット・透かし条件・商用利用可否</strong>を組み合わせて評価することが重要です。
+        無料プランで商用利用できるツールは限られており、広告動画・YouTube収益化・クライアント納品を前提とする場合は有料プランへの移行と最新規約の確認が前提となります。
+        クレジット消費量はツール・モデル・解像度・動画の長さによって大きく変わるため、定期的な公式ページ確認を推奨します。
+      </p>
+    </GuideSummaryBox>
+
+    <!-- 免責事項 -->
+    <GuideWarningBox variant="warning" title="免責事項・重要事項">
+      このガイドは情報提供を目的としており、法的アドバイスではありません。料金・クレジット数・商用利用条件は各ツールの判断で変更される場合があります。利用前に必ず各ツールの最新公式サイト・利用規約をご確認ください。
+    </GuideWarningBox>
+
+    <!-- 関連ガイドへの導線 -->
+    <div class="mb-8 rounded-lg border border-blue-100 bg-blue-50 px-5 py-4 text-sm text-blue-800 leading-relaxed">
+      <p class="mb-2 font-semibold text-blue-900">関連ガイド</p>
+      <ul class="space-y-1 text-xs text-blue-700">
+        <li>→ <a href="/guides/commercial-use-cost-comparison/" class="underline hover:text-blue-900">AI画像・動画生成ツールの商用利用条件と実質コスト比較（画像ツール含む）</a></li>
+        <li>→ <a href="/guides/commercial-use-copyright/" class="underline hover:text-blue-900">AI画像生成の商用利用と著作権｜考え方・注意点</a></li>
+        <li>→ <a href="/guides/watermark-credit-guide/" class="underline hover:text-blue-900">透かし・クレジット表記ガイド</a></li>
+        <li>→ <a href="/conditions/commercial-use/" class="underline hover:text-blue-900">商用利用条件を確認しやすいAIツール一覧</a></li>
+      </ul>
+    </div>
+
+    <!-- ── 比較表1：基本情報 ── -->
+    <section class="my-10" aria-labelledby="basic-info-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="basic-info-heading">
+        比較表1：基本情報
+      </h2>
+      <p class="mb-4 text-sm text-slate-500">
+        確認時点の公式情報をもとに整理しています。最新情報は各公式サイトでご確認ください。
+      </p>
+      <GuideComparisonTable
+        caption="AI動画生成ツール基本情報比較"
+        headers={basicHeaders}
+        rows={basicRows}
+        statusColIndex={-1}
+      />
+    </section>
+
+    <!-- ── 比較表2：月額料金・クレジット ── -->
+    <section class="my-10" aria-labelledby="pricing-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="pricing-heading">
+        比較表2：月額料金・クレジット付与数
+      </h2>
+      <p class="mb-4 text-sm text-slate-500">
+        料金・クレジット数は変更される場合があります。利用前に各公式料金ページでご確認ください。
+      </p>
+      <GuideComparisonTable
+        caption="AI動画生成ツール料金・クレジット比較"
+        headers={pricingHeaders}
+        rows={pricingRows}
+        statusColIndex={-1}
+      />
+      <p class="mt-3 text-xs text-slate-400">
+        年払いと月払いで料金が異なるツールがあります。最低有料プランの月額はいずれも年払い換算の目安です。詳細は公式料金ページをご確認ください。
+      </p>
+    </section>
+
+    <!-- ── 比較表3：5秒クレジット ── -->
+    <section class="my-10" aria-labelledby="credit5s-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="credit5s-heading">
+        比較表3：動画5秒あたりの消費クレジット目安
+      </h2>
+      <GuideWarningBox variant="info">
+        クレジット消費量は使用するモデル・解像度・品質設定・動画の長さによって大きく変動します。以下の数値はあくまで目安・概算であり、保証値ではありません。最新の正確な消費量は各ツールの公式ヘルプページをご確認ください。
+      </GuideWarningBox>
+      <GuideComparisonTable
+        caption="AI動画生成ツール5秒あたりクレジット消費比較"
+        headers={credit5sHeaders}
+        rows={credit5sRows}
+        statusColIndex={-1}
+      />
+    </section>
+
+    <!-- ── 比較表4：10秒クレジット ── -->
+    <section class="my-10" aria-labelledby="credit10s-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="credit10s-heading">
+        比較表4：動画10秒あたりの消費クレジット目安
+      </h2>
+      <GuideComparisonTable
+        caption="AI動画生成ツール10秒あたりクレジット消費比較"
+        headers={credit10sHeaders}
+        rows={credit10sRows}
+        statusColIndex={-1}
+      />
+      <p class="mt-3 text-xs text-slate-400">
+        10秒以上の動画生成に対応しているかどうかはツール・プランによって異なります。動画延長（Extend）機能を使う場合は追加クレジットが必要な場合があります。
+      </p>
+    </section>
+
+    <!-- ── 比較表5：透かし除去条件 ── -->
+    <section class="my-10" aria-labelledby="watermark-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="watermark-heading">
+        比較表5：透かし除去条件
+      </h2>
+      <p class="mb-4 text-sm text-slate-500">
+        ほぼすべてのツールで無料プランでは生成動画に透かしが付与されます。商用利用・広告利用には透かし除去が前提となる場合がほとんどです。
+      </p>
+      <GuideComparisonTable
+        caption="AI動画生成ツール透かし条件比較"
+        headers={watermarkHeaders}
+        rows={watermarkRows}
+        statusColIndex={-1}
+      />
+      <p class="mt-3 text-xs text-slate-400">
+        透かし除去と商用利用の許可は別の問題です。詳しくは<a href="/guides/watermark-credit-guide/" class="text-blue-600 hover:underline">透かし・クレジット表記ガイド</a>をご参照ください。
+      </p>
+    </section>
+
+    <!-- ── 比較表6：商用利用確認ポイント ── -->
+    <section class="my-10" aria-labelledby="commercial-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="commercial-heading">
+        比較表6：商用利用条件の確認ポイント
+      </h2>
+      <p class="mb-4 text-sm text-slate-500">
+        広告動画・YouTube収益化・クライアント納品を前提とする場合は、各ツールの最新利用規約で商用利用条件を必ず確認してください。本記事は法的助言ではありません。
+      </p>
+      <GuideComparisonTable
+        caption="AI動画生成ツール商用利用条件比較"
+        headers={commercialHeaders}
+        rows={commercialRows}
+        statusColIndex={-1}
+      />
+      <p class="mt-3 text-xs text-slate-400">
+        商用利用・著作権の考え方については<a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用・著作権ガイド</a>、確認手順については<a href="/guides/ai-commercial-use-checklist/" class="text-blue-600 hover:underline">商用利用前チェックリスト</a>もご参照ください。
+      </p>
+    </section>
+
+    <!-- ── 比較表7：用途別選び方 ── -->
+    <section class="my-10" aria-labelledby="usecase-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="usecase-heading">
+        比較表7：YouTube Shorts・広告動画・SNS動画別の選び方
+      </h2>
+      <p class="mb-4 text-sm text-slate-500">
+        用途によって商用利用条件・求められる動画尺・フォーマットが異なります。以下はあくまで目安です。
+      </p>
+      <GuideComparisonTable
+        caption="AI動画生成ツール用途別選び方"
+        headers={useCaseHeaders}
+        rows={useCaseRows}
+        statusColIndex={-1}
+      />
+    </section>
+
+    <!-- ── ツール別詳細メモ ── -->
+    <section class="my-10" aria-labelledby="detail-heading">
+      <h2 class="mb-6 text-lg font-semibold text-slate-900" id="detail-heading">
+        ツール別の料金・クレジット詳細メモ
+      </h2>
+      <div class="space-y-5 text-sm text-slate-700">
+
+        <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+          <h3 class="mb-2 font-bold text-slate-900">
+            <a href="/tools/runway/" class="text-blue-700 hover:underline">Runway</a>
+          </h3>
+          <p class="leading-relaxed">
+            無料プランは125クレジット（初回のみ・更新なし）。Standard $12/月〜（年払い）で月625クレジット程度が付与されます。
+            Gen-4 Turboは標準モデルよりクレジット消費が少ないとされています。動画の秒数・解像度によって消費量が変動します。
+            全プランでOutputの商用利用を制限しないと公式ヘルプで案内されていますが、最新の利用規約確認が必要です。
+          </p>
+          <p class="mt-2 text-xs text-slate-400">
+            参照：<a href="https://runwayml.com/pricing/" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">Runway料金プラン（公式）</a>
+            　<a href="https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">Runway商用利用ヘルプ（公式）</a>
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+          <h3 class="mb-2 font-bold text-slate-900">
+            <a href="/tools/pika/" class="text-blue-700 hover:underline">Pika</a>
+          </h3>
+          <p class="leading-relaxed">
+            無料プランは月80クレジット程度（毎月更新）。無料プランは商用利用不可とされています。
+            Standard $8/月〜（年払い）で月700クレジット程度が付与されます。
+            短尺動画の生成に向いているとされており、操作がシンプルです。
+          </p>
+          <p class="mt-2 text-xs text-slate-400">
+            参照：<a href="https://pika.art/pricing" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">Pika料金プラン（公式）</a>
+            　<a href="https://pika.art/terms-of-service" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">Pika利用規約（公式）</a>
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+          <h3 class="mb-2 font-bold text-slate-900">
+            <a href="/tools/luma-ai/" class="text-blue-700 hover:underline">Luma AI</a>
+          </h3>
+          <p class="leading-relaxed">
+            無料プランはnon-commercial use only・watermarksとされています。
+            Plus（$30/月）以上でcommercial use allowed・no watermarksと公式料金ページで案内されています。
+            プランによって月間クレジット付与数・生成できる動画の解像度が異なります。詳細は公式料金ページをご確認ください。
+          </p>
+          <p class="mt-2 text-xs text-slate-400">
+            参照：<a href="https://lumalabs.ai/pricing" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">Luma AI料金プラン（公式）</a>
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+          <h3 class="mb-2 font-bold text-slate-900">
+            <a href="/tools/kling-ai/" class="text-blue-700 hover:underline">Kling AI</a>
+          </h3>
+          <p class="leading-relaxed">
+            無料プランは1日66クレジット程度（翌日繰越なし・透かしあり）。有料プランの料金・クレジット条件は確認時点でHTTP 446により直接確認が困難でした。
+            商用利用条件は本DBではunknownとして扱っています。商用利用を前提にする場合は最新の公式料金ページ・利用規約を直接ご確認ください。
+          </p>
+          <p class="mt-2 text-xs text-slate-400">
+            参照：<a href="https://klingai.com" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">Kling AI公式サイト</a>
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+          <h3 class="mb-2 font-bold text-slate-900">
+            <a href="/tools/hailuo-ai/" class="text-blue-700 hover:underline">Hailuo AI</a>
+          </h3>
+          <p class="leading-relaxed">
+            有料プランは$14.99/月〜が案内されています。無料枠あり。クレジット消費・商用利用条件の詳細は公式サイトでご確認ください。
+            短尺・リアル系動画が得意とされています。
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+          <h3 class="mb-2 font-bold text-slate-900">
+            <a href="/tools/vidu-ai/" class="text-blue-700 hover:underline">Vidu AI</a>
+          </h3>
+          <p class="leading-relaxed">
+            中国Shengshu Technology開発。無料枠あり（詳細は公式確認）。有料ユーザーへの商用利用拡張が案内されているとされていますが、詳細は最新の公式利用規約をご確認ください。
+          </p>
+          <p class="mt-2 text-xs text-slate-400">
+            参照：<a href="https://www.vidu.com/pricing" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">Vidu AI料金ページ（公式）</a>
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+          <h3 class="mb-2 font-bold text-slate-900">
+            <a href="/tools/pixverse/" class="text-blue-700 hover:underline">PixVerse</a>
+          </h3>
+          <p class="leading-relaxed">
+            アニメ調・スタイライズドの映像生成が得意とされます。無料枠あり（透かしあり・生成回数制限あり）。
+            有料プランの料金・クレジット条件・商用利用条件の詳細は公式サイトでご確認ください。
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+          <h3 class="mb-2 font-bold text-slate-900">
+            <a href="/tools/haiper/" class="text-blue-700 hover:underline">Haiper</a>
+          </h3>
+          <p class="leading-relaxed">
+            操作がシンプルで初心者向けとされています。無料枠あり（詳細は公式確認）。日本語プロンプトへの対応が案内されています。
+            有料プランの料金・クレジット条件・商用利用条件の詳細は公式サイトでご確認ください。
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── コスト計算の考え方 ── -->
+    <section class="my-10" aria-labelledby="cost-calc-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="cost-calc-heading">
+        実質コストの計算の考え方
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          月額料金だけでなく、<strong>月間クレジット付与数 ÷ 1動画あたり消費クレジット = 月間生成可能本数</strong>で実質コストを見積もることが重要です。
+        </p>
+        <p>
+          たとえばRunway Standard（月625クレジット）でGen-4 Turbo（5秒≈5クレジット）を使う場合、理論上は5秒動画を月125本程度生成できる計算になります（実際の消費はモデル・解像度・設定によって変動します）。
+        </p>
+        <p>
+          広告動画制作では試作・ボツ込みの消費も見込む必要があります。試作段階では無料枠・低コストプランを活用し、本番素材は商用利用条件を確認したうえで有料プランで生成することを推奨します。
+        </p>
+        <p class="text-xs text-slate-400">
+          クレジット消費量・料金は変更される場合があります。最新情報は各公式サイトでご確認ください。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── チェックリスト ── -->
+    <section class="my-10">
+      <GuideCheckList
+        title="コスト・商用利用確認チェックリスト"
+        items={checklistItems}
+      />
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="my-10">
+      <GuideFAQ items={faqItems} title="よくある質問（FAQ）" />
+    </section>
+
+    <!-- ── 注意事項 ── -->
+    <section class="my-10">
+      <GuideWarningBox variant="info">
+        <ul class="space-y-1.5 list-disc list-inside">
+          <li>料金・クレジット数・商用利用条件はツール側の判断で予告なく変更される場合があります</li>
+          <li>このガイドの情報は2026年6月4日時点のものです。利用前に必ず各公式サイトで最新情報をご確認ください</li>
+          <li>商用利用・著作権の判断は本記事の情報だけでなく、各ツールの最新利用規約を直接確認してください</li>
+          <li>重要な商用利用の場面では、法律の専門家（弁護士等）への相談を推奨します</li>
+        </ul>
+      </GuideWarningBox>
+    </section>
+
+    <GuideFreshnessBox lastReviewed={data.lastReviewed} nextReviewDue={data.nextReviewDue} />
+
+    <!-- 関連ページ -->
+    <section class="mb-8 space-y-6">
+      <div>
+        <h2 class="mb-3 text-sm font-semibold text-slate-600">関連ガイド・比較ページ</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          <li><a href="/guides/commercial-use-cost-comparison/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700 hover:bg-blue-100 transition-colors">画像・動画ツールの商用利用コスト比較</a></li>
+          <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">商用利用・著作権の考え方ガイド</a></li>
+          <li><a href="/guides/watermark-credit-guide/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">透かし・クレジット表記ガイド</a></li>
+          <li><a href="/guides/ai-commercial-use-checklist/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">商用利用前チェックリスト</a></li>
+          <li><a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">商用利用条件を確認しやすいAIツール</a></li>
+          <li><a href="/conditions/no-watermark/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">透かしなしツール一覧</a></li>
+          <li><a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">無料枠のあるAIツール</a></li>
+          <li><a href="/categories/video-generation/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">AI動画生成ツール一覧</a></li>
+          <li><a href="/use-cases/ad-video/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">広告動画向け確認ポイント</a></li>
+          <li><a href="/use-cases/youtube/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">YouTube長尺動画向けAIツール</a></li>
+          <li><a href="/use-cases/shorts/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">Shorts・縦型動画向けAIツール</a></li>
+          <li><a href="/comparisons/free-ai-video-tools/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">AI動画ツールの無料プラン比較</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="mb-3 text-sm font-semibold text-slate-600">主要ツール詳細</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          <li><a href="/tools/runway/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">Runway</a></li>
+          <li><a href="/tools/pika/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">Pika</a></li>
+          <li><a href="/tools/luma-ai/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">Luma AI</a></li>
+          <li><a href="/tools/kling-ai/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">Kling AI</a></li>
+          <li><a href="/tools/vidu-ai/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">Vidu AI</a></li>
+          <li><a href="/tools/pixverse/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">PixVerse</a></li>
+          <li><a href="/tools/hailuo-ai/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">Hailuo AI</a></li>
+          <li><a href="/tools/haiper/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">Haiper</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="mb-6 text-xs text-slate-500 leading-relaxed">
+      最新情報は各公式サイトで確認してください。掲載内容は2026年6月4日時点のものであり、法的助言ではありません。
+    </p>
+
+    <nav class="border-t border-slate-200 pt-6 text-sm" aria-label="ページナビゲーション">
+      <a href="/guides/" class="text-blue-600 hover:underline">← ガイド一覧に戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

@@ -333,20 +333,24 @@ import NoticeBox from '../../../components/NoticeBox.astro';
       <div class="space-y-4">
         {[
           {
-            q: 'AI画像生成ツールでアニメ風イラストを作れますか？',
-            a: 'アニメ風・イラスト風の画像生成に対応しているツールはありますが、得意な表現や利用条件はツールごとに異なります。最新情報は公式サイトをご確認ください。',
+            q: 'アニメ・イラスト向けツールを選ぶとき、実写向けツールと何が違いますか？',
+            a: 'ツールごとに得意な画風が異なります。アニメ・イラスト調に向いているモデルを搭載しているか、画風のプリセットやLoRAなどのカスタマイズ機能があるかが選定ポイントになります。実写向けが得意なツールでアニメ風を指定しても、意図した表現が得られにくい場合があります。',
           },
           {
-            q: '生成したアニメ風画像は商用利用できますか？',
-            a: 'ツールやプラン、用途によって条件が異なる場合があります。公式サイト・料金ページ・利用規約を確認してください。本記事は法的助言ではありません。',
+            q: 'LoRAやカスタムモデルを使う場合、ライセンスの確認は必要ですか？',
+            a: 'LoRAや配布されているカスタムモデルはそれぞれ個別のライセンスを持つ場合があります。商用利用・再配布・二次利用の可否は、モデルごとに公開されているライセンス情報を確認することが必要です。Stable Diffusionのベースモデルもバージョンによってライセンスが異なります。',
           },
           {
-            q: '既存キャラクターに似た画像を作ってもよいですか？',
-            a: '既存キャラクター、ブランド、人物などに似せた画像は権利関係に注意が必要です。利用前に権利者のルールや利用先の規約をご確認ください。',
+            q: '生成したアニメ風画像をSNSアイコンやサムネイルに使う場合の注意点は？',
+            a: '使用するツールの商用利用条件・プランごとの条件に加えて、利用先プラットフォームのルールも確認が必要です。透かしがない画像であっても、商用利用の可否は別論点です。また、既存キャラクターやブランドに類似したデザインは権利関係の確認が必要になる場合があります。',
           },
           {
-            q: '無料ツールでもアニメ風イラストを作れますか？',
-            a: '無料枠で試せるツールもありますが、生成回数・透かし・出力サイズ・商用利用条件に制限がある場合があります。最新情報は公式サイトをご確認ください。',
+            q: '日本語プロンプトでアニメ風画像を生成しやすいツールの見分け方は？',
+            a: 'UIが日本語対応しているかだけでなく、日本語プロンプトで意図した画風の画像が生成できるかを確認することが重要です。英語プロンプトのみ安定するツールもあります。各ツールの公式ドキュメントやサンプルを確認してから選ぶとよいでしょう。',
+          },
+          {
+            q: '既存キャラクターや二次創作に似た画像を生成したい場合の注意点は？',
+            a: '既存のキャラクター・ブランド・人物に似せた画像には、著作権・商標・肖像権などの権利関係が絡む場合があります。生成すること自体だけでなく、SNS投稿・販売・配布などの利用方法によっても確認すべき範囲が変わります。権利者が公開しているガイドラインや、利用先のプラットフォームのルールを事前に確認することをおすすめします。本記事は法的助言ではありません。',
           },
         ].map(({ q, a }) => (
           <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
@@ -375,6 +379,8 @@ import NoticeBox from '../../../components/NoticeBox.astro';
         <li><a href="/guides/ai-image-commercial-use-checklist/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">商用利用チェックリスト</a></li>
         <li><a href="/use-cases/youtube-thumbnail/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">YouTubeサムネ向けツール</a></li>
         <li><a href="/use-cases/sns-blog-eyecatch/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">SNS・ブログアイキャッチ向けツール</a></li>
+        <li><a href="/categories/image-generation/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">AI画像生成ツール全体を比較する</a></li>
+        <li><a href="/use-cases/realistic-photo/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 text-slate-600 transition-colors">実写・写真風AI画像生成ツール比較を見る</a></li>
       </ul>
     </section>
 

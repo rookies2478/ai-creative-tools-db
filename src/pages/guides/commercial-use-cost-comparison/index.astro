@@ -1,0 +1,504 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideWarningBox from '../../../components/GuideWarningBox.astro';
+import GuideSummaryBox from '../../../components/GuideSummaryBox.astro';
+import GuideCheckList from '../../../components/GuideCheckList.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+import GuideComparisonTable from '../../../components/GuideComparisonTable.astro';
+import GuidePageHeader from '../../../components/GuidePageHeader.astro';
+import GuideFreshnessBox from '../../../components/GuideFreshnessBox.astro';
+
+const entry = await getEntry('guides', 'commercial-use-cost-comparison');
+if (!entry) throw new Error('guide not found: commercial-use-cost-comparison');
+const { data } = entry;
+
+// ── 比較表1：基本情報 ─────────────────────────────────────
+const basicHeaders = ['ツール名', 'カテゴリ', '無料プラン', '最低有料プラン目安', '日本語UI'];
+const basicRows = [
+  [{ text: 'Midjourney' }, { text: '画像' }, { text: 'なし' }, { text: '$10/月〜（月払い）' }, { text: 'なし' }],
+  [{ text: 'Adobe Firefly' }, { text: '画像' }, { text: 'あり（制限付）' }, { text: '$9.99/月〜' }, { text: 'あり' }],
+  [{ text: 'DALL-E' }, { text: '画像' }, { text: 'あり（制限付）' }, { text: 'ChatGPT Plus等' }, { text: 'あり（ChatGPT準拠）' }],
+  [{ text: 'Leonardo AI' }, { text: '画像' }, { text: 'あり（制限付）' }, { text: '$12/月〜（月払い）' }, { text: '要確認' }],
+  [{ text: 'Canva AI' }, { text: '画像' }, { text: 'あり（制限付）' }, { text: '$15/月〜（月払い）' }, { text: 'あり' }],
+  [{ text: 'Runway' }, { text: '動画' }, { text: 'あり（初回のみ）' }, { text: '$12/月〜（年払い）' }, { text: 'なし' }],
+  [{ text: 'Pika' }, { text: '動画' }, { text: 'あり（制限付）' }, { text: '$8/月〜（年払い）' }, { text: '一部あり' }],
+  [{ text: 'Luma AI' }, { text: '動画' }, { text: 'あり（制限付）' }, { text: '$30/月〜' }, { text: '要確認' }],
+  [{ text: 'Kling AI' }, { text: '動画' }, { text: 'あり（制限付）' }, { text: '要公式確認' }, { text: '一部あり' }],
+  [{ text: 'Vidu AI' }, { text: '動画' }, { text: 'あり（制限付）' }, { text: '要公式確認' }, { text: 'なし' }],
+];
+
+// ── 比較表2：料金・クレジット消費 ────────────────────────
+const creditHeaders = ['ツール名', '無料枠クレジット', '有料プラン目安', 'クレジット消費の特徴'];
+const creditRows = [
+  [
+    { text: 'Midjourney' },
+    { text: 'なし' },
+    { text: 'Basic $10/月（約200枚相当とされる）' },
+    { text: '生成品質・解像度によって消費量が異なる場合あり' },
+  ],
+  [
+    { text: 'Adobe Firefly' },
+    { text: 'あり（数量は変更の可能性あり）' },
+    { text: 'Standard $9.99/月〜（一定の生成クレジット付与）' },
+    { text: 'プランによって月間クレジット上限が変わる' },
+  ],
+  [
+    { text: 'DALL-E' },
+    { text: 'ChatGPT無料枠（制限付）' },
+    { text: 'ChatGPT Plus等の有料プランで拡大' },
+    { text: 'API利用は別途従量課金（公式サイトで要確認）' },
+  ],
+  [
+    { text: 'Leonardo AI' },
+    { text: '1日150トークン程度' },
+    { text: 'Apprentice $12/月〜' },
+    { text: '生成サイズ・品質設定でトークン消費量が変わる' },
+  ],
+  [
+    { text: 'Canva AI' },
+    { text: 'Dream Lab 月20回程度' },
+    { text: 'Pro $15/月（月500回程度）' },
+    { text: '生成回数制の場合が多い（詳細は公式確認）' },
+  ],
+  [
+    { text: 'Runway' },
+    { text: '125クレジット（初回のみ）' },
+    { text: 'Standard $12/月〜（月625クレジット程度）' },
+    { text: '動画の長さ・解像度で消費量が変わる' },
+  ],
+  [
+    { text: 'Pika' },
+    { text: '月80クレジット程度' },
+    { text: 'Standard $8/月〜（月700クレジット程度）' },
+    { text: '動画の秒数・解像度によって消費量が変わる場合あり' },
+  ],
+  [
+    { text: 'Luma AI' },
+    { text: '制限付き月間クレジット' },
+    { text: 'Plus $30/月〜' },
+    { text: 'プランで月間クレジット上限が異なる' },
+  ],
+  [
+    { text: 'Kling AI' },
+    { text: '1日66クレジット程度（翌日繰越なし）' },
+    { text: '要公式確認' },
+    { text: '動画の長さ・解像度・モデルによって消費量が異なる' },
+  ],
+  [
+    { text: 'Vidu AI' },
+    { text: 'あり（詳細は公式確認）' },
+    { text: '要公式確認' },
+    { text: '動画の長さ・解像度によって消費量が変わる場合あり' },
+  ],
+];
+
+// ── 比較表3：画像1枚あたり実質単価 ───────────────────────
+const imageUnitHeaders = ['ツール名', 'プラン', '月額費用', '月間生成枚数目安', '1枚あたり目安'];
+const imageUnitRows = [
+  [{ text: 'Midjourney' }, { text: 'Basic' }, { text: '$10/月' }, { text: '約200枚（標準品質）' }, { text: '約$0.05/枚' }],
+  [{ text: 'Midjourney' }, { text: 'Standard' }, { text: '$30/月' }, { text: '約900枚（Fast時間内）' }, { text: '約$0.03/枚' }],
+  [{ text: 'Adobe Firefly' }, { text: 'Standard' }, { text: '$9.99/月' }, { text: 'プランクレジット次第' }, { text: '要公式確認' }],
+  [{ text: 'DALL-E（API）' }, { text: '従量' }, { text: '生成ごと課金' }, { text: '制限なし' }, { text: '公式APIページで確認' }],
+  [{ text: 'Leonardo AI' }, { text: 'Apprentice' }, { text: '$12/月' }, { text: 'トークン制（詳細は公式）' }, { text: '要公式確認' }],
+  [{ text: 'Canva AI（Pro）' }, { text: 'Pro' }, { text: '$15/月' }, { text: '月500回程度' }, { text: '約$0.03/枚' }],
+];
+
+// ── 比較表4：動画あたり実質単価 ──────────────────────────
+const videoUnitHeaders = ['ツール名', 'プラン', '月額費用', '月間クレジット目安', '5秒動画のクレジット目安', '実質単価目安'];
+const videoUnitRows = [
+  [
+    { text: 'Runway' },
+    { text: 'Standard（年払い）' },
+    { text: '$12/月' },
+    { text: '月625クレジット程度' },
+    { text: '5〜10クレジット程度（要確認）' },
+    { text: '要公式確認' },
+  ],
+  [
+    { text: 'Pika' },
+    { text: 'Standard（年払い）' },
+    { text: '$8/月' },
+    { text: '月700クレジット程度' },
+    { text: '詳細は公式確認' },
+    { text: '要公式確認' },
+  ],
+  [
+    { text: 'Luma AI' },
+    { text: 'Plus' },
+    { text: '$30/月' },
+    { text: 'プラン付与クレジット' },
+    { text: '詳細は公式確認' },
+    { text: '要公式確認' },
+  ],
+  [
+    { text: 'Kling AI' },
+    { text: '要確認' },
+    { text: '要公式確認' },
+    { text: '要公式確認' },
+    { text: '要公式確認' },
+    { text: '要公式確認' },
+  ],
+  [
+    { text: 'Vidu AI' },
+    { text: '要確認' },
+    { text: '要公式確認' },
+    { text: '要公式確認' },
+    { text: '要公式確認' },
+    { text: '要公式確認' },
+  ],
+];
+
+// ── 比較表5：商用利用条件 ─────────────────────────────────
+const commercialHeaders = ['ツール名', '無料プランの商用利用', '有料プランの商用利用', '大企業向け条件', '備考'];
+const commercialRows = [
+  [
+    { text: 'Midjourney' },
+    { text: '無料プランなし' },
+    { text: '有料プランで商用利用が案内されている' },
+    { text: '年間総収益100万ドル超はPro/Megaプラン必要とされる' },
+    { text: '最新規約を要確認', muted: true },
+  ],
+  [
+    { text: 'Adobe Firefly' },
+    { text: '有料プランが前提（β機能は商用利用対象外）' },
+    { text: '商用利用が想定された設計と案内されている' },
+    { text: '記載なし' },
+    { text: 'ベータ機能（β表示）は商用利用対象外とされる', muted: true },
+  ],
+  [
+    { text: 'DALL-E' },
+    { text: 'ChatGPT無料プランで制限付き案内あり' },
+    { text: 'OpenAI規約上の商用利用が案内されている' },
+    { text: '記載なし' },
+    { text: '用途・内容によりポリシー制限あり', muted: true },
+  ],
+  [
+    { text: 'Leonardo AI' },
+    { text: '無料プランは権利がLeonardo.AIに帰属する場合あり' },
+    { text: '有料プラン＋Private設定で独占的利用が案内' },
+    { text: '記載なし' },
+    { text: '無料プランの商用利用は要注意', muted: true },
+  ],
+  [
+    { text: 'Canva AI' },
+    { text: '商用利用が案内されているが独占的権利は保証されない' },
+    { text: '同上' },
+    { text: '記載なし' },
+    { text: '独占的権利を必要とする用途は要確認', muted: true },
+  ],
+  [
+    { text: 'Runway' },
+    { text: '実用制限あり（透かし・クレジット数）' },
+    { text: 'すべてのプランでOutput商用利用を制限しないと案内' },
+    { text: '記載なし' },
+    { text: '最新規約を要確認', muted: true },
+  ],
+  [
+    { text: 'Pika' },
+    { text: '商用利用不可とされている' },
+    { text: '商用利用可能なプランが案内されている' },
+    { text: '記載なし' },
+    { text: '無料プランは明確に商用利用不可', muted: true },
+  ],
+  [
+    { text: 'Luma AI' },
+    { text: '非商用利用のみ（non-commercial use only）と案内' },
+    { text: 'Plus以上でcommercial use allowedと案内' },
+    { text: '記載なし' },
+    { text: '無料プランの商用利用は明確に不可', muted: true },
+  ],
+  [
+    { text: 'Kling AI' },
+    { text: '要確認（公式ページ直接確認不可）' },
+    { text: '要確認' },
+    { text: '要確認' },
+    { text: '公式情報確認に制限あり', muted: true },
+  ],
+  [
+    { text: 'Vidu AI' },
+    { text: '要確認' },
+    { text: '有料ユーザーに商用利用が拡張される旨が案内' },
+    { text: '要確認' },
+    { text: '詳細は最新規約を要確認', muted: true },
+  ],
+];
+
+// ── 比較表6：透かし条件 ───────────────────────────────────
+const watermarkHeaders = ['ツール名', '無料プランの透かし', '有料プランの透かし', '不可視メタデータ', 'クレジット表記義務'];
+const watermarkRows = [
+  [{ text: 'Midjourney' }, { text: '無料プランなし' }, { text: '透かしなし（有料プラン）' }, { text: '非公開' }, { text: '規約上の要件を確認' }],
+  [{ text: 'Adobe Firefly' }, { text: 'プランによっては可視透かしあり' }, { text: 'プランによっては可視透かしあり' }, { text: 'C2PAメタデータ埋め込みあり' }, { text: '規約上の要件を確認' }],
+  [{ text: 'DALL-E' }, { text: '制限付き利用' }, { text: 'なし（C2PA不可視メタデータあり）' }, { text: 'C2PAメタデータ埋め込みあり（場合による）' }, { text: '規約上の要件を確認' }],
+  [{ text: 'Leonardo AI' }, { text: '詳細は公式確認' }, { text: '通常は透かしなしとされている' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
+  [{ text: 'Canva AI' }, { text: '詳細は公式確認' }, { text: '詳細は公式確認' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
+  [{ text: 'Runway' }, { text: '透かしあり' }, { text: '透かしなし（有料プラン）' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
+  [{ text: 'Pika' }, { text: '透かしあり' }, { text: '透かしなし（有料プラン）' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
+  [{ text: 'Luma AI' }, { text: '透かしあり（non-commercial use only）' }, { text: 'no watermarksと案内（Plus以上）' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
+  [{ text: 'Kling AI' }, { text: '透かしあり（場合による）' }, { text: '条件は公式確認' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
+  [{ text: 'Vidu AI' }, { text: '透かしあり' }, { text: '条件は公式確認' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
+];
+
+// ── 比較表7：用途別選び方 ─────────────────────────────────
+const useCaseHeaders = ['用途', '推奨候補', '選び方のポイント'];
+const useCaseRows = [
+  [
+    { text: '広告クリエイティブ（画像）' },
+    { text: 'Adobe Firefly、Midjourney' },
+    { text: 'Fireflyは商用利用を想定した設計。Midjourneyは品質が高いが有料プランと規約確認が必須' },
+  ],
+  [
+    { text: 'SNS投稿用画像' },
+    { text: 'Canva AI、Adobe Firefly、Leonardo AI' },
+    { text: 'Canvaはデザイン作業と一体利用可。Fireflyは日本語UI対応' },
+  ],
+  [
+    { text: '広告動画・PR動画' },
+    { text: 'Runway、Luma AI' },
+    { text: 'Runwayは映像編集機能が豊富。Luma AIはPlus以上でcommercial useを案内' },
+  ],
+  [
+    { text: 'SNS用ショート動画' },
+    { text: 'Pika、Luma AI、Kling AI' },
+    { text: 'Pikaはシンプル操作。Pikaの無料プランは商用利用不可に注意' },
+  ],
+  [
+    { text: 'コスト重視の商用利用' },
+    { text: 'Leonardo AI（有料プラン）、Pika（有料プラン）' },
+    { text: '月額が比較的低いプランが用意されている' },
+  ],
+];
+
+// ── チェックリスト ─────────────────────────────────────────
+const checklistItems = [
+  '使用するツールの公式利用規約（Terms of Service）を確認した',
+  '利用するプランが商用利用を許可していることを確認した',
+  '透かし・クレジット表記の条件を確認した',
+  '月間クレジット付与数と1生成あたりの消費クレジットを確認した',
+  '生成コンテンツに人物・ブランドロゴ・第三者素材が含まれていないことを確認した',
+  '広告・収益化を前提とする場合は商用利用条件を別途詳細確認した',
+  '利用規約の最終更新日を確認し、最新版を参照した',
+];
+
+// ── FAQ ─────────────────────────────────────────────────
+const faqItems = [
+  {
+    q: '無料プランで商用利用できるツールはありますか？',
+    a: 'ツールによって対応が分かれます。Pika・Luma AIは無料プランで商用利用不可と明確に案内しています。Leonardo AIは無料プランで生成画像の権利がLeonardo.AIに帰属する場合があります。Adobe FireflyやCanva AIは一部の商用利用が案内されていますが条件があります。Runwayの無料プランはクレジットが初回のみで実用的でない場合が多いです。いずれも最新の公式規約をご確認ください。',
+  },
+  {
+    q: '商用利用と著作権は別の問題ですか？',
+    a: 'はい、別の問題です。ツールの利用規約上「商用利用可」であっても、生成した画像・動画の内容に既存の著作物・商標・有名人の肖像が含まれる場合は別途権利上のリスクが生じます。詳しくは商用利用・著作権ガイドをご覧ください。',
+  },
+  {
+    q: '透かしなしで使えるプランはどれですか？',
+    a: 'Midjourney（有料プラン）、Runway（有料プラン）、Pika（有料プラン）、Luma AI（Plus以上）、Leonardo AI（有料プラン）などで透かしなしが案内されています。Adobe FireflyはC2PA不可視メタデータが全プランで埋め込まれます。詳しくは透かし・クレジット表記ガイドをご覧ください。',
+  },
+  {
+    q: 'AI動画生成ツールのコスト計算の考え方は？',
+    a: '月額料金だけでなく、月間クレジット付与数÷1動画あたり消費クレジット=月間生成可能本数で実質コストを見積もることが重要です。解像度・モデル・動画の長さによってクレジット消費が大きく変わります。動画生成ツールの詳細なクレジット比較は「AI動画生成ツールの料金・クレジット消費比較ガイド」もご参照ください。',
+  },
+  {
+    q: '日本語UIに対応しているツールはどれですか？',
+    a: 'Adobe Firefly、Canva AI、DALL-E（ChatGPT準拠）は日本語UIに対応しています。Midjourney、Runway、Luma AI、Vidu AIは英語インターフェースです。Kling AI・Pikaは一部日本語表示がある場合があります。',
+  },
+  {
+    q: '料金・条件がよく変わるのはなぜですか？',
+    a: 'AIツール市場は急速に発展しており、各社が競争的にプランを改定しています。利用前の最新規約確認が特に重要な分野です。',
+  },
+];
+---
+
+<BaseLayout
+  title={`${data.title}｜公式情報ベースで比較`}
+  description={data.description}
+  canonicalPath="/guides/commercial-use-cost-comparison/"
+  ogType="article"
+>
+  <div class="mx-auto max-w-3xl px-6 py-12">
+
+    <GuidePageHeader
+      title={data.title}
+      description={data.description}
+      lastReviewed={data.lastReviewed}
+    />
+
+    <!-- パンくずナビ -->
+    <nav class="mb-6 text-sm text-slate-500">
+      <a href="/" class="hover:underline">トップ</a>
+      <span class="mx-1">/</span>
+      <a href="/guides/" class="hover:underline">ガイド一覧</a>
+      <span class="mx-1">/</span>
+      <span>AI画像・動画生成ツールの商用利用条件と実質コスト比較</span>
+    </nav>
+
+    <!-- 結論サマリー -->
+    <GuideSummaryBox title="このガイドの結論">
+      <p>
+        商用利用の可否は<strong class="font-semibold text-slate-900">ツールとプランの組み合わせ</strong>で変わります。
+        無料プランでは商用利用が制限されているケースが多く、有料プランへの移行が前提となる場合がほとんどです。
+        利用前に各ツールの公式利用規約を必ず確認してください。本ガイドは法的助言ではありません。
+      </p>
+    </GuideSummaryBox>
+
+    <!-- 免責事項 -->
+    <GuideWarningBox variant="warning" title="免責事項">
+      このガイドは情報提供を目的としており、法的アドバイスではありません。料金・商用利用条件は変更される場合があります。利用前に必ず各ツールの最新公式サイト・利用規約をご確認ください。
+    </GuideWarningBox>
+
+    <!-- 関連ガイドへの導線 -->
+    <div class="mb-8 rounded-lg border border-blue-100 bg-blue-50 px-5 py-4 text-sm text-blue-800 leading-relaxed">
+      <p class="mb-2 font-semibold text-blue-900">関連ガイド</p>
+      <ul class="space-y-1 text-xs text-blue-700">
+        <li>→ <a href="/guides/video-generation-credit-cost-comparison/" class="underline hover:text-blue-900">AI動画生成ツールの料金・クレジット消費比較（動画ツール専用・詳細版）</a></li>
+        <li>→ <a href="/guides/commercial-use-copyright/" class="underline hover:text-blue-900">AI画像生成の商用利用と著作権｜考え方・注意点</a></li>
+        <li>→ <a href="/guides/watermark-credit-guide/" class="underline hover:text-blue-900">透かし・クレジット表記ガイド</a></li>
+      </ul>
+    </div>
+
+    <!-- ── 比較表1：基本情報 ── -->
+    <section class="my-10" aria-labelledby="basic-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="basic-heading">比較表1：基本情報</h2>
+      <p class="mb-4 text-sm text-slate-500">確認時点の公式情報をもとに整理しています。最新情報は各公式サイトでご確認ください。</p>
+      <GuideComparisonTable
+        caption="AI画像・動画生成ツール基本情報比較"
+        headers={basicHeaders}
+        rows={basicRows}
+        statusColIndex={-1}
+      />
+    </section>
+
+    <!-- ── 比較表2：料金・クレジット ── -->
+    <section class="my-10" aria-labelledby="credit-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="credit-heading">比較表2：月額料金・クレジット消費</h2>
+      <GuideWarningBox variant="info">
+        すべての料金・クレジット数は変更される可能性があります。最新情報は各ツールの公式料金ページをご確認ください。
+      </GuideWarningBox>
+      <GuideComparisonTable
+        caption="AI画像・動画生成ツール料金・クレジット比較"
+        headers={creditHeaders}
+        rows={creditRows}
+        statusColIndex={-1}
+      />
+    </section>
+
+    <!-- ── 比較表3：画像単価 ── -->
+    <section class="my-10" aria-labelledby="image-unit-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="image-unit-heading">比較表3：画像1枚あたり実質単価の目安</h2>
+      <p class="mb-4 text-sm text-slate-500">
+        生成設定（解像度・品質・バリエーション数など）によって1枚あたりのコストは大きく変わります。以下は概算の参考値であり、保証値ではありません。
+      </p>
+      <GuideComparisonTable
+        caption="AI画像生成ツール単価比較"
+        headers={imageUnitHeaders}
+        rows={imageUnitRows}
+        statusColIndex={-1}
+      />
+    </section>
+
+    <!-- ── 比較表4：動画単価 ── -->
+    <section class="my-10" aria-labelledby="video-unit-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="video-unit-heading">比較表4：動画あたり実質単価の目安</h2>
+      <p class="mb-4 text-sm text-slate-500">
+        動画の秒数・解像度・使用モデルによってクレジット消費は大きく変わります。以下は概算の参考値です。
+        動画生成ツールの詳細なクレジット比較は<a href="/guides/video-generation-credit-cost-comparison/" class="text-blue-600 hover:underline">AI動画生成ツールの料金・クレジット消費比較ガイド</a>もご参照ください。
+      </p>
+      <GuideComparisonTable
+        caption="AI動画生成ツール単価比較"
+        headers={videoUnitHeaders}
+        rows={videoUnitRows}
+        statusColIndex={-1}
+      />
+    </section>
+
+    <!-- ── 比較表5：商用利用条件 ── -->
+    <section class="my-10" aria-labelledby="commercial-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="commercial-heading">比較表5：商用利用条件の確認ポイント</h2>
+      <GuideComparisonTable
+        caption="AI画像・動画生成ツール商用利用条件比較"
+        headers={commercialHeaders}
+        rows={commercialRows}
+        statusColIndex={-1}
+      />
+    </section>
+
+    <!-- ── 比較表6：透かし条件 ── -->
+    <section class="my-10" aria-labelledby="watermark-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="watermark-heading">比較表6：透かし・クレジット表記条件</h2>
+      <GuideComparisonTable
+        caption="AI画像・動画生成ツール透かし条件比較"
+        headers={watermarkHeaders}
+        rows={watermarkRows}
+        statusColIndex={-1}
+      />
+      <p class="mt-3 text-xs text-slate-400">
+        C2PAについて：C2PAはContent Authenticity Initiative（CAI）が策定したメタデータ標準です。可視透かしとは異なり目視では確認できません。
+      </p>
+    </section>
+
+    <!-- ── 比較表7：用途別選び方 ── -->
+    <section class="my-10" aria-labelledby="usecase-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="usecase-heading">比較表7：用途別の選び方</h2>
+      <GuideComparisonTable
+        caption="AI生成ツール用途別選び方"
+        headers={useCaseHeaders}
+        rows={useCaseRows}
+        statusColIndex={-1}
+      />
+    </section>
+
+    <!-- ── チェックリスト ── -->
+    <section class="my-10">
+      <GuideCheckList
+        title="商用利用前のチェックリスト"
+        items={checklistItems}
+      />
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="my-10">
+      <GuideFAQ items={faqItems} title="よくある質問（FAQ）" />
+    </section>
+
+    <!-- ── 注意事項 ── -->
+    <section class="my-10">
+      <GuideWarningBox variant="info">
+        <ul class="space-y-1.5 list-disc list-inside">
+          <li>各ツールの利用規約・料金プランは予告なく変更されます</li>
+          <li>このガイドの情報は各確認日時点のものです。最新情報は必ず公式サイトでご確認ください</li>
+          <li>AI生成コンテンツに関する著作権・知的財産の法的解釈は各国で整備・更新中です</li>
+          <li>重要な商用利用の場面では、法律の専門家（弁護士等）への相談を推奨します</li>
+        </ul>
+      </GuideWarningBox>
+    </section>
+
+    <GuideFreshnessBox lastReviewed={data.lastReviewed} nextReviewDue={data.nextReviewDue} />
+
+    <!-- 関連ページ -->
+    <section class="mb-8 space-y-6">
+      <div>
+        <h2 class="mb-3 text-sm font-semibold text-slate-600">関連ガイド・比較ページ</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          <li><a href="/guides/video-generation-credit-cost-comparison/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700 hover:bg-blue-100 transition-colors">AI動画生成ツールの料金・クレジット比較（詳細版）</a></li>
+          <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">商用利用・著作権ガイド</a></li>
+          <li><a href="/guides/watermark-credit-guide/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">透かし・クレジット表記ガイド</a></li>
+          <li><a href="/guides/ai-commercial-use-checklist/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">商用利用前チェックリスト</a></li>
+          <li><a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">商用利用条件を確認しやすいAIツール</a></li>
+          <li><a href="/conditions/no-watermark/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">透かしなしツール</a></li>
+          <li><a href="/categories/image-generation/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">AI画像生成ツール一覧</a></li>
+          <li><a href="/categories/video-generation/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">AI動画生成ツール一覧</a></li>
+          <li><a href="/use-cases/ad-video/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">広告動画向け確認ポイント</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="mb-6 text-xs text-slate-500 leading-relaxed">
+      最新情報は各公式サイトで確認してください。掲載内容は各確認日時点のものであり、法的助言ではありません。
+    </p>
+
+    <nav class="border-t border-slate-200 pt-6 text-sm" aria-label="ページナビゲーション">
+      <a href="/guides/" class="text-blue-600 hover:underline">← ガイド一覧に戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

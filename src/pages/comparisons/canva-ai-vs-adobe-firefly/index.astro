@@ -1,6 +1,18 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GuideFAQ from '../../../components/GuideFAQ.astro';
+import { getEntry } from 'astro:content';
+
+const [toolCanva, toolFirefly] = await Promise.all([
+  getEntry('tools', 'canva-ai-image-generator'),
+  getEntry('tools', 'adobe-firefly'),
+]);
+const toolDates = [toolCanva?.data.lastReviewed, toolFirefly?.data.lastReviewed].filter(Boolean) as string[];
+const latestDate = toolDates.length ? toolDates.sort().at(-1)! : null;
+function formatDate(iso: string): string {
+  const [y, m, d] = iso.split('-');
+  return `${y}年${Number(m)}月${Number(d)}日`;
+}
 
 const faqs = [
   {
@@ -118,12 +130,32 @@ const relatedLinks = [
   { href: '/guides/commercial-use-copyright/', label: '商用利用・著作権の確認ガイド' },
   { href: '/comparisons/', label: 'AI画像・動画ツール比較表' },
 ];
+
+const articleJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Canva AIとAdobe Fireflyを比較｜デザイン制作に使いやすいAI画像生成ツールはどちら？",
+  "description": "Canva AI画像生成とAdobe Fireflyの特徴、無料プラン、商用利用条件、日本語対応、デザイン制作への向き不向きを比較します。SNS画像、バナー、資料用画像などに使うAI画像生成ツール選びで確認すべきポイントを整理します。",
+  "url": "https://aicreative-db.com/comparisons/canva-ai-vs-adobe-firefly/",
+  "mainEntityOfPage": "https://aicreative-db.com/comparisons/canva-ai-vs-adobe-firefly/",
+  "author": {
+    "@type": "Organization",
+    "name": "AIクリエイティブナビ編集部"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AIクリエイティブナビ",
+    "url": "https://aicreative-db.com/"
+  },
+  ...(latestDate ? { "dateModified": latestDate } : {}),
+});
 ---
 
 <BaseLayout
   title="Canva AIとAdobe Fireflyを比較｜デザイン制作に使いやすいAI画像生成ツールはどちら？ | AIクリエイティブナビ"
   description="Canva AI画像生成とAdobe Fireflyの特徴、無料プラン、商用利用条件、日本語対応、デザイン制作への向き不向きを比較します。SNS画像、バナー、資料用画像などに使うAI画像生成ツール選びで確認すべきポイントを整理します。"
   canonicalPath="/comparisons/canva-ai-vs-adobe-firefly/"
+  jsonLd={articleJsonLd}
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
 
@@ -137,12 +169,12 @@ const relatedLinks = [
     </nav>
 
     <!-- H1 -->
-    <h1 class="mb-4 text-3xl font-bold text-[#002B61]">
+    <h1 class="mb-4 text-3xl font-bold text-slate-900">
       Canva AIとAdobe Fireflyを比較｜デザイン制作に使いやすいAI画像生成ツールはどちら？
     </h1>
 
-    <!-- 最終確認日 -->
-    <p class="mb-6 text-xs text-slate-400">最終確認：2026年5月16日 ／ 掲載情報は変更される場合があります</p>
+    <!-- 掲載ツール情報の最終確認日 -->
+    <p class="mb-6 text-xs text-slate-400">掲載ツール情報の最終確認：{latestDate ? formatDate(latestDate) : '要確認'} ／ 掲載情報は変更される場合があります</p>
 
     <!-- 注意ボックス -->
     <div class="mb-8 rounded-lg border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800 leading-relaxed">
@@ -209,7 +241,7 @@ const relatedLinks = [
     <!-- 基本比較表                                                    -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">Canva AIとAdobe Fireflyの基本比較表</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">Canva AIとAdobe Fireflyの基本比較表</h2>
       <p class="mb-4 text-sm text-slate-500">
         以下は参考情報です。内容は変更される場合があります。最新情報は各公式サイトでご確認ください。
       </p>
@@ -242,7 +274,7 @@ const relatedLinks = [
     <!-- Canva AIの特徴                                               -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">Canva AI画像生成の特徴</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">Canva AI画像生成の特徴</h2>
 
       <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm mb-5">
         <h3 class="mb-3 font-bold text-slate-900">Canvaのデザインツールとの一体利用</h3>
@@ -291,7 +323,7 @@ const relatedLinks = [
     <!-- Adobe Fireflyの特徴                                          -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">Adobe Fireflyの特徴</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">Adobe Fireflyの特徴</h2>
 
       <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm mb-5">
         <h3 class="mb-3 font-bold text-slate-900">Adobe Creative Cloudとの連携</h3>
@@ -339,7 +371,7 @@ const relatedLinks = [
     <!-- 用途別の選び方                                               -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">用途別の選び方</h2>
+      <h2 class="mb-5 text-2xl font-bold text-slate-900">用途別の選び方</h2>
 
       <div class="space-y-4">
         {[
@@ -434,7 +466,7 @@ const relatedLinks = [
     <!-- 向いている人 / 向いていない人                                 -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">向いている人・向いていない人</h2>
+      <h2 class="mb-5 text-2xl font-bold text-slate-900">向いている人・向いていない人</h2>
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
           <h3 class="mb-3 font-bold text-slate-900"><a href="/tools/canva-ai-image-generator/" class="text-blue-600 hover:underline">Canva AI</a>が向いている人</h3>
@@ -470,7 +502,7 @@ const relatedLinks = [
     <!-- 注意点                                                        -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">ご利用前の注意点</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">ご利用前の注意点</h2>
       <div class="rounded-lg border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800 leading-relaxed">
         <ul class="space-y-2 list-disc list-inside">
           <li>商用利用条件はプラン・用途・規約により異なる場合があります</li>
@@ -489,7 +521,7 @@ const relatedLinks = [
     <!-- 他のAI画像生成ツールも比較したい場合                          -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">他のAI画像生成ツールも比較したい場合</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">他のAI画像生成ツールも比較したい場合</h2>
       <p class="mb-4 text-sm text-slate-600 leading-relaxed">
         Canva AIとAdobe Fireflyの他にも、用途や予算によって向いているツールは異なります。以下の主要ツールも参考にしてください。
       </p>

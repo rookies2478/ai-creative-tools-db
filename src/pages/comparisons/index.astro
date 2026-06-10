@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConditionChips from '../../components/ConditionChips.astro';
+import ComparisonHub from '../../components/ComparisonHub.astro';
 ---
 
 <BaseLayout
   title="AIツール比較記事一覧｜AIクリエイティブナビ"
-  description="AI画像生成・AI動画生成を中心に、主要AIツールの違い、料金、無料枠、日本語対応、商用利用条件などを比較できる記事一覧です。"
+  description="AI画像生成・AI動画生成を中心に、無料枠・商用利用条件・透かし・用途別の違いを確認できる比較記事をまとめています。"
   canonicalPath="/comparisons/"
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
@@ -15,168 +17,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <span aria-current="page">比較記事一覧</span>
     </nav>
 
-    <h1 class="mb-2 text-3xl font-bold text-[#002B61]">AIツール比較記事一覧</h1>
-    <p class="mb-4 text-slate-600 leading-relaxed">
-      AI画像生成・AI動画生成ツールを、用途・料金・無料枠・商用利用条件・透かし・日本語対応などの観点で比較した記事をまとめています。どのツールを選ぶか迷ったとき、まずこのページから目的に合った比較記事を探してみてください。
-    </p>
-    <p class="mb-8 text-sm text-slate-500 leading-relaxed">
-      商用利用条件や著作権はツール・プラン・用途によって異なる場合があります。比較記事はあくまで参考情報です。利用前に必ず各公式サイトの最新情報をご確認ください。本サイトは商用利用・著作権について断定しません。
-    </p>
+    <ConditionChips currentPath="/comparisons/" />
 
-    <!-- 注意文 -->
-    <div class="mb-10 rounded-lg border border-amber-100 bg-amber-50 px-4 py-3">
-      <p class="text-xs leading-relaxed text-amber-800">
-        掲載内容は確認時点の情報です。最新情報や具体的な利用可否は必ず各公式サイトでご確認ください。本記事群は法的助言ではありません。プランや用途によって条件が異なる場合があります。
-      </p>
-    </div>
-
-    <!-- どの比較記事を読む？ -->
-    <section class="mb-12 rounded-xl border border-blue-100 bg-blue-50 p-6">
-      <h2 class="mb-4 text-lg font-bold text-[#002B61]">どの比較記事を読む？</h2>
-      <ul class="space-y-2 text-sm text-slate-700">
-        <li><span class="font-semibold text-slate-900">AI画像生成とAI動画生成をまとめて比較したい</span>
-          → <a href="/comparisons/ai-image-video-tools/" class="text-blue-600 hover:underline">AI画像・動画生成ツール比較表</a></li>
-        <li><span class="font-semibold text-slate-900">無料で使えるAI画像生成ツールを条件別に比較したい</span>
-          → <a href="/comparisons/free-ai-image-generators/" class="text-blue-600 hover:underline">無料AI画像生成ツール比較</a>（画像生成に絞った詳しい比較）または <a href="/conditions/free/" class="text-blue-600 hover:underline">無料で試せるツール一覧</a></li>
-        <li><span class="font-semibold text-slate-900">AI動画生成でRunwayとPikaを比較したい</span>
-          → <a href="/comparisons/runway-vs-pika/" class="text-blue-600 hover:underline">Runway vs Pika</a></li>
-        <li><span class="font-semibold text-slate-900">MidjourneyとAdobe Fireflyを比較したい</span>
-          → <a href="/comparisons/midjourney-vs-adobe-firefly/" class="text-blue-600 hover:underline">Midjourney vs Adobe Firefly</a></li>
-        <li><span class="font-semibold text-slate-900">Canva AIとAdobe Fireflyを比較したい</span>
-          → <a href="/comparisons/canva-ai-vs-adobe-firefly/" class="text-blue-600 hover:underline">Canva AI vs Adobe Firefly</a></li>
-      </ul>
-    </section>
-
-    <!-- 比較記事カード一覧 -->
-    <section class="mb-12">
-      <h2 class="mb-6 text-xl font-bold text-[#002B61]">比較記事</h2>
-
-      <div class="grid gap-4 sm:grid-cols-2">
-
-        <!-- AI画像・動画生成ツール比較表 -->
-        <a href="/comparisons/ai-image-video-tools/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <span class="inline-flex rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">比較表</span>
-          </div>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">AI画像・動画生成ツール比較表</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用・無料枠・日本語対応・透かし・料金目安で主要ツールを横並びで比較できます。</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
-        </a>
-
-        <!-- 無料AI画像生成ツール比較 -->
-        <a href="/comparisons/free-ai-image-generators/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <span class="inline-flex rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-600">無料枠</span>
-          </div>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">無料AI画像生成ツール比較</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">無料枠・透かし・商用利用条件をまとめて確認できます。</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
-        </a>
-
-        <!-- Runway vs Pika -->
-        <a href="/comparisons/runway-vs-pika/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <span class="inline-flex rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">動画生成</span>
-          </div>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">Runway vs Pika</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">料金・無料枠・商用利用・用途別の選び方を比較（動画生成）。</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
-        </a>
-
-        <!-- Midjourney vs Adobe Firefly -->
-        <a href="/comparisons/midjourney-vs-adobe-firefly/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <span class="inline-flex rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">画像生成</span>
-          </div>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">Midjourney vs Adobe Firefly</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用・料金・日本語対応・用途の違いを比較。</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
-        </a>
-
-        <!-- DALL·E vs Midjourney -->
-        <a href="/comparisons/dalle-vs-midjourney/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <span class="inline-flex rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">画像生成</span>
-          </div>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">DALL·E vs Midjourney</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">ChatGPT連携・画質・商用利用・用途の違いを比較。</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
-        </a>
-
-        <!-- Stable Diffusion vs Midjourney -->
-        <a href="/comparisons/stable-diffusion-vs-midjourney/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <span class="inline-flex rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">画像生成</span>
-          </div>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">Stable Diffusion vs Midjourney</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">無料利用・画質・商用利用・自由度の違いを比較。</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
-        </a>
-
-        <!-- Canva AI vs Adobe Firefly -->
-        <a href="/comparisons/canva-ai-vs-adobe-firefly/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <span class="inline-flex rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">画像生成</span>
-          </div>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">Canva AI vs Adobe Firefly</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">デザイン制作に使いやすいAI画像生成ツールはどちらか比較。</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
-        </a>
-
-        <!-- Adobe Firefly vs Microsoft Designer -->
-        <a href="/comparisons/adobe-firefly-vs-microsoft-designer/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <span class="inline-flex rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">画像生成</span>
-          </div>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">Adobe Firefly vs Microsoft Designer</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用・デザイン制作で選ぶAI画像生成ツールを比較。</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="mb-12" itemscope itemtype="https://schema.org/FAQPage">
-      <h2 class="mb-6 text-xl font-bold text-[#002B61]">よくある質問</h2>
-      <div class="space-y-4">
-
-        <div class="rounded-lg border border-slate-100 bg-white p-5" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <p class="font-semibold text-slate-900" itemprop="name">どの比較記事から読めばよいですか？</p>
-          <div class="mt-2 text-sm text-slate-600 leading-relaxed" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <div itemprop="text">AI画像生成と<a href="/categories/video-generation/" class="text-blue-600 hover:underline">AI動画生成</a>をまとめて見たい場合は<a href="/comparisons/ai-image-video-tools/" class="text-blue-600 hover:underline">全ツール横断比較</a>が出発点になります。動画生成ならRunwayとPikaの比較、画像生成ならMidjourneyやAdobe Fireflyなどのツール別比較記事が参考になります。上の「どの比較記事を読む？」セクションも参照してください。</div>
-          </div>
-        </div>
-
-        <div class="rounded-lg border border-slate-100 bg-white p-5" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <p class="font-semibold text-slate-900" itemprop="name">無料ツールだけを比較したい場合はどこを見ればよいですか？</p>
-          <div class="mt-2 text-sm text-slate-600 leading-relaxed" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <div itemprop="text">無料枠のあるツールを条件別に探す場合は<a href="/conditions/free/" class="text-blue-600 hover:underline">無料で試せるツール一覧</a>が参考になります。AI画像生成ツールに絞って詳しく比較したい場合は<a href="/comparisons/free-ai-image-generators/" class="text-blue-600 hover:underline">無料AI画像生成ツール比較</a>も参照してください。</div>
-          </div>
-        </div>
-
-        <div class="rounded-lg border border-slate-100 bg-white p-5" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <p class="font-semibold text-slate-900" itemprop="name">比較記事の商用利用情報だけで判断できますか？</p>
-          <div class="mt-2 text-sm text-slate-600 leading-relaxed" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <div itemprop="text">商用利用条件はツール・プラン・用途によって異なる場合があります。比較記事はあくまで参考情報であり、判断の根拠には公式規約をご確認ください。本サイトは商用利用・著作権について断定しません。詳しくは<a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用・著作権ガイド</a>もあわせて参照してください。</div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 関連ページ -->
-    <section class="border-t border-slate-100 pt-8">
-      <h2 class="mb-4 text-sm font-semibold text-slate-600">あわせて見る</h2>
-      <ul class="flex flex-wrap gap-3 text-sm">
-        <li><a href="/tools/" class="rounded-full border border-slate-200 px-4 py-1.5 text-slate-600 hover:bg-slate-100 transition-colors">すべてのツール</a></li>
-        <li><a href="/categories/video-generation/" class="rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 text-indigo-700 hover:bg-indigo-100 transition-colors">AI動画生成ツール一覧</a></li>
-        <li><a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-1.5 text-slate-600 hover:bg-slate-100 transition-colors">無料で試せる</a></li>
-        <li><a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-1.5 text-slate-600 hover:bg-slate-100 transition-colors">商用利用を確認</a></li>
-        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-200 px-4 py-1.5 text-slate-600 hover:bg-slate-100 transition-colors">商用利用・著作権ガイド</a></li>
-        <li><a href="/use-cases/" class="rounded-full border border-amber-200 bg-amber-50 px-4 py-1.5 text-amber-700 hover:bg-amber-100 transition-colors">用途別記事一覧</a></li>
-      </ul>
-    </section>
+    <ComparisonHub />
 
   </div>
 </BaseLayout>

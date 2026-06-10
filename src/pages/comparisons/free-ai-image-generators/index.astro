@@ -1,6 +1,22 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import NoticeBox from '../../../components/NoticeBox.astro';
+import { getEntry } from 'astro:content';
+
+const toolEntries = await Promise.all([
+  getEntry('tools', 'canva-ai-image-generator'),
+  getEntry('tools', 'adobe-firefly'),
+  getEntry('tools', 'dalle'),
+  getEntry('tools', 'stable-diffusion'),
+  getEntry('tools', 'leonardo-ai'),
+  getEntry('tools', 'midjourney'),
+]);
+const toolDates = toolEntries.map(t => t?.data.lastReviewed).filter(Boolean) as string[];
+const latestDate = toolDates.length ? toolDates.sort().at(-1)! : null;
+function formatDate(iso: string): string {
+  const [y, m, d] = iso.split('-');
+  return `${y}年${Number(m)}月${Number(d)}日`;
+}
 
 const tools = [
   {
@@ -182,12 +198,32 @@ const faqs = [
     a: '無料枠の内容、生成回数、透かし、画像サイズ、商用利用条件を確認してください。人物・著名人・ブランドロゴ・第三者素材を扱う場合は、肖像権・著作権・商標などについて別途確認が必要です。最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。',
   },
 ];
+
+const articleJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "無料プランで比較するAI画像生成ツール【無料枠・透かし・商用利用】",
+  "description": "AI画像生成ツールの無料枠を比較。完全無料・無料プラン・無料クレジットの違い、透かしの有無、商用利用条件、生成回数、日本語対応など、無料で使うときのチェックポイントを整理しています。",
+  "url": "https://aicreative-db.com/comparisons/free-ai-image-generators/",
+  "mainEntityOfPage": "https://aicreative-db.com/comparisons/free-ai-image-generators/",
+  "author": {
+    "@type": "Organization",
+    "name": "AIクリエイティブナビ編集部"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AIクリエイティブナビ",
+    "url": "https://aicreative-db.com/"
+  },
+  ...(latestDate ? { "dateModified": latestDate } : {}),
+});
 ---
 
 <BaseLayout
   title="無料プランで比較するAI画像生成ツール【無料枠・透かし・商用利用】| AIクリエイティブナビ"
   description="AI画像生成ツールの無料枠を比較。完全無料・無料プラン・無料クレジットの違い、透かしの有無、商用利用条件、生成回数、日本語対応など、無料で使うときのチェックポイントを整理しています。"
   canonicalPath="/comparisons/free-ai-image-generators/"
+  jsonLd={articleJsonLd}
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
 
@@ -201,10 +237,10 @@ const faqs = [
     </nav>
 
     <!-- H1 -->
-    <h1 class="mb-4 text-3xl font-bold text-[#002B61]">無料プランで比較するAI画像生成ツール</h1>
+    <h1 class="mb-4 text-3xl font-bold text-slate-900">無料プランで比較するAI画像生成ツール</h1>
 
-    <!-- 最終確認日 -->
-    <p class="mb-6 text-xs text-slate-400">最終確認：2026年5月16日 ／ 掲載情報は変更される場合があります</p>
+    <!-- 掲載ツール情報の最終確認日 -->
+    <p class="mb-6 text-xs text-slate-400">掲載ツール情報の最終確認：{latestDate ? formatDate(latestDate) : '要確認'} ／ 掲載情報は変更される場合があります</p>
 
     <!-- 導入文 -->
     <p class="mb-4 text-slate-600 leading-relaxed">
@@ -236,7 +272,7 @@ const faqs = [
     <!-- 向いている人 / 向いていない人                                  -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">このページが向いている人・向いていない人</h2>
+      <h2 class="mb-5 text-2xl font-bold text-slate-900">このページが向いている人・向いていない人</h2>
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div class="rounded-xl border border-blue-100 bg-blue-50 p-5">
           <p class="mb-3 font-bold text-blue-800 text-sm">向いている人</p>
@@ -263,7 +299,7 @@ const faqs = [
     <!-- チェックポイントセクション                                    -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">無料プランを比較するときのチェックポイント</h2>
+      <h2 class="mb-5 text-2xl font-bold text-slate-900">無料プランを比較するときのチェックポイント</h2>
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {checkpoints.map(({ icon, title, desc }) => (
           <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
@@ -281,7 +317,7 @@ const faqs = [
     <!-- おすすめツール紹介セクション                                  -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">無料枠を確認したいAI画像生成ツール</h2>
+      <h2 class="mb-5 text-2xl font-bold text-slate-900">無料枠を確認したいAI画像生成ツール</h2>
       <div class="space-y-6">
         {tools.map(({ name, slug, freeNote, point, bestFor, caution }) => (
           <div class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
@@ -328,7 +364,7 @@ const faqs = [
     <!-- 簡易比較表                                                    -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">簡易比較表</h2>
+      <h2 class="mb-5 text-2xl font-bold text-slate-900">簡易比較表</h2>
       <p class="mb-4 text-sm text-slate-600">
         以下は参考情報です。内容は変更される場合があります。最新情報は各ツールの公式サイトをご確認ください。
       </p>
@@ -371,7 +407,7 @@ const faqs = [
     <!-- 注意点セクション                                              -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-xl font-bold text-[#002B61]">無料AI画像生成ツールを使う前の注意点</h2>
+      <h2 class="mb-4 text-xl font-bold text-slate-900">無料AI画像生成ツールを使う前の注意点</h2>
       <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm text-sm text-slate-600 leading-relaxed space-y-3">
         <ul class="space-y-2 list-disc list-inside">
           <li>無料枠の内容（生成回数・画像サイズ・保存期間・透かし条件）はツールによって異なり、変更される場合があります。</li>
@@ -388,7 +424,7 @@ const faqs = [
     <!-- 既存ページとの違い                                            -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-xl font-bold text-[#002B61]">無料カテゴリページとの違い</h2>
+      <h2 class="mb-4 text-xl font-bold text-slate-900">無料カテゴリページとの違い</h2>
       <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm text-sm text-slate-600 leading-relaxed space-y-2">
         <p>
           <a href="/conditions/free/" class="text-blue-600 hover:underline font-medium">/conditions/free/</a>
@@ -408,7 +444,7 @@ const faqs = [
     <!-- FAQ                                                          -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">よくある質問</h2>
+      <h2 class="mb-5 text-2xl font-bold text-slate-900">よくある質問</h2>
       <div class="space-y-4">
         {faqs.map(({ q, a }) => (
           <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm">

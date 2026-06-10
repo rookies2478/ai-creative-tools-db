@@ -1,6 +1,18 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GuideFAQ from '../../../components/GuideFAQ.astro';
+import { getEntry } from 'astro:content';
+
+const [toolDalle, toolMidjourney] = await Promise.all([
+  getEntry('tools', 'dalle'),
+  getEntry('tools', 'midjourney'),
+]);
+const toolDates = [toolDalle?.data.lastReviewed, toolMidjourney?.data.lastReviewed].filter(Boolean) as string[];
+const latestDate = toolDates.length ? toolDates.sort().at(-1)! : null;
+function formatDate(iso: string): string {
+  const [y, m, d] = iso.split('-');
+  return `${y}年${Number(m)}月${Number(d)}日`;
+}
 
 const faqs = [
   {
@@ -106,12 +118,32 @@ const relatedLinks = [
   { href: '/comparisons/midjourney-vs-adobe-firefly/', label: 'Midjourney vs Adobe Firefly比較' },
   { href: '/guides/commercial-use-copyright/', label: '商用利用・著作権ガイド' },
 ];
+
+const articleJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DALL·EとMidjourneyを比較：料金・商用利用・日本語対応・用途の違い",
+  "description": "DALL·EとMidjourneyを料金・無料枠・商用利用条件・日本語対応・ChatGPT連携・透かし・向いている用途の観点で比較。YouTubeサムネ・SNS・広告・初心者利用など用途別のおすすめも整理しています。",
+  "url": "https://aicreative-db.com/comparisons/dalle-vs-midjourney/",
+  "mainEntityOfPage": "https://aicreative-db.com/comparisons/dalle-vs-midjourney/",
+  "author": {
+    "@type": "Organization",
+    "name": "AIクリエイティブナビ編集部"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AIクリエイティブナビ",
+    "url": "https://aicreative-db.com/"
+  },
+  ...(latestDate ? { "dateModified": latestDate } : {}),
+});
 ---
 
 <BaseLayout
   title="DALL·EとMidjourneyを比較：料金・商用利用・日本語対応・用途の違い | AIクリエイティブナビ"
   description="DALL·EとMidjourneyを料金・無料枠・商用利用条件・日本語対応・ChatGPT連携・透かし・向いている用途の観点で比較。YouTubeサムネ・SNS・広告・初心者利用など用途別のおすすめも整理しています。"
   canonicalPath="/comparisons/dalle-vs-midjourney/"
+  jsonLd={articleJsonLd}
 >
   <div class="mx-auto max-w-4xl px-6 py-12">
 
@@ -125,12 +157,12 @@ const relatedLinks = [
     </nav>
 
     <!-- H1 -->
-    <h1 class="mb-4 text-3xl font-bold text-[#002B61]">
+    <h1 class="mb-4 text-3xl font-bold text-slate-900">
       DALL·EとMidjourneyを比較：料金・商用利用・日本語対応・用途の違い
     </h1>
 
-    <!-- 最終確認日 -->
-    <p class="mb-6 text-xs text-slate-400">最終確認：2026年5月14日 ／ 掲載情報は変更される場合があります</p>
+    <!-- 掲載ツール情報の最終確認日 -->
+    <p class="mb-6 text-xs text-slate-400">掲載ツール情報の最終確認：{latestDate ? formatDate(latestDate) : '要確認'} ／ 掲載情報は変更される場合があります</p>
 
     <!-- 注意ボックス -->
     <div class="mb-8 rounded-lg border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800 leading-relaxed">
@@ -175,7 +207,7 @@ const relatedLinks = [
     <!-- 基本比較表                                                    -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">DALL·EとMidjourneyの基本比較表</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">DALL·EとMidjourneyの基本比較表</h2>
       <p class="mb-4 text-sm text-slate-500">
         以下は参考情報です。内容は変更される場合があります。最新情報は各公式サイトでご確認ください。
       </p>
@@ -208,7 +240,7 @@ const relatedLinks = [
     <!-- 料金・無料枠の違い                                            -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">料金・無料枠の違い</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">料金・無料枠の違い</h2>
 
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 mb-5">
         <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
@@ -244,7 +276,7 @@ const relatedLinks = [
     <!-- 商用利用条件の違い                                            -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">商用利用条件の違い</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">商用利用条件の違い</h2>
 
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 mb-5">
         <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
@@ -278,7 +310,7 @@ const relatedLinks = [
     <!-- 生成品質・表現の自由度                                        -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">生成品質・表現の自由度の違い</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">生成品質・表現の自由度の違い</h2>
 
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
@@ -306,7 +338,7 @@ const relatedLinks = [
     <!-- 日本語対応                                                    -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">日本語対応・使いやすさの違い</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">日本語対応・使いやすさの違い</h2>
 
       <div class="overflow-x-auto rounded-xl border border-slate-100 shadow-sm mb-4">
         <table class="w-full min-w-[400px] text-sm">
@@ -353,7 +385,7 @@ const relatedLinks = [
     <!-- 透かし条件                                                    -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">透かし（ウォーターマーク）条件の違い</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">透かし（ウォーターマーク）条件の違い</h2>
 
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 mb-4">
         <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
@@ -380,7 +412,7 @@ const relatedLinks = [
     <!-- 用途別おすすめ                                               -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">用途別おすすめ</h2>
+      <h2 class="mb-5 text-2xl font-bold text-slate-900">用途別おすすめ</h2>
 
       <div class="space-y-4">
         {[
@@ -445,7 +477,7 @@ const relatedLinks = [
     <!-- どちらを選ぶべきか（まとめ）                                  -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">どちらを選ぶべきか</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">どちらを選ぶべきか</h2>
       <div class="space-y-4">
         <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
           <p class="mb-2 text-sm font-bold text-slate-800">DALL·Eが向いている方</p>

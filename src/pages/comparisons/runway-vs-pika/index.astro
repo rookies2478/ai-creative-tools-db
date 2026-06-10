@@ -1,6 +1,18 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GuideFAQ from '../../../components/GuideFAQ.astro';
+import { getEntry } from 'astro:content';
+
+const [toolRunway, toolPika] = await Promise.all([
+  getEntry('tools', 'runway'),
+  getEntry('tools', 'pika'),
+]);
+const toolDates = [toolRunway?.data.lastReviewed, toolPika?.data.lastReviewed].filter(Boolean) as string[];
+const latestDate = toolDates.length ? toolDates.sort().at(-1)! : null;
+function formatDate(iso: string): string {
+  const [y, m, d] = iso.split('-');
+  return `${y}年${Number(m)}月${Number(d)}日`;
+}
 
 const faqs = [
   {
@@ -36,8 +48,8 @@ const faqs = [
 const comparisonRows = [
   {
     item: '料金（最低有料プラン）',
-    runway: '$12/月?（Standardプラン・年払い）',
-    pika: '$8/月?（年払い）',
+    runway: '$12/月（Standardプラン・年払い）',
+    pika: '$8/月（年払い）',
   },
   {
     item: '無料プラン',
@@ -160,12 +172,12 @@ const relatedLinks = [
     </nav>
 
     <!-- H1 -->
-    <h1 class="mb-4 text-3xl font-bold text-[#002B61]">
+    <h1 class="mb-4 text-3xl font-bold text-slate-900">
       RunwayとPikaを比較｜AI動画生成ツールはどちらを選ぶべき？
     </h1>
 
-    <!-- 最終確認日 -->
-    <p class="mb-6 text-xs text-slate-400">最終確認：2026年5月25日 ／ 掲載情報は変更される場合があります</p>
+    <!-- 掲載ツール情報の最終確認日 -->
+    <p class="mb-6 text-xs text-slate-400">掲載ツール情報の最終確認：{latestDate ? formatDate(latestDate) : '要確認'} ／ 掲載情報は変更される場合があります</p>
 
     <!-- 注意ボックス -->
     <div class="mb-8 rounded-lg border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800 leading-relaxed">
@@ -225,7 +237,7 @@ const relatedLinks = [
     <!-- 基本比較表                                                    -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">RunwayとPikaの基本比較表</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">RunwayとPikaの基本比較表</h2>
       <p class="mb-4 text-sm text-slate-500">
         以下は参考情報です。内容は変更される場合があります。最新情報は各公式サイトでご確認ください。
       </p>
@@ -258,7 +270,7 @@ const relatedLinks = [
     <!-- Runwayの特徴                                                  -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">Runwayの特徴</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">Runwayの特徴</h2>
 
       <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm mb-5">
         <h3 class="mb-3 font-bold text-slate-900">強み</h3>
@@ -277,7 +289,7 @@ const relatedLinks = [
           <li>無料プランのクレジットは125クレジット（初回のみ・更新なし）とされている</li>
           <li>日本語UIなし（英語インターフェースのみ）</li>
           <li>無料プランでは透かしあり</li>
-          <li>料金はPikaより高め（Standard $12/月?・年払い）</li>
+          <li>料金はPikaより高め（Standard $12/月・年払い）</li>
         </ul>
       </div>
 
@@ -290,14 +302,14 @@ const relatedLinks = [
     <!-- Pikaの特徴                                                    -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">Pikaの特徴</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">Pikaの特徴</h2>
 
       <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm mb-5">
         <h3 class="mb-3 font-bold text-slate-900">強み</h3>
         <ul class="text-sm text-slate-600 space-y-2 leading-relaxed list-disc list-inside">
           <li>操作がシンプルで取り組みやすいとされる</li>
           <li>無料プランで毎月クレジットが更新されるとされている（月80クレジット程度）</li>
-          <li>料金がRunwayより低め（Standard $8/月?・年払い）</li>
+          <li>料金がRunwayより低め（Standard $8/月・年払い）</li>
           <li>テキスト→動画・画像→動画に対応</li>
           <li>UIが一部で翻訳表示に対応している場合がある</li>
         </ul>
@@ -323,14 +335,14 @@ const relatedLinks = [
     <!-- 料金・無料枠の違い                                            -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">料金・無料枠の違い</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">料金・無料枠の違い</h2>
 
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 mb-5">
         <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
           <h3 class="mb-3 font-bold text-slate-900">Runway</h3>
           <ul class="text-sm text-slate-600 space-y-2 leading-relaxed">
             <li><span class="font-medium">無料プラン：</span>125クレジット（初回のみ・更新なし）</li>
-            <li><span class="font-medium">Standard：</span>$12/月?（年払い）・月625クレジット程度</li>
+            <li><span class="font-medium">Standard：</span>$12/月（年払い）・月625クレジット程度</li>
           </ul>
           <p class="mt-3 text-xs text-slate-400">最新情報は<a href="https://runwayml.com/pricing/" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Runway公式料金ページ</a>でご確認ください。</p>
         </div>
@@ -338,7 +350,7 @@ const relatedLinks = [
           <h3 class="mb-3 font-bold text-slate-900">Pika</h3>
           <ul class="text-sm text-slate-600 space-y-2 leading-relaxed">
             <li><span class="font-medium">無料プラン：</span>月80クレジット程度（毎月更新・商用利用不可）</li>
-            <li><span class="font-medium">Standard：</span>$8/月?（年払い）・月700クレジット程度</li>
+            <li><span class="font-medium">Standard：</span>$8/月（年払い）・月700クレジット程度</li>
           </ul>
           <p class="mt-3 text-xs text-slate-400">最新情報は<a href="https://pika.art/pricing" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Pika公式料金ページ</a>でご確認ください。</p>
         </div>
@@ -357,7 +369,7 @@ const relatedLinks = [
     <!-- 商用利用条件の違い                                            -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">商用利用・透かし条件の違い</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">商用利用・透かし条件の違い</h2>
 
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 mb-5">
         <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
@@ -398,7 +410,7 @@ const relatedLinks = [
     <!-- 用途別の選び方                                               -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">用途別の選び方</h2>
+      <h2 class="mb-5 text-2xl font-bold text-slate-900">用途別の選び方</h2>
 
       <div class="space-y-4">
         {[
@@ -457,7 +469,7 @@ const relatedLinks = [
     <!-- 向いている人 / 向いていない人                                 -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-[#002B61]">向いている人 / 向いていない人</h2>
+      <h2 class="mb-5 text-2xl font-bold text-slate-900">向いている人 / 向いていない人</h2>
 
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 mb-5">
         <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
@@ -497,7 +509,7 @@ const relatedLinks = [
     <!-- 他の候補も比較したい場合                                      -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">Kling AIなど他のAI動画生成ツールも検討したい場合</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">Kling AIなど他のAI動画生成ツールも検討したい場合</h2>
       <p class="mb-4 text-sm text-slate-600 leading-relaxed">
         RunwayとPika以外にも、用途によっては他のAI動画生成ツールが候補になる場合があります。
         以下は参考情報です。最新の料金・機能・商用利用条件は各公式サイトでご確認ください。
@@ -524,7 +536,7 @@ const relatedLinks = [
     <!-- 商用利用・透かし・無料枠に関する注意点                        -->
     <!-- ============================================================ -->
     <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-[#002B61]">商用利用・透かし・無料枠に関する注意点</h2>
+      <h2 class="mb-4 text-2xl font-bold text-slate-900">商用利用・透かし・無料枠に関する注意点</h2>
 
       <div class="space-y-4">
         <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">

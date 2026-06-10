@@ -96,14 +96,10 @@ const canonicalUrl = canonicalPath && Astro.site
                 <line x1="3" y1="11" x2="19" y2="11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 <line x1="3" y1="16" x2="19" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               </svg>
-              <svg class="nv-icon-close" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <line x1="4" y1="4" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <line x1="18" y1="4" x2="4" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
             </summary>
             <div class="nv-mobile-panel">
+              <a href="/tools/" class="nv-mobile-cta">ツールを探す →</a>
               <nav class="nv-mobile-nav" aria-label="モバイルメニュー">
-                <a href="/tools/">ツールを探す</a>
                 <a href="/categories/video-generation/">AI動画生成</a>
                 <a href="/categories/image-generation/">AI画像生成</a>
                 <a href="/comparisons/">比較表</a>
@@ -342,10 +338,6 @@ const canonicalUrl = canonicalPath && Astro.site
     flex: 0 0 auto;
     pointer-events: none;
   }
-  .nv-icon-close { display: none; }
-  .nv-mobile-details[open] .nv-icon-menu { display: none; }
-  .nv-mobile-details[open] .nv-icon-close { display: block; }
-
   /* ===== MOBILE PANEL ===== */
   .nv-mobile-panel {
     position: fixed;
@@ -361,6 +353,24 @@ const canonicalUrl = canonicalPath && Astro.site
     padding: 12px 14px 20px;
     max-height: calc(100svh - 90px);
     overflow-y: auto;
+  }
+  .nv-mobile-cta {
+    display: block;
+    font-family: var(--f-jp);
+    font-weight: 700;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background: #4B3FE4;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nv-mobile-cta:hover,
+  .nv-mobile-cta:focus {
+    background: #2E25A6;
   }
   .nv-mobile-nav {
     display: flex;

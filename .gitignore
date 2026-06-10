@@ -7,3 +7,9 @@ node_modules/
 .claude/settings.local.json
 *.docx
 貼り付けられたテキスト*.txt
+
+# 作業ファイル・設計資料（コミット対象外）
+backup-*.patch
+backup-*.txt
+design_handoff_aicreative_navi/
+tool-samples-inbox/

@@ -215,9 +215,9 @@ Runwayは主に3つの使い方があります。
 
 - [AI動画生成ツール一覧](/categories/video-generation/) — 主要AI動画生成ツールの比較・選び方
 - [YouTube向けAI動画生成の活用](/use-cases/youtube/) — YouTube動画にAI生成を活用する際の確認ポイント
-- [広告動画向け確認ポイント](/use-cases/ad-video/) — AI動画生成を広告・SNS広告に使う前の確認事項
+- [AI動画生成の用途別選び方](/use-cases/) — 用途に合わせたAIツールの確認ポイント
 - [RunwayとPikaを比較](/comparisons/runway-vs-pika/) — 料金・無料枠・商用利用・用途別の選び方を比較
-- [RunwayとKling AIを比較](/comparisons/runway-vs-kling-ai/) — クオリティ・無料枠・商用利用条件の違い
-- [AI動画透かし比較](/comparisons/ai-video-watermark-comparison/) — 透かしの有無・条件をまとめた比較
+- [AI動画生成ツール比較](/comparisons/ai-image-video-tools/) — AI画像・動画生成ツールの横断比較
+- [透かしなしAI動画ツール](/conditions/no-watermark/) — 透かしの有無・条件をまとめた一覧
 - [商用利用できるAI動画ツール](/conditions/commercial-use/) — 商用利用条件を確認できるツール一覧
 

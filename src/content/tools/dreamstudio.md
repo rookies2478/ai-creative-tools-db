@@ -28,6 +28,8 @@ weaknesses:
   - "初心者には設定項目がやや多く感じる場合がある"
 lastReviewed: "2026-05-14"
 nextReviewDue: "2026-06-14"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://stability.ai/ds-tos"
 pricingModel: "credit"
 platforms:
   - web

@@ -26,6 +26,8 @@ weaknesses:
   - "生成動画の長さ・解像度に制限がある場合がある"
 lastReviewed: "2026-06-05"
 nextReviewDue: "2026-07-05"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://pika.art/pricing"
 pricingModel: "subscription_credit"
 freePlanNote: "月80クレジット程度（毎月更新・商用利用不可）"
 paidPlanNote: "Standard $8/月〜（年払い）。月700クレジット程度。公式情報では、プランや用途によって商用利用条件が異なる場合があると案内されています。"

@@ -32,6 +32,8 @@ weaknesses:
   - "日本語プロンプト対応状況は公式情報で未確認"
 lastReviewed: "2026-06-04"
 nextReviewDue: "2026-09-04"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://www.vidu.com/pricing"
 pricingModel: "subscription_credit"
 freePlanNote: "無料枠あり（制限あり）。詳細は公式サイトをご確認ください。"
 paidPlanNote: "有料プランあり。料金・条件は公式サイトをご確認ください。"

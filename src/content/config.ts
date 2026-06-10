@@ -26,6 +26,8 @@ const tools = defineCollection({
     weaknesses: z.array(z.string()),
     lastReviewed: z.string(),
     nextReviewDue: z.string(),
+    verifiedAt: z.string().optional(),
+    officialSourceUrl: z.string().url().optional(),
     sources: z.array(
       z.object({
         title: z.string(),

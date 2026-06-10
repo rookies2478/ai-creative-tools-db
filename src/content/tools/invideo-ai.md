@@ -27,6 +27,8 @@ weaknesses:
   - "商用利用は有料プランが前提"
 lastReviewed: "2026-05-25"
 nextReviewDue: "2026-08-25"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://invideo.io/pricing/"
 pricingModel: "subscription"
 freePlanNote: "無料プランあり（透かしあり・エクスポート制限あり）。詳細は公式サイトをご確認ください。"
 paidPlanNote: "Plusプラン約$20/月〜（年払い）。料金・条件は変更される場合があります。"

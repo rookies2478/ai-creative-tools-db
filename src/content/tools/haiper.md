@@ -33,6 +33,8 @@ weaknesses:
   - "動画生成はプロンプト調整・試行が必要な場合がある"
 lastReviewed: "2026-05-24"
 nextReviewDue: "2026-06-24"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://docs.haiper.ai/pricing"
 pricingModel: "subscription_credit"
 freePlanNote: "公式ドキュメントではHaiper Web App / iOS App向けのクレジット制動画生成が案内されています。無料枠・利用上限・対象機能は変更される可能性があるため、最新の公式情報をご確認ください。"
 paidPlanNote: "公式ドキュメントでは動画生成のクレジット消費量が案内されています。プラン名・料金・クレジット条件は変更される可能性があるため、最新の公式料金ページをご確認ください。"

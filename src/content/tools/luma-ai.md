@@ -34,6 +34,8 @@ weaknesses:
   - "動画生成はプロンプト調整・試行が必要な場合がある"
 lastReviewed: "2026-06-05"
 nextReviewDue: "2026-06-24"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://lumalabs.ai/pricing"
 pricingModel: "subscription_credit"
 freePlanNote: "Freeプランにはlimited monthly credits / limited usageが案内されています。非商用利用限定・透かしありとされているため、無料利用時は用途と出力条件の公式確認が必要です。"
 paidPlanNote: "公式料金ページではPlus $30/月、Pro $90/月、Ultra $300/月が案内されています。Dream MachineプランではWeb Lite、Web Plus、Web Unlimitedなども案内されています。プラン名・料金・クレジット条件は変更される可能性があるため、最新の公式情報をご確認ください。"

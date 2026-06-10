@@ -27,6 +27,8 @@ weaknesses:
   - "生成画像への透かし有無は公式情報から未確認"
 lastReviewed: "2026-05-24"
 nextReviewDue: "2026-06-24"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://leonardo.ai/pricing/"
 pricingModel: "subscription_credit"
 freePlanNote: "1日150トークン程度（変更の可能性あり）"
 paidPlanNote: "Apprentice $10/月〜（年払い）。公式情報では、有料プランやPrivate設定などの条件が関係すると案内されています。利用前に最新の公式規約をご確認ください。"

@@ -32,6 +32,8 @@ weaknesses:
   - "有料プランの具体的な料金は公式会員ページでのみ確認できる"
 lastReviewed: "2026-06-06"
 nextReviewDue: "2026-09-06"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://www.seaart.ai/"
 pricingModel: "subscription"
 freePlanNote: "無料プランあり。詳細な機能制限・クレジット数は変更される可能性があるため、最新の公式サイトをご確認ください。"
 paidPlanNote: "VIPプランおよびSVIP（初級・標準・プロフェッショナル・マスター）プランが案内されています。プラン名・料金・クレジット条件は変更される可能性があるため、最新の公式サイトをご確認ください。"

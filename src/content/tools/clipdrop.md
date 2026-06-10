@@ -35,6 +35,8 @@ weaknesses:
   - "Proプランの料金が公式サイトで非表示となっており、価格確認にはサービス内ログインが必要な可能性がある"
 lastReviewed: "2026-06-06"
 nextReviewDue: "2026-07-06"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://clipdrop.co/pricing"
 pricingModel: "subscription"
 platforms:
   - web

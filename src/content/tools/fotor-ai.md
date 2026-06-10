@@ -31,6 +31,8 @@ weaknesses:
   - "AI生成物の法的扱いは国・地域の著作権法によって変わる可能性がある"
 lastReviewed: "2026-05-14"
 nextReviewDue: "2026-06-14"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://www.fotor.com/jp/pricing/"
 pricingModel: "subscription_credit"
 freePlanNote: "公式料金ページではBasic無料プランが案内されているが、無料クレジット・生成回数・保存期間・機能制限は変更される可能性があるため、最新の公式情報確認が必要。"
 platforms:

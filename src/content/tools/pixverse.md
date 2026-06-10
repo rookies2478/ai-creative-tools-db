@@ -31,6 +31,8 @@ weaknesses:
   - "無料プランの毎日クレジットは当日未使用分が翌日に失効する点に注意"
 lastReviewed: "2026-06-05"
 nextReviewDue: "2026-09-05"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://pixverse.ai/en/terms-of-service"
 pricingModel: "subscription_credit"
 freePlanNote: "無料プラン（Basic）あり。複数の第三者情報では、初回サインアップ時に90クレジット付与・毎日60クレジットが補充（当日未使用分は翌日失効）と報告されています。透かしあり・生成回数制限あり。詳細は公式サイトをご確認ください。"
 paidPlanNote: "有料プランあり（USD建て）。複数の第三者情報ではStandard $10/月〜Ultra $199/月の複数ティアが報告されています。料金・条件は公式サイトをご確認ください。"

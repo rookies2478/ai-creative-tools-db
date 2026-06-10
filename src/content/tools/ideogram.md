@@ -25,6 +25,8 @@ weaknesses:
   - "商用利用時は第三者権利や利用規約の確認が必要"
 lastReviewed: "2026-05-26"
 nextReviewDue: "2026-06-26"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://ideogram.ai/legal/tos"
 pricingModel: "unknown"
 freePlanNote: "無料アカウントでクレジットが提供される場合があります。詳細は公式サイトをご確認ください。"
 platforms:

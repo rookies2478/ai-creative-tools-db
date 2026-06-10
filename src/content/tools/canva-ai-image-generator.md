@@ -27,6 +27,8 @@ weaknesses:
   - "生成画像への透かし有無は公式情報から未確認"
 lastReviewed: "2026-05-24"
 nextReviewDue: "2026-06-24"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://www.canva.com/pricing/"
 pricingModel: "subscription_credit"
 freePlanNote: "無料プランで一定回数の生成が可能（回数は変更の可能性あり）"
 paidPlanNote: "Canva Pro $15/月〜（月払い）／$120/年（年払い）。生成回数が拡大。"

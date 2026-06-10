@@ -30,6 +30,8 @@ weaknesses:
   - "中国企業運営のためデータポリシー・規約は要確認"
 lastReviewed: "2026-06-06"
 nextReviewDue: "2026-09-06"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://hailuoai.video/doc/terms-of-service.html"
 pricingModel: "subscription_credit"
 freePlanNote: "無料枠あり（透かしあり・生成回数制限あり）。詳細は公式サイトをご確認ください。"
 paidPlanNote: "公式情報ではStandardプランが案内されていますが、確認時点では表示条件により価格が異なる可能性があります。最新の料金は公式サイトをご確認ください。"

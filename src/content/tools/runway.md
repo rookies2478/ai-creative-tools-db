@@ -27,6 +27,8 @@ weaknesses:
   - "コストが比較的高め"
 lastReviewed: "2026-06-05"
 nextReviewDue: "2026-06-24"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://runwayml.com/pricing/"
 pricingModel: "subscription_credit"
 freePlanNote: "125クレジット（初回のみ・更新なし）"
 paidPlanNote: "Standard $12/月〜（年払い）。月625クレジット程度。"

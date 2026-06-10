@@ -30,6 +30,8 @@ weaknesses:
   - "日本語UIの対応は公式情報だけでは確認が必要"
 lastReviewed: "2026-05-14"
 nextReviewDue: "2026-06-14"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://creator.nightcafe.studio/"
 pricingModel: "subscription_credit"
 platforms:
   - web

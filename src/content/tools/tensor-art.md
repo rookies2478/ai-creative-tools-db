@@ -34,6 +34,8 @@ weaknesses:
   - "モデル選択や設定項目が多く、初心者にはやや難しい場合がある"
 lastReviewed: "2026-05-14"
 nextReviewDue: "2026-06-14"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://tensor.art/about/terms-of-service-new"
 pricingModel: "subscription_credit"
 platforms:
   - web

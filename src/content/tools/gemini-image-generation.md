@@ -30,6 +30,8 @@ weaknesses:
   - "画像内テキストは崩れる場合がある"
 lastReviewed: "2026-05-15"
 nextReviewDue: "2026-06-15"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://policies.google.com/terms/generative-ai/use-policy"
 pricingModel: "subscription"
 freePlanNote: "Google AIの無料プランでもGeminiアプリの画像生成・編集が案内されています。利用上限・モデル・機能はプランや時期によって変わる可能性があるため、最新の公式情報をご確認ください。"
 paidPlanNote: "Google AI Plus / Pro / Ultraなどの有料プランで上限・機能が拡張される場合があります。料金はプランや時期により変更される可能性があるため、最新の料金は公式ページでご確認ください。"

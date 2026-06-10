@@ -1,0 +1,156 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FreshnessLabel from './FreshnessLabel.astro';
+
+interface Props {
+  tool: CollectionEntry<'tools'>;
+}
+
+const { tool } = Astro.props;
+const { data, slug } = tool;
+
+const badgeMap: Record<string, { letter: string; color: string }> = {
+  'canva-ai-image-generator': { letter: 'C', color: '#0E8E84' },
+  'adobe-firefly':            { letter: 'A', color: '#D8453A' },
+  'clipdrop':                 { letter: 'C', color: '#2E6FF2' },
+  'dalle':                    { letter: 'D', color: '#10A37F' },
+  'dreamstudio':              { letter: 'D', color: '#7A3FE8' },
+  'fotor-ai':                 { letter: 'F', color: '#6C5CE7' },
+  'gemini-image-generation':  { letter: 'G', color: '#3A6FF0' },
+  'leonardo-ai':              { letter: 'L', color: '#E89B12' },
+  'microsoft-designer':       { letter: 'M', color: '#0078D4' },
+  'nightcafe':                { letter: 'N', color: '#2D2A6E' },
+  'midjourney':               { letter: 'M', color: '#7A5AE0' },
+  'ideogram':                 { letter: 'I', color: '#1A1A2E' },
+  'playground-ai':            { letter: 'P', color: '#7C3AED' },
+  'seaart-ai':                { letter: 'S', color: '#5B7CFA' },
+  'stable-diffusion':         { letter: 'S', color: '#1F63E8' },
+  'tensor-art':               { letter: 'T', color: '#FF5A8A' },
+  'capcut-ai':                { letter: 'C', color: '#111319' },
+  'hailuo-ai':                { letter: 'H', color: '#FF6B35' },
+  'haiper':                   { letter: 'H', color: '#6D5BF8' },
+  'kling-ai':                 { letter: 'K', color: '#3A6FF0' },
+  'luma-ai':                  { letter: 'L', color: '#15897F' },
+  'pika':                     { letter: 'P', color: '#10A4C8' },
+  'pixverse':                 { letter: 'P', color: '#7B5BFF' },
+  'invideo-ai':               { letter: 'I', color: '#E1395B' },
+  'runway':                   { letter: 'R', color: '#E1543A' },
+  'vidu-ai':                  { letter: 'V', color: '#2EA8E0' },
+};
+
+const badge = badgeMap[slug] ?? { letter: data.name[0].toUpperCase(), color: '#4B3FE4' };
+
+function freeLabel(v: unknown): string {
+  if (v === true) return 'あり';
+  if (v === false) return 'なし';
+  return '要確認';
+}
+function commercialLabel(v: unknown): string {
+  return v === 'ok' ? '案内あり' : '要確認';
+}
+function jaLabel(ui: unknown, prompt: unknown): string {
+  if (ui === true) return '対応';
+  if (ui === false && prompt === false) return '非対応';
+  return '要確認';
+}
+function wmLabel(v: unknown): string {
+  if (v === 'no') return 'なし';
+  if (v === 'yes') return 'あり';
+  if (v === 'limited') return 'プランによる';
+  return '要確認';
+}
+function condClass(field: string, val: string): string {
+  if (field === 'commercial') return val === '案内あり' ? 'ok' : 'na';
+  if (field === 'free') return val === 'あり' ? 'ok' : 'na';
+  if (field === 'ja') return val === '対応' ? 'ok' : 'na';
+  if (field === 'watermark') {
+    if (val === 'なし') return 'ok';
+    if (val === 'あり') return 'warn';
+    return 'na';
+  }
+  return 'na';
+}
+
+const platformLabels: Record<string, string> = {
+  web: 'Web', ios: 'iOS', android: 'Android', api: 'API',
+  discord: 'Discord', desktop: 'Desktop', local: 'Local',
+};
+
+const commercialVal = commercialLabel(data.commercialUse);
+const freeVal       = freeLabel(data.freePlan);
+const jaVal         = jaLabel(data.japaneseUi, data.japanesePrompt);
+const wmVal         = wmLabel(data.watermark);
+
+const dataFree       = freeVal === 'あり' ? '1' : '0';
+const dataCommercial = commercialVal === '案内あり' ? '1' : '0';
+const dataJa         = jaVal === '対応' ? '1' : '0';
+const dataNowm       = wmVal === 'なし' ? '1' : '0';
+
+const catLabel = data.category === 'image' ? '画像生成'
+               : data.category === 'video' ? '動画生成'
+               : '画像・動画';
+
+const dataCat = (data.category === 'both') ? 'image' : data.category;
+
+const price = data.lowestPaidPlan ?? '要公式確認';
+const displayPlatforms = (data.platforms ?? []).map((p: string) => platformLabels[p] ?? p);
+---
+
+<article class="tool"
+  data-cat={dataCat}
+  data-name={data.name.toLowerCase()}
+  data-free={dataFree}
+  data-commercial={dataCommercial}
+  data-ja={dataJa}
+  data-nowm={dataNowm}
+>
+  <div class="tool-head">
+    <span class="tool-badge" style={`background:${badge.color};`}>{badge.letter}</span>
+    <span>
+      <span class="tool-name">{data.name}</span><br />
+      <span class="tool-cat">{catLabel}</span>
+    </span>
+  </div>
+
+  <div class="tool-cond">
+    <span class={`cond ${condClass('commercial', commercialVal)}`}>
+      <span class="ck">商用</span>
+      <span class="cv"><span class="d"></span>{commercialVal}</span>
+    </span>
+    <span class={`cond ${condClass('free', freeVal)}`}>
+      <span class="ck">無料枠</span>
+      <span class="cv"><span class="d"></span>{freeVal}</span>
+    </span>
+    <span class={`cond ${condClass('ja', jaVal)}`}>
+      <span class="ck">日本語</span>
+      <span class="cv"><span class="d"></span>{jaVal}</span>
+    </span>
+    <span class={`cond ${condClass('watermark', wmVal)}`}>
+      <span class="ck">透かし</span>
+      <span class="cv"><span class="d"></span>{wmVal}</span>
+    </span>
+  </div>
+
+  {displayPlatforms.length > 0 && (
+    <div class="tool-platforms">
+      {displayPlatforms.map((p: string) => <span class="plat">{p}</span>)}
+    </div>
+  )}
+
+  <div class="tool-meta">
+    <div>
+      <span class="tool-price">{price}</span>
+      <div style="margin-top:4px;">
+        <FreshnessLabel verifiedAt={data.verifiedAt} lastReviewed={data.lastReviewed} variant="card" />
+      </div>
+    </div>
+    <div class="tool-links">
+      <a class="detail" href={`/tools/${slug}/`}>詳しく見る →</a>
+      {data.officialUrl && (
+        <a class="ext" href={data.officialSourceUrl ?? data.officialUrl} target="_blank" rel="noopener noreferrer">
+          {data.officialSourceUrl ? '公式情報 ↗' : '公式サイト ↗'}
+        </a>
+      )}
+    </div>
+  </div>
+</article>

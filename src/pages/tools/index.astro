@@ -1,205 +1,415 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ToolCard from '../../components/ToolCard.astro';
-import NoticeBox from '../../components/NoticeBox.astro';
-import ConditionChips from '../../components/ConditionChips.astro';
+import ToolsListCard from '../../components/ToolsListCard.astro';
+import '../../styles/tools-page.css';
 
 const allTools = await getCollection('tools');
 const imageTools = allTools.filter((t) => t.data.category === 'image' || t.data.category === 'both');
 const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.category === 'both');
+const totalCount  = allTools.length;
+const imageCount  = imageTools.length;
+const videoCount  = videoTools.length;
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "AI画像生成・AI動画生成ツール一覧",
+  "url": "https://aicreative-db.com/tools/",
+  "numberOfItems": totalCount,
+});
 ---
 
 <BaseLayout
   title="AI画像生成・AI動画生成ツール一覧｜商用利用・料金・無料枠を比較"
   description="AI画像生成・AI動画生成ツールを一覧で比較。商用利用条件・料金・無料枠・透かし・日本語対応を確認しながら仕事や副業に使うツールを探せます。最新情報は公式サイトをご確認ください。"
   canonicalPath="/tools/"
+  homePage={true}
+  jsonLd={jsonLd}
 >
-  <div class="mx-auto max-w-5xl px-6 py-12">
 
-    <nav class="mb-6 text-sm text-slate-500">
-      <a href="/" class="hover:underline">トップ</a>
-      <span class="mx-1">/</span>
-      <span>ツール一覧</span>
-    </nav>
-
-    <h1 class="mb-2 text-3xl font-bold text-slate-900">AI画像生成・AI動画生成ツール一覧</h1>
-    <p class="mb-6 text-slate-500">
-      AI画像生成・動画生成ツールを、商用利用・無料枠・日本語対応・透かし・料金目安とあわせて一覧で確認できます。仕事や副業で使う前の比較にご活用ください。
-    </p>
-
-    <!-- 条件別チップ導線 -->
-    <ConditionChips currentPath="/tools/" />
-
-    <!-- NoticeBox -->
-    <div class="mb-8">
-      <NoticeBox />
-    </div>
-
-    <!-- AI画像生成ツールを選ぶ比較ポイント -->
-    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-5">
-      <h2 class="mb-3 text-base font-bold text-[#002B61]">AI画像生成ツールを選ぶ比較ポイント</h2>
-      <ul class="space-y-3 text-sm text-slate-700">
-        <li class="flex gap-2">
-          <span class="mt-0.5 text-slate-400">▸</span>
-          <span><strong>生成の種類：</strong>テキストプロンプトから画像を生成する「テキスト→画像」、既存画像を変換・編集する「画像→画像」、テンプレートに合わせてデザインを作る「デザイン補助」では、向いているツールが異なります。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 text-slate-400">▸</span>
-          <span><strong>無料枠・生成回数：</strong>完全無料・クレジット制・無料プランありなど形態はさまざまで、上限を超えると有料プランへの移行が必要な場合があります。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料枠のあるツール</a>はこちらで確認できます。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 text-slate-400">▸</span>
-          <span><strong>透かしの有無：</strong>無料プランでは透かしが入る場合があります。SNS画像や商用成果物に使う場合は透かし条件の確認が重要です。<a href="/conditions/no-watermark/" class="text-blue-600 hover:underline">透かしなしツール</a>はこちらで確認できます。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 text-slate-400">▸</span>
-          <span><strong>商用利用条件：</strong>プランや用途によって商用利用の可否が異なります。人物・ブランドロゴ・第三者素材が含まれる場合は、別途権利の確認も必要です。利用前に必ず最新の公式規約をご確認ください。本記事は法的助言ではありません。<a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール</a>はこちら。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 text-slate-400">▸</span>
-          <span><strong>日本語対応：</strong>日本語UIと日本語プロンプト対応は別問題です。UIが日本語でも、細かいスタイル指定では英語プロンプトの方が意図を伝えやすい場合があります。<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>はこちらで確認できます。</span>
-        </li>
-      </ul>
-      <p class="mt-4 text-xs text-slate-500">料金・無料枠・商用利用条件は変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
-    </section>
-
-    <!-- 向いている人 / 向いていない人 -->
-    <section class="mb-10 grid gap-4 sm:grid-cols-2">
-      <div class="rounded-xl border border-green-100 bg-green-50 px-5 py-4">
-        <h2 class="mb-3 text-sm font-bold text-green-900">向いている人</h2>
-        <ul class="space-y-2 text-sm text-green-900">
-          <li class="flex gap-2"><span>○</span><span>ブログアイキャッチやSNS画像を短時間で作りたい</span></li>
-          <li class="flex gap-2"><span>○</span><span>広告バナーやサムネイルの案を複数試したい</span></li>
-          <li class="flex gap-2"><span>○</span><span>デザイン案や構図案を素早く出したい</span></li>
-          <li class="flex gap-2"><span>○</span><span>画像素材をもとにバリエーションを作りたい</span></li>
-        </ul>
-      </div>
-      <div class="rounded-xl border border-red-100 bg-red-50 px-5 py-4">
-        <h2 class="mb-3 text-sm font-bold text-red-900">向いていない人</h2>
-        <ul class="space-y-2 text-sm text-red-900">
-          <li class="flex gap-2"><span>×</span><span>権利条件を確認せずに商用案件へ使いたい人</span></li>
-          <li class="flex gap-2"><span>×</span><span>人物・著名人・ブランドロゴを厳密に扱う必要がある人</span></li>
-          <li class="flex gap-2"><span>×</span><span>毎回同じ人物・同じ構図を完全に再現したい人</span></li>
-          <li class="flex gap-2"><span>×</span><span>細かなレイヤー編集や入稿データ制作まで完結させたい人</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 画像生成ツール -->
-    <section class="mb-12">
-      <h2 class="mb-4 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">
-        AI画像生成ツール（{imageTools.length}件）
-      </h2>
-      <div class="grid gap-4 sm:grid-cols-2">
-        {imageTools.map((tool) => <ToolCard tool={tool} />)}
-      </div>
-    </section>
-
-    <!-- 動画生成ツール -->
-    <section class="mb-12">
-      <h2 class="mb-4 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">
-        AI動画生成ツール（{videoTools.length}件）
-      </h2>
-      <div class="grid gap-4 sm:grid-cols-2">
-        {videoTools.map((tool) => <ToolCard tool={tool} />)}
-      </div>
-      <div class="mt-4">
-        <a href="/categories/video-generation/" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:underline">
-          AI動画生成ツール一覧を見る →
-        </a>
-      </div>
-    </section>
-
-    <!-- 比較表への導線 -->
-    <section class="mb-12 rounded-xl border border-slate-200 bg-slate-50 px-6 py-6">
-      <h2 class="mb-2 text-lg font-semibold text-slate-900">一覧で迷ったら、比較表で確認できます</h2>
-      <p class="mb-4 text-sm text-slate-600">
-        商用利用・無料枠・日本語対応・透かし・料金目安を横並びで確認したい場合は、比較表をご利用ください。
+  <!-- ============ ページヘッダー ============ -->
+  <section class="page-head">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="パンくずリスト">
+        <a href="/">トップ</a>
+        <span class="sep">/</span>
+        <span class="cur">ツール一覧</span>
+      </nav>
+      <span class="eyebrow">TOOL INDEX</span>
+      <h1>AI画像生成・AI動画生成<br /><span class="hl">ツール一覧</span></h1>
+      <p class="page-lead">
+        AI画像生成・動画生成ツールを、商用利用・無料枠・日本語対応・透かし・料金目安とあわせて一覧で確認できます。
+        仕事や副業で使う前の比較にご活用ください。
       </p>
-      <a href="/comparisons/" class="inline-block rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">
-        全ツール比較表を見る →
-      </a>
-    </section>
-
-    <!-- 関連カテゴリリンク -->
-    <section>
-      <h2 class="mb-4 text-lg font-semibold text-slate-800">条件別に探す</h2>
-      <ul class="flex flex-wrap gap-3">
-        <li>
-          <a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-            無料で使えるAIツール
-          </a>
-        </li>
-        <li>
-          <a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-            商用利用を確認しやすいAIツール
-          </a>
-        </li>
-        <li>
-          <a href="/conditions/japanese/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-            日本語対応のAIツール
-          </a>
-        </li>
-        <li>
-          <a href="/conditions/no-watermark/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-            透かしなしで使いやすいAIツール
-          </a>
-        </li>
-        <li>
-          <a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-            無料で使えるAI動画生成ツール比較
-          </a>
-        </li>
-        <li>
-          <a href="/use-cases/" class="rounded-full border border-blue-300 bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-800 hover:bg-blue-200">
-            用途別AI画像生成ツール比較（一覧）
-          </a>
-          <a href="/use-cases/youtube-thumbnail/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-            YouTubeサムネ向けAI画像生成ツールを比較
-          </a>
-        </li>
-        <li>
-          <a href="/use-cases/sns-post-image/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-            SNS投稿画像向けAI画像生成ツールを比較
-          </a>
-        </li>
-        <li>
-          <a href="/use-cases/ad-banner/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-            広告バナー向けAI画像生成ツールを比較
-          </a>
-        </li>
-        <li>
-          <a href="/use-cases/ec-product-image/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-            EC商品画像向けAI画像生成ツールを比較
-          </a>
-        </li>
-        <li>
-          <a href="/use-cases/blog-eyecatch/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-            ブログアイキャッチ向けAI画像生成ツールを比較
-          </a>
-        </li>
-      </ul>
-    </section>
-
-    <!-- FAQ -->
-    <section class="mt-12">
-      <h2 class="mb-6 text-xl font-semibold text-slate-800">よくある質問</h2>
-      <div class="space-y-5">
-        <div class="rounded-lg border border-slate-200 px-5 py-4">
-          <p class="font-medium text-slate-800">AI画像生成ツールは無料でも使えますか？</p>
-          <p class="mt-2 text-sm text-slate-600">無料で試せるツールもありますが、生成回数・画像サイズ・透かし・商用利用条件などに制限がある場合があります。最新情報は各公式サイトをご確認ください。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料枠のあるツール一覧</a>もご参照ください。</p>
+      <div class="page-stats">
+        <div class="page-stat">
+          <span class="n">{totalCount}</span>
+          <span class="t">ツール掲載</span>
         </div>
-        <div class="rounded-lg border border-slate-200 px-5 py-4">
-          <p class="font-medium text-slate-800">AI画像生成ツールを商用利用する前に何を確認すべきですか？</p>
-          <p class="mt-2 text-sm text-slate-600">料金プラン・生成物の利用条件・人物画像やブランドロゴ・第三者素材の扱い・利用規約の最新状況などを確認してください。本記事は法的助言ではありません。<a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール</a>や<a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用・著作権ガイド</a>もご参照ください。</p>
+        <div class="page-stat">
+          <span class="n"><span class="image">{imageCount}</span></span>
+          <span class="t">AI画像生成</span>
         </div>
-        <div class="rounded-lg border border-slate-200 px-5 py-4">
-          <p class="font-medium text-slate-800">日本語プロンプトに対応していれば日本語で十分ですか？</p>
-          <p class="mt-2 text-sm text-slate-600">日本語で指示できるツールもありますが、細かい画風や構図の指定では英語プロンプトの方が意図を伝えやすい場合があります。ツールごとの対応状況は<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>のページでご確認ください。</p>
+        <div class="page-stat">
+          <span class="n"><span class="video">{videoCount}</span></span>
+          <span class="t">AI動画生成</span>
+        </div>
+        <div class="page-stat">
+          <span class="n">5</span>
+          <span class="t">比較軸</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
+  <!-- ============ スティッキーフィルターバー ============ -->
+  <div class="toolbar">
+    <div class="wrap toolbar-inner">
+      <span class="tb-label">Filter</span>
+      <div class="filter-chips" id="filterChips" role="group" aria-label="カテゴリフィルター">
+        <button class="fchip" data-filter="all"        aria-pressed="true">すべて</button>
+        <button class="fchip" data-filter="image" data-cat="image" aria-pressed="false">AI画像生成</button>
+        <button class="fchip" data-filter="video" data-cat="video" aria-pressed="false">AI動画生成</button>
+        <button class="fchip" data-filter="free"       aria-pressed="false"><span class="ld"></span>無料で試せる</button>
+        <button class="fchip" data-filter="commercial" aria-pressed="false"><span class="ld"></span>商用利用の案内あり</button>
+        <button class="fchip" data-filter="ja"         aria-pressed="false"><span class="ld"></span>日本語対応</button>
+        <button class="fchip" data-filter="nowm"       aria-pressed="false"><span class="ld"></span>透かしなし</button>
+      </div>
+      <div class="toolbar-right">
+        <label class="tool-search" for="toolSearch">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input type="search" id="toolSearch" placeholder="ツール名で検索" aria-label="ツール名で検索" autocomplete="off" />
+        </label>
+        <span class="result-count" id="resultCount" aria-live="polite"><b>{totalCount}</b> 件</span>
+      </div>
+    </div>
   </div>
+
+  <!-- ============ メインコンテンツ ============ -->
+  <section class="tp-section">
+    <div class="wrap">
+
+      <!-- 注意バナー -->
+      <div class="notice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+        </svg>
+        <p>
+          <b>ご注意：</b>料金・無料枠・商用利用条件・透かしの有無は変更される場合があります。最新情報は各公式サイトをご確認ください。本記事は法的助言ではありません。
+        </p>
+      </div>
+
+      <!-- AI画像生成ブロック -->
+      <div class="tool-block" id="block-image" style="margin-top:44px;">
+        <div class="tool-block-head image">
+          <span class="dot"></span>
+          <h2>AI画像生成ツール</h2>
+          <span class="cnt" id="cntImage">{imageCount}件</span>
+          <span class="line"></span>
+          <a class="jump textlink" href="/categories/image-generation/">カテゴリを見る <span class="arr">→</span></a>
+        </div>
+        <div class="tools-list" id="imgGrid">
+          {imageTools.map((tool) => <ToolsListCard tool={tool} />)}
+          <div class="empty-note" id="imgEmpty" style="display:none;">条件に一致するAI画像生成ツールはありません。</div>
+        </div>
+      </div>
+
+      <!-- AI動画生成ブロック -->
+      <div class="tool-block" id="block-video">
+        <div class="tool-block-head video">
+          <span class="dot"></span>
+          <h2>AI動画生成ツール</h2>
+          <span class="cnt" id="cntVideo">{videoCount}件</span>
+          <span class="line"></span>
+          <a class="jump textlink" href="/categories/video-generation/">カテゴリを見る <span class="arr">→</span></a>
+        </div>
+        <div class="tools-list" id="vidGrid">
+          {videoTools.map((tool) => <ToolsListCard tool={tool} />)}
+          <div class="empty-note" id="vidEmpty" style="display:none;">条件に一致するAI動画生成ツールはありません。</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 比較表CTA ============ -->
+  <section class="tp-section" style="padding-top:0;">
+    <div class="wrap">
+      <div class="cta-strip reveal">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M9 17H5a2 2 0 0 0-2 2v1h18v-1a2 2 0 0 0-2-2h-4M9 17V7m0 10h6M15 17V7M9 7a3 3 0 1 1 6 0"/>
+          </svg>
+        </div>
+        <div>
+          <h3>全ツール比較表</h3>
+          <p>商用利用・無料枠・日本語対応・透かし・料金目安を横並びで確認できます。</p>
+        </div>
+        <a href="/comparisons/" class="btn btn-primary">全ツール比較表を見る <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 選び方ガイド ============ -->
+  <section class="tp-section" id="howto" style="background:var(--surface-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">How to choose</span>
+        <h2>AI画像生成ツールを選ぶ比較ポイント</h2>
+        <p>用途・条件によって向いているツールは変わります。一覧を絞り込む前に、確認しておきたい観点を整理しました。</p>
+      </div>
+      <div class="guide-grid reveal">
+        <ol class="points">
+          <li>
+            <span class="pn">01</span>
+            <span class="pt"><b>生成の種類：</b>テキストプロンプトから生成する「テキスト→画像」、既存画像を変換・編集する「画像→画像」、テンプレートに沿う「デザイン補助」で、向いているツールが異なります。</span>
+          </li>
+          <li>
+            <span class="pn">02</span>
+            <span class="pt"><b>無料枠・生成回数：</b>完全無料・クレジット制・無料プランありなど形態はさまざまで、上限を超えると有料プランへの移行が必要な場合があります。<a href="/conditions/free/">無料枠のあるツール</a>はこちら。</span>
+          </li>
+          <li>
+            <span class="pn">03</span>
+            <span class="pt"><b>透かしの有無：</b>無料プランでは透かしが入る場合があります。SNS画像や商用成果物に使う場合は透かし条件の確認が重要です。<a href="/conditions/no-watermark/">透かしなしツール</a>はこちら。</span>
+          </li>
+          <li>
+            <span class="pn">04</span>
+            <span class="pt"><b>商用利用条件：</b>プランや用途によって条件が異なります。人物・ブランドロゴ・第三者素材が含まれる場合は別途権利の確認も必要です。利用前に必ず最新の公式規約をご確認ください。本記事は法的助言ではありません。<a href="/conditions/commercial-use/">商用利用を確認しやすいツール</a>はこちら。</span>
+          </li>
+          <li>
+            <span class="pn">05</span>
+            <span class="pt"><b>日本語対応：</b>日本語UIと日本語プロンプト対応は別問題です。細かいスタイル指定では英語プロンプトの方が意図を伝えやすい場合があります。<a href="/conditions/japanese/">日本語対応ツール</a>はこちら。</span>
+          </li>
+        </ol>
+        <div class="fit-stack">
+          <div class="fit ok">
+            <h3>
+              <span class="bdg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" width="14" height="14" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              向いている人
+            </h3>
+            <ul>
+              <li><span class="m">○</span>ブログアイキャッチやSNS画像を短時間で作りたい</li>
+              <li><span class="m">○</span>広告バナーやサムネイルの案を複数試したい</li>
+              <li><span class="m">○</span>デザイン案や構図案を素早く出したい</li>
+              <li><span class="m">○</span>画像素材をもとにバリエーションを作りたい</li>
+            </ul>
+          </div>
+          <div class="fit no">
+            <h3>
+              <span class="bdg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" width="14" height="14" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              </span>
+              向いていない人
+            </h3>
+            <ul>
+              <li><span class="m">×</span>権利条件を確認せずに商用案件へ使いたい</li>
+              <li><span class="m">×</span>人物・著名人・ブランドロゴを厳密に扱う必要がある</li>
+              <li><span class="m">×</span>毎回同じ人物・同じ構図を完全に再現したい</li>
+              <li><span class="m">×</span>細かなレイヤー編集や入稿データ制作まで完結させたい</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 条件別に探す ============ -->
+  <section class="tp-section" id="conditions">
+    <div class="wrap">
+      <div class="finder reveal">
+        <h2>条件別に探す</h2>
+        <p class="lead">カテゴリ・条件タグから、目的に合うAIツールを絞り込めます。</p>
+        <div class="taglinks">
+          <a class="taglink" href="/conditions/free/"><span class="ld"></span>無料で使えるAIツール</a>
+          <a class="taglink" href="/conditions/commercial-use/"><span class="ld"></span>商用利用を確認しやすいAIツール</a>
+          <a class="taglink" href="/conditions/japanese/"><span class="ld"></span>日本語対応のAIツール</a>
+          <a class="taglink" href="/conditions/no-watermark/"><span class="ld"></span>透かしなしで使いやすいAIツール</a>
+        </div>
+        <div class="taglinks-row taglinks">
+          <a class="taglink" href="/categories/image-generation/"><span class="ld"></span>AI画像生成ツール一覧</a>
+          <a class="taglink" href="/categories/video-generation/"><span class="ld"></span>AI動画生成ツール一覧</a>
+          <a class="taglink" href="/use-cases/youtube-thumbnail/"><span class="ld"></span>YouTubeサムネ向け</a>
+          <a class="taglink" href="/use-cases/sns-post-image/"><span class="ld"></span>SNS投稿画像向け</a>
+          <a class="taglink" href="/use-cases/ad-banner/"><span class="ld"></span>広告バナー向け</a>
+          <a class="taglink" href="/use-cases/blog-eyecatch/"><span class="ld"></span>ブログアイキャッチ向け</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="tp-section" id="faq" style="background:var(--surface-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>よくある質問</h2>
+      </div>
+      <div class="faq-list reveal" id="faqList">
+
+        <div class="faq-item" aria-expanded="false">
+          <button class="faq-q">
+            <span class="qm">Q</span>
+            AI画像生成ツールは無料でも使えますか？
+            <span class="ind">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              無料で試せるツールもありますが、生成回数・画像サイズ・透かし・商用利用条件などに制限がある場合があります。最新情報は各公式サイトをご確認ください。<a href="/conditions/free/">無料枠のあるツール一覧</a>もご参照ください。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" aria-expanded="false">
+          <button class="faq-q">
+            <span class="qm">Q</span>
+            AI画像生成ツールを商用利用する前に何を確認すべきですか？
+            <span class="ind">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              料金プラン・生成物の利用条件・人物画像やブランドロゴ・第三者素材の扱い・利用規約の最新状況などを確認してください。本記事は法的助言ではありません。<a href="/conditions/commercial-use/">商用利用条件を確認しやすいツール</a>や<a href="/guides/commercial-use-copyright/">商用利用・著作権ガイド</a>もご参照ください。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" aria-expanded="false">
+          <button class="faq-q">
+            <span class="qm">Q</span>
+            日本語プロンプトに対応していれば日本語で十分ですか？
+            <span class="ind">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              日本語で指示できるツールもありますが、細かい画風や構図の指定では英語プロンプトの方が意図を伝えやすい場合があります。ツールごとの対応状況は<a href="/conditions/japanese/">日本語対応ツール</a>のページでご確認ください。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
+
+<script>
+(function () {
+  /* ---- フィルター ---- */
+  const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('#filterChips .fchip'));
+  const searchInput = document.getElementById('toolSearch') as HTMLInputElement | null;
+  const resultCount = document.getElementById('resultCount');
+  const cntImage    = document.getElementById('cntImage');
+  const cntVideo    = document.getElementById('cntVideo');
+  const blockImage  = document.getElementById('block-image');
+  const blockVideo  = document.getElementById('block-video');
+  const imgEmpty    = document.getElementById('imgEmpty');
+  const vidEmpty    = document.getElementById('vidEmpty');
+  let activeFilter  = 'all';
+
+  function matches(card: Element): boolean {
+    const q = (searchInput?.value ?? '').trim().toLowerCase();
+    if (q && !card.getAttribute('data-name')?.includes(q)) return false;
+    switch (activeFilter) {
+      case 'all':        return true;
+      case 'image':      return card.getAttribute('data-cat') === 'image';
+      case 'video':      return card.getAttribute('data-cat') === 'video';
+      case 'free':       return card.getAttribute('data-free') === '1';
+      case 'commercial': return card.getAttribute('data-commercial') === '1';
+      case 'ja':         return card.getAttribute('data-ja') === '1';
+      case 'nowm':       return card.getAttribute('data-nowm') === '1';
+      default:           return true;
+    }
+  }
+
+  function apply(): void {
+    const allCards = document.querySelectorAll<HTMLElement>('.tools-list .tool');
+    let nImg = 0, nVid = 0;
+    allCards.forEach((card) => {
+      const show = matches(card);
+      card.classList.toggle('hide', !show);
+      if (show) {
+        card.getAttribute('data-cat') === 'image' ? nImg++ : nVid++;
+      }
+    });
+
+    if (cntImage) cntImage.textContent = nImg + '件';
+    if (cntVideo) cntVideo.textContent = nVid + '件';
+    if (imgEmpty) imgEmpty.style.display = nImg === 0 ? '' : 'none';
+    if (vidEmpty) vidEmpty.style.display = nVid === 0 ? '' : 'none';
+
+    if (blockImage) blockImage.style.display = activeFilter === 'video' ? 'none' : '';
+    if (blockVideo) blockVideo.style.display = activeFilter === 'image' ? 'none' : '';
+
+    const total = nImg + nVid;
+    if (resultCount) resultCount.innerHTML = '<b>' + total + '</b> 件';
+  }
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      activeFilter = chip.getAttribute('data-filter') ?? 'all';
+      chips.forEach((c) => c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'));
+      apply();
+    });
+  });
+  if (searchInput) searchInput.addEventListener('input', apply);
+
+  /* ---- FAQ ---- */
+  document.querySelectorAll<HTMLElement>('.faq-item').forEach((item) => {
+    const q = item.querySelector<HTMLButtonElement>('.faq-q');
+    const a = item.querySelector<HTMLElement>('.faq-a');
+    if (!q || !a) return;
+    q.addEventListener('click', () => {
+      const open = item.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll<HTMLElement>('.faq-item').forEach((other) => {
+        other.setAttribute('aria-expanded', 'false');
+        const otherA = other.querySelector<HTMLElement>('.faq-a');
+        if (otherA) otherA.style.maxHeight = '';
+      });
+      if (!open) {
+        item.setAttribute('aria-expanded', 'true');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* ---- Scroll reveal ---- */
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets: Element[] = [];
+  document.querySelectorAll<HTMLElement>('.page-head, .tp-section').forEach((sec) => {
+    sec.querySelectorAll<HTMLElement>(':scope .section-head, :scope .finder').forEach((el) => {
+      el.classList.add('reveal'); targets.push(el);
+    });
+    sec.querySelectorAll<HTMLElement>(':scope .guide-grid, :scope .cta-strip, :scope .faq-list').forEach((el) => {
+      el.classList.add('reveal'); el.setAttribute('data-stagger', ''); targets.push(el);
+    });
+  });
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    targets.forEach((el) => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+    const start = () => targets.forEach((el) => io.observe(el));
+    if (document.readyState === 'complete') requestAnimationFrame(start);
+    else window.addEventListener('load', () => requestAnimationFrame(start));
+    setTimeout(() => {
+      const s = document.createElement('style');
+      s.textContent = '.reveal,.reveal[data-stagger]>*{opacity:1!important;transform:none!important;}';
+      document.head.appendChild(s);
+    }, 8000);
+  }
+})();
+</script>

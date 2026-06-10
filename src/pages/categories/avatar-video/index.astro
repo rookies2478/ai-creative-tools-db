@@ -85,7 +85,7 @@ function mark(val: string) {
       <!-- Hero -->
       <header class="cp-head">
         <span class="eyebrow">Avatar video</span>
-        <h1>AIアバター動画<br><span class="hl">ツール比較</span></h1>
+        <h1>AIアバター動画<span class="hl">ツール比較</span></h1>
         <p class="lead">
           AIアバターを使った解説動画・研修動画・営業動画ツールの比較・選び方を整理するページです。
           顔出し不要でテキスト原稿からアバターが話す動画を生成できるサービスを対象としています。
@@ -322,7 +322,7 @@ function mark(val: string) {
 
   /* Hero */
   .cp-x .cp-head { padding: 8px 0 48px; }
-  .cp-x .cp-head h1 { font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; letter-spacing: -.01em; line-height: 1.24; margin: 16px 0; }
+  .cp-x .cp-head h1 { font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; letter-spacing: -.01em; line-height: 1.24; margin: 16px 0; text-wrap: balance; }
   .cp-x .cp-head h1 .hl { color: var(--brand-ink); position: relative; }
   .cp-x .cp-head h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .26em; background: color-mix(in srgb, var(--brand) 18%, transparent); z-index: -1; border-radius: 2px; }
   .cp-x .lead { font-size: 15.5px; color: var(--ink-soft); max-width: 700px; }

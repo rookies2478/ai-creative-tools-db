@@ -197,10 +197,17 @@ const marqueeLoop = [...marquee, ...marquee];
   .fv-hero .outnote{font-size:11px;color:var(--faint);line-height:1.6;margin:0;}
 
   @media(max-width:900px){
-    .fv-hero{min-height:0;}
-    .fv-hero .fv-grid{grid-template-columns:1fr;}
-    .fv-hero .left{border-right:none;border-bottom:1px solid var(--line-strong);}
-    .fv-hero .right{padding-top:32px;padding-bottom:40px;}
+    .fv-hero{min-height:0;max-width:100%;overflow-x:clip;}
+    .fv-hero .fv-grid{grid-template-columns:1fr;max-width:100%;}
+    .fv-hero .left{border-right:none;border-bottom:1px solid var(--line-strong);max-width:100%;}
+    .fv-hero .right{padding-top:32px;padding-bottom:40px;max-width:100%;overflow-x:clip;}
+    .fv-hero .outputs{grid-template-columns:1fr 1fr 1fr;max-width:100%;}
+    .fv-hero .toolmarquee{overflow:hidden;max-width:100%;}
+  }
+  @media(max-width:480px){
+    .fv-hero .outputs{grid-template-columns:1fr 1fr 1fr;gap:8px;}
+    .fv-hero .gname{display:none;}
+    .fv-hero .sc-head .r{display:none;}
   }
   @media(prefers-reduced-motion:reduce){
     .fv-hero .gen-card .skel{opacity:0!important;}

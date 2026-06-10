@@ -1,0 +1,308 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideWarningBox from '../../components/GuideWarningBox.astro';
+import GuideSummaryBox from '../../components/GuideSummaryBox.astro';
+import GuideFAQ from '../../components/GuideFAQ.astro';
+import GuidePageHeader from '../../components/GuidePageHeader.astro';
+
+const title = 'AI画像・AI動画生成のプロンプト活用ガイド';
+const description = 'AI画像生成・AI動画生成で使うプロンプトの考え方と組み立て方を用途別に整理しています。ツールごとの違い・日本語・英語プロンプトの使い分け・よくある失敗と対策を解説します。';
+const lastReviewed = '2026-06-08';
+
+const faqItems = [
+  {
+    q: 'プロンプトは日本語と英語どちらがよいですか？',
+    a: 'ツールによって異なります。Midjourney・DALL·Eは英語プロンプトの精度が高い傾向があります。Adobe FireflyやCanva AI画像生成は日本語でも動作しますが、英語の方が意図通りの結果を得やすい場合があります。SeaArt AIなど日本語プロンプトに対応しているツールは公式情報でご確認ください。',
+  },
+  {
+    q: '長いプロンプトと短いプロンプト、どちらがよいですか？',
+    a: 'ツールによって解釈の仕方が異なります。Midjourneyは簡潔なキーワードの組み合わせが有効な場合があります。DALL·Eは自然文でも動作します。まず短いプロンプトで試し、結果を見ながら要素を追加・調整していくアプローチが実用的です。',
+  },
+  {
+    q: '同じプロンプトで毎回同じ画像が生成されますか？',
+    a: 'ほとんどのAI画像生成ツールは確率的な生成を行うため、同じプロンプトでも毎回異なる結果が得られます。シードを固定できるツールでは再現性を高めることができる場合があります。詳細は各ツールの公式ドキュメントをご確認ください。',
+  },
+  {
+    q: 'プロンプトで著作権・肖像権に問題が出ることはありますか？',
+    a: 'はい。実在するキャラクター・ブランド名・著名人の名前などをプロンプトに含めて生成したコンテンツは、著作権・商標権・肖像権等の問題が生じる可能性があります。商用利用の場面では特に注意が必要です。本記事は法的助言ではありません。',
+  },
+  {
+    q: 'ネガティブプロンプトとは何ですか？',
+    a: '生成画像に含めたくない要素を指定するプロンプトです。Stable Diffusion系のツールやSeaArt AIなどで利用できます。「blurry」「low quality」「watermark」などを指定して品質を向上させるために使われます。対応有無は各ツールの公式情報でご確認ください。',
+  },
+  {
+    q: 'AI動画生成のプロンプトは画像生成と違いますか？',
+    a: 'はい。AI動画生成では「動き」「カメラワーク」「シーンの変化」を意識した記述が有効な場合があります。例えば「slow zoom in」「camera pans left」などの指示を加えることで動きを制御できるツールがあります。詳細は各ツールの公式ガイドをご確認ください。',
+  },
+  {
+    q: 'プロンプトを工夫しても思った画像が出ない場合はどうすればよいですか？',
+    a: 'まず要素を一つずつ変えて試すことをお勧めします。スタイル・被写体・背景・色調・カメラアングルなどを個別に調整してみてください。また、ツール固有のパラメータ（--ar、--style等）の活用や、参照画像（image-to-image）の利用も有効な場合があります。',
+  },
+];
+---
+
+<BaseLayout
+  title={`${title}｜AIクリエイティブナビ`}
+  description={description}
+  canonicalPath="/prompts/"
+  ogType="article"
+>
+  <div class="mx-auto max-w-3xl px-6 py-12">
+
+    <GuidePageHeader
+      title={title}
+      description={description}
+      lastReviewed={lastReviewed}
+      breadcrumbLabel="プロンプト"
+    />
+
+    <GuideSummaryBox title="このページについて">
+      <p>
+        AI画像生成・AI動画生成において「プロンプト」は生成結果を左右する重要な要素ですが、
+        ツールごとに効果的な書き方が異なります。このページではプロンプトの考え方を整理しています。
+        <strong class="font-semibold text-slate-900">各ツールの最新仕様は公式ドキュメントをご確認ください。</strong>
+      </p>
+    </GuideSummaryBox>
+
+    <GuideWarningBox variant="info">
+      このページの情報は2026-06-08時点のものです。ツールのアップデートにより仕様が変わる場合があります。
+      商用利用・著作権・肖像権・商標について断定的な記述は行っておりません。
+      商用利用に関する判断は各ツールの最新公式規約と、必要に応じて専門家へのご相談をお願いします。
+    </GuideWarningBox>
+
+    <!-- ── プロンプトの基本 ── -->
+    <section class="my-10" aria-labelledby="basics-heading">
+      <h2 class="mb-6 text-lg font-semibold text-slate-900" id="basics-heading">プロンプトの基本的な考え方</h2>
+
+      <p class="mb-4 text-sm leading-relaxed text-slate-600">
+        AIへの指示文（プロンプト）は、生成したいコンテンツの「内容・スタイル・構図・雰囲気」を言語で伝えるものです。
+        ただし、同じプロンプトでもツールによって解釈が異なるため、使用するツールに合わせた書き方を探すことが重要です。
+      </p>
+
+      <div class="space-y-5">
+        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <h3 class="mb-2 text-sm font-semibold text-slate-900">1. 被写体・主題を明確にする</h3>
+          <p class="text-sm leading-relaxed text-slate-600">
+            まず「何を生成したいか」を中心に据えます。「猫」ではなく「白い猫がソファに座っている」のように、
+            被写体の特徴や状況を具体的に記述することで、意図に近い結果が得られやすくなる場合があります。
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <h3 class="mb-2 text-sm font-semibold text-slate-900">2. スタイル・雰囲気を指定する</h3>
+          <p class="text-sm leading-relaxed text-slate-600">
+            「oil painting」「photorealistic」「anime style」「cinematic」など、視覚的なスタイルを追加することで
+            生成方向を制御できる場合があります。日本語でも対応しているツールがあります。
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <h3 class="mb-2 text-sm font-semibold text-slate-900">3. 構図・カメラ設定を意識する</h3>
+          <p class="text-sm leading-relaxed text-slate-600">
+            「close-up」「wide shot」「bird's eye view」「portrait」など、構図に関する言葉を加えることで
+            レイアウトをある程度制御できる場合があります。
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <h3 class="mb-2 text-sm font-semibold text-slate-900">4. 照明・色調を加える</h3>
+          <p class="text-sm leading-relaxed text-slate-600">
+            「soft lighting」「golden hour」「high contrast」「muted colors」など、
+            照明や色に関する要素を指定することで雰囲気を調整できる場合があります。
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
+          <h3 class="mb-2 text-sm font-semibold text-slate-900">5. 品質・仕上がりを指定する</h3>
+          <p class="text-sm leading-relaxed text-slate-600">
+            「highly detailed」「4K」「masterpiece」などの品質を示す言葉が有効なツールがあります。
+            ただし、ツールによってこれらの効果は異なります。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 用途別プロンプトの考え方 ── -->
+    <section class="my-10" aria-labelledby="usecase-heading">
+      <h2 class="mb-6 text-lg font-semibold text-slate-900" id="usecase-heading">用途別プロンプトの考え方</h2>
+
+      <div class="overflow-hidden rounded-xl border border-slate-100">
+        <table class="w-full text-sm">
+          <caption class="sr-only">用途別プロンプトのポイント</caption>
+          <thead class="bg-slate-50">
+            <tr>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600">用途</th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600">プロンプトの考え方</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr>
+              <td class="px-4 py-3 font-medium text-slate-900 whitespace-nowrap">ブログアイキャッチ</td>
+              <td class="px-4 py-3 text-slate-600">記事テーマに関連するシンプルな構図。テキスト重ねを想定するならシンプルな背景が有効な場合があります。</td>
+            </tr>
+            <tr class="bg-slate-50/50">
+              <td class="px-4 py-3 font-medium text-slate-900 whitespace-nowrap">SNS投稿画像</td>
+              <td class="px-4 py-3 text-slate-600">正方形・縦型など公開先のアスペクト比を意識します。目を引く色使いや構図の指定が有効な場合があります。</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium text-slate-900 whitespace-nowrap">商品・EC画像</td>
+              <td class="px-4 py-3 text-slate-600">白背景・商品中心・クリーンな照明が基本。実在商品の場合はAI生成との組み合わせ方法を公開先に確認することを推奨します。</td>
+            </tr>
+            <tr class="bg-slate-50/50">
+              <td class="px-4 py-3 font-medium text-slate-900 whitespace-nowrap">AI動画（text-to-video）</td>
+              <td class="px-4 py-3 text-slate-600">シーン・動き・カメラワークを含めた記述が有効な場合があります。「slow pan」「fade in」など動作の指定も試してみてください。</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium text-slate-900 whitespace-nowrap">AI動画（image-to-video）</td>
+              <td class="px-4 py-3 text-slate-600">ベースとなる画像の雰囲気を維持しつつ、どの要素をどのように動かすかを指定するアプローチが有効な場合があります。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-2 text-xs text-slate-400">※ 各ツールの仕様により効果は異なります。公式ドキュメントも合わせてご確認ください。</p>
+    </section>
+
+    <!-- ── ツール別の特徴 ── -->
+    <section class="my-10" aria-labelledby="tools-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="tools-heading">主要ツールのプロンプト特性（概要）</h2>
+      <p class="mb-4 text-xs text-slate-500">以下は2026-06-08時点の概況です。ツールのアップデートにより変わる場合があります。詳細は各ツール公式ドキュメントをご確認ください。</p>
+
+      <div class="space-y-3">
+        <div class="rounded-lg border border-slate-100 bg-white p-4">
+          <div class="flex items-center justify-between gap-2 mb-1">
+            <span class="text-sm font-semibold text-slate-900">Midjourney</span>
+            <a href="/tools/midjourney/" class="text-xs text-blue-600 hover:underline">詳細を見る →</a>
+          </div>
+          <p class="text-xs leading-relaxed text-slate-600">英語キーワードの組み合わせが効果的な場合があります。<code class="bg-slate-100 px-1 rounded">--ar</code>（アスペクト比）<code class="bg-slate-100 px-1 rounded">--style</code>（スタイル）など独自パラメータあり。</p>
+        </div>
+
+        <div class="rounded-lg border border-slate-100 bg-white p-4">
+          <div class="flex items-center justify-between gap-2 mb-1">
+            <span class="text-sm font-semibold text-slate-900">DALL·E（ChatGPT経由）</span>
+            <a href="/tools/dalle/" class="text-xs text-blue-600 hover:underline">詳細を見る →</a>
+          </div>
+          <p class="text-xs leading-relaxed text-slate-600">自然文での指示に対応。日本語でも動作しますが英語の方が精度が高い場合があります。ChatGPTとの会話の中で修正指示が可能です。</p>
+        </div>
+
+        <div class="rounded-lg border border-slate-100 bg-white p-4">
+          <div class="flex items-center justify-between gap-2 mb-1">
+            <span class="text-sm font-semibold text-slate-900">Adobe Firefly</span>
+            <a href="/tools/adobe-firefly/" class="text-xs text-blue-600 hover:underline">詳細を見る →</a>
+          </div>
+          <p class="text-xs leading-relaxed text-slate-600">日本語・英語ともに対応。生成塗りつぶし・テキスト効果など機能別に異なるプロンプト形式があります。</p>
+        </div>
+
+        <div class="rounded-lg border border-slate-100 bg-white p-4">
+          <div class="flex items-center justify-between gap-2 mb-1">
+            <span class="text-sm font-semibold text-slate-900">Stable Diffusion系</span>
+            <a href="/tools/stable-diffusion/" class="text-xs text-blue-600 hover:underline">詳細を見る →</a>
+          </div>
+          <p class="text-xs leading-relaxed text-slate-600">ポジティブ・ネガティブプロンプトの組み合わせが基本。モデルによってプロンプトの効き方が異なります。LoRAなどの追加モデルも活用できる場合があります。</p>
+        </div>
+
+        <div class="rounded-lg border border-slate-100 bg-white p-4">
+          <div class="flex items-center justify-between gap-2 mb-1">
+            <span class="text-sm font-semibold text-slate-900">Runway（AI動画）</span>
+            <a href="/tools/runway/" class="text-xs text-blue-600 hover:underline">詳細を見る →</a>
+          </div>
+          <p class="text-xs leading-relaxed text-slate-600">Gen-4ではカメラモーション・シーンの動きを言語で指定できます。image-to-video時は入力画像のスタイルが優先されます。</p>
+        </div>
+
+        <div class="rounded-lg border border-slate-100 bg-white p-4">
+          <div class="flex items-center justify-between gap-2 mb-1">
+            <span class="text-sm font-semibold text-slate-900">Kling AI（AI動画）</span>
+            <a href="/tools/kling-ai/" class="text-xs text-blue-600 hover:underline">詳細を見る →</a>
+          </div>
+          <p class="text-xs leading-relaxed text-slate-600">中国語・英語に対応。日本語プロンプトは動作する場合がありますが公式サポート言語の確認を推奨します。カメラ制御オプションあり。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── よくある失敗と対策 ── -->
+    <section class="my-10" aria-labelledby="issues-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="issues-heading">よくある問題と対策の考え方</h2>
+
+      <div class="space-y-4">
+        <div class="flex gap-4 rounded-xl border border-amber-100 bg-amber-50 p-4">
+          <div class="shrink-0 text-amber-500 font-bold text-sm">Q</div>
+          <div>
+            <p class="text-sm font-medium text-slate-900 mb-1">意図しない要素が入る</p>
+            <p class="text-xs leading-relaxed text-slate-600">ネガティブプロンプト（対応ツールのみ）で除外するか、プロンプトをより具体的にします。「〜を含まない」という指定よりも「〜のみ」という肯定的な指定が有効な場合があります。</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 rounded-xl border border-amber-100 bg-amber-50 p-4">
+          <div class="shrink-0 text-amber-500 font-bold text-sm">Q</div>
+          <div>
+            <p class="text-sm font-medium text-slate-900 mb-1">品質が安定しない</p>
+            <p class="text-xs leading-relaxed text-slate-600">複数回生成して選ぶのが基本的なアプローチです。シード値を固定できるツールでは、気に入った結果に近いプロンプトを微調整しながら再生成できます。</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 rounded-xl border border-amber-100 bg-amber-50 p-4">
+          <div class="shrink-0 text-amber-500 font-bold text-sm">Q</div>
+          <div>
+            <p class="text-sm font-medium text-slate-900 mb-1">人物の手・顔が崩れる</p>
+            <p class="text-xs leading-relaxed text-slate-600">AI画像生成の既知の課題です。ツールのアップデートで改善されている場合があります。アップスケール・インペイントなどの後処理機能が有効な場合もあります。</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 rounded-xl border border-amber-100 bg-amber-50 p-4">
+          <div class="shrink-0 text-amber-500 font-bold text-sm">Q</div>
+          <div>
+            <p class="text-sm font-medium text-slate-900 mb-1">テキストが正確に生成されない</p>
+            <p class="text-xs leading-relaxed text-slate-600">AI画像生成はテキスト生成が苦手なツールが多いです。Adobe Fireflyのテキスト効果機能など、テキスト生成に特化した機能を持つツールを選ぶのが有効な場合があります。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="my-10">
+      <GuideFAQ items={faqItems} title="よくある質問（FAQ）" />
+    </section>
+
+    <!-- ── 注意事項 ── -->
+    <section class="my-10">
+      <GuideWarningBox variant="warning" title="著作権・肖像権・商標についての注意">
+        <ul class="space-y-1.5 list-disc list-inside text-sm">
+          <li>実在するキャラクター・ブランド・著名人をプロンプトに含める場合、著作権・商標権・肖像権等の問題が生じる可能性があります</li>
+          <li>生成コンテンツが「商用利用できる」かどうかは、各ツールの利用規約と生成内容の両面から確認が必要です</li>
+          <li>本ページは情報提供目的であり、法的助言ではありません。重要な判断の際は専門家への相談をお勧めします</li>
+        </ul>
+      </GuideWarningBox>
+    </section>
+
+    <!-- 関連ページ -->
+    <section class="mb-8 space-y-6">
+      <div>
+        <h2 class="mb-3 text-sm font-semibold text-slate-600">関連カテゴリ</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          <li><a href="/categories/image-generation/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700 hover:bg-blue-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">AI画像生成ツール一覧</a></li>
+          <li><a href="/categories/video-generation/" class="rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 text-indigo-700 hover:bg-indigo-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">AI動画生成ツール一覧</a></li>
+          <li><a href="/tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">ツール一覧</a></li>
+          <li><a href="/templates/" class="rounded-full border border-green-200 bg-green-50 px-4 py-1.5 text-green-700 hover:bg-green-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">実務テンプレート集</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="mb-3 text-sm font-semibold text-slate-600">関連ガイド</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用・著作権ガイド</a></li>
+          <li><a href="/guides/japanese-ai-image-tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">日本語対応ツール比較</a></li>
+          <li><a href="/guides/free-ai-image-tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料AI画像生成ツール比較</a></li>
+          <li><a href="/guides/video-generation-credit-cost-comparison/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">AI動画生成クレジット比較</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="mb-6 text-xs text-slate-500 leading-relaxed">
+      最新情報は各公式サイトで確認してください。掲載内容は2026-06-08時点のものであり、法的助言ではありません。
+    </p>
+
+    <nav class="border-t border-slate-200 pt-6 text-sm" aria-label="ページナビゲーション">
+      <a href="/guides/" class="text-blue-600 hover:underline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-sm">← ガイド一覧に戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideWarningBox from '../../components/GuideWarningBox.astro';
+import GuideSummaryBox from '../../components/GuideSummaryBox.astro';
+import GuideFAQ from '../../components/GuideFAQ.astro';
+import GuidePageHeader from '../../components/GuidePageHeader.astro';
+
+const title = 'AI制作の実務テンプレート集';
+const description = 'AI画像生成・AI動画生成を実務で使う際の構成案・制作指示・確認チェックリストのテンプレートを用途別に整理しています。コピーして自由にカスタマイズしてご活用ください。';
+const lastReviewed = '2026-06-08';
+
+const faqItems = [
+  {
+    q: 'テンプレートは商用利用できますか？',
+    a: '本ページのテンプレート文面自体は自由にご利用いただけます。ただし、テンプレートを使って生成したAIコンテンツの商用利用可否は、使用するツールの利用規約に依存します。各ツールの公式規約を必ずご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: 'テンプレートのプロンプトをそのまま使って良いですか？',
+    a: 'テンプレートはあくまで出発点です。ツール・用途・スタイルによって効果が異なります。まずそのまま試してみて、結果を見ながら調整することをお勧めします。',
+  },
+  {
+    q: 'クライアントへの説明・確認に使えますか？',
+    a: 'AI制作の説明資料・確認事項の整理にご活用いただけます。ただし、著作権・商用利用・肖像権に関する最終判断は各ツールの最新規約と専門家への確認に基づいて行ってください。',
+  },
+  {
+    q: '実在する人物・キャラクターを含むプロンプトは使えますか？',
+    a: '実在する著名人・キャラクター・ブランドをプロンプトに含める場合、著作権・商標権・肖像権等の問題が生じる可能性があります。本テンプレートではそのような要素を含む記述は避けています。商用利用の場面では特にご注意ください。',
+  },
+  {
+    q: 'テンプレートのチェックリストだけで商用利用の判断はできますか？',
+    a: '本ページのチェックリストは確認ポイントの整理を目的としており、法的助言ではありません。商用利用に関する具体的な判断は各ツールの最新公式規約を確認した上で、必要に応じて専門家へご相談ください。',
+  },
+];
+---
+
+<BaseLayout
+  title={`${title}｜AIクリエイティブナビ`}
+  description={description}
+  canonicalPath="/templates/"
+  ogType="article"
+>
+  <div class="mx-auto max-w-3xl px-6 py-12">
+
+    <GuidePageHeader
+      title={title}
+      description={description}
+      lastReviewed={lastReviewed}
+      breadcrumbLabel="テンプレート"
+    />
+
+    <GuideSummaryBox title="このページについて">
+      <p>
+        AI画像生成・AI動画生成を実務で活用する際に役立つ
+        <strong class="font-semibold text-slate-900">構成テンプレート・確認チェックリスト・依頼書の雛形</strong>
+        を用途別に整理しています。コピー・編集して自由にお使いください。
+      </p>
+    </GuideSummaryBox>
+
+    <GuideWarningBox variant="info">
+      このページの情報は2026-06-08時点のものです。
+      商用利用・著作権・肖像権・商標についての断定的な記述は行っておりません。
+      重要な判断の際は各ツールの最新公式規約と専門家へのご確認をお願いします。
+    </GuideWarningBox>
+
+    <!-- ── AI画像生成 制作依頼テンプレート ── -->
+    <section class="my-10" aria-labelledby="image-brief-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="image-brief-heading">AI画像生成：制作依頼・指示テンプレート</h2>
+      <p class="mb-4 text-xs text-slate-500">社内や外部パートナーへのAI画像制作依頼時に使えるテンプレートです。必要な項目を埋めてご利用ください。</p>
+
+      <div class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+        <pre class="whitespace-pre-wrap text-xs leading-relaxed text-slate-700 font-mono">【AI画像制作依頼】
+
+■ 用途
+（例：ブログアイキャッチ / SNS投稿 / 広告バナー / EC商品画像）
+
+■ 使用ツール
+（使用するAI画像生成ツール名を記入してください）
+
+■ 生成枚数・バリエーション
+（例：5バリエーション生成、そこから2枚選定）
+
+■ 画像サイズ・アスペクト比
+（例：1200×628px / 1:1 / 9:16）
+
+■ 被写体・主題
+（何を中心に描くかを具体的に）
+
+■ スタイル・雰囲気
+（例：フォトリアル / イラスト風 / ミニマル / 明るく清潔感）
+
+■ 色調・カラーパレット
+（例：ブランドカラーに合わせたブルー系 / モノトーン）
+
+■ 含めたい要素
+（構図・背景・小道具など）
+
+■ 含めない要素・NG事項
+（例：人物なし / 特定ブランドロゴなし / テキスト不要）
+
+■ 参照画像・雰囲気サンプル
+（参考となる画像URL または ファイル）
+
+■ 商用利用の確認
+□ 使用ツールの利用規約で商用利用が確認済み
+□ 使用プランが商用利用を許可している
+□ 生成コンテンツに著作権・商標・肖像に関わる要素がないことを確認
+
+■ 納期・納品形式
+（例：〇月〇日まで / PNG + JPEG / 元ファイルも添付）
+
+■ 備考
+（その他の指示・注意事項）</pre>
+      </div>
+    </section>
+
+    <!-- ── AI動画生成 制作依頼テンプレート ── -->
+    <section class="my-10" aria-labelledby="video-brief-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="video-brief-heading">AI動画生成：制作依頼・指示テンプレート</h2>
+      <p class="mb-4 text-xs text-slate-500">AI動画生成ツールを使った制作の依頼・指示に使えるテンプレートです。</p>
+
+      <div class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+        <pre class="whitespace-pre-wrap text-xs leading-relaxed text-slate-700 font-mono">【AI動画制作依頼】
+
+■ 用途
+（例：SNS動画 / YouTube / 広告動画 / プレゼン素材）
+
+■ 使用ツール
+（使用するAI動画生成ツール名を記入してください）
+
+■ 生成方式
+□ text-to-video（テキストプロンプトから生成）
+□ image-to-video（画像から動画を生成）
+
+■ 動画の長さ・フレームレート
+（例：5秒 / 24fps）
+
+■ アスペクト比・解像度
+（例：16:9 / 1080p / 9:16 縦型）
+
+■ シーン内容・プロンプト
+（何が映っているか、どのような動きか、カメラワークなど）
+
+■ 雰囲気・スタイル
+（例：リアル / アニメ / シネマティック / ポップ）
+
+■ 参照画像
+（image-to-video の場合：使用する元画像ファイル / URL）
+
+■ 動き・カメラワークの指定
+（例：ゆっくり左にパン / ズームイン / フェードイン）
+
+■ NG事項
+（例：人物の顔を映さない / 特定ブランド要素なし）
+
+■ 商用利用の確認
+□ 使用ツールの利用規約で商用利用が確認済み
+□ 透かしあり・なしの条件を確認済み
+□ 生成動画に著作権・商標・肖像に関わる要素がないことを確認
+
+■ 納期・納品形式
+（例：〇月〇日まで / MP4 / 元プロジェクトファイルも添付）
+
+■ 備考
+</pre>
+      </div>
+    </section>
+
+    <!-- ── プロンプト構成テンプレート ── -->
+    <section class="my-10" aria-labelledby="prompt-template-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="prompt-template-heading">プロンプト構成テンプレート</h2>
+      <p class="mb-4 text-xs text-slate-500">英語プロンプトを組み立てる際の要素ごとのテンプレートです。必要な要素を組み合わせてご活用ください。</p>
+
+      <div class="space-y-4">
+        <div class="rounded-xl border border-blue-100 bg-blue-50/50 p-4">
+          <p class="mb-2 text-xs font-semibold text-blue-700 uppercase tracking-wide">AI画像生成：基本構成</p>
+          <pre class="whitespace-pre-wrap text-xs leading-relaxed text-slate-700 font-mono">[被写体・主題], [スタイル], [構図・アングル], [照明・雰囲気], [色調], [品質指定]
+
+例：
+a white cat sitting on a wooden floor, photorealistic, close-up shot, soft natural lighting, warm tones, highly detailed
+
+（日本語プロンプト対応ツールの場合）
+白い猫が木の床に座っている、フォトリアル、クローズアップ、柔らかな自然光、温かみのある色調</pre>
+        </div>
+
+        <div class="rounded-xl border border-indigo-100 bg-indigo-50/50 p-4">
+          <p class="mb-2 text-xs font-semibold text-indigo-700 uppercase tracking-wide">AI動画生成：text-to-video</p>
+          <pre class="whitespace-pre-wrap text-xs leading-relaxed text-slate-700 font-mono">[シーン・場所], [被写体・動作], [カメラワーク], [雰囲気・スタイル]
+
+例：
+a sunlit forest path, leaves gently falling, slow camera pan to the right, cinematic style, golden hour lighting</pre>
+        </div>
+
+        <div class="rounded-xl border border-purple-100 bg-purple-50/50 p-4">
+          <p class="mb-2 text-xs font-semibold text-purple-700 uppercase tracking-wide">ネガティブプロンプト（Stable Diffusion系・対応ツール用）</p>
+          <pre class="whitespace-pre-wrap text-xs leading-relaxed text-slate-700 font-mono">blurry, low quality, watermark, text, logo, extra fingers, deformed hands, duplicate, bad anatomy, noise</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 公開前チェックリスト ── -->
+    <section class="my-10" aria-labelledby="checklist-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="checklist-heading">AI生成コンテンツ：公開前確認チェックリスト</h2>
+      <p class="mb-4 text-xs text-slate-500">SNS・ブログ・広告・ECなどに公開する前に確認してください。本チェックリストは法的助言ではありません。</p>
+
+      <div class="rounded-xl border border-slate-200 bg-white p-5">
+        <div class="space-y-3">
+          {[
+            '使用ツールの利用規約（Terms of Service）を最新版で確認した',
+            '使用プラン（無料 / 有料）が商用利用を許可していることを確認した',
+            '透かし・クレジット表記の条件を確認した',
+            '生成コンテンツに実在する人物・著名人の肖像が含まれていないことを確認した',
+            '実在するキャラクター・ブランドロゴ・商標を連想させる要素が含まれていないことを確認した',
+            '入力・参照した画像・素材の権利関係を確認した',
+            '公開先プラットフォーム（SNS・広告・ECサイト等）のAI生成コンテンツポリシーを確認した',
+            '「AI生成」である旨の開示が公開先で求められていないか確認した',
+            '利用規約の最終更新日を確認し、古い情報に基づいていないか確認した',
+          ].map(item => (
+            <label class="flex items-start gap-3 cursor-pointer group">
+              <input type="checkbox" class="mt-0.5 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 shrink-0" />
+              <span class="text-sm text-slate-700 group-hover:text-slate-900">{item}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <GuideWarningBox variant="warning" title="重要">
+        <p>このチェックリストは確認ポイントの整理を目的としており、法的助言ではありません。商用利用・著作権・肖像権・商標について断定できる内容ではありません。重要な判断の際は各ツールの最新公式規約と専門家（弁護士等）へのご確認をお願いします。</p>
+      </GuideWarningBox>
+    </section>
+
+    <!-- ── ツール選定テンプレート ── -->
+    <section class="my-10" aria-labelledby="selection-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="selection-heading">ツール選定：用途別確認テンプレート</h2>
+      <p class="mb-4 text-xs text-slate-500">複数のツールを比較・選定する際に使えるテンプレートです。</p>
+
+      <div class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+        <pre class="whitespace-pre-wrap text-xs leading-relaxed text-slate-700 font-mono">【ツール選定確認シート】
+
+■ 目的・用途
+（何のために使うか）
+
+■ 優先確認項目
+□ 無料プランで利用可能か
+□ 商用利用が可能か（プランを含めて）
+□ 日本語UIに対応しているか
+□ 日本語プロンプトに対応しているか
+□ 透かしなしで出力できるか
+□ API・外部ツール連携が必要か
+
+■ 候補ツール比較
+
+ツール名：
+├ 無料プラン：あり / なし / 限定
+├ 商用利用：可 / プラン次第 / 不可
+├ 透かし：無料プランあり / 有料プランなし / なし
+├ 日本語UI：対応 / 一部 / 非対応
+└ 公式確認日：
+
+ツール名：
+├ 無料プラン：
+├ 商用利用：
+├ 透かし：
+├ 日本語UI：
+└ 公式確認日：
+
+■ 選定理由・メモ
+
+■ 最終選定ツール
+</pre>
+      </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="my-10">
+      <GuideFAQ items={faqItems} title="よくある質問（FAQ）" />
+    </section>
+
+    <!-- ── 注意事項 ── -->
+    <section class="my-10">
+      <GuideWarningBox variant="warning" title="著作権・商用利用・肖像権についての注意">
+        <ul class="space-y-1.5 list-disc list-inside text-sm">
+          <li>本ページのテンプレートを使って生成したコンテンツの商用利用可否は、各ツールの利用規約に依存します</li>
+          <li>AI生成コンテンツが商用利用できる・安全であるという断定はしておりません</li>
+          <li>実在する人物・著名人・キャラクター・ブランドに関わる生成は、ツールの規約とは別に権利上の問題が生じる可能性があります</li>
+          <li>本ページは情報提供目的であり、法的助言ではありません</li>
+        </ul>
+      </GuideWarningBox>
+    </section>
+
+    <!-- 関連ページ -->
+    <section class="mb-8 space-y-6">
+      <div>
+        <h2 class="mb-3 text-sm font-semibold text-slate-600">関連カテゴリ</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          <li><a href="/categories/image-generation/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700 hover:bg-blue-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">AI画像生成ツール一覧</a></li>
+          <li><a href="/categories/video-generation/" class="rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 text-indigo-700 hover:bg-indigo-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">AI動画生成ツール一覧</a></li>
+          <li><a href="/tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">ツール一覧</a></li>
+          <li><a href="/prompts/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700 hover:bg-blue-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">プロンプト活用ガイド</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="mb-3 text-sm font-semibold text-slate-600">関連ガイド</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用・著作権ガイド</a></li>
+          <li><a href="/guides/ai-image-commercial-use-checklist/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用チェックリスト</a></li>
+          <li><a href="/guides/free-ai-image-tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料AI画像生成ツール比較</a></li>
+          <li><a href="/guides/video-generation-credit-cost-comparison/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">AI動画生成クレジット比較</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="mb-6 text-xs text-slate-500 leading-relaxed">
+      最新情報は各公式サイトで確認してください。掲載内容は2026-06-08時点のものであり、法的助言ではありません。
+    </p>
+
+    <nav class="border-t border-slate-200 pt-6 text-sm" aria-label="ページナビゲーション">
+      <a href="/guides/" class="text-blue-600 hover:underline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-sm">← ガイド一覧に戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

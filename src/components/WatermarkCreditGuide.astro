@@ -77,7 +77,7 @@ export interface Props {
 }
 
 const {
-  headingHtml = 'AI画像・動画生成の<br /><span class="hl">透かし・クレジット表記ガイド</span>',
+  headingHtml = 'AI画像・動画生成の<span class="hl">透かし・クレジット表記ガイド</span>',
   lead = '透かしなしで利用できるAI画像生成ツールを、無料プラン条件・透かしルール・商用利用可否・対応プラットフォーム・主な注意点で比較。実際に使う前に確認したいポイントも解説します。最新情報は必ず各公式サイトをご確認ください。',
   checkedDate = '2026-05-07',
   nextCheckDate = '2026-08-06',
@@ -533,7 +533,7 @@ const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
   .wcg-checked { font-family: var(--f-mono); font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; }
   .wcg-checked svg { width: 14px; height: 14px; }
   .wcg-checked b { color: var(--ink-soft); font-weight: 700; }
-  .wcg-h1 { font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; letter-spacing: -.01em; line-height: 1.24; margin: 14px 0 16px; }
+  .wcg-h1 { font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; letter-spacing: -.01em; line-height: 1.24; margin: 14px 0 16px; text-wrap: balance; }
   .wcg-h1 .hl { color: var(--brand-ink); position: relative; }
   .wcg-h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .26em; background: color-mix(in srgb, var(--brand) 18%, transparent); z-index: -1; border-radius: 2px; }
   .wcg-lead { font-size: 15.5px; color: var(--ink-soft); max-width: 660px; }

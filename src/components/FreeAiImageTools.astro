@@ -65,7 +65,7 @@ export interface Props {
 }
 
 const {
-  headingHtml = '無料で試せる<br /><span class="hl">AI画像生成ツール</span>比較',
+  headingHtml = '無料で試せる<span class="hl">AI画像生成ツール比較</span>',
   lead = '無料で使えるAI画像生成ツールを、無料枠・クレジット制限・透かし・商用利用・日本語対応・対応環境の観点で比較します。実務利用前に確認すべき注意点も整理します。最新情報は必ず各公式サイトをご確認ください。',
   checkedDate = '2026-05-05',
   nextCheckDate = '2026-08-04',
@@ -458,7 +458,7 @@ const cell = (b?: Badge) => b;
   .fai-checked { font-family: var(--f-mono); font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; }
   .fai-checked svg { width: 14px; height: 14px; }
   .fai-checked b { color: var(--ink-soft); font-weight: 700; }
-  .fai-h1 { font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; letter-spacing: -.01em; line-height: 1.24; margin: 14px 0 16px; }
+  .fai-h1 { font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; letter-spacing: -.01em; line-height: 1.24; margin: 14px 0 16px; text-wrap: balance; }
   .fai-h1 .hl { color: var(--brand-ink); position: relative; }
   .fai-h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .26em; background: color-mix(in srgb, var(--brand) 18%, transparent); z-index: -1; border-radius: 2px; }
   .fai-lead { font-size: 15.5px; color: var(--ink-soft); max-width: 640px; }

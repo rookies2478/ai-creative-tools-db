@@ -6,7 +6,6 @@ import GuideSummaryBox from '../../../components/GuideSummaryBox.astro';
 import GuideCheckList from '../../../components/GuideCheckList.astro';
 import GuideFAQ from '../../../components/GuideFAQ.astro';
 import GuideComparisonTable from '../../../components/GuideComparisonTable.astro';
-import GuidePageHeader from '../../../components/GuidePageHeader.astro';
 import GuideFreshnessBox from '../../../components/GuideFreshnessBox.astro';
 
 const entry = await getEntry('guides', 'video-generation-credit-cost-comparison');
@@ -476,20 +475,29 @@ const faqItems = [
 >
   <div class="mx-auto max-w-3xl px-6 py-12">
 
-    <GuidePageHeader
-      title={data.title}
-      description={data.description}
-      lastReviewed={data.lastReviewed}
-    />
+    <div class="gh-hero">
+      <nav class="gh-bc" aria-label="パンくずリスト">
+        <a href="/">トップ</a><span aria-hidden="true"> / </span><a href="/guides/">ガイド一覧</a><span aria-hidden="true"> / </span><span aria-current="page">AI動画生成ツールの料金・クレジット比較</span>
+      </nav>
+      <div class="gh-meta">
+        <span class="gh-pill">ガイド</span>
+        <span class="gh-date">最終確認: {data.lastReviewed}</span>
+      </div>
+      <h1 class="gh-h1">{data.title}</h1>
+      <p class="gh-lead">{data.description}</p>
+    </div>
 
-    <!-- パンくずナビ -->
-    <nav class="mb-6 text-sm text-slate-500">
-      <a href="/" class="hover:underline">トップ</a>
-      <span class="mx-1">/</span>
-      <a href="/guides/" class="hover:underline">ガイド一覧</a>
-      <span class="mx-1">/</span>
-      <span>AI動画生成ツールの料金・クレジット消費比較</span>
-    </nav>
+    <style>
+      .gh-hero { padding: 8px 0 32px; border-bottom: 1px solid #E3E2D9; margin-bottom: 32px; }
+      .gh-bc { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 13px; color: #6A7180; margin-bottom: 18px; }
+      .gh-bc a { color: #6A7180; text-decoration: none; }
+      .gh-bc a:hover { color: #4B3FE4; text-decoration: underline; }
+      .gh-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+      .gh-pill { font-size: 12px; font-weight: 700; color: #2E25A6; background: #ECEBFB; padding: 4px 13px; border-radius: 999px; font-family: "Noto Sans JP", system-ui, sans-serif; }
+      .gh-date { font-size: 12px; color: #6A7180; font-family: "Space Mono", monospace; }
+      .gh-h1 { font-size: clamp(22px, 3vw, 36px); font-weight: 900; line-height: 1.22; letter-spacing: -0.01em; color: #16181D; text-wrap: balance; margin: 0 0 14px; font-family: "Zen Kaku Gothic New", "Noto Sans JP", system-ui, sans-serif; }
+      .gh-lead { font-size: 15px; color: #3A3E47; line-height: 1.75; max-width: 620px; margin: 0; }
+    </style>
 
     <!-- 結論サマリー -->
     <GuideSummaryBox title="このガイドの結論">
@@ -617,7 +625,7 @@ const faqItems = [
         statusColIndex={-1}
       />
       <p class="mt-3 text-xs text-slate-400">
-        商用利用・著作権の考え方については<a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用・著作権ガイド</a>、確認手順については<a href="/guides/ai-commercial-use-checklist/" class="text-blue-600 hover:underline">商用利用前チェックリスト</a>もご参照ください。
+        商用利用・著作権の考え方については<a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用・著作権ガイド</a>、確認手順については<a href="/guides/ai-image-commercial-use-checklist/" class="text-blue-600 hover:underline">商用利用前チェックリスト</a>もご参照ください。
       </p>
     </section>
 
@@ -802,7 +810,7 @@ const faqItems = [
           <li><a href="/guides/commercial-use-cost-comparison/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700 hover:bg-blue-100 transition-colors">画像・動画ツールの商用利用コスト比較</a></li>
           <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">商用利用・著作権の考え方ガイド</a></li>
           <li><a href="/guides/watermark-credit-guide/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">透かし・クレジット表記ガイド</a></li>
-          <li><a href="/guides/ai-commercial-use-checklist/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">商用利用前チェックリスト</a></li>
+          <li><a href="/guides/ai-image-commercial-use-checklist/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">商用利用前チェックリスト</a></li>
           <li><a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">商用利用条件を確認しやすいAIツール</a></li>
           <li><a href="/conditions/no-watermark/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">透かしなしツール一覧</a></li>
           <li><a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">無料枠のあるAIツール</a></li>

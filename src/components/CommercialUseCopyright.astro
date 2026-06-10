@@ -58,7 +58,7 @@ export interface Props {
 }
 
 const {
-  headingHtml = 'AI画像生成の<br /><span class="hl">商用利用・著作権</span>ガイド',
+  headingHtml = 'AI画像生成の<span class="hl">商用利用・著作権ガイド</span>',
   lead = 'AI画像・動画生成ツールを仕事や副業で使う前に確認したい、商用利用条件と著作権のポイントを整理しました。公式規約・プラン・透かし条件の見方を解説します。最新情報は必ず各公式サイトをご確認ください。',
   checkedDate = '2026-05-07',
   nextCheckDate = '2026-08-07',
@@ -137,15 +137,15 @@ const {
   ],
   footnote = 'このガイドは情報提供を目的としており、法的アドバイスではありません。商用利用の判断は各ツールの最新利用規約と専門家への相談に基づいて行ってください。',
   related = [
-    { label: '商用利用前の確認チェックリスト', href: 'https://aicreative-db.com/guides/ai-image-commercial-use-checklist/' },
-    { label: '商用利用を確認しやすいツール', href: 'https://aicreative-db.com/conditions/commercial-use/' },
-    { label: '無料で使えるツール', href: 'https://aicreative-db.com/conditions/free/' },
-    { label: '日本語対応ツール', href: 'https://aicreative-db.com/conditions/japanese/' },
-    { label: '透かしなしツール', href: 'https://aicreative-db.com/conditions/no-watermark/' },
+    { label: '商用利用前の確認チェックリスト', href: '/guides/ai-image-commercial-use-checklist/' },
+    { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+    { label: '無料で使えるツール', href: '/conditions/free/' },
+    { label: '日本語対応ツール', href: '/conditions/japanese/' },
+    { label: '透かしなしツール', href: '/conditions/no-watermark/' },
   ],
   relatedSolid = [
-    { label: 'すべてのツールを見る', href: 'https://aicreative-db.com/tools/' },
-    { label: '全ツール比較表', href: 'https://aicreative-db.com/comparisons/' },
+    { label: 'すべてのツールを見る', href: '/tools/' },
+    { label: '全ツール比較表', href: '/comparisons/' },
   ],
   toolLinks = [
     { name: 'Midjourney', slug: 'midjourney', initial: 'M' },
@@ -448,7 +448,7 @@ const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
   .cuc-checked { font-family: var(--f-mono); font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; }
   .cuc-checked svg { width: 14px; height: 14px; }
   .cuc-checked b { color: var(--ink-soft); font-weight: 700; }
-  .cuc-h1 { font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; letter-spacing: -.01em; line-height: 1.24; margin: 14px 0 16px; }
+  .cuc-h1 { font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; letter-spacing: -.01em; line-height: 1.24; margin: 14px 0 16px; text-wrap: balance; }
   .cuc-h1 .hl { color: var(--brand-ink); position: relative; }
   .cuc-h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .26em; background: color-mix(in srgb, var(--brand) 18%, transparent); z-index: -1; border-radius: 2px; }
   .cuc-lead { font-size: 15.5px; color: var(--ink-soft); max-width: 620px; }

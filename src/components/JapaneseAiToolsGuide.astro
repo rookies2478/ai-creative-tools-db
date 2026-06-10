@@ -63,7 +63,7 @@ export interface Props {
 }
 
 const {
-  headingHtml = '日本語対応で選ぶ<br /><span class="hl">AI画像生成ツールガイド</span>',
+  headingHtml = '日本語対応で選ぶ<span class="hl">AI画像生成ツールガイド</span>',
   lead = '日本語UI・日本語プロンプト・無料枠・商用利用条件を観点に、AI画像生成・動画生成ツールを整理。日本語対応の確認ポイントと選び方を解説します。最新情報は必ず各公式サイトをご確認ください。',
   checkedDate = '2026-05-05',
   nextCheckDate = '2026-08-04',
@@ -395,7 +395,7 @@ const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
   .jag-checked { font-family: var(--f-mono); font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; }
   .jag-checked svg { width: 14px; height: 14px; }
   .jag-checked b { color: var(--ink-soft); font-weight: 700; }
-  .jag-h1 { font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; letter-spacing: -.01em; line-height: 1.24; margin: 14px 0 16px; }
+  .jag-h1 { font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; letter-spacing: -.01em; line-height: 1.24; margin: 14px 0 16px; text-wrap: balance; }
   .jag-h1 .hl { color: var(--brand-ink); position: relative; }
   .jag-h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .26em; background: color-mix(in srgb, var(--brand) 18%, transparent); z-index: -1; border-radius: 2px; }
   .jag-lead { font-size: 15.5px; color: var(--ink-soft); max-width: 680px; }

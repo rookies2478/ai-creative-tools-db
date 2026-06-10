@@ -4,11 +4,15 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import GuideFAQ from '../../../components/GuideFAQ.astro';
 import NoticeBox from '../../../components/NoticeBox.astro';
+import GeneratedSampleImage from '../../../components/GeneratedSampleImage.astro';
+import { generatedImages } from '../../../data/generatedImages';
 
 const allTools = await getCollection('tools');
 const videoTools = allTools.filter(
   (t) => t.data.category === 'video' || t.data.category === 'both'
 );
+
+const referenceImage = generatedImages.find((img) => img.pageSlug === 'categories/video-generation' && img.sampleType === 'reference-visual');
 
 const primarySlugs = ['runway', 'pika', 'kling-ai', 'luma-ai', 'hailuo-ai', 'haiper', 'vidu-ai', 'pixverse'];
 const editingSlugs = ['capcut-ai', 'invideo-ai'];
@@ -47,12 +51,25 @@ const faqs = [
   },
 ];
 
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a.replace(/<[^>]+>/g, '')
+    }
+  }))
+});
 ---
 
 <BaseLayout
   title="AI動画生成ツール一覧｜横断比較・用途別・商用利用・日本語対応"
   description="AI動画生成ツール（Runway・Pika・Kling AI・Luma AIなど）を横断比較表・用途別導線・商用利用条件・日本語対応で整理した一覧ページです。動画編集・アバター動画との違いも解説。最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/video-generation/"
+  jsonLd={faqJsonLd}
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
 
@@ -70,19 +87,99 @@ const faqs = [
       AI動画生成ツールは、テキストや画像から動画を作成したり、短尺動画・広告動画・SNS向け動画などの制作を支援するAIツールです。このページでは、無料枠、日本語対応、出力形式、透かし条件、商用利用条件の確認ポイントなどをもとに、AI動画生成ツールを比較できるよう整理しています。商用利用や権利関係の条件はプランや用途によって異なる場合があるため、利用前に公式情報をご確認ください。
     </p>
 
-    <div class="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700 leading-relaxed">
-      <p class="mb-1.5">掲載情報は公式サイト・利用規約をもとに整理していますが、内容は変更される可能性があります。<strong>最新情報は必ず公式サイトをご確認ください。</strong>商用利用・著作権に関しては断定的な記載を避けており、法的助言ではありません。</p>
-      <ul class="mt-2 space-y-1 text-xs text-amber-700 list-disc list-inside">
-        <li>生成時間はツールやサーバー混雑状況によって変わる場合があります</li>
-        <li>クレジット制のツールでは、生成に失敗した場合でもクレジットが消費される可能性があります</li>
-        <li>人物・著名人・ブランドロゴ・第三者素材を使用する場合は、別途利用条件の確認が必要です</li>
-      </ul>
-    </div>
-
-    <!-- NoticeBox -->
-    <div class="mb-8">
-      <NoticeBox />
-    </div>
+    <!-- 用途別おすすめ早見表 -->
+    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
+      <h2 class="mb-3 text-xl font-bold text-slate-900">用途別おすすめ早見表</h2>
+      <p class="mb-4 text-sm text-slate-600 leading-relaxed">
+        AI動画生成ツールは、映像品質・無料枠・日本語対応・画像から動画化したいかによって選び方が変わります。まずは目的別に候補を絞ってから、下の比較表で料金・無料枠・透かし・商用利用条件を確認してください。
+      </p>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[700px] border-collapse text-sm">
+          <thead>
+            <tr class="bg-slate-100 text-left text-xs font-semibold text-slate-600">
+              <th class="border border-slate-200 px-3 py-2">用途</th>
+              <th class="border border-slate-200 px-3 py-2">候補ツール</th>
+              <th class="border border-slate-200 px-3 py-2">向いている理由</th>
+              <th class="border border-slate-200 px-3 py-2">確認ポイント</th>
+              <th class="border border-slate-200 px-3 py-2">詳細</th>
+            </tr>
+          </thead>
+          <tbody class="text-xs text-slate-700">
+            <tr class="even:bg-slate-50">
+              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">初心者がまず試したい</td>
+              <td class="border border-slate-200 px-3 py-2">Pika / Haiper</td>
+              <td class="border border-slate-200 px-3 py-2">操作が比較的シンプルで、無料枠から試しやすい候補</td>
+              <td class="border border-slate-200 px-3 py-2">無料枠の上限、透かし、生成回数</td>
+              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
+                <a href="/tools/pika/" class="text-blue-600 hover:underline mr-1">Pika</a>
+                <a href="/tools/haiper/" class="text-blue-600 hover:underline">Haiper</a>
+              </td>
+            </tr>
+            <tr class="even:bg-slate-50">
+              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">映像品質を重視したい</td>
+              <td class="border border-slate-200 px-3 py-2">Runway / Luma AI / Kling AI</td>
+              <td class="border border-slate-200 px-3 py-2">リアル寄りの映像や自然な動きを重視する人向けの候補</td>
+              <td class="border border-slate-200 px-3 py-2">有料プラン、生成時間、動画尺</td>
+              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
+                <a href="/tools/runway/" class="text-blue-600 hover:underline mr-1">Runway</a>
+                <a href="/tools/luma-ai/" class="text-blue-600 hover:underline mr-1">Luma AI</a>
+                <a href="/tools/kling-ai/" class="text-blue-600 hover:underline">Kling AI</a>
+              </td>
+            </tr>
+            <tr class="even:bg-slate-50">
+              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">無料枠で試したい</td>
+              <td class="border border-slate-200 px-3 py-2">Pika / Kling AI / Haiper / Hailuo AI</td>
+              <td class="border border-slate-200 px-3 py-2">無料枠から試せる候補</td>
+              <td class="border border-slate-200 px-3 py-2">無料枠の回数、クレジット、透かし条件</td>
+              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
+                <a href="/tools/pika/" class="text-blue-600 hover:underline mr-1">Pika</a>
+                <a href="/tools/kling-ai/" class="text-blue-600 hover:underline mr-1">Kling AI</a>
+                <a href="/tools/haiper/" class="text-blue-600 hover:underline mr-1">Haiper</a>
+                <a href="/tools/hailuo-ai/" class="text-blue-600 hover:underline">Hailuo AI</a>
+              </td>
+            </tr>
+            <tr class="even:bg-slate-50">
+              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">画像から動画を作りたい</td>
+              <td class="border border-slate-200 px-3 py-2">Runway / Pika / Kling AI / Luma AI</td>
+              <td class="border border-slate-200 px-3 py-2">image-to-video用途で比較候補になりやすい</td>
+              <td class="border border-slate-200 px-3 py-2">対応機能、生成尺、プロンプト指定</td>
+              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
+                <a href="/tools/runway/" class="text-blue-600 hover:underline mr-1">Runway</a>
+                <a href="/tools/pika/" class="text-blue-600 hover:underline mr-1">Pika</a>
+                <a href="/tools/kling-ai/" class="text-blue-600 hover:underline mr-1">Kling AI</a>
+                <a href="/tools/luma-ai/" class="text-blue-600 hover:underline">Luma AI</a>
+              </td>
+            </tr>
+            <tr class="even:bg-slate-50">
+              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">日本語で扱いやすいものを探したい</td>
+              <td class="border border-slate-200 px-3 py-2">Kling AI / Haiper / CapCut AI</td>
+              <td class="border border-slate-200 px-3 py-2">日本語UIまたは日本語プロンプト対応を確認したい人向け</td>
+              <td class="border border-slate-200 px-3 py-2">日本語UIなのか、日本語プロンプト対応なのかを分けて確認</td>
+              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
+                <a href="/tools/kling-ai/" class="text-blue-600 hover:underline mr-1">Kling AI</a>
+                <a href="/tools/haiper/" class="text-blue-600 hover:underline mr-1">Haiper</a>
+                <a href="/tools/capcut-ai/" class="text-blue-600 hover:underline">CapCut AI</a>
+              </td>
+            </tr>
+            <tr class="even:bg-slate-50">
+              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">商用・納品用途を検討したい</td>
+              <td class="border border-slate-200 px-3 py-2">Runway / Kling AI / Pika など</td>
+              <td class="border border-slate-200 px-3 py-2">動画制作案件で候補に入りやすいツール</td>
+              <td class="border border-slate-200 px-3 py-2">プラン別の商用利用条件、素材利用、透かし、利用規約</td>
+              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
+                <a href="/tools/runway/" class="text-blue-600 hover:underline mr-1">Runway</a>
+                <a href="/tools/kling-ai/" class="text-blue-600 hover:underline mr-1">Kling AI</a>
+                <a href="/tools/pika/" class="text-blue-600 hover:underline mr-1">Pika</a>
+                <a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用ガイド</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-slate-500">
+        表内の候補は、当サイトで確認した公式情報と用途別の比較観点をもとに整理したものです。料金・無料枠・透かし・商用利用条件はプランや時期によって変わる場合があります。最新情報は各公式サイトをご確認ください。本記事は法的助言ではありません。
+      </p>
+    </section>
 
     <!-- AI動画生成・AI動画編集・AIアバター動画の違い -->
     <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
@@ -181,7 +278,7 @@ const faqs = [
     <section class="mb-12">
       <h2 class="mb-3 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">AI動画生成ツール 横断比較表</h2>
       <div class="mb-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-700 leading-relaxed">
-        料金、無料枠、商用利用条件、透かしの有無、生成した動画の利用条件は変更される場合があります。人物・ロゴ・商標・第三者素材を含む動画では、各サービスの規約や権利者の許諾確認が必要になる場合があります。本ページは法的助言ではありません。利用前に必ず公式情報をご確認ください。
+        比較表の内容は、当サイトで確認した公式情報をもとに整理しています。料金・無料枠・透かし・生成時間・クレジット消費・利用条件は、プランや時期によって変わる場合があります。人物・ロゴ・第三者素材を含む生成物の扱いは、各ツールの公式情報をご確認ください。本記事は法的助言ではありません。
       </div>
       <p class="mb-2 text-xs text-slate-400 sm:hidden text-center">← 横にスクロールできます →</p>
       <div class="relative">
@@ -319,6 +416,7 @@ const faqs = [
     <!-- ツール別：生成動画の特徴と向き -->
     <section class="mb-12">
       <h2 class="mb-3 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">ツール別：生成できる動画の特徴と向き</h2>
+      {referenceImage && <GeneratedSampleImage image={referenceImage} />}
       <p class="mb-3 text-sm text-slate-500">各ツールが得意とする動画スタイル・尺感・難易度の目安をまとめています。ツールの機能・品質は更新されることがあるため、最新情報は各公式サイトをご確認ください。</p>
       <p class="mb-2 text-xs text-slate-400 sm:hidden text-center">← 横にスクロールできます →</p>
       <div class="relative">
@@ -717,6 +815,11 @@ const faqs = [
         </ul>
       </div>
     </section>
+
+    <!-- NoticeBox -->
+    <div class="mb-8">
+      <NoticeBox />
+    </div>
 
     <!-- FAQ -->
     <GuideFAQ items={faqs} title="よくある質問" />

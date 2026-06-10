@@ -27,6 +27,8 @@ weaknesses:
   - "API利用は別途従量課金（料金は公式ページで要確認）"
 lastReviewed: "2026-05-26"
 nextReviewDue: "2026-06-26"
+verifiedAt: "2026-06-08"
+officialSourceUrl: "https://openai.com/dall-e-3"
 pricingModel: "subscription_credit"
 freePlanNote: "ChatGPT無料プランで制限付き利用できる場合あり"
 paidPlanNote: "ChatGPT Plus等の有料プランで利用枠が拡大。API利用は従量課金。"
@@ -209,6 +211,8 @@ C2PA（Coalition for Content Provenance and Authenticity）標準の不可視メ
 - [Leonardo AI](/tools/leonardo-ai/)：無料枠あり、ゲーム・イラスト・キャラクター向け
 - [Canva AI画像生成](/tools/canva-ai-image-generator/)：デザイン制作フローに組み込みやすい
 - [Stable Diffusion](/tools/stable-diffusion/)：オープンソース、ローカル実行可能
+
+[DALLEとMidjourneyを比較する →](/comparisons/dalle-vs-midjourney/)
 
 ---
 

@@ -1,4 +1,4 @@
-﻿---
+---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
@@ -10,84 +10,101 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
   <div class="mx-auto max-w-3xl px-6 py-12">
 
-    <nav class="mb-6 text-sm text-slate-500">
-      <a href="/" class="hover:underline">トップ</a>
-      <span class="mx-1">/</span>
-      <span>運営者情報</span>
+    <nav class="mb-6 text-sm text-slate-400">
+      <a href="/" class="hover:text-slate-700 hover:underline">トップ</a>
+      <span class="mx-1 text-slate-300">/</span>
+      <span class="text-slate-600">運営者情報</span>
     </nav>
 
-    <h1 class="mb-8 text-3xl font-bold text-[#002B61]">運営者情報</h1>
+    <header class="mb-10 border-b border-slate-100 pb-8">
+      <span class="mb-3 inline-block rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700">サイトについて</span>
+      <h1 class="text-2xl font-bold text-[#2E25A6] sm:text-3xl" style="text-wrap:balance">運営者情報</h1>
+      <p class="mt-3 text-base leading-relaxed text-slate-500">AIクリエイティブナビの運営方針・対象読者・情報の取り扱いについてご説明します。</p>
+    </header>
 
-    <div class="space-y-8 text-sm leading-relaxed text-slate-700">
+    <div class="space-y-6 text-sm leading-relaxed text-slate-700">
 
-      <section>
-        <h2 class="mb-3 text-base font-semibold text-[#002B61]">サイト概要</h2>
+      <section class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+        <h2 class="mb-4 text-base font-semibold text-[#2E25A6]">サイト概要</h2>
         <table class="w-full text-sm">
           <tbody class="divide-y divide-slate-100">
             <tr>
-              <th class="w-32 py-2 pr-4 text-left font-medium text-slate-600">運営者</th>
+              <th class="w-32 py-2 pr-4 text-left font-medium text-slate-500">運営者</th>
               <td class="py-2">AIクリエイティブナビ運営者（個人運営）</td>
             </tr>
             <tr>
-              <th class="w-32 py-2 pr-4 text-left font-medium text-slate-600">サイト名</th>
+              <th class="w-32 py-2 pr-4 text-left font-medium text-slate-500">サイト名</th>
               <td class="py-2">AIクリエイティブナビ</td>
             </tr>
             <tr>
-              <th class="py-2 pr-4 text-left font-medium text-slate-600">URL</th>
+              <th class="py-2 pr-4 text-left font-medium text-slate-500">URL</th>
               <td class="py-2">https://aicreative-db.com/</td>
             </tr>
             <tr>
-              <th class="py-2 pr-4 text-left font-medium text-slate-600">目的</th>
+              <th class="py-2 pr-4 text-left font-medium text-slate-500">目的</th>
               <td class="py-2">AI動画生成・AI画像生成を中心に、AIクリエイティブツールの料金・機能・商用利用条件などを比較・整理し、ツール選定の参考情報を提供する</td>
             </tr>
           </tbody>
         </table>
       </section>
 
-      <section>
-        <h2 class="mb-3 text-base font-semibold text-[#002B61]">対象読者</h2>
-        <p>本サイトは、以下のような方を主な対象としています。</p>
-        <ul class="mt-2 list-disc space-y-1 pl-5">
-          <li>AI画像生成・動画生成ツールの導入を検討している個人クリエイター・デザイナー</li>
-          <li>商用利用や業務利用に適したツールを探している方</li>
-          <li>無料プランや料金を比較してからツールを選びたい方</li>
-          <li>日本語対応ツールや透かしのないツールを探している方</li>
+      <section class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+        <h2 class="mb-4 text-base font-semibold text-[#2E25A6]">対象読者</h2>
+        <p class="mb-3 text-slate-600">本サイトは、以下のような方を主な対象としています。</p>
+        <ul class="space-y-2 pl-1">
+          {[
+            'AI画像生成・動画生成ツールの導入を検討している個人クリエイター・デザイナー',
+            '商用利用や業務利用に適したツールを探している方',
+            '無料プランや料金を比較してからツールを選びたい方',
+            '日本語対応ツールや透かしのないツールを探している方',
+          ].map(item => (
+            <li class="flex items-start gap-2">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-400"></span>
+              <span>{item}</span>
+            </li>
+          ))}
         </ul>
       </section>
 
-      <section>
-        <h2 class="mb-3 text-base font-semibold text-[#002B61]">情報の取り扱い方針</h2>
+      <section class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+        <h2 class="mb-4 text-base font-semibold text-[#2E25A6]">情報の取り扱い方針</h2>
 
-        <h3 class="mt-4 mb-2 font-medium text-slate-800">公式情報を優先する</h3>
-        <p>
-          掲載情報は各ツールの公式サイト・料金ページ・利用規約・ヘルプページを参照して作成しています。口コミや非公式情報のみを根拠とした記載は行いません。
-        </p>
+        <div class="space-y-5">
+          <div>
+            <h3 class="mb-1.5 font-medium text-slate-800">公式情報を優先する</h3>
+            <p class="text-slate-600">
+              掲載情報は各ツールの公式サイト・料金ページ・利用規約・ヘルプページを参照して作成しています。口コミや非公式情報のみを根拠とした記載は行いません。
+            </p>
+          </div>
 
-        <h3 class="mt-4 mb-2 font-medium text-slate-800">情報の鮮度管理（lastReviewed / nextReviewDue）</h3>
-        <p>
-          各ツールページには「最終確認日（lastReviewed）」と「次回確認予定日（nextReviewDue）」を設けています。料金・機能・商用利用条件は変更される可能性があるため、3ヶ月を目安に情報を再確認します。
-        </p>
-        <p class="mt-2">
-          最新情報は必ず各ツールの公式サイトでご確認ください。
-        </p>
+          <div>
+            <h3 class="mb-1.5 font-medium text-slate-800">情報の鮮度管理（lastReviewed / nextReviewDue）</h3>
+            <p class="text-slate-600">
+              各ツールページには「最終確認日（lastReviewed）」と「次回確認予定日（nextReviewDue）」を設けています。料金・機能・商用利用条件は変更される可能性があるため、3ヶ月を目安に情報を再確認します。
+            </p>
+            <p class="mt-2 text-slate-600">最新情報は必ず各ツールの公式サイトでご確認ください。</p>
+          </div>
 
-        <h3 class="mt-4 mb-2 font-medium text-slate-800">商用利用・著作権について法的断定を行わない</h3>
-        <p>
-          商用利用可否・著作権の帰属については、公式情報確認時点の整理として掲載しています。法的な判断や保証は行っておらず、商用利用前は各ツールの最新利用規約の確認および専門家への相談を推奨します。
-        </p>
+          <div>
+            <h3 class="mb-1.5 font-medium text-slate-800">商用利用・著作権について法的断定を行わない</h3>
+            <p class="text-slate-600">
+              商用利用可否・著作権の帰属については、公式情報確認時点の整理として掲載しています。法的な判断や保証は行っておらず、商用利用前は各ツールの最新利用規約の確認および専門家への相談を推奨します。
+            </p>
+          </div>
+        </div>
       </section>
 
-      <section>
-        <h2 class="mb-3 text-base font-semibold text-[#002B61]">お問い合わせ</h2>
-        <p>
-          掲載情報の誤りや修正依頼については、<a href="/contact/" class="text-blue-600 hover:underline">お問い合わせページ</a>をご覧ください。
+      <section class="rounded-xl border border-indigo-100 bg-indigo-50/40 p-6">
+        <h2 class="mb-3 text-base font-semibold text-[#2E25A6]">お問い合わせ</h2>
+        <p class="text-slate-600">
+          掲載情報の誤りや修正依頼については、<a href="/contact/" class="text-indigo-600 hover:underline">お問い合わせページ</a>をご覧ください。
         </p>
       </section>
 
     </div>
 
     <nav class="mt-10 border-t border-slate-200 pt-6 text-sm">
-      <a href="/" class="text-blue-600 hover:underline">← トップに戻る</a>
+      <a href="/" class="text-indigo-600 hover:underline">← トップに戻る</a>
     </nav>
 
   </div>

@@ -1,31 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import ToolCard from '../../../components/ToolCard.astro';
-import GuideFAQ from '../../../components/GuideFAQ.astro';
-import NoticeBox from '../../../components/NoticeBox.astro';
-import GeneratedSampleImage from '../../../components/GeneratedSampleImage.astro';
-import { generatedImages } from '../../../data/generatedImages';
 
 const allTools = await getCollection('tools');
 const videoTools = allTools.filter(
   (t) => t.data.category === 'video' || t.data.category === 'both'
 );
 
-const referenceImage = generatedImages.find((img) => img.pageSlug === 'categories/video-generation' && img.sampleType === 'reference-visual');
-
 const primarySlugs = ['runway', 'pika', 'kling-ai', 'luma-ai', 'hailuo-ai', 'haiper', 'vidu-ai', 'pixverse'];
-const editingSlugs = ['capcut-ai', 'invideo-ai'];
-const avatarSlugs = ['heygen', 'synthesia', 'd-id'];
-
 const primaryTools = primarySlugs
   .map((s) => videoTools.find((t) => t.slug === s))
-  .filter(Boolean);
-const editingTools = editingSlugs
-  .map((s) => allTools.find((t) => t.slug === s))
-  .filter(Boolean);
-const avatarTools = avatarSlugs
-  .map((s) => allTools.find((t) => t.slug === s))
   .filter(Boolean);
 
 const faqs = [
@@ -35,15 +19,15 @@ const faqs = [
   },
   {
     q: 'AI動画生成ツールとAIアバター動画ツールの違いは？',
-    a: 'AI動画生成ツールはテキストや画像からシーン・映像を生成します。AIアバター動画ツール（HeyGen・Synthesia・D-IDなど）はAIが生成した人物アバターが話すスタイルの動画を作成するものです。スライド説明・製品解説・研修動画など、話者映像が必要な用途ではアバター動画ツールが向いている場合があります。詳しくは<a href="/categories/avatar-video/" class="text-blue-600 hover:underline">AIアバター動画カテゴリ</a>をご参照ください。',
+    a: 'AI動画生成ツールはテキストや画像からシーン・映像を生成します。AIアバター動画ツール（HeyGen・Synthesia・D-IDなど）はAIが生成した人物アバターが話すスタイルの動画を作成するものです。スライド説明・製品解説・研修動画など、話者映像が必要な用途ではアバター動画ツールが向いている場合があります。詳しくは<a href="/categories/avatar-video/">AIアバター動画カテゴリ</a>をご参照ください。',
   },
   {
     q: '無料で使えるAI動画生成ツールはありますか？',
-    a: 'Runway・Pika・Kling AI・Luma AI・Haiper・Hailuo AI・Vidu AIはいずれも無料枠が用意されています。ただし無料プランの生成回数・クレジット上限・透かし条件・商用利用条件はツールごとに大きく異なります。最新情報は各ツールの公式サイトをご確認ください。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料枠のあるAIツール比較ページ</a>もご参照ください。',
+    a: 'Runway・Pika・Kling AI・Luma AI・Haiper・Hailuo AI・Vidu AIはいずれも無料枠が用意されています。ただし無料プランの生成回数・クレジット上限・透かし条件・商用利用条件はツールごとに大きく異なります。最新情報は各ツールの公式サイトをご確認ください。<a href="/conditions/free/">無料枠のあるAIツール比較ページ</a>もご参照ください。',
   },
   {
     q: '商用利用やYouTube利用時に確認すべき点は？',
-    a: '商用利用・YouTube投稿を前提にする場合、①プランごとの商用利用条件、②透かしの有無、③生成物の著作権・所有権に関する規定、④人物・ブランドロゴ・第三者素材を含む場合の制約、を各ツールの公式利用規約で事前に確認することを推奨します。無料プランでは商用利用が制限されているツールも多くあります。本ページは法的助言ではありません。確認の手順は<a href="/guides/ai-commercial-use-checklist/" class="text-blue-600 hover:underline">商用利用前に確認したいチェックリスト</a>、よくあるトラブル事例は<a href="/guides/ai-commercial-use-trouble-cases/" class="text-blue-600 hover:underline">商用利用で起こりやすいトラブル例と確認ポイント</a>もご参照ください。',
+    a: '商用利用・YouTube投稿を前提にする場合、①プランごとの商用利用条件、②透かしの有無、③生成物の著作権・所有権に関する規定、④人物・ブランドロゴ・第三者素材を含む場合の制約、を各ツールの公式利用規約で事前に確認することを推奨します。無料プランでは商用利用が制限されているツールも多くあります。本ページは法的助言ではありません。',
   },
   {
     q: '日本語プロンプトでも使えますか？',
@@ -63,770 +47,1015 @@ const faqJsonLd = JSON.stringify({
     }
   }))
 });
+
+const videoToolCards = [
+  { name: 'Runway',    slug: 'runway',    initial: 'R', role: '動画生成', commercial: '要確認', free: '要確認', jp: '要確認', note: 'プランによる', price: '$12/月（Standard・年払い）/ $14/月（月払い）', platforms: 'Web、API', date: '2026-06-08' },
+  { name: 'Pika',      slug: 'pika',      initial: 'P', role: '動画生成', commercial: '要確認', free: '要確認', jp: '要確認', note: 'プランによる', price: '$8/月（年払い）', platforms: 'Web', date: '2026-06-08' },
+  { name: 'Kling AI',  slug: 'kling-ai',  initial: 'K', role: '動画生成', commercial: '要確認', free: '要確認', jp: '要確認', note: 'プランによる', price: '$6.99〜（要公式確認）', platforms: 'Web', date: '2026-06-08' },
+  { name: 'Luma AI',   slug: 'luma-ai',   initial: 'L', role: '動画生成', commercial: '要確認', free: '無料枠あり', jp: '要確認', note: '透かしあり', price: '$30/月（Plus・月払い）', platforms: 'Web、API', date: '2026-06-08' },
+  { name: 'Hailuo AI', slug: 'hailuo-ai', initial: 'H', role: '動画生成', commercial: '要確認', free: '要確認', jp: '要確認', note: 'プランによる', price: '要公式確認', platforms: 'Web', date: '2026-06-08' },
+  { name: 'Haiper',    slug: 'haiper',    initial: 'H', role: '動画生成', commercial: '要確認', free: '無料枠あり', jp: '要確認', note: '透かしあり', price: '要公式確認', platforms: 'Web、iOS、API', date: '2026-06-08' },
+  { name: 'Vidu AI',   slug: 'vidu-ai',   initial: 'V', role: '動画生成', commercial: '要確認', free: '要確認', jp: '要確認', note: 'プランによる', price: '要公式確認', platforms: 'Web', date: '2026-06-08' },
+  { name: 'PixVerse',  slug: 'pixverse',  initial: 'P', role: '動画生成', commercial: '要確認', free: '要確認', jp: '対応', note: 'プランによる', price: '要公式確認', platforms: 'Web', date: '2026-06-08' },
+];
+
+const editToolCards = [
+  { name: 'CapCut AI',  slug: 'capcut-ai',  initial: 'C', role: '動画編集', commercial: '要確認', free: '無料枠あり', jp: '対応', note: '透かしあり', price: '要公式確認', platforms: 'Web、iOS、Android', date: '2026-06-08' },
+  { name: 'InVideo AI', slug: 'invideo-ai', initial: 'I', role: '動画編集', commercial: '要確認', free: '無料枠あり', jp: '要確認', note: 'プランによる', price: '約$20/月〜', platforms: 'Web', date: '2026-06-08' },
+];
+
+const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(Boolean);
 ---
 
 <BaseLayout
-  title="AI動画生成ツール一覧｜横断比較・用途別・商用利用・日本語対応"
-  description="AI動画生成ツール（Runway・Pika・Kling AI・Luma AIなど）を横断比較表・用途別導線・商用利用条件・日本語対応で整理した一覧ページです。動画編集・アバター動画との違いも解説。最新情報は公式サイトをご確認ください。"
+  title="AI動画生成ツールを比較する｜用途別・商用利用・日本語対応"
+  description="AI動画生成ツール（Runway・Pika・Kling AI・Luma AIなど）をテキスト→動画・画像→動画・無料枠・透かし・商用利用条件・日本語対応で比較する一覧ページです。用途別導線・比較表付き。最新情報は各公式サイトをご確認ください。"
   canonicalPath="/categories/video-generation/"
   jsonLd={faqJsonLd}
 >
-  <div class="mx-auto max-w-5xl px-6 py-12">
 
-    <nav class="mb-6 text-sm text-slate-500">
+  <div class="mx-auto max-w-5xl px-6 py-10">
+
+    <!-- パンくず -->
+    <nav class="mb-5 text-sm text-slate-500">
       <a href="/" class="hover:underline">トップ</a>
       <span class="mx-1">/</span>
       <a href="/tools/" class="hover:underline">ツール一覧</a>
       <span class="mx-1">/</span>
-      <span>AI動画生成ツール一覧</span>
+      <span>AI動画生成ツール</span>
     </nav>
 
-    <h1 class="mb-3 text-3xl font-bold text-slate-900">AI動画生成ツール一覧</h1>
-
-    <p class="mb-4 leading-relaxed text-slate-600">
-      AI動画生成ツールは、テキストや画像から動画を作成したり、短尺動画・広告動画・SNS向け動画などの制作を支援するAIツールです。このページでは、無料枠、日本語対応、出力形式、透かし条件、商用利用条件の確認ポイントなどをもとに、AI動画生成ツールを比較できるよう整理しています。商用利用や権利関係の条件はプランや用途によって異なる場合があるため、利用前に公式情報をご確認ください。
-    </p>
-
-    <!-- 用途別おすすめ早見表 -->
-    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
-      <h2 class="mb-3 text-xl font-bold text-slate-900">用途別おすすめ早見表</h2>
-      <p class="mb-4 text-sm text-slate-600 leading-relaxed">
-        AI動画生成ツールは、映像品質・無料枠・日本語対応・画像から動画化したいかによって選び方が変わります。まずは目的別に候補を絞ってから、下の比較表で料金・無料枠・透かし・商用利用条件を確認してください。
-      </p>
-      <div class="overflow-x-auto">
-        <table class="w-full min-w-[700px] border-collapse text-sm">
-          <thead>
-            <tr class="bg-slate-100 text-left text-xs font-semibold text-slate-600">
-              <th class="border border-slate-200 px-3 py-2">用途</th>
-              <th class="border border-slate-200 px-3 py-2">候補ツール</th>
-              <th class="border border-slate-200 px-3 py-2">向いている理由</th>
-              <th class="border border-slate-200 px-3 py-2">確認ポイント</th>
-              <th class="border border-slate-200 px-3 py-2">詳細</th>
-            </tr>
-          </thead>
-          <tbody class="text-xs text-slate-700">
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">初心者がまず試したい</td>
-              <td class="border border-slate-200 px-3 py-2">Pika / Haiper</td>
-              <td class="border border-slate-200 px-3 py-2">操作が比較的シンプルで、無料枠から試しやすい候補</td>
-              <td class="border border-slate-200 px-3 py-2">無料枠の上限、透かし、生成回数</td>
-              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
-                <a href="/tools/pika/" class="text-blue-600 hover:underline mr-1">Pika</a>
-                <a href="/tools/haiper/" class="text-blue-600 hover:underline">Haiper</a>
-              </td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">映像品質を重視したい</td>
-              <td class="border border-slate-200 px-3 py-2">Runway / Luma AI / Kling AI</td>
-              <td class="border border-slate-200 px-3 py-2">リアル寄りの映像や自然な動きを重視する人向けの候補</td>
-              <td class="border border-slate-200 px-3 py-2">有料プラン、生成時間、動画尺</td>
-              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
-                <a href="/tools/runway/" class="text-blue-600 hover:underline mr-1">Runway</a>
-                <a href="/tools/luma-ai/" class="text-blue-600 hover:underline mr-1">Luma AI</a>
-                <a href="/tools/kling-ai/" class="text-blue-600 hover:underline">Kling AI</a>
-              </td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">無料枠で試したい</td>
-              <td class="border border-slate-200 px-3 py-2">Pika / Kling AI / Haiper / Hailuo AI</td>
-              <td class="border border-slate-200 px-3 py-2">無料枠から試せる候補</td>
-              <td class="border border-slate-200 px-3 py-2">無料枠の回数、クレジット、透かし条件</td>
-              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
-                <a href="/tools/pika/" class="text-blue-600 hover:underline mr-1">Pika</a>
-                <a href="/tools/kling-ai/" class="text-blue-600 hover:underline mr-1">Kling AI</a>
-                <a href="/tools/haiper/" class="text-blue-600 hover:underline mr-1">Haiper</a>
-                <a href="/tools/hailuo-ai/" class="text-blue-600 hover:underline">Hailuo AI</a>
-              </td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">画像から動画を作りたい</td>
-              <td class="border border-slate-200 px-3 py-2">Runway / Pika / Kling AI / Luma AI</td>
-              <td class="border border-slate-200 px-3 py-2">image-to-video用途で比較候補になりやすい</td>
-              <td class="border border-slate-200 px-3 py-2">対応機能、生成尺、プロンプト指定</td>
-              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
-                <a href="/tools/runway/" class="text-blue-600 hover:underline mr-1">Runway</a>
-                <a href="/tools/pika/" class="text-blue-600 hover:underline mr-1">Pika</a>
-                <a href="/tools/kling-ai/" class="text-blue-600 hover:underline mr-1">Kling AI</a>
-                <a href="/tools/luma-ai/" class="text-blue-600 hover:underline">Luma AI</a>
-              </td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">日本語で扱いやすいものを探したい</td>
-              <td class="border border-slate-200 px-3 py-2">Kling AI / Haiper / CapCut AI</td>
-              <td class="border border-slate-200 px-3 py-2">日本語UIまたは日本語プロンプト対応を確認したい人向け</td>
-              <td class="border border-slate-200 px-3 py-2">日本語UIなのか、日本語プロンプト対応なのかを分けて確認</td>
-              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
-                <a href="/tools/kling-ai/" class="text-blue-600 hover:underline mr-1">Kling AI</a>
-                <a href="/tools/haiper/" class="text-blue-600 hover:underline mr-1">Haiper</a>
-                <a href="/tools/capcut-ai/" class="text-blue-600 hover:underline">CapCut AI</a>
-              </td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">商用・納品用途を検討したい</td>
-              <td class="border border-slate-200 px-3 py-2">Runway / Kling AI / Pika など</td>
-              <td class="border border-slate-200 px-3 py-2">動画制作案件で候補に入りやすいツール</td>
-              <td class="border border-slate-200 px-3 py-2">プラン別の商用利用条件、素材利用、透かし、利用規約</td>
-              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
-                <a href="/tools/runway/" class="text-blue-600 hover:underline mr-1">Runway</a>
-                <a href="/tools/kling-ai/" class="text-blue-600 hover:underline mr-1">Kling AI</a>
-                <a href="/tools/pika/" class="text-blue-600 hover:underline mr-1">Pika</a>
-                <a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用ガイド</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="mt-3 text-xs text-slate-500">
-        表内の候補は、当サイトで確認した公式情報と用途別の比較観点をもとに整理したものです。料金・無料枠・透かし・商用利用条件はプランや時期によって変わる場合があります。最新情報は各公式サイトをご確認ください。本記事は法的助言ではありません。
-      </p>
-    </section>
-
-    <!-- AI動画生成・AI動画編集・AIアバター動画の違い -->
-    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
-      <h2 class="mb-3 text-lg font-semibold text-slate-900">AI動画生成・AI動画編集・AIアバター動画の違い</h2>
-      <p class="mb-4 text-sm text-slate-600 leading-relaxed">
-        「動画系AIツール」は大きく3種類に分かれます。目的に合ったカテゴリを選ぶことが、ツール選びの第一歩です。
-      </p>
-      <div class="overflow-x-auto">
-        <table class="w-full min-w-[600px] border-collapse text-sm">
-          <thead>
-            <tr class="bg-slate-100 text-left text-xs font-semibold text-slate-600">
-              <th class="border border-slate-200 px-3 py-2">カテゴリ</th>
-              <th class="border border-slate-200 px-3 py-2">何をするツールか</th>
-              <th class="border border-slate-200 px-3 py-2">代表ツール</th>
-              <th class="border border-slate-200 px-3 py-2">向いている用途</th>
-            </tr>
-          </thead>
-          <tbody class="text-xs text-slate-700">
-            <tr class="bg-blue-50">
-              <td class="border border-slate-200 px-3 py-2 font-bold text-blue-800">AI動画生成<br/><span class="font-normal text-blue-600">（このページ）</span></td>
-              <td class="border border-slate-200 px-3 py-2">テキストや画像から映像を新規に生成する</td>
-              <td class="border border-slate-200 px-3 py-2">Runway・Pika・Kling AI・Luma AI・Haiper・Hailuo AI</td>
-              <td class="border border-slate-200 px-3 py-2">SNS動画・コンセプトムービー・画像の動画化</td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-bold text-slate-800">AI動画編集</td>
-              <td class="border border-slate-200 px-3 py-2">既存の動画素材にテンプレート・字幕・エフェクトを加える</td>
-              <td class="border border-slate-200 px-3 py-2">CapCut AI・InVideo AI</td>
-              <td class="border border-slate-200 px-3 py-2">テンプレート編集・自動字幕・既存素材の仕上げ</td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-bold text-slate-800">AIアバター動画</td>
-              <td class="border border-slate-200 px-3 py-2">AIが生成した人物アバターが話す動画を生成する</td>
-              <td class="border border-slate-200 px-3 py-2">HeyGen・Synthesia・D-ID</td>
-              <td class="border border-slate-200 px-3 py-2">研修動画・製品解説・ナレーション付き説明動画</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="mt-3 text-xs text-slate-500">
-        動画編集ツールについては<a href="/categories/video-editing/" class="text-blue-600 hover:underline">動画編集カテゴリ</a>、アバター動画については<a href="/categories/avatar-video/" class="text-blue-600 hover:underline">AIアバター動画カテゴリ</a>をご参照ください。
-      </p>
-    </section>
-
-    <!-- 用途別導線 -->
-    <section class="mb-10 rounded-xl border border-blue-100 bg-blue-50 px-6 py-5">
-      <h2 class="mb-3 text-sm font-semibold text-blue-800">用途別ページへ</h2>
+    <!-- カテゴリナビ -->
+    <nav class="mb-8">
+      <p class="mb-2 text-xs font-semibold text-slate-500 uppercase tracking-widest">カテゴリから探す</p>
       <div class="flex flex-wrap gap-2 text-sm">
-        <a href="/use-cases/youtube/" class="rounded-full border border-blue-200 bg-white px-3 py-1.5 text-blue-700 hover:bg-blue-100">YouTube動画向け</a>
-        <a href="/use-cases/shorts/" class="rounded-full border border-blue-200 bg-white px-3 py-1.5 text-blue-700 hover:bg-blue-100">Shorts・縦型動画向け</a>
-        <a href="/use-cases/faceless-video/" class="rounded-full border border-blue-200 bg-white px-3 py-1.5 text-blue-700 hover:bg-blue-100">顔出しなし動画向け</a>
-        <a href="/use-cases/ad-video/" class="rounded-full border border-blue-200 bg-white px-3 py-1.5 text-blue-700 hover:bg-blue-100">広告動画向け</a>
-        <a href="/categories/avatar-video/" class="rounded-full border border-purple-200 bg-white px-3 py-1.5 text-purple-700 hover:bg-purple-100">AIアバター動画</a>
-        <a href="/categories/video-editing/" class="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-slate-700 hover:bg-slate-100">動画編集・テンプレート活用</a>
-        <a href="/categories/image-generation/" class="rounded-full border border-emerald-200 bg-white px-3 py-1.5 text-emerald-700 hover:bg-emerald-100">AI画像生成も比較</a>
+        <a href="/categories/video-generation/" class="rounded-full border border-indigo-400 bg-indigo-50 px-3 py-1.5 font-semibold text-indigo-700" aria-current="page">AI動画生成</a>
+        <a href="/categories/image-generation/" class="rounded-full border border-slate-300 px-3 py-1.5 text-slate-600 hover:bg-slate-50">AI画像生成</a>
+        <a href="/categories/avatar-video/" class="rounded-full border border-slate-300 px-3 py-1.5 text-slate-600 hover:bg-slate-50">AIアバター動画</a>
+        <a href="/categories/video-editing/" class="rounded-full border border-slate-300 px-3 py-1.5 text-slate-600 hover:bg-slate-50">AI動画編集</a>
+        <a href="/categories/design/" class="rounded-full border border-slate-300 px-3 py-1.5 text-slate-600 hover:bg-slate-50">AIデザイン</a>
+        <a href="/categories/voice-narration/" class="rounded-full border border-slate-300 px-3 py-1.5 text-slate-600 hover:bg-slate-50">AI音声・ナレーション</a>
       </div>
-    </section>
-
-    <!-- 比較ポイント -->
-    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
-      <h2 class="mb-3 text-lg font-semibold text-slate-900">AI動画生成ツールを選ぶときの比較ポイント</h2>
-      <ul class="space-y-3 text-sm text-slate-700">
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>入力タイプ：</strong>テキストから動画を生成する「テキスト→動画」、画像から動画を生成する「画像→動画」、既存動画を入力する「動画→動画」など、ツールによって対応する入力タイプが異なります。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>生成できる動画の長さや解像度：</strong>多くのツールで無料プランは生成尺・解像度に制限があります。プランごとの上限は公式サイトでご確認ください。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>無料枠の有無と制限：</strong>クレジット制・月更新・初回限りなど、無料枠の形態はツールによって異なります。生成失敗時のクレジット消費についても公式情報をご確認ください。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>日本語UIまたは日本語プロンプトへの対応：</strong>日本語UIと日本語プロンプト対応は別問題です。細かい映像スタイルの指定では英語プロンプトの方が意図を伝えやすい場合があります。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>透かし条件：</strong>無料プランでは透かしが付与される場合があります。SNS投稿や商用利用を前提とする場合は透かし条件の確認が重要です。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>商用利用条件の確認ポイント：</strong>広告・YouTube・クライアントワーク等の商用利用を前提にする場合は、公式利用規約でプランごとの条件を事前に確認してください。本ページは法的助言ではありません。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>用途との相性：</strong>SNS向け短尺・YouTube・広告動画・顔出しなし動画・ナレーション動画など、目的によって向いているツールが異なります。</span>
-        </li>
-      </ul>
-      <p class="mt-3 text-xs text-slate-500">各条件の詳細は各ツールの詳細ページおよび公式サイトでご確認ください。</p>
-    </section>
-
-    <!-- 横断比較表 -->
-    <section class="mb-12">
-      <h2 class="mb-3 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">AI動画生成ツール 横断比較表</h2>
-      <div class="mb-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-700 leading-relaxed">
-        比較表の内容は、当サイトで確認した公式情報をもとに整理しています。料金・無料枠・透かし・生成時間・クレジット消費・利用条件は、プランや時期によって変わる場合があります。人物・ロゴ・第三者素材を含む生成物の扱いは、各ツールの公式情報をご確認ください。本記事は法的助言ではありません。
-      </div>
-      <p class="mb-2 text-xs text-slate-400 sm:hidden text-center">← 横にスクロールできます →</p>
-      <div class="relative">
-        <div class="overflow-x-auto">
-        <table class="w-full min-w-[1000px] border-collapse text-sm">
-          <thead>
-            <tr class="bg-slate-100 text-left text-xs font-semibold text-slate-600">
-              <th class="border border-slate-200 px-3 py-2">ツール名</th>
-              <th class="border border-slate-200 px-3 py-2">主な用途</th>
-              <th class="border border-slate-200 px-3 py-2">入力タイプ</th>
-              <th class="border border-slate-200 px-3 py-2">無料枠</th>
-              <th class="border border-slate-200 px-3 py-2">商用利用条件</th>
-              <th class="border border-slate-200 px-3 py-2">日本語対応</th>
-              <th class="border border-slate-200 px-3 py-2">透かし</th>
-              <th class="border border-slate-200 px-3 py-2">動画延長</th>
-              <th class="border border-slate-200 px-3 py-2">最大動画尺</th>
-              <th class="border border-slate-200 px-3 py-2">詳細</th>
-            </tr>
-          </thead>
-          <tbody>
-            {primaryTools.map((tool) => {
-              const cu = tool.data.commercialUse;
-              const cuLabel =
-                cu === 'ok' ? 'プラン・用途により異なる（要公式確認）' :
-                cu === 'paid-only' ? '有料プラン前提の場合あり（要公式確認）' :
-                cu === 'limited' ? '条件付きで利用可能な場合あり（要公式確認）' :
-                '要公式確認';
-              const wm = tool.data.watermark;
-              const wmLabel =
-                wm === 'no' ? 'なし（条件による）' :
-                wm === 'yes' ? 'あり' :
-                wm === 'free-only' ? '無料プランのみ' :
-                wm === 'limited' ? '無料プランはあり（有料は要確認）' :
-                '要確認';
-              const jpLabel =
-                tool.data.japaneseUi ? 'UI対応' :
-                tool.data.japanesePrompt === true || tool.data.japanesePrompt === 'yes' ? 'プロンプトのみ' :
-                tool.data.japanesePrompt === 'partial' ? '部分対応' :
-                '非対応／要確認';
-              const f = tool.data.features ?? {};
-              const inputLabel =
-                f.textToVideo && f.imageToVideo ? 'テキスト・画像' :
-                f.textToVideo ? 'テキスト' :
-                f.imageToVideo ? '画像' : '—';
-              return (
-                <tr class="even:bg-slate-50 hover:bg-blue-50">
-                  <td class="border border-slate-200 px-3 py-2 font-medium text-slate-800">
-                    <a href={`/tools/${tool.slug}/`} class="hover:underline text-blue-700">{tool.data.name}</a>
-                  </td>
-                  <td class="border border-slate-200 px-3 py-2 text-slate-700 text-xs">
-                    {tool.data.bestFor?.[0] ?? '—'}
-                  </td>
-                  <td class="border border-slate-200 px-3 py-2 text-xs text-slate-600">{inputLabel}</td>
-                  <td class="border border-slate-200 px-3 py-2">
-                    {tool.data.freePlan && tool.data.freePlan !== 'no' ? (
-                      <span class="rounded bg-emerald-100 px-1.5 py-0.5 text-xs text-emerald-700">あり</span>
-                    ) : (
-                      <span class="rounded bg-slate-100 px-1.5 py-0.5 text-xs text-slate-500">なし／要確認</span>
-                    )}
-                  </td>
-                  <td class="border border-slate-200 px-3 py-2 text-xs text-slate-600">{cuLabel}</td>
-                  <td class="border border-slate-200 px-3 py-2 text-xs text-slate-600">{jpLabel}</td>
-                  <td class="border border-slate-200 px-3 py-2 text-xs text-slate-600">{wmLabel}</td>
-                  <td class="border border-slate-200 px-3 py-2 text-xs text-slate-600">
-                    {tool.data.features?.videoExtend === true ? (
-                      <span class="rounded bg-emerald-100 px-1.5 py-0.5 text-emerald-700">対応</span>
-                    ) : tool.data.features?.videoExtend === false ? (
-                      <span class="rounded bg-slate-100 px-1.5 py-0.5 text-slate-500">非対応</span>
-                    ) : (
-                      <span class="text-slate-400">要確認</span>
-                    )}
-                  </td>
-                  <td class="border border-slate-200 px-3 py-2 text-xs text-slate-600">
-                    {tool.data.features?.maxVideoDuration ?? <span class="text-slate-400">要確認</span>}
-                  </td>
-                  <td class="border border-slate-200 px-3 py-2">
-                    <a href={`/tools/${tool.slug}/`} class="text-blue-600 hover:underline text-xs">詳細 →</a>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        </div>
-        <div class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent sm:hidden"></div>
-      </div>
-      <p class="mt-2 text-xs text-slate-400">商用利用条件・透かし条件はプランや時期により変更される場合があります。各ツールの公式利用規約を必ずご確認ください。</p>
-      <p class="mt-1 text-xs text-slate-400">最大動画尺や延長機能は、モデル・プラン・提供時期によって変わる場合があります。最新情報は各ツールの公式サイトをご確認ください。</p>
-    </section>
-
-
-    <!-- 用途別3カード -->
-    <section class="mb-12">
-      <h2 class="mb-1 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">迷ったら、用途別にこのあたりから確認</h2>
-      <p class="mb-4 text-sm text-slate-500">目的に合いそうなツールを用途別に整理しています。詳細は各ツールの詳細ページおよび公式サイトでご確認ください。</p>
-      <div class="grid gap-4 sm:grid-cols-3">
-
-        <!-- カード1：映像品質重視 -->
-        <div class="flex flex-col rounded-xl border border-slate-200 bg-white px-5 py-5 shadow-sm">
-          <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-violet-600">映像品質を重視したい</p>
-          <ul class="mb-4 flex-1 space-y-2 text-sm text-slate-700">
-            <li><a href="/tools/runway/" class="text-blue-600 hover:underline">Runway</a> — 多機能・映像表現幅広め</li>
-            <li><a href="/tools/luma-ai/" class="text-blue-600 hover:underline">Luma AI</a> — 自然な動き・フォトリアル寄り</li>
-            <li><a href="/tools/kling-ai/" class="text-blue-600 hover:underline">Kling AI</a> — リアル系・日本語プロンプト対応とされる</li>
-          </ul>
-          <a href="/comparisons/kling-ai-vs-luma-ai/" class="mt-auto text-right text-xs font-semibold text-blue-600 hover:underline">関連ページを見る →</a>
-        </div>
-
-        <!-- カード2：無料枠から試したい -->
-        <div class="flex flex-col rounded-xl border border-slate-200 bg-white px-5 py-5 shadow-sm">
-          <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-emerald-600">まず無料枠から試したい</p>
-          <ul class="mb-4 flex-1 space-y-2 text-sm text-slate-700">
-            <li><a href="/tools/pika/" class="text-blue-600 hover:underline">Pika</a> — 無料枠あり・操作しやすいとされる</li>
-            <li><a href="/tools/kling-ai/" class="text-blue-600 hover:underline">Kling AI</a> — 無料枠あり・クレジット制</li>
-            <li><a href="/tools/hailuo-ai/" class="text-blue-600 hover:underline">Hailuo AI</a> — 無料枠あり・短尺向け</li>
-          </ul>
-          <a href="/comparisons/free-ai-video-tools/" class="mt-auto text-right text-xs font-semibold text-blue-600 hover:underline">関連ページを見る →</a>
-        </div>
-
-        <!-- カード3：SNS・短尺動画 -->
-        <div class="flex flex-col rounded-xl border border-slate-200 bg-white px-5 py-5 shadow-sm">
-          <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-sky-600">SNS・短尺動画を作りたい</p>
-          <ul class="mb-4 flex-1 space-y-2 text-sm text-slate-700">
-            <li><a href="/tools/pika/" class="text-blue-600 hover:underline">Pika</a> — 短尺・縦型フォーマット向きとされる</li>
-            <li><a href="/tools/hailuo-ai/" class="text-blue-600 hover:underline">Hailuo AI</a> — 短尺・スムーズな動きが評価されることがある</li>
-            <li><a href="/tools/haiper/" class="text-blue-600 hover:underline">Haiper</a> — 操作シンプル・初心者向けとされる</li>
-          </ul>
-          <a href="/use-cases/shorts/" class="mt-auto text-right text-xs font-semibold text-blue-600 hover:underline">関連ページを見る →</a>
-        </div>
-
-      </div>
-      <p class="mt-3 text-xs text-slate-400">掲載ツールの条件・機能は変更される場合があります。商用利用・著作権に関しては各ツールの公式利用規約をご確認ください。本ページは法的助言ではありません。</p>
-    </section>
-
-    <!-- ツール別：生成動画の特徴と向き -->
-    <section class="mb-12">
-      <h2 class="mb-3 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">ツール別：生成できる動画の特徴と向き</h2>
-      {referenceImage && <GeneratedSampleImage image={referenceImage} />}
-      <p class="mb-3 text-sm text-slate-500">各ツールが得意とする動画スタイル・尺感・難易度の目安をまとめています。ツールの機能・品質は更新されることがあるため、最新情報は各公式サイトをご確認ください。</p>
-      <p class="mb-2 text-xs text-slate-400 sm:hidden text-center">← 横にスクロールできます →</p>
-      <div class="relative">
-        <div class="overflow-x-auto">
-        <table class="w-full min-w-[700px] border-collapse text-sm">
-          <thead>
-            <tr class="bg-slate-100 text-left text-xs font-semibold text-slate-600">
-              <th class="border border-slate-200 px-3 py-2">ツール名</th>
-              <th class="border border-slate-200 px-3 py-2">生成できる動画のタイプ・特徴</th>
-              <th class="border border-slate-200 px-3 py-2">向いているユーザー</th>
-            </tr>
-          </thead>
-          <tbody class="text-xs text-slate-700">
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-medium"><a href="/tools/runway/" class="text-blue-700 hover:underline">Runway</a></td>
-              <td class="border border-slate-200 px-3 py-2">短尺〜中尺・リアル系・映像品質重視。テキスト→動画、画像→動画、動画延長に対応。多機能な映像編集環境も内包。</td>
-              <td class="border border-slate-200 px-3 py-2"><span class="rounded bg-violet-100 px-1.5 py-0.5 text-violet-700">中〜上級者向け</span></td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-medium"><a href="/tools/pika/" class="text-blue-700 hover:underline">Pika</a></td>
-              <td class="border border-slate-200 px-3 py-2">短尺・アニメ調やスタイライズドの表現も可能。テキスト→動画、画像→動画に対応。SNS・Shorts向け短尺動画の試作に向いているとされる。</td>
-              <td class="border border-slate-200 px-3 py-2"><span class="rounded bg-emerald-100 px-1.5 py-0.5 text-emerald-700">初心者〜中級向け</span></td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-medium"><a href="/tools/kling-ai/" class="text-blue-700 hover:underline">Kling AI</a></td>
-              <td class="border border-slate-200 px-3 py-2">短尺〜中尺・リアル系の動きの自然さを重視。テキスト→動画、画像→動画、動画延長に対応。日本語プロンプト対応とされる。</td>
-              <td class="border border-slate-200 px-3 py-2"><span class="rounded bg-emerald-100 px-1.5 py-0.5 text-emerald-700">初心者〜中級向け</span></td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-medium"><a href="/tools/luma-ai/" class="text-blue-700 hover:underline">Luma AI</a></td>
-              <td class="border border-slate-200 px-3 py-2">短尺・フォトリアルで自然な動き。物理的な動作やカメラワークの表現が比較的得意とされる。コンセプトムービーやプリビズ用途にも言及されることが多い。</td>
-              <td class="border border-slate-200 px-3 py-2"><span class="rounded bg-violet-100 px-1.5 py-0.5 text-violet-700">中級者向け</span></td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-medium"><a href="/tools/hailuo-ai/" class="text-blue-700 hover:underline">Hailuo AI</a></td>
-              <td class="border border-slate-200 px-3 py-2">短尺・リアル寄りの映像生成。比較的スムーズな動きが評価されることがある。無料枠あり。</td>
-              <td class="border border-slate-200 px-3 py-2"><span class="rounded bg-emerald-100 px-1.5 py-0.5 text-emerald-700">初心者〜中級向け</span></td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-medium"><a href="/tools/haiper/" class="text-blue-700 hover:underline">Haiper</a></td>
-              <td class="border border-slate-200 px-3 py-2">短尺・スタイライズドおよびリアル系どちらも生成可。シンプルな操作感で試しやすいとされる。日本語プロンプト対応とされる。</td>
-              <td class="border border-slate-200 px-3 py-2"><span class="rounded bg-sky-100 px-1.5 py-0.5 text-sky-700">初心者向け</span></td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-medium"><a href="/tools/vidu-ai/" class="text-blue-700 hover:underline">Vidu AI</a></td>
-              <td class="border border-slate-200 px-3 py-2">短尺・リアル〜スタイライズド。テキスト→動画、画像→動画に対応。操作はシンプルとされる。</td>
-              <td class="border border-slate-200 px-3 py-2"><span class="rounded bg-emerald-100 px-1.5 py-0.5 text-emerald-700">初心者〜中級向け</span></td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-medium"><a href="/tools/pixverse/" class="text-blue-700 hover:underline">PixVerse</a></td>
-              <td class="border border-slate-200 px-3 py-2">短尺・アニメ調やスタイライズドの表現が得意とされる。顔出しなし・テキスト主体の動画生成用途でも候補に挙がることがある。</td>
-              <td class="border border-slate-200 px-3 py-2"><span class="rounded bg-sky-100 px-1.5 py-0.5 text-sky-700">初心者向け</span></td>
-            </tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent sm:hidden"></div>
-      </div>
-      <p class="mt-2 text-xs text-slate-400">「向き」はあくまで一般的な傾向の整理であり、個人差があります。ツールの機能・品質・操作感は更新される可能性があります。</p>
-    </section>
-
-    <!-- ツール一覧：主対象 -->
-    <section class="mb-12">
-      <h2 class="mb-1 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">
-        AI動画生成ツール（テキスト・画像→動画）
-      </h2>
-      <p class="mb-4 text-sm text-slate-500">テキストや画像から動画を生成するツールです。</p>
-      <div class="grid gap-4 sm:grid-cols-2">
-        {primaryTools.map((tool) => <ToolCard tool={tool} />)}
-      </div>
-    </section>
-
-    <!-- ツール一覧：関連（動画編集） -->
-    {editingTools.length > 0 && (
-      <section class="mb-12">
-        <h2 class="mb-1 border-b border-slate-200 pb-2 text-lg font-semibold text-slate-700">
-          用途が近い関連ツール：動画編集・テンプレート活用
-        </h2>
-        <p class="mb-4 text-sm text-slate-500">
-          テンプレート・自動字幕・編集補助が中心のツールです。AI動画生成ツールとは用途が異なります。
-          詳しくは<a href="/categories/video-editing/" class="text-blue-600 hover:underline">動画編集カテゴリ</a>をご覧ください。
-        </p>
-        <div class="grid gap-4 sm:grid-cols-2">
-          {editingTools.map((tool) => <ToolCard tool={tool} />)}
-        </div>
-      </section>
-    )}
-
-    <!-- ツール一覧：関連（アバター動画） -->
-    {avatarTools.length > 0 && (
-      <section class="mb-12">
-        <h2 class="mb-1 border-b border-slate-200 pb-2 text-lg font-semibold text-slate-700">
-          用途が近い関連ツール：AIアバター動画
-        </h2>
-        <p class="mb-4 text-sm text-slate-500">
-          AIアバターが話すスタイルの動画を生成するツールです。AI動画生成ツールとは用途が異なります。
-          詳しくは<a href="/categories/avatar-video/" class="text-blue-600 hover:underline">AIアバター動画カテゴリ</a>をご覧ください。
-        </p>
-        <div class="grid gap-4 sm:grid-cols-2">
-          {avatarTools.map((tool) => <ToolCard tool={tool} />)}
-        </div>
-      </section>
-    )}
-
-    <!-- 選び方セクション -->
-    <section class="mb-12 rounded-xl border border-slate-200 bg-white px-6 py-6">
-      <h2 class="mb-2 text-lg font-semibold text-slate-900">どのAI動画生成ツールを選ぶべきか</h2>
-      <p class="mb-4 text-sm text-slate-600 leading-relaxed">
-        「まず無料で試したい」「商用案件に使いたい」「日本語で使いやすいものがいい」など、目的によって候補が変わります。
-        以下の6点を確認することで、自分の用途に合ったツールを絞り込みやすくなります。
-      </p>
-      <ul class="space-y-3 text-sm text-slate-700">
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span>
-            <strong>無料で試せるか：</strong>クレジット制・月更新・初回限り など、無料枠の形態はツールによって異なります。長期利用や本格利用には有料プランへの移行が必要になる場合があります。
-          </span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span>
-            <strong>商用利用条件を確認できるか：</strong>広告・クライアントワーク・収益化コンテンツへの利用を前提にする場合、各ツールの公式利用規約で商用利用の条件を事前に確認することを推奨します。無料プランでは商用利用が制限されているツールも多くあります。
-          </span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span>
-            <strong>透かしの有無：</strong>多くのツールで無料プランでは透かしが付与される場合があります。透かしの条件はプランや利用状況によって変わるため、公式情報をご確認ください。
-          </span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span>
-            <strong>日本語で使いやすいか：</strong>日本語UIに対応しているツールは限られています（確認時点ではCapCut AIが対応）。日本語プロンプトについてはKling AI・Haiper・CapCut AIが対応しているとされています。英語UIのツールでも日本語プロンプトを試せる場合があります。
-          </span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span>
-            <strong>入力タイプ（テキスト→動画 / 画像→動画）：</strong>Runway・Pika・Kling AI・Luma AI・Haiperはテキストと画像の両方から動画を生成できるとされています。手持ちのイラストや写真素材を動かしたい場合はimage-to-video対応ツールが候補になります。
-          </span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span>
-            <strong>解像度・生成時間・クレジット消費：</strong>生成動画の解像度（HD・4K等）や生成にかかる時間はプランとツールによって異なります。動画生成は画像生成よりもクレジット消費が大きい傾向があります。
-          </span>
-        </li>
-      </ul>
-      <p class="mt-4 text-xs text-slate-500">各条件の詳細は各ツールの詳細ページおよび公式サイトでご確認ください。</p>
-    </section>
-
-    <!-- 用途別の選び分け -->
-    <section class="mb-12 rounded-xl border border-slate-200 bg-white px-6 py-6">
-      <h2 class="mb-4 text-lg font-semibold text-slate-900">用途別のツール選び分け</h2>
-      <div class="space-y-4 text-sm text-slate-700">
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-40">SNS・Shorts・縦型</span>
-          <span>短尺・縦型フォーマットに適したPika・Kling AI・Hailuo AIが検討候補に挙がりやすいです。<a href="/use-cases/shorts/" class="text-blue-600 hover:underline">Shorts向けツール</a>もご参照ください。</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-40">YouTube動画</span>
-          <span>映像クオリティを重視する場合はRunway・Luma AI・Kling AIが候補になります。商用利用条件は公式規約で事前確認が必要です。<a href="/use-cases/youtube/" class="text-blue-600 hover:underline">YouTube向けツール</a>もご参照ください。</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-40">顔出しなし動画</span>
-          <span>テキスト→動画で人物不要の映像を作る用途ではPixVerse・Hailuo AI・Haiper等が候補になります。<a href="/use-cases/faceless-video/" class="text-blue-600 hover:underline">顔出しなし動画向けツール</a>もご参照ください。</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-40">コンセプトムービー</span>
-          <span>自然な動きや映像表現を重視する場合はLuma AI・Runwayが候補になります。撮影前のプリビズ・雰囲気確認用途にも使われることがあります。</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-40">画像から動画化</span>
-          <span>静止画にモーションを加えるimage-to-videoにはRunway・Pika・Kling AI・Luma AI・Haiperが対応しているとされています。</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-40">アバター動画</span>
-          <span>AIアバターが話すスタイルの動画はHeyGen・Synthesia・D-IDなどが専門です。<a href="/categories/avatar-video/" class="text-blue-600 hover:underline">AIアバター動画カテゴリ</a>をご覧ください。</span>
-        </div>
-      </div>
-      <p class="mt-4 text-xs text-slate-500">ツールの対応状況・条件は変更される可能性があります。最新情報は各公式サイトでご確認ください。</p>
-    </section>
-
-    <!-- 比較記事案内 -->
-    <section class="mb-12">
-      <h2 class="mb-2 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">AI動画生成ツールの比較記事を目的別に読む</h2>
-      <p class="mb-5 text-sm text-slate-600 leading-relaxed">
-        AI動画生成ツールは、編集機能の多さ、リアル系の生成品質、無料枠や操作の手軽さなど、比較すべきポイントが異なります。目的に近い比較記事から確認すると、候補を絞り込みやすくなります。
-      </p>
-      <div class="grid gap-4 sm:grid-cols-3">
-        <a href="/comparisons/runway-vs-pika/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <p class="mb-1 text-xs font-semibold text-blue-600 uppercase tracking-wide">高機能・編集機能も見たい</p>
-          <p class="mb-2 font-bold text-slate-900 group-hover:text-blue-700 leading-snug">Runway vs Pika</p>
-          <p class="flex-1 text-xs leading-relaxed text-slate-500">RunwayとPikaの違いを、機能性・使いやすさ・動画制作の自由度で比較。</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">比較記事を読む →</p>
-        </a>
-        <a href="/comparisons/kling-ai-vs-luma-ai/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <p class="mb-1 text-xs font-semibold text-violet-600 uppercase tracking-wide">リアル系・高品質を重視</p>
-          <p class="mb-2 font-bold text-slate-900 group-hover:text-blue-700 leading-snug">Kling AI vs Luma AI</p>
-          <p class="flex-1 text-xs leading-relaxed text-slate-500">Kling AIとLuma AIの違いを、生成品質・使いどころ・確認すべき条件で比較。</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">比較記事を読む →</p>
-        </a>
-        <a href="/comparisons/pika-vs-hailuo-ai/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <p class="mb-1 text-xs font-semibold text-emerald-600 uppercase tracking-wide">初心者・無料枠・SNS向け</p>
-          <p class="mb-2 font-bold text-slate-900 group-hover:text-blue-700 leading-snug">Pika vs Hailuo AI</p>
-          <p class="flex-1 text-xs leading-relaxed text-slate-500">PikaとHailuo AIの違いを、手軽さ・無料枠・ショート動画との相性で比較。</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">比較記事を読む →</p>
-        </a>
-        <a href="/comparisons/free-ai-video-tools/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <p class="mb-1 text-xs font-semibold text-teal-600 uppercase tracking-wide">無料プラン・透かし・商用条件</p>
-          <p class="mb-2 font-bold text-slate-900 group-hover:text-blue-700 leading-snug">AI動画生成ツールの無料プラン比較</p>
-          <p class="flex-1 text-xs leading-relaxed text-slate-500">主要AI動画生成ツールの無料枠・透かし・商用利用条件を一覧で比較。</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">比較記事を読む →</p>
-        </a>
-      </div>
-      <p class="mt-3 text-xs text-slate-400">料金・商用利用条件はプランや時期によって変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
-    </section>
-
-    <!-- 無料枠・透かし・商用利用条件を見るときの注意点 -->
-    <section class="mb-12 rounded-xl border border-amber-100 bg-amber-50 px-6 py-6">
-      <h2 class="mb-3 text-lg font-semibold text-slate-900">無料枠・透かし・商用利用条件を見るときの注意点</h2>
-      <div class="space-y-4 text-sm text-slate-700">
-        <div class="flex gap-3">
-          <span class="shrink-0 mt-0.5 text-amber-500 font-bold">▸</span>
-          <div>
-            <strong>無料枠の形態はツールごとに大きく異なる：</strong>
-            「月次クレジット付与」「初回限りの無料クレジット」「機能制限版の無期限無料」など形態が様々です。生成に失敗した場合でもクレジットが消費される場合があるため、公式情報でご確認ください。
-          </div>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 mt-0.5 text-amber-500 font-bold">▸</span>
-          <div>
-            <strong>透かしは「無料プランのみ」が多いが条件は要確認：</strong>
-            無料プランで透かしが付与されるツールは多くあります。透かしの有無・位置・削除条件はプランや時期によって変更される場合があります。SNS投稿・商用利用を前提にする場合は、利用前に公式情報をご確認ください。詳しくは<a href="/conditions/no-watermark/" class="text-blue-600 hover:underline">透かしなしで使いやすいAIツール</a>もご参照ください。
-          </div>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 mt-0.5 text-amber-500 font-bold">▸</span>
-          <div>
-            <strong>商用利用条件はプランごとに異なる：</strong>
-            広告・クライアントワーク・YouTube収益化を前提にする場合は、①プランごとの商用利用可否、②生成物の著作権・所有権に関する規定、③人物・ブランドロゴ・第三者素材を含む場合の制約、を各ツールの公式利用規約で事前に確認することを推奨します。本ページは法的助言ではありません。<a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいAIツール</a>・<a href="/guides/ai-commercial-use-checklist/" class="text-blue-600 hover:underline">商用利用前に確認したいチェックリスト</a>・<a href="/guides/commercial-use-cost-comparison/" class="text-blue-600 hover:underline">商用利用プラン別の料金・コスト比較</a>もご参照ください。
-          </div>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 mt-0.5 text-amber-500 font-bold">▸</span>
-          <div>
-            <strong>人物・著名人・ブランド・第三者素材を含む場合は別論点：</strong>
-            AI動画生成ツールで人物・著名人の顔・ブランドロゴ・商標・第三者が権利を持つ素材を含む動画を生成する場合は、ツールの利用規約とは別に、肖像権・商標権・著作権等の権利者への確認が必要になる場合があります。本ページはこれらの権利の解釈について断定的な見解を示すものではありません。
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 向いている人 / 向いていない人 -->
-    <section class="mb-12 rounded-xl border border-slate-200 bg-white px-6 py-6">
-      <h2 class="mb-5 text-lg font-semibold text-slate-900">AI動画生成ツールが向いている人・向いていない人</h2>
-      <div class="grid gap-5 sm:grid-cols-2">
-        <div>
-          <h3 class="mb-3 text-sm font-bold text-emerald-700">向いている人</h3>
-          <ul class="space-y-2 text-sm text-slate-700">
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-emerald-500">✓</span><span>SNS動画やショート動画を短時間で作りたい人</span></li>
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-emerald-500">✓</span><span>手持ちの画像素材から簡単な動画を作りたい人</span></li>
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-emerald-500">✓</span><span>広告・LP・YouTube用の動画案をまず試作したい人</span></li>
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-emerald-500">✓</span><span>実写撮影前に構図や雰囲気をAIで検討したい人</span></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="mb-3 text-sm font-bold text-rose-700">向いていない人</h3>
-          <ul class="space-y-2 text-sm text-slate-700">
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-rose-400">✗</span><span>長尺動画を細かく編集したい人（AI生成は短尺・短時間が中心）</span></li>
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-rose-400">✗</span><span>厳密な人物表現やブランド表現が必要な人（生成品質の制御に限界がある場合があります）</span></li>
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-rose-400">✗</span><span>利用条件を確認せずに商用案件へ使いたい人（プランや用途によって条件が異なります）</span></li>
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-rose-400">✗</span><span>毎回まったく同じ構図・品質を完全に再現したい人（生成結果に揺れが生じる場合があります）</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- 関連ページリンク -->
-    <section class="mb-12">
-      <h2 class="mb-4 text-lg font-semibold text-slate-800">関連ページ</h2>
-
-      <div class="mb-4">
-        <p class="mb-2 text-sm font-semibold text-slate-700">ツール別詳細ページ（主要）</p>
-        <ul class="flex flex-wrap gap-3">
-          {primarySlugs.map((slug) => {
-            const tool = videoTools.find((t) => t.slug === slug);
-            return tool ? (
-              <li>
-                <a
-                  href={`/tools/${slug}/`}
-                  class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300"
-                >
-                  {tool.data.name}
-                </a>
-              </li>
-            ) : null;
-          })}
-        </ul>
-      </div>
-
-      <div class="mb-4">
-        <p class="mb-2 text-sm font-semibold text-slate-700">まとめページ</p>
-        <ul class="flex flex-wrap gap-3">
-          <li>
-            <a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              無料枠のあるAIツール比較
-            </a>
-          </li>
-          <li>
-            <a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              商用利用条件を確認しやすいAIツール
-            </a>
-          </li>
-          <li>
-            <a href="/conditions/no-watermark/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              透かしなしで使いやすいAIツール
-            </a>
-          </li>
-          <li>
-            <a href="/conditions/japanese/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              日本語対応ツール
-            </a>
-          </li>
-          <li>
-            <a href="/comparisons/runway-vs-pika/" class="rounded-full border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-              Runway vs Pika 比較
-            </a>
-          </li>
-          <li>
-            <a href="/comparisons/runway-vs-kling-ai/" class="rounded-full border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-              Runway vs Kling AI 比較
-            </a>
-          </li>
-          <li>
-            <a href="/comparisons/kling-ai-vs-luma-ai/" class="rounded-full border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-              Kling AI vs Luma AI 比較
-            </a>
-          </li>
-          <li>
-            <a href="/comparisons/ai-video-watermark-comparison/" class="rounded-full border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-              AI動画透かし条件比較
-            </a>
-          </li>
-          <li>
-            <a href="/use-cases/ad-video/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              広告動画向け確認ポイント
-            </a>
-          </li>
-          <li>
-            <a href="/guides/video-generation-credit-cost-comparison/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              料金・クレジット消費を詳しく比較する
-            </a>
-          </li>
-          <li>
-            <a href="/guides/commercial-use-cost-comparison/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              AI動画ツールの料金・コスト比較
-            </a>
-          </li>
-          <li>
-            <a href="/comparisons/pika-vs-hailuo-ai/" class="rounded-full border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-              Pika vs Hailuo AI 比較
-            </a>
-          </li>
-          <li>
-            <a href="/comparisons/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              全ツール比較表
-            </a>
-          </li>
-          <li>
-            <a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              商用利用・著作権の考え方ガイド
-            </a>
-          </li>
-          <li>
-            <a href="/guides/ai-commercial-use-checklist/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              商用利用前に確認したいチェックリスト
-            </a>
-          </li>
-          <li>
-            <a href="/guides/ai-commercial-use-trouble-cases/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              商用利用で起こりやすいトラブル例と確認ポイント
-            </a>
-          </li>
-          <li>
-            <a href="/categories/image-generation/" class="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm text-emerald-700 hover:bg-emerald-100">
-              AI画像生成ツール一覧
-            </a>
-          </li>
-          <li>
-            <a href="/tools/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              全AIツール一覧
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- NoticeBox -->
-    <div class="mb-8">
-      <NoticeBox />
-    </div>
-
-    <!-- FAQ -->
-    <GuideFAQ items={faqs} title="よくある質問" />
-
-    <nav class="mt-8 border-t border-slate-200 pt-6 text-sm">
-      <a href="/tools/" class="text-blue-600 hover:underline">← ツール一覧に戻る</a>
     </nav>
 
   </div>
+
+  <div class="cvg-x" data-cvg>
+    <div class="mx-auto max-w-5xl px-6">
+
+      <!-- ===== Hero ===== -->
+      <header class="cvg-head">
+        <div class="cvg-meta">
+          <span class="cvg-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+            AI VIDEO GENERATION
+          </span>
+          <span class="cvg-checked">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            記事内容の最終確認 <b>2026-06-08</b>
+          </span>
+        </div>
+        <h1 class="cvg-h1">AI動画生成ツールを<span class="hl">比較する</span></h1>
+        <p class="cvg-lead">テキストから動画、画像から動画、短尺動画、YouTube向け動画など、作りたい映像に合わせてAI動画生成ツールの選び方を整理します。無料枠・透かし・商用利用条件・日本語対応を横断的に確認できます。</p>
+        <div class="cvg-stats">
+          <div class="cvg-stat"><span class="n">8</span><span class="t">AI動画生成ツール</span></div>
+          <div class="cvg-stat"><span class="n">6</span><span class="t">用途別に比較</span></div>
+          <div class="cvg-stat"><span class="n">5</span><span class="t">よくある質問</span></div>
+        </div>
+      </header>
+
+      <!-- Notice -->
+      <div class="cvg-notice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <p><b>ご利用前の注意：</b>AI動画生成ツールは、プラン・生成方式・素材利用・商用利用条件によって扱いが異なる場合があります。生成動画の商用利用、第三者素材、人物・ブランド・ロゴの利用条件は、各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
+      </div>
+
+      <!-- ===== 用途別おすすめ早見表 ===== -->
+      <section class="cvg-sec">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">Quick guide</span>
+          <h2>用途別おすすめ早見表</h2>
+          <p>映像品質・無料枠・日本語対応・画像から動画化したいかによって選び方が変わります。まず目的別に候補を絞ってから、下の比較表で料金・無料枠・透かし・商用利用条件を確認してください。</p>
+        </div>
+        <div class="reveal">
+          <div class="cvg-tablewrap">
+            <table class="cvg-gt guide">
+              <thead>
+                <tr><th>用途</th><th>候補ツール</th><th>向いている理由</th><th>確認ポイント</th><th>詳細</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="cvg-situation">初心者がまず試したい</td>
+                  <td class="cvg-cand">Pika / Haiper</td>
+                  <td class="cvg-note">操作が比較的シンプルで、無料枠から試しやすい候補</td>
+                  <td class="cvg-note">無料枠の上限、透かし、生成回数</td>
+                  <td><span class="cvg-linklist"><a href="/tools/pika/">Pika →</a><a href="/tools/haiper/">Haiper →</a></span></td>
+                </tr>
+                <tr>
+                  <td class="cvg-situation">映像品質を重視したい</td>
+                  <td class="cvg-cand">Runway / Luma AI / Kling AI</td>
+                  <td class="cvg-note">リアル寄りの映像や自然な動きを重視する人向けの候補</td>
+                  <td class="cvg-note">有料プラン、生成時間、動画尺</td>
+                  <td><span class="cvg-linklist"><a href="/tools/runway/">Runway →</a><a href="/tools/luma-ai/">Luma AI →</a><a href="/tools/kling-ai/">Kling AI →</a></span></td>
+                </tr>
+                <tr>
+                  <td class="cvg-situation">無料枠で試したい</td>
+                  <td class="cvg-cand">Pika / Kling AI / Haiper / Hailuo AI</td>
+                  <td class="cvg-note">無料枠から試せる候補</td>
+                  <td class="cvg-note">無料枠の回数、クレジット、透かし条件</td>
+                  <td><span class="cvg-linklist"><a href="/tools/pika/">Pika →</a><a href="/tools/kling-ai/">Kling AI →</a><a href="/tools/haiper/">Haiper →</a><a href="/tools/hailuo-ai/">Hailuo AI →</a></span></td>
+                </tr>
+                <tr>
+                  <td class="cvg-situation">画像から動画を作りたい</td>
+                  <td class="cvg-cand">Runway / Pika / Kling AI / Luma AI</td>
+                  <td class="cvg-note">image-to-video用途で比較候補になりやすい</td>
+                  <td class="cvg-note">対応機能、生成尺、プロンプト指定</td>
+                  <td><span class="cvg-linklist"><a href="/tools/runway/">Runway →</a><a href="/tools/pika/">Pika →</a><a href="/tools/kling-ai/">Kling AI →</a><a href="/tools/luma-ai/">Luma AI →</a></span></td>
+                </tr>
+                <tr>
+                  <td class="cvg-situation">日本語で扱いやすいものを探したい</td>
+                  <td class="cvg-cand">Kling AI / Haiper / CapCut AI</td>
+                  <td class="cvg-note">日本語UIまたは日本語プロンプト対応を確認したい人向け</td>
+                  <td class="cvg-note">日本語UIなのか、日本語プロンプト対応なのかを分けて確認</td>
+                  <td><span class="cvg-linklist"><a href="/tools/kling-ai/">Kling AI →</a><a href="/tools/haiper/">Haiper →</a><a href="/tools/capcut-ai/">CapCut AI →</a></span></td>
+                </tr>
+                <tr>
+                  <td class="cvg-situation">商用・納品用途を検討したい</td>
+                  <td class="cvg-cand">Runway / Kling AI / Pika など</td>
+                  <td class="cvg-note">動画制作案件で候補に入りやすいツール</td>
+                  <td class="cvg-note">プラン別の商用利用条件、素材利用、透かし、利用規約</td>
+                  <td><span class="cvg-linklist"><a href="/tools/runway/">Runway →</a><a href="/tools/kling-ai/">Kling AI →</a><a href="/guides/commercial-use-copyright/">商用ガイド →</a></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cvg-foot">表内の候補は、当サイトで確認した公式情報と用途別の比較観点をもとに整理したものです。料金・無料枠・透かし・商用利用条件はプランや時期によって変わる場合があります。最新情報は各公式サイトをご確認ください。本記事は法的助言ではありません。</p>
+        </div>
+      </section>
+
+      <!-- ===== 動画生成/編集/アバターの違い ===== -->
+      <section class="cvg-sec band">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">3 categories</span>
+          <h2>AI動画生成・AI動画編集・AIアバター動画の違い</h2>
+          <p>「動画系AIツール」は大きく3種類に分かれます。目的に合ったカテゴリを選ぶことが、ツール選びの第一歩です。</p>
+        </div>
+        <div class="reveal">
+          <div class="cvg-tablewrap">
+            <table class="cvg-gt diff">
+              <thead>
+                <tr><th>カテゴリ</th><th>何をするツールか</th><th>代表ツール</th><th>向いている用途</th></tr>
+              </thead>
+              <tbody>
+                <tr class="is-current">
+                  <td class="cvg-catcell">AI動画生成<span class="cvg-curtag">このページ</span></td>
+                  <td class="cvg-note">テキストや画像から映像を新規に生成する</td>
+                  <td class="cvg-note">Runway・Pika・Kling AI・Luma AI・Haiper・Hailuo AI</td>
+                  <td class="cvg-note">SNS動画・コンセプトムービー・画像の動画化</td>
+                </tr>
+                <tr>
+                  <td class="cvg-catcell">AI動画編集</td>
+                  <td class="cvg-note">既存の動画素材にテンプレート・字幕・エフェクトを加える</td>
+                  <td class="cvg-note">CapCut AI・InVideo AI</td>
+                  <td class="cvg-note">テンプレート編集・自動字幕・既存素材の仕上げ</td>
+                </tr>
+                <tr>
+                  <td class="cvg-catcell">AIアバター動画</td>
+                  <td class="cvg-note">AIが生成した人物アバターが話す動画を生成する</td>
+                  <td class="cvg-note">HeyGen・Synthesia・D-ID</td>
+                  <td class="cvg-note">研修動画・製品解説・ナレーション付き説明動画</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cvg-foot">動画編集ツールについては<a href="/categories/video-editing/">動画編集カテゴリ</a>、アバター動画については<a href="/categories/avatar-video/">AIアバター動画カテゴリ</a>をご参照ください。</p>
+        </div>
+      </section>
+
+      <!-- ===== 用途別ページへ ===== -->
+      <section class="cvg-sec">
+        <div class="cvg-sechead reveal" style="margin-bottom:20px;">
+          <span class="cvg-eyebrow">By use case</span>
+          <h2>用途別ページへ</h2>
+        </div>
+        <div class="cvg-taglinks reveal">
+          <a class="cvg-taglink" href="/use-cases/youtube/"><span class="ld"></span>YouTube動画向け</a>
+          <a class="cvg-taglink" href="/use-cases/shorts/"><span class="ld"></span>Shorts・縦型動画向け</a>
+          <a class="cvg-taglink" href="/use-cases/faceless-video/"><span class="ld"></span>顔出しなし動画向け</a>
+          <a class="cvg-taglink" href="/categories/avatar-video/"><span class="ld"></span>AIアバター動画</a>
+          <a class="cvg-taglink" href="/categories/video-editing/"><span class="ld"></span>動画編集・テンプレート活用</a>
+          <a class="cvg-taglink" href="/categories/image-generation/"><span class="ld"></span>AI画像生成も比較</a>
+        </div>
+      </section>
+
+      <!-- ===== 選ぶときの比較ポイント ===== -->
+      <section class="cvg-sec band">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">Key factors</span>
+          <h2>AI動画生成ツールを選ぶときの比較ポイント</h2>
+          <p>「どれを使うか」を決める前に、次の観点を順に確認しておくと候補を絞りやすくなります。</p>
+        </div>
+        <ol class="cvg-points reveal" data-stagger>
+          <li class="cvg-pcard">
+            <span class="pn">1</span>
+            <div class="pt"><h3>入力タイプ</h3><p>テキストから生成する「テキスト→動画」、画像から生成する「画像→動画」、既存動画を入力する「動画→動画」など、対応する入力タイプがツールによって異なります。</p></div>
+          </li>
+          <li class="cvg-pcard">
+            <span class="pn">2</span>
+            <div class="pt"><h3>生成できる動画の長さ・解像度</h3><p>多くのツールで無料プランは生成尺・解像度に制限があります。プランごとの上限は公式サイトでご確認ください。</p></div>
+          </li>
+          <li class="cvg-pcard">
+            <span class="pn">3</span>
+            <div class="pt"><h3>無料枠の有無と制限</h3><p>クレジット制・月更新・初回限りなど形態が異なります。生成失敗時のクレジット消費についても公式情報をご確認ください。</p></div>
+          </li>
+          <li class="cvg-pcard">
+            <span class="pn">4</span>
+            <div class="pt"><h3>日本語UI／日本語プロンプト対応</h3><p>日本語UIと日本語プロンプト対応は別問題です。細かい映像スタイルの指定では英語プロンプトの方が意図を伝えやすい場合があります。</p></div>
+          </li>
+          <li class="cvg-pcard">
+            <span class="pn">5</span>
+            <div class="pt"><h3>透かし条件</h3><p>無料プランでは透かしが付与される場合があります。SNS投稿や商用利用を前提にする場合は透かし条件の確認が重要です。</p></div>
+          </li>
+          <li class="cvg-pcard">
+            <span class="pn">6</span>
+            <div class="pt"><h3>商用利用条件の確認</h3><p>広告・YouTube・クライアントワーク等を前提にする場合は、公式利用規約でプランごとの条件を事前に確認してください。本ページは法的助言ではありません。</p></div>
+          </li>
+          <li class="cvg-pcard">
+            <span class="pn">7</span>
+            <div class="pt"><h3>用途との相性</h3><p>SNS向け短尺・YouTube・広告動画・顔出しなし動画・ナレーション動画など、目的によって向いているツールが異なります。</p></div>
+          </li>
+        </ol>
+        <p class="cvg-foot reveal">各条件の詳細は各ツールの詳細ページおよび公式サイトでご確認ください。</p>
+      </section>
+
+      <!-- ===== 横断比較表 ===== -->
+      <section class="cvg-sec">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">Comparison table</span>
+          <h2>AI動画生成ツール 横断比較表</h2>
+          <p>以下は <b>2026-06-08</b> 時点の調査に基づく整理です。料金・無料枠・透かし・生成時間・クレジット消費・利用条件は、プランや時期によって変わる場合があります。人物・ロゴ・第三者素材を含む生成物の扱いは各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
+        </div>
+        <p class="cvg-gtcap reveal">← 横にスクロールできます →</p>
+        <div class="reveal">
+          <div class="cvg-tablewrap">
+            <table class="cvg-gt cross">
+              <thead>
+                <tr><th>ツール名</th><th>主な用途</th><th>入力タイプ</th><th>無料枠</th><th>商用利用条件</th><th>日本語対応</th><th>透かし</th><th>動画延長</th><th>最大動画尺</th><th>詳細</th></tr>
+              </thead>
+              <tbody>
+                {primaryTools.map((tool) => {
+                  const cu = tool.data.commercialUse;
+                  const cuLabel =
+                    cu === 'ok' ? '条件付きで利用可能な場合あり（要公式確認）' :
+                    cu === 'paid-only' ? '有料プラン前提の場合あり（要公式確認）' :
+                    cu === 'limited' ? '条件付きで利用可能な場合あり（要公式確認）' :
+                    '要公式確認';
+                  const wm = tool.data.watermark;
+                  const wmLabel =
+                    wm === 'no' ? 'なし（条件による）' :
+                    wm === 'yes' ? 'あり' :
+                    wm === 'free-only' ? '無料プランのみ' :
+                    wm === 'limited' ? '無料プランはあり（有料は要確認）' :
+                    '要確認';
+                  const jpLabel =
+                    tool.data.japaneseUi ? 'UI対応' :
+                    tool.data.japanesePrompt === true || tool.data.japanesePrompt === 'yes' ? 'プロンプトのみ' :
+                    tool.data.japanesePrompt === 'partial' ? '部分対応' :
+                    '非対応／要確認';
+                  const f = tool.data.features ?? {};
+                  const inputLabel =
+                    f.textToVideo && f.imageToVideo ? 'テキスト・画像' :
+                    f.textToVideo ? 'テキスト' :
+                    f.imageToVideo ? '画像' : '—';
+                  return (
+                    <tr>
+                      <td>
+                        <div class="cvg-tool">
+                          <span class="b">{(tool.data.name || '?').charAt(0)}</span>
+                          <a class="nm" href={`/tools/${tool.slug}/`}>{tool.data.name}</a>
+                        </div>
+                      </td>
+                      <td class="cvg-note">{tool.data.bestFor?.[0] ?? '—'}</td>
+                      <td class="cvg-note nowrap">{inputLabel}</td>
+                      <td class="cvg-note nowrap">
+                        {tool.data.freePlan && tool.data.freePlan !== 'no' ? 'あり' : 'なし／要確認'}
+                      </td>
+                      <td class="cvg-note">{cuLabel}</td>
+                      <td class="cvg-note nowrap">{jpLabel}</td>
+                      <td class="cvg-note">{wmLabel}</td>
+                      <td class="cvg-note nowrap">
+                        {tool.data.features?.videoExtend === true ? '対応' :
+                         tool.data.features?.videoExtend === false ? '非対応' : '要確認'}
+                      </td>
+                      <td class="cvg-note">{tool.data.features?.maxVideoDuration ?? '要確認'}</td>
+                      <td><a class="cvg-detail" href={`/tools/${tool.slug}/`}>詳細 →</a></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p class="cvg-foot">商用利用条件・透かし条件はプランや時期により変更される場合があります。最大動画尺や延長機能はモデル・プラン・提供時期によって変わる場合があります。各ツールの公式利用規約・公式サイトを必ずご確認ください。</p>
+        </div>
+      </section>
+
+      <!-- ===== 迷ったら用途別に ===== -->
+      <section class="cvg-sec band">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">Where to start</span>
+          <h2>迷ったら、用途別にこのあたりから</h2>
+          <p>目的に合いそうなツールを用途別に整理しています。詳細は各ツールの詳細ページおよび公式サイトでご確認ください。</p>
+        </div>
+        <div class="cvg-pickgrid reveal" data-stagger>
+          <div class="cvg-pickcard">
+            <h3 class="ph">映像品質を重視したい</h3>
+            <ul>
+              <li><a class="nm" href="/tools/runway/">Runway</a><span class="nt">— 多機能・映像表現幅広め</span></li>
+              <li><a class="nm" href="/tools/luma-ai/">Luma AI</a><span class="nt">— 自然な動き・フォトリアル寄り</span></li>
+              <li><a class="nm" href="/tools/kling-ai/">Kling AI</a><span class="nt">— リアル系・日本語プロンプト対応とされる</span></li>
+            </ul>
+            <a class="cvg-morelink" href="/comparisons/runway-vs-pika/">Runway vs Pikaを比較 →</a>
+          </div>
+          <div class="cvg-pickcard">
+            <h3 class="ph">まず無料枠から試したい</h3>
+            <ul>
+              <li><a class="nm" href="/tools/pika/">Pika</a><span class="nt">— 無料枠あり・操作しやすいとされる</span></li>
+              <li><a class="nm" href="/tools/kling-ai/">Kling AI</a><span class="nt">— 無料枠あり・クレジット制</span></li>
+              <li><a class="nm" href="/tools/hailuo-ai/">Hailuo AI</a><span class="nt">— 無料枠あり・短尺向け</span></li>
+            </ul>
+            <a class="cvg-morelink" href="/conditions/free/">無料枠のあるAIツール →</a>
+          </div>
+          <div class="cvg-pickcard">
+            <h3 class="ph">SNS・短尺動画を作りたい</h3>
+            <ul>
+              <li><a class="nm" href="/tools/pika/">Pika</a><span class="nt">— 短尺・縦型フォーマット向きとされる</span></li>
+              <li><a class="nm" href="/tools/hailuo-ai/">Hailuo AI</a><span class="nt">— 短尺・スムーズな動きが評価されることがある</span></li>
+              <li><a class="nm" href="/tools/haiper/">Haiper</a><span class="nt">— 操作シンプル・初心者向けとされる</span></li>
+            </ul>
+            <a class="cvg-morelink" href="/use-cases/shorts/">Shorts向けツールを見る →</a>
+          </div>
+        </div>
+        <p class="cvg-foot reveal">掲載ツールの条件・機能は変更される場合があります。商用利用・著作権に関しては各ツールの公式利用規約をご確認ください。本ページは法的助言ではありません。</p>
+      </section>
+
+      <!-- ===== ツール別：特徴と向き ===== -->
+      <section class="cvg-sec">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">Tool characteristics</span>
+          <h2>ツール別：生成できる動画の特徴と向き</h2>
+          <p>各ツールが得意とする動画スタイル・尺感・難易度の目安をまとめています。ツールの機能・品質は更新されることがあるため、最新情報は各公式サイトをご確認ください。</p>
+        </div>
+        <p class="cvg-gtcap reveal">← 横にスクロールできます →</p>
+        <div class="reveal">
+          <div class="cvg-tablewrap">
+            <table class="cvg-gt char">
+              <thead>
+                <tr><th>ツール名</th><th>生成できる動画のタイプ・特徴</th><th>向いているユーザー</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="cvg-tool"><span class="b">R</span><a class="nm" href="/tools/runway/">Runway</a></div></td>
+                  <td class="cvg-note">短尺〜中尺・リアル系・映像品質重視。テキスト→動画、画像→動画、動画延長に対応。多機能な映像編集環境も内包。</td>
+                  <td class="cvg-note nowrap"><span class="cvg-userbadge">中〜上級者向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cvg-tool"><span class="b">P</span><a class="nm" href="/tools/pika/">Pika</a></div></td>
+                  <td class="cvg-note">短尺・アニメ調やスタイライズドの表現も可能。テキスト→動画、画像→動画に対応。SNS・Shorts向け短尺動画の試作に向いているとされる。</td>
+                  <td class="cvg-note nowrap"><span class="cvg-userbadge">初心者〜中級向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cvg-tool"><span class="b">K</span><a class="nm" href="/tools/kling-ai/">Kling AI</a></div></td>
+                  <td class="cvg-note">短尺〜中尺・リアル系の動きの自然さを重視。テキスト→動画、画像→動画、動画延長に対応。日本語プロンプト対応とされる。</td>
+                  <td class="cvg-note nowrap"><span class="cvg-userbadge">初心者〜中級向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cvg-tool"><span class="b">L</span><a class="nm" href="/tools/luma-ai/">Luma AI</a></div></td>
+                  <td class="cvg-note">短尺・フォトリアルで自然な動き。物理的な動作やカメラワークの表現が比較的得意とされる。コンセプトムービーやプリビズ用途にも言及されることが多い。</td>
+                  <td class="cvg-note nowrap"><span class="cvg-userbadge">中級者向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cvg-tool"><span class="b">H</span><a class="nm" href="/tools/hailuo-ai/">Hailuo AI</a></div></td>
+                  <td class="cvg-note">短尺・リアル寄りの映像生成。比較的スムーズな動きが評価されることがある。無料枠あり。</td>
+                  <td class="cvg-note nowrap"><span class="cvg-userbadge">初心者〜中級向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cvg-tool"><span class="b">H</span><a class="nm" href="/tools/haiper/">Haiper</a></div></td>
+                  <td class="cvg-note">短尺・スタイライズドおよびリアル系どちらも生成可。シンプルな操作感で試しやすいとされる。日本語プロンプト対応とされる。</td>
+                  <td class="cvg-note nowrap"><span class="cvg-userbadge">初心者向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cvg-tool"><span class="b">V</span><a class="nm" href="/tools/vidu-ai/">Vidu AI</a></div></td>
+                  <td class="cvg-note">短尺・リアル〜スタイライズド。テキスト→動画、画像→動画に対応。操作はシンプルとされる。</td>
+                  <td class="cvg-note nowrap"><span class="cvg-userbadge">初心者〜中級向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cvg-tool"><span class="b">P</span><a class="nm" href="/tools/pixverse/">PixVerse</a></div></td>
+                  <td class="cvg-note">短尺・アニメ調やスタイライズドの表現が得意とされる。顔出しなし・テキスト主体の動画生成用途でも候補に挙がることがある。</td>
+                  <td class="cvg-note nowrap"><span class="cvg-userbadge">初心者向け</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cvg-foot">「向き」はあくまで一般的な傾向の整理であり、個人差があります。ツールの機能・品質・操作感は更新される可能性があります。</p>
+        </div>
+      </section>
+
+      <!-- ===== ツールカード（テキスト・画像→動画） ===== -->
+      <section class="cvg-sec band">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">Tools</span>
+          <h2>AI動画生成ツール（テキスト・画像→動画）</h2>
+          <p>テキストや画像から動画を生成するツールです。商用利用・無料枠・日本語・料金は確認時点の整理です。最新情報は各公式サイトをご確認ください。</p>
+        </div>
+        <div class="cvg-cardgrid reveal" data-stagger>
+          {videoToolCards.map((t) => (
+            <article class="cvg-tcard">
+              <header class="th">
+                <span class="b">{t.initial}</span>
+                <div class="ti">
+                  <a class="nm" href={`/tools/${t.slug}/`}>{t.name}</a>
+                  <span class="role">{t.role}</span>
+                </div>
+              </header>
+              <div class="tmeta">
+                <span class="m"><i>商用利用</i>{t.commercial}</span>
+                <span class="m"><i>無料枠</i>{t.free}</span>
+                <span class="m"><i>日本語</i>{t.jp}</span>
+                <span class="m"><i>備考</i>{t.note}</span>
+              </div>
+              <div class="tprice"><span class="lbl">料金</span>{t.price}</div>
+              <div class="tplats">{splitChips(t.platforms).map((p) => (<span class="plat">{p}</span>))}</div>
+              <footer class="tf">
+                <span class="tdate">確認 {t.date}</span>
+                <span class="tlinks">
+                  <a class="primary" href={`/tools/${t.slug}/`}>詳しく見る</a>
+                </span>
+              </footer>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- ===== 関連ツール（動画編集） ===== -->
+      <section class="cvg-sec">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">Related tools</span>
+          <h2>用途が近い関連ツール：動画編集・テンプレート活用</h2>
+          <p>テンプレート・自動字幕・編集補助が中心のツールです。AI動画生成ツールとは用途が異なります。詳しくは<a href="/categories/video-editing/">動画編集カテゴリ</a>をご覧ください。</p>
+        </div>
+        <div class="cvg-cardgrid two reveal" data-stagger>
+          {editToolCards.map((t) => (
+            <article class="cvg-tcard">
+              <header class="th">
+                <span class="b">{t.initial}</span>
+                <div class="ti">
+                  <a class="nm" href={`/tools/${t.slug}/`}>{t.name}</a>
+                  <span class="role">{t.role}</span>
+                </div>
+              </header>
+              <div class="tmeta">
+                <span class="m"><i>商用利用</i>{t.commercial}</span>
+                <span class="m"><i>無料枠</i>{t.free}</span>
+                <span class="m"><i>日本語</i>{t.jp}</span>
+                <span class="m"><i>備考</i>{t.note}</span>
+              </div>
+              <div class="tprice"><span class="lbl">料金</span>{t.price}</div>
+              <div class="tplats">{splitChips(t.platforms).map((p) => (<span class="plat">{p}</span>))}</div>
+              <footer class="tf">
+                <span class="tdate">確認 {t.date}</span>
+                <span class="tlinks">
+                  <a class="primary" href={`/tools/${t.slug}/`}>詳しく見る</a>
+                </span>
+              </footer>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- ===== 用途別の選び分け ===== -->
+      <section class="cvg-sec band">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">Pick by purpose</span>
+          <h2>用途別のツール選び分け</h2>
+        </div>
+        <div class="cvg-splitgrid reveal" data-stagger>
+          <div class="cvg-splitcard">
+            <h3>SNS・Shorts・縦型</h3>
+            <p>短尺・縦型フォーマットに適したPika・Kling AI・Hailuo AIが検討候補に挙がりやすいです。</p>
+            <a class="cvg-morelink" href="/use-cases/shorts/">Shorts向けツール →</a>
+          </div>
+          <div class="cvg-splitcard">
+            <h3>YouTube動画</h3>
+            <p>映像クオリティを重視する場合はRunway・Luma AI・Kling AIが候補になります。商用利用条件は公式規約で事前確認が必要です。</p>
+            <a class="cvg-morelink" href="/use-cases/youtube/">YouTube向けツール →</a>
+          </div>
+          <div class="cvg-splitcard">
+            <h3>顔出しなし動画</h3>
+            <p>テキスト→動画で人物不要の映像を作る用途ではPixVerse・Hailuo AI・Haiper等が候補になります。</p>
+            <a class="cvg-morelink" href="/use-cases/faceless-video/">顔出しなし動画向けツール →</a>
+          </div>
+          <div class="cvg-splitcard">
+            <h3>コンセプトムービー</h3>
+            <p>自然な動きや映像表現を重視する場合はLuma AI・Runwayが候補になります。撮影前のプリビズ・雰囲気確認用途にも使われることがあります。</p>
+          </div>
+          <div class="cvg-splitcard">
+            <h3>画像から動画化</h3>
+            <p>静止画にモーションを加えるimage-to-videoにはRunway・Pika・Kling AI・Luma AI・Haiperが対応しているとされています。</p>
+          </div>
+          <div class="cvg-splitcard">
+            <h3>アバター動画</h3>
+            <p>AIアバターが話すスタイルの動画はHeyGen・Synthesia・D-IDなどが専門です。</p>
+            <a class="cvg-morelink" href="/categories/avatar-video/">AIアバター動画カテゴリ →</a>
+          </div>
+        </div>
+        <p class="cvg-foot reveal">ツールの対応状況・条件は変更される可能性があります。最新情報は各公式サイトでご確認ください。</p>
+      </section>
+
+      <!-- ===== 比較記事 ===== -->
+      <section class="cvg-sec">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">Comparisons</span>
+          <h2>AI動画生成ツールの比較記事を読む</h2>
+          <p>編集機能の多さ、リアル系の生成品質、無料枠や操作の手軽さなど、比較すべきポイントは異なります。目的に近い記事から確認すると、候補を絞り込みやすくなります。</p>
+        </div>
+        <div class="cvg-artgrid reveal" data-stagger>
+          <a class="cvg-artcard" href="/comparisons/runway-vs-pika/">
+            <span class="tag">高機能・編集機能も見たい</span>
+            <h3>Runway vs Pika</h3>
+            <p>RunwayとPikaの違いを、機能性・使いやすさ・動画制作の自由度で比較。</p>
+            <span class="go">比較記事を読む →</span>
+          </a>
+          <a class="cvg-artcard" href="/comparisons/ai-image-video-tools/">
+            <span class="tag">画像生成との違いを知りたい</span>
+            <h3>AI動画生成 vs AI画像生成ツール</h3>
+            <p>AI動画生成ツールとAI画像生成ツールの違いや使い分けを整理した比較ページ。</p>
+            <span class="go">比較記事を読む →</span>
+          </a>
+          <a class="cvg-artcard" href="/guides/video-generation-credit-cost-comparison/">
+            <span class="tag">料金・クレジット消費を詳しく見る</span>
+            <h3>AI動画生成ツールの料金・クレジット比較</h3>
+            <p>主要AI動画生成ツールのクレジット消費・料金プランを整理したガイド。</p>
+            <span class="go">ガイドを読む →</span>
+          </a>
+          <a class="cvg-artcard" href="/comparisons/">
+            <span class="tag">すべての比較記事を見る</span>
+            <h3>比較記事一覧</h3>
+            <p>AIツールの横断比較・カテゴリ比較・用途別比較記事の一覧ページ。</p>
+            <span class="go">一覧を見る →</span>
+          </a>
+        </div>
+        <p class="cvg-foot reveal">料金・商用利用条件はプランや時期によって変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
+      </section>
+
+      <!-- ===== 無料枠・透かし・商用利用の注意点 ===== -->
+      <section class="cvg-sec band">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">Caution</span>
+          <h2>無料枠・透かし・商用利用条件を見るときの注意点</h2>
+        </div>
+        <ul class="cvg-cautions reveal" data-stagger>
+          <li class="cvg-caution">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+            <div class="cb">
+              <strong>無料枠の形態はツールごとに大きく異なる</strong>
+              <p>「月次クレジット付与」「初回限りの無料クレジット」「機能制限版の無期限無料」など形態が様々です。生成に失敗した場合でもクレジットが消費される場合があるため、公式情報でご確認ください。</p>
+            </div>
+          </li>
+          <li class="cvg-caution">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+            <div class="cb">
+              <strong>透かしは「無料プランのみ」が多いが条件は要確認</strong>
+              <p>無料プランで透かしが付与されるツールは多くあります。透かしの有無・位置・削除条件はプランや時期によって変更される場合があります。SNS投稿・商用利用を前提にする場合は、利用前に公式情報をご確認ください。詳しくは<a href="/conditions/no-watermark/">透かしなしで使いやすいAIツール</a>もご参照ください。</p>
+            </div>
+          </li>
+          <li class="cvg-caution">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+            <div class="cb">
+              <strong>商用利用条件はプランごとに異なる</strong>
+              <p>広告・クライアントワーク・YouTube収益化を前提にする場合は、①プランごとの商用利用可否、②生成物の著作権・所有権に関する規定、③人物・ブランドロゴ・第三者素材を含む場合の制約、を各ツールの公式利用規約で事前に確認することを推奨します。本ページは法的助言ではありません。<a href="/conditions/commercial-use/">商用利用条件を確認しやすいAIツール</a>もご参照ください。</p>
+            </div>
+          </li>
+          <li class="cvg-caution">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+            <div class="cb">
+              <strong>人物・著名人・ブランド・第三者素材を含む場合は別論点</strong>
+              <p>AI動画生成ツールで人物・著名人の顔・ブランドロゴ・商標・第三者が権利を持つ素材を含む動画を生成する場合は、ツールの利用規約とは別に、肖像権・商標権・著作権等の権利者への確認が必要になる場合があります。本ページはこれらの権利の解釈について断定的な見解を示すものではありません。</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===== 向いている人/向いていない人 ===== -->
+      <section class="cvg-sec">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">Fit check</span>
+          <h2>AI動画生成ツールが向いている人・向いていない人</h2>
+        </div>
+        <div class="cvg-twocol reveal" data-stagger>
+          <div class="cvg-panel pos">
+            <h3 class="ph">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+              向いている人
+            </h3>
+            <ul>
+              <li>SNS動画やショート動画を短時間で作りたい人</li>
+              <li>手持ちの画像素材から簡単な動画を作りたい人</li>
+              <li>広告・LP・YouTube用の動画案をまず試作したい人</li>
+              <li>実写撮影前に構図や雰囲気をAIで検討したい人</li>
+            </ul>
+          </div>
+          <div class="cvg-panel neg">
+            <h3 class="ph">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+              向いていない人
+            </h3>
+            <ul>
+              <li>長尺動画を細かく編集したい人（AI生成は短尺・短時間が中心）</li>
+              <li>厳密な人物表現やブランド表現が必要な人（生成品質の制御に限界がある場合があります）</li>
+              <li>利用条件を確認せずに商用案件へ使いたい人（プランや用途によって条件が異なります）</li>
+              <li>毎回まったく同じ構図・品質を完全に再現したい人（生成結果に揺れが生じる場合があります）</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== FAQ ===== -->
+      <section class="cvg-sec band">
+        <div class="cvg-sechead reveal">
+          <span class="cvg-eyebrow">FAQ</span>
+          <h2>よくある質問</h2>
+          <p>動画生成と動画編集／アバター動画の違い、無料枠、商用利用、日本語プロンプトについて、確認のポイントをお答えします。</p>
+        </div>
+        <div class="cvg-faq reveal">
+          {faqs.map((f) => (
+            <div class="cvg-faqitem" aria-expanded="false">
+              <button class="cvg-faqq" type="button">
+                <span class="qm">Q</span>{f.q}
+                <span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+              </button>
+              <div class="cvg-faqa"><div class="cvg-faqa-in" set:html={f.a}></div></div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ===== 注意事項 + 鮮度 ===== -->
+      <section class="cvg-sec">
+        <div class="cvg-sechead reveal"><span class="cvg-eyebrow">Notes</span><h2>ご利用前の注意</h2></div>
+        <ul class="cvg-notes reveal">
+          <li><span class="dot"></span>掲載情報は調査時点の内容です。料金・無料枠・透かし・商用利用条件・著作権に関する規約は予告なく変更される場合があります。利用前に必ず各ツールの公式サイト・利用規約をご確認ください。</li>
+          <li><span class="dot"></span>最大動画尺や延長機能は、モデル・プラン・提供時期によって変わる場合があります。最新情報は各ツールの公式サイトをご確認ください。</li>
+          <li><span class="dot"></span>本ページは法的アドバイスではありません。重要な商用利用の場面では、専門家（弁護士等）への相談を推奨します。</li>
+        </ul>
+        <div class="cvg-freshness reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span><b>情報の鮮度：</b>記事内容の最終確認日 <span class="mono">2026-06-08</span>（次回確認予定 <span class="mono">2026-09-06</span>）</span>
+        </div>
+        <div class="cvg-disclaimer reveal" style="margin-top:18px;max-width:880px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+          <p>掲載情報は調査時点の内容です。料金・商用利用条件・著作権に関する規約は変更される場合があります。実務利用前には必ず各ツールの公式サイト・利用規約をご確認ください。本サイトの内容は法的助言ではありません。</p>
+        </div>
+      </section>
+
+      <!-- ===== 関連ページ ===== -->
+      <section class="cvg-sec" style="padding-bottom:0;">
+        <div class="cvg-finder reveal">
+          <h2>関連ページ</h2>
+          <p class="lead">他のカテゴリ・条件・ガイドページからも、料金・無料枠・透かし・商用利用の条件を確認できます。</p>
+          <div class="cvg-relgrid">
+            <div class="cvg-relcol">
+              <h4>ツール別詳細ページ</h4>
+              <ul>
+                <li><a href="/tools/runway/"><span class="ld"></span>Runway</a></li>
+                <li><a href="/tools/pika/"><span class="ld"></span>Pika</a></li>
+                <li><a href="/tools/kling-ai/"><span class="ld"></span>Kling AI</a></li>
+                <li><a href="/tools/luma-ai/"><span class="ld"></span>Luma AI</a></li>
+                <li><a href="/tools/hailuo-ai/"><span class="ld"></span>Hailuo AI</a></li>
+                <li><a href="/tools/haiper/"><span class="ld"></span>Haiper</a></li>
+                <li><a href="/tools/vidu-ai/"><span class="ld"></span>Vidu AI</a></li>
+                <li><a href="/tools/pixverse/"><span class="ld"></span>PixVerse</a></li>
+              </ul>
+            </div>
+            <div class="cvg-relcol">
+              <h4>まとめ・比較・ガイド</h4>
+              <ul>
+                <li><a href="/conditions/free/"><span class="ld"></span>無料枠のあるAIツール比較</a></li>
+                <li><a href="/conditions/commercial-use/"><span class="ld"></span>商用利用条件を確認しやすいAIツール</a></li>
+                <li><a href="/conditions/no-watermark/"><span class="ld"></span>透かしなしで使いやすいAIツール</a></li>
+                <li><a href="/conditions/japanese/"><span class="ld"></span>日本語対応ツール</a></li>
+                <li><a href="/comparisons/runway-vs-pika/"><span class="ld"></span>Runway vs Pika 比較</a></li>
+                <li><a href="/guides/video-generation-credit-cost-comparison/"><span class="ld"></span>料金・クレジット消費を比較</a></li>
+                <li><a href="/guides/commercial-use-copyright/"><span class="ld"></span>商用利用・著作権ガイド</a></li>
+                <li><a href="/guides/commercial-use-cost-comparison/"><span class="ld"></span>商用利用プラン別の料金比較</a></li>
+                <li><a href="/comparisons/ai-image-video-tools/"><span class="ld"></span>AI動画vs画像生成ツール比較</a></li>
+                <li><a href="/comparisons/"><span class="ld"></span>全ツール比較表</a></li>
+                <li><a href="/categories/image-generation/"><span class="ld"></span>AI画像生成ツール一覧</a></li>
+                <li><a href="/tools/"><span class="ld"></span>全AIツール一覧</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
 </BaseLayout>
+
+<style>
+  .cvg-x {
+    --paper:#F4F4EE; --surface:#FFFFFF; --surface-2:#FAFAF6;
+    --ink:#16181D; --ink-soft:#3A3E47; --muted:#6A7180; --faint:#98A0AD;
+    --line:#E3E2D9; --line-strong:#D2D1C6;
+    --brand:#4B3FE4; --on-brand:#FFFFFF; --brand-ink:#2E25A6; --brand-tint:#ECEBFB;
+    --ok:#1E8A4C; --ok-tint:#E6F3EC; --warn:#A06A09; --warn-tint:#F8EFD9;
+    --no:#D23F3F; --no-tint:#FBEAEA; --na:#6A7180; --na-tint:#EFEFEA;
+    --f-jp:"Noto Sans JP",system-ui,sans-serif;
+    --f-body:"Noto Sans JP",system-ui,sans-serif;
+    --f-latin:"Space Grotesk",system-ui,sans-serif;
+    --f-mono:"Space Mono",ui-monospace,monospace;
+    --radius:14px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(20,22,28,.04),0 1px 3px rgba(20,22,28,.05);
+    --shadow-md:0 4px 14px rgba(20,22,28,.06),0 2px 6px rgba(20,22,28,.04);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    font-family: var(--f-body); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  .cvg-x :where(h1,h2,h3,h4) { font-family: var(--f-jp); font-weight: 700; line-height: 1.32; letter-spacing: .01em; margin: 0; }
+  .cvg-x :where(p) { margin: 0; }
+  .cvg-x a { color: inherit; text-decoration: none; }
+
+  /* セクション */
+  .cvg-sec { padding: 64px 0; }
+  .cvg-sec.band { background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding-left: max(24px, calc(50vw - 600px)); padding-right: max(24px, calc(50vw - 600px)); }
+  .cvg-sechead { max-width: 780px; margin-bottom: 30px; }
+  .cvg-sechead h2 { font-size: clamp(22px, 2.8vw, 34px); font-weight: 900; letter-spacing: -.005em; margin: 16px 0 12px; }
+  .cvg-sechead p { color: var(--muted); font-size: 15px; }
+  .cvg-sechead p b { color: var(--ink-soft); font-weight: 700; }
+  .cvg-sechead p a, .cvg-foot a { color: var(--brand-ink); font-weight: 600; }
+  .cvg-sechead p a:hover, .cvg-foot a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .cvg-eyebrow { font-family: var(--f-latin); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); display: inline-flex; align-items: center; gap: 10px; }
+  .cvg-eyebrow::before { content: ""; width: 22px; height: 2px; border-radius: 2px; background: var(--brand); }
+
+  /* Hero */
+  .cvg-head { padding: 8px 0 48px; }
+  .cvg-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  .cvg-pill { font-family: var(--f-jp); font-weight: 700; font-size: 12px; letter-spacing: .04em; color: var(--brand-ink); background: var(--brand-tint); padding: 5px 13px; border-radius: 999px; display: inline-flex; align-items: center; gap: 7px; }
+  .cvg-pill svg { width: 14px; height: 14px; }
+  .cvg-checked { font-family: var(--f-mono); font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; }
+  .cvg-checked svg { width: 14px; height: 14px; }
+  .cvg-checked b { color: var(--ink-soft); font-weight: 700; }
+  .cvg-h1 { font-size: clamp(28px, 3.8vw, 44px); font-weight: 900; letter-spacing: -.01em; line-height: 1.22; margin: 14px 0 16px; text-wrap: balance; max-width: 760px; }
+  .cvg-h1 .hl { color: var(--brand-ink); position: relative; }
+  .cvg-h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .26em; background: color-mix(in srgb, var(--brand) 20%, transparent); z-index: -1; border-radius: 2px; }
+  .cvg-lead { font-size: 15.5px; color: var(--ink-soft); max-width: 720px; }
+  .cvg-stats { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 24px; }
+  .cvg-stat { display: flex; align-items: baseline; gap: 8px; }
+  .cvg-stat + .cvg-stat { padding-left: 26px; border-left: 1px solid var(--line); }
+  .cvg-stat .n { font-family: var(--f-latin); font-weight: 700; font-size: 24px; color: var(--ink); line-height: 1; }
+  .cvg-stat .t { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+
+  /* Notice */
+  .cvg-notice { display: flex; align-items: flex-start; gap: 12px; background: var(--warn-tint); border: 1px solid color-mix(in srgb, var(--warn) 28%, var(--line)); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 60px; }
+  .cvg-notice svg { width: 18px; height: 18px; color: var(--warn); flex: none; margin-top: 2px; }
+  .cvg-notice p { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+  .cvg-notice b { color: var(--warn); font-weight: 700; }
+
+  /* 比較ポイントカード */
+  .cvg-points { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; list-style: none; margin: 0 0 18px; padding: 0; }
+  .cvg-pcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; display: flex; align-items: flex-start; gap: 15px; transition: transform .2s var(--ease), box-shadow .2s, border-color .2s; }
+  .cvg-pcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: color-mix(in srgb, var(--brand) 30%, var(--line)); }
+  .cvg-pcard .pn { font-family: var(--f-latin); font-weight: 700; font-size: 16px; color: var(--brand); background: var(--brand-tint); width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; flex: none; }
+  .cvg-pcard h3 { font-size: 15.5px; line-height: 1.4; color: var(--ink); margin-bottom: 5px; }
+  .cvg-pcard .pt p { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+
+  /* タグリンク */
+  .cvg-taglinks { display: flex; flex-wrap: wrap; gap: 10px; }
+  .cvg-taglink { font-family: var(--f-jp); font-weight: 600; font-size: 13.5px; padding: 9px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink-soft); display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; transition: transform .16s var(--ease), background .16s, border-color .16s, color .16s; }
+  .cvg-taglink:hover { border-color: var(--brand); color: var(--brand-ink); background: var(--brand-tint); transform: translateY(-1px); }
+  .cvg-taglink .ld { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex: none; }
+
+  /* 表（共通） */
+  .cvg-gtcap { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+  .cvg-tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-sm); }
+  table.cvg-gt { width: 100%; border-collapse: collapse; }
+  table.cvg-gt.guide { min-width: 880px; }
+  table.cvg-gt.diff { min-width: 720px; }
+  table.cvg-gt.cross { min-width: 1100px; }
+  table.cvg-gt.char { min-width: 760px; }
+  table.cvg-gt thead th { font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--ink-soft); background: var(--surface-2); padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  table.cvg-gt tbody td { padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.cvg-gt tbody tr:last-child td { border-bottom: none; }
+  table.cvg-gt tbody tr { transition: background .12s; }
+  table.cvg-gt tbody tr:hover { background: var(--surface-2); }
+  table.cvg-gt tbody tr.is-current { background: var(--brand-tint); }
+  .cvg-note { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+  .cvg-note.nowrap { white-space: nowrap; }
+  .cvg-situation { font-family: var(--f-jp); font-weight: 700; font-size: 14px; color: var(--ink); min-width: 150px; }
+  .cvg-cand { font-family: var(--f-jp); font-weight: 600; font-size: 13px; color: var(--brand-ink); min-width: 140px; line-height: 1.6; }
+  .cvg-catcell { font-family: var(--f-jp); font-weight: 700; font-size: 14px; color: var(--ink); white-space: nowrap; }
+  .cvg-curtag { display: inline-block; margin-left: 8px; font-size: 10.5px; font-weight: 700; color: var(--brand-ink); background: color-mix(in srgb, var(--brand) 16%, #fff); border: 1px solid color-mix(in srgb, var(--brand) 30%, var(--line)); padding: 2px 8px; border-radius: 999px; vertical-align: middle; }
+  .cvg-linklist { display: flex; flex-direction: column; gap: 4px; }
+  .cvg-linklist a { font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--brand-ink); white-space: nowrap; }
+  .cvg-linklist a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .cvg-tool { display: flex; align-items: center; gap: 11px; min-width: 120px; }
+  .cvg-tool .b { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; background: var(--brand-tint); color: var(--brand-ink); font-family: var(--f-latin); font-weight: 700; font-size: 14px; flex: none; }
+  .cvg-tool .nm { font-family: var(--f-jp); font-weight: 700; font-size: 14px; color: var(--ink); line-height: 1.3; white-space: nowrap; }
+  a.nm:hover { color: var(--brand-ink); text-decoration: underline; text-underline-offset: 3px; }
+  .cvg-detail { font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--brand-ink); white-space: nowrap; }
+  .cvg-detail:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .cvg-userbadge { display: inline-flex; font-family: var(--f-jp); font-weight: 700; font-size: 12px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px; white-space: nowrap; }
+  .cvg-foot { margin-top: 14px; font-size: 12px; color: var(--faint); line-height: 1.7; max-width: 920px; }
+
+  /* クイックピック */
+  .cvg-pickgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .cvg-pickcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; display: flex; flex-direction: column; }
+  .cvg-pickcard .ph { font-size: 15.5px; font-weight: 900; color: var(--ink); margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .cvg-pickcard ul { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .cvg-pickcard li { font-size: 13px; color: var(--muted); line-height: 1.55; }
+  .cvg-pickcard li .nm { font-family: var(--f-jp); font-weight: 700; font-size: 14px; color: var(--ink); }
+  .cvg-pickcard li a.nm:hover { color: var(--brand-ink); text-decoration: underline; text-underline-offset: 3px; }
+  .cvg-pickcard li .nt { display: block; margin-top: 1px; }
+  .cvg-morelink { margin-top: auto; font-family: var(--f-jp); font-weight: 700; font-size: 13px; color: var(--brand-ink); }
+  .cvg-morelink:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ツールカード */
+  .cvg-cardgrid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+  .cvg-cardgrid.two { grid-template-columns: repeat(2,1fr); max-width: 760px; }
+  .cvg-tcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: transform .2s var(--ease), box-shadow .2s, border-color .2s; }
+  .cvg-tcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: color-mix(in srgb, var(--brand) 26%, var(--line)); }
+  .cvg-tcard .th { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .cvg-tcard .th .b { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--brand-tint); color: var(--brand-ink); font-family: var(--f-latin); font-weight: 700; font-size: 17px; flex: none; }
+  .cvg-tcard .ti { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .cvg-tcard .ti .nm { font-family: var(--f-jp); font-weight: 700; font-size: 16px; color: var(--ink); line-height: 1.25; }
+  .cvg-tcard .ti .role { font-family: var(--f-mono); font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+  .cvg-tcard .tmeta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin-bottom: 14px; }
+  .cvg-tcard .tmeta .m { font-size: 12.5px; color: var(--ink-soft); display: flex; align-items: baseline; gap: 7px; line-height: 1.45; }
+  .cvg-tcard .tmeta .m i { font-style: normal; font-family: var(--f-jp); font-weight: 700; font-size: 10.5px; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 2px 7px; flex: none; }
+  .cvg-tcard .tprice { font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; padding: 12px 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); margin-bottom: 14px; }
+  .cvg-tcard .tprice .lbl { font-family: var(--f-jp); font-weight: 700; font-size: 10.5px; color: var(--muted); margin-right: 9px; }
+  .cvg-tcard .tplats { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .cvg-tcard .plat { font-family: var(--f-jp); font-weight: 600; font-size: 11.5px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 7px; padding: 3px 9px; }
+  .cvg-tcard .tf { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; }
+  .cvg-tcard .tdate { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+  .cvg-tcard .tlinks { display: inline-flex; align-items: center; gap: 14px; }
+  .cvg-tcard .tlinks .primary { font-family: var(--f-jp); font-weight: 700; font-size: 13px; color: var(--brand-ink); white-space: nowrap; }
+  .cvg-tcard .tlinks .primary:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* 用途別の選び分け */
+  .cvg-splitgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .cvg-splitcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); border-left: 3px solid var(--brand); padding: 22px 24px; display: flex; flex-direction: column; }
+  .cvg-splitcard h3 { font-size: 15px; color: var(--ink); margin-bottom: 8px; }
+  .cvg-splitcard p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+  .cvg-splitcard .cvg-morelink { margin-top: auto; }
+
+  /* 比較記事カード */
+  .cvg-artgrid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+  .cvg-artcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; display: flex; flex-direction: column; transition: transform .2s var(--ease), box-shadow .2s, border-color .2s; }
+  .cvg-artcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: color-mix(in srgb, var(--brand) 28%, var(--line)); }
+  .cvg-artcard .tag { font-family: var(--f-jp); font-weight: 700; font-size: 11px; color: var(--brand-ink); background: var(--brand-tint); border-radius: 999px; padding: 4px 11px; align-self: flex-start; margin-bottom: 13px; }
+  .cvg-artcard h3 { font-size: 18px; font-weight: 900; color: var(--ink); margin-bottom: 8px; }
+  .cvg-artcard p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+  .cvg-artcard .go { margin-top: auto; font-family: var(--f-jp); font-weight: 700; font-size: 13px; color: var(--brand-ink); }
+  .cvg-artcard:hover .go { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* 注意点 */
+  .cvg-cautions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .cvg-caution { display: grid; grid-template-columns: auto 1fr; gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; align-items: start; }
+  .cvg-caution .ic { width: 24px; height: 24px; color: var(--brand); flex: none; margin-top: 1px; }
+  .cvg-caution .ic svg { width: 24px; height: 24px; }
+  .cvg-caution strong { display: block; font-family: var(--f-jp); font-weight: 900; font-size: 15px; color: var(--ink); margin-bottom: 6px; }
+  .cvg-caution .cb p { font-size: 13px; color: var(--ink-soft); line-height: 1.75; }
+  .cvg-caution .cb p a { color: var(--brand-ink); font-weight: 600; }
+  .cvg-caution .cb p a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* 向いている/向いていない */
+  .cvg-twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cvg-panel { border-radius: var(--radius-lg); padding: 26px 28px; border: 1px solid var(--line); }
+  .cvg-panel.pos { background: var(--ok-tint); border-color: color-mix(in srgb, var(--ok) 24%, var(--line)); }
+  .cvg-panel.neg { background: var(--no-tint); border-color: color-mix(in srgb, var(--no) 24%, var(--line)); }
+  .cvg-panel .ph { display: flex; align-items: center; gap: 11px; font-size: 16px; font-weight: 900; margin-bottom: 16px; }
+  .cvg-panel.pos .ph { color: var(--ok); }
+  .cvg-panel.neg .ph { color: var(--no); }
+  .cvg-panel .ph .ic { width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; flex: none; }
+  .cvg-panel.pos .ph .ic { background: color-mix(in srgb, var(--ok) 16%, #fff); }
+  .cvg-panel.neg .ph .ic { background: color-mix(in srgb, var(--no) 16%, #fff); }
+  .cvg-panel .ph .ic svg { width: 16px; height: 16px; }
+  .cvg-panel ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .cvg-panel li { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; padding-left: 16px; position: relative; }
+  .cvg-panel li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; }
+  .cvg-panel.pos li::before { background: var(--ok); }
+  .cvg-panel.neg li::before { background: var(--no); }
+
+  /* FAQ */
+  .cvg-faq { max-width: 880px; }
+  .cvg-faqitem { border-bottom: 1px solid var(--line); }
+  .cvg-faqitem:first-child { border-top: 1px solid var(--line); }
+  .cvg-faqq { width: 100%; text-align: left; background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 16px; padding: 24px 6px; font-family: var(--f-jp); font-weight: 700; font-size: 16px; color: var(--ink); }
+  .cvg-faqq .qm { font-family: var(--f-latin); color: var(--brand); font-size: 16px; flex: none; font-weight: 700; }
+  .cvg-faqq .ind { margin-left: auto; flex: none; width: 24px; height: 24px; display: grid; place-items: center; transition: transform .3s var(--ease); color: var(--muted); }
+  .cvg-faqq .ind svg { width: 18px; height: 18px; }
+  .cvg-faqitem[aria-expanded="true"] .cvg-faqq .ind { transform: rotate(45deg); color: var(--brand); }
+  .cvg-faqa { max-height: 0; overflow: hidden; transition: max-height .35s var(--ease); }
+  .cvg-faqa-in { padding: 0 6px 26px 46px; color: var(--ink-soft); font-size: 14.5px; line-height: 1.8; }
+  .cvg-faqa-in a { color: var(--brand-ink); font-weight: 600; }
+  .cvg-faqa-in a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* 注意事項 + 鮮度 */
+  .cvg-notes { list-style: none; display: flex; flex-direction: column; gap: 12px; max-width: 880px; margin: 0; padding: 0; }
+  .cvg-notes li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; font-size: 13.5px; color: var(--ink-soft); line-height: 1.75; }
+  .cvg-notes li .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex: none; margin-top: 9px; }
+  .cvg-freshness { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 11px 20px; font-size: 13px; color: var(--ink-soft); max-width: max-content; }
+  .cvg-freshness svg { width: 16px; height: 16px; color: var(--brand); flex: none; }
+  .cvg-freshness b { font-weight: 700; color: var(--ink); }
+  .cvg-freshness .mono { font-family: var(--f-mono); font-size: 12.5px; }
+  .cvg-disclaimer { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; }
+  .cvg-disclaimer svg { width: 18px; height: 18px; color: var(--muted); flex: none; margin-top: 2px; }
+  .cvg-disclaimer p { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+
+  /* 関連ページ */
+  .cvg-finder { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 34px 34px 30px; }
+  .cvg-finder h2 { font-size: clamp(20px, 2.4vw, 26px); margin-bottom: 6px; }
+  .cvg-finder .lead { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+  .cvg-relgrid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 28px 40px; }
+  .cvg-relcol h4 { font-family: var(--f-latin); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; font-weight: 600; }
+  .cvg-relcol ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 9px 18px; }
+  .cvg-relcol a { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-jp); font-weight: 600; font-size: 13.5px; color: var(--ink-soft); transition: color .15s; }
+  .cvg-relcol a:hover { color: var(--brand-ink); }
+  .cvg-relcol a .ld { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); flex: none; }
+
+  /* スクロール表示アニメ */
+  @media (prefers-reduced-motion: no-preference) {
+    .cvg-x .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .cvg-x .reveal.in { opacity: 1; transform: none; }
+    .cvg-x .reveal[data-stagger] > * { opacity: 0; transform: translateY(16px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+    .cvg-x .reveal[data-stagger].in > * { opacity: 1; transform: none; }
+    .cvg-x .reveal[data-stagger].in > *:nth-child(1) { transition-delay: .04s; }
+    .cvg-x .reveal[data-stagger].in > *:nth-child(2) { transition-delay: .09s; }
+    .cvg-x .reveal[data-stagger].in > *:nth-child(3) { transition-delay: .14s; }
+    .cvg-x .reveal[data-stagger].in > *:nth-child(4) { transition-delay: .19s; }
+    .cvg-x .reveal[data-stagger].in > *:nth-child(5) { transition-delay: .24s; }
+    .cvg-x .reveal[data-stagger].in > *:nth-child(6) { transition-delay: .29s; }
+    .cvg-x .reveal[data-stagger].in > *:nth-child(7) { transition-delay: .34s; }
+    .cvg-x .reveal[data-stagger].in > *:nth-child(8) { transition-delay: .39s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cvg-x .reveal, .cvg-x .reveal[data-stagger] > * { opacity: 1 !important; transform: none !important; }
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 980px) {
+    .cvg-pickgrid { grid-template-columns: 1fr; }
+    .cvg-splitgrid { grid-template-columns: 1fr 1fr; }
+    .cvg-relgrid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .cvg-sec { padding: 48px 0; }
+    .cvg-points { grid-template-columns: 1fr; }
+    .cvg-cardgrid, .cvg-cardgrid.two, .cvg-artgrid, .cvg-twocol, .cvg-splitgrid { grid-template-columns: 1fr; }
+    .cvg-tcard .tmeta { grid-template-columns: 1fr; }
+    .cvg-relcol ul, .cvg-relcol:first-child ul { grid-template-columns: 1fr; }
+    .cvg-stat + .cvg-stat { padding-left: 0; border-left: none; }
+    .cvg-finder { padding: 26px 22px; }
+  }
+</style>
+
+<script>
+  (function () {
+    document.querySelectorAll('[data-cvg]').forEach(function (root) {
+      var faq = root.querySelector('.cvg-faq');
+      if (faq) {
+        faq.addEventListener('click', function (e) {
+          var btn = (e.target as HTMLElement).closest('.cvg-faqq');
+          if (!btn) return;
+          var item = btn.closest('.cvg-faqitem') as HTMLElement;
+          var open = item.getAttribute('aria-expanded') === 'true';
+          faq.querySelectorAll('.cvg-faqitem').forEach(function (it) {
+            it.setAttribute('aria-expanded', 'false');
+            var a = it.querySelector('.cvg-faqa') as HTMLElement | null;
+            if (a) a.style.maxHeight = '';
+          });
+          if (!open) {
+            item.setAttribute('aria-expanded', 'true');
+            var a = item.querySelector('.cvg-faqa') as HTMLElement | null;
+            if (a) a.style.maxHeight = a.scrollHeight + 'px';
+          }
+        });
+      }
+
+      var reveals = Array.prototype.slice.call(root.querySelectorAll('.reveal'));
+      if (!reveals.length) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        reveals.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      reveals.forEach(function (el) { io.observe(el); });
+      setTimeout(function () { reveals.forEach(function (el) { el.classList.add('in'); }); }, 8000);
+    });
+  })();
+</script>

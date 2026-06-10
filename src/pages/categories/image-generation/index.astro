@@ -1,30 +1,36 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import ToolCard from '../../../components/ToolCard.astro';
-import GuideFAQ from '../../../components/GuideFAQ.astro';
-import NoticeBox from '../../../components/NoticeBox.astro';
-import ConditionChips from '../../../components/ConditionChips.astro';
-import GeneratedSampleImage from '../../../components/GeneratedSampleImage.astro';
 import { generatedImages } from '../../../data/generatedImages';
 
 const allTools = await getCollection('tools');
 const imageTools = allTools.filter((t) => t.data.category === 'image' || t.data.category === 'both');
 const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.category === 'both');
+
+const primaryImageSlugs = ['midjourney', 'adobe-firefly', 'canva-ai-image-generator', 'leonardo-ai', 'stable-diffusion', 'dalle', 'ideogram', 'microsoft-designer', 'seaart-ai', 'fotor-ai', 'gemini-image-generation', 'nightcafe', 'playground-ai', 'clipdrop', 'dreamstudio', 'tensor-art'];
+const primaryImageTools = primaryImageSlugs
+  .map((s) => imageTools.find((t) => t.slug === s))
+  .filter(Boolean);
+
+const primaryVideoSlugs = ['runway', 'pika', 'kling-ai', 'luma-ai', 'hailuo-ai', 'haiper'];
+const primaryVideoTools = primaryVideoSlugs
+  .map((s) => videoTools.find((t) => t.slug === s))
+  .filter(Boolean);
+
 const referenceImage = generatedImages.find((img) => img.pageSlug === 'categories/image-generation' && img.sampleType === 'reference-visual');
 
 const faqs = [
   {
     q: 'AI画像生成ツールは無料でも使えますか？',
-    a: '無料で試せるツールもありますが、生成回数・画像サイズ・透かし・商用利用条件などに制限がある場合があります。最新情報は各公式サイトをご確認ください。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料枠のあるツール一覧</a>もご参照ください。',
+    a: '無料で試せるツールもありますが、生成回数・画像サイズ・透かし・商用利用条件などに制限がある場合があります。最新情報は各公式サイトをご確認ください。<a href="/conditions/free/">無料枠のあるツール一覧</a>もご参照ください。',
   },
   {
     q: 'AI画像生成ツールを商用利用する前に何を確認すべきですか？',
-    a: '料金プラン・生成物の利用条件・人物画像やブランドロゴ・第三者素材の扱い・利用規約の最新状況などを確認してください。プランによって商用利用の条件が異なるツールも多くあります。本記事は法的助言ではありません。<a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール</a>や<a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用・著作権の考え方ガイド</a>もご参照ください。',
+    a: '料金プラン・生成物の利用条件・人物画像やブランドロゴ・第三者素材の扱い・利用規約の最新状況などを確認してください。プランによって商用利用の条件が異なるツールも多くあります。本記事は法的助言ではありません。<a href="/conditions/commercial-use/">商用利用条件を確認しやすいツール</a>や<a href="/guides/commercial-use-copyright/">商用利用・著作権の考え方ガイド</a>もご参照ください。',
   },
   {
     q: '日本語プロンプトに対応していれば日本語で十分ですか？',
-    a: '日本語で指示できるツールもありますが、細かい画風や構図の指定では英語プロンプトの方が意図を伝えやすい場合があります。ツールごとの対応状況は<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>のページでご確認ください。',
+    a: '日本語で指示できるツールもありますが、細かい画風や構図の指定では英語プロンプトの方が意図を伝えやすい場合があります。ツールごとの対応状況は<a href="/conditions/japanese/">日本語対応ツール</a>のページでご確認ください。',
   },
   {
     q: '人物や著名人・ブランドロゴを含む画像を生成しても問題ありませんか？',
@@ -33,6 +39,14 @@ const faqs = [
   {
     q: 'テキストから画像を生成する方式と画像を編集する方式の違いは何ですか？',
     a: 'テキストプロンプトから画像を新規生成する「テキスト→画像（text-to-image）」と、既存画像を入力として加工・変換する「画像→画像（image-to-image）」では、向いているツールや使い方が異なります。また、Canva AIのようにデザインテンプレートと組み合わせて使う「デザイン補助」型のツールもあります。目的に合わせて選択することをおすすめします。',
+  },
+  {
+    q: 'AI画像生成・AI動画生成・AIデザインツールはどう違いますか？',
+    a: 'AI画像生成ツール（Midjourney・Stable Diffusionなど）はプロンプトから静止画を生成します。AI動画生成ツール（Runway・Kling AIなど）はテキストや画像から映像を生成します。AIデザインツール（Canva AI・Adobe Fireflyなど）はテンプレートやデザイン作業と一体化した形で画像生成・編集を行います。用途によって使い分けるか、組み合わせて活用するケースもあります。',
+  },
+  {
+    q: 'AI画像生成ツールで生成した画像の著作権は誰のものですか？',
+    a: 'AI生成画像の著作権・所有権の扱いは、ツールのプラン・利用規約・生成に使用した素材の権利状況・各国の法律などによって異なります。本記事は法的助言ではありません。商用利用や重要な場面での利用前には、各ツールの公式利用規約を確認し、必要に応じて専門家へご相談ください。',
   },
 ];
 
@@ -48,409 +62,1008 @@ const faqJsonLd = JSON.stringify({
     }
   }))
 });
+
+const imageToolCards = [
+  { name: 'Midjourney',           slug: 'midjourney',               initial: 'M', role: '画像生成', commercial: '要確認', free: 'なし',       jp: '要確認', note: '透かしなし',   price: '$10/月（Basic・月払い）', platforms: 'Discord、Web', date: '2026-06-10' },
+  { name: 'Adobe Firefly',        slug: 'adobe-firefly',            initial: 'A', role: '画像生成', commercial: '要確認', free: '要確認',     jp: '対応',   note: 'プランによる', price: '$9.99/月（Firefly Standard・プロモ適用時）', platforms: 'Web', date: '2026-06-10' },
+  { name: 'Canva AI',             slug: 'canva-ai-image-generator', initial: 'C', role: '画像生成', commercial: '要確認', free: '要確認',     jp: '対応',   note: '要確認',       price: '$15/月（Canva Pro・月払い）', platforms: 'Web、iOS、Android', date: '2026-06-10' },
+  { name: 'Leonardo AI',          slug: 'leonardo-ai',              initial: 'L', role: '画像生成', commercial: '要確認', free: '要確認',     jp: '要確認', note: '要確認',       price: '$10/月（Apprentice・年払い）', platforms: 'Web、API', date: '2026-06-10' },
+  { name: 'Stable Diffusion',     slug: 'stable-diffusion',         initial: 'S', role: '画像生成', commercial: '要確認', free: '無料枠あり', jp: '要確認', note: 'プランによる', price: '要公式確認', platforms: 'Local、API', date: '2026-06-10' },
+  { name: 'DALL·E',               slug: 'dalle',                    initial: 'D', role: '画像生成', commercial: '案内あり','free': '要確認',  jp: '対応',   note: 'プランによる', price: 'ChatGPT Plusプラン等で利用枠拡大', platforms: 'Web、API', date: '2026-06-10' },
+  { name: 'Ideogram',             slug: 'ideogram',                 initial: 'I', role: '画像生成', commercial: '要確認', free: '無料枠あり', jp: '要確認', note: '要確認',       price: '要公式確認', platforms: 'Web', date: '2026-06-10' },
+  { name: 'Microsoft Designer',   slug: 'microsoft-designer',       initial: 'M', role: '画像生成', commercial: '要確認', free: '無料枠あり', jp: '対応',   note: '要確認',       price: '要公式確認', platforms: 'Web', date: '2026-06-10' },
+  { name: 'SeaArt AI',            slug: 'seaart-ai',                initial: 'S', role: '画像生成', commercial: '要確認', free: '無料枠あり', jp: '対応',   note: '要確認',       price: '要公式確認（VIP・SVIPプランあり）', platforms: 'Web', date: '2026-06-10' },
+  { name: 'Fotor AI',             slug: 'fotor-ai',                 initial: 'F', role: '画像生成', commercial: '案内あり','free': '無料枠あり',jp:'対応',  note: '透かしあり',   price: '要公式確認', platforms: 'Web', date: '2026-06-10' },
+  { name: 'Gemini画像生成',       slug: 'gemini-image-generation',  initial: 'G', role: '画像生成', commercial: '要確認', free: '無料枠あり', jp: '対応',   note: '透かしあり',   price: '要公式確認', platforms: 'Web、iOS、Android', date: '2026-06-10' },
+  { name: 'NightCafe',            slug: 'nightcafe',                initial: 'N', role: '画像生成', commercial: '要確認', free: '無料枠あり', jp: '要確認', note: '透かしなし',   price: '要公式確認', platforms: 'Web', date: '2026-06-10' },
+  { name: 'Playground AI',        slug: 'playground-ai',            initial: 'P', role: '画像生成', commercial: '要確認', free: '無料枠あり', jp: '要確認', note: '要確認',       price: '$12/月（Pro・年払い）', platforms: 'Web', date: '2026-06-10' },
+  { name: 'Clipdrop',             slug: 'clipdrop',                 initial: 'C', role: '画像生成', commercial: '要確認', free: '無料枠あり', jp: '非対応', note: '要確認',       price: '要公式確認', platforms: 'Web、API', date: '2026-06-10' },
+  { name: 'DreamStudio',          slug: 'dreamstudio',              initial: 'D', role: '画像生成', commercial: '要確認', free: 'なし',       jp: '要確認', note: '要確認',       price: '要公式確認', platforms: 'Web', date: '2026-06-10' },
+  { name: 'Tensor.Art',           slug: 'tensor-art',               initial: 'T', role: '画像生成', commercial: '要確認', free: '無料枠あり', jp: '要確認', note: '要確認',       price: '要公式確認', platforms: 'Web', date: '2026-06-10' },
+];
+
+const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(Boolean);
 ---
 
 <BaseLayout
-  title="AI画像生成ツール一覧｜商用利用・料金・無料枠・用途別に比較"
-  description="AI画像生成ツールを商用利用条件・料金・無料枠・日本語対応・用途別の特徴で比較できる一覧ページです。Midjourney・Adobe Firefly・Canva AI・Leonardo AI・Stable Diffusionなど主要ツールを整理しています。最新情報は公式サイトをご確認ください。"
+  title="AI画像生成ツールを比較する｜用途別・商用利用・日本語対応"
+  description="AI画像生成ツール（Midjourney・Adobe Firefly・Canva AI・Leonardo AI・Stable Diffusionなど）をイラスト・写真風・SNS投稿・広告バナー・商品画像などの用途別に比較する一覧ページです。無料枠・透かし・商用利用条件・日本語対応を確認できます。最新情報は各公式サイトをご確認ください。"
   canonicalPath="/categories/image-generation/"
   jsonLd={faqJsonLd}
 >
-  <div class="mx-auto max-w-5xl px-6 py-12">
 
-    <nav class="mb-6 text-sm text-slate-500">
+  <div class="mx-auto max-w-5xl px-6 py-10">
+
+    <!-- パンくず -->
+    <nav class="mb-5 text-sm text-slate-500">
       <a href="/" class="hover:underline">トップ</a>
       <span class="mx-1">/</span>
       <a href="/tools/" class="hover:underline">ツール一覧</a>
       <span class="mx-1">/</span>
-      <span>AI画像生成ツール一覧</span>
+      <span>AI画像生成ツール</span>
     </nav>
 
-    <h1 class="mb-3 text-3xl font-bold text-slate-900">AI画像生成ツール一覧</h1>
-
-    <p class="mb-4 leading-relaxed text-slate-600">
-      AI画像生成ツールを、商用利用条件・料金・無料枠・日本語対応・用途別の特徴で比較できる一覧ページです。
-      Midjourney・Adobe Firefly・Canva AI・Leonardo AI・Stable Diffusionなど主要ツールの情報を整理しています。
-    </p>
-
-    <!-- 用途別おすすめ早見表 -->
-    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
-      <h2 class="mb-3 text-xl font-bold text-slate-900">用途別おすすめ早見表</h2>
-      <p class="mb-4 text-sm text-slate-600 leading-relaxed">
-        AI画像生成ツールは、用途によって向いているツールが変わります。まずは作りたい画像の種類や使い方から候補を絞り、下のツール一覧や比較ページで料金・無料枠・日本語対応・商用利用条件を確認してください。
-      </p>
-      <div class="overflow-x-auto">
-        <table class="w-full min-w-[700px] border-collapse text-sm">
-          <thead>
-            <tr class="bg-slate-100 text-left text-xs font-semibold text-slate-600">
-              <th class="border border-slate-200 px-3 py-2">用途</th>
-              <th class="border border-slate-200 px-3 py-2">候補ツール</th>
-              <th class="border border-slate-200 px-3 py-2">向いている理由</th>
-              <th class="border border-slate-200 px-3 py-2">確認ポイント</th>
-              <th class="border border-slate-200 px-3 py-2">詳細</th>
-            </tr>
-          </thead>
-          <tbody class="text-xs text-slate-700">
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">初心者がまず試したい</td>
-              <td class="border border-slate-200 px-3 py-2">Canva AI / Microsoft Designer</td>
-              <td class="border border-slate-200 px-3 py-2">デザイン作成と一緒に使いやすく、画像生成だけでなく編集・配置まで進めやすい候補</td>
-              <td class="border border-slate-200 px-3 py-2">無料枠、テンプレート、商用利用条件</td>
-              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
-                <a href="/tools/canva-ai-image-generator/" class="text-blue-600 hover:underline mr-1">Canva AI</a>
-                <a href="/tools/microsoft-designer/" class="text-blue-600 hover:underline">Microsoft Designer</a>
-              </td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">SNS・ブログ画像を作りたい</td>
-              <td class="border border-slate-200 px-3 py-2">Canva AI / Adobe Firefly / DALL·E</td>
-              <td class="border border-slate-200 px-3 py-2">ブログアイキャッチやSNS投稿向けの素材作成に使いやすい候補</td>
-              <td class="border border-slate-200 px-3 py-2">画像サイズ、文字入れ、編集機能、利用条件</td>
-              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
-                <a href="/tools/canva-ai-image-generator/" class="text-blue-600 hover:underline mr-1">Canva AI</a>
-                <a href="/tools/adobe-firefly/" class="text-blue-600 hover:underline mr-1">Adobe Firefly</a>
-                <a href="/tools/dalle/" class="text-blue-600 hover:underline">DALL·E</a>
-              </td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">商用・広告バナー用途を検討したい</td>
-              <td class="border border-slate-200 px-3 py-2">Adobe Firefly / Canva AI / Microsoft Designer</td>
-              <td class="border border-slate-200 px-3 py-2">デザイン制作や広告素材作成の流れに組み込みやすい候補</td>
-              <td class="border border-slate-200 px-3 py-2">プラン別の利用条件、素材・フォント・テンプレートの扱い、商用利用条件</td>
-              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
-                <a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">利用条件の考え方</a>
-              </td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">イラスト・ゲーム素材を作りたい</td>
-              <td class="border border-slate-200 px-3 py-2">Midjourney / Leonardo AI / Stable Diffusion</td>
-              <td class="border border-slate-200 px-3 py-2">イラスト寄り・コンセプトアート寄りの表現を検討しやすい候補</td>
-              <td class="border border-slate-200 px-3 py-2">生成スタイル、ライセンス、第三者素材・キャラクター表現の扱い</td>
-              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
-                <a href="/tools/midjourney/" class="text-blue-600 hover:underline mr-1">Midjourney</a>
-                <a href="/tools/leonardo-ai/" class="text-blue-600 hover:underline mr-1">Leonardo AI</a>
-                <a href="/tools/stable-diffusion/" class="text-blue-600 hover:underline">Stable Diffusion</a>
-              </td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">テキスト入り画像・サムネイルを作りたい</td>
-              <td class="border border-slate-200 px-3 py-2">Ideogram / Canva AI / Microsoft Designer</td>
-              <td class="border border-slate-200 px-3 py-2">文字入りビジュアルやサムネイル制作で比較候補になりやすい</td>
-              <td class="border border-slate-200 px-3 py-2">文字の再現性、編集機能、日本語テキスト対応</td>
-              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
-                <a href="/tools/ideogram/" class="text-blue-600 hover:underline mr-1">Ideogram</a>
-                <a href="/tools/canva-ai-image-generator/" class="text-blue-600 hover:underline mr-1">Canva AI</a>
-                <a href="/tools/microsoft-designer/" class="text-blue-600 hover:underline">Microsoft Designer</a>
-              </td>
-            </tr>
-            <tr class="even:bg-slate-50">
-              <td class="border border-slate-200 px-3 py-2 font-semibold whitespace-nowrap">高品質フォトリアル画像を作りたい</td>
-              <td class="border border-slate-200 px-3 py-2">Midjourney / DALL·E / Stable Diffusion</td>
-              <td class="border border-slate-200 px-3 py-2">写真風・リアル寄りの画像生成を検討しやすい候補</td>
-              <td class="border border-slate-200 px-3 py-2">画風、プロンプト指定、人物・ロゴ・既存キャラクターの扱い</td>
-              <td class="border border-slate-200 px-3 py-2 whitespace-nowrap">
-                <a href="/tools/midjourney/" class="text-blue-600 hover:underline mr-1">Midjourney</a>
-                <a href="/tools/dalle/" class="text-blue-600 hover:underline mr-1">DALL·E</a>
-                <a href="/tools/stable-diffusion/" class="text-blue-600 hover:underline">Stable Diffusion</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <!-- カテゴリナビ -->
+    <nav class="mb-8">
+      <p class="mb-2 text-xs font-semibold text-slate-500 uppercase tracking-widest">カテゴリから探す</p>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <a href="/categories/video-generation/" class="rounded-full border border-slate-300 px-3 py-1.5 text-slate-600 hover:bg-slate-50">AI動画生成</a>
+        <a href="/categories/image-generation/" class="rounded-full border border-indigo-400 bg-indigo-50 px-3 py-1.5 font-semibold text-indigo-700" aria-current="page">AI画像生成</a>
+        <a href="/categories/avatar-video/" class="rounded-full border border-slate-300 px-3 py-1.5 text-slate-600 hover:bg-slate-50">AIアバター動画</a>
+        <a href="/categories/video-editing/" class="rounded-full border border-slate-300 px-3 py-1.5 text-slate-600 hover:bg-slate-50">AI動画編集</a>
+        <a href="/categories/design/" class="rounded-full border border-slate-300 px-3 py-1.5 text-slate-600 hover:bg-slate-50">AIデザイン</a>
+        <a href="/categories/voice-narration/" class="rounded-full border border-slate-300 px-3 py-1.5 text-slate-600 hover:bg-slate-50">AI音声・ナレーション</a>
       </div>
-      <p class="mt-4 text-xs text-slate-500">表内の候補は、当サイトで確認した公式情報と用途別の比較観点をもとに整理したものです。料金・無料枠・日本語対応・商用利用条件はプランや時期によって変わる場合があります。最新情報は各公式サイトをご確認ください。本記事は法的助言ではありません。</p>
-    </section>
-
-    <!-- 条件別チップ導線 -->
-    <ConditionChips currentPath="/tools/" />
-
-    <!-- NoticeBox -->
-    <div class="mb-4">
-      <NoticeBox />
-    </div>
-    <ul class="mb-8 list-disc pl-5 text-sm text-slate-600">
-      <li>人物・著名人・ブランドロゴ・第三者素材を含む画像の利用は、別途権利の確認が必要です。</li>
-      <li>無料プランでは、生成画像に透かしが付与される場合があります。</li>
-    </ul>
-
-    <!-- AI画像生成ツール -->
-    <section class="mb-12">
-      <h2 class="mb-4 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">
-        AI画像生成ツール（{imageTools.length}件）
-      </h2>
-      <div class="grid gap-4 sm:grid-cols-2">
-        {imageTools.map((tool) => <ToolCard tool={tool} />)}
-      </div>
-    </section>
-
-    <!-- 選び方セクション -->
-    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
-      <h2 class="mb-4 text-lg font-semibold text-slate-900">AI画像生成ツールの選び方</h2>
-      <ul class="space-y-3 text-sm text-slate-700">
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>生成の種類：</strong>テキストプロンプトから画像を生成する「テキスト→画像」、既存画像を変換・編集する「画像→画像」、テンプレートに合わせてデザインを作る「デザイン補助」では、向いているツールが異なります。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>無料枠・生成回数：</strong>完全無料・クレジット制・無料プランありなど形態はさまざまで、上限を超えると有料プランへの移行が必要な場合があります。<a href="/conditions/free/" class="text-blue-600 hover:underline">無料枠のあるツール</a>はこちらで確認できます。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>透かしの有無：</strong>無料プランでは透かしが入る場合があります。SNS画像や商用成果物に使う場合は透かし条件の確認が重要です。<a href="/conditions/no-watermark/" class="text-blue-600 hover:underline">透かしなしツール</a>はこちらで確認できます。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>商用利用条件：</strong>プランや用途によって商用利用の可否が異なります。人物・ブランドロゴ・第三者素材が含まれる場合は別途権利の確認も必要です。利用前に必ず最新の公式規約をご確認ください。<a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール</a>はこちら。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>日本語対応：</strong>日本語UIと日本語プロンプト対応は別問題です。UIが日本語でも、細かいスタイル指定では英語プロンプトの方が意図を伝えやすい場合があります。<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール</a>はこちらで確認できます。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0 text-slate-400">▸</span>
-          <span><strong>生成品質・スタイル：</strong>フォトリアル・イラスト・アニメ調・ゲームグラフィックなど、ツールごとに得意なスタイルが異なります。目的の用途に合ったスタイルのサンプルを公式サイトで確認することをおすすめします。</span>
-        </li>
-      </ul>
-      <p class="mt-4 text-xs text-slate-500">料金・無料枠・商用利用条件は変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
-    </section>
-
-    <!-- 用途別の選び分け -->
-    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
-      <h2 class="mb-4 text-lg font-semibold text-slate-900">用途別のツール選び分け</h2>
-      <div class="space-y-4 text-sm text-slate-700">
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-36">SNS投稿画像</span>
-          <span>手軽にビジュアルを作りたい場合はCanva AI・Microsoft Designerが検討候補に挙がりやすいです。SNSフォーマットへのサイズ調整もデザインツール系の方がスムーズな場合があります。</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-36">ブログアイキャッチ</span>
-          <span>雰囲気重視の画像を生成する場合はMidjourney・DALL-E・Ideogramが候補に挙がります。商用利用前提の場合は各ツールの規約確認が先決です。</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-36">広告バナー</span>
-          <span>商用利用条件を公式規約で確認したうえで、Adobe Fireflyはアドビ製品との連携や商用利用条件の確認を重視する場合の候補になります。無料プランでの商用利用が制限されているツールも多いため、プラン確認が先決です。</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-36">サムネイル</span>
-          <span>YouTubeサムネイルやテキスト入り画像を作りたい場合はIdeogramがテキスト生成精度で候補に挙がることがあります。<a href="/use-cases/youtube-thumbnail/" class="text-blue-600 hover:underline">YouTube向け比較ページ</a>もご参照ください。</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-36">商品画像・EC</span>
-          <span>商品の見栄えを整えたい場合は背景除去・補正機能も備えたツールが便利です。商用利用条件・著作権の扱いを事前に確認することをおすすめします。<a href="/use-cases/ec-product-image/" class="text-blue-600 hover:underline">EC商品画像向け比較ページ</a>もご参照ください。</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-36">ゲーム・イラスト素材</span>
-          <span>ゲームグラフィックやイラスト素材の制作にはLeonardo AI・Stable Diffusion系が候補として挙がることがあります。スタイルの一貫性やモデル選択の柔軟性が特徴とされています。</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-semibold text-slate-600 w-36">プレゼン用ビジュアル</span>
-          <span>プレゼン資料用のビジュアル素材にはCanva AIのようにスライドデザインと一体化したツールが作業効率の観点から候補になります。</span>
-        </div>
-      </div>
-      <p class="mt-4 text-xs text-slate-500">ツールの対応状況・条件は変更される可能性があります。最新情報は各公式サイトでご確認ください。</p>
-    </section>
-
-    <!-- 主要ツールの特徴と違い -->
-    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
-      <h2 class="mb-4 text-lg font-semibold text-slate-900">主要ツールの特徴と違い</h2>
-      {referenceImage && <GeneratedSampleImage image={referenceImage} />}
-      <div class="space-y-4 text-sm text-slate-700">
-        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
-          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/midjourney/" class="hover:underline">Midjourney</a></p>
-          <p>アーティスティックで高品質なビジュアル制作に強みがあるとされており、フォトリアルからイラスト調まで幅広いスタイルに対応しています。無料プランはなく、有料プランが基本です。商用利用条件は公式規約での確認が必要です。</p>
-        </div>
-        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
-          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/adobe-firefly/" class="hover:underline">Adobe Firefly</a></p>
-          <p>Adobe製品（Photoshop・Illustratorなど）との連携に強みがあります。商用利用条件をアドビの枠組みで確認しながら使いたい場合の候補です。ただし商用利用の可否は利用規約・プランによって異なるため、最新の公式情報を必ずご確認ください。</p>
-        </div>
-        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
-          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/canva-ai-image-generator/" class="hover:underline">Canva AI（Magic Media）</a></p>
-          <p>Canvaのデザイン制作フローの中でAI画像生成を使いたい場合の候補です。SNS画像・プレゼン資料・バナーなどのデザイン作業と一体化して利用できます。商用利用条件はCanvaの利用規約に準じます。</p>
-        </div>
-        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
-          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/leonardo-ai/" class="hover:underline">Leonardo AI</a></p>
-          <p>ゲームグラフィックやイラスト素材の制作候補として挙がることが多いツールです。カスタムモデルの選択や一貫したスタイルの維持に強みがあるとされています。無料枠もあります。商用利用条件は公式規約での確認が必要です。</p>
-        </div>
-        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
-          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/stable-diffusion/" class="hover:underline">Stable Diffusion系（DreamStudio等）</a></p>
-          <p>オープンソースモデルをベースにカスタマイズ性の高い生成ができるツール群です。ローカル環境での実行や独自モデルのファインチューニングも可能ですが、技術的な知識が必要な場合があります。商用利用はモデルのライセンス条件を個別に確認する必要があります。</p>
-        </div>
-        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
-          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/dalle/" class="hover:underline">DALL-E（ChatGPT経由）</a></p>
-          <p>OpenAIのDALL-EモデルをChatGPT経由で利用できます。テキスト指示による画像生成が手軽で、会話の流れで修正指示を出せる点が特徴とされています。商用利用条件はOpenAIの利用規約での確認が必要です。</p>
-        </div>
-        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
-          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/ideogram/" class="hover:underline">Ideogram</a></p>
-          <p>画像内にテキストを精度よく生成できる点が特徴とされています。サムネイルやタイトルロゴ入り画像の生成用途で候補に挙がることがあります。無料枠もあります。商用利用条件は公式規約での確認が必要です。</p>
-        </div>
-        <div class="rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
-          <p class="mb-1 font-semibold text-slate-800"><a href="/tools/microsoft-designer/" class="hover:underline">Microsoft Designer</a></p>
-          <p>MicrosoftアカウントでアクセスできるAI画像生成・デザインツールです。SNS投稿やプレゼン用ビジュアルを手軽に作りたい場合の候補になります。商用利用条件はMicrosoftの利用規約での確認が必要です。</p>
-        </div>
-      </div>
-      <p class="mt-4 text-xs text-slate-500">掲載内容は公式情報をもとに整理していますが、機能・条件は変更される可能性があります。最新情報は各公式サイトでご確認ください。本記載は法的助言ではありません。</p>
-    </section>
-
-    <!-- 商用利用前に確認すること -->
-    <section class="mb-10 rounded-xl border border-amber-100 bg-amber-50 px-6 py-5">
-      <h2 class="mb-3 text-base font-bold text-amber-900">商用利用・著作権・肖像権について確認すべきこと</h2>
-      <ul class="space-y-2 text-sm text-amber-800">
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0">▸</span>
-          <span><strong>利用規約の確認：</strong>無料プランで商用利用が禁止されているツールも多くあります。利用前に最新の公式規約を必ずご確認ください。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0">▸</span>
-          <span><strong>人物・肖像権：</strong>実在の人物・著名人を模した画像の生成・公開・商用利用には肖像権上のリスクがある場合があります。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0">▸</span>
-          <span><strong>ブランド・商標：</strong>他社のロゴ・商標・キャラクターを含む画像の利用には商標権・著作権上の注意が必要です。</span>
-        </li>
-        <li class="flex gap-2">
-          <span class="mt-0.5 shrink-0">▸</span>
-          <span><strong>第三者素材：</strong>既存画像・写真・イラストを入力素材として使う場合は、その素材の権利関係を確認する必要があります。</span>
-        </li>
-      </ul>
-      <p class="mt-3 text-xs text-amber-700">本記事は法的助言ではありません。商用利用・権利関係については専門家へのご相談をおすすめします。<a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">商用利用・著作権の考え方ガイド</a>もご参照ください。</p>
-    </section>
-
-    <!-- 向いている人 / 向いていない人 -->
-    <section class="mb-10 rounded-xl border border-slate-200 bg-white px-6 py-6">
-      <h2 class="mb-5 text-lg font-semibold text-slate-900">AI画像生成ツールが向いている人・向いていない人</h2>
-      <div class="grid gap-5 sm:grid-cols-2">
-        <div>
-          <h3 class="mb-3 text-sm font-bold text-emerald-700">向いている人</h3>
-          <ul class="space-y-2 text-sm text-slate-700">
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-emerald-500">✓</span><span>ブログアイキャッチやSNS画像を短時間で作りたい人</span></li>
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-emerald-500">✓</span><span>広告バナーやサムネイルの案を複数試したい人</span></li>
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-emerald-500">✓</span><span>デザイン案や構図案を素早く出したい人</span></li>
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-emerald-500">✓</span><span>画像素材をもとにバリエーションを作りたい人</span></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="mb-3 text-sm font-bold text-rose-700">向いていない人</h3>
-          <ul class="space-y-2 text-sm text-slate-700">
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-rose-400">✗</span><span>利用条件を確認せずに商用案件へ使いたい人</span></li>
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-rose-400">✗</span><span>人物・著名人・ブランドロゴを厳密に扱う必要がある人</span></li>
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-rose-400">✗</span><span>毎回同じ人物・同じ構図を完全に再現したい人</span></li>
-            <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-rose-400">✗</span><span>細かなレイヤー編集や入稿データ制作まで完結させたい人</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- 動画生成ツール -->
-    <section class="mb-12">
-      <h2 class="mb-4 border-b border-slate-200 pb-2 text-xl font-semibold text-slate-800">
-        AI動画生成ツール（{videoTools.length}件）
-      </h2>
-      <div class="grid gap-4 sm:grid-cols-2">
-        {videoTools.map((tool) => <ToolCard tool={tool} />)}
-      </div>
-      <div class="mt-4">
-        <a href="/categories/video-generation/" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:underline">
-          AI動画生成ツール一覧を見る →
-        </a>
-      </div>
-    </section>
-
-    <!-- 関連ページリンク -->
-    <section class="mb-12">
-      <h2 class="mb-4 text-lg font-semibold text-slate-800">関連ページ</h2>
-
-      <div class="mb-4">
-        <p class="mb-2 text-sm font-semibold text-slate-700">ツール別詳細ページ</p>
-        <ul class="flex flex-wrap gap-3">
-          {['midjourney', 'adobe-firefly', 'canva-ai-image-generator', 'leonardo-ai', 'stable-diffusion', 'dalle', 'ideogram', 'microsoft-designer'].map((slug) => {
-            const tool = imageTools.find((t) => t.slug === slug);
-            return tool ? (
-              <li>
-                <a
-                  href={`/tools/${slug}/`}
-                  class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300"
-                >
-                  {tool.data.name}
-                </a>
-              </li>
-            ) : null;
-          })}
-        </ul>
-      </div>
-
-      <div>
-        <p class="mb-2 text-sm font-semibold text-slate-700">まとめ・ガイドページ</p>
-        <ul class="flex flex-wrap gap-3">
-          <li>
-            <a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              無料で使えるAIツール
-            </a>
-          </li>
-          <li>
-            <a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              商用利用を確認しやすいAIツール
-            </a>
-          </li>
-          <li>
-            <a href="/conditions/japanese/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              日本語対応のAIツール
-            </a>
-          </li>
-          <li>
-            <a href="/conditions/no-watermark/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              透かしなしで使いやすいAIツール
-            </a>
-          </li>
-          <li>
-            <a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              商用利用・著作権の考え方ガイド
-            </a>
-          </li>
-          <li>
-            <a href="/comparisons/" class="rounded-full border border-slate-200 px-4 py-2 text-sm hover:bg-slate-100 hover:border-slate-300">
-              全ツール比較表
-            </a>
-          </li>
-          <li>
-            <a href="/use-cases/" class="rounded-full border border-blue-300 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-              用途別AI画像生成ツール比較（一覧）
-            </a>
-          </li>
-          <li>
-            <a href="/use-cases/youtube-thumbnail/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-              YouTubeサムネ向け比較
-            </a>
-          </li>
-          <li>
-            <a href="/use-cases/sns-post-image/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-              SNS投稿画像向け比較
-            </a>
-          </li>
-          <li>
-            <a href="/use-cases/ad-banner/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-              広告バナー向け比較
-            </a>
-          </li>
-          <li>
-            <a href="/use-cases/ec-product-image/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-              EC商品画像向け比較
-            </a>
-          </li>
-          <li>
-            <a href="/use-cases/blog-eyecatch/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm text-blue-700 hover:bg-blue-100">
-              ブログアイキャッチ向け比較
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <GuideFAQ items={faqs} title="よくある質問" />
-
-    <nav class="mt-8 border-t border-slate-200 pt-6 text-sm">
-      <a href="/tools/" class="text-blue-600 hover:underline">← ツール一覧に戻る</a>
     </nav>
 
   </div>
+
+  <div class="cig-x" data-cig>
+    <div class="mx-auto max-w-5xl px-6">
+
+      <!-- ===== Hero ===== -->
+      <header class="cig-head">
+        <div class="cig-meta">
+          <span class="cig-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.8"/><path d="m21 15-4.5-4.5L7 21"/></svg>
+            AI IMAGE GENERATION
+          </span>
+          <span class="cig-checked">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            記事内容の最終確認 <b>2026-06-10</b>
+          </span>
+        </div>
+        <h1 class="cig-h1">AI画像生成ツールを<span class="hl">比較する</span></h1>
+        <p class="cig-lead">イラスト、写真風画像、SNS投稿、広告バナー、ブログアイキャッチ、EC商品画像など、作りたい画像に合わせてAI画像生成ツールの選び方を整理します。無料枠・透かし・商用利用条件・日本語対応を横断的に確認できます。</p>
+        <div class="cig-stats">
+          <div class="cig-stat"><span class="n">16</span><span class="t">AI画像生成ツール</span></div>
+          <div class="cig-stat"><span class="n">6</span><span class="t">用途別に比較</span></div>
+          <div class="cig-stat"><span class="n">7</span><span class="t">よくある質問</span></div>
+        </div>
+      </header>
+
+      <!-- Notice -->
+      <div class="cig-notice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <p><b>ご利用前の注意：</b>AI画像生成ツールは、プラン・生成方式・素材利用・商用利用条件によって扱いが異なる場合があります。生成画像の商用利用、第三者素材、人物・ブランド・ロゴの利用条件は、各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
+      </div>
+
+      <!-- ===== 用途別おすすめ早見表 ===== -->
+      <section class="cig-sec">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">Quick guide</span>
+          <h2>用途別おすすめ早見表</h2>
+          <p>AI画像生成ツールは、用途によって向いているツールが変わります。まずは作りたい画像の種類から候補を絞り、下の比較表で料金・無料枠・透かし・商用利用条件を確認してください。</p>
+        </div>
+        <div class="reveal">
+          <div class="cig-tablewrap">
+            <table class="cig-gt guide">
+              <thead>
+                <tr><th>用途</th><th>候補ツール</th><th>向いている理由</th><th>確認ポイント</th><th>詳細</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="cig-situation">初心者がまず試したい</td>
+                  <td class="cig-cand">Canva AI / Microsoft Designer</td>
+                  <td class="cig-note">デザイン作成と一緒に使いやすく、画像生成だけでなく編集・配置まで進めやすい候補</td>
+                  <td class="cig-note">無料枠、テンプレート、商用利用条件</td>
+                  <td><span class="cig-linklist"><a href="/tools/canva-ai-image-generator/">Canva AI →</a><a href="/tools/microsoft-designer/">Microsoft Designer →</a></span></td>
+                </tr>
+                <tr>
+                  <td class="cig-situation">SNS・ブログ画像を作りたい</td>
+                  <td class="cig-cand">Canva AI / Adobe Firefly / DALL·E</td>
+                  <td class="cig-note">ブログアイキャッチやSNS投稿向けの素材作成に使いやすい候補</td>
+                  <td class="cig-note">画像サイズ、文字入れ、編集機能、利用条件</td>
+                  <td><span class="cig-linklist"><a href="/tools/canva-ai-image-generator/">Canva AI →</a><a href="/tools/adobe-firefly/">Adobe Firefly →</a><a href="/tools/dalle/">DALL·E →</a></span></td>
+                </tr>
+                <tr>
+                  <td class="cig-situation">商用・広告バナー用途を検討したい</td>
+                  <td class="cig-cand">Adobe Firefly / Canva AI</td>
+                  <td class="cig-note">デザイン制作や広告素材作成の流れに組み込みやすい候補</td>
+                  <td class="cig-note">プラン別の利用条件、素材・フォント・テンプレートの扱い、商用利用条件</td>
+                  <td><span class="cig-linklist"><a href="/tools/adobe-firefly/">Adobe Firefly →</a><a href="/guides/commercial-use-copyright/">利用条件の考え方 →</a></span></td>
+                </tr>
+                <tr>
+                  <td class="cig-situation">イラスト・ゲーム素材を作りたい</td>
+                  <td class="cig-cand">Midjourney / Leonardo AI / Stable Diffusion</td>
+                  <td class="cig-note">イラスト寄り・コンセプトアート寄りの表現を検討しやすい候補</td>
+                  <td class="cig-note">生成スタイル、ライセンス、第三者素材・キャラクター表現の扱い</td>
+                  <td><span class="cig-linklist"><a href="/tools/midjourney/">Midjourney →</a><a href="/tools/leonardo-ai/">Leonardo AI →</a><a href="/tools/stable-diffusion/">Stable Diffusion →</a></span></td>
+                </tr>
+                <tr>
+                  <td class="cig-situation">テキスト入り画像・サムネイルを作りたい</td>
+                  <td class="cig-cand">Ideogram / Canva AI / Microsoft Designer</td>
+                  <td class="cig-note">文字入りビジュアルやサムネイル制作で比較候補になりやすい</td>
+                  <td class="cig-note">文字の再現性、編集機能、日本語テキスト対応</td>
+                  <td><span class="cig-linklist"><a href="/tools/ideogram/">Ideogram →</a><a href="/tools/canva-ai-image-generator/">Canva AI →</a></span></td>
+                </tr>
+                <tr>
+                  <td class="cig-situation">高品質フォトリアル画像を作りたい</td>
+                  <td class="cig-cand">Midjourney / DALL·E / Stable Diffusion</td>
+                  <td class="cig-note">写真風・リアル寄りの画像生成を検討しやすい候補</td>
+                  <td class="cig-note">画風、プロンプト指定、人物・ロゴ・既存キャラクターの扱い</td>
+                  <td><span class="cig-linklist"><a href="/tools/midjourney/">Midjourney →</a><a href="/tools/dalle/">DALL·E →</a><a href="/tools/stable-diffusion/">Stable Diffusion →</a></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cig-foot">表内の候補は、当サイトで確認した公式情報と用途別の比較観点をもとに整理したものです。料金・無料枠・日本語対応・商用利用条件はプランや時期によって変わる場合があります。最新情報は各公式サイトをご確認ください。本記事は法的助言ではありません。</p>
+        </div>
+      </section>
+
+      <!-- ===== AI画像生成・動画生成・デザインツールの違い ===== -->
+      <section class="cig-sec band">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">3 categories</span>
+          <h2>AI画像生成・AI動画生成・AIデザインツールの違い</h2>
+          <p>「AI画像系ツール」は大きく3種類に分かれます。目的に合ったカテゴリを選ぶことがツール選びの第一歩です。</p>
+        </div>
+        <div class="reveal">
+          <div class="cig-tablewrap">
+            <table class="cig-gt diff">
+              <thead>
+                <tr><th>カテゴリ</th><th>何をするツールか</th><th>代表ツール</th><th>向いている用途</th></tr>
+              </thead>
+              <tbody>
+                <tr class="is-current">
+                  <td class="cig-catcell">AI画像生成<span class="cig-curtag">このページ</span></td>
+                  <td class="cig-note">テキストや画像から静止画像を生成する</td>
+                  <td class="cig-note">Midjourney・Adobe Firefly・Stable Diffusion・Leonardo AI</td>
+                  <td class="cig-note">イラスト・SNS素材・ブログ画像・広告バナー・EC商品画像</td>
+                </tr>
+                <tr>
+                  <td class="cig-catcell">AI動画生成</td>
+                  <td class="cig-note">テキストや画像から映像を生成する</td>
+                  <td class="cig-note">Runway・Pika・Kling AI・Luma AI</td>
+                  <td class="cig-note">SNS動画・コンセプトムービー・画像の動画化</td>
+                </tr>
+                <tr>
+                  <td class="cig-catcell">AIデザインツール</td>
+                  <td class="cig-note">テンプレートやデザイン作業と一体化して画像生成・編集を行う</td>
+                  <td class="cig-note">Canva AI・Adobe Firefly・Microsoft Designer</td>
+                  <td class="cig-note">SNSバナー・プレゼン資料・LP画像・テンプレート活用</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cig-foot">AI動画生成については<a href="/categories/video-generation/">動画生成カテゴリ</a>、AIデザインツールについては<a href="/categories/design/">デザインカテゴリ</a>をご参照ください。</p>
+        </div>
+      </section>
+
+      <!-- ===== 用途別ページへ ===== -->
+      <section class="cig-sec">
+        <div class="cig-sechead reveal" style="margin-bottom:20px;">
+          <span class="cig-eyebrow">By use case</span>
+          <h2>用途別ページへ</h2>
+        </div>
+        <div class="cig-taglinks reveal">
+          <a class="cig-taglink" href="/use-cases/sns-post-image/"><span class="ld"></span>SNS投稿画像向け</a>
+          <a class="cig-taglink" href="/use-cases/blog-eyecatch/"><span class="ld"></span>ブログアイキャッチ向け</a>
+          <a class="cig-taglink" href="/use-cases/ad-banner/"><span class="ld"></span>広告バナー向け</a>
+          <a class="cig-taglink" href="/use-cases/youtube-thumbnail/"><span class="ld"></span>YouTubeサムネイル向け</a>
+          <a class="cig-taglink" href="/use-cases/ec-product-image/"><span class="ld"></span>EC商品画像向け</a>
+          <a class="cig-taglink" href="/use-cases/anime-illustration/"><span class="ld"></span>アニメ・イラスト向け</a>
+          <a class="cig-taglink" href="/use-cases/realistic-photo/"><span class="ld"></span>写真風・リアル系向け</a>
+          <a class="cig-taglink" href="/categories/video-generation/"><span class="ld"></span>AI動画生成も比較</a>
+        </div>
+      </section>
+
+      <!-- ===== 選ぶときの比較ポイント ===== -->
+      <section class="cig-sec band">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">Key factors</span>
+          <h2>AI画像生成ツールを選ぶときの確認ポイント</h2>
+          <p>「どれを使うか」を決める前に、次の観点を順に確認しておくと候補を絞りやすくなります。</p>
+        </div>
+        <ol class="cig-points reveal" data-stagger>
+          <li class="cig-pcard">
+            <span class="pn">1</span>
+            <div class="pt"><h3>生成の種類</h3><p>テキストプロンプトから画像を生成する「テキスト→画像」、既存画像を変換・編集する「画像→画像」、テンプレートに合わせてデザインを作る「デザイン補助」では、向いているツールが異なります。</p></div>
+          </li>
+          <li class="cig-pcard">
+            <span class="pn">2</span>
+            <div class="pt"><h3>無料枠・生成回数</h3><p>完全無料・クレジット制・無料プランありなど形態はさまざまで、上限を超えると有料プランへの移行が必要な場合があります。<a href="/conditions/free/">無料枠のあるツール</a>はこちらで確認できます。</p></div>
+          </li>
+          <li class="cig-pcard">
+            <span class="pn">3</span>
+            <div class="pt"><h3>透かしの有無</h3><p>無料プランでは透かしが入る場合があります。SNS画像や商用成果物に使う場合は透かし条件の確認が重要です。<a href="/conditions/no-watermark/">透かしなしツール</a>はこちらで確認できます。</p></div>
+          </li>
+          <li class="cig-pcard">
+            <span class="pn">4</span>
+            <div class="pt"><h3>商用利用条件</h3><p>プランや用途によって商用利用の可否が異なります。人物・ブランドロゴ・第三者素材が含まれる場合は別途権利の確認も必要です。利用前に必ず最新の公式規約をご確認ください。</p></div>
+          </li>
+          <li class="cig-pcard">
+            <span class="pn">5</span>
+            <div class="pt"><h3>日本語UI／日本語プロンプト対応</h3><p>日本語UIと日本語プロンプト対応は別問題です。UIが日本語でも、細かいスタイル指定では英語プロンプトの方が意図を伝えやすい場合があります。<a href="/conditions/japanese/">日本語対応ツール</a>はこちらで確認できます。</p></div>
+          </li>
+          <li class="cig-pcard">
+            <span class="pn">6</span>
+            <div class="pt"><h3>生成品質・スタイル</h3><p>フォトリアル・イラスト・アニメ調・ゲームグラフィックなど、ツールごとに得意なスタイルが異なります。目的の用途に合ったサンプルを公式サイトで確認することをおすすめします。</p></div>
+          </li>
+        </ol>
+        <p class="cig-foot reveal">各条件の詳細は各ツールの詳細ページおよび公式サイトでご確認ください。</p>
+      </section>
+
+      <!-- ===== 横断比較表 ===== -->
+      <section class="cig-sec">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">Comparison table</span>
+          <h2>AI画像生成ツール 横断比較表</h2>
+          <p>以下は <b>2026-06-10</b> 時点の調査に基づく整理です。料金・無料枠・透かし・商用利用条件・利用条件はプランや時期によって変わる場合があります。人物・ロゴ・第三者素材を含む生成物の扱いは各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
+        </div>
+        <p class="cig-gtcap reveal">← 横にスクロールできます →</p>
+        <div class="reveal">
+          <div class="cig-tablewrap">
+            <table class="cig-gt cross">
+              <thead>
+                <tr><th>ツール名</th><th>主な用途</th><th>入力タイプ</th><th>無料枠</th><th>商用利用条件</th><th>日本語対応</th><th>透かし</th><th>詳細</th></tr>
+              </thead>
+              <tbody>
+                {primaryImageTools.map((tool) => {
+                  const cu = tool.data.commercialUse;
+                  const cuLabel =
+                    cu === 'ok' ? '条件付きで利用可能な場合あり（要公式確認）' :
+                    cu === 'paid-only' ? '有料プラン前提の場合あり（要公式確認）' :
+                    cu === 'limited' ? '条件付きで利用可能な場合あり（要公式確認）' :
+                    '要公式確認';
+                  const wm = tool.data.watermark;
+                  const wmLabel =
+                    wm === 'no' ? 'なし（条件による）' :
+                    wm === 'yes' ? 'あり' :
+                    wm === 'free-only' ? '無料プランのみ' :
+                    wm === 'limited' ? '無料プランはあり（有料は要確認）' :
+                    '要確認';
+                  const jpLabel =
+                    tool.data.japaneseUi ? 'UI対応' :
+                    tool.data.japanesePrompt === true || tool.data.japanesePrompt === 'yes' ? 'プロンプトのみ' :
+                    tool.data.japanesePrompt === 'partial' ? '部分対応' :
+                    '非対応／要確認';
+                  const f = tool.data.features ?? {};
+                  const inputLabel =
+                    f.textToImage && f.imageToImage ? 'テキスト・画像' :
+                    f.textToImage ? 'テキスト' :
+                    f.imageToImage ? '画像' : '—';
+                  return (
+                    <tr>
+                      <td>
+                        <div class="cig-tool">
+                          <span class="b">{(tool.data.name || '?').charAt(0)}</span>
+                          <a class="nm" href={`/tools/${tool.slug}/`}>{tool.data.name}</a>
+                        </div>
+                      </td>
+                      <td class="cig-note">{tool.data.bestFor?.[0] ?? '—'}</td>
+                      <td class="cig-note nowrap">{inputLabel}</td>
+                      <td class="cig-note nowrap">
+                        {tool.data.freePlan && tool.data.freePlan !== 'no' ? 'あり' : 'なし／要確認'}
+                      </td>
+                      <td class="cig-note">{cuLabel}</td>
+                      <td class="cig-note nowrap">{jpLabel}</td>
+                      <td class="cig-note">{wmLabel}</td>
+                      <td><a class="cig-detail" href={`/tools/${tool.slug}/`}>詳細 →</a></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p class="cig-foot">商用利用条件・透かし条件はプランや時期により変更される場合があります。各ツールの公式利用規約・公式サイトを必ずご確認ください。</p>
+        </div>
+      </section>
+
+      <!-- ===== 迷ったら用途別に ===== -->
+      <section class="cig-sec band">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">Where to start</span>
+          <h2>迷ったら、用途別にこのあたりから</h2>
+          <p>目的に合いそうなツールを用途別に整理しています。詳細は各ツールの詳細ページおよび公式サイトでご確認ください。</p>
+        </div>
+        <div class="cig-pickgrid reveal" data-stagger>
+          <div class="cig-pickcard">
+            <h3 class="ph">イラスト・アート系を作りたい</h3>
+            <ul>
+              <li><a class="nm" href="/tools/midjourney/">Midjourney</a><span class="nt">— アーティスティックな表現・高品質画像生成</span></li>
+              <li><a class="nm" href="/tools/leonardo-ai/">Leonardo AI</a><span class="nt">— ゲーム素材・カスタムモデル選択</span></li>
+              <li><a class="nm" href="/tools/stable-diffusion/">Stable Diffusion</a><span class="nt">— オープンソース・カスタマイズ性高め</span></li>
+            </ul>
+            <a class="cig-morelink" href="/use-cases/anime-illustration/">アニメ・イラスト向けを比較 →</a>
+          </div>
+          <div class="cig-pickcard">
+            <h3 class="ph">SNS・ブログ用画像を手軽に作りたい</h3>
+            <ul>
+              <li><a class="nm" href="/tools/canva-ai-image-generator/">Canva AI</a><span class="nt">— デザイン作業と一体化・テンプレート活用</span></li>
+              <li><a class="nm" href="/tools/microsoft-designer/">Microsoft Designer</a><span class="nt">— Microsoftアカウントで手軽に試せる</span></li>
+              <li><a class="nm" href="/tools/dalle/">DALL·E</a><span class="nt">— ChatGPT経由で手軽・テキスト指示が直感的</span></li>
+            </ul>
+            <a class="cig-morelink" href="/use-cases/sns-post-image/">SNS投稿画像向けを比較 →</a>
+          </div>
+          <div class="cig-pickcard">
+            <h3 class="ph">テキスト入り画像・サムネイルを作りたい</h3>
+            <ul>
+              <li><a class="nm" href="/tools/ideogram/">Ideogram</a><span class="nt">— テキスト再現性が比較的高いとされる</span></li>
+              <li><a class="nm" href="/tools/canva-ai-image-generator/">Canva AI</a><span class="nt">— テキスト入り画像・SNSバナー向き</span></li>
+              <li><a class="nm" href="/tools/microsoft-designer/">Microsoft Designer</a><span class="nt">— タイトル画像・プレゼン向き</span></li>
+            </ul>
+            <a class="cig-morelink" href="/use-cases/youtube-thumbnail/">サムネイル向けを比較 →</a>
+          </div>
+        </div>
+        <p class="cig-foot reveal">掲載ツールの条件・機能は変更される場合があります。商用利用・著作権に関しては各ツールの公式利用規約をご確認ください。本ページは法的助言ではありません。</p>
+      </section>
+
+      <!-- ===== ツールカード ===== -->
+      <section class="cig-sec">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">Tools</span>
+          <h2>AI画像生成ツール（{imageToolCards.length}件）</h2>
+          <p>テキストや画像から画像を生成するツールです。商用利用・無料枠・日本語・料金は確認時点の整理です。最新情報は各公式サイトをご確認ください。</p>
+        </div>
+        <div class="cig-cardgrid reveal" data-stagger>
+          {imageToolCards.map((t) => (
+            <article class="cig-tcard">
+              <header class="th">
+                <span class="b">{t.initial}</span>
+                <div class="ti">
+                  <a class="nm" href={`/tools/${t.slug}/`}>{t.name}</a>
+                  <span class="role">{t.role}</span>
+                </div>
+              </header>
+              <div class="tmeta">
+                <span class="m"><i>商用利用</i>{t.commercial}</span>
+                <span class="m"><i>無料枠</i>{t.free}</span>
+                <span class="m"><i>日本語</i>{t.jp}</span>
+                <span class="m"><i>備考</i>{t.note}</span>
+              </div>
+              <div class="tprice"><span class="lbl">料金</span>{t.price}</div>
+              <div class="tplats">{splitChips(t.platforms).map((p) => (<span class="plat">{p}</span>))}</div>
+              <footer class="tf">
+                <span class="tdate">確認 {t.date}</span>
+                <span class="tlinks">
+                  <a class="primary" href={`/tools/${t.slug}/`}>詳しく見る</a>
+                </span>
+              </footer>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- ===== 主要ツールの特徴と向き ===== -->
+      <section class="cig-sec band">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">Tool characteristics</span>
+          <h2>主要ツールの特徴と向き</h2>
+          <p>各ツールが得意とする画風・用途・難易度の目安をまとめています。ツールの機能・品質は更新されることがあるため、最新情報は各公式サイトをご確認ください。</p>
+        </div>
+        {referenceImage && (
+          <figure class="cig-refvisual reveal">
+            <div class="img">
+              <img src={referenceImage.file} alt={referenceImage.alt} loading="lazy" />
+            </div>
+            <figcaption>
+              <p class="cap">{referenceImage.caption}</p>
+              <dl class="genmeta">
+                <div><dt>モデル</dt><dd><a href="https://huggingface.co/black-forest-labs/FLUX.1-schnell">FLUX.1-schnell</a></dd></div>
+                <div><dt>プロンプト</dt><dd class="mono">colorful abstract digital art, geometric patterns, glowing particles, vibrant colors, smooth gradients, wide composition, 16:9, high quality</dd></div>
+                <div><dt>生成日</dt><dd class="mono">2026-06-06</dd></div>
+              </dl>
+              <p class="note">※ 本画像は FLUX.1-schnell で生成した参考サンプルです。特定ツールの公式出力・代表結果を示すものではありません。生成モデルの利用条件は各モデルカードのライセンスをご確認ください。</p>
+            </figcaption>
+          </figure>
+        )}
+        <p class="cig-gtcap reveal">← 横にスクロールできます →</p>
+        <div class="reveal">
+          <div class="cig-tablewrap">
+            <table class="cig-gt char">
+              <thead>
+                <tr><th>ツール名</th><th>生成できる画像のタイプ・特徴</th><th>向いているユーザー</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="cig-tool"><span class="b">M</span><a class="nm" href="/tools/midjourney/">Midjourney</a></div></td>
+                  <td class="cig-note">フォトリアルからイラスト調まで幅広いスタイルに対応。アーティスティックで高品質なビジュアル制作に強みがあるとされる。無料プランはなく有料プランが基本。商用利用条件は公式規約確認が必要。</td>
+                  <td class="cig-note nowrap"><span class="cig-userbadge">中〜上級者向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cig-tool"><span class="b">A</span><a class="nm" href="/tools/adobe-firefly/">Adobe Firefly</a></div></td>
+                  <td class="cig-note">Adobe製品（Photoshop・Illustratorなど）との連携に強みがある。商用利用条件をアドビの枠組みで確認しながら使いたい場合の候補。商用利用の可否は規約・プランによって異なる。</td>
+                  <td class="cig-note nowrap"><span class="cig-userbadge">初心者〜中級向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cig-tool"><span class="b">C</span><a class="nm" href="/tools/canva-ai-image-generator/">Canva AI</a></div></td>
+                  <td class="cig-note">Canvaのデザイン制作フローと一体化。SNS画像・プレゼン資料・バナーなどのデザイン作業と組み合わせて使える。テンプレート活用が中心の用途に向く。</td>
+                  <td class="cig-note nowrap"><span class="cig-userbadge">初心者向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cig-tool"><span class="b">L</span><a class="nm" href="/tools/leonardo-ai/">Leonardo AI</a></div></td>
+                  <td class="cig-note">ゲームグラフィックやイラスト素材の制作候補として挙がることが多い。カスタムモデルの選択や一貫したスタイルの維持に強みがあるとされる。無料枠あり。</td>
+                  <td class="cig-note nowrap"><span class="cig-userbadge">中級者向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cig-tool"><span class="b">S</span><a class="nm" href="/tools/stable-diffusion/">Stable Diffusion</a></div></td>
+                  <td class="cig-note">オープンソースモデルをベースにカスタマイズ性の高い生成ができる。ローカル環境での実行や独自モデルのファインチューニングも可能。技術的な知識が必要な場合がある。</td>
+                  <td class="cig-note nowrap"><span class="cig-userbadge">上級者向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cig-tool"><span class="b">D</span><a class="nm" href="/tools/dalle/">DALL·E</a></div></td>
+                  <td class="cig-note">ChatGPT経由で手軽に利用可。テキスト指示による画像生成が直感的で、会話の流れで修正指示を出せる点が特徴とされる。商用利用条件はOpenAI規約確認が必要。</td>
+                  <td class="cig-note nowrap"><span class="cig-userbadge">初心者向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cig-tool"><span class="b">I</span><a class="nm" href="/tools/ideogram/">Ideogram</a></div></td>
+                  <td class="cig-note">画像内にテキストを精度よく生成できる点が特徴とされる。サムネイルやタイトルロゴ入り画像の生成用途で候補に挙がることがある。無料枠あり。</td>
+                  <td class="cig-note nowrap"><span class="cig-userbadge">初心者〜中級向け</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cig-tool"><span class="b">M</span><a class="nm" href="/tools/microsoft-designer/">Microsoft Designer</a></div></td>
+                  <td class="cig-note">MicrosoftアカウントでアクセスできるAI画像生成・デザインツール。SNS投稿やプレゼン用ビジュアルを手軽に作りたい場合の候補。</td>
+                  <td class="cig-note nowrap"><span class="cig-userbadge">初心者向け</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cig-foot">「向き」はあくまで一般的な傾向の整理であり、個人差があります。ツールの機能・品質・操作感は更新される可能性があります。</p>
+        </div>
+      </section>
+
+      <!-- ===== 商用利用・著作権・肖像権 ===== -->
+      <section class="cig-sec">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">Rights &amp; copyright</span>
+          <h2>商用利用・著作権・肖像権について確認すべきこと</h2>
+        </div>
+        <ul class="cig-cautions reveal" data-stagger>
+          <li class="cig-caution">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+            <div class="cb">
+              <strong>利用規約の確認</strong>
+              <p>無料プランで商用利用が禁止されているツールも多くあります。利用前に最新の公式規約を必ずご確認ください。</p>
+            </div>
+          </li>
+          <li class="cig-caution">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+            <div class="cb">
+              <strong>人物・肖像権</strong>
+              <p>実在の人物・著名人を模した画像の生成・公開・商用利用には肖像権上のリスクがある場合があります。</p>
+            </div>
+          </li>
+          <li class="cig-caution">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+            <div class="cb">
+              <strong>ブランド・商標</strong>
+              <p>他社のロゴ・商標・キャラクターを含む画像の利用には商標権・著作権上の注意が必要です。</p>
+            </div>
+          </li>
+          <li class="cig-caution">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+            <div class="cb">
+              <strong>第三者素材</strong>
+              <p>既存画像・写真・イラストを入力素材として使う場合は、その素材の権利関係を確認する必要があります。</p>
+            </div>
+          </li>
+        </ul>
+        <p class="cig-foot reveal">本記事は法的助言ではありません。商用利用・権利関係については専門家へのご相談をおすすめします。<a href="/guides/commercial-use-copyright/">商用利用・著作権の考え方ガイド</a>もご参照ください。</p>
+      </section>
+
+      <!-- ===== 向いている人 / 向いていない人 ===== -->
+      <section class="cig-sec band">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">Fit check</span>
+          <h2>AI画像生成ツールが向いている人・向いていない人</h2>
+        </div>
+        <div class="cig-twocol reveal" data-stagger>
+          <div class="cig-panel pos">
+            <h3 class="ph">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+              向いている人
+            </h3>
+            <ul>
+              <li>ブログアイキャッチやSNS画像を短時間で作りたい人</li>
+              <li>広告バナーやサムネイルの案を複数試したい人</li>
+              <li>デザイン案や構図案を素早く出したい人</li>
+              <li>画像素材をもとにバリエーションを作りたい人</li>
+            </ul>
+          </div>
+          <div class="cig-panel neg">
+            <h3 class="ph">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+              向いていない人
+            </h3>
+            <ul>
+              <li>利用条件を確認せずに商用案件へ使いたい人</li>
+              <li>人物・著名人・ブランドロゴを厳密に扱う必要がある人</li>
+              <li>毎回同じ人物・同じ構図を完全に再現したい人</li>
+              <li>細かなレイヤー編集や入稿データ制作まで完結させたい人</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 関連カテゴリ：AI動画生成ツール ===== -->
+      <section class="cig-sec">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">Related tools</span>
+          <h2>関連カテゴリ：AI動画生成ツール</h2>
+          <p>画像だけでなく動画生成も検討する場合の関連ツールです。詳しくは<a href="/categories/video-generation/">動画生成カテゴリ</a>をご覧ください。</p>
+        </div>
+        <div class="cig-cardgrid two reveal" data-stagger>
+          {primaryVideoTools.map((tool) => {
+            const cu = tool.data.commercialUse;
+            const cuLabel = cu === 'ok' || cu === 'limited' ? '条件付きで利用可能な場合あり（要確認）' : '要公式確認';
+            const wm = tool.data.watermark;
+            const wmLabel = wm === 'no' ? 'なし（条件による）' : wm === 'yes' ? 'あり' : wm === 'free-only' ? '無料プランのみ' : '要確認';
+            const jpLabel = tool.data.japaneseUi ? 'UI対応' : tool.data.japanesePrompt === true || tool.data.japanesePrompt === 'yes' ? 'プロンプトのみ' : '非対応／要確認';
+            return (
+              <article class="cig-tcard">
+                <header class="th">
+                  <span class="b">{(tool.data.name || '?').charAt(0)}</span>
+                  <div class="ti">
+                    <a class="nm" href={`/tools/${tool.slug}/`}>{tool.data.name}</a>
+                    <span class="role">動画生成</span>
+                  </div>
+                </header>
+                <div class="tmeta">
+                  <span class="m"><i>商用利用</i>{cuLabel}</span>
+                  <span class="m"><i>日本語</i>{jpLabel}</span>
+                  <span class="m"><i>透かし</i>{wmLabel}</span>
+                  <span class="m"><i>無料枠</i>{tool.data.freePlan && tool.data.freePlan !== 'no' ? 'あり' : 'なし／要確認'}</span>
+                </div>
+                <footer class="tf" style="margin-top:auto;">
+                  <span class="tlinks">
+                    <a class="primary" href={`/tools/${tool.slug}/`}>詳しく見る</a>
+                  </span>
+                </footer>
+              </article>
+            );
+          })}
+        </div>
+        <p class="cig-foot reveal"><a href="/categories/video-generation/">AI動画生成ツール一覧を見る →</a></p>
+      </section>
+
+      <!-- ===== 比較記事 ===== -->
+      <section class="cig-sec band">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">Comparisons</span>
+          <h2>AI画像生成ツールの比較・条件ページ</h2>
+          <p>用途別の選び方・料金・商用利用条件・透かしを確認できるページを整理しています。</p>
+        </div>
+        <div class="cig-artgrid reveal" data-stagger>
+          <a class="cig-artcard" href="/comparisons/ai-image-video-tools/">
+            <span class="tag">画像生成と動画生成の違いを知りたい</span>
+            <h3>AI動画生成 vs AI画像生成ツール</h3>
+            <p>AI動画生成ツールとAI画像生成ツールの違いや使い分けを整理した比較ページ。</p>
+            <span class="go">比較記事を読む →</span>
+          </a>
+          <a class="cig-artcard" href="/conditions/commercial-use/">
+            <span class="tag">商用利用条件を確認したい</span>
+            <h3>商用利用条件を確認しやすいAIツール</h3>
+            <p>商用利用に関する条件・プランを確認しやすいツールを整理したページ。</p>
+            <span class="go">条件を確認する →</span>
+          </a>
+          <a class="cig-artcard" href="/conditions/free/">
+            <span class="tag">無料で試したい</span>
+            <h3>無料枠のあるAIツール比較</h3>
+            <p>無料枠・フリープランのあるAIツールを横断比較するページ。</p>
+            <span class="go">無料枠を確認する →</span>
+          </a>
+          <a class="cig-artcard" href="/comparisons/">
+            <span class="tag">すべての比較記事を見る</span>
+            <h3>比較記事一覧</h3>
+            <p>AIツールの横断比較・カテゴリ比較・用途別比較記事の一覧ページ。</p>
+            <span class="go">一覧を見る →</span>
+          </a>
+        </div>
+        <p class="cig-foot reveal">料金・商用利用条件はプランや時期によって変更される場合があります。最新情報は各公式サイトをご確認ください。</p>
+      </section>
+
+      <!-- ===== FAQ ===== -->
+      <section class="cig-sec">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">FAQ</span>
+          <h2>よくある質問</h2>
+          <p>AI画像生成ツールの無料枠・商用利用・日本語プロンプト・生成方式の違いについて、確認のポイントをお答えします。</p>
+        </div>
+        <div class="cig-faq reveal">
+          {faqs.map((f) => (
+            <div class="cig-faqitem" aria-expanded="false">
+              <button class="cig-faqq" type="button">
+                <span class="qm">Q</span>{f.q}
+                <span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+              </button>
+              <div class="cig-faqa"><div class="cig-faqa-in" set:html={f.a}></div></div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ===== 注意事項 + 鮮度 ===== -->
+      <section class="cig-sec band">
+        <div class="cig-sechead reveal"><span class="cig-eyebrow">Notes</span><h2>ご利用前の注意</h2></div>
+        <ul class="cig-notes reveal">
+          <li><span class="dot"></span>掲載情報は調査時点の内容です。料金・無料枠・透かし・商用利用条件・著作権に関する規約は予告なく変更される場合があります。利用前に必ず各ツールの公式サイト・利用規約をご確認ください。</li>
+          <li><span class="dot"></span>人物・著名人・ブランドロゴ・第三者素材を含む画像の生成・利用には、肖像権・商標権・著作権等の観点から個別の確認が必要になる場合があります。</li>
+          <li><span class="dot"></span>本ページは法的アドバイスではありません。重要な商用利用の場面では、専門家（弁護士等）への相談を推奨します。</li>
+        </ul>
+        <div class="cig-freshness reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span><b>情報の鮮度：</b>記事内容の最終確認日 <span class="mono">2026-06-10</span>（次回確認予定 <span class="mono">2026-09-10</span>）</span>
+        </div>
+        <div class="cig-disclaimer reveal" style="margin-top:18px;max-width:880px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+          <p>掲載情報は調査時点の内容です。料金・商用利用条件・著作権に関する規約は変更される場合があります。実務利用前には必ず各ツールの公式サイト・利用規約をご確認ください。本サイトの内容は法的助言ではありません。</p>
+        </div>
+      </section>
+
+      <!-- ===== 関連ページ ===== -->
+      <section class="cig-sec" style="padding-bottom:0;">
+        <div class="cig-finder reveal">
+          <h2>関連ページ</h2>
+          <p class="lead">他のカテゴリ・条件・ガイドページからも、料金・無料枠・透かし・商用利用の条件を確認できます。</p>
+          <div class="cig-relgrid">
+            <div class="cig-relcol">
+              <h4>ツール別詳細ページ</h4>
+              <ul>
+                <li><a href="/tools/midjourney/"><span class="ld"></span>Midjourney</a></li>
+                <li><a href="/tools/adobe-firefly/"><span class="ld"></span>Adobe Firefly</a></li>
+                <li><a href="/tools/canva-ai-image-generator/"><span class="ld"></span>Canva AI</a></li>
+                <li><a href="/tools/leonardo-ai/"><span class="ld"></span>Leonardo AI</a></li>
+                <li><a href="/tools/stable-diffusion/"><span class="ld"></span>Stable Diffusion</a></li>
+                <li><a href="/tools/dalle/"><span class="ld"></span>DALL·E</a></li>
+                <li><a href="/tools/ideogram/"><span class="ld"></span>Ideogram</a></li>
+                <li><a href="/tools/microsoft-designer/"><span class="ld"></span>Microsoft Designer</a></li>
+              </ul>
+            </div>
+            <div class="cig-relcol">
+              <h4>まとめ・比較・ガイド</h4>
+              <ul>
+                <li><a href="/conditions/free/"><span class="ld"></span>無料枠のあるAIツール比較</a></li>
+                <li><a href="/conditions/commercial-use/"><span class="ld"></span>商用利用条件を確認しやすいAIツール</a></li>
+                <li><a href="/conditions/no-watermark/"><span class="ld"></span>透かしなしで使いやすいAIツール</a></li>
+                <li><a href="/conditions/japanese/"><span class="ld"></span>日本語対応ツール</a></li>
+                <li><a href="/comparisons/ai-image-video-tools/"><span class="ld"></span>AI動画vs画像生成ツール比較</a></li>
+                <li><a href="/guides/commercial-use-copyright/"><span class="ld"></span>商用利用・著作権ガイド</a></li>
+                <li><a href="/comparisons/"><span class="ld"></span>全ツール比較表</a></li>
+                <li><a href="/use-cases/"><span class="ld"></span>用途別AI画像生成ツール比較</a></li>
+                <li><a href="/use-cases/sns-post-image/"><span class="ld"></span>SNS投稿画像向け比較</a></li>
+                <li><a href="/use-cases/ad-banner/"><span class="ld"></span>広告バナー向け比較</a></li>
+                <li><a href="/categories/video-generation/"><span class="ld"></span>AI動画生成ツール一覧</a></li>
+                <li><a href="/tools/"><span class="ld"></span>全AIツール一覧</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
 </BaseLayout>
+
+<style>
+  .cig-x {
+    --paper:#F4F4EE; --surface:#FFFFFF; --surface-2:#FAFAF6;
+    --ink:#16181D; --ink-soft:#3A3E47; --muted:#6A7180; --faint:#98A0AD;
+    --line:#E3E2D9; --line-strong:#D2D1C6;
+    --brand:#4B3FE4; --on-brand:#FFFFFF; --brand-ink:#2E25A6; --brand-tint:#ECEBFB;
+    --ok:#1E8A4C; --ok-tint:#E6F3EC; --warn:#A06A09; --warn-tint:#F8EFD9;
+    --no:#D23F3F; --no-tint:#FBEAEA; --na:#6A7180; --na-tint:#EFEFEA;
+    --f-jp:"Noto Sans JP",system-ui,sans-serif;
+    --f-body:"Noto Sans JP",system-ui,sans-serif;
+    --f-latin:"Space Grotesk",system-ui,sans-serif;
+    --f-mono:"Space Mono",ui-monospace,monospace;
+    --radius:14px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(20,22,28,.04),0 1px 3px rgba(20,22,28,.05);
+    --shadow-md:0 4px 14px rgba(20,22,28,.06),0 2px 6px rgba(20,22,28,.04);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    font-family: var(--f-body); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  .cig-x :where(h1,h2,h3,h4) { font-family: var(--f-jp); font-weight: 700; line-height: 1.32; letter-spacing: .01em; margin: 0; }
+  .cig-x :where(p) { margin: 0; }
+  .cig-x a { color: inherit; text-decoration: none; }
+
+  /* セクション */
+  .cig-sec { padding: 64px 0; }
+  .cig-sec.band { background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .cig-sechead { max-width: 780px; margin-bottom: 30px; }
+  .cig-sechead h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 900; letter-spacing: -.005em; margin: 16px 0 12px; }
+  .cig-sechead p { color: var(--muted); font-size: 15px; }
+  .cig-sechead p b { color: var(--ink-soft); font-weight: 700; }
+  .cig-sechead p a, .cig-foot a { color: var(--brand-ink); font-weight: 600; }
+  .cig-sechead p a:hover, .cig-foot a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .cig-eyebrow { font-family: var(--f-latin); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); display: inline-flex; align-items: center; gap: 10px; }
+  .cig-eyebrow::before { content: ""; width: 22px; height: 2px; border-radius: 2px; background: var(--brand); }
+
+  /* ヘッダー */
+  .cig-head { padding-bottom: 8px; }
+  .cig-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  .cig-pill { font-family: var(--f-jp); font-weight: 700; font-size: 12px; letter-spacing: .04em; color: var(--brand-ink); background: var(--brand-tint); padding: 5px 13px; border-radius: 999px; display: inline-flex; align-items: center; gap: 7px; }
+  .cig-pill svg { width: 14px; height: 14px; }
+  .cig-checked { font-family: var(--f-mono); font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; }
+  .cig-checked svg { width: 14px; height: 14px; }
+  .cig-checked b { color: var(--ink-soft); font-weight: 700; }
+  .cig-h1 {
+    font-size: clamp(28px, 3.8vw, 44px); font-weight: 900; letter-spacing: -.01em;
+    line-height: 1.2; margin: 14px 0 16px;
+    text-wrap: balance; max-width: 820px;
+  }
+  .cig-h1 .hl { color: var(--brand-ink); position: relative; }
+  .cig-h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .26em; background: color-mix(in srgb, var(--brand) 20%, transparent); z-index: -1; border-radius: 2px; }
+  .cig-lead { font-size: 15.5px; color: var(--ink-soft); max-width: 720px; }
+  .cig-stats { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 24px; }
+  .cig-stat { display: flex; align-items: baseline; gap: 8px; }
+  .cig-stat + .cig-stat { padding-left: 26px; border-left: 1px solid var(--line); }
+  .cig-stat .n { font-family: var(--f-latin); font-weight: 700; font-size: 24px; color: var(--ink); line-height: 1; }
+  .cig-stat .t { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+
+  /* Notice */
+  .cig-notice { display: flex; align-items: flex-start; gap: 14px; background: var(--warn-tint); border: 1px solid color-mix(in srgb, var(--warn) 28%, var(--line)); border-radius: var(--radius); padding: 18px 22px; margin: 28px 0 0; }
+  .cig-notice svg { width: 18px; height: 18px; color: var(--warn); flex: none; margin-top: 2px; }
+  .cig-notice p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.75; }
+  .cig-notice p b { color: var(--ink); font-weight: 700; }
+
+  /* 選びのポイント */
+  .cig-points { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; list-style: none; margin: 0 0 18px; padding: 0; }
+  .cig-pcard { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; display: flex; align-items: flex-start; gap: 15px; transition: transform .2s var(--ease), box-shadow .2s, border-color .2s; }
+  .cig-pcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: color-mix(in srgb, var(--brand) 30%, var(--line)); }
+  .cig-pcard .pn { font-family: var(--f-latin); font-weight: 700; font-size: 16px; color: var(--brand); background: var(--brand-tint); width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; flex: none; }
+  .cig-pcard h3 { font-size: 15.5px; line-height: 1.4; color: var(--ink); margin-bottom: 5px; }
+  .cig-pcard .pt p { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+  .cig-pcard .pt p a { color: var(--brand-ink); font-weight: 600; }
+  .cig-pcard .pt p a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* タグリンク */
+  .cig-taglinks { display: flex; flex-wrap: wrap; gap: 10px; }
+  .cig-taglink { font-family: var(--f-jp); font-weight: 600; font-size: 13.5px; padding: 9px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink-soft); display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; transition: transform .16s var(--ease), background .16s, border-color .16s, color .16s; }
+  .cig-taglink:hover { border-color: var(--brand); color: var(--brand-ink); background: var(--brand-tint); transform: translateY(-1px); }
+  .cig-taglink .ld { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex: none; }
+
+  /* 表（共通） */
+  .cig-gtcap { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+  .cig-tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-sm); }
+  table.cig-gt { width: 100%; border-collapse: collapse; }
+  table.cig-gt.guide { min-width: 880px; }
+  table.cig-gt.diff { min-width: 720px; }
+  table.cig-gt.cross { min-width: 1000px; }
+  table.cig-gt.char { min-width: 760px; }
+  table.cig-gt thead th { font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--ink-soft); background: var(--surface-2); padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  table.cig-gt tbody td { padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.cig-gt tbody tr:last-child td { border-bottom: none; }
+  table.cig-gt tbody tr { transition: background .12s; }
+  table.cig-gt tbody tr:hover { background: var(--surface-2); }
+  table.cig-gt tbody tr.is-current { background: var(--brand-tint); }
+  table.cig-gt tbody tr.is-current:hover { background: color-mix(in srgb, var(--brand) 14%, var(--surface)); }
+  .cig-note { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+  .cig-note.nowrap { white-space: nowrap; }
+  .cig-situation { font-family: var(--f-jp); font-weight: 700; font-size: 14px; color: var(--ink); min-width: 150px; }
+  .cig-cand { font-family: var(--f-jp); font-weight: 600; font-size: 13px; color: var(--brand-ink); min-width: 150px; line-height: 1.6; }
+  .cig-catcell { font-family: var(--f-jp); font-weight: 700; font-size: 14px; color: var(--ink); white-space: nowrap; }
+  .cig-curtag { display: inline-block; margin-left: 8px; font-size: 10.5px; font-weight: 700; color: var(--brand-ink); background: color-mix(in srgb, var(--brand) 16%, #fff); border: 1px solid color-mix(in srgb, var(--brand) 30%, var(--line)); padding: 2px 8px; border-radius: 999px; vertical-align: middle; }
+  .cig-linklist { display: flex; flex-direction: column; gap: 4px; }
+  .cig-linklist a { font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--brand-ink); white-space: nowrap; }
+  .cig-linklist a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .cig-tool { display: flex; align-items: center; gap: 11px; min-width: 140px; }
+  .cig-tool .b { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; background: var(--brand-tint); color: var(--brand-ink); font-family: var(--f-latin); font-weight: 700; font-size: 14px; flex: none; }
+  .cig-tool .nm { font-family: var(--f-jp); font-weight: 700; font-size: 14px; color: var(--ink); line-height: 1.3; white-space: nowrap; }
+  a.nm:hover { color: var(--brand-ink); text-decoration: underline; text-underline-offset: 3px; }
+  .cig-detail { font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--brand-ink); white-space: nowrap; }
+  .cig-detail:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .cig-userbadge { display: inline-flex; font-family: var(--f-jp); font-weight: 700; font-size: 12px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px; white-space: nowrap; }
+  .cig-foot { margin-top: 14px; font-size: 12px; color: var(--faint); line-height: 1.7; max-width: 920px; }
+
+  /* 参考ビジュアル */
+  .cig-refvisual { display: grid; grid-template-columns: 1.05fr 1fr; gap: 26px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm); margin: 0 0 28px; }
+  .cig-refvisual .img { border-radius: var(--radius); overflow: hidden; background: #11131a; aspect-ratio: 16/9; }
+  .cig-refvisual .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cig-refvisual figcaption { align-self: center; }
+  .cig-refvisual .cap { font-size: 12.5px; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
+  .cig-refvisual .genmeta { display: flex; flex-direction: column; gap: 9px; margin: 0 0 14px; }
+  .cig-refvisual .genmeta > div { display: grid; grid-template-columns: 78px 1fr; gap: 12px; align-items: start; }
+  .cig-refvisual .genmeta dt { font-family: var(--f-jp); font-weight: 700; font-size: 11.5px; color: var(--muted); }
+  .cig-refvisual .genmeta dd { margin: 0; font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; }
+  .cig-refvisual .genmeta dd.mono { font-family: var(--f-mono); font-size: 11.5px; word-break: break-word; }
+  .cig-refvisual .genmeta dd a { color: var(--brand-ink); font-weight: 600; }
+  .cig-refvisual .note { font-size: 11px; color: var(--faint); line-height: 1.65; }
+
+  /* クイックピック */
+  .cig-pickgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .cig-pickcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; display: flex; flex-direction: column; }
+  .cig-pickcard .ph { font-size: 15.5px; font-weight: 900; color: var(--ink); margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .cig-pickcard ul { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .cig-pickcard li { font-size: 13px; color: var(--muted); line-height: 1.55; }
+  .cig-pickcard li .nm { font-family: var(--f-jp); font-weight: 700; font-size: 14px; color: var(--ink); }
+  .cig-pickcard li a.nm:hover { color: var(--brand-ink); text-decoration: underline; text-underline-offset: 3px; }
+  .cig-pickcard li .nt { display: block; margin-top: 1px; }
+  .cig-morelink { margin-top: auto; font-family: var(--f-jp); font-weight: 700; font-size: 13px; color: var(--brand-ink); }
+  .cig-morelink:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ツールカード */
+  .cig-cardgrid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+  .cig-cardgrid.two { grid-template-columns: repeat(2,1fr); max-width: 760px; }
+  .cig-tcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: transform .2s var(--ease), box-shadow .2s, border-color .2s; }
+  .cig-tcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: color-mix(in srgb, var(--brand) 26%, var(--line)); }
+  .cig-tcard .th { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .cig-tcard .th .b { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--brand-tint); color: var(--brand-ink); font-family: var(--f-latin); font-weight: 700; font-size: 17px; flex: none; }
+  .cig-tcard .ti { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .cig-tcard .ti .nm { font-family: var(--f-jp); font-weight: 700; font-size: 16px; color: var(--ink); line-height: 1.25; }
+  .cig-tcard .ti .role { font-family: var(--f-mono); font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+  .cig-tcard .tmeta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin-bottom: 14px; }
+  .cig-tcard .tmeta .m { font-size: 12.5px; color: var(--ink-soft); display: flex; align-items: baseline; gap: 7px; line-height: 1.45; }
+  .cig-tcard .tmeta .m i { font-style: normal; font-family: var(--f-jp); font-weight: 700; font-size: 10.5px; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 2px 7px; flex: none; }
+  .cig-tcard .tprice { font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; padding: 12px 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); margin-bottom: 14px; }
+  .cig-tcard .tprice .lbl { font-family: var(--f-jp); font-weight: 700; font-size: 10.5px; color: var(--muted); margin-right: 9px; }
+  .cig-tcard .tplats { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .cig-tcard .plat { font-family: var(--f-jp); font-weight: 600; font-size: 11.5px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 7px; padding: 3px 9px; }
+  .cig-tcard .tf { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; }
+  .cig-tcard .tdate { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+  .cig-tcard .tlinks { display: inline-flex; align-items: center; gap: 14px; }
+  .cig-tcard .tlinks .primary { font-family: var(--f-jp); font-weight: 700; font-size: 13px; color: var(--brand-ink); white-space: nowrap; }
+  .cig-tcard .tlinks .primary:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* 比較記事カード */
+  .cig-artgrid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+  .cig-artcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; display: flex; flex-direction: column; transition: transform .2s var(--ease), box-shadow .2s, border-color .2s; }
+  .cig-artcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: color-mix(in srgb, var(--brand) 28%, var(--line)); }
+  .cig-artcard .tag { font-family: var(--f-jp); font-weight: 700; font-size: 11px; color: var(--brand-ink); background: var(--brand-tint); border-radius: 999px; padding: 4px 11px; align-self: flex-start; margin-bottom: 13px; }
+  .cig-artcard h3 { font-size: 18px; font-weight: 900; color: var(--ink); margin-bottom: 8px; }
+  .cig-artcard p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+  .cig-artcard .go { margin-top: auto; font-family: var(--f-jp); font-weight: 700; font-size: 13px; color: var(--brand-ink); }
+  .cig-artcard:hover .go { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* 注意点 */
+  .cig-cautions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .cig-caution { display: grid; grid-template-columns: auto 1fr; gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; align-items: start; }
+  .cig-caution .ic { width: 24px; height: 24px; color: var(--warn); flex: none; margin-top: 1px; }
+  .cig-caution .ic svg { width: 24px; height: 24px; }
+  .cig-caution strong { display: block; font-family: var(--f-jp); font-weight: 900; font-size: 15px; color: var(--ink); margin-bottom: 6px; }
+  .cig-caution p { font-size: 13px; color: var(--ink-soft); line-height: 1.75; }
+  .cig-caution p a { color: var(--brand-ink); font-weight: 600; }
+  .cig-caution p a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* 向いている/向いていない */
+  .cig-twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cig-panel { border-radius: var(--radius-lg); padding: 26px 28px; border: 1px solid var(--line); }
+  .cig-panel.pos { background: var(--ok-tint); border-color: color-mix(in srgb, var(--ok) 24%, var(--line)); }
+  .cig-panel.neg { background: var(--no-tint); border-color: color-mix(in srgb, var(--no) 24%, var(--line)); }
+  .cig-panel .ph { display: flex; align-items: center; gap: 11px; font-size: 16px; font-weight: 900; margin-bottom: 16px; }
+  .cig-panel.pos .ph { color: var(--ok); }
+  .cig-panel.neg .ph { color: var(--no); }
+  .cig-panel .ph .ic { width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; flex: none; }
+  .cig-panel.pos .ph .ic { background: color-mix(in srgb, var(--ok) 16%, #fff); }
+  .cig-panel.neg .ph .ic { background: color-mix(in srgb, var(--no) 16%, #fff); }
+  .cig-panel .ph .ic svg { width: 16px; height: 16px; }
+  .cig-panel ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .cig-panel li { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; padding-left: 16px; position: relative; }
+  .cig-panel li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; }
+  .cig-panel.pos li::before { background: var(--ok); }
+  .cig-panel.neg li::before { background: var(--no); }
+
+  /* FAQ */
+  .cig-faq { max-width: 880px; }
+  .cig-faqitem { border-bottom: 1px solid var(--line); }
+  .cig-faqitem:first-child { border-top: 1px solid var(--line); }
+  .cig-faqq { width: 100%; text-align: left; background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 16px; padding: 24px 6px; font-family: var(--f-jp); font-weight: 700; font-size: 16px; color: var(--ink); }
+  .cig-faqq .qm { font-family: var(--f-latin); color: var(--brand); font-size: 16px; flex: none; }
+  .cig-faqq .ind { margin-left: auto; flex: none; width: 24px; height: 24px; display: grid; place-items: center; transition: transform .3s var(--ease); color: var(--muted); }
+  .cig-faqq .ind svg { width: 18px; height: 18px; }
+  .cig-faqitem[aria-expanded="true"] .cig-faqq .ind { transform: rotate(45deg); color: var(--brand); }
+  .cig-faqa { max-height: 0; overflow: hidden; transition: max-height .35s var(--ease); }
+  .cig-faqa-in { padding: 0 6px 26px 46px; color: var(--ink-soft); font-size: 14.5px; line-height: 1.8; }
+  .cig-faqa-in a { color: var(--brand-ink); font-weight: 600; }
+  .cig-faqa-in a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* 注意事項 + 鮮度 + 免責 */
+  .cig-notes { list-style: none; display: flex; flex-direction: column; gap: 12px; max-width: 880px; margin: 0; padding: 0; }
+  .cig-notes li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; font-size: 13.5px; color: var(--ink-soft); line-height: 1.75; }
+  .cig-notes li .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex: none; margin-top: 9px; }
+  .cig-freshness { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 11px 20px; font-size: 13px; color: var(--ink-soft); max-width: max-content; }
+  .cig-freshness svg { width: 16px; height: 16px; color: var(--brand); flex: none; }
+  .cig-freshness b { font-weight: 700; color: var(--ink); }
+  .cig-freshness .mono { font-family: var(--f-mono); font-size: 12.5px; }
+  .cig-disclaimer { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; }
+  .cig-disclaimer svg { width: 18px; height: 18px; color: var(--muted); flex: none; margin-top: 2px; }
+  .cig-disclaimer p { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+
+  /* 関連ページ */
+  .cig-finder { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 34px 34px 30px; }
+  .cig-finder h2 { font-size: clamp(20px, 2.4vw, 26px); margin-bottom: 6px; }
+  .cig-finder .lead { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+  .cig-relgrid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 28px 40px; }
+  .cig-relcol h4 { font-family: var(--f-latin); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; font-weight: 600; }
+  .cig-relcol ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 9px 18px; }
+  .cig-relcol a { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-jp); font-weight: 600; font-size: 13.5px; color: var(--ink-soft); transition: color .15s; }
+  .cig-relcol a:hover { color: var(--brand-ink); }
+  .cig-relcol a .ld { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); flex: none; }
+
+  /* スクロール表示アニメ */
+  @media (prefers-reduced-motion: no-preference) {
+    .cig-x .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .cig-x .reveal.in { opacity: 1; transform: none; }
+    .cig-x .reveal[data-stagger] > * { opacity: 0; transform: translateY(16px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+    .cig-x .reveal[data-stagger].in > * { opacity: 1; transform: none; }
+    .cig-x .reveal[data-stagger].in > *:nth-child(1) { transition-delay: .04s; }
+    .cig-x .reveal[data-stagger].in > *:nth-child(2) { transition-delay: .09s; }
+    .cig-x .reveal[data-stagger].in > *:nth-child(3) { transition-delay: .14s; }
+    .cig-x .reveal[data-stagger].in > *:nth-child(4) { transition-delay: .19s; }
+    .cig-x .reveal[data-stagger].in > *:nth-child(5) { transition-delay: .24s; }
+    .cig-x .reveal[data-stagger].in > *:nth-child(6) { transition-delay: .29s; }
+    .cig-x .reveal[data-stagger].in > *:nth-child(7) { transition-delay: .34s; }
+    .cig-x .reveal[data-stagger].in > *:nth-child(8) { transition-delay: .39s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cig-x .reveal, .cig-x .reveal[data-stagger] > * { opacity: 1 !important; transform: none !important; }
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 980px) {
+    .cig-pickgrid { grid-template-columns: 1fr; }
+    .cig-refvisual { grid-template-columns: 1fr; }
+    .cig-relgrid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .cig-sec { padding: 48px 0; }
+    .cig-points { grid-template-columns: 1fr; }
+    .cig-cardgrid, .cig-cardgrid.two, .cig-artgrid, .cig-twocol { grid-template-columns: 1fr; }
+    .cig-tcard .tmeta { grid-template-columns: 1fr; }
+    .cig-relcol ul { grid-template-columns: 1fr; }
+    .cig-stat + .cig-stat { padding-left: 0; border-left: none; }
+    .cig-finder { padding: 26px 22px; }
+  }
+</style>
+
+<script>
+  (function () {
+    document.querySelectorAll('[data-cig]').forEach(function (root) {
+      var faq = root.querySelector('.cig-faq');
+      if (faq) {
+        faq.addEventListener('click', function (e) {
+          var btn = (e.target as HTMLElement).closest('.cig-faqq');
+          if (!btn) return;
+          var item = btn.closest('.cig-faqitem') as HTMLElement;
+          var open = item.getAttribute('aria-expanded') === 'true';
+          faq.querySelectorAll('.cig-faqitem').forEach(function (it) {
+            it.setAttribute('aria-expanded', 'false');
+            var a = it.querySelector('.cig-faqa') as HTMLElement | null;
+            if (a) a.style.maxHeight = '';
+          });
+          if (!open) {
+            item.setAttribute('aria-expanded', 'true');
+            var a = item.querySelector('.cig-faqa') as HTMLElement | null;
+            if (a) a.style.maxHeight = a.scrollHeight + 'px';
+          }
+        });
+      }
+
+      var reveals = Array.prototype.slice.call(root.querySelectorAll('.reveal'));
+      if (!reveals.length) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        reveals.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      reveals.forEach(function (el) { io.observe(el); });
+      setTimeout(function () { reveals.forEach(function (el) { el.classList.add('in'); }); }, 8000);
+    });
+  })();
+</script>

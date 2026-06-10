@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import GuideFAQ from '../../../components/GuideFAQ.astro';
+import ComparisonVsArticle from '../../../components/ComparisonVsArticle.astro';
 import { getEntry } from 'astro:content';
 
 const [toolRunway, toolPika] = await Promise.all([
@@ -9,10 +8,6 @@ const [toolRunway, toolPika] = await Promise.all([
 ]);
 const toolDates = [toolRunway?.data.lastReviewed, toolPika?.data.lastReviewed].filter(Boolean) as string[];
 const latestDate = toolDates.length ? toolDates.sort().at(-1)! : null;
-function formatDate(iso: string): string {
-  const [y, m, d] = iso.split('-');
-  return `${y}年${Number(m)}月${Number(d)}日`;
-}
 
 const faqs = [
   {
@@ -46,102 +41,22 @@ const faqs = [
 ];
 
 const comparisonRows = [
-  {
-    item: '料金（最低有料プラン）',
-    runway: '$12/月（Standardプラン・年払い）',
-    pika: '$8/月（年払い）',
-  },
-  {
-    item: '無料プラン',
-    runway: '125クレジット（初回のみ・更新なし）',
-    pika: '月80クレジット程度（毎月更新）',
-  },
-  {
-    item: '商用利用（無料プラン）',
-    runway: '公式情報上、制限なしとされるが透かしあり',
-    pika: '無料プランでは商用利用不可とされる',
-  },
-  {
-    item: '商用利用（有料プラン）',
-    runway: '全プランで商用利用可能な場合あり（条件あり）',
-    pika: '有料プランで商用利用可能なプランあり（条件あり）',
-  },
-  {
-    item: '日本語UI',
-    runway: '非対応（英語のみ）',
-    pika: '一部対応（英語ベース・一部翻訳）',
-  },
-  {
-    item: '日本語プロンプト',
-    runway: '一部対応',
-    pika: '一部対応（英語の方が精度高め）',
-  },
-  {
-    item: '透かし（無料プラン）',
-    runway: 'あり',
-    pika: 'あり',
-  },
-  {
-    item: '透かし（有料プラン）',
-    runway: 'なし（プランによる・要確認）',
-    pika: 'なし（プランによる・要確認）',
-  },
-  {
-    item: '解像度・出力品質',
-    runway: '高解像度出力が可能（プランによる）',
-    pika: '出力解像度・品質はプランによって制限がある場合あり',
-  },
-  {
-    item: '操作のわかりやすさ',
-    runway: '多機能なため慣れが必要な場合がある',
-    pika: 'シンプルなUIで取り組みやすいとされる',
-  },
-  {
-    item: 'テキスト→動画',
-    runway: '対応',
-    pika: '対応',
-  },
-  {
-    item: '画像→動画',
-    runway: '対応',
-    pika: '対応',
-  },
-  {
-    item: '動画延長',
-    runway: '対応',
-    pika: '非対応（要確認）',
-  },
-  {
-    item: 'API',
-    runway: '対応',
-    pika: '非対応（要確認）',
-  },
-  {
-    item: '対応環境',
-    runway: 'Web・API',
-    pika: 'Webのみ',
-  },
+  { item: '料金（最低有料プラン）', toolA: '$12/月（Standardプラン・年払い）', toolB: '$8/月（年払い）' },
+  { item: '無料プラン', toolA: '125クレジット（初回のみ・更新なし）', toolB: '月80クレジット程度（毎月更新）' },
+  { item: '商用利用（無料プラン）', toolA: '公式情報上、制限なしとされるが透かしあり', toolB: '無料プランでは商用利用不可とされる' },
+  { item: '商用利用（有料プラン）', toolA: '全プランで商用利用可能な場合あり（条件あり）', toolB: '有料プランで商用利用可能なプランあり（条件あり）' },
+  { item: '日本語UI', toolA: '非対応（英語のみ）', toolB: '一部対応（英語ベース・一部翻訳）' },
+  { item: '日本語プロンプト', toolA: '一部対応', toolB: '一部対応（英語の方が精度高め）' },
+  { item: '透かし（無料プラン）', toolA: 'あり', toolB: 'あり' },
+  { item: '透かし（有料プラン）', toolA: 'なし（プランによる・要確認）', toolB: 'なし（プランによる・要確認）' },
+  { item: '解像度・出力品質', toolA: '高解像度出力が可能（プランによる）', toolB: '出力解像度・品質はプランによって制限がある場合あり' },
+  { item: '操作のわかりやすさ', toolA: '多機能なため慣れが必要な場合がある', toolB: 'シンプルなUIで取り組みやすいとされる' },
+  { item: 'テキスト→動画', toolA: '対応', toolB: '対応' },
+  { item: '画像→動画', toolA: '対応', toolB: '対応' },
+  { item: '動画延長', toolA: '対応', toolB: '非対応（要確認）' },
+  { item: 'API', toolA: '対応', toolB: '非対応（要確認）' },
+  { item: '対応環境', toolA: 'Web・API', toolB: 'Webのみ' },
 ];
-
-const articleJsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "RunwayとPikaを比較｜AI動画生成ツールはどちらを選ぶべき？",
-  "description": "RunwayとPikaの特徴、無料プラン、商用利用条件、日本語対応、透かし、向いている用途を比較します。AI動画生成ツール選びで迷っている方向けに確認すべきポイントを整理します。",
-  "url": "https://aicreative-db.com/comparisons/runway-vs-pika/",
-  "mainEntityOfPage": "https://aicreative-db.com/comparisons/runway-vs-pika/",
-  "author": {
-    "@type": "Organization",
-    "name": "AIクリエイティブナビ編集部"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "AIクリエイティブナビ",
-    "url": "https://aicreative-db.com/"
-  },
-  "datePublished": "2026-05-15",
-  "dateModified": "2026-05-25",
-});
 
 const relatedLinks = [
   { href: '/tools/runway/', label: 'Runway詳細' },
@@ -152,129 +67,73 @@ const relatedLinks = [
   { href: '/conditions/commercial-use/', label: '商用利用条件を確認しやすいツール' },
   { href: '/comparisons/', label: 'AI画像・動画ツール比較表' },
 ];
+
+const sources = [
+  { href: 'https://runwayml.com/pricing/', label: 'Runway料金プラン（公式）' },
+  { href: 'https://runwayml.com/terms-of-use/', label: 'Runway利用規約（公式）' },
+  { href: 'https://help.runwayml.com/hc/en-us/articles/18927776141715-Usage-rights', label: 'Runway利用権について（公式ヘルプ）' },
+  { href: 'https://pika.art/pricing', label: 'Pika料金プラン（公式）' },
+  { href: 'https://pika.art/terms-of-service', label: 'Pika利用規約（公式）' },
+];
+
+const articleJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "RunwayとPikaを比較｜AI動画生成ツールはどちらを選ぶべき？",
+  "description": "RunwayとPikaの特徴、無料プラン、商用利用条件、日本語対応、透かし、向いている用途を比較します。AI動画生成ツール選びで迷っている方向けに確認すべきポイントを整理します。",
+  "url": "https://aicreative-db.com/comparisons/runway-vs-pika/",
+  "mainEntityOfPage": "https://aicreative-db.com/comparisons/runway-vs-pika/",
+  "author": { "@type": "Organization", "name": "AIクリエイティブナビ編集部" },
+  "publisher": { "@type": "Organization", "name": "AIクリエイティブナビ", "url": "https://aicreative-db.com/" },
+  "datePublished": "2026-05-15",
+  "dateModified": "2026-05-25",
+});
 ---
 
-<BaseLayout
+<ComparisonVsArticle
   title="RunwayとPikaを比較｜AI動画生成ツールはどちらを選ぶべき？ | AIクリエイティブナビ"
   description="RunwayとPikaの特徴、無料プラン、商用利用条件、日本語対応、透かし、向いている用途を比較します。AI動画生成ツール選びで迷っている方向けに確認すべきポイントを整理します。"
   canonicalPath="/comparisons/runway-vs-pika/"
   jsonLd={articleJsonLd}
+  breadcrumbLabel="RunwayとPika比較"
+  h1="RunwayとPikaを比較"
+  lead="RunwayとPikaはどちらもAI動画生成ツールです。無料プランの更新条件・料金・商用利用条件・対応機能・UIの使いやすさを確認して、用途に合った選択をしてください。"
+  category="AI動画生成ツール比較"
+  latestDate={latestDate}
+  toolAName="Runway"
+  toolASlug="runway"
+  toolBName="Pika"
+  toolBSlug="pika"
+  conclusionA={{
+    label: '高品質・多機能な動画生成重視 →',
+    toolName: 'Runway',
+    toolHref: '/tools/runway/',
+    body: 'Gen-4など最新モデルによる高品質な動画生成に定評があります。動画延長・背景削除・API連携など多機能な映像制作環境が統合されています。無料プランはクレジットが初回のみで更新なしのため、継続利用には有料プランが現実的です。商用利用は全プランで可能な場合あり（無料プランは透かしあり）とされていますが、最新規約要確認。',
+  }}
+  conclusionB={{
+    label: '手軽・毎月無料枠で試したい →',
+    toolName: 'Pika',
+    toolHref: '/tools/pika/',
+    body: '操作がシンプルで取り組みやすく、無料プランで毎月クレジットが更新されるとされています。料金もRunwayより低めで、まず動画生成を試してみたい方に向いています。無料プランでは商用利用不可・透かしありの制約があります。商用利用には有料プランへのアップグレードが必要とされています。',
+  }}
+  conclusionNote="比較結果は用途・プラン・素材条件によって変わる場合があります。最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。"
+  comparisonRows={comparisonRows}
+  faqs={faqs}
+  relatedLinks={relatedLinks}
+  sources={sources}
+  noticeItems={[
+    '料金・無料枠・商用利用条件・透かし条件は変更される場合があります。',
+    '最新情報は各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。',
+    '本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。',
+  ]}
 >
-  <div class="mx-auto max-w-4xl px-6 py-12">
-
-    <!-- パンくずナビ -->
-    <nav class="mb-6 text-sm text-slate-500" aria-label="パンくずリスト">
-      <a href="/" class="hover:underline">トップ</a>
-      <span class="mx-1">/</span>
-      <a href="/comparisons/" class="hover:underline">比較記事一覧</a>
-      <span class="mx-1">/</span>
-      <span>RunwayとPika比較</span>
-    </nav>
-
-    <!-- H1 -->
-    <h1 class="mb-4 text-3xl font-bold text-slate-900">
-      RunwayとPikaを比較｜AI動画生成ツールはどちらを選ぶべき？
-    </h1>
-
-    <!-- 掲載ツール情報の最終確認日 -->
-    <p class="mb-6 text-xs text-slate-400">掲載ツール情報の最終確認：{latestDate ? formatDate(latestDate) : '要確認'} ／ 掲載情報は変更される場合があります</p>
-
-    <!-- 注意ボックス -->
-    <div class="mb-8 rounded-lg border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800 leading-relaxed">
-      <p class="mb-1 font-semibold">ご確認ください</p>
-      <ul class="mt-2 space-y-1.5 list-disc list-inside">
-        <li>料金・無料枠・商用利用条件・透かし条件は変更される場合があります。</li>
-        <li>最新情報は各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。</li>
-        <li>本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。</li>
-      </ul>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- 導入                                                          -->
-    <!-- ============================================================ -->
-    <section class="mb-10">
-      <p class="text-sm leading-relaxed text-slate-700">
-        RunwayとPikaはどちらもAI動画生成ツールとして注目されているサービスです。
-        テキストや画像から動画を生成できる点は共通していますが、無料プランの更新条件・料金・商用利用の条件・対応機能・UIの使いやすさなどに違いがあります。
-        このページでは両ツールの特徴を比較し、用途に応じた選び方を整理します。
-      </p>
-      <p class="mt-3 text-xs text-slate-500">
-        各ツールの詳細は<a href="/tools/runway/" class="text-blue-600 hover:underline">Runway詳細ページ</a>・<a href="/tools/pika/" class="text-blue-600 hover:underline">Pika詳細ページ</a>をご参照ください。
-        AI動画生成ツール全体の比較は<a href="/categories/video-generation/" class="text-blue-600 hover:underline">AI動画生成ツール一覧</a>もご参照ください。
-      </p>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- 結論サマリー                                                  -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <div class="rounded-xl border border-blue-100 bg-blue-50 px-6 py-5">
-        <h2 class="mb-3 text-lg font-bold text-blue-900">結論：RunwayとPikaはどちらを選ぶべきか</h2>
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div class="rounded-lg bg-white border border-blue-100 px-5 py-4">
-            <p class="mb-2 text-sm font-bold text-slate-800">高品質・多機能な動画生成重視 → <a href="/tools/runway/" class="text-blue-600 hover:underline">Runway</a></p>
-            <p class="text-xs leading-relaxed text-slate-600">
-              Gen-4など最新モデルによる高品質な動画生成に定評があります。
-              動画延長・背景削除・API連携など多機能な映像制作環境が統合されています。
-              無料プランはクレジットが初回のみで更新なしのため、継続利用には有料プランが現実的です。
-              商用利用は全プランで可能な場合あり（無料プランは透かしあり）とされていますが、最新規約要確認。
-            </p>
-          </div>
-          <div class="rounded-lg bg-white border border-blue-100 px-5 py-4">
-            <p class="mb-2 text-sm font-bold text-slate-800">手軽・毎月無料枠で試したい → <a href="/tools/pika/" class="text-blue-600 hover:underline">Pika</a></p>
-            <p class="text-xs leading-relaxed text-slate-600">
-              操作がシンプルで取り組みやすく、無料プランで毎月クレジットが更新されるとされています。
-              料金もRunwayより低めで、まず動画生成を試してみたい方に向いています。
-              無料プランでは商用利用不可・透かしありの制約があります。
-              商用利用には有料プランへのアップグレードが必要とされています。
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- 基本比較表                                                    -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-slate-900">RunwayとPikaの基本比較表</h2>
-      <p class="mb-4 text-sm text-slate-500">
-        以下は参考情報です。内容は変更される場合があります。最新情報は各公式サイトでご確認ください。
-      </p>
-      <div class="overflow-x-auto rounded-xl border border-slate-100 shadow-sm">
-        <table class="w-full min-w-[560px] text-sm">
-          <thead>
-            <tr class="bg-slate-50 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
-              <th class="px-4 py-3 w-1/3">比較項目</th>
-              <th class="px-4 py-3 w-1/3">Runway</th>
-              <th class="px-4 py-3 w-1/3">Pika</th>
-            </tr>
-          </thead>
-          <tbody>
-            {comparisonRows.map(({ item, runway, pika }, i) => (
-              <tr class={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
-                <td class="px-4 py-3 font-medium text-slate-700 text-xs">{item}</td>
-                <td class="px-4 py-3 text-slate-600 text-xs leading-relaxed">{runway}</td>
-                <td class="px-4 py-3 text-slate-600 text-xs leading-relaxed">{pika}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <p class="mt-3 text-xs text-slate-400">
-        情報は確認時点のものです。最新の料金・条件は各公式サイトをご参照ください。
-      </p>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- Runwayの特徴                                                  -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-slate-900">Runwayの特徴</h2>
-
-      <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm mb-5">
-        <h3 class="mb-3 font-bold text-slate-900">強み</h3>
-        <ul class="text-sm text-slate-600 space-y-2 leading-relaxed list-disc list-inside">
+  <!-- ===== Runwayの特徴 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">Runwayの特徴</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">強み</h3>
+        <ul>
           <li>Gen-4など最新モデルによる高品質な動画生成</li>
           <li>テキスト→動画・画像→動画・動画延長など多機能</li>
           <li>背景削除・音声ダビングなど映像編集ツールも統合</li>
@@ -282,31 +141,26 @@ const relatedLinks = [
           <li>公式情報上、全プランで商用利用可能とされる（条件あり）</li>
         </ul>
       </div>
-
-      <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-        <h3 class="mb-3 font-bold text-slate-900">注意点</h3>
-        <ul class="text-sm text-slate-600 space-y-2 leading-relaxed list-disc list-inside">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">注意点</h3>
+        <ul>
           <li>無料プランのクレジットは125クレジット（初回のみ・更新なし）とされている</li>
           <li>日本語UIなし（英語インターフェースのみ）</li>
           <li>無料プランでは透かしあり</li>
           <li>料金はPikaより高め（Standard $12/月・年払い）</li>
         </ul>
       </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-soft);">詳細は<a href="/tools/runway/" style="color:var(--brand-ink);">Runway詳細ページ</a>をご参照ください。</p>
+  </section>
 
-      <p class="mt-4 text-sm text-slate-600">
-        詳細は<a href="/tools/runway/" class="text-blue-600 hover:underline">Runway詳細ページ</a>をご参照ください。
-      </p>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- Pikaの特徴                                                    -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-slate-900">Pikaの特徴</h2>
-
-      <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm mb-5">
-        <h3 class="mb-3 font-bold text-slate-900">強み</h3>
-        <ul class="text-sm text-slate-600 space-y-2 leading-relaxed list-disc list-inside">
+  <!-- ===== Pikaの特徴 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">Pikaの特徴</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">強み</h3>
+        <ul>
           <li>操作がシンプルで取り組みやすいとされる</li>
           <li>無料プランで毎月クレジットが更新されるとされている（月80クレジット程度）</li>
           <li>料金がRunwayより低め（Standard $8/月・年払い）</li>
@@ -314,10 +168,9 @@ const relatedLinks = [
           <li>UIが一部で翻訳表示に対応している場合がある</li>
         </ul>
       </div>
-
-      <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-        <h3 class="mb-3 font-bold text-slate-900">注意点</h3>
-        <ul class="text-sm text-slate-600 space-y-2 leading-relaxed list-disc list-inside">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">注意点</h3>
+        <ul>
           <li>無料プランでは商用利用不可とされている</li>
           <li>無料プランでは透かしあり</li>
           <li>日本語UIは完全対応ではない（英語ベース）</li>
@@ -325,286 +178,79 @@ const relatedLinks = [
           <li>生成動画の長さ・解像度に制限がある場合がある</li>
         </ul>
       </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-soft);">詳細は<a href="/tools/pika/" style="color:var(--brand-ink);">Pika詳細ページ</a>をご参照ください。</p>
+  </section>
 
-      <p class="mt-4 text-sm text-slate-600">
-        詳細は<a href="/tools/pika/" class="text-blue-600 hover:underline">Pika詳細ページ</a>をご参照ください。
-      </p>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- 料金・無料枠の違い                                            -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-slate-900">料金・無料枠の違い</h2>
-
-      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 mb-5">
-        <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-          <h3 class="mb-3 font-bold text-slate-900">Runway</h3>
-          <ul class="text-sm text-slate-600 space-y-2 leading-relaxed">
-            <li><span class="font-medium">無料プラン：</span>125クレジット（初回のみ・更新なし）</li>
-            <li><span class="font-medium">Standard：</span>$12/月（年払い）・月625クレジット程度</li>
-          </ul>
-          <p class="mt-3 text-xs text-slate-400">最新情報は<a href="https://runwayml.com/pricing/" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Runway公式料金ページ</a>でご確認ください。</p>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-          <h3 class="mb-3 font-bold text-slate-900">Pika</h3>
-          <ul class="text-sm text-slate-600 space-y-2 leading-relaxed">
-            <li><span class="font-medium">無料プラン：</span>月80クレジット程度（毎月更新・商用利用不可）</li>
-            <li><span class="font-medium">Standard：</span>$8/月（年払い）・月700クレジット程度</li>
-          </ul>
-          <p class="mt-3 text-xs text-slate-400">最新情報は<a href="https://pika.art/pricing" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Pika公式料金ページ</a>でご確認ください。</p>
-        </div>
-      </div>
-
-      <div class="rounded-lg border border-slate-100 bg-slate-50 px-5 py-4 text-sm text-slate-600 leading-relaxed">
-        <p>
-          <strong>まず試したい方：</strong>無料プランの更新条件ではPikaの方が継続的に試せる場合があります（毎月更新とされていますが、商用利用不可・透かしありの制約あり）。
-          Runwayの無料プランは初回125クレジットのみのため、継続利用や本格利用には有料プランへの移行が必要です。
-          <a href="/conditions/free/" class="text-blue-600 hover:underline ml-1">無料で使えるAI動画生成ツール比較も参考にしてください →</a>
-        </p>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- 商用利用条件の違い                                            -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-slate-900">商用利用・透かし条件の違い</h2>
-
-      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 mb-5">
-        <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-          <h3 class="mb-3 font-bold text-slate-900">Runway</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            公式ヘルプによると、すべてのプランでOutputの商用利用を制限していないとされています。
-            ただし、<strong>無料プランでは透かしが付与されるため実用上の制約があります</strong>。
-            有料プランでは透かしが入らない場合があるとされています。
-            生成コンテンツの内容や第三者の権利によって制限される場合があります。
-          </p>
-          <p class="mt-3 text-xs text-slate-400">利用前に最新の<a href="https://runwayml.com/terms-of-use/" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Runway利用規約</a>をご確認ください。</p>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-          <h3 class="mb-3 font-bold text-slate-900">Pika</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            公式情報上、<strong>無料プランでは商用利用不可とされています</strong>。
-            有料プランでは商用利用ができるプランがあるとされていますが、プランによって条件が異なる場合があります。
-            無料プランでは透かしが付与される場合があります。
-          </p>
-          <p class="mt-3 text-xs text-slate-400">利用前に最新の<a href="https://pika.art/terms-of-service" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Pika利用規約</a>をご確認ください。</p>
-        </div>
-      </div>
-
-      <div class="rounded-lg border border-amber-100 bg-amber-50 px-5 py-4 text-sm text-amber-800 leading-relaxed">
-        <p class="font-semibold mb-1">商用利用を前提にする場合は</p>
-        <p>
-          どちらのツールも「絶対に商用利用できる」とは断言できません。プランや用途によって条件が異なる可能性があります。
-          人物・著名人・ブランドロゴ・第三者素材を扱う場合は、別途確認が必要です。
-          商用利用前は必ず最新の公式規約をご確認ください。本記事は法的助言ではありません。
-        </p>
-        <p class="mt-2">
-          <a href="/guides/commercial-use-copyright/" class="text-amber-900 underline">AI生成コンテンツの商用利用・著作権ガイド →</a>
-        </p>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- 用途別の選び方                                               -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-slate-900">用途別の選び方</h2>
-
-      <div class="space-y-4">
-        {[
-          {
-            useCase: 'YouTubeショート・SNS動画',
-            runway: '高品質な動画生成が可能。動画延長にも対応。商用利用条件を公式規約で要確認',
-            pika: 'シンプルな操作で手軽に短尺動画を生成できる。無料プランで毎月試せる場合あり（商用利用不可・透かしあり）',
-            recommend: '手軽さ・無料継続利用はPika。品質・機能重視はRunway',
-          },
-          {
-            useCase: '映像コンテンツ・プロ向け制作',
-            runway: '動画延長・背景削除・音声ダビングなど多機能な編集ツールを統合。API連携も可能',
-            pika: '動画延長・APIは非対応または要確認。シンプルな生成用途向け',
-            recommend: 'プロ向け・多機能ならRunwayが向いている傾向',
-          },
-          {
-            useCase: '広告・商用動画制作',
-            runway: '全プランで商用利用可能な場合あり（透かしなしは有料プラン）。最新規約を要確認',
-            pika: '有料プランで商用利用可能なプランあり。無料プランは商用利用不可。最新規約を要確認',
-            recommend: 'どちらも商用利用前に必ず最新規約を確認。本記事は法的助言ではありません',
-          },
-          {
-            useCase: '初心者・まず試してみたい',
-            runway: '無料プランは125クレジット初回のみ。英語UIのみ',
-            pika: '毎月無料クレジットが更新されるとされ継続的に試せる場合あり（商用利用不可・透かしあり）。UIは一部翻訳対応',
-            recommend: 'まず試すならPikaの無料プランが使いやすい場合あり',
-          },
-          {
-            useCase: '画像から動画を生成したい（image-to-video）',
-            runway: '対応',
-            pika: '対応',
-            recommend: 'どちらも対応。品質・コスト・無料枠で判断',
-          },
-        ].map(({ useCase, runway, pika, recommend }) => (
-          <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-            <h3 class="mb-3 text-base font-bold text-slate-900">{useCase}</h3>
-            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 mb-3">
-              <div class="rounded-lg bg-slate-50 px-4 py-3">
-                <p class="mb-1 text-xs font-semibold text-slate-600">Runway</p>
-                <p class="text-xs leading-relaxed text-slate-600">{runway}</p>
-              </div>
-              <div class="rounded-lg bg-blue-50 px-4 py-3">
-                <p class="mb-1 text-xs font-semibold text-blue-700">Pika</p>
-                <p class="text-xs leading-relaxed text-blue-800">{pika}</p>
-              </div>
-            </div>
-            <p class="text-xs text-slate-500">
-              <span class="font-medium">判断のポイント：</span>{recommend}
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- 向いている人 / 向いていない人                                 -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <h2 class="mb-5 text-2xl font-bold text-slate-900">向いている人 / 向いていない人</h2>
-
-      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 mb-5">
-        <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-          <h3 class="mb-3 font-bold text-slate-900">Runwayが向いている人</h3>
-          <ul class="text-sm text-slate-600 space-y-2 leading-relaxed list-disc list-inside">
-            <li>AI動画生成を本格的に試したい人</li>
-            <li>映像表現や編集寄りの機能も重視したい人</li>
-            <li>広告動画やプロモーション映像の試作をしたい人</li>
-            <li>画像素材から短い動画を作りたい人</li>
-            <li>API連携も含めた開発用途に使いたい人</li>
-          </ul>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-          <h3 class="mb-3 font-bold text-slate-900">Pikaが向いている人</h3>
-          <ul class="text-sm text-slate-600 space-y-2 leading-relaxed list-disc list-inside">
-            <li>短いAI動画を手軽に試したい人</li>
-            <li>SNS投稿用の動画案を作りたい人</li>
-            <li>シンプルな操作で動画生成を試したい人</li>
-            <li>Runwayより軽めに使い始めたい人</li>
-            <li>継続的に無料枠で試したい人（商用利用不可・透かしあり）</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="rounded-xl border border-amber-100 bg-amber-50 p-5">
-        <h3 class="mb-3 font-bold text-amber-800">どちらも向いていないケース</h3>
-        <ul class="text-sm text-amber-700 space-y-2 leading-relaxed list-disc list-inside">
-          <li>長尺動画を細かく編集したい人</li>
-          <li>毎回同じ人物・構図・動きを完全に再現したい人</li>
-          <li>公式条件を確認せずに商用案件へ使いたい人</li>
-          <li>無料枠だけで高解像度・透かしなし出力を前提にしたい人</li>
+  <!-- ===== 向いている人 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">向いている人・向いていない人</h2>
+    <div class="cp-suited-grid">
+      <div class="cp-suited-card">
+        <p class="cp-suited-h">Runwayが向いている人</p>
+        <ul class="cp-suited-list">
+          <li>AI動画生成を本格的に試したい人</li>
+          <li>映像表現や編集寄りの機能も重視したい人</li>
+          <li>広告動画やプロモーション映像の試作をしたい人</li>
+          <li>画像素材から短い動画を作りたい人</li>
+          <li>API連携も含めた開発用途に使いたい人</li>
         </ul>
       </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- 他の候補も比較したい場合                                      -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-slate-900">Kling AIなど他のAI動画生成ツールも検討したい場合</h2>
-      <p class="mb-4 text-sm text-slate-600 leading-relaxed">
-        RunwayとPika以外にも、用途によっては他のAI動画生成ツールが候補になる場合があります。
-        以下は参考情報です。最新の料金・機能・商用利用条件は各公式サイトでご確認ください。
-      </p>
-      <div class="space-y-3">
-        <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-          <p class="mb-1 text-sm font-bold text-slate-800"><a href="/tools/kling-ai/" class="text-blue-600 hover:underline">Kling AI</a></p>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            リアル寄りの動画生成を比較検討したい場合の候補とされています。RunwayやPikaとは異なる生成特性を持つ場合があります。
-            料金・商用利用条件・無料枠は変更される可能性があるため、最新情報は公式サイトでご確認ください。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-          <p class="mb-1 text-sm font-bold text-slate-800"><a href="/tools/luma-ai/" class="text-blue-600 hover:underline">Luma AI</a>・<a href="/tools/hailuo-ai/" class="text-blue-600 hover:underline">Hailuo AI</a></p>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            自然な動きや映像表現を比較検討したい場合の候補とされています。
-            詳しくは<a href="/categories/video-generation/" class="text-blue-600 hover:underline">AI動画生成ツール一覧</a>でご確認ください。
-          </p>
-        </div>
+      <div class="cp-suited-card">
+        <p class="cp-suited-h">Pikaが向いている人</p>
+        <ul class="cp-suited-list">
+          <li>短いAI動画を手軽に試したい人</li>
+          <li>SNS投稿用の動画案を作りたい人</li>
+          <li>シンプルな操作で動画生成を試したい人</li>
+          <li>Runwayより軽めに使い始めたい人</li>
+          <li>継続的に無料枠で試したい人（商用利用不可・透かしあり）</li>
+        </ul>
       </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- 商用利用・透かし・無料枠に関する注意点                        -->
-    <!-- ============================================================ -->
-    <section class="mb-12">
-      <h2 class="mb-4 text-2xl font-bold text-slate-900">商用利用・透かし・無料枠に関する注意点</h2>
-
-      <div class="space-y-4">
-        <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-          <h3 class="mb-2 text-sm font-bold text-slate-800">無料プランの利用制限</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            RunwayもPikaも無料プランでは透かしが付与される場合があります。
-            Pikaの無料プランでは商用利用不可とされています。
-            Runwayは無料プランでも商用利用が可能な場合があるとされていますが、透かしが入るため実用上の制約があります。
-            クレジット制の場合、生成が失敗・途中停止した場合でもクレジットが消費される可能性があります。
-            無料プランで生成した動画を商用利用する際は必ず最新の公式利用規約をご確認ください。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
-          <h3 class="mb-2 text-sm font-bold text-slate-800">商用利用を前提とする場合</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            商用利用を前提とする場合、Runwayは有料プランで透かしなし・商用利用可能とされていますが、
-            Pikaは有料プランでの商用利用可能なプランを確認する必要があります。
-            どちらも利用規約の条件はプラン・用途・生成コンテンツの内容によって異なる可能性があります。
-            商用利用前は必ず最新の公式利用規約をご確認ください。本記事は法的助言ではありません。
-          </p>
-        </div>
-        <div class="rounded-xl border border-amber-100 bg-amber-50 p-5">
-          <h3 class="mb-2 text-sm font-bold text-amber-800">免責事項</h3>
-          <p class="text-sm text-amber-700 leading-relaxed">
-            このページの情報は公式サイト・料金ページ・利用規約をもとに整理したものですが、内容は変更される可能性があります。
-            商用利用・著作権に関しては断定的な記載を避けており、法的助言ではありません。
-            利用前に必ず最新の<a href="https://runwayml.com/terms-of-use/" class="text-amber-900 underline" target="_blank" rel="noopener noreferrer">Runway利用規約</a>および<a href="https://pika.art/terms-of-service" class="text-amber-900 underline" target="_blank" rel="noopener noreferrer">Pika利用規約</a>の公式情報をご確認ください。
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- FAQ                                                          -->
-    <!-- ============================================================ -->
-    <GuideFAQ items={faqs} title="よくある質問" />
-
-    <!-- ============================================================ -->
-    <!-- 関連ページ                                                    -->
-    <!-- ============================================================ -->
-    <section class="mt-10 border-t border-slate-100 pt-8">
-      <h2 class="mb-4 text-base font-semibold text-slate-700">関連ページ</h2>
-      <div class="flex flex-wrap gap-2">
-        {relatedLinks.map(({ href, label }) => (
-          <a
-            href={href}
-            class="rounded-full border border-slate-200 px-4 py-1.5 text-sm text-slate-600 transition-colors hover:bg-slate-100"
-          >
-            {label}
-          </a>
-        ))}
-      </div>
-    </section>
-
-    <!-- 出典 -->
-    <section class="mt-8 border-t border-slate-100 pt-6">
-      <h2 class="mb-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">出典・参考情報</h2>
-      <ul class="space-y-1 text-xs text-slate-400">
-        <li><a href="https://runwayml.com/pricing/" class="hover:underline text-blue-500" target="_blank" rel="noopener noreferrer">Runway料金プラン（公式）</a></li>
-        <li><a href="https://runwayml.com/terms-of-use/" class="hover:underline text-blue-500" target="_blank" rel="noopener noreferrer">Runway利用規約（公式）</a></li>
-        <li><a href="https://help.runwayml.com/hc/en-us/articles/18927776141715-Usage-rights" class="hover:underline text-blue-500" target="_blank" rel="noopener noreferrer">Runway利用権について（公式ヘルプ）</a></li>
-        <li><a href="https://pika.art/pricing" class="hover:underline text-blue-500" target="_blank" rel="noopener noreferrer">Pika料金プラン（公式）</a></li>
-        <li><a href="https://pika.art/terms-of-service" class="hover:underline text-blue-500" target="_blank" rel="noopener noreferrer">Pika利用規約（公式）</a></li>
+    </div>
+    <div class="cp-not-suited">
+      <p class="cp-not-suited-h">どちらも向いていないケース</p>
+      <ul>
+        <li>長尺動画を細かく編集したい人</li>
+        <li>毎回同じ人物・構図・動きを完全に再現したい人</li>
+        <li>公式条件を確認せずに商用案件へ使いたい人</li>
+        <li>無料枠だけで高解像度・透かしなし出力を前提にしたい人</li>
       </ul>
-      <p class="mt-3 text-xs text-slate-400">
-        本ページの情報は上記公式ソースをもとに作成していますが、内容は変更される可能性があります。法的助言ではありません。利用前に必ず最新の公式情報をご確認ください。
-      </p>
-    </section>
+    </div>
+  </section>
 
-  </div>
-</BaseLayout>
+  <!-- ===== 商用利用・透かし注意 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">商用利用・透かし条件の違い</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Runway</h3>
+        <p>公式ヘルプによると、すべてのプランでOutputの商用利用を制限していないとされています。ただし<strong>無料プランでは透かしが付与されるため実用上の制約があります</strong>。有料プランでは透かしが入らない場合があるとされています。生成コンテンツの内容や第三者の権利によって制限される場合があります。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">利用前に最新の<a href="https://runwayml.com/terms-of-use/" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Runway利用規約</a>をご確認ください。</p>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Pika</h3>
+        <p>公式情報上、<strong>無料プランでは商用利用不可とされています</strong>。有料プランでは商用利用ができるプランがあるとされていますが、プランによって条件が異なる場合があります。無料プランでは透かしが付与される場合があります。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">利用前に最新の<a href="https://pika.art/terms-of-service" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Pika利用規約</a>をご確認ください。</p>
+      </div>
+    </div>
+    <div class="cp-caution-box">
+      <p><strong>商用利用を前提にする場合は</strong>どちらのツールも「絶対に商用利用できる」とは断言できません。プランや用途によって条件が異なる可能性があります。商用利用前は必ず最新の公式規約をご確認ください。本記事は法的助言ではありません。</p>
+      <p><a href="/guides/commercial-use-copyright/" style="color:var(--notice-ink);font-weight:600;">AI生成コンテンツの商用利用・著作権ガイド →</a></p>
+    </div>
+  </section>
+
+  <!-- ===== 他ツール候補 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">他のAI動画生成ツールも検討したい場合</h2>
+    <div class="cp-other-grid">
+      <div class="cp-other-card">
+        <p class="cp-other-h"><a href="/tools/kling-ai/">Kling AI</a></p>
+        <p>リアル寄りの動画生成を比較検討したい場合の候補とされています。RunwayやPikaとは異なる生成特性を持つ場合があります。料金・商用利用条件・無料枠は変更される可能性があるため、最新情報は公式サイトでご確認ください。</p>
+      </div>
+      <div class="cp-other-card">
+        <p class="cp-other-h"><a href="/tools/luma-ai/">Luma AI</a>・<a href="/tools/hailuo-ai/">Hailuo AI</a></p>
+        <p>自然な動きや映像表現を比較検討したい場合の候補とされています。詳しくは<a href="/categories/video-generation/" style="color:var(--brand-ink);">AI動画生成ツール一覧</a>でご確認ください。</p>
+      </div>
+    </div>
+  </section>
+</ComparisonVsArticle>

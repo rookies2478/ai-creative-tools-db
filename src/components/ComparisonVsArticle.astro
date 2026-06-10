@@ -1,0 +1,882 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GuideFAQ from './GuideFAQ.astro';
+
+export interface ConclusionCard {
+  label: string;
+  toolName: string;
+  toolHref?: string;
+  body: string;
+}
+
+export interface ComparisonRow {
+  item: string;
+  toolA: string;
+  toolB: string;
+}
+
+export interface RelatedLink { href: string; label: string; }
+export interface SourceLink { href: string; label: string; }
+
+export interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  jsonLd?: string;
+  breadcrumbLabel: string;
+  h1: string;
+  lead: string;
+  category?: string;
+  latestDate?: string | null;
+  noticeItems?: string[];
+  toolAName: string;
+  toolASlug?: string;
+  toolBName: string;
+  toolBSlug?: string;
+  conclusionA: ConclusionCard;
+  conclusionB: ConclusionCard;
+  conclusionNote?: string;
+  comparisonRows: ComparisonRow[];
+  faqs: { q: string; a: string }[];
+  relatedLinks: RelatedLink[];
+  sources: SourceLink[];
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  jsonLd,
+  breadcrumbLabel,
+  h1,
+  lead,
+  category = 'COMPARISON',
+  latestDate,
+  noticeItems = [
+    '料金・無料枠・商用利用条件・透かし条件は変更される場合があります。',
+    '最新情報は各ツールの公式サイト・料金ページ・利用規約をご確認ください。',
+    '本記事は情報提供を目的としており、法的助言ではありません。',
+  ],
+  toolAName,
+  toolASlug,
+  toolBName,
+  toolBSlug,
+  conclusionA,
+  conclusionB,
+  conclusionNote,
+  comparisonRows,
+  faqs,
+  relatedLinks,
+  sources,
+} = Astro.props;
+
+function formatDate(iso: string): string {
+  const [y, m, d] = iso.split('-');
+  return `${y}年${Number(m)}月${Number(d)}日`;
+}
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  jsonLd={jsonLd}
+>
+  <div class="cp-x" data-cpx>
+
+    <!-- パンくず -->
+    <nav class="cp-crumb" aria-label="パンくずリスト">
+      <a href="/">トップ</a>
+      <span aria-hidden="true">/</span>
+      <a href="/comparisons/">比較記事一覧</a>
+      <span aria-hidden="true">/</span>
+      <span>{breadcrumbLabel}</span>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <header class="cp-hero">
+      <span class="cp-eyebrow">{category}</span>
+      <h1 class="cp-h1">{h1}</h1>
+      <p class="cp-lead">{lead}</p>
+
+      <!-- ツール対比バッジ -->
+      <div class="cp-vs-row">
+        {toolASlug
+          ? <a href={`/tools/${toolASlug}/`} class="cp-tool-chip cp-tool-a">{toolAName}</a>
+          : <span class="cp-tool-chip cp-tool-a">{toolAName}</span>
+        }
+        <span class="cp-vs-badge">VS</span>
+        {toolBSlug
+          ? <a href={`/tools/${toolBSlug}/`} class="cp-tool-chip cp-tool-b">{toolBName}</a>
+          : <span class="cp-tool-chip cp-tool-b">{toolBName}</span>
+        }
+      </div>
+
+      <!-- 確認日 -->
+      {latestDate && (
+        <p class="cp-date">掲載ツール情報の最終確認：{formatDate(latestDate)} ／ 掲載情報は変更される場合があります</p>
+      )}
+    </header>
+
+    <!-- ===== 注意バナー ===== -->
+    <div class="cp-notice" role="note">
+      <div class="cp-notice-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/>
+        </svg>
+      </div>
+      <div>
+        <p class="cp-notice-title">ご確認ください</p>
+        <ul class="cp-notice-list">
+          {noticeItems.map(item => <li set:html={item} />)}
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== 結論カード ===== -->
+    <section class="cp-sec" aria-labelledby="cp-conclusion-h">
+      <h2 class="cp-sec-h2" id="cp-conclusion-h">
+        <span class="cp-eyebrow">Conclusion</span>
+        結論：どちらを選ぶべきか
+      </h2>
+      <div class="cp-conclusion-grid">
+        <div class="cp-conclusion-card">
+          <div class="cp-conclusion-label">
+            {conclusionA.label}
+            {conclusionA.toolHref
+              ? <a href={conclusionA.toolHref}>{conclusionA.toolName}</a>
+              : <strong>{conclusionA.toolName}</strong>
+            }
+          </div>
+          <p class="cp-conclusion-body">{conclusionA.body}</p>
+        </div>
+        <div class="cp-conclusion-card">
+          <div class="cp-conclusion-label">
+            {conclusionB.label}
+            {conclusionB.toolHref
+              ? <a href={conclusionB.toolHref}>{conclusionB.toolName}</a>
+              : <strong>{conclusionB.toolName}</strong>
+            }
+          </div>
+          <p class="cp-conclusion-body">{conclusionB.body}</p>
+        </div>
+      </div>
+      {conclusionNote && (
+        <p class="cp-conclusion-note">{conclusionNote}</p>
+      )}
+    </section>
+
+    <!-- ===== 比較表 ===== -->
+    <section class="cp-sec" aria-labelledby="cp-table-h">
+      <h2 class="cp-sec-h2" id="cp-table-h">
+        <span class="cp-eyebrow">Comparison Table</span>
+        {toolAName}と{toolBName}の基本比較表
+      </h2>
+      <p class="cp-table-note-top">以下は参考情報です。内容は変更される場合があります。最新情報は各公式サイトでご確認ください。</p>
+      <div class="cp-table-wrap">
+        <table class="cp-table">
+          <thead>
+            <tr>
+              <th class="cp-th-item">比較項目</th>
+              <th class="cp-th-a">{toolAName}</th>
+              <th class="cp-th-b">{toolBName}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map(({ item, toolA, toolB }, i) => (
+              <tr class={i % 2 === 0 ? 'cp-tr-even' : 'cp-tr-odd'}>
+                <td class="cp-td-item">{item}</td>
+                <td class="cp-td-val">{toolA}</td>
+                <td class="cp-td-val">{toolB}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="cp-table-note-bottom">情報は確認時点のものです。最新の料金・条件は各公式サイトをご参照ください。</p>
+    </section>
+
+    <!-- ===== 各ページ固有コンテンツ ===== -->
+    <slot />
+
+    <!-- ===== FAQ ===== -->
+    <div class="cp-faq-wrap">
+      <GuideFAQ items={faqs} title="よくある質問" />
+    </div>
+
+    <!-- ===== 関連ページ ===== -->
+    <section class="cp-related">
+      <h2 class="cp-related-h">関連ページ</h2>
+      <div class="cp-tag-list">
+        {relatedLinks.map(({ href, label }) => (
+          <a href={href} class="cp-tag">{label}</a>
+        ))}
+      </div>
+    </section>
+
+    <!-- ===== 出典 ===== -->
+    <section class="cp-sources">
+      <h2 class="cp-sources-h">出典・参考情報</h2>
+      <ul class="cp-sources-list">
+        {sources.map(({ href, label }) => (
+          <li><a href={href} target="_blank" rel="noopener noreferrer">{label}</a></li>
+        ))}
+      </ul>
+      <p class="cp-sources-disc">本ページの情報は上記公式ソースをもとに作成していますが、内容は変更される可能性があります。法的助言ではありません。利用前に必ず最新の公式情報をご確認ください。</p>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  /* ============================================================
+   * ComparisonVsArticle — scoped cp-x design tokens
+   * ============================================================ */
+  .cp-x {
+    --brand: #4B3FE4;
+    --brand-ink: #2E25A6;
+    --brand-tint: #ECEBFB;
+    --on-brand: #FFFFFF;
+    --ink: #16181D;
+    --ink-soft: #3A3E47;
+    --muted: #6A7180;
+    --faint: #98A0AD;
+    --line: #E3E2D9;
+    --line-strong: #D2D1C6;
+    --surface: #FFFFFF;
+    --surface-2: #FAFAF6;
+    --paper: #F4F4EE;
+    --notice-bg: #FFFBEB;
+    --notice-border: #FDE68A;
+    --notice-ink: #92400E;
+    --tool-a: #2E25A6;
+    --tool-a-tint: #ECEBFB;
+    --tool-b: #1D4ED8;
+    --tool-b-tint: #EFF6FF;
+    --radius: 14px;
+    --radius-lg: 22px;
+    --shadow-sm: 0 1px 2px rgba(20,22,28,.04), 0 1px 3px rgba(20,22,28,.05);
+    --shadow-md: 0 4px 16px -4px rgba(28,24,80,.12);
+    --ease: cubic-bezier(.22,.61,.36,1);
+    --f-jp: "Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+    --f-latin: "Space Grotesk",system-ui,sans-serif;
+
+    display: block;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    color: var(--ink);
+    font-family: "Noto Sans JP", system-ui, sans-serif;
+    line-height: 1.7;
+  }
+
+  /* パンくず */
+  .cp-crumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+  .cp-crumb a { color: var(--muted); text-decoration: none; }
+  .cp-crumb a:hover { color: var(--brand-ink); text-decoration: underline; }
+  .cp-crumb span[aria-hidden] { color: var(--faint); }
+
+  /* eyebrow */
+  .cp-eyebrow {
+    font-family: var(--f-latin);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--brand);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .cp-eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--brand);
+    flex: none;
+  }
+
+  /* HERO */
+  .cp-hero { margin-bottom: 36px; }
+  .cp-h1 {
+    font-family: var(--f-jp);
+    font-size: clamp(24px, 3.4vw, 38px);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -.015em;
+    color: var(--ink);
+    text-wrap: balance;
+    margin: 0 0 16px;
+  }
+  .cp-lead {
+    font-size: 15px;
+    color: var(--ink-soft);
+    max-width: 640px;
+    line-height: 1.75;
+    margin: 0 0 20px;
+  }
+
+  /* VS バッジ行 */
+  .cp-vs-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .cp-tool-chip {
+    font-family: var(--f-jp);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    white-space: nowrap;
+    text-decoration: none;
+    border: 2px solid;
+    transition: opacity .15s;
+  }
+  .cp-tool-chip:hover { opacity: .8; }
+  .cp-tool-a {
+    background: var(--tool-a-tint);
+    color: var(--tool-a);
+    border-color: color-mix(in srgb, var(--tool-a) 28%, transparent);
+  }
+  .cp-tool-b {
+    background: var(--tool-b-tint);
+    color: var(--tool-b);
+    border-color: color-mix(in srgb, var(--tool-b) 28%, transparent);
+  }
+  .cp-vs-badge {
+    font-family: var(--f-latin);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .12em;
+    color: var(--faint);
+    background: var(--surface-2);
+    border: 1px solid var(--line-strong);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .cp-date {
+    font-size: 12px;
+    color: var(--faint);
+    margin: 0;
+  }
+
+  /* 注意バナー */
+  .cp-notice {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--notice-bg);
+    border: 1px solid var(--notice-border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 44px;
+  }
+  .cp-notice-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #FEF3C7;
+    color: var(--notice-ink);
+    display: grid;
+    place-items: center;
+    flex: none;
+  }
+  .cp-notice-icon svg { width: 18px; height: 18px; }
+  .cp-notice-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--notice-ink);
+    margin: 0 0 6px;
+  }
+  .cp-notice-list {
+    list-style: disc;
+    padding-left: 18px;
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--notice-ink);
+    line-height: 1.8;
+  }
+  .cp-notice-list li + li { margin-top: 2px; }
+
+  /* セクション共通 */
+  .cp-sec {
+    margin-bottom: 52px;
+  }
+  .cp-sec-h2 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--f-jp);
+    font-size: clamp(20px, 2.6vw, 28px);
+    font-weight: 900;
+    letter-spacing: -.005em;
+    color: var(--ink);
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+
+  /* 結論カード */
+  .cp-conclusion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .cp-conclusion-card {
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 22px 22px 20px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .2s, transform .2s var(--ease);
+  }
+  .cp-conclusion-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .cp-conclusion-label {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .cp-conclusion-label a {
+    color: var(--brand-ink);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--brand-ink) 40%, transparent);
+    text-underline-offset: 2px;
+  }
+  .cp-conclusion-body {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.78;
+    margin: 0;
+  }
+  .cp-conclusion-note {
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.75;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+  }
+
+  /* 比較表 */
+  .cp-table-note-top {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin: 0 0 12px;
+    line-height: 1.7;
+  }
+  .cp-table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+  .cp-table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .cp-table th, .cp-table td {
+    text-align: left;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .cp-table thead tr {
+    background: var(--brand-tint);
+  }
+  .cp-th-item {
+    font-family: var(--f-latin);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--brand-ink);
+    width: 28%;
+  }
+  .cp-th-a, .cp-th-b {
+    font-family: var(--f-jp);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--brand-ink);
+    width: 36%;
+  }
+  .cp-table tbody tr:last-child td { border-bottom: none; }
+  .cp-tr-even { background: var(--surface); }
+  .cp-tr-odd { background: var(--surface-2); }
+  .cp-table tbody tr:hover { background: color-mix(in srgb, var(--brand-tint) 45%, var(--surface)); }
+  .cp-td-item {
+    font-weight: 600;
+    font-size: 12.5px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .cp-td-val {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  .cp-table-note-bottom {
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: var(--faint);
+  }
+
+  /* FAQ wrapper */
+  .cp-faq-wrap { margin-bottom: 48px; }
+
+  /* 関連ページ */
+  .cp-related {
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+    margin-bottom: 40px;
+  }
+  .cp-related-h {
+    font-family: var(--f-jp);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+  }
+  .cp-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .cp-tag {
+    font-family: var(--f-jp);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 7px 15px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: background .14s, border-color .14s, color .14s, transform .14s var(--ease);
+    white-space: nowrap;
+  }
+  .cp-tag:hover {
+    border-color: var(--brand);
+    color: var(--brand-ink);
+    background: var(--brand-tint);
+    transform: translateY(-1px);
+  }
+
+  /* 出典 */
+  .cp-sources {
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
+  .cp-sources-h {
+    font-family: var(--f-latin);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+  .cp-sources-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .cp-sources-list a {
+    font-size: 12px;
+    color: var(--brand-ink);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--brand-ink) 30%, transparent);
+    text-underline-offset: 2px;
+  }
+  .cp-sources-list a:hover { color: var(--brand); }
+  .cp-sources-disc {
+    font-size: 11.5px;
+    color: var(--faint);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ===== 個別ページ共通スタイル（slot 内の要素向け） ===== */
+  /* セクション見出し（slot 内で h2 を使う場合） */
+  .cp-x :global(.cp-body-sec) { margin-bottom: 48px; }
+  .cp-x :global(.cp-body-h2) {
+    font-family: "Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+    font-size: clamp(18px,2.2vw,24px);
+    font-weight: 900;
+    color: var(--ink);
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+
+  /* カード */
+  .cp-x :global(.cp-card) {
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 20px 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  .cp-x :global(.cp-card-h3) {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  .cp-x :global(.cp-card p) {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin: 0;
+  }
+  .cp-x :global(.cp-card ul) {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin: 0;
+    padding-left: 20px;
+  }
+  .cp-x :global(.cp-card ul li + li) { margin-top: 6px; }
+
+  /* 2カラムグリッド */
+  .cp-x :global(.cp-2col) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* 用途グリッド */
+  .cp-x :global(.cp-usecase-item) {
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 12px;
+  }
+  .cp-x :global(.cp-usecase-title) {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  .cp-x :global(.cp-usecase-cols) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .cp-x :global(.cp-uc-a) {
+    background: var(--tool-a-tint);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .cp-x :global(.cp-uc-b) {
+    background: var(--tool-b-tint);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .cp-x :global(.cp-uc-label) {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .cp-x :global(.cp-uc-text) {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin: 0;
+  }
+  .cp-x :global(.cp-usecase-point) {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+  .cp-x :global(.cp-usecase-point strong) { color: var(--ink-soft); }
+
+  /* 向いている人 */
+  .cp-x :global(.cp-suited-grid) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .cp-x :global(.cp-suited-card) {
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 20px 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  .cp-x :global(.cp-suited-h) {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  .cp-x :global(.cp-suited-list) {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin: 0;
+    padding-left: 18px;
+  }
+  .cp-x :global(.cp-suited-list li + li) { margin-top: 5px; }
+  .cp-x :global(.cp-not-suited) {
+    border-radius: var(--radius);
+    border: 1px solid var(--notice-border);
+    background: var(--notice-bg);
+    padding: 18px 20px;
+  }
+  .cp-x :global(.cp-not-suited-h) {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--notice-ink);
+    margin: 0 0 8px;
+  }
+  .cp-x :global(.cp-not-suited ul) {
+    font-size: 13px;
+    color: var(--notice-ink);
+    line-height: 1.75;
+    margin: 0;
+    padding-left: 18px;
+  }
+  .cp-x :global(.cp-not-suited ul li + li) { margin-top: 5px; }
+
+  /* 注意ボックス（inline amber） */
+  .cp-x :global(.cp-caution-box) {
+    border-radius: var(--radius);
+    border: 1px solid var(--notice-border);
+    background: var(--notice-bg);
+    padding: 16px 18px;
+    font-size: 13px;
+    color: var(--notice-ink);
+    line-height: 1.75;
+  }
+  .cp-x :global(.cp-caution-box p + p) { margin-top: 8px; }
+
+  /* 他ツールグリッド */
+  .cp-x :global(.cp-other-grid) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .cp-x :global(.cp-other-card) {
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .cp-x :global(.cp-other-h) {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 6px;
+  }
+  .cp-x :global(.cp-other-h a) {
+    color: var(--brand-ink);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--brand-ink) 35%, transparent);
+    text-underline-offset: 2px;
+  }
+  .cp-x :global(.cp-other-card p) {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* 確認ポイント */
+  .cp-x :global(.cp-check-grid) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+  .cp-x :global(.cp-check-card) {
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .cp-x :global(.cp-check-icon-row) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .cp-x :global(.cp-check-icon) {
+    font-size: 20px;
+    line-height: 1;
+  }
+  .cp-x :global(.cp-check-title) {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0;
+  }
+  .cp-x :global(.cp-check-desc) {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* inline note */
+  .cp-x :global(.cp-note-block) {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    margin-top: 12px;
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 680px) {
+    .cp-x { padding: 32px 16px 60px; }
+    .cp-conclusion-grid,
+    .cp-x :global(.cp-2col),
+    .cp-x :global(.cp-suited-grid),
+    .cp-x :global(.cp-other-grid),
+    .cp-x :global(.cp-usecase-cols) {
+      grid-template-columns: 1fr;
+    }
+    .cp-x :global(.cp-suited-grid > .cp-not-suited) {
+      /* not-suited は full width on mobile via sm:col-span */
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cp-conclusion-card { transition: none; }
+    .cp-tag { transition: none; }
+  }
+</style>

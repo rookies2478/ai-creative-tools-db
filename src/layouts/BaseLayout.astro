@@ -91,7 +91,15 @@ const canonicalUrl = canonicalPath && Astro.site
 
           <details class="nv-mobile-details">
             <summary class="nv-menu" aria-label="メニューを開く">
-              <span></span><span></span><span></span>
+              <svg class="nv-icon-menu" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <line x1="3" y1="6" x2="19" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="3" y1="11" x2="19" y2="11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="3" y1="16" x2="19" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <svg class="nv-icon-close" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <line x1="4" y1="4" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <line x1="18" y1="4" x2="4" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
             </summary>
             <div class="nv-mobile-panel">
               <nav class="nv-mobile-nav" aria-label="モバイルメニュー">
@@ -305,9 +313,11 @@ const canonicalUrl = canonicalPath && Astro.site
   /* suppress default triangle marker */
   .nv-mobile-details > summary { list-style: none; }
   .nv-mobile-details > summary::-webkit-details-marker { display: none; }
+  .nv-menu::-webkit-details-marker { display: none; }
+  .nv-menu::marker { content: ""; }
 
   .nv-menu {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 44px;
@@ -321,33 +331,20 @@ const canonicalUrl = canonicalPath && Astro.site
     position: relative;
     z-index: 120;
     flex-shrink: 0;
-    /* suppress iOS callout / highlight */
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     user-select: none;
   }
-  .nv-menu span {
+  .nv-menu svg {
+    width: 22px;
+    height: 22px;
     display: block;
-    width: 18px;
-    height: 2px;
-    background: var(--ink);
-    border-radius: 2px;
-    margin: 5px auto 0;
-    transition: transform 0.2s, opacity 0.2s;
+    flex: 0 0 auto;
     pointer-events: none;
   }
-  .nv-menu span:first-child { margin-top: 0; }
-
-  /* X animation when open */
-  .nv-mobile-details[open] .nv-menu span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-  .nv-mobile-details[open] .nv-menu span:nth-child(2) {
-    opacity: 0;
-  }
-  .nv-mobile-details[open] .nv-menu span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
+  .nv-icon-close { display: none; }
+  .nv-mobile-details[open] .nv-icon-menu { display: none; }
+  .nv-mobile-details[open] .nv-icon-close { display: block; }
 
   /* ===== MOBILE PANEL ===== */
   .nv-mobile-panel {

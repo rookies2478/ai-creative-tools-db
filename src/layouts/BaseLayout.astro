@@ -88,33 +88,29 @@ const canonicalUrl = canonicalPath && Astro.site
 
         <div class="nv-actions">
           <a href="/tools/" class="nv-cta">ツールを探す <span class="nv-arr">→</span></a>
-          <button type="button" id="nv-menu-btn" class="nv-menu" aria-label="メニューを開く" aria-expanded="false" aria-controls="nv-mobile-menu">
-            <span class="nv-ham" aria-hidden="true">
+
+          <details class="nv-mobile-details">
+            <summary class="nv-menu" aria-label="メニューを開く">
               <span></span><span></span><span></span>
-            </span>
-          </button>
+            </summary>
+            <div class="nv-mobile-panel">
+              <nav class="nv-mobile-nav" aria-label="モバイルメニュー">
+                <a href="/tools/">ツールを探す</a>
+                <a href="/categories/video-generation/">AI動画生成</a>
+                <a href="/categories/image-generation/">AI画像生成</a>
+                <a href="/comparisons/">比較表</a>
+                <a href="/guides/commercial-use-copyright/">商用利用ガイド</a>
+                <div class="nv-mobile-divider"></div>
+                <a href="/conditions/free/">無料で試せる</a>
+                <a href="/conditions/commercial-use/">商用利用OK</a>
+                <a href="/conditions/japanese/">日本語対応</a>
+                <a href="/conditions/no-watermark/">透かしなし</a>
+              </nav>
+            </div>
+          </details>
         </div>
       </div>
     </header>
-
-    <!-- ===== MOBILE MENU ===== -->
-    <div id="nv-mobile-menu" class="nv-mobile-menu" aria-hidden="true" role="dialog" aria-label="モバイルナビゲーション">
-      <div class="nv-mobile-inner">
-        <nav class="nv-mobile-nav" aria-label="モバイルメニュー">
-          <a href="/tools/">ツールを探す</a>
-          <a href="/categories/video-generation/">AI動画生成</a>
-          <a href="/categories/image-generation/">AI画像生成</a>
-          <a href="/comparisons/">比較表</a>
-          <a href="/guides/commercial-use-copyright/">商用利用ガイド</a>
-          <div class="nv-mobile-divider"></div>
-          <a href="/conditions/free/">無料で試せる</a>
-          <a href="/conditions/commercial-use/">商用利用OK</a>
-          <a href="/conditions/japanese/">日本語対応</a>
-          <a href="/conditions/no-watermark/">透かしなし</a>
-        </nav>
-      </div>
-    </div>
-    <div id="nv-mobile-overlay" class="nv-mobile-overlay" aria-hidden="true"></div>
 
     <main>
       <slot />
@@ -185,43 +181,6 @@ const canonicalUrl = canonicalPath && Astro.site
       </div>
     </footer>
 
-  <script is:inline>
-    (function () {
-      var btn = document.getElementById('nv-menu-btn');
-      var menu = document.getElementById('nv-mobile-menu');
-      var overlay = document.getElementById('nv-mobile-overlay');
-      if (!btn || !menu || !overlay) return;
-
-      function open() {
-        btn.setAttribute('aria-expanded', 'true');
-        menu.setAttribute('aria-hidden', 'false');
-        overlay.setAttribute('aria-hidden', 'false');
-        menu.classList.add('is-open');
-        overlay.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-      }
-      function close() {
-        btn.setAttribute('aria-expanded', 'false');
-        menu.setAttribute('aria-hidden', 'true');
-        overlay.setAttribute('aria-hidden', 'true');
-        menu.classList.remove('is-open');
-        overlay.style.display = '';
-        document.body.style.overflow = '';
-      }
-      function toggle() {
-        if (btn.getAttribute('aria-expanded') === 'true') { close(); } else { open(); }
-      }
-
-      btn.addEventListener('click', toggle);
-      overlay.addEventListener('click', close);
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
-
-      // メニュー内リンクをタップしたら閉じる
-      menu.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', close);
-      });
-    })();
-  </script>
   </body>
 </html>
 
@@ -337,69 +296,73 @@ const canonicalUrl = canonicalPath && Astro.site
   .nv-cta:hover .nv-arr {
     transform: translateX(3px);
   }
-  .nv-menu {
+  /* ===== HAMBURGER BUTTON (summary) ===== */
+  .nv-mobile-details {
     display: none;
+    position: relative;
+    flex-shrink: 0;
+  }
+  /* suppress default triangle marker */
+  .nv-mobile-details > summary { list-style: none; }
+  .nv-mobile-details > summary::-webkit-details-marker { display: none; }
+
+  .nv-menu {
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 9px;
     border: 1px solid var(--line-strong);
     background: var(--surface);
     color: var(--ink);
     cursor: pointer;
-    padding: 0;
+    touch-action: manipulation;
     position: relative;
     z-index: 120;
     flex-shrink: 0;
+    /* suppress iOS callout / highlight */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
   }
-  .nv-ham {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 18px;
-    pointer-events: none;
-  }
-  .nv-ham span {
+  .nv-menu span {
     display: block;
-    width: 100%;
+    width: 18px;
     height: 2px;
     background: var(--ink);
     border-radius: 2px;
+    margin: 5px auto 0;
     transition: transform 0.2s, opacity 0.2s;
+    pointer-events: none;
   }
-  .nv-menu[aria-expanded="true"] .nv-ham span:nth-child(1) {
+  .nv-menu span:first-child { margin-top: 0; }
+
+  /* X animation when open */
+  .nv-mobile-details[open] .nv-menu span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
   }
-  .nv-menu[aria-expanded="true"] .nv-ham span:nth-child(2) {
+  .nv-mobile-details[open] .nv-menu span:nth-child(2) {
     opacity: 0;
   }
-  .nv-menu[aria-expanded="true"] .nv-ham span:nth-child(3) {
+  .nv-mobile-details[open] .nv-menu span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
   }
 
-  /* Mobile menu panel */
-  .nv-mobile-menu {
-    display: none;
+  /* ===== MOBILE PANEL ===== */
+  .nv-mobile-panel {
     position: fixed;
     top: 68px;
-    left: 0;
-    right: 0;
+    left: 16px;
+    right: 16px;
+    max-width: calc(100vw - 32px);
     z-index: 110;
     background: var(--surface);
-    border-bottom: 1px solid var(--line);
-    box-shadow: 0 8px 32px -8px rgba(20,22,28,.18);
-    transform: translateY(-8px);
-    opacity: 0;
-    transition: transform 0.2s var(--ease), opacity 0.2s var(--ease);
-  }
-  .nv-mobile-menu.is-open {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  .nv-mobile-inner {
-    padding: 16px 18px 24px;
-    max-height: calc(100svh - 68px - 20px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 32px -8px rgba(20,22,28,.22);
+    padding: 12px 14px 20px;
+    max-height: calc(100svh - 90px);
     overflow-y: auto;
   }
   .nv-mobile-nav {
@@ -417,6 +380,7 @@ const canonicalUrl = canonicalPath && Astro.site
     padding: 12px 14px;
     border-radius: 10px;
     transition: background 0.15s, color 0.15s;
+    -webkit-tap-highlight-color: transparent;
   }
   .nv-mobile-nav a:hover,
   .nv-mobile-nav a:focus {
@@ -428,21 +392,12 @@ const canonicalUrl = canonicalPath && Astro.site
     background: var(--line);
     margin: 10px 0;
   }
-  .nv-mobile-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    background: rgba(22,24,29,.35);
-  }
 
   @media (max-width: 720px) {
     .nv-nav { display: none; }
     .nv-cta { display: none; }
-    .nv-menu { display: inline-flex; }
+    .nv-mobile-details { display: block; }
     .nv-inner { padding: 0 18px; gap: 12px; }
-    .nv-mobile-menu { display: block; }
-    .nv-mobile-overlay { display: block; }
   }
 
   /* ===== FOOTER ===== */

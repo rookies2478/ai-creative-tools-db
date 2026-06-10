@@ -1,14 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import NoticeBox from '../../components/NoticeBox.astro';
-import ToolSummaryTable from '../../components/ToolSummaryTable.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
 import ToolFAQ from '../../components/ToolFAQ.astro';
-import ToolSummaryCards from '../../components/ToolSummaryCards.astro';
-import GeneratedSampleImage from '../../components/GeneratedSampleImage.astro';
 import FreshnessLabel from '../../components/FreshnessLabel.astro';
 import { generatedImages } from '../../data/generatedImages';
+import '../../styles/tool-detail.css';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -24,15 +21,15 @@ const { Content } = await entry.render();
 
 const sampleImage = generatedImages.find(img => img.pageSlug === entry.slug) ?? null;
 
-const leadText = `${data.name}の料金・商用利用・日本語対応・透かしの有無など、実務利用前に確認すべきポイントをまとめています。`;
-
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : 'https://aicreative-db.com';
 const toolPageUrl = `${siteUrl}/tools/${entry.slug}/`;
 
-// BreadcrumbList: category に応じて親カテゴリを切り替える
 const isVideo = data.category === 'video' || data.category === 'both';
-const categoryUrl = isVideo ? `${siteUrl}/categories/video-generation/` : `${siteUrl}/tools/`;
-const categoryName = isVideo ? 'AI動画生成ツール一覧' : 'AI画像生成ツール一覧';
+const isImage = data.category === 'image' || data.category === 'both';
+const categoryUrl = isVideo ? `${siteUrl}/categories/video-generation/` : `${siteUrl}/categories/image-generation/`;
+const categoryName = data.category === 'both'
+  ? 'AI画像・動画生成ツール一覧'
+  : isVideo ? 'AI動画生成ツール一覧' : 'AI画像生成ツール一覧';
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -44,59 +41,102 @@ const breadcrumbJsonLd = {
   ],
 };
 
-// SoftwareApplication: 値がある項目のみ含める
 const softwareAppJsonLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   name: data.name,
   operatingSystem: 'Web',
+  applicationCategory: isVideo ? 'MultimediaApplication' : 'DesignApplication',
 };
 if (data.shortDescription) softwareAppJsonLd.description = data.shortDescription;
 if (data.officialUrl) softwareAppJsonLd.url = data.officialUrl;
-if (isVideo) {
-  softwareAppJsonLd.applicationCategory = 'MultimediaApplication';
-} else {
-  softwareAppJsonLd.applicationCategory = 'DesignApplication';
-}
 
 const jsonLd = JSON.stringify([breadcrumbJsonLd, softwareAppJsonLd]);
 
-function commercialUseDesc(val: string): string {
-  if (val === 'ok')        return '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。';
-  if (val === 'paid-only') return '有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。';
-  if (val === 'limited')   return '用途やプランによって制限がある可能性があります。公式規約をご確認ください。';
-  if (val === 'no')        return '商用利用はできない、または推奨されない可能性があります。最新の公式情報をご確認ください。';
-  return '公式情報の確認が必要です。利用前に公式サイトをご確認ください。';
+/* ---- badge helpers ---- */
+type CommercialUse = 'ok' | 'paid-only' | 'limited' | 'no' | 'unknown';
+type FreePlan = boolean | 'limited' | 'unknown';
+type FourState = 'yes' | 'no' | 'limited' | 'unknown';
+type TriState = boolean | 'partial' | 'unknown';
+
+function cuInfo(val: CommercialUse): { badge: string; cls: string; dot: string; desc: string } {
+  if (val === 'ok')        return { badge: '案内あり', cls: 'ok',   dot: 'ok',   desc: '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。' };
+  if (val === 'paid-only') return { badge: '有料向け', cls: 'warn', dot: 'warn', desc: '有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。' };
+  if (val === 'limited')   return { badge: '条件あり', cls: 'warn', dot: 'warn', desc: '用途やプランによって制限がある可能性があります。公式規約をご確認ください。' };
+  if (val === 'no')        return { badge: '非推奨',   cls: 'na',   dot: 'na',   desc: '商用利用はできない、または推奨されない可能性があります。最新の公式情報をご確認ください。' };
+  return                          { badge: '要確認',   cls: 'warn', dot: 'warn', desc: '公式情報の確認が必要です。利用前に公式サイトをご確認ください。' };
 }
 
-function commercialUseLabel(val: string): string {
-  if (val === 'ok')        return '商用利用：公式情報で可能';
-  if (val === 'paid-only') return '商用利用：有料プラン向け';
-  if (val === 'limited')   return '商用利用：条件あり';
-  if (val === 'no')        return '商用利用：不可または非推奨';
-  return '商用利用：要確認';
+function fpInfo(val: FreePlan): { text: string; cls: string } {
+  if (val === true)      return { text: '無料枠あり', cls: 'ok' };
+  if (val === false)     return { text: '無料枠なし', cls: 'na' };
+  if (val === 'limited') return { text: '限定的',     cls: 'warn' };
+  return                        { text: '要確認',      cls: 'warn' };
 }
 
-function commercialUseBadgeCls(val: string): string {
-  if (val === 'ok')        return 'bg-emerald-100 text-emerald-800';
-  if (val === 'paid-only') return 'bg-sky-100 text-sky-800';
-  if (val === 'limited')   return 'bg-amber-100 text-amber-800';
-  if (val === 'no')        return 'bg-red-100 text-red-800';
-  return 'bg-slate-100 text-slate-600';
+function wmInfo(val: FourState): { text: string; cls: string } {
+  if (val === 'no')      return { text: '透かしなし', cls: 'ok' };
+  if (val === 'yes')     return { text: '透かしあり', cls: 'na' };
+  if (val === 'limited') return { text: 'プランによる', cls: 'warn' };
+  return                        { text: '要確認',       cls: 'warn' };
 }
 
-function sourceTypeLabel(type: string) {
-  const labels: Record<string, string> = {
-    official: '公式サイト',
-    pricing: '料金',
-    terms: '利用規約',
-    help: 'ヘルプ',
-    policy: 'ポリシー',
-    commercial: '商用利用',
-    docs: 'ドキュメント',
+function triInfo(val: TriState): { text: string; cls: string } {
+  if (val === true)      return { text: '○', cls: 'ok' };
+  if (val === false)     return { text: '×', cls: 'na' };
+  if (val === 'partial') return { text: '△', cls: 'warn' };
+  return                        { text: '要確認', cls: 'warn' };
+}
+
+function sourceTypeLabel(type: string): string {
+  const m: Record<string, string> = {
+    official: '公式', pricing: '料金', terms: '規約',
+    help: 'ヘルプ', policy: 'ポリシー', commercial: '商用', docs: 'ドキュメント',
   };
-  return labels[type] ?? type;
+  return m[type] ?? type;
 }
+
+function catBadgeCls(cat: string): string {
+  if (cat === 'image') return 'image';
+  if (cat === 'video') return 'video';
+  return 'both';
+}
+
+function catLabel(cat: string): string {
+  if (cat === 'image') return 'AI画像生成';
+  if (cat === 'video') return 'AI動画生成';
+  return 'AI画像・動画生成';
+}
+
+const cu  = cuInfo(data.commercialUse);
+const fp  = fpInfo(data.freePlan);
+const wm  = wmInfo(data.watermark);
+const jui = triInfo(data.japaneseUi);
+const jpr = triInfo(data.japanesePrompt);
+
+const platformLabels: Record<string, string> = {
+  web: 'Web', discord: 'Discord', ios: 'iOS', android: 'Android',
+  desktop: 'デスクトップ', api: 'API', local: 'ローカル',
+};
+
+const featureLabels: Record<string, string> = {
+  textToImage: 'テキスト→画像', imageToImage: '画像→画像',
+  inpainting: '部分修正', outpainting: '画像拡張',
+  upscale: '高解像度化', backgroundRemoval: '背景削除',
+  stylePresets: 'スタイル選択', promptAssist: 'プロンプト補助',
+  textToVideo: 'テキスト→動画', imageToVideo: '画像→動画',
+  videoExtend: '動画延長', apiAvailable: 'API対応',
+};
+
+const featureOrder = [
+  'textToImage','imageToImage','inpainting','outpainting',
+  'upscale','backgroundRemoval','stylePresets','promptAssist',
+  'textToVideo','imageToVideo','videoExtend','apiAvailable',
+] as const;
+type FeatureKey = typeof featureOrder[number];
+const trueFeatures: string[] = data.features
+  ? featureOrder.filter(k => data.features![k as FeatureKey] === true).map(k => featureLabels[k]).slice(0, 8)
+  : [];
 ---
 
 <BaseLayout
@@ -106,399 +146,574 @@ function sourceTypeLabel(type: string) {
   ogType="article"
   jsonLd={jsonLd}
 >
-  <article class="mx-auto max-w-3xl px-6 py-12">
 
-    <!-- パンくず -->
-    <nav class="mb-6 text-sm text-slate-500">
-      <a href="/" class="hover:underline">トップ</a>
-      <span class="mx-1">/</span>
-      <a href="/tools/" class="hover:underline">ツール一覧</a>
-      <span class="mx-1">/</span>
-      <span>{data.name}</span>
-    </nav>
+  <!-- ===== HERO ===== -->
+  <section class="td-head">
+    <div class="wrap">
 
-    <!-- H1 -->
-    <h1 class="mb-2 text-3xl font-bold text-slate-900">{data.name}の商用利用・料金・無料枠まとめ</h1>
+      <!-- パンくず -->
+      <nav class="td-breadcrumb" aria-label="パンくずリスト">
+        <a href="/">トップ</a>
+        <span class="sep">/</span>
+        <a href="/tools/">ツール一覧</a>
+        <span class="sep">/</span>
+        <span class="cur">{data.name}</span>
+      </nav>
 
-    <!-- カテゴリ + 鮮度ラベル -->
-    <div class="mb-4 flex flex-wrap items-center gap-3">
-      <span class="text-xs font-medium text-blue-600">
-        {data.category === 'image' ? '画像生成' : data.category === 'video' ? '動画生成' : '画像・動画生成'}
-      </span>
-      <FreshnessLabel verifiedAt={data.verifiedAt} lastReviewed={data.lastReviewed} variant="detail" />
-      {data.officialSourceUrl && (
-        <a
-          href={data.officialSourceUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:underline"
-        >
-          公式情報 ↗
-        </a>
-      )}
-    </div>
+      <!-- eyebrow row -->
+      <div class="td-eyebrow-row">
+        <span class="eyebrow">TOOL DETAIL</span>
+        <span class={`td-cat-badge ${catBadgeCls(data.category)}`}>{catLabel(data.category)}</span>
+        <FreshnessLabel verifiedAt={data.verifiedAt} lastReviewed={data.lastReviewed} variant="detail" />
+      </div>
 
-    <!-- リード文 -->
-    <p class="mb-6 text-sm leading-relaxed text-slate-600">{leadText}</p>
+      <!-- H1 -->
+      <h1>{data.name}<span class="hl">の商用利用・料金・無料枠まとめ</span></h1>
 
-    <!-- 結論サマリーカード -->
-    <ToolSummaryCards data={data} />
+      <!-- lead -->
+      <p class="td-lead">
+        {data.shortDescription
+          ? data.shortDescription
+          : `${data.name}の料金・商用利用・日本語対応・透かしの有無など、実務利用前に確認すべきポイントをまとめています。`}
+      </p>
 
-    <!-- NoticeBox -->
-    <div class="mb-6">
-      <NoticeBox />
-    </div>
-
-    <!-- 信頼性表示ボックス -->
-    <div class="mb-6 rounded-lg border border-slate-200 bg-slate-50 px-5 py-4 text-xs text-slate-600">
-      <dl class="flex flex-wrap gap-x-6 gap-y-1.5">
-        <div class="flex items-baseline gap-1.5">
-          <dt class="font-semibold text-slate-700 shrink-0">最終確認日：</dt>
-          <dd>{data.lastReviewed ?? '—'}</dd>
+      <!-- stat chips -->
+      <div class="td-hero-stats">
+        <div class="td-hstat">
+          <span class="ck">商用利用</span>
+          <span class={`cv ${cu.dot}`}>{cu.badge}</span>
         </div>
-        {data.nextReviewDue && (
-          <div class="flex items-baseline gap-1.5">
-            <dt class="font-semibold text-slate-700 shrink-0">次回確認予定：</dt>
-            <dd>{data.nextReviewDue}</dd>
-          </div>
+        <div class="td-hstat">
+          <span class="ck">無料枠</span>
+          <span class={`cv ${fp.cls}`}>{fp.text}</span>
+        </div>
+        <div class="td-hstat">
+          <span class="ck">料金目安</span>
+          <span class="cv">{data.lowestPaidPlan ?? '要確認'}</span>
+        </div>
+        <div class="td-hstat">
+          <span class="ck">透かし</span>
+          <span class={`cv ${wm.cls}`}>{wm.text}</span>
+        </div>
+        <div class="td-hstat">
+          <span class="ck">日本語UI</span>
+          <span class={`cv ${jui.cls}`}>{jui.text}</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="td-hero-cta">
+        {data.officialUrl && (
+          <a
+            href={data.officialUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+          >
+            公式サイトで確認する <span class="arr">↗</span>
+          </a>
         )}
-      </dl>
+        {data.officialSourceUrl && data.officialSourceUrl !== data.officialUrl && (
+          <a
+            href={data.officialSourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-ghost"
+          >
+            公式情報ページ <span class="arr">↗</span>
+          </a>
+        )}
+      </div>
 
-      {/* sourceRefs優先、なければsources */}
-      {data.sourceRefs && data.sourceRefs.length > 0 ? (
-        <div class="mt-2.5">
-          <p class="mb-1 font-semibold text-slate-700">参照元：</p>
-          <ul class="flex flex-wrap gap-x-3 gap-y-1">
-            {data.sourceRefs.map((ref) => (
-              <li>
-                <a
-                  href={ref.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1 text-blue-600 hover:underline"
-                >
-                  <span class="rounded bg-slate-200 px-1.5 py-0.5 text-[10px] text-slate-500">{sourceTypeLabel(ref.type)}</span>
-                  {ref.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : data.sources && data.sources.length > 0 ? (
-        <div class="mt-2.5">
-          <p class="mb-1 font-semibold text-slate-700">参照元：</p>
-          <ul class="flex flex-wrap gap-x-3 gap-y-1">
-            {data.sources.map((src) => (
-              <li>
-                <a
-                  href={src.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-blue-600 hover:underline"
-                >
-                  {src.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+    </div>
+  </section>
 
-      <p class="mt-3 leading-relaxed text-slate-500">
-        本ページの情報は、各ツールの公式サイト・料金ページ・利用規約等をもとに整理したものです。掲載内容は確認時点の情報であり、最新情報や具体的な利用可否は必ず各公式サイトでご確認ください。本記事は法的助言ではありません。
+  <!-- ===== BODY ===== -->
+  <div class="td-body">
+
+    <!-- 注意バナー -->
+    <div class="td-notice">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+      </svg>
+      <p>
+        <b>ご注意：</b>料金・無料枠・商用利用条件・透かしの有無は変更される場合があります。最新情報は必ず公式サイトをご確認ください。本記事は法的助言ではありません。
       </p>
     </div>
 
-    <!-- このツールの要点 -->
-    <section class="mb-8 rounded-xl border border-blue-100 bg-blue-50 px-6 py-5">
-      <h2 class="mb-4 text-base font-bold text-[#002B61]">このツールの要点</h2>
+    <!-- ===== 基本情報グリッド ===== -->
+    <section class="td-section" aria-label="基本情報">
+      <h2 class="td-section-h">基本情報</h2>
+      <div class="td-info-grid">
 
-      <dl class="space-y-4 text-sm">
-        <!-- 概要 -->
-        <div>
-          <dt class="mb-0.5 font-semibold text-slate-700">概要</dt>
-          <dd class="leading-relaxed text-slate-600">{leadText}</dd>
+        <!-- 商用利用（wide） -->
+        <div class="td-info-card wide">
+          <p class="ic-label">商用利用</p>
+          <div class="ic-val">
+            <span class={`td-badge ${cu.cls}`}>{cu.badge}</span>
+          </div>
+          <p class="ic-note">{cu.desc}</p>
+          {data.commercialUseNote && <p class="ic-note">{data.commercialUseNote}</p>}
         </div>
 
-        <!-- 向いている用途 -->
-        {data.bestFor && data.bestFor.length > 0 && (
-          <div>
-            <dt class="mb-1.5 font-semibold text-slate-700">向いている用途</dt>
-            <dd class="flex flex-wrap gap-2">
-              {data.bestFor.map((item: string) => (
-                <span class="inline-flex rounded-full border border-blue-200 bg-white px-3 py-0.5 text-xs font-medium text-blue-700">
-                  {item}
+        <!-- 無料枠 -->
+        <div class="td-info-card">
+          <p class="ic-label">無料枠</p>
+          <div class="ic-val">
+            <span class={`td-badge ${fp.cls}`}>{fp.text}</span>
+          </div>
+          {data.freePlanNote && <p class="ic-note">{data.freePlanNote}</p>}
+        </div>
+
+        <!-- 料金 -->
+        <div class="td-info-card">
+          <p class="ic-label">最安料金目安</p>
+          <p class="ic-val">{data.lowestPaidPlan ?? '要確認'}</p>
+          {data.paidPlanNote && <p class="ic-note">{data.paidPlanNote}</p>}
+        </div>
+
+        <!-- 透かし -->
+        <div class="td-info-card">
+          <p class="ic-label">透かし</p>
+          <div class="ic-val">
+            <span class={`td-badge ${wm.cls}`}>{wm.text}</span>
+          </div>
+          {data.watermarkCondition && <p class="ic-note">{data.watermarkCondition}</p>}
+        </div>
+
+        <!-- 日本語対応 -->
+        <div class="td-info-card">
+          <p class="ic-label">日本語対応</p>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft);">
+              <span style="color:var(--muted);font-size:12px;">UI：</span>
+              <span class={`td-badge ${jui.cls}`}>{jui.text}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft);">
+              <span style="color:var(--muted);font-size:12px;">プロンプト：</span>
+              <span class={`td-badge ${jpr.cls}`}>{jpr.text}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 対応プラットフォーム -->
+        {data.platforms && data.platforms.length > 0 && (
+          <div class="td-info-card">
+            <p class="ic-label">対応環境</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;">
+              {data.platforms.map((p: string) => (
+                <span style="font-family:var(--f-mono);font-size:12px;background:var(--surface-2);border:1px solid var(--line);border-radius:7px;padding:3px 9px;color:var(--muted);">
+                  {platformLabels[p] ?? p}
                 </span>
               ))}
-            </dd>
+            </div>
           </div>
         )}
 
-        <!-- 強み -->
-        {data.strengths && data.strengths.length > 0 && (
-          <div>
-            <dt class="mb-1 font-semibold text-slate-700">強み</dt>
-            <dd>
-              <ul class="space-y-1">
-                {data.strengths.slice(0, 3).map((item: string) => (
-                  <li class="flex items-start gap-1.5 text-green-900">
-                    <span class="mt-0.5 shrink-0 text-green-600">○</span>{item}
-                  </li>
-                ))}
-              </ul>
-            </dd>
+        <!-- 主な機能 -->
+        {trueFeatures.length > 0 && (
+          <div class="td-info-card wide">
+            <p class="ic-label">主な機能</p>
+            <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;">
+              {trueFeatures.map((label: string) => (
+                <span class="td-badge info">{label}</span>
+              ))}
+              {data.features?.maxResolution && (
+                <span class="td-badge info">最大解像度: {data.features.maxResolution}</span>
+              )}
+              {data.features?.maxVideoDuration && (
+                <span class="td-badge info">最大動画尺: {data.features.maxVideoDuration}</span>
+              )}
+            </div>
           </div>
         )}
 
-        <!-- 注意点 -->
-        {data.weaknesses && data.weaknesses.length > 0 && (
-          <div>
-            <dt class="mb-1 font-semibold text-slate-700">注意点</dt>
-            <dd>
-              <ul class="space-y-1">
-                {data.weaknesses.slice(0, 3).map((item: string) => (
-                  <li class="flex items-start gap-1.5 text-red-900">
-                    <span class="mt-0.5 shrink-0 text-red-500">×</span>{item}
-                  </li>
-                ))}
-              </ul>
-            </dd>
-          </div>
-        )}
+      </div>
+    </section>
 
-        <!-- 商用利用 -->
-        <div>
-          <dt class="mb-1 font-semibold text-slate-700">商用利用</dt>
-          <dd>
-            <span class={`inline-block rounded px-2 py-0.5 text-xs font-medium ${commercialUseBadgeCls(data.commercialUse)}`}>
-              {commercialUseLabel(data.commercialUse)}
-            </span>
-            <p class="mt-1 text-sm leading-relaxed text-slate-600">{commercialUseDesc(data.commercialUse)}</p>
-            {data.commercialUseNote && (
-              <p class="mt-1 text-sm leading-relaxed text-slate-500">{data.commercialUseNote}</p>
-            )}
-          </dd>
+    <!-- ===== 向いている用途 ===== -->
+    {data.bestFor && data.bestFor.length > 0 && (
+      <section class="td-section" aria-label="向いている用途">
+        <h2 class="td-section-h">向いている用途</h2>
+        <div class="td-bestfor-tags">
+          {data.bestFor.map((item: string) => (
+            <span class="td-bestfor-tag">{item}</span>
+          ))}
         </div>
-      </dl>
-
-      <!-- 公式サイト確認導線 -->
-      <div class="mt-5 border-t border-blue-100 pt-4">
-        <p class="mb-2 text-xs text-slate-600">最新の料金・商用利用条件は公式サイトで確認してください。</p>
-        <a
-          href={data.officialUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 rounded-md bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 transition-colors"
-        >
-          公式サイトで確認する
-          <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ToolSummaryTable -->
-    <ToolSummaryTable tool={entry} />
-
-    <!-- 強み・弱み -->
-    <section class="mb-8 grid gap-4 sm:grid-cols-2">
-      <div class="rounded-lg border border-green-100 bg-green-50 p-4">
-        <h2 class="mb-2 text-sm font-semibold text-green-800">強み</h2>
-        <ul class="space-y-1">
-          {data.strengths.map((item) => (
-            <li class="flex items-start gap-1.5 text-sm text-green-900">
-              <span>○</span>{item}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div class="rounded-lg border border-red-100 bg-red-50 p-4">
-        <h2 class="mb-2 text-sm font-semibold text-red-800">弱み</h2>
-        <ul class="space-y-1">
-          {data.weaknesses.map((item) => (
-            <li class="flex items-start gap-1.5 text-sm text-red-900">
-              <span>×</span>{item}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-
-    <!-- 制限・注意点 -->
-    {data.limitations && data.limitations.length > 0 && (
-      <section class="mb-8 rounded-lg border border-orange-100 bg-orange-50 p-4">
-        <h2 class="mb-2 text-sm font-semibold text-orange-800">制限・注意点</h2>
-        <ul class="space-y-1">
-          {data.limitations.map((item) => (
-            <li class="flex items-start gap-1.5 text-sm text-orange-900">
-              <span class="shrink-0 font-bold">!</span>{item}
-            </li>
-          ))}
-        </ul>
       </section>
     )}
 
-    <!-- Markdown本文 -->
-    <div class="prose prose-slate mb-10 max-w-none text-sm leading-relaxed">
-      <Content />
-    </div>
+    <!-- ===== 強み・注意点 ===== -->
+    {(data.strengths?.length > 0 || data.weaknesses?.length > 0 || data.limitations?.length > 0) && (
+      <section class="td-section" aria-label="強み・注意点">
+        <h2 class="td-section-h">強み・注意点</h2>
+        <div class="td-points-grid">
+          {data.strengths && data.strengths.length > 0 && (
+            <div class="td-point-card ok">
+              <div class="pc-head">
+                <span class="bdg">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" width="14" height="14" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                強み
+              </div>
+              <ul>
+                {data.strengths.map((item: string) => (
+                  <li><span class="m">○</span><span>{item}</span></li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {data.weaknesses && data.weaknesses.length > 0 && (
+            <div class="td-point-card na">
+              <div class="pc-head">
+                <span class="bdg">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" width="14" height="14" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </span>
+                弱み
+              </div>
+              <ul>
+                {data.weaknesses.map((item: string) => (
+                  <li><span class="m">×</span><span>{item}</span></li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {data.limitations && data.limitations.length > 0 && (
+            <div class="td-point-card warn" style="grid-column: 1 / -1;">
+              <div class="pc-head">
+                <span class="bdg">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" width="14" height="14" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                </span>
+                制限・注意点
+              </div>
+              <ul>
+                {data.limitations.map((item: string) => (
+                  <li><span class="m">!</span><span>{item}</span></li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
 
-    <!-- AI生成サンプル画像（対象ツールに画像がある場合のみ表示） -->
-    {sampleImage && (
-      <section class="mb-8">
-        <h2 class="mb-3 text-base font-bold text-[#002B61]">AI生成サンプル（参考）</h2>
-        <p class="mb-3 text-xs text-slate-500">
-          以下のサンプル画像は、このページのツールとは<strong>別のモデル</strong>（{sampleImage.model}）を使用して生成したものです。
-          ページ掲載内容の説明補足を目的としており、このページで紹介しているツールの出力結果ではありません。
-          生成結果はモデル・設定・タイミングによって異なります。商用利用・著作権条件は各モデルの公式規約をご確認ください。
+    <!-- ===== 比較ポイント早見表 ===== -->
+    <section class="td-section" aria-label="比較ポイント早見表">
+      <h2 class="td-section-h">比較ポイント早見表</h2>
+      <div class="td-table-wrap">
+        <table>
+          <tbody>
+            <tr>
+              <th>ツール名</th>
+              <td style="font-weight:700;color:var(--ink);">{data.name}</td>
+            </tr>
+            <tr>
+              <th>カテゴリ</th>
+              <td>{catLabel(data.category)}</td>
+            </tr>
+            <tr>
+              <th>無料枠</th>
+              <td>
+                <span class={`td-badge ${fp.cls}`}>{fp.text}</span>
+                {data.freePlanNote && <p style="margin-top:6px;font-size:12px;color:var(--muted);">{data.freePlanNote}</p>}
+              </td>
+            </tr>
+            <tr>
+              <th>最安料金</th>
+              <td>
+                {data.lowestPaidPlan ?? '要確認'}
+                {data.paidPlanNote && <p style="margin-top:6px;font-size:12px;color:var(--muted);">{data.paidPlanNote}</p>}
+              </td>
+            </tr>
+            <tr>
+              <th>商用利用</th>
+              <td>
+                <span class={`td-badge ${cu.cls}`}>{cu.badge}</span>
+                <p style="margin-top:6px;font-size:12px;color:var(--muted);">{cu.desc}</p>
+                {data.commercialUseNote && <p style="margin-top:4px;font-size:12px;color:var(--muted);">{data.commercialUseNote}</p>}
+              </td>
+            </tr>
+            <tr>
+              <th>透かし</th>
+              <td>
+                <span class={`td-badge ${wm.cls}`}>{wm.text}</span>
+                {data.watermarkCondition && <p style="margin-top:6px;font-size:12px;color:var(--muted);">{data.watermarkCondition}</p>}
+              </td>
+            </tr>
+            <tr>
+              <th>日本語UI</th>
+              <td><span class={`td-badge ${jui.cls}`}>{jui.text}</span></td>
+            </tr>
+            <tr>
+              <th>日本語プロンプト</th>
+              <td><span class={`td-badge ${jpr.cls}`}>{jpr.text}</span></td>
+            </tr>
+            {data.platforms && data.platforms.length > 0 && (
+              <tr>
+                <th>対応環境</th>
+                <td>
+                  <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                    {data.platforms.map((p: string) => (
+                      <span style="font-family:var(--f-mono);font-size:12px;background:var(--brand-tint);color:var(--brand-ink);border-radius:7px;padding:3px 9px;">{platformLabels[p] ?? p}</span>
+                    ))}
+                  </div>
+                </td>
+              </tr>
+            )}
+            <tr>
+              <th>情報確認日</th>
+              <td style="font-family:var(--f-mono);font-size:12.5px;">{data.lastReviewed ?? '—'}</td>
+            </tr>
+            {data.nextReviewDue && (
+              <tr>
+                <th>次回確認予定</th>
+                <td style="font-family:var(--f-mono);font-size:12.5px;">{data.nextReviewDue}</td>
+              </tr>
+            )}
+            <tr>
+              <th>公式サイト</th>
+              <td>
+                <a href={data.officialUrl} target="_blank" rel="noopener noreferrer"
+                  style="color:var(--brand-ink);font-weight:600;font-size:13px;">
+                  公式サイトで確認 ↗
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="padding:10px 18px 12px;font-size:11px;color:var(--faint);line-height:1.7;">
+          ※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。
         </p>
-        <GeneratedSampleImage image={sampleImage} />
+      </div>
+    </section>
+
+    <!-- ===== Markdown本文 ===== -->
+    <section class="td-section" aria-label="詳細説明">
+      <div class="td-prose">
+        <Content />
+      </div>
+    </section>
+
+    <!-- ===== 公式情報・鮮度 ===== -->
+    <section class="td-section" aria-label="情報の鮮度・参照元">
+      <h2 class="td-section-h">情報の鮮度・参照元</h2>
+      <div class="td-freshness">
+        <dl class="fr-row">
+          <div style="display:flex;gap:6px;">
+            <dt>最終確認日：</dt>
+            <dd>{data.lastReviewed ?? '—'}</dd>
+          </div>
+          {data.nextReviewDue && (
+            <div style="display:flex;gap:6px;">
+              <dt>次回確認予定：</dt>
+              <dd>{data.nextReviewDue}</dd>
+            </div>
+          )}
+          {data.verifiedAt && (
+            <div style="display:flex;gap:6px;">
+              <dt>情報検証日：</dt>
+              <dd>{data.verifiedAt}</dd>
+            </div>
+          )}
+        </dl>
+
+        {/* sourceRefs優先、なければsources */}
+        {data.sourceRefs && data.sourceRefs.length > 0 ? (
+          <div class="fr-sources">
+            <p class="fr-sources-title">参照元</p>
+            <div class="fr-source-list">
+              {data.sourceRefs.map((ref: {type:string;url:string;label:string}) => (
+                <a href={ref.url} target="_blank" rel="noopener noreferrer" class="fr-source">
+                  <span class="fr-type">{sourceTypeLabel(ref.type)}</span>
+                  {ref.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : data.sources && data.sources.length > 0 ? (
+          <div class="fr-sources">
+            <p class="fr-sources-title">参照元</p>
+            <div class="fr-source-list">
+              {data.sources.map((src: {url:string;title:string}) => (
+                <a href={src.url} target="_blank" rel="noopener noreferrer" class="fr-source">
+                  {src.title}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        <p class="fr-disclaimer">
+          本ページの情報は、各ツールの公式サイト・料金ページ・利用規約等をもとに整理したものです。掲載内容は確認時点の情報であり、最新情報や具体的な利用可否は必ず各公式サイトでご確認ください。本記事は法的助言ではありません。
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== AI生成サンプル画像 ===== -->
+    {sampleImage && (
+      <section class="td-section" aria-label="AI生成サンプル">
+        <h2 class="td-section-h">
+          {sampleImage.sampleType === 'tool-output'
+            ? 'このツールで作成した実例サンプル'
+            : 'AI生成サンプル（参考）'}
+        </h2>
+        <figure class="td-sample-figure">
+          <img
+            src={sampleImage.file}
+            alt={sampleImage.alt}
+            width="800"
+            height="450"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="td-sample-cap">
+            <span class={`td-sample-scheme ${sampleImage.sampleType === 'tool-output' ? 'a' : 'b'}`}>
+              {sampleImage.sampleType === 'tool-output' ? 'A — ツール実例' : 'B — 参考ビジュアル'}
+            </span>
+            <p class="cap-title">{sampleImage.caption}</p>
+            <dl>
+              <div>
+                <dt>モデル：</dt>
+                <dd>
+                  <a href={sampleImage.modelUrl} target="_blank" rel="noopener noreferrer"
+                    style="color:var(--brand-ink);font-weight:600;">
+                    {sampleImage.model}
+                  </a>
+                </dd>
+              </div>
+              {sampleImage.sampleType !== 'tool-output' && (
+                <div>
+                  <dt>プロンプト：</dt>
+                  <dd>{sampleImage.prompt}</dd>
+                </div>
+              )}
+              <div>
+                <dt>生成日：</dt>
+                <dd>{sampleImage.generatedAt}</dd>
+              </div>
+            </dl>
+            {sampleImage.sampleType === 'tool-output' ? (
+              <p class="cap-note">
+                ※ 本画像は管理者が{sampleImage.model}で作成した参考作例サンプルです。公式出力・代表結果を示すものではありません。生成結果はプロンプト・設定・タイミングによって変わる場合があります。商用利用条件は公式情報をご確認ください。本記事は法的助言ではありません。
+              </p>
+            ) : (
+              <p class="cap-note">
+                ※ 本画像は{sampleImage.model}で生成した参考サンプルです。このページで紹介しているツールの出力結果・公式サンプルではありません。生成結果はモデル・設定・タイミングによって変わる場合があります。商用利用条件は各モデルの公式規約をご確認ください。本記事は法的助言ではありません。{sampleImage.usageNote && `　${sampleImage.usageNote}`}
+              </p>
+            )}
+          </div>
+        </figure>
       </section>
     )}
 
-    <!-- FAQ -->
+    <!-- ===== FAQ ===== -->
     <ToolFAQ faqs={data.faqs} />
 
-    <!-- 情報鮮度・免責 -->
-    <section class="mb-8 rounded-lg border border-yellow-200 bg-yellow-50 px-5 py-4 text-sm text-yellow-800">
-      {data.reviewed ? (
-        <div>
-          <p class="font-semibold">情報の確認日：</p>
-          <ul class="mt-1 space-y-0.5 text-xs">
-            {data.reviewed.pricing && <li>料金：{data.reviewed.pricing}</li>}
-            {data.reviewed.terms && <li>利用規約：{data.reviewed.terms}</li>}
-            {data.reviewed.features && <li>機能：{data.reviewed.features}</li>}
-          </ul>
-          <p class="mt-1 text-xs text-yellow-700">次回確認予定：{data.nextReviewDue}</p>
-        </div>
-      ) : (
-        <p>
-          <strong>情報の鮮度：</strong>最終確認日 {data.lastReviewed}（次回確認予定 {data.nextReviewDue}）
-        </p>
-      )}
-      <p class="mt-1">
-        料金・利用規約は予告なく変更されます。商用利用の可否は必ず公式サイトの最新規約でご確認ください。
-      </p>
-    </section>
-
-    <!-- 免責文（商用利用・著作権） -->
-    <div class="mb-4 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-600">
-      商用利用・著作権に関する内容は、公式情報をもとにした一般的な整理です。法的助言ではありません。実務利用前には必ず各ツールの公式規約・ライセンスをご確認ください。
+    <!-- ===== 免責 ===== -->
+    <div class="td-disclaimer td-section">
+      商用利用・著作権に関する内容は、公式情報をもとにした一般的な整理です。法的助言ではありません。実務利用前には必ず各ツールの公式規約・ライセンスをご確認ください。プランや用途によって条件が異なる場合があります。
     </div>
 
-    <!-- 参照元（sourceRefsがある場合は優先表示） -->
-    {data.sourceRefs && data.sourceRefs.length > 0 && (
-      <section class="mb-8">
-        <h2 class="mb-2 text-sm font-semibold text-slate-600">参照元</h2>
-        <ul class="space-y-1.5">
-          {data.sourceRefs.map((ref) => (
-            <li class="flex items-baseline gap-2 text-sm">
-              <span class="shrink-0 rounded bg-slate-100 px-1.5 py-0.5 text-xs text-slate-500">{sourceTypeLabel(ref.type)}</span>
-              <a
-                href={ref.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-blue-600 hover:underline"
-              >
-                {ref.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
+    <!-- ===== 関連ツール ===== -->
+    <section class="td-section" aria-label="関連ツール">
+      <h2 class="td-section-h">関連ツール</h2>
+      <RelatedTools currentSlug={entry.slug} category={data.category} />
+    </section>
 
-    <!-- 参照元（sourceRefsがない場合の既存sources） -->
-    {(!data.sourceRefs || data.sourceRefs.length === 0) && data.sources.length > 0 && (
-      <section class="mb-8">
-        <h2 class="mb-2 text-sm font-semibold text-slate-600">参照元</h2>
-        <ul class="space-y-1">
-          {data.sources.map((src) => (
-            <li class="text-sm">
-              <a
-                href={src.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-blue-600 hover:underline"
-              >
-                {src.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
-
-    <!-- 関連ツール -->
-    <RelatedTools currentSlug={entry.slug} category={data.category} />
-
-    <!-- 次に読む -->
-    <section class="mb-8">
-      <h2 class="mb-4 text-base font-bold text-slate-800">次に読む</h2>
-      <div class="grid gap-3 sm:grid-cols-2">
-        {(data.category === 'video' || data.category === 'both') ? (
+    <!-- ===== 次に読む ===== -->
+    <section class="td-section" aria-label="次に読む">
+      <h2 class="td-section-h">次に読む</h2>
+      <div class="td-nextread-grid">
+        {isVideo ? (
           <>
-            <a href="/categories/video-generation/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
-              <span class="text-sm font-semibold text-blue-700">AI動画生成ツール一覧を見る →</span>
-              <span class="text-xs leading-relaxed text-slate-600">主要なAI動画生成ツールを無料プラン・商用利用条件などで比較できます。</span>
+            <a href="/categories/video-generation/" class="td-nextread-card">
+              <span class="nc-title">AI動画生成ツール一覧 <span>→</span></span>
+              <span class="nc-desc">主要なAI動画生成ツールを無料プラン・商用利用条件などで比較できます。</span>
             </a>
-            <a href="/conditions/free/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
-              <span class="text-sm font-semibold text-blue-700">無料で使えるAI動画生成ツールを見る →</span>
-              <span class="text-xs leading-relaxed text-slate-600">無料枠・透かし・商用利用条件をまとめて比較できます。</span>
-            </a>
-            <a href="/comparisons/runway-vs-pika/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
-              <span class="text-sm font-semibold text-blue-700">RunwayとPikaを比較する →</span>
-              <span class="text-xs leading-relaxed text-slate-600">主要AI動画生成ツールの料金・商用利用条件を詳しく比較しています。</span>
+            <a href="/comparisons/runway-vs-pika/" class="td-nextread-card">
+              <span class="nc-title">RunwayとPikaを比較する <span>→</span></span>
+              <span class="nc-desc">主要AI動画生成ツールの料金・商用利用条件を詳しく比較しています。</span>
             </a>
           </>
         ) : (
           <>
-            <a href="/tools/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
-              <span class="text-sm font-semibold text-blue-700">AI画像生成ツール一覧を見る →</span>
-              <span class="text-xs leading-relaxed text-slate-600">主要なAI画像・動画生成ツールを一覧で確認できます。</span>
+            <a href="/categories/image-generation/" class="td-nextread-card">
+              <span class="nc-title">AI画像生成ツール一覧 <span>→</span></span>
+              <span class="nc-desc">主要なAI画像生成ツールを商用利用・無料枠などで比較できます。</span>
             </a>
-            <a href="/conditions/free/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
-              <span class="text-sm font-semibold text-blue-700">無料で使えるAI画像生成ツールを見る →</span>
-              <span class="text-xs leading-relaxed text-slate-600">無料枠のあるAI画像生成ツールを確認できます。</span>
+            <a href="/comparisons/ai-image-video-tools/" class="td-nextread-card">
+              <span class="nc-title">全ツール比較表で見る <span>→</span></span>
+              <span class="nc-desc">商用利用・無料枠・日本語対応・透かしを横並びで確認できます。</span>
             </a>
           </>
         )}
-        <a href="/comparisons/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
-          <span class="text-sm font-semibold text-blue-700">比較表でまとめて比較する →</span>
-          <span class="text-xs leading-relaxed text-slate-600">商用利用・無料枠・透かし・日本語対応を横断比較できます。</span>
+        <a href="/conditions/free/" class="td-nextread-card">
+          <span class="nc-title">無料で使えるAIツール <span>→</span></span>
+          <span class="nc-desc">無料枠・透かし・商用利用条件をまとめて比較できます。</span>
         </a>
-        <a href="/guides/commercial-use-copyright/" class="flex flex-col gap-1 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 hover:border-blue-300 hover:bg-blue-50 transition-colors">
-          <span class="text-sm font-semibold text-blue-700">商用利用・著作権ガイドを見る →</span>
-          <span class="text-xs leading-relaxed text-slate-600">商用利用や著作権まわりの確認ポイントを整理しています。</span>
+        <a href="/comparisons/" class="td-nextread-card">
+          <span class="nc-title">比較表でまとめて比較 <span>→</span></span>
+          <span class="nc-desc">商用利用・無料枠・透かし・日本語対応を横断比較できます。</span>
+        </a>
+        <a href="/guides/commercial-use-copyright/" class="td-nextread-card">
+          <span class="nc-title">商用利用・著作権ガイド <span>→</span></span>
+          <span class="nc-desc">商用利用や著作権まわりの確認ポイントを整理しています。</span>
         </a>
       </div>
     </section>
 
-    <!-- その他のカテゴリリンク -->
-    <section class="mb-8">
-      <h2 class="mb-4 text-sm font-semibold text-slate-600">カテゴリで探す</h2>
-      <ul class="flex flex-wrap gap-3 text-sm">
-        <li><a href="/tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">ツール一覧</a></li>
-        {(data.category === 'video' || data.category === 'both') && (
-          <>
-            <li><a href="/categories/video-generation/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">AI動画生成ツール一覧</a></li>
-            <li><a href="/conditions/free/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">無料で使えるAI動画生成ツール</a></li>
-          </>
-        )}
-        <li><a href="/conditions/free/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">無料で使えるツール</a></li>
-        <li><a href="/conditions/commercial-use/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">商用利用を確認しやすいツール</a></li>
-        <li><a href="/conditions/japanese/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">日本語対応ツール</a></li>
-        <li><a href="/conditions/no-watermark/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">透かしなしツール</a></li>
-        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100">商用利用・著作権ガイド</a></li>
-      </ul>
+    <!-- ===== 条件で探す ===== -->
+    <section class="td-section" aria-label="条件で探す">
+      <div class="td-finder">
+        <h2>条件別に探す</h2>
+        <p class="lead">カテゴリ・条件タグから、目的に合うAIツールを探せます。</p>
+        <div class="td-taglinks">
+          <a class="td-taglink" href="/tools/"><span class="ld"></span>ツール一覧</a>
+          <a class="td-taglink" href="/conditions/free/"><span class="ld"></span>無料で使えるAIツール</a>
+          <a class="td-taglink" href="/conditions/commercial-use/"><span class="ld"></span>商用利用を確認しやすいツール</a>
+          <a class="td-taglink" href="/conditions/japanese/"><span class="ld"></span>日本語対応ツール</a>
+          <a class="td-taglink" href="/conditions/no-watermark/"><span class="ld"></span>透かしなしツール</a>
+          {isVideo && (
+            <a class="td-taglink" href="/categories/video-generation/"><span class="ld"></span>AI動画生成ツール一覧</a>
+          )}
+          {isImage && (
+            <a class="td-taglink" href="/categories/image-generation/"><span class="ld"></span>AI画像生成ツール一覧</a>
+          )}
+          <a class="td-taglink" href="/use-cases/"><span class="ld"></span>用途別で探す</a>
+          <a class="td-taglink" href="/comparisons/"><span class="ld"></span>全ツール比較表</a>
+        </div>
+      </div>
     </section>
 
-    <!-- ナビ -->
-    <nav class="border-t border-slate-200 pt-6">
-      <div class="flex flex-wrap gap-3">
-        <a href="/tools/" class="rounded-lg border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">← ツール一覧に戻る</a>
-        <a href="/comparisons/" class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">比較表で見る</a>
-      </div>
+    <!-- ===== ナビ ===== -->
+    <nav class="td-bottom-nav" aria-label="ページナビゲーション">
+      <a href="/tools/" class="btn btn-ghost">← ツール一覧に戻る</a>
+      <a href="/comparisons/" class="btn btn-primary">比較表で見る <span class="arr">→</span></a>
     </nav>
 
-  </article>
+  </div>
+
 </BaseLayout>
+
+<script>
+(function () {
+  /* FAQ accordion */
+  document.querySelectorAll<HTMLElement>('.td-faq-item').forEach((item) => {
+    const q = item.querySelector<HTMLButtonElement>('.td-faq-q');
+    const a = item.querySelector<HTMLElement>('.td-faq-a');
+    if (!q || !a) return;
+    q.addEventListener('click', () => {
+      const open = item.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll<HTMLElement>('.td-faq-item').forEach((other) => {
+        other.setAttribute('aria-expanded', 'false');
+        const oa = other.querySelector<HTMLElement>('.td-faq-a');
+        if (oa) oa.style.maxHeight = '';
+      });
+      if (!open) {
+        item.setAttribute('aria-expanded', 'true');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+})();
+</script>

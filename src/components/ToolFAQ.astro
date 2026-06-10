@@ -30,14 +30,24 @@ const jsonLd = {
 
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-<section class="mb-8">
-  <h2 class="mb-4 text-lg font-semibold text-gray-900">よくある質問</h2>
-  <dl class="space-y-4">
+<section class="td-section" aria-label="よくある質問">
+  <h2 class="td-section-h">よくある質問</h2>
+  <div class="td-faq-list">
     {faqs.map((faq) => (
-      <div class="rounded-lg border border-slate-200 bg-white px-5 py-4">
-        <dt class="font-semibold text-sm text-slate-900">{faq.question}</dt>
-        <dd class="mt-1.5 text-sm leading-relaxed text-slate-700">{faq.answer}</dd>
+      <div class="td-faq-item" aria-expanded="false">
+        <button class="td-faq-q">
+          <span class="qm">Q</span>
+          {faq.question}
+          <span class="ind">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+          </span>
+        </button>
+        <div class="td-faq-a">
+          <div class="td-faq-a-inner">{faq.answer}</div>
+        </div>
       </div>
     ))}
-  </dl>
+  </div>
 </section>

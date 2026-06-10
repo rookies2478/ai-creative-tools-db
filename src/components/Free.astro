@@ -1,0 +1,650 @@
+---
+/**
+ * Free.astro
+ * 「無料で使えるAIクリエイティブツール」条件ページ本文
+ *  — 見出し ＋ 選び方カテゴリ ＋ 確認ポイント ＋ 用途別の選び分け
+ *    ＋ 無料枠ツール一覧（無料プラン絞り込み＋検索） ＋ 商用利用前の注意点
+ *    ＋ 関連ページ ＋ FAQ ＋ 免責事項
+ *
+ * 安全性（Tailwind / 既存ページを壊さない）:
+ *  - スタイルは Astro scoped <style>。全セレクタを .fp-x 配下に限定 → 漏れない。
+ *  - CSS変数は :root でなく .fp-x 上に定義 → 既存トークンと非衝突。
+ *  - 素のリセット（* / body / table 等の global 指定）なし → Tailwind preflight 非干渉。
+ *  - 表は SSR で描画。JS は [data-fp] 配下のみ操作（絞り込み/検索/FAQ/表示アニメ）。
+ *
+ * ヘッダー / フッター / パンくず / 条件ナビ は既存 Layout 側のものを使う想定。
+ */
+export type FreePlan = 'あり' | 'limited';        // 'あり'＝無料プランあり / 'limited'＝制限あり
+export type CatVariant = 'image' | 'video' | 'edit' | 'avatar';
+
+export interface Tool {
+  name: string;
+  slug: string;            // /tools/{slug}/ へのリンクに使用
+  initial?: string;        // バッジ頭文字（省略時は name の先頭）
+  freePlan: FreePlan;      // 無料プランの状態
+}
+export interface Category { variant: CatVariant; title: string; body: string; linkLabel: string; href: string; icon?: string; }
+export interface Point { title: string; body: string; icon?: string; } // body は HTML 文字列可
+export interface UseCase { use: string; kinds: string[]; refLabel: string; refHref: string; }
+export interface Faq { q: string; a: string; }      // a は HTML 文字列可
+export interface RelatedLink { label: string; href: string; solid?: boolean; }
+
+export interface Props {
+  headingHtml?: string;
+  lead?: string;
+  toolsBase?: string;          // 詳細リンクのベース（既定 '/tools/'）
+  stats?: { n: string; label: string }[];
+  categories?: Category[];
+  points?: Point[];
+  useCases?: UseCase[];
+  tools?: Tool[];
+  cautionTitle?: string;
+  cautionItems?: string[];
+  cautionNote?: string;        // HTML 可
+  faqs?: Faq[];
+  related?: RelatedLink[];
+  relatedSolid?: RelatedLink[];
+  disclaimer?: string;
+}
+
+/* ---- アイコン（カテゴリ／ポイント既定） ---- */
+const IC = {
+  image: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="m21 15-5-5L5 21"/></svg>',
+  video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>',
+  edit:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h10M4 17h7"/><circle cx="18" cy="15" r="3"/></svg>',
+  avatar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>',
+  credit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
+  drop:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22c4-3 7-7 7-12a7 7 0 0 0-14 0c0 5 3 9 7 12Z"/></svg>',
+  bag:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+  expand:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>',
+  grid:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
+  globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg>',
+};
+
+const DEFAULT_CATEGORIES: Category[] = [
+  { variant:'image',  title:'AI画像生成を無料で試す', body:'ブログ画像・SNS投稿・サムネイルなど静止画コンテンツ作成に向いています。無料プランでも比較的多くの枚数を生成できるツールが多く、初めての方に適しています。', linkLabel:'AI画像生成ツール一覧', href:'/categories/image-generation/' },
+  { variant:'video',  title:'AI動画生成を無料で試す', body:'SNS動画・YouTube Shorts・プロモーション動画の制作に向いています。画像生成より処理コストが高く、無料枠の上限が厳しいツールも多い傾向があります。', linkLabel:'AI動画生成ツール一覧', href:'/categories/video-generation/' },
+  { variant:'edit',   title:'AI動画編集を無料で試す', body:'既存の動画素材をAIで編集・加工したい場合に向いています。字幕生成・背景除去・カット編集などの機能を無料枠で試せるツールがあります。', linkLabel:'AI動画編集ツール一覧', href:'/categories/video-editing/' },
+  { variant:'avatar', title:'AIアバター動画を無料で試す', body:'顔出しなし動画や、AIアバターを使った解説・プレゼン動画に向いています。無料プランでは利用できるアバターや出力時間が制限されるケースが多いです。', linkLabel:'AIアバター動画ツール一覧', href:'/categories/avatar-video/' },
+];
+
+const DEFAULT_POINTS: Point[] = [
+  { title:'生成回数・クレジット', icon:IC.credit, body:'月あたりの生成回数やクレジット数に上限があるツールがほとんどです。上限に達すると追加購入や有料プランへの移行が必要になる場合があります。' },
+  { title:'透かし（ウォーターマーク）', icon:IC.drop, body:'無料プランでは生成画像・動画に透かしが付与されるツールがあります。透かしなしで使うには有料プランへの移行が必要なケースがほとんどです。<a href="/conditions/no-watermark/">透かしなしツール</a>もご参照ください。' },
+  { title:'商用利用条件', icon:IC.bag, body:'無料プランでの商用利用可否はツールによって異なります。SNS投稿や広告・ブログへの使用が商用と判断される場合があります。<a href="/conditions/commercial-use/">商用利用条件を確認</a>でご確認ください。' },
+  { title:'出力解像度・動画長', icon:IC.expand, body:'無料プランでは出力できる画像解像度や動画の最大長さが制限される場合があります。実務に必要な品質・長さが無料枠に含まれるかを事前に確認しましょう。' },
+  { title:'利用できる機能の範囲', icon:IC.grid, body:'無料プランでは一部のモデルや機能（高解像度出力・優先処理・API利用など）が有料プラン専用の場合があります。必要な機能が無料枠に含まれるか公式サイトで確認してください。' },
+  { title:'日本語対応', icon:IC.globe, body:'日本語UIやプロンプトへの対応状況はツールによって異なります。<a href="/conditions/japanese/">日本語対応ツール</a>でも対応状況を確認できます。' },
+];
+
+const DEFAULT_USECASES: UseCase[] = [
+  { use:'SNS投稿・ブログ画像', kinds:['AI画像生成'], refLabel:'AI画像生成ツール一覧', refHref:'/categories/image-generation/' },
+  { use:'YouTubeサムネイル', kinds:['AI画像生成'], refLabel:'サムネイル向けツール', refHref:'/use-cases/youtube-thumbnail/' },
+  { use:'YouTube動画', kinds:['AI動画生成','AI動画編集'], refLabel:'YouTube向けツール', refHref:'/use-cases/youtube/' },
+  { use:'YouTube Shorts', kinds:['AI動画生成','AI動画編集'], refLabel:'Shorts向けツール', refHref:'/use-cases/shorts/' },
+  { use:'顔出しなし動画', kinds:['AIアバター動画','AI動画生成'], refLabel:'顔出しなし動画向け', refHref:'/use-cases/faceless-video/' },
+];
+
+const DEFAULT_TOOLS: Tool[] = [
+  { name:'Canva AI画像生成', slug:'canva-ai-image-generator', initial:'C', freePlan:'limited' },
+  { name:'CapCut AI', slug:'capcut-ai', initial:'C', freePlan:'あり' },
+  { name:'Adobe Firefly', slug:'adobe-firefly', initial:'A', freePlan:'limited' },
+  { name:'Clipdrop', slug:'clipdrop', initial:'C', freePlan:'あり' },
+  { name:'DALL·E', slug:'dalle', initial:'D', freePlan:'limited' },
+  { name:'Fotor AI', slug:'fotor-ai', initial:'F', freePlan:'あり' },
+  { name:'Hailuo AI', slug:'hailuo-ai', initial:'H', freePlan:'limited' },
+  { name:'Gemini画像生成', slug:'gemini-image-generation', initial:'G', freePlan:'あり' },
+  { name:'Haiper', slug:'haiper', initial:'H', freePlan:'あり' },
+  { name:'Leonardo AI', slug:'leonardo-ai', initial:'L', freePlan:'limited' },
+  { name:'Kling AI', slug:'kling-ai', initial:'K', freePlan:'limited' },
+  { name:'Microsoft Designer', slug:'microsoft-designer', initial:'M', freePlan:'あり' },
+  { name:'Luma AI', slug:'luma-ai', initial:'L', freePlan:'あり' },
+  { name:'NightCafe', slug:'nightcafe', initial:'N', freePlan:'あり' },
+  { name:'Pika', slug:'pika', initial:'P', freePlan:'limited' },
+  { name:'PixVerse', slug:'pixverse', initial:'P', freePlan:'limited' },
+  { name:'Ideogram', slug:'ideogram', initial:'I', freePlan:'あり' },
+  { name:'InVideo AI', slug:'invideo-ai', initial:'I', freePlan:'あり' },
+  { name:'Runway', slug:'runway', initial:'R', freePlan:'limited' },
+  { name:'Playground AI', slug:'playground-ai', initial:'P', freePlan:'あり' },
+  { name:'SeaArt AI', slug:'seaart-ai', initial:'S', freePlan:'あり' },
+  { name:'Stable Diffusion', slug:'stable-diffusion', initial:'S', freePlan:'あり' },
+  { name:'Vidu AI', slug:'vidu-ai', initial:'V', freePlan:'limited' },
+  { name:'Tensor.Art', slug:'tensor-art', initial:'T', freePlan:'あり' },
+];
+
+const DEFAULT_CAUTION = [
+  '無料プランでの商用利用が許可されているか',
+  '生成コンテンツの著作権がどのように扱われるか（ツールによって異なります）',
+  '透かしが入る場合、商用利用に支障がないか',
+  '学習データや生成物に関する規約上の制限がないか',
+  '肖像権・商標権など第三者の権利を侵害していないか',
+];
+
+const DEFAULT_FAQS: Faq[] = [
+  { q:'無料プランで商用利用できますか？', a:'ツールによって異なります。無料プランでも商用利用が案内されているツールがある一方、無料プランでは商用利用が制限され有料プランへの移行が必要なツールもあります。また、無料プランでは透かしが入る場合があり、成果物の実務利用が難しい場面もあります。商用利用前は必ず最新の公式規約をご確認ください。本記事は法的助言ではありません。' },
+  { q:'無料プランで出力できる画像・動画の数に制限はありますか？', a:'ほとんどのツールでは無料プランに出力回数・クレジット数・生成時間などの上限が設けられています。上限はツールやプランにより異なり、一定期間ごとにリセットされる場合や、使い切ったら追加課金が必要な場合があります。最新の無料枠条件は各公式サイトでご確認ください。' },
+  { q:'透かしが入るツールはどう見分けますか？', a:'各ツールの<a href="/tools/">詳細ページ</a>や公式サイトの料金ページに透かし条件が記載されている場合があります。透かしなしで利用できるツールは<a href="/conditions/no-watermark/">透かしなしツール</a>でまとめています。ただし条件はプランや時期によって変わる可能性があるため、最新情報は公式サイトでご確認ください。' },
+  { q:'AI動画生成とAI画像生成、どちらを無料で試すべきですか？', a:'用途によって異なります。SNS投稿やサムネイル作成にはAI画像生成ツールが向いており、無料枠でも多くの画像を生成できるツールがあります。YouTube ShortsやSNS動画を作りたい場合はAI動画生成ツールを試すとよいでしょう。ただし動画生成は画像生成より処理コストが高く、無料枠の上限が厳しいケースが多い傾向があります。' },
+  { q:'無料プランで顔出しなし動画は作れますか？', a:'AIアバターやテキスト読み上げ機能を持つツールでは、無料プランで顔出しなし動画を試せる場合があります。ただし無料プランでは出力時間・解像度・機能に制限があることが多く、商用利用条件も有料プランとは異なる場合があります。各ツールの公式情報をご確認ください。' },
+];
+
+const DEFAULT_RELATED: RelatedLink[] = [
+  { label:'AI画像生成ツール一覧', href:'/categories/image-generation/' },
+  { label:'AI動画生成ツール一覧', href:'/categories/video-generation/' },
+  { label:'AI動画編集ツール一覧', href:'/categories/video-editing/' },
+  { label:'AIアバター動画ツール一覧', href:'/categories/avatar-video/' },
+  { label:'YouTube向けツール', href:'/use-cases/youtube/' },
+  { label:'Shorts向けツール', href:'/use-cases/shorts/' },
+  { label:'顔出しなし動画向けツール', href:'/use-cases/faceless-video/' },
+];
+const DEFAULT_RELATED_SOLID: RelatedLink[] = [
+  { label:'商用利用条件を確認しやすいツール', href:'/conditions/commercial-use/' },
+  { label:'透かしなしで使えるツール', href:'/conditions/no-watermark/' },
+  { label:'日本語対応ツール', href:'/conditions/japanese/' },
+];
+
+const {
+  headingHtml = '無料で試せる<br><span class="hl fp-title-nowrap">AIクリエイティブツール</span>',
+  lead = '無料プランがあるAI画像生成・AI動画生成・AI動画編集・AIアバター動画ツールの条件をまとめています。無料枠の内容、透かし、商用利用条件、出力制限を確認してから利用を始めましょう。条件はプランや時期によって変わる可能性があるため、実務利用前に必ず最新の公式情報をご確認ください。',
+  toolsBase = '/tools/',
+  stats,
+  categories = DEFAULT_CATEGORIES,
+  points = DEFAULT_POINTS,
+  useCases = DEFAULT_USECASES,
+  tools = DEFAULT_TOOLS,
+  cautionTitle = '確認しておきたい5項目',
+  cautionItems = DEFAULT_CAUTION,
+  cautionNote = '詳細は<a href="/guides/commercial-use-copyright/">AIツール商用利用・著作権ガイド</a>もご参照ください。',
+  faqs = DEFAULT_FAQS,
+  related = DEFAULT_RELATED,
+  relatedSolid = DEFAULT_RELATED_SOLID,
+  disclaimer = '本ページの情報は公式サイト・公式規約を参考に整理したものですが、内容の正確性・完全性を保証するものではありません。商用利用条件・著作権・透かし条件はプランや用途、時期によって変わる可能性があります。実務利用前には必ず各ツールの最新公式情報をご確認ください。本ページは法的助言ではありません。',
+} = Astro.props;
+
+const ini = (t: Tool) => t.initial ?? t.name.charAt(0);
+const freeCount = tools.filter((t) => t.freePlan === 'あり').length;
+const limitedCount = tools.filter((t) => t.freePlan === 'limited').length;
+const catCount = Array.from(new Set(categories.map((c) => c.variant))).length;
+
+const autoStats = stats ?? [
+  { n: String(tools.length), label:'無料枠ツール' },
+  { n: String(freeCount), label:'無料プランあり' },
+  { n: String(limitedCount), label:'制限あり' },
+  { n: String(catCount), label:'対応カテゴリ' },
+];
+
+/* 無料プランバッジの内容（freePlan による） */
+function freeBadge(v: FreePlan) {
+  return v === 'あり'
+    ? { cls: 'ok', label: '無料プランあり', key: 'free' }
+    : { cls: 'limited', label: '制限あり', key: 'limited' };
+}
+
+/* 絞り込みチップ：存在する状態だけ自動表示 */
+const hasFree = tools.some((t) => t.freePlan === 'あり');
+const hasLimited = tools.some((t) => t.freePlan === 'limited');
+---
+
+<div class="fp-x" data-fp>
+
+  <!-- ===== 見出し ===== -->
+  <header class="fp-head">
+    <span class="eyebrow">Free Plans</span>
+    <h1 set:html={headingHtml}></h1>
+    <p class="lead">{lead}</p>
+    {autoStats.length > 0 && (
+      <div class="stats">
+        {autoStats.map((s) => (<div class="stat"><span class="n">{s.n}</span><span class="t">{s.label}</span></div>))}
+      </div>
+    )}
+  </header>
+
+  <!-- ===== 選び方（カテゴリ） ===== -->
+  <section class="fp-sec">
+    <div class="sec-head">
+      <span class="eyebrow">How to choose</span>
+      <h2>無料AIクリエイティブツールの選び方</h2>
+      <p>無料プランは機能の範囲・生成回数・出力品質などが有料プランと異なる場合があります。まず用途を明確にし、必要な機能が無料枠に含まれているかを確認しましょう。透かしや商用利用条件は実務利用に直結するため、試用前に公式の料金ページ・利用規約を必ず確認してください。</p>
+    </div>
+    <div class="fcat-grid">
+      {categories.map((c) => (
+        <div class={`fcat-card ${c.variant}`}>
+          <span class="acc"></span>
+          <span class="ico" set:html={c.icon ?? IC[c.variant]}></span>
+          <h3>{c.title}</h3>
+          <p>{c.body}</p>
+          <a class="more" href={c.href}>{c.linkLabel} <span class="arr">→</span></a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== 確認ポイント ===== -->
+  <section class="fp-sec band">
+    <div class="sec-head">
+      <span class="eyebrow">Checkpoints</span>
+      <h2>無料プランで確認するポイント</h2>
+      <p>無料枠は「使えるけれど条件付き」が基本です。試用を始める前に、次の{points.length}点を公式情報で確認しておくと失敗が減ります。</p>
+    </div>
+    <div class="pt-grid">
+      {points.map((p) => (
+        <div class="pt-card">
+          <span class="ico" set:html={p.icon ?? IC.grid}></span>
+          <h3>{p.title}</h3>
+          <p set:html={p.body}></p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== 用途別の選び分け ===== -->
+  <section class="fp-sec">
+    <div class="sec-head">
+      <span class="eyebrow">By use case</span>
+      <h2>用途別の選び分け</h2>
+      <p>作りたいアウトプットによって、無料で試すべきツールの種類が変わります。代表的な用途ごとの目安です。</p>
+    </div>
+    <div class="gtable-wrap">
+      <table class="gtable">
+        <thead>
+          <tr><th class="h-item">用途</th><th>向いているツール種類</th><th>参考ページ</th></tr>
+        </thead>
+        <tbody>
+          {useCases.map((u) => (
+            <tr>
+              <td><span class="use">{u.use}</span></td>
+              <td class="kind">{u.kinds.map((k) => (<span class="k">{k}</span>))}</td>
+              <td class="ref"><a href={u.refHref}>{u.refLabel} →</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== 無料枠があるツール一覧 ===== -->
+  <section class="fp-sec band">
+    <div class="sec-head">
+      <span class="eyebrow">Tool index</span>
+      <h2>無料枠があるAIツール一覧</h2>
+      <p>確認時点で{tools.length}件。「制限あり」は生成回数・透かし・機能などに条件がある無料プランです。無料プランの有無で絞り込み、各ツールの詳細ページで条件を確認してください。</p>
+    </div>
+
+    <div class="statusbar">
+      <span class="sb-label">Free plan</span>
+      <div class="sfilter">
+        <button class="schip" data-free="all" aria-pressed="true">すべて</button>
+        {hasFree && (<button class="schip" data-free="free" aria-pressed="false"><span class="d" data-tone="ok"></span>無料プランあり</button>)}
+        {hasLimited && (<button class="schip" data-free="limited" aria-pressed="false"><span class="d" data-tone="limited"></span>制限あり</button>)}
+      </div>
+      <div class="statusbar-right">
+        <label class="cu-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4"/></svg>
+          <input type="search" data-search placeholder="ツール名で検索" aria-label="ツール名で検索" />
+        </label>
+        <span class="cu-count" data-count><b>{tools.length}</b> 件</span>
+      </div>
+    </div>
+
+    <div class="cu-table-wrap">
+      <table class="cu free-table">
+        <thead>
+          <tr><th class="col-tool">ツール</th><th>無料プラン</th><th>詳細</th></tr>
+        </thead>
+        <tbody>
+          {tools.map((t) => {
+            const b = freeBadge(t.freePlan);
+            return (
+              <tr data-name={t.name.toLowerCase()} data-free={b.key}>
+                <td><div class="cu-tool"><span class="b">{ini(t)}</span><span class="nm">{t.name}</span></div></td>
+                <td><span class={`st ${b.cls}`}><span class="d"></span>{b.label}</span></td>
+                <td><a class="cu-detail" href={`${toolsBase}${t.slug}/`}>詳細 →</a></td>
+              </tr>
+            );
+          })}
+          <tr class="cu-empty-row" hidden><td colspan="3">条件に一致するツールはありません。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cu-legend">
+      <span class="li"><span class="st ok"><span class="d"></span>無料プランあり</span></span>
+      <span class="li"><span class="st limited"><span class="d"></span>制限あり（回数・透かし・機能などに条件）</span></span>
+      <span class="cu-legend-sp">無料枠の条件は変更される場合があります</span>
+    </div>
+    <p class="note">※ 無料枠の条件は変更される場合があります。最新情報は各公式サイトでご確認ください。</p>
+  </section>
+
+  <!-- ===== 商用利用前の注意点 ===== -->
+  <section class="fp-sec">
+    <div class="sec-head">
+      <span class="eyebrow">Before commercial use</span>
+      <h2>商用利用前の注意点</h2>
+      <p>無料プランで生成したコンテンツを商用利用する際は、次の点を必ず公式規約で確認してください。本ページは情報提供を目的としており、法的助言ではありません。</p>
+    </div>
+    <div class="caution">
+      <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+      <div>
+        <h3>{cautionTitle}</h3>
+        <ul>
+          {cautionItems.map((c) => (
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg></span>{c}</li>
+          ))}
+        </ul>
+        {cautionNote && (<p class="lead-note" set:html={cautionNote}></p>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 関連ページ ===== -->
+  <section class="fp-sec">
+    <div class="finder">
+      <h2>カテゴリ・用途別に探す</h2>
+      <p class="finder-lead">カテゴリ一覧・用途別・他の条件ページからも、目的に合う無料ツールを探せます。</p>
+      <div class="taglinks">{related.map((r) => (<a class="taglink" href={r.href}><span class="ld"></span>{r.label}</a>))}</div>
+      {relatedSolid.length > 0 && (
+        <div class="taglinks row">{relatedSolid.map((r) => (<a class="taglink solid" href={r.href}>{r.label}</a>))}</div>
+      )}
+    </div>
+  </section>
+
+  <!-- ===== FAQ ＋ 免責 ===== -->
+  <section class="fp-sec band">
+    <div class="sec-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>よくある質問</h2>
+      <p>無料プランの商用利用・出力上限・透かし・用途ごとの選び方についてお答えします。</p>
+    </div>
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <div class="faq-item" aria-expanded="false">
+          <button class="faq-q"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner" set:html={f.a}></div></div>
+        </div>
+      ))}
+    </div>
+
+    {disclaimer && (
+      <div class="disclaimer">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></span>
+        <div>
+          <h4>免責事項</h4>
+          <p set:html={disclaimer}></p>
+        </div>
+      </div>
+    )}
+  </section>
+
+</div>
+
+<style>
+  .fp-x{
+    --paper:#F4F4EE; --surface:#FFFFFF; --surface-2:#FAFAF6;
+    --ink:#16181D; --ink-soft:#3A3E47; --muted:#6A7180; --faint:#98A0AD;
+    --line:#E3E2D9; --line-strong:#D2D1C6;
+    --brand:#4B3FE4; --on-brand:#FFFFFF; --brand-tint:#ECEBFB; --brand-ink:#2E25A6;
+    --video:#E1543A; --video-tint:#FCEDE9; --image:#15897F; --image-tint:#E2F1EF;
+    --ok:#1E8A4C; --ok-tint:#E6F3EC; --warn:#A06A09; --warn-tint:#F8EFD9; --na:#6A7180; --na-tint:#EFEFEA;
+    --radius:14px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(20,22,28,.04),0 1px 3px rgba(20,22,28,.05);
+    --shadow-md:0 4px 14px rgba(20,22,28,.06),0 2px 6px rgba(20,22,28,.04);
+    --f-jp:"Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+    --f-latin:"Space Grotesk",system-ui,sans-serif;
+    --f-mono:"Space Mono",ui-monospace,monospace;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    display:block; color:var(--ink); font-family:"Noto Sans JP",system-ui,sans-serif; line-height:1.7;
+  }
+  .fp-x .eyebrow{font-family:var(--f-latin);font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:10px;}
+  .fp-x .eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--brand);}
+  .fp-x h1,.fp-x h2,.fp-x h3,.fp-x h4{font-family:var(--f-jp);font-weight:700;line-height:1.32;color:var(--ink);}
+  .fp-x a{text-decoration:none;}
+
+  /* 見出し */
+  .fp-x .fp-head h1{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-.01em;line-height:1.24;margin:16px 0;max-width:900px;}
+  .fp-x .fp-title-nowrap{white-space:nowrap;}
+  .fp-x .fp-head h1 .hl{color:var(--brand-ink);position:relative;}
+  .fp-x .fp-head h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.26em;background:color-mix(in srgb,var(--brand) 18%,transparent);z-index:-1;border-radius:2px;}
+  .fp-x .lead{font-size:15.5px;color:var(--ink-soft);max-width:680px;}
+  .fp-x .stats{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:24px;}
+  .fp-x .stat{display:flex;align-items:baseline;gap:8px;}
+  .fp-x .stat + .stat{padding-left:26px;border-left:1px solid var(--line);}
+  .fp-x .stat .n{font-family:var(--f-latin);font-weight:700;font-size:24px;color:var(--ink);line-height:1;}
+  .fp-x .stat .t{font-size:12.5px;color:var(--muted);white-space:nowrap;}
+
+  /* セクション */
+  .fp-x .fp-sec{padding:60px 0;}
+  .fp-x .fp-sec.band{background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    /* 全幅バンド化したい場合は有効化（最大幅1200px前提・違えば数値調整）:
+    margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); padding-left:max(28px,calc(50vw - 600px)); padding-right:max(28px,calc(50vw - 600px)); */
+  }
+  .fp-x .sec-head{max-width:720px;margin-bottom:36px;}
+  .fp-x .sec-head h2{font-size:clamp(24px,3vw,34px);font-weight:900;letter-spacing:-.005em;margin:16px 0 12px;}
+  .fp-x .sec-head p{color:var(--muted);font-size:15px;}
+
+  /* 選び方カテゴリカード */
+  .fp-x .fcat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .fp-x .fcat-card{position:relative;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface);padding:28px 26px 24px;display:flex;flex-direction:column;gap:10px;overflow:hidden;transition:transform .22s var(--ease),box-shadow .22s,border-color .22s;}
+  .fp-x .fcat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+  .fp-x .fcat-card .acc{position:absolute;inset:0 auto 0 0;width:4px;}
+  .fp-x .fcat-card .ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;margin-bottom:4px;}
+  .fp-x .fcat-card .ico svg{width:23px;height:23px;}
+  .fp-x .fcat-card h3{font-size:16.5px;line-height:1.35;}
+  .fp-x .fcat-card p{font-size:12.5px;color:var(--muted);line-height:1.7;flex:1;}
+  .fp-x .fcat-card .more{font-family:var(--f-jp);font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:6px;margin-top:4px;}
+  .fp-x .fcat-card .more .arr{transition:transform .2s var(--ease);}
+  .fp-x .fcat-card:hover .more .arr{transform:translateX(4px);}
+  .fp-x .fcat-card.image{border-color:color-mix(in srgb,var(--image) 24%,var(--line));}
+  .fp-x .fcat-card.image .acc{background:var(--image);} .fp-x .fcat-card.image .ico{background:var(--image-tint);color:var(--image);} .fp-x .fcat-card.image .more{color:var(--image);}
+  .fp-x .fcat-card.video{border-color:color-mix(in srgb,var(--video) 24%,var(--line));}
+  .fp-x .fcat-card.video .acc{background:var(--video);} .fp-x .fcat-card.video .ico{background:var(--video-tint);color:var(--video);} .fp-x .fcat-card.video .more{color:var(--video);}
+  .fp-x .fcat-card.edit .acc{background:var(--brand);} .fp-x .fcat-card.edit .ico{background:var(--brand-tint);color:var(--brand-ink);} .fp-x .fcat-card.edit .more{color:var(--brand-ink);}
+  .fp-x .fcat-card.avatar .acc{background:var(--warn);} .fp-x .fcat-card.avatar .ico{background:var(--warn-tint);color:var(--warn);} .fp-x .fcat-card.avatar .more{color:var(--warn);}
+
+  /* 確認ポイント カード */
+  .fp-x .pt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .fp-x .pt-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:24px 24px 22px;display:flex;flex-direction:column;gap:9px;transition:transform .2s var(--ease),box-shadow .2s,border-color .2s;}
+  .fp-x .pt-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:color-mix(in srgb,var(--brand) 30%,var(--line));}
+  .fp-x .pt-card .ico{width:42px;height:42px;border-radius:11px;background:var(--brand-tint);color:var(--brand-ink);display:grid;place-items:center;margin-bottom:4px;}
+  .fp-x .pt-card .ico svg{width:21px;height:21px;}
+  .fp-x .pt-card h3{font-size:15.5px;}
+  .fp-x .pt-card p{font-size:13px;color:var(--muted);line-height:1.68;}
+  .fp-x .pt-card p a{color:var(--brand-ink);font-weight:600;}
+
+  /* 用途別 表 */
+  .fp-x .gtable-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-sm);}
+  .fp-x .gtable{width:100%;border-collapse:collapse;min-width:560px;}
+  .fp-x .gtable th,.fp-x .gtable td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--line);vertical-align:middle;}
+  .fp-x .gtable thead th{background:var(--surface-2);font-family:var(--f-jp);font-weight:700;font-size:13px;color:var(--ink-soft);white-space:nowrap;}
+  .fp-x .gtable thead th.h-item{font-family:var(--f-latin);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);}
+  .fp-x .gtable tbody tr:last-child td{border-bottom:none;}
+  .fp-x .gtable tbody tr{transition:background .12s;}
+  .fp-x .gtable tbody tr:hover{background:var(--surface-2);}
+  .fp-x .gtable .use{font-family:var(--f-jp);font-weight:700;color:var(--ink);font-size:14px;}
+  .fp-x .gtable .kind{font-size:13px;color:var(--ink-soft);}
+  .fp-x .gtable .kind .k{display:inline-block;font-family:var(--f-mono);font-size:11px;background:var(--surface-2);border:1px solid var(--line);border-radius:7px;padding:2px 8px;margin:0 4px 4px 0;}
+  .fp-x .gtable .ref a{font-family:var(--f-jp);font-weight:700;font-size:12.5px;color:var(--brand-ink);white-space:nowrap;}
+  .fp-x .gtable .ref a:hover{text-decoration:underline;text-underline-offset:3px;}
+
+  /* ステータスバッジ */
+  .fp-x .st{display:inline-flex;align-items:center;gap:6px;flex:none;font-family:var(--f-jp);font-weight:700;font-size:12px;line-height:1.2;padding:5px 11px;border-radius:999px;white-space:nowrap;}
+  .fp-x .st .d{width:6px;height:6px;border-radius:50%;background:currentColor;}
+  .fp-x .st.ok{color:var(--ok);background:var(--ok-tint);}
+  .fp-x .st.limited{color:var(--warn);background:var(--warn-tint);}
+
+  /* フィルタ */
+  .fp-x .statusbar{display:flex;align-items:center;gap:16px 22px;flex-wrap:wrap;margin-bottom:22px;}
+  .fp-x .sb-label{font-family:var(--f-latin);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);flex:none;}
+  .fp-x .sfilter{display:flex;flex-wrap:wrap;gap:8px;}
+  .fp-x .schip{font-family:var(--f-jp);font-weight:600;font-size:13px;padding:8px 15px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-soft);cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;transition:transform .16s var(--ease),background .16s,border-color .16s,color .16s;}
+  .fp-x .schip:hover{border-color:var(--brand);color:var(--brand-ink);}
+  .fp-x .schip .d{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.8;}
+  .fp-x .schip .d[data-tone="ok"]{color:var(--ok);}
+  .fp-x .schip .d[data-tone="limited"]{color:var(--warn);}
+  .fp-x .schip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink);}
+  .fp-x .schip[data-free="free"][aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:#fff;}
+  .fp-x .schip[data-free="limited"][aria-pressed="true"]{background:var(--warn);border-color:var(--warn);color:#fff;}
+  .fp-x .schip[aria-pressed="true"] .d{color:#fff;}
+  .fp-x .statusbar-right{margin-left:auto;display:flex;align-items:center;gap:14px;}
+  .fp-x .cu-search{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line-strong);border-radius:999px;padding:8px 15px;transition:border-color .15s,box-shadow .15s;}
+  .fp-x .cu-search:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 14%,transparent);}
+  .fp-x .cu-search svg{width:15px;height:15px;color:var(--muted);flex:none;}
+  .fp-x .cu-search input{border:none;background:none;outline:none;font-family:var(--f-jp);font-size:14px;color:var(--ink);width:150px;}
+  .fp-x .cu-search input::placeholder{color:var(--faint);}
+  .fp-x .cu-count{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);white-space:nowrap;}
+  .fp-x .cu-count b{color:var(--ink);font-weight:700;}
+
+  /* ツール表 */
+  .fp-x .cu-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-sm);}
+  .fp-x table.cu{width:100%;border-collapse:collapse;min-width:480px;}
+  .fp-x table.cu thead th{font-family:var(--f-jp);font-weight:700;font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);padding:15px 16px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
+  .fp-x table.cu thead th.col-tool{text-align:left;}
+  .fp-x table.cu tbody td{padding:13px 16px;text-align:center;border-bottom:1px solid var(--line);vertical-align:middle;}
+  .fp-x table.cu tbody tr:last-child td{border-bottom:none;}
+  .fp-x table.cu tbody tr{transition:background .12s,opacity .18s;}
+  .fp-x table.cu tbody tr:hover{background:var(--surface-2);}
+  .fp-x table.cu tbody tr.hide{display:none;}
+  .fp-x .cu-tool{display:flex;align-items:center;gap:11px;text-align:left;}
+  .fp-x .cu-tool .b{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:var(--brand-tint);color:var(--brand-ink);font-family:var(--f-latin);font-weight:700;font-size:13px;flex:none;}
+  .fp-x .cu-tool .nm{font-family:var(--f-jp);font-weight:700;font-size:14.5px;color:var(--ink);white-space:nowrap;}
+  .fp-x table.cu td .st{margin:0 auto;}
+  .fp-x .cu-detail{font-family:var(--f-jp);font-weight:700;font-size:12.5px;color:var(--brand-ink);white-space:nowrap;}
+  .fp-x .cu-detail:hover{text-decoration:underline;text-underline-offset:3px;}
+  .fp-x .cu-empty-row td{text-align:center;color:var(--muted);padding:36px;}
+  .fp-x .cu-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12.5px;color:var(--muted);align-items:center;}
+  .fp-x .cu-legend .li{display:inline-flex;align-items:center;gap:7px;}
+  .fp-x .cu-legend-sp{margin-left:auto;font-family:var(--f-mono);font-size:11px;}
+  .fp-x .note{margin-top:18px;font-size:12.5px;color:var(--faint);line-height:1.7;}
+
+  /* 商用利用前の注意点 */
+  .fp-x .caution{border:1px solid color-mix(in srgb,var(--warn) 26%,var(--line));border-radius:var(--radius-lg);background:var(--surface);padding:30px 34px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;}
+  .fp-x .caution .ci{width:46px;height:46px;border-radius:12px;background:var(--warn-tint);color:var(--warn);display:grid;place-items:center;flex:none;}
+  .fp-x .caution .ci svg{width:24px;height:24px;}
+  .fp-x .caution h3{font-size:18px;margin-bottom:12px;}
+  .fp-x .caution ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:0 0 14px;padding:0;}
+  .fp-x .caution li{display:grid;grid-template-columns:auto 1fr;gap:11px;font-size:14px;color:var(--ink-soft);line-height:1.6;}
+  .fp-x .caution li .ck{width:20px;height:20px;border-radius:6px;background:var(--warn-tint);color:var(--warn);display:grid;place-items:center;flex:none;margin-top:1px;}
+  .fp-x .caution li .ck svg{width:12px;height:12px;}
+  .fp-x .caution .lead-note{font-size:12.5px;color:var(--muted);}
+  .fp-x .caution .lead-note a{color:var(--brand-ink);font-weight:600;}
+
+  /* 関連ページ */
+  .fp-x .finder{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-lg);padding:34px 34px 30px;}
+  .fp-x .finder h2{font-size:clamp(20px,2.4vw,26px);margin-bottom:6px;}
+  .fp-x .finder-lead{color:var(--muted);font-size:14px;margin-bottom:22px;}
+  .fp-x .taglinks{display:flex;flex-wrap:wrap;gap:10px;}
+  .fp-x .taglink{font-family:var(--f-jp);font-weight:600;font-size:13.5px;padding:9px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-soft);display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:transform .16s var(--ease),background .16s,border-color .16s,color .16s;}
+  .fp-x .taglink:hover{border-color:var(--brand);color:var(--brand-ink);background:var(--brand-tint);transform:translateY(-1px);}
+  .fp-x .taglink .ld{width:7px;height:7px;border-radius:50%;background:var(--brand);flex:none;}
+  .fp-x .taglinks.row{margin-top:16px;padding-top:18px;border-top:1px dashed var(--line-strong);}
+  .fp-x .taglink.solid{background:var(--ink);color:var(--surface);border-color:var(--ink);}
+  .fp-x .taglink.solid:hover{background:var(--brand);border-color:var(--brand);color:var(--on-brand);}
+
+  /* FAQ */
+  .fp-x .faq-list{max-width:860px;}
+  .fp-x .faq-item{border-bottom:1px solid var(--line);}
+  .fp-x .faq-item:first-child{border-top:1px solid var(--line);}
+  .fp-x .faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:24px 6px;font-family:var(--f-jp);font-weight:700;font-size:16.5px;color:var(--ink);}
+  .fp-x .faq-q .qm{font-family:var(--f-latin);color:var(--brand);font-size:16px;flex:none;}
+  .fp-x .faq-q .ind{margin-left:auto;flex:none;width:24px;height:24px;display:grid;place-items:center;transition:transform .3s var(--ease);color:var(--muted);}
+  .fp-x .faq-q .ind svg{width:18px;height:18px;}
+  .fp-x .faq-item[aria-expanded="true"] .faq-q .ind{transform:rotate(45deg);color:var(--brand);}
+  .fp-x .faq-a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease);}
+  .fp-x .faq-a-inner{padding:0 6px 26px 46px;color:var(--ink-soft);font-size:14.5px;line-height:1.8;}
+  .fp-x .faq-a-inner a{color:var(--brand-ink);font-weight:600;}
+
+  /* 免責 */
+  .fp-x .disclaimer{display:flex;gap:16px;align-items:flex-start;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2);padding:24px 28px;margin-top:28px;}
+  .fp-x .disclaimer .ico{width:38px;height:38px;border-radius:10px;background:var(--na-tint);color:var(--na);display:grid;place-items:center;flex:none;}
+  .fp-x .disclaimer .ico svg{width:20px;height:20px;}
+  .fp-x .disclaimer h4{font-family:var(--f-jp);font-weight:700;font-size:14px;color:var(--ink);margin-bottom:8px;}
+  .fp-x .disclaimer p{font-size:12.5px;color:var(--muted);line-height:1.85;}
+
+  /* reveal（任意・JSが付与） */
+  @media (prefers-reduced-motion: no-preference){
+    .fp-x .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+    .fp-x .reveal.in{opacity:1;transform:none;}
+  }
+
+  @media (max-width:980px){
+    .fp-x .fcat-grid{grid-template-columns:repeat(2,1fr);}
+    .fp-x .pt-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:640px){
+    .fp-x .fp-title-nowrap{white-space:normal;}
+  }
+  @media (max-width:720px){
+    .fp-x .fcat-grid,.fp-x .pt-grid{grid-template-columns:1fr;}
+    .fp-x .caution{grid-template-columns:1fr;}
+    .fp-x .statusbar-right{margin-left:0;width:100%;}
+    .fp-x .cu-search{flex:1;}
+    .fp-x .cu-search input{width:100%;}
+    .fp-x .stat + .stat{padding-left:0;border-left:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .fp-x *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+    .fp-x .reveal{opacity:1 !important;transform:none !important;}
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-fp]').forEach((root) => {
+    const tbody = root.querySelector<HTMLElement>('table.cu tbody')!;
+    const rows = Array.from(tbody.querySelectorAll<HTMLElement>('tr[data-name]'));
+    const empty = root.querySelector<HTMLElement>('.cu-empty-row')!;
+    const chips = Array.from(root.querySelectorAll<HTMLElement>('.schip'));
+    const search = root.querySelector<HTMLInputElement>('[data-search]')!;
+    const countEl = root.querySelector<HTMLElement>('[data-count]')!;
+    let active = 'all';
+
+    const matches = (name: string, free: string) => {
+      const q = (search.value || '').trim().toLowerCase();
+      if (q && name.indexOf(q) === -1) return false;
+      if (active !== 'all' && free !== active) return false;
+      return true;
+    };
+
+    const apply = () => {
+      let n = 0;
+      rows.forEach((r) => {
+        const ok = matches(r.getAttribute('data-name') || '', r.getAttribute('data-free') || '');
+        r.classList.toggle('hide', !ok);
+        if (ok) n++;
+      });
+      empty.hidden = n !== 0;
+      countEl.innerHTML = '<b>' + n + '</b> 件';
+    };
+
+    chips.forEach((chip) => chip.addEventListener('click', () => {
+      active = chip.getAttribute('data-free') || 'all';
+      chips.forEach((c) => c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'));
+      apply();
+    }));
+    search.addEventListener('input', apply);
+    apply();
+
+    /* FAQ アコーディオン */
+    const items = Array.from(root.querySelectorAll<HTMLElement>('.faq-item'));
+    items.forEach((item) => {
+      const q = item.querySelector<HTMLElement>('.faq-q')!;
+      const a = item.querySelector<HTMLElement>('.faq-a')!;
+      q.addEventListener('click', () => {
+        const open = item.getAttribute('aria-expanded') === 'true';
+        items.forEach((o) => { o.setAttribute('aria-expanded', 'false'); o.querySelector<HTMLElement>('.faq-a')!.style.maxHeight = ''; });
+        if (!open) { item.setAttribute('aria-expanded', 'true'); a.style.maxHeight = a.scrollHeight + 'px'; }
+      });
+    });
+
+    /* スクロール表示アニメーション */
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targets = Array.from(root.querySelectorAll<HTMLElement>('.sec-head, .fcat-grid, .pt-grid, .gtable-wrap, .cu-table-wrap, .caution, .finder, .faq-list'));
+    targets.forEach((el) => el.classList.add('reveal'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.06, rootMargin: '0px 0px -4% 0px' });
+      targets.forEach((el) => io.observe(el));
+      window.setTimeout(() => targets.forEach((el) => el.classList.add('in')), 8000);
+    }
+  });
+</script>

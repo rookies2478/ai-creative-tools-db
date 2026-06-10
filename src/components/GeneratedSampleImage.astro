@@ -1,0 +1,51 @@
+---
+import type { GeneratedImage } from '../data/generatedImages';
+
+interface Props {
+  image: GeneratedImage;
+}
+
+const { image } = Astro.props;
+---
+
+<figure class="my-4 overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+  <img
+    src={image.file}
+    alt={image.alt}
+    width="800"
+    height="450"
+    loading="lazy"
+    decoding="async"
+    class="w-full object-cover"
+  />
+  <figcaption class="px-4 py-3">
+    <p class="text-sm font-medium text-slate-700">{image.caption}</p>
+    <dl class="mt-2 space-y-1 text-xs text-slate-500">
+      <div class="flex flex-wrap gap-x-1">
+        <dt class="font-semibold text-slate-600">モデル：</dt>
+        <dd>
+          <a href={image.modelUrl} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+            {image.model}
+          </a>
+        </dd>
+      </div>
+      <div class="flex flex-wrap gap-x-1">
+        <dt class="font-semibold text-slate-600">プロンプト：</dt>
+        <dd class="break-all">{image.prompt}</dd>
+      </div>
+      {image.negativePrompt && (
+        <div class="flex flex-wrap gap-x-1">
+          <dt class="font-semibold text-slate-600">ネガティブ：</dt>
+          <dd class="break-all">{image.negativePrompt}</dd>
+        </div>
+      )}
+      <div class="flex flex-wrap gap-x-1">
+        <dt class="font-semibold text-slate-600">生成日：</dt>
+        <dd>{image.generatedAt}</dd>
+      </div>
+    </dl>
+    <p class="mt-2 text-[11px] leading-relaxed text-slate-400">
+      ※ 本画像は {image.model} で生成した参考サンプルです。生成結果はモデル・設定・タイミングによって変わる場合があります。掲載ページで紹介しているツールの公式出力・代表結果を保証するものではありません。商用利用条件は、利用するモデルやサービスの公式情報をご確認ください。本記事は法的助言ではありません。{image.usageNote && `　${image.usageNote}`}
+    </p>
+  </figcaption>
+</figure>

@@ -1,0 +1,678 @@
+---
+/* =========================================================
+   FreeAiImageTools.astro
+   ガイド：/guides/free-ai-image-tools/ の記事本文
+   （結論 ＋ 免責 ＋ 選ぶポイント ＋ 無料枠で比較すべき項目
+    ＋ 無料プランの種類表 ＋ 透かし解説 ＋ 商用利用パターン
+    ＋ 無料プランがあるツール一覧表 ＋ 用途別おすすめ表
+    ＋ 無料プラン利用時の注意 ＋ チェックリスト ＋ FAQ
+    ＋ 注意事項/鮮度 ＋ 関連ページ）
+
+   既存サイト（Tailwind）を壊さない設計:
+   - すべてのセレクタを .fai-x 配下に限定（スタイル漏れなし）
+   - CSS変数は :root ではなく .fai-x 上に定義（既存トークン非衝突）
+   - 素のリセット（*{} / body{} / table{} 等）を含めない（preflight非干渉）
+   - SSRで描画。JSは [data-fai] 配下のみ操作（FAQ開閉・表示アニメ）
+
+   ヘッダー・フッター・パンくずは既存 Layout 側のものを使用してください。
+   このコンポーネントは記事本文だけを描画します。
+   ========================================================= */
+
+export type Mark = 'ok' | 'cond' | 'no' | 'na';
+
+export interface Stat { n: string; label: string; }
+export interface Point { title: string; sub: string; }
+export interface Badge { s: Mark; label: string; }
+export interface ToolRow {
+  name: string;
+  slug?: string;
+  initial?: string;
+  freePlan?: Badge;        // 無料プラン列
+  commercial?: Badge;      // 商用利用列
+  watermark?: Badge;       // 透かし列
+  date?: string;           // 最終確認日
+}
+export interface PlanType { en: string; ja: string; body: string; }
+export interface Pattern { lead: string; body: string; }
+export interface UseCase { situation: string; toolHtml: string; reason: string; }
+export interface NoteItem { lead: string; body: string; }
+export interface CheckItem { html: string; }
+export interface Faq { q: string; a: string; }
+export interface RelatedLink { label: string; href: string; solid?: boolean; }
+
+export interface Props {
+  headingHtml?: string;
+  lead?: string;
+  checkedDate?: string;
+  nextCheckDate?: string;
+  stats?: Stat[];
+  conclusionHtml?: string;
+  disclaimer?: string;
+  points?: Point[];
+  planTypes?: PlanType[];
+  watermarkHtml?: string;
+  patterns?: Pattern[];
+  tools?: ToolRow[];
+  toolsAsOf?: string;
+  useCases?: UseCase[];
+  cautions?: NoteItem[];
+  checklist?: CheckItem[];
+  faqs?: Faq[];
+  notes?: string[];
+  footnote?: string;
+  related?: RelatedLink[];
+  toolsBase?: string;          // 既定 /tools/ → /tools/{slug}/
+}
+
+const {
+  headingHtml = '無料で試せる<br /><span class="hl">AI画像生成ツール</span>比較',
+  lead = '無料で使えるAI画像生成ツールを、無料枠・クレジット制限・透かし・商用利用・日本語対応・対応環境の観点で比較します。実務利用前に確認すべき注意点も整理します。最新情報は必ず各公式サイトをご確認ください。',
+  checkedDate = '2026-05-05',
+  nextCheckDate = '2026-08-04',
+  stats = [
+    { n: '6', label: '選ぶポイント' },
+    { n: '24', label: '無料枠ツール' },
+    { n: '5', label: 'よくある質問' },
+  ],
+  conclusionHtml = '<p>無料で試せるAI画像生成ツールはいくつかありますが、<b>「無料で使える」＝「制限なく使える」ではありません</b>。</p><p>クレジット数・透かし・商用利用条件・対応環境はツールごとに大きく異なります。用途に合わせた事前確認が重要です。</p>',
+  disclaimer = 'このガイドは情報提供を目的としており、法的アドバイスではありません。商用利用の可否判断は各ツールの最新利用規約を必ずご確認ください。',
+  points = [
+    { title: '無料プランの形式', sub: '継続的に使えるか、初回のみか' },
+    { title: '生成できる枚数・クレジット数', sub: '月あたりの上限を確認する' },
+    { title: '透かし（ウォーターマーク）の有無と条件', sub: 'SNS投稿や商用利用で問題にならないか' },
+    { title: '商用利用の可否', sub: '無料プランでの商用利用条件を確認する' },
+    { title: '対応環境', sub: 'Webブラウザ・スマートフォン・ローカル実行など' },
+    { title: '日本語対応', sub: 'UI・プロンプトの対応状況' },
+  ],
+  planTypes = [
+    { en: 'Free Plan', ja: '無料プラン', body: '毎月一定量のクレジットが継続的に付与されるプラン。' },
+    { en: 'Free Trial', ja: '無料トライアル', body: '一定期間または一定量だけ有料機能を試せる仕組み。' },
+    { en: 'Free Credits', ja: '無料クレジット', body: '新規登録時に付与される初回限りのポイント。' },
+  ],
+  watermarkHtml = '<p>生成画像に透かしが入る場合、SNS・個人利用では問題ないこともありますが、商業素材・納品物・広告への使用は困難な場合があります。また可視透かしがなくても、C2PA（Content Authenticity Initiative）などの標準に基づく不可視メタデータが埋め込まれる場合があります。</p><p class="em"><b>透かしを消せることと商用利用できることは別問題です。</b></p>',
+  patterns = [
+    { lead: '無料プランでも商用利用できる場合がある', body: '条件・注意事項を確認の上で利用する（Adobe Firefly・DALL·Eなど）。' },
+    { lead: '有料プランへのアップグレードが必要な場合', body: '無料プランでは商用利用に制限がある（Leonardo AIなど）。' },
+    { lead: '追加の条件がある場合', body: 'AI生成コンテンツであることの明示が求められる場合がある（Canva AIなど）。' },
+    { lead: 'モデルバージョンによって条件が異なる場合', body: '利用するモデルごとに確認が必要（Stable Diffusionなど）。' },
+  ],
+  toolsAsOf = '2026-05-05',
+  tools = [
+    { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-24' },
+    { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', initial: 'C', freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-24' },
+    { name: 'CapCut AI', slug: 'capcut-ai', initial: 'C', freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, watermark: { s: 'no', label: '× あり' }, date: '2026-05-24' },
+    { name: 'Clipdrop', slug: 'clipdrop', initial: 'C', freePlan: { s: 'ok', label: '〇 無料プランあり' }, date: '2026-06-06' },
+    { name: 'DALL·E', slug: 'dalle', initial: 'D', freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'ok', label: '〇 可能（公式情報）' }, watermark: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-26' },
+    { name: 'Fotor AI', slug: 'fotor-ai', initial: 'F', freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'ok', label: '〇 可能（公式情報）' }, watermark: { s: 'no', label: '× あり' }, date: '2026-05-14' },
+    { name: 'Gemini画像生成', slug: 'gemini-image-generation', initial: 'G', freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, watermark: { s: 'no', label: '× あり' }, date: '2026-05-15' },
+    { name: 'Hailuo AI', slug: 'hailuo-ai', initial: 'H', freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-06-06' },
+    { name: 'Haiper', slug: 'haiper', initial: 'H', freePlan: { s: 'ok', label: '〇 無料プランあり' }, watermark: { s: 'no', label: '× あり' }, date: '2026-05-24' },
+    { name: 'Ideogram', slug: 'ideogram', initial: 'I', freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-26' },
+    { name: 'InVideo AI', slug: 'invideo-ai', initial: 'I', freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-25' },
+    { name: 'Kling AI', slug: 'kling-ai', initial: 'K', freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-06-04' },
+    { name: 'Leonardo AI', slug: 'leonardo-ai', initial: 'L', freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-24' },
+    { name: 'Luma AI', slug: 'luma-ai', initial: 'L', freePlan: { s: 'ok', label: '〇 無料プランあり' }, watermark: { s: 'no', label: '× あり' }, date: '2026-06-05' },
+    { name: 'Microsoft Designer', slug: 'microsoft-designer', initial: 'M', freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-26' },
+    { name: 'NightCafe', slug: 'nightcafe', initial: 'N', freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, watermark: { s: 'ok', label: '〇 なし' }, date: '2026-05-14' },
+    { name: 'Pika', slug: 'pika', initial: 'P', freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'cond', label: '△ 条件付き' }, watermark: { s: 'cond', label: '△ 条件付き' }, date: '2026-06-05' },
+    { name: 'PixVerse', slug: 'pixverse', initial: 'P', freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-06-05' },
+    { name: 'Playground AI', slug: 'playground-ai', initial: 'P', freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-06-06' },
+    { name: 'Runway', slug: 'runway', initial: 'R', freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'cond', label: '△ 条件付き' }, watermark: { s: 'cond', label: '△ 条件付き' }, date: '2026-06-05' },
+    { name: 'SeaArt AI', slug: 'seaart-ai', initial: 'S', freePlan: { s: 'ok', label: '〇 無料プランあり' }, date: '2026-06-06' },
+    { name: 'Stable Diffusion', slug: 'stable-diffusion', initial: 'S', freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, watermark: { s: 'cond', label: '△ 条件付き' }, date: '2026-06-06' },
+    { name: 'Tensor.Art', slug: 'tensor-art', initial: 'T', freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-14' },
+    { name: 'Vidu AI', slug: 'vidu-ai', initial: 'V', freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-06-04' },
+  ],
+  useCases = [
+    { situation: '手軽にWebで試したい・日本語対応が必要', toolHtml: 'Canva AI画像生成 / Adobe Firefly', reason: '日本語UI・プロンプト対応。登録後すぐ使える。' },
+    { situation: 'ChatGPTと一緒に使いたい', toolHtml: '<a href="/tools/dalle/">DALL·E</a>', reason: 'ChatGPT統合。日本語UIはChatGPTに準拠。' },
+    { situation: '商用素材として使いたい', toolHtml: '<a href="/tools/adobe-firefly/">Adobe Firefly</a>', reason: '商用利用を想定した設計とされている（条件要確認）。' },
+    { situation: 'プライバシー重視・ローカルで使いたい', toolHtml: '<a href="/tools/stable-diffusion/">Stable Diffusion</a>', reason: 'ローカル実行。標準的な構成ではデータが外部に送られにくい。' },
+    { situation: 'ゲーム・イラスト向けに無料枠での試作', toolHtml: '<a href="/tools/leonardo-ai/">Leonardo AI</a>', reason: '1日150トークン程度の無料枠（変更の可能性あり）。' },
+  ],
+  cautions = [
+    { lead: '無料枠は変更・終了される可能性があります。', body: '今日確認した内容が数週間後に変わっている場合があります。' },
+    { lead: '「永久無料」という表現は保証ではありません。', body: 'サービス方針の変更により、無料プランが縮小・廃止される可能性があります。' },
+    { lead: '「初回のみ無料」と「毎月継続して無料」は別物です。', body: '生成前に無料プランの形式を確認してください。' },
+    { lead: '無料プランのコンテンツがプラットフォームに利用される場合があります。', body: '一部のツールでは生成コンテンツがモデル学習等に使用される可能性があります。' },
+    { lead: '商用利用前には必ず公式規約を確認してください。', body: '' },
+  ],
+  checklist = [
+    { html: '<b>無料プランの形式</b>を確認した（継続型か、初回のみか）' },
+    { html: '月あたりの<b>生成可能枚数・クレジット数</b>を確認した' },
+    { html: '<b>透かし</b>の有無・条件を確認した' },
+    { html: '商用利用する場合、<b>公式規約で条件</b>を確認した' },
+    { html: '<b>クレジット表記</b>の義務の有無を確認した' },
+    { html: '使いたい<b>デバイス・環境</b>に対応しているか確認した' },
+    { html: '日本語UI・プロンプト対応が必要な場合、<b>対応状況</b>を確認した' },
+  ],
+  faqs = [
+    { q: '無料で使えるAI画像生成ツールはありますか？', a: 'あります。Stable Diffusion（ローカル実行）・Adobe Firefly・Canva AI画像生成・DALL·E（ChatGPT経由）・Leonardo AIなどで無料プランまたは無料枠が提供されています（確認時点）。ただし生成枚数・機能・商用利用条件はツールによって異なります。最新の提供状況は各ツールの公式サイトでご確認ください。' },
+    { q: '無料プランでも商用利用できますか？', a: 'ツールによって異なります。Adobe Firefly・DALL·E（ChatGPT経由）は公式情報上、商用利用が案内されていますが、条件があります。Leonardo AIの無料プランでは生成画像の権利がLeonardo.AIに帰属する場合があるとされています。Stable Diffusionはモデルバージョンごとにライセンスが異なります。商用利用前は必ず各ツールの公式利用規約の最新版をご確認ください。このページは法的アドバイスではありません。' },
+    { q: '無料プランでは透かしが入りますか？', a: 'ツールやプランによって異なります。無料プランで可視透かしが付与されるツールもあれば、透かしなしで利用できるツールもあります。また可視透かしがない場合でも、C2PAなどの不可視メタデータが埋め込まれる場合があります（Adobe Firefly・DALL·E 3など）。最新の条件は各ツールの公式サイトでご確認ください。' },
+    { q: '日本語で使える無料AI画像生成ツールはありますか？', a: '日本語UIに対応しているツールとして、Adobe Firefly・Canva AI画像生成（いずれも確認時点）が挙げられます。DALL·EはChatGPT経由のためChatGPTの日本語UIに準拠します。最新の対応状況は各ツールの公式サイトでご確認ください。' },
+    { q: '無料プランから有料プランに切り替える目安はありますか？', a: '月あたりの生成回数・クレジットが不足している場合、透かしが商用利用・納品物に支障をきたす場合、商用利用条件を満たすために有料プランが必要とされている場合、出力解像度が用途に対して不足している場合に有料プランの検討が現実的です。料金・機能・商用利用条件を公式サイトで比較してください。' },
+  ],
+  notes = [
+    '各ツールの料金・利用規約は予告なく変更されます。利用前に必ず公式サイトの最新情報をご確認ください。',
+    '本ページは法的アドバイスではありません。重要な商用利用の場面では、専門家（弁護士等）への相談を推奨します。',
+  ],
+  footnote = 'このガイドは情報提供を目的としており、法的アドバイスではありません。商用利用の判断は各ツールの最新利用規約と専門家への相談に基づいて行ってください。',
+  related = [
+    { label: 'ツール一覧', href: '/tools/' },
+    { label: '無料で使えるツール', href: '/conditions/free/' },
+    { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+    { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+    { label: '商用利用・著作権ガイド', href: '/guides/commercial-use-copyright/' },
+    { label: '透かし・クレジット表記ガイド', href: '/guides/watermark-credit-guide/' },
+  ],
+  toolsBase = '/tools/',
+} = Astro.props as Props;
+
+const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
+const cell = (b?: Badge) => b;
+---
+
+<article class="fai-x" data-fai>
+  <!-- ===== 記事ヘッダー ===== -->
+  <header class="fai-head">
+    <div class="fai-meta">
+      <span class="fai-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h10"/></svg>
+        ガイド
+      </span>
+      <span class="fai-checked">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        記事内容の最終確認 <b>{checkedDate}</b>
+      </span>
+    </div>
+    <h1 class="fai-h1" set:html={headingHtml}></h1>
+    <p class="fai-lead">{lead}</p>
+    <div class="fai-stats">
+      {stats.map((s) => (
+        <div class="fai-stat"><span class="n">{s.n}</span><span class="t">{s.label}</span></div>
+      ))}
+    </div>
+  </header>
+
+  <!-- ===== 結論 + 免責 ===== -->
+  <section class="fai-sec reveal">
+    <div class="fai-conclusion">
+      <div class="ttl"><span class="k">Conclusion</span></div>
+      <h2>このガイドの結論</h2>
+      <div set:html={conclusionHtml}></div>
+    </div>
+    <div class="fai-disclaimer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <p><b>免責事項：</b>{disclaimer}</p>
+    </div>
+  </section>
+
+  <!-- ===== 選ぶポイント ===== -->
+  <section class="fai-sec">
+    <div class="fai-sechead reveal">
+      <span class="fai-eyebrow">How to choose</span>
+      <h2>無料AI画像生成ツールを選ぶポイント</h2>
+      <p>「無料で使える」と案内されていても、形式・上限・透かし・商用条件はツールごとに異なります。試す前に押さえておきたい6つの観点です。</p>
+    </div>
+    <ol class="fai-points reveal" data-stagger>
+      {points.map((p, i) => (
+        <li class="fai-pcard">
+          <span class="pn">{i + 1}</span>
+          <div class="pt">
+            <h3>{p.title}</h3>
+            <p>{p.sub}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- ===== 無料枠で比較すべき項目 ===== -->
+  <section class="fai-sec band">
+    <div class="fai-sechead reveal">
+      <span class="fai-eyebrow">Key factors</span>
+      <h2>無料枠で比較すべき項目</h2>
+      <p>「無料」の中身はツールによって違います。無料プランの形式・透かし・商用利用条件の3点を、利用前に必ず確認しておきましょう。</p>
+    </div>
+
+    <div class="fai-subsec reveal">
+      <h3 class="fai-h3">無料プランの種類を把握する</h3>
+      <p class="fai-p">「無料で使える」という表現には異なる意味が含まれている場合があります。「初回無料クレジット」は継続的に使える「無料プラン」とは別物です。各ツールの公式サイトで、どの形式の「無料」かを確認してください。</p>
+      <div class="fai-tablewrap">
+        <table class="fai-gt">
+          <thead><tr><th>無料プランの種類</th><th>内容</th></tr></thead>
+          <tbody>
+            {planTypes.map((pt) => (
+              <tr>
+                <td>
+                  <div class="fai-ptype">
+                    <span class="en">{pt.en}</span>
+                    <span class="ja">{pt.ja}</span>
+                  </div>
+                </td>
+                <td class="fai-note">{pt.body}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="fai-subsec reveal">
+      <h3 class="fai-h3">透かし（ウォーターマーク）について</h3>
+      <div class="fai-richtext" set:html={watermarkHtml}></div>
+    </div>
+
+    <div class="fai-subsec reveal">
+      <h3 class="fai-h3">商用利用条件のパターン</h3>
+      <ul class="fai-patterns" data-stagger>
+        {patterns.map((p) => (
+          <li>
+            <span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14"/></svg></span>
+            <span class="tx"><b>{p.lead}：</b>{p.body}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== 無料プランがあるツール ===== -->
+  <section class="fai-sec">
+    <div class="fai-sechead reveal">
+      <span class="fai-eyebrow">Tool index</span>
+      <h2>無料プランがあるツール（確認時点）</h2>
+      <p>以下は <b>{toolsAsOf}</b> 時点の調査に基づく目安です。プランや時期によって変更される可能性があります。詳細は各ツールの詳細ページおよび公式サイトでご確認ください。</p>
+    </div>
+    <div class="reveal">
+      <p class="fai-gtcap">各行の確認日と公式サイトをご確認ください。</p>
+      <div class="fai-tablewrap">
+        <table class="fai-gt tools">
+          <thead><tr><th>ツール</th><th>無料プラン</th><th>商用利用</th><th>透かし</th><th>最終確認日</th><th>詳細</th></tr></thead>
+          <tbody>
+            {tools.map((t) => (
+              <tr>
+                <td><div class="fai-tool"><span class="b">{t.initial}</span><span class="nm">{t.name}</span></div></td>
+                <td>{cell(t.freePlan) ? <span class={`fai-st ${t.freePlan!.s}`}><span class="d"></span>{t.freePlan!.label}</span> : <span class="fai-dash">—</span>}</td>
+                <td>{cell(t.commercial) ? <span class={`fai-st ${t.commercial!.s}`}><span class="d"></span>{t.commercial!.label}</span> : <span class="fai-dash">—</span>}</td>
+                <td>{cell(t.watermark) ? <span class={`fai-st ${t.watermark!.s}`}><span class="d"></span>{t.watermark!.label}</span> : <span class="fai-dash">—</span>}</td>
+                <td class="fai-date">{t.date}</td>
+                <td>{toolUrl(t.slug) ? <a class="fai-detail" href={toolUrl(t.slug)}>詳細 →</a> : null}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="fai-legend">
+        <span class="li"><span class="fai-st ok"><span class="d"></span>〇</span> 可能または無料プランあり（確認時点。条件あり）</span>
+        <span class="li"><span class="fai-st cond"><span class="d"></span>△</span> 条件付き・制限付き</span>
+        <span class="li"><span class="fai-st no"><span class="d"></span>×</span> 不可または透かしあり</span>
+      </div>
+      <p class="fai-foot">※ この表は法的判断の根拠ではありません。必ず各ツールの最新公式情報をご確認ください。</p>
+    </div>
+  </section>
+
+  <!-- ===== 用途別おすすめ ===== -->
+  <section class="fai-sec band">
+    <div class="fai-sechead reveal">
+      <span class="fai-eyebrow">By use case</span>
+      <h2>用途別おすすめ</h2>
+      <p>目的に応じて、以下を参考に選ぶことができます。各ツールの詳細条件・最新情報は各ツールの詳細ページおよび公式サイトでご確認ください。</p>
+    </div>
+    <div class="reveal">
+      <div class="fai-tablewrap">
+        <table class="fai-gt usecase">
+          <thead><tr><th>こんなとき</th><th>ツール</th><th>理由</th></tr></thead>
+          <tbody>
+            {useCases.map((u) => (
+              <tr>
+                <td class="fai-situation">{u.situation}</td>
+                <td class="fai-uctool" set:html={u.toolHtml}></td>
+                <td class="fai-note" set:html={u.reason}></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 無料プラン利用時の注意 ===== -->
+  <section class="fai-sec">
+    <div class="fai-sechead reveal">
+      <span class="fai-eyebrow">Caution</span>
+      <h2>無料プラン利用時の注意点</h2>
+      <p>無料枠は流動的です。利用を始める前と、継続利用の節目に、次の点を確認しておきましょう。</p>
+    </div>
+    <div class="fai-callout reveal">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+      <ul data-stagger>
+        {cautions.map((c) => (
+          <li><b>{c.lead}</b>{c.body}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== チェックリスト ===== -->
+  <section class="fai-sec band">
+    <div class="fai-sechead reveal">
+      <span class="fai-eyebrow">Checklist</span>
+      <h2>実際に使う前のチェックリスト</h2>
+      <p>無料プランで生成を始める前に、最低限おさえておきたい項目です。重要な用途では各項目を公式情報で裏付けてください。</p>
+    </div>
+    <ul class="fai-checklist reveal" data-stagger>
+      {checklist.map((c) => (
+        <li><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span class="tx" set:html={c.html}></span></li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="fai-sec">
+    <div class="fai-sechead reveal">
+      <span class="fai-eyebrow">FAQ</span>
+      <h2>よくある質問</h2>
+      <p>無料プランの有無・商用利用・透かし・日本語対応・有料プランへの切り替えについて、確認のポイントをお答えします。</p>
+    </div>
+    <div class="fai-faq reveal">
+      {faqs.map((f) => (
+        <div class="fai-faqitem" aria-expanded="false">
+          <button class="fai-faqq" type="button"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="fai-faqa"><div class="fai-faqa-in" set:html={f.a}></div></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== 注意事項 + 鮮度 ===== -->
+  <section class="fai-sec band">
+    <div class="fai-sechead reveal"><span class="fai-eyebrow">Notes</span><h2>注意事項</h2></div>
+    <ul class="fai-notes reveal">
+      {notes.map((n) => (<li><span class="dot"></span>{n}</li>))}
+    </ul>
+    <div class="fai-freshness reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <span><b>情報の鮮度：</b>記事内容の最終確認日 <span class="mono">{checkedDate}</span>（次回確認予定 <span class="mono">{nextCheckDate}</span>）</span>
+    </div>
+    <div class="fai-disclaimer reveal" style="margin-top:18px;max-width:820px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <p>{footnote}</p>
+    </div>
+  </section>
+
+  <!-- ===== 関連ページ ===== -->
+  <section class="fai-sec" style="padding-bottom:0;">
+    <div class="fai-finder reveal">
+      <h2>関連ページ</h2>
+      <p class="lead">他のガイド・条件ページからも、目的に合う無料ツールを探せます。</p>
+      <div class="fai-taglinks">
+        {related.map((r) => (<a class="fai-taglink" href={r.href}><span class="ld"></span>{r.label}</a>))}
+      </div>
+    </div>
+  </section>
+</article>
+
+<style>
+  /* すべて .fai-x 配下に限定。CSS変数も .fai-x 上に定義（:root非使用）。 */
+  .fai-x {
+    --paper:#F4F4EE; --surface:#FFFFFF; --surface-2:#FAFAF6;
+    --ink:#16181D; --ink-soft:#3A3E47; --muted:#6A7180; --faint:#98A0AD;
+    --line:#E3E2D9; --line-strong:#D2D1C6;
+    --brand:#4B3FE4; --brand-ink:#2E25A6; --brand-tint:#ECEBFB;
+    --video:#E1543A; --video-tint:#FCEDE9; --image:#15897F; --image-tint:#E2F1EF;
+    --ok:#1E8A4C; --ok-tint:#E6F3EC; --warn:#A06A09; --warn-tint:#F8EFD9; --na:#6A7180; --na-tint:#EFEFEA;
+    --f-jp:"Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+    --f-body:"Noto Sans JP",system-ui,sans-serif;
+    --f-latin:"Space Grotesk",system-ui,sans-serif;
+    --f-mono:"Space Mono",ui-monospace,monospace;
+    --radius:14px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(20,22,28,.04),0 1px 3px rgba(20,22,28,.05);
+    --shadow-md:0 4px 14px rgba(20,22,28,.06),0 2px 6px rgba(20,22,28,.04);
+    --ease:cubic-bezier(.22,.61,.36,1);
+
+    font-family: var(--f-body);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .fai-x :where(h1,h2,h3) { font-family: var(--f-jp); font-weight: 700; line-height: 1.32; letter-spacing: .01em; margin: 0; }
+  .fai-x :where(p) { margin: 0; }
+  .fai-x a { color: inherit; text-decoration: none; }
+
+  /* セクション */
+  .fai-sec { padding: 64px 0; }
+  .fai-sec.band { background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .fai-sechead { max-width: 720px; margin-bottom: 32px; }
+  .fai-sechead h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 900; letter-spacing: -.005em; margin: 16px 0 12px; }
+  .fai-sechead p { color: var(--muted); font-size: 15px; }
+  .fai-sechead p b { color: var(--ink-soft); font-weight: 700; }
+  .fai-eyebrow { font-family: var(--f-latin); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); display: inline-flex; align-items: center; gap: 10px; }
+  .fai-eyebrow::before { content: ""; width: 22px; height: 2px; border-radius: 2px; background: var(--brand); }
+
+  /* 記事ヘッダー */
+  .fai-head { padding-bottom: 8px; }
+  .fai-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  .fai-pill { font-family: var(--f-jp); font-weight: 700; font-size: 12px; letter-spacing: .04em; color: var(--brand-ink); background: var(--brand-tint); padding: 5px 13px; border-radius: 999px; display: inline-flex; align-items: center; gap: 7px; }
+  .fai-pill svg { width: 13px; height: 13px; }
+  .fai-checked { font-family: var(--f-mono); font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; }
+  .fai-checked svg { width: 14px; height: 14px; }
+  .fai-checked b { color: var(--ink-soft); font-weight: 700; }
+  .fai-h1 { font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; letter-spacing: -.01em; line-height: 1.24; margin: 14px 0 16px; }
+  .fai-h1 .hl { color: var(--brand-ink); position: relative; }
+  .fai-h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .26em; background: color-mix(in srgb, var(--brand) 18%, transparent); z-index: -1; border-radius: 2px; }
+  .fai-lead { font-size: 15.5px; color: var(--ink-soft); max-width: 640px; }
+  .fai-stats { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 24px; }
+  .fai-stat { display: flex; align-items: baseline; gap: 8px; }
+  .fai-stat + .fai-stat { padding-left: 26px; border-left: 1px solid var(--line); }
+  .fai-stat .n { font-family: var(--f-latin); font-weight: 700; font-size: 24px; color: var(--ink); line-height: 1; }
+  .fai-stat .t { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+
+  /* 結論 + 免責 */
+  .fai-conclusion { position: relative; background: var(--brand-tint); border: 1px solid color-mix(in srgb, var(--brand) 24%, var(--line)); border-radius: var(--radius-lg); padding: 30px 34px 28px; overflow: hidden; }
+  .fai-conclusion::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 5px; background: var(--brand); }
+  .fai-conclusion .ttl { margin-bottom: 8px; }
+  .fai-conclusion .ttl .k { font-family: var(--f-latin); font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--brand); }
+  .fai-conclusion h2 { font-size: 21px; font-weight: 900; color: var(--brand-ink); line-height: 1.3; margin-bottom: 12px; }
+  .fai-conclusion :where(p) { font-size: 14.5px; color: var(--ink-soft); line-height: 1.85; }
+  .fai-conclusion :where(p) + :where(p) { margin-top: 10px; }
+  .fai-conclusion b { color: var(--brand-ink); font-weight: 700; }
+
+  .fai-disclaimer { display: flex; align-items: flex-start; gap: 12px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; margin-top: 18px; }
+  .fai-disclaimer svg { width: 18px; height: 18px; color: var(--muted); flex: none; margin-top: 2px; }
+  .fai-disclaimer p { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+  .fai-disclaimer b { color: var(--ink-soft); font-weight: 700; }
+
+  /* 選ぶポイント */
+  .fai-points { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; list-style: none; margin: 0; padding: 0; }
+  .fai-pcard { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; display: flex; align-items: flex-start; gap: 15px; transition: transform .2s var(--ease), box-shadow .2s, border-color .2s; }
+  .fai-pcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: color-mix(in srgb, var(--brand) 30%, var(--line)); }
+  .fai-pcard .pn { font-family: var(--f-latin); font-weight: 700; font-size: 16px; color: var(--brand); background: var(--brand-tint); width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; flex: none; }
+  .fai-pcard h3 { font-size: 15.5px; line-height: 1.4; color: var(--ink); margin-bottom: 5px; }
+  .fai-pcard .pt p { font-size: 12.5px; color: var(--muted); line-height: 1.65; }
+
+  /* サブセクション */
+  .fai-subsec { margin-top: 8px; }
+  .fai-subsec + .fai-subsec { margin-top: 38px; }
+  .fai-h3 { font-family: var(--f-jp); font-weight: 700; font-size: 18px; color: var(--ink); margin-bottom: 10px; display: flex; align-items: center; gap: 11px; }
+  .fai-h3::before { content: ""; width: 4px; height: 18px; border-radius: 2px; background: var(--brand); flex: none; }
+  .fai-p { font-size: 14px; color: var(--ink-soft); line-height: 1.85; max-width: 760px; margin-bottom: 16px; }
+  .fai-richtext :where(p) { font-size: 14px; color: var(--ink-soft); line-height: 1.85; max-width: 760px; }
+  .fai-richtext :where(p) + :where(p) { margin-top: 12px; }
+  .fai-richtext .em { color: var(--ink); }
+  .fai-richtext b { color: var(--brand-ink); font-weight: 700; }
+
+  /* 商用利用パターン */
+  .fai-patterns { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .fai-patterns li { display: grid; grid-template-columns: auto 1fr; gap: 13px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
+  .fai-patterns .mk { width: 26px; height: 26px; border-radius: 8px; background: var(--brand-tint); color: var(--brand-ink); display: grid; place-items: center; flex: none; margin-top: 1px; }
+  .fai-patterns .mk svg { width: 15px; height: 15px; }
+  .fai-patterns .tx { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; }
+  .fai-patterns .tx b { color: var(--ink); font-weight: 700; }
+
+  /* ガイド表（共通） */
+  .fai-gtcap { font-size: 12.5px; color: var(--muted); margin-bottom: 12px; }
+  .fai-tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-sm); }
+  table.fai-gt { width: 100%; border-collapse: collapse; }
+  table.fai-gt.tools { min-width: 820px; }
+  table.fai-gt.usecase { min-width: 640px; }
+  table.fai-gt thead th { font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--ink-soft); background: var(--surface-2); padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  table.fai-gt tbody td { padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  table.fai-gt tbody tr:last-child td { border-bottom: none; }
+  table.fai-gt tbody tr { transition: background .12s; }
+  table.fai-gt tbody tr:hover { background: var(--surface-2); }
+  .fai-tool { display: flex; align-items: center; gap: 11px; min-width: 150px; }
+  .fai-tool .b { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; background: var(--brand-tint); color: var(--brand-ink); font-family: var(--f-latin); font-weight: 700; font-size: 14px; flex: none; }
+  .fai-tool .nm { font-family: var(--f-jp); font-weight: 700; font-size: 14px; color: var(--ink); line-height: 1.3; white-space: nowrap; }
+  .fai-note { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+  .fai-note a { color: var(--brand-ink); font-weight: 600; }
+  .fai-date { font-family: var(--f-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .fai-detail { font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--brand-ink); white-space: nowrap; }
+  .fai-detail:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .fai-dash { color: var(--faint); font-size: 13px; }
+
+  /* 無料プランの種類 */
+  .fai-ptype { display: flex; flex-direction: column; gap: 2px; min-width: 150px; }
+  .fai-ptype .en { font-family: var(--f-latin); font-weight: 600; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); }
+  .fai-ptype .ja { font-family: var(--f-jp); font-weight: 700; font-size: 14.5px; color: var(--ink); }
+
+  /* 用途別 */
+  .fai-situation { font-family: var(--f-jp); font-weight: 700; font-size: 14px; color: var(--ink); min-width: 200px; }
+  .fai-uctool { font-family: var(--f-jp); font-weight: 700; font-size: 13.5px; color: var(--ink-soft); white-space: nowrap; }
+  .fai-uctool a { color: var(--brand-ink); }
+  .fai-uctool a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ステータスバッジ */
+  .fai-st { display: inline-flex; align-items: center; gap: 6px; flex: none; font-family: var(--f-jp); font-weight: 700; font-size: 12px; line-height: 1.2; padding: 5px 11px; border-radius: 999px; white-space: nowrap; }
+  .fai-st .d { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .fai-st.ok   { color: var(--ok);    background: var(--ok-tint); }
+  .fai-st.cond { color: var(--warn);  background: var(--warn-tint); }
+  .fai-st.no   { color: var(--video); background: var(--video-tint); }
+  .fai-st.na   { color: var(--na);    background: var(--na-tint); }
+
+  .fai-legend { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 14px; font-size: 12.5px; color: var(--muted); align-items: flex-start; }
+  .fai-legend .li { display: inline-flex; align-items: center; gap: 8px; }
+  .fai-legend .li .fai-st { flex: none; padding: 3px 8px; }
+  .fai-foot { margin-top: 12px; font-size: 12px; color: var(--faint); line-height: 1.7; }
+
+  /* コールアウト（注意点） */
+  .fai-callout { display: flex; align-items: flex-start; gap: 16px; background: var(--warn-tint); border: 1px solid color-mix(in srgb, var(--warn) 26%, var(--line)); border-radius: var(--radius-lg); padding: 26px 30px; }
+  .fai-callout .ic { width: 26px; height: 26px; color: var(--warn); flex: none; margin-top: 2px; }
+  .fai-callout .ic svg { width: 26px; height: 26px; }
+  .fai-callout ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .fai-callout li { font-size: 14px; color: var(--ink-soft); line-height: 1.7; padding-left: 18px; position: relative; }
+  .fai-callout li::before { content: ""; position: absolute; left: 0; top: 10px; width: 7px; height: 7px; border-radius: 50%; background: var(--warn); }
+  .fai-callout li b { color: var(--ink); font-weight: 700; }
+
+  /* チェックリスト */
+  .fai-checklist { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px 32px; display: flex; flex-direction: column; gap: 2px; max-width: 880px; list-style: none; margin: 0; }
+  .fai-checklist li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; padding: 13px 0; border-bottom: 1px dashed var(--line); }
+  .fai-checklist li:last-child { border-bottom: none; }
+  .fai-checklist .box { width: 24px; height: 24px; border-radius: 7px; border: 2px solid var(--brand); display: grid; place-items: center; flex: none; margin-top: 1px; }
+  .fai-checklist .box svg { width: 14px; height: 14px; color: var(--brand); }
+  .fai-checklist .tx { font-size: 14px; color: var(--ink-soft); line-height: 1.65; }
+  .fai-checklist .tx b { color: var(--ink); font-weight: 700; }
+
+  /* FAQ */
+  .fai-faq { max-width: 860px; }
+  .fai-faqitem { border-bottom: 1px solid var(--line); }
+  .fai-faqitem:first-child { border-top: 1px solid var(--line); }
+  .fai-faqq { width: 100%; text-align: left; background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 16px; padding: 24px 6px; font-family: var(--f-jp); font-weight: 700; font-size: 16px; color: var(--ink); }
+  .fai-faqq .qm { font-family: var(--f-latin); color: var(--brand); font-size: 16px; flex: none; }
+  .fai-faqq .ind { margin-left: auto; flex: none; width: 24px; height: 24px; display: grid; place-items: center; transition: transform .3s var(--ease); color: var(--muted); }
+  .fai-faqq .ind svg { width: 18px; height: 18px; }
+  .fai-faqitem[aria-expanded="true"] .fai-faqq .ind { transform: rotate(45deg); color: var(--brand); }
+  .fai-faqa { max-height: 0; overflow: hidden; transition: max-height .35s var(--ease); }
+  .fai-faqa-in { padding: 0 6px 26px 46px; color: var(--ink-soft); font-size: 14.5px; line-height: 1.8; }
+  .fai-faqa-in a { color: var(--brand-ink); font-weight: 600; }
+
+  /* 注意事項 + 鮮度 */
+  .fai-notes { list-style: none; display: flex; flex-direction: column; gap: 12px; max-width: 820px; margin: 0; padding: 0; }
+  .fai-notes li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; font-size: 13.5px; color: var(--ink-soft); line-height: 1.75; }
+  .fai-notes li .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex: none; margin-top: 9px; }
+  .fai-freshness { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 11px 20px; font-size: 13px; color: var(--ink-soft); max-width: max-content; }
+  .fai-freshness svg { width: 16px; height: 16px; color: var(--brand); flex: none; }
+  .fai-freshness b { font-weight: 700; color: var(--ink); }
+  .fai-freshness .mono { font-family: var(--f-mono); font-size: 12.5px; }
+
+  /* 関連 */
+  .fai-finder { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 34px 34px 30px; }
+  .fai-finder h2 { font-size: clamp(20px, 2.4vw, 26px); margin-bottom: 6px; }
+  .fai-finder .lead { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+  .fai-taglinks { display: flex; flex-wrap: wrap; gap: 10px; }
+  .fai-taglink { font-family: var(--f-jp); font-weight: 600; font-size: 13.5px; padding: 9px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink-soft); display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; transition: transform .16s var(--ease), background .16s, border-color .16s, color .16s; }
+  .fai-taglink:hover { border-color: var(--brand); color: var(--brand-ink); background: var(--brand-tint); transform: translateY(-1px); }
+  .fai-taglink .ld { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex: none; }
+
+  /* スクロール表示アニメ */
+  @media (prefers-reduced-motion: no-preference) {
+    .fai-x .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .fai-x .reveal.in { opacity: 1; transform: none; }
+    .fai-x .reveal[data-stagger] > * { opacity: 0; transform: translateY(16px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+    .fai-x .reveal[data-stagger].in > * { opacity: 1; transform: none; }
+    .fai-x .reveal[data-stagger].in > *:nth-child(1) { transition-delay: .04s; }
+    .fai-x .reveal[data-stagger].in > *:nth-child(2) { transition-delay: .10s; }
+    .fai-x .reveal[data-stagger].in > *:nth-child(3) { transition-delay: .16s; }
+    .fai-x .reveal[data-stagger].in > *:nth-child(4) { transition-delay: .22s; }
+    .fai-x .reveal[data-stagger].in > *:nth-child(5) { transition-delay: .28s; }
+    .fai-x .reveal[data-stagger].in > *:nth-child(6) { transition-delay: .34s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fai-x .reveal, .fai-x .reveal[data-stagger] > * { opacity: 1 !important; transform: none !important; }
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 980px) { .fai-points { grid-template-columns: 1fr 1fr; } .fai-patterns { grid-template-columns: 1fr; } }
+  @media (max-width: 720px) {
+    .fai-sec { padding: 48px 0; }
+    .fai-points { grid-template-columns: 1fr; }
+    .fai-conclusion { padding: 24px 22px; }
+    .fai-checklist { padding: 22px 20px; }
+    .fai-callout { padding: 22px 20px; }
+    .fai-stat + .fai-stat { padding-left: 0; border-left: none; }
+  }
+</style>
+
+<script>
+  // JSは [data-fai] 配下のみ操作（既存サイトに干渉しない）
+  (function () {
+    document.querySelectorAll('[data-fai]').forEach(function (root) {
+      // FAQ 開閉（1つ開くと他は閉じる）
+      var faq = root.querySelector('.fai-faq');
+      if (faq) {
+        faq.addEventListener('click', function (e) {
+          var btn = (e.target as HTMLElement).closest('.fai-faqq');
+          if (!btn) return;
+          var item = btn.closest('.fai-faqitem') as HTMLElement;
+          var open = item.getAttribute('aria-expanded') === 'true';
+          faq.querySelectorAll('.fai-faqitem').forEach(function (it) {
+            it.setAttribute('aria-expanded', 'false');
+            var a = it.querySelector('.fai-faqa') as HTMLElement | null;
+            if (a) a.style.maxHeight = '';
+          });
+          if (!open) {
+            item.setAttribute('aria-expanded', 'true');
+            var a = item.querySelector('.fai-faqa') as HTMLElement | null;
+            if (a) a.style.maxHeight = a.scrollHeight + 'px';
+          }
+        });
+      }
+
+      // スクロール表示アニメ（prefers-reduced-motion 尊重・8秒フェイルセーフ）
+      var reveals = Array.prototype.slice.call(root.querySelectorAll('.reveal'));
+      if (!reveals.length) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        reveals.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      reveals.forEach(function (el) { io.observe(el); });
+      setTimeout(function () { reveals.forEach(function (el) { el.classList.add('in'); }); }, 8000);
+    });
+  })();
+</script>

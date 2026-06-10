@@ -1,0 +1,384 @@
+---
+/**
+ * ComparisonHub.astro
+ * 「AIツール比較記事一覧」ハブページ本文
+ *  — 注意バナー ＋ どの比較記事を読む？（ルーター）＋ 比較記事カード（フラッグシップ＋一覧）＋ FAQ ＋ あわせて見る
+ *
+ * 安全性（Tailwind / 既存ページを壊さない）:
+ *  - スタイルは Astro scoped <style>。全セレクタを .chub-x 配下に限定 → 漏れない。
+ *  - CSS変数は :root でなく .chub-x 上に定義 → 既存トークンと非衝突。
+ *  - 素のリセット（* / body / table 等の global 指定）なし → Tailwind preflight 非干渉。
+ *  - JS は [data-chub] 配下のみ操作。複数設置も可。
+ *
+ * ヘッダー / フッター / パンくず は既存 Layout 側のものを使う想定。
+ * このコンポーネントは <main> の中身（記事本文）だけを描画します。
+ */
+export interface Stat { n: string; label: string; tone?: 'image' | 'video'; }
+export interface RouterLink { label: string; href: string; ghost?: boolean; }
+export interface RouterRow { goal: string; links: RouterLink[]; }
+export interface Featured { catLabel: string; title: string; desc: string; axes: string[]; href: string; }
+export type CatTone = 'brand' | 'free' | 'video' | 'image';
+export interface Article { tone: CatTone; catLabel: string; title: string; desc: string; href: string; }
+export interface Faq { q: string; a: string; } // a は HTML 文字列可
+export interface RelatedLink { label: string; href: string; solid?: boolean; }
+
+export interface Props {
+  headingHtml?: string;
+  lead?: string;
+  notice?: string;
+  stats?: Stat[];
+  router?: RouterRow[];
+  featured?: Featured;
+  articles?: Article[];
+  faqs?: Faq[];
+  related?: RelatedLink[];
+}
+
+const {
+  headingHtml = 'AIツール<br><span class="hl">比較記事</span>一覧',
+  lead = 'AI画像生成・AI動画生成ツールを、用途・料金・無料枠・商用利用条件・透かし・日本語対応などの観点で比較した記事をまとめています。どのツールを選ぶか迷ったとき、まずこのページから目的に合った比較記事を探してみてください。',
+  notice = '商用利用条件や著作権はツール・プラン・用途によって異なる場合があります。比較記事はあくまで参考情報です。掲載内容は確認時点のもので、最新情報や具体的な利用可否は必ず各公式サイトでご確認ください。本サイトは商用利用・著作権について断定せず、本記事群は法的助言ではありません。',
+  stats = [
+    { n:'8', label:'比較記事' },
+    { n:'6', label:'画像生成', tone:'image' },
+    { n:'1', label:'動画生成', tone:'video' },
+    { n:'5', label:'比較観点' },
+  ] as Stat[],
+  router = [
+    { goal:'AI画像生成とAI動画生成をまとめて比較したい', links:[{ label:'AI画像・動画生成ツール比較表', href:'/comparisons/ai-image-video-tools/' }] },
+    { goal:'無料で使えるAI画像生成ツールを条件別に比較したい', links:[{ label:'無料AI画像生成ツール比較', href:'/comparisons/free-ai-image-generators/' }, { label:'無料で試せるツール一覧', href:'/conditions/free/', ghost:true }] },
+    { goal:'AI動画生成でRunwayとPikaを比較したい', links:[{ label:'Runway vs Pika', href:'/comparisons/runway-vs-pika/' }] },
+    { goal:'MidjourneyとAdobe Fireflyを比較したい', links:[{ label:'Midjourney vs Adobe Firefly', href:'/comparisons/midjourney-vs-adobe-firefly/' }] },
+    { goal:'Canva AIとAdobe Fireflyを比較したい', links:[{ label:'Canva AI vs Adobe Firefly', href:'/comparisons/canva-ai-vs-adobe-firefly/' }] },
+  ] as RouterRow[],
+  featured = {
+    catLabel:'比較表 / 横断',
+    title:'AI画像・動画生成ツール比較表',
+    desc:'商用利用・無料枠・日本語対応・透かし・料金目安で、主要ツールを横並びで比較できます。まず全体像をつかみたいときの出発点です。',
+    axes:['商用利用','無料枠','日本語対応','透かし','料金目安'],
+    href:'/comparisons/ai-image-video-tools/',
+  } as Featured,
+  articles = [
+    { tone:'free',  catLabel:'無料枠',   title:'無料AI画像生成ツール比較', desc:'無料枠・透かし・商用利用条件をまとめて確認できます。', href:'/comparisons/free-ai-image-generators/' },
+    { tone:'video', catLabel:'動画生成', title:'Runway vs Pika', desc:'料金・無料枠・商用利用・用途別の選び方を比較（動画生成）。', href:'/comparisons/runway-vs-pika/' },
+    { tone:'image', catLabel:'画像生成', title:'Midjourney vs Adobe Firefly', desc:'商用利用・料金・日本語対応・用途の違いを比較。', href:'/comparisons/midjourney-vs-adobe-firefly/' },
+    { tone:'image', catLabel:'画像生成', title:'DALL·E vs Midjourney', desc:'ChatGPT連携・画質・商用利用・用途の違いを比較。', href:'/comparisons/dalle-vs-midjourney/' },
+    { tone:'image', catLabel:'画像生成', title:'Stable Diffusion vs Midjourney', desc:'無料利用・画質・商用利用・自由度の違いを比較。', href:'/comparisons/stable-diffusion-vs-midjourney/' },
+    { tone:'image', catLabel:'画像生成', title:'Canva AI vs Adobe Firefly', desc:'デザイン制作に使いやすいAI画像生成ツールはどちらか比較。', href:'/comparisons/canva-ai-vs-adobe-firefly/' },
+    { tone:'image', catLabel:'画像生成', title:'Adobe Firefly vs Microsoft Designer', desc:'商用利用・デザイン制作で選ぶAI画像生成ツールを比較。', href:'/comparisons/adobe-firefly-vs-microsoft-designer/' },
+  ] as Article[],
+  faqs = [
+    { q:'どの比較記事から読めばよいですか？',
+      a:'AI画像生成と<a href="/categories/video-generation/">AI動画生成</a>をまとめて見たい場合は<a href="/comparisons/ai-image-video-tools/">全ツール横断比較</a>が出発点になります。動画生成ならRunwayとPikaの比較、画像生成ならMidjourneyやAdobe Fireflyなどのツール別比較記事が参考になります。上の「どの比較記事を読む？」セクションも参照してください。' },
+    { q:'無料ツールだけを比較したい場合はどこを見ればよいですか？',
+      a:'無料枠のあるツールを条件別に探す場合は<a href="/conditions/free/">無料で試せるツール一覧</a>が参考になります。AI画像生成ツールに絞って詳しく比較したい場合は<a href="/comparisons/free-ai-image-generators/">無料AI画像生成ツール比較</a>も参照してください。' },
+    { q:'比較記事の商用利用情報だけで判断できますか？',
+      a:'商用利用条件はツール・プラン・用途によって異なる場合があります。比較記事はあくまで参考情報であり、判断の根拠には公式規約をご確認ください。本サイトは商用利用・著作権について断定しません。詳しくは<a href="/guides/commercial-use-copyright/">商用利用・著作権ガイド</a>もあわせて参照してください。' },
+  ] as Faq[],
+  related = [
+    { label:'無料で試せる', href:'/conditions/free/' },
+    { label:'商用利用を確認', href:'/conditions/commercial-use/' },
+    { label:'商用利用・著作権ガイド', href:'/guides/commercial-use-copyright/' },
+    { label:'用途別記事一覧', href:'/use-cases/' },
+    { label:'すべてのツール', href:'/tools/', solid:true },
+    { label:'AI画像生成ツール一覧', href:'/categories/image-generation/', solid:true },
+    { label:'AI動画生成ツール一覧', href:'/categories/video-generation/', solid:true },
+  ] as RelatedLink[],
+} = Astro.props;
+
+const relStd = related.filter((r) => !r.solid);
+const relSolid = related.filter((r) => r.solid);
+const pad2 = (i: number) => String(i + 1).padStart(2, '0');
+---
+
+<div class="chub-x" data-chub>
+
+  <!-- ===== 見出し ===== -->
+  <header class="chub-head">
+    <span class="eyebrow">Comparisons</span>
+    <h1 set:html={headingHtml}></h1>
+    <p class="lead">{lead}</p>
+    {stats.length > 0 && (
+      <div class="stats">
+        {stats.map((s) => (
+          <div class="stat"><span class={`n${s.tone ? ' ' + s.tone : ''}`}>{s.n}</span><span class="t">{s.label}</span></div>
+        ))}
+      </div>
+    )}
+  </header>
+
+  <!-- ===== 注意 ===== -->
+  {notice && (
+    <div class="notice">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <p><b>ご利用前に：</b>{notice}</p>
+    </div>
+  )}
+
+  <!-- ===== どの比較記事を読む？ ===== -->
+  <section class="chub-sec band">
+    <div class="sec-head">
+      <span class="eyebrow">Where to start</span>
+      <h2>どの比較記事を読む？</h2>
+      <p>「やりたいこと」から、最初に読むと近道になる比較記事を選びました。迷ったら上から順に確認してください。</p>
+    </div>
+    <div class="router">
+      {router.map((row, i) => (
+        <div class="router-row">
+          <span class="goal"><span class="qn">{pad2(i)}</span>{row.goal}</span>
+          <span class="links">
+            {row.links.map((l) => (<a class={`go${l.ghost ? ' ghost' : ''}`} href={l.href}>{l.label} <span class="arr">→</span></a>))}
+          </span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== 比較記事 ===== -->
+  <section class="chub-sec">
+    <div class="sec-head">
+      <span class="eyebrow">All articles</span>
+      <h2>比較記事</h2>
+      <p>テーマ別の比較記事一覧です。各記事は商用利用・料金・無料枠などの観点で、要確認ベースで整理しています。</p>
+    </div>
+    <div class="cmp-grid">
+      <a class="feature-card" href={featured.href}>
+        <div class="fc-body">
+          <span class="cat-badge brand"><span class="d"></span>{featured.catLabel}</span>
+          <h3>{featured.title}</h3>
+          <p>{featured.desc}</p>
+          <div class="fc-axes">{featured.axes.map((a) => (<span>{a}</span>))}</div>
+          <span class="fc-cta">比較表を見る <span class="arr">→</span></span>
+        </div>
+        <div class="fc-visual">
+          <div class="mhead"><span></span><span><span class="dot di"></span>画像</span><span><span class="dot dv"></span>動画</span></div>
+          <div class="mr"><span class="lbl">無料プラン</span><span class="m ok">○</span><span class="m cond">△</span></div>
+          <div class="mr"><span class="lbl">透かしなし</span><span class="m cond">△</span><span class="m cond">△</span></div>
+          <div class="mr"><span class="lbl">日本語対応</span><span class="m ok">○</span><span class="m cond">△</span></div>
+        </div>
+      </a>
+      {articles.map((a) => (
+        <a class="cmp-card" href={a.href}>
+          <span class={`cat-badge ${a.tone}`}><span class="d"></span>{a.catLabel}</span>
+          <h3>{a.title}</h3>
+          <p>{a.desc}</p>
+          <span class="more">読む <span class="arr">→</span></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="chub-sec band">
+    <div class="sec-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>よくある質問</h2>
+      <p>比較記事の読み方や、比較情報をどう判断に使うかについてお答えします。</p>
+    </div>
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <div class="faq-item" aria-expanded="false">
+          <button class="faq-q"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner" set:html={f.a}></div></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== あわせて見る ===== -->
+  <section class="chub-sec">
+    <div class="finder">
+      <h2>あわせて見る</h2>
+      <p class="finder-lead">カテゴリ・条件・ガイドのページからも、目的に合うAIツールを探せます。</p>
+      <div class="taglinks">{relStd.map((r) => (<a class="taglink" href={r.href}><span class="ld"></span>{r.label}</a>))}</div>
+      <div class="taglinks row">{relSolid.map((r) => (<a class="taglink solid" href={r.href}>{r.label}</a>))}</div>
+    </div>
+  </section>
+
+</div>
+
+<style>
+  .chub-x{
+    --paper:#F4F4EE; --surface:#FFFFFF; --surface-2:#FAFAF6;
+    --ink:#16181D; --ink-soft:#3A3E47; --muted:#6A7180; --faint:#98A0AD;
+    --line:#E3E2D9; --line-strong:#D2D1C6;
+    --brand:#4B3FE4; --on-brand:#FFFFFF; --brand-tint:#ECEBFB; --brand-ink:#2E25A6;
+    --video:#E1543A; --video-tint:#FCEDE9; --image:#15897F; --image-tint:#E2F1EF;
+    --ok:#1E8A4C; --ok-tint:#E6F3EC; --warn:#A06A09; --warn-tint:#F8EFD9;
+    --radius:14px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(20,22,28,.04),0 1px 3px rgba(20,22,28,.05);
+    --shadow-md:0 4px 14px rgba(20,22,28,.06),0 2px 6px rgba(20,22,28,.04);
+    --shadow-lg:0 18px 50px -16px rgba(28,24,80,.22);
+    --f-jp:"Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+    --f-latin:"Space Grotesk",system-ui,sans-serif;
+    --f-mono:"Space Mono",ui-monospace,monospace;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    display:block; color:var(--ink); font-family:"Noto Sans JP",system-ui,sans-serif; line-height:1.7;
+  }
+  .chub-x .eyebrow{font-family:var(--f-latin);font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:10px;}
+  .chub-x .eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--brand);}
+  .chub-x h1,.chub-x h2,.chub-x h3,.chub-x h4{font-family:var(--f-jp);font-weight:700;line-height:1.32;color:var(--ink);}
+
+  /* 見出し */
+  .chub-x .chub-head{margin-bottom:8px;}
+  .chub-x .chub-head h1{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-.01em;line-height:1.24;margin:16px 0;}
+  .chub-x .chub-head h1 .hl{color:var(--brand-ink);position:relative;}
+  .chub-x .chub-head h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.26em;background:color-mix(in srgb,var(--brand) 18%,transparent);z-index:-1;border-radius:2px;}
+  .chub-x .lead{font-size:15.5px;color:var(--ink-soft);max-width:660px;}
+  .chub-x .stats{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:24px;}
+  .chub-x .stat{display:flex;align-items:baseline;gap:8px;}
+  .chub-x .stat + .stat{padding-left:26px;border-left:1px solid var(--line);}
+  .chub-x .stat .n{font-family:var(--f-latin);font-weight:700;font-size:24px;color:var(--ink);line-height:1;}
+  .chub-x .stat .n.image{color:var(--image);}
+  .chub-x .stat .n.video{color:var(--video);}
+  .chub-x .stat .t{font-size:12.5px;color:var(--muted);white-space:nowrap;}
+
+  /* 注意バナー */
+  .chub-x .notice{display:flex;align-items:flex-start;gap:12px;background:var(--warn-tint);border:1px solid color-mix(in srgb,var(--warn) 28%,var(--line));border-radius:var(--radius);padding:16px 20px;margin-top:26px;}
+  .chub-x .notice svg{width:18px;height:18px;color:var(--warn);flex:none;margin-top:2px;}
+  .chub-x .notice p{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+  .chub-x .notice b{color:var(--warn);font-weight:700;}
+
+  /* セクション */
+  .chub-x .chub-sec{padding:64px 0;}
+  .chub-x .chub-sec.band{background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    /* 全幅バンドにしたい場合は下記を有効化（サイト最大幅1200px前提・違えば数値調整）:
+    margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); padding-left:max(28px,calc(50vw - 600px)); padding-right:max(28px,calc(50vw - 600px)); */
+  }
+  .chub-x .sec-head{max-width:720px;margin-bottom:40px;}
+  .chub-x .sec-head h2{font-size:clamp(24px,3vw,34px);font-weight:900;letter-spacing:-.005em;margin:16px 0 12px;}
+  .chub-x .sec-head p{color:var(--muted);font-size:15px;}
+
+  /* ルーター */
+  .chub-x .router{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:8px 30px;box-shadow:var(--shadow-sm);}
+  .chub-x .router-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid var(--line);}
+  .chub-x .router-row:last-child{border-bottom:none;}
+  .chub-x .router-row .goal{display:flex;align-items:center;gap:14px;flex:1;min-width:280px;font-size:15px;color:var(--ink-soft);font-weight:500;line-height:1.5;}
+  .chub-x .router-row .goal .qn{font-family:var(--f-latin);font-weight:700;font-size:13px;color:var(--brand);background:var(--brand-tint);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;}
+  .chub-x .router-row .links{display:flex;gap:8px;flex-wrap:wrap;}
+  .chub-x .router-row a.go{font-family:var(--f-jp);font-weight:700;font-size:13px;color:var(--brand-ink);background:var(--brand-tint);padding:9px 15px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:transform .16s var(--ease),background .16s,color .16s;}
+  .chub-x .router-row a.go .arr{transition:transform .2s var(--ease);}
+  .chub-x .router-row a.go:hover{background:var(--brand);color:var(--on-brand);transform:translateY(-1px);}
+  .chub-x .router-row a.go:hover .arr{transform:translateX(3px);}
+  .chub-x .router-row a.go.ghost{background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-soft);}
+  .chub-x .router-row a.go.ghost:hover{background:var(--ink);border-color:var(--ink);color:var(--surface);}
+
+  /* 比較記事カード */
+  .chub-x .cmp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .chub-x .cmp-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 24px 22px;display:flex;flex-direction:column;gap:11px;text-decoration:none;transition:transform .2s var(--ease),box-shadow .2s,border-color .2s;}
+  .chub-x .cmp-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:color-mix(in srgb,var(--brand) 35%,var(--line));}
+  .chub-x .cat-badge{align-self:flex-start;font-family:var(--f-jp);font-weight:700;font-size:11.5px;padding:4px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;line-height:1.2;}
+  .chub-x .cat-badge .d{width:6px;height:6px;border-radius:50%;background:currentColor;}
+  .chub-x .cat-badge.brand{color:var(--brand-ink);background:var(--brand-tint);}
+  .chub-x .cat-badge.free{color:var(--ok);background:var(--ok-tint);}
+  .chub-x .cat-badge.video{color:var(--video);background:var(--video-tint);}
+  .chub-x .cat-badge.image{color:var(--image);background:var(--image-tint);}
+  .chub-x .cmp-card h3{font-size:17px;line-height:1.4;color:var(--ink);}
+  .chub-x .cmp-card p{font-size:13.5px;color:var(--muted);line-height:1.65;flex:1;}
+  .chub-x .cmp-card .more{margin-top:4px;font-family:var(--f-jp);font-weight:700;font-size:13.5px;color:var(--brand-ink);display:inline-flex;align-items:center;gap:7px;}
+  .chub-x .cmp-card .more .arr{transition:transform .2s var(--ease);}
+  .chub-x .cmp-card:hover .more .arr{transform:translateX(4px);}
+
+  /* フラッグシップカード */
+  .chub-x .feature-card{grid-column:1 / -1;display:grid;grid-template-columns:1.2fr .8fr;gap:0;border:1px solid color-mix(in srgb,var(--brand) 28%,var(--line));border-radius:var(--radius-lg);overflow:hidden;background:var(--surface);text-decoration:none;transition:transform .25s var(--ease),box-shadow .25s;}
+  .chub-x .feature-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+  .chub-x .feature-card .fc-body{padding:38px 40px;display:flex;flex-direction:column;gap:14px;justify-content:center;}
+  .chub-x .feature-card .fc-body h3{font-size:clamp(21px,2.4vw,26px);line-height:1.32;color:var(--ink);}
+  .chub-x .feature-card .fc-body p{color:var(--muted);font-size:14.5px;line-height:1.7;}
+  .chub-x .fc-axes{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px;}
+  .chub-x .fc-axes span{font-family:var(--f-jp);font-weight:600;font-size:12px;color:var(--ink-soft);background:var(--surface-2);border:1px solid var(--line);padding:5px 11px;border-radius:999px;}
+  .chub-x .fc-cta{margin-top:8px;font-family:var(--f-jp);font-weight:700;font-size:14.5px;color:var(--brand-ink);display:inline-flex;align-items:center;gap:8px;}
+  .chub-x .fc-cta .arr{transition:transform .2s var(--ease);}
+  .chub-x .feature-card:hover .fc-cta .arr{transform:translateX(4px);}
+  .chub-x .feature-card .fc-visual{background:var(--ink);padding:30px;display:flex;flex-direction:column;justify-content:center;gap:9px;}
+  .chub-x .fc-visual .mhead{display:grid;grid-template-columns:1fr 34px 34px;gap:12px;padding:0 14px 5px;align-items:center;}
+  .chub-x .fc-visual .mhead span{justify-self:center;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.55);display:inline-flex;flex-direction:column;align-items:center;gap:4px;}
+  .chub-x .fc-visual .mhead span .dot{width:7px;height:7px;border-radius:50%;}
+  .chub-x .fc-visual .mhead .di{background:var(--image);}
+  .chub-x .fc-visual .mhead .dv{background:var(--video);}
+  .chub-x .fc-visual .mr{display:grid;grid-template-columns:1fr 34px 34px;gap:12px;align-items:center;padding:11px 14px;background:rgba(255,255,255,.06);border-radius:10px;}
+  .chub-x .fc-visual .mr .lbl{color:#fff;font-family:var(--f-jp);font-weight:700;font-size:12.5px;}
+  .chub-x .fc-visual .mr .m{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;justify-self:center;}
+  .chub-x .fc-visual .m.ok{background:rgba(70,192,124,.16);color:#74D69E;}
+  .chub-x .fc-visual .m.cond{background:rgba(216,163,62,.16);color:#E6C067;}
+
+  /* FAQ */
+  .chub-x .faq-list{max-width:860px;}
+  .chub-x .faq-item{border-bottom:1px solid var(--line);}
+  .chub-x .faq-item:first-child{border-top:1px solid var(--line);}
+  .chub-x .faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:24px 6px;font-family:var(--f-jp);font-weight:700;font-size:16.5px;color:var(--ink);}
+  .chub-x .faq-q .qm{font-family:var(--f-latin);color:var(--brand);font-size:16px;flex:none;}
+  .chub-x .faq-q .ind{margin-left:auto;flex:none;width:24px;height:24px;display:grid;place-items:center;transition:transform .3s var(--ease);color:var(--muted);}
+  .chub-x .faq-q .ind svg{width:18px;height:18px;}
+  .chub-x .faq-item[aria-expanded="true"] .faq-q .ind{transform:rotate(45deg);color:var(--brand);}
+  .chub-x .faq-a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease);}
+  .chub-x .faq-a-inner{padding:0 6px 26px 46px;color:var(--ink-soft);font-size:14.5px;line-height:1.8;}
+  .chub-x .faq-a-inner a{color:var(--brand-ink);font-weight:600;}
+
+  /* あわせて見る */
+  .chub-x .finder{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-lg);padding:34px 34px 30px;}
+  .chub-x .finder h2{font-size:clamp(20px,2.4vw,26px);margin-bottom:6px;}
+  .chub-x .finder-lead{color:var(--muted);font-size:14px;margin-bottom:22px;}
+  .chub-x .taglinks{display:flex;flex-wrap:wrap;gap:10px;}
+  .chub-x .taglink{font-family:var(--f-jp);font-weight:600;font-size:13.5px;padding:9px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-soft);text-decoration:none;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:transform .16s var(--ease),background .16s,border-color .16s,color .16s;}
+  .chub-x .taglink:hover{border-color:var(--brand);color:var(--brand-ink);background:var(--brand-tint);transform:translateY(-1px);}
+  .chub-x .taglink .ld{width:7px;height:7px;border-radius:50%;background:var(--brand);flex:none;}
+  .chub-x .taglinks.row{margin-top:16px;padding-top:18px;border-top:1px dashed var(--line-strong);}
+  .chub-x .taglink.solid{background:var(--ink);color:var(--surface);border-color:var(--ink);}
+  .chub-x .taglink.solid:hover{background:var(--brand);border-color:var(--brand);color:var(--on-brand);}
+
+  /* reveal（任意・JSが付与） */
+  @media (prefers-reduced-motion: no-preference){
+    .chub-x .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+    .chub-x .reveal.in{opacity:1;transform:none;}
+  }
+
+  @media (max-width:980px){
+    .chub-x .cmp-grid{grid-template-columns:repeat(2,1fr);}
+    .chub-x .feature-card{grid-template-columns:1fr;}
+    .chub-x .feature-card .fc-visual{order:-1;}
+  }
+  @media (max-width:720px){
+    .chub-x .chub-sec{padding:52px 0;}
+    .chub-x .cmp-grid{grid-template-columns:1fr;}
+    .chub-x .router{padding:8px 22px;}
+    .chub-x .stat + .stat{padding-left:0;border-left:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .chub-x *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+    .chub-x .reveal{opacity:1 !important;transform:none !important;}
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-chub]').forEach((root) => {
+    /* FAQ アコーディオン */
+    const items = Array.from(root.querySelectorAll<HTMLElement>('.faq-item'));
+    items.forEach((item) => {
+      const q = item.querySelector<HTMLElement>('.faq-q')!;
+      const a = item.querySelector<HTMLElement>('.faq-a')!;
+      q.addEventListener('click', () => {
+        const open = item.getAttribute('aria-expanded') === 'true';
+        items.forEach((other) => {
+          other.setAttribute('aria-expanded', 'false');
+          other.querySelector<HTMLElement>('.faq-a')!.style.maxHeight = '';
+        });
+        if (!open) { item.setAttribute('aria-expanded', 'true'); a.style.maxHeight = a.scrollHeight + 'px'; }
+      });
+    });
+
+    /* スクロール表示アニメーション */
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targets = Array.from(root.querySelectorAll<HTMLElement>('.sec-head, .router, .cmp-grid, .faq-list, .finder'));
+    targets.forEach((el) => el.classList.add('reveal'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+      targets.forEach((el) => io.observe(el));
+      window.setTimeout(() => targets.forEach((el) => el.classList.add('in')), 8000);
+    }
+  });
+</script>

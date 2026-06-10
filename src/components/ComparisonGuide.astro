@@ -1,0 +1,441 @@
+---
+/**
+ * ComparisonGuide.astro
+ * 「AI画像生成・AI動画生成ツール比較」記事ページ本文
+ *  — 違い（画像/動画ピラー）＋ 用途カード ＋ 比較ポイント表 ＋ 関連ページ ＋ FAQ ＋ 免責
+ *
+ * 安全性（Tailwind / 既存ページを壊さない）:
+ *  - スタイルは Astro scoped <style>。全セレクタを .cig-x 配下に限定 → 漏れない。
+ *  - CSS変数は :root でなく .cig-x 上に定義 → 既存トークンと非衝突。
+ *  - 素のリセット（* / body / table 等の global 指定）なし → Tailwind preflight 非干渉。
+ *  - JS は [data-cig] 配下のみ操作。複数設置も可。
+ *
+ * ヘッダー / フッター / パンくず は既存 Layout 側のものを使う想定。
+ * このコンポーネントは <main> の中身（記事本文）だけを描画します。
+ */
+export interface Row {
+  icon?: 'free' | 'watermark' | 'commercial' | 'japanese';
+  item: string;
+  image: string;
+  imageEm?: string;   // 画像列の強調語（任意。例: 'あり'）
+  video: string;
+  videoEm?: string;   // 動画列の強調語（任意）
+  videoNote?: string; // 動画列の補足（小さく下に表示）
+}
+export interface Faq { q: string; a: string; } // a は HTML 文字列可
+export interface RelatedLink { label: string; href: string; solid?: boolean; }
+
+export interface Props {
+  heading?: string;
+  lead?: string;
+  imageHref?: string;          // 画像生成カテゴリ一覧
+  videoHref?: string;          // 動画生成カテゴリ一覧
+  imageDiff?: string[];        // 違いセクション・画像の箇条書き
+  videoDiff?: string[];        // 違いセクション・動画の箇条書き
+  imageUseCases?: string[];    // 用途・画像
+  videoUseCases?: string[];    // 用途・動画
+  rows?: Row[];                // 比較ポイント表
+  related?: RelatedLink[];     // 関連ページ
+  faqs?: Faq[];
+  disclaimer?: string;
+}
+
+const {
+  heading = 'AI画像生成・AI動画生成ツール比較',
+  lead = 'AI画像生成ツールとAI動画生成ツールの違いと、用途ごとの選び方を整理しています。商用利用・透かし・無料プランの確認ポイントも共通して解説します。',
+  imageHref = '/categories/image-generation/',
+  videoHref = '/categories/video-generation/',
+  imageDiff = [
+    'テキストから静止画（png / jpg）を生成',
+    'SNS投稿画像・ブログアイキャッチ・EC商品画像などに活用',
+    '比較的低コストで利用できるツールが多い',
+    '無料プランがあるツールも多数',
+  ],
+  videoDiff = [
+    'テキストや静止画から短い動画クリップを生成',
+    'SNS動画・プロモーション動画・プレゼン素材などに活用',
+    '画像生成よりも高負荷・高コストになる傾向',
+    '音声・BGM素材の権利確認が追加で必要',
+  ],
+  imageUseCases = [
+    'ブログ・記事のアイキャッチ画像',
+    'SNS投稿用の静止画',
+    'ECサイトの商品イメージ素材',
+    '広告バナーのベース素材',
+    'イラスト・コンセプトアート',
+  ],
+  videoUseCases = [
+    'SNS向けショート動画素材',
+    'プレゼン・提案資料の動画素材',
+    '商品・サービスのプロモーション動画',
+    '静止画から動きのある素材への変換',
+  ],
+  rows = [
+    { icon:'free',       item:'無料プランの有無', image:'（多数）', imageEm:'あり', video:'（一部）', videoEm:'あり' },
+    { icon:'watermark',  item:'透かし',           image:'無料プランでは入る場合が多い', video:'無料プランでは入る場合が多い' },
+    { icon:'commercial', item:'商用利用条件',     image:'プランによって異なる', video:'プランによって異なる', videoNote:'音声素材の権利も確認が必要' },
+    { icon:'japanese',   item:'日本語対応',       image:'対応ツールあり', video:'英語UIが多い' },
+  ] as Row[],
+  related = [
+    { label:'無料で使えるツール', href:'/conditions/free/' },
+    { label:'商用利用条件を確認しやすいツール', href:'/conditions/commercial-use/' },
+    { label:'日本語対応ツール', href:'/conditions/japanese/' },
+    { label:'透かしなしツール', href:'/conditions/no-watermark/' },
+    { label:'商用利用・著作権ガイド', href:'/guides/commercial-use-copyright/' },
+    { label:'AI画像生成ツール一覧', href:'/categories/image-generation/', solid:true },
+    { label:'AI動画生成ツール一覧', href:'/categories/video-generation/', solid:true },
+    { label:'比較記事一覧を見る', href:'/comparisons/', solid:true },
+  ] as RelatedLink[],
+  faqs = [
+    { q:'AI画像生成とAI動画生成の違いは何ですか？',
+      a:'AI画像生成は静止画（jpg / png等）を生成するツールです。AI動画生成はテキストや画像から数秒〜数十秒の動画クリップを生成するツールです。用途・必要なスペック・料金体系が大きく異なるため、目的に応じて選ぶことが重要です。' },
+    { q:'画像生成と動画生成、どちらを先に試せばいいですか？',
+      a:'まず用途を明確にすることをおすすめします。SNS投稿画像・ブログアイキャッチ・EC商品画像などの静止画用途なら画像生成ツール、SNS動画・プロモーション動画・プレゼン素材などの動画用途なら動画生成ツールが適しています。<a href="/conditions/free/">無料プランがあるツール</a>から試すのが取り組みやすい方法です。' },
+    { q:'商用利用する場合、画像と動画で確認ポイントは違いますか？',
+      a:'基本的な確認事項（利用規約・プランごとの商用利用条件・透かし）は共通していますが、AI動画生成では音声・BGM素材の権利、人物・背景素材の権利、プラットフォームごとのポリシーなど追加で確認すべき点があります。商用利用前は必ず各ツールの最新公式規約をご確認ください。<a href="/guides/commercial-use-copyright/">商用利用・著作権ガイド</a>もご参照ください。本記事は法的助言ではありません。' },
+  ] as Faq[],
+  disclaimer = '本ページの情報は公式サイト・公式規約を参考に整理したものですが、内容の正確性・完全性を保証するものではありません。商用利用条件・著作権・透かし条件はプランや用途、時期によって変わる可能性があります。実務利用前には必ず各ツールの最新公式情報をご確認ください。本ページは法的助言ではありません。',
+} = Astro.props;
+
+const ICONS: Record<string, string> = {
+  free:       '<path d="M12 2v20M2 12h20"/>',
+  watermark:  '<path d="M12 22c4-3 7-7 7-12a7 7 0 0 0-14 0c0 5 3 9 7 12Z"/>',
+  commercial: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+  japanese:   '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/>',
+};
+const relStd = related.filter((r) => !r.solid);
+const relSolid = related.filter((r) => r.solid);
+---
+
+<div class="cig-x" data-cig>
+
+  <!-- ===== 見出し ===== -->
+  <header class="cig-head">
+    <span class="eyebrow">Comparison Guide</span>
+    <h1 set:html={heading.replace('比較', '<span class="hl">比較</span>')}></h1>
+    <p class="lead">{lead}</p>
+    <div class="axes-row">
+      <span class="axis-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>無料プランの有無</span>
+      <span class="axis-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c4-3 7-7 7-12a7 7 0 0 0-14 0c0 5 3 9 7 12Z"/></svg>透かし</span>
+      <span class="axis-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>商用利用条件</span>
+      <span class="axis-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg>日本語対応</span>
+    </div>
+  </header>
+
+  <!-- ===== 違い ===== -->
+  <section class="cig-sec">
+    <div class="sec-head">
+      <span class="eyebrow">Difference</span>
+      <h2>AI画像生成とAI動画生成の違い</h2>
+      <p>どちらも「テキストや素材から生成する」点は共通ですが、出力形式・コスト・確認すべき権利の範囲が異なります。まずは大きな違いを把握しておきましょう。</p>
+    </div>
+    <div class="diff-pillars">
+      <div class="pillar image">
+        <span class="pillar-accent"></span>
+        <span class="toplbl">Image</span>
+        <div class="pillar-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="m21 15-5-5L5 21"/></svg></div>
+        <h3>AI画像生成ツール</h3>
+        <ul class="pl-list">{imageDiff.map((t) => (<li><span class="b"></span>{t}</li>))}</ul>
+        <div class="pl-link"><a href={imageHref}>AI画像生成ツール一覧 <span class="arr">→</span></a></div>
+      </div>
+      <div class="pillar video">
+        <span class="pillar-accent"></span>
+        <span class="toplbl">Video</span>
+        <div class="pillar-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></div>
+        <h3>AI動画生成ツール</h3>
+        <ul class="pl-list">{videoDiff.map((t) => (<li><span class="b"></span>{t}</li>))}</ul>
+        <div class="pl-link"><a href={videoHref}>AI動画生成ツール一覧 <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 用途 ===== -->
+  <section class="cig-sec band">
+    <div class="sec-head">
+      <span class="eyebrow">Use cases</span>
+      <h2>用途から選ぶ</h2>
+      <p>作りたいアウトプットによって、向いているツールは変わります。代表的な用途を画像・動画それぞれで整理しました。</p>
+    </div>
+    <div class="usecase-grid">
+      <div class="uc-card image">
+        <div class="uc-card-head">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="m21 15-5-5L5 21"/></svg></span>
+          <div><h3>画像生成が向いている用途</h3><span class="sub">Still image</span></div>
+        </div>
+        <ul class="uc-list">{imageUseCases.map((t) => (<li><span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m9 18 6-6-6-6"/></svg></span>{t}</li>))}</ul>
+      </div>
+      <div class="uc-card video">
+        <div class="uc-card-head">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></span>
+          <div><h3>動画生成が向いている用途</h3><span class="sub">Motion clip</span></div>
+        </div>
+        <ul class="uc-list">{videoUseCases.map((t) => (<li><span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m9 18 6-6-6-6"/></svg></span>{t}</li>))}</ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 比較ポイント ===== -->
+  <section class="cig-sec">
+    <div class="sec-head">
+      <span class="eyebrow">Checkpoints</span>
+      <h2>商用利用・無料プランの比較ポイント</h2>
+      <p>仕事や副業で使う前に確認しておきたい項目を、画像生成・動画生成で横並びに整理しました。各条件はプランや時期で変わるため、最終確認は公式サイトで行ってください。</p>
+    </div>
+    <div class="gtable-wrap">
+      <table class="gtable">
+        <thead>
+          <tr>
+            <th class="h-item">確認項目</th>
+            <th class="h-image"><span class="hdot"></span>AI画像生成</th>
+            <th class="h-video"><span class="hdot"></span>AI動画生成</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <td>
+                <span class="item">
+                  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" set:html={ICONS[r.icon ?? 'free']}></svg></span>
+                  {r.item}
+                </span>
+              </td>
+              <td class="v c-image">{r.imageEm && (<span class="em">{r.imageEm}</span>)}{r.image}</td>
+              <td class="v c-video">{r.videoEm && (<span class="em">{r.videoEm}</span>)}{r.video}{r.videoNote && (<span class="note">{r.videoNote}</span>)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="note">※ 各条件は変更される場合があります。最新情報は各公式サイトでご確認ください。本記事は法的助言ではありません。</p>
+  </section>
+
+  <!-- ===== 関連ページ ===== -->
+  <section class="cig-sec">
+    <div class="finder">
+      <h2>関連ページ</h2>
+      <p class="finder-lead">カテゴリ一覧・条件別ページから、目的に合うAIツールをさらに絞り込めます。</p>
+      <div class="taglinks">{relStd.map((r) => (<a class="taglink" href={r.href}><span class="ld"></span>{r.label}</a>))}</div>
+      <div class="taglinks row">{relSolid.map((r) => (<a class="taglink solid" href={r.href}>{r.label}</a>))}</div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="cig-sec band">
+    <div class="sec-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>よくある質問</h2>
+      <p>AI画像生成・動画生成ツールの違いと、選び方・商用利用前の確認ポイントについてお答えします。</p>
+    </div>
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <div class="faq-item" aria-expanded="false">
+          <button class="faq-q"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner" set:html={f.a}></div></div>
+        </div>
+      ))}
+    </div>
+    <div class="disclaimer">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></span>
+      <div><h4>免責事項</h4><p>{disclaimer}</p></div>
+    </div>
+  </section>
+
+</div>
+
+<style>
+  .cig-x{
+    --paper:#F4F4EE; --surface:#FFFFFF; --surface-2:#FAFAF6;
+    --ink:#16181D; --ink-soft:#3A3E47; --muted:#6A7180; --faint:#98A0AD;
+    --line:#E3E2D9; --line-strong:#D2D1C6;
+    --brand:#4B3FE4; --on-brand:#FFFFFF; --brand-tint:#ECEBFB; --brand-ink:#2E25A6;
+    --video:#E1543A; --video-tint:#FCEDE9; --image:#15897F; --image-tint:#E2F1EF;
+    --na:#6A7180; --na-tint:#EFEFEA;
+    --radius:14px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(20,22,28,.04),0 1px 3px rgba(20,22,28,.05);
+    --shadow-lg:0 18px 50px -16px rgba(28,24,80,.22);
+    --f-jp:"Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+    --f-latin:"Space Grotesk",system-ui,sans-serif;
+    --f-mono:"Space Mono",ui-monospace,monospace;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    display:block; color:var(--ink); font-family:"Noto Sans JP",system-ui,sans-serif; line-height:1.7;
+  }
+  .cig-x .eyebrow{font-family:var(--f-latin);font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:10px;}
+  .cig-x .eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--brand);}
+  .cig-x h1,.cig-x h2,.cig-x h3,.cig-x h4{font-family:var(--f-jp);font-weight:700;line-height:1.32;color:var(--ink);}
+
+  /* 見出し */
+  .cig-x .cig-head{margin-bottom:40px;}
+  .cig-x .cig-head h1{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-.01em;line-height:1.24;margin:16px 0;}
+  .cig-x .cig-head h1 .hl{color:var(--brand-ink);position:relative;}
+  .cig-x .cig-head h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.26em;background:color-mix(in srgb,var(--brand) 18%,transparent);z-index:-1;border-radius:2px;}
+  .cig-x .lead{font-size:15.5px;color:var(--ink-soft);max-width:620px;}
+  .cig-x .axes-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .cig-x .axis-chip{font-family:var(--f-jp);font-weight:600;font-size:13px;padding:7px 13px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-soft);display:inline-flex;align-items:center;gap:8px;white-space:nowrap;}
+  .cig-x .axis-chip svg{width:14px;height:14px;color:var(--brand);flex:none;}
+
+  /* セクション */
+  .cig-x .cig-sec{padding:64px 0;}
+  .cig-x .cig-sec.band{background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    /* 親パディングを越えて全幅バンドにしたい場合は下記を有効化:
+    margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); padding-left:max(28px,calc(50vw - 600px)); padding-right:max(28px,calc(50vw - 600px)); */
+  }
+  .cig-x .sec-head{max-width:720px;margin-bottom:40px;}
+  .cig-x .sec-head h2{font-size:clamp(24px,3vw,34px);font-weight:900;letter-spacing:-.005em;margin:16px 0 12px;}
+  .cig-x .sec-head p{color:var(--muted);font-size:15px;}
+
+  /* 違いピラー */
+  .cig-x .diff-pillars{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .cig-x .pillar{position:relative;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);background:var(--surface);padding:38px 36px 32px;display:flex;flex-direction:column;transition:transform .25s var(--ease),box-shadow .25s,border-color .25s;}
+  .cig-x .pillar:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+  .cig-x .pillar .pillar-accent{position:absolute;inset:0 auto 0 0;width:5px;}
+  .cig-x .pillar.image{border-color:color-mix(in srgb,var(--image) 22%,var(--line));}
+  .cig-x .pillar.image .pillar-accent{background:var(--image);}
+  .cig-x .pillar.video{border-color:color-mix(in srgb,var(--video) 22%,var(--line));}
+  .cig-x .pillar.video .pillar-accent{background:var(--video);}
+  .cig-x .pillar .toplbl{position:absolute;top:26px;right:26px;display:inline-flex;align-items:center;font-family:var(--f-latin);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;}
+  .cig-x .pillar.image .toplbl{color:var(--image);background:var(--image-tint);}
+  .cig-x .pillar.video .toplbl{color:var(--video);background:var(--video-tint);}
+  .cig-x .pillar-ico{width:50px;height:50px;border-radius:13px;display:grid;place-items:center;margin-bottom:20px;}
+  .cig-x .pillar.image .pillar-ico{background:var(--image-tint);color:var(--image);}
+  .cig-x .pillar.video .pillar-ico{background:var(--video-tint);color:var(--video);}
+  .cig-x .pillar-ico svg{width:26px;height:26px;}
+  .cig-x .pillar h3{font-size:23px;margin-bottom:10px;}
+  .cig-x .pl-list{list-style:none;padding:0;margin:6px 0 24px;display:flex;flex-direction:column;gap:12px;}
+  .cig-x .pl-list li{display:grid;grid-template-columns:auto 1fr;gap:11px;font-size:14.5px;color:var(--ink-soft);line-height:1.62;}
+  .cig-x .pl-list li .b{width:7px;height:7px;border-radius:50%;margin-top:8px;flex:none;}
+  .cig-x .pillar.image .pl-list li .b{background:var(--image);}
+  .cig-x .pillar.video .pl-list li .b{background:var(--video);}
+  .cig-x .pl-link{margin-top:auto;}
+  .cig-x .pl-link a{font-family:var(--f-jp);font-weight:700;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;}
+  .cig-x .pillar.image .pl-link a{color:var(--image);}
+  .cig-x .pillar.video .pl-link a{color:var(--video);}
+  .cig-x .pl-link a .arr{transition:transform .2s var(--ease);}
+  .cig-x .pl-link a:hover .arr{transform:translateX(4px);}
+
+  /* 用途カード */
+  .cig-x .usecase-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .cig-x .uc-card{border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface);padding:30px 32px;box-shadow:var(--shadow-sm);}
+  .cig-x .uc-card.image{border-color:color-mix(in srgb,var(--image) 24%,var(--line));}
+  .cig-x .uc-card.video{border-color:color-mix(in srgb,var(--video) 24%,var(--line));}
+  .cig-x .uc-card-head{display:flex;align-items:center;gap:13px;margin-bottom:14px;}
+  .cig-x .uc-card-head .ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex:none;}
+  .cig-x .uc-card.image .uc-card-head .ico{background:var(--image-tint);color:var(--image);}
+  .cig-x .uc-card.video .uc-card-head .ico{background:var(--video-tint);color:var(--video);}
+  .cig-x .uc-card-head .ico svg{width:23px;height:23px;}
+  .cig-x .uc-card-head h3{font-size:18px;line-height:1.25;}
+  .cig-x .uc-card-head .sub{font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;}
+  .cig-x .uc-list{list-style:none;padding:0;margin:0;}
+  .cig-x .uc-list li{display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--ink-soft);line-height:1.5;}
+  .cig-x .uc-list li:last-child{border-bottom:none;padding-bottom:0;}
+  .cig-x .uc-list li .ar{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;flex:none;}
+  .cig-x .uc-list li .ar svg{width:13px;height:13px;}
+  .cig-x .uc-card.image .uc-list li .ar{background:var(--image-tint);color:var(--image);}
+  .cig-x .uc-card.video .uc-list li .ar{background:var(--video-tint);color:var(--video);}
+
+  /* 比較ポイント表 */
+  .cig-x .gtable-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-sm);}
+  .cig-x .gtable{width:100%;border-collapse:collapse;min-width:680px;}
+  .cig-x .gtable th,.cig-x .gtable td{text-align:left;padding:18px 22px;border-bottom:1px solid var(--line);vertical-align:top;}
+  .cig-x .gtable thead th{background:var(--surface-2);font-family:var(--f-jp);font-weight:700;font-size:14.5px;white-space:nowrap;}
+  .cig-x .gtable thead th.h-item{color:var(--faint);font-family:var(--f-latin);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
+  .cig-x .gtable thead th.h-image{color:var(--image);}
+  .cig-x .gtable thead th.h-video{color:var(--video);}
+  .cig-x .gtable thead th .hdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:9px;vertical-align:middle;}
+  .cig-x .gtable thead th.h-image .hdot{background:var(--image);}
+  .cig-x .gtable thead th.h-video .hdot{background:var(--video);}
+  .cig-x .gtable tbody tr:last-child td{border-bottom:none;}
+  .cig-x .gtable tbody tr{transition:background .12s;}
+  .cig-x .gtable tbody tr:hover{background:var(--surface-2);}
+  .cig-x .gtable td.c-image{background:color-mix(in srgb,var(--image) 4%,transparent);}
+  .cig-x .gtable td.c-video{background:color-mix(in srgb,var(--video) 4%,transparent);}
+  .cig-x .gtable .item{font-family:var(--f-jp);font-weight:700;color:var(--ink);font-size:14.5px;display:flex;align-items:center;gap:11px;white-space:nowrap;}
+  .cig-x .gtable .item .ic{width:32px;height:32px;border-radius:9px;background:var(--brand-tint);color:var(--brand-ink);display:grid;place-items:center;flex:none;}
+  .cig-x .gtable .item .ic svg{width:16px;height:16px;}
+  .cig-x .gtable td.v{color:var(--ink-soft);font-size:14px;line-height:1.65;}
+  .cig-x .gtable td.v .em{color:var(--ink);font-weight:700;}
+  .cig-x .gtable td.v .note{display:block;font-size:12px;color:var(--muted);margin-top:3px;}
+  .cig-x .note{margin-top:18px;font-size:12.5px;color:var(--faint);line-height:1.7;}
+
+  /* 関連ページ */
+  .cig-x .finder{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-lg);padding:34px 34px 30px;}
+  .cig-x .finder h2{font-size:clamp(20px,2.4vw,26px);margin-bottom:6px;}
+  .cig-x .finder-lead{color:var(--muted);font-size:14px;margin-bottom:22px;}
+  .cig-x .taglinks{display:flex;flex-wrap:wrap;gap:10px;}
+  .cig-x .taglink{font-family:var(--f-jp);font-weight:600;font-size:13.5px;padding:9px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-soft);text-decoration:none;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:transform .16s var(--ease),background .16s,border-color .16s,color .16s;}
+  .cig-x .taglink:hover{border-color:var(--brand);color:var(--brand-ink);background:var(--brand-tint);transform:translateY(-1px);}
+  .cig-x .taglink .ld{width:7px;height:7px;border-radius:50%;background:var(--brand);flex:none;}
+  .cig-x .taglinks.row{margin-top:16px;padding-top:18px;border-top:1px dashed var(--line-strong);}
+  .cig-x .taglink.solid{background:var(--ink);color:var(--surface);border-color:var(--ink);}
+  .cig-x .taglink.solid:hover{background:var(--brand);border-color:var(--brand);color:var(--on-brand);}
+
+  /* FAQ */
+  .cig-x .faq-list{max-width:860px;}
+  .cig-x .faq-item{border-bottom:1px solid var(--line);}
+  .cig-x .faq-item:first-child{border-top:1px solid var(--line);}
+  .cig-x .faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:24px 6px;font-family:var(--f-jp);font-weight:700;font-size:16.5px;color:var(--ink);}
+  .cig-x .faq-q .qm{font-family:var(--f-latin);color:var(--brand);font-size:16px;flex:none;}
+  .cig-x .faq-q .ind{margin-left:auto;flex:none;width:24px;height:24px;display:grid;place-items:center;transition:transform .3s var(--ease);color:var(--muted);}
+  .cig-x .faq-q .ind svg{width:18px;height:18px;}
+  .cig-x .faq-item[aria-expanded="true"] .faq-q .ind{transform:rotate(45deg);color:var(--brand);}
+  .cig-x .faq-a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease);}
+  .cig-x .faq-a-inner{padding:0 6px 26px 46px;color:var(--ink-soft);font-size:14.5px;line-height:1.8;}
+  .cig-x .faq-a-inner a{color:var(--brand-ink);font-weight:600;}
+
+  /* 免責 */
+  .cig-x .disclaimer{display:flex;gap:16px;align-items:flex-start;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2);padding:26px 30px;margin-top:36px;}
+  .cig-x .disclaimer .ico{width:38px;height:38px;border-radius:10px;background:var(--na-tint);color:var(--na);display:grid;place-items:center;flex:none;}
+  .cig-x .disclaimer .ico svg{width:20px;height:20px;}
+  .cig-x .disclaimer h4{font-size:14.5px;margin-bottom:8px;}
+  .cig-x .disclaimer p{font-size:13px;color:var(--muted);line-height:1.85;}
+
+  /* reveal（任意・JSが付与） */
+  @media (prefers-reduced-motion: no-preference){
+    .cig-x .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+    .cig-x .reveal.in{opacity:1;transform:none;}
+  }
+
+  @media (max-width:980px){
+    .cig-x .diff-pillars,.cig-x .usecase-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:720px){
+    .cig-x .cig-sec{padding:52px 0;}
+    .cig-x .uc-card{padding:26px 24px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cig-x *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+    .cig-x .reveal{opacity:1 !important;transform:none !important;}
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-cig]').forEach((root) => {
+    /* FAQ アコーディオン */
+    const items = Array.from(root.querySelectorAll<HTMLElement>('.faq-item'));
+    items.forEach((item) => {
+      const q = item.querySelector<HTMLElement>('.faq-q')!;
+      const a = item.querySelector<HTMLElement>('.faq-a')!;
+      q.addEventListener('click', () => {
+        const open = item.getAttribute('aria-expanded') === 'true';
+        items.forEach((other) => {
+          other.setAttribute('aria-expanded', 'false');
+          other.querySelector<HTMLElement>('.faq-a')!.style.maxHeight = '';
+        });
+        if (!open) { item.setAttribute('aria-expanded', 'true'); a.style.maxHeight = a.scrollHeight + 'px'; }
+      });
+    });
+
+    /* スクロール表示アニメーション */
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targets = Array.from(root.querySelectorAll<HTMLElement>('.sec-head, .diff-pillars, .usecase-grid, .gtable-wrap, .faq-list, .finder'));
+    targets.forEach((el) => el.classList.add('reveal'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+      targets.forEach((el) => io.observe(el));
+      window.setTimeout(() => targets.forEach((el) => el.classList.add('in')), 8000);
+    }
+  });
+</script>

@@ -1,0 +1,583 @@
+---
+/**
+ * NoWatermark.astro
+ * 「透かし条件を確認しやすいAIツール比較」条件ページ本文
+ *  — 見出し ＋ 透かしステータス凡例 ＋ 透かし条件を比較するときのポイント
+ *    ＋ 対象ツール表（無料枠/日本語/商用利用 ＋ 透かしステータスバッジ）
+ *    ＋ 透かしステータス絞り込み＋検索 ＋ 各ツールの透かし・無料枠条件カード ＋ FAQ ＋ 関連ページ
+ *
+ * 安全性（Tailwind / 既存ページを壊さない）:
+ *  - スタイルは Astro scoped <style>。全セレクタを .nw-x 配下に限定 → 漏れない。
+ *  - CSS変数は :root でなく .nw-x 上に定義 → 既存トークンと非衝突。
+ *  - 素のリセット（* / body / table 等の global 指定）なし → Tailwind preflight 非干渉。
+ *  - 表・カードは SSR で描画。JS は [data-nw] 配下のみ操作（絞り込み/検索/FAQ/表示アニメ）。
+ *
+ * ヘッダー / フッター / パンくず / 条件ナビ は既存 Layout 側のものを使う想定。
+ */
+export type WmStatus = 'none' | 'paid' | 'meta' | 'unknown';
+export interface Tool {
+  name: string;
+  slug: string;            // /tools/{slug}/ へのリンクに使用
+  initial?: string;        // バッジ頭文字（省略時は name の先頭）
+  free: string;            // 無料枠: 'あり' | 'なし' | '要確認'
+  ja: string;              // 日本語: '対応' | '非対応' | '要確認'
+  commercial: string;      // 商用利用: '案内あり' | '不可' | '要確認' など（参考列・○/△/×）
+  wm: WmStatus;            // 透かしステータス（バッジ＋絞り込み）
+  wmNote: string;          // 透かし条件の説明（プレーンテキスト）
+  freeNote: string;        // 無料枠の条件の説明（プレーンテキスト）
+}
+export interface Point { title: string; body: string; }   // body は HTML 文字列可
+export interface Faq { q: string; a: string; }             // a は HTML 文字列可
+export interface RelatedLink { label: string; href: string; solid?: boolean; }
+
+export interface Props {
+  headingHtml?: string;
+  lead?: string;
+  notice?: string;
+  toolsBase?: string;          // 詳細リンクのベース（既定 '/tools/'）
+  stats?: { n: string; label: string }[];
+  points?: Point[];
+  tools?: Tool[];
+  faqs?: Faq[];
+  related?: RelatedLink[];
+}
+
+const STATUS: Record<WmStatus, { label: string; cls: string }> = {
+  none:    { label: '透かしなし',  cls: 'none' },
+  paid:    { label: '有料で除去',  cls: 'paid' },
+  meta:    { label: 'メタデータ型', cls: 'meta' },
+  unknown: { label: '要確認',      cls: 'unknown' },
+};
+
+const DEFAULT_POINTS: Point[] = [
+  { title:'プランごとの透かし条件', body:'<a href="/conditions/free/">無料プランでは透かしが入る場合があります</a>。有料プランに移行すると透かしなしになる場合があります。プランごとの条件を公式情報で確認してください。' },
+  { title:'機能・出力形式ごとの違い', body:'生成画像・編集画像・動画生成で透かし条件が異なる可能性があります。使いたい機能に対応した条件を個別に確認してください。' },
+  { title:'用途別の注意点', body:'SNS画像・YouTubeサムネイル・広告バナー・商品画像など、透かしが問題になりやすい用途では特に注意が必要です。実際の出力画面で透かしの有無をご確認ください。' },
+  { title:'商用利用条件は別問題', body:'透かしを除去できることと商用利用が許可されていることは別の問題です。<a href="/conditions/commercial-use/">商用利用条件</a>はツールの公式規約で確認する必要があります。本記事は法的助言ではありません。' },
+  { title:'公式情報で最終確認', body:'本サイトの情報は確認時点のものです。ツール側の方針変更により条件が変わる場合があります。<a href="/tools/">各ツールの詳細ページ</a>の公式リンクから最新情報をご確認ください。' },
+];
+
+const DEFAULT_TOOLS: Tool[] = [
+  { name:'Adobe Firefly', slug:'adobe-firefly', initial:'A', free:'要確認', ja:'対応', commercial:'要確認', wm:'meta',
+    wmNote:'プランによっては可視透かしが入る場合があります。全プランでC2PAメタデータ（コンテンツクレデンシャル）が埋め込まれるとされています。最新の公式情報と実際の出力画面でご確認ください。',
+    freeNote:'無料プランで一定数の生成クレジットがあるとされています（数量は変更の可能性あり）。' },
+  { name:'DALL·E', slug:'dalle', initial:'D', free:'要確認', ja:'対応', commercial:'案内あり', wm:'meta',
+    wmNote:'C2PAメタデータ（不可視）が埋め込まれる場合があるとされています。可視透かしの有無は出力形式・利用環境によって異なる可能性があります。',
+    freeNote:'ChatGPT無料プランで制限付き利用できる場合があります。' },
+  { name:'Hailuo AI', slug:'hailuo-ai', initial:'H', free:'要確認', ja:'要確認', commercial:'要確認', wm:'paid',
+    wmNote:'無料プランでは透かしありとされています。有料プランの透かし条件は公式サイトをご確認ください。',
+    freeNote:'無料枠あり（透かしあり・生成回数制限あり）。詳細は公式サイトをご確認ください。' },
+  { name:'Kling AI', slug:'kling-ai', initial:'K', free:'要確認', ja:'要確認', commercial:'要確認', wm:'paid',
+    wmNote:'無料プランでは透かしが入る可能性があり、有料プランでは条件が変わる場合があります。最新の公式料金ページをご確認ください。',
+    freeNote:'1日66クレジット程度（翌日繰越なし・透かしあり・商用利用不可）とされています。' },
+  { name:'NightCafe', slug:'nightcafe', initial:'N', free:'あり', ja:'要確認', commercial:'要確認', wm:'none',
+    wmNote:'NightCafe公式ブログでは「without any watermarks」と案内されています。ただし仕様は変更される可能性があるため、最新の公式画面でご確認ください。',
+    freeNote:'公式ブログでは無料利用や無料クレジットが案内されています。ただし無料クレジット数・付与条件・有料プランは変更される可能性があるため、最新の公式情報をご確認ください。' },
+  { name:'Midjourney', slug:'midjourney', initial:'M', free:'なし', ja:'要確認', commercial:'要確認', wm:'none',
+    wmNote:'有料プランでは透かしなしとされています。無料プランは提供されていない場合があります。',
+    freeNote:'有料プランのみ。無料枠は提供されていない場合があります。' },
+  { name:'Pika', slug:'pika', initial:'P', free:'要確認', ja:'要確認', commercial:'要確認', wm:'paid',
+    wmNote:'無料プランでは透かしあり、有料プランでは透かしなしとされています。最新の公式情報をご確認ください。',
+    freeNote:'月80クレジット程度（毎月更新・商用利用不可）とされています。' },
+  { name:'PixVerse', slug:'pixverse', initial:'P', free:'要確認', ja:'対応', commercial:'要確認', wm:'paid',
+    wmNote:'無料プランでは透かしありとされています。有料プランの透かし条件は公式サイトをご確認ください。',
+    freeNote:'無料プラン（Basic）あり。複数の第三者情報では、初回サインアップ時に90クレジット付与・毎日60クレジットが補充（当日未使用分は翌日失効）と報告されています。透かしあり・生成回数制限あり。詳細は公式サイトをご確認ください。' },
+  { name:'InVideo AI', slug:'invideo-ai', initial:'I', free:'あり', ja:'要確認', commercial:'要確認', wm:'paid',
+    wmNote:'無料プランでは透かしあり、有料プランでは透かしなしで出力できるとされています。',
+    freeNote:'無料プランあり（透かしあり・エクスポート制限あり）。詳細は公式サイトをご確認ください。' },
+  { name:'Runway', slug:'runway', initial:'R', free:'要確認', ja:'要確認', commercial:'要確認', wm:'paid',
+    wmNote:'無料プランでは透かしあり、有料プランでは透かしなしとされています。',
+    freeNote:'125クレジット（初回のみ・更新なし）とされています。' },
+  { name:'Stable Diffusion', slug:'stable-diffusion', initial:'S', free:'あり', ja:'要確認', commercial:'要確認', wm:'meta',
+    wmNote:'一部バージョンで不可視透かし（invisible watermark）が埋め込まれる場合があるとされています。可視透かしは通常入りませんが、利用環境やモデルによって異なる可能性があります。',
+    freeNote:'ローカル実行は無料（GPU搭載PCと環境構築が必要）。' },
+  { name:'Vidu AI', slug:'vidu-ai', initial:'V', free:'要確認', ja:'要確認', commercial:'要確認', wm:'paid',
+    wmNote:'無料プランでは透かしありとされています。有料プランの透かし条件は公式サイトをご確認ください。',
+    freeNote:'無料枠あり（制限あり）。詳細は公式サイトをご確認ください。' },
+];
+
+const DEFAULT_FAQS: Faq[] = [
+  { q:'透かしなしで使えるAI画像生成ツールはありますか？', a:'透かし条件はプランや機能によって変わる可能性があります。無料プランでも透かしなしで出力できるツールがある一方、有料プランへの移行で透かしが外れるツールもあります。上の一覧表の「透かし条件」欄で各ツールの状況を確認し、実際の出力画面で透かしの有無をご確認ください。' },
+  { q:'無料プランでは透かしが入りますか？', a:'ツールによって異なります。無料プランで透かしなしの出力ができるものもあれば、透かしが入るものもあります。透かし条件はプランや出力形式によって変わる可能性があるため、各ツールの公式情報でご確認ください。無料プランの詳細は<a href="/conditions/free/">無料で使えるツール</a>のページも参照してください。' },
+  { q:'有料プランにすると透かしは消えますか？', a:'有料プランでは透かしなしになる場合があります。ただし、出力形式（静止画・動画・編集機能など）によって透かし条件が異なる可能性があります。最新の公式情報で対象プランと機能を確認したうえで、実際の出力画面で透かしの有無をご確認ください。' },
+  { q:'YouTubeサムネやSNS画像で透かしは問題になりますか？', a:'YouTubeサムネイル・SNS画像・広告バナー・商品画像などで透かし入りの画像を使うと、見栄えや信頼性に影響する場合があります。収益化を伴う用途では特に注意が必要です。透かしの有無に加え、商用利用条件も公式規約で事前に確認することを推奨します。<a href="/conditions/commercial-use/">商用利用条件を確認しやすいツール</a>のページもご参照ください。本記事は法的助言ではありません。' },
+  { q:'商用利用では透かし以外に何を確認すべきですか？', a:'透かしを除去できることと商用利用が許可されていることは別の問題です。商用利用を前提にする場合は、①利用規約における商用利用の定義と許可範囲、②プランごとの条件、③クレジット表記義務、④禁止コンテンツ・用途の制限、を最新の公式規約でご確認ください。<a href="/conditions/commercial-use/">商用利用条件のまとめページ</a>も参考にしてください。本記事は法的助言ではありません。' },
+  { q:'透かしの有無はどこで確認すればいいですか？', a:'公式情報や実際の出力画面で確認する必要があります。本サイトの一覧表は確認時点の情報をまとめたものですが、ツール側の方針変更により条件が変わる場合があります。<a href="/tools/">各ツールの詳細ページ</a>に公式情報へのリンクを掲載していますので、あわせてご活用ください。' },
+];
+
+const {
+  headingHtml = '透かし条件を確認しやすい<br><span class="hl">AIツール</span>比較',
+  lead = 'AI生成画像や動画をSNS画像・YouTubeサムネイル・広告バナー・商品画像などに使う場合、透かしの有無は重要な確認ポイントです。このページでは、透かしなし、または条件付きで透かしを外せる可能性のあるツールを整理しています。透かし条件はプラン・機能・出力形式によって変わる場合があるため、最新情報は各ツールの公式サイト・実際の出力画面でご確認ください。',
+  notice = '透かしの有無は、無料プラン・有料プラン・出力形式によって変わる場合があります。また、透かしを除去できることと商用利用が許可されていることは別の問題です。掲載情報は調査時点の内容であり、実務利用前には必ず各ツールの公式サイト・最新の利用規約をご確認ください。本サイトの内容は法的助言ではありません。',
+  toolsBase = '/tools/',
+  stats = [
+    { n:'12', label:'対象ツール' },
+    { n:'4',  label:'透かしタイプ' },
+    { n:'6',  label:'よくある質問' },
+  ],
+  points = DEFAULT_POINTS,
+  tools = DEFAULT_TOOLS,
+  faqs = DEFAULT_FAQS,
+  related = [
+    { label:'無料で使えるツール', href:'/conditions/free/' },
+    { label:'商用利用を確認しやすいツール', href:'/conditions/commercial-use/' },
+    { label:'日本語対応ツール', href:'/conditions/japanese/' },
+    { label:'透かし・クレジット表記ガイド', href:'/guides/watermark-credit-guide/' },
+    { label:'商用利用・著作権ガイド', href:'/guides/commercial-use-copyright/' },
+    { label:'AI動画生成ツール一覧', href:'/categories/video-generation/' },
+    { label:'全ツール比較表', href:'/comparisons/', solid:true },
+    { label:'すべてのツールを見る', href:'/tools/', solid:true },
+    { label:'AI画像生成ツール一覧', href:'/categories/image-generation/', solid:true },
+  ] as RelatedLink[],
+} = Astro.props;
+
+const relStd = related.filter((r) => !r.solid);
+const relSolid = related.filter((r) => r.solid);
+
+/* ○/△/× の判定（参考列ごとの意味づけ） */
+function mark(field: 'free' | 'ja' | 'commercial', val: string) {
+  let cls = 'cond', ch = '△';
+  if (field === 'free') { if (val === 'あり') { cls = 'yes'; ch = '○'; } else if (val === 'なし') { cls = 'no'; ch = '×'; } }
+  else if (field === 'ja') { if (val === '対応') { cls = 'yes'; ch = '○'; } else if (val === '非対応') { cls = 'no'; ch = '×'; } }
+  else if (field === 'commercial') { if (val === '案内あり' || val === 'あり') { cls = 'yes'; ch = '○'; } else if (val === '不可' || val === 'なし') { cls = 'no'; ch = '×'; } }
+  return { cls, ch };
+}
+const ini = (t: Tool) => t.initial ?? t.name.charAt(0);
+const presentStatuses = Array.from(new Set(tools.map((t) => t.wm)));
+const filterChips: { st: WmStatus | 'all'; label: string }[] = [
+  { st: 'all', label: 'すべて' },
+  ...(['none','paid','meta','unknown'] as WmStatus[]).filter((s) => presentStatuses.includes(s)).map((s) => ({ st: s, label: STATUS[s].label })),
+];
+---
+
+<div class="nw-x" data-nw>
+
+  <!-- ===== 見出し ===== -->
+  <header class="nw-head">
+    <span class="eyebrow">No watermark</span>
+    <h1 set:html={headingHtml}></h1>
+    <p class="lead">{lead}</p>
+    {stats.length > 0 && (
+      <div class="stats">
+        {stats.map((s) => (<div class="stat"><span class="n">{s.n}</span><span class="t">{s.label}</span></div>))}
+      </div>
+    )}
+  </header>
+
+  <!-- ===== 注意 ===== -->
+  {notice && (
+    <div class="notice">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <p><b>ご利用前の注意：</b>{notice}</p>
+    </div>
+  )}
+
+  <!-- ===== 透かしステータスの見方 ===== -->
+  <section class="nw-sec">
+    <div class="sec-head">
+      <span class="eyebrow">Status legend</span>
+      <h2>透かしステータスの見方</h2>
+      <p>各ツールの透かし条件は、確認時点の公式情報をもとに以下の4タイプで整理しています。透かしの有無はプラン・機能・出力形式によって変わる場合があります。実務利用前には実際の出力画面と公式情報でご確認ください。</p>
+    </div>
+    <div class="status-grid">
+      <div class="status-card none"><span class="st none"><span class="d"></span>透かしなし <small>none</small></span><p>公式情報上、可視透かしが入らないと案内されているツールです。仕様は変更される可能性があるため、出力画面でご確認ください。</p></div>
+      <div class="status-card paid"><span class="st paid"><span class="d"></span>有料で除去 <small>paid</small></span><p>無料プランでは透かしが入り、有料プランで透かしなし出力ができる場合があるツールです。対象プランを公式情報で確認してください。</p></div>
+      <div class="status-card meta"><span class="st meta"><span class="d"></span>メタデータ型 <small>meta</small></span><p>可視透かしは入らないものの、C2PAなどの不可視メタデータ（来歴情報）が埋め込まれる場合があるツールです。</p></div>
+      <div class="status-card unknown"><span class="st unknown"><span class="d"></span>要確認 <small>unknown</small></span><p>公式情報から透かし条件を確認できていないツールです。利用前に必ず公式情報と出力画面をご確認ください。</p></div>
+    </div>
+  </section>
+
+  <!-- ===== 比較するときのポイント ===== -->
+  <section class="nw-sec band">
+    <div class="sec-head">
+      <span class="eyebrow">Checkpoints</span>
+      <h2>透かし条件を比較するときのポイント</h2>
+      <p>「透かしなし」と案内されていても、プランや機能によって条件は変わります。実務で使う前に確認しておきたい観点を整理しました。</p>
+    </div>
+    <ol class="points">
+      {points.map((p, i) => (
+        <li><span class="pn">{String(i + 1).padStart(2, '0')}</span><span class="pt"><b>{p.title}：</b><span set:html={p.body}></span></span></li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- ===== 対象ツール一覧 ===== -->
+  <section class="nw-sec">
+    <div class="sec-head">
+      <span class="eyebrow">Tool index</span>
+      <h2>対象ツール一覧</h2>
+      <p>確認時点で{tools.length}件。「有料で除去」は無料プランで透かしあり、有料プランで除去できる場合があることを示します。透かしステータスで絞り込み、各ツールの詳細ページで条件を確認してください。絞り込み・検索は下の「各ツールの透かし・無料枠条件」にも反映されます。</p>
+    </div>
+
+    <div class="statusbar">
+      <span class="sb-label">透かし</span>
+      <div class="sfilter">
+        {filterChips.map((c) => (
+          <button class="schip" data-st={c.st} aria-pressed={c.st === 'all' ? 'true' : 'false'}>
+            {c.st !== 'all' && (<span class="d" data-tone={c.st}></span>)}{c.label}
+          </button>
+        ))}
+      </div>
+      <div class="statusbar-right">
+        <label class="nw-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4"/></svg>
+          <input type="search" data-search placeholder="ツール名で検索" aria-label="ツール名で検索" />
+        </label>
+        <span class="nw-count" data-count><b>{tools.length}</b> 件</span>
+      </div>
+    </div>
+
+    <div class="nw-table-wrap">
+      <table class="nw-tbl">
+        <thead>
+          <tr><th class="col-tool">ツール</th><th>無料枠</th><th>日本語</th><th>商用利用</th><th>透かし条件</th><th>詳細</th></tr>
+        </thead>
+        <tbody>
+          {tools.map((t) => {
+            const f = mark('free', t.free), j = mark('ja', t.ja), c = mark('commercial', t.commercial);
+            return (
+              <tr data-name={t.name.toLowerCase()} data-st={t.wm}>
+                <td><div class="nw-tool"><span class="b">{ini(t)}</span><span class="nm">{t.name}</span></div></td>
+                <td><span class={`mk ${f.cls}`} title={t.free}>{f.ch}</span></td>
+                <td><span class={`mk ${j.cls}`} title={t.ja}>{j.ch}</span></td>
+                <td><span class={`mk ${c.cls}`} title={t.commercial}>{c.ch}</span></td>
+                <td><span class={`st ${STATUS[t.wm].cls}`}><span class="d"></span>{STATUS[t.wm].label}</span></td>
+                <td><a class="nw-detail" href={`${toolsBase}${t.slug}/`}>詳細 →</a></td>
+              </tr>
+            );
+          })}
+          <tr class="nw-empty-row" hidden><td colspan="6">条件に一致するツールはありません。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nw-legend">
+      <span class="li"><span class="st none"><span class="d"></span>透かしなし</span></span>
+      <span class="li"><span class="st paid"><span class="d"></span>有料で除去</span></span>
+      <span class="li"><span class="st meta"><span class="d"></span>メタデータ型</span></span>
+      <span class="li"><span class="mk yes">○</span>あり / 対応</span>
+      <span class="li"><span class="mk cond">△</span>要確認</span>
+      <span class="li"><span class="mk no">×</span>なし / 非対応</span>
+      <span class="nw-legend-sp">透かし条件はステータスで表示</span>
+    </div>
+    <p class="note">※ 値は確認日時点の参考値です。無料枠・商用利用・透かし条件はプランや出力形式により異なる場合があります。最新情報は必ず公式サイト・実際の出力画面でご確認ください。</p>
+  </section>
+
+  <!-- ===== 各ツールの透かし・無料枠条件 ===== -->
+  <section class="nw-sec band">
+    <div class="sec-head">
+      <span class="eyebrow">Per-tool notes</span>
+      <h2>各ツールの透かし・無料枠条件</h2>
+      <p>確認時点の公式情報をもとにした整理です。条件・仕様は変更される可能性があります。上の絞り込み・検索は表とこのカードの両方に反映されます。実務利用前に必ず公式情報と出力画面をご確認ください。</p>
+    </div>
+    <div class="note-grid">
+      {tools.map((t) => (
+        <article class="note-card" data-name={t.name.toLowerCase()} data-st={t.wm}>
+          <div class="nc-head">
+            <span class="nc-b">{ini(t)}</span>
+            <a class="nc-name" href={`${toolsBase}${t.slug}/`}>{t.name}</a>
+            <span class={`st ${STATUS[t.wm].cls}`}><span class="d"></span>{STATUS[t.wm].label}</span>
+          </div>
+          <div class="nc-fields">
+            <div class="nc-f"><span class="nc-lbl">透かし条件</span><p>{t.wmNote}</p></div>
+            <div class="nc-f"><span class="nc-lbl">無料枠の条件</span><p>{t.freeNote}</p></div>
+          </div>
+        </article>
+      ))}
+      <div class="nw-empty" hidden>条件に一致するツールはありません。</div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="nw-sec">
+    <div class="sec-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>よくある質問</h2>
+      <p>透かしの有無やプランごとの条件、商用利用との違い、確認方法についてお答えします。</p>
+    </div>
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <div class="faq-item" aria-expanded="false">
+          <button class="faq-q"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner" set:html={f.a}></div></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== 関連ページ ===== -->
+  <section class="nw-sec">
+    <div class="finder">
+      <h2>関連ページ</h2>
+      <p class="finder-lead">他の条件や比較表・ガイドからも、透かし条件を確認しやすいツールを探せます。</p>
+      <div class="taglinks">{relStd.map((r) => (<a class="taglink" href={r.href}><span class="ld"></span>{r.label}</a>))}</div>
+      <div class="taglinks row">{relSolid.map((r) => (<a class="taglink solid" href={r.href}>{r.label}</a>))}</div>
+    </div>
+  </section>
+
+</div>
+
+<style>
+  .nw-x{
+    --paper:#F4F4EE; --surface:#FFFFFF; --surface-2:#FAFAF6;
+    --ink:#16181D; --ink-soft:#3A3E47; --muted:#6A7180; --faint:#98A0AD;
+    --line:#E3E2D9; --line-strong:#D2D1C6;
+    --brand:#4B3FE4; --on-brand:#FFFFFF; --brand-tint:#ECEBFB; --brand-ink:#2E25A6;
+    --video:#E1543A; --video-tint:#FCEDE9; --image:#15897F; --image-tint:#E2F1EF;
+    --ok:#1E8A4C; --ok-tint:#E6F3EC; --warn:#A06A09; --warn-tint:#F8EFD9; --na:#6A7180; --na-tint:#EFEFEA;
+    --radius:14px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(20,22,28,.04),0 1px 3px rgba(20,22,28,.05);
+    --shadow-md:0 4px 14px rgba(20,22,28,.06),0 2px 6px rgba(20,22,28,.04);
+    --f-jp:"Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+    --f-latin:"Space Grotesk",system-ui,sans-serif;
+    --f-mono:"Space Mono",ui-monospace,monospace;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    display:block; color:var(--ink); font-family:"Noto Sans JP",system-ui,sans-serif; line-height:1.7;
+  }
+  .nw-x .eyebrow{font-family:var(--f-latin);font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:10px;}
+  .nw-x .eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--brand);}
+  .nw-x h1,.nw-x h2,.nw-x h3,.nw-x h4{font-family:var(--f-jp);font-weight:700;line-height:1.32;color:var(--ink);}
+  .nw-x a{text-decoration:none;}
+
+  /* 見出し */
+  .nw-x .nw-head h1{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-.01em;line-height:1.24;margin:16px 0;max-width:900px;}
+  .nw-x .nw-head h1 .hl{color:var(--brand-ink);position:relative;}
+  .nw-x .nw-head h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.26em;background:color-mix(in srgb,var(--brand) 18%,transparent);z-index:-1;border-radius:2px;}
+  .nw-x .lead{font-size:15.5px;color:var(--ink-soft);max-width:700px;}
+  .nw-x .stats{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:24px;}
+  .nw-x .stat{display:flex;align-items:baseline;gap:8px;}
+  .nw-x .stat + .stat{padding-left:26px;border-left:1px solid var(--line);}
+  .nw-x .stat .n{font-family:var(--f-latin);font-weight:700;font-size:24px;color:var(--ink);line-height:1;}
+  .nw-x .stat .t{font-size:12.5px;color:var(--muted);white-space:nowrap;}
+
+  /* 注意バナー */
+  .nw-x .notice{display:flex;align-items:flex-start;gap:12px;background:var(--warn-tint);border:1px solid color-mix(in srgb,var(--warn) 28%,var(--line));border-radius:var(--radius);padding:16px 20px;margin-top:26px;}
+  .nw-x .notice svg{width:18px;height:18px;color:var(--warn);flex:none;margin-top:2px;}
+  .nw-x .notice p{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+  .nw-x .notice b{color:var(--warn);font-weight:700;}
+
+  /* セクション */
+  .nw-x .nw-sec{padding:60px 0;}
+  .nw-x .nw-sec.band{background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    /* 全幅バンド化したい場合は有効化（最大幅1200px前提・違えば数値調整）:
+    margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); padding-left:max(28px,calc(50vw - 600px)); padding-right:max(28px,calc(50vw - 600px)); */
+  }
+  .nw-x .sec-head{max-width:760px;margin-bottom:36px;}
+  .nw-x .sec-head h2{font-size:clamp(24px,3vw,34px);font-weight:900;letter-spacing:-.005em;margin:16px 0 12px;}
+  .nw-x .sec-head p{color:var(--muted);font-size:15px;}
+  .nw-x .sec-head p b{color:var(--ink-soft);font-weight:700;}
+
+  /* ステータスバッジ */
+  .nw-x .st{display:inline-flex;align-items:center;gap:6px;flex:none;font-family:var(--f-jp);font-weight:700;font-size:12px;line-height:1.2;padding:5px 11px;border-radius:999px;white-space:nowrap;}
+  .nw-x .st .d{width:6px;height:6px;border-radius:50%;background:currentColor;}
+  .nw-x .st small{opacity:.7;font-weight:600;}
+  .nw-x .st.none{color:var(--ok);background:var(--ok-tint);}
+  .nw-x .st.paid{color:var(--brand-ink);background:var(--brand-tint);}
+  .nw-x .st.meta{color:var(--image);background:var(--image-tint);}
+  .nw-x .st.unknown{color:var(--na);background:var(--na-tint);}
+
+  /* ステータス凡例 */
+  .nw-x .status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .nw-x .status-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:20px 20px 18px;display:flex;flex-direction:column;gap:10px;}
+  .nw-x .status-card .st{align-self:flex-start;}
+  .nw-x .status-card p{font-size:12.5px;color:var(--muted);line-height:1.7;}
+  .nw-x .status-card.none{border-top:3px solid var(--ok);}
+  .nw-x .status-card.paid{border-top:3px solid var(--brand);}
+  .nw-x .status-card.meta{border-top:3px solid var(--image);}
+  .nw-x .status-card.unknown{border-top:3px solid var(--na);}
+
+  /* 選び方ポイント */
+  .nw-x .points{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:30px 32px;list-style:none;display:flex;flex-direction:column;gap:20px;margin:0;}
+  .nw-x .points li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;}
+  .nw-x .points .pn{font-family:var(--f-latin);font-weight:700;font-size:13px;color:var(--brand);background:var(--brand-tint);width:28px;height:28px;border-radius:8px;display:grid;place-items:center;flex:none;}
+  .nw-x .points .pt{font-size:14px;color:var(--ink-soft);line-height:1.7;}
+  .nw-x .points .pt b{color:var(--ink);font-weight:700;}
+  .nw-x .points .pt a{color:var(--brand-ink);font-weight:600;}
+
+  /* フィルタ */
+  .nw-x .statusbar{display:flex;align-items:center;gap:16px 22px;flex-wrap:wrap;margin-bottom:22px;}
+  .nw-x .sb-label{font-family:var(--f-jp);font-weight:700;font-size:12px;color:var(--faint);flex:none;}
+  .nw-x .sfilter{display:flex;flex-wrap:wrap;gap:8px;}
+  .nw-x .schip{font-family:var(--f-jp);font-weight:600;font-size:13px;padding:8px 15px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-soft);cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;transition:transform .16s var(--ease),background .16s,border-color .16s,color .16s;}
+  .nw-x .schip:hover{border-color:var(--brand);color:var(--brand-ink);}
+  .nw-x .schip .d{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.8;}
+  .nw-x .schip .d[data-tone="none"]{color:var(--ok);}
+  .nw-x .schip .d[data-tone="paid"]{color:var(--brand);}
+  .nw-x .schip .d[data-tone="meta"]{color:var(--image);}
+  .nw-x .schip .d[data-tone="unknown"]{color:var(--na);}
+  .nw-x .schip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink);}
+  .nw-x .schip[data-st="none"][aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:#fff;}
+  .nw-x .schip[data-st="paid"][aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff;}
+  .nw-x .schip[data-st="meta"][aria-pressed="true"]{background:var(--image);border-color:var(--image);color:#fff;}
+  .nw-x .schip[aria-pressed="true"] .d{color:#fff;}
+  .nw-x .statusbar-right{margin-left:auto;display:flex;align-items:center;gap:14px;}
+  .nw-x .nw-search{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line-strong);border-radius:999px;padding:8px 15px;transition:border-color .15s,box-shadow .15s;}
+  .nw-x .nw-search:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 14%,transparent);}
+  .nw-x .nw-search svg{width:15px;height:15px;color:var(--muted);flex:none;}
+  .nw-x .nw-search input{border:none;background:none;outline:none;font-family:var(--f-jp);font-size:14px;color:var(--ink);width:150px;}
+  .nw-x .nw-search input::placeholder{color:var(--faint);}
+  .nw-x .nw-count{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);white-space:nowrap;}
+  .nw-x .nw-count b{color:var(--ink);font-weight:700;}
+
+  /* 表 */
+  .nw-x .nw-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-sm);}
+  .nw-x table.nw-tbl{width:100%;border-collapse:collapse;min-width:760px;}
+  .nw-x table.nw-tbl thead th{font-family:var(--f-jp);font-weight:700;font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);padding:15px 16px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
+  .nw-x table.nw-tbl thead th.col-tool{text-align:left;}
+  .nw-x table.nw-tbl tbody td{padding:13px 16px;text-align:center;border-bottom:1px solid var(--line);vertical-align:middle;}
+  .nw-x table.nw-tbl tbody tr:last-child td{border-bottom:none;}
+  .nw-x table.nw-tbl tbody tr{transition:background .12s,opacity .18s;}
+  .nw-x table.nw-tbl tbody tr:hover{background:var(--surface-2);}
+  .nw-x table.nw-tbl tbody tr.hide{display:none;}
+  .nw-x .nw-tool{display:flex;align-items:center;gap:11px;text-align:left;}
+  .nw-x .nw-tool .b{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:var(--brand-tint);color:var(--brand-ink);font-family:var(--f-latin);font-weight:700;font-size:13px;flex:none;}
+  .nw-x .nw-tool .nm{font-family:var(--f-jp);font-weight:700;font-size:14.5px;color:var(--ink);white-space:nowrap;}
+  .nw-x .mk{display:inline-flex;width:24px;height:24px;border-radius:50%;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .nw-x .mk.yes{background:var(--ok-tint);color:var(--ok);}
+  .nw-x .mk.cond{background:var(--warn-tint);color:var(--warn);}
+  .nw-x .mk.no{background:var(--na-tint);color:var(--na);}
+  .nw-x table.nw-tbl td .st{margin:0 auto;}
+  .nw-x .nw-detail{font-family:var(--f-jp);font-weight:700;font-size:12.5px;color:var(--brand-ink);white-space:nowrap;}
+  .nw-x .nw-detail:hover{text-decoration:underline;text-underline-offset:3px;}
+  .nw-x .nw-empty-row td{text-align:center;color:var(--muted);padding:36px;}
+  .nw-x .nw-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12.5px;color:var(--muted);align-items:center;}
+  .nw-x .nw-legend .li{display:inline-flex;align-items:center;gap:7px;}
+  .nw-x .nw-legend .mk{width:20px;height:20px;font-size:11px;}
+  .nw-x .nw-legend .st{font-size:11px;padding:4px 9px;}
+  .nw-x .nw-legend-sp{margin-left:auto;font-family:var(--f-mono);font-size:11px;}
+  .nw-x .note{margin-top:18px;font-size:12.5px;color:var(--faint);line-height:1.7;}
+
+  /* 透かし・無料枠カード */
+  .nw-x .note-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .nw-x .note-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:22px 24px;display:flex;flex-direction:column;gap:14px;}
+  .nw-x .note-card.hide{display:none;}
+  .nw-x .note-card .nc-head{display:flex;align-items:center;gap:12px;}
+  .nw-x .note-card .nc-b{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:var(--brand-tint);color:var(--brand-ink);font-family:var(--f-latin);font-weight:700;font-size:15px;flex:none;}
+  .nw-x .note-card .nc-name{font-family:var(--f-jp);font-weight:700;font-size:15.5px;color:var(--ink);line-height:1.25;}
+  .nw-x .note-card .nc-name:hover{color:var(--brand-ink);}
+  .nw-x .note-card .nc-head .st{margin-left:auto;}
+  .nw-x .nc-fields{display:flex;flex-direction:column;gap:12px;}
+  .nw-x .nc-f{display:flex;flex-direction:column;gap:5px;}
+  .nw-x .nc-lbl{font-family:var(--f-jp);font-weight:700;font-size:11.5px;color:var(--muted);display:inline-flex;align-items:center;gap:7px;}
+  .nw-x .nc-lbl::before{content:"";width:14px;height:2px;border-radius:2px;background:var(--brand);}
+  .nw-x .nc-f p{font-size:13px;color:var(--ink-soft);line-height:1.78;}
+  .nw-x .nw-empty{grid-column:1 / -1;padding:40px;text-align:center;color:var(--muted);font-size:14px;border:1px dashed var(--line-strong);border-radius:var(--radius);background:var(--surface-2);}
+
+  /* FAQ */
+  .nw-x .faq-list{max-width:860px;}
+  .nw-x .faq-item{border-bottom:1px solid var(--line);}
+  .nw-x .faq-item:first-child{border-top:1px solid var(--line);}
+  .nw-x .faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:24px 6px;font-family:var(--f-jp);font-weight:700;font-size:16.5px;color:var(--ink);}
+  .nw-x .faq-q .qm{font-family:var(--f-latin);color:var(--brand);font-size:16px;flex:none;}
+  .nw-x .faq-q .ind{margin-left:auto;flex:none;width:24px;height:24px;display:grid;place-items:center;transition:transform .3s var(--ease);color:var(--muted);}
+  .nw-x .faq-q .ind svg{width:18px;height:18px;}
+  .nw-x .faq-item[aria-expanded="true"] .faq-q .ind{transform:rotate(45deg);color:var(--brand);}
+  .nw-x .faq-a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease);}
+  .nw-x .faq-a-inner{padding:0 6px 26px 46px;color:var(--ink-soft);font-size:14.5px;line-height:1.8;}
+  .nw-x .faq-a-inner a{color:var(--brand-ink);font-weight:600;}
+
+  /* 関連ページ */
+  .nw-x .finder{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-lg);padding:34px 34px 30px;}
+  .nw-x .finder h2{font-size:clamp(20px,2.4vw,26px);margin-bottom:6px;}
+  .nw-x .finder-lead{color:var(--muted);font-size:14px;margin-bottom:22px;}
+  .nw-x .taglinks{display:flex;flex-wrap:wrap;gap:10px;}
+  .nw-x .taglink{font-family:var(--f-jp);font-weight:600;font-size:13.5px;padding:9px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-soft);display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:transform .16s var(--ease),background .16s,border-color .16s,color .16s;}
+  .nw-x .taglink:hover{border-color:var(--brand);color:var(--brand-ink);background:var(--brand-tint);transform:translateY(-1px);}
+  .nw-x .taglink .ld{width:7px;height:7px;border-radius:50%;background:var(--brand);flex:none;}
+  .nw-x .taglinks.row{margin-top:16px;padding-top:18px;border-top:1px dashed var(--line-strong);}
+  .nw-x .taglink.solid{background:var(--ink);color:var(--surface);border-color:var(--ink);}
+  .nw-x .taglink.solid:hover{background:var(--brand);border-color:var(--brand);color:var(--on-brand);}
+
+  /* reveal（任意・JSが付与） */
+  @media (prefers-reduced-motion: no-preference){
+    .nw-x .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+    .nw-x .reveal.in{opacity:1;transform:none;}
+  }
+
+  @media (max-width:980px){
+    .nw-x .status-grid{grid-template-columns:repeat(2,1fr);}
+    .nw-x .note-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:720px){
+    .nw-x .status-grid{grid-template-columns:1fr;}
+    .nw-x .statusbar-right{margin-left:0;width:100%;}
+    .nw-x .nw-search{flex:1;}
+    .nw-x .nw-search input{width:100%;}
+    .nw-x .stat + .stat{padding-left:0;border-left:none;}
+    .nw-x .nw-legend-sp{margin-left:0;width:100%;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .nw-x *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+    .nw-x .reveal{opacity:1 !important;transform:none !important;}
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-nw]').forEach((root) => {
+    const tbody = root.querySelector<HTMLElement>('table.nw-tbl tbody')!;
+    const rows = Array.from(tbody.querySelectorAll<HTMLElement>('tr[data-name]'));
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('.note-card'));
+    const chips = Array.from(root.querySelectorAll<HTMLElement>('.schip'));
+    const search = root.querySelector<HTMLInputElement>('[data-search]')!;
+    const countEl = root.querySelector<HTMLElement>('[data-count]')!;
+    const emptyRow = root.querySelector<HTMLElement>('.nw-empty-row');
+    const emptyCard = root.querySelector<HTMLElement>('.nw-empty');
+    let activeSt = 'all';
+
+    const matches = (name: string, st: string) => {
+      const q = (search.value || '').trim().toLowerCase();
+      if (q && name.indexOf(q) === -1) return false;
+      if (activeSt !== 'all' && st !== activeSt) return false;
+      return true;
+    };
+
+    const apply = () => {
+      let n = 0;
+      rows.forEach((r) => {
+        const ok = matches(r.getAttribute('data-name') || '', r.getAttribute('data-st') || '');
+        r.classList.toggle('hide', !ok);
+        if (ok) n++;
+      });
+      cards.forEach((c) => {
+        const ok = matches(c.getAttribute('data-name') || '', c.getAttribute('data-st') || '');
+        c.classList.toggle('hide', !ok);
+      });
+      if (emptyRow) emptyRow.hidden = n !== 0;
+      if (emptyCard) emptyCard.hidden = n !== 0;
+      countEl.innerHTML = '<b>' + n + '</b> 件';
+    };
+
+    chips.forEach((chip) => chip.addEventListener('click', () => {
+      activeSt = chip.getAttribute('data-st') || 'all';
+      chips.forEach((c) => c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'));
+      apply();
+    }));
+    search.addEventListener('input', apply);
+    apply();
+
+    /* FAQ アコーディオン */
+    const items = Array.from(root.querySelectorAll<HTMLElement>('.faq-item'));
+    items.forEach((item) => {
+      const q = item.querySelector<HTMLElement>('.faq-q')!;
+      const a = item.querySelector<HTMLElement>('.faq-a')!;
+      q.addEventListener('click', () => {
+        const open = item.getAttribute('aria-expanded') === 'true';
+        items.forEach((o) => { o.setAttribute('aria-expanded', 'false'); o.querySelector<HTMLElement>('.faq-a')!.style.maxHeight = ''; });
+        if (!open) { item.setAttribute('aria-expanded', 'true'); a.style.maxHeight = a.scrollHeight + 'px'; }
+      });
+    });
+
+    /* スクロール表示アニメーション */
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targets = Array.from(root.querySelectorAll<HTMLElement>('.sec-head, .status-grid, .points, .nw-table-wrap, .note-grid, .faq-list, .finder'));
+    targets.forEach((el) => el.classList.add('reveal'));
+    if (reduce || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.06, rootMargin: '0px 0px -4% 0px' });
+      targets.forEach((el) => io.observe(el));
+      window.setTimeout(() => targets.forEach((el) => el.classList.add('in')), 8000);
+    }
+  });
+</script>

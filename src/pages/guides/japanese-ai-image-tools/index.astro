@@ -1,78 +1,11 @@
 ---
-import { getEntry, getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import GuidePageHeader from '../../../components/GuidePageHeader.astro';
-import GuideSummaryBox from '../../../components/GuideSummaryBox.astro';
-import GuideWarningBox from '../../../components/GuideWarningBox.astro';
-import GuideFAQ from '../../../components/GuideFAQ.astro';
-import GuideComparisonTable from '../../../components/GuideComparisonTable.astro';
-import GuideFreshnessBox from '../../../components/GuideFreshnessBox.astro';
+import JapaneseAiToolsGuide from '../../../components/JapaneseAiToolsGuide.astro';
 
 const entry = await getEntry('guides', 'japanese-ai-image-tools');
 if (!entry) throw new Error('guide not found: japanese-ai-image-tools');
 const { data } = entry;
-
-const allTools = await getCollection('tools');
-const japaneseTools = allTools
-  .filter(
-    (t) =>
-      t.data.japaneseUi === true ||
-      t.data.japaneseUi === 'partial' ||
-      t.data.japanesePrompt === true ||
-      t.data.japanesePrompt === 'partial'
-  )
-  .sort((a, b) => a.data.name.localeCompare(b.data.name, 'ja'));
-
-type FreePlan = boolean | 'limited' | 'unknown';
-type TriState = boolean | 'partial' | 'unknown';
-type FourState = 'yes' | 'no' | 'limited' | 'unknown';
-type CommercialUse = 'ok' | 'paid-only' | 'limited' | 'no' | 'unknown';
-
-function triLabel(val: TriState): string {
-  if (val === true)      return '〇 対応';
-  if (val === false)     return '× 非対応';
-  if (val === 'partial') return '△ 一部対応';
-                         return '確認中';
-}
-
-function freePlanLabel(val: FreePlan): string {
-  if (val === true)      return '〇 無料プランあり';
-  if (val === false)     return '× 無料プランなし';
-  if (val === 'limited') return '△ 制限付き無料';
-                         return '不明';
-}
-
-function commercialLabel(val: CommercialUse): string {
-  if (val === 'ok')        return '〇 可能（公式情報）';
-  if (val === 'paid-only') return '★ 有料プラン向け';
-  if (val === 'no')        return '× 不可または非推奨';
-  if (val === 'limited')   return '△ 条件付き';
-                           return '要確認';
-}
-
-const japaneseToolRows = japaneseTools.map((tool) => [
-  { text: tool.data.name, href: `/tools/${tool.slug}/` },
-  { text: triLabel(tool.data.japaneseUi) },
-  { text: triLabel(tool.data.japanesePrompt) },
-  { text: freePlanLabel(tool.data.freePlan) },
-  { text: commercialLabel(tool.data.commercialUse) },
-  { text: tool.data.lastReviewed, muted: true },
-]);
-
-const faqItems = [
-  {
-    q: '日本語UIに対応していれば使いやすいですか？',
-    a: '日本語UIに対応していると操作しやすい場合があります。ただし、AI生成の品質や商用利用条件はUI言語だけでは判断できません。料金、利用規約、出力品質も確認してください。',
-  },
-  {
-    q: '英語UIのツールでも日本語プロンプトは使えますか？',
-    a: '使える場合があります。ただし、ツールやモデルによって日本語の理解度や出力精度は異なる可能性があります。重要な用途では、複数回確認し、必要に応じて英語プロンプトも検討してください。',
-  },
-  {
-    q: '日本語プロンプトで作った画像や動画は商用利用できますか？',
-    a: 'プロンプトの言語だけでは商用利用可否は決まりません。商用利用の可否は、ツールの利用規約、プラン、生成内容、用途によって変わる場合があります。必ず公式情報をご確認ください。',
-  },
-];
 ---
 
 <BaseLayout
@@ -82,190 +15,18 @@ const faqItems = [
   ogType="article"
 >
   <div class="mx-auto max-w-3xl px-6 py-12">
-
-    <GuidePageHeader
-      title={data.title}
-      description={data.description}
-      lastReviewed={data.lastReviewed}
+    <JapaneseAiToolsGuide
+      checkedDate={data.lastReviewed}
+      nextCheckDate={data.nextReviewDue}
+      statusAsOf={data.lastReviewed}
+      related={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '日本語対応ツール', href: '/conditions/japanese/' },
+        { label: '無料で使えるツール', href: '/conditions/free/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '無料ツールの選び方', href: '/guides/free-ai-image-tools/' },
+        { label: '透かし・クレジット表記ガイド', href: '/guides/watermark-credit-guide/' },
+      ]}
     />
-
-    <GuideSummaryBox title="このガイドのまとめ">
-      <ul class="space-y-1.5">
-        <li class="flex gap-2"><span class="text-slate-400 shrink-0">?</span><span>「日本語対応」には日本語UIと日本語プロンプト対応の2種類があり、別物です</span></li>
-        <li class="flex gap-2"><span class="text-slate-400 shrink-0">?</span><span>英語UIのツールでも日本語プロンプトが使える場合があります</span></li>
-        <li class="flex gap-2"><span class="text-slate-400 shrink-0">?</span><span>日本語で使えることと商用利用できることは別の条件です</span></li>
-        <li class="flex gap-2"><span class="text-slate-400 shrink-0">?</span><span>日本語対応状況はアップデートで変わる可能性があります</span></li>
-      </ul>
-    </GuideSummaryBox>
-
-    <GuideWarningBox variant="warning" title="免責事項">
-      このガイドは情報提供を目的としており、法的アドバイスではありません。商用利用の可否判断は各ツールの最新利用規約を必ずご確認ください。
-    </GuideWarningBox>
-
-    <!-- はじめに -->
-    <section class="my-10" aria-labelledby="intro-heading">
-      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="intro-heading">はじめに</h2>
-      <p class="text-sm leading-relaxed text-slate-600">
-        AI画像生成・動画生成ツールの多くは英語ベースで開発されていますが、日本語で操作できるツールや、日本語プロンプトに対応するツールも増えています。
-        「日本語対応」と一口に言っても、その内容はツールによって異なります。このガイドでは、日本語対応ツールを選ぶ際の基本事項と確認ポイントを整理します。
-      </p>
-    </section>
-
-    <!-- 日本語UIとプロンプトの違い -->
-    <section class="my-10" aria-labelledby="ui-vs-prompt-heading">
-      <h2 class="mb-5 text-lg font-semibold text-slate-900" id="ui-vs-prompt-heading">
-        日本語UIと日本語プロンプトの違い
-      </h2>
-
-      <div class="grid gap-4 sm:grid-cols-2">
-        <div class="rounded-xl border border-slate-200 bg-white p-5">
-          <h3 class="mb-2 text-sm font-semibold text-slate-900">日本語UI対応</h3>
-          <p class="text-sm leading-relaxed text-slate-600">
-            メニュー、ボタン、設定画面などの操作インターフェースが日本語で表示されます。日本語UIに対応していると、操作方法をより直感的に理解しやすい場合があります。
-          </p>
-          <p class="mt-2 text-xs text-slate-500">UIが日本語でも、AI生成の品質や商用利用条件はUI言語とは別に判断が必要です。</p>
-        </div>
-        <div class="rounded-xl border border-slate-200 bg-white p-5">
-          <h3 class="mb-2 text-sm font-semibold text-slate-900">日本語プロンプト対応</h3>
-          <p class="text-sm leading-relaxed text-slate-600">
-            生成指示（プロンプト）を日本語で入力できます。UIが英語のツールでも、日本語プロンプトが使える場合があります。
-          </p>
-          <p class="mt-2 text-xs text-slate-500">日本語プロンプトに一定程度対応していても、細かいニュアンスが正確に反映されないことがある場合があります。</p>
-        </div>
-      </div>
-
-      <GuideWarningBox variant="info">
-        この2つは別物です。どちらに対応しているかを個別に確認することを推奨します。
-      </GuideWarningBox>
-    </section>
-
-    <!-- 確認ポイント -->
-    <section class="my-10" aria-labelledby="check-points-heading">
-      <h2 class="mb-5 text-lg font-semibold text-slate-900" id="check-points-heading">
-        日本語対応ツールを選ぶときの確認ポイント
-      </h2>
-      <ol class="space-y-5">
-        {[
-          ['UIが日本語に対応しているか', '操作画面・設定・ヘルプが日本語で提供されているかを確認してください。日本語UIの有無は、ツールの公式サイトや設定画面で確認できる場合があります。'],
-          ['日本語プロンプトでどの程度意図が伝わるか', '日本語プロンプトへの対応状況はツールやモデルによって異なる場合があります。重要な用途では、複数回テストを行い、必要に応じて英語プロンプトとの比較も検討することを推奨します。'],
-          ['日本語サポート・ドキュメントが整備されているか', '公式のサポート窓口・ドキュメント・チュートリアルが日本語で提供されているかどうかも、継続利用の快適さに影響する場合があります。'],
-          ['対応状況はアップデートで変わる可能性がある', 'AI生成ツールは頻繁にアップデートされます。日本語対応の範囲や品質も変化する可能性があるため、最新情報は公式サイトでご確認ください。'],
-          ['商用利用条件は言語対応とは別に確認する', '日本語で使えることと、商用利用が許可されていることは別の条件です。商用利用を考える場合は、ツールの利用規約も別途確認してください。'],
-        ].map(([title, desc], i) => (
-          <li class="flex gap-4">
-            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white" aria-hidden="true">{i + 1}</span>
-            <div>
-              <h3 class="mb-1 text-sm font-semibold text-slate-900">{title}</h3>
-              <p class="text-sm leading-relaxed text-slate-600">{desc}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </section>
-
-    <!-- 海外AIツールを使うときの注意点 -->
-    <section class="my-10" aria-labelledby="overseas-notes-heading">
-      <h2 class="mb-5 text-lg font-semibold text-slate-900" id="overseas-notes-heading">
-        海外AIツールを日本語で使うときの注意点
-      </h2>
-
-      <div class="space-y-5">
-        <div class="rounded-xl border border-slate-200 bg-white p-5">
-          <h3 class="mb-2 text-sm font-semibold text-slate-900">プロンプトの精度に限界がある場合がある</h3>
-          <p class="text-sm leading-relaxed text-slate-600">
-            英語ベースで学習されたモデルでは、日本語プロンプトの意図が完全には反映されない場合があります。特に固有名詞、文化的な表現、複雑な指示では、英語プロンプトのほうが期待に近い出力が得られることがある場合があります。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-200 bg-white p-5">
-          <h3 class="mb-2 text-sm font-semibold text-slate-900">出力内容の確認を怠らない</h3>
-          <p class="text-sm leading-relaxed text-slate-600">
-            日本語プロンプトで生成した場合も、出力内容に不適切な要素が含まれていないか、第三者の権利に関わる要素がないかを確認することを推奨します。プロンプトの言語によって権利上のリスクが変わるわけではありません。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-200 bg-white p-5">
-          <h3 class="mb-2 text-sm font-semibold text-slate-900">利用規約は原文（英語など）が基準となる場合がある</h3>
-          <p class="text-sm leading-relaxed text-slate-600">
-            ツールの利用規約が英語で提供されている場合、日本語の説明や翻訳はあくまで参考であり、原文が優先される場合があります。重要な確認は原文の利用規約を参照することを推奨します。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-200 bg-white p-5">
-          <h3 class="mb-2 text-sm font-semibold text-slate-900">商用利用・納品物での使用は利用規約を確認する</h3>
-          <p class="text-sm leading-relaxed text-slate-600">
-            日本語対応ツールであっても、商用利用の可否、透かし条件、クレジット表記義務などは利用規約で別途定められています。商用利用や納品物への使用前には、公式の最新情報をご確認ください。
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 日本語対応ツール一覧（動的） -->
-    <section class="my-10" aria-labelledby="tool-list-heading">
-      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="tool-list-heading">
-        日本語対応ツール一覧（確認時点）
-      </h2>
-      <p class="mb-4 text-sm text-slate-500">
-        以下は <strong class="font-medium text-slate-700">{data.lastReviewed}</strong> 時点の調査に基づく目安です。アップデートや方針変更により変わる可能性があります。詳細は各ツールの詳細ページおよび公式サイトでご確認ください。
-      </p>
-
-      {japaneseTools.length === 0 ? (
-        <p class="rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm text-slate-600">
-          現在、公式情報確認前のため、この条件に該当するツールは未確定です。確認が完了したツールから順次掲載します。
-        </p>
-      ) : (
-        <GuideComparisonTable
-          caption="日本語対応ツール一覧"
-          headers={['ツール名', '日本語UI', '日本語プロンプト', '無料プラン', '商用利用', '最終確認日']}
-          rows={japaneseToolRows}
-          statusColIndexes={[1, 2, 3, 4]}
-        />
-      )}
-
-      <!-- 凡例 -->
-      <div class="mt-4 rounded-lg border border-slate-100 bg-slate-50 px-4 py-3 text-xs text-slate-600">
-        <p class="mb-1 font-semibold text-slate-700">凡例</p>
-        <ul class="space-y-1">
-          <li><span class="inline-block rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800 mr-2">〇</span>対応・可能</li>
-          <li><span class="inline-block rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800 mr-2">△</span>一部対応・条件付き</li>
-          <li><span class="inline-block rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-800 mr-2">×</span>非対応・不可</li>
-        </ul>
-        <p class="mt-2 text-slate-500">この表は法的判断の根拠ではありません。必ず各ツールの最新公式情報をご確認ください。</p>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="my-10">
-      <GuideFAQ items={faqItems} title="よくある質問（FAQ）" />
-    </section>
-
-    <!-- 注意事項 -->
-    <section class="my-10">
-      <GuideWarningBox variant="info">
-        <ul class="space-y-1.5 list-disc list-inside">
-          <li>各ツールの機能・対応状況・料金・利用規約は予告なく変更されます。利用前に必ず公式サイトの最新情報をご確認ください</li>
-          <li>本ページは法的アドバイスではありません。重要な商用利用の場面では、専門家（弁護士等）への相談を推奨します</li>
-          <li>日本語対応状況はアップデートで変わる可能性があります。最新情報は公式サイトでご確認ください</li>
-        </ul>
-      </GuideWarningBox>
-    </section>
-
-    <GuideFreshnessBox lastReviewed={data.lastReviewed} nextReviewDue={data.nextReviewDue} />
-
-    <!-- 関連ページ -->
-    <section class="mb-8">
-      <h2 class="mb-3 text-sm font-semibold text-slate-600">関連ページ</h2>
-      <ul class="flex flex-wrap gap-3 text-sm">
-        <li><a href="/tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">ツール一覧</a></li>
-        <li><a href="/conditions/japanese/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">日本語対応ツール</a></li>
-        <li><a href="/conditions/free/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料で使えるツール</a></li>
-        <li><a href="/conditions/commercial-use/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用を確認しやすいツール</a></li>
-        <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用・著作権ガイド</a></li>
-        <li><a href="/guides/free-ai-image-tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料ツールの選び方</a></li>
-        <li><a href="/guides/watermark-credit-guide/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">透かし・クレジット表記ガイド</a></li>
-      </ul>
-    </section>
-
-    <nav class="border-t border-slate-200 pt-6 text-sm" aria-label="ページナビゲーション">
-      <a href="/" class="text-blue-600 hover:underline focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-sm">← トップに戻る</a>
-    </nav>
-
   </div>
 </BaseLayout>

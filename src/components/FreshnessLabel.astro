@@ -1,0 +1,59 @@
+---
+interface Props {
+  verifiedAt?: string;
+  lastReviewed?: string;
+  /** 'card' = minimal footer display, 'detail' = full inline display */
+  variant?: 'card' | 'detail';
+}
+
+const { verifiedAt, lastReviewed, variant = 'detail' } = Astro.props;
+
+const dateStr = verifiedAt ?? lastReviewed ?? null;
+const labelPrefix = verifiedAt ? '確認' : lastReviewed ? '最終見直し' : null;
+
+function daysSince(iso: string): number {
+  const ms = Date.now() - new Date(iso).getTime();
+  return Math.floor(ms / (1000 * 60 * 60 * 24));
+}
+
+type Freshness = 'ok' | 'warn' | 'stale' | 'unknown';
+
+function getFreshness(iso: string | null): Freshness {
+  if (!iso) return 'unknown';
+  const d = daysSince(iso);
+  if (d > 180) return 'stale';
+  if (d > 90)  return 'warn';
+  return 'ok';
+}
+
+const freshness = getFreshness(dateStr);
+
+const styles: Record<Freshness, { bg: string; text: string; ring: string }> = {
+  ok:      { bg: 'bg-emerald-50', text: 'text-emerald-700', ring: 'ring-emerald-200' },
+  warn:    { bg: 'bg-amber-50',   text: 'text-amber-700',   ring: 'ring-amber-200'   },
+  stale:   { bg: 'bg-red-50',     text: 'text-red-700',     ring: 'ring-red-200'     },
+  unknown: { bg: 'bg-slate-50',   text: 'text-slate-500',   ring: 'ring-slate-200'   },
+};
+const s = styles[freshness];
+
+const alertText =
+  freshness === 'stale' ? '古い可能性があります' :
+  freshness === 'warn'  ? '要再確認：確認から90日超' :
+  null;
+
+const displayDate = dateStr ? `${labelPrefix} ${dateStr}` : '確認日：要確認';
+---
+
+{variant === 'card' ? (
+  <p class={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[10px] font-medium ring-1 ring-inset ${s.bg} ${s.text} ${s.ring}`}>
+    {displayDate}
+    {alertText && <span aria-label={alertText}>⚠</span>}
+  </p>
+) : (
+  <div class={`inline-flex flex-wrap items-center gap-2 rounded-md px-3 py-1.5 text-xs ring-1 ring-inset ${s.bg} ${s.text} ${s.ring}`}>
+    <span>{displayDate}</span>
+    {alertText && (
+      <span class="font-semibold">— {alertText}</span>
+    )}
+  </div>
+)}

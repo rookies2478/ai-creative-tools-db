@@ -1,0 +1,645 @@
+---
+/* =========================================================
+   CommercialUseCopyright.astro
+   ガイド：/guides/commercial-use-copyright/ の記事本文
+   （結論 ＋ 免責 ＋ 確認ポイント ＋ ツール別条件表 ＋ 無料プラン注意表
+    ＋ 透かし表 ＋ チェックリスト ＋ FAQ ＋ 注意事項/鮮度 ＋ 関連）
+
+   既存サイト（Tailwind）を壊さない設計:
+   - すべてのセレクタを .cuc-x 配下に限定（スタイル漏れなし）
+   - CSS変数は :root ではなく .cuc-x 上に定義（既存トークン非衝突）
+   - 素のリセット（*{} / body{} / table{} 等）を含めない（preflight非干渉）
+   - SSRで描画。JSは [data-cuc] 配下のみ操作（FAQ開閉・表示アニメ）
+
+   ヘッダー・フッター・パンくずは既存 Layout 側のものを使用してください。
+   このコンポーネントは記事本文だけを描画します。
+   ========================================================= */
+
+export type CondStatus = 'cond' | 'plan';
+
+export interface Stat { n: string; label: string; }
+export interface Point { title: string; body: string; }      // body はプレーンテキスト
+export interface ToolRow {
+  name: string;
+  slug?: string;
+  initial?: string;
+  status?: CondStatus;     // 条件表のみ使用
+  statusLabel?: string;    // 例: '〇 条件あり' / '△ プランによる'
+  note: string;            // 主な注意点 / 制限 / 透かし条件
+  date?: string;           // 確認日（条件表のみ）
+}
+export interface CheckItem { html: string; }                  // html可（<b> 等）
+export interface Faq { q: string; a: string; }                // a はHTML可
+export interface RelatedLink { label: string; href: string; solid?: boolean; }
+export interface ToolLink { name: string; slug: string; initial?: string; }
+
+export interface Props {
+  headingHtml?: string;
+  lead?: string;
+  checkedDate?: string;
+  nextCheckDate?: string;
+  stats?: Stat[];
+  conclusionHtml?: string;       // <p> を含むHTML可
+  disclaimer?: string;
+  points?: Point[];
+  imageTools?: ToolRow[];
+  videoTools?: ToolRow[];
+  freePlan?: ToolRow[];
+  watermark?: ToolRow[];
+  checklist?: CheckItem[];
+  faqs?: Faq[];
+  notes?: string[];
+  freshnessHtml?: string;
+  footnote?: string;
+  related?: RelatedLink[];
+  relatedSolid?: RelatedLink[];
+  toolLinks?: ToolLink[];
+  toolsBase?: string;            // 既定 /tools/ → /tools/{slug}/
+}
+
+const {
+  headingHtml = 'AI画像生成の<br /><span class="hl">商用利用・著作権</span>ガイド',
+  lead = 'AI画像・動画生成ツールを仕事や副業で使う前に確認したい、商用利用条件と著作権のポイントを整理しました。公式規約・プラン・透かし条件の見方を解説します。最新情報は必ず各公式サイトをご確認ください。',
+  checkedDate = '2026-05-07',
+  nextCheckDate = '2026-08-07',
+  stats = [
+    { n: '5', label: '確認すべきポイント' },
+    { n: '9', label: '対象ツール' },
+    { n: '6', label: 'よくある質問' },
+  ],
+  conclusionHtml = '<p>商用利用の可否は<b>ツールとプランの組み合わせ</b>によって異なります。無料プランでは商用利用不可、有料プランでは可能という構造が多く見られます。</p><p>「商用利用可」とされている場合でも、透かしの除去・クレジット表記・大企業向けの収益条件など、追加の要件がある場合があります。利用前に各ツールの公式利用規約を必ずご確認ください。</p>',
+  disclaimer = 'このガイドは情報提供を目的としており、法的アドバイスではありません。商用利用の判断は各ツールの最新利用規約を必ず確認し、重要な場面では専門家（弁護士等）への相談に基づいて行ってください。',
+  points = [
+    { title: '公式規約で商用利用が認められているか', body: '各AIツールの利用規約（Terms of Service）が商用利用を認めているかが最優先の確認事項です。規約は予告なく変更される場合があるため、利用前に最終更新日も確認することを推奨します。' },
+    { title: '無料プランと有料プランで条件が違うか', body: '多くのAIツールでは無料／有料プランで商用利用の条件が異なります。無料プランでは透かし・解像度・クレジット表記・用途などに制限がある場合があります。Pika・Kling AIの無料プランは商用利用不可とされています（確認時点）。' },
+    { title: '透かしやクレジット表記の条件があるか', body: '透かしを除去できることと、商用利用が認められていることは別の問題です。有料プランで透かしを消せても、規約上の商用利用条件を別途満たす必要がある場合があります。ツール名のクレジット表記を求める規約があるかも確認してください。' },
+    { title: '生成物に第三者の権利が含まれていないか', body: '生成物に既存のキャラクター・ロゴ・商標・著名人の肖像・第三者の著作物の特徴が含まれる場合、著作権・商標権・肖像権等を侵害する可能性があります。これはどのツールでも生じうるリスクで、規約上の商用利用許可とは別の対応が必要です。' },
+    { title: '素材・テンプレート・アップロード画像の権利に問題がないか', body: 'Canvaのように素材・テンプレート・アップロード画像を組み合わせるツールでは、AI生成部分だけでなく、組み合わせた各素材それぞれの権利条件を個別に確認する必要があります。' },
+  ],
+  imageTools = [
+    { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', status: 'cond', statusLabel: '〇 条件あり', note: 'ベータ機能（β表示）は商用利用対象外。プランによっては可視透かしあり。', date: '2026-05-04' },
+    { name: 'DALL·E', slug: 'dalle', initial: 'D', status: 'cond', statusLabel: '〇 条件あり', note: 'ChatGPT経由。C2PA不可視メタデータが埋め込まれる場合あり。', date: '2026-05-04' },
+    { name: 'Midjourney', slug: 'midjourney', initial: 'M', status: 'plan', statusLabel: '△ プランによる', note: '有料プランで商用利用可。年間総収益100万ドル超の企業はPro/Megaプランへのアップグレードが必要とされている。', date: '2026-05-04' },
+    { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', initial: 'C', status: 'plan', statusLabel: '△ プランによる', note: 'AI生成コンテンツであることの明示が条件とされる場合あり。', date: '2026-05-04' },
+    { name: 'Leonardo AI', slug: 'leonardo-ai', initial: 'L', status: 'plan', statusLabel: '△ プランによる', note: '有料プラン＋Private設定が商用利用の条件。無料プランでは画像の権利がLeonardo.AIに帰属する場合あり。', date: '2026-05-04' },
+    { name: 'Stable Diffusion', slug: 'stable-diffusion', initial: 'S', status: 'plan', statusLabel: '△ ライセンスによる', note: 'SD 3.x以降は年間収益100万ドル未満が条件とされている。モデルごとに個別のライセンス確認が必要。', date: '2026-05-04' },
+  ],
+  videoTools = [
+    { name: 'Runway', slug: 'runway', initial: 'R', status: 'cond', statusLabel: '〇 条件あり', note: '全プランで商用利用可とされているが、無料プランでは透かしあり・クレジット一度限りのため実用に制限がある。', date: '2026-05-05' },
+    { name: 'Pika', slug: 'pika', initial: 'P', status: 'plan', statusLabel: '△ プランによる', note: '無料プランでは商用利用不可。有料プランで可能とされている。', date: '2026-05-05' },
+    { name: 'Kling AI', slug: 'kling-ai', initial: 'K', status: 'plan', statusLabel: '△ プランによる', note: '無料プランでは商用利用不可。プラットフォームが生成コンテンツへの永続的なライセンスを保持する条項あり。中国系サービスのためデータポリシーも要確認。', date: '2026-05-05' },
+  ],
+  freePlan = [
+    { name: 'Midjourney', initial: 'M', note: '無料プランなし（2024年末に廃止されたとされている）。' },
+    { name: 'DALL·E', initial: 'D', note: 'ChatGPT無料プランで制限付き利用可。商用利用できる場合あり。' },
+    { name: 'Adobe Firefly', initial: 'A', note: '一定数の生成クレジットあり。商用利用できる場合あり（β機能を除く）。' },
+    { name: 'Stable Diffusion', initial: 'S', note: 'ローカル実行は無料。モデルごとにライセンスを個別確認。' },
+    { name: 'Canva AI画像生成', initial: 'C', note: '一定回数まで生成可。商用利用できる場合があるが明示条件あり。' },
+    { name: 'Leonardo AI', initial: 'L', note: '1日150トークン程度（変更の可能性あり）。無料プランでは画像の権利がLeonardo.AIに帰属し商用利用不可とされている。' },
+    { name: 'Runway', initial: 'R', note: '125クレジット（初回のみ・更新なし）。商用利用できる場合があるが透かしあり。' },
+    { name: 'Pika', initial: 'P', note: '月80クレジット程度（毎月更新）。商用利用不可。' },
+    { name: 'Kling AI', initial: 'K', note: '1日66クレジット程度（翌日繰越なし・透かしあり）。商用利用不可。' },
+  ],
+  watermark = [
+    { name: 'Midjourney', initial: 'M', note: '有料プランでは透かしなし。' },
+    { name: 'DALL·E', initial: 'D', note: '可視透かしなし。C2PA標準の不可視メタデータが埋め込まれる場合あり。' },
+    { name: 'Adobe Firefly', initial: 'A', note: 'プランによっては可視透かしあり。全プランでC2PAメタデータ（コンテンツクレデンシャル）埋め込み。' },
+    { name: 'Stable Diffusion', initial: 'S', note: '一部バージョン・実装で不可視透かし（invisible watermark）が埋め込まれる場合あり。' },
+    { name: 'Canva AI画像生成', initial: 'C', note: '公式情報から未確認。' },
+    { name: 'Leonardo AI', initial: 'L', note: '通常は透かしなしとされているが公式情報からの詳細は未確認。' },
+    { name: 'Runway', initial: 'R', note: '無料プランでは透かしあり。有料プランでは透かしなし。' },
+    { name: 'Pika', initial: 'P', note: '無料プランでは透かしあり。有料プランでは透かしなし。' },
+    { name: 'Kling AI', initial: 'K', note: '無料プランでは透かしあり。有料プランでは透かしなし。' },
+  ],
+  checklist = [
+    { html: '使用するツールの<b>公式利用規約（Terms of Service）</b>を確認した' },
+    { html: '利用するプランが<b>商用利用を許可している</b>ことを確認した' },
+    { html: '透かし・クレジット表記の条件を確認した' },
+    { html: '生成コンテンツに<b>既存の著作物・商標・肖像</b>が含まれていないことを確認した' },
+    { html: '組み合わせる素材・テンプレートそれぞれのライセンスを確認した（Canva等）' },
+    { html: '利用規約の<b>最終更新日</b>を確認し、最新版を参照した' },
+    { html: '大企業（年間収益100万ドル超）に該当する場合は Midjourney・Stable Diffusion の条件を別途確認した' },
+    { html: '重要な商用利用の場合、<b>法律の専門家に相談</b>した' },
+  ],
+  faqs = [
+    { q: '無料プランで生成した画像・動画は商用利用できますか？', a: 'ツールとプランによって大きく異なります。Pika・Kling AIの無料プランは商用利用不可とされています（確認時点）。Leonardo AIの無料プランでも画像の権利がLeonardo.AIに帰属し商用利用不可とされています。一方、Runway・DALL·E・Adobe Fireflyは全プランで商用利用できる場合があるとされています（確認時点）。いずれも条件は変更される可能性があるため、利用前に各ツールの最新利用規約とプラン条件を必ずご確認ください。' },
+    { q: '透かし（ウォーターマーク）が入っていても商用利用できますか？', a: '透かしの有無と商用利用の可否は、別の問題として扱われる場合があります。透かしが入っていても規約上は商用利用が許可されている場合がありますが、透かし入りコンテンツの実用的な商用利用は困難な場合がほとんどです。また、透かしを無断で除去することがツールの利用規約に違反する可能性があります。各ツールの規約をご確認ください。' },
+    { q: '生成コンテンツの著作権は自分に帰属しますか？', a: 'ツールの利用規約と日本の著作権法の両面から確認が必要です。多くのツールでは「ユーザーに権利が帰属する」または「ユーザーに商用利用ライセンスを付与する」としていますが、Kling AIなどプラットフォームが生成コンテンツへの永続的なライセンスを保持する条項を設けているツールもあります。AI生成コンテンツの著作権の法的扱いは日本でも整備・議論中のため、重要な商用利用の場面では専門家への相談を推奨します。' },
+    { q: 'SNS広告に使っても問題ありませんか？', a: '利用するツールの商用利用許可の有無に加えて、次の点も個別に確認することを推奨します。生成コンテンツに第三者の著作権・商標・肖像権等に関わる要素が含まれていないか、ツールの利用規約で広告利用が制限されていないか、掲載するプラットフォームのポリシーに抵触しないか。これらは各ツールの最新公式情報と、必要に応じて専門家への確認に基づいて判断することを推奨します。' },
+    { q: '生成した画像・動画を素材として販売できますか？', a: '素材集・テンプレートとしての販売（再頒布）は、ツールによって明示的に禁止または制限されている場合があります。利用規約の「再頒布」「再販」「サブライセンス」に関する条項を事前に確認してください。ツールによって扱いが異なるため、各ツールの最新公式情報でご確認ください。' },
+    { q: 'クライアントへの納品物に使っても問題ありませんか？', a: '商用利用を許可しているツールでは、クライアントへの成果物納品は一般的に想定される商用利用の範囲に含まれる場合があります。ただし、納品物に含まれる生成コンテンツへの第三者の権利侵害リスク、ツールの利用規約上の制限の有無、クライアントが求めるコンプライアンス要件等を確認した上で使用することを推奨します。' },
+  ],
+  notes = [
+    '各ツールの利用規約は予告なく変更されます。定期的に公式規約を確認してください。',
+    'このサイトの情報は各ページの確認日時点のものです。最新情報は必ず公式サイトでご確認ください。',
+    'AI生成コンテンツに関する著作権・知的財産の法的解釈は、日本を含む各国で整備・更新中です。',
+    '重要な商用利用の場面では、法律の専門家（弁護士等）への相談を推奨します。',
+  ],
+  footnote = 'このガイドは情報提供を目的としており、法的アドバイスではありません。商用利用の判断は各ツールの最新利用規約と専門家への相談に基づいて行ってください。',
+  related = [
+    { label: '商用利用前の確認チェックリスト', href: 'https://aicreative-db.com/guides/ai-image-commercial-use-checklist/' },
+    { label: '商用利用を確認しやすいツール', href: 'https://aicreative-db.com/conditions/commercial-use/' },
+    { label: '無料で使えるツール', href: 'https://aicreative-db.com/conditions/free/' },
+    { label: '日本語対応ツール', href: 'https://aicreative-db.com/conditions/japanese/' },
+    { label: '透かしなしツール', href: 'https://aicreative-db.com/conditions/no-watermark/' },
+  ],
+  relatedSolid = [
+    { label: 'すべてのツールを見る', href: 'https://aicreative-db.com/tools/' },
+    { label: '全ツール比較表', href: 'https://aicreative-db.com/comparisons/' },
+  ],
+  toolLinks = [
+    { name: 'Midjourney', slug: 'midjourney', initial: 'M' },
+    { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A' },
+    { name: 'Stable Diffusion', slug: 'stable-diffusion', initial: 'S' },
+    { name: 'DALL·E', slug: 'dalle', initial: 'D' },
+    { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', initial: 'C' },
+    { name: 'Leonardo AI', slug: 'leonardo-ai', initial: 'L' },
+    { name: 'Runway', slug: 'runway', initial: 'R' },
+    { name: 'Pika', slug: 'pika', initial: 'P' },
+    { name: 'Kling AI', slug: 'kling-ai', initial: 'K' },
+  ],
+  toolsBase = '/tools/',
+} = Astro.props as Props;
+
+const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
+---
+
+<article class="cuc-x" data-cuc>
+  <!-- ===== 記事ヘッダー ===== -->
+  <header class="cuc-head">
+    <div class="cuc-meta">
+      <span class="cuc-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h10"/></svg>
+        ガイド
+      </span>
+      <span class="cuc-checked">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        記事内容の最終確認 <b>{checkedDate}</b>
+      </span>
+    </div>
+    <h1 class="cuc-h1" set:html={headingHtml}></h1>
+    <p class="cuc-lead">{lead}</p>
+    <div class="cuc-stats">
+      {stats.map((s) => (
+        <div class="cuc-stat"><span class="n">{s.n}</span><span class="t">{s.label}</span></div>
+      ))}
+    </div>
+  </header>
+
+  <!-- ===== 結論 + 免責 ===== -->
+  <section class="cuc-sec reveal">
+    <div class="cuc-conclusion">
+      <div class="ttl"><span class="k">Conclusion</span></div>
+      <h2>このガイドの結論</h2>
+      <div set:html={conclusionHtml}></div>
+    </div>
+    <div class="cuc-disclaimer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <p><b>免責事項：</b>{disclaimer}</p>
+    </div>
+  </section>
+
+  <!-- ===== 確認すべきポイント ===== -->
+  <section class="cuc-sec">
+    <div class="cuc-sechead reveal">
+      <span class="cuc-eyebrow">Checkpoints</span>
+      <h2>商用利用で確認すべきポイント</h2>
+      <p>「商用利用OK」と案内されていても、プラン・生成内容・素材の権利によって条件は変わります。実務で使う前に押さえておきたい観点を整理しました。</p>
+    </div>
+    <div class="cuc-points reveal" data-stagger>
+      {points.map((p, i) => (
+        <div class={`cuc-pcard${i === points.length - 1 && points.length % 2 === 1 ? ' span2' : ''}`}>
+          <span class="pn">{i + 1}</span>
+          <h3>{p.title}</h3>
+          <p>{p.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== ツール別の商用利用条件 ===== -->
+  <section class="cuc-sec band">
+    <div class="cuc-sechead reveal">
+      <span class="cuc-eyebrow">Tool conditions</span>
+      <h2>ツール別の商用利用条件</h2>
+      <p>以下は各確認日時点の情報です。実際の条件はプラン・時期によって変更される場合があります。詳細は各ツールの詳細ページおよび公式利用規約でご確認ください。</p>
+    </div>
+
+    <div class="reveal">
+      <h3 class="cuc-gtsub image">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></span>
+        画像生成ツール
+      </h3>
+      <p class="cuc-gtcap">各行の確認日と公式サイトをご確認ください。</p>
+      <div class="cuc-tablewrap">
+        <table class="cuc-gt">
+          <thead><tr><th>ツール</th><th>商用利用</th><th>主な注意点</th><th>確認日</th><th>詳細</th></tr></thead>
+          <tbody>
+            {imageTools.map((t) => (
+              <tr>
+                <td><div class="cuc-tool"><span class="b">{t.initial}</span><span class="nm">{t.name}</span></div></td>
+                <td><span class={`cuc-st ${t.status}`}><span class="d"></span>{t.statusLabel}</span></td>
+                <td class="cuc-note">{t.note}</td>
+                <td class="cuc-date">{t.date}</td>
+                <td>{toolUrl(t.slug) ? <a class="cuc-detail" href={toolUrl(t.slug)}>詳細を見る →</a> : null}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:34px;">
+      <h3 class="cuc-gtsub video">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="14" height="16" rx="2"/><path d="m16 9 6-3v12l-6-3"/></svg></span>
+        動画生成ツール
+      </h3>
+      <p class="cuc-gtcap">各行の確認日と公式サイトをご確認ください。</p>
+      <div class="cuc-tablewrap">
+        <table class="cuc-gt">
+          <thead><tr><th>ツール</th><th>商用利用</th><th>主な注意点</th><th>確認日</th><th>詳細</th></tr></thead>
+          <tbody>
+            {videoTools.map((t) => (
+              <tr>
+                <td><div class="cuc-tool"><span class="b">{t.initial}</span><span class="nm">{t.name}</span></div></td>
+                <td><span class={`cuc-st ${t.status}`}><span class="d"></span>{t.statusLabel}</span></td>
+                <td class="cuc-note">{t.note}</td>
+                <td class="cuc-date">{t.date}</td>
+                <td>{toolUrl(t.slug) ? <a class="cuc-detail" href={toolUrl(t.slug)}>詳細を見る →</a> : null}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="cuc-legend">
+        <span class="li"><span class="cuc-st cond"><span class="d"></span>〇 条件あり</span> 確認時点の公式情報で商用利用できる場合があるとされています。規約・プラン・コンテンツ内容等により制限される可能性があります。</span>
+        <span class="li"><span class="cuc-st plan"><span class="d"></span>△ プランによる</span> 無料プランでは商用利用不可、有料プランでは商用利用できる場合があるとされています。</span>
+      </div>
+      <p class="cuc-foot">※ この表は法的判断の根拠ではありません。必ず各ツールの最新公式情報をご確認ください。</p>
+    </div>
+  </section>
+
+  <!-- ===== 無料プラン利用時の注意 ===== -->
+  <section class="cuc-sec">
+    <div class="cuc-sechead reveal">
+      <span class="cuc-eyebrow">Free plan</span>
+      <h2>無料プラン利用時の注意</h2>
+      <p>無料プランで生成したコンテンツを商用利用する際は特に注意が必要です。無料プランでは商用利用が不可、または制限されているツールがあります。</p>
+    </div>
+    <div class="reveal">
+      <div class="cuc-callout">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+        <div class="ct">
+          <div class="h">無料プランで商用利用が明確に不可とされているツール（確認時点）</div>
+          <p><b>Pika・Kling AI・Leonardo AI</b> の無料プランは商用利用不可とされています。</p>
+        </div>
+      </div>
+      <div class="cuc-tablewrap">
+        <table class="cuc-gt">
+          <thead><tr><th>ツール</th><th>無料プランの主な制限（確認時点）</th></tr></thead>
+          <tbody>
+            {freePlan.map((t) => (
+              <tr>
+                <td><div class="cuc-tool"><span class="b">{t.initial}</span><span class="nm">{t.name}</span></div></td>
+                <td class="cuc-note">{t.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 透かし・クレジット・ライセンス ===== -->
+  <section class="cuc-sec band">
+    <div class="cuc-sechead reveal">
+      <span class="cuc-eyebrow">Watermark &amp; license</span>
+      <h2>透かし・クレジット・ライセンスの違い</h2>
+      <p>「透かしなし＝商用利用可」ではありません。透かしの有無、クレジット表記の要否、商用ライセンスの付与は、それぞれ別の問題として扱われる場合があります。</p>
+    </div>
+    <div class="reveal">
+      <div class="cuc-tablewrap">
+        <table class="cuc-gt">
+          <thead><tr><th>ツール</th><th>透かしの条件（確認時点）</th></tr></thead>
+          <tbody>
+            {watermark.map((t) => (
+              <tr>
+                <td><div class="cuc-tool"><span class="b">{t.initial}</span><span class="nm">{t.name}</span></div></td>
+                <td class="cuc-note">{t.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 実務利用前のチェックリスト ===== -->
+  <section class="cuc-sec">
+    <div class="cuc-sechead reveal">
+      <span class="cuc-eyebrow">Checklist</span>
+      <h2>実務利用前のチェックリスト</h2>
+      <p>商用利用を前提にする前に、最低限確認しておきたい項目です。重要な用途では各項目を公式情報・専門家への相談で裏付けてください。</p>
+    </div>
+    <ul class="cuc-checklist reveal" data-stagger>
+      {checklist.map((c) => (
+        <li><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span class="tx" set:html={c.html}></span></li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="cuc-sec band">
+    <div class="cuc-sechead reveal">
+      <span class="cuc-eyebrow">FAQ</span>
+      <h2>よくある質問</h2>
+      <p>無料プラン・透かし・著作権の帰属・SNS広告・素材販売・クライアント納品について、確認のポイントをお答えします。</p>
+    </div>
+    <div class="cuc-faq reveal">
+      {faqs.map((f) => (
+        <div class="cuc-faqitem" aria-expanded="false">
+          <button class="cuc-faqq" type="button"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="cuc-faqa"><div class="cuc-faqa-in" set:html={f.a}></div></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== 注意事項 + 鮮度 ===== -->
+  <section class="cuc-sec">
+    <div class="cuc-sechead reveal"><span class="cuc-eyebrow">Notes</span><h2>注意事項</h2></div>
+    <ul class="cuc-notes reveal">
+      {notes.map((n) => (<li><span class="dot"></span>{n}</li>))}
+    </ul>
+    <div class="cuc-freshness reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <span><b>情報の鮮度：</b>記事内容の最終確認日 <span class="mono">{checkedDate}</span>（次回確認予定 <span class="mono">{nextCheckDate}</span>）</span>
+    </div>
+    <div class="cuc-disclaimer reveal" style="margin-top:18px;max-width:820px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <p>{footnote}</p>
+    </div>
+  </section>
+
+  <!-- ===== 関連カテゴリ・主要ツール ===== -->
+  <section class="cuc-sec" style="padding-bottom:0;">
+    <div class="cuc-finder reveal">
+      <h2>関連カテゴリ・主要ツール</h2>
+      <p class="lead">他の条件ページや比較表からも、商用利用に適したツールを探せます。</p>
+      <div class="cuc-taglinks">
+        {related.map((r) => (<a class="cuc-taglink" href={r.href}><span class="ld"></span>{r.label}</a>))}
+      </div>
+      <div class="cuc-taglinks row">
+        {relatedSolid.map((r) => (<a class="cuc-taglink solid" href={r.href}>{r.label}</a>))}
+      </div>
+      <div class="row" style="margin-top:20px;">
+        <div class="cuc-cloudlabel">主要ツール詳細</div>
+        <div class="cuc-cloud">
+          {toolLinks.map((t) => (
+            <a href={toolUrl(t.slug)}><span class="b">{t.initial}</span>{t.name}</a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</article>
+
+<style>
+  /* すべて .cuc-x 配下に限定。CSS変数も .cuc-x 上に定義（:root非使用）。 */
+  .cuc-x {
+    --paper:#F4F4EE; --surface:#FFFFFF; --surface-2:#FAFAF6;
+    --ink:#16181D; --ink-soft:#3A3E47; --muted:#6A7180; --faint:#98A0AD;
+    --line:#E3E2D9; --line-strong:#D2D1C6;
+    --brand:#4B3FE4; --brand-ink:#2E25A6; --brand-tint:#ECEBFB;
+    --video:#E1543A; --video-tint:#FCEDE9; --image:#15897F; --image-tint:#E2F1EF;
+    --ok:#1E8A4C; --ok-tint:#E6F3EC; --warn:#A06A09; --warn-tint:#F8EFD9; --na:#6A7180; --na-tint:#EFEFEA;
+    --f-jp:"Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+    --f-body:"Noto Sans JP",system-ui,sans-serif;
+    --f-latin:"Space Grotesk",system-ui,sans-serif;
+    --f-mono:"Space Mono",ui-monospace,monospace;
+    --radius:14px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(20,22,28,.04),0 1px 3px rgba(20,22,28,.05);
+    --shadow-md:0 4px 14px rgba(20,22,28,.06),0 2px 6px rgba(20,22,28,.04);
+    --ease:cubic-bezier(.22,.61,.36,1);
+
+    font-family: var(--f-body);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .cuc-x :where(h1,h2,h3) { font-family: var(--f-jp); font-weight: 700; line-height: 1.32; letter-spacing: .01em; margin: 0; }
+  .cuc-x :where(p) { margin: 0; }
+  .cuc-x a { color: inherit; text-decoration: none; }
+
+  /* セクション */
+  .cuc-sec { padding: 64px 0; }
+  .cuc-sec.band { background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .cuc-sechead { max-width: 720px; margin-bottom: 32px; }
+  .cuc-sechead h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 900; letter-spacing: -.005em; margin: 16px 0 12px; }
+  .cuc-sechead p { color: var(--muted); font-size: 15px; }
+  .cuc-eyebrow { font-family: var(--f-latin); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); display: inline-flex; align-items: center; gap: 10px; }
+  .cuc-eyebrow::before { content: ""; width: 22px; height: 2px; border-radius: 2px; background: var(--brand); }
+
+  /* 記事ヘッダー */
+  .cuc-head { padding-bottom: 8px; }
+  .cuc-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  .cuc-pill { font-family: var(--f-jp); font-weight: 700; font-size: 12px; letter-spacing: .04em; color: var(--brand-ink); background: var(--brand-tint); padding: 5px 13px; border-radius: 999px; display: inline-flex; align-items: center; gap: 7px; }
+  .cuc-pill svg { width: 13px; height: 13px; }
+  .cuc-checked { font-family: var(--f-mono); font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; }
+  .cuc-checked svg { width: 14px; height: 14px; }
+  .cuc-checked b { color: var(--ink-soft); font-weight: 700; }
+  .cuc-h1 { font-size: clamp(27px, 3.6vw, 42px); font-weight: 900; letter-spacing: -.01em; line-height: 1.24; margin: 14px 0 16px; }
+  .cuc-h1 .hl { color: var(--brand-ink); position: relative; }
+  .cuc-h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .26em; background: color-mix(in srgb, var(--brand) 18%, transparent); z-index: -1; border-radius: 2px; }
+  .cuc-lead { font-size: 15.5px; color: var(--ink-soft); max-width: 620px; }
+  .cuc-stats { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 24px; }
+  .cuc-stat { display: flex; align-items: baseline; gap: 8px; }
+  .cuc-stat + .cuc-stat { padding-left: 26px; border-left: 1px solid var(--line); }
+  .cuc-stat .n { font-family: var(--f-latin); font-weight: 700; font-size: 24px; color: var(--ink); line-height: 1; }
+  .cuc-stat .t { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+
+  /* 結論 + 免責 */
+  .cuc-conclusion { position: relative; background: var(--brand-tint); border: 1px solid color-mix(in srgb, var(--brand) 24%, var(--line)); border-radius: var(--radius-lg); padding: 30px 34px 28px; overflow: hidden; }
+  .cuc-conclusion::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 5px; background: var(--brand); }
+  .cuc-conclusion .ttl { margin-bottom: 8px; }
+  .cuc-conclusion .ttl .k { font-family: var(--f-latin); font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--brand); }
+  .cuc-conclusion h2 { font-size: 21px; font-weight: 900; color: var(--brand-ink); line-height: 1.3; margin-bottom: 12px; }
+  .cuc-conclusion :where(p) { font-size: 14.5px; color: var(--ink-soft); line-height: 1.85; }
+  .cuc-conclusion :where(p) + :where(p) { margin-top: 10px; }
+  .cuc-conclusion b { color: var(--brand-ink); font-weight: 700; }
+
+  .cuc-disclaimer { display: flex; align-items: flex-start; gap: 12px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; margin-top: 18px; }
+  .cuc-disclaimer svg { width: 18px; height: 18px; color: var(--muted); flex: none; margin-top: 2px; }
+  .cuc-disclaimer p { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+  .cuc-disclaimer b { color: var(--ink-soft); font-weight: 700; }
+
+  /* 確認ポイント */
+  .cuc-points { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cuc-pcard { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px 22px; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; align-items: start; transition: transform .2s var(--ease), box-shadow .2s, border-color .2s; }
+  .cuc-pcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: color-mix(in srgb, var(--brand) 30%, var(--line)); }
+  .cuc-pcard .pn { grid-row: 1 / span 2; font-family: var(--f-latin); font-weight: 700; font-size: 16px; color: var(--brand); background: var(--brand-tint); width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; }
+  .cuc-pcard h3 { font-size: 16px; line-height: 1.45; color: var(--ink); align-self: center; }
+  .cuc-pcard p { grid-column: 2; font-size: 13.5px; color: var(--ink-soft); line-height: 1.78; }
+  .cuc-pcard.span2 { grid-column: 1 / -1; }
+
+  /* ガイド表 */
+  .cuc-gtsub { font-family: var(--f-jp); font-weight: 700; font-size: 17px; color: var(--ink); margin: 8px 0 6px; display: flex; align-items: center; gap: 10px; }
+  .cuc-gtsub .ic { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; flex: none; }
+  .cuc-gtsub.image .ic { background: var(--image-tint); color: var(--image); }
+  .cuc-gtsub.video .ic { background: var(--video-tint); color: var(--video); }
+  .cuc-gtsub .ic svg { width: 15px; height: 15px; }
+  .cuc-gtcap { font-size: 12.5px; color: var(--muted); margin-bottom: 12px; }
+  .cuc-tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-sm); }
+  table.cuc-gt { width: 100%; border-collapse: collapse; min-width: 720px; }
+  table.cuc-gt thead th { font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--ink-soft); background: var(--surface-2); padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  table.cuc-gt tbody td { padding: 16px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.cuc-gt tbody tr:last-child td { border-bottom: none; }
+  table.cuc-gt tbody tr { transition: background .12s; }
+  table.cuc-gt tbody tr:hover { background: var(--surface-2); }
+  .cuc-tool { display: flex; align-items: center; gap: 11px; min-width: 150px; }
+  .cuc-tool .b { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; background: var(--brand-tint); color: var(--brand-ink); font-family: var(--f-latin); font-weight: 700; font-size: 14px; flex: none; }
+  .cuc-tool .nm { font-family: var(--f-jp); font-weight: 700; font-size: 14.5px; color: var(--ink); line-height: 1.3; }
+  .cuc-note { font-size: 13px; color: var(--ink-soft); line-height: 1.7; min-width: 240px; }
+  .cuc-date { font-family: var(--f-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .cuc-detail { font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--brand-ink); white-space: nowrap; }
+  .cuc-detail:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .cuc-st { display: inline-flex; align-items: center; gap: 6px; flex: none; font-family: var(--f-jp); font-weight: 700; font-size: 12px; line-height: 1.2; padding: 5px 11px; border-radius: 999px; white-space: nowrap; }
+  .cuc-st .d { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .cuc-st.cond { color: var(--ok); background: var(--ok-tint); }
+  .cuc-st.plan { color: var(--warn); background: var(--warn-tint); }
+
+  .cuc-legend { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 14px; font-size: 12.5px; color: var(--muted); align-items: flex-start; }
+  .cuc-legend .li { display: inline-flex; align-items: flex-start; gap: 8px; max-width: 460px; }
+  .cuc-legend .li .cuc-st { flex: none; }
+  .cuc-foot { margin-top: 12px; font-size: 12px; color: var(--faint); line-height: 1.7; }
+
+  /* コールアウト */
+  .cuc-callout { display: flex; align-items: flex-start; gap: 13px; background: var(--video-tint); border: 1px solid color-mix(in srgb, var(--video) 26%, var(--line)); border-radius: var(--radius); padding: 18px 22px; margin-bottom: 22px; }
+  .cuc-callout .ic { width: 22px; height: 22px; color: var(--video); flex: none; margin-top: 1px; }
+  .cuc-callout .ic svg { width: 22px; height: 22px; }
+  .cuc-callout .ct .h { font-family: var(--f-jp); font-weight: 700; font-size: 14px; color: var(--video); margin-bottom: 4px; }
+  .cuc-callout .ct p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; }
+  .cuc-callout .ct p b { color: var(--ink); font-weight: 700; }
+
+  /* チェックリスト */
+  .cuc-checklist { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px 32px; display: flex; flex-direction: column; gap: 2px; max-width: 880px; list-style: none; margin: 0; }
+  .cuc-checklist li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; padding: 13px 0; border-bottom: 1px dashed var(--line); }
+  .cuc-checklist li:last-child { border-bottom: none; }
+  .cuc-checklist .box { width: 24px; height: 24px; border-radius: 7px; border: 2px solid var(--brand); display: grid; place-items: center; flex: none; margin-top: 1px; }
+  .cuc-checklist .box svg { width: 14px; height: 14px; color: var(--brand); }
+  .cuc-checklist .tx { font-size: 14px; color: var(--ink-soft); line-height: 1.65; }
+  .cuc-checklist .tx b { color: var(--ink); font-weight: 700; }
+
+  /* FAQ */
+  .cuc-faq { max-width: 860px; }
+  .cuc-faqitem { border-bottom: 1px solid var(--line); }
+  .cuc-faqitem:first-child { border-top: 1px solid var(--line); }
+  .cuc-faqq { width: 100%; text-align: left; background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 16px; padding: 24px 6px; font-family: var(--f-jp); font-weight: 700; font-size: 16px; color: var(--ink); }
+  .cuc-faqq .qm { font-family: var(--f-latin); color: var(--brand); font-size: 16px; flex: none; }
+  .cuc-faqq .ind { margin-left: auto; flex: none; width: 24px; height: 24px; display: grid; place-items: center; transition: transform .3s var(--ease); color: var(--muted); }
+  .cuc-faqq .ind svg { width: 18px; height: 18px; }
+  .cuc-faqitem[aria-expanded="true"] .cuc-faqq .ind { transform: rotate(45deg); color: var(--brand); }
+  .cuc-faqa { max-height: 0; overflow: hidden; transition: max-height .35s var(--ease); }
+  .cuc-faqa-in { padding: 0 6px 26px 46px; color: var(--ink-soft); font-size: 14.5px; line-height: 1.8; }
+  .cuc-faqa-in a { color: var(--brand-ink); font-weight: 600; }
+
+  /* 注意事項 + 鮮度 */
+  .cuc-notes { list-style: none; display: flex; flex-direction: column; gap: 12px; max-width: 820px; margin: 0; padding: 0; }
+  .cuc-notes li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; font-size: 13.5px; color: var(--ink-soft); line-height: 1.75; }
+  .cuc-notes li .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex: none; margin-top: 9px; }
+  .cuc-freshness { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 24px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 11px 20px; font-size: 13px; color: var(--ink-soft); max-width: max-content; }
+  .cuc-freshness svg { width: 16px; height: 16px; color: var(--brand); flex: none; }
+  .cuc-freshness b { font-weight: 700; color: var(--ink); }
+  .cuc-freshness .mono { font-family: var(--f-mono); font-size: 12.5px; }
+
+  /* 関連 */
+  .cuc-finder { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 34px 34px 30px; }
+  .cuc-finder h2 { font-size: clamp(20px, 2.4vw, 26px); margin-bottom: 6px; }
+  .cuc-finder .lead { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+  .cuc-taglinks { display: flex; flex-wrap: wrap; gap: 10px; }
+  .cuc-taglinks.row { margin-top: 16px; padding-top: 18px; border-top: 1px dashed var(--line-strong); }
+  .cuc-taglink { font-family: var(--f-jp); font-weight: 600; font-size: 13.5px; padding: 9px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink-soft); display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; transition: transform .16s var(--ease), background .16s, border-color .16s, color .16s; }
+  .cuc-taglink:hover { border-color: var(--brand); color: var(--brand-ink); background: var(--brand-tint); transform: translateY(-1px); }
+  .cuc-taglink .ld { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex: none; }
+  .cuc-taglink.solid { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+  .cuc-taglink.solid:hover { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .cuc-finder .row { border-top: 1px dashed var(--line-strong); padding-top: 18px; }
+  .cuc-cloudlabel { font-family: var(--f-latin); font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--faint); margin-bottom: 12px; }
+  .cuc-cloud { display: flex; flex-wrap: wrap; gap: 9px; }
+  .cuc-cloud a { font-family: var(--f-jp); font-weight: 600; font-size: 13px; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: 8px 15px; display: inline-flex; align-items: center; gap: 8px; transition: transform .16s var(--ease), border-color .16s, color .16s, background .16s; }
+  .cuc-cloud a:hover { border-color: var(--brand); color: var(--brand-ink); background: var(--brand-tint); transform: translateY(-1px); }
+  .cuc-cloud a .b { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: var(--brand-tint); color: var(--brand-ink); font-family: var(--f-latin); font-weight: 700; font-size: 11px; flex: none; }
+
+  /* スクロール表示アニメ */
+  @media (prefers-reduced-motion: no-preference) {
+    .cuc-x .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .cuc-x .reveal.in { opacity: 1; transform: none; }
+    .cuc-x .reveal[data-stagger] > * { opacity: 0; transform: translateY(16px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+    .cuc-x .reveal[data-stagger].in > * { opacity: 1; transform: none; }
+    .cuc-x .reveal[data-stagger].in > *:nth-child(1) { transition-delay: .04s; }
+    .cuc-x .reveal[data-stagger].in > *:nth-child(2) { transition-delay: .10s; }
+    .cuc-x .reveal[data-stagger].in > *:nth-child(3) { transition-delay: .16s; }
+    .cuc-x .reveal[data-stagger].in > *:nth-child(4) { transition-delay: .22s; }
+    .cuc-x .reveal[data-stagger].in > *:nth-child(5) { transition-delay: .28s; }
+    .cuc-x .reveal[data-stagger].in > *:nth-child(6) { transition-delay: .34s; }
+    .cuc-x .reveal[data-stagger].in > *:nth-child(7) { transition-delay: .40s; }
+    .cuc-x .reveal[data-stagger].in > *:nth-child(8) { transition-delay: .46s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cuc-x .reveal, .cuc-x .reveal[data-stagger] > * { opacity: 1 !important; transform: none !important; }
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 980px) { .cuc-points { grid-template-columns: 1fr; } }
+  @media (max-width: 720px) {
+    .cuc-sec { padding: 48px 0; }
+    .cuc-conclusion { padding: 24px 22px; }
+    .cuc-checklist { padding: 22px 20px; }
+    .cuc-stat + .cuc-stat { padding-left: 0; border-left: none; }
+  }
+</style>
+
+<script>
+  // JSは [data-cuc] 配下のみ操作（既存サイトに干渉しない）
+  (function () {
+    document.querySelectorAll('[data-cuc]').forEach(function (root) {
+      // FAQ 開閉（1つ開くと他は閉じる）
+      var faq = root.querySelector('.cuc-faq');
+      if (faq) {
+        faq.addEventListener('click', function (e) {
+          var btn = (e.target as HTMLElement).closest('.cuc-faqq');
+          if (!btn) return;
+          var item = btn.closest('.cuc-faqitem') as HTMLElement;
+          var open = item.getAttribute('aria-expanded') === 'true';
+          faq.querySelectorAll('.cuc-faqitem').forEach(function (it) {
+            it.setAttribute('aria-expanded', 'false');
+            var a = it.querySelector('.cuc-faqa') as HTMLElement | null;
+            if (a) a.style.maxHeight = '';
+          });
+          if (!open) {
+            item.setAttribute('aria-expanded', 'true');
+            var a = item.querySelector('.cuc-faqa') as HTMLElement | null;
+            if (a) a.style.maxHeight = a.scrollHeight + 'px';
+          }
+        });
+      }
+
+      // スクロール表示アニメ（prefers-reduced-motion 尊重・8秒フェイルセーフ）
+      var reveals = Array.prototype.slice.call(root.querySelectorAll('.reveal'));
+      if (!reveals.length) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        reveals.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      reveals.forEach(function (el) { io.observe(el); });
+      setTimeout(function () { reveals.forEach(function (el) { el.classList.add('in'); }); }, 8000);
+    });
+  })();
+</script>

@@ -1,33 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import GuideFAQ from '../../../components/GuideFAQ.astro';
+import ConditionChips from '../../../components/ConditionChips.astro';
+import Free, { type FreePlan } from '../../../components/Free.astro';
 
-const tools = await getCollection('tools');
-const freePlanTools = tools.filter((t) => t.data.freePlan === true || t.data.freePlan === 'limited');
-
-const faqs = [
-  {
-    q: '無料プランで商用利用できますか？',
-    a: 'ツールによって異なります。無料プランでも商用利用が案内されているツールがある一方、無料プランでは商用利用が制限され有料プランへの移行が必要なツールもあります。また、無料プランでは透かしが入る場合があり、成果物の実務利用が難しい場面もあります。商用利用前は必ず最新の公式規約をご確認ください。本記事は法的助言ではありません。',
-  },
-  {
-    q: '無料プランで出力できる画像・動画の数に制限はありますか？',
-    a: 'ほとんどのツールでは無料プランに出力回数・クレジット数・生成時間などの上限が設けられています。上限はツールやプランにより異なり、一定期間ごとにリセットされる場合や、使い切ったら追加課金が必要な場合があります。最新の無料枠条件は各公式サイトでご確認ください。',
-  },
-  {
-    q: '透かしが入るツールはどう見分けますか？',
-    a: '各ツールの詳細ページ（/tools/ から確認できます）や公式サイトの料金ページに透かし条件が記載されている場合があります。透かしなしで利用できるツールは /conditions/no-watermark/ でまとめています。ただし条件はプランや時期によって変わる可能性があるため、最新情報は公式サイトでご確認ください。',
-  },
-  {
-    q: 'AI動画生成とAI画像生成、どちらを無料で試すべきですか？',
-    a: '用途によって異なります。SNS投稿やサムネイル作成にはAI画像生成ツールが向いており、無料枠でも多くの画像を生成できるツールがあります。YouTube ShortsやSNS動画を作りたい場合はAI動画生成ツールを試すとよいでしょう。ただし動画生成は画像生成より処理コストが高く、無料枠の上限が厳しいケースが多い傾向があります。',
-  },
-  {
-    q: '無料プランで顔出しなし動画は作れますか？',
-    a: 'AIアバターやテキスト読み上げ機能を持つツールでは、無料プランで顔出しなし動画を試せる場合があります。ただし無料プランでは出力時間・解像度・機能に制限があることが多く、商用利用条件も有料プランとは異なる場合があります。各ツールの公式情報をご確認ください。',
-  },
-];
+const entries = await getCollection('tools');
+const tools = entries
+  .filter((e) => e.data.freePlan === true || e.data.freePlan === 'limited')
+  .map((e) => ({
+    name: e.data.name,
+    slug: e.slug,
+    initial: e.data.name.charAt(0),
+    freePlan: (e.data.freePlan === true ? 'あり' : 'limited') as FreePlan,
+  }));
 ---
 
 <BaseLayout
@@ -36,233 +21,12 @@ const faqs = [
   canonicalPath="/conditions/free/"
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
-
     <nav class="mb-6 text-sm text-slate-500" aria-label="パンくずリスト">
       <a href="/" class="hover:underline">トップ</a>
       <span class="mx-1">/</span>
       <span>無料で使えるAIツール</span>
     </nav>
-
-    <h1 class="mb-3 text-2xl font-bold text-slate-900 sm:text-3xl">
-      無料で使えるAIクリエイティブツール
-    </h1>
-    <p class="mb-8 text-sm leading-relaxed text-slate-500">
-      無料プランがあるAI画像生成・AI動画生成・AI動画編集・AIアバター動画ツールの条件をまとめています。
-      無料枠の内容、透かし、商用利用条件、出力制限を確認してから利用を始めましょう。
-      条件はプランや時期によって変わる可能性があるため、実務利用前に必ず最新の公式情報をご確認ください。
-    </p>
-
-    <section class="mb-10">
-      <h2 class="mb-4 text-lg font-bold text-slate-800">無料AIクリエイティブツールの選び方</h2>
-      <p class="mb-4 text-sm leading-relaxed text-slate-600">
-        AIクリエイティブツールの無料プランは、機能の範囲・生成回数・出力品質などが有料プランと異なる場合があります。
-        まず用途（画像生成・動画生成・動画編集・アバター動画）を明確にし、必要な機能が無料枠に含まれているかを確認することが重要です。
-        透かしや商用利用条件は実務利用に直結するため、試用前に公式の料金ページ・利用規約を必ず確認してください。
-      </p>
-      <div class="grid gap-4 sm:grid-cols-2">
-        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
-          <p class="mb-1 font-semibold text-slate-800">AI画像生成を無料で試す</p>
-          <p class="text-sm leading-relaxed text-slate-600">
-            ブログ画像・SNS投稿・サムネイルなど静止画コンテンツ作成に向いています。
-            無料プランでも比較的多くの枚数を生成できるツールが多く、初めてAIツールを試す方に適しています。
-            <a href="/categories/image-generation/" class="text-blue-600 hover:underline">AI画像生成ツール一覧</a>で詳細を確認できます。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
-          <p class="mb-1 font-semibold text-slate-800">AI動画生成を無料で試す</p>
-          <p class="text-sm leading-relaxed text-slate-600">
-            SNS動画・YouTube Shorts・プロモーション動画の制作に向いています。
-            画像生成より処理コストが高く、無料枠の上限が厳しいツールも多い傾向があります。
-            <a href="/categories/video-generation/" class="text-blue-600 hover:underline">AI動画生成ツール一覧</a>で比較できます。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
-          <p class="mb-1 font-semibold text-slate-800">AI動画編集を無料で試す</p>
-          <p class="text-sm leading-relaxed text-slate-600">
-            既存の動画素材をAIで編集・加工したい場合に向いています。
-            字幕生成・背景除去・カット編集などの機能を無料枠で試せるツールがあります。
-            <a href="/categories/video-editing/" class="text-blue-600 hover:underline">AI動画編集ツール一覧</a>で確認できます。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
-          <p class="mb-1 font-semibold text-slate-800">AIアバター動画を無料で試す</p>
-          <p class="text-sm leading-relaxed text-slate-600">
-            顔出しなしで動画を作りたい場合や、AIアバターを使った解説動画・プレゼン動画に向いています。
-            無料プランでは利用できるアバターや出力時間が制限されるケースが多いです。
-            <a href="/categories/avatar-video/" class="text-blue-600 hover:underline">AIアバター動画ツール一覧</a>で比較できます。
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="mb-4 text-lg font-bold text-slate-800">無料プランで確認するポイント</h2>
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
-          <p class="mb-1 font-semibold text-slate-800">生成回数・クレジット</p>
-          <p class="text-sm leading-relaxed text-slate-600">
-            月あたりの生成回数やクレジット数に上限があるツールがほとんどです。
-            上限に達した場合、追加クレジットの購入や有料プランへの移行が必要になる場合があります。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
-          <p class="mb-1 font-semibold text-slate-800">透かし（ウォーターマーク）</p>
-          <p class="text-sm leading-relaxed text-slate-600">
-            無料プランでは生成画像・動画に透かしが自動で付与されるツールがあります。
-            透かしなしで利用したい場合は有料プランへの移行が必要なケースがほとんどです。
-            <a href="/conditions/no-watermark/" class="text-blue-600 hover:underline">透かしなしで使えるツール一覧</a>もご参照ください。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
-          <p class="mb-1 font-semibold text-slate-800">商用利用条件</p>
-          <p class="text-sm leading-relaxed text-slate-600">
-            無料プランでの商用利用可否はツールによって異なります。
-            SNSへの投稿や広告・ブログへの使用が商用と判断される場合があります。
-            <a href="/conditions/commercial-use/" class="text-blue-600 hover:underline">商用利用条件を確認しやすいツール一覧</a>で詳細をご確認ください。本記事は法的助言ではありません。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
-          <p class="mb-1 font-semibold text-slate-800">出力解像度・動画長</p>
-          <p class="text-sm leading-relaxed text-slate-600">
-            無料プランでは出力できる画像解像度や動画の最大長さが制限される場合があります。
-            実務利用に必要な品質・長さが無料枠に含まれているかを事前に確認しましょう。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
-          <p class="mb-1 font-semibold text-slate-800">利用できる機能の範囲</p>
-          <p class="text-sm leading-relaxed text-slate-600">
-            無料プランでは一部のモデルや機能（高解像度出力・優先処理・API利用など）が有料プラン専用の場合があります。
-            必要な機能が無料枠に含まれるかを公式サイトで確認してください。
-          </p>
-        </div>
-        <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
-          <p class="mb-1 font-semibold text-slate-800">日本語対応</p>
-          <p class="text-sm leading-relaxed text-slate-600">
-            日本語UIやプロンプトへの対応状況はツールによって異なります。
-            日本語対応ツールは<a href="/conditions/japanese/" class="text-blue-600 hover:underline">日本語対応ツール一覧</a>でも確認できます。
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="mb-4 text-lg font-bold text-slate-800">用途別の選び分け</h2>
-      <div class="overflow-x-auto">
-        <table class="w-full border-collapse text-sm">
-          <thead>
-            <tr class="bg-slate-50">
-              <th class="border border-slate-200 px-4 py-2 text-left font-semibold text-slate-700">用途</th>
-              <th class="border border-slate-200 px-4 py-2 text-left font-semibold text-slate-700">向いているツール種類</th>
-              <th class="border border-slate-200 px-4 py-2 text-left font-semibold text-slate-700">参考ページ</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="hover:bg-slate-50">
-              <td class="border border-slate-200 px-4 py-2 text-slate-700">SNS投稿・ブログ画像</td>
-              <td class="border border-slate-200 px-4 py-2 text-slate-600">AI画像生成</td>
-              <td class="border border-slate-200 px-4 py-2"><a href="/categories/image-generation/" class="text-blue-600 hover:underline">AI画像生成ツール一覧</a></td>
-            </tr>
-            <tr class="hover:bg-slate-50">
-              <td class="border border-slate-200 px-4 py-2 text-slate-700">YouTubeサムネイル</td>
-              <td class="border border-slate-200 px-4 py-2 text-slate-600">AI画像生成</td>
-              <td class="border border-slate-200 px-4 py-2"><a href="/use-cases/youtube-thumbnail/" class="text-blue-600 hover:underline">YouTubeサムネイル向けツール</a></td>
-            </tr>
-            <tr class="hover:bg-slate-50">
-              <td class="border border-slate-200 px-4 py-2 text-slate-700">YouTube動画</td>
-              <td class="border border-slate-200 px-4 py-2 text-slate-600">AI動画生成・AI動画編集</td>
-              <td class="border border-slate-200 px-4 py-2"><a href="/use-cases/youtube/" class="text-blue-600 hover:underline">YouTube向けツール</a></td>
-            </tr>
-            <tr class="hover:bg-slate-50">
-              <td class="border border-slate-200 px-4 py-2 text-slate-700">YouTube Shorts</td>
-              <td class="border border-slate-200 px-4 py-2 text-slate-600">AI動画生成・AI動画編集</td>
-              <td class="border border-slate-200 px-4 py-2"><a href="/use-cases/shorts/" class="text-blue-600 hover:underline">Shorts向けツール</a></td>
-            </tr>
-            <tr class="hover:bg-slate-50">
-              <td class="border border-slate-200 px-4 py-2 text-slate-700">顔出しなし動画</td>
-              <td class="border border-slate-200 px-4 py-2 text-slate-600">AIアバター動画・AI動画生成</td>
-              <td class="border border-slate-200 px-4 py-2"><a href="/use-cases/faceless-video/" class="text-blue-600 hover:underline">顔出しなし動画向けツール</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    {freePlanTools.length > 0 && (
-      <section class="mb-10">
-        <h2 class="mb-4 text-lg font-bold text-slate-800">無料枠があるAIツール一覧</h2>
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse text-sm">
-            <thead>
-              <tr class="bg-slate-50">
-                <th class="border border-slate-200 px-4 py-2 text-left font-semibold text-slate-700">ツール名</th>
-                <th class="border border-slate-200 px-4 py-2 text-left font-semibold text-slate-700">無料プラン</th>
-              </tr>
-            </thead>
-            <tbody>
-              {freePlanTools.map((t) => (
-                <tr class="hover:bg-slate-50">
-                  <td class="border border-slate-200 px-4 py-2">
-                    <a href={`/tools/${t.slug}/`} class="text-blue-600 hover:underline">{t.data.name}</a>
-                  </td>
-                  <td class="border border-slate-200 px-4 py-2 text-slate-600">
-                    {t.data.freePlan === 'limited' ? '制限あり' : 'あり'}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p class="mt-2 text-xs text-slate-400">※ 無料枠の条件は変更される場合があります。最新情報は各公式サイトでご確認ください。</p>
-      </section>
-    )}
-
-    <section class="mb-10">
-      <h2 class="mb-4 text-lg font-bold text-slate-800">商用利用前の注意点</h2>
-      <p class="mb-3 text-sm leading-relaxed text-slate-600">
-        AIクリエイティブツールで生成したコンテンツを商用利用する際は、以下の点を必ず公式規約で確認してください。
-        本ページは情報提供を目的としており、法的助言ではありません。
-      </p>
-      <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600">
-        <li>無料プランでの商用利用が許可されているか</li>
-        <li>生成コンテンツの著作権がどのように扱われるか（ツールによって異なります）</li>
-        <li>透かしが入る場合、商用利用に支障がないか</li>
-        <li>学習データや生成物に関する規約上の制限がないか</li>
-        <li>肖像権・商標権など第三者の権利を侵害していないか</li>
-      </ul>
-      <p class="mt-3 text-sm leading-relaxed text-slate-600">
-        詳細は<a href="/guides/commercial-use-copyright/" class="text-blue-600 hover:underline">AIツール商用利用・著作権ガイド</a>もご参照ください。
-      </p>
-    </section>
-
-    <section class="mb-10">
-      <h2 class="mb-4 text-lg font-bold text-slate-800">カテゴリ・用途別に探す</h2>
-      <div class="flex flex-wrap gap-3">
-        <a href="/categories/image-generation/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">AI画像生成ツール一覧</a>
-        <a href="/categories/video-generation/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">AI動画生成ツール一覧</a>
-        <a href="/categories/video-editing/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">AI動画編集ツール一覧</a>
-        <a href="/categories/avatar-video/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">AIアバター動画ツール一覧</a>
-        <a href="/use-cases/youtube/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">YouTube向けツール</a>
-        <a href="/use-cases/shorts/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">Shorts向けツール</a>
-        <a href="/use-cases/faceless-video/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">顔出しなし動画向けツール</a>
-        <a href="/conditions/commercial-use/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">商用利用条件を確認しやすいツール</a>
-        <a href="/conditions/no-watermark/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">透かしなしで使えるツール</a>
-        <a href="/conditions/japanese/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">日本語対応ツール</a>
-        <a href="/guides/commercial-use-copyright/" class="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:border-slate-300">商用利用・著作権ガイド</a>
-      </div>
-    </section>
-
-    <section class="mb-10">
-      <GuideFAQ items={faqs} />
-    </section>
-
-    <div class="rounded-xl border border-amber-100 bg-amber-50 p-5 text-sm leading-relaxed text-amber-800">
-      <p class="font-semibold mb-1">免責事項</p>
-      <p>
-        本ページの情報は公式サイト・公式規約を参考に整理したものですが、内容の正確性・完全性を保証するものではありません。
-        商用利用条件・著作権・透かし条件はプランや用途、時期によって変わる可能性があります。
-        実務利用前には必ず各ツールの最新公式情報をご確認ください。本ページは法的助言ではありません。
-      </p>
-    </div>
-
+    <ConditionChips currentPath="/conditions/free/" />
+    <Free {tools} />
   </div>
 </BaseLayout>

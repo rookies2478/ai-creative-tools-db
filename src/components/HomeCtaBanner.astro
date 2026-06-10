@@ -1,0 +1,82 @@
+---
+// HomeCtaBanner.astro
+---
+
+<section class="hcb-section">
+  <div class="wrap hcb-inner">
+    <div class="hcb-text reveal">
+      <h2>AIクリエイティブツールを条件で絞り込む</h2>
+      <p>商用利用・無料枠・透かしなどの条件を組み合わせて、目的に合ったAIツールを探せます。</p>
+    </div>
+    <div class="hcb-actions reveal">
+      <a href="/comparisons/" class="btn btn-primary btn-lg">比較表を見る <span class="arr">→</span></a>
+      <a href="/conditions/free/" class="btn btn-ghost btn-lg">無料ツールを探す <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hcb-section {
+    padding: 80px 0;
+    background: var(--brand);
+    background: linear-gradient(135deg, var(--brand) 0%, color-mix(in srgb, var(--brand) 75%, #000) 100%);
+  }
+
+  .hcb-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .hcb-text {
+    flex: 1;
+    min-width: 0;
+  }
+  .hcb-text h2 {
+    font-family: var(--f-jp);
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .hcb-text p {
+    font-size: 14.5px;
+    color: rgba(255,255,255,.8);
+    line-height: 1.65;
+  }
+
+  .hcb-actions {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+  /* override btn colors on brand bg */
+  .hcb-actions :global(.btn-primary) {
+    background: #fff;
+    color: var(--brand);
+    border-color: #fff;
+  }
+  .hcb-actions :global(.btn-primary:hover) {
+    background: rgba(255,255,255,.9);
+  }
+  .hcb-actions :global(.btn-ghost) {
+    border-color: rgba(255,255,255,.55);
+    color: #fff;
+    background: transparent;
+  }
+  .hcb-actions :global(.btn-ghost:hover) {
+    background: rgba(255,255,255,.12);
+    border-color: #fff;
+  }
+
+  @media (max-width: 720px) {
+    .hcb-section { padding: 56px 0; }
+    .hcb-inner { flex-direction: column; align-items: flex-start; }
+    .hcb-actions { width: 100%; }
+    .hcb-actions :global(.btn) { flex: 1; justify-content: center; }
+  }
+</style>

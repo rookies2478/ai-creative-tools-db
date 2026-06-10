@@ -1,8 +1,17 @@
-﻿---
+---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ToolCard from '../components/ToolCard.astro';
-import CompareTablePreview from '../components/CompareTablePreview.astro';
+import HomeHeroAnimated from '../components/HomeHeroAnimated.astro';
+import HomePillarCards from '../components/HomePillarCards.astro';
+import HomeCriteriaStrip from '../components/HomeCriteriaStrip.astro';
+import HomeGoalCards from '../components/HomeGoalCards.astro';
+import HomeStartFinder from '../components/HomeStartFinder.astro';
+import HomeComparisonInteractive from '../components/HomeComparisonInteractive.astro';
+import type { CmpTool } from '../components/HomeComparisonInteractive.astro';
+import HomeGuidesGrid from '../components/HomeGuidesGrid.astro';
+import HomeEditorialPolicy from '../components/HomeEditorialPolicy.astro';
+import HomeFaq from '../components/HomeFaq.astro';
+import HomeCtaBanner from '../components/HomeCtaBanner.astro';
 
 const FEATURED_IMAGE_SLUGS = [
   'midjourney',
@@ -30,8 +39,63 @@ const videoTools = FEATURED_VIDEO_SLUGS
   .map(slug => allTools.find(t => t.slug === slug))
   .filter((t): t is NonNullable<typeof t> => t !== undefined);
 
-// 注目ツール表示用（動画→画像の順）
-const tools = [...videoTools, ...imageTools].slice(0, 6);
+// --- CmpTool マッピング ---
+type Mark = 'y' | 'c' | 'n';
+const TOOL_META: Record<string, { initial: string; color: string; cat: string }> = {
+  'runway':                   { initial: 'R', color: '#E1543A', cat: '動画生成' },
+  'kling-ai':                 { initial: 'K', color: '#3A6FF0', cat: '動画生成' },
+  'pika':                     { initial: 'P', color: '#10A4C8', cat: '動画生成' },
+  'luma-ai':                  { initial: 'L', color: '#15897F', cat: '動画生成' },
+  'capcut-ai':                { initial: 'C', color: '#111319', cat: '動画生成' },
+  'midjourney':               { initial: 'M', color: '#7A5AE0', cat: '画像生成' },
+  'adobe-firefly':            { initial: 'A', color: '#D8453A', cat: '画像生成' },
+  'canva-ai-image-generator': { initial: 'C', color: '#0E8E84', cat: '画像生成' },
+  'leonardo-ai':              { initial: 'L', color: '#E89B12', cat: '画像生成' },
+  'stable-diffusion':         { initial: 'S', color: '#1F63E8', cat: '画像生成' },
+};
+function mapFree(v: boolean | 'limited' | 'unknown'): Mark {
+  return v === true ? 'y' : v === false ? 'n' : 'c';
+}
+function mapWatermark(v: 'yes' | 'no' | 'limited' | 'unknown'): Mark {
+  return v === 'no' ? 'y' : v === 'yes' ? 'n' : 'c';
+}
+function mapJapanese(v: boolean | 'partial' | 'unknown'): Mark {
+  return v === true ? 'y' : v === false ? 'n' : 'c';
+}
+function mapCommercial(v: 'ok' | 'paid-only' | 'limited' | 'no' | 'unknown'): Mark {
+  return v === 'ok' ? 'y' : v === 'no' ? 'n' : 'c';
+}
+function extractPrice(s?: string): number | null {
+  if (!s) return null;
+  const m = s.match(/(\d+\.?\d*)/);
+  return m ? parseFloat(m[1]) : null;
+}
+function toCmpTool(t: (typeof allTools)[number]): CmpTool {
+  const d = t.data;
+  const meta = TOOL_META[t.slug] ?? { initial: d.name[0], color: '#888', cat: '' };
+  const noLowest = !d.lowestPaidPlan;
+  const isFreeOnly = d.freePlan === true && noLowest;
+  const price = isFreeOnly ? 0 : extractPrice(d.lowestPaidPlan);
+  const sym = d.lowestPaidPlan?.startsWith('¥') ? '¥' : '$';
+  const priceLabel = isFreeOnly
+    ? '<span class="cmp-free">無料〜</span>'
+    : price !== null
+      ? `${sym}${price}<small>/月〜</small>`
+      : '要確認';
+  return {
+    name: d.name, initial: meta.initial, color: meta.color, cat: meta.cat,
+    free: mapFree(d.freePlan),
+    watermark: mapWatermark(d.watermark),
+    japanese: mapJapanese(d.japaneseUi),
+    commercial: mapCommercial(d.commercialUse),
+    price, priceLabel,
+    checked: d.lastReviewed,
+    url: `/tools/${t.slug}/`,
+  };
+}
+const cmpVideoTools: CmpTool[] = videoTools.map(toCmpTool);
+const cmpImageTools: CmpTool[] = imageTools.map(toCmpTool);
+// --- ここまで ---
 
 const faqJsonLd = JSON.stringify({
   "@context": "https://schema.org",
@@ -94,1054 +158,65 @@ const faqJsonLd = JSON.stringify({
   description="AI画像生成・AI動画生成ツールを商用利用・料金・無料枠・透かし・日本語対応で比較できるDBです。副業・SNS運用・仕事での利用前に条件を確認できます。最新情報は公式サイトをご確認ください。"
   canonicalPath="/"
   jsonLd={faqJsonLd}
+  homePage={true}
 >
 
-  <!-- ============================================================ -->
-  <!-- 0. ページ内アンカーナビ（トップページ専用）                    -->
-  <!-- ============================================================ -->
-  <nav aria-label="ページ内ナビゲーション" class="border-b border-slate-100 bg-white">
-    <div class="overflow-x-auto overflow-y-hidden">
-      <div class="flex min-w-max gap-1 px-6">
-        <a href="#categories"  class="inline-flex min-h-[44px] items-center whitespace-nowrap px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">カテゴリ</a>
-        <a href="#use-cases"   class="inline-flex min-h-[44px] items-center whitespace-nowrap px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">目的から選ぶ</a>
-        <a href="#comparison"  class="inline-flex min-h-[44px] items-center whitespace-nowrap px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">主要ツール比較</a>
-        <a href="#articles"    class="inline-flex min-h-[44px] items-center whitespace-nowrap px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">記事</a>
-        <a href="#pickup"      class="inline-flex min-h-[44px] items-center whitespace-nowrap px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">ピックアップ</a>
-        <a href="#faq"         class="inline-flex min-h-[44px] items-center whitespace-nowrap px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">FAQ</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ============================================================ -->
-  <!-- 1. HERO                                                       -->
-  <!-- ============================================================ -->
-  <section class="hero-bg pb-20 pt-20">
-    <div class="mx-auto max-w-5xl px-6">
-      <div class="grid gap-12 lg:grid-cols-[1fr_320px] lg:items-start">
-
-        <!-- Left -->
-        <div>
-          <!-- Label -->
-          <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
-            <span class="h-2 w-2 rounded-full bg-blue-600"></span>
-            <span>AI CREATIVE TOOL NAVI</span>
-          </div>
-
-          <!-- H1 -->
-          <h1 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
-            AIクリエイティブツール比較ナビ
-          </h1>
-
-          <!-- Description -->
-          <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
-            AI動画生成・AI画像生成を中心に、目的別で探せるAIクリエイティブツール比較ナビ
-          </p>
-
-          <!-- 比較軸ラベル -->
-          <div class="mt-4 flex flex-wrap gap-2">
-            {['商用利用', '無料枠', '透かし', '日本語対応'].map(label => (
-              <span class="inline-flex items-center rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-                {label}
-              </span>
-            ))}
-          </div>
-
-          <!-- CTAs -->
-          <div class="mt-7 flex flex-wrap gap-3">
-            <a href="/categories/video-generation/" class="primary-btn">
-              AI動画生成ツールを見る
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-              </svg>
-            </a>
-            <a href="/tools/" class="outline-btn">AI画像生成ツールを見る</a>
-            <a href="/guides/commercial-use-copyright/" class="text-sm font-medium text-slate-500 hover:text-blue-600 self-center">商用利用ガイド →</a>
-          </div>
-
-          <!-- Flow guide -->
-          <p class="mt-3 text-xs text-slate-500">
-            初めての方：条件から探す → 一覧で候補を見る → 比較表で比べる → 詳細で確認 → 公式サイトで最終確認
-          </p>
-
-          <!-- Footnote -->
-          <p class="mt-2 text-xs text-slate-400">
-            情報は公式サイト・ヘルプ・利用規約などをもとに整理しています。確認日時点の情報です。
-          </p>
-        </div>
-
-        <!-- Right: 比較できる項目 card -->
-        <div class="rounded-2xl border border-blue-100 bg-white px-6 py-6 shadow-sm">
-          <p class="mb-5 text-[10px] font-bold uppercase tracking-widest text-slate-400">比較できる項目</p>
-          <ul class="space-y-4">
-            {[
-              { label: '商用利用',   desc: 'ビジネス・副業での活用可否を公式情報で確認' },
-              { label: '著作権',     desc: '生成物の利用条件を利用規約で確認' },
-              { label: '透かし',     desc: '出力画像・動画への透かし付与の有無' },
-              { label: '無料枠',     desc: '無料で試せる範囲・クレジット数など' },
-              { label: '日本語対応', desc: 'UIと日本語プロンプト対応状況' },
-            ].map(item => (
-              <li class="flex items-start gap-3">
-                <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">✓</span>
-                <div>
-                  <p class="text-sm font-semibold text-slate-800">{item.label}</p>
-                  <p class="text-xs leading-relaxed text-slate-500">{item.desc}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- 2. 条件フィルター                                             -->
-  <!-- ============================================================ -->
-  <section class="border-y border-slate-100 bg-white py-8">
-    <div class="mx-auto max-w-5xl px-6">
-      <p class="mb-4 text-sm font-semibold text-slate-700">条件からAIツールを探す</p>
-
-      <div class="flex flex-wrap gap-2">
-        <a href="/categories/video-generation/"          class="chip">AI動画生成</a>
-        <a href="/categories/image-generation/"        class="chip">AI画像生成</a>
-        <a href="/conditions/commercial-use/" class="chip">商用利用を確認</a>
-        <a href="/conditions/free/"           class="chip">無料で試せる</a>
-        <a href="/conditions/free/"     class="chip">動画無料プラン</a>
-        <a href="/conditions/japanese/"       class="chip">日本語対応</a>
-        <a href="/conditions/no-watermark/"   class="chip">透かしなし</a>
-      </div>
-
-      <div class="mt-5 flex flex-wrap gap-3">
-        <a href="/categories/video-generation/" class="primary-btn">AI動画生成ツール一覧</a>
-        <a href="/categories/image-generation/" class="outline-btn">AI画像生成ツール一覧</a>
-        <a href="/comparisons/"          class="outline-btn">比較表で見る</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- 2.5 カテゴリから探す                                          -->
-  <!-- ============================================================ -->
-  <section id="categories" class="scroll-mt-24 bg-white py-14">
-    <div class="mx-auto max-w-5xl px-6">
-      <div class="mb-8">
-        <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
-          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
-          <span>CATEGORIES</span>
-        </div>
-        <h2 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
-          カテゴリから探す
-        </h2>
-        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
-          AI動画生成・AI画像生成を中心に、動画編集・アバター・デザイン・音声まで、制作に使えるAIツールカテゴリを整理しています。
-        </p>
-      </div>
-
-      <!-- 主役カテゴリ（AI動画生成 / AI画像生成） -->
-      <div class="mb-4 grid gap-4 sm:grid-cols-2">
-
-        <!-- AI動画生成 -->
-        <a href="/categories/video-generation/" class="group relative flex flex-col rounded-2xl border-2 border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-md transition hover:border-blue-600 hover:shadow-lg">
-          <div class="mb-3 flex items-center gap-2 flex-wrap">
-            <span class="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
-              ★ 中心カテゴリ
-            </span>
-          </div>
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-600" aria-hidden="true">
-              <polygon points="23 7 16 12 23 17 23 7"/>
-              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-            </svg>
-            <p class="text-base font-bold text-slate-900 group-hover:text-blue-700">AI動画生成</p>
-          </div>
-          <p class="mt-1 text-sm leading-relaxed text-slate-600">テキストや画像から動画を自動生成。Runway・Kling AI・Pika など主要ツールを商用利用・無料枠・透かしで比較できます。</p>
-          <p class="mt-2 text-xs leading-relaxed text-slate-500">Hailuo AI・PixVerse・Vidu AI・InVideo AI など10件規模のツールをカテゴリで比較できます。</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">Runway</span>
-            <span class="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">Kling AI</span>
-            <span class="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">Pika</span>
-          </div>
-          <p class="mt-4 text-right text-sm font-bold text-blue-600 group-hover:underline">ツール一覧を見る →</p>
-        </a>
-
-        <!-- AI画像生成 -->
-        <a href="/categories/image-generation/" class="group relative flex flex-col rounded-2xl border-2 border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 shadow-md transition hover:border-blue-600 hover:shadow-lg">
-          <div class="mb-3 flex items-center gap-2 flex-wrap">
-            <span class="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
-              ★ 中心カテゴリ
-            </span>
-          </div>
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-600" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-              <circle cx="8.5" cy="8.5" r="1.5"/>
-              <polyline points="21 15 16 10 5 21"/>
-            </svg>
-            <p class="text-base font-bold text-slate-900 group-hover:text-blue-700">AI画像生成</p>
-          </div>
-          <p class="mt-1 flex-1 text-sm leading-relaxed text-slate-600">テキストプロンプトから画像を生成。Midjourney・Adobe Firefly など主要ツールを商用利用・無料枠・透かしで比較できます。</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">Midjourney</span>
-            <span class="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">Adobe Firefly</span>
-            <span class="rounded-full bg-blue-100 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">Stable Diffusion</span>
-          </div>
-          <p class="mt-4 text-right text-sm font-bold text-blue-600 group-hover:underline">ツール一覧を見る →</p>
-        </a>
-
-      </div>
-
-      <!-- サポートカテゴリ（AI動画編集 / AIアバター動画） -->
-      <p class="mb-3 mt-6 text-xs font-semibold uppercase tracking-widest text-slate-400">動画制作を支えるカテゴリ</p>
-      <div class="mb-4 grid gap-4 sm:grid-cols-2">
-
-        <!-- AI動画編集 -->
-        <a href="/categories/video-editing/" class="group flex flex-col rounded-xl border border-indigo-100 bg-indigo-50/40 p-5 shadow-sm transition hover:border-indigo-300 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-indigo-500" aria-hidden="true">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-            </svg>
-            <p class="text-sm font-bold text-slate-800 group-hover:text-indigo-700">AI動画編集</p>
-          </div>
-          <p class="flex-1 text-xs leading-relaxed text-slate-600">AIを使った動画トリミング・字幕追加・カット編集ツールの比較情報。</p>
-          <p class="mt-3 text-right text-xs font-semibold text-indigo-600 group-hover:underline">カテゴリを見る →</p>
-        </a>
-
-        <!-- AIアバター動画 -->
-        <a href="/categories/avatar-video/" class="group flex flex-col rounded-xl border border-indigo-100 bg-indigo-50/40 p-5 shadow-sm transition hover:border-indigo-300 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-indigo-500" aria-hidden="true">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-            <p class="text-sm font-bold text-slate-800 group-hover:text-indigo-700">AIアバター動画</p>
-          </div>
-          <p class="flex-1 text-xs leading-relaxed text-slate-600">AIアバターを使った解説動画・プレゼン動画ツールの比較情報。</p>
-          <p class="mt-3 text-right text-xs font-semibold text-indigo-600 group-hover:underline">カテゴリを見る →</p>
-        </a>
-
-      </div>
-
-      <!-- 制作補助カテゴリ（2つ） -->
-      <p class="mb-3 mt-6 text-xs font-semibold uppercase tracking-widest text-slate-400">制作補助ツール</p>
-      <div class="grid gap-3 sm:grid-cols-2">
-
-        <!-- AIデザイン -->
-        <div class="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-4">
-          <p class="text-xs font-bold text-slate-600">AIデザイン</p>
-          <p class="mt-1 text-[11px] leading-relaxed text-slate-400">バナー・LP・SNS投稿デザイン自動化ツール。比較情報準備中。</p>
-          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
-        </div>
-
-        <!-- AI音声・ナレーション -->
-        <div class="flex flex-col rounded-lg border border-slate-100 bg-slate-50 p-4">
-          <p class="text-xs font-bold text-slate-600">AI音声・ナレーション</p>
-          <p class="mt-1 text-[11px] leading-relaxed text-slate-400">テキスト読み上げ・音声クローンツール。比較情報準備中。</p>
-          <span class="mt-3 inline-flex w-fit rounded-full bg-slate-200 px-2 py-0.5 text-[9px] font-semibold text-slate-500">準備中</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- 3.5 目的から選ぶ                                              -->
-  <!-- ============================================================ -->
-  <section id="use-cases" class="scroll-mt-24 bg-white py-14 border-b border-slate-100">
-    <div class="mx-auto max-w-5xl px-6">
-      <div class="mb-8">
-        <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
-          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
-          <span>USE CASES</span>
-        </div>
-        <h2 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
-          目的から選ぶ
-        </h2>
-        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
-          制作したいアウトプットから、関連カテゴリの記事に案内します。未作成の用途は順次追加予定です。
-        </p>
-      </div>
-
-      <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-
-        <!-- 1. YouTubeサムネイル（リンク） -->
-        <a href="/use-cases/youtube-thumbnail/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-              <circle cx="8.5" cy="8.5" r="1.5"/>
-              <polyline points="21 15 16 10 5 21"/>
-            </svg>
-          </div>
-          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">YouTubeサムネイル</p>
-          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">クリックされるサムネ画像</p>
-          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
-        </a>
-
-        <!-- 4. SNS投稿（リンク） -->
-        <a href="/use-cases/sns-post-image/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            </svg>
-          </div>
-          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">SNS投稿</p>
-          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">画像・動画投稿</p>
-          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
-        </a>
-
-        <!-- 5. 広告クリエイティブ（リンク） -->
-        <a href="/use-cases/ad-banner/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
-              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-            </svg>
-          </div>
-          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">広告クリエイティブ</p>
-          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">バナー・動画広告</p>
-          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
-        </a>
-
-        <!-- 6. ブログ・アイキャッチ（リンク） -->
-        <a href="/use-cases/blog-eyecatch/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
-              <polyline points="10 9 9 9 8 9"/>
-            </svg>
-          </div>
-          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">ブログ・アイキャッチ</p>
-          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">記事・メディア用画像</p>
-          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
-        </a>
-
-        <!-- 7. EC商品画像（リンク） -->
-        <a href="/use-cases/ec-product-image/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <path d="M16 10a4 4 0 0 1-8 0"/>
-            </svg>
-          </div>
-          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">EC商品画像</p>
-          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">商品写真・背景合成</p>
-          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
-        </a>
-
-        <!-- 8. 顔出しなし動画 -->
-        <a href="/use-cases/faceless-video/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-300 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-          </div>
-          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">顔出しなし動画</p>
-          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">アバター・読み上げ</p>
-          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
-        </a>
-
-        <!-- YouTube動画 -->
-        <a href="/use-cases/youtube/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
-              <polygon points="23 7 16 12 23 17 23 7"/>
-              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-            </svg>
-          </div>
-          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">YouTube動画</p>
-          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">長尺・横型動画</p>
-          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
-        </a>
-
-        <!-- Shorts・縦型動画 -->
-        <a href="/use-cases/shorts/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-          <div class="mb-2 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-blue-500" aria-hidden="true">
-              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-              <line x1="12" y1="18" x2="12.01" y2="18"/>
-            </svg>
-          </div>
-          <p class="text-sm font-bold leading-snug text-slate-900 group-hover:text-blue-700">Shorts・縦型動画</p>
-          <p class="mt-1 flex-1 text-xs leading-relaxed text-slate-500">短尺・縦型動画</p>
-          <p class="mt-3 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
-        </a>
-
-      </div>
-
-      <div class="mt-6">
-        <a href="/use-cases/" class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:underline">
-          用途別ページを一覧で見る →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- 4. FEED / ピックアップ（タブ切り替え）                        -->
-  <!-- ============================================================ -->
-  <section id="pickup" class="scroll-mt-24 bg-slate-50 py-16">
-    <div class="mx-auto max-w-5xl px-6">
-
-      <!-- セクションヘッダー -->
-      <div class="mb-8">
-        <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
-          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
-          <span>FEED</span>
-        </div>
-        <h2 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
-          ピックアップ
-        </h2>
-        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
-          編集部が確認した注目ツールや、最近更新した記事をまとめています。
-        </p>
-      </div>
-
-      <!-- タブバー -->
-      <div class="overflow-x-auto">
-        <div class="flex min-w-max border-b border-slate-200">
-          <button
-            id="feed-tab-pickup"
-            onclick="switchFeedTab('pickup')"
-            class="feed-tab active whitespace-nowrap px-5 py-3 text-sm font-semibold transition"
-          >
-            ピックアップ記事
-          </button>
-          <button
-            id="feed-tab-tools"
-            onclick="switchFeedTab('tools')"
-            class="feed-tab whitespace-nowrap px-5 py-3 text-sm font-semibold transition"
-          >
-            注目ツール
-          </button>
-          <button
-            id="feed-tab-new"
-            onclick="switchFeedTab('new')"
-            class="feed-tab whitespace-nowrap px-5 py-3 text-sm font-semibold transition"
-          >
-            新着・更新
-          </button>
-        </div>
-      </div>
-
-      <!-- パネル：ピックアップ記事 -->
-      <div id="feed-panel-pickup" class="mt-6">
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-
-          <a href="/comparisons/ai-image-video-tools/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-100 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-600">比較表</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">AI画像・動画生成ツール比較表</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">主要ツールを商用利用・無料枠・透かしで横並びに整理</p>
-            <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
-          </a>
-
-          <a href="/comparisons/runway-vs-pika/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">比較記事</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-indigo-700">Runway vs Pika｜AI動画生成ツール比較</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用・無料枠・透かしなど主要条件を横並びで比較</p>
-            <p class="mt-4 text-right text-xs font-semibold text-indigo-600 group-hover:underline">読む →</p>
-          </a>
-
-          <a href="/guides/commercial-use-copyright/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-100 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-600">ガイド</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">AI画像生成の商用利用・著作権ガイド</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用の注意点・ツール別の利用条件を整理</p>
-            <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
-          </a>
-
-          <a href="/comparisons/midjourney-vs-adobe-firefly/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">比較記事</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-indigo-700">Midjourney vs Adobe Firefly｜AI画像生成比較</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用・著作権・価格・品質の違いを比較</p>
-            <p class="mt-4 text-right text-xs font-semibold text-indigo-600 group-hover:underline">読む →</p>
-          </a>
-
-          <a href="/use-cases/youtube-thumbnail/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-100 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-amber-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">用途別</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">YouTubeサムネイル向けAI画像生成ツール</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">クリックされるサムネイル作成に使えるツールを条件で絞り込み</p>
-            <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
-          </a>
-
-          <a href="/use-cases/blog-eyecatch/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-100 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-amber-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">用途別</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">ブログ・アイキャッチ向けAI画像生成ツール</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">記事・メディア用アイキャッチ作成に使えるツールを条件で絞り込み</p>
-            <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
-          </a>
-
-        </div>
-        <div class="mt-5 flex flex-wrap gap-3">
-          <a href="/comparisons/" class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:underline">比較記事をすべて見る →</a>
-          <a href="/guides/" class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:underline">ガイドをすべて見る →</a>
-        </div>
-      </div>
-
-      <!-- パネル：注目ツール -->
-      <div id="feed-panel-tools" class="mt-6 hidden">
-        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {tools.map(tool => <ToolCard tool={tool} />)}
-        </div>
-        <div class="mt-5">
-          <a href="/tools/" class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:underline">すべてのツールを見る →</a>
-        </div>
-      </div>
-
-      <!-- パネル：新着・更新 -->
-      <div id="feed-panel-new" class="mt-6 hidden">
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-
-          <a href="/categories/video-generation/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-600">ツール一覧</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">AI動画生成ツール一覧</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">Runway・Kling AI・Pika など主要ツールを商用利用・無料枠・透かしで比較</p>
-            <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
-          </a>
-
-          <a href="/tools/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-600">ツール一覧</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">AI画像生成ツール一覧</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">Midjourney・Adobe Firefly など主要ツールの条件を一覧で確認</p>
-            <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">見る →</p>
-          </a>
-
-          <a href="/comparisons/ai-image-video-tools/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">比較表</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-indigo-700">全カテゴリの比較表</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">AI画像・動画生成ツールを同じ観点で横並びに整理した比較表</p>
-            <p class="mt-4 text-right text-xs font-semibold text-indigo-600 group-hover:underline">見る →</p>
-          </a>
-
-          <a href="/guides/free-ai-image-tools/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-100 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-600">ガイド</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">無料で使えるAI画像生成ツールの選び方</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">無料プランの比較・制限・用途別のおすすめポイントを解説</p>
-            <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
-          </a>
-
-          <a href="/use-cases/ad-banner/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-100 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-amber-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">用途別</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">広告クリエイティブ向けAIツール</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">バナー・動画広告に使えるツールを条件で絞り込み</p>
-            <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
-          </a>
-
-          <a href="/use-cases/ec-product-image/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-100 hover:shadow-md">
-            <span class="mb-3 inline-flex w-fit rounded-full bg-amber-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">用途別</span>
-            <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">EC商品画像向けAI画像生成ツール</p>
-            <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商品写真・背景合成に使えるツールを比較</p>
-            <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
-          </a>
-
-        </div>
-        <div class="mt-5">
-          <a href="/use-cases/" class="inline-flex items-center gap-1 text-xs font-semibold text-amber-600 hover:underline">用途別記事をすべて見る →</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <style>
-    .feed-tab {
-      color: #64748b;
-      border-bottom: 2px solid transparent;
-      background: transparent;
-    }
-    .feed-tab:hover {
-      color: #1e40af;
-      background: #f8fafc;
-    }
-    .feed-tab.active {
-      color: #2563eb;
-      border-bottom-color: #2563eb;
-      font-weight: 700;
-    }
-  </style>
-
-  <script>
-    function switchFeedTab(tab: string) {
-      const tabs = ['pickup', 'tools', 'new'];
-      tabs.forEach(t => {
-        const panel = document.getElementById('feed-panel-' + t);
-        const btn   = document.getElementById('feed-tab-' + t);
-        if (!panel || !btn) return;
-        if (t === tab) {
-          panel.classList.remove('hidden');
-          btn.classList.add('active');
-        } else {
-          panel.classList.add('hidden');
-          btn.classList.remove('active');
-        }
-      });
-    }
-    (window as any).switchFeedTab = switchFeedTab;
-  </script>
-
-  <!-- ============================================================ -->
-  <!-- 5. 比較表プレビュー（タブ切り替え）                           -->
-  <!-- ============================================================ -->
-  <section id="comparison" class="scroll-mt-24 bg-slate-50 py-16">
-    <div class="mx-auto max-w-5xl px-6">
-
-      <!-- Section header -->
-      <div class="mb-8">
-        <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
-          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
-          <span>COMPARISON</span>
-        </div>
-        <h2 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
-          主要ツールを横並びで比較
-        </h2>
-        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
-          カテゴリごとに主要ツールを同じ観点で並べて確認できます。値はすべて要確認ベースで、プランや用途によって条件が異なる場合があります。
-        </p>
-      </div>
-
-      <!-- タブバー（横スクロール可） -->
-      <div class="overflow-x-auto">
-        <div class="flex min-w-max border-b border-slate-200">
-          <button
-            id="tab-video"
-            onclick="switchCompTab('video')"
-            class="comp-tab active whitespace-nowrap px-5 py-3 text-sm font-semibold transition"
-          >
-            AI動画生成
-          </button>
-          <button
-            id="tab-image"
-            onclick="switchCompTab('image')"
-            class="comp-tab whitespace-nowrap px-5 py-3 text-sm font-semibold transition"
-          >
-            AI画像生成
-          </button>
-          <span class="inline-flex cursor-default items-center whitespace-nowrap px-5 py-3 text-xs text-slate-400">
-            AIデザイン・AI音声は今後拡張予定
-          </span>
-        </div>
-      </div>
-
-      <!-- 白カード -->
-      <div class="rounded-b-2xl rounded-tr-2xl border border-slate-200 border-t-0 bg-white shadow-sm">
-
-        <!-- AI動画生成パネル -->
-        <div id="panel-video" class="p-6">
-          <CompareTablePreview tools={videoTools} limit={5} />
-
-          <!-- 凡例 -->
-          <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
-            <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-[11px] text-slate-500">
-              <span class="inline-flex items-center gap-1.5">
-                <span class="inline-block h-2.5 w-2.5 rounded-full bg-emerald-200"></span>対応の案内あり・公式情報を確認
-              </span>
-              <span class="inline-flex items-center gap-1.5">
-                <span class="inline-block h-2.5 w-2.5 rounded-full bg-amber-200"></span>要確認・プラン差・条件あり
-              </span>
-            </div>
-          </div>
-
-          <!-- 新着ツール案内 -->
-          <p class="mt-4 text-xs leading-relaxed text-slate-500">
-            新しく <a href="/tools/hailuo-ai/" class="font-semibold text-blue-600 hover:underline">Hailuo AI</a>・<a href="/tools/pixverse/" class="font-semibold text-blue-600 hover:underline">PixVerse</a> なども追加しました。<a href="/categories/video-generation/" class="text-blue-600 hover:underline">カテゴリ一覧</a>で10件規模のツールを比較できます。
-          </p>
-
-          <!-- CTA -->
-          <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
-            <p class="text-[11px] text-slate-400">※ 最新情報は必ず公式サイトでご確認ください。商用利用条件はプランや用途により異なります。</p>
-            <a
-              href="/categories/video-generation/"
-              class="inline-flex items-center gap-1 rounded-lg bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 transition hover:bg-blue-100"
-            >
-              AI動画生成の全ツール一覧を見る →
-            </a>
-          </div>
-        </div>
-
-        <!-- AI画像生成パネル -->
-        <div id="panel-image" class="hidden p-6">
-          <CompareTablePreview tools={imageTools} limit={5} />
-
-          <!-- 凡例 -->
-          <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
-            <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-[11px] text-slate-500">
-              <span class="inline-flex items-center gap-1.5">
-                <span class="inline-block h-2.5 w-2.5 rounded-full bg-emerald-200"></span>対応の案内あり・公式情報を確認
-              </span>
-              <span class="inline-flex items-center gap-1.5">
-                <span class="inline-block h-2.5 w-2.5 rounded-full bg-amber-200"></span>要確認・プラン差・条件あり
-              </span>
-            </div>
-          </div>
-
-          <!-- CTA -->
-          <div class="mt-5 flex flex-wrap items-center justify-between gap-3">
-            <p class="text-[11px] text-slate-400">※ 最新情報は必ず公式サイトでご確認ください。商用利用条件はプランや用途により異なります。</p>
-            <a
-              href="/tools/"
-              class="inline-flex items-center gap-1 rounded-lg bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 transition hover:bg-blue-100"
-            >
-              AI画像生成の全ツール一覧を見る →
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- 比較表全体リンク -->
-      <div class="mt-4 text-right">
-        <a href="/comparisons/ai-image-video-tools/" class="text-xs font-semibold text-slate-500 hover:text-blue-600 hover:underline">
-          全カテゴリの比較表を見る →
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <style>
-    .comp-tab {
-      color: #64748b;
-      border-bottom: 2px solid transparent;
-      background: transparent;
-    }
-    .comp-tab:hover {
-      color: #1e40af;
-      background: #f8fafc;
-    }
-    .comp-tab.active {
-      color: #2563eb;
-      border-bottom-color: #2563eb;
-      font-weight: 700;
-    }
-  </style>
-
-  <script>
-    function switchCompTab(tab: string) {
-      const panels = ['video', 'image'];
-      panels.forEach(p => {
-        const panel = document.getElementById('panel-' + p);
-        const btn   = document.getElementById('tab-' + p);
-        if (!panel || !btn) return;
-        if (p === tab) {
-          panel.classList.remove('hidden');
-          btn.classList.add('active');
-        } else {
-          panel.classList.add('hidden');
-          btn.classList.remove('active');
-        }
-      });
-    }
-    (window as any).switchCompTab = switchCompTab;
-  </script>
-
-  <!-- ============================================================ -->
-  <!-- 6. 比較・ガイド記事                                           -->
-  <!-- ============================================================ -->
-  <section id="articles" class="scroll-mt-24 bg-slate-50 py-16">
-    <div class="mx-auto max-w-5xl px-6">
-      <div class="mb-8">
-        <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
-          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
-          <span>COMPARISON &amp; GUIDES</span>
-        </div>
-        <h2 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
-          比較・ガイド記事
-        </h2>
-        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
-          AIツールの選び方、比較ポイント、商用利用条件、用途別の活用例をまとめています。トップページでは代表的な記事だけを掲載しています。
-        </p>
-      </div>
-
-      <!-- 特集記事 -->
-      <a href="/comparisons/ai-image-video-tools/" class="group mb-8 flex flex-col gap-5 rounded-2xl border-2 border-blue-200 bg-white p-7 shadow-md transition hover:border-blue-400 hover:shadow-lg sm:flex-row sm:items-start">
-        <div class="flex-1">
-          <span class="mb-3 inline-flex rounded-full bg-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white">比較表</span>
-          <p class="mt-3 text-lg font-bold leading-snug text-slate-900 group-hover:text-blue-700 sm:text-xl">AI画像・動画生成ツール比較表｜商用利用・無料枠・透かしを横並びで確認</p>
-          <p class="mt-3 text-sm leading-relaxed text-slate-500">AI動画生成・AI画像生成の主要ツールを同じ観点で横並びに整理した比較表です。商用利用条件・無料枠・透かしの有無をまとめて確認できます。</p>
-          <p class="mt-2 text-xs text-slate-400">最終確認：公式サイトでご確認ください</p>
-        </div>
-        <div class="flex shrink-0 items-end sm:items-center">
-          <span class="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-bold text-white transition group-hover:bg-blue-700">
-            比較表を見る
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-            </svg>
-          </span>
-        </div>
-      </a>
-
-      <!-- 厳選カード 6件（3列） -->
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-
-        <a href="/comparisons/runway-vs-pika/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
-          <span class="mb-3 inline-flex w-fit rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">比較記事</span>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-indigo-700">Runway vs Pika｜AI動画生成ツール比較</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用・無料枠・透かしなど主要条件を横並びで比較</p>
-          <p class="mt-4 text-right text-xs font-semibold text-indigo-600 group-hover:underline">読む →</p>
-        </a>
-
-        <a href="/comparisons/midjourney-vs-adobe-firefly/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-indigo-100 hover:shadow-md">
-          <span class="mb-3 inline-flex w-fit rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo-600">比較記事</span>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-indigo-700">Midjourney vs Adobe Firefly｜AI画像生成比較</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用・著作権・価格・品質の違いを比較</p>
-          <p class="mt-4 text-right text-xs font-semibold text-indigo-600 group-hover:underline">読む →</p>
-        </a>
-
-        <a href="/guides/commercial-use-copyright/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-100 hover:shadow-md">
-          <span class="mb-3 inline-flex w-fit rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-600">ガイド</span>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">AI画像生成の商用利用・著作権ガイド</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">商用利用の注意点・ツール別の利用条件を整理</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
-        </a>
-
-        <a href="/guides/free-ai-image-tools/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-blue-100 hover:shadow-md">
-          <span class="mb-3 inline-flex w-fit rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-600">ガイド</span>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-blue-700">無料で使えるAI画像生成ツールの選び方</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">無料プランの比較・制限・用途別のおすすめポイントを解説</p>
-          <p class="mt-4 text-right text-xs font-semibold text-blue-600 group-hover:underline">読む →</p>
-        </a>
-
-        <a href="/use-cases/youtube-thumbnail/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-100 hover:shadow-md">
-          <span class="mb-3 inline-flex w-fit rounded-full bg-amber-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">用途別</span>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">YouTubeサムネイル向けAI画像生成ツール</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">クリックされるサムネイル作成に使えるツールを条件で絞り込み</p>
-          <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
-        </a>
-
-        <a href="/use-cases/sns-post-image/" class="group flex flex-col rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-amber-100 hover:shadow-md">
-          <span class="mb-3 inline-flex w-fit rounded-full bg-amber-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-700">用途別</span>
-          <p class="font-bold leading-snug text-slate-900 group-hover:text-amber-700">SNS投稿向けAI画像生成ツール</p>
-          <p class="mt-2 flex-1 text-xs leading-relaxed text-slate-500">Instagram・X（旧Twitter）など投稿画像に使えるツールを比較</p>
-          <p class="mt-4 text-right text-xs font-semibold text-amber-600 group-hover:underline">読む →</p>
-        </a>
-
-      </div>
-
-      <!-- 準備中カード（控えめ） -->
-      <div class="mt-6 grid gap-4 sm:grid-cols-2">
-
-        <div class="flex flex-col rounded-xl border border-dashed border-slate-200 bg-white p-5 opacity-60">
-          <span class="mb-2 inline-flex w-fit rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold text-slate-400">準備中</span>
-          <p class="text-sm font-bold text-slate-400">プロンプト活用ガイド</p>
-          <p class="mt-1 text-xs leading-relaxed text-slate-400">AI動画・画像生成の出力品質を高めるプロンプトテンプレートを解説予定。</p>
-        </div>
-
-        <div class="flex flex-col rounded-xl border border-dashed border-slate-200 bg-white p-5 opacity-60">
-          <span class="mb-2 inline-flex w-fit rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-semibold text-slate-400">準備中</span>
-          <p class="text-sm font-bold text-slate-400">実務テンプレート集</p>
-          <p class="mt-1 text-xs leading-relaxed text-slate-400">制作フローや確認シートなど、実務で使うための補助資料を追加予定。</p>
-        </div>
-
-      </div>
-
-      <!-- 下部CTA -->
-      <div class="mt-10 flex flex-wrap gap-3">
-        <a href="/comparisons/" class="inline-flex items-center gap-1.5 rounded-lg border border-indigo-200 bg-indigo-50 px-5 py-2.5 text-sm font-semibold text-indigo-700 transition hover:bg-indigo-100">
-          比較記事をすべて見る →
-        </a>
-        <a href="/guides/" class="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-5 py-2.5 text-sm font-semibold text-blue-700 transition hover:bg-blue-100">
-          ガイドをすべて見る →
-        </a>
-        <a href="/use-cases/" class="inline-flex items-center gap-1.5 rounded-lg border border-amber-200 bg-amber-50 px-5 py-2.5 text-sm font-semibold text-amber-700 transition hover:bg-amber-100">
-          用途別記事をすべて見る →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- 8. 編集方針                                                   -->
-  <!-- ============================================================ -->
-  <section class="border-t border-slate-100 bg-slate-50 py-12">
-    <div class="mx-auto max-w-5xl px-6">
-      <div class="grid gap-8 lg:grid-cols-[1fr_1.6fr]">
-
-        <!-- 左：見出し・説明・リンク -->
-        <div>
-          <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
-            <span class="h-2 w-2 rounded-full bg-blue-600"></span>
-            <span>EDITORIAL</span>
-          </div>
-          <h2 class="mb-3 text-2xl font-black tracking-tight text-slate-950 sm:text-3xl">編集方針</h2>
-          <p class="mt-4 text-base leading-relaxed text-slate-600">
-            本サイトは、AIクリエイティブ制作ツールを整理する比較DB型メディアです。記事は情報提供を目的としており、本記事は法的助言ではありません。
-          </p>
-          <div class="mt-5 flex flex-col gap-2">
-            <a href="/editorial-policy/" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:underline">
-              編集方針の詳細を見る →
-            </a>
-            <a href="/guides/commercial-use-copyright/" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:underline">
-              商用利用・著作権ガイドを読む →
-            </a>
-          </div>
-        </div>
-
-        <!-- 右：4つの方針カード -->
-        <div class="grid gap-3 sm:grid-cols-2">
-
-          <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-            <p class="mb-1 text-xs font-bold text-slate-700">料金条件は公式情報を確認</p>
-            <p class="text-[11px] leading-relaxed text-slate-500">料金・無料枠・対応状況は変更される場合があります。最新情報は公式サイトをご確認ください。</p>
-          </div>
-
-          <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-            <p class="mb-1 text-xs font-bold text-slate-700">商用利用は断定しない</p>
-            <p class="text-[11px] leading-relaxed text-slate-500">商用利用条件はツール・プラン・用途によって異なる場合があります。利用前に各ツールの公式規約をご確認ください。</p>
-          </div>
-
-          <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-            <p class="mb-1 text-xs font-bold text-slate-700">確認できない項目は要確認扱い</p>
-            <p class="text-[11px] leading-relaxed text-slate-500">条件が確定できない項目は要確認として表示し、安易な断定を避けます。</p>
-          </div>
-
-          <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-            <p class="mb-1 text-xs font-bold text-slate-700">更新日を記事ごとに明示</p>
-            <p class="text-[11px] leading-relaxed text-slate-500">記事には最終確認日を記載しています。条件タグは公式情報の更新に合わせて見直します。</p>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- 9. よくある質問（FAQ）                                        -->
-  <!-- ============================================================ -->
-  <section id="faq" class="scroll-mt-24 bg-white py-16">
-    <div class="mx-auto max-w-5xl px-6">
-      <div class="mb-8">
-        <div class="mb-4 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-slate-500">
-          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
-          <span>FAQ</span>
-        </div>
-        <h2 class="text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
-          よくあるご質問
-        </h2>
-        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
-          掲載方針や更新頻度、AIツールの選び方に関する質問にお答えします。
-        </p>
-      </div>
-
-      <div class="faq-list divide-y divide-slate-100 rounded-xl border border-slate-100 bg-white shadow-sm">
-
-        <!-- Q1 -->
-        <details class="faq-item group">
-          <summary class="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 text-sm font-bold text-[#002B61] select-none">
-            <span>Q. このサイトで紹介しているAIツールは商用利用できますか？</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-blue-500 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-            </svg>
-          </summary>
-          <div class="px-5 pb-5 pt-1 text-[13px] leading-relaxed text-slate-600">
-            商用利用の可否はツール・プラン・用途によって異なり、本サイトでは断定しません。掲載情報はあくまで参考用であり、本記事は法的助言ではありません。
-            プランや用途によって条件が異なる場合があります。利用前に必ず各ツールの公式サイトおよび利用規約をご確認ください。
-          </div>
-        </details>
-
-        <!-- Q2 -->
-        <details class="faq-item group">
-          <summary class="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 text-sm font-bold text-[#002B61] select-none">
-            <span>Q. 無料で使えるAIツールだけを探せますか？</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-blue-500 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-            </svg>
-          </summary>
-          <div class="px-5 pb-5 pt-1 text-[13px] leading-relaxed text-slate-600">
-            ツール一覧ページでは料金タグ（無料プランあり・無料クレジットなど）で絞り込めます。
-            ただし無料枠の内容や制限はプランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。
-          </div>
-        </details>
-
-        <!-- Q3 -->
-        <details class="faq-item group">
-          <summary class="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 text-sm font-bold text-[#002B61] select-none">
-            <span>Q. AI画像生成ツールとAI動画生成ツールはどう選べばよいですか？</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-blue-500 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-            </svg>
-          </summary>
-          <div class="px-5 pb-5 pt-1 text-[13px] leading-relaxed text-slate-600">
-            本サイトはクリエイティブ制作に直接関係するAIツール（画像・動画生成）を中心に扱っています。
-            用途（SNS投稿・商用制作など）、料金、無料枠の有無、透かしの有無などの条件で絞り込むと選びやすくなります。
-            比較記事も参考にしてください。最終的な選択は公式サイトをご確認ください。
-          </div>
-        </details>
-
-        <!-- Q4 -->
-        <details class="faq-item group">
-          <summary class="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 text-sm font-bold text-[#002B61] select-none">
-            <span>Q. 日本語対応や透かしの有無はどこで確認できますか？</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-blue-500 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-            </svg>
-          </summary>
-          <div class="px-5 pb-5 pt-1 text-[13px] leading-relaxed text-slate-600">
-            各ツールの詳細ページおよびタグ一覧から確認できます。
-            対応状況はアップデートにより変わる場合があります。確定できない項目は要確認として表示しており、公式サイトで最終確認されることをおすすめします。
-          </div>
-        </details>
-
-        <!-- Q5 -->
-        <details class="faq-item group">
-          <summary class="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 text-sm font-bold text-[#002B61] select-none">
-            <span>Q. 料金や条件タグはどのくらいの頻度で更新されますか？</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-blue-500 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-            </svg>
-          </summary>
-          <div class="px-5 pb-5 pt-1 text-[13px] leading-relaxed text-slate-600">
-            公式情報の更新を確認次第、随時見直しを行っています。ただし更新タイミングにはラグが生じる場合があります。
-            最新の料金・条件は必ず公式サイトをご確認ください。記事ごとに最終確認日を記載しています。
-          </div>
-        </details>
-
-        <!-- Q6 -->
-        <details class="faq-item group">
-          <summary class="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 text-sm font-bold text-[#002B61] select-none">
-            <span>Q. 掲載されていないAIツールを追加依頼できますか？</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-blue-500 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-            </svg>
-          </summary>
-          <div class="px-5 pb-5 pt-1 text-[13px] leading-relaxed text-slate-600">
-            クリエイティブ制作（画像・動画生成）に直接関係するAIツールを対象に、掲載ご要望を受け付けています。
-            ただし掲載はサイトの編集方針に基づき審査のうえ判断します。詳しくは
-            <a href="/editorial-policy/" class="font-medium text-blue-600 hover:underline">編集方針ページ</a>をご覧ください。
-          </div>
-        </details>
-
-      </div>
-    </div>
-  </section>
-
-  <style>
-    .faq-item summary {
-      min-height: 44px;
-      list-style: none;
-    }
-    .faq-item summary::-webkit-details-marker {
-      display: none;
-    }
-    .faq-item[open] .faq-chevron {
-      transform: rotate(180deg);
-    }
-    .faq-item summary:hover {
-      background-color: #f8fafc;
-    }
-    .faq-item:first-child summary {
-      border-radius: 0.75rem 0.75rem 0 0;
-    }
-    .faq-item:last-child summary {
-      border-radius: 0 0 0.75rem 0.75rem;
-    }
-    .faq-item[open]:last-child summary {
-      border-radius: 0;
-    }
-  </style>
+  <HomeHeroAnimated
+    videoHref="/categories/video-generation/"
+    imageHref="/categories/image-generation/"
+  />
+  <HomeCriteriaStrip />
+  <HomePillarCards />
+  <HomeGoalCards />
+  <HomeStartFinder />
+  <HomeComparisonInteractive videoTools={cmpVideoTools} imageTools={cmpImageTools} />
+  <HomeGuidesGrid />
+  <HomeEditorialPolicy />
+  <HomeFaq />
+  <HomeCtaBanner />
 
 </BaseLayout>
+
+<script>
+// Scroll reveal — IntersectionObserver + load + rAF + 8s failsafe
+window.addEventListener('load', function() {
+  requestAnimationFrame(function() {
+    // 8-second failsafe: force-reveal everything if observer hasn't fired
+    var failsafe = setTimeout(function() {
+      document.querySelectorAll('.reveal:not(.in), [data-stagger] > *:not(.in)').forEach(function(el) {
+        el.classList.add('in');
+      });
+    }, 8000);
+
+    // Stagger children: add .reveal to each child so IntersectionObserver can pick them up
+    document.querySelectorAll('[data-stagger]').forEach(function(parent) {
+      Array.from(parent.children).forEach(function(child) {
+        child.classList.add('reveal');
+      });
+    });
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      // If already in viewport on load (above the fold), show immediately
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('in');
+      } else {
+        observer.observe(el);
+      }
+    });
+
+    // Clear failsafe once all elements are revealed
+    var remaining = document.querySelectorAll('.reveal:not(.in)');
+    if (remaining.length === 0) clearTimeout(failsafe);
+  });
+});
+</script>

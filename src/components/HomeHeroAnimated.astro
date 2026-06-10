@@ -1,0 +1,286 @@
+---
+/**
+ * HomeHeroAnimated.astro
+ * AIクリエイティブツール比較ナビ — アニメーション付きファーストビュー
+ *
+ * 設計上の安全性（Tailwind/既存ページを壊さないために）:
+ *  - スタイルはすべて Astro の scoped <style>。さらに全セレクタを .fv-hero 配下に
+ *    限定しているので、グローバルや他コンポーネントへ漏れません。
+ *  - CSS 変数は :root ではなく .fv-hero 上で定義。既存トークンと衝突しません。
+ *  - 素の要素リセット（*{} / body{} / h1{} 等の global 指定）は一切なし。
+ *    Tailwind の preflight と干渉しません。
+ *  - ヘッダー/フッターは含めません（既存 BaseLayout のものを使う前提）。
+ *  - 画像はビルド時 props で渡す実 <img>。未指定ならプレースホルダ + 生成中スケルトン。
+ *  - JS は [data-fv-hero] 配下のみを操作。prefers-reduced-motion を尊重。
+ */
+export interface FvTool {
+  name: string;
+  initial: string;
+  color: string;   // バッジ色
+  img?: string;    // 作例画像（public/ 配下の絶対パス推奨）。未指定ならプレースホルダ
+  alt?: string;
+}
+export interface Props {
+  /** 見出し（<br> 区切り用に2行で渡せます） */
+  titleLines?: string[];
+  /** ボタンのリンク先（既存サイトのURLに合わせて） */
+  videoHref?: string;
+  imageHref?: string;
+  videoLabel?: string;
+  imageLabel?: string;
+  /** 右側カードに出す3ツール（無料で試せる有名どころ） */
+  tools?: FvTool[];
+  /** 掲載ツールのカルーセル（会社名） */
+  marquee?: string[];
+  /** タイピングで流す作例テーマ */
+  promptTheme?: string;
+  /** ヘッダー高さ（min-height の差し引きに使用） */
+  headerHeight?: string;
+}
+
+const {
+  titleLines = ['AIクリエイティブ', 'ツール比較ナビ'],
+  videoHref = '/categories/video-generation/',
+  imageHref = '/categories/image-generation/',
+  videoLabel = 'AI動画生成ツールを比較',
+  imageLabel = 'AI画像生成ツールを比較',
+  tools = [
+    { name: 'Leonardo AI',      initial: 'L', color: '#E89B12', img: '/images/generated/tools/leonardo-ai-tool-output-01.webp',      alt: 'Leonardo AIで作成したファーストビュー用作例サンプル' },
+    { name: 'Adobe Firefly',    initial: 'A', color: '#D8453A', img: '/images/generated/tools/adobe-firefly-tool-output-01.webp',    alt: 'Adobe Fireflyで作成したファーストビュー用作例サンプル' },
+    { name: 'Stable Diffusion', initial: 'S', color: '#1F63E8', img: '/images/generated/tools/stable-diffusion-tool-output-01.webp', alt: 'Stable Diffusionで作成したファーストビュー用作例サンプル' },
+  ],
+  marquee = ['Runway','Midjourney','Kling AI','Adobe Firefly','Luma AI','Stable Diffusion','Pika','HeyGen','Canva','Leonardo AI','PixVerse','Vidu'],
+  promptTheme = '夕暮れの東京、ネオンに濡れた路地を走る一匹の猫',
+  headerHeight = '68px',
+} = Astro.props;
+
+// マーキーはシームレスループのため2回繰り返す
+const marqueeLoop = [...marquee, ...marquee];
+---
+
+<section class="fv-hero" data-fv-hero data-fv-theme={promptTheme} style={`--fv-header:${headerHeight}`}>
+ <div class="fv-grid">
+  <!-- 左：コピー -->
+  <div class="left">
+    <span class="kicker">AI CREATIVE TOOL NAVI</span>
+    <h1>{titleLines.map((l, i) => (<>{i > 0 && <br />}{l}</>))}</h1>
+    <p class="lead">
+      AI動画生成・AI画像生成を中心に、<b>商用利用</b>・<b>著作権</b>・<b>透かし</b>・<b>無料枠</b>・<b>日本語対応</b>の5つの視点で比較。
+    </p>
+    <div class="cta">
+      <a class="btn btn-primary" href={videoHref}>{videoLabel} <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href={imageHref}>{imageLabel}</a>
+    </div>
+    <div class="toolmarquee">
+      <span class="tm-label">掲載ツール — 30+</span>
+      <div class="tm-track">
+        <div class="tm-row">
+          {marqueeLoop.map((name) => (<span class="tm-item">{name}</span>))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右：作例ショーケース（アニメーション） -->
+  <div class="right">
+    <div class="sc-head"><span class="l">AI Generated Showcase</span><span class="r">同じテーマ × 3ツール</span></div>
+
+    <div class="prompt">
+      <span class="spk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 3l2.3 6.2L21.5 11l-6.2 2.3L13 19.5 10.7 13.3 4.5 11l6.2-2.3z"/></svg></span>
+      <div class="pmain">
+        <div class="plabel">作例テーマ — Example Theme</div>
+        <div class="ptext"><span class="ptext-val"></span><span class="cur"></span></div>
+      </div>
+    </div>
+
+    <div class="flow"><span class="ln"></span><span class="badge">SAME THEME</span>同じテーマを、3ツールはどう描く？<span class="ln"></span></div>
+
+    <div class="outputs">
+      {tools.map((t) => (
+        <div class="gen-card">
+          {t.img
+            ? <img class="gen-img" src={t.img} alt={t.alt ?? `${t.name} の作例`} loading="lazy" decoding="async" />
+            : <div class="gen-ph" aria-hidden="true"></div>}
+          <div class="ghead"><span class="gbadge" style={`background:${t.color}`}>{t.initial}</span><span class="gname">{t.name}</span></div>
+          <div class="skel"><div class="genstate"><span class="spin"></span><span class="gt">{t.name}</span></div></div>
+        </div>
+      ))}
+    </div>
+
+    <p class="outnote">※ 同じテーマでの作例イメージ。各ツールの傾向を示すもので、生成結果を保証するものではありません。条件は公式情報を要確認。</p>
+  </div>
+ </div>
+
+</section>
+
+<style>
+  /* ── 変数はコンポーネント根に閉じ込める（:root に撒かない）─────────── */
+  .fv-hero{
+    --paper:#F4F4EE; --surface:#FFFFFF; --surface-2:#FAFAF6;
+    --ink:#16181D; --ink-soft:#3A3E47; --muted:#6A7180; --faint:#98A0AD;
+    --line:#E3E2D9; --line-strong:#D2D1C6;
+    --brand:#4B3FE4; --brand-press:#3A2FCB; --on-brand:#FFFFFF; --brand-tint:#ECEBFB; --brand-ink:#2E25A6;
+    --f-jp:"Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+    --f-latin:"Space Grotesk",system-ui,sans-serif;
+    --f-mono:"Space Mono",ui-monospace,monospace;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --fv-header:68px;
+
+    display:flex; flex-direction:column;
+    min-height:calc(100svh - var(--fv-header) - 72px);
+    background:var(--paper); color:var(--ink);
+    font-family:"Noto Sans JP",system-ui,sans-serif;
+  }
+  .fv-hero .fv-grid{display:grid;grid-template-columns:1.02fr 1.06fr;flex:1;min-height:0;}
+
+  /* 左 */
+  .fv-hero .left{padding:clamp(36px,5vw,60px) clamp(24px,4vw,48px);display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--line-strong);position:relative;min-width:0;}
+  .fv-hero .kicker{font-family:var(--f-latin);font-size:11.5px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin:0 0 22px;display:flex;align-items:center;gap:10px;}
+  .fv-hero .kicker::before{content:"";width:26px;height:2px;background:var(--brand);}
+  .fv-hero h1{font-family:var(--f-jp);font-weight:900;font-size:clamp(34px,4.1vw,52px);line-height:1.16;letter-spacing:-.015em;margin:0 0 20px;color:var(--ink);}
+  .fv-hero .lead{font-size:15.5px;line-height:1.9;color:var(--ink-soft);max-width:460px;margin:0 0 30px;}
+  .fv-hero .lead b{font-weight:700;font-style:normal;color:var(--brand-ink);}
+  .fv-hero .cta{display:flex;gap:13px;align-items:center;flex-wrap:wrap;}
+
+  .fv-hero .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-jp);font-weight:700;font-size:15px;padding:14px 24px;border-radius:999px;border:1px solid transparent;white-space:nowrap;cursor:pointer;text-decoration:none;transition:transform .18s var(--ease),background .18s,border-color .18s,color .18s;}
+  .fv-hero .btn .arr{transition:transform .2s var(--ease);}
+  .fv-hero .btn:hover .arr{transform:translateX(3px);}
+  .fv-hero .btn-primary{background:var(--brand);color:var(--on-brand);box-shadow:0 8px 22px -8px color-mix(in srgb,var(--brand) 65%,transparent);}
+  .fv-hero .btn-primary:hover{background:var(--brand-press);transform:translateY(-1px);}
+  .fv-hero .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-strong);}
+  .fv-hero .btn-ghost:hover{border-color:var(--brand);color:var(--brand-ink);}
+
+  /* カルーセル */
+  .fv-hero .toolmarquee{margin-top:34px;min-width:0;max-width:100%;}
+  .fv-hero .tm-label{display:block;font-family:var(--f-latin);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:13px;}
+  .fv-hero .tm-track{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 88%,transparent);}
+  .fv-hero .tm-row{display:flex;width:max-content;animation:fv-marquee 30s linear infinite;}
+  @keyframes fv-marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .fv-hero .tm-item{display:inline-flex;align-items:center;font-family:var(--f-jp);font-weight:700;font-size:14.5px;color:var(--ink-soft);white-space:nowrap;}
+  .fv-hero .tm-item::after{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--brand);opacity:.5;margin:0 19px;}
+
+  /* 右 */
+  .fv-hero .right{padding:clamp(28px,3.4vw,40px) clamp(24px,3.4vw,44px);display:flex;flex-direction:column;justify-content:center;gap:16px;background:radial-gradient(120% 80% at 85% 0%,var(--brand-tint),transparent 52%),var(--surface-2);position:relative;overflow:hidden;min-width:0;}
+  .fv-hero .sc-head{display:flex;align-items:center;justify-content:space-between;}
+  .fv-hero .sc-head .l{font-family:var(--f-latin);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+  .fv-hero .sc-head .r{font-family:var(--f-mono);font-size:10.5px;color:var(--faint);white-space:nowrap;}
+
+  .fv-hero .prompt{display:flex;align-items:center;gap:13px;background:var(--surface);border:1px solid var(--line-strong);border-radius:14px;padding:14px 16px;box-shadow:0 4px 14px -8px rgba(20,22,28,.18);}
+  .fv-hero .prompt .spk{width:32px;height:32px;border-radius:9px;background:var(--brand-tint);color:var(--brand-ink);display:grid;place-items:center;flex:none;}
+  .fv-hero .prompt .spk svg{width:17px;height:17px;}
+  .fv-hero .prompt .pmain{min-width:0;}
+  .fv-hero .prompt .plabel{font-family:var(--f-latin);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:2px;}
+  .fv-hero .prompt .ptext{font-family:var(--f-jp);font-weight:600;font-size:14.5px;color:var(--ink);line-height:1.4;}
+  .fv-hero .prompt .cur{display:inline-block;width:2px;height:15px;background:var(--brand);vertical-align:-2px;margin-left:1px;opacity:0;}
+  .fv-hero .prompt.typing .cur{opacity:1;animation:fv-blink 1s steps(1) infinite;}
+  @keyframes fv-blink{50%{opacity:0;}}
+
+  .fv-hero .flow{display:flex;align-items:center;gap:10px;font-family:var(--f-jp);font-weight:600;font-size:11.5px;color:var(--muted);}
+  .fv-hero .flow .ln{flex:1;height:1px;background:var(--line-strong);}
+  .fv-hero .flow .badge{font-family:var(--f-latin);letter-spacing:.06em;color:var(--brand-ink);background:var(--brand-tint);padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:600;}
+
+  .fv-hero .outputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+  /* カードは常に表示（base=revealed）。生成中スケルトンだけが乗り、消える。 */
+  .fv-hero .gen-card{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:0 10px 26px -16px rgba(20,22,28,.4);aspect-ratio:3/4;}
+  .fv-hero .gen-img,.fv-hero .gen-ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+  .fv-hero .gen-ph{background:repeating-linear-gradient(135deg,var(--surface-2),var(--surface-2) 10px,#fff 10px,#fff 20px);}
+  .fv-hero .gen-card .ghead{position:absolute;left:8px;top:8px;right:8px;z-index:4;display:flex;align-items:center;gap:6px;}
+  .fv-hero .gen-card .gbadge{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;color:#fff;font-family:var(--f-latin);font-weight:700;font-size:10.5px;flex:none;box-shadow:0 2px 6px rgba(0,0,0,.25);}
+  .fv-hero .gen-card .gname{font-family:var(--f-jp);font-weight:700;font-size:10.5px;color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.7);background:rgba(0,0,0,.32);backdrop-filter:blur(4px);padding:3px 7px;border-radius:999px;white-space:nowrap;}
+  .fv-hero .gen-card .skel{position:absolute;inset:0;z-index:3;background:linear-gradient(100deg,#E9E8E0 28%,#F6F5F0 48%,#E9E8E0 68%);background-size:220% 100%;animation:fv-shimmer 1.25s linear infinite;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .5s var(--ease);}
+  .fv-hero .gen-card.generating .skel{opacity:1;pointer-events:auto;}
+  @keyframes fv-shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+  .fv-hero .genstate{display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--muted);}
+  .fv-hero .genstate .spin{width:22px;height:22px;border-radius:50%;border:2.4px solid var(--line-strong);border-top-color:var(--brand);animation:fv-spin .8s linear infinite;}
+  @keyframes fv-spin{to{transform:rotate(360deg);}}
+  .fv-hero .genstate .gt{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);}
+  .fv-hero .outnote{font-size:11px;color:var(--faint);line-height:1.6;margin:0;}
+
+  @media(max-width:900px){
+    .fv-hero{min-height:0;}
+    .fv-hero .fv-grid{grid-template-columns:1fr;}
+    .fv-hero .left{border-right:none;border-bottom:1px solid var(--line-strong);}
+    .fv-hero .right{padding-top:32px;padding-bottom:40px;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .fv-hero .gen-card .skel{opacity:0!important;}
+    .fv-hero .tm-row{animation:none!important;}
+    .fv-hero .prompt .cur{display:none;}
+  }
+</style>
+
+<script>
+  // [data-fv-hero] 配下のみを操作。複数設置にも対応。
+  document.querySelectorAll<HTMLElement>('[data-fv-hero]').forEach((root) => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const promptEl = root.querySelector<HTMLElement>('.prompt');
+    const ptextEl = root.querySelector<HTMLElement>('.ptext-val');
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('.gen-card'));
+    const theme = root.dataset.fvTheme ?? '';
+    if (!promptEl || !ptextEl || cards.length === 0) return;
+
+    let stopped = false;
+    const wait = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+
+    const type = (text: string, speed: number) =>
+      new Promise<void>((resolve) => {
+        promptEl.classList.add('typing');
+        let i = 0;
+        const step = () => {
+          if (i <= text.length) {
+            ptextEl.textContent = text.slice(0, i);
+            i++;
+            setTimeout(step, speed);
+          } else {
+            promptEl.classList.remove('typing');
+            resolve();
+          }
+        };
+        step();
+      });
+
+    const popIn = (el: HTMLElement) => {
+      if (reduce || !el.animate) return;
+      el.animate(
+        [{ transform: 'translateY(12px) scale(.96)', opacity: 0.45 }, { transform: 'none', opacity: 1 }],
+        { duration: 540, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'none' }
+      );
+    };
+
+    async function loop() {
+      if (stopped) return;
+      promptEl.classList.remove('typing');
+      ptextEl.textContent = '';
+      cards.forEach((c) => c.classList.add('generating'));
+      await wait(550);
+      await type(theme, 46);
+      await wait(750);
+      for (const card of cards) {
+        card.classList.remove('generating');
+        popIn(card);
+        await wait(430);
+      }
+      await wait(3200);
+      if (stopped) return;
+      promptEl.classList.add('typing');
+      await wait(250);
+      loop();
+    }
+
+    if (reduce) {
+      ptextEl.textContent = theme; // 静止：最終状態を表示
+    } else {
+      // 画面外/低速描画で固まらないよう、可視になってから開始
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) { io.disconnect(); loop(); }
+          });
+        }, { threshold: 0.15 });
+        io.observe(root);
+      } else {
+        loop();
+      }
+    }
+  });
+</script>

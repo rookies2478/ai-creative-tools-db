@@ -1,0 +1,223 @@
+---
+// HomeFaq.astro
+// コンテンツ正本: src/pages/index.astro 既存「FAQ」セクション
+// JS駆動アコーディオン: 同時1件開く / max-height アニメ / + → ×回転
+---
+
+<section id="faq" class="hfq-section scroll-mt-24">
+  <div class="wrap">
+
+    <div class="section-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>よくあるご質問</h2>
+      <p>掲載方針や更新頻度、AIツールの選び方に関する質問にお答えします。</p>
+    </div>
+
+    <div class="hfq-list" data-faq>
+
+      <div class="hfq-item">
+        <button class="hfq-q" aria-expanded="false">
+          <span>Q. このサイトで紹介しているAIツールは商用利用できますか？</span>
+          <span class="hfq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="hfq-a">
+          <div class="hfq-a-inner">
+            商用利用の可否はツール・プラン・用途によって異なり、本サイトでは断定しません。掲載情報はあくまで参考用であり、本記事は法的助言ではありません。
+            プランや用途によって条件が異なる場合があります。利用前に必ず各ツールの公式サイトおよび利用規約をご確認ください。
+          </div>
+        </div>
+      </div>
+
+      <div class="hfq-item">
+        <button class="hfq-q" aria-expanded="false">
+          <span>Q. 無料で使えるAIツールだけを探せますか？</span>
+          <span class="hfq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="hfq-a">
+          <div class="hfq-a-inner">
+            ツール一覧ページでは料金タグ（無料プランあり・無料クレジットなど）で絞り込めます。
+            ただし無料枠の内容や制限はプランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。
+          </div>
+        </div>
+      </div>
+
+      <div class="hfq-item">
+        <button class="hfq-q" aria-expanded="false">
+          <span>Q. AI画像生成ツールとAI動画生成ツールはどう選べばよいですか？</span>
+          <span class="hfq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="hfq-a">
+          <div class="hfq-a-inner">
+            本サイトはクリエイティブ制作に直接関係するAIツール（画像・動画生成）を中心に扱っています。
+            用途（SNS投稿・商用制作など）、料金、無料枠の有無、透かしの有無などの条件で絞り込むと選びやすくなります。
+            比較記事も参考にしてください。最終的な選択は公式サイトをご確認ください。
+          </div>
+        </div>
+      </div>
+
+      <div class="hfq-item">
+        <button class="hfq-q" aria-expanded="false">
+          <span>Q. 日本語対応や透かしの有無はどこで確認できますか？</span>
+          <span class="hfq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="hfq-a">
+          <div class="hfq-a-inner">
+            各ツールの詳細ページおよびタグ一覧から確認できます。
+            対応状況はアップデートにより変わる場合があります。確定できない項目は要確認として表示しており、公式サイトで最終確認されることをおすすめします。
+          </div>
+        </div>
+      </div>
+
+      <div class="hfq-item">
+        <button class="hfq-q" aria-expanded="false">
+          <span>Q. 料金や条件タグはどのくらいの頻度で更新されますか？</span>
+          <span class="hfq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="hfq-a">
+          <div class="hfq-a-inner">
+            公式情報の更新を確認次第、随時見直しを行っています。ただし更新タイミングにはラグが生じる場合があります。
+            最新の料金・条件は必ず公式サイトをご確認ください。記事ごとに最終確認日を記載しています。
+          </div>
+        </div>
+      </div>
+
+      <div class="hfq-item">
+        <button class="hfq-q" aria-expanded="false">
+          <span>Q. 掲載されていないAIツールを追加依頼できますか？</span>
+          <span class="hfq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="hfq-a">
+          <div class="hfq-a-inner">
+            クリエイティブ制作（画像・動画生成）に直接関係するAIツールを対象に、掲載ご要望を受け付けています。
+            ただし掲載はサイトの編集方針に基づき審査のうえ判断します。詳しくは
+            <a href="/editorial-policy/">編集方針ページ</a>をご覧ください。
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .hfq-section {
+    padding: 88px 0 80px;
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+  }
+
+  .hfq-list {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .hfq-item {
+    border-bottom: 1px solid var(--line);
+  }
+  .hfq-item:last-child { border-bottom: none; }
+
+  .hfq-q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--f-jp);
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--ink);
+    transition: background .15s;
+    min-height: 56px;
+  }
+  .hfq-q:hover { background: var(--surface-2); }
+  .hfq-q[aria-expanded="true"] { background: var(--surface-2); }
+
+  /* + icon that rotates to × */
+  .hfq-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--brand-tint);
+    flex-shrink: 0;
+    position: relative;
+    transition: background .2s, transform .25s var(--ease);
+  }
+  .hfq-icon::before,
+  .hfq-icon::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    background: var(--brand-ink);
+    border-radius: 2px;
+  }
+  .hfq-icon::before { width: 10px; height: 2px; }
+  .hfq-icon::after  { width: 2px;  height: 10px; }
+  .hfq-q[aria-expanded="true"] .hfq-icon {
+    transform: rotate(45deg);
+    background: var(--brand);
+  }
+  .hfq-q[aria-expanded="true"] .hfq-icon::before,
+  .hfq-q[aria-expanded="true"] .hfq-icon::after { background: #fff; }
+
+  /* answer panel */
+  .hfq-a {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .32s cubic-bezier(.4,0,.2,1);
+  }
+  .hfq-a-inner {
+    padding: 4px 24px 22px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+  }
+  .hfq-a-inner a {
+    color: var(--brand-ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 720px) {
+    .hfq-section { padding: 60px 0 52px; }
+    .hfq-q { padding: 16px 18px; font-size: 13.5px; }
+    .hfq-a-inner { padding: 4px 18px 18px; }
+  }
+</style>
+
+<script>
+(function() {
+  var list = document.querySelector('[data-faq]');
+  if (!list) return;
+  var items = list.querySelectorAll('.hfq-q');
+
+  function close(btn) {
+    btn.setAttribute('aria-expanded', 'false');
+    var panel = btn.nextElementSibling;
+    if (panel) panel.style.maxHeight = '0';
+  }
+
+  items.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      // close all
+      items.forEach(function(b) { close(b); });
+      // open clicked if was closed
+      if (!isOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        var panel = btn.nextElementSibling;
+        if (panel) panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    });
+  });
+})();
+</script>

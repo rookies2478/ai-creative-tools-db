@@ -1,0 +1,251 @@
+---
+// HomeComparisonTable.astro
+// コンテンツ正本: src/pages/index.astro 既存「比較表プレビュー」セクション
+// CompareTablePreview は props でそのまま流用（他ページに影響なし）
+import CompareTablePreview from './CompareTablePreview.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  videoTools: CollectionEntry<'tools'>[];
+  imageTools: CollectionEntry<'tools'>[];
+}
+const { videoTools, imageTools } = Astro.props;
+---
+
+<section id="comparison" class="hct-section scroll-mt-24">
+  <div class="wrap">
+
+    <div class="section-head reveal">
+      <span class="eyebrow">Comparison</span>
+      <h2>主要ツールを横並びで比較</h2>
+      <p>カテゴリごとに主要ツールを同じ観点で並べて確認できます。値はすべて要確認ベースで、プランや用途によって条件が異なる場合があります。</p>
+    </div>
+
+    <!-- タブバー -->
+    <div class="hct-tabbar" role="tablist">
+      <button data-hct-tab="video" class="hct-tab active" role="tab" aria-selected="true"  aria-controls="panel-video">AI動画生成</button>
+      <button data-hct-tab="image" class="hct-tab"        role="tab" aria-selected="false" aria-controls="panel-image">AI画像生成</button>
+      <span class="hct-tab-note">AIデザイン・AI音声は今後拡張予定</span>
+    </div>
+
+    <!-- カードラッパー -->
+    <div class="hct-card">
+
+      <!-- AI動画生成パネル -->
+      <div id="panel-video" data-hct-panel="video" class="hct-panel">
+        <CompareTablePreview tools={videoTools} limit={5} />
+
+        <div class="hct-legend">
+          <span class="legend-item">
+            <span class="leg ok" aria-hidden="true"></span>○ あり / 対応
+          </span>
+          <span class="legend-item">
+            <span class="leg warn" aria-hidden="true"></span>△ 要確認
+          </span>
+          <span class="legend-item">
+            <span class="leg na" aria-hidden="true"></span>× なし / 非対応
+          </span>
+        </div>
+
+        <p class="hct-note">
+          新しく <a href="/tools/hailuo-ai/">Hailuo AI</a>・<a href="/tools/pixverse/">PixVerse</a> なども追加しました。
+          <a href="/categories/video-generation/">カテゴリ一覧</a>で10件規模のツールを比較できます。
+        </p>
+
+        <div class="hct-cta-row">
+          <p class="hct-disclaimer">※ 値は確認日時点の参考値です。無料枠・商用利用・対応状況はプランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。</p>
+          <a href="/categories/video-generation/" class="btn btn-ghost hct-btn">
+            AI動画生成の全ツール一覧を見る <span class="arr">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- AI画像生成パネル -->
+      <div id="panel-image" data-hct-panel="image" class="hct-panel hidden">
+        <CompareTablePreview tools={imageTools} limit={5} />
+
+        <div class="hct-legend">
+          <span class="legend-item">
+            <span class="leg ok" aria-hidden="true"></span>○ あり / 対応
+          </span>
+          <span class="legend-item">
+            <span class="leg warn" aria-hidden="true"></span>△ 要確認
+          </span>
+          <span class="legend-item">
+            <span class="leg na" aria-hidden="true"></span>× なし / 非対応
+          </span>
+        </div>
+
+        <div class="hct-cta-row">
+          <p class="hct-disclaimer">※ 値は確認日時点の参考値です。無料枠・商用利用・対応状況はプランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。</p>
+          <a href="/tools/" class="btn btn-ghost hct-btn">
+            AI画像生成の全ツール一覧を見る <span class="arr">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hct-bottom">
+      <a href="/comparisons/ai-image-video-tools/" class="textlink">全カテゴリの比較表を見る <span class="arr">→</span></a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .hct-section {
+    padding: 88px 0 80px;
+    background: var(--surface-2);
+    border-top: 1px solid var(--line);
+  }
+
+  /* ── Tab bar ── */
+  .hct-tabbar {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    gap: 0;
+  }
+  .hct-tab {
+    font-family: var(--f-jp);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 20px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    background: transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s, background .15s;
+    margin-bottom: -1px;
+  }
+  .hct-tab:hover {
+    color: var(--brand-ink);
+    background: var(--brand-tint);
+  }
+  .hct-tab.active {
+    color: var(--brand);
+    border-bottom-color: var(--brand);
+  }
+  .hct-tab-note {
+    font-family: var(--f-latin);
+    font-size: 11px;
+    color: var(--faint);
+    padding: 0 16px;
+    white-space: nowrap;
+    margin-left: auto;
+  }
+
+  /* ── Card container ── */
+  .hct-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: none;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* ── Panels ── */
+  .hct-panel {
+    padding: 28px 28px 24px;
+  }
+  .hct-panel.hidden { display: none; }
+
+  /* ── Legend ── */
+  .hct-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 18px;
+  }
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .leg {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .leg.ok   { background: #6ee7b7; }
+  .leg.warn { background: #fcd34d; }
+  .leg.na   { background: #d1d5db; }
+
+  /* ── Note + CTA row ── */
+  .hct-note {
+    margin-top: 14px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .hct-note a {
+    color: var(--brand-ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .hct-note a:hover { text-decoration: underline; }
+  .hct-cta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .hct-disclaimer {
+    font-size: 11px;
+    color: var(--faint);
+    flex: 1;
+    min-width: 0;
+  }
+  .hct-btn {
+    font-size: 13px;
+    padding: 10px 18px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── Bottom link ── */
+  .hct-bottom {
+    text-align: right;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 720px) {
+    .hct-section { padding: 60px 0 52px; }
+    .hct-panel { padding: 20px 18px 18px; }
+    .hct-cta-row { flex-direction: column; align-items: flex-start; }
+    .hct-tab-note { display: none; }
+    .hct-bottom { text-align: left; }
+  }
+</style>
+
+<script>
+(function() {
+  var sec = document.querySelector('#comparison');
+  if (!sec) return;
+  var tabs   = sec.querySelectorAll('[data-hct-tab]');
+  var panels = sec.querySelectorAll('[data-hct-panel]');
+  tabs.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var target = btn.getAttribute('data-hct-tab');
+      tabs.forEach(function(b) {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      panels.forEach(function(p) { p.classList.add('hidden'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      var panel = sec.querySelector('[data-hct-panel="' + target + '"]');
+      if (panel) panel.classList.remove('hidden');
+    });
+  });
+})();
+</script>

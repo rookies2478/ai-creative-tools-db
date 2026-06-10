@@ -1,0 +1,394 @@
+---
+/**
+ * HomeComparisonInteractive.astro
+ * 「判断できる比較表」— ○/△/× ＋ 最安料金 ＋ タブ切替
+ *
+ * 安全性（Tailwind/既存ページを壊さない）:
+ *  - <style is:global> を使うが、全セレクタを .cmp-x 配下に限定。
+ *  - CSS変数は .cmp-x 上に定義（既存トークンと非衝突）。
+ *  - is:global が必要な理由: tbody は JS の innerHTML で動的生成されるため
+ *    Astro scoped CSS のハッシュ属性が付かず、scoped では styling が届かない。
+ *  - 素のリセット（* / body / table 等の global 指定）なし → Tailwind preflight 非干渉。
+ *  - JS は [data-cmp] 配下のみ操作。
+ */
+export type Mark = 'y' | 'c' | 'n';
+export interface CmpTool {
+  name: string;
+  initial: string;
+  color: string;
+  free: Mark;
+  watermark: Mark;
+  japanese: Mark;
+  commercial: Mark;
+  price: number | null;
+  priceLabel: string;
+  checked: string;
+  url: string;
+  cat?: string;
+}
+export interface Props {
+  videoTools?: CmpTool[];
+  imageTools?: CmpTool[];
+  heading?: string;
+  videoAllHref?: string;
+  imageAllHref?: string;
+}
+
+const DEFAULT_VIDEO: CmpTool[] = [
+  {name:'Runway',    initial:'R',color:'#E1543A',free:'c',watermark:'c',japanese:'c',commercial:'c',price:12,   priceLabel:'$12<small>/月〜</small>',   checked:'2026-06-05',url:'/tools/runway/',   cat:'動画生成'},
+  {name:'Kling AI',  initial:'K',color:'#3A6FF0',free:'c',watermark:'c',japanese:'c',commercial:'c',price:6.99, priceLabel:'$6.99<small>/月〜</small>', checked:'2026-06-04',url:'/tools/kling-ai/', cat:'動画生成'},
+  {name:'Pika',      initial:'P',color:'#10A4C8',free:'c',watermark:'c',japanese:'c',commercial:'c',price:8,    priceLabel:'$8<small>/月〜</small>',    checked:'2026-06-05',url:'/tools/pika/',      cat:'動画生成'},
+  {name:'Luma AI',   initial:'L',color:'#15897F',free:'y',watermark:'n',japanese:'c',commercial:'c',price:30,   priceLabel:'$30<small>/月〜</small>',   checked:'2026-06-05',url:'/tools/luma-ai/',   cat:'動画生成'},
+  {name:'CapCut AI', initial:'C',color:'#111319',free:'y',watermark:'n',japanese:'y',commercial:'c',price:0,    priceLabel:'<span class="cmp-free">無料〜</span>',checked:'2026-05-24',url:'/tools/capcut-ai/',cat:'動画生成'},
+];
+const DEFAULT_IMAGE: CmpTool[] = [
+  {name:'Midjourney',      initial:'M',color:'#7A5AE0',free:'n',watermark:'y',japanese:'c',commercial:'c',price:10,  priceLabel:'$10<small>/月〜</small>', checked:'2026-06-06',url:'/tools/midjourney/',              cat:'画像生成'},
+  {name:'Adobe Firefly',   initial:'A',color:'#D8453A',free:'c',watermark:'c',japanese:'y',commercial:'c',price:null,priceLabel:'要確認',                   checked:'2026-06-05',url:'/tools/adobe-firefly/',           cat:'画像生成'},
+  {name:'Canva AI画像生成', initial:'C',color:'#0E8E84',free:'c',watermark:'c',japanese:'y',commercial:'c',price:null,priceLabel:'要確認',                   checked:'2026-06-05',url:'/tools/canva-ai-image-generator/', cat:'画像生成'},
+  {name:'Leonardo AI',     initial:'L',color:'#E89B12',free:'c',watermark:'c',japanese:'c',commercial:'c',price:null,priceLabel:'要確認',                   checked:'2026-06-05',url:'/tools/leonardo-ai/',              cat:'画像生成'},
+  {name:'Stable Diffusion',initial:'S',color:'#1F63E8',free:'y',watermark:'c',japanese:'c',commercial:'c',price:0,   priceLabel:'<span class="cmp-free">無料〜</span>',checked:'2026-06-05',url:'/tools/stable-diffusion/',cat:'画像生成'},
+];
+
+const {
+  videoTools = DEFAULT_VIDEO,
+  imageTools = DEFAULT_IMAGE,
+  heading = '主要ツールを横並びで比較',
+  videoAllHref = '/categories/video-generation/',
+  imageAllHref = '/tools/',
+} = Astro.props;
+
+const payload = JSON.stringify({ video: videoTools, image: imageTools });
+---
+
+<section class="cmp-x" data-cmp data-cmp-payload={payload}>
+  <div class="cmp-wrap">
+    <div class="cmp-head">
+      <span class="cmp-eyebrow">Comparison</span>
+      <h2 class="cmp-h2">{heading}</h2>
+      <p class="cmp-sub">カテゴリごとに主要ツールを同じ観点で並べて確認できます。値はすべて要確認ベースで、プランや用途によって条件が異なる場合があります。</p>
+    </div>
+
+    <div class="cmp-tabs" role="tablist">
+      <button class="cmp-tab" role="tab" aria-selected="true"  data-cat="video">AI動画生成</button>
+      <button class="cmp-tab" role="tab" aria-selected="false" data-cat="image">AI画像生成</button>
+    </div>
+
+    <div class="cmp-card">
+      <div class="cmp-table-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th class="cmp-th cmp-col-tool">ツール</th>
+              <th class="cmp-th">無料枠</th>
+              <th class="cmp-th">透かし</th>
+              <th class="cmp-th">日本語</th>
+              <th class="cmp-th">商用利用</th>
+              <th class="cmp-th">最安料金</th>
+              <th class="cmp-th">詳細</th>
+            </tr>
+          </thead>
+          <tbody data-tbody></tbody>
+        </table>
+      </div>
+
+      <div class="cmp-legend">
+        <span class="cmp-li cmp-yes"><span class="cmp-ic">○</span>あり / 対応</span>
+        <span class="cmp-li cmp-cond"><span class="cmp-ic">△</span>要確認</span>
+        <span class="cmp-li cmp-no"><span class="cmp-ic">×</span>なし / 非対応</span>
+        <span class="cmp-legend-note">最安料金は確認日時点の参考値</span>
+      </div>
+      <p class="cmp-note">※ 透かし列は「透かしなし＝○」で評価しています。商用利用・無料枠・対応状況はプランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください（編集方針に準拠）。</p>
+    </div>
+
+    <div class="cmp-bottom">
+      <a class="cmp-alllink" href={videoAllHref}>AI動画生成の全ツール一覧 →</a>
+      <a class="cmp-alllink" href={imageAllHref}>AI画像生成の全ツール一覧 →</a>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* ── 自己完結 CSS 変数（.cmp-x スコープ内のみ有効） ── */
+  .cmp-x {
+    --cmp-surface:  #FFFFFF;
+    --cmp-surface2: #FAFAF6;
+    --cmp-ink:      #16181D;
+    --cmp-ink-soft: #3A3E47;
+    --cmp-muted:    #6A7180;
+    --cmp-faint:    #98A0AD;
+    --cmp-line:     #E3E2D9;
+    --cmp-brand:    #4B3FE4;
+    --cmp-brand-ink:#2E25A6;
+    --cmp-brand-t:  #ECEBFB;
+    --cmp-ok:       #1E8A4C;
+    --cmp-ok-t:     #E6F3EC;
+    --cmp-warn:     #A06A09;
+    --cmp-warn-t:   #F8EFD9;
+    --cmp-na:       #6A7180;
+    --cmp-na-t:     #EFEFEA;
+    --cmp-f-jp:     "Noto Sans JP", system-ui, sans-serif;
+    --cmp-f-latin:  "Space Grotesk", system-ui, sans-serif;
+    --cmp-f-mono:   "Space Mono", ui-monospace, monospace;
+
+    display: block;
+    padding: 88px 0 80px;
+    background: var(--cmp-surface2);
+    border-top: 1px solid var(--cmp-line);
+    color: var(--cmp-ink);
+  }
+
+  .cmp-x .cmp-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ── Head ── */
+  .cmp-x .cmp-head { margin-bottom: 28px; }
+  .cmp-x .cmp-eyebrow {
+    font-family: var(--cmp-f-latin);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--cmp-brand-ink);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .cmp-x .cmp-eyebrow::before {
+    content: ""; width: 24px; height: 2px; background: var(--cmp-brand);
+  }
+  .cmp-x .cmp-h2 {
+    font-family: var(--cmp-f-jp);
+    font-weight: 700;
+    font-size: clamp(22px, 2.8vw, 32px);
+    margin: 12px 0 10px;
+    line-height: 1.3;
+    color: var(--cmp-ink);
+  }
+  .cmp-x .cmp-sub {
+    color: var(--cmp-muted);
+    font-family: var(--cmp-f-jp);
+    font-size: 14px;
+    margin: 0;
+    max-width: 680px;
+    line-height: 1.7;
+  }
+
+  /* ── Tabs ── */
+  .cmp-x .cmp-tabs {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--cmp-line);
+    gap: 0;
+  }
+  .cmp-x .cmp-tab {
+    font-family: var(--cmp-f-jp);
+    font-size: 14px; font-weight: 600;
+    padding: 12px 20px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--cmp-muted);
+    background: transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s, background .15s;
+    margin-bottom: -1px;
+  }
+  .cmp-x .cmp-tab:hover {
+    color: var(--cmp-brand-ink);
+    background: var(--cmp-brand-t);
+  }
+  .cmp-x .cmp-tab[aria-selected="true"] {
+    color: var(--cmp-brand);
+    border-bottom-color: var(--cmp-brand);
+  }
+
+  /* ── Card ── */
+  .cmp-x .cmp-card {
+    background: var(--cmp-surface);
+    border: 1px solid var(--cmp-line);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 14px -8px rgba(20,22,28,.08);
+    padding: 0 0 20px;
+  }
+
+  /* ── Table ── */
+  .cmp-x .cmp-table-wrap {
+    overflow-x: auto;
+  }
+  .cmp-x .cmp-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 680px;
+  }
+  .cmp-x .cmp-th {
+    font-family: var(--cmp-f-jp);
+    font-weight: 700;
+    font-size: 11.5px;
+    color: var(--cmp-ink-soft);
+    background: var(--cmp-surface2);
+    padding: 14px 16px;
+    text-align: center;
+    border-bottom: 1px solid var(--cmp-line);
+    white-space: nowrap;
+  }
+  .cmp-x .cmp-col-tool { text-align: left; }
+
+  .cmp-x .cmp-table tbody td {
+    padding: 14px 16px;
+    text-align: center;
+    border-bottom: 1px solid var(--cmp-line);
+    vertical-align: middle;
+    font-family: var(--cmp-f-jp);
+  }
+  .cmp-x .cmp-table tbody tr:last-child td { border-bottom: none; }
+  .cmp-x .cmp-table tbody tr:hover { background: var(--cmp-surface2); }
+
+  /* ── Tool cell ── */
+  .cmp-x .cmp-tool {
+    display: flex; align-items: center; gap: 12px; text-align: left;
+  }
+  .cmp-x .cmp-badge {
+    width: 34px; height: 34px; border-radius: 9px;
+    display: grid; place-items: center;
+    color: #fff;
+    font-family: var(--cmp-f-latin); font-weight: 700; font-size: 15px;
+    flex: none;
+  }
+  .cmp-x .cmp-tool-name {
+    font-family: var(--cmp-f-jp); font-weight: 700; font-size: 14px;
+    line-height: 1.2; white-space: nowrap; color: var(--cmp-ink);
+  }
+  .cmp-x .cmp-tool-cat {
+    font-family: var(--cmp-f-mono); font-size: 10px; color: var(--cmp-muted);
+  }
+
+  /* ── Mark cells ── */
+  .cmp-x .cmp-mark {
+    display: inline-flex; flex-direction: column; align-items: center; gap: 3px;
+  }
+  .cmp-x .cmp-mark .cmp-ic {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 14px; font-weight: 700;
+  }
+  .cmp-x .cmp-mark .cmp-lbl {
+    font-size: 10px; color: var(--cmp-muted);
+    font-family: var(--cmp-f-jp); white-space: nowrap;
+  }
+  .cmp-x .cmp-mark.cmp-yes .cmp-ic { background: var(--cmp-ok-t);   color: var(--cmp-ok); }
+  .cmp-x .cmp-mark.cmp-cond .cmp-ic { background: var(--cmp-warn-t); color: var(--cmp-warn); }
+  .cmp-x .cmp-mark.cmp-no .cmp-ic  { background: var(--cmp-na-t);   color: var(--cmp-na); }
+
+  /* ── Price / checked ── */
+  .cmp-x .cmp-price {
+    font-family: var(--cmp-f-mono); font-weight: 700;
+    font-size: 13px; color: var(--cmp-ink); white-space: nowrap; display: block;
+  }
+  .cmp-x .cmp-free { color: var(--cmp-ok); }
+  .cmp-x .cmp-price small { display: block; font-weight: 400; font-size: 10px; color: var(--cmp-faint); }
+  .cmp-x .cmp-checked {
+    display: block;
+    font-family: var(--cmp-f-mono); font-size: 10px;
+    color: var(--cmp-faint); white-space: nowrap; margin-top: 2px;
+  }
+
+  /* ── Detail link ── */
+  .cmp-x .cmp-detail {
+    font-family: var(--cmp-f-jp); font-weight: 700;
+    font-size: 12px; color: var(--cmp-brand-ink);
+    text-decoration: none; white-space: nowrap;
+  }
+  .cmp-x .cmp-detail:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ── Legend ── */
+  .cmp-x .cmp-legend {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    margin: 18px 24px 0;
+    font-size: 12px; color: var(--cmp-muted); align-items: center;
+  }
+  .cmp-x .cmp-li { display: inline-flex; align-items: center; gap: 6px; }
+  .cmp-x .cmp-li .cmp-ic {
+    width: 20px; height: 20px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 700;
+  }
+  .cmp-x .cmp-yes .cmp-ic  { background: var(--cmp-ok-t);   color: var(--cmp-ok); }
+  .cmp-x .cmp-cond .cmp-ic { background: var(--cmp-warn-t); color: var(--cmp-warn); }
+  .cmp-x .cmp-no .cmp-ic   { background: var(--cmp-na-t);   color: var(--cmp-na); }
+  .cmp-x .cmp-legend-note {
+    margin-left: auto;
+    font-family: var(--cmp-f-mono); font-size: 10.5px; color: var(--cmp-faint);
+  }
+
+  .cmp-x .cmp-note {
+    margin: 10px 24px 0;
+    font-size: 11.5px; color: var(--cmp-faint); line-height: 1.7;
+    font-family: var(--cmp-f-jp);
+  }
+
+  /* ── Bottom links ── */
+  .cmp-x .cmp-bottom {
+    display: flex; gap: 24px; flex-wrap: wrap; margin-top: 20px;
+  }
+  .cmp-x .cmp-alllink {
+    font-family: var(--cmp-f-jp); font-weight: 700;
+    font-size: 13.5px; color: var(--cmp-brand-ink);
+    text-decoration: none;
+  }
+  .cmp-x .cmp-alllink:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 720px) {
+    .cmp-x { padding: 60px 0 52px; }
+    .cmp-x .cmp-wrap { padding: 0 18px; }
+    .cmp-x .cmp-mark .cmp-lbl { display: none; }
+    .cmp-x .cmp-legend-note { margin-left: 0; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-cmp]').forEach(function(root) {
+    var DATA = JSON.parse(root.dataset.cmpPayload || '{"video":[],"image":[]}');
+    var MARK = {
+      free:      { y:['○','あり'],     c:['△','要確認'], n:['×','なし'] },
+      watermark: { y:['○','なし'],     c:['△','要確認'], n:['×','あり'] },
+      japanese:  { y:['○','対応'],     c:['△','要確認'], n:['×','非対応'] },
+      commercial:{ y:['○','案内あり'], c:['△','要確認'], n:['×','非対応'] },
+    };
+    var cat = 'video';
+    var tbody = root.querySelector('[data-tbody]');
+
+    function cell(field, v) {
+      var cls = v === 'y' ? 'cmp-yes' : v === 'c' ? 'cmp-cond' : 'cmp-no';
+      var pair = MARK[field][v];
+      return '<td><span class="cmp-mark ' + cls + '"><span class="cmp-ic">' + pair[0] + '</span><span class="cmp-lbl">' + pair[1] + '</span></span></td>';
+    }
+
+    function render() {
+      var rows = DATA[cat].slice();
+      tbody.innerHTML = rows.map(function(r) {
+        return '<tr>'
+          + '<td><div class="cmp-tool"><span class="cmp-badge" style="background:' + r.color + '">' + r.initial + '</span>'
+          + '<span><span class="cmp-tool-name">' + r.name + '</span><br><span class="cmp-tool-cat">' + (r.cat || '') + '</span></span></div></td>'
+          + cell('free', r.free)
+          + cell('watermark', r.watermark)
+          + cell('japanese', r.japanese)
+          + cell('commercial', r.commercial)
+          + '<td><span class="cmp-price">' + r.priceLabel + '</span><span class="cmp-checked">確認 ' + r.checked + '</span></td>'
+          + '<td><a class="cmp-detail" href="' + r.url + '">詳細 →</a></td>'
+          + '</tr>';
+      }).join('');
+    }
+
+    root.querySelectorAll('.cmp-tab').forEach(function(t) {
+      t.addEventListener('click', function() {
+        root.querySelectorAll('.cmp-tab').forEach(function(x) {
+          x.setAttribute('aria-selected', x === t ? 'true' : 'false');
+        });
+        cat = t.dataset.cat;
+        render();
+      });
+    });
+
+    render();
+  });
+</script>

@@ -1,0 +1,121 @@
+---
+// HomeCriteriaStrip.astro
+// 比較できる5項目をインク帯で表示する静的セクション
+---
+
+<section class="criteria-strip">
+  <div class="wrap cs-inner">
+    <span class="cs-lead">
+      <span class="cs-eyebrow">Criteria</span>
+      比較できる項目
+    </span>
+    <ul class="cs-list" role="list">
+      <li class="cs-item">
+        <span class="cs-ck" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+        </span>
+        商用利用
+      </li>
+      <li class="cs-item">
+        <span class="cs-ck" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+        </span>
+        著作権
+      </li>
+      <li class="cs-item">
+        <span class="cs-ck" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+        </span>
+        透かし
+      </li>
+      <li class="cs-item">
+        <span class="cs-ck" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+        </span>
+        無料枠
+      </li>
+      <li class="cs-item">
+        <span class="cs-ck" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+        </span>
+        日本語対応
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .criteria-strip {
+    background: var(--ink);
+    color: #fff;
+  }
+  .cs-inner {
+    padding: 28px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .cs-lead {
+    font-family: var(--f-jp);
+    font-weight: 700;
+    font-size: 15px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .cs-eyebrow {
+    font-family: var(--f-latin);
+    font-size: 11px;
+    letter-spacing: .2em;
+    color: rgba(255,255,255,.5);
+    text-transform: uppercase;
+  }
+  .cs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin-left: auto;
+    list-style: none;
+    padding: 0;
+  }
+  .cs-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 14px;
+    color: rgba(255,255,255,.9);
+    font-weight: 500;
+    font-family: var(--f-jp);
+  }
+  .cs-ck {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    background: var(--brand);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .cs-ck svg {
+    width: 12px;
+    height: 12px;
+    color: #fff;
+  }
+  @media (max-width: 720px) {
+    .cs-list { margin-left: 0; }
+    .cs-inner { gap: 14px; }
+  }
+</style>

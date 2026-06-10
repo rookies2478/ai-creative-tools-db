@@ -1,0 +1,381 @@
+---
+// HomeHero.astro
+// コンテンツ正本: src/pages/index.astro 既存 HERO セクション
+// デザイン参照:  design_handoff_aicreative_navi/reference/
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="wrap">
+    <div class="hero-grid">
+
+      <!-- ===== Left copy ===== -->
+      <div class="hero-copy">
+        <span class="eyebrow">AI Creative Tool Navi</span>
+
+        <h1>AIクリエイティブツール比較ナビ</h1>
+
+        <p class="hero-lead">
+          AI動画生成・AI画像生成を中心に、目的別で探せるAIクリエイティブツール比較ナビ
+        </p>
+
+        <div class="chip-row">
+          {['商用利用', '無料枠', '透かし', '日本語対応'].map(label => (
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+                <path d="M20 6 9 17l-5-5"/>
+              </svg>
+              {label}
+            </span>
+          ))}
+        </div>
+
+        <div class="hero-cta">
+          <a href="/categories/video-generation/" class="btn btn-primary btn-lg">
+            AI動画生成ツールを見る <span class="arr">→</span>
+          </a>
+          <a href="/tools/" class="btn btn-ghost btn-lg">
+            AI画像生成ツールを見る
+          </a>
+        </div>
+
+        <div class="hero-sublinks">
+          <a href="/conditions/free/" class="textlink">
+            無料で使えるツールを見る <span class="arr">→</span>
+          </a>
+          <a href="/guides/commercial-use-copyright/" class="textlink">
+            商用利用ガイド <span class="arr">→</span>
+          </a>
+        </div>
+
+        <p class="hero-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/>
+          </svg>
+          情報は公式サイト・ヘルプ・利用規約などをもとに整理しています。確認日時点の情報です。
+        </p>
+      </div>
+
+      <!-- ===== Right: comparison snapshot card ===== -->
+      <div class="hero-visual">
+        <div class="snapshot">
+          <div class="snapshot-top">
+            <span class="lbl">Comparison Snapshot</span>
+            <span class="live">
+              <span class="pulse" aria-hidden="true"></span>last check 2026-06
+            </span>
+          </div>
+
+          <a class="snap-row" href="/tools/runway/">
+            <div class="snap-id">
+              <span class="snap-badge" style="background:var(--video);">R</span>
+              <span>
+                <span class="snap-name">Runway</span><br />
+                <span class="snap-cat">VIDEO GEN</span>
+              </span>
+            </div>
+            <div class="snap-tags">
+              <span class="tag warn"><span class="dot"></span>商用 要確認</span>
+              <span class="tag warn">無料枠：要確認</span>
+            </div>
+          </a>
+
+          <a class="snap-row" href="/tools/midjourney/">
+            <div class="snap-id">
+              <span class="snap-badge" style="background:#7A5AE0;">M</span>
+              <span>
+                <span class="snap-name">Midjourney</span><br />
+                <span class="snap-cat">IMAGE GEN</span>
+              </span>
+            </div>
+            <div class="snap-tags">
+              <span class="tag ok"><span class="dot"></span>透かしなし</span>
+              <span class="tag na">有料プランのみ</span>
+            </div>
+          </a>
+
+          <a class="snap-row" href="/tools/luma-ai/">
+            <div class="snap-id">
+              <span class="snap-badge" style="background:var(--image);">L</span>
+              <span>
+                <span class="snap-name">Luma AI</span><br />
+                <span class="snap-cat">VIDEO GEN</span>
+              </span>
+            </div>
+            <div class="snap-tags">
+              <span class="tag ok"><span class="dot"></span>無料枠あり</span>
+              <span class="tag warn">商用 要確認</span>
+            </div>
+          </a>
+
+          <div class="snapshot-foot">
+            <span>5項目 × 主要ツールを横並び比較</span>
+            <span class="mono">commercial · free · watermark · ja</span>
+          </div>
+        </div>
+
+        <div class="float-stat float-top" aria-hidden="true">
+          <span class="n">30+</span>
+          <span class="t">掲載ツールを<br />条件で絞り込み</span>
+        </div>
+        <div class="float-stat float-bot" aria-hidden="true">
+          <span class="n">5</span>
+          <span class="t">同一観点で<br />比較できる項目</span>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Section ── */
+  .hero {
+    padding: 86px 0 76px;
+    position: relative;
+    overflow: hidden;
+    background: var(--paper);
+  }
+  /* dot-grid + brand radial overlay */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(120% 90% at 88% -10%, color-mix(in srgb, var(--brand) 12%, transparent), transparent 60%),
+      linear-gradient(to right,  color-mix(in srgb, var(--ink) 4%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--ink) 4%, transparent) 1px, transparent 1px);
+    background-size: 100% 100%, 44px 44px, 44px 44px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 92%);
+    mask-image: linear-gradient(to bottom, #000 35%, transparent 92%);
+  }
+  .hero-content { position: relative; z-index: 1; }
+
+  /* ── Layout ── */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  /* ── Left copy ── */
+  h1 {
+    font-family: var(--f-jp);
+    font-size: clamp(31px, 4.5vw, 54px);
+    font-weight: 900;
+    line-height: 1.22;
+    letter-spacing: -.01em;
+    margin: 22px 0 20px;
+    color: var(--ink);
+  }
+  .hero-lead {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 540px;
+    line-height: 1.7;
+  }
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 26px 0 28px;
+  }
+  .chip {
+    font-family: var(--f-jp);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    color: var(--ink-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+  }
+  .chip svg {
+    width: 14px;
+    height: 14px;
+    color: var(--brand);
+    flex-shrink: 0;
+  }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .hero-sublinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 22px;
+  }
+  .hero-note {
+    margin-top: 26px;
+    font-size: 12.5px;
+    color: var(--faint);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    max-width: 500px;
+    line-height: 1.6;
+  }
+  .hero-note svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── Snapshot card ── */
+  .hero-visual { position: relative; }
+  .snapshot {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    position: relative;
+  }
+  /* 3-color top bar */
+  .snapshot::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--video), var(--brand) 55%, var(--image));
+    z-index: 2;
+  }
+  .snapshot-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface-2);
+  }
+  .lbl {
+    font-family: var(--f-latin);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .live {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11.5px;
+    color: var(--muted);
+    font-family: var(--f-mono);
+  }
+  .pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ok);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0   color-mix(in srgb, var(--ok) 55%, transparent); }
+    70%  { box-shadow: 0 0 0 8px transparent; }
+    100% { box-shadow: 0 0 0 0   transparent; }
+  }
+  .snap-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: inherit;
+    transition: background .15s;
+  }
+  .snap-row:last-of-type { border-bottom: none; }
+  .snap-row:hover { background: var(--surface-2); }
+  .snap-id { display: flex; align-items: center; gap: 12px; }
+  .snap-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--f-latin);
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+  }
+  .snap-name {
+    font-family: var(--f-jp);
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .snap-cat {
+    font-size: 11.5px;
+    color: var(--muted);
+    font-family: var(--f-mono);
+    letter-spacing: .02em;
+  }
+  .snap-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .snapshot-foot {
+    padding: 13px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface-2);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .mono { font-family: var(--f-mono); }
+
+  /* ── Float stats ── */
+  .float-stat {
+    position: absolute;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow-md);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .float-top { top: -36px; right: -14px; }
+  .float-bot { bottom: -20px; left: -18px; }
+  .float-stat .n {
+    font-family: var(--f-latin);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--brand-ink);
+    line-height: 1;
+  }
+  .float-stat .t {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    .hero-visual { max-width: 520px; }
+  }
+  @media (max-width: 720px) {
+    .hero { padding: 60px 0 50px; }
+    .float-stat { display: none; }
+  }
+</style>

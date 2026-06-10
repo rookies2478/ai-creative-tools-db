@@ -1,0 +1,300 @@
+---
+// HomePickupFeed.astro
+// コンテンツ正本: src/pages/index.astro 既存「FEED / ピックアップ」セクション
+// ToolCard は props でそのまま流用（他ページに影響なし）
+import ToolCard from './ToolCard.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  tools: CollectionEntry<'tools'>[];
+}
+const { tools } = Astro.props;
+---
+
+<section id="pickup" class="hpf-section scroll-mt-24">
+  <div class="wrap">
+
+    <div class="section-head reveal">
+      <span class="eyebrow">Feed</span>
+      <h2>ピックアップ</h2>
+      <p>編集部が確認した注目ツールや、最近更新した記事をまとめています。</p>
+    </div>
+
+    <!-- タブバー -->
+    <div class="hpf-tabbar" role="tablist">
+      <button data-hpf-tab="pickup" class="hpf-tab active" role="tab" aria-selected="true"  aria-controls="feed-panel-pickup">ピックアップ記事</button>
+      <button data-hpf-tab="tools"  class="hpf-tab"        role="tab" aria-selected="false" aria-controls="feed-panel-tools">注目ツール</button>
+      <button data-hpf-tab="new"    class="hpf-tab"        role="tab" aria-selected="false" aria-controls="feed-panel-new">新着・更新</button>
+    </div>
+
+    <!-- パネル：ピックアップ記事 -->
+    <div id="feed-panel-pickup" data-hpf-panel="pickup" class="hpf-panel">
+      <div class="hpf-grid">
+
+        <a href="/comparisons/ai-image-video-tools/" class="ac">
+          <span class="ac-kicker brand">比較表</span>
+          <h3>AI画像・動画生成ツール比較表</h3>
+          <p>主要ツールを商用利用・無料枠・透かしで横並びに整理</p>
+          <span class="textlink ac-more">見る <span class="arr">→</span></span>
+        </a>
+
+        <a href="/comparisons/runway-vs-pika/" class="ac">
+          <span class="ac-kicker brand">比較記事</span>
+          <h3>Runway vs Pika｜AI動画生成ツール比較</h3>
+          <p>商用利用・無料枠・透かしなど主要条件を横並びで比較</p>
+          <span class="textlink ac-more">読む <span class="arr">→</span></span>
+        </a>
+
+        <a href="/guides/commercial-use-copyright/" class="ac">
+          <span class="ac-kicker ok">ガイド</span>
+          <h3>AI画像生成の商用利用・著作権ガイド</h3>
+          <p>商用利用の注意点・ツール別の利用条件を整理</p>
+          <span class="textlink ac-more">読む <span class="arr">→</span></span>
+        </a>
+
+        <a href="/comparisons/midjourney-vs-adobe-firefly/" class="ac">
+          <span class="ac-kicker brand">比較記事</span>
+          <h3>Midjourney vs Adobe Firefly｜AI画像生成比較</h3>
+          <p>商用利用・著作権・価格・品質の違いを比較</p>
+          <span class="textlink ac-more">読む <span class="arr">→</span></span>
+        </a>
+
+        <a href="/use-cases/youtube-thumbnail/" class="ac">
+          <span class="ac-kicker warn">用途別</span>
+          <h3>YouTubeサムネイル向けAI画像生成ツール</h3>
+          <p>クリックされるサムネイル作成に使えるツールを条件で絞り込み</p>
+          <span class="textlink ac-more">読む <span class="arr">→</span></span>
+        </a>
+
+        <a href="/use-cases/blog-eyecatch/" class="ac">
+          <span class="ac-kicker warn">用途別</span>
+          <h3>ブログ・アイキャッチ向けAI画像生成ツール</h3>
+          <p>記事・メディア用アイキャッチ作成に使えるツールを条件で絞り込み</p>
+          <span class="textlink ac-more">読む <span class="arr">→</span></span>
+        </a>
+
+      </div>
+      <div class="hpf-foot">
+        <a href="/comparisons/" class="textlink">比較記事をすべて見る <span class="arr">→</span></a>
+        <a href="/guides/" class="textlink">ガイドをすべて見る <span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <!-- パネル：注目ツール -->
+    <div id="feed-panel-tools" data-hpf-panel="tools" class="hpf-panel hidden">
+      <div class="hpf-tools-grid">
+        {tools.map(tool => <ToolCard tool={tool} />)}
+      </div>
+      <div class="hpf-foot">
+        <a href="/tools/" class="textlink">すべてのツールを見る <span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <!-- パネル：新着・更新 -->
+    <div id="feed-panel-new" data-hpf-panel="new" class="hpf-panel hidden">
+      <div class="hpf-grid">
+
+        <a href="/categories/video-generation/" class="ac">
+          <span class="ac-kicker na">ツール一覧</span>
+          <h3>AI動画生成ツール一覧</h3>
+          <p>Runway・Kling AI・Pika など主要ツールを商用利用・無料枠・透かしで比較</p>
+          <span class="textlink ac-more">見る <span class="arr">→</span></span>
+        </a>
+
+        <a href="/tools/" class="ac">
+          <span class="ac-kicker na">ツール一覧</span>
+          <h3>AI画像生成ツール一覧</h3>
+          <p>Midjourney・Adobe Firefly など主要ツールの条件を一覧で確認</p>
+          <span class="textlink ac-more">見る <span class="arr">→</span></span>
+        </a>
+
+        <a href="/comparisons/ai-image-video-tools/" class="ac">
+          <span class="ac-kicker brand">比較表</span>
+          <h3>全カテゴリの比較表</h3>
+          <p>AI画像・動画生成ツールを同じ観点で横並びに整理した比較表</p>
+          <span class="textlink ac-more">見る <span class="arr">→</span></span>
+        </a>
+
+        <a href="/guides/free-ai-image-tools/" class="ac">
+          <span class="ac-kicker ok">ガイド</span>
+          <h3>無料で使えるAI画像生成ツールの選び方</h3>
+          <p>無料プランの比較・制限・用途別のおすすめポイントを解説</p>
+          <span class="textlink ac-more">読む <span class="arr">→</span></span>
+        </a>
+
+        <a href="/use-cases/ad-banner/" class="ac">
+          <span class="ac-kicker warn">用途別</span>
+          <h3>広告クリエイティブ向けAIツール</h3>
+          <p>バナー・動画広告に使えるツールを条件で絞り込み</p>
+          <span class="textlink ac-more">読む <span class="arr">→</span></span>
+        </a>
+
+        <a href="/use-cases/ec-product-image/" class="ac">
+          <span class="ac-kicker warn">用途別</span>
+          <h3>EC商品画像向けAI画像生成ツール</h3>
+          <p>商品写真・背景合成に使えるツールを比較</p>
+          <span class="textlink ac-more">読む <span class="arr">→</span></span>
+        </a>
+
+      </div>
+      <div class="hpf-foot">
+        <a href="/use-cases/" class="textlink">用途別記事をすべて見る <span class="arr">→</span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .hpf-section {
+    padding: 88px 0 80px;
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+  }
+
+  /* ── Tab bar ── */
+  .hpf-tabbar {
+    display: flex;
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    margin-bottom: 0;
+    gap: 0;
+  }
+  .hpf-tab {
+    font-family: var(--f-jp);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 20px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    background: transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s, background .15s;
+    margin-bottom: -1px;
+  }
+  .hpf-tab:hover {
+    color: var(--brand-ink);
+    background: var(--brand-tint);
+  }
+  .hpf-tab.active {
+    color: var(--brand);
+    border-bottom-color: var(--brand);
+  }
+
+  /* ── Panels ── */
+  .hpf-panel {
+    padding-top: 28px;
+  }
+  .hpf-panel.hidden { display: none; }
+
+  /* ── Article cards grid ── */
+  .hpf-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .ac {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform .2s var(--ease), box-shadow .2s, border-color .2s;
+  }
+  .ac:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--brand) 35%, var(--line));
+  }
+  /* Kicker badge */
+  .ac-kicker {
+    display: inline-flex;
+    align-self: flex-start;
+    font-family: var(--f-latin);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 4px;
+  }
+  .ac-kicker.brand { color: var(--brand-ink); background: var(--brand-tint); }
+  .ac-kicker.ok    { color: var(--ok);        background: var(--ok-tint); }
+  .ac-kicker.warn  { color: var(--warn);      background: var(--warn-tint); }
+  .ac-kicker.na    { color: var(--na);        background: var(--na-tint); }
+
+  .ac h3 {
+    font-family: var(--f-jp);
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .ac p {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .ac-more {
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 13px;
+  }
+
+  /* ── ToolCard grid (no restyle — just layout) ── */
+  .hpf-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  /* ── Footer links ── */
+  .hpf-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-top: 22px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 980px) {
+    .hpf-grid { grid-template-columns: repeat(2, 1fr); }
+    .hpf-tools-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 720px) {
+    .hpf-section { padding: 60px 0 52px; }
+    .hpf-grid { grid-template-columns: 1fr; }
+    .hpf-tools-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+(function() {
+  var sec = document.querySelector('#pickup');
+  if (!sec) return;
+  var tabs   = sec.querySelectorAll('[data-hpf-tab]');
+  var panels = sec.querySelectorAll('[data-hpf-panel]');
+  tabs.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var target = btn.getAttribute('data-hpf-tab');
+      tabs.forEach(function(b) {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      panels.forEach(function(p) { p.classList.add('hidden'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      var panel = sec.querySelector('[data-hpf-panel="' + target + '"]');
+      if (panel) panel.classList.remove('hidden');
+    });
+  });
+})();
+</script>

@@ -8,6 +8,7 @@ interface Props {
   ogType?: string;
   jsonLd?: string;
   noindex?: boolean;
+  homePage?: boolean;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   ogType = 'website',
   jsonLd,
   noindex = false,
+  homePage = false,
 } = Astro.props;
 
 const canonicalUrl = canonicalPath && Astro.site
@@ -25,7 +27,7 @@ const canonicalUrl = canonicalPath && Astro.site
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang="ja" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,6 +35,10 @@ const canonicalUrl = canonicalPath && Astro.site
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- Design-token fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
@@ -43,13 +49,13 @@ const canonicalUrl = canonicalPath && Astro.site
     {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
     {import.meta.env.PROD && (
       <>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTH7GM5ZG7"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTH7GM5ZGT"></script>
         <script is:inline>
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-YTH7GM5ZG7');
+            gtag('config', 'G-YTH7GM5ZGT');
           `}
         </script>
         <script type="text/javascript" is:inline>
@@ -64,35 +70,30 @@ const canonicalUrl = canonicalPath && Astro.site
       </>
     )}
   </head>
-  <body class="min-h-screen bg-white text-slate-900 antialiased">
+  <body class:list={['min-h-screen text-slate-900 antialiased', homePage ? 'body-paper' : 'bg-white']}>
 
     <!-- ===== HEADER ===== -->
-    <header class="sticky top-0 z-30 border-b border-slate-100 bg-white/95 backdrop-blur-sm">
-      <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-3.5">
-
-        <!-- Brand -->
-        <a href="/" class="flex items-center gap-2.5 no-underline">
-          <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-violet-600 text-sm font-black text-white shadow-sm">AI</span>
-          <span class="flex flex-col leading-tight">
-            <span class="text-sm font-black tracking-tight text-slate-900 sm:text-base">AIクリエイティブナビ</span>
-            <span class="text-[10px] tracking-widest text-slate-400 sm:text-xs">aicreative-db.com</span>
+    <header class="nv-topbar">
+      <div class="nv-inner">
+        <a href="/" class="nv-logo">
+          <span class="nv-mark">AI</span>
+          <span class="nv-wordmark">
+            <span class="nv-name">AIクリエイティブナビ</span>
+            <span class="nv-sub">aicreative-db.com</span>
           </span>
         </a>
 
-        <!-- Center nav — desktop only -->
-        <nav class="hidden items-center gap-5 text-sm text-slate-600 lg:flex">
-          <a href="/categories/video-generation/"      class="hover:text-[#0066FF]">AI動画生成</a>
-          <a href="/categories/image-generation/"    class="hover:text-[#0066FF]">AI画像生成</a>
-          <a href="/comparisons/"                    class="hover:text-[#0066FF]">比較表</a>
-          <a href="/guides/commercial-use-copyright/" class="hover:text-[#0066FF]">商用利用ガイド</a>
+        <nav class="nv-nav">
+          <a href="/categories/video-generation/">AI動画生成</a>
+          <a href="/categories/image-generation/">AI画像生成</a>
+          <a href="/comparisons/">比較表</a>
+          <a href="/guides/commercial-use-copyright/">商用利用ガイド</a>
         </nav>
 
-        <!-- Right CTA -->
-        <a href="/tools/" class="rounded-lg bg-[#0066FF] px-3.5 py-2 text-xs font-semibold text-white hover:bg-blue-700 sm:px-5 sm:text-sm">
-          <span class="hidden sm:inline">条件から探す</span>
-          <span class="sm:hidden">ツールを探す</span>
-        </a>
-
+        <div class="nv-actions">
+          <a href="/tools/" class="nv-cta">ツールを探す <span class="nv-arr">→</span></a>
+          <a href="/tools/" class="nv-menu" aria-label="ツールを探す">☰</a>
+        </div>
       </div>
     </header>
 
@@ -101,67 +102,284 @@ const canonicalUrl = canonicalPath && Astro.site
     </main>
 
     <!-- ===== FOOTER ===== -->
-    <footer class="border-t border-slate-100 bg-slate-50 py-12">
-      <div class="mx-auto max-w-5xl px-6">
+    <footer class="nf-footer">
+      <div class="nf-inner">
 
-        <!-- Brand -->
-        <div class="mb-8">
-          <p class="text-base font-bold text-[#002B61]">AIクリエイティブナビ</p>
-          <p class="mt-0.5 text-xs text-slate-400">AI動画生成・AI画像生成を中心に、料金・無料枠・商用利用条件・日本語対応などを比較するAIクリエイティブツール比較メディアです。</p>
-        </div>
-
-        <!-- Link columns -->
-        <div class="grid grid-cols-2 gap-8 sm:grid-cols-4">
+        <div class="nf-grid">
+          <!-- About -->
+          <div class="nf-about">
+            <a href="/" class="nv-logo nf-logo-light">
+              <span class="nv-mark">AI</span>
+              <span class="nv-wordmark">
+                <span class="nv-name">AIクリエイティブナビ</span>
+                <span class="nv-sub">aicreative-db.com</span>
+              </span>
+            </a>
+            <p class="nf-desc">AI動画生成・AI画像生成を中心に、料金・無料枠・商用利用条件・日本語対応などを比較するAIクリエイティブツール比較メディアです。</p>
+          </div>
 
           <!-- カテゴリ -->
-          <div>
-            <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">カテゴリ</p>
-            <ul class="space-y-2 text-xs text-slate-500">
-              <li><a href="/categories/image-generation/" class="hover:text-blue-600 hover:underline underline-offset-4">AI画像生成ツール</a></li>
-              <li><a href="/categories/video-generation/" class="hover:text-blue-600 hover:underline underline-offset-4">AI動画生成ツール</a></li>
-              <li><a href="/comparisons/"               class="hover:text-blue-600 hover:underline underline-offset-4">比較表</a></li>
+          <div class="nf-col">
+            <h4>Categories</h4>
+            <ul>
+              <li><a href="/categories/image-generation/">AI画像生成ツール</a></li>
+              <li><a href="/categories/video-generation/">AI動画生成ツール</a></li>
+              <li><a href="/categories/video-editing/">AI動画編集ツール</a></li>
+              <li><a href="/categories/avatar-video/">AIアバター動画ツール</a></li>
+              <li><a href="/categories/design/">AIデザインツール</a></li>
+              <li><a href="/categories/voice-narration/">AI音声・ナレーションツール</a></li>
+              <li><a href="/comparisons/">比較表</a></li>
             </ul>
           </div>
 
           <!-- 目的別 -->
-          <div>
-            <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">目的別</p>
-            <ul class="space-y-2 text-xs text-slate-500">
-              <li><a href="/conditions/free/"            class="hover:text-blue-600 hover:underline underline-offset-4">無料で試せるAIツール</a></li>
-              <li><a href="/conditions/commercial-use/" class="hover:text-blue-600 hover:underline underline-offset-4">商用利用を確認しやすいAIツール</a></li>
-              <li><a href="/conditions/japanese/"       class="hover:text-blue-600 hover:underline underline-offset-4">日本語対応AIツール</a></li>
-              <li><a href="/conditions/no-watermark/"   class="hover:text-blue-600 hover:underline underline-offset-4">透かしなしAIツール</a></li>
+          <div class="nf-col">
+            <h4>条件から探す</h4>
+            <ul>
+              <li><a href="/conditions/free/">無料で試せるAIツール</a></li>
+              <li><a href="/conditions/commercial-use/">商用利用を確認しやすいAIツール</a></li>
+              <li><a href="/conditions/japanese/">日本語対応AIツール</a></li>
+              <li><a href="/conditions/no-watermark/">透かしなしAIツール</a></li>
             </ul>
           </div>
 
-          <!-- ガイド -->
-          <div>
-            <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">ガイド</p>
-            <ul class="space-y-2 text-xs text-slate-500">
-              <li><a href="/guides/commercial-use-copyright/" class="hover:text-blue-600 hover:underline underline-offset-4">商用利用・著作権ガイド</a></li>
-              <li><a href="/guides/free-ai-image-tools/"      class="hover:text-blue-600 hover:underline underline-offset-4">無料ツールの選び方</a></li>
-              <li><a href="/guides/watermark-credit-guide/"   class="hover:text-blue-600 hover:underline underline-offset-4">透かし・クレジット表記</a></li>
-              <li><a href="/guides/japanese-ai-image-tools/"  class="hover:text-blue-600 hover:underline underline-offset-4">日本語対応ツールの選び方</a></li>
+          <!-- ガイド＋サイト情報 -->
+          <div class="nf-col">
+            <h4>ガイド・サイト情報</h4>
+            <ul>
+              <li><a href="/guides/commercial-use-copyright/">商用利用・著作権ガイド</a></li>
+              <li><a href="/guides/free-ai-image-tools/">無料ツールの選び方</a></li>
+              <li><a href="/guides/watermark-credit-guide/">透かし・クレジット表記</a></li>
+              <li><a href="/guides/japanese-ai-image-tools/">日本語対応ツールの選び方</a></li>
+              <li><a href="/about/">運営者情報</a></li>
+              <li><a href="/editorial-policy/">掲載方針・比較基準</a></li>
+              <li><a href="/privacy-policy/">プライバシーポリシー</a></li>
+              <li><a href="/contact/">お問い合わせ</a></li>
+              <li><a href="/disclaimer/">免責事項</a></li>
             </ul>
           </div>
-
-          <!-- サイト情報 -->
-          <div>
-            <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">サイト情報</p>
-            <ul class="space-y-2 text-xs text-slate-500">
-              <li><a href="/about/"            class="hover:text-blue-600 hover:underline underline-offset-4">運営者情報</a></li>
-              <li><a href="/editorial-policy/" class="hover:text-blue-600 hover:underline underline-offset-4">掲載方針・比較基準</a></li>
-              <li><a href="/privacy-policy/"   class="hover:text-blue-600 hover:underline underline-offset-4">プライバシーポリシー</a></li>
-              <li><a href="/contact/"          class="hover:text-blue-600 hover:underline underline-offset-4">お問い合わせ</a></li>
-              <li><a href="/disclaimer/"       class="hover:text-blue-600 hover:underline underline-offset-4">免責事項</a></li>
-            </ul>
-          </div>
-
         </div>
 
-        <p class="mt-10 text-center text-xs text-slate-400">© 2026 AIクリエイティブナビ</p>
+        <div class="nf-bottom">
+          <span class="nf-copy">© 2026 AIクリエイティブナビ</span>
+        </div>
       </div>
     </footer>
 
   </body>
 </html>
+
+<style>
+  /* ===== HEADER ===== */
+  .nv-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: color-mix(in srgb, var(--paper) 82%, transparent);
+    backdrop-filter: saturate(1.2) blur(14px);
+    -webkit-backdrop-filter: saturate(1.2) blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nv-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    height: 68px;
+  }
+  .nv-logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .nv-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: var(--brand);
+    color: var(--on-brand);
+    display: grid;
+    place-items: center;
+    font-family: var(--f-latin);
+    font-weight: 700;
+    font-size: 17px;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+  }
+  .nv-wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .nv-name {
+    font-family: var(--f-jp);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .nv-sub {
+    font-family: var(--f-latin);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .nv-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 6px;
+  }
+  .nv-nav a {
+    font-family: var(--f-jp);
+    font-weight: 600;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    padding: 9px 13px;
+    border-radius: 9px;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .nv-nav a:hover {
+    background: var(--surface);
+    color: var(--brand-ink);
+  }
+  .nv-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nv-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--f-jp);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--on-brand);
+    background: var(--brand);
+    padding: 10px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 6px 18px -6px color-mix(in srgb, var(--brand) 65%, transparent);
+    transition: background 0.18s, transform 0.18s;
+  }
+  .nv-cta:hover {
+    background: var(--brand-press);
+    transform: translateY(-1px);
+  }
+  .nv-arr {
+    transition: transform 0.2s var(--ease);
+  }
+  .nv-cta:hover .nv-arr {
+    transform: translateX(3px);
+  }
+  .nv-menu {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 9px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 18px;
+  }
+  @media (max-width: 720px) {
+    .nv-nav { display: none; }
+    .nv-menu { display: inline-flex; }
+    .nv-inner { padding: 0 18px; }
+  }
+
+  /* ===== FOOTER ===== */
+  .nf-footer {
+    background: var(--ink);
+    color: #fff;
+    padding: 64px 0 32px;
+  }
+  .nf-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  .nf-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .nf-logo-light .nv-name { color: #fff; }
+  .nf-logo-light .nv-sub  { color: rgba(255,255,255,.4); }
+  .nf-desc {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 16px;
+    max-width: 340px;
+  }
+  .nf-col h4 {
+    font-family: var(--f-latin);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .nf-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .nf-col a {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 13.5px;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nf-col a:hover { color: #fff; }
+  .nf-bottom {
+    padding-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nf-copy {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12.5px;
+    font-family: var(--f-mono);
+  }
+  @media (max-width: 980px) {
+    .nf-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .nf-about {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 720px) {
+    .nf-grid { grid-template-columns: 1fr; }
+    .nf-inner { padding: 0 18px; }
+    .nf-footer { padding: 48px 0 24px; }
+  }
+
+  /* focus-visible */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+</style>

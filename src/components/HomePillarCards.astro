@@ -1,0 +1,313 @@
+---
+// HomePillarCards.astro
+// コンテンツ正本: src/pages/index.astro 既存「カテゴリから探す」セクション
+// デザイン参照:  design_handoff_aicreative_navi/reference/ §4-8 Pillars
+---
+
+<section id="categories" class="hp-section scroll-mt-24">
+  <div class="wrap">
+
+    <div class="section-head">
+      <span class="eyebrow">Categories</span>
+      <h2>カテゴリから探す</h2>
+      <p>AI動画生成・AI画像生成を中心に、動画編集・アバター・デザイン・音声まで、制作に使えるAIツールカテゴリを整理しています。</p>
+    </div>
+
+    <!-- ★ 中心カテゴリ 2枚 -->
+    <div class="pillars">
+
+      <a href="/categories/video-generation/" class="pillar video">
+        <span class="pillar-accent"></span>
+        <span class="toplbl">★ 中心カテゴリ</span>
+        <span class="pillar-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="5" width="14" height="14" rx="3"/>
+            <path d="m16 9 6-3v12l-6-3"/>
+          </svg>
+        </span>
+        <h3>AI動画生成</h3>
+        <p>テキストや画像から動画を自動生成。Runway・Kling AI・Pika など主要ツールを商用利用・無料枠・透かしで比較できます。Hailuo AI・PixVerse・Vidu AI・InVideo AI など10件規模のツールをカテゴリで比較できます。</p>
+        <div class="pillar-tools">
+          <span class="t">Runway</span>
+          <span class="t">Kling AI</span>
+          <span class="t">Pika</span>
+        </div>
+        <span class="textlink">ツール一覧を見る <span class="arr">→</span></span>
+      </a>
+
+      <a href="/categories/image-generation/" class="pillar image">
+        <span class="pillar-accent"></span>
+        <span class="toplbl">★ 中心カテゴリ</span>
+        <span class="pillar-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </span>
+        <h3>AI画像生成</h3>
+        <p>テキストプロンプトから画像を生成。Midjourney・Adobe Firefly など主要ツールを商用利用・無料枠・透かしで比較できます。</p>
+        <div class="pillar-tools">
+          <span class="t">Midjourney</span>
+          <span class="t">Adobe Firefly</span>
+          <span class="t">Stable Diffusion</span>
+        </div>
+        <span class="textlink">ツール一覧を見る <span class="arr">→</span></span>
+      </a>
+
+    </div>
+
+    <!-- 動画制作を支えるカテゴリ -->
+    <p class="sub-label">動画制作を支えるカテゴリ</p>
+    <div class="support-grid">
+
+      <a href="/categories/video-editing/" class="scard">
+        <span class="scard-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+        </span>
+        <h4>AI動画編集</h4>
+        <p>AIを使った動画トリミング・字幕追加・カット編集ツールの比較情報。</p>
+        <span class="textlink scard-more">カテゴリを見る <span class="arr">→</span></span>
+      </a>
+
+      <a href="/categories/avatar-video/" class="scard">
+        <span class="scard-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </span>
+        <h4>AIアバター動画</h4>
+        <p>AIアバターを使った解説動画・プレゼン動画ツールの比較情報。</p>
+        <span class="textlink scard-more">カテゴリを見る <span class="arr">→</span></span>
+      </a>
+
+    </div>
+
+    <!-- 制作補助ツール -->
+    <p class="sub-label">制作補助ツール</p>
+    <div class="aux-grid">
+
+      <a href="/categories/design/" class="scard aux-scard">
+        <span class="scard-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18M9 21V9"/>
+          </svg>
+        </span>
+        <h4>AIデザイン</h4>
+        <p>バナー・SNS投稿・LP素材のデザイン自動化ツール。Canva AI・Adobe Fireflyなどを比較。</p>
+        <span class="textlink scard-more">カテゴリを見る <span class="arr">→</span></span>
+      </a>
+
+      <a href="/categories/voice-narration/" class="scard aux-scard">
+        <span class="scard-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="23"/>
+            <line x1="8" y1="23" x2="16" y2="23"/>
+          </svg>
+        </span>
+        <h4>AI音声・ナレーション</h4>
+        <p>テキスト読み上げ・音声生成ツール。動画制作のナレーション追加や解説コンテンツ向け。</p>
+        <span class="textlink scard-more">カテゴリを見る <span class="arr">→</span></span>
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ── Section wrapper ── */
+  .hp-section {
+    padding: 88px 0;
+    background: var(--paper);
+  }
+
+  /* ── Pillar cards ── */
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  .pillar {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 38px 36px 32px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform .25s var(--ease), box-shadow .25s, border-color .25s;
+  }
+  .pillar:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+  /* Left accent bar */
+  .pillar-accent {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 5px;
+  }
+  /* Video variant */
+  .pillar.video {
+    border-color: color-mix(in srgb, var(--video) 22%, var(--line));
+  }
+  .pillar.video .pillar-accent { background: var(--video); }
+  .pillar.video .pillar-ico    { background: var(--video-tint); color: var(--video); }
+  .pillar.video .toplbl        { color: var(--video); background: var(--video-tint); }
+  /* Image variant */
+  .pillar.image {
+    border-color: color-mix(in srgb, var(--image) 22%, var(--line));
+  }
+  .pillar.image .pillar-accent { background: var(--image); }
+  .pillar.image .pillar-ico    { background: var(--image-tint); color: var(--image); }
+  .pillar.image .toplbl        { color: var(--image); background: var(--image-tint); }
+  /* Top-right badge */
+  .toplbl {
+    position: absolute;
+    top: 26px;
+    right: 26px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--f-latin);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  /* Icon */
+  .pillar-ico {
+    width: 50px;
+    height: 50px;
+    border-radius: 13px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+  }
+  .pillar-ico svg { width: 26px; height: 26px; }
+  /* Heading + body */
+  .pillar h3 {
+    font-family: var(--f-jp);
+    font-size: 23px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .pillar p {
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 18px;
+    flex: 1;
+  }
+  /* Tool chips */
+  .pillar-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 24px;
+  }
+  .pillar-tools .t {
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+    border-radius: 7px;
+  }
+
+  /* ── Support cards ── */
+  .sub-label {
+    font-family: var(--f-latin);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 32px 0 14px;
+  }
+  .support-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 0;
+  }
+  .scard {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform .2s var(--ease), box-shadow .2s, border-color .2s;
+  }
+  .scard:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--brand) 35%, var(--line));
+  }
+  .scard-ico {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--brand-tint);
+    color: var(--brand-ink);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .scard-ico svg { width: 20px; height: 20px; }
+  .scard h4 {
+    font-family: var(--f-jp);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .scard p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .scard-more { margin-top: auto; font-size: 13px; }
+
+  /* ── Auxiliary cards ── */
+  .aux-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .aux-scard h4 { font-size: 14px; }
+  .aux-scard p  { font-size: 12.5px; }
+
+  /* ── Responsive ── */
+  @media (max-width: 980px) {
+    .pillars        { grid-template-columns: 1fr; }
+    .support-grid   { grid-template-columns: 1fr 1fr; }
+    .aux-grid       { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 720px) {
+    .hp-section     { padding: 60px 0; }
+    .support-grid   { grid-template-columns: 1fr; }
+    .aux-grid       { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,280 @@
+---
+// HomeStartFinder.astro
+// 「はじめての方へ」+「条件からAIツールを探す」統合パネル
+---
+
+<section id="start" class="hsf-section">
+  <div class="wrap">
+
+    <div class="finder-box">
+
+      <!-- 上段: START GUIDE -->
+      <div class="hsf-head">
+        <span class="eyebrow">Start Guide</span>
+        <h2>はじめて選ぶ方へ</h2>
+        <p>迷ったら、試したい目的や確認したい条件から選べます。</p>
+      </div>
+
+      <div class="hgs-grid">
+
+        <a href="/conditions/free/" class="hgs-card">
+          <span class="hgs-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1.5a1.8 1.8 0 0 0 0 3.4V15a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1.6a1.8 1.8 0 0 0 0-3.4z"/>
+              <path d="M14 7v10" stroke-dasharray="1.5 2.5"/>
+            </svg>
+          </span>
+          <h3>無料で試したい</h3>
+          <p>無料枠あり・クレジット制など、まず試せるツールを一覧で確認できます。</p>
+          <span class="textlink hgs-more">無料ツールを見る <span class="arr">→</span></span>
+        </a>
+
+        <a href="/conditions/commercial-use/" class="hgs-card">
+          <span class="hgs-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="7" width="18" height="13" rx="2.5"/>
+              <path d="M8 7V5.5A2 2 0 0 1 10 3.5h4a2 2 0 0 1 2 2V7"/>
+              <path d="M3 12.5h18"/>
+            </svg>
+          </span>
+          <h3>商用利用条件を確認したい</h3>
+          <p>ビジネス・副業・SNS運用での利用を想定した方向けに、商用利用条件を整理しています。</p>
+          <span class="textlink hgs-more">商用利用ツールを見る <span class="arr">→</span></span>
+        </a>
+
+        <a href="/comparisons/" class="hgs-card">
+          <span class="hgs-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"/>
+              <path d="m20.5 20.5-4-4"/>
+            </svg>
+          </span>
+          <h3>目的に合うツールを探したい</h3>
+          <p>SNS画像・動画生成・商用素材など、用途別の比較記事でツールを選べます。</p>
+          <span class="textlink hgs-more">比較記事を見る <span class="arr">→</span></span>
+        </a>
+
+      </div>
+
+      <!-- 区切り -->
+      <hr class="finder-divider" />
+
+      <!-- 下段: 条件でしぼり込む -->
+      <p class="tier-label">条件でしぼり込む</p>
+
+      <div class="taglinks">
+        <a class="taglink" href="/categories/video-generation/">
+          <span class="ld" aria-hidden="true"></span>AI動画生成
+        </a>
+        <a class="taglink" href="/categories/image-generation/">
+          <span class="ld" aria-hidden="true"></span>AI画像生成
+        </a>
+        <a class="taglink" href="/conditions/commercial-use/">
+          <span class="ld" aria-hidden="true"></span>商用利用を確認
+        </a>
+        <a class="taglink" href="/conditions/free/">
+          <span class="ld" aria-hidden="true"></span>無料で試せる
+        </a>
+        <a class="taglink" href="/conditions/japanese/">
+          <span class="ld" aria-hidden="true"></span>日本語対応
+        </a>
+        <a class="taglink" href="/conditions/no-watermark/">
+          <span class="ld" aria-hidden="true"></span>透かしなし
+        </a>
+      </div>
+
+      <div class="taglinks taglinks-row">
+        <a class="taglink solid" href="/categories/video-generation/">AI動画生成ツール一覧</a>
+        <a class="taglink solid" href="/categories/image-generation/">AI画像生成ツール一覧</a>
+        <a class="taglink solid" href="/comparisons/">比較表で見る</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .hsf-section {
+    padding: 80px 0;
+    background: var(--surface-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .finder-box {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 36px 36px 32px;
+  }
+
+  /* START GUIDE 見出しブロック */
+  .hsf-head {
+    margin-bottom: 20px;
+  }
+  .hsf-head h2 {
+    font-family: var(--f-jp);
+    font-size: clamp(20px, 2.4vw, 28px);
+    font-weight: 900;
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    margin: 10px 0 8px;
+    color: var(--ink);
+  }
+  .hsf-head > p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  /* 下段段見出し */
+  .tier-label {
+    font-family: var(--f-latin);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .tier-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* 新規: 点線区切り */
+  .finder-divider {
+    border: 0;
+    border-top: 1px dashed var(--line-strong);
+    margin: 26px 0;
+  }
+
+  /* カードグリッド */
+  .hgs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 0;
+  }
+
+  .hgs-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform .2s var(--ease), box-shadow .2s, border-color .2s;
+  }
+  .hgs-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--brand) 35%, var(--line));
+  }
+
+  .hgs-ico {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--brand-tint);
+    color: var(--brand-ink);
+    display: grid;
+    place-items: center;
+    margin-bottom: 8px;
+    transition: transform .2s var(--ease);
+    flex-shrink: 0;
+  }
+  .hgs-card:hover .hgs-ico {
+    transform: scale(1.06) rotate(-3deg);
+  }
+  .hgs-ico svg { width: 22px; height: 22px; }
+
+  .hgs-card h3 {
+    font-family: var(--f-jp);
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .hgs-card p {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.65;
+    flex: 1;
+  }
+  .hgs-more {
+    margin-top: auto;
+    padding-top: 10px;
+    font-size: 13.5px;
+  }
+
+  /* タグリンク */
+  .taglinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .taglink {
+    font-family: var(--f-jp);
+    font-weight: 600;
+    font-size: 13.5px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    color: var(--ink-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: transform .16s var(--ease), background .16s, border-color .16s, color .16s;
+  }
+  .taglink:hover {
+    border-color: var(--brand);
+    color: var(--brand-ink);
+    background: var(--brand-tint);
+    transform: translateY(-1px);
+  }
+  .taglink .ld {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--brand);
+    flex-shrink: 0;
+  }
+  .taglinks-row {
+    margin-top: 16px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--line-strong);
+  }
+  .taglink.solid {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .taglink.solid:hover {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--on-brand);
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 980px) {
+    .hgs-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 720px) {
+    .hsf-section { padding: 60px 0; }
+    .finder-box { padding: 24px 20px 22px; }
+    .hgs-grid { grid-template-columns: 1fr; }
+  }
+</style>

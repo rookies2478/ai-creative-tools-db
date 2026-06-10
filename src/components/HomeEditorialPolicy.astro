@@ -1,0 +1,133 @@
+---
+// HomeEditorialPolicy.astro
+// コンテンツ正本: src/pages/index.astro 既存「編集方針」セクション
+---
+
+<section class="hep-section">
+  <div class="wrap hep-grid">
+
+    <!-- 左：見出し・説明・リンク -->
+    <div class="hep-left reveal">
+      <span class="eyebrow">Editorial</span>
+      <h2>編集方針</h2>
+      <p>本サイトは、AIクリエイティブ制作ツールを整理する比較DB型メディアです。記事は情報提供を目的としており、本記事は法的助言ではありません。</p>
+      <div class="hep-links">
+        <a href="/editorial-policy/" class="textlink">編集方針の詳細を見る <span class="arr">→</span></a>
+        <a href="/guides/commercial-use-copyright/" class="textlink">商用利用・著作権ガイドを読む <span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <!-- 右：4つの方針カード -->
+    <div class="hep-principles" data-stagger>
+
+      <div class="hep-card">
+        <span class="hep-num">01</span>
+        <h4>料金条件は公式情報を確認</h4>
+        <p>料金・無料枠・対応状況は変更される場合があります。最新情報は公式サイトをご確認ください。</p>
+      </div>
+
+      <div class="hep-card">
+        <span class="hep-num">02</span>
+        <h4>商用利用は断定しない</h4>
+        <p>商用利用条件はツール・プラン・用途によって異なる場合があります。利用前に各ツールの公式規約をご確認ください。</p>
+      </div>
+
+      <div class="hep-card">
+        <span class="hep-num">03</span>
+        <h4>確認できない項目は要確認扱い</h4>
+        <p>条件が確定できない項目は要確認として表示し、安易な断定を避けます。</p>
+      </div>
+
+      <div class="hep-card">
+        <span class="hep-num">04</span>
+        <h4>更新日を記事ごとに明示</h4>
+        <p>記事には最終確認日を記載しています。条件タグは公式情報の更新に合わせて見直します。</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .hep-section {
+    padding: 80px 0;
+    background: var(--ink);
+    color: #fff;
+  }
+  .hep-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  /* ── Left ── */
+  .hep-left h2 {
+    font-family: var(--f-jp);
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 900;
+    color: #fff;
+    margin: 18px 0 16px;
+  }
+  .hep-left :global(.eyebrow) { color: rgba(255,255,255,.5); }
+  .hep-left :global(.eyebrow::before) { background: rgba(255,255,255,.35); }
+  .hep-left p {
+    font-size: 14.5px;
+    color: rgba(255,255,255,.7);
+    line-height: 1.75;
+  }
+  .hep-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .hep-links :global(.textlink) {
+    color: rgba(255,255,255,.8);
+    font-size: 14px;
+  }
+  .hep-links :global(.textlink:hover) { color: #fff; }
+
+  /* ── Principle cards ── */
+  .hep-principles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .hep-card {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: var(--radius-sm);
+    padding: 18px 18px 16px;
+  }
+  .hep-num {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    color: rgba(255,255,255,.35);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .hep-card h4 {
+    font-family: var(--f-jp);
+    font-size: 13.5px;
+    font-weight: 700;
+    color: rgba(255,255,255,.92);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .hep-card p {
+    font-size: 12px;
+    color: rgba(255,255,255,.55);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 980px) {
+    .hep-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+  @media (max-width: 720px) {
+    .hep-section { padding: 60px 0; }
+    .hep-principles { grid-template-columns: 1fr; }
+  }
+</style>

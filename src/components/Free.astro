@@ -144,7 +144,7 @@ const DEFAULT_RELATED_SOLID: RelatedLink[] = [
 ];
 
 const {
-  headingHtml = '無料で試せる<br><span class="hl fp-title-nowrap">AIクリエイティブツール</span>',
+  headingHtml = '無料で試せる<span class="hl">AIクリエイティブツール</span>',
   lead = '無料プランがあるAI画像生成・AI動画生成・AI動画編集・AIアバター動画ツールの条件をまとめています。無料枠の内容、透かし、商用利用条件、出力制限を確認してから利用を始めましょう。条件はプランや時期によって変わる可能性があるため、実務利用前に必ず最新の公式情報をご確認ください。',
   toolsBase = '/tools/',
   stats,
@@ -399,8 +399,7 @@ const hasLimited = tools.some((t) => t.freePlan === 'limited');
   .fp-x a{text-decoration:none;}
 
   /* 見出し */
-  .fp-x .fp-head h1{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-.01em;line-height:1.24;margin:16px 0;max-width:900px;}
-  .fp-x .fp-title-nowrap{white-space:nowrap;}
+  .fp-x .fp-head h1{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-.01em;line-height:1.24;margin:16px 0;max-width:900px;text-wrap:balance;}
   .fp-x .fp-head h1 .hl{color:var(--brand-ink);position:relative;}
   .fp-x .fp-head h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.26em;background:color-mix(in srgb,var(--brand) 18%,transparent);z-index:-1;border-radius:2px;}
   .fp-x .lead{font-size:15.5px;color:var(--ink-soft);max-width:680px;}

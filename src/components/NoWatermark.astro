@@ -106,7 +106,7 @@ const DEFAULT_FAQS: Faq[] = [
 ];
 
 const {
-  headingHtml = '透かし条件を確認しやすい<br><span class="hl">AIツール</span>比較',
+  headingHtml = '透かし条件を確認しやすい<span class="hl">AIツール</span>比較',
   lead = 'AI生成画像や動画をSNS画像・YouTubeサムネイル・広告バナー・商品画像などに使う場合、透かしの有無は重要な確認ポイントです。このページでは、透かしなし、または条件付きで透かしを外せる可能性のあるツールを整理しています。透かし条件はプラン・機能・出力形式によって変わる場合があるため、最新情報は各ツールの公式サイト・実際の出力画面でご確認ください。',
   notice = '透かしの有無は、無料プラン・有料プラン・出力形式によって変わる場合があります。また、透かしを除去できることと商用利用が許可されていることは別の問題です。掲載情報は調査時点の内容であり、実務利用前には必ず各ツールの公式サイト・最新の利用規約をご確認ください。本サイトの内容は法的助言ではありません。',
   toolsBase = '/tools/',
@@ -339,7 +339,7 @@ const filterChips: { st: WmStatus | 'all'; label: string }[] = [
   .nw-x a{text-decoration:none;}
 
   /* 見出し */
-  .nw-x .nw-head h1{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-.01em;line-height:1.24;margin:16px 0;max-width:900px;}
+  .nw-x .nw-head h1{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-.01em;line-height:1.24;margin:16px 0;max-width:900px;text-wrap:balance;}
   .nw-x .nw-head h1 .hl{color:var(--brand-ink);position:relative;}
   .nw-x .nw-head h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.26em;background:color-mix(in srgb,var(--brand) 18%,transparent);z-index:-1;border-radius:2px;}
   .nw-x .lead{font-size:15.5px;color:var(--ink-soft);max-width:700px;}

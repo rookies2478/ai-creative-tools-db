@@ -108,7 +108,7 @@ const DEFAULT_FAQS: Faq[] = [
 ];
 
 const {
-  headingHtml = '日本語対応の<br><span class="hl">AIツール</span>比較',
+  headingHtml = '日本語対応の<span class="hl">AIツール</span>比較',
   lead = '日本語UIや日本語プロンプトに対応しているAI画像・動画生成ツールを整理しています。英語が苦手な方や、国内向けの制作・SNS運用でAIツールを使いたい方が対象です。日本語対応の範囲はツールごとに異なるため、最新情報は各ツールの公式サイトでご確認ください。',
   notice = '掲載情報は調査時点の内容です。料金・商用利用条件・著作権に関する規約は変更される場合があります。実務利用前には必ず各ツールの公式サイト・利用規約をご確認ください。本サイトの内容は法的助言ではありません。',
   toolsBase = '/tools/',
@@ -360,7 +360,7 @@ const filterChips: { st: JaStatus | 'all'; label: string }[] = [
   .ja-x a{text-decoration:none;}
 
   /* 見出し */
-  .ja-x .ja-head h1{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-.01em;line-height:1.24;margin:16px 0;max-width:900px;}
+  .ja-x .ja-head h1{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-.01em;line-height:1.24;margin:16px 0;max-width:900px;text-wrap:balance;}
   .ja-x .ja-head h1 .hl{color:var(--brand-ink);position:relative;}
   .ja-x .ja-head h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.26em;background:color-mix(in srgb,var(--brand) 18%,transparent);z-index:-1;border-radius:2px;}
   .ja-x .lead{font-size:15.5px;color:var(--ink-soft);max-width:700px;}

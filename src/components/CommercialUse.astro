@@ -95,7 +95,7 @@ const DEFAULT_FAQS: Faq[] = [
 ];
 
 const {
-  headingHtml = '商用利用条件を確認しやすい<br><span class="hl">AIツール</span>比較',
+  headingHtml = '商用利用条件を確認しやすい<span class="hl">AIツール</span>比較',
   lead = 'AI画像・動画生成ツールを仕事や副業で使う場合は、商用利用条件を事前に確認することが重要です。このページでは公式情報をもとに商用利用ステータスを整理しています。用途・プラン・生成内容によって条件は異なる場合があり、規約はツール側の判断で随時変更されることがあります。',
   notice = '商用利用の可否は、プラン・生成内容・利用目的・各ツールの規約によって変わる場合があります。掲載情報は調査時点の内容であり、公式情報をもとにした一般的な整理です。実務利用前には必ず各ツールの公式サイト・最新の利用規約をご確認ください。本サイトの内容は法的助言ではありません。',
   toolsBase = '/tools/',
@@ -319,7 +319,7 @@ const filterChips: { st: Status | 'all'; label: string }[] = [
   .cu-x h1,.cu-x h2,.cu-x h3,.cu-x h4{font-family:var(--f-jp);font-weight:700;line-height:1.32;color:var(--ink);}
 
   /* 見出し */
-  .cu-x .cu-head h1{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-.01em;line-height:1.24;margin:16px 0;max-width:820px;}
+  .cu-x .cu-head h1{font-size:clamp(27px,3.6vw,42px);font-weight:900;letter-spacing:-.01em;line-height:1.24;margin:16px 0;max-width:820px;text-wrap:balance;}
   .cu-x .cu-head h1 .hl{color:var(--brand-ink);position:relative;}
   .cu-x .cu-head h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.26em;background:color-mix(in srgb,var(--brand) 18%,transparent);z-index:-1;border-radius:2px;}
   .cu-x .lead{font-size:15.5px;color:var(--ink-soft);max-width:680px;}

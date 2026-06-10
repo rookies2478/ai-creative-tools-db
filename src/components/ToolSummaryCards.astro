@@ -13,25 +13,21 @@ type TriState = boolean | 'partial' | 'unknown';
 type FreePlan = boolean | 'limited' | 'unknown';
 
 function cuBadge(val: CommercialUse): { text: string; cls: string; desc: string } {
-  if (val === 'ok')        return { text: '商用利用：公式情報で可能',   cls: 'bg-emerald-100 text-emerald-800', desc: '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。' };
-  if (val === 'paid-only') return { text: '商用利用：有料プラン向け',   cls: 'bg-sky-100 text-sky-800',         desc: '有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。' };
-  if (val === 'limited')   return { text: '商用利用：条件あり',         cls: 'bg-amber-100 text-amber-800',     desc: '用途やプランによって制限がある可能性があります。公式規約をご確認ください。' };
-  if (val === 'no')        return { text: '商用利用：不可または非推奨', cls: 'bg-red-100 text-red-800',         desc: '商用利用はできない、または推奨されない可能性があります。最新の公式情報をご確認ください。' };
-                           return { text: '商用利用：要確認',           cls: 'bg-gray-100 text-gray-600',       desc: '公式情報の確認が必要です。利用前に公式サイトをご確認ください。' };
+  if (val === 'ok')  return { text: '商用利用：案内あり', cls: 'bg-emerald-100 text-emerald-800', desc: '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。' };
+  if (val === 'no')  return { text: '商用利用：非対応',   cls: 'bg-slate-100 text-slate-600',     desc: '商用利用はできない、または推奨されない可能性があります。最新の公式情報をご確認ください。' };
+                     return { text: '商用利用：要確認',   cls: 'bg-amber-100 text-amber-800',     desc: '用途やプランによって条件が異なる場合があります。公式規約をご確認ください。' };
 }
 
 function fpBadge(val: FreePlan): { text: string; cls: string } {
-  if (val === true)      return { text: '無料プランあり', cls: 'bg-green-100 text-green-800' };
-  if (val === false)     return { text: '無料プランなし', cls: 'bg-red-100 text-red-800' };
-  if (val === 'limited') return { text: '制限付き無料',   cls: 'bg-yellow-100 text-yellow-800' };
-                         return { text: '要確認',          cls: 'bg-gray-100 text-gray-600' };
+  if (val === true)  return { text: '無料枠あり', cls: 'bg-green-100 text-green-800' };
+  if (val === false) return { text: '無料枠なし', cls: 'bg-slate-100 text-slate-600' };
+                     return { text: '無料枠：要確認', cls: 'bg-amber-100 text-amber-800' };
 }
 
 function wmBadge(val: FourState): { text: string; cls: string } {
-  if (val === 'yes')     return { text: 'あり',     cls: 'bg-red-100 text-red-800' };
-  if (val === 'no')      return { text: 'なし',     cls: 'bg-green-100 text-green-800' };
-  if (val === 'limited') return { text: '条件付き', cls: 'bg-yellow-100 text-yellow-800' };
-                         return { text: '要確認',   cls: 'bg-gray-100 text-gray-600' };
+  if (val === 'no')  return { text: '透かしなし', cls: 'bg-green-100 text-green-800' };
+  if (val === 'yes') return { text: '透かしあり', cls: 'bg-slate-100 text-slate-600' };
+                     return { text: '透かし：要確認', cls: 'bg-amber-100 text-amber-800' };
 }
 
 function triText(val: TriState): { text: string; cls: string } {

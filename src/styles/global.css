@@ -1,5 +1,171 @@
 @import "tailwindcss";
 
+/* ==========================================================
+   Design tokens — リデザイン用 CSS 変数
+   source: design_handoff_aicreative_navi/reference/styles.css
+   既存 Tailwind クラスは変更しない。トップページ専用コンポーネントから参照。
+   ========================================================== */
+:root {
+  --paper: #F4F4EE;
+  --surface: #FFFFFF;
+  --surface-2: #FAFAF6;
+  --ink: #16181D;
+  --ink-soft: #3A3E47;
+  --muted: #6A7180;
+  --faint: #98A0AD;
+  --line: #E3E2D9;
+  --line-strong: #D2D1C6;
+
+  --brand: #4B3FE4;
+  --brand-press: #3A2FCB;
+  --on-brand: #FFFFFF;
+  --brand-tint: #ECEBFB;
+  --brand-ink: #2E25A6;
+
+  --video: #E1543A;
+  --video-tint: #FCEDE9;
+  --image: #15897F;
+  --image-tint: #E2F1EF;
+
+  --ok: #1E8A4C;
+  --ok-tint: #E6F3EC;
+  --warn: #A06A09;
+  --warn-tint: #F8EFD9;
+  --na: #6A7180;
+  --na-tint: #EFEFEA;
+
+  --f-jp:   "Zen Kaku Gothic New", "Noto Sans JP", system-ui, sans-serif;
+  --f-body: "Noto Sans JP", system-ui, sans-serif;
+  --f-latin:"Space Grotesk", system-ui, sans-serif;
+  --f-mono: "Space Mono", ui-monospace, monospace;
+
+  --radius:    14px;
+  --radius-sm: 10px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 1px 2px rgba(20,22,28,.04), 0 1px 3px rgba(20,22,28,.05);
+  --shadow-md: 0 4px 14px rgba(20,22,28,.06), 0 2px 6px rgba(20,22,28,.04);
+  --shadow-lg: 0 18px 50px -16px rgba(28,24,80,.22);
+  --maxw: 1200px;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+[data-theme="dark"] {
+  --paper: #0D0E12;
+  --surface: #15171D;
+  --surface-2: #1A1D24;
+  --ink: #F2F2EE;
+  --ink-soft: #C9CCD3;
+  --muted: #9AA1AE;
+  --faint: #6C7480;
+  --line: #262A33;
+  --line-strong: #333845;
+  --brand: #8E80FF;
+  --brand-press: #A89DFF;
+  --on-brand: #11121A;
+  --brand-tint: #1D1B33;
+  --brand-ink: #B6ADFF;
+  --video: #FF6E54;
+  --video-tint: #2A1813;
+  --image: #36B3A8;
+  --image-tint: #102420;
+  --ok: #46C07C;
+  --ok-tint: #11251A;
+  --warn: #D8A33E;
+  --warn-tint: #2A2110;
+  --na: #9AA1AE;
+  --na-tint: #1E222A;
+  --shadow-lg: 0 18px 50px -16px rgba(0,0,0,.6);
+}
+
+/* ==========================================================
+   New-design global utilities
+   Used only by Home* components. No existing pages touch these.
+   ========================================================== */
+
+/* Container */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+@media (max-width: 720px) { .wrap { padding: 0 18px; } }
+
+/* Section header */
+.section-head { max-width: 720px; margin-bottom: 44px; }
+.section-head h2 {
+  font-family: var(--f-jp);
+  font-size: clamp(26px, 3.2vw, 38px);
+  font-weight: 900;
+  letter-spacing: -.005em;
+  line-height: 1.32;
+  margin: 18px 0 14px;
+  color: var(--ink);
+}
+.section-head p { color: var(--muted); font-size: 15.5px; line-height: 1.7; }
+
+/* Eyebrow label */
+.eyebrow {
+  font-family: var(--f-latin);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 22px; height: 2px; border-radius: 2px;
+  background: var(--brand);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--f-jp); font-weight: 700; font-size: 15px;
+  padding: 13px 22px; border-radius: 999px;
+  border: 1px solid transparent; cursor: pointer; text-decoration: none;
+  transition: transform .18s var(--ease), background .18s, box-shadow .18s, border-color .18s;
+  white-space: nowrap;
+}
+.btn .arr { transition: transform .2s var(--ease); }
+.btn:hover .arr { transform: translateX(3px); }
+.btn-primary {
+  background: var(--brand); color: var(--on-brand);
+  box-shadow: 0 6px 18px -6px color-mix(in srgb, var(--brand) 65%, transparent);
+}
+.btn-primary:hover { background: var(--brand-press); transform: translateY(-1px); }
+.btn-ghost {
+  background: var(--surface); color: var(--ink); border-color: var(--line-strong);
+}
+.btn-ghost:hover { border-color: var(--brand); color: var(--brand-ink); transform: translateY(-1px); }
+.btn-lg { padding: 16px 28px; font-size: 16px; }
+
+/* Text link */
+.textlink {
+  font-family: var(--f-jp); font-weight: 600; font-size: 14.5px; color: var(--brand-ink);
+  display: inline-flex; align-items: center; gap: 7px; text-decoration: none;
+}
+.textlink .arr { transition: transform .2s var(--ease); }
+.textlink:hover .arr { transform: translateX(4px); }
+
+/* Tags */
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 600; font-family: var(--f-jp);
+  padding: 5px 11px; border-radius: 999px; line-height: 1.2;
+  border: 1px solid transparent;
+}
+.tag .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.tag.ok    { color: var(--ok);        background: var(--ok-tint); }
+.tag.warn  { color: var(--warn);      background: var(--warn-tint); }
+.tag.na    { color: var(--na);        background: var(--na-tint); }
+.tag.brand { color: var(--brand-ink); background: var(--brand-tint); }
+.tag.line  { color: var(--muted);     background: transparent; border-color: var(--line-strong); }
+
+/* Top page only — paper background without affecting other pages */
+.body-paper { background: var(--paper); }
+
 /* Hero section background: subtle radial gradient from pale blue at top */
 .hero-bg {
   background-color: #ffffff;
@@ -57,4 +223,59 @@
 }
 .outline-btn:hover {
   background-color: #f8fafc;
+}
+
+/* ==========================================================
+   Scroll reveal
+   ========================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .55s var(--ease), transform .55s var(--ease);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered children */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .45s var(--ease), transform .45s var(--ease);
+}
+[data-stagger] > *.in {
+  opacity: 1;
+  transform: none;
+}
+[data-stagger] > *:nth-child(1)  { transition-delay: 0ms; }
+[data-stagger] > *:nth-child(2)  { transition-delay: 60ms; }
+[data-stagger] > *:nth-child(3)  { transition-delay: 120ms; }
+[data-stagger] > *:nth-child(4)  { transition-delay: 180ms; }
+[data-stagger] > *:nth-child(5)  { transition-delay: 240ms; }
+[data-stagger] > *:nth-child(6)  { transition-delay: 300ms; }
+[data-stagger] > *:nth-child(7)  { transition-delay: 360ms; }
+[data-stagger] > *:nth-child(8)  { transition-delay: 420ms; }
+
+/* Disable all reveal transitions when user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.in,
+  [data-stagger] > *,
+  [data-stagger] > *.in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================
+   Focus ring
+   ========================================================== */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 6px;
 }

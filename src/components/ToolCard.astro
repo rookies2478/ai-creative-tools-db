@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import ToolLogo from './ToolLogo.astro';
+import FreshnessLabel from './FreshnessLabel.astro';
 
 interface Props {
   tool: CollectionEntry<'tools'>;
@@ -15,25 +16,21 @@ const { tool } = Astro.props;
 const { data, slug } = tool;
 
 function freeBadge(val: FreePlan) {
-  if (val === true)      return { text: '無料枠あり',  cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (val === 'limited') return { text: '制限あり',    cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
-  if (val === false)     return { text: '有料のみ',    cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
-                         return { text: '要確認',      cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
+  if (val === true)      return { text: '無料枠あり', cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === false)     return { text: '無料枠なし', cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+                         return { text: '無料枠：要確認', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
 }
 
 function cuBadge(val: CommercialUse) {
-  if (val === 'ok')       return { text: '商用利用：公式情報で可能', cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (val === 'paid-only') return { text: '商用利用：有料プラン向け', cls: 'bg-sky-50 text-sky-700 ring-1 ring-inset ring-sky-200' };
-  if (val === 'limited')  return { text: '商用利用：条件あり',       cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
-  if (val === 'no')       return { text: '商用利用：不可または非推奨', cls: 'bg-red-50 text-red-500 ring-1 ring-inset ring-red-200' };
-                          return { text: '商用利用：要確認',          cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
+  if (val === 'ok')  return { text: '商用利用：案内あり', cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === 'no')  return { text: '商用利用：非対応',   cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+                     return { text: '商用利用：要確認',   cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
 }
 
 function jpBadge(ui: TriState, prompt: TriState) {
-  if (ui === true)                                                 return { text: '日本語UI',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (ui === 'partial' || prompt === true || prompt === 'partial') return { text: '一部日本語', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
-  if (ui === false && prompt === false)                            return { text: '日本語×',    cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
-                                                                   return { text: '要確認',    cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
+  if (ui === true)                       return { text: '日本語：対応',  cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (ui === false && prompt === false)   return { text: '日本語：非対応', cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+                                          return { text: '日本語：要確認', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
 }
 
 function wmBadge(val: FourState) {
@@ -95,8 +92,10 @@ const wm = wmBadge(data.watermark);
     </div>
   )}
 
-  <!-- lastReviewed -->
-  <p class="mt-3 text-xs text-slate-500">最終確認日: {data.lastReviewed}</p>
+  <!-- 鮮度ラベル -->
+  <div class="mt-3">
+    <FreshnessLabel verifiedAt={data.verifiedAt} lastReviewed={data.lastReviewed} variant="card" />
+  </div>
 
   <!-- Buttons -->
   <div class="mt-auto pt-4 flex flex-col gap-2">

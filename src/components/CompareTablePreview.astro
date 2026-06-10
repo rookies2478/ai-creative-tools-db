@@ -15,32 +15,27 @@ const { tools, limit = 5 } = Astro.props;
 const preview = tools.slice(0, limit);
 
 function freeBadge(val: FreePlan) {
-  if (val === true)      return { text: '無料枠あり',  cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (val === 'limited') return { text: 'プラン差',    cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
-  if (val === false)     return { text: '有料のみ',    cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
-                         return { text: '要確認',      cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === true)  return { text: 'あり',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === false) return { text: 'なし',   cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+                     return { text: '要確認', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
 }
 
 function cuBadge(val: CommercialUse) {
-  if (val === 'ok')        return { text: '公式情報を確認',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (val === 'paid-only') return { text: 'プラン差',         cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
-  if (val === 'limited')   return { text: '条件あり',         cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
-  if (val === 'no')        return { text: '要確認',           cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
-                           return { text: '要確認',           cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === 'ok') return { text: '案内あり', cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === 'no') return { text: '非対応',   cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+                    return { text: '要確認',   cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
 }
 
 function jpBadge(ui: TriState, prompt: TriState) {
-  if (ui === true)                                                 return { text: '対応の案内あり', cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (ui === 'partial' || prompt === true || prompt === 'partial') return { text: '一部対応',       cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
-  if (ui === false && prompt === false)                            return { text: '案内なし',        cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
-                                                                   return { text: '要確認',          cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (ui === true)                     return { text: '対応',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (ui === false && prompt === false) return { text: '非対応', cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+                                        return { text: '要確認', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
 }
 
 function wmBadge(val: FourState) {
-  if (val === 'no')      return { text: 'なし',         cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (val === 'yes')     return { text: 'あり',         cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
-  if (val === 'limited') return { text: 'プラン差',     cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
-                         return { text: '要確認',       cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === 'no')  return { text: 'なし',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === 'yes') return { text: 'あり',   cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+                     return { text: '要確認', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
 }
 ---
 
@@ -87,4 +82,45 @@ function wmBadge(val: FourState) {
       })}
     </tbody>
   </table>
+  <div class="ctp-legend">
+    <span class="ctp-li ctp-ok"><span class="ctp-ic">○</span>あり / 対応</span>
+    <span class="ctp-li ctp-warn"><span class="ctp-ic">△</span>要確認</span>
+    <span class="ctp-li ctp-na"><span class="ctp-ic">×</span>なし / 非対応</span>
+  </div>
+  <p class="ctp-note">※ 値は確認日時点の参考値です。無料枠・商用利用・対応状況はプランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。</p>
 </div>
+
+<style>
+  .ctp-legend {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 14px 0 0;
+    font-size: 11.5px;
+    color: #6a7180;
+    align-items: center;
+  }
+  .ctp-li {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .ctp-ic {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .ctp-ok .ctp-ic   { background: #e6f3ec; color: #1e8a4c; }
+  .ctp-warn .ctp-ic { background: #f8efd9; color: #a06a09; }
+  .ctp-na .ctp-ic   { background: #efefea; color: #6a7180; }
+  .ctp-note {
+    margin: 8px 0 0;
+    font-size: 11px;
+    color: #98a0ad;
+    line-height: 1.7;
+  }
+</style>

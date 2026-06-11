@@ -86,6 +86,8 @@ const canonicalUrl = canonicalPath && Astro.site
           <a href="/guides/commercial-use-copyright/">商用利用ガイド</a>
         </nav>
 
+        <a href="/tools/" class="nv-mobile-top-cta">ツールを探す</a>
+
         <div class="nv-actions">
           <a href="/tools/" class="nv-cta">ツールを探す <span class="nv-arr">→</span></a>
 
@@ -400,11 +402,42 @@ const canonicalUrl = canonicalPath && Astro.site
     margin: 10px 0;
   }
 
+  /* スマホ用ヘッダーCTA（デフォルト非表示） */
+  .nv-mobile-top-cta {
+    display: none;
+  }
+
   @media (max-width: 720px) {
     .nv-nav { display: none; }
     .nv-cta { display: none; }
     .nv-mobile-details { display: block; }
-    .nv-inner { padding: 0 18px; gap: 12px; }
+    .nv-inner { padding: 0 14px; gap: 8px; }
+    .nv-logo { min-width: 0; }
+    .nv-wordmark { min-width: 0; overflow: hidden; }
+    .nv-sub { font-size: 9px; }
+    .nv-mobile-top-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #4B3FE4, #2E25A6);
+      color: #fff;
+      font-family: var(--f-jp);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      text-decoration: none;
+      box-shadow: 0 10px 24px rgba(75, 63, 228, 0.22);
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .nv-sub { display: none; }
+    .nv-mobile-top-cta { font-size: 12px; padding: 0 10px; }
   }
 
   /* ===== FOOTER ===== */

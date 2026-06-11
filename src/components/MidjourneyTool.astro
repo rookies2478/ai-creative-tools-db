@@ -1,0 +1,234 @@
+---
+import TdpToolPage from './TdpToolPage.astro';
+import type { Props as TdpProps } from './TdpToolPage.astro';
+
+const props: TdpProps = {
+  toolName: 'Midjourney',
+  category: 'AI画像生成',
+  checkedDate: '2026-06-06',
+  headingHtml: 'Midjourneyの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ',
+  lead: '高品質なアート・イラスト生成に定評のあるAI画像生成サービス。Discord・Web版で利用可能で有料プランのみ提供。料金・商用利用条件（大企業要件あり）・透かし有無を、公式情報をもとに整理しています。',
+  specs: [
+    { lb: '商用利用', badge: { s: 'cond', label: '条件あり' } },
+    { lb: '無料枠', badge: { s: 'na', label: '無料枠なし' } },
+    { lb: '料金目安', text: '$10/月〜', mono: true },
+    { lb: '透かし', badge: { s: 'ok', label: '透かしなし' } },
+    { lb: '日本語UI', badge: { s: 'na', label: '× 非対応' } },
+  ],
+  primaryCta: { label: '公式サイトで確認する', href: 'https://www.midjourney.com' },
+  secondaryCta: { label: 'プラン比較（公式）', href: 'https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans' },
+  basicInfo: [
+    {
+      title: '商用利用', badge: { s: 'cond', label: '条件あり' }, wide: true,
+      sum: '有料プランでは商用利用が可能と案内されています。年間総収益100万ドル超の企業はPro/Megaプランへのアップグレードが必要とされています。',
+      det: '公式ヘルプでは有料プラン利用者向けの商用利用に関する案内が掲載されています。年間総収益が100万ドル超の企業は利用規約上Pro/Megaプランへのアップグレードが必要とされています。利用条件はプランや用途によって異なる可能性があるため、最新の公式規約をご確認ください。本記事は法的助言ではありません。',
+    },
+    {
+      title: '無料枠', badge: { s: 'na', label: '無料枠なし' },
+      det: '無料プランは2024年末に廃止されたとされています。現在の提供状況は公式サイトでご確認ください。',
+    },
+    {
+      title: '最安料金目安', sum: '$10/月（Basicプラン・月払い）', sumMono: true,
+      det: 'Basic $10/月〜（月払い）。年払いで割引あり（$8/月〜）。Standard $30/月〜、Pro $60/月〜、Mega $120/月〜。',
+    },
+    {
+      title: '透かし', badge: { s: 'ok', label: '透かしなし' },
+      det: '公式情報上、有料プランでは生成画像に透かしは付与されない場合があります。最新の条件は公式サイトでご確認ください。',
+    },
+    {
+      title: '日本語対応',
+      lang: [
+        { label: 'UI', badge: { s: 'na', label: '× 非対応' } },
+        { label: 'プロンプト', badge: { s: 'cond', label: '△ 限定的' } },
+      ],
+    },
+    {
+      title: '対応環境',
+      feats: ['Discord', 'Web'],
+    },
+    {
+      title: '主な機能', wide: true,
+      feats: ['テキスト→画像', '画像→画像', '高解像度化', 'スタイル選択'],
+    },
+  ],
+  useCases: [
+    '<b>高品質なアート・イラスト</b>のビジュアル生成',
+    '<b>SNS投稿・ブログアイキャッチ・サムネイル案</b>の素材制作',
+    '<b>コンセプトビジュアル</b>やデザイン方向性の探索',
+    '<b>スタイルの幅が広い</b>複数ビジュアル案の短時間比較',
+  ],
+  pros: [
+    '画像品質・スタイル表現が業界トップクラスとされる',
+    'Discordベースで操作可能、Web版も提供',
+    'v6以降、プロンプト精度が向上しているとされる',
+    '有料プランでは透かしなしで生成可能とされる',
+    '有料プラン利用時の商用利用に関する公式案内がある',
+  ],
+  cons: [
+    '無料プランなし（2024年末に廃止済みとされている）',
+    '日本語UIなし（英語インターフェースのみ）',
+    'ローカル実行不可、クラウドのみ',
+    '年間総収益100万ドル超の企業は上位プランが必要とされる',
+    'Discordの操作に慣れる必要がある（Web版も提供あり）',
+  ],
+  limits: [
+    '無料プランなし',
+    '年間総収益100万ドル超の企業はPro/Megaプランへのアップグレードが必要とされている',
+    'ローカル実行・API提供なし',
+  ],
+  quickTable: {
+    kind: 'spec',
+    rows: [
+      [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成' }],
+      [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>無料枠なし</span><br />2024年末に廃止されたとされています。最新の状況は公式サイトでご確認ください。' }],
+      [{ html: '最安料金', rk: true }, { html: '<span class="mono">$10/月〜</span><br />Basicプラン月払い$10/月〜。年払い$8/月〜。' }],
+      [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり</span><br />有料プランで可能と案内。年収100万ドル超企業はPro/Mega必須とされています。' }],
+      [{ html: '透かし', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>透かしなし</span><br />有料プランでは透かしなしと案内されています' }],
+      [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>× 非対応</span><br />英語インターフェースのみ' }],
+      [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 限定的</span><br />英語より精度が低い傾向あり' }],
+      [{ html: '対応環境', rk: true }, { html: 'Discord / Web' }],
+      [{ html: '情報確認日', rk: true }, { html: '2026-06-06', mono: true }],
+      [{ html: '次回確認予定', rk: true }, { html: '2026-07-06', mono: true }],
+      [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.midjourney.com" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+    ],
+    note: '※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。',
+  },
+  overviewTitle: 'Midjourneyとは',
+  about: [
+    'Midjourneyは高品質なアート・イラスト・写真風画像の生成で広く知られるAI画像生成サービスです。Discord上でボットコマンドで操作する形式が基本で、公式Webサイトからブラウザで利用できるWeb版も提供されています。有料プランのみの提供で無料プランはありません（2024年末廃止とされています）。',
+    'v6以降のバージョンからプロンプト精度が向上したとされており、アート調・イラスト調・写真風など幅広いスタイルの画像生成が得意とされています。SNS投稿・ブログアイキャッチ・コンセプトビジュアル・デザイン方向性の探索などに活用されています。',
+  ],
+  aboutMore: { label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' },
+  pricing: {
+    table: {
+      kind: 'cmp',
+      headers: ['プラン', '月払い', '年払い'],
+      rows: [
+        [{ html: 'Basic', rk: true }, { html: '$10/月', mono: true }, { html: '$8/月', mono: true }],
+        [{ html: 'Standard', rk: true }, { html: '$30/月', mono: true }, { html: '$24/月', mono: true }],
+        [{ html: 'Pro', rk: true }, { html: '$60/月', mono: true }, { html: '$48/月', mono: true }],
+        [{ html: 'Mega', rk: true }, { html: '$120/月', mono: true }, { html: '$96/月', mono: true }],
+      ],
+    },
+    notes: [
+      '無料プランは2024年末に廃止されたとされています',
+      '料金・プラン内容は変更される可能性があります',
+      '<b>最新の料金・プラン詳細はMidjourney公式サイトをご確認ください</b>',
+      '上記の価格は確認時点の参考値です。最新は公式サイトで必ずご確認ください。',
+    ],
+  },
+  commercial: {
+    lead: '公式ヘルプでは有料プラン利用者向けの商用利用に関する案内が掲載されています。以下の点にご注意ください。',
+    points: [
+      '<b>有料プランでは商用利用が可能</b>と案内されています（最新の規約をご確認ください）',
+      '<b>年間総収益が100万ドル超の企業</b>は利用規約上Pro/Megaプランへのアップグレードが必要とされています',
+      '規約・条件は変更される可能性があります',
+      '人物・著名人・ブランドロゴ・第三者素材を扱う場合は別途確認が必要です',
+    ],
+    disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前はMidjourney利用規約・商用利用ガイドの最新版をご確認ください。',
+    more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+  },
+  overviewSubSection: {
+    title: 'DiscordとWeb版について',
+    content: 'Midjourneyは当初Discordボットとして展開され、コマンドベースで画像生成を操作する形式が基本です。Discordアカウントが必要ですが、操作の自由度が高く、生成過程のコミュニティ共有もできます。公式Webサイトからブラウザで利用できるWeb版も提供されており、Discord操作に慣れていない場合はWeb版が使いやすい場合があります。最新の提供状況と機能の違いは公式サイトでご確認ください。',
+  },
+  whoFor: [
+    '高品質なアート調・イラスト調のビジュアルを作りたい人',
+    'SNS投稿・ブログアイキャッチ・サムネイル案の素材が欲しい人',
+    'コンセプトビジュアルやデザイン方向性の探索に使いたい人',
+    '英語インターフェースに抵抗がない人',
+    '有料プランから試す意欲がある人',
+  ],
+  whoNot: [
+    '無料から試したい人（無料プランなし）',
+    '日本語UIを必要とする人（英語のみ）',
+    'Canvaなどデザインツールとの統合を重視する人',
+    '公式条件を確認せずに商用案件へ使いたい人',
+    '大企業（年間総収益100万ドル超）でBasicプランのみで利用したい人',
+  ],
+  selectTable: {
+    kind: 'cmp',
+    headers: ['ツール', '向いているケース'],
+    rows: [
+      [{ html: 'Midjourney（このページ）', rk: true, me: true }, { html: '高品質なアート調・雰囲気重視のビジュアル表現を最優先する場合' }],
+      [{ html: '<a href="/tools/adobe-firefly/">Adobe Firefly</a>', rk: true }, { html: 'Adobe製品との連携や日本語環境を重視する場合' }],
+      [{ html: '<a href="/tools/leonardo-ai/">Leonardo AI</a>', rk: true }, { html: 'イラスト・ゲーム素材の候補、無料枠から試したい場合' }],
+      [{ html: '<a href="/tools/dalle/">DALL·E</a>', rk: true }, { html: 'ChatGPTと連携した汎用的なアイデア出しや画像生成の候補' }],
+      [{ html: '<a href="/tools/canva-ai-image-generator/">Canva AI画像生成</a>', rk: true }, { html: 'デザインフローの中で画像生成を完結させたい場合' }],
+    ],
+  },
+  versusTable: {
+    kind: 'cmp',
+    headers: ['比較軸', 'Midjourney', 'Adobe Firefly', 'DALL·E'],
+    rows: [
+      [{ html: '用途の傾向', rk: true }, { html: 'アート調・雰囲気重視', me: true }, { html: 'デザイン制作・Adobe連携' }, { html: 'ChatGPT連携・指示忠実度' }],
+      [{ html: '商用利用の案内', rk: true }, { html: '有料プランで可能と案内', me: true }, { html: '有料プランで可能と案内' }, { html: '公式情報上、可能と案内' }],
+      [{ html: '透かし', rk: true }, { html: '透かしなし（有料）', me: true }, { html: 'プランによる' }, { html: 'C2PAメタデータ（不可視）' }],
+      [{ html: '日本語UI', rk: true }, { html: '非対応', me: true }, { html: '対応' }, { html: '対応（ChatGPT準拠）' }],
+    ],
+    note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+  },
+  language: [
+    '<b>日本語UI：</b>非対応（英語インターフェースのみ）',
+    '<b>日本語プロンプト：</b>一部対応（英語と比べて精度が低い傾向があります）',
+    '日本語プロンプトの意図がうまく反映されない場合は英語プロンプトへの切り替えが効果的な場合があります',
+  ],
+  watermark: [
+    '公式情報上、有料プランでは生成画像に透かしは付与されない場合があります',
+    '透かしの有無・条件はプランや提供状況により変わる可能性があります',
+    '最新の条件は公式サイトでご確認ください',
+  ],
+  watermarkMore: { label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' },
+  checklist: [
+    { html: '利用しているMidjourneyのプラン' },
+    { html: '企業の年間総収益が100万ドル超かどうか（Pro/Mega必須の条件）' },
+    { html: '商用利用の条件（プランや用途による違い）' },
+    { html: '生成物の利用範囲（掲載媒体・配布範囲など）' },
+    { html: '人物・ブランド・ロゴ・第三者素材の扱い' },
+    { html: '著作権（AIのみで生成した画像の著作権保護に関する各国の扱い）' },
+    { html: 'Midjourney利用規約・商用利用ガイドの最新情報' },
+    { html: '利用時点での最新の利用条件' },
+  ],
+  lastChecked: '2026-06-06',
+  nextCheck: '2026-07-06',
+  verifiedDate: '2026-06-08',
+  sources: [
+    { tag: '料金', label: 'Midjourneyプラン比較（公式）', href: 'https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans' },
+    { tag: '規約', label: 'Midjourney利用規約（2026年版・公式）', href: 'https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service' },
+    { tag: '商用', label: 'Midjourney商用利用ガイド（公式）', href: 'https://docs.midjourney.com/hc/en-us/articles/27870375276557-Using-Images-Videos-Commercially' },
+    { tag: '公式', label: 'Midjourney公式サイト', href: 'https://www.midjourney.com' },
+  ],
+  faqs: [
+    { q: 'Midjourneyは無料で使えますか？', a: '現在は無料プランが提供されていない場合があります（2024年末に廃止されたとされています）。最新の状況は公式サイトでご確認ください。' },
+    { q: 'Midjourneyは商用利用できますか？', a: '公式情報上、有料プランでは商用利用ができる場合があります。ただし年間総収益100万ドル超の企業はPro/Megaプランへのアップグレードが必要とされています。利用前に最新の公式利用規約をご確認ください。本記事は法的助言ではありません。' },
+    { q: '日本語で使えますか？', a: 'UIは英語のみです。日本語プロンプトを一部理解する場合がありますが、英語と比べて精度が低い傾向があります。' },
+    { q: '透かしは入りますか？', a: '公式情報上、有料プランでは透かしが入らない場合があります。最新の条件は公式サイトでご確認ください。' },
+    { q: 'DiscordとWeb版の違いは何ですか？', a: 'Discordでの利用が基本ですが、公式WebサイトからWeb版でも利用できる場合があります。機能の違いや最新の対応状況は公式サイトでご確認ください。' },
+    { q: 'どんな用途に向いていますか？', a: 'アート調のイラスト、コンセプトビジュアル、SNS投稿画像、ブログアイキャッチ案、サムネイル案などに向いています。ただし用途によって確認すべき利用条件があります。商用利用の場合は公式規約をご確認ください。' },
+    { q: '人物や著名人・ブランドロゴを含む画像を作成できますか？', a: '技術的には生成可能な場合がありますが、実在の人物・著名人・ブランドロゴ・第三者の著作物を含む画像を作成・利用する際は、肖像権・商標権・著作権などの観点から別途確認が必要です。本記事は法的助言ではありません。' },
+  ],
+  relatedTools: [
+    { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', cat: '画像生成', badges: [{ s: 'paid', label: '商用：有料向け' }, { s: 'cond', label: '無料枠：限定的' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://firefly.adobe.com' },
+    { name: 'Leonardo AI', slug: 'leonardo-ai', initial: 'L', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料枠：限定的' }, { s: 'na', label: '日本語UI：要確認' }], platforms: ['Web', 'API'], official: 'https://leonardo.ai' },
+    { name: 'DALL·E', slug: 'dalle', initial: 'D', cat: '画像生成', badges: [{ s: 'ok', label: '商用：案内あり' }, { s: 'cond', label: '無料枠：限定的' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web', 'API'], official: 'https://openai.com/dall-e-3' },
+  ],
+  nextReads: [
+    { href: '/comparisons/midjourney-vs-adobe-firefly/', title: 'MidjourneyとAdobe Fireflyを比較', desc: 'アート調かデザイン制作か、用途で選び分け' },
+    { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+    { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+    { href: '/conditions/no-watermark/', title: '透かしなしのAI画像ツール', desc: '透かしなし・商用利用条件を整理したツール一覧' },
+    { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: '商用利用や著作権まわりの確認ポイント' },
+    { href: '/comparisons/', title: '比較表でまとめて比較', desc: '商用利用・無料枠・透かし・日本語対応を横断比較' },
+  ],
+  conditions: [
+    { label: 'ツール一覧', href: '/tools/' },
+    { label: '無料で使えるAIツール', href: '/conditions/free/' },
+    { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+    { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+    { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+    { label: '全ツール比較表', href: '/comparisons/' },
+  ],
+};
+---
+
+<TdpToolPage {...props} />

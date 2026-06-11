@@ -1,0 +1,291 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'stable-diffusion');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Stable Diffusion', item: 'https://aicreative-db.com/tools/stable-diffusion/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Stable Diffusion',
+    operatingSystem: 'Windows, Mac, Linux, API',
+    applicationCategory: 'DesignApplication',
+    description: 'Stability AIが公開したオープンソースのAI画像生成モデル。ローカル環境で無料実行でき、高度なカスタマイズが可能。',
+    url: 'https://stability.ai',
+  },
+]);
+---
+
+<BaseLayout
+  title="Stable Diffusionの商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="Stable Diffusionの商用利用条件・ライセンス・料金プラン・ローカル実行・透かし・日本語対応を公式情報をもとに整理。モデルバージョンによってライセンスが異なります。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/stable-diffusion/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Stable Diffusion</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Stable Diffusion"
+      category="AI画像生成"
+      checkedDate={d?.lastReviewed ?? '2026-06-06'}
+      headingHtml='Stable Diffusionの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="Stability AIが公開したオープンソースのAI画像生成モデル。ローカル環境（PC）で無料実行でき、カスタムモデルやLoRAによる高度なカスタマイズが可能です。モデルバージョンによってライセンスが異なるため、商用利用前はモデルごとの確認が必要です。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '条件あり（モデル依存）' } },
+        { lb: '無料枠', badge: { s: 'ok', label: 'ローカル実行は無料' } },
+        { lb: '料金目安', text: 'ローカル無料 / API別途', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: '一部バージョンで付与' } },
+        { lb: '日本語UI', badge: { s: 'cond', label: '拡張機能で対応可' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://stability.ai' }}
+      secondaryCta={{ label: 'ライセンス情報（公式）', href: 'https://stability.ai/license' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '条件あり（モデル依存）' }, wide: true,
+          sum: '利用するモデルのバージョンによってライセンスが異なります。SD 1.x/2.x/SDXLとSD 3.x/3.5以降では条件が異なります。',
+          det: 'SD 1.x / 2.x / SDXL は CreativeML Open RAIL-M ライセンス。収益制限なしで条件付き商用利用できる場合があります。SD 3.x / 3.5 以降は Stability AI Community License で年間総収益100万ドル未満の場合に商用利用できる場合があるとされています。コミュニティ公開モデル（Civitai等）は各モデルで独自ライセンスが設けられていることがあります。ライセンス条件は変更される可能性があるため、利用するモデルのライセンスを必ず最新情報でご確認ください。',
+        },
+        {
+          title: '無料枠', badge: { s: 'ok', label: 'ローカル実行は無料' },
+          det: 'GPU搭載PCと環境構築があればローカル実行は無料です。Stability AI Platform（クラウドAPI）は別途課金となります。',
+        },
+        {
+          title: '最安料金目安', sum: 'ローカル無料 / API：$20/月〜（公式案内）', sumMono: true,
+          det: 'ローカル実行は無料（GPU搭載PC・環境構築が必要）。クラウドAPI（Stability AI Platform）は2026年6月時点で$20/月・6,000クレジット等のプランが案内されています。最新料金は公式サイトでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: '一部バージョンで付与' },
+          det: '一部バージョン・実装では不可視透かし（invisible watermark）が埋め込まれる場合があるとされています。詳細は利用するバージョンごとにご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'cond', label: '拡張機能で対応可' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '△ 一部対応' } },
+          ],
+        },
+        { title: '対応環境', feats: ['ローカル（Win/Mac/Linux）', 'API'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→画像', '画像→画像', 'インペインティング', 'アウトペインティング', '高解像度化', 'LoRA/カスタムモデル'] },
+      ]}
+      useCases={[
+        '<b>ローカル環境での無料・繰り返し生成</b>（GPU搭載PCが必要）',
+        '<b>カスタムモデル・LoRA</b>を活用したスタイル特化生成',
+        '<b>プライバシーを重視した用途</b>（標準構成では外部送信が発生しにくい）',
+        '<b>コンセプトアート・背景素材・キャラクター案</b>の試作',
+      ]}
+      pros={[
+        'オープンソースで無料利用可能（ローカル実行）',
+        'LoRA・ControlNet・カスタムモデルによる高度なカスタマイズが可能',
+        'コミュニティモデルが豊富（Civitai等）',
+        'ローカル実行のためデータが外部に送信されにくい（標準的な構成の場合）',
+        'AUTOMATIC1111 Web UIやComfyUIなど複数のフロントエンドが利用可能',
+      ]}
+      cons={[
+        '環境構築に技術知識が必要（GPU・依存ライブラリ等）',
+        'モデルごとにライセンスが異なり、個別確認が必要',
+        '日本語対応は拡張機能に依存',
+        '一部バージョンで不可視透かしが埋め込まれる場合がある',
+      ]}
+      limits={[
+        'SD 3.x以降は年間総収益100万ドル超の場合エンタープライズライセンスが必要とされている',
+        'コミュニティモデルのライセンスは個別確認が必要',
+        'ローカル実行にはGPU搭載PCと環境構築が必要',
+        '日本語UIは標準では非対応（拡張機能が必要）',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成（オープンソースモデル）' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>ローカル実行は無料</span><br>GPU搭載PCと環境構築が必要。API利用は別途課金。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">ローカル無料 / API $20/月〜</span><br>クラウドAPI（Stability AI Platform）は$20/月〜（要公式確認）' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（モデル依存）</span><br>SD 1.x/SDXL と SD 3.x以降でライセンスが異なります。必ずモデルのライセンスを確認してください。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>一部バージョンで付与</span><br>不可視透かしが埋め込まれる場合あり。バージョンごとに確認が必要。' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>拡張機能で対応可</span><br>AUTOMATIC1111等で拡張機能を導入した場合に対応できる場合あり' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span><br>英語プロンプトの方が精度が高い傾向あり' }],
+          [{ html: '対応環境', rk: true }, { html: 'ローカル（Win/Mac/Linux） / API' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-06', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://stability.ai" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ ライセンス・料金はモデルバージョン・利用形態により異なります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'Stable Diffusionは、Stability AIが開発・公開したオープンソースのAI画像生成モデルです。モデルウェイトが公開されているため、GPU搭載PCがあればローカル環境で無料実行できます。AUTOMATIC1111 Web UIやComfyUIなどのフロントエンドと組み合わせて広く使われています。',
+        'カスタムモデル・LoRA・ControlNetなどの拡張により高度なカスタマイズが可能ですが、<b>モデルごとにライセンスが異なる</b>ため、商用利用前は必ず使用するモデルのライセンスを確認する必要があります。2024年10月にはSD 3.5系が公式発表されています。',
+      ]}
+      aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['利用形態', '料金'],
+          rows: [
+            [{ html: 'ローカル実行', rk: true }, { html: '無料（GPU搭載PC・環境構築が必要）', mono: false }],
+            [{ html: 'Stability AI Platform API', rk: true }, { html: '$20/月〜（6,000クレジット等・2026年6月時点）', mono: true }],
+          ],
+        },
+        notes: [
+          'ローカル実行はGPU搭載PCと環境構築（AUTOMATIC1111、ComfyUI等）が必要です',
+          'Stability AI Platform（クラウドAPI）の料金・プラン内容は変更される可能性があります',
+          '<b>最新料金は公式サイトでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: '利用するモデルのバージョンによってライセンスが異なります。商用利用前は必ず使用するモデルのライセンスを個別に確認してください。',
+        points: [
+          '<b>SD 1.x / 2.x / SDXL</b>：CreativeML Open RAIL-M ライセンス。収益制限なしで条件付き商用利用できる場合があります',
+          '<b>SD 3.x / SD 3.5以降</b>：Stability AI Community License。年間総収益100万ドル未満の場合に商用利用できる場合があるとされています。100万ドル以上はエンタープライズライセンスが必要とされています',
+          '<b>コミュニティ公開モデル（Civitai等）</b>：各モデルで独自のライセンスが設けられている場合があります',
+          'ライセンス条件は変更される可能性があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のライセンスおよびStability AI公式サイトをご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="AUTOMATIC1111・ComfyUIなどのフロントエンドについて"
+      integration="Stable Diffusionをローカル実行する際は、AUTOMATIC1111 Web UIやComfyUIなどのフロントエンドツールと組み合わせて利用するのが一般的です。AUTOMATIC1111は歴史が長くチュートリアルが豊富で、ComfyUIはノードベースのワークフロー構築が可能で2025〜2026年にかけて主流ツールとしての地位を確立しつつあります。最新の状況は各ツールの公式ページでご確認ください。"
+      whoFor={[
+        'GPU搭載PCでローカル実行し繰り返し生成したい人',
+        'カスタムモデルやLoRAを活用して特化した生成をしたい人',
+        '画像生成パラメータを細かく制御したい人',
+        'プライバシーを重視した生成環境が必要な人',
+        '技術的な環境構築に抵抗がない人',
+      ]}
+      whoNot={[
+        'GPU搭載PCがなく、ブラウザから手軽に使いたい人',
+        '環境構築なしですぐ始めたい人',
+        'Adobe製品との連携や公式条件確認を重視する人',
+        'テンプレートを使ったデザイン制作を完結させたい人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Stable Diffusion（このページ）', rk: true, me: true }, { html: 'ローカル実行・カスタマイズ性・LoRA活用を最大限に重視する場合' }],
+          [{ html: '<a href="/tools/midjourney/">Midjourney</a>', rk: true }, { html: 'アート調・雰囲気重視の高品質なビジュアル表現を手軽に得たい場合' }],
+          [{ html: '<a href="/tools/adobe-firefly/">Adobe Firefly</a>', rk: true }, { html: 'Adobe製品との連携や商業利用時の条件を公式で確認しながら使いたい場合' }],
+          [{ html: '<a href="/tools/leonardo-ai/">Leonardo AI</a>', rk: true }, { html: 'イラスト・ゲーム素材・キャラクター案出しでカスタムモデルを活用したい場合' }],
+          [{ html: '<a href="/tools/dalle/">DALL·E</a>', rk: true }, { html: 'ChatGPT連携で手軽に画像生成・アイデア出しをしたい場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Stable Diffusion', 'Midjourney', 'Leonardo AI'],
+        rows: [
+          [{ html: '実行環境', rk: true }, { html: 'ローカル / API', me: true }, { html: 'クラウドのみ' }, { html: 'クラウド / API' }],
+          [{ html: '無料枠', rk: true }, { html: 'ローカルは無料', me: true }, { html: 'なし' }, { html: '限定的' }],
+          [{ html: '商用利用', rk: true }, { html: 'モデル依存・要確認', me: true }, { html: '有料プランで条件あり' }, { html: '要確認' }],
+          [{ html: 'カスタマイズ性', rk: true }, { html: '最高レベル', me: true }, { html: 'プリセット中心' }, { html: '高い' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>標準では非対応。AUTOMATIC1111やComfyUIで拡張機能を導入した場合に日本語UIにできる場合があります',
+        '<b>日本語プロンプト：</b>一部対応。英語プロンプトの方が精度が高い傾向あり。翻訳拡張機能の利用が推奨される場合があります',
+        '日本語ドキュメント：非公式・コミュニティによる情報が中心',
+      ]}
+      watermark={[
+        '一部バージョン・実装では不可視透かし（invisible watermark）が埋め込まれる場合があるとされています',
+        'SDXLなど一部モデルでは可視的なアーティファクトが報告されたケースもあります',
+        '詳細な仕様は利用するバージョン・実装ごとに異なる場合があります',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '利用するモデルのバージョン（SD 1.x/SDXL か SD 3.x以降 か）' },
+        { html: 'コミュニティモデルを使う場合は各モデルのライセンス' },
+        { html: '年間総収益が100万ドルを超えていないか（SD 3.x以降）' },
+        { html: 'ControlNet・拡張機能などのライセンス' },
+        { html: 'img2img等で使用する入力画像の権利関係' },
+        { html: 'ローカル実行かクラウドAPIかの利用形態' },
+        { html: '最新のStability AI公式ライセンス情報' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-06-06'}
+      nextCheck={d?.nextReviewDue ?? '2026-07-06'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: 'ライセンス', label: 'Stability AIライセンスページ（公式）', href: 'https://stability.ai/license' },
+        { tag: '料金', label: 'Stability AI Platform 料金（公式）', href: 'https://platform.stability.ai/pricing' },
+        { tag: '公式', label: 'Stability AI公式サイト', href: 'https://stability.ai' },
+        { tag: 'モデル', label: 'Stable Diffusion 3.5 リリースアナウンス（公式）', href: 'https://stability.ai/news-updates/introducing-stable-diffusion-3-5' },
+        { tag: 'ツール', label: 'AUTOMATIC1111 Web UI（GitHub）', href: 'https://github.com/AUTOMATIC1111/stable-diffusion-webui' },
+        { tag: 'ツール', label: 'ComfyUI 公式ドキュメント', href: 'https://docs.comfy.org' },
+      ]}
+      faqs={[
+        { q: 'Stable Diffusionは無料で使えますか？', a: 'ローカル環境での実行は無料です。ただしGPU搭載PCと環境構築が必要です。Stability AI PlatformのクラウドAPI経由では別途料金が発生します。' },
+        { q: 'Stable Diffusionは商用利用できますか？', a: '利用するモデルのバージョンによってライセンスが異なります。SD 3.x以降は年間総収益100万ドル未満の場合に商用利用できる場合があるとされています。利用するモデルのライセンスを個別に必ずご確認ください。このページは法的助言ではありません。' },
+        { q: 'Stable Diffusionは日本語で使えますか？', a: '標準では英語環境ですが、AUTOMATIC1111 Web UIなど一部の実装で日本語化拡張機能を導入することで日本語UIにできる場合があります。日本語プロンプトは一部対応ですが英語の方が精度が高い傾向があります。' },
+        { q: '透かしは入りますか？', a: 'バージョン・実装によって異なります。一部バージョンでは不可視透かしが埋め込まれる場合があるとされています。詳細は利用する実装ごとにご確認ください。' },
+        { q: 'AUTOMATIC1111とComfyUIの違いは何ですか？', a: 'どちらもStable Diffusionを動かすためのフロントエンドツールです。AUTOMATIC1111はチュートリアルが豊富で導入事例が多く、ComfyUIはノードベースのワークフロー構築が可能で新モデルへの対応速度に優れています。用途に合わせて選択することを推奨します。' },
+        { q: 'SD 3.5とは何ですか？', a: '2024年10月に公式発表されたStability AIのモデル系統です。Large（8.1Bパラメータ）・Large Turbo・Mediumのバリアントが公開されています。ライセンスはSD 3.x系と同様にStability AI Community Licenseが適用されています。詳細は公式サイトをご確認ください。' },
+        { q: 'コミュニティモデル（Civitai等）のライセンスはどうなりますか？', a: 'Civitaiなどで公開されているカスタムモデル・LoRAはそれぞれ独自のライセンスを持つ場合があります。商用利用する際は各モデルのライセンス・配布ページで利用条件を確認する必要があります。' },
+      ]}
+      relatedTools={[
+        { name: 'Midjourney', slug: 'midjourney', initial: 'M', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'na', label: '無料枠：なし' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Discord', 'Web'], official: 'https://www.midjourney.com' },
+        { name: 'Leonardo AI', slug: 'leonardo-ai', initial: 'L', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料枠：限定' }, { s: 'na', label: '日本語UI：要確認' }], platforms: ['Web', 'API'], official: 'https://leonardo.ai' },
+        { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', cat: '画像生成', badges: [{ s: 'paid', label: '商用：有料向け' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://firefly.adobe.com' },
+      ]}
+      nextReads={[
+        { href: '/comparisons/stable-diffusion-vs-midjourney/', title: 'Stable Diffusion と Midjourney を比較', desc: 'ローカル実行かクラウドかの選び分け' },
+        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・無料プランがあるツールを一覧で確認' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用と著作権について', desc: 'AI生成画像を商用利用する際の注意点まとめ' },
+        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '日本語対応ツール', href: '/conditions/japanese/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

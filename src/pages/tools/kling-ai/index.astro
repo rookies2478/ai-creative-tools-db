@@ -1,0 +1,284 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'kling-ai');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Kling AI', item: 'https://aicreative-db.com/tools/kling-ai/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Kling AI',
+    operatingSystem: 'Web',
+    applicationCategory: 'VideoApplication',
+    description: 'Kling AIは中国Kuaishou運営のAI動画生成ツール。テキスト・画像から最大10秒の動画を生成でき、動画延長（最大3分）にも対応。無料プランは1日66クレジット付与。',
+    url: 'https://klingai.com',
+  },
+]);
+---
+
+<BaseLayout
+  title="Kling AIの商用利用・料金・無料枠まとめ｜AI動画生成ツールDB"
+  description="Kling AIのAI動画生成における商用利用条件・料金プラン・無料枠・透かし・日本語対応を公式情報をもとに整理。無料プランの制限と有料プランの違いもまとめ。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/kling-ai/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Kling AI</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Kling AI"
+      category="AI動画生成"
+      checkedDate={d?.lastReviewed ?? '2026-06-04'}
+      headingHtml='Kling AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="Kling AIはKuaishou（中国）が運営するAI動画生成ツールです。テキストや画像から最大10秒の動画を生成でき、動画延長機能では最大3分まで延長が可能です。無料プランでは1日66クレジットが付与されますが、透かしあり・商用利用不可とされています。商用利用はStandard以上の有料プランで可能とされていますが、最新条件は必ず公式サイトでご確認ください。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'paid', label: '有料プランのみ（要確認）' } },
+        { lb: '無料枠', badge: { s: 'cond', label: '1日66クレジット（透かし・商用不可）' } },
+        { lb: '料金目安', text: '$6.99/月〜', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: '無料プランあり・有料なし' } },
+        { lb: '日本語UI', badge: { s: 'cond', label: '部分対応' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://klingai.com' }}
+      secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://klingai.com/global/pricing' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'paid', label: '有料プランのみ（要確認）' }, wide: true,
+          sum: '無料プランでは商用利用不可とされています。Standard以上の有料プランで商用利用できるとされていますが、最新条件は公式サイトでご確認ください。',
+          det: '商用利用条件については公式価格ページから直接確認が困難な状況（HTTP 446エラー等）のため、第三者情報をもとにした記載となっています。利用前は必ず公式サイトで最新の商用利用条件をご確認ください。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: '1日66クレジット（制限あり）' },
+          det: '無料プランでは1日66クレジットが付与されるとされています。無料プランでは透かしが付与され、商用利用は不可とされています。クレジット数・条件は変更される可能性があります。',
+        },
+        {
+          title: '最安料金目安', sum: '$6.99/月〜（公式案内）', sumMono: true,
+          det: '2026年6月時点の情報に基づきます。プラン内容・料金は変更される可能性があります。最新料金は公式サイトでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: '無料プランあり・有料なし' },
+          det: '無料プランでは生成動画に透かしが付与されるとされています。有料プランでは透かしなしとされていますが、最新仕様は公式サイトでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'cond', label: '部分対応' } },
+            { label: 'プロンプト', badge: { s: 'ok', label: '対応' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→動画', '画像→動画', '動画延長（最大3分）', '最大10秒/クリップ'] },
+      ]}
+      useCases={[
+        '<b>コスト重視のAI動画生成</b>（$6.99/月〜と比較的安価）',
+        '<b>日本語プロンプト</b>での動画生成（日本語プロンプト対応）',
+        '<b>動画延長</b>で最大3分の動画を作成したい場合',
+        '<b>無料枠での試用</b>（透かしあり・商用不可・1日66クレジット）',
+      ]}
+      pros={[
+        'AI動画生成ツールの中で最安クラスの料金（$6.99/月〜）',
+        '日本語プロンプトに対応',
+        '動画延長機能で最大3分の動画生成が可能',
+        '無料プランでも1日66クレジット付与（透かしあり）',
+      ]}
+      cons={[
+        '無料プランでは商用利用不可・透かしあり',
+        '商用利用は有料プランのみ（Standard以上）',
+        '公式価格ページの直接確認が困難な場合がある',
+        '運営が中国企業（Kuaishou）のため、データ取り扱いへの注意が必要な場合がある',
+      ]}
+      limits={[
+        '無料プランでは商用利用不可・透かしあり',
+        '最大動画長は10秒/クリップ（延長で最大3分）',
+        '商用利用条件の公式確認が困難な場合がある',
+        'UIは部分的な日本語対応にとどまる',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>1日66クレジット</span><br>透かしあり・商用利用不可。条件は変更される可能性あり。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">$6.99/月〜</span><br>最新料金は公式サイトで確認。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st paid sm"><span class="d"></span>有料プランのみ（要確認）</span><br>Standard以上で可とされる。最新条件は公式サイトを必ずご確認ください。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料プランあり・有料なし</span><br>有料プランでは透かしなしとされています。' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>部分対応</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span>' }],
+          [{ html: '最大動画長', rk: true }, { html: '10秒/クリップ（延長で最大3分）' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-04', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://klingai.com" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 料金・クレジット数・商用利用条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'Kling AIはKuaishou（快手）が運営するAI動画生成ツールです。テキストや画像から最大10秒の動画を生成でき、動画延長機能を使えば最大3分まで動画を延ばすことができます。料金が$6.99/月〜と比較的安価なことと、日本語プロンプトへの対応が特徴です。',
+        '無料プランでは1日66クレジットが付与されますが、<b>透かしあり・商用利用不可</b>とされています。商用利用にはStandard以上の有料プランへの移行が必要です。公式価格ページへの直接アクセスが困難な場合があるため、<b>商用利用前は必ず公式サイトで最新条件をご確認ください。</b>',
+      ]}
+      aboutMore={{ label: 'AI動画生成ツール一覧で比較する →', href: '/categories/video-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', '備考'],
+          rows: [
+            [{ html: '無料', rk: true }, { html: '無料' }, { html: '1日66クレジット・透かしあり・商用不可' }],
+            [{ html: 'Standard', rk: true }, { html: '$6.99/月〜', mono: true }, { html: '商用利用可とされる（要公式確認）' }],
+            [{ html: '上位プラン', rk: true }, { html: '要公式確認', mono: true }, { html: '要公式確認' }],
+          ],
+        },
+        notes: [
+          '料金・クレジット数は2026年6月時点の第三者情報に基づきます',
+          '公式価格ページへの直接アクセスが困難な場合があります',
+          '<b>最新料金・条件は必ず公式サイトでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: '無料プランでは商用利用不可とされています。Standard以上の有料プランで商用利用できるとされていますが、公式情報の直接確認が困難な状況のため、利用前は必ず公式サイトで最新条件を確認してください。',
+        points: [
+          '無料プランでは商用利用不可とされています',
+          'Standard以上の有料プランで商用利用できるとされています（要公式確認）',
+          '公式価格ページへの直接アクセスが困難な場合があります（HTTP 446等）',
+          '利用規約・商用利用条件は変更される可能性があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のKling AI公式サイトおよび利用規約をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="Kling AIの動画延長機能について"
+      integration="Kling AIでは動画延長（Extend）機能により、1クリップ10秒の動画を最大3分まで延長することができるとされています。ストーリー性のある動画や長尺コンテンツの制作に活用できる場合があります。動画延長機能のクレジット消費量・最大延長時間は変更される可能性があるため、最新仕様は公式サイトでご確認ください。"
+      whoFor={[
+        'コスト重視でAI動画生成を始めたい人（$6.99/月〜）',
+        '日本語プロンプトで動画生成したい人',
+        '動画延長機能で最大3分の動画を作りたい人',
+        '無料枠で試用してから有料移行を検討したい人',
+      ]}
+      whoNot={[
+        '無料プランで商用利用したい人（無料プランは商用不可）',
+        '公式情報の直接確認を重視する人（価格ページへのアクセスが困難な場合あり）',
+        '英語UIのみで問題がある人（部分的な日本語対応）',
+        '運営企業の所在地・データポリシーを重視する人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Kling AI（このページ）', rk: true, me: true }, { html: 'コスト重視・日本語プロンプト・動画延長を活用したい場合' }],
+          [{ html: '<a href="/tools/runway/">Runway</a>', rk: true }, { html: 'プロ向け機能・API・映像編集も含めて使いたい場合' }],
+          [{ html: '<a href="/tools/luma-ai/">Luma AI</a>', rk: true }, { html: '長尺動画生成・高品質な動きを求める場合' }],
+          [{ html: '<a href="/tools/pika/">Pika</a>', rk: true }, { html: '手軽に試用・低コストで始めたい場合' }],
+          [{ html: '<a href="/tools/hailuo-ai/">Hailuo AI</a>', rk: true }, { html: '長尺動画（最大3分）で別の選択肢を試したい場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Kling AI', 'Runway', 'Luma AI', 'Pika', 'Hailuo AI'],
+        rows: [
+          [{ html: '最大動画長', rk: true }, { html: '10秒（延長3分）', me: true }, { html: '要公式確認' }, { html: '最大20秒' }, { html: '最大25秒' }, { html: '最大10秒' }],
+          [{ html: '商用利用', rk: true }, { html: '有料プランのみ', me: true }, { html: '全プラン・条件あり' }, { html: 'Plus以上' }, { html: '有料プランで可' }, { html: 'Standard以上' }],
+          [{ html: '透かし（無料）', rk: true }, { html: 'あり', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
+          [{ html: '日本語UI', rk: true }, { html: '部分対応', me: true }, { html: '非対応' }, { html: '非対応' }, { html: '部分対応' }, { html: '非対応' }],
+          [{ html: '無料枠', rk: true }, { html: '1日66cr', me: true }, { html: '125cr（初回）' }, { html: '限定クレジット' }, { html: '月80cr' }, { html: '生成回数制限' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>部分対応。一部インターフェースで日本語表示が可能とされています',
+        '<b>日本語プロンプト：</b>対応。日本語での動画生成指示が可能とされています',
+        '公式ドキュメントの日本語対応は限定的です',
+      ]}
+      watermark={[
+        '無料プランでは生成動画に透かしが付与されるとされています',
+        '有料プランでは透かしなしとされていますが、最新仕様は公式サイトでご確認ください',
+        '透かしの有無はプランによって異なります',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '利用プランが有料プラン（Standard以上）かどうか（無料プランは商用不可）' },
+        { html: '最新のKling AI利用規約・商用利用条件を公式サイトで確認したか' },
+        { html: '生成動画に使用する入力画像・映像の権利関係' },
+        { html: '動画延長機能を使用する場合のクレジット消費量' },
+        { html: '運営企業のデータポリシー・データ取り扱いを確認したか' },
+        { html: '公式価格ページへのアクセス・条件確認ができているか' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-06-04'}
+      nextCheck={d?.nextReviewDue ?? '2026-07-04'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '料金', label: 'Kling AI 料金プラン（公式・要確認）', href: 'https://klingai.com/global/pricing' },
+        { tag: '公式', label: 'Kling AI 公式サイト', href: 'https://klingai.com' },
+      ]}
+      faqs={[
+        { q: 'Kling AIは無料で使えますか？', a: '無料プランで1日66クレジットが付与されます。ただし無料プランでは透かしが付与され、商用利用は不可とされています。' },
+        { q: 'Kling AIは商用利用できますか？', a: 'Standard以上の有料プランで商用利用できるとされています。無料プランでは商用利用不可です。商用利用前は必ず最新の公式利用規約をご確認ください。このページは法的助言ではありません。' },
+        { q: 'Kling AIは日本語で使えますか？', a: 'UIは部分的に日本語対応しています。プロンプトは日本語に対応しているとされています。' },
+        { q: '動画の最大長はどのくらいですか？', a: '1クリップあたり最大10秒の動画を生成できます。動画延長機能を使うと最大3分まで延長できるとされています。最新仕様は公式サイトでご確認ください。' },
+        { q: '透かしはありますか？', a: '無料プランでは生成動画に透かしが付与されるとされています。有料プランでは透かしなしとされていますが、最新仕様は公式サイトでご確認ください。' },
+        { q: '運営会社はどこですか？', a: 'Kling AIは中国のKuaishou（快手）が運営しています。データの取り扱いポリシーは公式サイトでご確認ください。' },
+      ]}
+      relatedTools={[
+        { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
+        { name: 'Luma AI', slug: 'luma-ai', initial: 'L', cat: '動画生成', badges: [{ s: 'paid', label: '商用：Plus以上' }, { s: 'cond', label: '無料：限定' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://lumalabs.ai/' },
+        { name: 'Pika', slug: 'pika', initial: 'P', cat: '動画生成', badges: [{ s: 'cond', label: '商用：有料で可' }, { s: 'cond', label: '無料：月80cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://pika.art' },
+      ]}
+      nextReads={[
+        { href: '/comparisons/runway-vs-kling-ai/', title: 'Runway と Kling AI を比較', desc: '映像制作向け多機能かリアル寄り動画かで選び分け' },
+        { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
+        { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
+        { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

@@ -1,0 +1,232 @@
+---
+import TdpToolPage from './TdpToolPage.astro';
+import type { Props as TdpProps } from './TdpToolPage.astro';
+
+const props: TdpProps = {
+  toolName: 'Leonardo AI',
+  category: 'AI画像生成',
+  checkedDate: '2026-05-24',
+  headingHtml: 'Leonardo AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ',
+  lead: 'ゲーム・イラスト向けのカスタムモデルが豊富なAI画像生成サービス。無料枠のトークン数が比較的多い。料金・商用利用条件（プライベートモード要件）・透かし有無を、公式情報をもとに整理しています。',
+  specs: [
+    { lb: '商用利用', badge: { s: 'cond', label: '条件あり' } },
+    { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
+    { lb: '料金目安', text: '$10/月〜', mono: true },
+    { lb: '透かし', badge: { s: 'na', label: '要確認' } },
+    { lb: '日本語UI', badge: { s: 'na', label: '要確認' } },
+  ],
+  primaryCta: { label: '公式サイトで確認する', href: 'https://leonardo.ai' },
+  secondaryCta: { label: '料金プラン（公式）', href: 'https://leonardo.ai/pricing/' },
+  basicInfo: [
+    {
+      title: '商用利用', badge: { s: 'cond', label: '条件あり' }, wide: true,
+      sum: '有料プランかつPrivate設定時にユーザーが画像の知的財産権を保有し商用利用できるとされています。',
+      det: '公式情報上、有料プランかつPrivate設定時にユーザーが画像の知的財産権を保有し商用利用できるとされています。無料プランでは生成画像の権利はLeonardo.AIが保持し、他ユーザーも同一画像を使用できる場合があります。商用利用前に最新の利用規約をご確認ください。本記事は法的助言ではありません。',
+    },
+    {
+      title: '無料枠', badge: { s: 'cond', label: '限定的' },
+      det: '1日150トークン程度（変更の可能性あり）。無料プランでは生成画像の権利がLeonardo.AIに帰属する場合があります。',
+    },
+    {
+      title: '最安料金目安', sum: '$10/月（Apprenticeプラン・年払い）', sumMono: true,
+      det: 'Apprentice $10/月〜（年払い）。月払いは$12/月〜。有料プランでPrivate設定が利用可能になります。',
+    },
+    {
+      title: '透かし', badge: { s: 'na', label: '要確認' },
+      det: '通常は透かしなしとされていますが、詳細は公式情報から未確認です。最新の条件はLeonardo AI公式サイトでご確認ください。',
+    },
+    {
+      title: '日本語対応',
+      lang: [
+        { label: 'UI', badge: { s: 'na', label: '要確認' } },
+        { label: 'プロンプト', badge: { s: 'cond', label: '△ 限定的' } },
+      ],
+    },
+    {
+      title: '対応環境',
+      feats: ['Web', 'API'],
+    },
+    {
+      title: '主な機能', wide: true,
+      feats: ['テキスト→画像', '画像→画像', '部分修正', '高解像度化', 'スタイル選択', 'API対応'],
+    },
+  ],
+  useCases: [
+    '<b>ゲームアセット・キャラクター系</b>の画像生成',
+    '<b>カスタムモデル</b>を活用した特化生成',
+    '<b>無料枠</b>での高品質な試作・プロトタイプ作成',
+    '<b>イラスト・デザイン素材</b>の量産候補',
+  ],
+  pros: [
+    '無料プランのトークン数が比較的多い（1日150程度）',
+    'ゲーム・イラスト向けのカスタムモデルが豊富',
+    '有料プランでは画像の知的財産権がユーザーに帰属するとされる',
+    'テキスト→画像・画像→画像・部分修正など多機能',
+    'API提供があり開発・業務フローへの組み込みが可能',
+  ],
+  cons: [
+    '無料プランでは画像の権利がLeonardo.AIに帰属する場合がある',
+    '商用利用には有料プラン＋Private設定が必要とされる',
+    '日本語UIの有無は公式情報から未確認',
+    '日本語プロンプトは英語より精度が低い傾向がある',
+    '生成画像への透かし有無は公式情報から詳細未確認',
+  ],
+  limits: [
+    '無料プランでは生成画像の権利がLeonardo.AIに帰属する場合あり',
+    '商用利用には有料プラン＋Private設定が必要とされる',
+    '日本語UIの有無は公式情報から未確認',
+  ],
+  quickTable: {
+    kind: 'spec',
+    rows: [
+      [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成' }],
+      [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br />1日150トークン程度（変更の可能性あり）。無料プランでは権利がLeonardo.AIに帰属' }],
+      [{ html: '最安料金', rk: true }, { html: '<span class="mono">$10/月〜</span><br />Apprenticeプラン年払い$10/月〜、月払い$12/月〜' }],
+      [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり</span><br /><b>有料プラン＋Private設定</b>時にユーザーが知的財産権を保有し商用利用できるとされています' }],
+      [{ html: '透かし', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br />通常は透かしなしとされているが詳細は公式情報から未確認' }],
+      [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span>' }],
+      [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 限定的</span><br />英語より精度が低い傾向あり' }],
+      [{ html: '対応環境', rk: true }, { html: 'Web / API' }],
+      [{ html: '情報確認日', rk: true }, { html: '2026-05-24', mono: true }],
+      [{ html: '次回確認予定', rk: true }, { html: '2026-06-24', mono: true }],
+      [{ html: '公式サイト', rk: true }, { html: '<a href="https://leonardo.ai" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+    ],
+    note: '※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。',
+  },
+  overviewTitle: 'Leonardo AIとは',
+  about: [
+    'Leonardo AIはゲーム・イラスト向けのカスタムモデルが豊富なAI画像生成サービスです。無料プランでも1日150トークン程度が提供されており、有料契約前に品質を試しやすい点が特徴です。テキスト→画像・画像→画像・部分修正・高解像度化など多彩な機能を備え、APIも提供されています。',
+    'ゲームアセット・キャラクター素材・イラスト系の生成を得意とするカスタムモデルが複数用意されており、用途に合わせてモデルを選べます。ただし日本語UIの有無は公式情報から未確認であり、日本語プロンプトの精度は英語より低い傾向があります。',
+  ],
+  aboutMore: { label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' },
+  pricing: {
+    table: {
+      kind: 'cmp',
+      headers: ['プラン', '料金（年払い）', '備考'],
+      rows: [
+        [{ html: '無料', rk: true }, { html: '無料', mono: true }, { html: '1日150トークン程度（変更の可能性あり）' }],
+        [{ html: 'Apprentice', rk: true }, { html: '$10/月〜', mono: true }, { html: 'Private設定が利用可能になる' }],
+        [{ html: 'Artisan以上', rk: true }, { html: '$24/月〜', mono: true }, { html: '上位プランで機能・容量拡大' }],
+      ],
+    },
+    notes: [
+      '月払いはApprentice $12/月〜',
+      '料金・クレジット数はプランや時期により変更される可能性があります',
+      '<b>最新の料金・プランはLeonardo AI公式サイトをご確認ください</b>',
+    ],
+  },
+  commercial: {
+    lead: '公式情報上、有料プランかつPrivate設定時にユーザーが画像の知的財産権を保有し商用利用できるとされています。以下の点にご注意ください。',
+    points: [
+      '<b>無料プランでは生成画像の権利はLeonardo.AIが保持</b>し、他ユーザーも同一画像を使用できる場合があります',
+      '<b>有料プラン＋Private設定</b>にすることでユーザーへの権利移転が案内されています',
+      '商用利用条件はプランや用途によって異なる場合があります',
+      '人物・著名人・ブランドロゴ・第三者素材を扱う場合は別途確認が必要です',
+    ],
+    disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前はLeonardo AI利用規約の最新版をご確認ください。',
+    more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+  },
+  overviewSubSection: {
+    title: 'プライベートモードと画像の権利',
+    content: 'Leonardo AIでは、<b>有料プランでPrivate設定</b>を有効にすることで生成画像がギャラリーに公開されず、ユーザーが知的財産権を保有できるとされています。無料プランやPublic設定では生成画像の権利がLeonardo.AIに帰属し、他ユーザーが同一の画像にアクセスできる場合があります。商用利用を検討している場合は、プランとPrivate設定の組み合わせを公式情報で必ずご確認ください。',
+  },
+  whoFor: [
+    'ゲームアセット・キャラクター素材・イラスト系の画像生成を試したい人',
+    '無料枠でじっくり試してから有料プランを検討したい人',
+    'カスタムモデルを活用して特化した品質を目指したい人',
+    'テキスト→画像だけでなく部分修正・高解像度化も使いたい人',
+    'APIで開発・業務フローへの組み込みを検討している人',
+  ],
+  whoNot: [
+    '無料プランで商用利用したい人（権利がLeonardo.AIに帰属する場合がある）',
+    '日本語UIを最優先する人（UIの有無が公式情報から未確認）',
+    '公式条件を確認せずに商用案件へ使いたい人',
+    'Adobe製品やCanvaのデザインフローとの統合を重視する人',
+  ],
+  selectTable: {
+    kind: 'cmp',
+    headers: ['ツール', '向いているケース'],
+    rows: [
+      [{ html: 'Leonardo AI（このページ）', rk: true, me: true }, { html: 'イラスト・ゲーム素材・キャラクター制作の候補、無料枠から試したい場合' }],
+      [{ html: '<a href="/tools/midjourney/">Midjourney</a>', rk: true }, { html: '高品質なアート調・雰囲気重視のビジュアル表現を最優先する場合' }],
+      [{ html: '<a href="/tools/adobe-firefly/">Adobe Firefly</a>', rk: true }, { html: 'Adobe製品との連携や商用利用条件の確認を重視する場合' }],
+      [{ html: '<a href="/tools/canva-ai-image-generator/">Canva AI画像生成</a>', rk: true }, { html: 'Canvaのデザインフローの中で画像生成を使いたい場合' }],
+      [{ html: '<a href="/tools/stable-diffusion/">Stable Diffusion</a>', rk: true }, { html: 'ローカル実行・カスタマイズ性を最優先にしたい場合' }],
+    ],
+  },
+  versusTable: {
+    kind: 'cmp',
+    headers: ['比較軸', 'Leonardo AI', 'Midjourney', 'Adobe Firefly'],
+    rows: [
+      [{ html: '用途の傾向', rk: true }, { html: 'イラスト・ゲーム素材', me: true }, { html: 'アート調・雰囲気重視' }, { html: 'デザイン制作・Adobe連携' }],
+      [{ html: '商用利用の案内', rk: true }, { html: '有料＋Private時に可能と案内', me: true }, { html: '有料プランで可能と案内' }, { html: '有料プランで可能と案内' }],
+      [{ html: '無料枠', rk: true }, { html: '比較的多め（1日150程度）', me: true }, { html: 'なし' }, { html: '限定的' }],
+      [{ html: '日本語UI', rk: true }, { html: '要確認', me: true }, { html: '非対応' }, { html: '対応' }],
+    ],
+    note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+  },
+  language: [
+    '<b>日本語UI：</b>公式情報から有無が未確認です。最新の対応状況はLeonardo AI公式サイトをご確認ください',
+    '<b>日本語プロンプト：</b>一部対応（英語と比べて精度が低い傾向があります）',
+    '日本語での利用を優先する場合は、事前に公式サイトでUI対応状況をご確認ください',
+  ],
+  watermark: [
+    '通常は透かしなしとされていますが、詳細は公式情報から未確認です',
+    'プランや設定により条件が変わる可能性があります',
+    '最新の条件はLeonardo AI公式サイトでご確認ください',
+  ],
+  watermarkMore: { label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' },
+  checklist: [
+    { html: '利用しているLeonardo AIのプラン（無料 / 有料）' },
+    { html: 'Private設定を有効にしているか（商用利用の前提条件）' },
+    { html: '生成物の権利帰属（無料プランと有料プランの違い）' },
+    { html: '商用利用の条件（プランや用途による違い）' },
+    { html: '生成物の利用範囲（掲載媒体・配布範囲など）' },
+    { html: '入力素材の権利（アップロード画像・素材の権利関係）' },
+    { html: '人物・ブランド・ロゴ・第三者素材の扱い' },
+    { html: 'Leonardo AI利用規約の最新情報' },
+  ],
+  lastChecked: '2026-05-24',
+  nextCheck: '2026-06-24',
+  verifiedDate: '2026-06-08',
+  sources: [
+    { tag: '料金', label: 'Leonardo AI料金プラン（公式）', href: 'https://leonardo.ai/pricing/' },
+    { tag: '規約', label: 'Leonardo AI利用規約（公式）', href: 'https://leonardo.ai/terms-of-service/' },
+    { tag: '商用', label: 'Leonardo AI商用利用ガイド（公式）', href: 'https://leonardo.ai/news/can-you-use-ai-generated-images-commercially/' },
+    { tag: 'ヘルプ', label: 'Leonardo AI FAQ（公式）', href: 'https://leonardo.ai/faq/' },
+  ],
+  faqs: [
+    { q: 'Leonardo AIは無料で使えますか？', a: '無料プランで1日150トークン程度が提供されています（数量は変更の可能性あり）。ただし無料プランでは生成画像の権利がLeonardo.AIに帰属し、他ユーザーも同一画像を使用できる場合があります。最新の状況はLeonardo AI公式サイトをご確認ください。' },
+    { q: 'Leonardo AIは商用利用できますか？', a: '公式情報上、有料プランかつPrivate設定時にユーザーが画像の知的財産権を保有し商用利用できるとされています。無料プランでは商用利用の条件が異なります。利用前に最新の利用規約をご確認ください。このページは法的助言ではありません。' },
+    { q: '無料プランと有料プランで何が違いますか？', a: '無料プランでは生成画像の権利がLeonardo.AIに帰属し、生成された画像は他ユーザーにも公開される場合があります。有料プランのPrivate設定を使うことで画像の知的財産権がユーザーに移転し、商用利用が可能とされます。詳細は公式利用規約をご確認ください。' },
+    { q: '日本語で使えますか？', a: '日本語UIの有無は公式情報から現時点で未確認です。日本語プロンプトでの生成は一部対応していますが、英語プロンプトと比べて精度が低い傾向があります。最新の状況は公式サイトでご確認ください。' },
+    { q: '透かしは入りますか？', a: '通常は透かしなしとされていますが、詳細は公式情報から未確認です。プランや設定により条件が変わる可能性があります。最新の条件は公式サイトでご確認ください。' },
+    { q: 'どんな用途に向いていますか？', a: 'ゲームアセット・キャラクター素材・イラスト系の画像生成が得意とされています。無料枠が比較的多いため、有料契約前に品質を試したい場合にも向いています。カスタムモデルの活用やAPI連携を検討している方にも選択肢になります。' },
+    { q: 'Midjourneyとどう違いますか？', a: 'Leonardo AIはゲーム・イラスト向けのカスタムモデルが豊富で無料枠が比較的多い点が特徴です。Midjourneyはアート調・雰囲気重視の高品質なビジュアル表現で比較されやすく、無料プランはありません。用途・予算・スタイルに合わせて選択することが有効です。' },
+  ],
+  relatedTools: [
+    { name: 'Midjourney', slug: 'midjourney', initial: 'M', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'na', label: '無料枠なし' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Discord', 'Web'], official: 'https://www.midjourney.com' },
+    { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', cat: '画像生成', badges: [{ s: 'paid', label: '商用：有料向け' }, { s: 'cond', label: '無料枠：限定的' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://firefly.adobe.com' },
+    { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', initial: 'C', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料枠：限定的' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web', 'iOS', 'Android'], official: 'https://www.canva.com' },
+  ],
+  nextReads: [
+    { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+    { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+    { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・透かし・商用利用条件をまとめて比較' },
+    { href: '/comparisons/', title: '比較表でまとめて比較', desc: '商用利用・無料枠・透かし・日本語対応を横断比較' },
+    { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: '商用利用や著作権まわりの確認ポイント' },
+    { href: '/conditions/commercial-use/', title: '商用利用を確認しやすいツール', desc: '商用利用条件を整理したツール一覧' },
+  ],
+  conditions: [
+    { label: 'ツール一覧', href: '/tools/' },
+    { label: '無料で使えるAIツール', href: '/conditions/free/' },
+    { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+    { label: '日本語対応ツール', href: '/conditions/japanese/' },
+    { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+    { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+    { label: '全ツール比較表', href: '/comparisons/' },
+  ],
+};
+---
+
+<TdpToolPage {...props} />

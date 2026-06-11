@@ -1,0 +1,287 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'dalle');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'DALL·E', item: 'https://aicreative-db.com/tools/dalle/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'DALL·E',
+    operatingSystem: 'Web',
+    applicationCategory: 'DesignApplication',
+    description: 'OpenAI開発のAI画像生成モデル。ChatGPTと統合されており、プロンプトへの忠実度が高い画像生成が可能。',
+    url: 'https://openai.com/dall-e-3',
+  },
+]);
+---
+
+<BaseLayout
+  title="DALL·Eの商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="DALL·Eの商用利用条件・料金プラン・無料枠・透かし・日本語対応状況を、公式情報をもとに整理しています。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/dalle/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">DALL·E</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="DALL·E"
+      category="AI画像生成"
+      checkedDate={d?.lastReviewed ?? '2026-05-26'}
+      headingHtml='DALL·Eの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="OpenAI開発のAI画像生成モデル。ChatGPTと統合されており、テキスト指示への忠実度が高い画像生成が可能。料金・商用利用条件・日本語対応を公式情報をもとに整理しています。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'ok', label: '案内あり' } },
+        { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
+        { lb: '料金目安', text: '要公式確認', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: 'C2PA埋め込み' } },
+        { lb: '日本語UI', badge: { s: 'ok', label: '〇 対応' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://openai.com/dall-e-3' }}
+      secondaryCta={{ label: 'OpenAI利用規約（公式）', href: 'https://openai.com/policies/usage-policies' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'ok', label: '案内あり' }, wide: true,
+          sum: 'OpenAI公式情報上、生成画像の商用利用ができる場合があります。',
+          det: 'OpenAI公式情報上、生成画像の商用利用ができる場合があります。ただし用途・生成内容・第三者の権利・OpenAIポリシーにより制限される場合があります。利用前にOpenAIの最新規約・ポリシーをご確認ください。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: '限定的' },
+          det: 'ChatGPTの無料プランで制限付きの利用ができる場合があります。利用可能回数はプランや時期により変わる可能性があります。',
+        },
+        {
+          title: '最安料金目安', sum: '要公式確認', sumMono: true,
+          det: 'ChatGPT Plus等の有料プランで利用枠が拡大します。API利用は従量課金です。料金・プラン条件は変更される可能性があります。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: 'C2PA埋め込み' },
+          det: '従来型の可視透かしは付与されませんが、C2PA標準の不可視メタデータが生成画像に埋め込まれる場合があります。最新の仕様はOpenAI公式情報でご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'ok', label: '〇 対応' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '△ 一部対応' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web', 'API'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→画像', '画像→画像', '部分修正', 'API対応'] },
+      ]}
+      useCases={[
+        '<b>ChatGPT経由での手軽な画像生成</b>・アイデア出し',
+        '<b>SNS投稿画像・ブログアイキャッチ</b>候補の素早い作成',
+        '<b>プレゼン資料・サムネイル案</b>のビジュアル試作',
+        '<b>API経由での開発・業務フロー</b>への組み込み',
+      ]}
+      pros={[
+        'ChatGPTと統合されており追加設定なしで利用可能',
+        'OpenAI公式情報上、商用利用が案内されている',
+        'テキスト指示への忠実度が高く意図した内容を画像にしやすい傾向',
+        'ChatGPTの無料プランでも制限付きで利用できる場合がある',
+        'API提供あり（開発・業務フローへの組み込み可能）',
+      ]}
+      cons={[
+        '単独プランなし。ChatGPT等の有料プランが必要な場合がある',
+        'スタイルの自由度・表現の幅が限定的な傾向がある',
+        '画像内への日本語テキスト生成は精度が低い傾向がある',
+        'API利用は別途従量課金',
+      ]}
+      limits={[
+        '単独プランなし。ChatGPT等の有料プランが必要な場合あり',
+        'スタイルの自由度・表現の幅が限定的な傾向',
+        '画像内への日本語テキスト生成は精度が低い傾向',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br>ChatGPT無料プランで制限付き利用できる場合あり' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">要公式確認</span><br>ChatGPT Plus等の有料プランで利用枠が拡大' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>案内あり</span><br>OpenAI公式情報上、商用利用が案内されています。最新情報は公式サイトをご確認ください。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>C2PA埋め込み</span><br>可視透かしなし。不可視メタデータが埋め込まれる場合あり' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>〇 対応</span><br>ChatGPTの日本語UIに準拠' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span><br>画像内テキスト生成は精度が低い傾向' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web / API' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-26', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://openai.com/dall-e-3" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'DALL·EはOpenAIが開発したAI画像生成モデルです。現行バージョンはDALL·E 3で、<b>ChatGPTと統合</b>されており、テキストから画像を生成できます。プロンプトへの忠実度が高いとされ、指示に沿った画像を生成しやすい傾向があります。',
+        'アイデア出し・SNS投稿画像・ブログアイキャッチ・プレゼン資料ビジュアルの素早い試作など、テキスト指示から素早くビジュアルを確認したい用途に向いています。API提供もあり、開発・業務フローへの組み込みも可能です。',
+      ]}
+      aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', 'DALL·E利用'],
+          rows: [
+            [{ html: 'ChatGPT 無料', rk: true }, { html: '無料', mono: true }, { html: '制限付きで利用できる場合がある' }],
+            [{ html: 'ChatGPT Plus等', rk: true }, { html: '有料（詳細は公式参照）', mono: true }, { html: '利用枠が拡大する場合がある' }],
+            [{ html: 'API（開発者向け）', rk: true }, { html: '従量課金', mono: true }, { html: '詳細はOpenAI API料金ページで確認' }],
+          ],
+        },
+        notes: [
+          '利用可能回数・制限は時期・プラン・提供状況により変わる可能性があります',
+          '<b>最新の条件はOpenAI公式ヘルプと料金ページをご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: 'OpenAI公式情報上、DALL·E 3で生成した画像の商用利用ができる場合があります。ただし以下の点をご確認ください。',
+        points: [
+          '用途・生成内容・第三者の権利によって制限される場合があります',
+          'OpenAIのポリシー変更により条件が変わる可能性があります',
+          '生成した画像に第三者の著作物・商標・人物が含まれる場合は別途確認が必要です',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ずOpenAI利用規約の最新版をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="ChatGPTとAPIとの連携"
+      integration="DALL·EはChatGPTと統合されており、ChatGPTのインターフェースから直接画像生成を依頼できます。OpenAI APIを使って開発・業務フローに組み込むことも可能です。API利用は従量課金制で、料金・条件は公式APIページをご確認ください。"
+      whoFor={[
+        'ChatGPTをすでに使っており、そのまま画像生成も試したい人',
+        'テキスト指示に忠実な画像生成が必要な人',
+        '日本語インターフェースで操作したい人',
+        '開発・業務フローにAPI経由で組み込みたい人',
+        'SNS・ブログ・プレゼン用のビジュアルを素早く試作したい人',
+      ]}
+      whoNot={[
+        '高品質なアート・イラスト表現を優先したい人（Midjourneyが候補）',
+        'Adobe製品との連携を重視したい人（Adobe Fireflyが候補）',
+        'ゲームアセット・キャラクター素材を大量生成したい人（Leonardo AIが候補）',
+        'カスタマイズ性・ローカル実行を重視したい人（Stable Diffusionが候補）',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'DALL·E（このページ）', rk: true, me: true }, { html: 'ChatGPT連携で手軽に画像生成・アイデア出し・API組み込みをしたい場合' }],
+          [{ html: '<a href="/tools/midjourney/">Midjourney</a>', rk: true }, { html: '高品質なアート・イラスト・クリエイティブなビジュアル表現を重視する場合' }],
+          [{ html: '<a href="/tools/adobe-firefly/">Adobe Firefly</a>', rk: true }, { html: 'Adobe製品との連携や公式条件を確認しながら使いたい場合' }],
+          [{ html: '<a href="/tools/leonardo-ai/">Leonardo AI</a>', rk: true }, { html: 'イラスト・ゲーム素材・キャラクター制作の候補、無料枠から試したい場合' }],
+          [{ html: '<a href="/tools/canva-ai-image-generator/">Canva AI画像生成</a>', rk: true }, { html: 'Canvaのデザインフローの中でAI画像を使いたい場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'DALL·E', 'Midjourney', 'Adobe Firefly'],
+        rows: [
+          [{ html: '用途の傾向', rk: true }, { html: 'ChatGPT連携・指示忠実度', me: true }, { html: 'アート調・雰囲気重視' }, { html: 'デザイン制作・Adobe連携' }],
+          [{ html: '商用利用', rk: true }, { html: '案内あり（要確認）', me: true }, { html: 'プランによる（要確認）' }, { html: '有料向け' }],
+          [{ html: '無料枠', rk: true }, { html: '限定的', me: true }, { html: 'なし' }, { html: '限定的' }],
+          [{ html: '日本語UI', rk: true }, { html: '対応', me: true }, { html: '非対応' }, { html: '対応' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>ChatGPTの日本語UIに準拠して利用できる場合あり',
+        '<b>日本語プロンプト：</b>一部対応（画像内テキスト生成は精度が低い傾向）',
+        '日本語ドキュメント：非対応',
+      ]}
+      watermark={[
+        '従来型の可視透かしは付与されません',
+        'C2PA（Coalition for Content Provenance and Authenticity）標準の不可視メタデータが生成画像に埋め込まれる場合があります',
+        'AI生成を示す情報が含まれる場合があります。最新の仕様はOpenAI公式情報でご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '用途・生成内容（第三者の権利に抵触しないか）' },
+        { html: 'ChatGPTプランと適用される利用規約' },
+        { html: '生成物の利用範囲（掲載媒体・配布範囲など）' },
+        { html: '第三者の著作物・商標・人物が含まれていないか' },
+        { html: 'OpenAIポリシーの変更状況' },
+        { html: 'API利用の場合は別途従量課金の確認' },
+        { html: 'OpenAI利用規約の最新情報' },
+        { html: '利用時点での最新の利用条件' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-05-26'}
+      nextCheck={d?.nextReviewDue ?? '2026-06-26'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'DALL·E 3公式ページ（OpenAI）', href: 'https://openai.com/dall-e-3' },
+        { tag: '規約', label: 'OpenAI利用規約（公式）', href: 'https://openai.com/policies/usage-policies' },
+        { tag: '料金', label: 'OpenAI API料金（公式）', href: 'https://openai.com/pricing' },
+      ]}
+      faqs={[
+        { q: 'DALL·Eは無料で使えますか？', a: 'ChatGPTの無料プランで制限付きの利用ができる場合があります。利用可能回数はプランや時期により変わる可能性があるため、最新の状況はOpenAI公式ヘルプをご確認ください。' },
+        { q: 'DALL·Eは商用利用できますか？', a: 'OpenAI公式情報上、生成画像の商用利用ができる場合があります。用途・生成内容・第三者の権利により制限される場合があるため、利用前に最新の利用規約をご確認ください。このページは法的助言ではありません。' },
+        { q: 'DALL·Eは日本語で使えますか？', a: 'ChatGPT経由のためChatGPTの日本語UIに準拠して利用できる場合があります。日本語プロンプトも一部対応していますが、画像内への日本語テキスト生成は精度が低い傾向があります。' },
+        { q: 'DALL·Eに透かしは入りますか？', a: '従来型の可視透かしは付与されませんが、C2PA標準の不可視メタデータが埋め込まれる場合があります。最新の仕様は公式情報でご確認ください。' },
+        { q: 'DALL·EはどのプラットフォームやAPIで使えますか？', a: 'ChatGPT経由（Web）とOpenAI API経由での利用が可能です。APIは別途従量課金です。最新の料金は公式APIページでご確認ください。' },
+        { q: 'DALL·Eで人物や著名人・ブランドロゴを含む画像を作成できますか？', a: '技術的には生成可能な場合がありますが、実在の人物・著名人・ブランドロゴ・第三者の著作物を含む画像を作成・利用する際は、肖像権・商標権・著作権などの観点から別途確認が必要です。本記事は法的助言ではありません。' },
+        { q: 'DALL·EとMidjourneyはどう違いますか？', a: 'DALL·EはChatGPTと統合されておりテキスト指示への忠実度が高い傾向があります。Midjourneyはアートやイラストなどスタイリッシュなビジュアルやクリエイティブな表現を得意とするとされています。用途や優先事項に応じて選び分けることが有効です。' },
+      ]}
+      relatedTools={[
+        { name: 'Midjourney', slug: 'midjourney', initial: 'M', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'na', label: '無料枠なし' }, { s: 'na', label: '日本語UI：なし' }], platforms: ['Discord', 'Web'], official: 'https://www.midjourney.com' },
+        { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', cat: '画像生成', badges: [{ s: 'paid', label: '商用：有料向け' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://firefly.adobe.com' },
+        { name: 'Leonardo AI', slug: 'leonardo-ai', initial: 'L', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料枠：限定' }, { s: 'na', label: '日本語UI：要確認' }], platforms: ['Web', 'API'], official: 'https://leonardo.ai' },
+      ]}
+      nextReads={[
+        { href: '/comparisons/dalle-vs-midjourney/', title: 'DALL·E と Midjourney を比較', desc: 'プロンプト忠実度とアート表現の違い' },
+        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・透かし・商用利用条件をまとめて比較' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: '商用利用や著作権まわりの確認ポイント' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '日本語対応ツール', href: '/conditions/japanese/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

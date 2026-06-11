@@ -1,0 +1,284 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'seaart-ai');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'SeaArt AI', item: 'https://aicreative-db.com/tools/seaart-ai/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'SeaArt AI',
+    operatingSystem: 'Web',
+    applicationCategory: 'DesignApplication',
+    description: '画像生成・画像編集・キャラクター作成・動画生成などを含むクリエイティブAIプラットフォーム。日本語UI対応でアニメ風・イラスト系の制作と相性がよい。',
+    url: 'https://www.seaart.ai/ja',
+  },
+]);
+---
+
+<BaseLayout
+  title="SeaArt AIの商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="SeaArt AIの商用利用条件・料金プラン・無料枠・透かし・日本語対応状況を、公式情報をもとに整理しています。アニメ・イラスト系制作に向いた多機能AIプラットフォームの特徴を解説。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/seaart-ai/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">SeaArt AI</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="SeaArt AI"
+      category="AI画像生成・クリエイティブプラットフォーム"
+      checkedDate={d?.lastReviewed ?? '2026-06-06'}
+      headingHtml='SeaArt AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="SeaArt AIは、画像生成・画像編集・キャラクター作成・動画生成などの機能を備えたクリエイティブAIプラットフォームです。日本語UIに対応しており、アニメ風・イラスト系のビジュアル制作と相性がよい環境が整っています。商用利用の条件はプランおよび利用するモデルにより異なる場合があるため、利用前に公式規約の確認が必要です。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '要確認（プラン・モデル依存）' } },
+        { lb: '無料枠', badge: { s: 'ok', label: '無料プランあり' } },
+        { lb: '料金目安', text: '無料〜VIP/SVIP（公式確認）', mono: true },
+        { lb: '透かし', badge: { s: 'na', label: '要確認' } },
+        { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
+      ]}
+      primaryCta={{ label: '公式サイト（日本語）で確認する', href: 'https://www.seaart.ai/ja' }}
+      secondaryCta={{ label: '利用規約（公式）', href: 'https://image.cdn2.seaart.me/20250802/d2790ce8-f8e8-4ea4-a4a1-c958c728566e.html' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '要確認（プラン・モデル依存）' }, wide: true,
+          sum: '公式利用規約では、ユーザーが生成したコンテンツの権利はユーザーが保持するとされています。ただし他ユーザーのUGCは個人的・非商用目的に限定されます。',
+          det: '公式利用規約（2026年6月確認）では、ユーザーが自ら生成・アップロードしたコンテンツの権利はユーザーが保持するとされています。他ユーザーのUGCは「個人的・非商用目的」に限定されています。VIP・SVIPプランには「exclusive rights and interests」が案内されていますが、商用利用可否を含む具体的な内容は会員向けページに記載されており、断定できません。コミュニティモデルを使用する場合はモデルごとの権利・ライセンスも確認が必要です。商用利用を前提にする場合は最新の公式利用規約と会員プラン条件をご確認ください。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'ok', label: '無料プランあり' },
+          det: '無料プランが提供されています。詳細な機能制限・クレジット数は変更される可能性があるため、最新の公式サイトをご確認ください。',
+        },
+        {
+          title: '最安料金目安', sum: '無料〜VIP/SVIP（詳細は公式確認）', sumMono: true,
+          det: '無料プランのほか、VIPプランおよびSVIP（初級・標準・プロフェッショナル・マスター）など複数の有料プランが案内されています。具体的な料金・クレジット数は公式サイトでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'na', label: '要確認' },
+          det: '透かしの有無・条件は公式情報では確認できていません。最新の条件は公式サイトでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'ok', label: '対応' } },
+            { label: 'プロンプト', badge: { s: 'ok', label: '対応（とされている）' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web（ブラウザ）'] },
+        { title: '主な機能', wide: true, feats: ['AI画像生成（テキスト→画像）', '画像→画像変換', '画像編集', '動画生成（Seedance 2.0搭載）', 'AIキャラクターチャット', '背景除去', '画像アップスケール'] },
+      ]}
+      useCases={[
+        '<b>アニメ風・イラスト系画像の生成</b>（コミュニティモデルが豊富）',
+        '<b>キャラクター画像の作成</b>（AIキャラクターチャット機能も）',
+        '<b>日本語UIでAI画像生成を始めたい場合</b>',
+        '<b>画像生成と編集・動画生成をまとめて使いたい場合</b>',
+        '<b>コミュニティモデルでスタイルを広く試したい場合</b>',
+      ]}
+      pros={[
+        '公式サイト（seaart.ai/ja）が日本語UIで提供されている',
+        '画像生成・編集・動画生成・AIキャラクターチャットなど多機能',
+        'アニメ風・イラスト系・キャラクター系のビジュアル制作と相性がよい',
+        'コミュニティ上の作品やモデルを参考にしながら利用できる',
+        '無料プランがある',
+      ]}
+      cons={[
+        '商用利用の条件はプラン・利用モデルごとに異なる可能性があり確認が必要',
+        '透かしの有無・条件は公式情報から未確認',
+        'コミュニティモデルのライセンスは個別確認が必要',
+        '有料プランの具体的な料金は公式会員ページでのみ確認可能',
+      ]}
+      limits={[
+        '商用利用条件はプランおよび利用するモデルにより異なる可能性がある',
+        '他ユーザーのUGCは個人的・非商用目的に限定されている',
+        '透かし条件は公式情報から未確認',
+        'コミュニティモデルのライセンスは各モデルで確認が必要',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成・クリエイティブプラットフォーム' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>無料プランあり</span><br>機能制限・クレジット数は変更の可能性あり。最新情報は公式確認要。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">無料〜VIP/SVIP（公式確認）</span><br>有料プランの料金は公式サイトでご確認ください。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要確認（プラン・モデル依存）</span><br>ユーザー生成物はユーザーが権利保持。他ユーザーUGCは非商用目的限定。プラン・モデルごとに確認が必要です。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>公式情報では透かし条件を確認できていません。' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span><br>seaart.ai/ja が日本語UIで提供されています。' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応（とされている）</span><br>モデルや用途によっては英語の方が安定する場合あり。' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web（ブラウザ）' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-06', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.seaart.ai/ja" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 料金・機能・商用利用条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'SeaArt AIは画像生成・画像編集・キャラクター作成・動画生成（Seedance 2.0搭載）などの機能を備えたクリエイティブAIプラットフォームです。アニメ風・イラスト系のビジュアル制作と相性がよく、コミュニティ上で公開されているモデルや作品を参考にしながら利用できる環境が整っています。',
+        '公式サイトは日本語UIに対応しており、日本語ユーザーも利用しやすい環境が提供されています。コミュニティモデルを使用する場合は、<b>モデルごとの権利・ライセンス条件の個別確認</b>が必要です。年齢制限コンテンツに関するポリシーも存在するため、利用前に公式のコンテンツポリシーを確認してください。',
+      ]}
+      aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金目安'],
+          rows: [
+            [{ html: '無料プラン', rk: true }, { html: '無料（機能・クレジット制限あり）', mono: false }],
+            [{ html: 'VIPプラン', rk: true }, { html: '公式サイトで確認', mono: false }],
+            [{ html: 'SVIPプラン（初級〜マスター）', rk: true }, { html: '公式サイトで確認', mono: false }],
+          ],
+        },
+        notes: [
+          '無料プランの機能制限・クレジット数は変更される可能性があります',
+          'VIP・SVIPプランの料金・特典は公式会員ページに記載されています',
+          '<b>最新料金は公式サイトでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: '公式利用規約ではユーザー生成コンテンツの権利はユーザーが保持するとされていますが、商用利用の可否はプランおよび利用するモデルにより異なる可能性があります。',
+        points: [
+          '<b>ユーザー自身が生成したコンテンツ</b>：公式利用規約では権利はユーザーが保持するとされています',
+          '<b>他ユーザーのUGC</b>：個人的・非商用目的に限定されています',
+          '<b>VIP・SVIPプランの権利</b>：会員向けページに記載。商用利用可否の具体的な内容は公式確認が必要です',
+          '<b>コミュニティモデルのライセンス</b>：モデルごとに個別確認が必要です',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新の公式利用規約とプラン条件をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="コミュニティモデルとコンテンツポリシーについて"
+      integration="SeaArt AIはコミュニティ上に公開されているモデルや作品を参照しながら利用できる環境が特徴です。利用するモデルごとのライセンス・権利条件は異なる場合があります。また年齢制限コンテンツに関するポリシーが設けられており、利用前に公式のコンテンツポリシーをご確認ください。"
+      whoFor={[
+        '日本語UIでAI画像生成を始めたい人',
+        'アニメ風・イラスト系・キャラクター画像を生成したい人',
+        'コミュニティモデルを活用して幅広いスタイルを試したい人',
+        '画像生成・編集・動画生成をまとめて使えるプラットフォームを探している人',
+      ]}
+      whoNot={[
+        '商用利用条件を明確に確認したい人（プラン・モデルごとに確認が必要）',
+        '透かし条件を事前に把握したい人',
+        'APIやローカル実行での利用を想定している人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'SeaArt AI（このページ）', rk: true, me: true }, { html: 'アニメ風・イラスト系の画像生成。日本語UI重視。コミュニティモデル活用。' }],
+          [{ html: '<a href="/tools/tensor-art/">Tensor.Art</a>', rk: true }, { html: 'Stable Diffusion系のLoRA・Checkpointを活用したスタイル特化生成。' }],
+          [{ html: '<a href="/tools/stable-diffusion/">Stable Diffusion</a>', rk: true }, { html: 'ローカル実行・カスタマイズ性・LoRA活用を最大限に重視する場合。' }],
+          [{ html: '<a href="/tools/leonardo-ai/">Leonardo AI</a>', rk: true }, { html: 'イラスト・ゲーム素材・キャラクター案出しでカスタムモデルを活用したい場合。' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'SeaArt AI', 'Tensor.Art', 'Leonardo AI'],
+        rows: [
+          [{ html: '日本語UI', rk: true }, { html: '対応', me: true }, { html: '要確認' }, { html: '要確認' }],
+          [{ html: '無料枠', rk: true }, { html: 'あり', me: true }, { html: 'あり' }, { html: '限定' }],
+          [{ html: '商用利用', rk: true }, { html: 'プラン・モデル依存・要確認', me: true }, { html: 'モデル依存・要確認' }, { html: '要確認' }],
+          [{ html: '特化スタイル', rk: true }, { html: 'アニメ・イラスト系', me: true }, { html: 'SD系・アニメ・リアル系' }, { html: 'イラスト・ゲーム系' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>対応。公式サイト（seaart.ai/ja）が日本語UIで提供されています',
+        '<b>日本語プロンプト：</b>対応しているとされています。モデルや用途によっては英語プロンプトの方が安定する場合があります',
+        '<b>日本語ドキュメント：</b>特定商取引法・資金決済法に基づく表示など日本向けページが用意されています',
+      ]}
+      watermark={[
+        '透かしの有無・条件は公式情報では確認できていません',
+        'プランや仕様の変更により条件が変わる可能性があります',
+        '最新の条件は公式サイトでご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '利用するモデルのライセンス・権利条件（コミュニティモデルは個別確認が必要）' },
+        { html: 'VIP・SVIPプランの商用利用に関する権利・条件（公式会員ページで確認）' },
+        { html: '他ユーザーのUGCは個人的・非商用目的に限定されていること' },
+        { html: '透かしの有無（公式サイトで最新状況を確認）' },
+        { html: '公式コンテンツポリシーの年齢制限・禁止事項' },
+        { html: '最新の公式利用規約の内容' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-06-06'}
+      nextCheck={d?.nextReviewDue ?? '2026-09-06'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'SeaArt AI 公式サイト（日本語）', href: 'https://www.seaart.ai/ja' },
+        { tag: '規約', label: 'SeaArt AI 利用規約（公式・2025年8月版）', href: 'https://image.cdn2.seaart.me/20250802/d2790ce8-f8e8-4ea4-a4a1-c958c728566e.html' },
+        { tag: 'ポリシー', label: 'SeaArt AI プライバシーポリシー（公式）', href: 'https://image.cdn2.seaart.me/20250710/e6a1e6bb-9c1b-4f63-af4e-011f28596d77.html' },
+      ]}
+      faqs={[
+        { q: 'SeaArt AIは無料で使えますか？', a: '無料プランが提供されています。利用できる機能や制限は変更される可能性があるため、最新の状況は公式サイトをご確認ください。' },
+        { q: 'SeaArt AIは商用利用できますか？', a: '公式利用規約では、ユーザーが生成したコンテンツの権利はユーザーが保持するとされています。ただし、他ユーザーのUGCは個人的・非商用目的に限定されています。VIP・SVIPプランでは追加の権利と特典が案内されていますが、商用利用の具体的な可否はプランおよびモデルごとに異なる可能性があります。利用前に最新の公式利用規約と会員プラン条件をご確認ください。本記事は法的助言ではありません。' },
+        { q: 'SeaArt AIは日本語で使えますか？', a: '公式サイト（seaart.ai/ja）が日本語UIで提供されており、日本語プロンプトでの画像生成にも対応しているとされています。' },
+        { q: 'SeaArt AIに透かしは入りますか？', a: '透かしの有無・条件は公式情報では確認できていません。最新の条件は公式サイトでご確認ください。' },
+        { q: 'SeaArt AIにはどんなプランがありますか？', a: '無料プランのほか、VIPプランおよびSVIP（初級・標準・プロフェッショナル・マスター）など複数の有料プランが案内されています。具体的な料金・クレジット数・特典は変更される可能性があるため、最新の公式サイトをご確認ください。' },
+        { q: 'SeaArt AIはアニメ・イラスト制作に向いていますか？', a: 'アニメ風・イラスト系・キャラクター系のビジュアル制作と相性がよいとされています。コミュニティ上に公開されているモデルや作品を参考にしながら利用できる環境が整っており、スタイルの選択肢が広い点が特徴です。' },
+        { q: 'SeaArt AIではどんな機能が使えますか？', a: '画像生成（テキストから・画像から）、画像編集、動画生成（Seedance 2.0搭載）、AIキャラクターチャット、背景除去、画像アップスケールなど多数の機能が案内されています。機能・対応モデルは変更される可能性があるため、最新の公式サイトをご確認ください。' },
+      ]}
+      relatedTools={[
+        { name: 'Tensor.Art', slug: 'tensor-art', initial: 'T', cat: '画像生成', badges: [{ s: 'cond', label: '商用：モデル依存' }, { s: 'ok', label: '無料枠：あり' }, { s: 'cond', label: '日本語UI：要確認' }], platforms: ['Web'], official: 'https://tensor.art/' },
+        { name: 'Leonardo AI', slug: 'leonardo-ai', initial: 'L', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料枠：限定' }, { s: 'cond', label: '日本語UI：要確認' }], platforms: ['Web'], official: 'https://leonardo.ai' },
+        { name: 'Fotor AI', slug: 'fotor-ai', initial: 'F', cat: '画像生成・編集', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'ok', label: '無料枠：あり' }, { s: 'ok', label: '日本語UI：対応' }], platforms: ['Web'], official: 'https://www.fotor.com/jp/' },
+      ]}
+      nextReads={[
+        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・無料プランがあるツールを一覧で確認' },
+        { href: '/conditions/japanese/', title: '日本語対応AIツール', desc: '日本語UIに対応したツールを一覧で確認' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用と著作権について', desc: 'AI生成画像を商用利用する際の注意点まとめ' },
+        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '日本語対応ツール', href: '/conditions/japanese/' },
+        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

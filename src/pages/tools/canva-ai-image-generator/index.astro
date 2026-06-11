@@ -1,0 +1,287 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'canva-ai-image-generator');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Canva AI画像生成', item: 'https://aicreative-db.com/tools/canva-ai-image-generator/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Canva AI画像生成',
+    operatingSystem: 'Web, iOS, Android',
+    applicationCategory: 'DesignApplication',
+    description: 'Canvaのデザインツールに統合されたAI画像生成機能。日本語UI対応で、SNS素材やバナー制作に手軽に使える。',
+    url: 'https://www.canva.com',
+  },
+]);
+---
+
+<BaseLayout
+  title="Canva AI画像生成の商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="Canva AI画像生成の商用利用条件・料金プラン・無料枠・透かし・日本語対応状況を、公式情報をもとに整理しています。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/canva-ai-image-generator/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Canva AI画像生成</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Canva AI画像生成"
+      category="AI画像生成"
+      checkedDate={d?.lastReviewed ?? '2026-05-24'}
+      headingHtml='Canva AI画像生成の<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="Canvaのデザインツールに統合されたAI画像生成機能。日本語UIに対応しており、SNS素材・バナー・プレゼン資料の制作に使いやすい。料金・商用利用・無料枠を公式情報をもとに整理しています。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '条件あり' } },
+        { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
+        { lb: '料金目安', text: '$15/月〜', mono: true },
+        { lb: '透かし', badge: { s: 'na', label: '要確認' } },
+        { lb: '日本語UI', badge: { s: 'ok', label: '〇 対応' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://www.canva.com' }}
+      secondaryCta={{ label: '料金プラン（公式）', href: 'https://www.canva.com/pricing/' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '条件あり' }, wide: true,
+          sum: 'AI生成コンテンツであることの明示が条件とされている場合があります。',
+          det: '公式情報上、AI生成画像の商用利用ができる場合があります。ただしAI生成コンテンツであることの明示が条件とされているとされています。また既存の著作物に類似する場合は利用できない可能性があります。プランや用途によって条件が異なるため、利用前にCanva公式のコンテンツライセンスをご確認ください。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: '限定的' },
+          det: '無料プランで一定回数の生成が可能です。生成可能回数はプランや時期により変更される可能性があります。',
+        },
+        {
+          title: '最安料金目安', sum: '$15/月（Canva Pro・月払い）／$120/年（年払い）', sumMono: true,
+          det: 'Canva Pro $15/月〜（月払い）。年払いで$120/年。生成回数が無料プランより拡大します。',
+        },
+        {
+          title: '透かし', badge: { s: 'na', label: '要確認' },
+          det: 'AI画像生成機能で生成した画像への透かし付与の有無は、公式情報から現時点で確認できていません。最新の仕様はCanva公式ヘルプでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'ok', label: '〇 対応' } },
+            { label: 'プロンプト', badge: { s: 'ok', label: '〇 対応' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web', 'iOS', 'Android'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→画像', '背景削除', 'スタイル選択'] },
+      ]}
+      useCases={[
+        '<b>SNS投稿用画像・広告バナー</b>の案出し',
+        '<b>ブログアイキャッチ・YouTubeサムネイル</b>候補の作成',
+        '<b>プレゼン資料</b>への挿絵ビジュアル生成',
+        'Canvaのテンプレートと組み合わせた<b>デザイン編集</b>まで一貫して使いたい場合',
+      ]}
+      pros={[
+        '日本語UI・日本語プロンプト対応',
+        'Canvaのデザインツールと一体利用可能（生成→編集→書き出し）',
+        '無料プランでも一定回数の生成が可能',
+        'Web・iOS・Androidから利用できる',
+        '豊富な日本語フォント対応',
+      ]}
+      cons={[
+        '無料プランは生成回数に上限がある（プランや時期により変更の可能性あり）',
+        'AI生成画像の商用利用には条件がある場合があり、利用前に公式規約の確認が必要',
+        '専門的な画像生成ツールと比べて表現の自由度が限定的',
+        '透かしの有無が公式情報から確認できていない',
+      ]}
+      limits={[
+        '無料プランの生成回数に上限あり（変更の可能性あり）',
+        'AI生成コンテンツであることの明示が条件の場合あり',
+        '専門的な画像生成ツールと比べて表現の自由度が限定的',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br>無料プランで一定回数の生成が可能（回数は変更の可能性あり）' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">$15/月〜</span><br>Canva Pro $15/月〜（月払い）。年払い$120/年。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり</span><br>AI生成コンテンツであることの明示が条件とされている場合があります。最新情報は公式サイトをご確認ください。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>公式情報から確認できていません' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>〇 対応</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>〇 対応</span>' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web / iOS / Android' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-24', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.canva.com" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'Canva AI画像生成は、Canvaに統合されたAI画像生成機能です。テキストプロンプトから画像を生成でき、Canvaのデザインエディター上でそのままテンプレートに組み込めます。<b>デザイン制作フローとの一体利用</b>が最大の特徴で、生成後にテキスト・ロゴ・装飾を加えてそのまま書き出せます。',
+        'SNS投稿用画像・広告バナー・ブログアイキャッチ・プレゼン資料用ビジュアルなど、実務に直結した用途との相性が高いとされています。日本語UIに対応しており、英語ツールに慣れていない場合でも利用しやすいです。',
+      ]}
+      aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', 'AI画像生成'],
+          rows: [
+            [{ html: '無料', rk: true }, { html: '無料', mono: true }, { html: '一定回数まで利用可能な場合がある' }],
+            [{ html: 'Canva Pro', rk: true }, { html: '$15/月〜', mono: true }, { html: '生成回数が拡大する場合がある' }],
+          ],
+        },
+        notes: [
+          '無料プランの生成可能回数はプランや時期により変更される可能性があります',
+          '<b>最新の生成回数・制限はCanva公式ヘルプでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: '公式情報上、AI生成画像の商用利用ができる場合があります。以下の点に注意が必要です。',
+        points: [
+          'AI生成コンテンツであることの明示が条件となる場合があるとされています',
+          '既存の著作物と類似する場合は利用できない可能性があります',
+          'Canva素材（テンプレート・素材）をそのまま商用利用することとは条件が異なります',
+          'プラン・用途により条件が変わる可能性があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前はCanvaコンテンツライセンスの最新版をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="Canvaのデザイン機能との連携"
+      integration="Canva AI画像生成はCanvaのデザインエディターと統合されており、生成した画像をテンプレートのビジュアルとしてそのまま使用できます。Instagram・X・Facebookなど各SNS向けサイズプリセットや、YouTube・ブログ向けのサイズ設定が用意されており、生成→テキスト追加→書き出しまでCanva上で完結します。各機能の利用可否はプランによって異なります。最新の対応状況はCanva公式サイトをご確認ください。"
+      whoFor={[
+        'SNS投稿用画像や広告バナーを短時間で作りたい人',
+        '生成した画像をそのままCanvaのテンプレートでレイアウト編集したい人',
+        'ブログアイキャッチやYouTubeサムネイルの候補案を素早く作りたい人',
+        '日本語UIで迷わず操作したい人',
+        'デザイン初心者で画像生成からレイアウト作成まで一つのツールで完結させたい人',
+      ]}
+      whoNot={[
+        'アート性の高い画像を大量生成・細かく作り分けたい人（Midjourneyが候補）',
+        'プロンプトによる画風・構図の細かな制御を重視する人',
+        '公式条件を確認せずに商用案件へ使いたい人',
+        '毎回同じ人物・構図を完全再現したい人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Canva AI画像生成（このページ）', rk: true, me: true }, { html: 'Canvaのデザインフローの中でAI画像を使いたい場合、日本語UIで操作したい場合' }],
+          [{ html: '<a href="/tools/adobe-firefly/">Adobe Firefly</a>', rk: true }, { html: 'Adobe製品（Photoshop・Illustratorなど）との連携を重視する場合' }],
+          [{ html: '<a href="/tools/midjourney/">Midjourney</a>', rk: true }, { html: '高品質なビジュアル表現・アート調イラストを重視する場合' }],
+          [{ html: '<a href="/tools/leonardo-ai/">Leonardo AI</a>', rk: true }, { html: 'イラスト・ゲーム素材・キャラクター制作の候補、無料枠から試したい場合' }],
+          [{ html: '<a href="/tools/dalle/">DALL·E</a>', rk: true }, { html: 'ChatGPT連携で手軽に画像生成・アイデア出しをしたい場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Canva AI', 'Adobe Firefly', 'Midjourney'],
+        rows: [
+          [{ html: '用途の傾向', rk: true }, { html: 'テンプレートデザイン・SNS', me: true }, { html: 'デザイン制作・Adobe連携' }, { html: 'アート調・雰囲気重視' }],
+          [{ html: '日本語UI', rk: true }, { html: '対応', me: true }, { html: '対応' }, { html: '非対応' }],
+          [{ html: 'デザイン編集機能', rk: true }, { html: 'Canvaエディター統合', me: true }, { html: 'Adobe製品連携' }, { html: 'なし' }],
+          [{ html: '無料枠', rk: true }, { html: '限定的', me: true }, { html: '限定的' }, { html: 'なし' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>対応（日本語インターフェースで利用可能）',
+        '<b>日本語プロンプト：</b>対応（ただし英語プロンプトと比べて意図通りの結果が出にくい場合があります）',
+      ]}
+      watermark={[
+        'AI画像生成機能で生成した画像への透かし付与の有無は、公式情報から現時点で確認できていません',
+        '最新の仕様はCanva公式ヘルプでご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '利用しているCanvaのプラン（無料 / Pro）' },
+        { html: 'AI生成コンテンツであることの明示が条件の有無' },
+        { html: '既存著作物との類似リスク' },
+        { html: '生成物の利用範囲（掲載媒体・配布範囲など）' },
+        { html: '入力素材の権利（アップロード画像・素材の権利関係）' },
+        { html: '人物・ブランド・ロゴ・第三者素材の扱い' },
+        { html: 'Canvaコンテンツライセンスの最新情報' },
+        { html: '利用時点での最新の利用条件' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-05-24'}
+      nextCheck={d?.nextReviewDue ?? '2026-06-24'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '料金', label: 'Canva料金プラン（公式）', href: 'https://www.canva.com/pricing/' },
+        { tag: '商用', label: 'Canvaコンテンツライセンス（公式）', href: 'https://www.canva.com/policies/content-license-agreement/' },
+        { tag: '規約', label: 'Canva利用規約（公式）', href: 'https://www.canva.com/policies/terms-of-use/' },
+        { tag: 'ヘルプ', label: 'Canva Dream Labヘルプ（公式）', href: 'https://www.canva.com/help/generate-with-dreamlab/' },
+      ]}
+      faqs={[
+        { q: 'Canva AI画像生成は無料で使えますか？', a: '無料プランで一定回数の画像生成が可能です。生成可能回数はプランや時期により変更される可能性があるため、最新の状況はCanva公式ヘルプでご確認ください。' },
+        { q: 'Canva AI画像生成で作成した画像は商用利用できますか？', a: '公式情報上、AI生成画像の商用利用ができる場合があります。ただしAI生成コンテンツであることの明示が条件となる場合があります。プランや用途により条件が変わる可能性があるため、利用前に最新のCanvaコンテンツライセンスをご確認ください。このページは法的助言ではありません。' },
+        { q: 'Canva AI画像生成は日本語で使えますか？', a: '日本語UIに対応しており、日本語プロンプトでの生成も可能です。ただし日本語プロンプトは英語プロンプトと比べて意図通りの画像が出にくい場合があります。' },
+        { q: 'Canva AI画像生成に透かしは入りますか？', a: 'AI画像生成機能で生成した画像への透かし付与の有無は公式情報から現時点で確認できていません。最新の仕様はCanva公式ヘルプでご確認ください。' },
+        { q: 'どの環境で使えますか？', a: 'WebブラウザのほかiOS・Androidアプリからも利用できます。' },
+        { q: 'Adobe Fireflyとどう違いますか？', a: 'Canva AI画像生成はCanvaのデザイン編集機能との一体利用が特徴です。Adobe FireflyはAdobe製品（Photoshop・Illustratorなど）との連携を重視した設計です。デザイン作業の中心ツールが何かによって使い分けが変わります。' },
+        { q: 'Midjourneyとどう違いますか？', a: 'CanvaはデザインテンプレートやSNS用途向けの一体型ツールです。Midjourneyはアート調・雰囲気重視の高品質な画像生成に特化しており、細かなスタイル調整を重視する場合に比較されやすいです。' },
+        { q: '人物や著名人の画像を生成できますか？', a: '人物・著名人・ブランドロゴ・第三者の著作物に関連する画像を生成・利用する場合は、肖像権・商標権・著作権などの観点から別途確認が必要です。本記事は法的助言ではありません。' },
+      ]}
+      relatedTools={[
+        { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', cat: '画像生成', badges: [{ s: 'paid', label: '商用：有料向け' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://firefly.adobe.com' },
+        { name: 'Microsoft Designer', slug: 'microsoft-designer', initial: 'M', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'ok', label: '無料枠あり' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://designer.microsoft.com/' },
+        { name: 'Midjourney', slug: 'midjourney', initial: 'M', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'na', label: '無料枠なし' }, { s: 'na', label: '日本語UI：なし' }], platforms: ['Discord', 'Web'], official: 'https://www.midjourney.com' },
+      ]}
+      nextReads={[
+        { href: '/comparisons/canva-ai-vs-adobe-firefly/', title: 'Canva AI と Adobe Firefly を比較', desc: 'テンプレート制作と画像生成の違い' },
+        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・透かし・商用利用条件をまとめて比較' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: '商用利用や著作権まわりの確認ポイント' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '日本語対応ツール', href: '/conditions/japanese/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

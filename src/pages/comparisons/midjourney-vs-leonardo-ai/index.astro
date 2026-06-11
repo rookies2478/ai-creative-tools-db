@@ -1,0 +1,290 @@
+---
+import ComparisonVsArticle from '../../../components/ComparisonVsArticle.astro';
+import { getEntry } from 'astro:content';
+
+const [toolMidjourney, toolLeonardoAi] = await Promise.all([
+  getEntry('tools', 'midjourney'),
+  getEntry('tools', 'leonardo-ai'),
+]);
+const toolDates = [toolMidjourney?.data.lastReviewed, toolLeonardoAi?.data.lastReviewed].filter(Boolean) as string[];
+const latestDate = toolDates.length ? toolDates.sort().at(-1)! : null;
+
+const faqs = [
+  {
+    q: 'MidjourneyとLeonardo AIはどちらが高品質な画像を生成できますか？',
+    a: 'Midjourneyはアート調・写真風・雰囲気重視の高品質なビジュアル生成で評価されることが多い傾向があります。Leonardo AIはゲーム・イラスト・キャラクター系の特化生成に強みがあるとされています。どちらが「高品質」かは生成する画像のスタイルや用途によって評価が異なります。両ツールを実際に試して比較することをおすすめします。',
+  },
+  {
+    q: 'MidjourneyとLeonardo AIはどちらが無料で使えますか？',
+    a: 'Leonardo AIは無料プランで1日150トークン程度が付与される場合があり、継続的に試せる面があります。Midjourneyは2024年末に無料プランが廃止されたとされており、現在は有料プランのみとされています。最新の状況は各公式サイトでご確認ください。',
+  },
+  {
+    q: 'MidjourneyとLeonardo AIの商用利用条件はどう違いますか？',
+    a: 'Midjourneyは有料プランで商用利用に関する案内があります。年間総収益100万ドル超の企業はPro/Megaプランへのアップグレードが必要とされています。Leonardo AIは有料プランかつPrivate設定時にユーザーが画像の知的財産権を保有し商用利用できるとされています。無料プランでは画像の権利がLeonardo.AIに帰属する場合があります。どちらも商用利用前は最新の公式利用規約を必ずご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: 'MidjourneyとLeonardo AIはどちらが初心者向けですか？',
+    a: 'Midjourneyはシンプルなプロンプト入力から高品質な画像を生成できるため、複雑な設定なしに良い結果を得やすいとされています。Leonardo AIはパラメータ調整の自由度が高く、カスタムモデルを切り替えて試せる反面、設定項目が多くなる場合があります。操作の手軽さではMidjourney、細かい調整や無料枠で試したい場合はLeonardo AIが候補になります。',
+  },
+  {
+    q: 'MidjourneyとLeonardo AIはどちらがイラスト・ゲーム素材に向いていますか？',
+    a: 'Leonardo AIはゲーム・イラスト向けのカスタムモデルが豊富に提供されており、特定スタイルのイラストやゲーム素材案の制作に向いているとされています。Midjourneyもイラスト生成に対応していますが、ゲーム向けの特化モデルはLeonardo AIの方が充実しているとされています。用途に合わせて公式情報をご確認の上、試してみることをおすすめします。',
+  },
+  {
+    q: 'MidjourneyとLeonardo AIは日本語で使えますか？',
+    a: 'どちらも日本語プロンプトは一部受け付ける場合がありますが、英語プロンプトの方が生成精度が高い傾向があるとされています。日本語UIについては、Midjourneyは英語のみです。Leonardo AIの日本語UI対応状況は公式情報から確認できていません。最新の対応状況は各公式サイトでご確認ください。',
+  },
+  {
+    q: 'MidjourneyとLeonardo AIで人物・著名人・ブランドロゴを使う場合の注意点は？',
+    a: '実在人物の肖像権・著名人・ブランドロゴ・商標・第三者が権利を持つ素材を含む画像を生成・利用する際は、ツールの利用規約とは別に、肖像権・商標権・著作権などの観点から別途確認が必要です。商用利用を前提とする場合は特に注意が必要です。本記事は法的助言ではありません。',
+  },
+  {
+    q: 'MidjourneyとLeonardo AI以外の選択肢は？',
+    a: 'Adobe製品との連携や商用利用の条件を確認しながら使いたい場合はAdobe Fireflyが候補です。無料・オープンソースのローカル実行を重視する場合はStable Diffusionが候補です。デザインテンプレートとの連携ではCanva AI画像生成も候補になります。テキストから画像を手軽に生成したい場合はDALL·Eも候補になります。詳しくは<a href="/categories/image-generation/">AI画像生成ツール一覧</a>をご参照ください。',
+  },
+];
+
+const comparisonRows = [
+  { item: '料金（最低有料プラン）', toolA: '$10/月（Basicプラン・月払い）／$8/月（年払い）', toolB: '$10/月（Apprenticeプラン・年払い）／$12/月（月払い）' },
+  { item: '無料プラン', toolA: 'なし（2024年末廃止とされる・最新は公式確認）', toolB: 'あり（1日150トークン程度・変更の可能性あり）' },
+  { item: '商用利用（無料プラン）', toolA: '無料プランなし', toolB: '画像の権利がLeonardo.AIに帰属する場合あり（商用利用不可とされる）' },
+  { item: '商用利用（有料プラン）', toolA: '有料プランで商用利用可能な場合あり（大企業はPro/Mega必須）', toolB: '有料プラン＋Private設定でユーザーが知的財産権を保有し商用利用可とされる' },
+  { item: '日本語UI', toolA: '非対応（英語のみ）', toolB: '要確認（公式情報から未確認）' },
+  { item: '日本語プロンプト', toolA: '一部対応（英語の方が精度高め）', toolB: '一部対応（英語の方が精度高め）' },
+  { item: '透かし', toolA: 'なし（有料プラン）', toolB: '通常なしとされるが公式詳細未確認' },
+  { item: 'テキスト→画像', toolA: '対応', toolB: '対応' },
+  { item: '画像→画像', toolA: '対応', toolB: '対応' },
+  { item: 'インペインティング', toolA: '要確認', toolB: '対応' },
+  { item: 'アップスケール', toolA: '対応', toolB: '対応' },
+  { item: 'スタイルプリセット', toolA: '対応', toolB: '対応（カスタムモデル多数）' },
+  { item: 'API', toolA: '非対応', toolB: '対応' },
+  { item: 'Discord連携', toolA: '対応（Discord・Web版）', toolB: '非対応（Webのみ）' },
+  { item: '得意なスタイル', toolA: 'アート調・写真風・雰囲気重視のビジュアル', toolB: 'ゲーム・イラスト・キャラクター系特化生成' },
+];
+
+const relatedLinks = [
+  { href: '/tools/midjourney/', label: 'Midjourney詳細' },
+  { href: '/tools/leonardo-ai/', label: 'Leonardo AI詳細' },
+  { href: '/categories/image-generation/', label: 'AI画像生成ツール一覧' },
+  { href: '/tools/adobe-firefly/', label: 'Adobe Firefly詳細' },
+  { href: '/tools/stable-diffusion/', label: 'Stable Diffusion詳細' },
+  { href: '/tools/dalle/', label: 'DALL·E詳細' },
+  { href: '/tools/canva-ai-image-generator/', label: 'Canva AI画像生成詳細' },
+  { href: '/tools/ideogram/', label: 'Ideogram詳細' },
+  { href: '/comparisons/midjourney-vs-adobe-firefly/', label: 'MidjourneyとAdobe Fireflyを比較' },
+  { href: '/comparisons/stable-diffusion-vs-midjourney/', label: 'Stable DiffusionとMidjourneyを比較' },
+  { href: '/comparisons/dalle-vs-midjourney/', label: 'DALL·EとMidjourneyを比較' },
+  { href: '/comparisons/', label: 'AI画像・動画ツール比較表' },
+];
+
+const sources = [
+  { href: 'https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans', label: 'Midjourneyプラン比較（公式）' },
+  { href: 'https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service', label: 'Midjourney利用規約（2026年版・公式）' },
+  { href: 'https://docs.midjourney.com/hc/en-us/articles/27870375276557-Using-Images-Videos-Commercially', label: 'Midjourney商用利用ガイド（公式）' },
+  { href: 'https://leonardo.ai/pricing/', label: 'Leonardo AI料金プラン（公式）' },
+  { href: 'https://leonardo.ai/terms-of-service/', label: 'Leonardo AI利用規約（公式）' },
+  { href: 'https://leonardo.ai/news/can-you-use-ai-generated-images-commercially/', label: 'Leonardo AI商用利用ガイド（公式）' },
+  { href: 'https://leonardo.ai/faq/', label: 'Leonardo AI FAQ（公式）' },
+];
+
+const articleJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "MidjourneyとLeonardo AIを比較｜AI画像生成ツールはどちらを選ぶ？",
+  "description": "MidjourneyとLeonardo AIの特徴、無料プラン、商用利用条件、日本語対応、透かし、向いている用途を比較します。アート調・雰囲気重視かゲーム・イラスト特化かで選び方が異なります。",
+  "url": "https://aicreative-db.com/comparisons/midjourney-vs-leonardo-ai/",
+  "mainEntityOfPage": "https://aicreative-db.com/comparisons/midjourney-vs-leonardo-ai/",
+  "author": { "@type": "Organization", "name": "AIクリエイティブナビ編集部" },
+  "publisher": { "@type": "Organization", "name": "AIクリエイティブナビ", "url": "https://aicreative-db.com/" },
+  "datePublished": "2026-06-11",
+  "dateModified": "2026-06-11",
+});
+---
+
+<ComparisonVsArticle
+  title="MidjourneyとLeonardo AIを比較｜AI画像生成ツールはどちらを選ぶ？ | AIクリエイティブナビ"
+  description="MidjourneyとLeonardo AIの特徴、無料プラン、商用利用条件、日本語対応、透かし、向いている用途を比較します。アート調・雰囲気重視かゲーム・イラスト特化かで選び方が異なります。"
+  canonicalPath="/comparisons/midjourney-vs-leonardo-ai/"
+  jsonLd={articleJsonLd}
+  breadcrumbLabel="MidjourneyとLeonardo AI比較"
+  h1="MidjourneyとLeonardo AIを比較｜AI画像生成ツールはどちらを選ぶ？"
+  lead="MidjourneyとLeonardo AIはどちらも代表的なAI画像生成ツールですが、強みの傾向が異なります。アート調・写真風・雰囲気重視の高品質なビジュアルを求めるならMidjourneyが、ゲーム素材・イラスト・キャラクター向けのカスタムモデルや無料枠で継続的に試したい場合はLeonardo AIが候補になります。無料プランの有無・料金・商用利用条件・透かし・APIの有無を確認して、用途に合った選択をしてください。"
+  category="AI画像生成ツール比較"
+  latestDate={latestDate}
+  toolAName="Midjourney"
+  toolASlug="midjourney"
+  toolBName="Leonardo AI"
+  toolBSlug="leonardo-ai"
+  conclusionA={{
+    label: 'アート調・雰囲気重視の高品質ビジュアル →',
+    toolName: 'Midjourney',
+    toolHref: '/tools/midjourney/',
+    body: 'アート・イラスト・写真風など幅広いスタイルで高品質な画像生成に定評があります。シンプルなプロンプトから良い結果を得やすいとされており、コンセプトビジュアルやSNS素材の案出しに向いています。無料プランは2024年末に廃止されたとされており、有料プランのみです。商用利用は有料プランで可能な場合がありますが、大企業（年収100万ドル超）はPro/Mega必須とされています。最新規約要確認。',
+  }}
+  conclusionB={{
+    label: 'ゲーム・イラスト特化・無料枠で試したい →',
+    toolName: 'Leonardo AI',
+    toolHref: '/tools/leonardo-ai/',
+    body: 'ゲーム・イラスト向けのカスタムモデルが豊富で、特定スタイルの特化生成に向いています。無料プランで1日150トークン程度が付与される場合があり、継続的に試せる面があります。商用利用は有料プラン＋Private設定が条件とされており、無料プランでは画像の権利がLeonardo.AIに帰属する場合があります。最新規約要確認。',
+  }}
+  conclusionNote="比較結果は用途・プラン・素材条件によって変わる場合があります。最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。"
+  comparisonRows={comparisonRows}
+  faqs={faqs}
+  relatedLinks={relatedLinks}
+  sources={sources}
+  noticeItems={[
+    '料金・無料枠・商用利用条件・透かし条件は変更される場合があります。',
+    '最新情報は各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。',
+    'Midjourneyの無料プランは2024年末に廃止されたとされています。最新状況は公式サイトでご確認ください。',
+    '本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。',
+  ]}
+>
+  <!-- ===== Midjourneyの特徴 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">Midjourneyの特徴</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">強み</h3>
+        <ul>
+          <li>アート調・写真風・雰囲気重視の高品質なビジュアル生成で評価が高いとされる</li>
+          <li>シンプルなプロンプトから良い結果を得やすいとされる</li>
+          <li>Discord・Web版どちらからも利用可能</li>
+          <li>v6以降、プロンプト精度が向上しているとされる</li>
+          <li>有料プランで商用利用可能な場合あり（条件あり）</li>
+        </ul>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">注意点</h3>
+        <ul>
+          <li>無料プランなし（2024年末廃止とされる）</li>
+          <li>日本語UIなし（英語インターフェースのみ）</li>
+          <li>年間総収益100万ドル超の企業はPro/Megaプランが必要とされる</li>
+          <li>APIは非対応（要確認）</li>
+          <li>毎回全く同じ画像を再現することは難しい</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-soft);">詳細は<a href="/tools/midjourney/" style="color:var(--brand-ink);">Midjourney詳細ページ</a>をご参照ください。</p>
+  </section>
+
+  <!-- ===== Leonardo AIの特徴 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">Leonardo AIの特徴</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">強み</h3>
+        <ul>
+          <li>ゲーム・イラスト向けのカスタムモデルが豊富</li>
+          <li>無料プランで1日150トークン程度が付与される場合あり（継続して試せる）</li>
+          <li>生成パラメータ（ガイダンススケール・シード値等）を細かく調整可能</li>
+          <li>インペインティング対応</li>
+          <li>API連携が可能</li>
+        </ul>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">注意点</h3>
+        <ul>
+          <li>無料プランでは画像の権利がLeonardo.AIに帰属する場合あり（商用利用不可とされる）</li>
+          <li>商用利用には有料プラン＋Private設定が必要とされる</li>
+          <li>日本語UI対応状況は公式情報から未確認</li>
+          <li>透かし条件の公式詳細が未確認</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-soft);">詳細は<a href="/tools/leonardo-ai/" style="color:var(--brand-ink);">Leonardo AI詳細ページ</a>をご参照ください。</p>
+  </section>
+
+  <!-- ===== 料金・無料枠の違い ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">料金・無料枠の違い</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Midjourney</h3>
+        <p>無料プランは2024年末に廃止されたとされています。有料プランはBasic $10/月（月払い）・$8/月（年払い）から案内されています。試作・検討段階から費用が発生する点を考慮して選択してください。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">最新の料金は<a href="https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Midjourneyプラン比較（公式）</a>をご確認ください。</p>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Leonardo AI</h3>
+        <p>無料プランで1日150トークン程度が付与される場合があります（変更の可能性あり）。有料プランはApprentice $10/月〜（年払い）から案内されています。無料枠でまず試して、必要に応じて有料プランに移行できます。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">最新の料金は<a href="https://leonardo.ai/pricing/" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Leonardo AI料金プラン（公式）</a>をご確認ください。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 商用利用・著作権の注意点 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">商用利用・著作権・商標表現について確認したいポイント</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Midjourney</h3>
+        <p>公式ヘルプでは有料プラン利用者向けの商用利用案内があります。<strong>年間総収益100万ドル超の企業はPro/Megaプランへのアップグレードが利用規約上必要</strong>とされています。条件は変更される可能性があります。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">利用前に<a href="https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Midjourney利用規約</a>および<a href="https://docs.midjourney.com/hc/en-us/articles/27870375276557-Using-Images-Videos-Commercially" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">商用利用ガイド</a>をご確認ください。</p>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Leonardo AI</h3>
+        <p><strong>無料プランでは生成画像の権利がLeonardo.AIに帰属する場合があり、他ユーザーも同一画像を使用できる場合があります</strong>。有料プラン＋Private設定でユーザーが知的財産権を保有し商用利用できるとされています。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">利用前に<a href="https://leonardo.ai/terms-of-service/" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Leonardo AI利用規約</a>をご確認ください。</p>
+      </div>
+    </div>
+    <div class="cp-caution-box">
+      <p><strong>人物・著名人・ブランドロゴ・商標について：</strong>実在人物の肖像権・著名人・ブランドロゴ・商標・第三者が権利を持つ素材を含む画像を生成・利用する際は、ツールの利用規約とは別に、肖像権・商標権・著作権などの観点から別途確認が必要です。</p>
+      <p style="margin-top:8px;"><strong>著作権について：</strong>米国著作権法上、AIのみで生成した画像は著作権保護を受けられない可能性があります（商用利用権とは別の問題です）。日本国内の著作権法上の扱いについても確認が必要な場合があります。</p>
+      <p style="margin-top:8px;"><a href="/guides/commercial-use-copyright/" style="color:var(--notice-ink);font-weight:600;">AI生成コンテンツの商用利用・著作権ガイド →</a></p>
+    </div>
+  </section>
+
+  <!-- ===== 向いている人 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">向いている人・向いていない人</h2>
+    <div class="cp-suited-grid">
+      <div class="cp-suited-card">
+        <p class="cp-suited-h">Midjourneyが向いている人</p>
+        <ul class="cp-suited-list">
+          <li>高品質なアート調・写真風ビジュアルを求める人</li>
+          <li>コンセプトビジュアルやSNS素材を短時間で複数案作りたい人</li>
+          <li>シンプルな操作で良い結果を得たい人</li>
+          <li>有料プランを前提に使い始める人</li>
+          <li>英語プロンプトに慣れている人</li>
+        </ul>
+      </div>
+      <div class="cp-suited-card">
+        <p class="cp-suited-h">Leonardo AIが向いている人</p>
+        <ul class="cp-suited-list">
+          <li>ゲーム素材・イラスト・キャラクター案を試作したい人</li>
+          <li>無料枠で継続的に試してから有料移行を判断したい人</li>
+          <li>生成パラメータを細かく調整したい人</li>
+          <li>複数のカスタムモデルを切り替えてスタイルを比較したい人</li>
+          <li>API連携を含めた開発用途に使いたい人</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cp-not-suited">
+      <p class="cp-not-suited-h">どちらも向いていないケース</p>
+      <ul>
+        <li>毎回全く同じ人物・構図を完全に再現したい人</li>
+        <li>レイヤー編集や印刷入稿データを一ツールで完結させたい人（→ Adobe Firefly + Photoshop等が候補）</li>
+        <li>公式規約を確認せずに商用案件へ使いたい人</li>
+        <li>日本語UIを必須とする人（MidjourneyはUI英語のみ。Leonardo AIの日本語UI対応は未確認）</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== 他ツール候補 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">他のAI画像生成ツールとの選び分け</h2>
+    <div class="cp-other-grid">
+      <div class="cp-other-card">
+        <p class="cp-other-h"><a href="/tools/adobe-firefly/">Adobe Firefly</a></p>
+        <p>Adobe製品（Photoshop・Illustrator等）との連携を重視する場合の候補です。日本語UIに対応しており、商用利用に関する条件も公式で案内されています。詳しくは<a href="/comparisons/midjourney-vs-adobe-firefly/" style="color:var(--brand-ink);">MidjourneyとAdobe Fireflyの比較</a>もご参照ください。</p>
+      </div>
+      <div class="cp-other-card">
+        <p class="cp-other-h"><a href="/tools/stable-diffusion/">Stable Diffusion</a></p>
+        <p>オープンソースでローカル実行が可能なため、カスタマイズ性やコスト重視の場合の候補です。詳しくは<a href="/comparisons/stable-diffusion-vs-midjourney/" style="color:var(--brand-ink);">Stable DiffusionとMidjourneyの比較</a>もご参照ください。</p>
+      </div>
+      <div class="cp-other-card">
+        <p class="cp-other-h"><a href="/tools/ideogram/">Ideogram</a> / <a href="/tools/canva-ai-image-generator/">Canva AI画像生成</a></p>
+        <p>Ideogramはテキスト表現を含む画像生成に強みがあるとされています。Canva AI画像生成はデザインテンプレートとの組み合わせで使いたい場合の候補です。詳しくは<a href="/categories/image-generation/" style="color:var(--brand-ink);">AI画像生成ツール一覧</a>をご参照ください。</p>
+      </div>
+    </div>
+  </section>
+</ComparisonVsArticle>

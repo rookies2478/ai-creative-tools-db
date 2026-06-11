@@ -1,0 +1,282 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'ideogram');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Ideogram', item: 'https://aicreative-db.com/tools/ideogram/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Ideogram',
+    operatingSystem: 'Web',
+    applicationCategory: 'DesignApplication',
+    description: 'テキスト入り画像やタイポグラフィ表現に強いAI画像生成サービス。ロゴ風デザイン・ポスター・SNS画像の作成に活用されている。',
+    url: 'https://ideogram.ai/',
+  },
+]);
+---
+
+<BaseLayout
+  title="Ideogramの商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="Ideogramの商用利用条件・料金プラン・無料枠・透かし・日本語対応を公式情報をもとに整理。文字入り画像・ロゴ風デザインに強いAI画像生成サービスです。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/ideogram/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Ideogram</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Ideogram"
+      category="AI画像生成"
+      checkedDate={d?.lastReviewed ?? '2026-05-26'}
+      headingHtml='Ideogramの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="テキスト入り画像やタイポグラフィ表現に強いAI画像生成サービスです。ロゴ風デザイン・ポスター・SNS画像の作成に活用されており、無料アカウントから試すことができます。商用利用時は利用規約と第三者権利の確認が必要です。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '条件あり（要確認）' } },
+        { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
+        { lb: '料金目安', text: '要公式確認', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: '要公式確認' } },
+        { lb: '日本語UI', badge: { s: 'na', label: '× 非対応' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://ideogram.ai/' }}
+      secondaryCta={{ label: '利用規約（公式）', href: 'https://ideogram.ai/legal/tos' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '条件あり（要確認）' }, wide: true,
+          sum: 'Ideogram公式FAQでは、生成画像について所有権を主張せず利用を制限しない旨が説明されています。ただし法律・第三者の権利・利用規約に違反しないことは利用者側で確認が必要です。',
+          det: '商用利用条件とは別に、商標、著作権、第三者素材の扱いを確認する必要があります。ロゴ風デザインやブランド名を含む画像を使う場合は、利用前に公式規約や権利関係をご確認ください。このページは法的助言ではありません。最新の公式FAQと利用規約をご確認ください。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: '限定的' },
+          det: '無料アカウントでクレジットが提供される場合があります。クレジット数や利用制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。',
+        },
+        {
+          title: '料金目安', sum: '要公式確認（有料プランあり）', sumMono: false,
+          det: '有料プランの詳細は変更される可能性があります。最新の料金は公式料金ページ（https://ideogram.ai/pricing）でご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: '要公式確認' },
+          det: '透かしの有無・条件は現時点での公式情報では確認できていません。最新の条件は公式サイトでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'na', label: '× 非対応' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '要公式確認' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web', 'API'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→画像', 'テキスト入り画像', 'ロゴ風デザイン', 'スタイルプリセット', 'API'] },
+      ]}
+      useCases={[
+        '<b>文字入り画像・タイポグラフィ</b>を含むビジュアルの試作',
+        '<b>ロゴ風デザイン・ポスター案</b>のラフ作成',
+        '<b>SNS投稿・ブログアイキャッチ・YouTubeサムネイル案</b>の制作',
+        '<b>広告バナーのラフ案</b>・デザイン方向性の確認',
+      ]}
+      pros={[
+        '画像内テキストの生成精度が高いとされており、文字を含むビジュアル案に向いている',
+        'ロゴ風・ポスター風のビジュアルを作りやすい',
+        '無料アカウントから試せる',
+        'APIが提供されており開発用途にも利用可能',
+      ]}
+      cons={[
+        '日本語UIなし（英語インターフェースのみ）',
+        '商用利用時は第三者権利・利用規約の確認が必要',
+        '透かしの条件が公式情報では確認しにくい',
+        'ロゴ風表現・ブランド名使用時は商標権・著作権の別途確認が必要',
+      ]}
+      limits={[
+        '日本語UIなし（英語インターフェースのみ）',
+        '商用利用時は第三者権利・利用規約の確認が必要',
+        'ロゴ風デザイン・商標・ブランド名を含む場合は権利関係の確認が必要',
+        '透かし条件は公式情報のみでは確認できていない',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成（テキスト入り画像・タイポグラフィ特化）' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br>無料アカウントでクレジットが提供される場合があります。' }],
+          [{ html: '料金', rk: true }, { html: '有料プランあり。最新料金は公式サイトでご確認ください。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（要確認）</span><br>法律・第三者の権利・利用規約に違反しないことは利用者側で確認が必要。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要公式確認</span><br>公式情報のみでは確認できていません。' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>× 非対応</span><br>英語インターフェースのみ' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要公式確認</span>' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web / API' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-26', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://ideogram.ai/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 値は確認日時点の参考値です。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'Ideogramは画像内のテキスト表現やタイポグラフィに強みを持つAI画像生成サービスです。ロゴ風デザイン・ポスター・文字入りSNS画像の作成に活用されており、無料アカウントから試すことができます。APIも提供されており、開発用途にも利用されています。',
+        '<b>文字を含むビジュアル案の試作</b>に向いているとされますが、商用利用時は利用規約・第三者権利の確認が必要です。特に<b>ロゴ風表現・ブランド名・商標を含む場合</b>は、商用利用条件とは別に権利関係の確認が必要です。',
+      ]}
+      aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '内容'],
+          rows: [
+            [{ html: '無料', rk: true }, { html: 'クレジット付与（数量・条件は変更される場合あり）' }],
+            [{ html: '有料プラン', rk: true }, { html: '詳細は公式料金ページ（ideogram.ai/pricing）でご確認ください' }],
+          ],
+        },
+        notes: [
+          '料金・プラン内容は変更される可能性があります',
+          '<b>最新料金は公式サイトでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: 'Ideogram公式FAQでは、生成画像について所有権を主張せず利用を制限しない旨が説明されています。ただし以下の点は利用者側で確認が必要です。',
+        points: [
+          '法律・第三者の権利・利用規約に違反しないことは利用者側で確認する必要があります',
+          '<b>ロゴ風デザイン・ブランド名・商標を含む画像</b>は、商用利用条件とは別に商標権・著作権・第三者素材の確認が必要です',
+          '利用規約は変更される可能性があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。利用前に最新のIdeogram利用規約および公式FAQをご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="テキスト入り画像・タイポグラフィ表現について"
+      integration="Ideogramは画像内テキストの生成精度が高いとされており、文字を含むビジュアル案の試作に向いています。ただしロゴ風デザインやブランド名を含む画像を作成・使用する場合は、商用利用条件とは別に商標権・著作権・第三者素材の権利関係を確認する必要があります。このページは法的助言ではありません。"
+      whoFor={[
+        '文字入り画像・タイポグラフィを含むビジュアル案を試したい人',
+        'ロゴ風デザイン・ポスター案のラフ作成候補を探している人',
+        '無料枠でAI画像生成を試したい人',
+        'APIで画像生成を自動化・組み込みたい開発者',
+      ]}
+      whoNot={[
+        '日本語UIが必要な人（英語インターフェースのみ）',
+        'ロゴ・商標を含む画像を確認なく商用利用したい人',
+        '透かし条件を事前に公式情報で確認したい人（公式情報が確認しにくい）',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Ideogram（このページ）', rk: true, me: true }, { html: '文字入り画像、タイポグラフィ、ポスター、ロゴ風デザイン案を試したい場合' }],
+          [{ html: '<a href="/tools/midjourney/">Midjourney</a>', rk: true }, { html: '高品質なビジュアル表現を重視する場合' }],
+          [{ html: '<a href="/tools/adobe-firefly/">Adobe Firefly</a>', rk: true }, { html: 'Adobe製品との連携や公式条件を確認しながら使いたい場合' }],
+          [{ html: '<a href="/tools/dalle/">DALL·E</a>', rk: true }, { html: 'アイデア出しや汎用的な画像生成を試したい場合' }],
+          [{ html: '<a href="/tools/stable-diffusion/">Stable Diffusion</a>', rk: true }, { html: 'ローカル実行・カスタマイズ性を重視する場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Ideogram', 'DALL·E', 'Adobe Firefly'],
+        rows: [
+          [{ html: '文字入り画像', rk: true }, { html: '特化', me: true }, { html: '一般的' }, { html: '一般的' }],
+          [{ html: '無料枠', rk: true }, { html: '限定的', me: true }, { html: '限定的' }, { html: '限定的' }],
+          [{ html: '日本語UI', rk: true }, { html: '非対応', me: true }, { html: '対応' }, { html: '対応' }],
+          [{ html: '商用利用', rk: true }, { html: '要確認', me: true }, { html: '案内あり（条件確認）' }, { html: '有料向け案内あり' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>非対応（英語インターフェースのみ）',
+        '<b>日本語プロンプト：</b>対応状況は公式情報でご確認ください',
+        '日本語テキスト入り画像の生成精度については公式情報での確認をおすすめします',
+      ]}
+      watermark={[
+        '透かしの有無・条件は現時点での公式情報では確認できていません',
+        '最新の条件は公式サイトでご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '利用プラン（無料 / 有料）' },
+        { html: '商用利用条件（最新の公式FAQと利用規約）' },
+        { html: 'ロゴ風表現・ブランド名・商標を含む場合の権利関係' },
+        { html: '第三者素材・著作物の扱い' },
+        { html: '透かし条件（公式サイトでご確認ください）' },
+        { html: '最新のIdeogram利用規約・公式FAQ' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-05-26'}
+      nextCheck={d?.nextReviewDue ?? '2026-06-26'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'Ideogram公式サイト', href: 'https://ideogram.ai/' },
+        { tag: 'FAQ', label: 'Ideogramよくある質問（公式）', href: 'https://docs.ideogram.ai/frequently-asked-questions' },
+        { tag: '規約', label: 'Ideogram利用規約（公式）', href: 'https://ideogram.ai/legal/tos' },
+        { tag: '料金', label: 'Ideogram料金プラン（公式）', href: 'https://ideogram.ai/pricing' },
+      ]}
+      faqs={[
+        { q: 'Ideogramは無料で使えますか？', a: '無料アカウントでクレジットが提供される場合があります。クレジット数や利用制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。' },
+        { q: 'Ideogramは商用利用できますか？', a: 'Ideogram公式FAQでは、生成画像について所有権を主張せず利用を制限しない旨が説明されています。ただし、法律・第三者の権利・利用規約に違反しないことは利用者側で確認する必要があります。利用前に公式FAQと利用規約の最新版をご確認ください。このページは法的助言ではありません。' },
+        { q: 'IdeogramはMidjourneyやDALL·Eと何が違いますか？', a: 'Ideogramは文字入り画像やタイポグラフィ表現を含むビジュアル案を試したい場合の候補です。Midjourneyは高品質なビジュアル表現、DALL·Eは汎用的なアイデア出しや画像生成の候補として比較できます。用途に合わせて選択することを推奨します。' },
+        { q: 'Ideogramでロゴやブランド名入り画像を作ってもよいですか？', a: '商用利用条件とは別に、商標、著作権、第三者素材の扱いを確認する必要があります。ロゴ風デザインやブランド名を含む画像を使う場合は、利用前に公式規約や権利関係をご確認ください。このページは法的助言ではありません。' },
+        { q: 'Ideogramは日本語で使えますか？', a: 'UIは英語のみです。日本語テキスト生成の精度については公式情報での確認をおすすめします。' },
+        { q: 'Ideogramに透かしは入りますか？', a: '透かしの有無・条件は公式情報では確認できていません。最新の条件は公式サイトでご確認ください。' },
+        { q: 'IdeogramのAPIは何に使えますか？', a: 'Ideogram APIを使うと、テキスト入り画像生成をプログラムから呼び出すことができます。詳細は公式ドキュメント（docs.ideogram.ai）でご確認ください。' },
+      ]}
+      relatedTools={[
+        { name: 'DALL·E', slug: 'dalle', initial: 'D', cat: '画像生成', badges: [{ s: 'ok', label: '商用：案内あり' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web', 'API'], official: 'https://openai.com/dall-e-3' },
+        { name: 'Midjourney', slug: 'midjourney', initial: 'M', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'na', label: '無料枠：なし' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Discord', 'Web'], official: 'https://www.midjourney.com' },
+        { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', cat: '画像生成', badges: [{ s: 'paid', label: '商用：有料向け' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://firefly.adobe.com' },
+      ]}
+      nextReads={[
+        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・無料プランがあるツールを一覧で確認' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用と著作権について', desc: 'AI生成画像を商用利用する際の注意点まとめ' },
+        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+        { href: '/conditions/commercial-use/', title: '商用利用を確認しやすいツール', desc: '商用利用条件が整理されたツールを一覧で確認' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '日本語対応ツール', href: '/conditions/japanese/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

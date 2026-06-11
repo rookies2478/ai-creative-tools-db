@@ -1,0 +1,286 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'gemini-image-generation');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Gemini画像生成', item: 'https://aicreative-db.com/tools/gemini-image-generation/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Gemini画像生成',
+    operatingSystem: 'Web, iOS, Android',
+    applicationCategory: 'DesignApplication',
+    description: 'Google GeminiアプリでAI画像生成・画像編集・テキスト入り画像・スタイル適用などができる機能。Googleアカウントで手軽に利用可能。',
+    url: 'https://gemini.google/jp/overview/image-generation/?hl=ja-JP',
+  },
+]);
+---
+
+<BaseLayout
+  title="Gemini画像生成の商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="Google Geminiの画像生成機能の商用利用条件・料金プラン・無料枠・SynthID透かし・日本語対応を公式情報をもとに整理。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/gemini-image-generation/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Gemini画像生成</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Gemini画像生成"
+      category="AI画像生成"
+      checkedDate={d?.lastReviewed ?? '2026-05-15'}
+      headingHtml='Gemini画像生成の<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="Google GeminiアプリでAI画像生成・画像編集・テキスト入り画像・スタイル適用などができる機能です。Googleアカウントで手軽に利用できますが、商用利用には用途・プラン・生成AI禁止利用ポリシーの確認が必要です。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '条件あり（要確認）' } },
+        { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
+        { lb: '料金目安', text: 'Google AIプランによる', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: 'SynthID付与あり' } },
+        { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://gemini.google/jp/overview/image-generation/?hl=ja-JP' }}
+      secondaryCta={{ label: 'Google生成AI利用ポリシー（公式）', href: 'https://policies.google.com/terms/generative-ai/use-policy' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '条件あり（要確認）' }, wide: true,
+          sum: 'Google公式情報上、商用利用・広告利用・クライアントワークへの具体的な可否は用途・プラン・規約・生成AI禁止利用ポリシーの確認が必要です。',
+          det: '用途・プランによって条件が異なる可能性があります。Googleの生成AI禁止利用ポリシーに抵触しないかの確認が必要です。第三者の権利（著作権・肖像権等）に関わる生成物の利用には注意が必要です。利用規約は変更される可能性があります。最新の公式規約とポリシーをご確認ください。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: '限定的' },
+          det: 'Google AIの無料プランでもGeminiアプリの画像生成・編集が案内されています。利用上限・対応モデル・機能はプランや時期によって変わる可能性があります。最新の状況はGoogle公式でご確認ください。',
+        },
+        {
+          title: '料金目安', sum: 'Google AIプランによる（無料〜有料プラン）', sumMono: false,
+          det: 'Google AI Plus / Pro / Ultraなどの有料プランで上限・機能が拡張される場合があります。料金はプランや時期により変更される可能性があるため、最新の料金は公式ページでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: 'SynthID付与あり' },
+          det: 'Google公式ページでは、Geminiで作成されたビジュアルにはSynthIDによる目に見えない透かしと目に見える透かしが使用されると案内されています。透かし条件はプランや機能によって変わる可能性があります。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'ok', label: '対応' } },
+            { label: 'プロンプト', badge: { s: 'ok', label: '対応' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web', 'iOS', 'Android'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→画像', '画像編集', '雰囲気変更', 'スタイル適用', 'サイズ変更', 'テキスト入り画像'] },
+      ]}
+      useCases={[
+        '<b>SNS投稿・ブログアイキャッチ・資料用画像</b>の生成',
+        '<b>既存画像の編集・雰囲気変更</b>（スタイル適用）',
+        '<b>テキスト入り画像</b>の作成',
+        'Googleアカウントで<b>手軽に画像生成を始めたい</b>場合',
+      ]}
+      pros={[
+        'Geminiアプリ上で画像生成と編集が一体でできる',
+        '日本語UIに対応しており日本語環境で使いやすい',
+        'Googleアカウントがあれば手軽に利用開始できる',
+        '画像の雰囲気変更・参照写真のスタイル適用・サイズ変更・テキスト入り画像に対応',
+        'Web・iOS・Androidで利用可能',
+      ]}
+      cons={[
+        '商用利用は用途・プラン・規約・生成AI禁止利用ポリシーの確認が必要',
+        'SynthIDによる透かし（目に見えない・目に見える）が使用されるとされている',
+        '画像生成モデルや利用上限はプランや時期によって変わる可能性がある',
+        '画像内テキストが崩れる場合がある',
+      ]}
+      limits={[
+        '商用利用条件はプラン・用途・生成AI禁止利用ポリシーで変わる可能性がある',
+        '透かし条件はプランや機能によって変わる可能性がある',
+        '利用上限・モデルはプランや時期によって変わる可能性がある',
+        '画像内テキストは非ラテン文字（日本語等）で崩れる場合がある',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成（Google Geminiアプリ内機能）' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br>無料プランで画像生成・編集が案内されています。利用上限・機能はプランや時期により変わる可能性があります。' }],
+          [{ html: '料金', rk: true }, { html: 'Google AIプランによる（無料〜有料）。最新料金は公式サイトでご確認ください。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（要確認）</span><br>用途・プラン・生成AI禁止利用ポリシーの確認が必要です。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>SynthID付与あり</span><br>目に見えない透かし（SynthID）と目に見える透かしが使用されると公式ページで案内されています。' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span><br>画像内テキストは崩れる場合あり' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web / iOS / Android' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-15', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://gemini.google/jp/overview/image-generation/?hl=ja-JP" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'Gemini画像生成は、Google Geminiアプリ上でテキストから画像を生成・編集できる機能です。画像の雰囲気変更、参照写真のスタイル適用、サイズ変更、テキスト入り画像の作成などが公式ページで案内されています。',
+        'Googleアカウントで手軽に始められ、日本語UIに対応しています。ただし<b>商用利用には生成AI禁止利用ポリシー・最新規約の確認が必要</b>で、SynthIDによる透かしが付与されることに留意が必要です。',
+      ]}
+      aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '画像生成', '備考'],
+          rows: [
+            [{ html: '無料プラン', rk: true }, { html: '案内あり' }, { html: '利用上限あり、詳細は公式確認' }],
+            [{ html: 'Google AI Plus / Pro / Ultra', rk: true }, { html: '上限・機能拡張' }, { html: '料金は公式サイトでご確認ください' }],
+          ],
+        },
+        notes: [
+          '料金・プラン内容・提供機能は変更される可能性があります',
+          '<b>最新料金はGoogle公式ページでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: 'Google公式情報上、Geminiの画像生成機能や利用プランは確認できますが、商用利用・広告利用・クライアントワークへの具体的な可否は以下の観点からの確認が必要です。',
+        points: [
+          '用途・プランによって条件が異なる可能性があります',
+          'Googleの<b>生成AI禁止利用ポリシー</b>に抵触しないかの確認が必要です',
+          '第三者の権利（著作権・肖像権等）に関わる生成物の利用には注意が必要です',
+          '利用規約は変更される可能性があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用・広告利用・クライアントワークを前提にする場合は、Google利用規約およびGoogle生成AI利用ポリシーの最新版をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="SynthID透かしについて"
+      integration="Google公式ページでは、Geminiで作成されたビジュアルにはSynthIDによる目に見えない透かし（AI生成であることを示す不可視の電子透かし）と目に見える透かしが使用されると案内されています。透かし条件はプランや機能によって変わる可能性があるため、実際の出力画面と公式情報でご確認ください。"
+      whoFor={[
+        'Googleアカウントをすでに持っており、手軽に画像生成を始めたい方',
+        '日本語環境で使いやすいAI画像生成ツールを探している方',
+        'Google系サービスに馴染みがあり、同じエコシステム内で作業したい方',
+        'SNS・ブログ・資料用に画像を手軽に生成・編集したい方',
+        '画像の雰囲気変更やスタイル適用を試したい方',
+      ]}
+      whoNot={[
+        '商用利用・広告利用を即座に開始したい方（規約確認が必要）',
+        '透かしなしで成果物を使いたい方（SynthID付与あり）',
+        '画像内への正確な日本語テキスト挿入が必要な方（崩れる場合あり）',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Gemini画像生成（このページ）', rk: true, me: true }, { html: 'Google系エコシステムで日本語UI対応のAI画像生成を手軽に試したい場合' }],
+          [{ html: '<a href="/tools/dalle/">DALL·E</a>', rk: true }, { html: 'ChatGPT連携で手軽に画像生成・アイデア出しをしたい場合' }],
+          [{ html: '<a href="/tools/adobe-firefly/">Adobe Firefly</a>', rk: true }, { html: 'Adobe製品との連携・商業利用時の公式案内が充実している場合' }],
+          [{ html: '<a href="/tools/canva-ai-image-generator/">Canva AI画像生成</a>', rk: true }, { html: 'Canvaのデザインフローの中でAI画像を使いたい場合' }],
+          [{ html: '<a href="/tools/midjourney/">Midjourney</a>', rk: true }, { html: '高品質なアート・イラスト・クリエイティブ表現を重視する場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Gemini画像生成', 'DALL·E', 'Adobe Firefly'],
+        rows: [
+          [{ html: '日本語UI', rk: true }, { html: '対応', me: true }, { html: '対応' }, { html: '対応' }],
+          [{ html: '無料枠', rk: true }, { html: '限定的', me: true }, { html: '限定的' }, { html: '限定的' }],
+          [{ html: '商用利用', rk: true }, { html: '要確認', me: true }, { html: '案内あり（条件確認）' }, { html: '有料向け案内あり' }],
+          [{ html: '透かし', rk: true }, { html: 'SynthID付与', me: true }, { html: '要確認' }, { html: 'プランによる' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>対応（公式ページに日本語ページあり）',
+        '<b>日本語プロンプト：</b>対応（画像内テキストや細かい構図指定は英語の方が安定する場合あり）',
+        '日本語ドキュメント：公式サポートあり',
+      ]}
+      watermark={[
+        'Google公式ページでは、Geminiで作成されたビジュアルにはSynthIDによる目に見えない透かしと目に見える透かしが使用されると案内されています',
+        '透かし条件はプランや機能によって変わる可能性があります',
+        '最新の条件は公式サイトでご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '利用プラン（無料 / Google AI Plus / Pro / Ultra）' },
+        { html: '商用利用・広告利用・クライアントワークへの適用可否' },
+        { html: 'Googleの生成AI禁止利用ポリシーとの整合性' },
+        { html: '第三者の権利（著作権・肖像権等）に関わる生成物の扱い' },
+        { html: 'SynthID透かしの条件と最新状況' },
+        { html: 'Google利用規約・生成AI利用ポリシーの最新版' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-05-15'}
+      nextCheck={d?.nextReviewDue ?? '2026-06-15'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'Gemini画像生成 公式ページ（Google）', href: 'https://gemini.google/jp/overview/image-generation/?hl=ja-JP' },
+        { tag: 'ポリシー', label: 'Google生成AI利用ポリシー（公式）', href: 'https://policies.google.com/terms/generative-ai/use-policy' },
+        { tag: '規約', label: 'Google利用規約（公式）', href: 'https://policies.google.com/terms?hl=ja' },
+        { tag: '公式', label: 'Gemini Advanced（Google公式）', href: 'https://gemini.google.com/advanced?hl=ja' },
+      ]}
+      faqs={[
+        { q: 'Gemini画像生成は無料で使えますか？', a: 'Google AIの無料プランでもGeminiアプリの画像生成・編集が案内されています。利用上限・対応モデル・機能はプランや時期によって変わる可能性があるため、最新の状況はGoogle公式ヘルプをご確認ください。' },
+        { q: 'Gemini画像生成は商用利用できますか？', a: 'Google公式情報上、商用利用・広告利用・クライアントワークへの具体的な可否は用途・プラン・利用規約・生成AI禁止利用ポリシー・第三者権利の確認が必要です。利用前に最新の公式規約をご確認ください。このページは法的助言ではありません。' },
+        { q: 'Gemini画像生成は日本語で使えますか？', a: 'Gemini公式ページに日本語ページがあり、日本語UIで利用できます。日本語プロンプトでの画像生成も可能ですが、画像内テキストや細かい構図指定は英語や具体的な指示の方が安定する場合があります。' },
+        { q: '透かしは入りますか？', a: 'Google公式ページでは、Geminiで作成されたビジュアルにはSynthIDによる目に見えない透かしと目に見える透かしが使用されると案内されています。透かし条件はプランや機能によって変わる可能性があるため、公式情報でご確認ください。' },
+        { q: 'どの環境で使えますか？', a: 'WebブラウザのほかiOS・Androidアプリからも利用できます。Googleアカウントへのサインインが必要です。' },
+        { q: 'SynthIDとは何ですか？', a: 'Google DeepMindが開発したAI生成コンテンツへの電子透かし技術です。人間の目には見えない不可視の透かしをAI生成コンテンツに埋め込むことで、AI生成であることを検出可能にするものです。Geminiで作成した画像にはこの透かしが使用されると公式ページで案内されています。' },
+        { q: 'Gemini画像生成でロゴや人物を含む画像を作成できますか？', a: '技術的には生成可能な場合がありますが、実在の人物・著名人・ブランドロゴ・第三者の著作物を含む画像を作成・利用する際は、肖像権・商標権・著作権などの観点から別途確認が必要です。本記事は法的助言ではありません。' },
+      ]}
+      relatedTools={[
+        { name: 'DALL·E', slug: 'dalle', initial: 'D', cat: '画像生成', badges: [{ s: 'ok', label: '商用：案内あり' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web', 'API'], official: 'https://openai.com/dall-e-3' },
+        { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', cat: '画像生成', badges: [{ s: 'paid', label: '商用：有料向け' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://firefly.adobe.com' },
+        { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', initial: 'C', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://www.canva.com' },
+      ]}
+      nextReads={[
+        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・無料プランがあるツールを一覧で確認' },
+        { href: '/conditions/japanese/', title: '日本語対応AIツール一覧', desc: '日本語UIで使えるツールを確認' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用と著作権について', desc: 'AI生成画像を商用利用する際の注意点まとめ' },
+        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '日本語対応ツール', href: '/conditions/japanese/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

@@ -1,0 +1,283 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'fotor-ai');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Fotor AI', item: 'https://aicreative-db.com/tools/fotor-ai/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Fotor AI',
+    operatingSystem: 'Web',
+    applicationCategory: 'DesignApplication',
+    description: 'AI画像生成・写真編集・背景除去・デザインテンプレートをまとめて使えるオンライン画像編集・デザインツール。日本語ページあり。',
+    url: 'https://www.fotor.com/jp/ai-image-generator/',
+  },
+]);
+---
+
+<BaseLayout
+  title="Fotor AIの商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="Fotor AIの商用利用条件・料金プラン・無料枠・透かし・日本語対応状況を、公式情報をもとに整理しています。画像生成と編集を一体化したツールの特徴を解説。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/fotor-ai/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Fotor AI</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Fotor AI"
+      category="AI画像生成・画像編集"
+      checkedDate={d?.lastReviewed ?? '2026-05-14'}
+      headingHtml='Fotor AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="Fotor AIは、AI画像生成・写真編集・背景除去・デザインテンプレートをブラウザ上でまとめて使えるオンライン画像編集・デザインツールです。日本語ページ対応で初心者にも扱いやすく、無料プランから試せます。商用利用については公式ヘルプで案内がありますが、第三者権利や最新規約の確認はユーザー側で必要です。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '条件あり（要規約確認）' } },
+        { lb: '無料枠', badge: { s: 'ok', label: 'Basicプランあり' } },
+        { lb: '料金目安', text: '無料〜（有料プランあり）', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: 'Basicは透かしあり' } },
+        { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://www.fotor.com/jp/ai-image-generator/' }}
+      secondaryCta={{ label: '料金プラン（公式）', href: 'https://www.fotor.com/jp/pricing/' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '条件あり（要規約確認）' }, wide: true,
+          sum: '公式ヘルプではAI生成画像を個人・商用利用両方で使えると案内されています。ただし第三者の著作権・商標・保護作品を侵害しない責任はユーザー側にあります。',
+          det: '公式ヘルプ（AI-generated images commercially available）では個人・商用利用の両方で使えると案内されています。一方、Commercial UseページではFotor側が出力物の著作権を主張しないが利用許諾を付与する立場ではないとされており、法域ごとの著作権法の変化により扱いが変わる可能性があります。プラン・素材・テンプレートの利用条件も個別に確認が必要です。商用利用前は最新の公式利用規約をご確認ください。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'ok', label: 'Basicプランあり' },
+          det: 'Basicの無料プランが案内されています。無料クレジット数・生成回数・保存期間・機能制限は変更される可能性があるため、最新の情報は公式料金ページでご確認ください。',
+        },
+        {
+          title: '最安料金目安', sum: '無料〜（Basicプランあり・有料プランは公式確認）', sumMono: true,
+          det: 'Basicの無料プランのほか、有料プランが案内されています。透かしなし書き出し・高解像度書き出しなどは有料プランで利用できる場合があります。最新の料金条件は公式料金ページでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: 'Basicは透かしあり' },
+          det: 'Basicプランでは書き出し時に透かしが入る場合があります。有料プランでは透かしなし書き出しが案内されています。最新の条件は公式料金ページでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'ok', label: '対応' } },
+            { label: 'プロンプト', badge: { s: 'ok', label: '対応' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web（ブラウザ）'] },
+        { title: '主な機能', wide: true, feats: ['AI画像生成（テキスト→画像）', '画像→画像変換', '背景除去', '写真レタッチ・フィルター', 'デザインテンプレート', 'AIプロンプト補助'] },
+      ]}
+      useCases={[
+        '<b>SNS投稿用の画像・バナー制作</b>（日本語UIで操作しやすい）',
+        '<b>ブログのアイキャッチ画像</b>（テンプレートから手軽に作成）',
+        '<b>商品画像の背景除去・レタッチ</b>（編集機能が充実）',
+        '<b>広告バナーのデザイン案</b>（テンプレートとAI生成を組み合わせ）',
+        '<b>写真の簡易編集・加工</b>（フィルター・レタッチ機能）',
+      ]}
+      pros={[
+        '日本語ページ・日本語UIに対応している',
+        'AI画像生成と写真編集をまとめて利用できる',
+        '無料プランがある',
+        'テンプレートや編集機能が豊富',
+        '初心者でも使いやすいUIデザイン',
+      ]}
+      cons={[
+        '無料プランでは書き出し時に透かしが入る場合がある',
+        '無料クレジット数・料金条件は変更される可能性がある',
+        '商用利用時は第三者権利や最新公式規約の確認が必要',
+        'AI生成物の法的扱いは国・地域の著作権法によって変わる可能性がある',
+      ]}
+      limits={[
+        'Basicプランでは透かき・クレジット制限・機能制限あり（条件は変更の可能性あり）',
+        'テンプレートや素材の商用利用条件はプラン・素材ごとに異なる場合がある',
+        '商用利用前は公式利用規約の確認が必要',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成・写真編集・デザイン' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>Basicプランあり</span><br>無料クレジット数・機能制限は変更の可能性あり。最新情報は公式確認要。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">無料〜（有料プランあり）</span><br>有料プランの料金は公式料金ページでご確認ください。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（要規約確認）</span><br>公式ヘルプでは個人・商用利用両方で使えると案内。第三者権利・最新規約の確認が必要です。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>Basicは透かしあり</span><br>有料プランでは透かしなし書き出しが案内。最新条件は公式確認要。' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span><br>日本語ページが提供されています。' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span><br>モデルや用途によっては英語の方が安定する場合あり。' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web（ブラウザ）' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-14', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.fotor.com/jp/ai-image-generator/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 料金・機能・商用利用条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'Fotor AIは、AI画像生成・写真編集・背景除去・デザインテンプレートをブラウザ上でまとめて使えるオンライン画像編集・デザインツールです。日本語ページが用意されており、初心者でも扱いやすいUIが特徴です。',
+        'AI画像生成機能では日本語プロンプトが利用でき、テンプレートを使ったSNSバナー・ポスター作成や、写真の背景除去・レタッチなど幅広い編集機能を備えています。<b>単なる画像生成ツールでなく、画像編集・デザイン補助ツールとしての側面が強い</b>のが特徴です。',
+      ]}
+      aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金目安'],
+          rows: [
+            [{ html: 'Basic（無料）', rk: true }, { html: '無料（クレジット制限・透かしあり）', mono: false }],
+            [{ html: '有料プラン', rk: true }, { html: '公式料金ページで確認', mono: false }],
+          ],
+        },
+        notes: [
+          '無料クレジット数・生成回数・保存期間・機能制限は変更される可能性があります',
+          'Basicプランでは書き出し時に透かしが入る場合があります',
+          '<b>最新料金は公式料金ページでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: '公式ヘルプではAI生成画像を個人・商用利用の両方で使えると案内されています。ただし、プラン・素材・テンプレートの利用条件を分けて確認することが重要です。',
+        points: [
+          '<b>生成画像の商用利用</b>：公式ヘルプでは個人・商用利用両方で使えると案内。ただしFotor側が利用許諾を付与する立場ではないとされています',
+          '<b>テンプレート・素材の商用利用</b>：プランや素材ごとに条件が異なる場合があります。個別確認が必要です',
+          '<b>第三者の権利</b>：著作権・商標・保護作品を侵害しない責任はユーザー側にあります',
+          'AI生成物の法的扱いは法域ごとの著作権法によって変わる可能性があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新の公式利用規約をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      whoFor={[
+        '日本語UIでAI画像生成・編集を始めたい人',
+        'AI画像生成と写真編集を一つのツールでまとめて行いたい人',
+        '背景除去・バナー作成など幅広い編集機能を試したい人',
+        'テンプレートを活用して手軽にデザインを作りたいクリエイター・個人事業主',
+        '無料から始めてAI画像生成を探求したい人',
+      ]}
+      whoNot={[
+        '透かしなしで無料利用したい人',
+        '高度なLoRA・カスタムモデルを使いたい人',
+        'プロンプト制御を細かく行いたい上級者',
+        'API連携・開発用途が主な人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Fotor AI（このページ）', rk: true, me: true }, { html: '画像生成と写真編集・デザインをまとめて使いたい場合。日本語UI重視。' }],
+          [{ html: '<a href="/tools/canva-ai-image-generator/">Canva AI</a>', rk: true }, { html: '豊富なテンプレートとデザイン機能重視。SNS・プレゼン・印刷物。' }],
+          [{ html: '<a href="/tools/adobe-firefly/">Adobe Firefly</a>', rk: true }, { html: 'Adobe製品との連携や商業利用時の条件を公式で確認しながら使いたい場合。' }],
+          [{ html: '<a href="/tools/midjourney/">Midjourney</a>', rk: true }, { html: 'アート調・雰囲気重視の高品質なビジュアル表現を優先する場合。' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Fotor AI', 'Canva AI', 'Adobe Firefly'],
+        rows: [
+          [{ html: '日本語UI', rk: true }, { html: '対応', me: true }, { html: '対応' }, { html: '対応' }],
+          [{ html: '無料枠', rk: true }, { html: 'Basicプランあり', me: true }, { html: '無料プランあり' }, { html: '限定' }],
+          [{ html: '画像編集機能', rk: true }, { html: '充実', me: true }, { html: '充実' }, { html: 'Adobe連携' }],
+          [{ html: '商用利用', rk: true }, { html: '条件あり・要確認', me: true }, { html: '条件あり・要確認' }, { html: '条件あり・要確認' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>対応。日本語ページが提供されています',
+        '<b>日本語プロンプト：</b>対応。ただしモデルや用途によっては英語プロンプトの方が意図が安定する場合があります',
+        '<b>日本語ドキュメント：</b>日本語ヘルプページが一部提供されています',
+      ]}
+      watermark={[
+        'Basicプランでは書き出し時に透かし（ウォーターマーク）が入る場合があります',
+        '有料プランでは透かしなし書き出しが案内されています',
+        '最新の条件はプランや仕様の変更により変わる可能性があります',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '生成に使ったプロンプト・素材に第三者の著作権・商標が含まれていないか' },
+        { html: 'テンプレートや素材の商用利用条件（プランごとに異なる場合あり）' },
+        { html: '利用中のプランで商用利用が案内されているか（最新の規約確認）' },
+        { html: '書き出し時に透かしが入っていないか（Basicプランは要確認）' },
+        { html: '最新の公式利用規約の内容' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-05-14'}
+      nextCheck={d?.nextReviewDue ?? '2026-06-14'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'Fotor AI画像生成（公式・日本語）', href: 'https://www.fotor.com/jp/ai-image-generator/' },
+        { tag: '料金', label: 'Fotor料金プラン（公式・日本語）', href: 'https://www.fotor.com/jp/pricing/' },
+        { tag: '商用', label: 'AI生成画像の商用利用・所有権について（公式ヘルプ）', href: 'https://support.fotor.com/hc/en-us/articles/17767970123417-Are-the-AI-generated-images-commercially-available-Do-I-have-ownership-of-them' },
+        { tag: '商用', label: 'Commercial Use（公式ヘルプ）', href: 'https://support.fotor.com/hc/en-us/articles/900006654446-Commercial-Use' },
+        { tag: '規約', label: 'Fotor利用規約（公式）', href: 'https://www.fotor.com/termsofservice' },
+      ]}
+      faqs={[
+        { q: 'Fotor AIは無料で使えますか？', a: 'Basicの無料プランがあります。ただし無料クレジット数・生成回数・保存期間・機能制限は変更される可能性があるため、最新の情報はFotor公式料金ページでご確認ください。' },
+        { q: 'Fotor AIは商用利用できますか？', a: '公式ヘルプでは、AI生成画像を個人・商用利用の両方で使えると案内されています。ただし、Fotor側が利用許諾を付与する立場ではないとされており、第三者の権利・商標・保護作品を侵害しない責任はユーザー側にあります。テンプレート・素材の商用利用条件はプランごとに異なる場合があります。商用利用前に最新の公式規約をご確認ください。このページは法的助言ではありません。' },
+        { q: 'Fotor AIは日本語で使えますか？', a: '日本語ページ・日本語UIに対応しています。AI画像生成でも日本語プロンプトを入力できますが、モデルや用途によっては英語プロンプトの方が意図が安定しやすい場合があります。' },
+        { q: '透かしは入りますか？', a: 'Basicプランでは書き出し時に透かしが入る場合があります。有料プランでは透かしなし書き出しが案内されています。最新の条件は公式料金ページでご確認ください。' },
+        { q: 'Fotor AIにはどんな機能がありますか？', a: 'AI画像生成（テキスト→画像）、画像→画像変換、背景除去、写真レタッチ・フィルター、デザインテンプレートなど多数の機能があります。AI画像生成だけでなく画像編集・デザイン補助ツールとしての機能が充実しています。' },
+        { q: 'Fotor AIはどの環境で使えますか？', a: 'Webブラウザから利用できます。インストールは不要です。' },
+      ]}
+      relatedTools={[
+        { name: 'Canva AI', slug: 'canva-ai-image-generator', initial: 'C', cat: '画像生成・デザイン', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'ok', label: '無料枠：あり' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://www.canva.com/ja_jp/' },
+        { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', cat: '画像生成', badges: [{ s: 'paid', label: '商用：有料向け' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://firefly.adobe.com' },
+        { name: 'SeaArt AI', slug: 'seaart-ai', initial: 'S', cat: '画像生成', badges: [{ s: 'cond', label: '商用：要確認' }, { s: 'ok', label: '無料枠：あり' }, { s: 'ok', label: '日本語UI：対応' }], platforms: ['Web'], official: 'https://www.seaart.ai/ja' },
+      ]}
+      nextReads={[
+        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・無料プランがあるツールを一覧で確認' },
+        { href: '/conditions/japanese/', title: '日本語対応AIツール', desc: '日本語UIに対応したツールを一覧で確認' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用と著作権について', desc: 'AI生成画像を商用利用する際の注意点まとめ' },
+        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '日本語対応ツール', href: '/conditions/japanese/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

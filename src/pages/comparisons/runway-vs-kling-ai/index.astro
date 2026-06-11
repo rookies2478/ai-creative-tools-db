@@ -1,0 +1,295 @@
+---
+import ComparisonVsArticle from '../../../components/ComparisonVsArticle.astro';
+import { getEntry } from 'astro:content';
+
+const [toolRunway, toolKlingAi] = await Promise.all([
+  getEntry('tools', 'runway'),
+  getEntry('tools', 'kling-ai'),
+]);
+const toolDates = [toolRunway?.data.lastReviewed, toolKlingAi?.data.lastReviewed].filter(Boolean) as string[];
+const latestDate = toolDates.length ? toolDates.sort().at(-1)! : null;
+
+const faqs = [
+  {
+    q: 'RunwayとKling AIはどちらが初心者向けですか？',
+    a: 'Kling AIは無料プランで毎日クレジットが付与される（翌日繰越なし）とされており、気軽に試しやすい面があります。Runwayは多機能な映像制作ツールが統合されており、映像表現を本格的に試したい場合の候補になります。どちらも英語UIが主体で、日本語ネイティブ対応は現時点で限定的とされています。',
+  },
+  {
+    q: 'RunwayとKling AIはどちらが動画品質が高いですか？',
+    a: 'RunwayはGen-4など最新モデルを継続的に提供しており、映像制作向けの高品質な動画生成で評価されることがある傾向があります。Kling AIはリアル寄りの動画生成や自然な動きの表現で候補になるとされています。用途・素材・生成内容によって評価が異なるため、両方を試して比較することをおすすめします。最新のモデル性能は各公式サイトでご確認ください。',
+  },
+  {
+    q: 'RunwayとKling AIはどちらが無料で使いやすいですか？',
+    a: 'Kling AIは無料プランで1日66クレジット程度が付与されるとされており（翌日繰越なし）、継続的に試せる面があります。Runwayの無料プランは125クレジットが初回のみで更新なしとされています。どちらも無料プランでは透かしあり・商用利用不可とされています。最新の無料プラン条件は各公式サイトでご確認ください。',
+  },
+  {
+    q: 'RunwayとKling AIはどちらが商用利用しやすいですか？',
+    a: 'Runwayは公式ヘルプによると全プランでOutputの商用利用を制限していないとされていますが、無料プランでは透かしが付与されるため実用上の制約があります。Kling AIはStandard以上の有料プランで商用利用が認められているとされていますが、無料プランは商用利用不可とされています。どちらも商用利用前は最新の公式利用規約を必ずご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: 'RunwayとKling AIはどちらが日本語で使えますか？',
+    a: 'Runwayは英語UIのみです。Kling AIは日本語UIのネイティブ対応はなく、ブラウザの翻訳機能や拡張機能に依存する場合があるとされています。日本語プロンプトについてはどちらも一部対応しているとされていますが、英語プロンプトの方が生成品質が高い場合があるとされています。',
+  },
+  {
+    q: 'RunwayとKling AIに透かしは入りますか？',
+    a: 'どちらも無料プランでは透かしが付与される場合があるとされています。有料プランでは条件が変わる場合があるとされていますが、最新の条件は各公式サイトでご確認ください。',
+  },
+  {
+    q: 'RunwayとKling AIで人物・ブランド素材を使ってよいですか？',
+    a: '商用利用条件とは別に、実在人物の肖像権・著名人・ブランドロゴ・第三者素材を含む動画では別途権利確認が必要になる場合があります。生成前に公式規約や権利関係をご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: 'RunwayとKling AIはどちらが映像制作向きですか？',
+    a: 'Runwayは背景削除・動画延長・音声ダビング・API連携など映像制作向けの多機能なツールを統合しており、映像制作・広告動画の試作用途での候補になります。Kling AIはリアル寄りの動画生成と動きの自然さを重視したい場合の候補になります。用途に合わせて公式情報をご確認の上、選択してください。',
+  },
+];
+
+const comparisonRows = [
+  { item: '料金（最低有料プラン）', toolA: '$12/月（Standardプラン・年払い）', toolB: '$6.99/月（Standardプラン・月払い）' },
+  { item: '無料プラン', toolA: '125クレジット（初回のみ・更新なし）', toolB: '1日66クレジット程度（翌日繰越なし）' },
+  { item: '無料プランの継続性', toolA: '一度使い切ると更新なし', toolB: '毎日クレジット付与（継続的に試せる）' },
+  { item: '商用利用（無料プラン）', toolA: '公式情報上制限なしとされるが透かしあり', toolB: '個人・非商用利用のみ（商用利用不可とされる）' },
+  { item: '商用利用（有料プラン）', toolA: '全プランで商用利用可能な場合あり（条件あり）', toolB: 'Standard以上で商用利用可（条件あり）' },
+  { item: '日本語UI', toolA: '非対応（英語のみ）', toolB: '非対応（拡張機能依存の場合あり）' },
+  { item: '日本語プロンプト', toolA: '一部対応（精度は要確認）', toolB: '一部対応（英語の方が精度高め）' },
+  { item: '透かし（無料プラン）', toolA: 'あり', toolB: 'あり' },
+  { item: '透かし（有料プラン）', toolA: 'なし（プランによる・要確認）', toolB: 'なし（プランによる・要確認）' },
+  { item: 'テキスト→動画', toolA: '対応', toolB: '対応' },
+  { item: '画像→動画', toolA: '対応', toolB: '対応' },
+  { item: '動画延長', toolA: '対応', toolB: '対応（有料プランで最大3分まで）' },
+  { item: '最大動画長', toolA: 'プランによる（要確認）', toolB: '10秒/クリップ（Extend機能で最大3分まで・有料）' },
+  { item: '背景削除', toolA: '対応', toolB: '要確認' },
+  { item: 'API', toolA: '対応', toolB: '要確認' },
+  { item: '対応環境', toolA: 'Web・API', toolB: 'Web' },
+  { item: '映像編集ツール', toolA: '統合（背景削除・音声ダビング等）', toolB: '主にAI動画生成に特化' },
+];
+
+const relatedLinks = [
+  { href: '/tools/runway/', label: 'Runway詳細' },
+  { href: '/tools/kling-ai/', label: 'Kling AI詳細' },
+  { href: '/categories/video-generation/', label: 'AI動画生成ツール一覧' },
+  { href: '/tools/luma-ai/', label: 'Luma AI詳細' },
+  { href: '/tools/pika/', label: 'Pika詳細' },
+  { href: '/tools/hailuo-ai/', label: 'Hailuo AI詳細' },
+  { href: '/comparisons/runway-vs-pika/', label: 'RunwayとPikaを比較' },
+  { href: '/comparisons/', label: 'AI画像・動画ツール比較表' },
+];
+
+const sources = [
+  { href: 'https://runwayml.com/pricing/', label: 'Runway料金プラン（公式）' },
+  { href: 'https://runwayml.com/terms-of-use/', label: 'Runway利用規約（公式）' },
+  { href: 'https://help.runwayml.com/hc/en-us/articles/18927776141715-Usage-rights', label: 'Runway利用権について（公式ヘルプ）' },
+  { href: 'https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes', label: 'Runway：商用利用について（公式ヘルプ）' },
+  { href: 'https://klingai.com/global/pricing', label: 'Kling AI料金ページ（公式・確認時点でHTTP 446により直接確認不可）' },
+  { href: 'https://klingai.com/docs/user-policy', label: 'Kling AIユーザーポリシー（公式・確認時点でHTTP 446により直接確認不可）' },
+];
+
+const articleJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "RunwayとKling AIを比較｜AI動画生成ならどちらを選ぶ？",
+  "description": "RunwayとKling AIの特徴、無料プラン、商用利用条件、日本語対応、透かし、向いている用途を比較します。映像制作寄りかリアル動画生成かで選び方が異なります。",
+  "url": "https://aicreative-db.com/comparisons/runway-vs-kling-ai/",
+  "mainEntityOfPage": "https://aicreative-db.com/comparisons/runway-vs-kling-ai/",
+  "author": { "@type": "Organization", "name": "AIクリエイティブナビ編集部" },
+  "publisher": { "@type": "Organization", "name": "AIクリエイティブナビ", "url": "https://aicreative-db.com/" },
+  "datePublished": "2026-06-11",
+  "dateModified": "2026-06-11",
+});
+---
+
+<ComparisonVsArticle
+  title="RunwayとKling AIを比較｜AI動画生成ならどちらを選ぶ？ | AIクリエイティブナビ"
+  description="RunwayとKling AIの特徴、無料プラン、商用利用条件、日本語対応、透かし、向いている用途を比較します。映像制作寄りかリアル動画生成かで選び方が異なります。"
+  canonicalPath="/comparisons/runway-vs-kling-ai/"
+  jsonLd={articleJsonLd}
+  breadcrumbLabel="RunwayとKling AI比較"
+  h1="RunwayとKling AIを比較｜AI動画生成ならどちらを選ぶ？"
+  lead="RunwayとKling AIはどちらもAI動画生成ツールですが、強みの傾向が異なります。映像制作寄りの多機能ツールを試したい場合はRunwayが、リアル寄りの動画生成や毎日の無料枠で継続的に試したい場合はKling AIが候補になります。無料プランの更新条件・料金・商用利用条件・対応機能を確認して、用途に合った選択をしてください。"
+  category="AI動画生成ツール比較"
+  latestDate={latestDate}
+  toolAName="Runway"
+  toolASlug="runway"
+  toolBName="Kling AI"
+  toolBSlug="kling-ai"
+  conclusionA={{
+    label: '映像制作・多機能重視 →',
+    toolName: 'Runway',
+    toolHref: '/tools/runway/',
+    body: 'Gen-4など最新モデルによる高品質な動画生成に加え、背景削除・動画延長・音声ダビング・API連携など映像制作向けの多機能なツールが統合されています。無料プランはクレジットが初回のみで更新なしのため、継続利用には有料プランが現実的です。全プランで商用利用可能な場合あり（無料プランは透かしあり）とされていますが、最新規約要確認。',
+  }}
+  conclusionB={{
+    label: 'リアル寄りの動画・毎日無料枠で試したい →',
+    toolName: 'Kling AI',
+    toolHref: '/tools/kling-ai/',
+    body: 'リアル寄りの動画生成や自然な動きの表現を比較したい場合の候補とされています。無料プランで毎日クレジットが付与されるとされており（翌日繰越なし・透かしあり）、継続的に試せる面があります。商用利用はStandard以上の有料プランで可能とされていますが、無料プランは商用利用不可。プランや用途によって条件が異なるため、最新の公式規約を必ずご確認ください。',
+  }}
+  conclusionNote="比較結果は用途・プラン・素材条件によって変わる場合があります。最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。"
+  comparisonRows={comparisonRows}
+  faqs={faqs}
+  relatedLinks={relatedLinks}
+  sources={sources}
+  noticeItems={[
+    '料金・無料枠・商用利用条件・透かし条件は変更される場合があります。',
+    '最新情報は各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。',
+    '本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。',
+    'Kling AI公式ページはHTTP 446により直接確認できない場合があります。第三者情報源を参照しています。',
+  ]}
+>
+  <!-- ===== Runwayの特徴 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">Runwayの特徴</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">強み</h3>
+        <ul>
+          <li>Gen-4など最新モデルによる高品質な動画生成</li>
+          <li>テキスト→動画・画像→動画・動画延長など多機能</li>
+          <li>背景削除・音声ダビングなど映像編集ツールも統合</li>
+          <li>API連携が可能</li>
+          <li>公式情報上、全プランで商用利用可能とされる（条件あり）</li>
+        </ul>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">注意点</h3>
+        <ul>
+          <li>無料プランのクレジットは125クレジット（初回のみ・更新なし）とされている</li>
+          <li>日本語UIなし（英語インターフェースのみ）</li>
+          <li>無料プランでは透かしあり</li>
+          <li>料金はKling AIより高め（Standard $12/月・年払い）</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-soft);">詳細は<a href="/tools/runway/" style="color:var(--brand-ink);">Runway詳細ページ</a>をご参照ください。</p>
+  </section>
+
+  <!-- ===== Kling AIの特徴 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">Kling AIの特徴</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">強み</h3>
+        <ul>
+          <li>リアル寄りのAI動画生成を試したい場合の候補とされている</li>
+          <li>無料プランで毎日クレジットが付与されるとされている（翌日繰越なし）</li>
+          <li>Runwayより料金が低め（Standard $6.99/月）</li>
+          <li>テキスト→動画・画像→動画・動画延長（Extend）に対応</li>
+        </ul>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">注意点</h3>
+        <ul>
+          <li>無料プランでは商用利用不可・透かしありとされている</li>
+          <li>日本語UIはネイティブ非対応（拡張機能依存の場合あり）</li>
+          <li>公式ページがHTTP 446で直接確認できない場合がある</li>
+          <li>Runwayに比べて映像編集ツール群は限定的とされる</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-soft);">詳細は<a href="/tools/kling-ai/" style="color:var(--brand-ink);">Kling AI詳細ページ</a>をご参照ください。</p>
+  </section>
+
+  <!-- ===== 料金・無料枠の違い ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">料金・無料枠・クレジットの違い</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Runway</h3>
+        <p>無料プランは125クレジット（初回のみ・更新なし）とされています。有料プランはStandard $12/月〜（年払い）から案内されています。無料プランを使い切ると継続利用には有料プランが必要になります。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">最新の料金は<a href="https://runwayml.com/pricing/" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Runway公式料金ページ</a>をご確認ください。</p>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Kling AI</h3>
+        <p>無料プランで1日66クレジット程度が付与されるとされています（翌日繰越なし）。有料プランはStandard $6.99/月〜（月払い）と案内されています。クレジット繰越不可・生成失敗時の返金なしの場合があります。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">最新の料金は<a href="https://klingai.com/global/pricing" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Kling AI公式料金ページ</a>をご確認ください（確認時点でHTTP 446により直接確認できない場合があります）。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== テキスト→動画・画像→動画の違い ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">テキストから動画・画像から動画の違い</h2>
+    <p>RunwayとKling AIはどちらもテキストから動画・画像から動画・動画延長に対応しているとされています。傾向の違いとして以下が挙げられることがありますが、生成内容・プロンプト・使用モデルによって結果は大きく変わる場合があります。</p>
+    <ul>
+      <li><strong>Runway：</strong>映像制作向けのモデル（Gen-4等）で高品質な動画生成に定評があるとされています。背景削除・音声ダビングなど映像制作ツールとして幅広い用途に対応しています。</li>
+      <li><strong>Kling AI：</strong>リアル寄りの映像表現や人物・物体の自然な動きを試したい場合の候補とされています。最大3分まで動画延長（Extend機能・有料プラン）が可能とされています。</li>
+    </ul>
+    <p style="font-size:13px;color:var(--ink-soft);">いずれも単一サンプルで性能を断定することは適切ではありません。用途に合わせて両ツールを試して比較することをおすすめします。</p>
+  </section>
+
+  <!-- ===== 商用利用・透かし注意 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">商用利用前に確認したいポイント</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Runway</h3>
+        <p>公式ヘルプによると、すべてのプランでOutputの商用利用を制限していないとされています。ただし<strong>無料プランでは透かしが付与されるため実用上の制約があります</strong>。生成コンテンツの内容や第三者の権利によって制限される場合があります。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">利用前に最新の<a href="https://runwayml.com/terms-of-use/" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Runway利用規約</a>をご確認ください。</p>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Kling AI</h3>
+        <p>公式規約（2026年4月21日付・第三者情報源による）では、<strong>Standard以上の有料プランで商用利用が認められているとされています</strong>。無料プランは個人・非商用利用のみとされています。公式ページはHTTP 446により直接確認できない場合があります。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">利用前に最新の<a href="https://klingai.com/docs/user-policy" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Kling AIユーザーポリシー</a>をご確認ください。</p>
+      </div>
+    </div>
+    <div class="cp-caution-box">
+      <p><strong>人物・ブランド・第三者素材を使う場合：</strong>実在人物の肖像権・著名人・ブランドロゴ・第三者素材を含む動画では、商用利用条件とは別に権利確認が必要です。生成前に公式規約や権利関係をご確認ください。</p>
+      <p style="margin-top:8px;"><strong>第三者素材をアップロードする場合：</strong>著作権・肖像権・商標権が第三者に帰属する素材を使用する際は、素材の利用権も含めて確認が必要です。</p>
+      <p style="margin-top:8px;"><a href="/guides/commercial-use-copyright/" style="color:var(--notice-ink);font-weight:600;">AI生成コンテンツの商用利用・著作権ガイド →</a></p>
+    </div>
+  </section>
+
+  <!-- ===== 向いている人 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">向いている人・向いていない人</h2>
+    <div class="cp-suited-grid">
+      <div class="cp-suited-card">
+        <p class="cp-suited-h">Runwayが向いている人</p>
+        <ul class="cp-suited-list">
+          <li>映像制作・広告動画の試作を本格的に行いたい人</li>
+          <li>背景削除・動画延長・音声ダビングなど多機能なツールも使いたい人</li>
+          <li>API連携も含めた開発用途に使いたい人</li>
+          <li>有料プランで継続的に高品質な動画生成を試したい人</li>
+        </ul>
+      </div>
+      <div class="cp-suited-card">
+        <p class="cp-suited-h">Kling AIが向いている人</p>
+        <ul class="cp-suited-list">
+          <li>リアル寄りの動画生成や自然な動きを試したい人</li>
+          <li>毎日の無料枠で継続的に試したい人（商用利用不可・透かしあり）</li>
+          <li>コストを抑えて有料プランに移行したい人（最低$6.99/月）</li>
+          <li>SNS向けのリアル寄り短尺動画を試したい人</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cp-not-suited">
+      <p class="cp-not-suited-h">どちらも向いていないケース</p>
+      <ul>
+        <li>長尺動画を細かく編集したい人</li>
+        <li>毎回同じ人物・構図・動きを完全に再現したい人</li>
+        <li>公式条件を確認せずに商用案件へ使いたい人</li>
+        <li>無料枠だけで高解像度・透かしなし出力を前提にしたい人</li>
+        <li>日本語UIで完全に操作したい人（どちらも現時点でネイティブ非対応）</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== 他ツール候補 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">他のAI動画生成ツールとの選び分け</h2>
+    <div class="cp-other-grid">
+      <div class="cp-other-card">
+        <p class="cp-other-h"><a href="/tools/pika/">Pika</a></p>
+        <p>短尺動画を手軽に試したい場合の候補とされています。無料プランで毎月クレジットが更新されるとされています。RunwayやKling AIとは異なる生成特性を持つ場合があります。詳細は<a href="/comparisons/runway-vs-pika/" style="color:var(--brand-ink);">RunwayとPikaの比較</a>もご参照ください。</p>
+      </div>
+      <div class="cp-other-card">
+        <p class="cp-other-h"><a href="/tools/luma-ai/">Luma AI</a></p>
+        <p>自然なカメラワークや映像表現を比較検討したい場合の候補とされています。詳しくは<a href="/categories/video-generation/" style="color:var(--brand-ink);">AI動画生成ツール一覧</a>でご確認ください。</p>
+      </div>
+      <div class="cp-other-card">
+        <p class="cp-other-h"><a href="/tools/hailuo-ai/">Hailuo AI</a></p>
+        <p>リアル寄りの動画生成を別視点で比較検討したい場合の候補とされています。料金・商用利用条件・無料枠は変更される可能性があるため、最新情報は公式サイトでご確認ください。</p>
+      </div>
+    </div>
+  </section>
+</ComparisonVsArticle>

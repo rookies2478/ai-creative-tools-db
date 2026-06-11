@@ -1,0 +1,284 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'tensor-art');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Tensor.Art', item: 'https://aicreative-db.com/tools/tensor-art/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Tensor.Art',
+    operatingSystem: 'Web',
+    applicationCategory: 'DesignApplication',
+    description: 'Stable Diffusion系モデル・LoRA・Checkpoint・Workflowを活用してブラウザ上で画像生成できるコミュニティ型AI画像生成プラットフォーム。',
+    url: 'https://tensor.art/',
+  },
+]);
+---
+
+<BaseLayout
+  title="Tensor.Artの商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="Tensor.ArtのSD系モデル・LoRA活用・商用利用条件・料金プラン・無料枠を公式情報をもとに整理。モデルごとのライセンス確認の重要性も解説。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/tensor-art/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Tensor.Art</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Tensor.Art"
+      category="AI画像生成（コミュニティ型）"
+      checkedDate={d?.lastReviewed ?? '2026-05-14'}
+      headingHtml='Tensor.Artの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="Tensor.ArtはStable Diffusion系モデル・LoRA・Checkpoint・Workflowを活用してブラウザ上で画像生成できるコミュニティ型プラットフォームです。無料利用枠があり、豊富なモデルライブラリと他ユーザーの作例を参考にしながら使えます。商用利用については、Tensor.Art側はAI生成画像の著作権を主張しないとされていますが、利用するモデル・LoRAごとのライセンス確認が必須です。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '条件あり（モデル依存）' } },
+        { lb: '無料枠', badge: { s: 'ok', label: '無料利用枠あり' } },
+        { lb: '料金目安', text: '無料〜Proプラン（公式確認）', mono: true },
+        { lb: '透かし', badge: { s: 'na', label: '要確認' } },
+        { lb: '日本語UI', badge: { s: 'na', label: '要確認' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://tensor.art/' }}
+      secondaryCta={{ label: '利用規約（公式）', href: 'https://tensor.art/about/terms-of-service-new' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '条件あり（モデル依存）' }, wide: true,
+          sum: '公式Termsでは、Tensor.Art側はAI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で使用できると案内されています。ただし利用するモデル・LoRAのライセンスは個別確認が必須です。',
+          det: '公式Terms（terms-of-service-new）では、Tensor.Art側はモデルやAI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で自由に使用できると案内されています。ただし、利用するモデル・LoRA・AI Toolsが商用利用可能かどうかは個別確認が必要です。商用利用不可モデルを使った場合の責任はユーザー側にあるとされています。アップロードする元画像の著作権・使用権の確認も必要です。商用利用を前提にする場合は最新の公式規約とモデルごとのライセンスをご確認ください。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'ok', label: '無料利用枠あり' },
+          det: '無料利用枠が案内されています。クレジット制の仕組みや利用回数は変更される可能性があるため、最新の状況は公式サイトでご確認ください。',
+        },
+        {
+          title: '最安料金目安', sum: '無料〜Proプラン（Daily Pass・Monthly等・要公式確認）', sumMono: true,
+          det: '無料利用枠のほか、Daily Pass・Monthly Pro Subscription・Quarterly・Yearly・Credits Packなどの有料プランが案内されています。詳細は公式Proプランページでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'na', label: '要確認' },
+          det: '透かし条件はモデル・機能・プランにより変わる可能性があります。公式情報のみでは全機能の透かし条件を断定できません。最新の条件は公式画面でご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'na', label: '要確認' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '△ 一部対応' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web（ブラウザ）'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→画像生成', '画像→画像生成', 'インペインティング', 'モデル・LoRA・Checkpoint選択', 'スタイルプリセット', 'Workflow機能', 'AI Tools'] },
+      ]}
+      useCases={[
+        '<b>Stable Diffusion系モデルをブラウザで手軽に試したい場合</b>（ローカル環境不要）',
+        '<b>LoRA・Checkpointを組み合わせた独自スタイルの表現</b>',
+        '<b>アニメイラスト・キャラクター画像の生成</b>',
+        '<b>リアル系写真・ポートレート風画像の生成</b>',
+        '<b>他ユーザーの作例を参考にプロンプトを学習・検証</b>',
+      ]}
+      pros={[
+        'モデル・LoRA・Checkpointが豊富でスタイルの選択肢が広い',
+        'コミュニティ型プラットフォームで作例・設定例を探しやすい',
+        '無料利用枠があり始めやすい',
+        'ブラウザ上で動作しローカル環境の構築が不要',
+        'Workflow機能で画像生成フローを作成・共有できる',
+      ]}
+      cons={[
+        '商用利用時はモデルごとのライセンス個別確認が必須',
+        '商用利用不可モデルを使った場合の責任はユーザー側にある',
+        '日本語UIは公式情報のみでは確認不可',
+        '透かし条件はモデル・機能・プランにより変わる可能性がある',
+        'モデル選択や設定項目が多く初心者にはやや難しい場合がある',
+      ]}
+      limits={[
+        '商用利用時はモデル・LoRAごとのライセンス確認が必要',
+        '無料枠・クレジット条件は予告なく変更される可能性がある',
+        '日本語UIは公式情報のみでは確認不可',
+        '透かし条件はモデル・機能・プランにより変わる可能性がある',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成（Stable Diffusion系・コミュニティ型）' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>無料利用枠あり</span><br>クレジット数・条件は変更の可能性あり。最新情報は公式確認要。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">無料〜Proプラン（要公式確認）</span><br>Daily Pass・Monthlyなど複数プランあり。最新料金は公式確認要。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（モデル依存）</span><br>Tensor.Art側は著作権主張しないが、利用するモデル・LoRAのライセンス個別確認が必須。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>モデル・機能・プランにより変わる可能性あり。' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>公式情報のみでは確認できていません。' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span><br>SD系モデルは英語プロンプトの方が安定しやすい傾向あり。' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web（ブラウザ）' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-14', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://tensor.art/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 商用利用条件はモデルごとに異なります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'Tensor.ArtはStable Diffusion系モデル・LoRA・Checkpoint・Workflowを活用してブラウザ上で画像生成できるコミュニティ型プラットフォームです。ローカルにStable Diffusionをインストールすることなく、豊富なモデルライブラリにアクセスできます。',
+        '<b>商用利用の注意点</b>：Tensor.Art側はAI生成画像の所有権・著作権を主張しないとされていますが、利用するモデル・LoRAが商用利用可能かどうかはモデルごとに個別確認が必要です。商用利用不可モデルを使用した場合の責任はユーザー側にあるとされています。',
+      ]}
+      aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金目安'],
+          rows: [
+            [{ html: '無料利用枠', rk: true }, { html: '無料（クレジット制限あり）', mono: false }],
+            [{ html: 'Daily Pass', rk: true }, { html: '公式Proページで確認', mono: false }],
+            [{ html: 'Monthly Pro Subscription', rk: true }, { html: '公式Proページで確認', mono: false }],
+            [{ html: 'Credits Pack', rk: true }, { html: '公式Proページで確認', mono: false }],
+          ],
+        },
+        notes: [
+          '無料枠の回数・クレジット量は変更される可能性があります',
+          '有料プランの料金・特典はProプランページでご確認ください',
+          '<b>最新料金は公式サイトでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: 'Tensor.Art側はAI生成画像の著作権を主張しないとされていますが、利用するモデル・LoRAのライセンスはそれぞれ異なります。商用利用前はモデルごとの確認が必須です。',
+        points: [
+          '<b>Tensor.Artの基本方針</b>：AI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で使用できると案内されています',
+          '<b>モデル・LoRAのライセンス</b>：商用利用可否はモデルごとに異なります。商用利用不可モデルを使った場合の責任はユーザー側にあるとされています',
+          '<b>入力画像の権利</b>：img2imgで使用する入力画像の著作権・使用権の確認も必要です',
+          '<b>第三者の権利</b>：第三者の権利・素材を使用する場合は権利確認が必要です',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新の公式規約と利用するモデルのライセンスをご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="LoRA・Checkpoint・Workflowについて"
+      integration="Tensor.ArtではStable Diffusion系のLoRA・Checkpointをプラットフォーム上で選択して利用できます。Workflow機能では画像生成フローの作成・共有が可能です。商用利用を前提にする場合は、選択するモデル・LoRAごとのライセンスを必ず確認してください。"
+      whoFor={[
+        'Stable Diffusion系モデルをブラウザで手軽に試したい人',
+        'LoRAやCheckpointを使って独自スタイルを探求したいクリエイター',
+        '他ユーザーの作例・設定例を参考にプロンプトを学習・検証したい人',
+        'アニメイラスト・キャラクター画像の生成に強い環境を探している人',
+        'ローカル環境を構築せずにStable Diffusion系の機能を使いたい人',
+      ]}
+      whoNot={[
+        '商用利用条件をシンプルに確認したい人（モデルごとの個別確認が必要）',
+        '日本語UIを重視する人（対応状況は要確認）',
+        'Adobe製品連携や公式保証を重視する人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Tensor.Art（このページ）', rk: true, me: true }, { html: 'ブラウザでSD系モデル・LoRA・Workflowを活用したい場合' }],
+          [{ html: '<a href="/tools/stable-diffusion/">Stable Diffusion</a>', rk: true }, { html: 'ローカル実行・カスタマイズ性・LoRA活用を最大限に重視する場合' }],
+          [{ html: '<a href="/tools/seaart-ai/">SeaArt AI</a>', rk: true }, { html: 'アニメ風・イラスト系・日本語UI重視の場合' }],
+          [{ html: '<a href="/tools/leonardo-ai/">Leonardo AI</a>', rk: true }, { html: 'イラスト・ゲーム素材・キャラクター案出しでカスタムモデルを活用したい場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Tensor.Art', 'Stable Diffusion', 'SeaArt AI'],
+        rows: [
+          [{ html: '実行環境', rk: true }, { html: 'ブラウザ', me: true }, { html: 'ローカル / API' }, { html: 'ブラウザ' }],
+          [{ html: '無料枠', rk: true }, { html: 'あり', me: true }, { html: 'ローカルは無料' }, { html: 'あり' }],
+          [{ html: '商用利用', rk: true }, { html: 'モデル依存・要確認', me: true }, { html: 'モデル依存・要確認' }, { html: 'プラン・モデル依存' }],
+          [{ html: 'カスタマイズ性', rk: true }, { html: '高い（ブラウザ内）', me: true }, { html: '最高レベル' }, { html: '高い' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>公式情報のみでは日本語UI対応を確認できていません。実際の画面は公式サイトでご確認ください',
+        '<b>日本語プロンプト：</b>一部対応。Stable Diffusion系モデルやLoRAでは英語プロンプトの方が意図通りに生成されやすい傾向があります',
+      ]}
+      watermark={[
+        '透かし条件はモデル・機能・プランにより変わる可能性があります',
+        '公式情報のみでは全機能の透かし条件を断定できません',
+        '最新の条件は公式画面でご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '利用するモデル・LoRAが商用利用可能かどうか（モデルごとに個別確認）' },
+        { html: '商用利用不可モデルを誤って使用していないか' },
+        { html: 'img2imgで使用する入力画像の著作権・使用権' },
+        { html: '透かしの有無（公式画面で最新状況を確認）' },
+        { html: '最新の公式利用規約の内容' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-05-14'}
+      nextCheck={d?.nextReviewDue ?? '2026-06-14'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'Tensor.Art公式サイト', href: 'https://tensor.art/' },
+        { tag: '規約', label: 'Tensor.Art利用規約（公式）', href: 'https://tensor.art/about/terms-of-service-new' },
+        { tag: '料金', label: 'Tensor.Art Proプラン案内（公式）', href: 'https://tensor.art/event/proupdate' },
+        { tag: 'ドキュメント', label: 'Tensor.Art Workflow（公式）', href: 'https://tensorart.me/workflow' },
+      ]}
+      faqs={[
+        { q: 'Tensor.Artは無料で使えますか？', a: '無料利用枠が案内されています。ただしクレジット制の仕組みや利用回数は変更される可能性があるため、最新の状況はTensor.Art公式サイトでご確認ください。' },
+        { q: 'Tensor.Artは商用利用できますか？', a: '公式Termsでは、Tensor.Art側はAI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で使用できると案内されています。ただし、利用するモデル・LoRAが商用利用可能かどうかは個別確認が必要です。商用利用不可モデルを使った場合の責任はユーザー側にあるとされています。最新の公式規約とモデルごとのライセンスをご確認ください。このページは法的助言ではありません。' },
+        { q: '日本語プロンプトは使えますか？', a: '日本語プロンプトでも使える場合がありますが、Stable Diffusion系モデルやLoRAでは英語プロンプトの方が意図通りに生成されやすい傾向があります。意図した画像が生成されない場合は英語プロンプトも試してみてください。' },
+        { q: '透かしは入りますか？', a: '透かし条件はモデル・機能・プランにより変わる可能性があります。公式情報のみでは断定できないため、最新の条件はTensor.Art公式画面でご確認ください。' },
+        { q: 'LoRAやCheckpointはどう使いますか？', a: 'Tensor.Artではプラットフォーム上でモデル・LoRA・Checkpointを選択して利用できます。商用利用時は選択するモデルごとのライセンスを必ず確認してください。' },
+        { q: 'ローカル版Stable Diffusionと何が違いますか？', a: 'Tensor.ArtはブラウザURLで動作するサービスのため、ローカル環境の構築やGPUが不要です。一方で、ローカル版と比べてカスタマイズ性は限られる場合があります。' },
+      ]}
+      relatedTools={[
+        { name: 'Stable Diffusion', slug: 'stable-diffusion', initial: 'S', cat: '画像生成', badges: [{ s: 'cond', label: '商用：モデル依存' }, { s: 'ok', label: '無料枠：ローカル無料' }, { s: 'cond', label: '日本語UI：拡張機能で可' }], platforms: ['ローカル', 'API'], official: 'https://stability.ai' },
+        { name: 'SeaArt AI', slug: 'seaart-ai', initial: 'S', cat: '画像生成', badges: [{ s: 'cond', label: '商用：要確認' }, { s: 'ok', label: '無料枠：あり' }, { s: 'ok', label: '日本語UI：対応' }], platforms: ['Web'], official: 'https://www.seaart.ai/ja' },
+        { name: 'Leonardo AI', slug: 'leonardo-ai', initial: 'L', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料枠：限定' }, { s: 'cond', label: '日本語UI：要確認' }], platforms: ['Web'], official: 'https://leonardo.ai' },
+      ]}
+      nextReads={[
+        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・無料プランがあるツールを一覧で確認' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用と著作権について', desc: 'AI生成画像を商用利用する際の注意点まとめ' },
+        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

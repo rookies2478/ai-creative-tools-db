@@ -1,0 +1,282 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'microsoft-designer');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Microsoft Designer', item: 'https://aicreative-db.com/tools/microsoft-designer/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Microsoft Designer',
+    operatingSystem: 'Web',
+    applicationCategory: 'DesignApplication',
+    description: 'MicrosoftのAIデザイン・画像生成サービス。SNS画像、バナー、プレゼン素材などを手軽に作成できる。',
+    url: 'https://designer.microsoft.com/',
+  },
+]);
+---
+
+<BaseLayout
+  title="Microsoft Designerの商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="Microsoft Designerの商用利用条件・料金プラン・無料枠・透かし・日本語対応状況を、公式情報をもとに整理しています。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/microsoft-designer/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Microsoft Designer</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Microsoft Designer"
+      category="AI画像生成"
+      checkedDate={d?.lastReviewed ?? '2026-05-26'}
+      headingHtml='Microsoft Designerの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="MicrosoftのAIデザイン・画像生成サービス。Microsoftアカウントで利用でき、SNS画像・バナー・プレゼン素材の作成に向いている。料金・商用利用・日本語対応を公式情報をもとに整理しています。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '条件あり' } },
+        { lb: '無料枠', badge: { s: 'ok', label: '無料枠あり' } },
+        { lb: '料金目安', text: '要公式確認', mono: true },
+        { lb: '透かし', badge: { s: 'na', label: '要確認' } },
+        { lb: '日本語UI', badge: { s: 'ok', label: '〇 対応' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://designer.microsoft.com/' }}
+      secondaryCta={{ label: 'よくある質問（公式）', href: 'https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '条件あり' }, wide: true,
+          sum: '用途・アカウント種別・最新規約により条件が異なる可能性があります。',
+          det: 'Microsoft Designerの公式FAQでは、Microsoftアカウントでの個人的な利用や非商用利用に関する記載があります。商用利用の可否や条件は、用途・アカウント種別・Microsoftの最新規約により異なる可能性があるため、公式情報をご確認ください。',
+        },
+        {
+          title: '無料枠', badge: { s: 'ok', label: '無料枠あり' },
+          det: 'Microsoftアカウントがあれば無料で利用できる場合があります。利用可能な機能や制限は変更される可能性があります。',
+        },
+        {
+          title: '最安料金目安', sum: '要公式確認', sumMono: true,
+          det: '無料で利用できる機能があります。詳細なプラン・クレジット数・有料オプションは変更される可能性があるため、最新の情報は公式サイトでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'na', label: '要確認' },
+          det: '透かしの有無・条件は現時点での公式情報では確認できていません。最新の条件は公式サイトでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'ok', label: '〇 対応' } },
+            { label: 'プロンプト', badge: { s: 'ok', label: '〇 対応' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→画像', 'スタイル選択', 'プロンプト補助'] },
+      ]}
+      useCases={[
+        '<b>SNS投稿画像</b>のビジュアル作成',
+        '<b>広告バナー案</b>の初期案作りや複数パターン比較',
+        '<b>ブログアイキャッチ・プレゼン資料</b>用ビジュアルの案出し',
+        '<b>Microsoftアカウント・Microsoft系サービス</b>との連携環境で使いたい場合',
+      ]}
+      pros={[
+        'Microsoftアカウントで手軽に開始できる',
+        '画像生成だけでなくデザイン作成・画像編集にも使いやすい',
+        'SNS投稿や資料用のビジュアル作成に向いている',
+        'テンプレートを使ったデザイン制作が手軽',
+        '日本語UI対応で英語ツールに慣れていない場合でも使いやすい',
+      ]}
+      cons={[
+        '商用利用条件は用途やアカウント種別により確認が必要',
+        '一部機能は地域・年齢・サブスクリプション条件に左右される可能性がある',
+        '透かしの有無が公式情報から確認できていない',
+      ]}
+      limits={[
+        '商用利用条件は公式規約の確認が必要',
+        '一部機能は地域・年齢制限の対象になる場合がある',
+        'APIによる自動化・組み込みには非対応（公式情報による）',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>無料枠あり</span><br>Microsoftアカウントがあれば無料で利用できる場合があります' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">要公式確認</span>' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり</span><br>用途・アカウント種別・最新規約により条件が異なります。最新情報は公式サイトをご確認ください。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>公式情報から確認できていません' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>〇 対応</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>〇 対応</span>' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-26', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://designer.microsoft.com/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'Microsoft DesignerはMicrosoftが提供するAIデザイン・画像生成サービスです。Microsoftアカウントでブラウザから利用でき、SNS投稿用画像・バナー・プレゼン素材などのビジュアル作成に活用されています。テキストプロンプトからの画像生成に加え、テンプレートを使ったデザイン編集機能も備えています。',
+        'Microsoftアカウントとの親和性が高く、Microsoft 365環境と組み合わせた制作フローへの取り込みがしやすいとされています。デザイン経験が少ない場合でも短時間でビジュアル案を作成しやすいです。',
+      ]}
+      aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', '機能'],
+          rows: [
+            [{ html: '無料（Microsoftアカウント）', rk: true }, { html: '無料', mono: true }, { html: '一定の機能が利用可能な場合があります' }],
+          ],
+        },
+        notes: [
+          '詳細なプラン・クレジット数・有料オプションは変更される可能性があります',
+          '<b>最新の情報は公式サイトでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: '商用利用の可否や条件は、用途・アカウント種別・Microsoftの最新規約により異なる可能性があります。',
+        points: [
+          'Microsoftアカウントの種別（個人・法人・教育機関など）によって条件が変わる可能性があります',
+          '生成物の利用条件（配布・販売・広告利用など）は公式規約でご確認ください',
+          'テンプレート・素材・ブランド・ロゴの権利関係は個別確認が必要です',
+          '第三者の商標・肖像・著作物が含まれていないか確認が必要です',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。利用前にMicrosoftサービス規約および公式FAQの最新版をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="Microsoft系サービスとの連携"
+      integration="Microsoft DesignerはMicrosoftアカウントと連携しており、Microsoft 365環境と組み合わせた制作フローに取り入れやすいとされています。PowerPointなどのプレゼン資料に使うビジュアル素材の案出しや、Teams・OneDriveとの連携も利用環境によっては活用できます。各機能の利用可否はアカウント種別やプランによって異なります。最新の対応状況は公式サイトでご確認ください。"
+      whoFor={[
+        'Microsoftアカウントをすでに持っている人',
+        'SNS投稿・資料・バナー用の画像を手軽に作りたい人',
+        '英語ツールに慣れていない初心者',
+        'デザインテンプレートと画像生成を組み合わせて使いたい人',
+        'Microsoft系サービスとの連携を重視する人',
+      ]}
+      whoNot={[
+        '高精度なアート調ビジュアルを重視する人（Midjourneyが候補）',
+        'Adobe製品との連携を優先する人（Adobe Fireflyが候補）',
+        '公式条件を確認せずに商用案件へ使いたい人',
+        'APIによる自動化・組み込みを必要とする人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Microsoft Designer（このページ）', rk: true, me: true }, { html: 'Microsoftアカウントを活用してデザインと画像生成を一体で行いたい場合' }],
+          [{ html: '<a href="/tools/canva-ai-image-generator/">Canva AI画像生成</a>', rk: true }, { html: 'Canva内のテンプレートとデザイン制作フローの中で画像生成を使いたい場合' }],
+          [{ html: '<a href="/tools/adobe-firefly/">Adobe Firefly</a>', rk: true }, { html: 'Adobe製品との連携や、商用利用時の条件を公式で確認しながら使いたい場合' }],
+          [{ html: '<a href="/tools/midjourney/">Midjourney</a>', rk: true }, { html: 'アート調・雰囲気重視の高品質なビジュアル表現を重視する場合' }],
+          [{ html: '<a href="/tools/dalle/">DALL·E</a>', rk: true }, { html: 'ChatGPT連携で手軽に画像生成・アイデア出しをしたい場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Microsoft Designer', 'Canva AI', 'Adobe Firefly'],
+        rows: [
+          [{ html: '用途の傾向', rk: true }, { html: 'Microsoft連携・デザイン', me: true }, { html: 'テンプレートデザイン・SNS' }, { html: 'デザイン制作・Adobe連携' }],
+          [{ html: '無料枠', rk: true }, { html: 'あり（条件あり）', me: true }, { html: '限定的' }, { html: '限定的' }],
+          [{ html: '日本語UI', rk: true }, { html: '対応', me: true }, { html: '対応' }, { html: '対応' }],
+          [{ html: 'Microsoft連携', rk: true }, { html: 'あり', me: true }, { html: 'なし' }, { html: 'なし' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>対応（日本語インターフェースで利用可能）',
+        '<b>日本語プロンプト：</b>対応しているとされていますが、機能の詳細は公式サイトでご確認ください',
+      ]}
+      watermark={[
+        '透かしの有無・条件は現時点での公式情報では確認できていません',
+        '最新の条件は公式サイトでご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: 'Microsoftアカウントの種別（個人・法人・教育機関など）' },
+        { html: '利用プランと適用される利用規約' },
+        { html: '生成物の利用条件（配布・販売・広告利用など）' },
+        { html: 'テンプレート・素材・ブランド・ロゴの権利関係' },
+        { html: '第三者の商標・肖像・著作物が含まれていないか' },
+        { html: '地域・年齢制限の対象かどうか' },
+        { html: 'Microsoftサービス規約・公式FAQの最新情報' },
+        { html: '利用時点での最新の利用条件' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-05-26'}
+      nextCheck={d?.nextReviewDue ?? '2026-06-26'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'Microsoft Designer 公式サイト', href: 'https://designer.microsoft.com/' },
+        { tag: 'ヘルプ', label: 'Microsoft Designer よくある質問（公式）', href: 'https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer' },
+        { tag: '規約', label: 'Microsoftサービス規約（公式）', href: 'https://www.microsoft.com/servicesagreement' },
+      ]}
+      faqs={[
+        { q: 'Microsoft Designerは無料で使えますか？', a: 'Microsoftアカウントがあれば無料で利用できる場合があります。利用可能な機能や制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。' },
+        { q: 'Microsoft Designerは商用利用できますか？', a: '商用利用の可否や条件は、用途・アカウント種別・Microsoftの最新規約により異なる可能性があります。利用前に公式FAQおよびMicrosoftサービス規約の最新版をご確認ください。このページは法的助言ではありません。' },
+        { q: 'Microsoft Designerは日本語で使えますか？', a: '日本語UIに対応しています。日本語プロンプトにも対応しているとされています。' },
+        { q: 'Microsoft Designerに透かしは入りますか？', a: '透かしの有無・条件は公式情報では確認できていません。最新の条件は公式サイトでご確認ください。' },
+        { q: 'どんな用途に向いていますか？', a: 'SNS投稿用画像、広告バナー案、ブログアイキャッチ、プレゼン資料用ビジュアルなど、デザインテンプレートと画像生成を組み合わせた用途に向いています。Microsoftアカウントを持っていれば手軽に始められます。' },
+        { q: 'Canva AI画像生成やAdobe Fireflyとどう違いますか？', a: 'Microsoft DesignerはMicrosoftアカウントとの連携や、Microsoft系サービスとの相性が特徴です。Canva AI画像生成はCanvaのテンプレートとデザインフローの中で使いたい場合に、Adobe FireflyはAdobe製品との連携や商用条件の確認を重視する場合に向いています。用途に合わせてご検討ください。' },
+      ]}
+      relatedTools={[
+        { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', initial: 'C', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web', 'iOS', 'Android'], official: 'https://www.canva.com' },
+        { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', cat: '画像生成', badges: [{ s: 'paid', label: '商用：有料向け' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://firefly.adobe.com' },
+        { name: 'DALL·E', slug: 'dalle', initial: 'D', cat: '画像生成', badges: [{ s: 'ok', label: '商用：案内あり' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web', 'API'], official: 'https://openai.com/dall-e-3' },
+      ]}
+      nextReads={[
+        { href: '/comparisons/adobe-firefly-vs-microsoft-designer/', title: 'Adobe Firefly と Microsoft Designer を比較', desc: '無料枠・商用利用・連携の違い' },
+        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・透かし・商用利用条件をまとめて比較' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: '商用利用や著作権まわりの確認ポイント' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '日本語対応ツール', href: '/conditions/japanese/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

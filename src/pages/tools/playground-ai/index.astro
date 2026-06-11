@@ -1,0 +1,285 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'playground-ai');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Playground AI', item: 'https://aicreative-db.com/tools/playground-ai/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Playground AI',
+    operatingSystem: 'Web',
+    applicationCategory: 'DesignApplication',
+    description: '画像生成・画像編集・デザイン制作をまとめて行えるAIグラフィックデザインツール。無料枠から始められる。',
+    url: 'https://playground.com/',
+  },
+]);
+---
+
+<BaseLayout
+  title="Playground AIの商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="Playground AIの商用利用条件・料金プラン・無料枠・透かし・日本語対応を公式情報をもとに整理。無料プランは非商用利用のみ。商用利用には有料プランが必要とされています。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/playground-ai/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Playground AI</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Playground AI"
+      category="AI画像生成・編集"
+      checkedDate={d?.lastReviewed ?? '2026-06-06'}
+      headingHtml='Playground AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="画像生成・画像編集・デザイン制作をブラウザ上でまとめて行えるAIグラフィックデザインツールです。無料枠から始められますが、無料プランは非商用利用のみと公式料金ページで案内されています。商用利用には有料プランへの加入と最新規約の確認が必要です。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '有料プランで案内あり' } },
+        { lb: '無料枠', badge: { s: 'cond', label: '非商用のみ' } },
+        { lb: '料金目安', text: '$12/月〜（Pro・年払い）', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: '要公式確認' } },
+        { lb: '日本語UI', badge: { s: 'cond', label: '要公式確認' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://playground.com/' }}
+      secondaryCta={{ label: '料金プラン（公式）', href: 'https://playground.com/design/pricing' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '有料プランで案内あり' }, wide: true,
+          sum: '公式料金ページでは、無料プランは「Non-commercial use（非商用のみ）」と明記されており、ProおよびPro Plusプランでは「World-wide, royalty free license」として商用利用が案内されています。',
+          det: '公式利用規約では、ユーザーが作成したAssetsの所有権はユーザーにあり、個人・商用目的での利用が認められています。ただし第三者の著作権・商標・ロゴ・保護作品などを侵害しない責任はユーザー側にあります。商用利用には有料プランへの加入と最新の公式規約の確認が必要です。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: '非商用のみ' },
+          det: '公式料金ページでは無料プランが案内されており、3時間ごとに最大10枚の生成制限があります。ただし無料プランは非商用利用のみです。生成回数・機能制限は変更される可能性があります。',
+        },
+        {
+          title: '最安料金目安', sum: '$12/月（Pro・年払い）／$15/月（月払い）', sumMono: true,
+          det: 'Proプラン$12/月（年払い）、$15/月（月払い）。Pro Plusプラン$36/月（年払い）、$45/月（月払い）と案内されています。料金・プラン内容は変更される可能性があります。最新情報は公式料金ページでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: '要公式確認' },
+          det: '公式情報のみでは透かしの有無を断定できません。最新の条件は公式サイトでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'cond', label: '要公式確認' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '要公式確認' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→画像', '画像→画像', 'インペインティング', 'スタイルプリセット', '複数AIモデル対応'] },
+      ]}
+      useCases={[
+        '<b>SNS投稿・広告バナー・商品画像</b>のラフ案作成',
+        '<b>画像生成と画像編集</b>を一つのツールでまとめて行いたい場合',
+        '<b>ブログアイキャッチ・デザイン案</b>の素早い試作',
+        '無料枠でAI画像生成・編集を<b>まず試してみたい</b>場合（非商用）',
+      ]}
+      pros={[
+        '画像生成と画像編集をまとめて利用できる',
+        '無料プランがあり登録後すぐに試せる（非商用利用）',
+        'デザイン用途との相性がよく、テンプレートが豊富',
+        'GPT Image 2・Nano Banana Pro・Seedreamなど複数のAIモデルに対応',
+        '有料プランでは商用利用向けのライセンスが案内されている',
+      ]}
+      cons={[
+        '無料プランは非商用利用のみ（Non-commercial use）と明記されている',
+        '無料枠・生成回数・機能制限が変更される可能性がある',
+        '第三者の著作権・商標などを侵害しない責任はユーザー側にある',
+        '公開AssetsはPlayground上で他ユーザーにリミックスされる可能性がある',
+        '日本語UIおよび日本語プロンプト対応は公式情報のみでは確認できない',
+      ]}
+      limits={[
+        '無料プランは非商用利用のみ（商用利用には有料プランが必要とされている）',
+        '無料枠は3時間ごとに最大10枚の生成制限あり（変更の可能性あり）',
+        '公開Assetsは他ユーザーにリミックスされる可能性がある',
+        '日本語UIは公式情報のみでは確認不可',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成・編集（グラフィックデザインツール）' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>非商用のみ</span><br>3時間ごとに最大10枚。商用利用には有料プランが必要とされています。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">$12/月〜（Pro・年払い）</span><br>月払いは$15/月〜。Pro Plusは$36/月〜（年払い）。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>有料プランで案内あり</span><br>ProおよびPro Plusプランでは「World-wide, royalty free license」と案内。無料プランは非商用のみ。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要公式確認</span><br>公式情報のみでは断定できません。' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要公式確認</span>' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-06', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://playground.com/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 値は確認日時点の参考値です。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'Playground AIは、画像生成・画像編集・デザイン制作をブラウザ上でまとめて行えるAIグラフィックデザインツールです。テキストから画像を生成するだけでなく、既存の画像を編集したり、デザインのベースとして活用したりといった用途に使えます。',
+        '<b>無料プランは非商用利用のみ</b>と公式料金ページで明記されています。商用利用を行う場合はProプランまたはPro Plusプランへの加入と最新規約の確認が必要です。複数のAIモデルに対応しており、GPT Image 2・Nano Banana Pro・Seedreamなどが利用できます。',
+      ]}
+      aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '月払い', '年払い', '商用利用'],
+          rows: [
+            [{ html: '無料', rk: true }, { html: '$0', mono: true }, { html: '$0', mono: true }, { html: '非商用のみ' }],
+            [{ html: 'Pro', rk: true }, { html: '$15/月', mono: true }, { html: '$12/月', mono: true }, { html: '案内あり（ライセンス付与）' }],
+            [{ html: 'Pro Plus', rk: true }, { html: '$45/月', mono: true }, { html: '$36/月', mono: true }, { html: '案内あり（ライセンス付与）' }],
+          ],
+        },
+        notes: [
+          '無料プランは「Non-commercial use（非商用のみ）」と公式料金ページで明記されています',
+          '料金・プラン内容・生成回数・機能制限は変更される可能性があります',
+          '<b>最新料金は公式料金ページでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: '公式料金ページでは、ProおよびPro Plusプランで「World-wide, royalty free license」として商用利用が案内されています。',
+        points: [
+          '<b>無料プランは「Non-commercial use（非商用のみ）」</b>と公式料金ページで明記されています',
+          '公式利用規約では、ユーザーが作成したAssetsの所有権はユーザーにあり、個人・商用目的での利用が認められています',
+          '第三者の著作権・商標・ロゴ・保護作品・特定アーティストのスタイルなどを侵害しない責任はユーザー側にあります',
+          '公開設定にしたAssetsはPlayground上で他のユーザーにリミックスされる可能性があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用を前提にする場合は、有料プランへの加入と最新の公式利用規約をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="対応AIモデルについて"
+      integration="公式サイトではGPT Image 2・Nano Banana Pro・Seedreamなど複数のAIモデルが案内されています。利用可能なモデルは変更される可能性があるため、最新の情報は公式サイトでご確認ください。"
+      whoFor={[
+        'SNS画像・広告バナー・商品画像を手軽に作りたい方',
+        '画像生成と画像編集を一つのツールでまとめて行いたい方',
+        '無料枠でAI画像生成・編集を試してみたい方（非商用利用の場合）',
+        '商用利用を行う場合で有料プランを検討している方',
+      ]}
+      whoNot={[
+        '無料のまま商用利用したい方（無料プランは非商用のみ）',
+        '公開Assetsのリミックスリスクを避けたい方',
+        '日本語UIが必要な方（公式情報のみでは確認不可）',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Playground AI（このページ）', rk: true, me: true }, { html: '画像生成と編集を一体で行い、デザイン素材を手軽に作りたい場合' }],
+          [{ html: '<a href="/tools/adobe-firefly/">Adobe Firefly</a>', rk: true }, { html: 'Adobe製品との連携・商業利用時の公式案内が充実している場合' }],
+          [{ html: '<a href="/tools/canva-ai-image-generator/">Canva AI画像生成</a>', rk: true }, { html: 'Canvaのデザインフローの中でAI画像を使いたい場合' }],
+          [{ html: '<a href="/tools/clipdrop/">Clipdrop</a>', rk: true }, { html: '背景削除・不要物削除・アップスケールなど画像編集特化の機能を使いたい場合' }],
+          [{ html: '<a href="/tools/midjourney/">Midjourney</a>', rk: true }, { html: '高品質なアート・イラスト・クリエイティブ表現を重視する場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Playground AI', 'Adobe Firefly', 'Canva AI'],
+        rows: [
+          [{ html: '無料枠', rk: true }, { html: '非商用のみ', me: true }, { html: '限定的' }, { html: '限定的' }],
+          [{ html: '商用利用', rk: true }, { html: '有料プランで案内', me: true }, { html: '有料向け案内あり' }, { html: '条件あり' }],
+          [{ html: '日本語UI', rk: true }, { html: '要確認', me: true }, { html: '対応' }, { html: '対応' }],
+          [{ html: '編集機能', rk: true }, { html: '充実', me: true }, { html: '充実' }, { html: '充実' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>公式情報のみでは明確に確認できません。最新の状況は公式サイトでご確認ください',
+        '<b>日本語プロンプト：</b>公式情報のみでは対応を明確に確認できません',
+      ]}
+      watermark={[
+        '公式情報のみでは透かしの有無を断定できません',
+        '最新の条件は公式サイトでご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '利用プラン（無料は非商用のみ。商用利用にはProまたはPro Plusが必要とされている）' },
+        { html: '生成物の利用範囲（商用・個人）' },
+        { html: '第三者の著作権・商標・ロゴの扱い' },
+        { html: '公開Assetsのリミックスリスク（公開設定の場合）' },
+        { html: '透かし条件（公式サイトでご確認ください）' },
+        { html: '最新のPlayground AI公式利用規約' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-06-06'}
+      nextCheck={d?.nextReviewDue ?? '2026-09-06'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'Playground AI公式サイト', href: 'https://playground.com/' },
+        { tag: '料金', label: 'Playground AI料金プラン（公式）', href: 'https://playground.com/design/pricing' },
+        { tag: '規約', label: 'Playground AI利用規約（公式）', href: 'https://playground.com/terms' },
+        { tag: '商用', label: '著作権・所有権について（公式ヘルプ）', href: 'https://help.playgroundai.com/en/articles/6848773-how-does-copyright-work-do-i-own-the-designs-i-create' },
+      ]}
+      faqs={[
+        { q: 'Playground AIは無料で使えますか？', a: '公式料金ページでは無料プランが案内されており、3時間ごとに最大10枚の画像生成が可能とされています。ただし無料プランは非商用利用のみとされており、生成回数・機能制限は変更される可能性があります。最新の情報は公式料金ページでご確認ください。' },
+        { q: 'Playground AIは商用利用できますか？', a: '公式料金ページでは、無料プランは「Non-commercial use（非商用のみ）」と案内されています。ProおよびPro Plusプランでは「World-wide, royalty free license」として商用利用が案内されています。商用利用には有料プランへの加入と最新の公式規約の確認が必要です。このページは法的助言ではありません。' },
+        { q: '有料プランはいくらですか？', a: '公式料金ページでは、Proプランが月$12（年払い）または月$15（月払い）、Pro Plusプランが月$36（年払い）または月$45（月払い）と案内されています。ただし料金・プラン内容は変更される可能性があります。最新の情報は公式料金ページでご確認ください。' },
+        { q: 'Playground AIは日本語で使えますか？', a: '公式情報のみでは日本語UIおよび日本語プロンプト対応を明確に確認できません。最新の状況は公式サイトおよびヘルプセンターでご確認ください。' },
+        { q: '透かし（ウォーターマーク）は入りますか？', a: '公式情報のみでは透かしの有無を断定できません。最新の条件は公式サイトでご確認ください。' },
+        { q: 'どのAIモデルが使えますか？', a: '公式サイトではGPT Image 2・Nano Banana Pro・Seedreamなど複数のAIモデルが案内されています。利用可能なモデルは変更される可能性があるため、最新の情報は公式サイトでご確認ください。' },
+        { q: '公開Assetsはリミックスされるとはどういうことですか？', a: '公開設定にしたAssetsは、Playground上で他のユーザーにリミックスされる可能性があります。非公開設定を選択する場合など、詳細は公式利用規約をご確認ください。' },
+      ]}
+      relatedTools={[
+        { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', cat: '画像生成', badges: [{ s: 'paid', label: '商用：有料向け' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://firefly.adobe.com' },
+        { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', initial: 'C', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://www.canva.com' },
+        { name: 'Clipdrop', slug: 'clipdrop', initial: 'C', cat: '画像編集', badges: [{ s: 'cond', label: '商用：要確認' }, { s: 'cond', label: '無料枠：限定' }, { s: 'cond', label: '日本語：要確認' }], platforms: ['Web', 'API'], official: 'https://clipdrop.co/' },
+      ]}
+      nextReads={[
+        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・無料プランがあるツールを一覧で確認' },
+        { href: '/conditions/commercial-use/', title: '商用利用を確認しやすいツール', desc: '商用利用条件が整理されたツールを一覧で確認' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用と著作権について', desc: 'AI生成画像を商用利用する際の注意点まとめ' },
+        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '日本語対応ツール', href: '/conditions/japanese/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

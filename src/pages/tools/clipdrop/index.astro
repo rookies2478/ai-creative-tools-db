@@ -1,0 +1,288 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'clipdrop');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Clipdrop', item: 'https://aicreative-db.com/tools/clipdrop/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Clipdrop',
+    operatingSystem: 'Web',
+    applicationCategory: 'DesignApplication',
+    description: '背景削除・画像拡張・アップスケール・不要物削除・文字削除・画像生成など、複数のAI画像編集機能をブラウザ上で使えるオールインワン型ツール。',
+    url: 'https://clipdrop.co/',
+  },
+]);
+---
+
+<BaseLayout
+  title="Clipdropの商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="Clipdropの商用利用条件・料金プラン・無料枠・透かし・日本語対応を公式情報をもとに整理。背景削除・不要物削除・アップスケール等の画像編集AI機能が揃うオールインワンツール。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/clipdrop/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Clipdrop</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Clipdrop"
+      category="AI画像編集・生成"
+      checkedDate={d?.lastReviewed ?? '2026-06-06'}
+      headingHtml='Clipdropの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="背景削除・画像拡張・アップスケール・不要物削除・文字削除・画像生成など、複数のAI画像編集機能をブラウザ上で使えるオールインワン型ツールです。Freeプランで主要機能の一部を試せますが、商用利用条件は公式Termsで確認が必要です。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '要公式確認' } },
+        { lb: '無料枠', badge: { s: 'cond', label: '機能ごとに回数制限あり' } },
+        { lb: '料金目安', text: 'Proプランは要公式確認', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: '要公式確認' } },
+        { lb: '日本語UI', badge: { s: 'cond', label: '要公式確認' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://clipdrop.co/' }}
+      secondaryCta={{ label: '料金プラン（公式）', href: 'https://clipdrop.co/pricing' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '要公式確認' }, wide: true,
+          sum: '公式Terms（clipdrop.co/terms-visitor）ではサービス利用条件を確認できますが、生成・編集した画像の商用利用可否や権利関係については確認時点で断定しにくい状況です。',
+          det: '商用利用を前提にする場合は、最新の公式Termsの確認が必要です。またアップロードする元画像の著作権・使用権の確認も必要です。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: '機能ごとに回数制限あり' },
+          det: '公式料金ページではFreeプランが案内されており、Background Removal・Image Upscaler・Cleanup・Relightなどを20回/24時間、Text Removerを50回/24時間の枠で試せます。利用回数・対象機能・制限は変更される可能性があります。',
+        },
+        {
+          title: '料金目安', sum: 'Proプランの料金は公式サイトで要確認', sumMono: false,
+          det: 'Proプランの具体的な料金は2026年6月時点で公式サイト上に表示されていないとされています。最新の料金は公式サイトでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: '要公式確認' } ,
+          det: 'Freeプランの透かし有無は機能・プランにより異なる可能性があります。最新の条件は公式画面でご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'cond', label: '要公式確認' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '要公式確認' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web', 'API'] },
+        { title: '主な機能', wide: true, feats: ['背景削除', '不要物削除（Cleanup）', '高解像度化', '文字削除', '再ライティング（Relight）', '画像拡張（Uncrop）', 'テキスト→画像', 'API提供'] },
+      ]}
+      useCases={[
+        '<b>EC・商品ページ向けの背景削除・不要物削除</b>による画像加工',
+        '<b>SNS投稿・広告バナー素材</b>の画像編集',
+        '<b>低解像度素材のアップスケール</b>',
+        'APIを使った<b>画像編集処理の自動化</b>',
+      ]}
+      pros={[
+        '背景削除・不要物削除・アップスケール・Relightなど画像編集系AI機能が多数揃っている',
+        'ブラウザ上で使えるためインストール不要',
+        'Freeプランで主要機能の一部を試せる（Background Removal等20回/24時間）',
+        'APIが提供されており開発者による自動化・組み込みが可能',
+        'Jasper傘下でサービス継続中（2024年以降）',
+      ]}
+      cons={[
+        '商用利用・権利関係は公式Terms確認が必要であり断定できない',
+        'アップロードする元画像の著作権・権利確認が必要',
+        '無料枠や機能制限は変更される可能性がある',
+        '日本語UI・日本語プロンプト対応は公式情報のみでは確認できない',
+        'Proプランの料金が公式サイトで非表示（要問い合わせまたはログイン後確認）',
+        '2024年にJasperに統合されAPIがJasper APIに移行済み',
+      ]}
+      limits={[
+        '商用利用条件は公式Termsで個別確認が必要',
+        'Freeプランは機能ごとに20〜50回/24時間の利用制限あり（変更の可能性あり）',
+        'Proプランの具体的な料金が公式サイトで非表示',
+        '2024年のJasper統合によりAPIがJasper APIに移行済み',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI画像編集・生成（オールインワン型）' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>機能ごとに回数制限あり</span><br>Background Removal・Cleanup等20回/24時間。Text Remover50回/24時間。' }],
+          [{ html: '料金', rk: true }, { html: 'Proプランは公式サイトで要確認（2026年6月時点で非表示）' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要公式確認</span><br>公式Termsで確認が必要。断定しにくい状況。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要公式確認</span><br>機能・プランにより異なる可能性があります。' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要公式確認</span>' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web / API' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-06', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://clipdrop.co/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 値は確認日時点の参考値です。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'Clipdropは、背景削除・画像拡張・アップスケール・不要物削除・文字削除・画像生成など、複数のAI画像編集機能をブラウザ上でまとめて利用できるオールインワン型ツールです。インストール不要でWebブラウザからアクセスでき、Freeプランで主要機能の一部を試すことができます。',
+        'Clipdropは2023年にStability AIに買収され、2024年にJasper.aiに統合されました。現在もclipdrop.coでサービスは継続されていますが、<b>APIはJasper APIに移行</b>しています。<b>商用利用条件や権利関係は公式Termsでの確認が必要</b>で、断定しにくい状況です。',
+      ]}
+      aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '利用枠', '料金'],
+          rows: [
+            [{ html: 'Free', rk: true }, { html: 'Background Removal等20回/24h、Text Remover50回/24h', mono: false }, { html: '$0', mono: true }],
+            [{ html: 'Pro', rk: true }, { html: '制限緩和（詳細は公式確認）', mono: false }, { html: '公式サイトで要確認', mono: false }],
+          ],
+        },
+        notes: [
+          'Freeプランの利用回数・対象機能・制限は変更される可能性があります',
+          'Proプランの具体的な料金は2026年6月時点で公式サイト上に表示されていません',
+          '<b>最新料金は公式料金ページでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: '公式Terms（clipdrop.co/terms-visitor）ではサービス利用条件を確認できますが、生成・編集した画像の商用利用可否や権利関係については、確認時点で断定しにくい状況です。',
+        points: [
+          '最新の<b>公式Terms</b>の内容と商用利用に関する条件を確認する必要があります',
+          'アップロードする<b>元画像の著作権・使用権</b>（第三者素材を使用する場合は特に注意）',
+          '生成・編集した成果物の権利帰属と利用範囲',
+          '利用規約は変更される可能性があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用や権利関係を前提にする場合は、最新の公式Termsと元画像の権利をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="JasperとClipdropの関係について"
+      integration="Clipdropは2023年にStability AIに買収され、2024年にJasper.aiに統合されました。現在もclipdrop.coでサービスは継続されていますが、APIはJasper APIに移行しています。今後のサービス方針については公式アナウンスをご確認ください。"
+      whoFor={[
+        'ECサイト運営者・ネットショップオーナー（商品画像の背景削除・不要物削除を効率化したい場合）',
+        'SNS担当者・マーケター（広告バナーやSNS素材の画像編集を手軽に行いたい場合）',
+        'フォトグラファー・デザイナー（写真の不要物削除・アップスケール・Relightを活用したい場合）',
+        '開発者（APIを通じて画像編集処理を自動化・アプリに組み込みたい場合）',
+      ]}
+      whoNot={[
+        '商用利用条件を事前に明確に確認したい方（断定しにくい状況）',
+        '日本語UIが必要な方（公式情報のみでは確認不可）',
+        'APIの長期安定利用が必要な方（Jasper統合により方針変更リスクあり）',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Clipdrop（このページ）', rk: true, me: true }, { html: '背景削除・不要物削除・アップスケール等の画像編集AI機能をまとめて使いたい場合' }],
+          [{ html: '<a href="/tools/playground-ai/">Playground AI</a>', rk: true }, { html: '画像生成とデザイン制作を一体で行いたい場合' }],
+          [{ html: '<a href="/tools/adobe-firefly/">Adobe Firefly</a>', rk: true }, { html: 'Adobe製品との連携・商業利用時の公式案内が充実している場合' }],
+          [{ html: '<a href="/tools/stable-diffusion/">Stable Diffusion</a>', rk: true }, { html: 'ローカル実行・カスタマイズ性を重視する場合' }],
+          [{ html: '<a href="/tools/canva-ai-image-generator/">Canva AI画像生成</a>', rk: true }, { html: 'Canvaのデザインフローの中でAI画像・編集を使いたい場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Clipdrop', 'Playground AI', 'Adobe Firefly'],
+        rows: [
+          [{ html: '主な用途', rk: true }, { html: '画像編集特化', me: true }, { html: '生成+編集', }, { html: '生成+Adobe連携' }],
+          [{ html: '無料枠', rk: true }, { html: '機能ごとに回数制限', me: true }, { html: '非商用のみ' }, { html: '限定的' }],
+          [{ html: '商用利用', rk: true }, { html: '要公式確認', me: true }, { html: '有料プランで案内' }, { html: '有料向け案内あり' }],
+          [{ html: 'API', rk: true }, { html: '提供あり（Jasper API）', me: true }, { html: '未確認' }, { html: 'Firefly API' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>公式情報のみでは日本語UI対応を明確に確認できません',
+        '<b>日本語プロンプト：</b>公式情報のみでは確認できません。画像生成機能（Stable Diffusion XL）で日本語を使用する場合、英語プロンプトの方が意図通りに生成されやすい傾向がある場合があります',
+      ]}
+      watermark={[
+        'Freeプランの透かし（ウォーターマーク）の有無は機能・プランにより異なる可能性があります',
+        '公式情報のみでは全機能の透かし条件を断定できません',
+        '最新の条件は公式画面でご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '最新の公式Terms（clipdrop.co/terms-visitor）の商用利用条件' },
+        { html: 'アップロードする元画像の著作権・使用権' },
+        { html: '生成・編集した成果物の権利帰属と利用範囲' },
+        { html: '透かし条件（公式画面でご確認ください）' },
+        { html: '利用する機能の最新利用制限・料金' },
+        { html: 'Jasper統合後のサービス方針（APIを使う場合）' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-06-06'}
+      nextCheck={d?.nextReviewDue ?? '2026-07-06'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'Clipdrop公式サイト', href: 'https://clipdrop.co/' },
+        { tag: '料金', label: 'Clipdrop料金プラン（公式）', href: 'https://clipdrop.co/pricing' },
+        { tag: '規約', label: 'Clipdrop利用規約（公式）', href: 'https://clipdrop.co/terms-visitor' },
+        { tag: 'API', label: 'Clipdrop API（公式）', href: 'https://clipdrop.co/apis' },
+        { tag: 'ツール', label: 'Clipdropツール一覧（公式）', href: 'https://clipdrop.co/tools' },
+      ]}
+      faqs={[
+        { q: 'Clipdropは無料で使えますか？', a: '公式料金ページではFreeプランが案内されており、Background Removal・Image Upscaler・Cleanup・Relightなどの機能を無料で試せる枠が示されています。ただし利用回数・対象機能・制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。' },
+        { q: 'Clipdropは商用利用できますか？', a: '公式Terms（clipdrop.co/terms-visitor）ではサービス利用条件を確認できますが、生成・編集した画像の商用利用可否や権利関係については確認時点で断定しにくい状況です。商用利用を前提にする場合は最新の公式Termsをご確認ください。このページは法的助言ではありません。' },
+        { q: 'Clipdropは日本語で使えますか？', a: '公式情報のみでは日本語UI・日本語プロンプトへの対応を明確に確認できません。最新の状況は公式サイトでご確認ください。' },
+        { q: '透かしは入りますか？', a: 'Freeプランの透かし有無は機能・プランにより異なる可能性があります。最新の条件は公式画面でご確認ください。' },
+        { q: 'APIはありますか？', a: 'Clipdrop APIが提供されており、背景削除・アップスケールなどの機能を開発者が呼び出せます。なお2024年にJasper統合に伴いAPIはJasper APIに移行しています。詳細はclipdrop.co/apisをご確認ください。' },
+        { q: '元画像の権利は確認が必要ですか？', a: 'はい。アップロードする元画像の著作権・使用権の確認が必要です。第三者が権利を持つ画像を無断でアップロードしないよう注意してください。' },
+        { q: 'Clipdropの無料プランの利用回数制限はありますか？', a: '公式料金ページでは、Background Removal・Cleanup・Relightが20回/24時間、Text Removerが50回/24時間といった利用上限が案内されています。ただし制限内容は変更される可能性があるため、最新の条件は公式料金ページでご確認ください。' },
+        { q: 'JasperとClipdropの関係は何ですか？', a: 'Clipdropは2023年にStability AIに買収され、2024年にJasper.aiに統合されました。現在もclipdrop.coでサービスは継続されていますが、APIはJasper APIに移行しています。今後のサービス方針については公式アナウンスをご確認ください。' },
+      ]}
+      relatedTools={[
+        { name: 'Playground AI', slug: 'playground-ai', initial: 'P', cat: '画像生成・編集', badges: [{ s: 'cond', label: '商用：有料プランで案内' }, { s: 'cond', label: '無料：非商用のみ' }, { s: 'cond', label: '日本語：要確認' }], platforms: ['Web'], official: 'https://playground.com/' },
+        { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', cat: '画像生成', badges: [{ s: 'paid', label: '商用：有料向け' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://firefly.adobe.com' },
+        { name: 'Stable Diffusion', slug: 'stable-diffusion', initial: 'S', cat: '画像生成', badges: [{ s: 'cond', label: '商用：モデル依存' }, { s: 'ok', label: 'ローカル：無料' }, { s: 'cond', label: '日本語：拡張で対応' }], platforms: ['ローカル', 'API'], official: 'https://stability.ai' },
+      ]}
+      nextReads={[
+        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・無料プランがあるツールを一覧で確認' },
+        { href: '/conditions/commercial-use/', title: '商用利用を確認しやすいツール', desc: '商用利用条件が整理されたツールを一覧で確認' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用と著作権について', desc: 'AI生成画像を商用利用する際の注意点まとめ' },
+        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '日本語対応ツール', href: '/conditions/japanese/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

@@ -48,11 +48,13 @@ const jsonLd = JSON.stringify([
     </div>
   </nav>
 
-  <AdobeFireflyTool
-    lastChecked={d?.lastReviewed}
-    nextCheck={d?.nextReviewDue}
-    verifiedDate={d?.verifiedAt}
-  />
+  <div class="af-main">
+    <AdobeFireflyTool
+      lastChecked={d?.lastReviewed}
+      nextCheck={d?.nextReviewDue}
+      verifiedDate={d?.verifiedAt}
+    />
+  </div>
 
 </BaseLayout>
 
@@ -79,4 +81,6 @@ const jsonLd = JSON.stringify([
   .af-breadcrumb a:hover { text-decoration: underline; }
   .af-breadcrumb .sep { color: var(--faint, #98A0AD); }
   .af-breadcrumb .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .af-main { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .af-main { padding: 0 18px; } }
 </style>

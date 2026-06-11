@@ -1,0 +1,291 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'capcut-ai');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'CapCut AI', item: 'https://aicreative-db.com/tools/capcut-ai/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'CapCut AI',
+    operatingSystem: 'Web, iOS, Android, Windows, Mac',
+    applicationCategory: 'VideoApplication',
+    description: 'CapCut AIはByteDance（TikTokの親会社）が提供するSNS動画向けAI動画編集・生成ツール。自動字幕・テンプレート・AI音声・背景削除など多数のAI機能を搭載。日本語UI対応。商用利用時は素材・音源・テンプレート・AI機能ごとの条件確認が必要。',
+    url: 'https://www.capcut.com/',
+  },
+]);
+---
+
+<BaseLayout
+  title="CapCut AIの商用利用・料金・無料枠まとめ｜AI動画生成ツールDB"
+  description="CapCut AIの商用利用条件・料金プラン・無料枠・透かし・素材ライセンスの注意点を整理。日本語UI対応・スマホアプリ対応のSNS動画向けAI編集ツール。商用利用時は素材・テンプレート・音源ごとの条件確認が必要。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/capcut-ai/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">CapCut AI</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="CapCut AI"
+      category="AI動画編集・生成"
+      checkedDate={d?.lastReviewed ?? '2026-05-24'}
+      headingHtml='CapCut AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="CapCut AIはByteDance（TikTokの親会社）が提供するSNS動画向けのAI動画編集・生成ツールです。自動字幕・テンプレート・AI音声・背景削除など多数のAI機能をスマートフォン・PC・Webブラウザから利用できます。日本語UIが提供されています。<b>商用利用を検討する場合は、CapCut本体の利用規約に加えて、使用する素材・音源・テンプレート・AI機能ごとの条件を個別に確認することが重要です。</b>"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '要確認（素材ごとに条件あり）' } },
+        { lb: '無料枠', badge: { s: 'cond', label: 'あり（機能・条件制限）' } },
+        { lb: '料金目安', text: 'アプリ内で確認（地域・プラットフォームで変動）', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: '条件により変動（要確認）' } },
+        { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://www.capcut.com/' }}
+      secondaryCta={{ label: '料金・利用規約を確認（公式）', href: 'https://www.capcut.com/help/new-capcut-subscription-pricing' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '要確認（素材ごとに条件あり）' }, wide: true,
+          sum: 'CapCutの利用規約では、ユーザーがアップロード・利用する素材について必要な権利や許諾を持つ必要があると案内されています。<b>商用利用・広告利用・クライアントワークを前提にする場合は、CapCut本体の利用規約に加えて、素材・音源・テンプレート・AI機能ごとの条件確認が必要です。</b>',
+          det: '第三者AI技術を使う機能では追加条件に従う必要があります。ビジネス利用・クライアントワーク・企業アカウント運用では特に詳細確認が重要です。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: 'あり（機能・条件制限）' },
+          det: 'CapCutには無料で使える機能があります。ただし、AI機能・テンプレート・素材・書き出し条件はプランや地域、プラットフォームによって異なる可能性があります。最新の公式情報を確認してください。',
+        },
+        {
+          title: '最安料金目安', sum: 'アプリ内サブスクリプションページで確認（地域・プラットフォームで変動）', sumMono: false,
+          det: 'CapCut公式ヘルプでは、最新価格はアプリ内サブスクリプションページで確認するよう案内されています。プラン名・料金・機能制限は地域・プラットフォーム（iOS / Android / Web / PC）・時期によって変わる可能性があります。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: '条件により変動（要確認）' },
+          det: '無料利用・テンプレート・素材・書き出し条件により透かしやロゴ表示の扱いが変わる可能性があります。透かし条件はプラン・機能・出力形式ごとに最新の公式画面でご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'ok', label: '対応' } },
+            { label: 'プロンプト', badge: { s: 'ok', label: '対応' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web', 'iOS', 'Android', 'Windows', 'Mac'] },
+        { title: '主な機能', wide: true, feats: ['AI動画生成（text-to-video）', '自動字幕（Auto Captions）', '背景削除', 'テンプレート編集', 'AI音声・テキスト読み上げ', 'AI画像生成', 'カラーグレーディング'] },
+      ]}
+      useCases={[
+        '<b>TikTok・Instagramリール・YouTubeショート</b>などSNS動画を日常的に制作する場合',
+        '<b>自動字幕・AI音声を使ったトーク系・解説系動画</b>の制作',
+        '<b>スマートフォン中心の動画編集ワークフロー</b>（iOS / Android対応）',
+      ]}
+      pros={[
+        'SNS動画編集に特化した機能が充実している',
+        'テンプレートが豊富でショート動画制作と相性がよい',
+        'スマホアプリでも直感的に使いやすい（iOS / Android）',
+        '自動字幕・AI音声・背景削除など多数のAI機能を搭載',
+        '日本語UIおよび日本語情報が提供されている',
+      ]}
+      cons={[
+        '商用利用時は素材・音源・テンプレート・AI機能ごとの条件確認が必要',
+        '料金・機能・透かし条件がプランや地域・時期によって変わる可能性がある',
+        'ByteDance（TikTokの親会社）運営のためデータ取り扱いを確認する必要がある',
+        'ビジネス利用では利用規約の詳細確認が重要',
+      ]}
+      limits={[
+        '商用利用時は素材・音源・テンプレート・AI機能ごとの個別確認が必要',
+        '料金・機能・透かし条件がプランや地域によって変わる可能性がある',
+        'ビジネス利用・クライアントワークでは利用規約の詳細確認が重要',
+        '純粋なAI映像生成よりも編集・テンプレート活用が中心',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI動画編集・生成' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>あり（機能・条件制限）</span><br>プラン・地域によって異なる。' }],
+          [{ html: '最安料金', rk: true }, { html: 'アプリ内で確認（地域・プラットフォームで変動）' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要確認（素材ごとに条件あり）</span><br>素材・音源・テンプレートの個別確認が必要。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件により変動（要確認）</span>' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span>' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web / iOS / Android / Windows / Mac' }],
+          [{ html: '運営', rk: true }, { html: 'ByteDance（TikTokの親会社）' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-24', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.capcut.com/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 商用利用時は素材・音源・テンプレートの個別確認が重要です。料金・条件は変更される可能性があります。',
+      }}
+      about={[
+        'CapCut AIはByteDance（TikTokの親会社）が提供する動画編集アプリ「CapCut」のAI機能群です。テキストから動画を生成するAI動画生成、自動字幕・テキスト読み上げ・背景削除・テンプレート自動編集など、多数のAI機能をスマートフォン・PC・Webブラウザから利用できます。日本語UIが提供されています。',
+        '<b>重要な注意点として、商用利用を検討する場合はCapCut本体の利用規約に加えて、テンプレート・音楽・ストック素材・AI機能ごとの条件を個別に確認することが必要です。</b>また、ByteDance（TikTokの親会社）の運営であることを踏まえ、データポリシーの確認も推奨されます。このページは法的助言ではありません。',
+      ]}
+      aboutMore={{ label: 'AI動画生成ツール一覧で比較する →', href: '/categories/video-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', '備考'],
+          rows: [
+            [{ html: '無料', rk: true }, { html: '無料' }, { html: '一部機能・素材に制限あり' }],
+            [{ html: '有料プラン', rk: true }, { html: 'アプリ内で確認', mono: true }, { html: '地域・プラットフォームで異なる' }],
+          ],
+        },
+        notes: [
+          'CapCut公式ヘルプでは、最新価格はアプリ内サブスクリプションページで確認するよう案内されています',
+          'プラン名・料金・機能制限は地域・プラットフォーム・時期によって変わる可能性があります',
+          '<b>商用利用時は素材・音源・テンプレートの個別確認が必要です</b>',
+        ],
+      }}
+      commercial={{
+        lead: 'CapCutの利用規約では、利用する素材について必要な権利・許諾を持つ必要があることが案内されています。<b>商用利用・広告利用・クライアントワークを前提にする場合は、CapCut本体の規約だけでなく、使用する素材・音源・テンプレート・AI機能ごとの条件を公式で確認することが必要です。</b>',
+        points: [
+          'CapCut本体の利用規約を確認する',
+          'テンプレートのライセンス条件を個別に確認する',
+          '音楽・BGM・効果音のライセンス条件を個別に確認する',
+          'ストック素材・映像のライセンス条件を個別に確認する',
+          '第三者AI技術を使う機能の追加条件を確認する',
+          'SNS広告・クライアントワーク・企業アカウント運用では特に詳細確認が必要',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のCapCut公式利用規約および各素材・機能のライセンス条件をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="CapCut AIとSNS動画制作の連携について"
+      integration="CapCut AIはTikTok・Instagramリール・YouTubeショートなどのSNS動画制作に特化した機能が充実しています。自動字幕・AI音声・テンプレート自動編集などを組み合わせることで、スマートフォンからでも短時間でSNS向け動画を仕上げることができます。ただし、テンプレート・音楽・素材の商用利用条件はCapCut本体の利用規約とは別に設定されている場合があるため、ビジネス利用前の個別確認が重要です。"
+      whoFor={[
+        'TikTok・Instagramリール・YouTubeショートを日常的に作る人',
+        '日本語UIでAI動画編集ツールを使いたい人',
+        'スマートフォン中心で動画編集したい人（iOS / Android対応）',
+        '自動字幕・AI音声など多機能なAIツールを試したい人',
+      ]}
+      whoNot={[
+        '商用利用条件を確認せずに案件へ使いたい人（素材・音源・テンプレートごとの確認が必要）',
+        'テキストから本格的なAI映像を生成したい人（→ Runway・Kling AIなどが候補）',
+        '運営企業のデータポリシーへの懸念がある人（ByteDance運営）',
+        '料金・機能・透かし条件が固定であることを前提にしている人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'CapCut AI（このページ）', rk: true, me: true }, { html: 'SNS動画・テンプレート・自動字幕を組み合わせて使う場合（素材ライセンスの個別確認が必要）' }],
+          [{ html: '<a href="/tools/runway/">Runway</a>', rk: true }, { html: 'プロ向けAI映像生成・映像編集機能を重視する場合' }],
+          [{ html: '<a href="/tools/invideo-ai/">InVideo AI</a>', rk: true }, { html: '台本からのテンプレート型解説動画を制作する場合' }],
+          [{ html: '<a href="/tools/kling-ai/">Kling AI</a>', rk: true }, { html: 'テキスト・画像からリアルなAI映像生成を重視する場合' }],
+          [{ html: '<a href="/tools/pika/">Pika</a>', rk: true }, { html: 'シンプル操作のAI映像生成を試したい場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'CapCut AI', 'Runway', 'InVideo AI', 'Kling AI', 'Pika'],
+        rows: [
+          [{ html: '動画タイプ', rk: true }, { html: '編集・テンプレート', me: true }, { html: 'AI映像生成' }, { html: 'テンプレート型' }, { html: 'AI映像生成' }, { html: 'AI映像生成' }],
+          [{ html: '商用利用', rk: true }, { html: '素材ごとに要確認', me: true }, { html: '全プラン・条件あり' }, { html: '有料プランのみ' }, { html: '有料プランのみ' }, { html: '有料プランで可' }],
+          [{ html: '透かし（無料）', rk: true }, { html: '条件により変動', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
+          [{ html: '日本語UI', rk: true }, { html: '対応', me: true }, { html: '非対応' }, { html: '非対応' }, { html: '部分対応' }, { html: '部分対応' }],
+          [{ html: 'スマホApp', rk: true }, { html: 'iOS / Android', me: true }, { html: 'なし' }, { html: 'なし' }, { html: 'なし' }, { html: 'なし' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>日本語の公式ページ（capcut.com/ja-jp）が提供されており、日本語UIで利用可能',
+        '<b>日本語プロンプト：</b>日本語入力でも利用できる場合がありますが、英語や具体的な構成指示の方が安定する可能性があります',
+        '日本語ユーザー向けのサポート情報も提供されています',
+      ]}
+      watermark={[
+        '無料利用・テンプレート・素材・書き出し条件により透かしやロゴ表示の扱いが変わる可能性があります',
+        '透かし条件はプラン・機能・出力形式ごとに最新の公式画面でご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '最新のCapCut利用規約（Terms of Service）を確認したか' },
+        { html: '使用するテンプレートのライセンス条件を確認したか' },
+        { html: '使用する音楽・BGM・効果音のライセンス条件を確認したか' },
+        { html: '使用するストック素材・映像のライセンス条件を確認したか' },
+        { html: '第三者AI技術を使う機能の追加条件を確認したか' },
+        { html: '投稿先SNSプラットフォーム（TikTok・YouTube等）のポリシーを確認したか' },
+        { html: 'ByteDance運営のデータポリシーを確認したか（特に企業利用の場合）' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-05-24'}
+      nextCheck={d?.nextReviewDue ?? '2026-06-24'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'CapCut 公式サイト', href: 'https://www.capcut.com/' },
+        { tag: 'AI動画生成', label: 'CapCut AI動画生成（公式）', href: 'https://www.capcut.com/ja-jp/tools/ai-video-generator' },
+        { tag: '料金', label: 'CapCut サブスクリプション・料金（公式ヘルプ）', href: 'https://www.capcut.com/help/new-capcut-subscription-pricing' },
+        { tag: '利用規約', label: 'CapCut 利用規約（公式）', href: 'https://www.capcut.com/clause/terms-of-service' },
+        { tag: 'プライバシー', label: 'CapCut プライバシーポリシー（公式）', href: 'https://www.capcut.com/clause/privacy-policy' },
+      ]}
+      faqs={[
+        { q: 'CapCut AIは無料で使えますか？', a: 'CapCutには無料で使える機能があります。ただしAI機能・テンプレート・素材・書き出し条件・透かしの有無はプランや地域、プラットフォームによって異なる可能性があります。最新の条件は公式サイトおよびアプリ内サブスクリプションページでご確認ください。' },
+        { q: 'CapCut AIは商用利用できますか？', a: 'CapCutの利用規約では、利用する素材について必要な権利・許諾を持つ必要があることが案内されています。商用利用・広告利用・クライアントワークを前提にする場合は、CapCut本体の規約だけでなく、使用する素材・音源・テンプレート・AI機能ごとの条件を公式で確認することが必要です。このページは法的助言ではありません。' },
+        { q: '日本語で使えますか？', a: 'CapCutには日本語の公式ページおよびアプリが提供されており、日本語UIで利用可能です。AI動画生成でも日本語入力を使える場合がありますが、英語や具体的な構成指示の方が安定する可能性があります。' },
+        { q: '透かしはありますか？', a: '無料利用・テンプレート・素材・書き出し条件により透かしやロゴ表示の扱いが変わる可能性があります。最新の透かし条件はプラン・機能・出力形式ごとに公式画面でご確認ください。' },
+        { q: 'Runway・Kling AIなどとどう違いますか？', a: 'CapCut AIは動画編集・テンプレート・自動字幕・AI機能を組み合わせたSNS動画向けの編集ツールです。RunwayやKling AIのような純粋なAI動画生成ツールとは異なり、編集・加工・テンプレート活用を中心に設計されています。' },
+        { q: 'テンプレートや音楽の商用利用はできますか？', a: 'CapCut内で使用できるテンプレート・BGM・素材は、それぞれ個別のライセンス条件が設定されている場合があります。商用利用前は各素材のライセンス条件を公式サイトで確認してください。このページは法的助言ではありません。' },
+        { q: '料金プランはどうなっていますか？', a: 'CapCut公式ヘルプでは、最新価格はアプリ内サブスクリプションページで確認するよう案内されています。プラン名・料金・機能制限は地域・プラットフォーム・時期で変わる可能性があるため、必ず最新の公式情報をご確認ください。' },
+        { q: 'CapCut AIはAI動画生成ツールですか？', a: 'AI動画生成そのものより、AIを使った編集補助・自動字幕生成・テンプレート活用・SNS投稿向け調整などで使われることが多いです。テキストや画像からの映像生成を中心に比較する場合は、RunwayやKling AI・Luma AIなども候補として確認することをおすすめします。' },
+      ]}
+      relatedTools={[
+        { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
+        { name: 'InVideo AI', slug: 'invideo-ai', initial: 'I', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料のみ' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web'], official: 'https://invideo.io' },
+        { name: 'Kling AI', slug: 'kling-ai', initial: 'K', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料のみ' }, { s: 'cond', label: '無料：1日66cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://klingai.com' },
+      ]}
+      nextReads={[
+        { href: '/comparisons/invideo-ai-vs-capcut-ai/', title: 'InVideo AI と CapCut AI を比較', desc: '台本型動画生成かSNS動画編集かで選び分け' },
+        { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
+        { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
+        { href: '/conditions/japanese/', title: '日本語UIのAIツール一覧', desc: '日本語UIに対応しているAIツール' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '日本語UIのAIツール', href: '/conditions/japanese/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

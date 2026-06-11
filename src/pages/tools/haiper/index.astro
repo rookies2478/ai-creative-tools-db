@@ -1,0 +1,282 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'haiper');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Haiper', item: 'https://aicreative-db.com/tools/haiper/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Haiper',
+    operatingSystem: 'Web, iOS',
+    applicationCategory: 'VideoApplication',
+    description: 'Haiperはテキストから動画・画像から動画・キーフレーム指定などに対応するAI動画生成ツール。Web App / iOS App / APIで利用可能。有料メンバーで透かしなし・商用利用可と公式FAQで案内されている。',
+    url: 'https://haiper.ai/',
+  },
+]);
+---
+
+<BaseLayout
+  title="Haiperの商用利用・料金・無料枠まとめ｜AI動画生成ツールDB"
+  description="HaiperのAI動画生成における商用利用条件・料金プラン・無料枠・透かし・利用規約の注意点を整理。Web App / iOS App / API対応。有料メンバーで透かしなし・商用利用可と公式FAQに案内。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/haiper/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Haiper</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Haiper"
+      category="AI動画生成"
+      checkedDate={d?.lastReviewed ?? '2026-05-24'}
+      headingHtml='Haiperの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="Haiperはテキストから動画・画像から動画・キーフレーム指定などに対応するAI動画生成ツールです。Web AppおよびiOS Appから手軽に試せるほか、API経由での利用も用意されています。<b>公式FAQでは有料メンバーになるとHaiperの透かしなし動画を生成でき、それらは商用利用にも使えると案内されています。</b>無料利用時の商用利用可否は断定できないため、商用利用前は最新の公式規約をご確認ください。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'paid', label: '有料メンバーのみ（公式FAQ）' } },
+        { lb: '無料枠', badge: { s: 'cond', label: 'クレジット制（要確認）' } },
+        { lb: '料金目安', text: '要公式確認', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: '無料あり・有料なし（公式FAQ）' } },
+        { lb: '日本語UI', badge: { s: 'na', label: '非対応（要確認）' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://haiper.ai/' }}
+      secondaryCta={{ label: 'FAQ・料金を確認（公式）', href: 'https://docs.haiper.ai/pricing' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'paid', label: '有料メンバーのみ（公式FAQ）' }, wide: true,
+          sum: '<b>公式FAQでは有料メンバーになるとHaiperの透かしなし動画を生成でき、それらは商用利用にも使えると案内されています。</b>無料利用時の商用利用可否は断定できません。商用利用・広告利用・クライアントワークを前提にする場合は、最新の公式規約・FAQ・プラン条件をご確認ください。',
+          det: 'このページは法的助言ではありません。条件・規約は変更される可能性があります。最新情報は公式FAQおよび公式利用規約でご確認ください。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: 'クレジット制（要確認）' },
+          det: '公式ドキュメントではHaiper Web App / iOS App向けのクレジット制動画生成が案内されています。無料枠・利用上限・対象機能は変更される可能性があるため、最新の公式情報をご確認ください。',
+        },
+        {
+          title: '最安料金目安', sum: '要公式確認', sumMono: true,
+          det: 'プラン名・料金・クレジット条件は変更される可能性があるため、必ず最新の公式料金ページをご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: '無料あり・有料なし（公式FAQ）' },
+          det: '公式FAQでは有料メンバーになるとHaiperの透かしなし動画を生成できると案内されています。無料利用時やプランによって透かし条件が異なる可能性があるため、実際の出力画面と最新の公式情報で確認してください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'na', label: '非対応（要確認）' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '要確認' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web', 'iOS', 'API'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→動画', '画像→動画', 'キーフレーム指定', 'Haiper Video 2.x', 'API対応'] },
+      ]}
+      useCases={[
+        '<b>SNS・ショート動画のアイデア検証</b>（有料プランで商用利用可）',
+        '<b>画像素材を動かしたい</b>ケース（image-to-video）',
+        '<b>API経由での動画生成ワークフロー構築</b>',
+      ]}
+      pros={[
+        '有料メンバーで透かしなし・商用利用可と公式FAQで案内されている',
+        'テキスト・画像からの動画生成の両方に対応',
+        'Web App / iOS Appで手軽に試せる',
+        'API経由での利用が案内されている',
+        'Haiper Video 2.xで複数の生成機能に対応',
+      ]}
+      cons={[
+        '無料利用時の商用利用可否は断定できない',
+        '日本語UIは公式情報で明確に確認できていない',
+        '無料枠・クレジット・透かし条件が変わる可能性がある',
+        '料金の詳細は公式サイトで要確認',
+      ]}
+      limits={[
+        '商用利用は有料メンバー条件が前提とされている（公式FAQ）',
+        '無料枠・クレジット条件は変更される可能性がある',
+        '日本語UIは公式情報で明確に確認できていない',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>クレジット制（要確認）</span><br>詳細は公式サイトで確認。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">要公式確認</span>' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st paid sm"><span class="d"></span>有料メンバーのみ（公式FAQ）</span><br>無料利用時は断定できない。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料あり・有料なし（公式FAQ）</span>' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>非対応（要確認）</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要確認</span>' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web / iOS / API' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-24', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://haiper.ai/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 条件・料金は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'Haiperはテキストから動画（text-to-video）、画像から動画（image-to-video）、キーフレーム指定などに対応するAI動画生成ツールです。Haiper Video 2.xを中心に複数の生成機能が用意されており、Web AppおよびiOS Appから利用できます。API経由での利用も案内されています。',
+        '<b>公式FAQでは有料メンバーになるとHaiperの透かしなし動画を生成でき、それらは商用利用にも使えると案内されています。</b>無料利用時の商用利用可否は断定できないため、商用利用を前提にする場合は必ず最新の公式規約をご確認ください。このページは法的助言ではありません。',
+      ]}
+      aboutMore={{ label: 'AI動画生成ツール一覧で比較する →', href: '/categories/video-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', '備考'],
+          rows: [
+            [{ html: '無料', rk: true }, { html: '無料' }, { html: 'クレジット制・透かしあり（要確認）' }],
+            [{ html: '有料プラン', rk: true }, { html: '要公式確認', mono: true }, { html: '透かしなし・商用利用可（公式FAQ）' }],
+          ],
+        },
+        notes: [
+          'プラン名・料金・クレジット条件は変更される可能性があります',
+          '最新情報は公式料金ページでご確認ください',
+        ],
+      }}
+      commercial={{
+        lead: '<b>公式FAQでは有料メンバーになるとHaiperの透かしなし動画を生成でき、それらは商用利用にも使えると案内されています。</b>無料利用時の商用利用可否は断定できません。',
+        points: [
+          '有料メンバーで透かしなし・商用利用可と公式FAQで案内されている',
+          '無料利用時の商用利用可否は公式規約をご確認ください',
+          '条件・規約は変更される可能性があります',
+          '人物・ブランドロゴ・第三者が権利を持つ素材を扱う場合は別途確認が必要',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のHaiper公式FAQ・利用規約を詳しくご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="HaiperのiOS App対応とAPI利用について"
+      integration="HaiperはWeb Appに加えてiOS Appでも利用可能で、スマートフォンからAI動画生成を手軽に試せる点が特徴です。また、API経由での利用も案内されており、動画生成をワークフローに組み込みたい開発者にも対応しています。公式ドキュメントでは動画生成のクレジット消費量が案内されているため、利用前に確認することを推奨します。"
+      whoFor={[
+        'AI動画生成をスマートフォンで試したい人（iOS App対応）',
+        'API経由で動画生成を組み込みたい開発者',
+        'SNS・ショート動画のアイデアを素早く検証したい人',
+        '有料プランで商用利用条件を確認した上で利用したい人',
+      ]}
+      whoNot={[
+        '無料枠だけで大量生成・透かしなしを前提にしたい人',
+        '日本語UIを必須とする人（公式情報で明確に確認できていない）',
+        '商用利用条件を確認せずにそのままクライアント案件へ使いたい人',
+        '長尺動画の編集まで1ツールで完結させたい人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Haiper（このページ）', rk: true, me: true }, { html: 'iOS App・API対応で手軽に試したい場合（商用は有料プランが前提）' }],
+          [{ html: '<a href="/tools/runway/">Runway</a>', rk: true }, { html: 'プロ向け映像編集機能・API・明確な利用規約を重視する場合' }],
+          [{ html: '<a href="/tools/pika/">Pika</a>', rk: true }, { html: 'シンプル操作・低コストの動画生成を優先する場合' }],
+          [{ html: '<a href="/tools/kling-ai/">Kling AI</a>', rk: true }, { html: 'コスト重視・日本語プロンプト対応を検討する場合' }],
+          [{ html: '<a href="/tools/luma-ai/">Luma AI</a>', rk: true }, { html: '高品質動画・長尺・API連携を重視する場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Haiper', 'Runway', 'Kling AI', 'Luma AI', 'Pika'],
+        rows: [
+          [{ html: '商用利用', rk: true }, { html: '有料メンバーのみ', me: true }, { html: '全プラン・条件あり' }, { html: '有料プランのみ' }, { html: 'Plus以上' }, { html: '有料プランで可' }],
+          [{ html: '透かし（無料）', rk: true }, { html: 'あり', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
+          [{ html: '日本語UI', rk: true }, { html: '非対応（要確認）', me: true }, { html: '非対応' }, { html: '部分対応' }, { html: '非対応' }, { html: '部分対応' }],
+          [{ html: 'iOS App', rk: true }, { html: 'あり', me: true }, { html: 'なし' }, { html: 'なし' }, { html: 'なし' }, { html: 'なし' }],
+          [{ html: 'API', rk: true }, { html: 'あり', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: '要確認' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>公式情報で明確に確認できていません（非対応と推定）',
+        '<b>日本語プロンプト：</b>要確認。最新情報は公式サイトでご確認ください',
+        '動画生成では英語プロンプトや具体的な動き・構図の指定の方が安定する可能性があります',
+      ]}
+      watermark={[
+        '公式FAQでは有料メンバーになるとHaiperの透かしなし動画を生成できると案内されています',
+        '無料利用時やプランによって透かし条件が異なる可能性があります',
+        '最新の透かし条件は実際の出力画面と公式情報でご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '最新のHaiper公式FAQ・利用規約を確認したか' },
+        { html: '有料メンバーへの加入が商用利用の前提条件とされていることを理解したか' },
+        { html: '生成動画に使用する入力画像・素材の権利関係' },
+        { html: '人物・著名人・ブランドロゴを含む素材を使っていないか' },
+        { html: 'クレジット消費量を公式ドキュメントで確認したか' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-05-24'}
+      nextCheck={d?.nextReviewDue ?? '2026-06-24'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'Haiper 公式サイト', href: 'https://haiper.ai/' },
+        { tag: 'ドキュメント', label: 'Haiper ドキュメント（Introduction）', href: 'https://docs.haiper.ai/introduction' },
+        { tag: '料金', label: 'Haiper 料金・クレジット（公式）', href: 'https://docs.haiper.ai/pricing' },
+        { tag: 'API料金', label: 'Haiper API料金（公式）', href: 'https://docs.haiper.ai/api-reference/api-pricing' },
+        { tag: 'FAQ', label: 'Haiper FAQ（公式）', href: 'https://book.haiper.ai/haiper-video-generator/faq' },
+      ]}
+      faqs={[
+        { q: 'Haiperは無料で使えますか？', a: '公式ドキュメントではHaiper Web App / iOS App向けのクレジット制動画生成が案内されており、試用目的での無料利用は可能とされています。ただし無料枠・利用上限・対象機能は変更される可能性があるため、最新の公式情報をご確認ください。' },
+        { q: 'Haiperは商用利用できますか？', a: '公式FAQでは有料メンバーになるとHaiperの透かしなし動画を生成でき、それらは商用利用にも使えると案内されています。無料利用時の商用利用可否は断定できません。商用利用前は最新の公式規約・FAQをご確認ください。このページは法的助言ではありません。' },
+        { q: '透かしはありますか？', a: '公式FAQでは有料メンバーになるとHaiperの透かしなし動画を生成できると案内されています。無料利用時やプランによって透かし条件が異なる可能性があるため、実際の出力画面と最新の公式情報でご確認ください。' },
+        { q: 'APIは使えますか？', a: '公式ドキュメントではAPI提供が案内されています。API料金・利用条件の詳細は公式APIドキュメントをご確認ください。' },
+        { q: '日本語で使えますか？', a: '公式情報だけでは日本語UIの対応を明確に確認できていません。日本語プロンプトで試せる場合でも、動画生成では英語プロンプトの方が安定する可能性があります。最新の対応状況は公式サイトでご確認ください。' },
+        { q: '料金はどのくらいですか？', a: 'プラン名・料金・クレジット条件は変更される可能性があるため、必ず最新の公式料金ページをご確認ください。' },
+      ]}
+      relatedTools={[
+        { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
+        { name: 'Pika', slug: 'pika', initial: 'P', cat: '動画生成', badges: [{ s: 'cond', label: '商用：有料で可' }, { s: 'cond', label: '無料：月80cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://pika.art' },
+        { name: 'Kling AI', slug: 'kling-ai', initial: 'K', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料のみ' }, { s: 'cond', label: '無料：1日66cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://klingai.com' },
+      ]}
+      nextReads={[
+        { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
+        { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
+        { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

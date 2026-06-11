@@ -1,0 +1,282 @@
+---
+import ComparisonVsArticle from '../../../components/ComparisonVsArticle.astro';
+import { getEntry } from 'astro:content';
+
+const [toolInvideoAi, toolCapcutAi] = await Promise.all([
+  getEntry('tools', 'invideo-ai'),
+  getEntry('tools', 'capcut-ai'),
+]);
+const toolDates = [toolInvideoAi?.data.lastReviewed, toolCapcutAi?.data.lastReviewed].filter(Boolean) as string[];
+const latestDate = toolDates.length ? toolDates.sort().at(-1)! : null;
+
+const faqs = [
+  {
+    q: 'InVideo AIとCapCut AIはどちらが初心者向けですか？',
+    a: 'CapCut AIは日本語UIが提供されており、スマートフォンアプリからも直感的に操作できるため、動画編集に慣れていない方が入りやすい面があります。InVideo AIは英語UIが主体ですが、テキストスクリプトから動画を自動生成できるため、台本さえあれば動画制作の手間を減らせます。どちらも無料プランから試せますが、条件は変更される可能性があるため最新の公式サイトをご確認ください。',
+  },
+  {
+    q: 'InVideo AIとCapCut AIはどちらがYouTube動画に向いていますか？',
+    a: 'YouTube向けの解説動画・ナレーション付き動画を台本から効率的に作りたい場合はInVideo AIが候補になります。YouTubeショートなどの短尺動画をテンプレートや自動字幕を使って素早く仕上げたい場合はCapCut AIが候補になります。用途・動画の長さ・制作スタイルによって向いているツールが異なります。',
+  },
+  {
+    q: 'InVideo AIとCapCut AIはどちらが商用利用しやすいですか？',
+    a: 'InVideo AIは有料プランで商用利用に対応しているとされています。無料プランでの商用利用条件は公式規約をご確認ください。CapCut AIは商用利用・広告利用・クライアントワークを前提にする場合、CapCut本体の規約だけでなく使用する素材・音源・テンプレート・AI機能ごとの条件確認が必要とされています。どちらも最新の公式利用規約を必ずご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: 'InVideo AIとCapCut AIに透かしは入りますか？',
+    a: 'InVideo AIは無料プランでは透かしが入るとされています。有料プランでは透かしなしで出力できるとされています。CapCut AIは無料利用・テンプレート・素材・書き出し条件により透かしやロゴ表示の扱いが変わる可能性があります。どちらも最新の条件は公式サイトでご確認ください。',
+  },
+  {
+    q: 'InVideo AIとCapCut AIはどちらが日本語で使えますか？',
+    a: 'CapCut AIは日本語の公式ページおよびアプリが提供されており、日本語UIで利用可能です。InVideo AIはUIが英語主体で、日本語UIへのネイティブ対応はないとされています。日本語テキストから動画生成は両ツールとも一定程度可能とされていますが、英語コンテンツの方が品質が安定する場合があるとされています。',
+  },
+  {
+    q: 'InVideo AIとCapCut AIはどちらがSNS動画に向いていますか？',
+    a: 'CapCut AIはTikTok・Instagramリール・YouTubeショートなどの縦型ショート動画制作に特化した機能が充実しており、SNS向けショート動画を日常的に作る場合の候補とされています。InVideo AIはSNS向け動画も対象としていますが、テキストから台本型の動画を生成する用途が得意とされています。',
+  },
+  {
+    q: 'InVideo AIとCapCut AIで素材・テンプレートを使うときの注意点は？',
+    a: 'どちらのツールもプラットフォーム内で利用できる素材・テンプレート・音源にそれぞれ個別のライセンス条件が設定されている場合があります。商用利用・広告利用を前提にする場合は、ツール本体の規約に加え、使用する素材ごとの利用条件を確認することが必要です。本記事は法的助言ではありません。',
+  },
+  {
+    q: 'InVideo AIとCapCut AIはAI動画生成ツールとしてRunwayやKling AIと何が違いますか？',
+    a: 'InVideo AIはテキストスクリプトとテンプレート・素材を組み合わせた台本型の動画制作が得意です。CapCut AIはSNS向け動画編集・テンプレート・AI字幕などの編集補助機能が中心です。Runway・Pika・Kling AI・Luma AIなどは、AIがゼロから映像を生成するtext-to-videoまたはimage-to-videoの生成ツールです。映像そのものをAIで生成したい場合は、AI動画生成ツールの候補も合わせて確認することをおすすめします。',
+  },
+];
+
+const comparisonRows = [
+  { item: '主な用途', toolA: 'テキストから台本型の動画自動生成', toolB: 'SNS動画編集・テンプレート・AI編集補助' },
+  { item: '料金（最低有料プラン）', toolA: '約$20/月〜（年払い・Plusプラン）', toolB: '最新価格はアプリ内で確認（地域・プラットフォームによる）' },
+  { item: '無料プラン', toolA: 'あり（透かし・エクスポート制限あり）', toolB: 'あり（透かし・機能制限・条件は公式確認）' },
+  { item: '商用利用（無料プラン）', toolA: '公式規約を要確認', toolB: '素材・機能ごとに条件確認が必要' },
+  { item: '商用利用（有料プラン）', toolA: '有料プランで対応しているとされる（条件あり）', toolB: '素材・テンプレート・AI機能ごとの条件確認が必要' },
+  { item: '日本語UI', toolA: '非対応（英語主体）', toolB: '対応（日本語公式ページ・アプリあり）' },
+  { item: '日本語プロンプト', toolA: '一部対応（英語の方が品質安定）', toolB: '対応（英語・具体的指示の方が安定する場合あり）' },
+  { item: '透かし（無料プラン）', toolA: 'あり', toolB: '条件により異なる（公式確認推奨）' },
+  { item: '透かし（有料プラン）', toolA: 'なし（有料プランでは出力可）', toolB: '条件により異なる（公式確認推奨）' },
+  { item: 'テキスト→動画', toolA: '対応（台本型）', toolB: '対応（テンプレート+AI生成）' },
+  { item: '画像→動画', toolA: '非対応（要確認）', toolB: '対応' },
+  { item: 'AIナレーション', toolA: '対応', toolB: '対応' },
+  { item: '自動字幕', toolA: '対応', toolB: '対応（Auto Captions機能）' },
+  { item: '背景削除', toolA: '要確認', toolB: '対応' },
+  { item: 'テンプレート', toolA: '豊富（英語コンテンツ向け）', toolB: '豊富（SNS縦型動画向け）' },
+  { item: 'スマホアプリ', toolA: '非対応（Webのみ）', toolB: '対応（iOS・Android）' },
+  { item: '対応環境', toolA: 'Web', toolB: 'Web・iOS・Android・デスクトップ' },
+];
+
+const relatedLinks = [
+  { href: '/tools/invideo-ai/', label: 'InVideo AI詳細' },
+  { href: '/tools/capcut-ai/', label: 'CapCut AI詳細' },
+  { href: '/categories/video-generation/', label: 'AI動画生成ツール一覧' },
+  { href: '/tools/runway/', label: 'Runway詳細' },
+  { href: '/tools/kling-ai/', label: 'Kling AI詳細' },
+  { href: '/tools/pika/', label: 'Pika詳細' },
+  { href: '/comparisons/runway-vs-pika/', label: 'RunwayとPikaを比較' },
+  { href: '/comparisons/runway-vs-kling-ai/', label: 'RunwayとKling AIを比較' },
+  { href: '/comparisons/', label: 'AI画像・動画ツール比較表' },
+];
+
+const sources = [
+  { href: 'https://invideo.io/pricing/', label: 'InVideo AI料金プラン（公式）' },
+  { href: 'https://invideo.io', label: 'InVideo AI公式サイト' },
+  { href: 'https://www.capcut.com/', label: 'CapCut公式サイト' },
+  { href: 'https://www.capcut.com/ja-jp/tools/ai-video-generator', label: 'CapCut AI動画生成（公式・日本語）' },
+  { href: 'https://www.capcut.com/help/new-capcut-subscription-pricing', label: 'CapCutサブスクリプション・料金（公式ヘルプ）' },
+  { href: 'https://www.capcut.com/clause/terms-of-service', label: 'CapCut利用規約（公式）' },
+];
+
+const articleJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "InVideo AIとCapCut AIを比較｜動画制作・SNS動画ならどちらを選ぶ？",
+  "description": "InVideo AIとCapCut AIの特徴、無料プラン、商用利用条件、日本語対応、透かし、向いている用途を比較します。台本から動画を作りたい場合とSNS動画編集を重視する場合で選び方が異なります。",
+  "url": "https://aicreative-db.com/comparisons/invideo-ai-vs-capcut-ai/",
+  "mainEntityOfPage": "https://aicreative-db.com/comparisons/invideo-ai-vs-capcut-ai/",
+  "author": { "@type": "Organization", "name": "AIクリエイティブナビ編集部" },
+  "publisher": { "@type": "Organization", "name": "AIクリエイティブナビ", "url": "https://aicreative-db.com/" },
+  "datePublished": "2026-06-11",
+  "dateModified": "2026-06-11",
+});
+---
+
+<ComparisonVsArticle
+  title="InVideo AIとCapCut AIを比較｜動画制作・SNS動画ならどちらを選ぶ？ | AIクリエイティブナビ"
+  description="InVideo AIとCapCut AIの特徴、無料プラン、商用利用条件、日本語対応、透かし、向いている用途を比較します。台本から動画を作りたい場合とSNS動画編集を重視する場合で選び方が異なります。"
+  canonicalPath="/comparisons/invideo-ai-vs-capcut-ai/"
+  jsonLd={articleJsonLd}
+  breadcrumbLabel="InVideo AIとCapCut AI比較"
+  h1="InVideo AIとCapCut AIを比較｜動画制作・SNS動画ならどちらを選ぶ？"
+  lead="InVideo AIとCapCut AIはどちらも動画制作に活用できますが、得意とする用途が異なります。テキストスクリプトから解説動画・台本型の動画を自動生成したい場合はInVideo AIが、SNSショート動画の編集・テンプレート・自動字幕・日本語UIを重視する場合はCapCut AIが候補になります。無料プランの条件・商用利用条件・素材ライセンスを確認して、用途に合った選択をしてください。"
+  category="AI動画制作ツール比較"
+  latestDate={latestDate}
+  toolAName="InVideo AI"
+  toolASlug="invideo-ai"
+  toolBName="CapCut AI"
+  toolBSlug="capcut-ai"
+  conclusionA={{
+    label: '台本・スクリプトから動画を自動生成したい →',
+    toolName: 'InVideo AI',
+    toolHref: '/tools/invideo-ai/',
+    body: 'テキストスクリプトから動画を自動生成し、AIナレーション・字幕・テンプレートを活用してYouTube・SNS向けの解説動画を効率的に作りたい場合の候補です。UIは英語主体で、英語コンテンツの動画化に向いているとされています。商用利用は有料プランで対応しているとされていますが、最新の公式利用規約を必ずご確認ください。',
+  }}
+  conclusionB={{
+    label: 'SNS動画編集・テンプレート・日本語UI重視 →',
+    toolName: 'CapCut AI',
+    toolHref: '/tools/capcut-ai/',
+    body: 'TikTok・Instagramリール・YouTubeショートなどのショート動画制作に特化した機能が充実しています。日本語UIが提供されておりスマートフォンアプリからも利用可能です。自動字幕・背景削除・テンプレートなど多機能なAI編集補助を使いたい場合の候補です。商用利用は素材・音源・テンプレート・AI機能ごとの条件確認が必要とされています。',
+  }}
+  conclusionNote="比較結果は用途・プラン・素材条件によって変わる場合があります。最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。"
+  comparisonRows={comparisonRows}
+  faqs={faqs}
+  relatedLinks={relatedLinks}
+  sources={sources}
+  noticeItems={[
+    '料金・無料枠・商用利用条件・透かし条件は変更される場合があります。',
+    '最新情報は各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。',
+    'CapCutの料金はアプリ内サブスクリプションページで確認するよう案内されています（地域・プラットフォームによって異なる場合があります）。',
+    '本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。',
+  ]}
+>
+  <!-- ===== 2ツールの位置づけの違い ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">InVideo AIとCapCut AIの根本的な違い</h2>
+    <p>この2ツールを比較する際に最初に理解しておきたいのは、用途の方向性が異なる点です。</p>
+    <ul>
+      <li><strong>InVideo AI：</strong>テキストスクリプト（台本）から動画を自動生成するサービスです。AIナレーション・字幕・テンプレート素材を組み合わせて、YouTube解説動画・ビジネス動画などを効率的に作ることに向いているとされています。</li>
+      <li><strong>CapCut AI：</strong>動画編集アプリ「CapCut」のAI機能群です。自動字幕・背景削除・AI音声・テンプレート自動編集など、SNSショート動画の制作・編集補助に特化した機能が充実しています。日本語UIでスマートフォンからも利用可能です。</li>
+    </ul>
+    <p>また、どちらのツールもRunway・Pika・Kling AIのような<strong>AIがゼロから映像を生成するtext-to-videoツールとは異なります</strong>。本格的なAI映像生成を検討する場合は、<a href="/categories/video-generation/" style="color:var(--brand-ink);">AI動画生成ツール一覧</a>もご参照ください。</p>
+  </section>
+
+  <!-- ===== InVideo AIの特徴 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">InVideo AIの特徴</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">強み</h3>
+        <ul>
+          <li>テキストプロンプト・スクリプトから動画を自動生成できる</li>
+          <li>AIナレーション・字幕生成に対応</li>
+          <li>テンプレートが豊富（英語コンテンツ向け）</li>
+          <li>YouTube・SNS向けの解説動画制作に向いているとされる</li>
+        </ul>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">注意点</h3>
+        <ul>
+          <li>無料プランでは透かしとエクスポート回数の制限あり</li>
+          <li>日本語UIなし（英語主体）</li>
+          <li>日本語コンテンツは英語ほど品質が安定しない場合あり</li>
+          <li>商用利用は有料プランが前提とされている</li>
+          <li>スマートフォンアプリは非対応（Webのみ）</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-soft);">詳細は<a href="/tools/invideo-ai/" style="color:var(--brand-ink);">InVideo AI詳細ページ</a>をご参照ください。</p>
+  </section>
+
+  <!-- ===== CapCut AIの特徴 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">CapCut AIの特徴</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">強み</h3>
+        <ul>
+          <li>日本語UIが提供されており、日本語で操作できる</li>
+          <li>スマートフォン（iOS・Android）・Web・デスクトップに対応</li>
+          <li>自動字幕・AI音声・背景削除など多機能なAI編集補助</li>
+          <li>SNS縦型ショート動画向けのテンプレートが豊富</li>
+          <li>TikTok・Instagramリール・YouTubeショートとの相性がよいとされる</li>
+        </ul>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">注意点</h3>
+        <ul>
+          <li>商用利用は素材・音源・テンプレート・AI機能ごとの条件確認が必要</li>
+          <li>料金・機能・透かし条件がプランや地域・時期によって変わる可能性あり</li>
+          <li>本格的なAI映像生成（text-to-video）は中心機能ではない</li>
+          <li>ビジネス利用・クライアントワークでは規約の詳細確認が重要</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-soft);">詳細は<a href="/tools/capcut-ai/" style="color:var(--brand-ink);">CapCut AI詳細ページ</a>をご参照ください。</p>
+  </section>
+
+  <!-- ===== 商用利用・素材ライセンスの注意点 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">商用利用前に確認したいポイント</h2>
+    <div class="cp-2col" style="margin-bottom:14px;">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">InVideo AI</h3>
+        <p>公式情報上、<strong>有料プランで商用利用に対応しているとされています</strong>。無料プランでの商用利用条件は公式規約をご確認ください。InVideo AI内で使用できる素材・テンプレートにもそれぞれライセンス条件が設定されている場合があります。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">利用前に最新の<a href="https://invideo.io" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">InVideo AI公式サイト</a>の利用規約をご確認ください。</p>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">CapCut AI</h3>
+        <p>CapCutの利用規約では、利用する素材について必要な権利・許諾を持つ必要があることが案内されています。<strong>商用利用・広告利用・クライアントワークを前提にする場合、CapCut本体の規約だけでなく、使用する素材・音源・テンプレート・AI機能ごとの条件確認が必要です</strong>。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">利用前に最新の<a href="https://www.capcut.com/clause/terms-of-service" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">CapCut利用規約</a>をご確認ください。</p>
+      </div>
+    </div>
+    <div class="cp-caution-box">
+      <p><strong>素材・テンプレート・音源の利用条件について：</strong>どちらのツールもプラットフォーム内で利用できる素材・テンプレート・音源にはそれぞれ個別のライセンス条件が設定されている場合があります。商用利用を前提とする場合は、ツール本体の規約に加え、使用する素材ごとの条件確認が必要です。</p>
+      <p style="margin-top:8px;"><strong>人物・ブランド・第三者素材を使う場合：</strong>実在人物の肖像権・著名人・ブランドロゴ・第三者素材を含む動画では、別途権利確認が必要になる場合があります。</p>
+      <p style="margin-top:8px;"><strong>SNS投稿先のポリシー：</strong>TikTok・YouTube Shorts・Instagram Reelsなど投稿先のプラットフォームポリシーも合わせてご確認ください。</p>
+      <p style="margin-top:8px;"><a href="/guides/commercial-use-copyright/" style="color:var(--notice-ink);font-weight:600;">AI生成コンテンツの商用利用・著作権ガイド →</a></p>
+    </div>
+  </section>
+
+  <!-- ===== 向いている人 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">向いている人・向いていない人</h2>
+    <div class="cp-suited-grid">
+      <div class="cp-suited-card">
+        <p class="cp-suited-h">InVideo AIが向いている人</p>
+        <ul class="cp-suited-list">
+          <li>テキストスクリプト・台本から動画を自動生成したい人</li>
+          <li>YouTube解説動画・ビジネス動画を効率的に量産したい人</li>
+          <li>AIナレーション付きの解説動画を作りたい人</li>
+          <li>英語コンテンツの動画化を中心に試したい人</li>
+          <li>有料プランで商用利用を前提に使いたい人</li>
+        </ul>
+      </div>
+      <div class="cp-suited-card">
+        <p class="cp-suited-h">CapCut AIが向いている人</p>
+        <ul class="cp-suited-list">
+          <li>TikTok・Instagramリール・YouTubeショートなどのSNS動画を日常的に作る人</li>
+          <li>日本語UIでAI動画編集ツールを使いたい人</li>
+          <li>スマートフォンからも動画編集・投稿したい人</li>
+          <li>自動字幕・AI音声など多機能なAI編集補助を使いたい人</li>
+          <li>テンプレートを活用して短時間で動画を仕上げたい人</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cp-not-suited">
+      <p class="cp-not-suited-h">どちらも向いていないケース</p>
+      <ul>
+        <li>テキストや画像からAIが本格的に映像を生成する用途（→ <a href="/tools/runway/">Runway</a>・<a href="/tools/kling-ai/">Kling AI</a>・<a href="/tools/pika/">Pika</a>などが候補）</li>
+        <li>毎回同じ人物・構図・動きを完全に再現したい人</li>
+        <li>公式条件を確認せずに商用案件・クライアントワークへ使いたい人</li>
+        <li>長尺の映像を細かく演出・コントロールしたい人</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== 他ツール候補 ===== -->
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">他のAI動画生成ツールも検討したい場合</h2>
+    <div class="cp-other-grid">
+      <div class="cp-other-card">
+        <p class="cp-other-h"><a href="/tools/runway/">Runway</a> / <a href="/tools/kling-ai/">Kling AI</a></p>
+        <p>テキストや画像からAIが映像を生成する用途を検討したい場合の候補です。InVideo AIやCapCut AIとは異なるアプローチで、映像そのものをAIで生成できます。詳しくは<a href="/comparisons/runway-vs-kling-ai/" style="color:var(--brand-ink);">RunwayとKling AIの比較</a>もご参照ください。</p>
+      </div>
+      <div class="cp-other-card">
+        <p class="cp-other-h"><a href="/tools/pika/">Pika</a></p>
+        <p>短尺AI動画を手軽に試したい場合の候補とされています。CapCut AIやInVideo AIとは異なり、AI映像生成に特化したツールです。詳しくは<a href="/comparisons/runway-vs-pika/" style="color:var(--brand-ink);">RunwayとPikaの比較</a>もご参照ください。</p>
+      </div>
+      <div class="cp-other-card">
+        <p class="cp-other-h">動画生成ツール全体を比較</p>
+        <p>主要なAI動画生成・編集ツールを横断的に比較したい場合は<a href="/categories/video-generation/" style="color:var(--brand-ink);">AI動画生成ツール一覧</a>をご参照ください。</p>
+      </div>
+    </div>
+  </section>
+</ComparisonVsArticle>

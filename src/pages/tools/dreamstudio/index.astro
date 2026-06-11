@@ -1,0 +1,283 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'dreamstudio');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'DreamStudio', item: 'https://aicreative-db.com/tools/dreamstudio/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'DreamStudio',
+    operatingSystem: 'Web',
+    applicationCategory: 'DesignApplication',
+    description: 'Stability AI公式のStable Diffusion系画像生成サービス。ブラウザ上でプロンプト・ネガティブプロンプト・画像サイズを調整して画像生成できる。',
+    url: 'https://dreamstudio.ai/',
+  },
+]);
+---
+
+<BaseLayout
+  title="DreamStudioの商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="DreamStudio（Stability AI）の商用利用条件・料金・クレジット・ライセンスを公式情報をもとに整理。Stable Diffusionとの違いも解説。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/dreamstudio/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">DreamStudio</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="DreamStudio"
+      category="AI画像生成（Stability AI公式）"
+      checkedDate={d?.lastReviewed ?? '2026-05-14'}
+      headingHtml='DreamStudioの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="DreamStudioはStability AIが提供するAI画像生成サービスです。ブラウザ上でStable Diffusion系モデルを使い、プロンプト・ネガティブプロンプト・各種パラメータを調整して画像を生成できます。Stable Diffusion本体のオープンソースモデル・DreamStudioのサービス・Stability AIのライセンスは別個のものであり、混同しないことが重要です。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '条件あり（要ライセンス確認）' } },
+        { lb: '無料枠', badge: { s: 'na', label: '要確認（初回クレジット等）' } },
+        { lb: '料金目安', text: 'クレジット消費制（要公式確認）', mono: true },
+        { lb: '透かし', badge: { s: 'na', label: '要確認' } },
+        { lb: '日本語UI', badge: { s: 'na', label: '要確認' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://dreamstudio.ai/' }}
+      secondaryCta={{ label: 'Stability AIライセンス（公式）', href: 'https://stability.ai/license' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '条件あり（要ライセンス確認）' }, wide: true,
+          sum: 'DreamStudioの利用規約ではユーザーがプロンプト・生成コンテンツについて責任を負うとされています。Stability AIのライセンス条件とAcceptable Use Policyの確認が必要です。',
+          det: 'DreamStudio利用規約では、ユーザーがプロンプト・生成コンテンツ・共有結果について責任を負うとされています。商用利用を検討する際は、Stability AIライセンスの内容と商用利用条件・Acceptable Use Policyの禁止事項・第三者の権利・素材を使用する場合の権利確認が必要です。なお、Stable Diffusion本体のオープンソースモデルのライセンスと、DreamStudioサービスの利用規約は別のものです。混同しないようにご注意ください。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'na', label: '要確認（初回クレジット等）' },
+          det: '無料枠や初回クレジットの有無は変更される可能性があります。最新の状況はDreamStudio公式サイトでご確認ください。',
+        },
+        {
+          title: '最安料金目安', sum: 'クレジット消費制（要公式確認）', sumMono: true,
+          det: 'DreamStudioはクレジット消費制のサービスです。クレジット単価・付与条件は変更される可能性があるため、最新の料金・クレジット条件は公式サイトでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'na', label: '要確認' },
+          det: '公式情報のみでは透かしの有無・条件を断定できません。プランや仕様の変更により条件が変わる可能性があります。最新の条件は公式サイトでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'na', label: '要確認' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '△ 一部対応' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web（ブラウザ）', 'API（Stability AI API）'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→画像生成', '画像→画像生成', 'インペインティング', 'ネガティブプロンプト', 'パラメータ調整（ステップ数・CFGスケール等）', 'APIアクセス'] },
+      ]}
+      useCases={[
+        '<b>Stable Diffusion系モデルをブラウザで手軽に試したい場合</b>（環境構築不要）',
+        '<b>コンセプトアート・イメージボードの制作</b>',
+        '<b>ブログ・SNS用のオリジナル画像生成</b>',
+        '<b>プロンプトやパラメータの効果を検証したい場合</b>',
+        '<b>広告・販促ビジュアルのラフ案作成</b>',
+      ]}
+      pros={[
+        'Stability AI公式サービスでStable Diffusion系モデルをブラウザから利用できる',
+        'ネガティブプロンプトや画像サイズなど詳細設定が調整しやすい',
+        'ローカル環境の構築なしに利用開始できる',
+        'Stability AI APIアクセスにも対応',
+      ]}
+      cons={[
+        '料金・クレジット条件が変更される可能性がある',
+        '商用利用時はライセンス・禁止事項・第三者権利の確認が必要',
+        '日本語UIは公式情報のみでは確認できない',
+        '透かし条件は公式情報から断定できない',
+        '初心者には設定項目がやや多く感じる場合がある',
+      ]}
+      limits={[
+        '料金・クレジット条件は予告なく変更される可能性がある',
+        '商用利用時はStability AIライセンス・Acceptable Use Policyの確認が必要',
+        '日本語UIは公式情報のみでは確認不可',
+        '透かし条件は公式情報から断定できない',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成（Stability AI公式サービス）' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>無料枠・初回クレジットの有無は変更の可能性あり。最新情報は公式確認要。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">クレジット消費制（要公式確認）</span><br>クレジット単価・付与条件は変更の可能性あり。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（要ライセンス確認）</span><br>Stability AIライセンス・Acceptable Use Policyの確認が必要。SDモデルとDreamStudioの規約は別物。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>公式情報のみでは断定できません。' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>公式情報のみでは確認できていません。' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span><br>Stable Diffusion系は英語プロンプトの方が安定しやすい傾向あり。' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web（ブラウザ）/ API' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-14', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://dreamstudio.ai/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 料金・機能・商用利用条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'DreamStudioはStability AIが提供するAI画像生成サービスです。ブラウザ上でプロンプト・ネガティブプロンプト・画像サイズ・ステップ数などのパラメータを調整しながらStable Diffusion系モデルで画像を生成できます。',
+        '<b>重要：Stable Diffusion本体・DreamStudioサービス・Stability AIライセンスは別個のものです。</b>Stable Diffusionはオープンソースモデルであり、DreamStudioはそれを利用するStability AI公式のブラウザサービスです。商用利用時は混同せず、それぞれの条件を個別に確認してください。',
+      ]}
+      aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['利用形態', '料金目安'],
+          rows: [
+            [{ html: '初回クレジット', rk: true }, { html: '付与有無・数量は変更の可能性あり（要公式確認）', mono: false }],
+            [{ html: 'クレジット追加購入', rk: true }, { html: '公式サイトで確認', mono: false }],
+          ],
+        },
+        notes: [
+          'クレジット単価・付与条件は変更される可能性があります',
+          '無料枠や初回クレジットの有無は公式サイトでご確認ください',
+          '<b>最新料金は公式サイトでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: 'DreamStudioの利用規約ではユーザーがプロンプト・生成コンテンツについて責任を負うとされています。商用利用前はStability AIのライセンスとAcceptable Use Policyを確認してください。',
+        points: [
+          '<b>DreamStudio利用規約</b>：ユーザーがプロンプト・生成コンテンツ・共有結果について責任を負うとされています',
+          '<b>Stability AIライセンス</b>：利用するモデルのバージョンによってライセンス条件が異なります（SD 1.x/2.x/SDXL と SD 3.x以降）',
+          '<b>Acceptable Use Policy</b>：禁止事項の確認が必要です',
+          '<b>Stable Diffusion本体とDreamStudioの区別</b>：オープンソースモデルのライセンスとDreamStudioサービス規約は別物です',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新の公式規約・ライセンスをご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="Stable DiffusionとDreamStudioの関係"
+      integration="DreamStudioはStable Diffusionの開発元であるStability AIが提供する公式ブラウザサービスです。ローカルにStable DiffusionをインストールしなくてもブラウザからStable Diffusion系モデルを利用できます。ただし、ローカル版と比べてカスタマイズ性は低く、利用にはクレジットが必要です。Stability AI APIへのアクセスも提供されています。"
+      whoFor={[
+        'ローカル環境を構築せずにStable Diffusion系モデルを試してみたい人',
+        'プロンプトやパラメータ調整を細かく実験したいユーザー',
+        'コンセプトアートやイメージボード作成に使いたいクリエイター',
+        'Stability AI公式系のサービスを使いたい人',
+        'ローカル版Stable Diffusionの経験者がブラウザでの手軽な検証に使いたい人',
+      ]}
+      whoNot={[
+        '無料で始めたい人（無料枠の有無は要確認）',
+        'LoRAやカスタムモデルを活用したい人（ローカル版の方が適している）',
+        '日本語UIを重視する人（対応状況は要確認）',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'DreamStudio（このページ）', rk: true, me: true }, { html: 'Stability AI公式サービスでSDモデルをブラウザからパラメータ調整しながら使いたい場合' }],
+          [{ html: '<a href="/tools/stable-diffusion/">Stable Diffusion</a>', rk: true }, { html: 'ローカル実行・カスタマイズ性・LoRA活用を最大限に重視する場合' }],
+          [{ html: '<a href="/tools/tensor-art/">Tensor.Art</a>', rk: true }, { html: 'ブラウザでSD系モデル・LoRA・Checkpointを豊富なライブラリから活用したい場合' }],
+          [{ html: '<a href="/tools/nightcafe/">NightCafe</a>', rk: true }, { html: 'コミュニティ型でAIアートを楽しみながら複数モデルを比較したい場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'DreamStudio', 'Stable Diffusion（ローカル）', 'Tensor.Art'],
+        rows: [
+          [{ html: '実行環境', rk: true }, { html: 'ブラウザ', me: true }, { html: 'ローカル' }, { html: 'ブラウザ' }],
+          [{ html: '無料枠', rk: true }, { html: '要確認', me: true }, { html: 'ローカルは無料' }, { html: 'あり' }],
+          [{ html: '商用利用', rk: true }, { html: '条件あり・要確認', me: true }, { html: 'モデル依存・要確認' }, { html: 'モデル依存・要確認' }],
+          [{ html: 'カスタマイズ性', rk: true }, { html: 'パラメータ調整可', me: true }, { html: '最高レベル' }, { html: 'モデル・LoRA選択' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>公式情報のみでは日本語UI対応を確認できていません。利用前に公式サイトでご確認ください',
+        '<b>日本語プロンプト：</b>一部対応。Stable Diffusion系は英語データで学習されている割合が高いため、英語プロンプトの方が意図した画像に近い結果が得られやすい傾向があります',
+      ]}
+      watermark={[
+        '公式情報のみでは生成画像への透かしの有無・条件を断定できません',
+        'プランや仕様の変更により条件が変わる可能性があります',
+        '最新の条件は公式サイトでご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: 'DreamStudio利用規約の内容（Stability AI公式サイトで確認）' },
+        { html: 'Stability AIライセンス（モデルバージョンごとに条件が異なる）' },
+        { html: 'Acceptable Use Policyの禁止事項' },
+        { html: 'img2imgで使用する入力画像の著作権・使用権' },
+        { html: '透かしの有無（公式サイトで最新状況を確認）' },
+        { html: 'Stable DiffusionオープンソースモデルのライセンスとDreamStudio規約を混同していないか' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-05-14'}
+      nextCheck={d?.nextReviewDue ?? '2026-06-14'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'DreamStudio公式サイト', href: 'https://dreamstudio.ai/' },
+        { tag: '規約', label: 'DreamStudio利用規約（Stability AI公式）', href: 'https://stability.ai/ds-tos' },
+        { tag: 'ライセンス', label: 'Stability AIライセンス（公式）', href: 'https://stability.ai/license' },
+        { tag: 'ポリシー', label: 'Stability AI Acceptable Use Policy（公式）', href: 'https://stability.ai/acceptable-use-policy' },
+      ]}
+      faqs={[
+        { q: 'DreamStudioは無料で使えますか？', a: '無料枠や初回クレジットの有無・数量は変更される可能性があります。最新の状況はDreamStudio公式サイトでご確認ください。' },
+        { q: 'DreamStudioは商用利用できますか？', a: 'DreamStudioの利用規約では、ユーザーがプロンプト・生成コンテンツ・共有結果について責任を負うとされています。Stability AIのライセンス条件やAcceptable Use Policyの確認が必要です。商用利用を前提にする場合は最新の公式規約・ライセンスをご確認ください。このページは法的助言ではありません。' },
+        { q: 'Stable Diffusionと何が違いますか？', a: 'DreamStudioはStability AI公式のブラウザサービスで、ローカル環境の構築なしにStable Diffusion系モデルを利用できます。セットアップ不要で手軽ですが、クレジット消費制の有料サービスです。ローカル版はGPU搭載PCと環境構築が必要ですが、無料で繰り返し生成できます。' },
+        { q: '日本語プロンプトは使えますか？', a: '日本語プロンプトでも使える場合がありますが、Stable Diffusion系では英語プロンプトの方が意図が安定しやすい傾向があります。' },
+        { q: '透かしは入りますか？', a: '公式情報のみでは断定できません。最新の条件は公式サイトでご確認ください。' },
+        { q: 'Stable Diffusionのライセンスとの関係は？', a: 'DreamStudioの利用規約とStable Diffusionオープンソースモデルのライセンス（CreativeML Open RAIL-MやStability AI Community License）は別個のものです。利用するモデルのバージョンによってライセンスが異なるため、混同しないようにご注意ください。' },
+      ]}
+      relatedTools={[
+        { name: 'Stable Diffusion', slug: 'stable-diffusion', initial: 'S', cat: '画像生成', badges: [{ s: 'cond', label: '商用：モデル依存' }, { s: 'ok', label: '無料枠：ローカル無料' }, { s: 'cond', label: 'カスタマイズ：最高レベル' }], platforms: ['ローカル', 'API'], official: 'https://stability.ai' },
+        { name: 'NightCafe', slug: 'nightcafe', initial: 'N', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'ok', label: '無料枠：クレジットあり' }, { s: 'na', label: '日本語UI：要確認' }], platforms: ['Web'], official: 'https://creator.nightcafe.studio/' },
+        { name: 'Tensor.Art', slug: 'tensor-art', initial: 'T', cat: '画像生成', badges: [{ s: 'cond', label: '商用：モデル依存' }, { s: 'ok', label: '無料枠：あり' }, { s: 'na', label: '日本語UI：要確認' }], platforms: ['Web'], official: 'https://tensor.art/' },
+      ]}
+      nextReads={[
+        { href: '/tools/stable-diffusion/', title: 'Stable Diffusion詳細ページ', desc: 'ローカル実行・ライセンス・カスタマイズ性を確認' },
+        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール', desc: '無料枠・無料プランがあるツールを一覧で確認' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用と著作権について', desc: 'AI生成画像を商用利用する際の注意点まとめ' },
+        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

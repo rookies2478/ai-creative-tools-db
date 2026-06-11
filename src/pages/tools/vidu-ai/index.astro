@@ -1,0 +1,283 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'vidu-ai');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Vidu AI', item: 'https://aicreative-db.com/tools/vidu-ai/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Vidu AI',
+    operatingSystem: 'Web',
+    applicationCategory: 'VideoApplication',
+    description: 'Vidu AIは中国Shengshu Technologyが開発したAI動画生成サービス。テキスト・画像・最大7枚の参照画像から動画を生成。アニメ動画生成・音効生成に対応。有料プランで商用利用が公式利用規約で明記されているが、ユーザー投稿コンテンツへの広範なライセンス（取消不能）にも注意が必要。',
+    url: 'https://www.vidu.com',
+  },
+]);
+---
+
+<BaseLayout
+  title="Vidu AIの商用利用・料金・無料枠まとめ｜AI動画生成ツールDB"
+  description="Vidu AIのAI動画生成における商用利用条件・料金プラン・無料枠・透かし・利用規約の注意点を整理。参照画像による一貫性維持・アニメ動画生成・音効生成機能を搭載。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/vidu-ai/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Vidu AI</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Vidu AI"
+      category="AI動画生成"
+      checkedDate={d?.lastReviewed ?? '2026-06-04'}
+      headingHtml='Vidu AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="Vidu AIは中国のShengshu Technology（生数科技）が開発したAI動画生成サービスです。テキスト・画像・最大7枚の参照画像から動画を生成でき、アニメ動画生成や音効生成にも対応しています。公式利用規約では有料ユーザーに商用利用ライセンスが拡張されると明記されていますが、<b>ユーザーが投稿したコンテンツには世界規模・無期限・取消不能のライセンスがViduに付与される点への注意が必要です。</b>"
+      specs={[
+        { lb: '商用利用', badge: { s: 'paid', label: '有料プランのみ（公式規約）' } },
+        { lb: '無料枠', badge: { s: 'cond', label: 'あり（制限・透かし）' } },
+        { lb: '料金目安', text: '要公式確認', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: '無料あり・有料要確認' } },
+        { lb: '日本語UI', badge: { s: 'na', label: '非対応' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://www.vidu.com' }}
+      secondaryCta={{ label: '利用規約を確認（公式）', href: 'https://www.vidu.com/terms-of-service' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'paid', label: '有料プランのみ（公式規約）' }, wide: true,
+          sum: '公式利用規約では「有料ユーザーについて商用利用にライセンスが拡張される（for paid users, this license extends to commercial use）」と明記されています。ただし、<b>ユーザーが投稿したコンテンツにはViduに対して世界規模・無償・取消不能のライセンスが付与される</b>点にも注意が必要です。',
+          det: '競合サービスの開発目的での利用は禁止されています。第三者の著作物・人物・ロゴ・商標を含む場合は別途条件の確認が必要です。無料プランでの商用利用可否は公式規約をご確認ください。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: 'あり（制限・透かし）' },
+          det: '公式サイトでは全ユーザーへの無料クレジット提供と、オフピークモードでの無制限無料生成が案内されています。ただし、無料プランでは透かしが付く場合があります。詳細は公式サイトでご確認ください。',
+        },
+        {
+          title: '最安料金目安', sum: '要公式確認（Creator Planあり）', sumMono: true,
+          det: '具体的な料金・クレジット数は公式サイトの最新情報をご確認ください。支払いはStripe経由で処理されるとされています。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: '無料あり・有料要確認' },
+          det: '無料プランでは透かしが入る場合があります。有料プランでの透かし条件は公式サイトでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'na', label: '非対応' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '要確認' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→動画', '画像→動画', '参照画像（最大7枚）による一貫性維持', 'アニメ動画生成（Superior Anime）', 'AI音効生成', 'First & Last Frames Control', '最大16秒（Vidu Q3モデル）'] },
+      ]}
+      useCases={[
+        '<b>参照画像を使ったキャラクター・物体の一貫性維持</b>が必要な動画生成',
+        '<b>アニメ・イラスト動画の生成</b>に特化した用途',
+        '<b>AI音効生成</b>を動画に組み合わせたい場合（有料プランで商用利用可）',
+      ]}
+      pros={[
+        '有料プランでの商用利用が公式利用規約で明記されている',
+        '最大7枚の参照画像によるキャラクター・物体・シーンの一貫性維持に対応',
+        'アニメ動画生成（Superior Anime Generation）機能を搭載',
+        'AI音効生成機能あり',
+        'オフピークモードでの無制限無料生成が案内されている',
+      ]}
+      cons={[
+        'ユーザー投稿コンテンツへの広範なライセンス（AIトレーニング含む・取消不能）が付与される',
+        '中国企業（Shengshu Technology）運営でデータ取り扱いへの注意が必要',
+        '日本語UI非対応',
+        '日本語プロンプト対応状況が不明',
+        '料金・クレジット詳細は公式サイトで動的ロードのため事前確認が必要',
+      ]}
+      limits={[
+        'ユーザー投稿コンテンツへのViduの世界規模・無期限・取消不能ライセンス（AIトレーニング含む）',
+        '無料プランでは透かしが入る場合がある',
+        '日本語UI非対応・日本語プロンプト対応状況不明',
+        '競合サービスの開発目的での利用は禁止',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>あり（透かし・制限）</span><br>オフピーク無制限生成が案内されている。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">要公式確認</span><br>正確な料金は公式サイトで確認。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st paid sm"><span class="d"></span>有料プランのみ（公式規約）</span><br>投稿コンテンツへの広範なライセンスに注意。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料あり・有料要確認</span>' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>非対応</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要確認</span>' }],
+          [{ html: '最大動画長', rk: true }, { html: '最大16秒（Vidu Q3モデル）' }],
+          [{ html: '運営', rk: true }, { html: 'Shengshu Technology（中国）' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-04', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.vidu.com" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 利用規約のライセンス条項を必ずご確認ください。料金・条件は変更される可能性があります。',
+      }}
+      about={[
+        'Vidu AIは中国のShengshu Technology（生数科技）が開発したAI動画生成サービスです。テキスト・画像・最大7枚の参照画像から動画を生成できます。公式サイトによると約10秒での高速生成が可能とされており、アニメ動画生成（Superior Anime Generation）や音効生成（AI Sound Effect Generator）機能も搭載しています。',
+        '<b>重要な注意点として、ユーザーが投稿したコンテンツには、Viduに対して世界規模・無償・取消不能のライセンスが付与されます（AIトレーニング目的を含む）。</b>機密性の高い素材のアップロードは、ライセンス条項を踏まえて慎重に検討してください。このページは法的助言ではありません。',
+      ]}
+      aboutMore={{ label: 'AI動画生成ツール一覧で比較する →', href: '/categories/video-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', '備考'],
+          rows: [
+            [{ html: '無料', rk: true }, { html: '無料' }, { html: '透かしあり・制限あり' }],
+            [{ html: 'Creator Plan以上', rk: true }, { html: '要公式確認', mono: true }, { html: '商用利用可・詳細は公式サイトで確認' }],
+          ],
+        },
+        notes: [
+          '料金・クレジット詳細は公式サイトで動的ロードのため最新情報の確認が必要です',
+          '<b>ユーザー投稿コンテンツへの広範なライセンスにも注意が必要です</b>',
+        ],
+      }}
+      commercial={{
+        lead: '公式利用規約では「有料ユーザーについて商用利用にライセンスが拡張される」と明記されています。ただし<b>ユーザーが投稿したコンテンツにはViduへの世界規模・無期限・取消不能ライセンスが付与される</b>点への注意が必要です。',
+        points: [
+          '有料プランで商用利用ライセンスが拡張される（公式利用規約に明記）',
+          '競合サービスの開発目的での利用は禁止',
+          'ユーザー投稿コンテンツへのViduの世界規模・無期限・取消不能ライセンス（AIトレーニング含む）',
+          '第三者の著作物・人物・ロゴ・商標を含む場合は別途条件の確認が必要',
+          '利用規約は変更される可能性があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のVidu AI公式利用規約を詳しくご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="Vidu AIの参照画像機能とアニメ生成について"
+      integration="Vidu AIの参照画像機能（Reference to Video）では、最大7枚の画像をアップロードしてキャラクター・物体・シーンの一貫性を保った動画を生成できるとされています。アニメ動画生成機能（Superior Anime Generation）はアニメ・イラスト風の動画生成に特化しており、他のAI動画生成ツールにはない特徴的な機能です。ただし、機密性の高い素材をアップロードする場合は利用規約のライセンス条項を十分に確認してから利用することを推奨します。"
+      whoFor={[
+        '参照画像を使った一貫性のある動画生成を試したい人（利用規約確認が前提）',
+        'アニメ・イラスト風の動画生成に特化した用途',
+        'AI動画生成ツールを複数比較検討している人',
+        '有料プランで商用利用ライセンスを明示的に確認したい人',
+      ]}
+      whoNot={[
+        '機密性の高い素材を安心してアップロードしたい人（広範なライセンス条項に注意）',
+        '日本語UIで操作したい人',
+        '運営企業のデータポリシーへの懸念がある人',
+        '日本語プロンプト対応を重視する人（対応状況不明）',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Vidu AI（このページ）', rk: true, me: true }, { html: '参照画像の一貫性・アニメ動画生成を試したい場合（利用規約確認が必須）' }],
+          [{ html: '<a href="/tools/runway/">Runway</a>', rk: true }, { html: 'プロ向け映像編集機能・API・明確な利用規約を重視する場合' }],
+          [{ html: '<a href="/tools/luma-ai/">Luma AI</a>', rk: true }, { html: '高品質な動画生成・長尺（最大20秒）・API連携を重視する場合' }],
+          [{ html: '<a href="/tools/kling-ai/">Kling AI</a>', rk: true }, { html: 'コスト重視・日本語プロンプト・動画延長（最大3分）を検討する場合' }],
+          [{ html: '<a href="/tools/pika/">Pika</a>', rk: true }, { html: 'シンプル操作・低コストの動画生成を優先する場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Vidu AI', 'Runway', 'Kling AI', 'Luma AI', 'Pika'],
+        rows: [
+          [{ html: '最大動画長', rk: true }, { html: '最大16秒（Q3）', me: true }, { html: '要公式確認' }, { html: '10秒（延長3分）' }, { html: '最大20秒' }, { html: '最大25秒' }],
+          [{ html: '商用利用', rk: true }, { html: '有料プランのみ', me: true }, { html: '全プラン・条件あり' }, { html: '有料プランのみ' }, { html: 'Plus以上' }, { html: '有料プランで可' }],
+          [{ html: '透かし（無料）', rk: true }, { html: 'あり', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
+          [{ html: '日本語UI', rk: true }, { html: '非対応', me: true }, { html: '非対応' }, { html: '部分対応' }, { html: '非対応' }, { html: '部分対応' }],
+          [{ html: '参照画像', rk: true }, { html: '最大7枚', me: true }, { html: '要確認' }, { html: '要確認' }, { html: '要確認' }, { html: '要確認' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>非対応。インターフェースは英語のみです',
+        '<b>日本語プロンプト：</b>対応状況不明。最新情報は公式サイトでご確認ください',
+      ]}
+      watermark={[
+        '無料プランでは透かしが入る場合があります',
+        '有料プランでの透かし条件は公式サイトでご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '最新のVidu AI利用規約（Terms of Use）を詳しく確認したか' },
+        { html: 'ユーザー投稿コンテンツへの世界規模・取消不能ライセンスの内容を理解したか' },
+        { html: '中国企業（Shengshu Technology）運営のデータポリシーを確認したか' },
+        { html: '有料プランに加入しているか（商用利用の前提条件）' },
+        { html: '生成動画に使用する参照画像・素材の権利関係' },
+        { html: '競合サービス開発目的での利用でないことを確認したか' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-06-04'}
+      nextCheck={d?.nextReviewDue ?? '2026-09-04'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'Vidu AI 公式サイト', href: 'https://www.vidu.com' },
+        { tag: '利用規約', label: 'Vidu AI Terms of Use（公式）', href: 'https://www.vidu.com/terms-of-service' },
+        { tag: '料金', label: 'Vidu AI 料金ページ（公式）', href: 'https://www.vidu.com/pricing' },
+      ]}
+      faqs={[
+        { q: 'Vidu AIは無料で使えますか？', a: '公式サイトでは全ユーザーへの無料クレジット提供と、オフピークモードでの無制限無料生成が案内されています。ただし、無料プランでは透かしが付く場合があり、詳細な制限は公式サイトをご確認ください。' },
+        { q: 'Vidu AIは商用利用できますか？', a: '公式利用規約では「有料ユーザーについて商用利用にライセンスが拡張される」と明記されています。ただし、ユーザーが投稿したコンテンツには世界規模・無償・取消不能のライセンスがViduに付与されます。商用利用前は利用規約を特に慎重にご確認ください。このページは法的助言ではありません。' },
+        { q: '参照画像機能とは何ですか？', a: '公式サイトによると、最大7枚の画像をアップロードすることで、キャラクター・物体・シーンの一貫性を保ちながら動画を生成できる機能です。詳細は公式サイトをご確認ください。' },
+        { q: 'アップロードしたコンテンツはどう扱われますか？', a: '公式利用規約によると、ユーザーが投稿したコンテンツには、Viduに対して世界規模・無償・取消不能のライセンスが付与されます。このライセンスはAIトレーニング目的での利用も含まれ、アカウント削除後も継続します。機密性の高い素材の取り扱いには注意が必要です。' },
+        { q: '日本語で使えますか？', a: '公式サイトに言語切替オプションが存在しますが、日本語UIへの対応は確認できていません。日本語プロンプトへの対応状況についても公式サイトで最新情報をご確認ください。' },
+        { q: '運営会社はどこですか？', a: 'Vidu AIは中国のShengshu Technology（生数科技）が開発しています。データの取り扱いポリシーは公式サイトでご確認ください。' },
+      ]}
+      relatedTools={[
+        { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
+        { name: 'Luma AI', slug: 'luma-ai', initial: 'L', cat: '動画生成', badges: [{ s: 'paid', label: '商用：Plus以上' }, { s: 'cond', label: '無料：限定' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://lumalabs.ai/' },
+        { name: 'Kling AI', slug: 'kling-ai', initial: 'K', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料のみ' }, { s: 'cond', label: '無料：1日66cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://klingai.com' },
+      ]}
+      nextReads={[
+        { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
+        { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
+        { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

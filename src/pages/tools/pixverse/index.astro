@@ -1,0 +1,287 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'pixverse');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'PixVerse', item: 'https://aicreative-db.com/tools/pixverse/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'PixVerse',
+    operatingSystem: 'Web',
+    applicationCategory: 'VideoApplication',
+    description: 'PixVerseはテキスト・画像からAI動画を生成できるサービス。V6モデル搭載で最大15秒の動画生成・extend機能（最大8秒延長）に対応。日本語UIあり・無料枠あり。商用利用には別途認可または商用ライセンスが必要と公式規約に案内されています。',
+    url: 'https://pixverse.ai',
+  },
+]);
+---
+
+<BaseLayout
+  title="PixVerseの商用利用・料金・無料枠まとめ｜AI動画生成ツールDB"
+  description="PixVerseのAI動画生成における商用利用条件・料金プラン・無料枠・透かし・利用規約の注意点を整理。V6モデル搭載・日本語UI対応。商用利用には別途認可が必要と公式規約に記載。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/pixverse/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">PixVerse</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="PixVerse"
+      category="AI動画生成"
+      checkedDate={d?.lastReviewed ?? '2026-06-05'}
+      headingHtml='PixVerseの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="PixVerseはテキストや画像からAI動画を生成できるサービスです。V6モデルを搭載し、最大15秒の動画生成とextend機能（最大8秒延長）に対応しています。公式サイトは日本語UIで提供されており、無料プラン（Basic）では初回クレジット付与と毎日のクレジット補充で試すことができます。<b>ただし公式利用規約では、アウトプットの利用はデフォルトで非商用目的に限定されており、商用目的での利用には別途の認可または商用ライセンスが必要と案内されています。</b>"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '要認可（公式規約）' } },
+        { lb: '無料枠', badge: { s: 'cond', label: '毎日60cr補充（透かし）' } },
+        { lb: '料金目安', text: '$10〜$199/月程度（要確認）', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: '無料あり・有料要確認' } },
+        { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://pixverse.ai' }}
+      secondaryCta={{ label: '利用規約を確認（公式）', href: 'https://pixverse.ai/en/terms-of-service' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '要認可（公式規約）' }, wide: true,
+          sum: '公式利用規約では、アウトプットの利用はデフォルトで非商用目的に限定されており、商用目的での利用には<b>「別途の認可または商用ライセンス」</b>が必要と案内されています。プラットフォーム提供素材の商用利用・政治目的・広告目的での外部収益化は明確に制限されています。',
+          det: '商用利用を検討する場合は、必ず最新の公式利用規約（pixverse.ai/en/terms-of-service）を確認し、必要に応じて商用ライセンスの取得手続きを行ってください。プランや用途によって条件が異なる場合があります。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: '毎日60cr補充（透かし）' },
+          det: '無料プラン（Basic）では、初回サインアップ時に90クレジット付与・毎日60クレジットが補充（当日未使用分は翌日失効）と複数の情報源で報告されています。透かしあり・生成回数制限あり。詳細は公式サイトでご確認ください。',
+        },
+        {
+          title: '最安料金目安', sum: '$10/月程度（Standard・要公式確認）', sumMono: true,
+          det: '複数の第三者情報ではStandard $10/月〜Ultra $199/月の複数ティアが報告されています。2026年6月時点の参考値です。正確な料金・プラン内容は公式サイトでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: '無料あり・有料要確認' },
+          det: '無料プランでは透かしが付与されるとされています。有料プランでの透かし条件は公式サイトでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'ok', label: '対応' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '要確認' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→動画', '画像→動画', '動画延長（extend・最大8秒追加）', '最大15秒（V6モデル）'] },
+      ]}
+      useCases={[
+        '<b>日本語UIでAI動画生成を始めたい</b>場合（公式利用規約の確認が前提）',
+        '<b>テキスト・画像から短尺動画を手軽に試したい</b>場合',
+        '<b>SNS・YouTubeショート向けのAI動画</b>を制作したい場合（商用条件の確認が必要）',
+      ]}
+      pros={[
+        '公式サイトが日本語UIで提供されており、日本語環境で操作しやすい',
+        '無料プラン（Basic）で毎日クレジット補充があり試しやすい',
+        'V6モデルでextend機能による動画延長に対応',
+        'テキスト・画像からの動画生成の両方に対応',
+      ]}
+      cons={[
+        'デフォルトは非商用利用のみ。商用利用には別途認可または商用ライセンスが必要（公式規約）',
+        '無料プランの毎日クレジットは当日未使用分が翌日失効',
+        '日本語プロンプト対応状況は公式に明示されておらず要確認',
+        '無料プランでは透かしあり',
+      ]}
+      limits={[
+        '商用利用にはデフォルトで認可または商用ライセンスが必要（公式規約）',
+        'プラットフォーム提供素材の商用利用・政治目的・広告目的での外部収益化は明確に制限',
+        '無料プランでは透かしあり・毎日クレジット上限あり',
+        '日本語プロンプト対応状況は要確認',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>毎日60cr補充</span><br>透かしあり。当日未使用分は翌日失効。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">$10/月程度（Standard・要公式確認）</span><br>正確な料金は公式サイトで確認。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要認可（公式規約）</span><br>デフォルト非商用。商用には別途認可または商用ライセンスが必要。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料あり・有料要確認</span>' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要確認</span>' }],
+          [{ html: '最大動画長', rk: true }, { html: '最大15秒（V6）・extend機能で+8秒' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-05', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://pixverse.ai" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 商用利用条件の確認が重要です。料金・条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'PixVerseはテキストや画像からAI動画を生成できるサービスです。V6モデルを搭載し、最大15秒の動画生成とextend機能（最大8秒延長）に対応。公式サイト（pixverse.ai）は日本語UIで提供されており、英語UIに不慣れなユーザーでも操作しやすい環境が整っています。',
+        '<b>重要な注意点として、公式利用規約ではアウトプットの利用がデフォルトで非商用目的に限定されており、商用目的での利用には別途の認可または商用ライセンスが必要と案内されています。</b>商用利用を検討する場合は、必ず最新の公式利用規約をご確認ください。このページは法的助言ではありません。',
+      ]}
+      aboutMore={{ label: 'AI動画生成ツール一覧で比較する →', href: '/categories/video-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', '備考'],
+          rows: [
+            [{ html: 'Basic（無料）', rk: true }, { html: '無料' }, { html: '毎日60cr補充・透かしあり' }],
+            [{ html: 'Standard', rk: true }, { html: '$10/月程度（要確認）', mono: true }, { html: '月1,200cr程度とされる（要公式確認）' }],
+            [{ html: 'Pro', rk: true }, { html: '$30/月程度（要確認）', mono: true }, { html: '月6,000cr程度とされる（要公式確認）' }],
+            [{ html: 'Premium以上', rk: true }, { html: '$60〜$199/月程度（要確認）', mono: true }, { html: '上位プラン・要公式確認' }],
+          ],
+        },
+        notes: [
+          '料金は2026年6月時点の第三者情報に基づくおおよその目安です',
+          '正確な料金・プラン内容は必ず公式サイトでご確認ください',
+          '<b>商用利用には別途認可または商用ライセンスが必要とされています（公式規約）</b>',
+        ],
+      }}
+      commercial={{
+        lead: '<b>公式利用規約では、アウトプットの利用はデフォルトで非商用目的に限定されており、商用目的での利用には別途の認可または商用ライセンスが必要と案内されています。</b>商用利用前は利用規約を必ずご確認ください。',
+        points: [
+          'デフォルトでは商用利用不可。商用目的には別途認可または商用ライセンスが必要（公式規約）',
+          'プラットフォーム提供素材の商用利用・政治目的・広告目的での外部収益化は明確に制限',
+          '日本語プロンプト対応状況は公式に明示されていないため要確認',
+          '利用規約は変更される可能性があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のPixVerse公式利用規約を詳しくご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="PixVerseの日本語UIとextend機能について"
+      integration="PixVerseの公式サイト（pixverse.ai）は日本語UIで提供されており、Runway・Pikaなど英語UIのみのサービスと比較して日本語ユーザーが導入しやすい点が特徴です。V6モデルのextend機能を使うと動画をさらに最大8秒延長でき、最大23秒程度の動画を作成できるとされています。ただし商用利用には公式規約上の別途認可が必要な点は常に確認が必要です。"
+      whoFor={[
+        '日本語UIでAI動画生成を始めたい人（商用利用条件の確認が前提）',
+        '無料枠でAI動画生成を試したい人',
+        'テキスト・画像から短尺動画を手軽に生成したい人',
+        'SNS・YouTube向けのショートコンテンツを作りたい人（商用条件要確認）',
+      ]}
+      whoNot={[
+        '商用利用条件を確認せずにそのまま使いたい人（公式規約の確認が必要）',
+        '透かしなしで無料出力を前提にしたい人',
+        '日本語プロンプトの精度を重視する人（対応状況は要確認）',
+        '長尺動画の編集まで1ツールで完結させたい人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'PixVerse（このページ）', rk: true, me: true }, { html: '日本語UIで短尺動画を試したい場合（商用利用条件の確認が前提）' }],
+          [{ html: '<a href="/tools/runway/">Runway</a>', rk: true }, { html: 'プロ向け映像編集機能・API・明確な利用規約を重視する場合' }],
+          [{ html: '<a href="/tools/pika/">Pika</a>', rk: true }, { html: 'シンプル操作・低コストの動画生成を優先する場合' }],
+          [{ html: '<a href="/tools/kling-ai/">Kling AI</a>', rk: true }, { html: 'コスト重視・日本語プロンプト・動画延長を検討する場合' }],
+          [{ html: '<a href="/tools/luma-ai/">Luma AI</a>', rk: true }, { html: '高品質動画・長尺（最大20秒）・API連携を重視する場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'PixVerse', 'Runway', 'Kling AI', 'Luma AI', 'Pika'],
+        rows: [
+          [{ html: '最大動画長', rk: true }, { html: '最大15秒（extend+8秒）', me: true }, { html: '要公式確認' }, { html: '10秒（延長3分）' }, { html: '最大20秒' }, { html: '最大25秒' }],
+          [{ html: '商用利用', rk: true }, { html: '要認可（公式規約）', me: true }, { html: '全プラン・条件あり' }, { html: '有料プランのみ' }, { html: 'Plus以上' }, { html: '有料プランで可' }],
+          [{ html: '透かし（無料）', rk: true }, { html: 'あり', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
+          [{ html: '日本語UI', rk: true }, { html: '対応', me: true }, { html: '非対応' }, { html: '部分対応' }, { html: '非対応' }, { html: '部分対応' }],
+          [{ html: '無料枠', rk: true }, { html: '毎日60cr補充', me: true }, { html: '125cr（初回）' }, { html: '1日66cr' }, { html: '限定クレジット' }, { html: '月80cr' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>公式サイト（pixverse.ai）が日本語UIで提供されており、日本語環境で操作できることが確認されています',
+        '<b>日本語プロンプト：</b>対応状況は公式に明示されていないため要確認。最新情報は公式サイトでご確認ください',
+      ]}
+      watermark={[
+        '無料プランでは透かしが付与されるとされています',
+        '有料プランでの透かし条件は公式サイトでご確認ください',
+        '透かしの有無はプランによって異なる可能性があります',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '最新のPixVerse利用規約（Terms of Service）を確認したか' },
+        { html: '商用利用には別途認可または商用ライセンスが必要なことを理解したか' },
+        { html: 'プラットフォーム提供素材の利用条件を確認したか' },
+        { html: '生成動画に使用する入力画像・映像の権利関係' },
+        { html: '無料プランの毎日クレジット失効ルールを理解したか' },
+        { html: '正確な料金・プラン内容を公式サイトで確認したか' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-06-05'}
+      nextCheck={d?.nextReviewDue ?? '2026-09-05'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'PixVerse 公式サイト', href: 'https://pixverse.ai' },
+        { tag: '利用規約', label: 'PixVerse Terms of Service（公式）', href: 'https://pixverse.ai/en/terms-of-service' },
+        { tag: '公式ブログ', label: 'PixVerse 公式ブログ', href: 'https://pixverse.ai/blog' },
+        { tag: 'APIドキュメント', label: 'PixVerse Platform APIドキュメント', href: 'https://docs.platform.pixverse.ai' },
+      ]}
+      faqs={[
+        { q: 'PixVerseは無料で使えますか？', a: '無料プラン（Basic）で毎日60クレジットが補充され動画生成を試すことができます（当日未使用分は翌日失効）。初回サインアップ時に90クレジットが付与されるとも報告されています。透かしあり・生成回数制限あり。詳細は公式サイトでご確認ください。' },
+        { q: 'PixVerseは商用利用できますか？', a: '公式利用規約では、アウトプットの利用はデフォルトで非商用目的に限定されており、商用目的での利用には別途の認可または商用ライセンスが必要と案内されています。商用利用前は必ず公式利用規約を詳しくご確認ください。このページは法的助言ではありません。' },
+        { q: '日本語で使えますか？', a: '公式サイト（pixverse.ai）は日本語UIで提供されており、日本語環境で操作できます。ただし、動画生成プロンプトとして日本語を入力した場合の精度・対応状況については公式サイトで直接ご確認ください。' },
+        { q: '動画はどのくらいの長さまで生成できますか？', a: 'V6モデルでは最大15秒の動画生成が可能で、extend機能を使うとさらに最大8秒の延長ができるとされています。詳細は公式サイトをご確認ください。' },
+        { q: '透かしはありますか？', a: '無料プランでは透かしが付与されるとされています。有料プランでの透かし条件は公式サイトでご確認ください。' },
+        { q: '料金はどのくらいですか？', a: '複数の第三者情報ではStandard $10/月〜Ultra $199/月の複数ティアが報告されています。料金は変更される場合があります。最新の料金・プラン内容は必ず公式サイトをご確認ください。' },
+        { q: 'RunwayやPikaとどう使い分けるとよいですか？', a: 'PixVerseは日本語UIに対応しており、無料枠で試しやすい点が特徴です。Runwayは映像編集機能が充実、Pikaはシンプルな操作性が強みです。生成スタイルや機能の違いを実際に試して比較するとよいでしょう。' },
+      ]}
+      relatedTools={[
+        { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
+        { name: 'Kling AI', slug: 'kling-ai', initial: 'K', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料のみ' }, { s: 'cond', label: '無料：1日66cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://klingai.com' },
+        { name: 'Pika', slug: 'pika', initial: 'P', cat: '動画生成', badges: [{ s: 'cond', label: '商用：有料で可' }, { s: 'cond', label: '無料：月80cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://pika.art' },
+      ]}
+      nextReads={[
+        { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
+        { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
+        { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
+        { href: '/conditions/japanese/', title: '日本語UIのAIツール一覧', desc: '日本語UIに対応しているAIツール' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: '日本語UIのAIツール', href: '/conditions/japanese/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

@@ -1,0 +1,283 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'invideo-ai');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'InVideo AI', item: 'https://aicreative-db.com/tools/invideo-ai/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'InVideo AI',
+    operatingSystem: 'Web',
+    applicationCategory: 'VideoApplication',
+    description: 'InVideo AIはテキストから動画を自動生成・編集できるAIビデオ作成サービス。テンプレートと音声ナレーション生成を活用した動画制作に対応。有料プランで商用利用可とされているが、生成AIの利用条件と素材ライセンスは分けて確認が必要。',
+    url: 'https://invideo.io',
+  },
+]);
+---
+
+<BaseLayout
+  title="InVideo AIの商用利用・料金・無料枠まとめ｜AI動画生成ツールDB"
+  description="InVideo AIの商用利用条件・料金プラン・無料枠・透かし・素材ライセンスの注意点を整理。テンプレート型AI動画生成ツールで有料プランで商用利用可とされている。生成AIの条件と素材ライセンスは分けて確認が必要。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/invideo-ai/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">InVideo AI</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="InVideo AI"
+      category="AI動画生成"
+      checkedDate={d?.lastReviewed ?? '2026-05-25'}
+      headingHtml='InVideo AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="InVideo AIはテキストや台本から動画を自動生成・編集できるAIビデオ作成サービスです。AIナレーション・字幕・テンプレートを活用してYouTubeやSNS向けの解説動画を制作できます。<b>有料プランで商用利用に対応しているとされていますが、InVideo AI本体のAI利用条件に加えて、使用するテンプレート・音楽・ストック素材のライセンスも個別に確認が必要です。</b>"
+      specs={[
+        { lb: '商用利用', badge: { s: 'paid', label: '有料プランのみ（要確認）' } },
+        { lb: '無料枠', badge: { s: 'cond', label: 'あり（透かし・制限）' } },
+        { lb: '料金目安', text: '約$20/月〜（年払い）', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: '無料あり・有料なし' } },
+        { lb: '日本語UI', badge: { s: 'na', label: '非対応' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://invideo.io' }}
+      secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://invideo.io/pricing/' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'paid', label: '有料プランのみ（要確認）' }, wide: true,
+          sum: '公式情報上、有料プランで商用利用に対応しているとされています。ただし、<b>InVideo AI本体の商用利用条件に加えて、使用するテンプレート・音楽・ストック素材のライセンスも個別に確認が必要です。</b>無料プランでの商用利用条件は公式規約をご確認ください。',
+          det: 'InVideo AIはテンプレート・ストック素材・音楽・ナレーション生成を組み合わせたサービスのため、商用利用時は各素材のライセンス条件を個別に確認することが重要です。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: 'あり（透かし・制限）' },
+          det: '無料プランが用意されています。ただし透かしとエクスポート回数の制限があります。詳細は公式サイトでご確認ください。',
+        },
+        {
+          title: '最安料金目安', sum: '約$20/月〜（Plusプラン・年払い）', sumMono: true,
+          det: '料金は変更される場合があります。最新の料金・プラン内容は必ず公式サイトでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: '無料あり・有料なし' },
+          det: '無料プランでは透かしが付与されます。有料プランでは透かしなしで出力できるとされています。最新仕様は公式サイトでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'na', label: '非対応' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '部分対応（品質要確認）' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→動画（テンプレート型）', 'AIナレーション・字幕生成', 'テンプレート活用', 'ストック素材・音楽', 'YouTube・SNS向け解説動画制作'] },
+      ]}
+      useCases={[
+        '<b>YouTube・SNS向けの解説動画</b>を台本から自動制作したい場合（有料プランで商用利用可）',
+        '<b>テンプレートを活用した短時間での動画仕上げ</b>',
+        '<b>AIナレーションを使った動画制作</b>の効率化',
+      ]}
+      pros={[
+        'テキストプロンプトから動画を自動生成できる',
+        'AIナレーション・字幕生成に対応',
+        'テンプレートが豊富でYouTube・SNS向けに最適化されている',
+        '有料プランで商用利用に対応しているとされている',
+      ]}
+      cons={[
+        '無料プランでは透かしが入る',
+        '日本語コンテンツは英語ほど品質が安定しない場合がある',
+        '純粋なAI映像生成（text-to-video）よりもテンプレート動画制作に近い',
+        'テンプレート・音楽・素材のライセンスを個別に確認する必要がある',
+        '商用利用は有料プランが前提',
+      ]}
+      limits={[
+        '無料プランでは透かしあり・エクスポート回数制限',
+        '商用利用は有料プランが前提',
+        '日本語コンテンツへの対応は限定的',
+        'テンプレート・音楽・ストック素材のライセンスの個別確認が必要',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成（テンプレート型）' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>あり（透かし・制限）</span><br>エクスポート回数制限あり。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">約$20/月〜（年払い・要確認）</span>' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st paid sm"><span class="d"></span>有料プランのみ（要確認）</span><br>素材・テンプレートのライセンスも個別確認が必要。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料あり・有料なし</span>' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>非対応</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>部分対応（品質要確認）</span>' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-25', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://invideo.io" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 料金・条件は変更される可能性があります。素材ライセンスの個別確認が重要です。最新情報は公式サイトでご確認ください。',
+      }}
+      about={[
+        'InVideo AIはテキストや台本から動画を自動生成・編集できるAIビデオ作成サービスです。AIナレーション・字幕・テンプレートを活用してYouTubeやSNS向けの解説動画を制作できます。RunwayやPikaのようなAI映像生成とは異なり、テンプレートと素材を組み合わせた動画制作スタイルです。',
+        '<b>重要な注意点として、InVideo AIはテンプレート・ストック素材・音楽・ナレーション生成を組み合わせたサービスのため、商用利用時はInVideo AI本体の条件に加えて、各素材のライセンスも個別に確認する必要があります。</b>このページは法的助言ではありません。',
+      ]}
+      aboutMore={{ label: 'AI動画生成ツール一覧で比較する →', href: '/categories/video-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', '備考'],
+          rows: [
+            [{ html: '無料', rk: true }, { html: '無料' }, { html: '透かしあり・エクスポート制限' }],
+            [{ html: 'Plus以上', rk: true }, { html: '約$20/月〜（年払い・要確認）', mono: true }, { html: '商用利用可とされる・透かしなし' }],
+          ],
+        },
+        notes: [
+          '料金は変更される場合があります',
+          '最新情報は公式サイトでご確認ください',
+          '<b>商用利用時はテンプレート・音楽・素材のライセンスも個別に確認が必要です</b>',
+        ],
+      }}
+      commercial={{
+        lead: '有料プランで商用利用に対応しているとされています。ただし<b>InVideo AI本体の条件に加えて、テンプレート・音楽・ストック素材のライセンスも個別に確認が必要です。</b>',
+        points: [
+          '有料プランで商用利用に対応しているとされています（要公式確認）',
+          '無料プランでの商用利用条件は公式規約をご確認ください',
+          'テンプレート・音楽・ストック素材のライセンスはInVideo AIの条件と別に確認が必要',
+          '広告利用・クライアントワークでは特に詳細確認が推奨されます',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のInVideo AI公式利用規約および各素材のライセンス条件をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="InVideo AIと純粋なAI動画生成ツールの違い"
+      integration="InVideo AIはRunwayやPikaのようにAIがゼロから映像を生成するtext-to-videoとは異なり、テキストスクリプトからテンプレートや素材を組み合わせて動画を作るサービスです。この特性から、YouTube解説動画やSNS投稿向けの動画を台本から効率的に制作したい用途に向いています。ただしナレーション音声・BGM・テンプレート・ストック映像のライセンスは各素材ごとに条件が設定されている場合があるため、商用利用前の個別確認が重要です。"
+      whoFor={[
+        'YouTube・SNS向けの解説動画を台本から自動制作したい人（有料プランで商用利用可）',
+        'テンプレートを活用して短時間で動画を仕上げたい人',
+        'AIナレーションを使った動画制作を効率化したい人',
+        '英語コンテンツの動画化を中心に考えている人',
+      ]}
+      whoNot={[
+        '純粋なAI映像生成（テキストからリアルな映像）を求める人（→ Runway・Kling AIなどが候補）',
+        '日本語コンテンツの高品質な動画化を優先する人',
+        '商用利用条件を確認せずにそのまま使いたい人',
+        '素材・音楽のライセンスの個別確認なしに商用利用したい人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'InVideo AI（このページ）', rk: true, me: true }, { html: '台本からのテンプレート型解説動画制作（素材ライセンスの個別確認が必要）' }],
+          [{ html: '<a href="/tools/runway/">Runway</a>', rk: true }, { html: 'AI映像生成・プロ向け映像編集機能を重視する場合' }],
+          [{ html: '<a href="/tools/kling-ai/">Kling AI</a>', rk: true }, { html: 'テキスト・画像からリアルな動画生成を重視する場合' }],
+          [{ html: '<a href="/tools/capcut-ai/">CapCut AI</a>', rk: true }, { html: 'SNS動画・テンプレート・自動字幕を組み合わせて使う場合' }],
+          [{ html: '<a href="/tools/pika/">Pika</a>', rk: true }, { html: 'シンプル操作・低コストのAI映像生成を優先する場合' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'InVideo AI', 'Runway', 'CapCut AI', 'Kling AI', 'Pika'],
+        rows: [
+          [{ html: '動画タイプ', rk: true }, { html: 'テンプレート型', me: true }, { html: 'AI映像生成', }, { html: '編集・テンプレート' }, { html: 'AI映像生成' }, { html: 'AI映像生成' }],
+          [{ html: '商用利用', rk: true }, { html: '有料プランのみ', me: true }, { html: '全プラン・条件あり' }, { html: '要確認' }, { html: '有料プランのみ' }, { html: '有料プランで可' }],
+          [{ html: '透かし（無料）', rk: true }, { html: 'あり', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
+          [{ html: '日本語UI', rk: true }, { html: '非対応', me: true }, { html: '非対応' }, { html: '対応' }, { html: '部分対応' }, { html: '部分対応' }],
+          [{ html: 'ナレーション生成', rk: true }, { html: 'あり', me: true }, { html: '要確認' }, { html: 'あり' }, { html: '要確認' }, { html: '要確認' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>非対応。インターフェースは英語のみです',
+        '<b>日本語プロンプト：</b>日本語テキストを入力して動画生成することはできますが、英語コンテンツほどの品質は保証できない場合があります',
+        '日本語AIナレーションの品質は公式情報でご確認ください',
+      ]}
+      watermark={[
+        '無料プランでは透かしが付与されます',
+        '有料プランでは透かしなしで出力できるとされています',
+        '最新仕様は公式サイトでご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '最新のInVideo AI利用規約を確認したか' },
+        { html: '有料プランに加入しているか（商用利用の前提条件）' },
+        { html: '使用するテンプレートのライセンス条件を確認したか' },
+        { html: '使用する音楽・BGMのライセンス条件を確認したか' },
+        { html: '使用するストック素材・映像のライセンス条件を確認したか' },
+        { html: '広告利用・クライアントワークでの詳細条件を公式で確認したか' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-05-25'}
+      nextCheck={d?.nextReviewDue ?? '2026-08-25'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '公式', label: 'InVideo AI 公式サイト', href: 'https://invideo.io' },
+        { tag: '料金', label: 'InVideo AI 料金プラン（公式）', href: 'https://invideo.io/pricing/' },
+      ]}
+      faqs={[
+        { q: 'InVideo AIは無料で使えますか？', a: '無料プランが用意されています。ただし透かしとエクスポート回数の制限があります。詳細は公式サイトをご確認ください。' },
+        { q: 'InVideo AIは商用利用できますか？', a: '有料プランで商用利用に対応しているとされています。ただし、テンプレート・音楽・ストック素材のライセンスはInVideo AIの条件と別に確認が必要です。無料プランでの商用利用条件は公式規約をご確認ください。このページは法的助言ではありません。' },
+        { q: '日本語コンテンツを動画化できますか？', a: '日本語テキストを入力して動画生成することはできますが、英語コンテンツほどの品質は保証できない場合があります。日本語AIナレーションの品質は公式情報でご確認ください。' },
+        { q: 'RunwayやPikaと何が違いますか？', a: 'InVideo AIはテキストスクリプトからテンプレートや素材を組み合わせて動画を作るサービスです。RunwayやPikaはAIがゼロから映像を生成するtext-to-videoです。用途によって選び方が異なります。' },
+        { q: 'テンプレートや音楽の商用利用はできますか？', a: 'InVideo AI内で使用するテンプレート・音楽・ストック素材のライセンスは、InVideo AI本体の条件とは別に個別に設定されている場合があります。商用利用前は各素材のライセンス条件を公式サイトで確認してください。このページは法的助言ではありません。' },
+        { q: '料金はどのくらいですか？', a: '複数の情報源ではPlusプランが約$20/月（年払い）程度と報告されています。料金は変更される場合があります。最新の料金・プラン内容は必ず公式サイトをご確認ください。' },
+      ]}
+      relatedTools={[
+        { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
+        { name: 'CapCut AI', slug: 'capcut-ai', initial: 'C', cat: '動画編集', badges: [{ s: 'cond', label: '商用：要確認' }, { s: 'ok', label: '日本語UI：対応' }], platforms: ['Web', 'iOS', 'Android', 'Desktop'], official: 'https://www.capcut.com/' },
+        { name: 'Pika', slug: 'pika', initial: 'P', cat: '動画生成', badges: [{ s: 'cond', label: '商用：有料で可' }, { s: 'cond', label: '無料：月80cr' }], platforms: ['Web'], official: 'https://pika.art' },
+      ]}
+      nextReads={[
+        { href: '/comparisons/invideo-ai-vs-capcut-ai/', title: 'InVideo AI と CapCut AI を比較', desc: '台本型動画生成かSNS動画編集かで選び分け' },
+        { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
+        { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
+        { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

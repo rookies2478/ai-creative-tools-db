@@ -1,0 +1,285 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'runway');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Runway', item: 'https://aicreative-db.com/tools/runway/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Runway',
+    operatingSystem: 'Web, API',
+    applicationCategory: 'VideoApplication',
+    description: 'RunwayはAI動画生成・映像編集ツール。Gen-4モデルによるテキスト・画像→動画生成、動画延長、背景除去などを提供する。クリエイター・映像制作者向けのプロフェッショナルツール。',
+    url: 'https://runwayml.com',
+  },
+]);
+---
+
+<BaseLayout
+  title="Runwayの商用利用・料金・無料枠まとめ｜AI動画生成ツールDB"
+  description="RunwayのAI動画生成における商用利用条件・料金プラン・無料枠・透かし・日本語対応を公式情報をもとに整理。Gen-4モデルの特徴と注意点もまとめ。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/runway/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Runway</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Runway"
+      category="AI動画生成"
+      checkedDate={d?.lastReviewed ?? '2026-06-05'}
+      headingHtml='Runwayの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
+      lead="RunwayはGen-4モデルによるAI動画生成・映像編集ツールです。テキストや画像から動画を生成でき、動画延長・背景除去・APIも提供。映像制作者・クリエイター向けのプロフェッショナルツールとして知られています。無料プランでは125クレジット（初回のみ）が付与されます。商用利用条件は全プランで制限なしとされていますが、第三者の権利等への注意が必要です。"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: '条件あり（要確認）' } },
+        { lb: '無料枠', badge: { s: 'cond', label: '125クレジット（初回のみ）' } },
+        { lb: '料金目安', text: '$12/月〜（年払い）', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: '無料プランあり・有料なし' } },
+        { lb: '日本語UI', badge: { s: 'na', label: '非対応' } },
+      ]}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://runwayml.com' }}
+      secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://runwayml.com/pricing/' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: '条件あり（要確認）' }, wide: true,
+          sum: '全プランでOutput（生成動画）の商用利用制限はないとされていますが、第三者の権利・禁止コンテンツ等への注意が必要です。',
+          det: '公式利用規約では生成コンテンツの商用利用について一定の条件が設けられています。第三者の権利侵害や禁止コンテンツの生成は禁止されています。利用規約は変更される可能性があるため、商用利用前は必ず最新の公式利用規約をご確認ください。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: '125クレジット（初回のみ）' },
+          det: '無料プランでは初回サインアップ時に125クレジットが付与されます。使い切った後は追加クレジットの購入または有料プランへの移行が必要です。無料プランでは透かしが付与されます。',
+        },
+        {
+          title: '最安料金目安', sum: '$12/月（年払い）〜（公式案内）', sumMono: true,
+          det: '2026年6月時点の公式案内に基づきます。月払いでは料金が異なる場合があります。プラン内容・料金は変更される可能性があります。最新料金は公式サイトでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: '無料プランあり・有料なし' },
+          det: '無料プランでは生成動画に透かしが付与されるとされています。有料プランでは透かしなしとされていますが、最新仕様は公式サイトでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'na', label: '非対応' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '△ 一部対応' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web', 'API'] },
+        { title: '主な機能', wide: true, feats: ['テキスト→動画', '画像→動画', '動画延長', '背景除去', 'API'] },
+      ]}
+      useCases={[
+        '<b>短尺動画・広告素材</b>のAI生成（テキスト・画像→動画）',
+        '<b>映像の動画延長</b>（VideoExtend機能を活用）',
+        '<b>背景除去・映像合成</b>のプロフェッショナル用途',
+        '<b>API連携</b>によるプロダクト・サービスへの動画生成組み込み',
+      ]}
+      pros={[
+        'Gen-4モデルによる高品質な動画生成',
+        '動画延長・背景除去など映像編集機能も充実',
+        'API提供でプロダクトへの組み込みも可能',
+        '映像クリエイター向けの機能セットが豊富',
+      ]}
+      cons={[
+        '無料枠は125クレジット（初回のみ）と限定的',
+        '日本語UIに非対応',
+        '料金はAI動画生成ツールの中でやや高め',
+        '日本語プロンプトは部分対応にとどまる',
+      ]}
+      limits={[
+        '無料プランでは透かしが付与される',
+        '商用利用条件は利用規約の確認が必要',
+        '第三者の権利侵害・禁止コンテンツの生成は禁止',
+        'クレジット制のため生成量に応じてコストが増加する',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>125クレジット（初回のみ）</span><br>使い切り後は有料プランまたはクレジット購入が必要。透かしあり。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">$12/月〜（年払い）</span><br>月払いでは料金が異なる場合あり。最新料金は公式サイトで確認。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（要確認）</span><br>全プランで制限なしとされるが第三者権利等への注意が必要。最新利用規約を確認してください。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料プランあり・有料なし</span><br>有料プランでは透かしなしとされています。' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>非対応</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span><br>英語プロンプトの方が精度が高い傾向あり' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web / API' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-05', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://runwayml.com" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 料金・クレジット数・商用利用条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
+      }}
+      about={[
+        'RunwayはAI動画生成・映像編集ツールとして映像クリエイターやコンテンツ制作者から注目を集めています。Gen-4（旧Gen-2から進化）モデルによるテキスト→動画・画像→動画生成を中心に、動画延長・背景除去・インペインティングなど映像編集機能も充実しています。',
+        'APIも提供されており、プロダクトやサービスへの組み込みも可能です。無料プランは125クレジット（初回のみ）で、有料プランは$12/月〜（年払い）から利用できます（2026年6月時点）。<b>商用利用条件・利用規約は変更される可能性があるため、最新情報は公式サイトでご確認ください。</b>',
+      ]}
+      aboutMore={{ label: 'AI動画生成ツール一覧で比較する →', href: '/categories/video-generation/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', 'クレジット目安'],
+          rows: [
+            [{ html: '無料', rk: true }, { html: '無料' }, { html: '125クレジット（初回のみ）' }],
+            [{ html: 'Standard', rk: true }, { html: '$12/月〜（年払い）', mono: true }, { html: '要公式確認' }],
+            [{ html: 'Pro以上', rk: true }, { html: '要公式確認', mono: true }, { html: '要公式確認' }],
+          ],
+        },
+        notes: [
+          '料金・クレジット数は2026年6月時点の公式案内に基づきます',
+          '月払いでは料金が異なる場合があります',
+          '<b>最新料金は公式サイトでご確認ください</b>',
+        ],
+      }}
+      commercial={{
+        lead: '全プランでOutput（生成動画）の商用利用制限はないとされていますが、利用規約への準拠・第三者の権利侵害回避が必要です。商用利用前は必ず最新の公式利用規約をご確認ください。',
+        points: [
+          '全プランで生成動画の商用利用制限はないとされています（2026年6月時点）',
+          '第三者の著作権・肖像権等の権利侵害は禁止されています',
+          '禁止コンテンツの生成・利用は規約違反となります',
+          '利用規約は変更される可能性があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のRunway公式利用規約をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="Runway Gen-4について"
+      integration="RunwayのGen-4モデルは2025〜2026年にかけてリリースされた最新世代のAI動画生成モデルです。テキスト・画像からの動画生成品質が向上し、よりリアルな動きや複雑なシーン生成に対応しているとされています。動画の長さ・解像度・クレジット消費量はプランや設定によって異なるため、最新仕様は公式サイトでご確認ください。"
+      whoFor={[
+        '映像クリエイター・動画制作者でAI生成動画を活用したい人',
+        '短尺広告・プロモーション動画の素材をAI生成したい人',
+        'APIで動画生成をサービスに組み込みたい開発者',
+        '動画延長・背景除去などプロ向け機能を求める人',
+      ]}
+      whoNot={[
+        '無料で大量に動画生成したい人（無料枠は初回125クレジットのみ）',
+        '日本語UIで操作したい人',
+        'コスト重視で最安ツールを探している人',
+        '長尺・高解像度動画を大量生成したい人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Runway（このページ）', rk: true, me: true }, { html: '映像編集機能・APIも活用したプロ向けAI動画生成' }],
+          [{ html: '<a href="/tools/kling-ai/">Kling AI</a>', rk: true }, { html: 'コスト重視・日本語プロンプトで動画生成したい場合' }],
+          [{ html: '<a href="/tools/luma-ai/">Luma AI</a>', rk: true }, { html: '長尺動画生成・Plusプランで商用利用を想定する場合' }],
+          [{ html: '<a href="/tools/pika/">Pika</a>', rk: true }, { html: '手軽に動画生成を試したい・低コストで始めたい場合' }],
+          [{ html: '<a href="/tools/hailuo-ai/">Hailuo AI</a>', rk: true }, { html: '長尺動画延長（最大3分）を試したい場合（利用規約要確認）' }],
+        ],
+      }}
+      versusTable={{
+        kind: 'cmp',
+        headers: ['比較軸', 'Runway', 'Kling AI', 'Luma AI', 'Pika', 'Hailuo AI'],
+        rows: [
+          [{ html: '最大動画長', rk: true }, { html: '要公式確認', me: true }, { html: '10秒/クリップ' }, { html: '最大20秒' }, { html: '最大25秒' }, { html: '最大10秒' }],
+          [{ html: '商用利用', rk: true }, { html: '全プラン・条件あり', me: true }, { html: '有料プランのみ' }, { html: 'Plus以上' }, { html: '有料プランで可' }, { html: 'Standard以上' }],
+          [{ html: '透かし（無料）', rk: true }, { html: 'あり', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
+          [{ html: '日本語UI', rk: true }, { html: '非対応', me: true }, { html: '部分対応' }, { html: '非対応' }, { html: '部分対応' }, { html: '非対応' }],
+          [{ html: '無料枠', rk: true }, { html: '125cr（初回）', me: true }, { html: '1日66cr' }, { html: '限定クレジット' }, { html: '月80cr' }, { html: '生成回数制限' }],
+        ],
+        note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+      }}
+      language={[
+        '<b>日本語UI：</b>非対応。インターフェースは英語のみです',
+        '<b>日本語プロンプト：</b>一部対応。英語プロンプトの方が精度が高い傾向があります',
+        '日本語ドキュメント：公式ドキュメントは英語中心',
+      ]}
+      watermark={[
+        '無料プランでは生成動画に透かしが付与されるとされています',
+        '有料プランでは透かしなしとされていますが、最新仕様は公式サイトでご確認ください',
+        '透かしの有無はプラン・設定によって異なる場合があります',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '利用プランが有料プランかどうか（無料プランでは透かしあり・商用条件に注意）' },
+        { html: '第三者の著作権・肖像権を侵害するコンテンツでないか' },
+        { html: '最新のRunway利用規約（Terms of Use）を確認したか' },
+        { html: '生成動画に使用する入力画像・映像の権利関係' },
+        { html: 'クレジット消費量とコストの見積もり' },
+        { html: '公式サイトで最新の商用利用条件を確認したか' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-06-05'}
+      nextCheck={d?.nextReviewDue ?? '2026-07-05'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      sources={[
+        { tag: '料金', label: 'Runway 料金プラン（公式）', href: 'https://runwayml.com/pricing/' },
+        { tag: '利用規約', label: 'Runway Terms of Use（公式）', href: 'https://runwayml.com/terms-of-use/' },
+        { tag: '公式', label: 'Runway 公式サイト', href: 'https://runwayml.com' },
+      ]}
+      faqs={[
+        { q: 'Runwayは無料で使えますか？', a: '初回サインアップ時に125クレジットが付与される無料プランがあります。ただし使い切った後は有料プランへの移行またはクレジット購入が必要です。無料プランでは透かしが付与されます。' },
+        { q: 'Runwayは商用利用できますか？', a: '全プランで生成動画の商用利用制限はないとされていますが、第三者の権利侵害・禁止コンテンツの生成は禁止されています。商用利用前は必ず最新の公式利用規約をご確認ください。このページは法的助言ではありません。' },
+        { q: 'Runwayは日本語で使えますか？', a: 'UIは英語のみです。日本語プロンプトは一部対応していますが、英語プロンプトの方が精度が高い傾向があります。' },
+        { q: '透かしはありますか？', a: '無料プランでは生成動画に透かしが付与されるとされています。有料プランでは透かしなしとされていますが、最新仕様は公式サイトでご確認ください。' },
+        { q: 'Gen-4とは何ですか？', a: 'RunwayのAI動画生成エンジンの最新世代モデルです。テキスト・画像からの動画生成品質向上・複雑なシーン対応が特徴とされています。詳細は公式サイトをご確認ください。' },
+        { q: 'APIは利用できますか？', a: 'RunwayはAPI提供を行っており、動画生成機能をサービスやプロダクトに組み込むことができます。API料金・仕様は公式ドキュメントをご確認ください。' },
+      ]}
+      relatedTools={[
+        { name: 'Kling AI', slug: 'kling-ai', initial: 'K', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料のみ' }, { s: 'cond', label: '無料：1日66cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://klingai.com' },
+        { name: 'Luma AI', slug: 'luma-ai', initial: 'L', cat: '動画生成', badges: [{ s: 'paid', label: '商用：Plus以上' }, { s: 'cond', label: '無料：限定' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://lumalabs.ai/' },
+        { name: 'Pika', slug: 'pika', initial: 'P', cat: '動画生成', badges: [{ s: 'cond', label: '商用：有料で可' }, { s: 'cond', label: '無料：月80cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://pika.art' },
+      ]}
+      nextReads={[
+        { href: '/comparisons/runway-vs-kling-ai/', title: 'Runway と Kling AI を比較', desc: '映像制作向け多機能かリアル寄り動画かで選び分け' },
+        { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
+        { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
+        { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

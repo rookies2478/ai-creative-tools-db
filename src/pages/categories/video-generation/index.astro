@@ -804,7 +804,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
   .cvg-checked { font-family: var(--f-mono); font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; }
   .cvg-checked svg { width: 14px; height: 14px; }
   .cvg-checked b { color: var(--ink-soft); font-weight: 700; }
-  .cvg-h1 { font-size: clamp(28px, 3.8vw, 44px); font-weight: 900; letter-spacing: -.01em; line-height: 1.22; margin: 14px 0 16px; text-wrap: balance; max-width: 760px; }
+  .cvg-h1 { font-size: clamp(28px, 3.8vw, 44px); font-weight: 900; letter-spacing: -.01em; line-height: 1.22; margin: 14px 0 16px; text-wrap: balance; max-width: 760px; word-break: keep-all; overflow-wrap: break-word; }
   .cvg-h1 .hl { color: var(--brand-ink); position: relative; }
   .cvg-h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .26em; background: color-mix(in srgb, var(--brand) 20%, transparent); z-index: -1; border-radius: 2px; }
   .cvg-lead { font-size: 15.5px; color: var(--ink-soft); max-width: 720px; }

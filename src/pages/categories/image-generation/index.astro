@@ -133,7 +133,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
             記事内容の最終確認 <b>2026-06-10</b>
           </span>
         </div>
-        <h1 class="cig-h1">AI画像生成ツールを<span class="hl">比較する</span></h1>
+        <h1 class="cig-h1">AI画像生成<span class="phrase-nowrap">ツールを</span><span class="hl">比較する</span></h1>
         <p class="cig-lead">イラスト、写真風画像、SNS投稿、広告バナー、ブログアイキャッチ、EC商品画像など、作りたい画像に合わせてAI画像生成ツールの選び方を整理します。無料枠・透かし・商用利用条件・日本語対応を横断的に確認できます。</p>
         <div class="cig-stats">
           <div class="cig-stat"><span class="n">16</span><span class="t">AI画像生成ツール</span></div>
@@ -801,7 +801,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
   .cig-h1 {
     font-size: clamp(28px, 3.8vw, 44px); font-weight: 900; letter-spacing: -.01em;
     line-height: 1.2; margin: 14px 0 16px;
-    text-wrap: balance; max-width: 820px;
+    text-wrap: balance; max-width: 820px; word-break: keep-all; overflow-wrap: break-word;
   }
   .cig-h1 .hl { color: var(--brand-ink); position: relative; }
   .cig-h1 .hl::after { content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .26em; background: color-mix(in srgb, var(--brand) 20%, transparent); z-index: -1; border-radius: 2px; }

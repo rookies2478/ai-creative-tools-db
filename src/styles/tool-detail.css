@@ -58,6 +58,8 @@
   letter-spacing: -.015em;
   line-height: 1.18;
   text-wrap: balance;
+  word-break: keep-all;
+  overflow-wrap: break-word;
   max-width: 26ch;
   margin: 0 0 16px;
   color: var(--ink);

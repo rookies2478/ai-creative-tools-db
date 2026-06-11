@@ -127,17 +127,17 @@ const marqueeLoop = [...marquee, ...marquee];
     --fv-header:68px;
 
     display:flex; flex-direction:column;
-    min-height:calc(100svh - var(--fv-header) - 72px);
+    min-height:calc(100svh - var(--fv-header) - 100px);
     background:var(--paper); color:var(--ink);
     font-family:"Noto Sans JP",system-ui,sans-serif;
   }
-  .fv-hero .fv-grid{display:grid;grid-template-columns:1.02fr 1.06fr;flex:1;min-height:0;}
+  .fv-hero .fv-grid{display:grid;grid-template-columns:1fr 0.9fr;flex:1;min-height:0;}
 
   /* 左 */
-  .fv-hero .left{padding:clamp(36px,5vw,60px) clamp(24px,4vw,48px);display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--line-strong);position:relative;min-width:0;}
+  .fv-hero .left{padding:clamp(32px,4.5vw,56px) clamp(24px,4vw,48px);display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--line);position:relative;min-width:0;}
   .fv-hero .kicker{font-family:var(--f-latin);font-size:11.5px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin:0 0 22px;display:flex;align-items:center;gap:10px;}
   .fv-hero .kicker::before{content:"";width:26px;height:2px;background:var(--brand);}
-  .fv-hero h1{font-family:var(--f-jp);font-weight:900;font-size:clamp(34px,4.1vw,52px);line-height:1.16;letter-spacing:-.015em;margin:0 0 20px;color:var(--ink);}
+  .fv-hero h1{font-family:var(--f-jp);font-weight:900;font-size:clamp(30px,3.5vw,46px);line-height:1.12;letter-spacing:-.015em;margin:0 0 18px;color:var(--ink);text-wrap:balance;}
   .fv-hero .lead{font-size:15.5px;line-height:1.9;color:var(--ink-soft);max-width:460px;margin:0 0 30px;}
   .fv-hero .lead b{font-weight:700;font-style:normal;color:var(--brand-ink);}
   .fv-hero .cta{display:flex;gap:13px;align-items:center;flex-wrap:wrap;}
@@ -151,7 +151,7 @@ const marqueeLoop = [...marquee, ...marquee];
   .fv-hero .btn-ghost:hover{border-color:var(--brand);color:var(--brand-ink);}
 
   /* カルーセル */
-  .fv-hero .toolmarquee{margin-top:34px;min-width:0;max-width:100%;}
+  .fv-hero .toolmarquee{margin-top:26px;min-width:0;max-width:100%;}
   .fv-hero .tm-label{display:block;font-family:var(--f-latin);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:13px;}
   .fv-hero .tm-track{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 88%,transparent);}
   .fv-hero .tm-row{display:flex;width:max-content;animation:fv-marquee 30s linear infinite;}
@@ -160,7 +160,7 @@ const marqueeLoop = [...marquee, ...marquee];
   .fv-hero .tm-item::after{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--brand);opacity:.5;margin:0 19px;}
 
   /* 右 */
-  .fv-hero .right{padding:clamp(28px,3.4vw,40px) clamp(24px,3.4vw,44px);display:flex;flex-direction:column;justify-content:center;gap:16px;background:radial-gradient(120% 80% at 85% 0%,var(--brand-tint),transparent 52%),var(--surface-2);position:relative;overflow:hidden;min-width:0;}
+  .fv-hero .right{padding:clamp(24px,3vw,36px) clamp(20px,2.8vw,36px);display:flex;flex-direction:column;justify-content:center;gap:12px;background:radial-gradient(120% 80% at 85% 0%,var(--brand-tint),transparent 52%),var(--surface-2);position:relative;overflow:hidden;min-width:0;}
   .fv-hero .sc-head{display:flex;align-items:center;justify-content:space-between;}
   .fv-hero .sc-head .l{font-family:var(--f-latin);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
   .fv-hero .sc-head .r{font-family:var(--f-mono);font-size:10.5px;color:var(--faint);white-space:nowrap;}
@@ -179,11 +179,11 @@ const marqueeLoop = [...marquee, ...marquee];
   .fv-hero .flow .ln{flex:1;height:1px;background:var(--line-strong);}
   .fv-hero .flow .badge{font-family:var(--f-latin);letter-spacing:.06em;color:var(--brand-ink);background:var(--brand-tint);padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:600;}
 
-  .fv-hero .outputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+  .fv-hero .outputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
   /* カードは常に表示（base=revealed）。生成中スケルトンだけが乗り、消える。 */
-  .fv-hero .gen-card{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:0 10px 26px -16px rgba(20,22,28,.4);aspect-ratio:3/4;}
+  .fv-hero .gen-card{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:0 6px 18px -12px rgba(20,22,28,.35);aspect-ratio:2/3;}
   .fv-hero .gen-img,.fv-hero .gen-ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
-  .fv-hero .gen-ph{background:repeating-linear-gradient(135deg,var(--surface-2),var(--surface-2) 10px,#fff 10px,#fff 20px);}
+  .fv-hero .gen-ph{background:color-mix(in srgb,var(--brand-tint) 40%,var(--surface-2));}
   .fv-hero .gen-card .ghead{position:absolute;left:8px;top:8px;right:8px;z-index:4;display:flex;align-items:center;gap:6px;}
   .fv-hero .gen-card .gbadge{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;color:#fff;font-family:var(--f-latin);font-weight:700;font-size:10.5px;flex:none;box-shadow:0 2px 6px rgba(0,0,0,.25);}
   .fv-hero .gen-card .gname{font-family:var(--f-jp);font-weight:700;font-size:10.5px;color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.7);background:rgba(0,0,0,.32);backdrop-filter:blur(4px);padding:3px 7px;border-radius:999px;white-space:nowrap;}

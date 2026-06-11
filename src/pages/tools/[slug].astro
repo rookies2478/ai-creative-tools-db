@@ -9,10 +9,13 @@ import '../../styles/tool-detail.css';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
-  return tools.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+  const STATIC_OVERRIDES = new Set(['adobe-firefly']);
+  return tools
+    .filter((entry) => !STATIC_OVERRIDES.has(entry.slug))
+    .map((entry) => ({
+      params: { slug: entry.slug },
+      props: { entry },
+    }));
 }
 
 const { entry } = Astro.props;

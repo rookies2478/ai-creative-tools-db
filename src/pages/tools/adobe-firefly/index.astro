@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdobeFireflyTool from '../../../components/AdobeFireflyTool.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'adobe-firefly');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Adobe Firefly', item: 'https://aicreative-db.com/tools/adobe-firefly/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Adobe Firefly',
+    operatingSystem: 'Web',
+    applicationCategory: 'DesignApplication',
+    description: 'Adobe公式のAI画像生成サービス。商用利用を想定した設計で、Photoshop・Illustratorとの連携が可能。',
+    url: 'https://firefly.adobe.com',
+  },
+]);
+---
+
+<BaseLayout
+  title="Adobe Fireflyの商用利用・料金・無料枠まとめ｜AI生成ツールDB"
+  description="Adobe Fireflyの商用利用条件・料金プラン・無料枠・透かし・日本語対応状況を、公式情報をもとに整理しています。最新情報は公式サイトをご確認ください。"
+  canonicalPath="/tools/adobe-firefly/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <!-- パンくず -->
+  <nav class="af-breadcrumb" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Adobe Firefly</span>
+    </div>
+  </nav>
+
+  <AdobeFireflyTool
+    lastChecked={d?.lastReviewed}
+    nextCheck={d?.nextReviewDue}
+    verifiedDate={d?.verifiedAt}
+  />
+
+</BaseLayout>
+
+<style>
+  .af-breadcrumb {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .af-breadcrumb .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .af-breadcrumb a {
+    color: var(--muted, #6A7180);
+    text-decoration: none;
+  }
+  .af-breadcrumb a:hover { text-decoration: underline; }
+  .af-breadcrumb .sep { color: var(--faint, #98A0AD); }
+  .af-breadcrumb .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+</style>

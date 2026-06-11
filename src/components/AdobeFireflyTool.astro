@@ -1,0 +1,819 @@
+---
+/* =========================================================
+   AdobeFireflyTool.astro
+   ツール詳細ページ：/tools/adobe-firefly/ の記事本文
+   （ヒーロー（クイック仕様＋CTA＋注意）＋ 基本情報カード ＋ 向いている用途
+    ＋ 強み/弱み/制限 ＋ 比較ポイント早見表 ＋ 解説（とは/料金/商用利用/連携）
+    ＋ 向いている人/向いていない人 ＋ 他ツールとの選び分け ＋ 主要3ツール比較
+    ＋ 日本語対応/透かし ＋ 商用利用前チェックリスト ＋ 情報の鮮度・参照元
+    ＋ FAQ ＋ 関連ツール ＋ 比較記事/次に読む ＋ 条件別に探す）
+
+   既存サイト（Tailwind）を壊さない設計:
+   - すべてのセレクタを .tdp-x 配下に限定（スタイル漏れなし）
+   - CSS変数は :root ではなく .tdp-x 上に定義（既存トークン非衝突）
+   - 素のリセット（*{} / body{} / table{} 等）を含めない（preflight非干渉）
+   - SSRで描画。JSは [data-tdp] 配下のみ操作（FAQ開閉・表示アニメ）
+
+   ヘッダー・フッター・パンくず・条件ナビは既存 Layout 側のものを使用してください。
+   このコンポーネントは記事本文だけを描画します。
+   `透かし・クレジットガイド` / `商用利用・著作権ガイド` と同じデザインシステムです。
+   ========================================================= */
+
+export type Mark = 'ok' | 'cond' | 'no' | 'na' | 'paid';
+export interface Badge { s: Mark; label: string; }
+
+export interface SpecItem { lb: string; badge?: Badge; text?: string; mono?: boolean; }
+export interface InfoCard {
+  title: string;
+  badge?: Badge;
+  sum?: string;
+  sumMono?: boolean;
+  det?: string;
+  wide?: boolean;
+  lang?: { label: string; badge: Badge }[];
+  feats?: string[];
+}
+export interface TableCell { html: string; rk?: boolean; me?: boolean; mono?: boolean; }
+export interface RichTable { kind?: 'spec' | 'cmp'; headers?: string[]; rows: TableCell[][]; note?: string; }
+export interface ToolCard {
+  name: string; slug?: string; initial?: string; cat?: string;
+  badges?: Badge[]; platforms?: string[]; official?: string;
+}
+export interface ReadLink { href: string; title: string; desc?: string; }
+export interface TagLink { label: string; href: string; }
+export interface SourceLink { tag: string; label: string; href: string; }
+export interface Faq { q: string; a: string; }
+export interface CheckItem { html: string; }
+
+export interface Props {
+  category?: string;
+  checkedDate?: string;
+  headingHtml?: string;
+  lead?: string;
+  specs?: SpecItem[];
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+  caution?: string;
+  basicInfo?: InfoCard[];
+  useCases?: string[];                 // html可
+  pros?: string[];
+  cons?: string[];
+  limits?: string[];
+  quickTable?: RichTable;
+  about?: string[];                    // html可（段落）
+  aboutMore?: { label: string; href: string };
+  pricing?: { table: RichTable; notes: string[] };  // notes html可
+  commercial?: { lead: string; points: string[]; disclaimer: string; more?: { label: string; href: string } };
+  integration?: string;
+  whoFor?: string[];
+  whoNot?: string[];
+  selectTable?: RichTable;
+  versusTable?: RichTable;
+  language?: string[];                 // html可
+  watermark?: string[];                // html可
+  watermarkMore?: { label: string; href: string };
+  checklist?: CheckItem[];
+  lastChecked?: string;
+  nextCheck?: string;
+  verifiedDate?: string;
+  sources?: SourceLink[];
+  faqs?: Faq[];
+  relatedTools?: ToolCard[];
+  nextReads?: ReadLink[];
+  conditions?: TagLink[];
+  toolsBase?: string;                  // 既定 /tools/
+}
+
+const {
+  category = 'AI画像生成',
+  checkedDate = '2026-06-08',
+  headingHtml = 'Adobe Fireflyの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ',
+  lead = 'Adobe公式のAI画像生成サービス。商用利用を想定した設計で、Photoshop・Illustratorとの連携が可能。料金・無料枠・透かし・日本語対応を、公式情報をもとに整理しています。',
+  specs = [
+    { lb: '商用利用', badge: { s: 'paid', label: '有料向け' } },
+    { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
+    { lb: '料金目安', text: '$9.99/月〜', mono: true },
+    { lb: '透かし', badge: { s: 'cond', label: 'プランによる' } },
+    { lb: '日本語UI', badge: { s: 'ok', label: '〇 対応' } },
+  ],
+  primaryCta = { label: '公式サイトで確認する', href: 'https://firefly.adobe.com' },
+  secondaryCta = { label: '料金プラン（公式）', href: 'https://www.adobe.com/products/firefly/plans.html' },
+  caution = '料金・無料枠・商用利用条件・透かしの有無は変更される場合があります。最新情報は必ず公式サイトをご確認ください。本記事は法的助言ではありません。',
+  basicInfo = [
+    { title: '商用利用', badge: { s: 'paid', label: '有料向け' }, wide: true, sum: '有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。', det: 'Adobe公式情報上、Fireflyは商用利用を想定したAI生成サービスとして案内されています。ただしベータ機能（β表示）、第三者素材、利用プランや用途によって扱いが変わる可能性があります。商用利用前に最新のAdobe公式利用条件をご確認ください。' },
+    { title: '無料枠', badge: { s: 'cond', label: '限定的' }, det: '無料プランで一定数の生成クレジットあり（数量は変更の可能性あり）。' },
+    { title: '最安料金目安', sum: '$9.99/月（Firefly Standard・プロモ価格適用時）', sumMono: true, det: 'Firefly Standard $9.99/月〜。Creative Cloud All Appsに含まれる場合あり。' },
+    { title: '透かし', badge: { s: 'cond', label: 'プランによる' }, det: 'プランによっては可視透かしあり。全プランでC2PAメタデータ（コンテンツクレデンシャル）が埋め込まれる場合があります。' },
+    { title: '日本語対応', lang: [{ label: 'UI', badge: { s: 'ok', label: '〇 対応' } }, { label: 'プロンプト', badge: { s: 'ok', label: '〇 対応' } }] },
+    { title: '対応環境', feats: ['Web'] },
+    { title: '主な機能', wide: true, feats: ['テキスト→画像', '画像→画像', '部分修正', '画像拡張', '背景削除', 'スタイル選択'] },
+  ],
+  useCases = [
+    '<b>商用素材の生成</b>（著作権リスクの低減を意図した設計）',
+    '<b>Adobe Creative Cloud</b>との連携ワークフロー',
+    '<b>日本語環境</b>での利用（UI・プロンプト対応）',
+    'SNS画像・広告バナー・アイキャッチの<b>案出し</b>',
+  ],
+  pros = [
+    'Adobe公式情報上、商用利用が案内されている',
+    '学習データに権利処理済み素材・パブリックドメインを使用しているとされる',
+    '日本語UI・多言語プロンプト対応',
+    'Photoshop・Illustratorと連携可能',
+    '無料枠で一定数の生成クレジットが提供される場合がある',
+  ],
+  cons = [
+    '無料枠のクレジット数はプランや時期により変わる可能性がある',
+    'プランによっては生成画像に可視透かしが入る場合がある',
+    '他ツールと比べて表現の自由度・スタイルの幅が狭い傾向',
+    'ベータ機能は商用利用対象外とされている',
+  ],
+  limits = [
+    'ベータ機能（β表示）は商用利用対象外',
+    '表現の自由度・スタイルの幅が他ツールより狭い傾向',
+    '人物・ブランド・第三者素材は別途確認が必要',
+  ],
+  quickTable = {
+    kind: 'spec',
+    rows: [
+      [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成' }],
+      [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br />無料プランで一定数の生成クレジットあり（数量は変更の可能性あり）' }],
+      [{ html: '最安料金', rk: true }, { html: '<span class="mono">$9.99/月〜</span><br />Firefly Standard $9.99/月〜。Creative Cloud All Appsに含まれる場合あり。' }],
+      [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st paid sm"><span class="d"></span>有料向け</span><br />有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。' }],
+      [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>プランによる</span><br />プランによっては可視透かしあり。全プランでC2PAメタデータ埋め込み' }],
+      [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>〇 対応</span>' }],
+      [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>〇 対応</span>' }],
+      [{ html: '対応環境', rk: true }, { html: 'Web' }],
+      [{ html: '情報確認日', rk: true }, { html: '2026-05-24', mono: true }],
+      [{ html: '次回確認予定', rk: true }, { html: '2026-06-24', mono: true }],
+      [{ html: '公式サイト', rk: true }, { html: '<a href="https://firefly.adobe.com" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+    ],
+    note: '※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。',
+  },
+  about = [
+    'Adobe FireflyはAdobeが提供するAI画像生成サービス。Photoshop・IllustratorなどAdobe Creative Cloudと統合されており、<b>商用利用を想定した設計</b>が特徴とされています。学習データには権利処理済みのコンテンツとパブリックドメイン素材を使用しているとAdobeは説明しています。',
+    'SNS画像・広告バナー・ブログアイキャッチ・デザイン素材の案出しに向いており、生成後にPhotoshopやIllustratorで編集するワークフローとの親和性が高いとされています。',
+  ],
+  aboutMore = { label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' },
+  pricing = {
+    table: {
+      kind: 'cmp',
+      headers: ['プラン', '料金', '生成クレジット'],
+      rows: [
+        [{ html: '無料', rk: true }, { html: '無料', mono: true }, { html: '一定数のクレジットが提供される場合あり' }],
+        [{ html: 'Standard', rk: true }, { html: '$9.99/月〜', mono: true }, { html: '有料プランで拡大' }],
+      ],
+    },
+    notes: [
+      'Creative Cloud All Appsプランに含まれる場合があります',
+      '料金・クレジット数はプランや時期により変わる可能性があります',
+      '<b>最新のクレジット数・料金はAdobe公式サイトをご確認ください</b>',
+    ],
+  },
+  commercial = {
+    lead: 'Adobe公式情報上、Fireflyは商用利用を想定したAI生成サービスとして案内されています。以下の点にご注意ください。',
+    points: [
+      '学習データには契約済みのAdobe Stock素材とパブリックドメインコンテンツを使用しているとされています',
+      '<b>β（ベータ）表示の機能は商用利用の対象外</b>とされています',
+      '商用利用条件はプランや用途によって異なる場合があります',
+      '人物・著名人・ブランドロゴ・第三者素材を扱う場合は、別途確認が必要です',
+    ],
+    disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前はAdobe生成AIユーザーガイドラインの最新版をご確認ください。',
+    more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+  },
+  integration = 'Adobe FireflyはAdobe Express・Photoshop・Illustratorと連携して利用できます。たとえばPhotoshopの「生成塗りつぶし」や「生成拡張」でFireflyのモデルを呼び出すことができます。生成した画像をそのまま編集ワークフローに組み込める点が他サービスとの違いとして挙げられます。各機能の利用可否はプランや製品バージョンによって異なります。最新の対応状況はAdobe公式サイトをご確認ください。',
+  whoFor = [
+    'Adobe製品（Photoshop・Illustratorなど）をすでに使っている人',
+    'SNS画像・広告バナーの案を素早く作りたい人',
+    'ブログアイキャッチやデザイン素材の叩き台が欲しい人',
+    '生成後にAdobeツールで加工・編集したい人',
+  ],
+  whoNot = [
+    'アート性の強い画像を大量に作りたい人（表現の幅が狭い傾向あり）',
+    'AdobeアカウントやAdobe製品連携を使いたくない人',
+    '公式条件を確認せずに商用案件に使いたい人',
+    '毎回同じ人物・構図を完全に再現したい人',
+  ],
+  selectTable = {
+    kind: 'cmp',
+    headers: ['ツール', '向いているケース'],
+    rows: [
+      [{ html: 'Adobe Firefly（このページ）', rk: true, me: true }, { html: 'Adobe製品との連携を重視する場合、日本語UIで操作したい場合' }],
+      [{ html: '<a href="/tools/midjourney/">Midjourney</a>', rk: true }, { html: '高品質なビジュアル表現・アート調イラストを重視する場合' }],
+      [{ html: '<a href="/tools/leonardo-ai/">Leonardo AI</a>', rk: true }, { html: 'イラスト・ゲーム素材・キャラクター制作の候補、無料枠から試したい場合' }],
+      [{ html: '<a href="/tools/canva-ai-image-generator/">Canva AI画像生成</a>', rk: true }, { html: 'Canvaのデザインフローの中でAI画像を使いたい場合' }],
+      [{ html: '<a href="/tools/stable-diffusion/">Stable Diffusion</a>', rk: true }, { html: 'カスタマイズ性・ローカル実行を重視する場合' }],
+    ],
+  },
+  versusTable = {
+    kind: 'cmp',
+    headers: ['比較軸', 'Adobe Firefly', 'Midjourney', 'Canva AI'],
+    rows: [
+      [{ html: '用途の傾向', rk: true }, { html: 'デザイン制作・Adobe連携', me: true }, { html: 'アート調・雰囲気重視' }, { html: 'テンプレートデザイン' }],
+      [{ html: '商用利用の案内', rk: true }, { html: '公式情報上、商用利用想定と案内', me: true }, { html: 'プランによる（要確認）' }, { html: 'プランによる（要確認）' }],
+      [{ html: 'Adobe製品連携', rk: true }, { html: 'あり', me: true }, { html: 'なし' }, { html: '限定的' }],
+      [{ html: '日本語UI', rk: true }, { html: '対応', me: true }, { html: '限定的' }, { html: '対応' }],
+    ],
+    note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
+  },
+  language = [
+    '<b>日本語UI：</b>対応（複数言語にローカライズされています）',
+    '<b>日本語プロンプト：</b>対応（多言語のテキストプロンプトに対応しているとされています）',
+    '日本語プロンプトの精度は英語と異なる場合があります',
+  ],
+  watermark = [
+    '<b>プランによっては</b>生成画像に可視透かしが入る場合があります',
+    '透かしの有無・条件はプランや提供状況により変わる可能性があります',
+    '<b>全プラン共通：</b>C2PA標準の不可視メタデータ（コンテンツクレデンシャル）が埋め込まれる場合があります',
+    '最新の条件はAdobe公式サイトでご確認ください',
+  ],
+  watermarkMore = { label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' },
+  checklist = [
+    { html: '利用しているAdobe Fireflyのプラン' },
+    { html: '使いたい生成機能がβ（ベータ）表示でないか' },
+    { html: '商用利用の条件（プラン・用途による違い）' },
+    { html: '生成物の利用範囲（掲載媒体・配布範囲など）' },
+    { html: '入力素材の権利（アップロード画像・素材の権利関係）' },
+    { html: '人物・ブランド・ロゴ・第三者素材の扱い' },
+    { html: 'Adobe公式ヘルプ・利用規約・料金ページの最新情報' },
+    { html: '利用時点での最新の利用条件' },
+  ],
+  // 専用ページのため更新時は adobe-firefly.md の lastReviewed / nextReviewDue / verifiedAt と日付同期すること
+  lastChecked = '2026-05-24',
+  nextCheck = '2026-06-24',
+  verifiedDate = '2026-06-08',
+  sources = [
+    { tag: '料金', label: 'Adobe Firefly料金プラン（公式）', href: 'https://www.adobe.com/products/firefly/plans.html' },
+    { tag: 'ポリシー', label: 'Adobe生成AIユーザーガイドライン（公式）', href: 'https://www.adobe.com/legal/licenses-terms/adobe-gen-ai-user-guidelines.html' },
+    { tag: '公式', label: 'Adobe Firefly公式サイト', href: 'https://firefly.adobe.com' },
+  ],
+  faqs = [
+    { q: 'Adobe Fireflyは無料で使えますか？', a: '無料プランで一定数の生成クレジットが提供される場合があります。クレジット数・無料枠の条件はプランや時期により変更される可能性があるため、最新の状況はAdobe公式サイトをご確認ください。' },
+    { q: 'Adobe Fireflyで作成した画像は商用利用できますか？', a: 'Adobe公式情報上、商用利用を想定したサービスとして案内されています。ただし商用利用条件はプランや用途によって異なる場合があります。β（ベータ）表示の機能は商用利用対象外とされています。利用前に最新のAdobe生成AIユーザーガイドラインをご確認ください。本記事は法的助言ではありません。' },
+    { q: 'Adobe Fireflyはどんな用途に向いていますか？', a: 'SNS画像、広告バナー、ブログアイキャッチ、デザイン素材の案出しなどに向いています。Adobe製品（Photoshop・Illustratorなど）と組み合わせて使う場合は、各製品の利用条件も合わせてご確認ください。' },
+    { q: 'Adobe FireflyとMidjourneyはどう違いますか？', a: 'Adobe FireflyはAdobe製品との連携やデザイン制作寄りの用途に向いているとされています。Midjourneyはアート性・雰囲気重視の画像生成で比較されやすいです。用途・目的に応じてご確認ください。' },
+    { q: '日本語で使えますか？', a: '日本語UIに対応しており、日本語プロンプトでの生成も可能です。ただし日本語プロンプトの精度は英語と異なる場合があります。' },
+    { q: '透かしは入りますか？', a: 'プランによっては可視透かしが入る場合があります。全プラン共通でC2PAの不可視メタデータが埋め込まれる場合があります。最新の条件は公式サイトでご確認ください。' },
+    { q: 'どの環境で使えますか？', a: 'Webブラウザから利用できます。PhotoshopやIllustratorとの連携も可能です。' },
+  ],
+  relatedTools = [
+    { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', initial: 'C', cat: '画像生成', badges: [{ s: 'na', label: '商用：要確認' }, { s: 'cond', label: '無料枠：要確認' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web', 'iOS', 'Android'], official: 'https://www.canva.com' },
+    { name: 'Clipdrop', slug: 'clipdrop', initial: 'C', cat: '画像生成', badges: [{ s: 'na', label: '商用：要確認' }, { s: 'ok', label: '無料枠あり' }, { s: 'no', label: '日本語：非対応' }], platforms: ['Web', 'API'], official: 'https://clipdrop.co/' },
+    { name: 'DALL·E', slug: 'dalle', initial: 'D', cat: '画像生成', badges: [{ s: 'ok', label: '商用：案内あり' }, { s: 'na', label: '無料枠：要確認' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web', 'API'], official: 'https://openai.com/dall-e-3' },
+  ],
+  nextReads = [
+    { href: '/comparisons/midjourney-vs-adobe-firefly/', title: 'Midjourney と Adobe Firefly を比較', desc: 'アート調かデザイン制作か、用途で選び分け' },
+    { href: '/comparisons/canva-ai-vs-adobe-firefly/', title: 'Canva AI と Adobe Firefly を比較', desc: 'テンプレート制作と画像生成の違い' },
+    { href: '/comparisons/adobe-firefly-vs-microsoft-designer/', title: 'Adobe Firefly と Microsoft Designer を比較', desc: '無料枠・商用利用・連携の違い' },
+    { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+    { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
+    { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: '商用利用や著作権まわりの確認ポイント' },
+  ],
+  conditions = [
+    { label: 'ツール一覧', href: '/tools/' },
+    { label: '無料で使えるAIツール', href: '/conditions/free/' },
+    { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+    { label: '日本語対応ツール', href: '/conditions/japanese/' },
+    { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+    { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+    { label: '全ツール比較表', href: '/comparisons/' },
+  ],
+  toolsBase = '/tools/',
+} = Astro.props as Props;
+
+const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
+const tableClass = (t: RichTable) => `tdp-gt ${t.kind ?? 'cmp'}`;
+const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono ? 'mono' : ''].filter(Boolean).join(' ');
+---
+
+<article class="tdp-x" data-tdp>
+
+  <!-- ===== HERO ===== -->
+  <header class="tdp-head">
+    <div class="tdp-meta">
+      <span class="tdp-kicker">Tool detail</span>
+      <span class="tdp-cat"><span class="d"></span>{category}</span>
+      <span class="tdp-checked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>確認 <b>{checkedDate}</b></span>
+    </div>
+    <h1 class="tdp-h1" set:html={headingHtml}></h1>
+    <p class="tdp-lead">{lead}</p>
+
+    <div class="tdp-spec">
+      <div class="tdp-specgrid">
+        {specs.map((s) => (
+          <div class="tdp-specitem">
+            <span class="lb">{s.lb}</span>
+            <span class={`vl${s.mono ? ' mono' : ''}`}>
+              {s.badge ? <span class={`tdp-st ${s.badge.s} sm`}><span class="d"></span>{s.badge.label}</span> : s.text}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="tdp-actions">
+      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel="noopener">{primaryCta.label} <span class="ext">↗</span></a>
+      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel="noopener">{secondaryCta.label} <span class="ext">↗</span></a> : null}
+    </div>
+
+    <div class="tdp-caution">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <p><b>ご注意：</b>{caution}</p>
+    </div>
+  </header>
+
+  <!-- ===== 基本情報 ===== -->
+  <section class="tdp-sec">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Basic info</span><h2>基本情報</h2><p>商用利用・無料枠・料金・透かし・日本語対応・対応環境の概要です。各項目は公式情報をもとに整理しています。</p></div>
+    <div class="tdp-infogrid reveal" data-stagger>
+      {basicInfo.map((c) => (
+        <article class={`tdp-infocard${c.wide ? ' wide' : ''}`}>
+          <div class="ih"><h3>{c.title}</h3>{c.badge ? <span class={`tdp-st ${c.badge.s}`}><span class="d"></span>{c.badge.label}</span> : null}</div>
+          {c.sum ? <p class={`sum${c.sumMono ? ' mono' : ''}`}>{c.sum}</p> : null}
+          {c.det ? <p class="det">{c.det}</p> : null}
+          {c.lang ? <div class="tdp-lang">{c.lang.map((l) => (<span class="row"><b>{l.label}</b><span class={`tdp-st ${l.badge.s} sm`}><span class="d"></span>{l.badge.label}</span></span>))}</div> : null}
+          {c.feats ? <div class="tdp-feats">{c.feats.map((f) => (<span class="tdp-feat">{f}</span>))}</div> : null}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== 向いている用途 ===== -->
+  <section class="tdp-sec band">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Best for</span><h2>向いている用途</h2><p>Adobe Fireflyが特に活用しやすい主な用途です。</p></div>
+    <ul class="tdp-bullets reveal" data-stagger>
+      {useCases.map((u) => (<li set:html={u}></li>))}
+    </ul>
+  </section>
+
+  <!-- ===== 強み・注意点 ===== -->
+  <section class="tdp-sec">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Strengths &amp; cautions</span><h2>強み・注意点</h2><p>公式情報をもとにした強み・弱み・制限の整理です。最終的な判断は公式条件をご確認ください。</p></div>
+    <div class="tdp-judge reveal" data-stagger>
+      <div class="tdp-jcol pro"><div class="jh"><span class="ic">○</span>強み</div><ul>{pros.map((x) => (<li set:html={x}></li>))}</ul></div>
+      <div class="tdp-jcol con"><div class="jh"><span class="ic">×</span>弱み</div><ul>{cons.map((x) => (<li set:html={x}></li>))}</ul></div>
+      <div class="tdp-jcol lim"><div class="jh"><span class="ic">!</span>制限・注意点</div><ul>{limits.map((x) => (<li set:html={x}></li>))}</ul></div>
+    </div>
+  </section>
+
+  <!-- ===== 比較ポイント早見表 ===== -->
+  <section class="tdp-sec band">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">At a glance</span><h2>比較ポイント早見表</h2><p>確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。</p></div>
+    <div class="reveal">
+      <div class="tdp-tablewrap"><table class={tableClass(quickTable)}>
+        {quickTable.headers ? <thead><tr>{quickTable.headers.map((h) => (<th>{h}</th>))}</tr></thead> : null}
+        <tbody>{quickTable.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={c.html}></td>))}</tr>))}</tbody>
+      </table></div>
+      {quickTable.note ? <p class="tdp-tnote">{quickTable.note}</p> : null}
+    </div>
+  </section>
+
+  <!-- ===== 解説（とは / 料金 / 商用利用 / 連携） ===== -->
+  <section class="tdp-sec">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Overview</span><h2>Adobe Fireflyとは</h2></div>
+    <div class="tdp-prose reveal">
+      {about.map((p) => (<p set:html={p}></p>))}
+      {aboutMore ? <a class="tdp-inline-more" href={aboutMore.href}>{aboutMore.label}</a> : null}
+
+      <h3>料金プラン</h3>
+      <div class="tdp-tablewrap"><table class={tableClass(pricing.table)}>
+        {pricing.table.headers ? <thead><tr>{pricing.table.headers.map((h) => (<th>{h}</th>))}</tr></thead> : null}
+        <tbody>{pricing.table.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={c.html}></td>))}</tr>))}</tbody>
+      </table></div>
+      <ul>{pricing.notes.map((n) => (<li set:html={n}></li>))}</ul>
+
+      <h3>商用利用について</h3>
+      <p>{commercial.lead}</p>
+      <ul>{commercial.points.map((p) => (<li set:html={p}></li>))}</ul>
+      <div class="tdp-quote"><b>免責事項：</b>{commercial.disclaimer}</div>
+      {commercial.more ? <a class="tdp-inline-more" href={commercial.more.href}>{commercial.more.label}</a> : null}
+
+      <h3>Adobe製品との連携</h3>
+      <p>{integration}</p>
+    </div>
+  </section>
+
+  <!-- ===== 向いている人・向いていない人 ===== -->
+  <section class="tdp-sec band">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Who it's for</span><h2>向いている人・向いていない人</h2></div>
+    <div class="tdp-judge reveal" data-stagger style="grid-template-columns:1fr 1fr;">
+      <div class="tdp-jcol pro"><div class="jh"><span class="ic">○</span>向いている人</div><ul>{whoFor.map((x) => (<li set:html={x}></li>))}</ul></div>
+      <div class="tdp-jcol con"><div class="jh"><span class="ic">×</span>向いていない人</div><ul>{whoNot.map((x) => (<li set:html={x}></li>))}</ul></div>
+    </div>
+  </section>
+
+  <!-- ===== 他ツールとの選び分け ===== -->
+  <section class="tdp-sec">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Pick the right tool</span><h2>他ツールとの選び分け</h2><p>用途別に、Adobe Fireflyと他の主要ツールの向き・不向きを整理しました。各ツールの最新条件は公式サイトをご確認ください。</p></div>
+    <div class="reveal">
+      <div class="tdp-tablewrap"><table class={tableClass(selectTable)}>
+        {selectTable.headers ? <thead><tr>{selectTable.headers.map((h) => (<th>{h}</th>))}</tr></thead> : null}
+        <tbody>{selectTable.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={c.html}></td>))}</tr>))}</tbody>
+      </table></div>
+
+      <div class="tdp-sechead reveal" style="margin-top:44px;margin-bottom:18px;"><h2 style="font-size:21px;">主要3ツールとの違い</h2></div>
+      <div class="tdp-tablewrap"><table class={tableClass(versusTable)}>
+        {versusTable.headers ? <thead><tr>{versusTable.headers.map((h) => (<th>{h}</th>))}</tr></thead> : null}
+        <tbody>{versusTable.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={c.html}></td>))}</tr>))}</tbody>
+      </table></div>
+      {versusTable.note ? <p class="tdp-tnote">{versusTable.note}</p> : null}
+    </div>
+  </section>
+
+  <!-- ===== 日本語対応 / 透かし ===== -->
+  <section class="tdp-sec band">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Localization &amp; watermark</span><h2>日本語対応・透かし</h2></div>
+    <div class="tdp-prose reveal">
+      <h3>日本語対応</h3>
+      <ul>{language.map((x) => (<li set:html={x}></li>))}</ul>
+      <h3>透かし（ウォーターマーク）</h3>
+      <ul>{watermark.map((x) => (<li set:html={x}></li>))}</ul>
+      {watermarkMore ? <a class="tdp-inline-more" href={watermarkMore.href}>{watermarkMore.label}</a> : null}
+    </div>
+  </section>
+
+  <!-- ===== 商用利用前のチェックリスト ===== -->
+  <section class="tdp-sec">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Checklist</span><h2>商用利用前に確認したいポイント</h2><p>商用案件・クライアントワークで使う前に、最低限おさえておきたい項目です。各項目は公式情報で裏付けてください。</p></div>
+    <ul class="tdp-checklist reveal" data-stagger>
+      {checklist.map((c) => (
+        <li><span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><span class="tx" set:html={c.html}></span></li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- ===== 情報の鮮度・参照元 ===== -->
+  <section class="tdp-sec band">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Sources</span><h2>情報の鮮度・参照元</h2><p>本ページの情報は、各ツールの公式サイト・料金ページ・利用規約等をもとに整理したものです。掲載内容は確認時点の情報です。</p></div>
+    <div class="tdp-srcgrid reveal" data-stagger>
+      <div class="tdp-datebox">
+        <div class="row"><b>最終確認日</b><span class="mono">{lastChecked}</span></div>
+        <div class="row"><b>次回確認予定</b><span class="mono">{nextCheck}</span></div>
+        <div class="row"><b>情報検証日</b><span class="mono">{verifiedDate}</span></div>
+      </div>
+      <div class="tdp-srcbox">
+        <h3>参照元</h3>
+        <div class="tdp-srclist">
+          {sources.map((s) => (<a class="tdp-srclink" href={s.href} target="_blank" rel="noopener"><span class="tag">{s.tag}</span>{s.label}<span class="ext">↗</span></a>))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="tdp-sec">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">FAQ</span><h2>よくある質問</h2><p>無料枠・商用利用・用途・日本語対応・透かし・対応環境について、確認のポイントをお答えします。</p></div>
+    <div class="tdp-faq reveal">
+      {faqs.map((f) => (
+        <div class="tdp-faqitem" aria-expanded="false">
+          <button class="tdp-faqq" type="button"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="tdp-faqa"><div class="tdp-faqa-in" set:html={f.a}></div></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== 関連ツール ===== -->
+  <section class="tdp-sec band">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Related tools</span><h2>このツールと比較されるAIツール</h2><p>Adobe Fireflyと一緒に検討されることの多いAI画像生成ツールです。</p></div>
+    <div class="tdp-toolcards reveal" data-stagger>
+      {relatedTools.map((t) => (
+        <article class="tdp-toolcard">
+          <div class="th"><span class="b">{t.initial}</span><span><span class="nm">{t.name}</span><br /><span class="ct">{t.cat}</span></span></div>
+          {t.badges ? <div class="tags">{t.badges.map((b) => (<span class={`tdp-st ${b.s} sm`}><span class="d"></span>{b.label}</span>))}</div> : null}
+          {t.platforms ? <div class="plats">{t.platforms.map((p) => (<span class="plat">{p}</span>))}</div> : null}
+          <div class="tact">
+            {toolUrl(t.slug) ? <a href={toolUrl(t.slug)}>詳しく見る →</a> : null}
+            {t.official ? <a class="ghost" href={t.official} target="_blank" rel="noopener">公式 ↗</a> : null}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== 比較記事 / 次に読む ===== -->
+  <section class="tdp-sec">
+    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Next reads</span><h2>比較記事・次に読む</h2><p>Adobe Fireflyの比較記事と、あわせて読みたいガイド・比較表です。</p></div>
+    <div class="tdp-reads reveal" data-stagger>
+      {nextReads.map((r) => (
+        <a class="tdp-read" href={r.href}><span class="ar">→</span><span><span class="rt">{r.title}</span>{r.desc ? <span class="rd">{r.desc}</span> : null}</span></a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== 条件別に探す ===== -->
+  <section class="tdp-sec band" style="padding-bottom:60px;">
+    <div class="tdp-finder reveal">
+      <h2>条件別に探す</h2>
+      <p class="lead">カテゴリ・条件タグから、目的に合うAIツールを探せます。</p>
+      <div class="tdp-taglinks">
+        {conditions.map((c) => (<a class="tdp-taglink" href={c.href}><span class="ld"></span>{c.label}</a>))}
+      </div>
+      <div class="tdp-pagenav">
+        <a href="/tools/" class="btn btn-ghost">← ツール一覧に戻る</a>
+        <a href="/comparisons/" class="btn btn-primary">比較表で見る <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</article>
+
+<style>
+  /* すべて .tdp-x 配下に限定。CSS変数も .tdp-x 上に定義（:root非使用）。 */
+  .tdp-x{
+    --paper:#F4F4EE; --surface:#FFFFFF; --surface-2:#FAFAF6;
+    --ink:#16181D; --ink-soft:#3A3E47; --muted:#6A7180; --faint:#98A0AD;
+    --line:#E3E2D9; --line-strong:#D2D1C6;
+    --brand:#4B3FE4; --brand-ink:#2E25A6; --brand-tint:#ECEBFB;
+    --video:#E1543A; --video-tint:#FCEDE9; --image:#15897F; --image-tint:#E2F1EF;
+    --ok:#1E8A4C; --ok-tint:#E6F3EC; --warn:#A06A09; --warn-tint:#F8EFD9;
+    --na:#6A7180; --na-tint:#EFEFEA; --paid:#4B3FE4; --paid-tint:#ECEBFB;
+    --f-jp:"Zen Kaku Gothic New","Noto Sans JP",system-ui,sans-serif;
+    --f-body:"Noto Sans JP",system-ui,sans-serif;
+    --f-latin:"Space Grotesk",system-ui,sans-serif;
+    --f-mono:"Space Mono",ui-monospace,monospace;
+    --radius:14px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(20,22,28,.04),0 1px 3px rgba(20,22,28,.05);
+    --shadow-md:0 4px 14px rgba(20,22,28,.06),0 2px 6px rgba(20,22,28,.04);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    font-family:var(--f-body); color:var(--ink); line-height:1.7; -webkit-font-smoothing:antialiased;
+  }
+  .tdp-x :where(h1,h2,h3,h4){font-family:var(--f-jp);font-weight:700;line-height:1.32;letter-spacing:.01em;margin:0;}
+  .tdp-x :where(p){margin:0;}
+  .tdp-x a{color:inherit;text-decoration:none;}
+
+  .tdp-sec{padding:60px 0;}
+  .tdp-sec.band{background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .tdp-sechead{max-width:780px;margin-bottom:30px;}
+  .tdp-sechead h2{font-size:clamp(23px,2.8vw,32px);font-weight:900;letter-spacing:-.005em;margin:14px 0 11px;}
+  .tdp-sechead p{color:var(--muted);font-size:14.5px;}
+  .tdp-sechead p b{color:var(--ink-soft);font-weight:700;}
+  .tdp-eyebrow{font-family:var(--f-latin);font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:10px;}
+  .tdp-eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--brand);}
+
+  /* ===== hero header ===== */
+  .tdp-head{padding:30px 0 8px;}
+  .tdp-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px;}
+  .tdp-kicker{font-family:var(--f-latin);font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);}
+  .tdp-cat{font-family:var(--f-jp);font-weight:700;font-size:12px;letter-spacing:.04em;color:var(--image);background:var(--image-tint);padding:5px 13px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;}
+  .tdp-cat .d{width:6px;height:6px;border-radius:50%;background:currentColor;}
+  .tdp-checked{font-family:var(--f-mono);font-size:12px;color:var(--muted);display:inline-flex;align-items:center;gap:7px;margin-left:auto;}
+  .tdp-checked svg{width:14px;height:14px;}
+  .tdp-checked b{color:var(--ink-soft);font-weight:700;}
+  .tdp-h1{font-size:clamp(28px,3.8vw,44px);font-weight:900;letter-spacing:-.01em;line-height:1.22;margin:0 0 16px;max-width:18ch;}
+  .tdp-h1 .hl{color:var(--brand-ink);position:relative;}
+  .tdp-h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.26em;background:color-mix(in srgb,var(--brand) 18%,transparent);z-index:-1;border-radius:2px;}
+  .tdp-lead{font-size:16px;color:var(--ink-soft);max-width:680px;}
+
+  /* spec strip */
+  .tdp-spec{margin-top:30px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;}
+  .tdp-specgrid{display:grid;grid-template-columns:repeat(5,1fr);}
+  .tdp-specitem{padding:20px 22px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:9px;}
+  .tdp-specitem:last-child{border-right:none;}
+  .tdp-specitem .lb{font-family:var(--f-jp);font-weight:700;font-size:11.5px;color:var(--muted);letter-spacing:.02em;}
+  .tdp-specitem .vl{font-size:14px;color:var(--ink);font-weight:700;line-height:1.4;}
+  .tdp-specitem .vl.mono{font-family:var(--f-mono);font-size:12.5px;font-weight:700;color:var(--ink-soft);}
+  .tdp-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;}
+  .tdp-actions .btn .ext{transition:transform .2s var(--ease);}
+  .tdp-actions .btn:hover .ext{transform:translate(2px,-2px);}
+
+  .tdp-caution{display:flex;align-items:flex-start;gap:13px;background:var(--warn-tint);border:1px solid color-mix(in srgb,var(--warn) 26%,var(--line));border-radius:var(--radius);padding:17px 22px;margin-top:24px;max-width:880px;}
+  .tdp-caution svg{width:19px;height:19px;color:var(--warn);flex:none;margin-top:2px;}
+  .tdp-caution p{font-size:13px;color:var(--ink-soft);line-height:1.75;}
+  .tdp-caution b{color:var(--ink);font-weight:700;}
+
+  /* ===== status badges (shared) ===== */
+  .tdp-st{display:inline-flex;align-items:center;gap:6px;flex:none;font-family:var(--f-jp);font-weight:700;font-size:12px;line-height:1.2;padding:5px 11px;border-radius:999px;white-space:nowrap;}
+  .tdp-st .d{width:6px;height:6px;border-radius:50%;background:currentColor;}
+  .tdp-st.ok{color:var(--ok);background:var(--ok-tint);}
+  .tdp-st.cond{color:var(--warn);background:var(--warn-tint);}
+  .tdp-st.no{color:var(--video);background:var(--video-tint);}
+  .tdp-st.na{color:var(--na);background:var(--na-tint);}
+  .tdp-st.paid{color:var(--paid);background:var(--paid-tint);}
+  .tdp-st.sm{padding:3px 9px;font-size:11px;}
+
+  /* ===== basic info cards ===== */
+  .tdp-infogrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .tdp-infocard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-sm);}
+  .tdp-infocard.wide{grid-column:1 / -1;}
+  .tdp-infocard .ih{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .tdp-infocard .ih h3{font-size:15px;font-weight:700;color:var(--ink);}
+  .tdp-infocard .ih .tdp-st{margin-left:auto;}
+  .tdp-infocard .sum{font-size:14px;color:var(--ink);font-weight:700;line-height:1.6;margin-bottom:8px;}
+  .tdp-infocard .sum.mono{font-family:var(--f-mono);font-size:13px;}
+  .tdp-infocard .det{font-size:13px;color:var(--muted);line-height:1.75;}
+  .tdp-lang{display:flex;gap:26px;flex-wrap:wrap;}
+  .tdp-lang .row{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--ink-soft);}
+  .tdp-lang .row b{color:var(--muted);font-weight:700;font-size:12.5px;}
+  .tdp-feats{display:flex;flex-wrap:wrap;gap:8px;}
+  .tdp-feat{font-family:var(--f-jp);font-weight:600;font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:6px 12px;line-height:1.4;}
+
+  /* ===== use cases / bullet lists ===== */
+  .tdp-bullets{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;max-width:880px;}
+  .tdp-bullets li{position:relative;padding-left:20px;font-size:14px;color:var(--ink-soft);line-height:1.7;}
+  .tdp-bullets li::before{content:"";position:absolute;left:0;top:10px;width:7px;height:7px;border-radius:50%;background:var(--brand);}
+  .tdp-bullets li b{color:var(--ink);font-weight:700;}
+
+  /* ===== pros / cons / limits ===== */
+  .tdp-judge{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .tdp-jcol{border-radius:var(--radius-lg);padding:24px 26px;border:1px solid var(--line);}
+  .tdp-jcol.pro{background:var(--ok-tint);border-color:color-mix(in srgb,var(--ok) 24%,var(--line));}
+  .tdp-jcol.con{background:var(--video-tint);border-color:color-mix(in srgb,var(--video) 22%,var(--line));}
+  .tdp-jcol.lim{background:var(--warn-tint);border-color:color-mix(in srgb,var(--warn) 24%,var(--line));}
+  .tdp-jcol .jh{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:900;margin-bottom:15px;}
+  .tdp-jcol.pro .jh{color:var(--ok);}
+  .tdp-jcol.con .jh{color:var(--video);}
+  .tdp-jcol.lim .jh{color:var(--warn);}
+  .tdp-jcol .jh .ic{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:#fff;font-family:var(--f-latin);font-weight:700;font-size:15px;flex:none;}
+  .tdp-jcol ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .tdp-jcol li{font-size:13.5px;color:var(--ink-soft);line-height:1.65;padding-left:22px;position:relative;}
+  .tdp-jcol li::before{position:absolute;left:0;top:0;font-family:var(--f-latin);font-weight:700;font-size:13px;}
+  .tdp-jcol.pro li::before{content:"○";color:var(--ok);}
+  .tdp-jcol.con li::before{content:"×";color:var(--video);}
+  .tdp-jcol.lim li::before{content:"!";color:var(--warn);left:4px;}
+
+  /* ===== tables ===== */
+  .tdp-gtcap{font-size:12.5px;color:var(--muted);margin-bottom:12px;}
+  .tdp-tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-sm);}
+  table.tdp-gt{width:100%;border-collapse:collapse;}
+  table.tdp-gt.spec{min-width:480px;}
+  table.tdp-gt.cmp{min-width:620px;}
+  table.tdp-gt thead th{font-family:var(--f-jp);font-weight:700;font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);padding:13px 18px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap;}
+  table.tdp-gt tbody td{padding:13px 18px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13.5px;color:var(--ink-soft);line-height:1.7;}
+  table.tdp-gt tbody tr:last-child td{border-bottom:none;}
+  table.tdp-gt tbody tr{transition:background .12s;}
+  table.tdp-gt tbody tr:hover{background:var(--surface-2);}
+  table.tdp-gt .rk{font-family:var(--f-jp);font-weight:700;color:var(--ink);white-space:nowrap;width:1%;}
+  table.tdp-gt .mono{font-family:var(--f-mono);font-size:12.5px;color:var(--ink-soft);}
+  table.tdp-gt a{color:var(--brand-ink);font-weight:700;}
+  table.tdp-gt a:hover{text-decoration:underline;text-underline-offset:3px;}
+  table.tdp-gt .me{color:var(--ink);font-weight:700;}
+  .tdp-tnote{margin-top:11px;font-size:12px;color:var(--faint);line-height:1.7;}
+
+  /* ===== callout ===== */
+  .tdp-callout{display:flex;align-items:flex-start;gap:16px;background:var(--warn-tint);border:1px solid color-mix(in srgb,var(--warn) 26%,var(--line));border-radius:var(--radius-lg);padding:24px 28px;}
+  .tdp-callout .ic{width:26px;height:26px;color:var(--warn);flex:none;margin-top:2px;}
+  .tdp-callout .ic svg{width:26px;height:26px;}
+  .tdp-callout .ct strong{display:block;font-family:var(--f-jp);font-weight:900;font-size:16px;color:var(--ink);margin-bottom:6px;}
+  .tdp-callout .ct p{font-size:13.5px;color:var(--ink-soft);line-height:1.75;}
+
+  /* ===== prose blocks ===== */
+  .tdp-prose{max-width:820px;display:flex;flex-direction:column;gap:14px;}
+  .tdp-prose h3{font-family:var(--f-jp);font-weight:700;font-size:18px;color:var(--ink);display:flex;align-items:center;gap:11px;margin-top:8px;}
+  .tdp-prose h3::before{content:"";width:4px;height:18px;border-radius:2px;background:var(--brand);flex:none;}
+  .tdp-prose p{font-size:14.5px;color:var(--ink-soft);line-height:1.85;}
+  .tdp-prose ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .tdp-prose ul li{position:relative;padding-left:20px;font-size:14px;color:var(--ink-soft);line-height:1.75;}
+  .tdp-prose ul li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--brand);}
+  .tdp-prose b{color:var(--ink);font-weight:700;}
+  .tdp-prose a{color:var(--brand-ink);font-weight:600;}
+  .tdp-prose a:hover{text-decoration:underline;text-underline-offset:3px;}
+  .tdp-quote{background:var(--surface-2);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:0 var(--radius) var(--radius) 0;padding:16px 22px;font-size:13.5px;color:var(--ink-soft);line-height:1.8;}
+  .tdp-quote b{color:var(--ink);}
+  .tdp-inline-more{font-family:var(--f-jp);font-weight:700;font-size:13.5px;color:var(--brand-ink);display:inline-flex;align-items:center;gap:7px;}
+  .tdp-inline-more:hover{text-decoration:underline;text-underline-offset:3px;}
+
+  /* ===== checklist ===== */
+  .tdp-checklist{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px 32px;display:grid;grid-template-columns:1fr 1fr;gap:2px 36px;max-width:920px;list-style:none;margin:0;}
+  .tdp-checklist li{display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:start;padding:12px 0;border-bottom:1px dashed var(--line);}
+  .tdp-checklist .box{width:23px;height:23px;border-radius:7px;border:2px solid var(--brand);display:grid;place-items:center;flex:none;margin-top:1px;}
+  .tdp-checklist .box svg{width:13px;height:13px;color:var(--brand);}
+  .tdp-checklist .tx{font-size:13.5px;color:var(--ink-soft);line-height:1.6;}
+
+  /* ===== sources / freshness ===== */
+  .tdp-srcgrid{display:grid;grid-template-columns:1fr 1.4fr;gap:16px;align-items:start;}
+  .tdp-datebox{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:14px;}
+  .tdp-datebox .row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted);}
+  .tdp-datebox .row b{color:var(--ink-soft);font-weight:700;}
+  .tdp-datebox .row .mono{font-family:var(--f-mono);font-size:12.5px;color:var(--ink);}
+  .tdp-srcbox{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-sm);}
+  .tdp-srcbox h3{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:14px;letter-spacing:.02em;}
+  .tdp-srclist{display:flex;flex-direction:column;gap:10px;}
+  .tdp-srclink{display:flex;align-items:center;gap:11px;font-size:13.5px;color:var(--ink-soft);padding:10px 13px;border:1px solid var(--line);border-radius:10px;transition:border-color .15s,background .15s;}
+  .tdp-srclink:hover{border-color:var(--brand);background:var(--brand-tint);color:var(--brand-ink);}
+  .tdp-srclink .tag{font-family:var(--f-jp);font-weight:700;font-size:11px;color:var(--brand-ink);background:var(--brand-tint);padding:3px 9px;border-radius:6px;flex:none;}
+  .tdp-srclink .ext{margin-left:auto;color:var(--faint);}
+
+  /* ===== FAQ ===== */
+  .tdp-faq{max-width:860px;}
+  .tdp-faqitem{border-bottom:1px solid var(--line);}
+  .tdp-faqitem:first-child{border-top:1px solid var(--line);}
+  .tdp-faqq{width:100%;text-align:left;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:22px 6px;font-family:var(--f-jp);font-weight:700;font-size:15.5px;color:var(--ink);}
+  .tdp-faqq .qm{font-family:var(--f-latin);color:var(--brand);font-size:16px;flex:none;}
+  .tdp-faqq .ind{margin-left:auto;flex:none;width:24px;height:24px;display:grid;place-items:center;transition:transform .3s var(--ease);color:var(--muted);}
+  .tdp-faqq .ind svg{width:18px;height:18px;}
+  .tdp-faqitem[aria-expanded="true"] .tdp-faqq .ind{transform:rotate(45deg);color:var(--brand);}
+  .tdp-faqa{max-height:0;overflow:hidden;transition:max-height .35s var(--ease);}
+  .tdp-faqa-in{padding:0 6px 24px 44px;color:var(--ink-soft);font-size:14px;line-height:1.8;}
+
+  /* ===== related tool cards ===== */
+  .tdp-toolcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .tdp-toolcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:transform .2s var(--ease),box-shadow .2s,border-color .2s;}
+  .tdp-toolcard:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:color-mix(in srgb,var(--brand) 26%,var(--line));}
+  .tdp-toolcard .th{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+  .tdp-toolcard .th .b{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--brand-tint);color:var(--brand-ink);font-family:var(--f-latin);font-weight:700;font-size:16px;flex:none;}
+  .tdp-toolcard .th .nm{font-family:var(--f-jp);font-weight:700;font-size:15px;color:var(--ink);line-height:1.25;}
+  .tdp-toolcard .th .ct{font-size:11.5px;color:var(--muted);}
+  .tdp-toolcard .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+  .tdp-toolcard .plats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+  .tdp-toolcard .plat{font-family:var(--f-jp);font-weight:600;font-size:11px;color:var(--ink-soft);background:var(--surface-2);border:1px solid var(--line);border-radius:7px;padding:3px 9px;}
+  .tdp-toolcard .tact{margin-top:auto;display:flex;align-items:center;gap:14px;padding-top:14px;border-top:1px solid var(--line);}
+  .tdp-toolcard .tact a{font-family:var(--f-jp);font-weight:700;font-size:13px;color:var(--brand-ink);}
+  .tdp-toolcard .tact a:hover{text-decoration:underline;text-underline-offset:3px;}
+  .tdp-toolcard .tact a.ghost{color:var(--muted);margin-left:auto;}
+
+  /* ===== next reads ===== */
+  .tdp-reads{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .tdp-read{display:flex;align-items:flex-start;gap:13px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;transition:border-color .15s,transform .15s,box-shadow .15s;}
+  .tdp-read:hover{border-color:var(--brand);transform:translateY(-1px);box-shadow:var(--shadow-md);}
+  .tdp-read .ar{font-family:var(--f-latin);color:var(--brand);font-weight:700;flex:none;margin-top:1px;}
+  .tdp-read .rt{font-family:var(--f-jp);font-weight:700;font-size:14px;color:var(--ink);line-height:1.4;}
+  .tdp-read .rd{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.6;}
+
+  /* ===== conditions tag links ===== */
+  .tdp-finder{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px 34px 28px;}
+  .tdp-finder h2{font-size:clamp(20px,2.4vw,25px);margin-bottom:6px;}
+  .tdp-finder .lead{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .tdp-taglinks{display:flex;flex-wrap:wrap;gap:10px;}
+  .tdp-taglink{font-family:var(--f-jp);font-weight:600;font-size:13.5px;padding:9px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-soft);display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:transform .16s var(--ease),background .16s,border-color .16s,color .16s;}
+  .tdp-taglink:hover{border-color:var(--brand);color:var(--brand-ink);background:var(--brand-tint);transform:translateY(-1px);}
+  .tdp-taglink .ld{width:7px;height:7px;border-radius:50%;background:var(--brand);flex:none;}
+
+  .tdp-pagenav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:28px 0 4px;}
+  /* btn フォールバック（既存サイトに .btn が無い場合のみ意味を持つ。既存があればそちらが優先） */
+  .tdp-x .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-jp);font-weight:700;font-size:15px;padding:11px 20px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:transform .18s var(--ease),background .18s;white-space:nowrap;}
+  .tdp-x .btn .arr{transition:transform .2s var(--ease);}
+  .tdp-x .btn:hover .arr{transform:translateX(3px);}
+  .tdp-x .btn-primary{background:var(--brand);color:#fff;box-shadow:0 6px 18px -6px color-mix(in srgb,var(--brand) 65%,transparent);}
+  .tdp-x .btn-primary:hover{background:#3A2FCB;transform:translateY(-1px);}
+  .tdp-x .btn-ghost{background:var(--surface);color:var(--ink);border-color:var(--line-strong);}
+
+  /* reveal */
+  @media (prefers-reduced-motion:no-preference){
+    .tdp-x .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+    .tdp-x .reveal.in{opacity:1;transform:none;}
+    .tdp-x .reveal[data-stagger]>*{opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease),transform .5s var(--ease);}
+    .tdp-x .reveal[data-stagger].in>*{opacity:1;transform:none;}
+    .tdp-x .reveal[data-stagger].in>*:nth-child(1){transition-delay:.04s;}
+    .tdp-x .reveal[data-stagger].in>*:nth-child(2){transition-delay:.09s;}
+    .tdp-x .reveal[data-stagger].in>*:nth-child(3){transition-delay:.14s;}
+    .tdp-x .reveal[data-stagger].in>*:nth-child(4){transition-delay:.19s;}
+    .tdp-x .reveal[data-stagger].in>*:nth-child(5){transition-delay:.24s;}
+    .tdp-x .reveal[data-stagger].in>*:nth-child(6){transition-delay:.29s;}
+  }
+  @media (prefers-reduced-motion:reduce){.tdp-x .reveal,.tdp-x .reveal[data-stagger]>*{opacity:1!important;transform:none!important;}}
+
+  /* responsive */
+  @media (max-width:980px){
+    .tdp-specgrid{grid-template-columns:repeat(2,1fr);}
+    .tdp-specitem:nth-child(2){border-right:none;}
+    .tdp-specitem{border-bottom:1px solid var(--line);}
+    .tdp-infogrid{grid-template-columns:1fr;}
+    .tdp-judge{grid-template-columns:1fr;}
+    .tdp-toolcards{grid-template-columns:1fr;}
+    .tdp-srcgrid{grid-template-columns:1fr;}
+  }
+  @media (max-width:720px){
+    .tdp-sec{padding:46px 0;}
+    .tdp-bullets{grid-template-columns:1fr;}
+    .tdp-checklist{grid-template-columns:1fr;padding:22px 20px;}
+    .tdp-reads{grid-template-columns:1fr;}
+    .tdp-specgrid{grid-template-columns:1fr;}
+    .tdp-specitem{border-right:none;}
+    .tdp-checked{margin-left:0;}
+  }
+</style>
+
+<script>
+  // JSは [data-tdp] 配下のみ操作（既存サイトに干渉しない）
+  (function () {
+    document.querySelectorAll('[data-tdp]').forEach(function (root) {
+      // FAQ 開閉（1つ開くと他は閉じる）
+      var faq = root.querySelector('.tdp-faq');
+      if (faq) {
+        faq.addEventListener('click', function (e) {
+          var btn = (e.target as HTMLElement).closest('.tdp-faqq'); if (!btn) return;
+          var item = btn.closest('.tdp-faqitem'); if (!item) return;
+          var open = item.getAttribute('aria-expanded') === 'true';
+          faq.querySelectorAll('.tdp-faqitem').forEach(function (it) {
+            it.setAttribute('aria-expanded', 'false');
+            var a = it.querySelector('.tdp-faqa') as HTMLElement | null; if (a) a.style.maxHeight = '';
+          });
+          if (!open) {
+            item.setAttribute('aria-expanded', 'true');
+            var a = item.querySelector('.tdp-faqa') as HTMLElement | null; if (a) a.style.maxHeight = a.scrollHeight + 'px';
+          }
+        });
+      }
+      // スクロールで表示アニメ（prefers-reduced-motion 尊重・8秒フェイルセーフ）
+      var reveals = Array.prototype.slice.call(root.querySelectorAll('.reveal'));
+      if (!reveals.length) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) { reveals.forEach(function (el) { el.classList.add('in'); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      reveals.forEach(function (el) { io.observe(el); });
+      setTimeout(function () { reveals.forEach(function (el) { el.classList.add('in'); }); }, 8000);
+    });
+  })();
+</script>

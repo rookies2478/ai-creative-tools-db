@@ -77,7 +77,7 @@ export const generatedImages: GeneratedImage[] = [
     usageNote: '本画像は管理者が各ツールで作成した参考作例サンプルです。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。商用利用条件は公式情報をご確認ください。本記事は法的助言ではありません。',
   },
   {
-    file: '/images/generated/tools/stable-diffusion-sample-image-01.webp',
+    file: '/images/generated/tools/stable-diffusion-reference-visual-01.webp',
     alt: 'AI画像生成サンプル：黄金色の光が差し込む日本の禅庭園。石灯籠、紅葉、砂紋を描いた砂利が印象的な風景。',
     caption: 'AI生成サンプル（参考）。Stable Diffusion本体の出力結果・公式サンプルではありません。FLUX.1-schnell（black-forest-labs）でページ補足用に生成した参考ビジュアルです。生成結果はモデル・設定・タイミングによって変わる場合があります。',
     sampleType: 'reference-visual',

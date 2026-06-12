@@ -36,7 +36,7 @@ function fourStateBadge(val: FourState) {
 
 function commercialUseDetail(val: CommercialUse): { badge: string; badgeCls: string; desc: string } {
   if (val === 'ok')        return { badge: '案内あり', badgeCls: 'bg-emerald-100 text-emerald-800', desc: '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。' };
-  if (val === 'paid-only') return { badge: '要確認',   badgeCls: 'bg-sky-100 text-sky-800',         desc: '有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。' };
+  if (val === 'paid-only') return { badge: '有料プラン向け', badgeCls: 'bg-sky-100 text-sky-800',    desc: '有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。' };
   if (val === 'limited')   return { badge: '要確認',   badgeCls: 'bg-amber-100 text-amber-800',     desc: '用途やプランによって制限がある可能性があります。公式規約をご確認ください。' };
   if (val === 'no')        return { badge: '非対応',   badgeCls: 'bg-red-100 text-red-800',         desc: '商用利用はできない、または推奨されない可能性があります。最新の公式情報をご確認ください。' };
                            return { badge: '要確認',   badgeCls: 'bg-gray-100 text-gray-600',       desc: '公式情報の確認が必要です。最新情報は公式サイトをご確認ください。' };

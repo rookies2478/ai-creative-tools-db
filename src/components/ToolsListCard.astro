@@ -46,7 +46,10 @@ function freeLabel(v: unknown): string {
   return '要確認';
 }
 function commercialLabel(v: unknown): string {
-  return v === 'ok' ? '案内あり' : '要確認';
+  if (v === 'ok')        return '案内あり';
+  if (v === 'paid-only') return '有料プラン向け';
+  if (v === 'no')        return '非対応';
+  return '要確認';
 }
 function jaLabel(ui: unknown, prompt: unknown): string {
   if (ui === true) return '対応';
@@ -60,7 +63,7 @@ function wmLabel(v: unknown): string {
   return '要確認';
 }
 function condClass(field: string, val: string): string {
-  if (field === 'commercial') return val === '案内あり' ? 'ok' : 'na';
+  if (field === 'commercial') return val === '案内あり' ? 'ok' : val === '有料プラン向け' ? 'warn' : 'na';
   if (field === 'free') return val === 'あり' ? 'ok' : 'na';
   if (field === 'ja') return val === '対応' ? 'ok' : 'na';
   if (field === 'watermark') {

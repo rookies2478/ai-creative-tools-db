@@ -64,9 +64,9 @@ type TriState = boolean | 'partial' | 'unknown';
 
 function cuInfo(val: CommercialUse): { badge: string; cls: string; dot: string; desc: string } {
   if (val === 'ok')        return { badge: '案内あり', cls: 'ok',   dot: 'ok',   desc: '公式情報では商用利用可能とされています。最新情報は公式サイトをご確認ください。' };
-  if (val === 'paid-only') return { badge: '有料向け', cls: 'warn', dot: 'warn', desc: '有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。' };
-  if (val === 'limited')   return { badge: '条件あり', cls: 'warn', dot: 'warn', desc: '用途やプランによって制限がある可能性があります。公式規約をご確認ください。' };
-  if (val === 'no')        return { badge: '非推奨',   cls: 'na',   dot: 'na',   desc: '商用利用はできない、または推奨されない可能性があります。最新の公式情報をご確認ください。' };
+  if (val === 'paid-only') return { badge: '有料プラン向け', cls: 'warn', dot: 'warn', desc: '有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。' };
+  if (val === 'limited')   return { badge: '条件あり',      cls: 'warn', dot: 'warn', desc: '用途やプランによって制限がある可能性があります。公式規約をご確認ください。' };
+  if (val === 'no')        return { badge: '非対応',         cls: 'na',   dot: 'na',   desc: '商用利用はできない、または商用利用に対応していない可能性があります。最新の公式情報をご確認ください。' };
   return                          { badge: '要確認',   cls: 'warn', dot: 'warn', desc: '公式情報の確認が必要です。利用前に公式サイトをご確認ください。' };
 }
 
@@ -140,6 +140,33 @@ type FeatureKey = typeof featureOrder[number];
 const trueFeatures: string[] = data.features
   ? featureOrder.filter(k => data.features![k as FeatureKey] === true).map(k => featureLabels[k]).slice(0, 8)
   : [];
+
+type CapFit = typeof data.capabilityFit;
+type CapKey = 'imageGeneration' | 'videoGeneration' | 'videoEditing' | 'avatarVideo' | 'textToImage' | 'imageToImage' | 'textToVideo' | 'imageToVideo';
+const capItems: { key: CapKey; label: string }[] = [
+  { key: 'imageGeneration', label: '画像生成' },
+  { key: 'videoGeneration', label: '動画生成' },
+  { key: 'videoEditing', label: '動画編集' },
+  { key: 'textToImage', label: 'テキスト→画像' },
+  { key: 'imageToImage', label: '画像→画像' },
+  { key: 'textToVideo', label: 'テキスト→動画' },
+  { key: 'imageToVideo', label: '画像→動画' },
+  { key: 'avatarVideo', label: 'アバター動画' },
+];
+
+function capCls(val: boolean | undefined): string {
+  if (val === true) return 'ok';
+  if (val === false) return 'na';
+  return 'unk';
+}
+function capVal(val: boolean | undefined): string {
+  if (val === true) return 'あり';
+  if (val === false) return 'なし';
+  return '—';
+}
+function styleCtrlLabel(v: string): string {
+  return v === 'high' ? '高' : v === 'medium' ? '中' : '低';
+}
 ---
 
 <BaseLayout
@@ -489,6 +516,239 @@ const trueFeatures: string[] = data.features
         </p>
       </div>
     </section>
+
+    <!-- ===== 向いている人・向いていない人 ===== -->
+    {(data.bestFor?.length > 0 || data.notBestFor?.length > 0) && (
+      <section class="td-section" aria-label="向いている人・向いていない人">
+        <h2 class="td-section-h">このツールが向いている人・向いていない人</h2>
+        <div class="td-whofor-grid">
+          {data.bestFor && data.bestFor.length > 0 && (
+            <div class="td-whofor-card ok">
+              <div class="wf-head">
+                <span class="wf-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="15" height="15" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <span>向いている用途・人</span>
+              </div>
+              <ul>
+                {data.bestFor.map((item: string) => (
+                  <li><span class="wf-dot ok"></span><span>{item}</span></li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {data.notBestFor && data.notBestFor.length > 0 && (
+            <div class="td-whofor-card na">
+              <div class="wf-head">
+                <span class="wf-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="15" height="15" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </span>
+                <span>向いていないケース</span>
+              </div>
+              <ul>
+                {data.notBestFor.map((item: string) => (
+                  <li><span class="wf-dot na"></span><span>{item}</span></li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    <!-- ===== 機能対応マトリクス ===== -->
+    {data.capabilityFit && (
+      <section class="td-section" aria-label="機能対応">
+        <h2 class="td-section-h">機能対応まとめ</h2>
+        <div class="td-cap-grid">
+          {capItems.map(({ key, label }) => (
+            <div class={`td-cap-item ${capCls(data.capabilityFit![key])}`}>
+              <span class="cap-dot"></span>
+              <span class="cap-label">{label}</span>
+              <span class="cap-val">{capVal(data.capabilityFit![key])}</span>
+            </div>
+          ))}
+          {data.capabilityFit.styleControl && data.capabilityFit.styleControl !== 'unknown' && (
+            <div class="td-cap-item info">
+              <span class="cap-dot"></span>
+              <span class="cap-label">スタイル制御</span>
+              <span class="cap-val">{styleCtrlLabel(data.capabilityFit.styleControl)}</span>
+            </div>
+          )}
+          {data.capabilityFit.consistencyControl && data.capabilityFit.consistencyControl !== 'unknown' && (
+            <div class="td-cap-item info">
+              <span class="cap-dot"></span>
+              <span class="cap-label">一貫性制御</span>
+              <span class="cap-val">{styleCtrlLabel(data.capabilityFit.consistencyControl)}</span>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    <!-- ===== 料金・無料枠の判断ポイント ===== -->
+    {data.pricingDecision && (
+      <section class="td-section" aria-label="料金・無料枠の判断ポイント">
+        <h2 class="td-section-h">無料枠・透かし・料金の判断ポイント</h2>
+        <div class="td-pd-grid">
+          {data.pricingDecision.hasFreePlan && (
+            <div class="td-pd-item">
+              <span class="pd-label">無料プラン</span>
+              <span class={`td-badge ${data.pricingDecision.hasFreePlan === 'yes' ? 'ok' : data.pricingDecision.hasFreePlan === 'limited' ? 'warn' : 'na'}`}>
+                {data.pricingDecision.hasFreePlan === 'yes' ? 'あり' : data.pricingDecision.hasFreePlan === 'limited' ? '限定的' : data.pricingDecision.hasFreePlan === 'no' ? 'なし' : '要確認'}
+              </span>
+              {data.pricingDecision.freePlanLimitNote && (
+                <p class="pd-note">{data.pricingDecision.freePlanLimitNote}</p>
+              )}
+            </div>
+          )}
+          {data.pricingDecision.watermarkStatus && (
+            <div class="td-pd-item">
+              <span class="pd-label">透かし</span>
+              <span class={`td-badge ${data.pricingDecision.watermarkStatus === 'none' ? 'ok' : data.pricingDecision.watermarkStatus === 'always' ? 'na' : 'warn'}`}>
+                {data.pricingDecision.watermarkStatus === 'free-only' ? '無料プランのみ' : data.pricingDecision.watermarkStatus === 'paid-only' ? '有料プランのみ' : data.pricingDecision.watermarkStatus === 'none' ? 'なし' : data.pricingDecision.watermarkStatus === 'always' ? '常時あり' : '要確認'}
+              </span>
+            </div>
+          )}
+          {data.pricingDecision.creditSystem === true && (
+            <div class="td-pd-item">
+              <span class="pd-label">クレジット制</span>
+              <span class="td-badge warn">あり（消費量注意）</span>
+            </div>
+          )}
+          {data.pricingDecision.pricingNote && (
+            <div class="td-pd-item wide">
+              <span class="pd-label">料金メモ</span>
+              <p class="pd-note">{data.pricingDecision.pricingNote}</p>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    <!-- ===== 商用利用・権利まわりの確認ポイント ===== -->
+    {data.usagePolicy && (
+      <section class="td-section" aria-label="商用利用・権利まわり">
+        <h2 class="td-section-h">商用利用・権利まわりの確認ポイント</h2>
+        <div class="td-notice" style="margin-bottom:20px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex:none;">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+          </svg>
+          <p>
+            <b>免責事項：</b>以下の情報は公式情報をもとにした一般的な整理です。法的助言ではありません。商用利用前には必ず最新の公式規約をご確認ください。
+          </p>
+        </div>
+        <div class="td-up-grid">
+          {data.usagePolicy.commercialUseStatus && (
+            <div class="td-up-item wide">
+              <span class="up-label">商用利用ステータス</span>
+              <span class={`td-badge ${data.usagePolicy.commercialUseStatus === 'ok' ? 'ok' : data.usagePolicy.commercialUseStatus === 'no' ? 'na' : 'warn'}`}>
+                {data.usagePolicy.commercialUseStatus === 'ok' ? '可（全プラン）' : data.usagePolicy.commercialUseStatus === 'paid-only' ? '有料プランのみ' : data.usagePolicy.commercialUseStatus === 'limited' ? '条件あり' : data.usagePolicy.commercialUseStatus === 'no' ? '不可' : '要確認'}
+              </span>
+              {data.usagePolicy.commercialUseByPlan && (
+                <div class="up-plan-grid">
+                  {data.usagePolicy.commercialUseByPlan.free && (
+                    <div class="up-plan-row">
+                      <span class="up-plan-label">無料プラン：</span>
+                      <span class="up-plan-val">{data.usagePolicy.commercialUseByPlan.free}</span>
+                    </div>
+                  )}
+                  {data.usagePolicy.commercialUseByPlan.paid && (
+                    <div class="up-plan-row">
+                      <span class="up-plan-label">有料プラン：</span>
+                      <span class="up-plan-val">{data.usagePolicy.commercialUseByPlan.paid}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+              {data.usagePolicy.commercialUseNote && (
+                <p class="up-note">{data.usagePolicy.commercialUseNote}</p>
+              )}
+            </div>
+          )}
+          {data.usagePolicy.inputMaterialRisk && (
+            <div class="td-up-item">
+              <span class="up-label">入力素材のリスク</span>
+              <span class={`td-badge ${data.usagePolicy.inputMaterialRisk === 'low' ? 'ok' : data.usagePolicy.inputMaterialRisk === 'high' ? 'na' : 'warn'}`}>
+                {data.usagePolicy.inputMaterialRisk === 'low' ? '低' : data.usagePolicy.inputMaterialRisk === 'high' ? '高（要確認）' : data.usagePolicy.inputMaterialRisk === 'medium' ? '中（要確認）' : '要確認'}
+              </span>
+              {data.usagePolicy.inputMaterialNote && (
+                <p class="up-note">{data.usagePolicy.inputMaterialNote}</p>
+              )}
+            </div>
+          )}
+          {data.usagePolicy.peopleLogoRisk && (
+            <div class="td-up-item">
+              <span class="up-label">人物・ロゴ使用リスク</span>
+              <span class={`td-badge ${data.usagePolicy.peopleLogoRisk === 'low' ? 'ok' : data.usagePolicy.peopleLogoRisk === 'high' ? 'na' : 'warn'}`}>
+                {data.usagePolicy.peopleLogoRisk === 'low' ? '低' : data.usagePolicy.peopleLogoRisk === 'high' ? '高（別途確認必要）' : data.usagePolicy.peopleLogoRisk === 'medium' ? '中（要確認）' : '要確認'}
+              </span>
+              {data.usagePolicy.peopleLogoNote && (
+                <p class="up-note">{data.usagePolicy.peopleLogoNote}</p>
+              )}
+            </div>
+          )}
+          {data.usagePolicy.rightsStatus && (
+            <div class="td-up-item">
+              <span class="up-label">生成物の権利帰属</span>
+              <span class={`td-badge ${data.usagePolicy.rightsStatus === 'user-owns' ? 'ok' : 'warn'}`}>
+                {data.usagePolicy.rightsStatus === 'user-owns' ? 'ユーザー保持（公式情報）' : data.usagePolicy.rightsStatus === 'platform-owns' ? 'プラットフォーム' : data.usagePolicy.rightsStatus === 'shared' ? '共有' : '要確認'}
+              </span>
+              {data.usagePolicy.rightsNote && (
+                <p class="up-note">{data.usagePolicy.rightsNote}</p>
+              )}
+            </div>
+          )}
+          {(data.usagePolicy.termsUrl || data.usagePolicy.officialSourceUrl) && (
+            <div class="td-up-item wide">
+              <span class="up-label">公式確認先</span>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+                {data.usagePolicy.officialSourceUrl && (
+                  <a href={data.usagePolicy.officialSourceUrl} target="_blank" rel="noopener noreferrer" class="td-source-btn">
+                    商用利用ガイド ↗
+                  </a>
+                )}
+                {data.usagePolicy.termsUrl && data.usagePolicy.termsUrl !== data.usagePolicy.officialSourceUrl && (
+                  <a href={data.usagePolicy.termsUrl} target="_blank" rel="noopener noreferrer" class="td-source-btn ghost">
+                    利用規約 ↗
+                  </a>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    <!-- ===== 公式サイト確認前チェックリスト ===== -->
+    {data.conversionGuide?.beforeClickChecklist && data.conversionGuide.beforeClickChecklist.length > 0 && (
+      <section class="td-section td-checklist-section" aria-label="公式確認前チェックリスト">
+        <h2 class="td-section-h">公式サイトで確認するポイント</h2>
+        <p class="td-checklist-lead">
+          {data.conversionGuide.primaryCtaReason ?? `${data.name}の最新条件は公式サイトで確認することを推奨します。`}
+        </p>
+        <ul class="td-checklist">
+          {data.conversionGuide.beforeClickChecklist.map((item: string) => (
+            <li>
+              <span class="cl-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14" height="14" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="td-checklist-cta">
+          <a href={data.officialUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            {data.conversionGuide.primaryCtaLabel ?? `${data.name}の公式サイトで最新条件を確認する`} <span class="arr">↗</span>
+          </a>
+          {data.usagePolicy?.termsUrl && (
+            <a href={data.usagePolicy.termsUrl} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+              利用規約を確認する <span class="arr">↗</span>
+            </a>
+          )}
+        </div>
+      </section>
+    )}
 
     <!-- ===== Markdown本文 ===== -->
     <section class="td-section" aria-label="詳細説明">

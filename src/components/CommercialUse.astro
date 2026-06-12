@@ -44,7 +44,7 @@ const STATUS: Record<Status, { label: string; code: string }> = {
   ok:      { label: '公式案内あり',  code: 'ok' },
   paid:    { label: '有料プラン向け', code: 'paid-only' },
   limited: { label: '条件あり',      code: 'limited' },
-  no:      { label: '不可の可能性',  code: 'no' },
+  no:      { label: '非対応',        code: 'no' },
   unknown: { label: '要確認',        code: 'unknown' },
 };
 
@@ -171,7 +171,7 @@ const filterChips: { st: Status | 'all'; label: string }[] = [
       <div class="status-card ok"><span class="st ok"><span class="d"></span>公式案内あり <small>ok</small></span><p>公式規約で商用利用が案内されています。ただしプラン・用途・生成内容によって条件が変わる場合があります。</p></div>
       <div class="status-card paid"><span class="st paid"><span class="d"></span>有料プラン向け <small>paid-only</small></span><p>有料プランで商用利用が案内されています。無料プランでは商用利用に制限がある場合があります。</p></div>
       <div class="status-card limited"><span class="st limited"><span class="d"></span>条件あり <small>limited</small></span><p>一定の条件のもとで商用利用が案内されています。用途・生成内容・プランによって異なります。</p></div>
-      <div class="status-card no"><span class="st no"><span class="d"></span>不可の可能性 <small>no</small></span><p>公式規約で商用利用が禁止または制限されている、または不可の可能性があるツールです。</p></div>
+      <div class="status-card no"><span class="st no"><span class="d"></span>非対応 <small>no</small></span><p>公式規約で商用利用が禁止または制限されている、または非対応の可能性があるツールです。</p></div>
       <div class="status-card unknown"><span class="st unknown"><span class="d"></span>要確認 <small>unknown</small></span><p>公式情報から商用利用条件を確認できていません。利用前に必ず公式規約をご確認ください。</p></div>
     </div>
   </section>

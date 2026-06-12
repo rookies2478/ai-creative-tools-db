@@ -356,6 +356,120 @@
   font-size: 12px; color: var(--faint); line-height: 1.75;
 }
 
+/* ---------- Who for / not for grid ---------- */
+.td-whofor-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 4px;
+}
+.td-whofor-card {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px 22px; background: var(--surface);
+}
+.td-whofor-card.ok { border-left: 3px solid var(--ok); }
+.td-whofor-card.na { border-left: 3px solid var(--faint); }
+.wf-head {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--f-jp); font-weight: 700; font-size: 13.5px;
+  color: var(--ink); margin-bottom: 12px;
+}
+.wf-icon {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: grid; place-items: center; flex: none;
+}
+.td-whofor-card.ok .wf-icon { background: var(--ok-tint); color: var(--ok); }
+.td-whofor-card.na .wf-icon { background: var(--surface-2); color: var(--faint); }
+.td-whofor-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+.td-whofor-card li { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+.wf-dot { width: 6px; height: 6px; border-radius: 50%; flex: none; margin-top: 5px; }
+.wf-dot.ok { background: var(--ok); }
+.wf-dot.na { background: var(--faint); }
+
+/* ---------- Capability fit grid ---------- */
+.td-cap-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 4px;
+}
+.td-cap-item {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 10px 14px; background: var(--surface); font-size: 12.5px;
+}
+.td-cap-item.ok { background: var(--ok-tint); border-color: color-mix(in srgb,var(--ok) 30%,var(--line)); }
+.td-cap-item.na { background: var(--surface-2); border-color: var(--line); }
+.td-cap-item.unk { background: var(--surface-2); border-color: var(--line); }
+.td-cap-item.info { background: var(--brand-tint); border-color: color-mix(in srgb,var(--brand) 25%,var(--line)); }
+.cap-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.td-cap-item.ok .cap-dot { background: var(--ok); }
+.td-cap-item.na .cap-dot { background: var(--faint); }
+.td-cap-item.unk .cap-dot { background: var(--faint); }
+.td-cap-item.info .cap-dot { background: var(--brand); }
+.cap-label { flex: 1; color: var(--ink-soft); font-weight: 500; }
+.cap-val { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); }
+.td-cap-item.ok .cap-val { color: var(--ok); font-weight: 700; }
+
+/* ---------- Pricing decision grid ---------- */
+.td-pd-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 4px;
+}
+.td-pd-item {
+  display: flex; flex-direction: column; gap: 6px;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px 16px; background: var(--surface);
+}
+.td-pd-item.wide { grid-column: 1 / -1; }
+.pd-label { font-size: 11.5px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.pd-note { font-size: 12.5px; color: var(--ink-soft); line-height: 1.65; margin-top: 4px; }
+
+/* ---------- Usage policy grid ---------- */
+.td-up-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 4px;
+}
+.td-up-item {
+  display: flex; flex-direction: column; gap: 6px;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px 16px; background: var(--surface);
+}
+.td-up-item.wide { grid-column: 1 / -1; }
+.up-label { font-size: 11.5px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.up-note { font-size: 12.5px; color: var(--ink-soft); line-height: 1.65; margin-top: 4px; }
+.up-plan-grid { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
+.up-plan-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; line-height: 1.55; }
+.up-plan-label { font-weight: 600; color: var(--muted); white-space: nowrap; }
+.up-plan-val { color: var(--ink-soft); }
+.td-source-btn {
+  display: inline-flex; align-items: center;
+  font-family: var(--f-jp); font-weight: 700; font-size: 12.5px;
+  color: var(--brand-ink); background: var(--brand-tint);
+  padding: 7px 14px; border-radius: 999px; text-decoration: none;
+  border: 1px solid color-mix(in srgb,var(--brand) 25%,var(--line));
+  transition: background .15s, color .15s;
+}
+.td-source-btn:hover { background: var(--brand); color: var(--on-brand); }
+.td-source-btn.ghost {
+  background: var(--surface); color: var(--ink-soft);
+  border-color: var(--line-strong);
+}
+.td-source-btn.ghost:hover { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+
+/* ---------- Before-click checklist ---------- */
+.td-checklist-section {
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); padding: 28px 32px;
+}
+.td-checklist-lead { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 18px; }
+.td-checklist {
+  list-style: none; padding: 0; margin: 0 0 24px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.td-checklist li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13.5px; color: var(--ink-soft); line-height: 1.6;
+}
+.cl-icon {
+  width: 22px; height: 22px; border-radius: 6px;
+  background: var(--brand-tint); color: var(--brand-ink);
+  display: grid; place-items: center; flex: none; margin-top: 1px;
+}
+.td-checklist-cta { display: flex; flex-wrap: wrap; gap: 10px; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
   .td-info-grid { grid-template-columns: 1fr; }
@@ -364,4 +478,10 @@
   .td-nextread-grid { grid-template-columns: 1fr; }
   .td-hero-stats { gap: 8px; }
   .td-hstat { font-size: 12px; padding: 8px 12px; }
+  .td-whofor-grid { grid-template-columns: 1fr; }
+  .td-up-grid { grid-template-columns: 1fr; }
+  .td-up-item.wide { grid-column: auto; }
+  .td-pd-grid { grid-template-columns: 1fr; }
+  .td-pd-item.wide { grid-column: auto; }
+  .td-checklist-section { padding: 20px 18px; }
 }

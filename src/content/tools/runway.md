@@ -57,6 +57,56 @@ notFor:
   - "無料枠だけで継続利用したい人（クレジットは初回のみで更新なし）"
   - "日本語UIが必須の人（英語インターフェースのみです）"
   - "商用案件に公式規約確認なく使いたい人（利用前に公式利用規約の確認が必要です）"
+notBestFor:
+  - "長尺動画を細かく編集したい人（映像編集ツールとしての機能は限定的）"
+  - "毎回同じ人物・構図・動きを完全に再現したい人（AI生成の再現性に限界あり）"
+  - "低コストで大量生成したい人（クレジット消費量が多い）"
+difficulty: "intermediate"
+pricingDecision:
+  hasFreePlan: "limited"
+  freePlanLimitNote: "125クレジット（初回のみ・更新なし）。透かしあり。継続利用には有料プランが必要。"
+  watermarkStatus: "free-only"
+  creditSystem: true
+  paidPlanRequiredForExport: false
+  pricingNote: "Standard $12/月〜（年払い）で月625クレジット程度。クレジット消費量は動画の長さ・解像度によって変動。最新プランは公式サイトで確認推奨。"
+usagePolicy:
+  commercialUseStatus: "ok"
+  commercialUseByPlan:
+    free: "商用利用可とされているが、透かしありのため実用上の制約あり"
+    paid: "商用利用可とされている（公式ヘルプ）"
+    enterprise: "要確認"
+  commercialUseNote: "公式ヘルプによると全プランで商用利用を制限していないとされているが、第三者権利・コンテンツ内容・規約変更によって制限される場合あり。"
+  rightsStatus: "user-owns"
+  rightsNote: "公式情報上、生成コンテンツの所有権はユーザーが保持するとされている。クレジット表記も不要とされているが、最新規約を確認すること。"
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "アップロードした画像・動画素材の権利関係はユーザーが確認する必要あり。第三者の著作物を含む場合は別途権利確認が必要。"
+  peopleLogoRisk: "high"
+  peopleLogoNote: "実在の人物・著名人・ブランドロゴ・第三者の著作物を含む生成物は、肖像権・商標権・著作権の観点から別途確認が必要。本記事は法的助言ではない。"
+  creditRequiredStatus: "not-required"
+  creditRequiredNote: "公式情報上、Runwayへのクレジット表記は不要とされているが、最新規約での確認を推奨。"
+  officialSourceUrl: "https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes"
+  termsUrl: "https://runwayml.com/terms-of-use/"
+  lastReviewed: "2026-06-05"
+capabilityFit:
+  imageGeneration: false
+  videoGeneration: true
+  videoEditing: true
+  avatarVideo: false
+  textToImage: false
+  imageToImage: false
+  textToVideo: true
+  imageToVideo: true
+  styleControl: "medium"
+  consistencyControl: "low"
+conversionGuide:
+  primaryCtaLabel: "無料枠・透かし・商用利用条件を公式サイトで確認する"
+  primaryCtaReason: "プラン・クレジット・透かし条件は変更される場合がある。実務利用前に最新情報を確認することを推奨。"
+  beforeClickChecklist:
+    - "無料プランの125クレジットは初回のみで更新なし。継続利用には有料プランが必要か確認したか？"
+    - "無料プランでは生成動画に透かしが付く場合がある。用途に支障がないか確認したか？"
+    - "商用案件に使う場合、公式利用規約・利用権ヘルプを最新版で確認したか？"
+    - "生成に使う素材（画像・動画）に第三者の権利が含まれていないか確認したか？"
+    - "人物・著名人・ブランドロゴを含む生成物を使用する場合、権利関係を別途確認したか？"
 reviewed:
   pricing: "2026-05-05"
   terms: "2026-05-05"

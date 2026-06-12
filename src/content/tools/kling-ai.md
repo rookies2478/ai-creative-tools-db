@@ -53,6 +53,56 @@ notFor:
   - "商用案件に使う前に規約確認を省略したい人（公式利用規約の確認が必要です）"
   - "透かしなしで無料出力を前提にしたい人（無料プランでは透かしが付く場合があります）"
   - "日本語UIのみで完結させたい人（現時点でネイティブ対応ではない場合があります）"
+notBestFor:
+  - "Runwayの多機能な映像編集ツール群も同時に必要な人（Kling AIはシンプルな動画生成特化）"
+  - "無料枠を商用案件に使いたい人（無料プランは非商用利用のみとされている）"
+  - "毎回まったく同じシーンを再現したい人（AI生成の再現性に限界あり）"
+difficulty: "beginner"
+pricingDecision:
+  hasFreePlan: "limited"
+  freePlanLimitNote: "1日66クレジット程度（翌日繰越なし・透かしあり・商用利用不可）。無料継続利用は可能だが商用には有料が必要。"
+  watermarkStatus: "free-only"
+  creditSystem: true
+  paidPlanRequiredForExport: false
+  pricingNote: "Standard $6.99/月〜。クレジット繰越なし・生成失敗時の返金なしに注意。最新プランは公式サイトで確認推奨。"
+usagePolicy:
+  commercialUseStatus: "paid-only"
+  commercialUseByPlan:
+    free: "個人・非商用利用のみとされている"
+    paid: "Standard以上で商用利用可とされている（公式規約2026年4月21日付）"
+    enterprise: "要確認"
+  commercialUseNote: "無料プランは商用利用不可とされている。有料プランでも第三者権利・コンテンツ内容によって制限がある場合あり。公式規約への直接アクセスはHTTP 446により確認困難なため第三者情報を参照。"
+  rightsStatus: "unknown"
+  rightsNote: "生成物の権利帰属は公式規約で確認が必要。最新の公式利用規約を参照すること。"
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "アップロードする画像・動画素材の権利関係はユーザーが確認する必要あり。"
+  peopleLogoRisk: "high"
+  peopleLogoNote: "実在の人物・著名人・ブランドロゴを含む動画は肖像権・商標権等の観点から別途確認が必要。本記事は法的助言ではない。"
+  creditRequiredStatus: "unknown"
+  creditRequiredNote: "公式規約での明記は確認できていない。最新規約を参照すること。"
+  officialSourceUrl: "https://klingai.com/docs/user-policy"
+  termsUrl: "https://klingai.com/docs/user-policy"
+  lastReviewed: "2026-06-04"
+capabilityFit:
+  imageGeneration: false
+  videoGeneration: true
+  videoEditing: false
+  avatarVideo: false
+  textToImage: false
+  imageToImage: false
+  textToVideo: true
+  imageToVideo: true
+  styleControl: "medium"
+  consistencyControl: "low"
+conversionGuide:
+  primaryCtaLabel: "無料枠・透かし・商用利用条件を公式サイトで確認する"
+  primaryCtaReason: "無料プランの商用利用不可・透かし条件・有料プランの料金は最新公式情報で確認推奨。公式ページはアクセス制限の場合あり。"
+  beforeClickChecklist:
+    - "無料プランは商用利用不可とされているが、用途が非商用であることを確認したか？"
+    - "無料プランには透かしが入る場合がある。用途に支障がないか確認したか？"
+    - "有料プランで商用利用する場合、最新の公式利用規約を確認したか？"
+    - "生成に使う素材（画像・動画）に第三者の権利が含まれていないか確認したか？"
+    - "人物・著名人・ブランドロゴを含む動画を使用する場合、権利関係を別途確認したか？"
 reviewed:
   pricing: "2026-06-04"
   terms: "2026-06-04"

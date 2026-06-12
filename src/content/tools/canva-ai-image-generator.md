@@ -53,6 +53,56 @@ limitations:
   - "無料プランは生成回数に上限あり（変更の可能性あり）"
   - "AI生成画像の商用利用にはAI生成コンテンツであることの明示が条件の場合あり"
   - "専門的な画像生成ツールと比べて表現の自由度が限定的"
+notBestFor:
+  - "高品質なアート・イラスト・写真品質の画像生成をしたい人（専門画像生成ツールの方が向いている）"
+  - "Canva以外のデザインツールで素材を使いたい人"
+  - "動画生成が主目的の人（静止画生成が中心）"
+difficulty: "beginner"
+pricingDecision:
+  hasFreePlan: "limited"
+  freePlanLimitNote: "無料プランで一定回数の生成が可能。回数・条件は変更の可能性あり。"
+  watermarkStatus: "unknown"
+  creditSystem: false
+  paidPlanRequiredForExport: false
+  pricingNote: "Canva Pro $15/月〜（月払い）で生成回数が拡大。透かしの有無は公式情報から未確認。最新条件は公式サイトで確認推奨。"
+usagePolicy:
+  commercialUseStatus: "limited"
+  commercialUseByPlan:
+    free: "商用利用に関する条件あり。AI生成コンテンツであることの明示が条件とされている場合あり。"
+    paid: "商用利用ができる場合があるが、条件はCanvaコンテンツライセンスで確認が必要。"
+    enterprise: "要確認"
+  commercialUseNote: "AI生成画像の商用利用には条件がある場合あり。AI生成コンテンツであることの明示・既存著作物との類似を避けることが条件とされている。"
+  rightsStatus: "unknown"
+  rightsNote: "生成物の権利帰属はCanvaコンテンツライセンスで確認が必要。"
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "Canvaの既存テンプレート・素材を組み合わせて使う場合は各素材のライセンス条件を別途確認すること。"
+  peopleLogoRisk: "high"
+  peopleLogoNote: "実在の人物・著名人・ブランドロゴを含む画像は肖像権・商標権等の観点から別途確認が必要。本記事は法的助言ではない。"
+  creditRequiredStatus: "unknown"
+  creditRequiredNote: "AI生成コンテンツであることの明示が求められる場合がある。Canva公式利用規約を参照すること。"
+  officialSourceUrl: "https://www.canva.com/policies/content-license-agreement/"
+  termsUrl: "https://www.canva.com/policies/terms-of-use/"
+  lastReviewed: "2026-05-24"
+capabilityFit:
+  imageGeneration: true
+  videoGeneration: false
+  videoEditing: false
+  avatarVideo: false
+  textToImage: true
+  imageToImage: false
+  textToVideo: false
+  imageToVideo: false
+  styleControl: "low"
+  consistencyControl: "medium"
+conversionGuide:
+  primaryCtaLabel: "無料枠・透かし・商用利用条件を公式サイトで確認する"
+  primaryCtaReason: "AI生成コンテンツの商用利用条件・透かし有無・無料枠の回数制限を最新公式情報で確認することを推奨。"
+  beforeClickChecklist:
+    - "AI生成画像の商用利用にはAI生成コンテンツであることの明示が条件の場合がある。用途を確認したか？"
+    - "Canvaのテンプレート・素材を組み合わせる場合、各素材のライセンス条件を確認したか？"
+    - "実在の人物・著名人・ブランドロゴを含む画像を使用する場合、権利関係を別途確認したか？"
+    - "商用案件に使う場合、最新のCanvaコンテンツライセンスを確認したか？"
+    - "無料プランの生成回数制限と用途が一致しているか確認したか？"
 reviewed:
   pricing: "2026-05-04"
   terms: "2026-05-04"

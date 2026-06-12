@@ -67,6 +67,56 @@ notFor:
   - "無料プランで商用利用したい人（無料プランは非商用利用限定とされています）"
   - "透かしなしで無料出力を前提にしたい人（無料プランでは透かしが付く場合があります）"
   - "商用案件に利用する前に公式規約確認を省略したい人（最新の利用規約確認が必要です）"
+notBestFor:
+  - "低コストで継続利用したい人（Plus $30/月〜と比較的高コスト）"
+  - "動画の細かい編集・構成調整が必要な人（生成ツールであり編集機能は限定的）"
+  - "日本語UIが必要な人（英語インターフェースのみ）"
+difficulty: "beginner"
+pricingDecision:
+  hasFreePlan: "yes"
+  freePlanLimitNote: "月間クレジット制限あり・非商用利用限定・透かしあり。用途と条件に注意が必要。"
+  watermarkStatus: "free-only"
+  creditSystem: true
+  paidPlanRequiredForExport: false
+  pricingNote: "Plus $30/月〜。商用利用にはPlus以上が必要とされている。クレジット制のため消費量管理が必要。最新プランは公式サイトで確認推奨。"
+usagePolicy:
+  commercialUseStatus: "paid-only"
+  commercialUseByPlan:
+    free: "非商用利用のみ・透かしありとされている"
+    paid: "Web Plus以上でcommercial use allowed・no watermarksと案内されている"
+    enterprise: "要確認"
+  commercialUseNote: "無料プランは非商用利用のみ。商用利用にはPlus以上が必要。第三者権利・コンテンツ内容によって制限がある場合あり。"
+  rightsStatus: "unknown"
+  rightsNote: "生成物の権利帰属は最新の公式利用規約で確認が必要。"
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "アップロードする画像・動画素材の権利関係はユーザーが確認する必要あり。"
+  peopleLogoRisk: "high"
+  peopleLogoNote: "実在の人物・著名人・ブランドロゴを含む動画は肖像権・商標権等の観点から別途確認が必要。本記事は法的助言ではない。"
+  creditRequiredStatus: "unknown"
+  creditRequiredNote: "公式規約での明記は確認できていない。最新規約を参照すること。"
+  officialSourceUrl: "https://lumalabs.ai/pricing"
+  termsUrl: "https://lumalabs.ai/legal/terms-of-service"
+  lastReviewed: "2026-06-05"
+capabilityFit:
+  imageGeneration: false
+  videoGeneration: true
+  videoEditing: false
+  avatarVideo: false
+  textToImage: false
+  imageToImage: false
+  textToVideo: true
+  imageToVideo: true
+  styleControl: "medium"
+  consistencyControl: "low"
+conversionGuide:
+  primaryCtaLabel: "無料枠・透かし・商用利用条件を公式サイトで確認する"
+  primaryCtaReason: "無料プランは非商用利用・透かしあり。商用利用にはPlus以上が必要。最新プランと条件を公式サイトで確認推奨。"
+  beforeClickChecklist:
+    - "無料プランは非商用利用のみ・透かしありとされているが、用途が適合しているか確認したか？"
+    - "商用利用する場合はPlus（$30/月〜）以上が必要とされているが、コストを把握しているか？"
+    - "商用案件に使う場合、最新の公式利用規約を確認したか？"
+    - "生成に使う素材（画像・動画）に第三者の権利が含まれていないか確認したか？"
+    - "人物・著名人・ブランドロゴを含む動画を使用する場合、権利関係を別途確認したか？"
 reviewed:
   pricing: "2026-05-15"
   terms: "2026-05-15"

@@ -124,6 +124,59 @@ const tools = defineCollection({
         ])
       })
     ).optional(),
+
+    notBestFor: z.array(z.string()).optional(),
+
+    difficulty: z.enum(['beginner', 'intermediate', 'advanced', 'unknown']).optional(),
+
+    pricingDecision: z.object({
+      hasFreePlan: z.enum(['yes', 'no', 'limited', 'unknown']).optional(),
+      freePlanLimitNote: z.string().optional(),
+      watermarkStatus: z.enum(['free-only', 'paid-only', 'none', 'always', 'unknown']).optional(),
+      creditSystem: z.boolean().optional(),
+      paidPlanRequiredForExport: z.boolean().optional(),
+      pricingNote: z.string().optional(),
+    }).optional(),
+
+    usagePolicy: z.object({
+      commercialUseStatus: z.enum(['ok', 'paid-only', 'limited', 'no', 'unknown']).optional(),
+      commercialUseByPlan: z.object({
+        free: z.string().optional(),
+        paid: z.string().optional(),
+        enterprise: z.string().optional(),
+      }).optional(),
+      commercialUseNote: z.string().optional(),
+      rightsStatus: z.enum(['user-owns', 'platform-owns', 'shared', 'unknown']).optional(),
+      rightsNote: z.string().optional(),
+      inputMaterialRisk: z.enum(['low', 'medium', 'high', 'unknown']).optional(),
+      inputMaterialNote: z.string().optional(),
+      peopleLogoRisk: z.enum(['low', 'medium', 'high', 'unknown']).optional(),
+      peopleLogoNote: z.string().optional(),
+      creditRequiredStatus: z.enum(['required', 'optional', 'not-required', 'unknown']).optional(),
+      creditRequiredNote: z.string().optional(),
+      officialSourceUrl: z.string().url().optional(),
+      termsUrl: z.string().url().optional(),
+      lastReviewed: z.string().optional(),
+    }).optional(),
+
+    capabilityFit: z.object({
+      imageGeneration: z.boolean().optional(),
+      videoGeneration: z.boolean().optional(),
+      videoEditing: z.boolean().optional(),
+      avatarVideo: z.boolean().optional(),
+      textToImage: z.boolean().optional(),
+      imageToImage: z.boolean().optional(),
+      textToVideo: z.boolean().optional(),
+      imageToVideo: z.boolean().optional(),
+      styleControl: z.enum(['high', 'medium', 'low', 'unknown']).optional(),
+      consistencyControl: z.enum(['high', 'medium', 'low', 'unknown']).optional(),
+    }).optional(),
+
+    conversionGuide: z.object({
+      primaryCtaLabel: z.string().optional(),
+      primaryCtaReason: z.string().optional(),
+      beforeClickChecklist: z.array(z.string()).optional(),
+    }).optional(),
   }),
 });
 

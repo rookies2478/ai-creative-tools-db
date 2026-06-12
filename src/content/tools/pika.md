@@ -54,6 +54,56 @@ notFor:
   - "無料プランで商用利用したい人（無料プランは商用利用不可とされています）"
   - "透かしなしで無料出力を前提にしたい人（無料プランでは透かしが付く場合があります）"
   - "長尺・高解像度の動画を無料で出力したい人（無料枠では制限があります）"
+notBestFor:
+  - "動画の細かい編集・映像合成が必要な人（生成専特化ツール）"
+  - "長尺動画（10秒超）を継続生成したい人（最大10〜25秒程度の短尺向け）"
+  - "日本語プロンプトで細かい画風指定をしたい人（対応状況に限界あり）"
+difficulty: "beginner"
+pricingDecision:
+  hasFreePlan: "limited"
+  freePlanLimitNote: "月80クレジット程度（毎月更新）。ただし商用利用不可・透かしあり。"
+  watermarkStatus: "free-only"
+  creditSystem: true
+  paidPlanRequiredForExport: false
+  pricingNote: "Standard $8/月〜（年払い）で月700クレジット程度。商用利用には有料プランが必要とされている。"
+usagePolicy:
+  commercialUseStatus: "limited"
+  commercialUseByPlan:
+    free: "商用利用不可とされている"
+    paid: "一部プランで商用利用可と案内されているとされているが要確認"
+    enterprise: "要確認"
+  commercialUseNote: "無料プランは商用利用不可。有料プランでも条件が分かれている場合がある。最新の公式利用規約・料金ページで確認が必要。"
+  rightsStatus: "unknown"
+  rightsNote: "生成物の権利帰属は最新の公式利用規約で確認が必要。"
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "アップロードする画像・動画素材の権利関係はユーザーが確認する必要あり。"
+  peopleLogoRisk: "high"
+  peopleLogoNote: "実在の人物・著名人・ブランドロゴを含む動画は肖像権・商標権等の観点から別途確認が必要。本記事は法的助言ではない。"
+  creditRequiredStatus: "unknown"
+  creditRequiredNote: "公式規約での明記は確認できていない。最新規約を参照すること。"
+  officialSourceUrl: "https://pika.art/pricing"
+  termsUrl: "https://pika.art/terms-of-service"
+  lastReviewed: "2026-06-05"
+capabilityFit:
+  imageGeneration: false
+  videoGeneration: true
+  videoEditing: false
+  avatarVideo: false
+  textToImage: false
+  imageToImage: false
+  textToVideo: true
+  imageToVideo: true
+  styleControl: "low"
+  consistencyControl: "low"
+conversionGuide:
+  primaryCtaLabel: "無料枠・透かし・商用利用条件を公式サイトで確認する"
+  primaryCtaReason: "無料プランは商用利用不可・透かしあり。商用利用には有料プランと規約確認が必要。"
+  beforeClickChecklist:
+    - "無料プランは商用利用不可とされているが、用途が非商用であることを確認したか？"
+    - "無料プランには透かしが入る場合がある。用途に支障がないか確認したか？"
+    - "商用利用を予定している場合、有料プランの条件と最新の公式利用規約を確認したか？"
+    - "生成に使う素材（画像・動画）に第三者の権利が含まれていないか確認したか？"
+    - "人物・著名人・ブランドロゴを含む動画を使用する場合、権利関係を別途確認したか？"
 reviewed:
   pricing: "2026-05-24"
   terms: "2026-05-24"

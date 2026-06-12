@@ -56,6 +56,56 @@ useCases:
 limitations:
   - "ベータ機能（β表示）は商用利用対象外"
   - "表現の自由度・スタイルの幅が他ツールより狭い傾向"
+notBestFor:
+  - "スタイルの自由度・独自性の高いアート制作をしたい人（表現範囲がAdobe寄りに限定される傾向）"
+  - "Adobe Creative Cloud以外の制作ツールで使いたい人（他ツールとの連携は限定的）"
+  - "動画生成が主目的の人（静止画生成が中心）"
+difficulty: "beginner"
+pricingDecision:
+  hasFreePlan: "limited"
+  freePlanLimitNote: "無料プランで一定数の生成クレジットあり。クレジット上限後はプロモ（可視透かし）付きに切り替わる場合がある。"
+  watermarkStatus: "free-only"
+  creditSystem: true
+  paidPlanRequiredForExport: false
+  pricingNote: "Firefly Standard $9.99/月〜。Creative Cloud All Appsプランに含まれる場合あり。クレジット上限後の透かし条件は最新プランで確認推奨。"
+usagePolicy:
+  commercialUseStatus: "paid-only"
+  commercialUseByPlan:
+    free: "商用利用に関する条件はプランや用途によって異なる。クレジット切れ後のPromotion（透かし）出力は商用利用不可の場合あり。"
+    paid: "商用利用が案内されている（Adobe生成AIユーザーガイドライン）。ベータ機能（β表示）は対象外とされている。"
+    enterprise: "Creative Cloud for enterpriseで別途条件あり"
+  commercialUseNote: "商用利用を想定した設計とされているが、ベータ機能は対象外。第三者素材・類似著作物は別途確認が必要。"
+  rightsStatus: "user-owns"
+  rightsNote: "Adobe生成AIユーザーガイドラインでは、ユーザーが生成コンテンツの権利を保持するとされている。最新ガイドラインを確認すること。"
+  inputMaterialRisk: "low"
+  inputMaterialNote: "Fireflyは権利処理済み素材・パブリックドメインを学習データとして使用しているとされているため、他ツールより入力リスクは低いとされる。ただし最新情報は公式で確認推奨。"
+  peopleLogoRisk: "high"
+  peopleLogoNote: "実在の人物・著名人・ブランドロゴを含む画像は肖像権・商標権等の観点から別途確認が必要。本記事は法的助言ではない。"
+  creditRequiredStatus: "not-required"
+  creditRequiredNote: "Adobe生成AIユーザーガイドラインではクレジット表記は必須とされていないが、用途に応じて検討すること。"
+  officialSourceUrl: "https://www.adobe.com/legal/licenses-terms/adobe-gen-ai-user-guidelines.html"
+  termsUrl: "https://www.adobe.com/legal/terms.html"
+  lastReviewed: "2026-05-24"
+capabilityFit:
+  imageGeneration: true
+  videoGeneration: false
+  videoEditing: false
+  avatarVideo: false
+  textToImage: true
+  imageToImage: true
+  textToVideo: false
+  imageToVideo: false
+  styleControl: "medium"
+  consistencyControl: "medium"
+conversionGuide:
+  primaryCtaLabel: "無料枠・透かし・商用利用条件を公式サイトで確認する"
+  primaryCtaReason: "クレジット上限後の透かし条件・ベータ機能の商用利用除外・最新プランを公式で確認することを推奨。"
+  beforeClickChecklist:
+    - "無料プランのクレジット上限後に可視透かし（Promotion）が付く場合がある。用途に支障がないか確認したか？"
+    - "ベータ（β）機能は商用利用対象外とされているが、使う機能がベータか確認したか？"
+    - "第三者素材（著作物・人物・ブランドロゴ等）に類似する出力物を使う場合、権利関係を別途確認したか？"
+    - "商用案件に使う場合、最新のAdobe生成AIユーザーガイドラインを確認したか？"
+    - "Creative Cloud All Appsプランとの関係（Fireflyクレジットの付与条件）を確認したか？"
 reviewed:
   pricing: "2026-05-04"
   terms: "2026-05-04"

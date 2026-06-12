@@ -52,6 +52,57 @@ useCases:
 limitations:
   - "無料プランなし"
   - "年間総収益100万ドル超の企業はPro/Megaプランへのアップグレードが必要とされている"
+notBestFor:
+  - "毎回同じ人物・構図を完全に再現したい人（AI生成の再現性に限界あり）"
+  - "レイヤー編集・印刷入稿データ制作まで1ツールで完結させたい人"
+  - "日本語UIのみで操作したい人（英語インターフェースのみ）"
+  - "無料から試したい人（現在は有料プランのみ）"
+difficulty: "intermediate"
+pricingDecision:
+  hasFreePlan: "no"
+  freePlanLimitNote: "2024年末に無料プランが廃止されたとされている。最新状況は公式サイトで確認推奨。"
+  watermarkStatus: "none"
+  creditSystem: false
+  paidPlanRequiredForExport: true
+  pricingNote: "Basic $10/月〜（月払い）、$8/月（年払い）。年払いで20%割引。最安プランでも月払いが必要。"
+usagePolicy:
+  commercialUseStatus: "limited"
+  commercialUseByPlan:
+    free: "無料プランなし"
+    paid: "商用利用案内あり（公式ヘルプ）。年間総収益100万ドル超の企業はPro/Mega必須とされている。"
+    enterprise: "要確認"
+  commercialUseNote: "有料プランでは商用利用案内があるが、年間総収益100万ドル超の企業は上位プランへの移行が規約上必要とされている。本記事は法的助言ではない。"
+  rightsStatus: "user-owns"
+  rightsNote: "公式情報上、有料プランのユーザーは生成画像の所有権を保持するとされている。Stealth Modeで非公開にしない限り、他ユーザーも利用できる場合がある。最新規約を確認すること。"
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "画像→画像機能でアップロードした素材の権利関係はユーザーが確認する必要あり。"
+  peopleLogoRisk: "high"
+  peopleLogoNote: "実在の人物・著名人・ブランドロゴを含む画像は肖像権・商標権等の観点から別途確認が必要。本記事は法的助言ではない。"
+  creditRequiredStatus: "not-required"
+  creditRequiredNote: "公式利用規約での明示はないが、用途に応じてクレジット表記を検討することを推奨。"
+  officialSourceUrl: "https://docs.midjourney.com/hc/en-us/articles/27870375276557-Using-Images-Videos-Commercially"
+  termsUrl: "https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service"
+  lastReviewed: "2026-06-06"
+capabilityFit:
+  imageGeneration: true
+  videoGeneration: false
+  videoEditing: false
+  avatarVideo: false
+  textToImage: true
+  imageToImage: true
+  textToVideo: false
+  imageToVideo: false
+  styleControl: "high"
+  consistencyControl: "low"
+conversionGuide:
+  primaryCtaLabel: "無料枠・透かし・商用利用条件を公式サイトで確認する"
+  primaryCtaReason: "有料プランのみ。プラン料金・商用利用条件・大企業向け規約を最新公式情報で確認することを推奨。"
+  beforeClickChecklist:
+    - "現在は有料プランのみ（$10/月〜）。試用できる無料プランがないことを確認したか？"
+    - "年間総収益100万ドル超の企業はPro/Megaプランへのアップグレードが規約上必要とされているか確認したか？"
+    - "商用案件に使う場合、最新の利用規約・商用利用ガイドを確認したか？"
+    - "生成した画像を使う媒体（SNS・広告・印刷物等）でプランの条件に問題ないか確認したか？"
+    - "実在の人物・著名人・ブランドロゴを含む画像を使用する場合、権利関係を別途確認したか？"
 reviewed:
   pricing: "2026-05-04"
   terms: "2026-06-06"

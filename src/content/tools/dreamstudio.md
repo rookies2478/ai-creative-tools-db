@@ -26,9 +26,9 @@ weaknesses:
   - "商用利用時はライセンス・禁止事項・第三者権利の確認が必要"
   - "日本語UIは公式情報のみでは確認できない"
   - "初心者には設定項目がやや多く感じる場合がある"
-lastReviewed: "2026-05-14"
-nextReviewDue: "2026-06-14"
-verifiedAt: "2026-06-08"
+lastReviewed: "2026-06-13"
+nextReviewDue: "2026-07-13"
+verifiedAt: "2026-06-13"
 officialSourceUrl: "https://stability.ai/ds-tos"
 pricingModel: "credit"
 platforms:

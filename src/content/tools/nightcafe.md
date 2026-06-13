@@ -28,9 +28,9 @@ weaknesses:
   - "各国の著作権法によって生成物の扱いが変わる可能性がある"
   - "無料クレジット数・料金条件が変更される可能性がある"
   - "日本語UIの対応は公式情報だけでは確認が必要"
-lastReviewed: "2026-05-14"
-nextReviewDue: "2026-06-14"
-verifiedAt: "2026-06-08"
+lastReviewed: "2026-06-13"
+nextReviewDue: "2026-07-13"
+verifiedAt: "2026-06-13"
 officialSourceUrl: "https://creator.nightcafe.studio/"
 pricingModel: "subscription_credit"
 platforms:

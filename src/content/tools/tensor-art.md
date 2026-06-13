@@ -6,7 +6,7 @@ officialUrl: "https://tensor.art/"
 freePlan: true
 freePlanNote: "無料利用枠やクレジット制の内容は変更される可能性があります。最新の公式画面・公式案内でご確認ください。"
 commercialUse: "limited"
-commercialUseNote: "公式Termsでは、Tensor.Art側はモデルやAI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で自由に使用できると案内されています。ただし、利用するモデル・LoRA・AI Toolsが商用利用可能かどうかは個別確認が必要です。商用利用不可モデルを使った場合の責任はユーザー側にあるとされています。商用利用を前提にする場合は、最新の公式規約とモデルごとのライセンスをご確認ください。本記事は法的助言ではありません。"
+commercialUseNote: "公式Termsでは、Tensor.Art側はモデルやAI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で自由に使用できると案内されています。また公式情報では、Pro Segmentモデルで生成した画像について商用利用に関する案内があります。ただし、利用するモデル・LoRA・AI Toolsが商用利用可能かどうかは個別確認が必要であり、全モデルで商用利用可能というわけではありません。商用利用不可モデルを使った場合の責任はユーザー側にあるとされています。商用利用を前提にする場合は、最新の公式規約とモデルごとのライセンスをご確認ください。本記事は法的助言ではありません。"
 japaneseUi: false
 japanesePrompt: true
 watermark: "unknown"
@@ -32,9 +32,9 @@ weaknesses:
   - "無料枠・料金・クレジット条件が変更される可能性がある"
   - "日本語UIや透かし条件は公式情報のみでは確認が必要"
   - "モデル選択や設定項目が多く、初心者にはやや難しい場合がある"
-lastReviewed: "2026-05-14"
-nextReviewDue: "2026-06-14"
-verifiedAt: "2026-06-08"
+lastReviewed: "2026-06-13"
+nextReviewDue: "2026-07-13"
+verifiedAt: "2026-06-13"
 officialSourceUrl: "https://tensor.art/about/terms-of-service-new"
 pricingModel: "subscription_credit"
 platforms:

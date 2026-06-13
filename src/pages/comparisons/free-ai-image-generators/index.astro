@@ -10,6 +10,8 @@ const toolEntries = await Promise.all([
   getEntry('tools', 'stable-diffusion'),
   getEntry('tools', 'leonardo-ai'),
   getEntry('tools', 'midjourney'),
+  getEntry('tools', 'fotor-ai'),
+  getEntry('tools', 'gemini-image-generation'),
 ]);
 const toolDates = toolEntries.map(t => t?.data.lastReviewed).filter(Boolean) as string[];
 const latestDate = toolDates.length ? toolDates.sort().at(-1)! : null;
@@ -59,6 +61,22 @@ const tools = [
     bestFor: 'ゲーム・キャラクター・コンセプトアート向け',
     caution: '無料プランの商用利用条件・透かしの有無は利用規約をご確認ください。',
   },
+  {
+    name: 'Fotor AI',
+    slug: 'fotor-ai',
+    freeNote: '無料プランあり（Basic）',
+    point: '公式料金ページではBasic無料プランが案内されています。無料プランでもAI画像生成・写真編集・背景除去などの基本機能を試せます。日本語UIに対応しており、英語が不慣れな方でも操作しやすい候補です。無料クレジット数・生成回数・利用できる機能はプランや時期によって変わる場合があります。',
+    bestFor: 'AI画像生成と写真編集をまとめて試したい方・日本語UIで始めたい方・ブログ用やSNS用の画像素材を試作したい方',
+    caution: '無料プランでは書き出し時に透かしが入る場合があります。商用利用の可否・条件は、公式ヘルプとCommercial Useページで案内内容に差異が見られます。商用利用を前提にする場合は、最新の公式規約をご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    name: 'Gemini画像生成',
+    slug: 'gemini-image-generation',
+    freeNote: 'Googleアカウントで利用可能（無料プランあり）',
+    point: 'Googleアカウントがあれば手軽に利用を開始できます。日本語UIに対応しており、日本語プロンプトでの生成も可能です。テキストから画像生成のほか、画像編集やスタイル適用なども利用できます。利用上限・モデル・機能はプランや時期によって変わる可能性があります。',
+    bestFor: 'Googleアカウントをすでに持っている方・日本語UIで手軽に試したい方・SNS画像やプレゼン素材のアイデア出しをしたい方',
+    caution: 'SynthIDによる目に見えない透かし、および目に見える透かしが使用される場合があります。透かしの扱い・商用利用の条件は、用途・プランによって異なる場合があります。商用利用を前提にする場合は、最新の公式規約・生成AI禁止利用ポリシーをご確認ください。本記事は法的助言ではありません。',
+  },
 ];
 
 const tableRows = [
@@ -68,6 +86,8 @@ const tableRows = [
   { name: 'Stable Diffusion', slug: 'stable-diffusion', freeType: 'ローカル実行（環境構築が必要）', watermark: '基本なし（設定による）', japanese: '△', editability: '△（環境依存）', commercialNote: 'モデルごとのライセンス条件を確認してください。' },
   { name: 'Leonardo AI', slug: 'leonardo-ai', freeType: '無料プラン（日次トークン制）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: '有料プランでは条件が変わる場合があります。最新情報は公式サイトをご確認ください。' },
   { name: 'Midjourney', slug: 'midjourney', freeType: '無料プランなし（有料のみ）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: '公式情報の確認が必要です。プランによって条件が異なります。' },
+  { name: 'Fotor AI', slug: 'fotor-ai', freeType: '無料プランあり（Basic）', watermark: '無料プランでは入る場合あり', japanese: '◯', editability: '◯（写真編集・テンプレート連携）', commercialNote: '公式ヘルプとCommercial Useページで案内内容に差異が見られます。商用利用を前提にする場合は最新の公式規約をご確認ください。' },
+  { name: 'Gemini画像生成', slug: 'gemini-image-generation', freeType: 'Googleアカウントで利用可能（無料プランあり）', watermark: 'SynthID等の透かしあり', japanese: '◯', editability: '◯（画像編集・スタイル適用）', commercialNote: '用途・プランによって条件が異なる場合があります。最新の公式規約・生成AI禁止利用ポリシーをご確認ください。' },
 ];
 
 const checkpoints = [
@@ -290,6 +310,8 @@ const articleJsonLd = JSON.stringify({
         <li><a href="https://stability.ai/license" target="_blank" rel="noopener noreferrer">Stability AIライセンス（公式）</a></li>
         <li><a href="https://leonardo.ai" target="_blank" rel="noopener noreferrer">Leonardo AI 公式サイト</a></li>
         <li><a href="https://www.midjourney.com" target="_blank" rel="noopener noreferrer">Midjourney 公式サイト</a></li>
+        <li><a href="https://www.fotor.com/jp/pricing/" target="_blank" rel="noopener noreferrer">Fotor AI 料金プラン（公式）</a></li>
+        <li><a href="https://policies.google.com/terms/generative-ai/use-policy" target="_blank" rel="noopener noreferrer">Google 生成AI利用ポリシー（公式）</a></li>
       </ul>
       <p>本ページの情報は上記公式ソースをもとに作成していますが、内容は変更される可能性があります。法的助言ではありません。</p>
     </section>

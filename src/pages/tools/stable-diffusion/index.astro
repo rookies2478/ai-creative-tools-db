@@ -8,14 +8,17 @@ const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'stable-diffusion');
 const d = entry?.data;
 const toolSlug = 'stable-diffusion';
-const sampleImage = generatedImages.find((img) =>
-  img.sampleType === 'tool-output' &&
-  img.isSameToolAsPage === true &&
-  (
-    img.sourceToolSlug === toolSlug ||
-    (!img.sourceToolSlug && img.file.includes(`${toolSlug}-tool-output`))
-  )
-) ?? null;
+const toolOutputBase = (image: import('../../../data/generatedImages').GeneratedImage) =>
+  image.sampleType === 'tool-output' &&
+  image.sourceToolSlug === toolSlug &&
+  image.isSameToolAsPage === true;
+const benchmarkSampleImage = generatedImages.find((image) =>
+  toolOutputBase(image) && image.promptVersion === 'image-tool-benchmark-v1'
+);
+const fallbackSampleImage = generatedImages.find((image) =>
+  toolOutputBase(image) && image.promptVersion === 'home-showcase-v1'
+);
+const sampleImage = benchmarkSampleImage ?? fallbackSampleImage ?? null;
 
 const jsonLd = JSON.stringify([
   {

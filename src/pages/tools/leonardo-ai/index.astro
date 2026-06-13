@@ -7,8 +7,14 @@ import { generatedImages } from '../../../data/generatedImages';
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'leonardo-ai');
 const d = entry?.data;
-const sampleImage = generatedImages.find(
-  (img) => img.sampleType === 'tool-output' && img.isSameToolAsPage === true && img.file.includes('leonardo-ai-tool-output')
+const toolSlug = 'leonardo-ai';
+const sampleImage = generatedImages.find((img) =>
+  img.sampleType === 'tool-output' &&
+  img.isSameToolAsPage === true &&
+  (
+    img.sourceToolSlug === toolSlug ||
+    (!img.sourceToolSlug && img.file.includes(`${toolSlug}-tool-output`))
+  )
 ) ?? null;
 
 const jsonLd = JSON.stringify([

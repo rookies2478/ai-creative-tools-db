@@ -5,6 +5,7 @@ export interface GeneratedImage {
   sampleType: 'reference-visual' | 'tool-output';
   comparisonEligible?: boolean;
   isSameToolAsPage?: boolean;
+  sourceToolSlug?: string;
   promptVersion: string;
   prompt: string;
   negativePrompt: string;
@@ -26,6 +27,7 @@ export const generatedImages: GeneratedImage[] = [
     sampleType: 'tool-output',
     comparisonEligible: false,
     isSameToolAsPage: true,
+    sourceToolSlug: 'adobe-firefly',
     promptVersion: 'image-tool-benchmark-v1',
     prompt: '（管理者作成・詳細非公開）',
     negativePrompt: '',
@@ -45,6 +47,7 @@ export const generatedImages: GeneratedImage[] = [
     sampleType: 'tool-output',
     comparisonEligible: false,
     isSameToolAsPage: true,
+    sourceToolSlug: 'leonardo-ai',
     promptVersion: 'image-tool-benchmark-v1',
     prompt: '（管理者作成・詳細非公開）',
     negativePrompt: '',
@@ -64,6 +67,7 @@ export const generatedImages: GeneratedImage[] = [
     sampleType: 'tool-output',
     comparisonEligible: false,
     isSameToolAsPage: true,
+    sourceToolSlug: 'stable-diffusion',
     promptVersion: 'image-tool-benchmark-v1',
     prompt: '（管理者作成・詳細非公開）',
     negativePrompt: '',

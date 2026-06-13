@@ -2,10 +2,18 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+import { generatedImages } from '../../../data/generatedImages';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'gemini-image-generation');
 const d = entry?.data;
+const toolSlug = 'gemini-image-generation';
+const sampleImage = generatedImages.find((image) =>
+  image.sampleType === 'tool-output' &&
+  image.sourceToolSlug === toolSlug &&
+  image.isSameToolAsPage === true &&
+  image.promptVersion === 'image-tool-benchmark-v1'
+) ?? null;
 
 const jsonLd = JSON.stringify([
   {
@@ -49,6 +57,7 @@ const jsonLd = JSON.stringify([
 
   <div class="tdp-wrap">
     <ToolDetailPage
+      sampleImage={sampleImage}
       toolName="Gemini画像生成"
       category="AI画像生成"
       checkedDate={d?.lastReviewed ?? '2026-05-15'}

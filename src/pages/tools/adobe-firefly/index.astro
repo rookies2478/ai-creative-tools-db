@@ -2,10 +2,14 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import AdobeFireflyTool from '../../../components/AdobeFireflyTool.astro';
+import { generatedImages } from '../../../data/generatedImages';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'adobe-firefly');
 const d = entry?.data;
+const sampleImage = generatedImages.find(
+  (img) => img.sampleType === 'tool-output' && img.isSameToolAsPage === true && img.file.includes('adobe-firefly-tool-output')
+) ?? null;
 
 const jsonLd = JSON.stringify([
   {
@@ -53,6 +57,7 @@ const jsonLd = JSON.stringify([
       lastChecked={d?.lastReviewed}
       nextCheck={d?.nextReviewDue}
       verifiedDate={d?.verifiedAt}
+      sampleImage={sampleImage}
     />
   </div>
 

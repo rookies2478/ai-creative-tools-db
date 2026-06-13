@@ -2,10 +2,14 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+import { generatedImages } from '../../../data/generatedImages';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'stable-diffusion');
 const d = entry?.data;
+const sampleImage = generatedImages.find(
+  (img) => img.sampleType === 'tool-output' && img.isSameToolAsPage === true && img.file.includes('stable-diffusion-tool-output')
+) ?? null;
 
 const jsonLd = JSON.stringify([
   {
@@ -261,6 +265,7 @@ const jsonLd = JSON.stringify([
         { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
         { label: '全ツール比較表', href: '/comparisons/' },
       ]}
+      sampleImage={sampleImage}
     />
   </div>
 

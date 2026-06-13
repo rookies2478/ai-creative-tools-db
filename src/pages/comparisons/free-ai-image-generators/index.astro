@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GuideFAQ from '../../../components/GuideFAQ.astro';
 import { getEntry } from 'astro:content';
+import { generatedImages } from '../../../data/generatedImages';
 
 const toolEntries = await Promise.all([
   getEntry('tools', 'canva-ai-image-generator'),
@@ -127,6 +128,32 @@ const faqs = [
     a: '無料枠の内容、生成回数、透かし、画像サイズ、商用利用条件を確認してください。人物・著名人・ブランドロゴ・第三者素材を扱う場合は、肖像権・著作権・商標などについて別途確認が必要です。最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。',
   },
 ];
+
+const comparisonTargetSlugs = [
+  'canva-ai-image-generator',
+  'adobe-firefly',
+  'leonardo-ai',
+  'stable-diffusion',
+  'fotor-ai',
+  'gemini-image-generation',
+];
+
+const toolNameMap: Record<string, string> = {
+  'canva-ai-image-generator': 'Canva AI画像生成',
+  'adobe-firefly': 'Adobe Firefly',
+  'leonardo-ai': 'Leonardo AI',
+  'stable-diffusion': 'Stable Diffusion',
+  'fotor-ai': 'Fotor AI',
+  'gemini-image-generation': 'Gemini画像生成',
+};
+
+const benchmarkSamples = generatedImages.filter(
+  img =>
+    img.sampleType === 'tool-output' &&
+    img.promptVersion === 'image-tool-benchmark-v1' &&
+    img.comparisonEligible === true &&
+    comparisonTargetSlugs.includes(img.sourceToolSlug ?? '')
+);
 
 const relatedLinks = [
   { href: '/conditions/free/', label: '無料枠あり・ツール一覧' },
@@ -295,6 +322,41 @@ const articleJsonLd = JSON.stringify({
         </table>
       </div>
       <p class="fai-table-foot">◯：UI・プロンプトとも対応、△：部分的に対応または英語中心。情報は確認時点のものです。</p>
+    </section>
+
+    <!-- 同一プロンプト生成サンプル -->
+    <section class="fai-sec fai-samples-sec">
+      <h2 class="fai-h2">同一プロンプトで生成した参考作例</h2>
+      <div class="fai-samples-notice">
+        <p>以下は、管理者が同一プロンプトを使って各ツールで作成した参考作例です。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。1枚の画像だけでツールの品質や性能を断定するものではありません。商用利用条件は各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
+        <p class="fai-samples-sub">DALL·EとMidjourneyは、本検証時点で同一条件のAスキーム画像を未掲載のため、この画像一覧には含めていません。</p>
+      </div>
+      <div class="fai-samples-grid">
+        {benchmarkSamples.map((img) => (
+          <div class="fai-sample-card">
+            <div class="fai-sample-img-wrap">
+              <img
+                src={img.file}
+                alt={img.alt}
+                width="1200"
+                height="675"
+                loading="lazy"
+                decoding="async"
+                class="fai-sample-img"
+              />
+            </div>
+            <div class="fai-sample-body">
+              <p class="fai-sample-tool">{toolNameMap[img.sourceToolSlug ?? ''] ?? img.sourceToolSlug}</p>
+              <p class="fai-sample-label">管理者作成の参考作例</p>
+              {img.sourceToolSlug === 'gemini-image-generation' && (
+                <p class="fai-sample-gemini-note">※ Gemini画像生成では、SynthIDなどの透かしが使用される場合があります。透かしの扱いは用途・プランによって異なる場合があるため、最新の公式情報をご確認ください。</p>
+              )}
+              <a href={`/tools/${img.sourceToolSlug}/`} class="fai-sample-link">詳細を見る →</a>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="fai-samples-foot">掲載画像は管理者が各ツールで作成した参考作例です。公式出力・代表結果ではありません。生成結果を保証するものではありません。</p>
     </section>
 
     <!-- FAQ -->
@@ -633,10 +695,98 @@ const articleJsonLd = JSON.stringify({
   }
   .fai-related-link:hover { background: var(--brand-tint); border-color: #C7C2F5; color: var(--brand-ink); }
 
+  /* ===== Benchmark samples ===== */
+  .fai-samples-sec { margin-bottom: 56px; }
+  .fai-samples-notice {
+    background: var(--amber-bg);
+    border: 1px solid var(--amber-border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    font-size: 12.5px;
+    color: var(--amber-text);
+    line-height: 1.7;
+  }
+  .fai-samples-sub {
+    margin-top: 8px;
+    font-size: 11.5px;
+    color: #a16207;
+  }
+  .fai-samples-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .fai-sample-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .fai-sample-img-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+  .fai-sample-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .fai-sample-body {
+    padding: 12px 14px;
+  }
+  .fai-sample-tool {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 3px;
+  }
+  .fai-sample-label {
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .fai-sample-gemini-note {
+    font-size: 10px;
+    color: var(--amber-text);
+    background: var(--amber-bg);
+    border: 1px solid var(--amber-border);
+    border-radius: 6px;
+    padding: 6px 8px;
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+  .fai-sample-link {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--brand-ink);
+    text-decoration: none;
+    border: 1px solid #C7C2F5;
+    border-radius: 20px;
+    padding: 3px 12px;
+    display: inline-block;
+    transition: background .15s;
+  }
+  .fai-sample-link:hover { background: var(--brand-tint); }
+  .fai-samples-foot {
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--faint);
+    line-height: 1.6;
+  }
+
   /* ===== Responsive ===== */
   @media (max-width: 680px) {
     .fai-2col { grid-template-columns: 1fr; }
     .fai-tool-body { grid-template-columns: 1fr; }
     .fai-check-grid { grid-template-columns: 1fr; }
+    .fai-samples-grid { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 681px) and (max-width: 900px) {
+    .fai-samples-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>

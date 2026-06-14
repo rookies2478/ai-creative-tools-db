@@ -1,7 +1,7 @@
 ---
 import type { GeneratedImage } from '../data/generatedImages';
 import UsagePolicySummary from './UsagePolicySummary.astro';
-import type { UsagePolicyData } from './UsagePolicySummary.astro';
+import type { UsagePolicyData, LabelOverrides } from './UsagePolicySummary.astro';
 /*
   ToolDetailPage.astro
   汎用ツール詳細ページコンポーネント（AdobeFireflyTool.astroと同一デザインシステム）
@@ -55,6 +55,8 @@ export interface Props {
   pricing?: { table: RichTable; notes: string[] };
   commercial?: { lead: string; points: string[]; disclaimer: string; more?: { label: string; href: string } };
   usagePolicy?: UsagePolicyData;
+  usagePolicyLabelOverrides?: LabelOverrides;
+  usagePolicySdNote?: string;
   watermarkRaw?: string;
   watermarkConditionRaw?: string;
   integrationTitle?: string;
@@ -101,6 +103,8 @@ const {
   pricing,
   commercial,
   usagePolicy,
+  usagePolicyLabelOverrides,
+  usagePolicySdNote,
   watermarkRaw,
   watermarkConditionRaw,
   integrationTitle,
@@ -262,6 +266,8 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
             policy={usagePolicy}
             watermark={watermarkRaw}
             watermarkNote={watermarkConditionRaw}
+            labelOverrides={usagePolicyLabelOverrides}
+            sdNote={usagePolicySdNote}
           />
         )}
 

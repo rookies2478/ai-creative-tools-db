@@ -16,6 +16,8 @@ export interface UsagePolicyData {
   creditRequiredNote?: string;
   inputMaterialRisk?: string;
   inputMaterialNote?: string;
+  peopleLogoRisk?: string;
+  peopleLogoNote?: string;
   rightsStatus?: string;
   rightsNote?: string;
   officialSourceUrl?: string;
@@ -23,13 +25,25 @@ export interface UsagePolicyData {
   lastReviewed?: string;
 }
 
+export interface LabelOverrides {
+  freePlan?: string;
+  paidPlan?: string;
+  enterprise?: string;
+}
+
 export interface Props {
   policy: UsagePolicyData;
   watermark?: string;
   watermarkNote?: string;
+  labelOverrides?: LabelOverrides;
+  sdNote?: string;
 }
 
-const { policy, watermark, watermarkNote } = Astro.props;
+const { policy, watermark, watermarkNote, labelOverrides, sdNote } = Astro.props;
+
+const freePlanLabel = labelOverrides?.freePlan ?? '無料プラン商用利用';
+const paidPlanLabel = labelOverrides?.paidPlan ?? '有料プラン商用利用';
+const enterpriseLabel = labelOverrides?.enterprise ?? 'エンタープライズ';
 
 function creditLabel(s?: string): string {
   if (s === 'required') return '表記が必要と案内';
@@ -70,15 +84,32 @@ function rightsLabel(s?: string): string {
 
     {policy.commercialUseByPlan?.free && (
       <div class="ups-item">
-        <span class="ups-label">無料プラン商用利用</span>
+        <span class="ups-label">{freePlanLabel}</span>
         <span class="ups-val">{policy.commercialUseByPlan.free}</span>
       </div>
     )}
 
     {policy.commercialUseByPlan?.paid && (
       <div class="ups-item">
-        <span class="ups-label">有料プラン商用利用</span>
+        <span class="ups-label">{paidPlanLabel}</span>
         <span class="ups-val">{policy.commercialUseByPlan.paid}</span>
+      </div>
+    )}
+
+    {policy.commercialUseByPlan?.enterprise && (
+      <div class="ups-item">
+        <span class="ups-label">{enterpriseLabel}</span>
+        <span class="ups-val">{policy.commercialUseByPlan.enterprise}</span>
+      </div>
+    )}
+
+    {(policy.peopleLogoRisk || policy.peopleLogoNote) && (
+      <div class="ups-item">
+        <span class="ups-label">人物・ロゴ・既存IP</span>
+        <span class="ups-val">
+          {inputRiskLabel(policy.peopleLogoRisk)}
+          {policy.peopleLogoNote && <span class="ups-note">{policy.peopleLogoNote}</span>}
+        </span>
       </div>
     )}
 
@@ -142,6 +173,10 @@ function rightsLabel(s?: string): string {
     )}
 
   </div>
+
+  {sdNote && (
+    <p class="ups-sd-note">{sdNote}</p>
+  )}
 
   <p class="ups-disclaimer">
     商用利用は、生成物の利用条件と、入力した画像・ロゴ・人物・既存作品などの素材権利を分けて確認する必要があります。プランや用途によって条件が異なる場合があるため、最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。
@@ -273,6 +308,17 @@ function rightsLabel(s?: string): string {
   .ups-ext {
     font-size: 11px;
     color: var(--faint);
+  }
+
+  .ups-sd-note {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin: 0 0 14px;
   }
 
   .ups-disclaimer {

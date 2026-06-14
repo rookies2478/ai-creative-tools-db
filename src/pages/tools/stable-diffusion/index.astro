@@ -274,6 +274,15 @@ const jsonLd = JSON.stringify([
         { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
         { label: '全ツール比較表', href: '/comparisons/' },
       ]}
+      usagePolicy={d?.usagePolicy}
+      watermarkRaw={d?.watermark}
+      watermarkConditionRaw={d?.watermarkCondition}
+      usagePolicyLabelOverrides={{
+        freePlan: 'ローカル実行・無料利用時',
+        paidPlan: '公式API・有料サービス経由',
+        enterprise: '企業・大規模利用時',
+      }}
+      usagePolicySdNote="Stable Diffusionは単一のSaaS型ツールではなく、モデル系統・ローカル実行・公式API・外部サービス・派生モデルによって利用条件が変わる場合があります。商用利用条件や生成物の扱いは、利用するモデル・サービス・入力素材ごとに確認してください。本記事は法的助言ではありません。"
       sampleImage={sampleImage}
     />
   </div>

@@ -144,20 +144,20 @@ const tools = [
 ];
 
 const tableRows = [
-  { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', freeType: '無料プラン（回数制限あり）', watermark: '要確認', japanese: '◯', editability: '◯（テンプレート連携）', commercialNote: '用途やプランによって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
-  { name: 'Adobe Firefly', slug: 'adobe-firefly', freeType: '無料クレジット（月次）', watermark: '要確認', japanese: '◯', editability: '◯（Adobe製品連携）', commercialNote: '公式情報の確認が必要です。プランによって条件が変わる場合があります。' },
-  { name: 'DALL·E', slug: 'dalle', freeType: 'ChatGPT無料プラン経由（制限あり）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: '最新情報はOpenAI公式サイトをご確認ください。' },
-  { name: 'Stable Diffusion', slug: 'stable-diffusion', freeType: 'ローカル実行（環境構築が必要）', watermark: '基本なし（設定による）', japanese: '△', editability: '△（環境依存）', commercialNote: 'モデルごとのライセンス条件を確認してください。' },
-  { name: 'Leonardo AI', slug: 'leonardo-ai', freeType: '無料プラン（日次トークン制）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: '有料プランでは条件が変わる場合があります。最新情報は公式サイトをご確認ください。' },
-  { name: 'Fotor AI', slug: 'fotor-ai', freeType: '無料プランあり（Basic）', watermark: '無料プランでは入る場合あり', japanese: '◯', editability: '◯（写真編集・テンプレート連携）', commercialNote: '公式ヘルプとCommercial Useページで案内内容に差異が見られます。商用利用を前提にする場合は最新の公式規約をご確認ください。' },
-  { name: 'Gemini画像生成', slug: 'gemini-image-generation', freeType: 'Googleアカウントで利用可能（無料プランあり）', watermark: 'SynthID等の透かしあり', japanese: '◯', editability: '◯（画像編集・スタイル適用）', commercialNote: '用途・プランによって条件が異なる場合があります。最新の公式規約・生成AI禁止利用ポリシーをご確認ください。' },
-  { name: 'Brand Studio（旧DreamStudio）', slug: 'dreamstudio', freeType: '無料試用またはCore tier（要公式確認）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: 'DreamStudioからBrand Studioへ移行した可能性があります。Stability AIライセンス・Acceptable Use Policyをご確認ください。' },
-  { name: 'Ideogram', slug: 'ideogram', freeType: '無料プランあり（回数制限）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
-  { name: 'Microsoft Designer', slug: 'microsoft-designer', freeType: '無料プランあり（Microsoftアカウント）', watermark: '要確認', japanese: '◯', editability: '◯（テンプレート連携）', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
-  { name: 'NightCafe', slug: 'nightcafe', freeType: '無料クレジットあり（デイリー）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
-  { name: 'Playground AI', slug: 'playground-ai', freeType: '無料プランあり（回数制限）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
-  { name: 'SeaArt AI', slug: 'seaart-ai', freeType: '無料プランあり（スタミナ制）', watermark: '要確認', japanese: '◯', editability: '△', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
-  { name: 'Tensor Art', slug: 'tensor-art', freeType: '無料プランあり（クレジット制）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
+  { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', freeType: '無料プラン（回数制限あり）', watermark: '要確認', japanese: '◯', editability: '◯（テンプレート連携）', freePlanCommercial: '条件付き（公式未明記）', paidPlanCommercial: '条件付き（Canvaライセンス確認）', commercialNote: 'AI生成コンテンツであることの明示が条件とされている場合あり。プランや用途によって条件が異なります。最新情報は公式サイトをご確認ください。' },
+  { name: 'Adobe Firefly', slug: 'adobe-firefly', freeType: '無料クレジット（月次）', watermark: '要確認', japanese: '◯', editability: '◯（Adobe製品連携）', freePlanCommercial: '条件付き（クレジット切れ後の透かしあり出力は商用不可の場合あり）', paidPlanCommercial: '案内あり（Adobeガイドライン・ベータ機能は対象外）', commercialNote: '無料クレジット範囲内でも条件があります。有料プランではAdobe生成AIユーザーガイドラインに基づく商用利用が案内されています。最新情報は公式をご確認ください。' },
+  { name: 'DALL·E', slug: 'dalle', freeType: 'ChatGPT無料プラン経由（制限あり）', watermark: '要確認', japanese: '△', editability: '△', freePlanCommercial: '要確認（OpenAI利用規約参照）', paidPlanCommercial: '要確認（OpenAI利用規約参照）', commercialNote: '最新情報はOpenAI公式サイトをご確認ください。' },
+  { name: 'Stable Diffusion', slug: 'stable-diffusion', freeType: 'ローカル実行（環境構築が必要）', watermark: '基本なし（設定による）', japanese: '△', editability: '△（環境依存）', freePlanCommercial: 'モデル・利用形態による（公式API・サービス規約による）', paidPlanCommercial: '公式API・サービス規約による', commercialNote: 'ローカル実行時はSD 1.x/2.x/SDXLはCreativeML Open RAIL-M等、SD 3.x以降はStability AI Community License。商用利用はモデルバージョンごとのライセンスを個別確認してください。' },
+  { name: 'Leonardo AI', slug: 'leonardo-ai', freeType: '無料プラン（日次トークン制）', watermark: '要確認', japanese: '△', editability: '△', freePlanCommercial: '不可の場合あり（公式FAQ・利用規約より）', paidPlanCommercial: '条件付き（有料プラン＋Private設定時に可能とされています）', commercialNote: '無料プランでは商用利用が認められていない場合があります。有料プランでもPrivate設定・モデル・用途によって条件が異なります。最新の公式規約をご確認ください。' },
+  { name: 'Fotor AI', slug: 'fotor-ai', freeType: '無料プランあり（Basic）', watermark: '無料プランでは入る場合あり', japanese: '◯', editability: '◯（写真編集・テンプレート連携）', freePlanCommercial: '公式未明記（要確認）', paidPlanCommercial: '有料で案内あり（要公式確認）', commercialNote: '公式ヘルプとCommercial Useページで案内内容に差異が見られます。商用利用を前提にする場合は最新の公式規約をご確認ください。' },
+  { name: 'Gemini画像生成', slug: 'gemini-image-generation', freeType: 'Googleアカウントで利用可能（無料プランあり）', watermark: 'SynthID等の透かしあり', japanese: '◯', editability: '◯（画像編集・スタイル適用）', freePlanCommercial: '要確認（生成AI禁止利用ポリシー参照）', paidPlanCommercial: '要確認（生成AI禁止利用ポリシー参照）', commercialNote: '用途・プランによって条件が異なる場合があります。最新の公式規約・Google生成AI禁止利用ポリシーをご確認ください。' },
+  { name: 'Brand Studio（旧DreamStudio）', slug: 'dreamstudio', freeType: '無料試用またはCore tier（要公式確認）', watermark: '要確認', japanese: '△', editability: '△', freePlanCommercial: 'モデルライセンス参照', paidPlanCommercial: 'Stability AI規約による', commercialNote: 'DreamStudioからBrand Studioへ移行した可能性があります。Stability AIライセンス・Acceptable Use Policyをご確認ください。' },
+  { name: 'Ideogram', slug: 'ideogram', freeType: '無料プランあり（回数制限）', watermark: '要確認', japanese: '△', editability: '△', freePlanCommercial: '公式FAQ参照（所有権を主張しない旨の案内あり）', paidPlanCommercial: '公式FAQ参照（要確認）', commercialNote: '公式FAQでは所有権を主張しない旨が案内されています。ただしプラン・生成内容・第三者の権利によって条件が異なる場合があります。最新の公式FAQ・利用規約をご確認ください。' },
+  { name: 'Microsoft Designer', slug: 'microsoft-designer', freeType: '無料プランあり（Microsoftアカウント）', watermark: '要確認', japanese: '◯', editability: '◯（テンプレート連携）', freePlanCommercial: '要確認', paidPlanCommercial: '要確認', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
+  { name: 'NightCafe', slug: 'nightcafe', freeType: '無料クレジットあり（デイリー）', watermark: '要確認', japanese: '△', editability: '△', freePlanCommercial: '要確認', paidPlanCommercial: '要確認', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
+  { name: 'Playground AI', slug: 'playground-ai', freeType: '無料プランあり（回数制限）', watermark: '要確認', japanese: '△', editability: '△', freePlanCommercial: '要確認', paidPlanCommercial: '要確認', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
+  { name: 'SeaArt AI', slug: 'seaart-ai', freeType: '無料プランあり（スタミナ制）', watermark: '要確認', japanese: '◯', editability: '△', freePlanCommercial: '要確認', paidPlanCommercial: '要確認', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
+  { name: 'Tensor Art', slug: 'tensor-art', freeType: '無料プランあり（クレジット制）', watermark: '要確認', japanese: '△', editability: '△', freePlanCommercial: '要確認', paidPlanCommercial: '要確認', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
 ];
 
 const checkpoints = [
@@ -388,18 +388,20 @@ const articleJsonLd = JSON.stringify({
               <th>透かし</th>
               <th>日本語対応</th>
               <th>生成後の編集</th>
-              <th>商用利用メモ</th>
+              <th>無料プラン商用<span class="fai-th-note">※1</span></th>
+              <th>商用利用メモ<span class="fai-th-note">※2</span></th>
               <th>詳細</th>
             </tr>
           </thead>
           <tbody>
-            {tableRows.map(({ name, slug, freeType, watermark, japanese, editability, commercialNote }, i) => (
+            {tableRows.map(({ name, slug, freeType, watermark, japanese, editability, freePlanCommercial, commercialNote }, i) => (
               <tr class={i % 2 === 0 ? 'fai-tr-even' : 'fai-tr-odd'}>
                 <td class="fai-td-name">{name}</td>
                 <td>{freeType}</td>
                 <td>{watermark}</td>
                 <td>{japanese}</td>
                 <td>{editability}</td>
+                <td class="fai-td-note">{freePlanCommercial}</td>
                 <td class="fai-td-note">{commercialNote}</td>
                 <td><a href={`/tools/${slug}/`} class="fai-td-link">詳細 →</a></td>
               </tr>
@@ -408,6 +410,15 @@ const articleJsonLd = JSON.stringify({
         </table>
       </div>
       <p class="fai-table-foot">◯：UI・プロンプトとも対応、△：部分的に対応または英語中心。情報は確認時点のものです。</p>
+      <div class="fai-table-legend">
+        <p><b>この表の見方</b></p>
+        <ul>
+          <li><b>※1 無料プラン商用：</b>無料枠で作成した生成物の商用利用条件を、公式情報をもとに整理したものです。「案内あり」でも有料プランと条件が異なる場合があります。</li>
+          <li><b>※2 商用利用メモ：</b>プラン・用途・生成内容によって条件が変わる場合があります。詳細は各ツールの詳細ページおよび公式利用規約をご確認ください。</li>
+          <li>入力素材・人物・ロゴ・既存IPを使用する場合は、商用利用条件とは別に権利の確認が必要です。</li>
+          <li>本記事は法的助言ではありません。最新情報は各公式サイトをご確認ください。</li>
+        </ul>
+      </div>
     </section>
 
     <!-- 同一プロンプト生成サンプル -->
@@ -753,6 +764,20 @@ const articleJsonLd = JSON.stringify({
   .fai-td-link { color: var(--brand-ink); font-weight: 600; text-decoration: none; white-space: nowrap; }
   .fai-td-link:hover { text-decoration: underline; }
   .fai-table-foot { margin-top: 8px; font-size: 11.5px; color: var(--faint); }
+  .fai-th-note { font-size: 10px; font-weight: 400; color: var(--brand-ink); margin-left: 2px; }
+  .fai-table-legend {
+    margin-top: 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .fai-table-legend p { font-weight: 700; color: var(--ink-body); margin-bottom: 8px; font-size: 12.5px; }
+  .fai-table-legend ul { padding-left: 16px; }
+  .fai-table-legend li + li { margin-top: 4px; }
 
   /* ===== Sources ===== */
   .fai-sources {

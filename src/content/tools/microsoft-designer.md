@@ -3,7 +3,7 @@ name: "Microsoft Designer"
 shortDescription: "MicrosoftのAIデザイン・画像生成サービス。SNS画像、バナー、プレゼン素材などを手軽に作成できる。Microsoftアカウントで利用可能。"
 category: "image"
 officialUrl: "https://designer.microsoft.com/"
-freePlan: true
+freePlan: "limited"
 lowestPaidPlan: "要公式確認"
 currency: "USD"
 commercialUse: "limited"
@@ -25,12 +25,13 @@ strengths:
 weaknesses:
   - "商用利用条件は用途やアカウント種別により確認が必要"
   - "一部機能は地域・年齢・サブスクリプション条件に左右される可能性がある"
-lastReviewed: "2026-05-26"
-nextReviewDue: "2026-06-26"
-verifiedAt: "2026-06-08"
-officialSourceUrl: "https://designer.microsoft.com/"
-pricingModel: "unknown"
-freePlanNote: "Microsoftアカウントで無料利用可能。詳細は公式サイトをご確認ください。"
+lastReviewed: "2026-06-14"
+nextReviewDue: "2026-07-14"
+verifiedAt: "2026-06-14"
+officialSourceUrl: "https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer"
+pricingModel: "subscription"
+pricingSummary: "Microsoftアカウントで無料利用できる範囲がありますが、公式FAQでは個人的・非商用利用向けと案内されています。頻繁に利用する場合やMicrosoft 365 / Copilot Pro連携機能では、サブスクリプションが必要になる場合があります。最新情報は公式サイトをご確認ください。"
+freePlanNote: "Microsoftアカウントで無料利用できる範囲があります。公式FAQでは個人的・非商用利用向けと案内されており、頻繁に作成するユーザーにはサブスクリプションが必要になる場合があります。生成回数や対象機能は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
 platforms:
   - web
 signupRequired: true
@@ -63,6 +64,9 @@ sourceRefs:
   - label: "Microsoftサービス規約（公式）"
     url: "https://www.microsoft.com/servicesagreement"
     type: terms
+  - label: "Microsoft Designer よくある質問（公式・日本語）"
+    url: "https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer"
+    type: help
 sources:
   - title: "Microsoft Designer 公式サイト"
     url: "https://designer.microsoft.com/"
@@ -70,6 +74,8 @@ sources:
     url: "https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer"
   - title: "Microsoftサービス規約（公式）"
     url: "https://www.microsoft.com/servicesagreement"
+  - title: "Microsoft Designer よくある質問（公式・日本語）"
+    url: "https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer"
 faqs:
   - question: "Microsoft Designerは無料で使えますか？"
     answer: "Microsoftアカウントがあれば無料で利用できる場合があります。利用可能な機能や制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。"

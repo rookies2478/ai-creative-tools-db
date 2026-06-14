@@ -3,7 +3,7 @@ name: "Ideogram"
 shortDescription: "テキスト入り画像やタイポグラフィ表現に強いAI画像生成サービス。ロゴ風デザイン・ポスター・SNS画像の作成に活用されている。"
 category: "image"
 officialUrl: "https://ideogram.ai/"
-freePlan: true
+freePlan: "limited"
 lowestPaidPlan: "要公式確認"
 currency: "USD"
 commercialUse: "limited"
@@ -23,12 +23,13 @@ strengths:
 weaknesses:
   - "日本語UIや日本語テキスト生成の扱いは確認が必要"
   - "商用利用時は第三者権利や利用規約の確認が必要"
-lastReviewed: "2026-05-26"
-nextReviewDue: "2026-06-26"
-verifiedAt: "2026-06-08"
-officialSourceUrl: "https://ideogram.ai/legal/tos"
-pricingModel: "unknown"
-freePlanNote: "無料アカウントでクレジットが提供される場合があります。詳細は公式サイトをご確認ください。"
+lastReviewed: "2026-06-14"
+nextReviewDue: "2026-07-14"
+verifiedAt: "2026-06-14"
+officialSourceUrl: "https://docs.ideogram.ai/plans-and-pricing/available-plans"
+pricingModel: "subscription_credit"
+pricingSummary: "無料プランでは制限付きのクレジット枠が案内されています。有料プランでは生成容量や優先処理などが増える場合があります。クレジット数・料金・対象機能は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
+freePlanNote: "公式ドキュメントでは、無料プランで週次のクレジット枠が案内されています。クレジット数や生成条件は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
 platforms:
   - web
 signupRequired: true
@@ -67,6 +68,12 @@ sourceRefs:
   - label: "Ideogram 料金プラン（公式）"
     url: "https://ideogram.ai/pricing"
     type: pricing
+  - label: "Ideogram 利用可能なプラン（公式ドキュメント）"
+    url: "https://docs.ideogram.ai/plans-and-pricing/available-plans"
+    type: pricing
+  - label: "Ideogram 登録・開始方法（公式ドキュメント）"
+    url: "https://docs.ideogram.ai/using-ideogram/getting-started/signup-and-registration"
+    type: docs
 sources:
   - title: "Ideogram 公式サイト"
     url: "https://ideogram.ai/"
@@ -76,6 +83,10 @@ sources:
     url: "https://ideogram.ai/legal/tos"
   - title: "Ideogram 料金プラン（公式）"
     url: "https://ideogram.ai/pricing"
+  - title: "Ideogram 利用可能なプラン（公式ドキュメント）"
+    url: "https://docs.ideogram.ai/plans-and-pricing/available-plans"
+  - title: "Ideogram 登録・開始方法（公式ドキュメント）"
+    url: "https://docs.ideogram.ai/using-ideogram/getting-started/signup-and-registration"
 faqs:
   - question: "Ideogramは無料で使えますか？"
     answer: "無料アカウントでクレジットが提供される場合があります。クレジット数や利用制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。"

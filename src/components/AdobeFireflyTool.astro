@@ -1,5 +1,7 @@
 ---
 import type { GeneratedImage } from '../data/generatedImages';
+import UsagePolicySummary from './UsagePolicySummary.astro';
+import type { UsagePolicyData } from './UsagePolicySummary.astro';
 /* =========================================================
    AdobeFireflyTool.astro
    ツール詳細ページ：/tools/adobe-firefly/ の記事本文
@@ -84,6 +86,9 @@ export interface Props {
   conditions?: TagLink[];
   toolsBase?: string;                  // 既定 /tools/
   sampleImage?: GeneratedImage | null;
+  usagePolicy?: UsagePolicyData;
+  watermarkRaw?: string;
+  watermarkConditionRaw?: string;
 }
 
 const {
@@ -282,6 +287,9 @@ const {
   ],
   toolsBase = '/tools/',
   sampleImage = null,
+  usagePolicy,
+  watermarkRaw,
+  watermarkConditionRaw,
 } = Astro.props as Props;
 
 const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
@@ -402,6 +410,14 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
       <ul>{commercial.points.map((p) => (<li set:html={p}></li>))}</ul>
       <div class="tdp-quote"><b>免責事項：</b>{commercial.disclaimer}</div>
       {commercial.more ? <a class="tdp-inline-more" href={commercial.more.href}>{commercial.more.label}</a> : null}
+
+      {usagePolicy && (
+        <UsagePolicySummary
+          policy={usagePolicy}
+          watermark={watermarkRaw}
+          watermarkNote={watermarkConditionRaw}
+        />
+      )}
 
       <h3>Adobe製品との連携</h3>
       <p>{integration}</p>

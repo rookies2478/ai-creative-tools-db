@@ -1,0 +1,301 @@
+---
+/*
+  UsagePolicySummary.astro
+  商用利用・権利まわりの確認ポイント ブロック
+  - .tdp-x 配下で使用する前提（CSS変数継承）
+  - 断定表現禁止。ラベルはすべて「公式情報上〜と案内」ベース
+*/
+
+export interface UsagePolicyData {
+  commercialUseByPlan?: {
+    free?: string;
+    paid?: string;
+    enterprise?: string;
+  };
+  creditRequiredStatus?: string;
+  creditRequiredNote?: string;
+  inputMaterialRisk?: string;
+  inputMaterialNote?: string;
+  rightsStatus?: string;
+  rightsNote?: string;
+  officialSourceUrl?: string;
+  termsUrl?: string;
+  lastReviewed?: string;
+}
+
+export interface Props {
+  policy: UsagePolicyData;
+  watermark?: string;
+  watermarkNote?: string;
+}
+
+const { policy, watermark, watermarkNote } = Astro.props;
+
+function creditLabel(s?: string): string {
+  if (s === 'required') return '表記が必要と案内';
+  if (s === 'not-required') return '公式情報上、不要と案内';
+  if (s === 'plan-dependent') return 'プラン依存';
+  return '公式未明記';
+}
+
+function inputRiskLabel(s?: string): string {
+  if (s === 'low') return '比較的低いとされているが、入力素材は別途確認を推奨';
+  if (s === 'medium') return '入力素材の確認が必要';
+  if (s === 'high') return '入力素材・人物・ロゴ等の確認が特に必要';
+  return '公式未明記';
+}
+
+function watermarkLabel(s?: string): string {
+  if (s === 'yes') return 'あり';
+  if (s === 'no') return 'なし';
+  if (s === 'limited') return 'プラン・条件による';
+  return '公式未明記';
+}
+
+function rightsLabel(s?: string): string {
+  if (s === 'user-owns') return '公式情報上、ユーザーが権利を保持するとされている';
+  if (s === 'platform-owns') return 'プラットフォームが権利を保持するとされている';
+  if (s === 'shared') return 'ユーザーとプラットフォームで共有とされている';
+  return '公式未明記';
+}
+---
+
+<div class="ups-wrap">
+  <div class="ups-head">
+    <span class="ups-eyebrow">Usage policy</span>
+    <h3 class="ups-title">商用利用・権利まわりの確認ポイント</h3>
+  </div>
+
+  <div class="ups-grid">
+
+    {policy.commercialUseByPlan?.free && (
+      <div class="ups-item">
+        <span class="ups-label">無料プラン商用利用</span>
+        <span class="ups-val">{policy.commercialUseByPlan.free}</span>
+      </div>
+    )}
+
+    {policy.commercialUseByPlan?.paid && (
+      <div class="ups-item">
+        <span class="ups-label">有料プラン商用利用</span>
+        <span class="ups-val">{policy.commercialUseByPlan.paid}</span>
+      </div>
+    )}
+
+    <div class="ups-item">
+      <span class="ups-label">クレジット表記</span>
+      <span class="ups-val">
+        {creditLabel(policy.creditRequiredStatus)}
+        {policy.creditRequiredNote && <span class="ups-note">{policy.creditRequiredNote}</span>}
+      </span>
+    </div>
+
+    <div class="ups-item">
+      <span class="ups-label">透かし</span>
+      <span class="ups-val">
+        {watermarkLabel(watermark)}
+        {watermarkNote && <span class="ups-note">{watermarkNote}</span>}
+      </span>
+    </div>
+
+    <div class="ups-item">
+      <span class="ups-label">入力素材</span>
+      <span class="ups-val">
+        {inputRiskLabel(policy.inputMaterialRisk)}
+        {policy.inputMaterialNote && <span class="ups-note">{policy.inputMaterialNote}</span>}
+      </span>
+    </div>
+
+    {(policy.rightsStatus || policy.rightsNote) && (
+      <div class="ups-item">
+        <span class="ups-label">生成物の権利まわり</span>
+        <span class="ups-val">
+          {rightsLabel(policy.rightsStatus)}
+          {policy.rightsNote && <span class="ups-note">{policy.rightsNote}</span>}
+        </span>
+      </div>
+    )}
+
+    {(policy.officialSourceUrl || policy.termsUrl) && (
+      <div class="ups-item ups-item--links">
+        <span class="ups-label">公式確認ソース</span>
+        <span class="ups-val ups-links">
+          {policy.officialSourceUrl && (
+            <a href={policy.officialSourceUrl} target="_blank" rel="noopener" class="ups-link">
+              公式情報を確認する <span class="ups-ext">↗</span>
+            </a>
+          )}
+          {policy.termsUrl && (
+            <a href={policy.termsUrl} target="_blank" rel="noopener" class="ups-link">
+              利用規約を確認する <span class="ups-ext">↗</span>
+            </a>
+          )}
+        </span>
+      </div>
+    )}
+
+    {policy.lastReviewed && (
+      <div class="ups-item">
+        <span class="ups-label">最終確認日</span>
+        <span class="ups-val ups-mono">{policy.lastReviewed}</span>
+      </div>
+    )}
+
+  </div>
+
+  <p class="ups-disclaimer">
+    商用利用は、生成物の利用条件と、入力した画像・ロゴ・人物・既存作品などの素材権利を分けて確認する必要があります。プランや用途によって条件が異なる場合があるため、最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。
+  </p>
+</div>
+
+<style>
+  .ups-wrap {
+    margin-top: 28px;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--brand);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background: var(--surface-2);
+    padding: 24px 26px 20px;
+  }
+
+  .ups-head {
+    margin-bottom: 18px;
+  }
+
+  .ups-eyebrow {
+    font-family: var(--f-latin);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .ups-title {
+    font-family: var(--f-jp);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ups-title::before {
+    content: "";
+    width: 4px;
+    height: 16px;
+    border-radius: 2px;
+    background: var(--brand);
+    flex: none;
+  }
+
+  .ups-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 18px;
+  }
+
+  .ups-item {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 10px 16px;
+    align-items: baseline;
+    padding: 11px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .ups-item:last-child {
+    border-bottom: none;
+  }
+
+  .ups-label {
+    font-family: var(--f-jp);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    flex: none;
+  }
+
+  .ups-val {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .ups-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .ups-mono {
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+
+  .ups-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ups-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brand-ink);
+    border: 1px solid color-mix(in srgb, var(--brand) 30%, var(--line));
+    border-radius: 8px;
+    padding: 5px 12px;
+    background: var(--surface);
+    transition: border-color .14s, background .14s;
+    text-decoration: none;
+  }
+
+  .ups-link:hover {
+    background: var(--brand-tint);
+    border-color: var(--brand);
+  }
+
+  .ups-ext {
+    font-size: 11px;
+    color: var(--faint);
+  }
+
+  .ups-disclaimer {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    margin: 0;
+  }
+
+  @media (max-width: 540px) {
+    .ups-item {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+
+    .ups-label {
+      font-size: 11px;
+    }
+
+    .ups-links {
+      flex-direction: column;
+    }
+  }
+</style>

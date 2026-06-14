@@ -48,6 +48,24 @@ useCases:
 limitations:
   - "日本語UIなし（英語インターフェース）"
   - "商用利用時は第三者権利・利用規約の確認が必要"
+usagePolicy:
+  commercialUseStatus: "limited"
+  commercialUseByPlan:
+    free: "公式FAQでは所有権を主張せず利用を制限しない旨が案内されています。ただし法律・第三者の権利・利用規約への準拠はユーザーが確認する必要があります"
+    paid: "有料プランでも基本的な条件は同様とされていますが、プランによる条件の違いは最新の公式情報でご確認ください"
+    enterprise: "要確認"
+  commercialUseNote: "公式FAQでは生成画像の所有権を主張しない旨が説明されています。ただしプラン・生成内容・第三者の権利によって利用条件が異なる場合があります。最新の公式FAQ・利用規約をご確認ください。本記事は法的助言ではありません。"
+  rightsStatus: "unknown"
+  rightsNote: "公式FAQでは所有権を主張しない旨の記載がありますが、著作権帰属の詳細は最新の公式利用規約で確認が必要です。"
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "アップロードする参照画像・素材の権利はユーザーが確認する必要があります。"
+  peopleLogoRisk: "high"
+  peopleLogoNote: "実在の人物・著名人・ブランドロゴを含む生成画像は、肖像権・商標権の観点から別途確認が必要です。本記事は法的助言ではありません。"
+  creditRequiredStatus: "unknown"
+  creditRequiredNote: "クレジット表記義務については公式情報から確認できていません。最新の利用規約をご参照ください。"
+  officialSourceUrl: "https://docs.ideogram.ai/frequently-asked-questions"
+  termsUrl: "https://ideogram.ai/legal/tos"
+  lastReviewed: "2026-06-14"
 reviewed:
   pricing: "2026-05-26"
   terms: "2026-05-26"

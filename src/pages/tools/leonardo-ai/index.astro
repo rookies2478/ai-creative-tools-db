@@ -221,6 +221,9 @@ const jsonLd = JSON.stringify([
         '最新の条件は公式サイトでご確認ください',
       ]}
       watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      usagePolicy={d?.usagePolicy}
+      watermarkRaw={d?.watermark}
+      watermarkConditionRaw={d?.watermarkCondition}
       checklist={[
         { html: '利用プラン（無料 / 有料）' },
         { html: 'Private設定の有無（商用利用には必要とされる）' },

@@ -152,6 +152,9 @@ const jsonLd = JSON.stringify([
           '<b>最新料金は公式サイトでご確認ください</b>',
         ],
       }}
+      usagePolicy={d?.usagePolicy as any}
+      watermarkRaw={d?.watermark}
+      watermarkConditionRaw={d?.watermarkCondition}
       commercial={{
         lead: '全プランでOutput（生成動画）の商用利用制限はないとされていますが、利用規約への準拠・第三者の権利侵害回避が必要です。商用利用前は必ず最新の公式利用規約をご確認ください。',
         points: [

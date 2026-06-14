@@ -149,7 +149,6 @@ const tableRows = [
   { name: 'DALL·E', slug: 'dalle', freeType: 'ChatGPT無料プラン経由（制限あり）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: '最新情報はOpenAI公式サイトをご確認ください。' },
   { name: 'Stable Diffusion', slug: 'stable-diffusion', freeType: 'ローカル実行（環境構築が必要）', watermark: '基本なし（設定による）', japanese: '△', editability: '△（環境依存）', commercialNote: 'モデルごとのライセンス条件を確認してください。' },
   { name: 'Leonardo AI', slug: 'leonardo-ai', freeType: '無料プラン（日次トークン制）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: '有料プランでは条件が変わる場合があります。最新情報は公式サイトをご確認ください。' },
-  { name: 'Midjourney', slug: 'midjourney', freeType: '無料プランなし（有料のみ）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: '公式情報の確認が必要です。プランによって条件が異なります。' },
   { name: 'Fotor AI', slug: 'fotor-ai', freeType: '無料プランあり（Basic）', watermark: '無料プランでは入る場合あり', japanese: '◯', editability: '◯（写真編集・テンプレート連携）', commercialNote: '公式ヘルプとCommercial Useページで案内内容に差異が見られます。商用利用を前提にする場合は最新の公式規約をご確認ください。' },
   { name: 'Gemini画像生成', slug: 'gemini-image-generation', freeType: 'Googleアカウントで利用可能（無料プランあり）', watermark: 'SynthID等の透かしあり', japanese: '◯', editability: '◯（画像編集・スタイル適用）', commercialNote: '用途・プランによって条件が異なる場合があります。最新の公式規約・生成AI禁止利用ポリシーをご確認ください。' },
   { name: 'Brand Studio（旧DreamStudio）', slug: 'dreamstudio', freeType: '無料試用またはCore tier（要公式確認）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: 'DreamStudioからBrand Studioへ移行した可能性があります。Stability AIライセンス・Acceptable Use Policyをご確認ください。' },
@@ -242,6 +241,7 @@ const benchmarkSamples = generatedImages.filter(
 );
 
 const relatedLinks = [
+  { href: '/categories/image-generation/', label: 'AI画像生成ツール一覧を見る' },
   { href: '/conditions/free/', label: '無料枠あり・ツール一覧' },
   { href: '/tools/', label: 'ツール一覧' },
   { href: '/comparisons/', label: '比較表' },

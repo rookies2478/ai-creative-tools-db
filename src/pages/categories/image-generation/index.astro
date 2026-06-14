@@ -48,6 +48,14 @@ const faqs = [
     q: 'AI画像生成ツールで生成した画像の著作権は誰のものですか？',
     a: 'AI生成画像の著作権・所有権の扱いは、ツールのプラン・利用規約・生成に使用した素材の権利状況・各国の法律などによって異なります。本記事は法的助言ではありません。商用利用や重要な場面での利用前には、各ツールの公式利用規約を確認し、必要に応じて専門家へご相談ください。',
   },
+  {
+    q: '透かしなしで使えるAI画像生成ツールはありますか？',
+    a: '透かし（ウォーターマーク）の有無はツールやプランによって異なります。有料プランで透かしなしになるツール、無料プランでも透かしなしの場合があるツールなど、条件はさまざまです。SNS投稿や商用成果物への利用を検討する場合は、利用前に各ツールの公式情報をご確認ください。<a href="/conditions/no-watermark/">透かしなしで使いやすいAIツール</a>もご参照ください。',
+  },
+  {
+    q: '初心者はどのAI画像生成ツールから試すとよいですか？',
+    a: 'デザイン作業と一体化して使いやすいCanva AIやMicrosoft Designerは、初めてAI画像生成を試す方の比較候補として挙げられることがあります。Googleアカウントがあれば手軽に始められるGemini画像生成も候補の一つです。ツールの操作感・生成できる画風・無料枠の条件はそれぞれ異なるため、実際に無料枠で試してみることをおすすめします。商用利用条件は各ツールの公式規約をご確認ください。',
+  },
 ];
 
 const faqJsonLd = JSON.stringify({
@@ -134,13 +142,20 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
           </span>
         </div>
         <h1 class="cig-h1">AI画像生成<span class="phrase-nowrap">ツールを</span><span class="hl">比較する</span></h1>
-        <p class="cig-lead">イラスト、写真風画像、SNS投稿、広告バナー、ブログアイキャッチ、EC商品画像など、作りたい画像に合わせてAI画像生成ツールの選び方を整理します。無料枠・透かし・商用利用条件・日本語対応を横断的に確認できます。</p>
+        <p class="cig-lead">イラスト、写真風画像、SNS投稿、広告バナー、ブログアイキャッチ、YouTubeサムネイル、EC商品画像、デザイン案や企画ラフなど、作りたい画像の用途に合わせてAI画像生成ツールの選び方を整理します。ツールによって無料枠・透かし・商用利用条件・日本語対応・画像編集機能・得意な画風が異なります。無料枠・透かし・商用利用条件・日本語対応を横断的に確認できます。</p>
         <div class="cig-stats">
           <div class="cig-stat"><span class="n">16</span><span class="t">AI画像生成ツール</span></div>
           <div class="cig-stat"><span class="n">6</span><span class="t">用途別に比較</span></div>
-          <div class="cig-stat"><span class="n">7</span><span class="t">よくある質問</span></div>
+          <div class="cig-stat"><span class="n">9</span><span class="t">よくある質問</span></div>
         </div>
       </header>
+
+      <!-- 無料比較CTA -->
+      <div class="cig-free-cta reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        <span>無料で試せるAI画像生成ツールを比較したい方は→</span>
+        <a href="/comparisons/free-ai-image-generators/">無料で使えるAI画像生成ツールを比較する →</a>
+      </div>
 
       <!-- Notice -->
       <div class="cig-notice">
@@ -298,7 +313,15 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
           </li>
           <li class="cig-pcard">
             <span class="pn">6</span>
-            <div class="pt"><h3>生成品質・スタイル</h3><p>フォトリアル・イラスト・アニメ調・ゲームグラフィックなど、ツールごとに得意なスタイルが異なります。目的の用途に合ったサンプルを公式サイトで確認することをおすすめします。</p></div>
+            <div class="pt"><h3>生成品質・スタイル・得意分野</h3><p>フォトリアル・イラスト・アニメ調・ゲームグラフィックなど、ツールごとに得意なスタイルが異なります。写実系・イラスト系・デザイン向けなど用途に合った画風を公式サンプルで確認してから選ぶことをおすすめします。</p></div>
+          </li>
+          <li class="cig-pcard">
+            <span class="pn">7</span>
+            <div class="pt"><h3>文字入り画像・ロゴ風表現への対応</h3><p>YouTubeサムネイルやバナーなど、画像内にテキストを入れたい用途では、文字再現性に強みのあるツール（例：Ideogram）が比較候補になります。日本語テキストの再現性はツールによって差があります。ロゴ風表現・商標的な表現を生成する場合は利用条件の確認が必要です。</p></div>
+          </li>
+          <li class="cig-pcard">
+            <span class="pn">8</span>
+            <div class="pt"><h3>生成サンプルの確認方法</h3><p>1枚の画像サンプルだけでツールの性能を判断することは難しいです。公式サイトのギャラリー・実際に無料枠で試す・複数のプロンプトで試すなど、複数の観点から確認することをおすすめします。</p></div>
           </li>
         </ol>
         <p class="cig-foot reveal">各条件の詳細は各ツールの詳細ページおよび公式サイトでご確認ください。</p>
@@ -823,6 +846,13 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
   .cig-stat + .cig-stat { padding-left: 26px; border-left: 1px solid var(--line); }
   .cig-stat .n { font-family: var(--f-latin); font-weight: 700; font-size: 24px; color: var(--ink); line-height: 1; }
   .cig-stat .t { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+
+  /* 無料比較CTA */
+  .cig-free-cta { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; background: var(--brand-tint); border: 1px solid color-mix(in srgb, var(--brand) 28%, var(--line)); border-radius: var(--radius); padding: 14px 20px; margin: 20px 0 0; font-size: 13.5px; color: var(--brand-ink); }
+  .cig-free-cta svg { width: 16px; height: 16px; flex: none; }
+  .cig-free-cta span { color: var(--ink-soft); }
+  .cig-free-cta a { font-weight: 700; color: var(--brand-ink); border-bottom: 1px solid color-mix(in srgb, var(--brand) 40%, transparent); }
+  .cig-free-cta a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   /* Notice */
   .cig-notice { display: flex; align-items: flex-start; gap: 14px; background: var(--warn-tint); border: 1px solid color-mix(in srgb, var(--warn) 28%, var(--line)); border-radius: var(--radius); padding: 18px 22px; margin: 28px 0 0; }

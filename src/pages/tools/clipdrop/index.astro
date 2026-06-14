@@ -23,7 +23,7 @@ const jsonLd = JSON.stringify([
     name: 'Clipdrop',
     operatingSystem: 'Web',
     applicationCategory: 'DesignApplication',
-    description: '背景削除・画像拡張・アップスケール・不要物削除・文字削除・画像生成など、複数のAI画像編集機能をブラウザ上で使えるオールインワン型ツール。',
+    description: '背景削除・画像拡張・アップスケール・不要物削除・文字削除などのAI画像編集機能をブラウザ上で使えるオールインワン型ツール。',
     url: 'https://clipdrop.co/',
   },
 ]);
@@ -53,7 +53,7 @@ const jsonLd = JSON.stringify([
       category="AI画像編集・生成"
       checkedDate={d?.lastReviewed ?? '2026-06-06'}
       headingHtml='Clipdropの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="背景削除・画像拡張・アップスケール・不要物削除・文字削除などのAI画像編集機能を中心に使えるオールインワン型ツールです。Freeプランで画像編集系機能の一部を試せますが、text-to-image生成（Stable Diffusion XL）の無料版での利用可否は要公式確認です。商用利用条件は公式Termsで確認が必要です。"
+      lead="背景削除・画像拡張・アップスケール・不要物削除・文字削除などのAI画像編集機能を中心に使えるオールインワン型ツールです。無料枠では一部の画像編集系機能を試せる場合がありますが、管理者環境ではtext-to-image生成（Stable Diffusion XL）は有料版でのみ利用できる状態を確認しました。最新の利用条件は公式サイトをご確認ください。商用利用条件は公式Termsで確認が必要です。"
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '要公式確認' } },
         { lb: '無料枠', badge: { s: 'cond', label: '機能ごとに回数制限あり' } },
@@ -71,7 +71,7 @@ const jsonLd = JSON.stringify([
         },
         {
           title: '無料枠', badge: { s: 'cond', label: '機能ごとに回数制限あり' },
-          det: '公式料金ページではFreeプランが案内されており、Background Removal・Image Upscaler・Cleanup・Relightなどを20回/24時間、Text Removerを50回/24時間の枠で試せます。利用回数・対象機能・制限は変更される可能性があります。',
+          det: '公式料金ページではFreeプランが案内されており、Background Removal・Image Upscaler・Cleanup・Relightなどの画像編集系機能を20回/24時間、Text Removerを50回/24時間の枠で試せます。ただし、管理者環境ではtext-to-image生成（Stable Diffusion XL）は有料版でのみ利用できる状態を確認しました。対象機能や回数は変更される場合があります。',
         },
         {
           title: '料金目安', sum: 'Proプランの料金は公式サイトで要確認', sumMono: false,
@@ -134,7 +134,7 @@ const jsonLd = JSON.stringify([
         note: '※ 値は確認日時点の参考値です。最新情報は必ず公式サイトでご確認ください。',
       }}
       about={[
-        'Clipdropは、背景削除・画像拡張・アップスケール・不要物削除・文字削除などのAI画像編集機能を中心に使えるオールインワン型ツールです。インストール不要でWebブラウザからアクセスでき、Freeプランで画像編集系機能の一部を試すことができます。text-to-image生成機能（Stable Diffusion XL）も搭載されていますが、管理者環境では無料版で同一条件の生成を確認できませんでした。最新の利用条件は公式サイトでご確認ください。',
+        'Clipdropは、背景削除・画像拡張・アップスケール・不要物削除・文字削除などのAI画像編集機能を中心に使えるオールインワン型ツールです。インストール不要でWebブラウザからアクセスでき、無料枠では一部の画像編集系機能を試せる場合があります。なお、管理者環境ではtext-to-image生成機能（Stable Diffusion XL）は有料版でのみ利用できる状態を確認しました。最新の利用条件は公式サイトでご確認ください。',
         'Clipdropは2023年にStability AIに買収され、2024年にJasper.aiに統合されました。現在もclipdrop.coでサービスは継続されていますが、<b>APIはJasper APIに移行</b>しています。<b>商用利用条件や権利関係は公式Termsでの確認が必要</b>で、断定しにくい状況です。',
       ]}
       aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
@@ -228,7 +228,7 @@ const jsonLd = JSON.stringify([
         { tag: 'ツール', label: 'Clipdropツール一覧（公式）', href: 'https://clipdrop.co/tools' },
       ]}
       faqs={[
-        { q: 'Clipdropは無料で使えますか？', a: '公式料金ページではFreeプランが案内されており、Background Removal・Image Upscaler・Cleanup・Relightなどの機能を無料で試せる枠が示されています。ただし利用回数・対象機能・制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。' },
+        { q: 'Clipdropは無料で使えますか？', a: '公式料金ページではFreeプランが案内されており、Background Removal・Image Upscaler・Cleanup・Relightなどの画像編集系機能を試せる枠が示されています。ただし、管理者環境ではtext-to-image生成（Stable Diffusion XL）は有料版でのみ利用できる状態を確認しました。対象機能や利用回数は変更される可能性があるため、最新の状況は公式サイトでご確認ください。' },
         { q: 'Clipdropは商用利用できますか？', a: '公式Terms（clipdrop.co/terms-visitor）ではサービス利用条件を確認できますが、生成・編集した画像の商用利用可否や権利関係については確認時点で断定しにくい状況です。商用利用を前提にする場合は最新の公式Termsをご確認ください。このページは法的助言ではありません。' },
         { q: 'Clipdropは日本語で使えますか？', a: '公式情報のみでは日本語UI・日本語プロンプトへの対応を明確に確認できません。最新の状況は公式サイトでご確認ください。' },
         { q: '透かしは入りますか？', a: 'Freeプランの透かし有無は機能・プランにより異なる可能性があります。最新の条件は公式画面でご確認ください。' },

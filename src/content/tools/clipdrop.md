@@ -1,10 +1,10 @@
 ---
 name: "Clipdrop"
-shortDescription: "背景削除・画像拡張・アップスケール・不要物削除・文字削除などのAI画像編集機能を中心に使えるオールインワン型ツール。text-to-image生成機能（Stable Diffusion XL）もありますが、無料版での利用可否は要確認です。"
+shortDescription: "背景削除・画像拡張・アップスケール・不要物削除・文字削除などのAI画像編集機能を中心に使えるオールインワン型ツール。text-to-image生成機能（Stable Diffusion XL）もありますが、管理者環境では有料版でのみ利用できる状態を確認しました。最新の利用条件は公式サイトをご確認ください。"
 category: "image"
 officialUrl: "https://clipdrop.co/"
 freePlan: "limited"
-freePlanNote: "公式料金ページではFreeプランが案内されており、Background Removal（20回/24時間）・Image Upscaler x2（20回/24時間）・Cleanup（20回/24時間）・Relight（20回/24時間）・Text Remover（50回/24時間）などの画像編集機能の無料利用枠が示されています。なお、text-to-image生成（Stable Diffusion XL）については、管理者環境では無料版で同一条件の生成を確認できませんでした。利用回数・対象機能・制限は変更される可能性があるため、最新の公式情報をご確認ください。"
+freePlanNote: "無料枠では一部の画像編集系機能を試せる場合があります。公式料金ページではBackground Removal（20回/24時間）・Image Upscaler x2（20回/24時間）・Cleanup（20回/24時間）・Relight（20回/24時間）・Text Remover（50回/24時間）などの無料利用枠が示されています。ただし、管理者環境ではtext-to-image生成（Stable Diffusion XL）は有料版でのみ利用できる状態を確認しました。対象機能や回数は変更される場合があるため、最新情報は公式サイトをご確認ください。"
 commercialUse: "unknown"
 commercialUseNote: "公式Terms（https://clipdrop.co/terms-visitor）ではサービス利用条件を確認できますが、生成・編集した画像の商用利用可否や権利関係については確認時点で断定しにくい状況です。商用利用を前提にする場合は、最新の公式Terms・元画像の権利・第三者権利を必ず確認してください。本記事は法的助言ではありません。"
 japaneseUi: false
@@ -100,7 +100,7 @@ sources:
     url: "https://clipdrop.co/apis"
 faqs:
   - question: "無料で使えますか？"
-    answer: "公式料金ページではFreeプランが案内されており、Background Removal・Image Upscaler・Cleanup・Relightなどの機能を無料で試せる枠が示されています。ただし利用回数・対象機能・制限は変更される可能性があるため、最新の状況はClipdrop公式サイトでご確認ください。"
+    answer: "公式料金ページではFreeプランが案内されており、Background Removal・Image Upscaler・Cleanup・Relightなどの画像編集系機能を試せる枠が示されています。ただし、管理者環境ではtext-to-image生成（Stable Diffusion XL）は有料版でのみ利用できる状態を確認しました。対象機能や利用回数は変更される可能性があるため、最新の状況はClipdrop公式サイトでご確認ください。"
   - question: "商用利用できますか？"
     answer: "公式Terms（https://clipdrop.co/terms-visitor）ではサービス利用条件を確認できますが、生成・編集した画像の商用利用可否や権利関係については確認時点で断定しにくい状況です。商用利用を前提にする場合は最新の公式Termsをご確認ください。このページは法的助言ではありません。"
   - question: "日本語で使えますか？"
@@ -119,7 +119,7 @@ faqs:
 
 ## Clipdropとは
 
-Clipdropは、背景削除・画像拡張・アップスケール・不要物削除・文字削除などのAI画像編集機能を中心に使えるオールインワン型ツールです。インストール不要でWebブラウザからアクセスでき、Freeプランで画像編集系機能の一部を試すことができます。ECサイトの商品画像加工・SNS素材の編集・広告バナーの制作など、実務向けの用途に向いています。なお、text-to-image生成機能（Stable Diffusion XL）については、管理者環境では無料版で同一条件の生成を確認できませんでした。利用可否・条件は公式サイトでご確認ください。
+Clipdropは、背景削除・画像拡張・アップスケール・不要物削除・文字削除などのAI画像編集機能を中心に使えるオールインワン型ツールです。インストール不要でWebブラウザからアクセスでき、Freeプランで画像編集系機能の一部を試すことができます。ECサイトの商品画像加工・SNS素材の編集・広告バナーの制作など、実務向けの用途に向いています。なお、管理者環境ではtext-to-image生成機能（Stable Diffusion XL）は有料版でのみ利用できる状態を確認しました。最新の利用条件は公式サイトでご確認ください。
 
 > **サービス体制について：** Clipdropは2023年にStability AIに買収され、2024年にJasper.aiに統合されました。現在も[clipdrop.co](https://clipdrop.co/)でサービスは継続されていますが、APIはJasper APIに移行しています。今後のサービス方針については公式アナウンスをご確認ください。
 
@@ -130,7 +130,7 @@ Clipdropは、背景削除・画像拡張・アップスケール・不要物削
 - **Cleanup（不要物削除）** — 写り込んだ不要なオブジェクトや人物を削除
 - **Text Remover（文字削除）** — 画像内のテキストを削除
 - **Relight（再ライティング）** — 画像の光源を調整・再構成
-- **Stable Diffusion XL（画像生成）** — テキストプロンプトから画像を生成（無料版での利用可否は要公式確認）
+- **Stable Diffusion XL（画像生成）** — テキストプロンプトから画像を生成（管理者環境では有料版でのみ利用できる状態を確認。最新条件は公式サイトをご確認ください）
 - **Uncrop（画像拡張）** — 画像の外側を生成して拡張
 - **Sky Replacer（空の置き換え）** — 写真内の空を置き換え
 - **API提供** — 各機能をAPIから呼び出し可能（開発者向け）

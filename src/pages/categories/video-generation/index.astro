@@ -33,6 +33,18 @@ const faqs = [
     q: '日本語プロンプトでも使えますか？',
     a: '日本語プロンプトに対応しているとされるツールとしてKling AI・Haiper・CapCut AIなどが挙げられます。英語UIのツールでも日本語プロンプトを入力できる場合がありますが、細かい表現や映像スタイルの指定では英語プロンプトの方が意図を伝えやすいケースがあります。日本語UIに対応しているのは確認時点ではCapCut AIのみです。最新の対応状況は各公式サイトをご確認ください。',
   },
+  {
+    q: '画像から動画を作れるAIツールはありますか？',
+    a: 'Runway・Pika・Kling AI・Luma AI・Haiper などが画像→動画生成（image-to-video）に対応しているとされています。静止画にモーションを加えてSNS用の短尺動画やコンセプトムービーを作る用途で候補に挙がることがあります。入力画像に人物・ブランドロゴ・第三者素材が含まれる場合は、各ツールの利用条件に加えて権利関係の別途確認が必要です。最新情報は各公式サイトをご確認ください。',
+  },
+  {
+    q: '透かしなしで使えるAI動画生成ツールはありますか？',
+    a: '透かしの有無はツールおよびプランによって異なります。公式情報では、Runwayは無料プランで透かしありとされています。Luma AIは有料のPlus以上で透かしなしが案内されています。Kling AIは有料プランで透かしなしが案内されているとされています。透かし条件はSNS投稿・商用利用前に必ず各公式サイトをご確認ください。<a href="/conditions/no-watermark/">透かしなしで使いやすいAIツール</a>もご参照ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '生成動画の著作権や肖像権はどう確認すればよいですか？',
+    a: 'AI生成動画の著作権・所有権の扱いはツール・プラン・利用規約・各国の法律によって異なります。公式情報では、RunwayはユーザーがOwnershipを保持するとされていますが、その他のツールは規約上確認が必要なものが多い状況です。また、生成動画に実在の人物・著名人の顔・ブランドロゴ・商標・第三者の著作物が含まれる場合は、ツールの利用規約とは別に肖像権・商標権・著作権の観点から個別確認が必要です。本記事は法的助言ではありません。重要な商用利用の場面では専門家（弁護士等）へのご相談を推奨します。<a href="/guides/commercial-use-copyright/">商用利用・著作権の考え方ガイド</a>もご参照ください。',
+  },
 ];
 
 const faqJsonLd = JSON.stringify({
@@ -49,10 +61,10 @@ const faqJsonLd = JSON.stringify({
 });
 
 const videoToolCards = [
-  { name: 'Runway',    slug: 'runway',    initial: 'R', role: '動画生成', commercial: '要確認', free: '要確認', jp: '要確認', note: 'プランによる', price: '$12/月（Standard・年払い）/ $14/月（月払い）', platforms: 'Web、API', date: '2026-06-08' },
-  { name: 'Pika',      slug: 'pika',      initial: 'P', role: '動画生成', commercial: '要確認', free: '要確認', jp: '要確認', note: 'プランによる', price: '$8/月（年払い）', platforms: 'Web', date: '2026-06-08' },
-  { name: 'Kling AI',  slug: 'kling-ai',  initial: 'K', role: '動画生成', commercial: '要確認', free: '要確認', jp: '要確認', note: 'プランによる', price: '$6.99〜（要公式確認）', platforms: 'Web', date: '2026-06-08' },
-  { name: 'Luma AI',   slug: 'luma-ai',   initial: 'L', role: '動画生成', commercial: '要確認', free: '無料枠あり', jp: '要確認', note: '透かしあり', price: '$30/月（Plus・月払い）', platforms: 'Web、API', date: '2026-06-08' },
+  { name: 'Runway',    slug: 'runway',    initial: 'R', role: '動画生成', commercial: '全プランで案内あり（透かし等：要確認）', free: '要確認', jp: '要確認', note: 'プランによる', price: '$12/月（Standard・年払い）/ $14/月（月払い）', platforms: 'Web、API', date: '2026-06-08' },
+  { name: 'Pika',      slug: 'pika',      initial: 'P', role: '動画生成', commercial: '無料:不可 / 有料:一部で案内（要確認）', free: '要確認', jp: '要確認', note: 'プランによる', price: '$8/月（年払い）', platforms: 'Web', date: '2026-06-08' },
+  { name: 'Kling AI',  slug: 'kling-ai',  initial: 'K', role: '動画生成', commercial: '無料:非商用のみ / 有料Standard以上:案内あり', free: '要確認', jp: '要確認', note: 'プランによる', price: '$6.99〜（要公式確認）', platforms: 'Web', date: '2026-06-08' },
+  { name: 'Luma AI',   slug: 'luma-ai',   initial: 'L', role: '動画生成', commercial: '無料:非商用のみ / 有料Plus以上:案内あり', free: '無料枠あり', jp: '要確認', note: '無料:透かしあり', price: '$30/月（Plus・月払い）', platforms: 'Web、API', date: '2026-06-08' },
   { name: 'Hailuo AI', slug: 'hailuo-ai', initial: 'H', role: '動画生成', commercial: '要確認', free: '要確認', jp: '要確認', note: 'プランによる', price: '要公式確認', platforms: 'Web', date: '2026-06-08' },
   { name: 'Haiper',    slug: 'haiper',    initial: 'H', role: '動画生成', commercial: '要確認', free: '無料枠あり', jp: '要確認', note: '透かしあり', price: '要公式確認', platforms: 'Web、iOS、API', date: '2026-06-08' },
   { name: 'Vidu AI',   slug: 'vidu-ai',   initial: 'V', role: '動画生成', commercial: '要確認', free: '要確認', jp: '要確認', note: 'プランによる', price: '要公式確認', platforms: 'Web', date: '2026-06-08' },
@@ -69,7 +81,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
 
 <BaseLayout
   title="AI動画生成ツールを比較する｜用途別・商用利用・日本語対応"
-  description="AI動画生成ツール（Runway・Pika・Kling AI・Luma AIなど）をテキスト→動画・画像→動画・無料枠・透かし・商用利用条件・日本語対応で比較する一覧ページです。用途別導線・比較表付き。最新情報は各公式サイトをご確認ください。"
+  description="AI動画生成ツール（Runway・Pika・Kling AI・Luma AIなど）をテキスト→動画・画像→動画・SNS動画・YouTubeショート・広告動画・Bロールなど用途別に比較。無料枠・透かし・商用利用条件・日本語対応を横断確認できます。最新情報は各公式サイトをご確認ください。"
   canonicalPath="/categories/video-generation/"
   jsonLd={faqJsonLd}
 >
@@ -116,11 +128,11 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
           </span>
         </div>
         <h1 class="cvg-h1">AI動画生成ツールを<span class="hl">比較する</span></h1>
-        <p class="cvg-lead">テキストから動画、画像から動画、短尺動画、YouTube向け動画など、作りたい映像に合わせてAI動画生成ツールの選び方を整理します。無料枠・透かし・商用利用条件・日本語対応を横断的に確認できます。</p>
+        <p class="cvg-lead">SNS動画、YouTubeショート、広告動画、商品紹介、映像ラフ、企画提案、Bロール作成など、テキストや画像から短尺動画を生成するAIツールを比較整理します。ツールによって無料枠・生成秒数・透かし・解像度・商用利用条件・日本語プロンプト対応・画像から動画への対応が異なります。無料枠・透かし・商用利用条件・日本語対応を横断的に確認できます。商用利用・著作権・肖像権・商標・入力素材は別途確認が必要です。</p>
         <div class="cvg-stats">
           <div class="cvg-stat"><span class="n">8</span><span class="t">AI動画生成ツール</span></div>
           <div class="cvg-stat"><span class="n">6</span><span class="t">用途別に比較</span></div>
-          <div class="cvg-stat"><span class="n">5</span><span class="t">よくある質問</span></div>
+          <div class="cvg-stat"><span class="n">8</span><span class="t">よくある質問</span></div>
         </div>
       </header>
 
@@ -282,7 +294,15 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
           </li>
           <li class="cvg-pcard">
             <span class="pn">7</span>
-            <div class="pt"><h3>用途との相性</h3><p>SNS向け短尺・YouTube・広告動画・顔出しなし動画・ナレーション動画など、目的によって向いているツールが異なります。</p></div>
+            <div class="pt"><h3>カメラワーク・モーション制御</h3><p>ズーム・パン・ティルトなどのカメラモーションを指定できるツール（Runwayのカメラコントロール機能など）もあります。細かいカメラワーク指定が必要な用途では、対応機能を事前に確認してください。</p></div>
+          </li>
+          <li class="cvg-pcard">
+            <span class="pn">8</span>
+            <div class="pt"><h3>入力素材・人物・ロゴの扱い</h3><p>既存の画像・動画を入力として使う場合は素材の権利関係を確認する必要があります。人物・著名人・ブランドロゴ・商標・既存の著作物を含む素材の利用は、ツールの利用規約とは別に肖像権・商標権・著作権等の観点から個別確認が必要です。本ページは法的助言ではありません。</p></div>
+          </li>
+          <li class="cvg-pcard">
+            <span class="pn">9</span>
+            <div class="pt"><h3>生成サンプルの確認方法</h3><p>1本の動画サンプルだけでツールの性能を断定することは難しいです。公式ギャラリー・実際に無料枠で試す・複数のプロンプトで試すなど、複数の観点から確認することをおすすめします。今後、当サイトでも各ツールで作成した短尺の実例動画を掲載する場合があります。ただし、1本のサンプルだけでツール性能を断定するものではありません。</p></div>
           </li>
         </ol>
         <p class="cvg-foot reveal">各条件の詳細は各ツールの詳細ページおよび公式サイトでご確認ください。</p>

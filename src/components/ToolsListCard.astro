@@ -74,6 +74,24 @@ function condClass(field: string, val: string): string {
   return 'na';
 }
 
+const USAGE_POLICY_SUMMARIES: Record<string, string> = {
+  'adobe-firefly':            '有料:商用案内あり / 無料:条件付き',
+  'runway':                   '全プランで商用案内あり（入力素材は別確認）',
+  'midjourney':               '無料プランなし / 有料:商用案内あり',
+  'kling-ai':                 '無料:商用不可 / 有料(Standard以上):案内あり',
+  'pika':                     '無料:商用不可 / 有料:条件付き（要確認）',
+  'luma-ai':                  '無料:商用不可 / 有料(Plus以上):案内あり',
+  'canva-ai-image-generator': '条件付き / AI生成明示等が条件の場合あり',
+  'leonardo-ai':              '無料:商用不可 / 有料+Private設定:案内あり',
+  'ideogram':                 '条件付き（要公式確認）',
+  'stable-diffusion':         'モデル・利用形態による（要個別確認）',
+};
+
+const usagePolicySummary: string | null =
+  (data.usagePolicy != null && USAGE_POLICY_SUMMARIES[slug] != null)
+    ? USAGE_POLICY_SUMMARIES[slug]
+    : null;
+
 const platformLabels: Record<string, string> = {
   web: 'Web', ios: 'iOS', android: 'Android', api: 'API',
   discord: 'Discord', desktop: 'Desktop', local: 'Local',
@@ -133,6 +151,13 @@ const displayPlatforms = (data.platforms ?? []).map((p: string) => platformLabel
       <span class="cv"><span class="d"></span>{wmVal}</span>
     </span>
   </div>
+
+  {usagePolicySummary && (
+    <div class="tool-usage-summary">
+      <span class="us-label">商用利用</span>
+      <span class="us-value">{usagePolicySummary}</span>
+    </div>
+  )}
 
   {displayPlatforms.length > 0 && (
     <div class="tool-platforms">

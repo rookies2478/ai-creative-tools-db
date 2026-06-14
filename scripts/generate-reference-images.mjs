@@ -1,3 +1,5 @@
+// 管理者PCローカル専用の制作補助スクリプトです。本番フロントエンド・buildプロセスからは呼び出しません。
+// HF_TOKEN やAPIキーをコード・ログ・フロントエンドに露出させないでください。
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';

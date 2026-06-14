@@ -211,6 +211,7 @@ const jsonLd = JSON.stringify([
         '透かしの有無はプランによって異なります',
       ]}
       watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      usagePolicy={d?.usagePolicy}
       checklist={[
         { html: '利用プランが有料プランかどうか（無料プランは商用不可）' },
         { html: '最新のPika利用規約・商用利用条件を公式サイトで確認したか' },

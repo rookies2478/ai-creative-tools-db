@@ -313,7 +313,7 @@ export const generatedImages: GeneratedImage[] = [
     negativePrompt: 'text, letters, words, logo, watermark, trademark, brand mark, celebrity, real person, existing character, distorted hands, face, low quality, blurry, extra objects, messy layout, medical, legal, financial, violent, sexual',
     model: 'Brand Studio',
     provider: 'Stability AI',
-    modelUrl: 'https://dreamstudio.ai/',
+    modelUrl: 'https://stability.ai/brandstudio',
     generatedAt: '2026-06-14',
     reviewedAt: '2026-06-14',
     pageSlug: 'dreamstudio',

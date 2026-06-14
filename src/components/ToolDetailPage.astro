@@ -1,5 +1,7 @@
 ---
 import type { GeneratedImage } from '../data/generatedImages';
+import type { GeneratedVideo } from '../data/generatedVideos';
+import GeneratedVideoSample from './GeneratedVideoSample.astro';
 import UsagePolicySummary from './UsagePolicySummary.astro';
 import type { UsagePolicyData, LabelOverrides } from './UsagePolicySummary.astro';
 /*
@@ -79,6 +81,7 @@ export interface Props {
   conditions?: TagLink[];
   toolsBase?: string;
   sampleImage?: GeneratedImage | null;
+  sampleVideo?: GeneratedVideo | null;
 }
 
 const {
@@ -127,6 +130,7 @@ const {
   conditions = [],
   toolsBase = '/tools/',
   sampleImage = null,
+  sampleVideo = null,
 } = Astro.props as Props;
 
 const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
@@ -183,6 +187,12 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
           )}
         </figcaption>
       </figure>
+    </div>
+  )}
+
+  {sampleVideo && (
+    <div class="tdp-sample-wrap">
+      <GeneratedVideoSample video={sampleVideo} />
     </div>
   )}
 

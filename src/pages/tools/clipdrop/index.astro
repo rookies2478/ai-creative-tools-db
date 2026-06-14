@@ -53,7 +53,7 @@ const jsonLd = JSON.stringify([
       category="AI画像編集・生成"
       checkedDate={d?.lastReviewed ?? '2026-06-06'}
       headingHtml='Clipdropの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="背景削除・画像拡張・アップスケール・不要物削除・文字削除・画像生成など、複数のAI画像編集機能をブラウザ上で使えるオールインワン型ツールです。Freeプランで主要機能の一部を試せますが、商用利用条件は公式Termsで確認が必要です。"
+      lead="背景削除・画像拡張・アップスケール・不要物削除・文字削除などのAI画像編集機能を中心に使えるオールインワン型ツールです。Freeプランで画像編集系機能の一部を試せますが、text-to-image生成（Stable Diffusion XL）の無料版での利用可否は要公式確認です。商用利用条件は公式Termsで確認が必要です。"
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '要公式確認' } },
         { lb: '無料枠', badge: { s: 'cond', label: '機能ごとに回数制限あり' } },
@@ -134,7 +134,7 @@ const jsonLd = JSON.stringify([
         note: '※ 値は確認日時点の参考値です。最新情報は必ず公式サイトでご確認ください。',
       }}
       about={[
-        'Clipdropは、背景削除・画像拡張・アップスケール・不要物削除・文字削除・画像生成など、複数のAI画像編集機能をブラウザ上でまとめて利用できるオールインワン型ツールです。インストール不要でWebブラウザからアクセスでき、Freeプランで主要機能の一部を試すことができます。',
+        'Clipdropは、背景削除・画像拡張・アップスケール・不要物削除・文字削除などのAI画像編集機能を中心に使えるオールインワン型ツールです。インストール不要でWebブラウザからアクセスでき、Freeプランで画像編集系機能の一部を試すことができます。text-to-image生成機能（Stable Diffusion XL）も搭載されていますが、管理者環境では無料版で同一条件の生成を確認できませんでした。最新の利用条件は公式サイトでご確認ください。',
         'Clipdropは2023年にStability AIに買収され、2024年にJasper.aiに統合されました。現在もclipdrop.coでサービスは継続されていますが、<b>APIはJasper APIに移行</b>しています。<b>商用利用条件や権利関係は公式Termsでの確認が必要</b>で、断定しにくい状況です。',
       ]}
       aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}

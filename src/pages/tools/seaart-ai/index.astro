@@ -2,10 +2,18 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+import { generatedImages } from '../../../data/generatedImages';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'seaart-ai');
 const d = entry?.data;
+const toolSlug = 'seaart-ai';
+const sampleImage = generatedImages.find((img) =>
+  img.sampleType === 'tool-output' &&
+  img.sourceToolSlug === toolSlug &&
+  img.isSameToolAsPage === true &&
+  img.promptVersion === 'image-tool-benchmark-v1'
+) ?? null;
 
 const jsonLd = JSON.stringify([
   {
@@ -49,6 +57,7 @@ const jsonLd = JSON.stringify([
 
   <div class="tdp-wrap">
     <ToolDetailPage
+      sampleImage={sampleImage}
       toolName="SeaArt AI"
       category="AI画像生成・クリエイティブプラットフォーム"
       checkedDate={d?.lastReviewed ?? '2026-06-06'}

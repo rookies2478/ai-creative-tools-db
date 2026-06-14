@@ -2,10 +2,15 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+import { generatedImages } from '../../../data/generatedImages';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'midjourney');
 const d = entry?.data;
+const sampleImage = generatedImages.find((img) =>
+  img.pageSlug === 'midjourney' &&
+  img.sampleType === 'reference-visual'
+) ?? null;
 
 const jsonLd = JSON.stringify([
   {
@@ -49,6 +54,7 @@ const jsonLd = JSON.stringify([
 
   <div class="tdp-wrap">
     <ToolDetailPage
+      sampleImage={sampleImage}
       toolName="Midjourney"
       category="AI画像生成"
       checkedDate={d?.lastReviewed ?? '2026-06-06'}

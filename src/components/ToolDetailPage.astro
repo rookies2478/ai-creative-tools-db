@@ -163,8 +163,12 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
       <figure class="tdp-sample-fig">
         <img src={sampleImage.file} alt={sampleImage.alt} width="800" height="450" loading="lazy" decoding="async" class="tdp-sample-img" />
         <figcaption class="tdp-sample-cap">
-          <span class="tdp-sample-label">実例サンプル（参考）</span>
-          <p class="tdp-sample-note">この画像は、管理者が本ページで紹介しているツールを使い、共通プロンプトをもとに作成した実例サンプルです。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。商用利用条件は公式情報をご確認ください。本記事は法的助言ではありません。</p>
+          <span class="tdp-sample-label">{sampleImage.isSameToolAsPage ? 'このツールで作成した実例サンプル' : 'AI生成サンプル（参考）'}</span>
+          {sampleImage.isSameToolAsPage ? (
+            <p class="tdp-sample-note">この画像は、管理者が本ページで紹介しているツールを使い、共通プロンプトをもとに作成した実例サンプルです。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。商用利用条件は公式情報をご確認ください。本記事は法的助言ではありません。</p>
+          ) : (
+            <p class="tdp-sample-note">この画像は本ページで紹介しているツールの公式出力・代表結果・実例ではありません。参考ビジュアルとして掲載しています。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。商用利用条件は公式情報をご確認ください。本記事は法的助言ではありません。</p>
+          )}
         </figcaption>
       </figure>
     </div>

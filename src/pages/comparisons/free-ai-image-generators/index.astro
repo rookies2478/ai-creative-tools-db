@@ -13,6 +13,13 @@ const toolEntries = await Promise.all([
   getEntry('tools', 'midjourney'),
   getEntry('tools', 'fotor-ai'),
   getEntry('tools', 'gemini-image-generation'),
+  getEntry('tools', 'dreamstudio'),
+  getEntry('tools', 'ideogram'),
+  getEntry('tools', 'microsoft-designer'),
+  getEntry('tools', 'nightcafe'),
+  getEntry('tools', 'playground-ai'),
+  getEntry('tools', 'seaart-ai'),
+  getEntry('tools', 'tensor-art'),
 ]);
 const toolDates = toolEntries.map(t => t?.data.lastReviewed).filter(Boolean) as string[];
 const latestDate = toolDates.length ? toolDates.sort().at(-1)! : null;
@@ -78,6 +85,62 @@ const tools = [
     bestFor: 'Googleアカウントをすでに持っている方・日本語UIで手軽に試したい方・SNS画像やプレゼン素材のアイデア出しをしたい方',
     caution: 'SynthIDによる目に見えない透かし、および目に見える透かしが使用される場合があります。透かしの扱い・商用利用の条件は、用途・プランによって異なる場合があります。商用利用を前提にする場合は、最新の公式規約・生成AI禁止利用ポリシーをご確認ください。本記事は法的助言ではありません。',
   },
+  {
+    name: 'Brand Studio（旧DreamStudio）',
+    slug: 'dreamstudio',
+    freeNote: '無料試用またはCore tierの案内あり（要公式確認）',
+    point: '公式情報ではBrand Studioとして案内されています（旧DreamStudio）。Stable Diffusion系モデルをブラウザ上で使えるStability AI公式サービスです。無料試用やCore tierの案内がありますが、プランや条件は変わる場合があります。最新情報は公式サイトをご確認ください。',
+    bestFor: 'Stable Diffusion系モデルをブラウザで試したい方・プロンプト調整を実験したい方',
+    caution: 'DreamStudioからBrand Studioへ移行した可能性があります。プランや条件は変更される場合があるため、最新情報は必ず公式サイトをご確認ください。商用利用条件はStability AIライセンス・Acceptable Use Policyをご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    name: 'Ideogram',
+    slug: 'ideogram',
+    freeNote: '無料プランあり（生成回数に制限）',
+    point: '無料プランでもAI画像生成を試せます。テキストレンダリング（画像内に文字を生成）に強みがあるとされています。生成回数・機能・商用利用条件はプランによって異なります。最新情報は公式サイトをご確認ください。',
+    bestFor: '画像内に文字を含むビジュアルを生成したい方・ロゴ案・サムネイルのアイデア出し',
+    caution: '無料プランの生成回数・商用利用条件は変更される場合があります。公式サイト・利用規約をご確認ください。',
+  },
+  {
+    name: 'Microsoft Designer',
+    slug: 'microsoft-designer',
+    freeNote: '無料プランあり（Microsoftアカウントで利用可能）',
+    point: 'Microsoftアカウントがあれば無料で利用を開始できます。DALLEベースの画像生成とデザインテンプレートが組み合わさっています。日本語UIにも対応しており、SNS用・プレゼン用ビジュアルの作成に向いています。生成回数・機能・商用利用条件はプランや時期によって変わる場合があります。',
+    bestFor: 'Microsoftアカウントをすでに持っている方・デザインテンプレートと組み合わせたい方・日本語UIで手軽に試したい方',
+    caution: '無料プランの生成回数・商用利用条件は変更される場合があります。公式サイト・利用規約をご確認ください。',
+  },
+  {
+    name: 'NightCafe',
+    slug: 'nightcafe',
+    freeNote: '無料クレジットあり（デイリー付与）',
+    point: '無料クレジットが毎日付与されます。複数のAIモデルを選択できるのが特徴で、様々な画風の画像生成を試せます。コミュニティ機能もあります。クレジット数・機能・商用利用条件はプランによって異なります。',
+    bestFor: '複数モデルを比較したい方・AI画像生成のコミュニティに参加したい方',
+    caution: '無料クレジット数・商用利用条件は変更される場合があります。公式サイト・利用規約をご確認ください。',
+  },
+  {
+    name: 'Playground AI',
+    slug: 'playground-ai',
+    freeNote: '無料プランあり（生成回数に制限）',
+    point: '無料プランでも一定数の画像生成が可能です。高品質なリアル系画像の生成に向いているとされています。生成回数・機能・商用利用条件はプランによって異なります。最新情報は公式サイトをご確認ください。',
+    bestFor: 'リアル系・フォト調の画像生成を試したい方・無料でクオリティの高い生成を試したい方',
+    caution: '無料プランの生成回数・商用利用条件は変更される場合があります。公式サイト・利用規約をご確認ください。',
+  },
+  {
+    name: 'SeaArt AI',
+    slug: 'seaart-ai',
+    freeNote: '無料プランあり（スタミナ制）',
+    point: '無料プランでもスタミナが付与され、AI画像生成を試せます。アニメ・イラスト系の画風が豊富で、キャラクター系の生成を試したい方の候補になります。日本語UIに対応しています。スタミナ数・機能・商用利用条件はプランによって異なります。',
+    bestFor: 'アニメ・イラスト系の画像生成を試したい方・日本語UIで始めたい方',
+    caution: '無料プランのスタミナ数・商用利用条件は変更される場合があります。公式サイト・利用規約をご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    name: 'Tensor Art',
+    slug: 'tensor-art',
+    freeNote: '無料プランあり（クレジット制）',
+    point: '無料クレジットで画像生成を試せます。Stable Diffusion系のカスタムモデルを多数選択できるのが特徴です。アニメ・イラスト・リアル系など幅広い画風に対応しています。クレジット数・機能・商用利用条件はプランによって異なります。',
+    bestFor: 'カスタムモデルで様々な画風を試したい方・Stable Diffusion系を手軽に使いたい方',
+    caution: '無料クレジット数・商用利用条件は変更される場合があります。公式サイト・利用規約をご確認ください。',
+  },
 ];
 
 const tableRows = [
@@ -89,6 +152,13 @@ const tableRows = [
   { name: 'Midjourney', slug: 'midjourney', freeType: '無料プランなし（有料のみ）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: '公式情報の確認が必要です。プランによって条件が異なります。' },
   { name: 'Fotor AI', slug: 'fotor-ai', freeType: '無料プランあり（Basic）', watermark: '無料プランでは入る場合あり', japanese: '◯', editability: '◯（写真編集・テンプレート連携）', commercialNote: '公式ヘルプとCommercial Useページで案内内容に差異が見られます。商用利用を前提にする場合は最新の公式規約をご確認ください。' },
   { name: 'Gemini画像生成', slug: 'gemini-image-generation', freeType: 'Googleアカウントで利用可能（無料プランあり）', watermark: 'SynthID等の透かしあり', japanese: '◯', editability: '◯（画像編集・スタイル適用）', commercialNote: '用途・プランによって条件が異なる場合があります。最新の公式規約・生成AI禁止利用ポリシーをご確認ください。' },
+  { name: 'Brand Studio（旧DreamStudio）', slug: 'dreamstudio', freeType: '無料試用またはCore tier（要公式確認）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: 'DreamStudioからBrand Studioへ移行した可能性があります。Stability AIライセンス・Acceptable Use Policyをご確認ください。' },
+  { name: 'Ideogram', slug: 'ideogram', freeType: '無料プランあり（回数制限）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
+  { name: 'Microsoft Designer', slug: 'microsoft-designer', freeType: '無料プランあり（Microsoftアカウント）', watermark: '要確認', japanese: '◯', editability: '◯（テンプレート連携）', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
+  { name: 'NightCafe', slug: 'nightcafe', freeType: '無料クレジットあり（デイリー）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
+  { name: 'Playground AI', slug: 'playground-ai', freeType: '無料プランあり（回数制限）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
+  { name: 'SeaArt AI', slug: 'seaart-ai', freeType: '無料プランあり（スタミナ制）', watermark: '要確認', japanese: '◯', editability: '△', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
+  { name: 'Tensor Art', slug: 'tensor-art', freeType: '無料プランあり（クレジット制）', watermark: '要確認', japanese: '△', editability: '△', commercialNote: 'プランや用途によって条件が異なる場合があります。最新情報は公式サイトをご確認ください。' },
 ];
 
 const checkpoints = [
@@ -136,6 +206,14 @@ const comparisonTargetSlugs = [
   'stable-diffusion',
   'fotor-ai',
   'gemini-image-generation',
+  'dalle',
+  'dreamstudio',
+  'ideogram',
+  'microsoft-designer',
+  'nightcafe',
+  'playground-ai',
+  'seaart-ai',
+  'tensor-art',
 ];
 
 const toolNameMap: Record<string, string> = {
@@ -145,6 +223,14 @@ const toolNameMap: Record<string, string> = {
   'stable-diffusion': 'Stable Diffusion',
   'fotor-ai': 'Fotor AI',
   'gemini-image-generation': 'Gemini画像生成',
+  'dalle': 'DALL·E',
+  'dreamstudio': 'Brand Studio（旧DreamStudio）',
+  'ideogram': 'Ideogram',
+  'microsoft-designer': 'Microsoft Designer',
+  'nightcafe': 'NightCafe',
+  'playground-ai': 'Playground AI',
+  'seaart-ai': 'SeaArt AI',
+  'tensor-art': 'Tensor Art',
 };
 
 const benchmarkSamples = generatedImages.filter(
@@ -329,7 +415,7 @@ const articleJsonLd = JSON.stringify({
       <h2 class="fai-h2">同一プロンプトで生成した参考作例</h2>
       <div class="fai-samples-notice">
         <p>以下は、管理者が同一プロンプトを使って各ツールで作成した参考作例です。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。1枚の画像だけでツールの品質や性能を断定するものではありません。商用利用条件は各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
-        <p class="fai-samples-sub">DALL·EとMidjourneyは、本検証時点で同一条件のAスキーム画像を未掲載のため、この画像一覧には含めていません。</p>
+        <p class="fai-samples-sub">Midjourneyは本記事作成時点で無料生成枠を確認しにくいため、同一プロンプト画像サンプルの対象には含めていません。Clipdropは画像編集系機能が中心で、管理者環境では無料版で同一条件の画像生成を確認できなかったため対象外としています。</p>
       </div>
       <div class="fai-samples-grid">
         {benchmarkSamples.map((img) => (
@@ -374,6 +460,13 @@ const articleJsonLd = JSON.stringify({
         <li><a href="https://www.midjourney.com" target="_blank" rel="noopener noreferrer">Midjourney 公式サイト</a></li>
         <li><a href="https://www.fotor.com/jp/pricing/" target="_blank" rel="noopener noreferrer">Fotor AI 料金プラン（公式）</a></li>
         <li><a href="https://policies.google.com/terms/generative-ai/use-policy" target="_blank" rel="noopener noreferrer">Google 生成AI利用ポリシー（公式）</a></li>
+        <li><a href="https://stability.ai/" target="_blank" rel="noopener noreferrer">Stability AI 公式サイト（Brand Studio / 旧DreamStudio）</a></li>
+        <li><a href="https://ideogram.ai/" target="_blank" rel="noopener noreferrer">Ideogram 公式サイト</a></li>
+        <li><a href="https://designer.microsoft.com/" target="_blank" rel="noopener noreferrer">Microsoft Designer 公式サイト</a></li>
+        <li><a href="https://nightcafe.studio/" target="_blank" rel="noopener noreferrer">NightCafe 公式サイト</a></li>
+        <li><a href="https://playground.com/" target="_blank" rel="noopener noreferrer">Playground AI 公式サイト</a></li>
+        <li><a href="https://www.seaart.ai/" target="_blank" rel="noopener noreferrer">SeaArt AI 公式サイト</a></li>
+        <li><a href="https://tensor.art/" target="_blank" rel="noopener noreferrer">Tensor Art 公式サイト</a></li>
       </ul>
       <p>本ページの情報は上記公式ソースをもとに作成していますが、内容は変更される可能性があります。法的助言ではありません。</p>
     </section>

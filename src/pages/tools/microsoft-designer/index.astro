@@ -65,7 +65,7 @@ const jsonLd = JSON.stringify([
       lead="MicrosoftのAIデザイン・画像生成サービス。Microsoftアカウントで利用でき、SNS画像・バナー・プレゼン素材の作成に向いている。料金・商用利用・日本語対応を公式情報をもとに整理しています。"
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '条件あり' } },
-        { lb: '無料枠', badge: { s: 'ok', label: '無料枠あり' } },
+        { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
         { lb: '料金目安', text: '要公式確認', mono: true },
         { lb: '透かし', badge: { s: 'na', label: '要確認' } },
         { lb: '日本語UI', badge: { s: 'ok', label: '〇 対応' } },
@@ -79,12 +79,12 @@ const jsonLd = JSON.stringify([
           det: 'Microsoft Designerの公式FAQでは、Microsoftアカウントでの個人的な利用や非商用利用に関する記載があります。商用利用の可否や条件は、用途・アカウント種別・Microsoftの最新規約により異なる可能性があるため、公式情報をご確認ください。',
         },
         {
-          title: '無料枠', badge: { s: 'ok', label: '無料枠あり' },
-          det: 'Microsoftアカウントがあれば無料で利用できる場合があります。利用可能な機能や制限は変更される可能性があります。',
+          title: '無料枠', badge: { s: 'cond', label: '限定的' },
+          det: 'Microsoftアカウントで無料利用できる範囲があります。公式FAQでは個人的・非商用利用向けと案内されており、頻繁に作成するユーザーにはサブスクリプションが必要になる場合があります。生成回数や対象機能は変更される可能性があるため、最新情報は公式サイトをご確認ください。',
         },
         {
           title: '最安料金目安', sum: '要公式確認', sumMono: true,
-          det: '無料で利用できる機能があります。詳細なプラン・クレジット数・有料オプションは変更される可能性があるため、最新の情報は公式サイトでご確認ください。',
+          det: 'Microsoftアカウントで無料利用できる範囲がありますが、公式FAQでは個人的・非商用利用向けと案内されています。頻繁に利用する場合やMicrosoft 365 / Copilot Pro連携機能では、サブスクリプションが必要になる場合があります。最新情報は公式サイトをご確認ください。',
         },
         {
           title: '透かし', badge: { s: 'na', label: '要確認' },
@@ -127,7 +127,7 @@ const jsonLd = JSON.stringify([
         kind: 'spec',
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成' }],
-          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>無料枠あり</span><br>Microsoftアカウントがあれば無料で利用できる場合があります' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br>Microsoftアカウントで無料利用できる範囲があります。公式FAQでは個人的・非商用利用向けと案内されており、頻繁に作成するユーザーにはサブスクリプションが必要になる場合があります。' }],
           [{ html: '最安料金', rk: true }, { html: '<span class="mono">要公式確認</span>' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり</span><br>用途・アカウント種別・最新規約により条件が異なります。最新情報は公式サイトをご確認ください。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>公式情報から確認できていません' }],
@@ -149,7 +149,8 @@ const jsonLd = JSON.stringify([
           kind: 'cmp',
           headers: ['プラン', '料金', '機能'],
           rows: [
-            [{ html: '無料（Microsoftアカウント）', rk: true }, { html: '無料', mono: true }, { html: '一定の機能が利用可能な場合があります' }],
+            [{ html: '無料（限定的）', rk: true }, { html: '無料', mono: true }, { html: '個人的・非商用利用向け。頻繁な利用にはサブスクリプションが必要になる場合があります' }],
+            [{ html: 'Copilot Pro / Microsoft 365', rk: true }, { html: '要公式確認', mono: true }, { html: 'Word・PowerPoint等との連携機能や拡張機能に必要になる場合があります' }],
           ],
         },
         notes: [
@@ -224,16 +225,16 @@ const jsonLd = JSON.stringify([
         { html: 'Microsoftサービス規約・公式FAQの最新情報' },
         { html: '利用時点での最新の利用条件' },
       ]}
-      lastChecked={d?.lastReviewed ?? '2026-05-26'}
-      nextCheck={d?.nextReviewDue ?? '2026-06-26'}
-      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      lastChecked={d?.lastReviewed ?? '2026-06-14'}
+      nextCheck={d?.nextReviewDue ?? '2026-07-14'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-14'}
       sources={[
         { tag: '公式', label: 'Microsoft Designer 公式サイト', href: 'https://designer.microsoft.com/' },
         { tag: 'ヘルプ', label: 'Microsoft Designer よくある質問（公式）', href: 'https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer' },
         { tag: '規約', label: 'Microsoftサービス規約（公式）', href: 'https://www.microsoft.com/servicesagreement' },
       ]}
       faqs={[
-        { q: 'Microsoft Designerは無料で使えますか？', a: 'Microsoftアカウントがあれば無料で利用できる場合があります。利用可能な機能や制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。' },
+        { q: 'Microsoft Designerは無料で使えますか？', a: 'Microsoftアカウントで無料利用できる範囲があります。公式FAQでは個人的・非商用利用向けと案内されており、頻繁に作成するユーザーにはサブスクリプションが必要になる場合があります。生成回数や対象機能は変更される可能性があるため、最新の状況は公式サイトでご確認ください。' },
         { q: 'Microsoft Designerは商用利用できますか？', a: '商用利用の可否や条件は、用途・アカウント種別・Microsoftの最新規約により異なる可能性があります。利用前に公式FAQおよびMicrosoftサービス規約の最新版をご確認ください。このページは法的助言ではありません。' },
         { q: 'Microsoft Designerは日本語で使えますか？', a: '日本語UIに対応しています。日本語プロンプトにも対応しているとされています。' },
         { q: 'Microsoft Designerに透かしは入りますか？', a: '透かしの有無・条件は公式情報では確認できていません。最新の条件は公式サイトでご確認ください。' },

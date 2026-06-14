@@ -80,7 +80,7 @@ const jsonLd = JSON.stringify([
         },
         {
           title: '無料枠', badge: { s: 'cond', label: '限定的' },
-          det: '無料アカウントでクレジットが提供される場合があります。クレジット数や利用制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。',
+          det: '公式ドキュメントでは、無料プランで週次のクレジット枠が案内されています。クレジット数や生成条件は変更される可能性があるため、最新情報は公式サイトをご確認ください。',
         },
         {
           title: '料金目安', sum: '要公式確認（有料プランあり）', sumMono: false,
@@ -128,7 +128,7 @@ const jsonLd = JSON.stringify([
         kind: 'spec',
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成（テキスト入り画像・タイポグラフィ特化）' }],
-          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br>無料アカウントでクレジットが提供される場合があります。' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br>公式ドキュメントでは、無料プランで週次のクレジット枠が案内されています。クレジット数や生成条件は変更される可能性があるため、最新情報は公式サイトをご確認ください。' }],
           [{ html: '料金', rk: true }, { html: '有料プランあり。最新料金は公式サイトでご確認ください。' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（要確認）</span><br>法律・第三者の権利・利用規約に違反しないことは利用者側で確認が必要。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要公式確認</span><br>公式情報のみでは確認できていません。' }],
@@ -150,7 +150,7 @@ const jsonLd = JSON.stringify([
           kind: 'cmp',
           headers: ['プラン', '内容'],
           rows: [
-            [{ html: '無料', rk: true }, { html: 'クレジット付与（数量・条件は変更される場合あり）' }],
+            [{ html: '無料（限定的）', rk: true }, { html: '週次のクレジット枠が案内されています。クレジット数・生成条件は変更される可能性があるため、最新情報は公式サイトをご確認ください。' }],
             [{ html: '有料プラン', rk: true }, { html: '詳細は公式料金ページ（ideogram.ai/pricing）でご確認ください' }],
           ],
         },
@@ -222,17 +222,19 @@ const jsonLd = JSON.stringify([
         { html: '透かし条件（公式サイトでご確認ください）' },
         { html: '最新のIdeogram利用規約・公式FAQ' },
       ]}
-      lastChecked={d?.lastReviewed ?? '2026-05-26'}
-      nextCheck={d?.nextReviewDue ?? '2026-06-26'}
-      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      lastChecked={d?.lastReviewed ?? '2026-06-14'}
+      nextCheck={d?.nextReviewDue ?? '2026-07-14'}
+      verifiedDate={d?.verifiedAt ?? '2026-06-14'}
       sources={[
         { tag: '公式', label: 'Ideogram公式サイト', href: 'https://ideogram.ai/' },
         { tag: 'FAQ', label: 'Ideogramよくある質問（公式）', href: 'https://docs.ideogram.ai/frequently-asked-questions' },
         { tag: '規約', label: 'Ideogram利用規約（公式）', href: 'https://ideogram.ai/legal/tos' },
         { tag: '料金', label: 'Ideogram料金プラン（公式）', href: 'https://ideogram.ai/pricing' },
+        { tag: 'プラン', label: 'Ideogram利用可能なプラン（公式ドキュメント）', href: 'https://docs.ideogram.ai/plans-and-pricing/available-plans' },
+        { tag: 'ドキュメント', label: 'Ideogram登録・開始方法（公式ドキュメント）', href: 'https://docs.ideogram.ai/using-ideogram/getting-started/signup-and-registration' },
       ]}
       faqs={[
-        { q: 'Ideogramは無料で使えますか？', a: '無料アカウントでクレジットが提供される場合があります。クレジット数や利用制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。' },
+        { q: 'Ideogramは無料で使えますか？', a: '公式ドキュメントでは、無料プランで週次のクレジット枠が案内されています。クレジット数や生成条件は変更される可能性があるため、最新の状況は公式サイトでご確認ください。' },
         { q: 'Ideogramは商用利用できますか？', a: 'Ideogram公式FAQでは、生成画像について所有権を主張せず利用を制限しない旨が説明されています。ただし、法律・第三者の権利・利用規約に違反しないことは利用者側で確認する必要があります。利用前に公式FAQと利用規約の最新版をご確認ください。このページは法的助言ではありません。' },
         { q: 'IdeogramはMidjourneyやDALL·Eと何が違いますか？', a: 'Ideogramは文字入り画像やタイポグラフィ表現を含むビジュアル案を試したい場合の候補です。Midjourneyは高品質なビジュアル表現、DALL·Eは汎用的なアイデア出しや画像生成の候補として比較できます。用途に合わせて選択することを推奨します。' },
         { q: 'Ideogramでロゴやブランド名入り画像を作ってもよいですか？', a: '商用利用条件とは別に、商標、著作権、第三者素材の扱いを確認する必要があります。ロゴ風デザインやブランド名を含む画像を使う場合は、利用前に公式規約や権利関係をご確認ください。このページは法的助言ではありません。' },

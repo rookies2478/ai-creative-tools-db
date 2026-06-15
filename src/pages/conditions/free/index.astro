@@ -13,11 +13,60 @@ const tools = entries
     initial: e.data.name.charAt(0),
     freePlan: (e.data.freePlan === true ? 'あり' : 'limited') as FreePlan,
   }));
+
+const customFaqs = [
+  {
+    q: '「無料プランあり」と「完全無料」はどう違いますか？',
+    a: '「無料プランあり」は有料プランも存在しつつ、無料で使える枠が用意されているツールを指します。生成回数・クレジット数・機能に上限がある場合がほとんどです。「完全無料」はすべての機能を無制限に無料で使えるという意味合いで使われることがありますが、AIクリエイティブツールで完全無料と言えるものはごく限られています。本ページで掲載しているのは「無料枠がある」ツールであり、無料での利用範囲は各ツールの公式サイトでご確認ください。',
+  },
+  {
+    q: 'スマホで無料で使えるAI動画生成ツールはありますか？',
+    a: 'iOS・Androidアプリやモバイルブラウザに対応しているとされるAI動画生成ツールはありますが、スマホからすべての機能を利用できるかどうかはツールやプランによって異なります。また、スマホ対応の有無や対応の範囲は変更される場合があります。利用時点の公式情報をご確認ください。AI動画生成ツールの一覧は<a href="/categories/video-generation/">AI動画生成カテゴリ</a>で確認できます。',
+  },
+  {
+    q: '登録なし・ログイン不要で使えるAI生成ツールはありますか？',
+    a: 'ツールの中にはアカウント登録なしで試せるとされているものもありますが、登録不要・ログイン不要かどうかはツールの仕様変更によって変わる場合があります。本ページでは登録不要かどうかを保証できないため、利用時点の公式サイトでご確認ください。',
+  },
+  {
+    q: '画像から動画を無料で作れるAIツールはありますか？',
+    a: '画像→動画（image-to-video）に対応しているとされるAIツール（Runway・Pika・Kling AI・Luma AI・Haiperなど）には無料枠が用意されている場合があります。ただし無料枠内での利用可能な生成回数・動画尺・透かし条件はツールごとに異なります。最新の無料枠条件は各公式サイトでご確認ください。image-to-videoの選び方は<a href="/categories/video-generation/">AI動画生成ツール比較</a>もご参照ください。',
+  },
+  {
+    q: 'AI画像生成を無料で使う場合の注意点は何ですか？',
+    a: '①生成回数・クレジット上限の確認、②透かしの有無（無料プランでは透かしが付くツールが多い）、③商用利用条件の確認（無料プランでは商用利用が制限される場合がある）、④画像解像度・出力サイズが有料プランより制限される場合があることを確認しておくことをおすすめします。<a href="/conditions/no-watermark/">透かしなしで使いやすいツール</a>・<a href="/guides/ai-image-commercial-use-checklist/">AI画像の商用利用チェックリスト</a>もご参照ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '無料プランでも日本語プロンプトは使えますか？',
+    a: '日本語プロンプトに対応しているとされるツールは無料プランでも日本語入力が使える場合があります。ただし日本語UIへの対応と日本語プロンプトへの対応は別問題です。また細かい画風や映像スタイルの指定では英語プロンプトの方が意図を伝えやすい場合があります。日本語対応状況は<a href="/conditions/japanese/">日本語対応ツール</a>のページでも確認できます。',
+  },
+  {
+    q: '無料プランで生成した画像や動画は商用利用できますか？',
+    a: '無料プランでの商用利用の可否はツールによって異なります。無料プランで商用利用が案内されているツールがある一方、無料プランでは非商用のみに限定されているツールも多くあります。また無料プランでは透かしが付く場合があり、商用成果物として使いにくいケースもあります。商用利用前は必ず最新の公式利用規約をご確認ください。本記事は法的助言ではありません。<a href="/guides/commercial-use-copyright/">商用利用・著作権の考え方ガイド</a>もご参照ください。',
+  },
+];
+
+const customRelated = [
+  { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+  { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
+  { label: 'AI動画編集ツール一覧', href: '/categories/video-editing/' },
+  { label: 'AIアバター動画ツール一覧', href: '/categories/avatar-video/' },
+  { label: 'YouTube向けツール', href: '/use-cases/youtube/' },
+  { label: 'Shorts向けツール', href: '/use-cases/shorts/' },
+  { label: '顔出しなし動画向けツール', href: '/use-cases/faceless-video/' },
+];
+
+const customRelatedSolid = [
+  { label: '商用利用条件を確認しやすいツール', href: '/conditions/commercial-use/' },
+  { label: '透かしなしで使えるツール', href: '/conditions/no-watermark/' },
+  { label: '日本語対応ツール', href: '/conditions/japanese/' },
+  { label: '商用利用・著作権の考え方ガイド', href: '/guides/commercial-use-copyright/' },
+  { label: 'AI画像の商用利用チェックリスト', href: '/guides/ai-image-commercial-use-checklist/' },
+];
 ---
 
 <BaseLayout
-  title="無料で使えるAIクリエイティブツール比較｜無料枠・透かし・商用利用条件を確認"
-  description="無料プランがあるAI画像生成・AI動画生成・AI動画編集・AIアバター動画ツールの比較。無料枠の内容、透かしの有無、商用利用条件、出力制限などの条件を整理。実務利用前に公式規約を必ずご確認ください。本記事は法的助言ではありません。"
+  title="無料で使えるAI動画生成・AI画像生成ツール比較｜無料枠・スマホ対応・透かし・商用利用条件を確認"
+  description="無料プランで試せるAI動画生成・AI画像生成・AI動画編集・AIアバター動画ツールを比較。スマホ対応・透かしの有無・無料枠の内容・商用利用条件を整理しています。登録不要かどうかを含め、最新情報は各公式サイトをご確認ください。本記事は法的助言ではありません。"
   canonicalPath="/conditions/free/"
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
@@ -27,6 +76,13 @@ const tools = entries
       <span>無料で使えるAIツール</span>
     </nav>
     <ConditionChips currentPath="/conditions/free/" />
-    <Free {tools} />
+    <Free
+      {tools}
+      headingHtml='無料で試せる<span class="hl">AI動画生成・AI画像生成</span>ツール'
+      lead="無料プランがあるAI動画生成・AI画像生成・AI動画編集・AIアバター動画ツールの条件をまとめています。スマホ対応・透かしの有無・商用利用条件・生成回数の上限は、ツールやプランによって大きく異なります。「無料プランあり」と「完全無料」は異なる概念です。登録不要・ログイン不要かどうかも含め、実務利用前に必ず各公式サイトの最新情報をご確認ください。本ページは法的助言ではありません。"
+      faqs={customFaqs}
+      related={customRelated}
+      relatedSolid={customRelatedSolid}
+    />
   </div>
 </BaseLayout>

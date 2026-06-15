@@ -87,6 +87,22 @@ faqs:
     answer: "テキストや画像から短尺の高品質動画を素早く生成したい用途に向いているとされています。SNS投稿やアイデア検証など、試し生成から始めやすいサービスです。有料プランでは商用利用も可能とされています。"
   - question: "RunwayやPikaとどう使い分けるとよいですか？"
     answer: "Hailuo AIは比較的安価な有料プランと無料枠で手軽に試せる点が特徴です。Runwayは多機能な映像編集環境、Pikaはシンプルな操作性を重視する場合に向いています。用途・予算に応じて複数のサービスを試すのがおすすめです。"
+usagePolicy:
+  commercialUseStatus: "paid-only"
+  commercialUseByPlan:
+    free: "商用利用不可とされている（透かしあり）"
+    paid: "Standard以上で商用目的での利用が認められているとされている（公式payment-policy.html）"
+    enterprise: "要確認"
+  commercialUseNote: "有料プランでも、入力素材（人物・ブランドロゴ・第三者著作物）の権利関係・Hailuo AIへのコンテンツライセンス条項は別途確認が必要。本記事は法的助言ではない。"
+  rightsStatus: "shared"
+  rightsNote: "利用規約ではHailuo AIがユーザーコンテンツに対して広範なライセンスを保持するとされている。最新の公式利用規約を確認すること。"
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "アップロードする素材の権利関係はユーザーが確認する必要あり。"
+  peopleLogoRisk: "high"
+  peopleLogoNote: "実在人物・著名人・ブランドロゴを含む動画は肖像権・商標権等の観点から別途確認が必要。本記事は法的助言ではない。"
+  officialSourceUrl: "https://hailuoai.video/doc/payment-policy.html"
+  termsUrl: "https://hailuoai.video/doc/terms-of-service.html"
+  lastReviewed: "2026-06-06"
 reviewed:
   pricing: "2026-06-06"
   terms: "2026-06-06"

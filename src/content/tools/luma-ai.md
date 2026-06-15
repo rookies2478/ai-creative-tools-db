@@ -10,7 +10,7 @@ commercialUse: "paid-only"
 commercialUseNote: "公式料金ページではPlus以上にCommercial useが案内されています。Dream Machineプラン比較ではWeb Plus以上にcommercial use allowed・no watermarksが案内されている一方、無料プランはnon-commercial use only・watermarksとされています。商用利用・広告利用・クライアントワークを前提にする場合は、有料プランへのアップグレードと最新の公式利用規約の確認が必要です。このページは法的助言ではありません。"
 japaneseUi: false
 japanesePrompt: true
-watermark: "yes"
+watermark: "limited"
 bestFor:
   - "AI動画生成"
   - "画像から動画生成"
@@ -60,9 +60,10 @@ useCases:
   - product_image
   - business
 limitations:
-  - "無料プランは非商用利用限定・透かしあり"
+  - "無料プランは非商用利用限定・透かしあり（Web Plus以上では透かしなし・商用利用可と案内されているが最新の公式画面で要確認）"
+  - "透かしの有無・商用利用可否はプランによって異なる（watermark: limited）"
   - "クレジット制で生成コスト管理が必要"
-  - "商用利用は有料プラン前提"
+  - "商用利用は有料プラン前提（有料プランでも最新の公式規約確認が必要）"
 notFor:
   - "無料プランで商用利用したい人（無料プランは非商用利用限定とされています）"
   - "透かしなしで無料出力を前提にしたい人（無料プランでは透かしが付く場合があります）"

@@ -30,9 +30,9 @@ weaknesses:
   - "日本語UI非対応"
   - "ユーザー投稿コンテンツへの広範なライセンス（AIトレーニング含む・取消不能）が付与される"
   - "日本語プロンプト対応状況は公式情報で未確認"
-lastReviewed: "2026-06-04"
-nextReviewDue: "2026-09-04"
-verifiedAt: "2026-06-08"
+lastReviewed: "2026-06-15"
+nextReviewDue: "2026-09-15"
+verifiedAt: "2026-06-15"
 officialSourceUrl: "https://www.vidu.com/pricing"
 pricingModel: "subscription_credit"
 freePlanNote: "無料枠あり（制限あり）。詳細は公式サイトをご確認ください。"
@@ -64,7 +64,7 @@ sources:
   - title: "Vidu AI 公式サイト"
     url: "https://www.vidu.com"
   - title: "Vidu AI 利用規約"
-    url: "https://www.vidu.com/terms-of-service"
+    url: "https://www.vidu.com/terms"
   - title: "Vidu AI 料金ページ"
     url: "https://www.vidu.com/pricing"
 sourceRefs:
@@ -75,7 +75,7 @@ sourceRefs:
     url: "https://www.vidu.com/pricing"
     type: official
   - label: "Vidu AI利用規約"
-    url: "https://www.vidu.com/terms-of-service"
+    url: "https://www.vidu.com/terms"
     type: official
 faqs:
   - question: "無料で使えますか？"
@@ -93,9 +93,9 @@ faqs:
   - question: "アップロードしたコンテンツはどう扱われますか？"
     answer: "公式利用規約によると、ユーザーが投稿したコンテンツには、Viduに対して世界規模・無償・取消不能のライセンスが付与されます。このライセンスはAIトレーニング目的での利用も含まれ、アカウント削除後も継続します。機密性の高い素材の取り扱いには注意が必要です。最新の公式利用規約を直接ご確認ください。本記事は法的助言ではありません。"
 reviewed:
-  pricing: "2026-06-04"
-  terms: "2026-06-04"
-  features: "2026-06-04"
+  pricing: "2026-06-15"
+  terms: "2026-06-15"
+  features: "2026-06-15"
 ---
 
 ## Vidu AIとは

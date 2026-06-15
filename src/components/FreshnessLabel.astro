@@ -8,8 +8,8 @@ interface Props {
 
 const { verifiedAt, lastReviewed, variant = 'detail' } = Astro.props;
 
-const dateStr = verifiedAt ?? lastReviewed ?? null;
-const labelPrefix = verifiedAt ? '確認' : lastReviewed ? '最終見直し' : null;
+const dateStr = lastReviewed ?? verifiedAt ?? null;
+const labelPrefix = lastReviewed ? '情報確認' : verifiedAt ? '確認' : null;
 
 function daysSince(iso: string): number {
   const ms = Date.now() - new Date(iso).getTime();

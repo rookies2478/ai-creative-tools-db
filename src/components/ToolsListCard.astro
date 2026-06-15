@@ -57,9 +57,9 @@ function jaLabel(ui: unknown, prompt: unknown): string {
   return '要確認';
 }
 function wmLabel(v: unknown): string {
-  if (v === 'no') return 'なし';
-  if (v === 'yes') return 'あり';
-  if (v === 'limited') return 'プランによる';
+  if (v === 'no') return '透かしなし';
+  if (v === 'yes') return '透かしあり';
+  if (v === 'limited') return 'プランによって異なる';
   return '要確認';
 }
 function condClass(field: string, val: string): string {
@@ -67,8 +67,8 @@ function condClass(field: string, val: string): string {
   if (field === 'free') return val === 'あり' ? 'ok' : 'na';
   if (field === 'ja') return val === '対応' ? 'ok' : 'na';
   if (field === 'watermark') {
-    if (val === 'なし') return 'ok';
-    if (val === 'あり') return 'warn';
+    if (val === '透かしなし') return 'ok';
+    if (val === '透かしあり') return 'warn';
     return 'na';
   }
   return 'na';
@@ -105,7 +105,7 @@ const wmVal         = wmLabel(data.watermark);
 const dataFree       = freeVal === 'あり' ? '1' : '0';
 const dataCommercial = commercialVal === '案内あり' ? '1' : '0';
 const dataJa         = jaVal === '対応' ? '1' : '0';
-const dataNowm       = wmVal === 'なし' ? '1' : '0';
+const dataNowm       = wmVal === '透かしなし' ? '1' : '0';
 
 const catLabel = data.category === 'image' ? '画像生成'
                : data.category === 'video' ? '動画生成'
@@ -143,7 +143,7 @@ const displayPlatforms = (data.platforms ?? []).map((p: string) => platformLabel
       <span class="cv"><span class="d"></span>{freeVal}</span>
     </span>
     <span class={`cond ${condClass('ja', jaVal)}`}>
-      <span class="ck">日本語</span>
+      <span class="ck">日本語対応</span>
       <span class="cv"><span class="d"></span>{jaVal}</span>
     </span>
     <span class={`cond ${condClass('watermark', wmVal)}`}>
@@ -154,7 +154,7 @@ const displayPlatforms = (data.platforms ?? []).map((p: string) => platformLabel
 
   {usagePolicySummary && (
     <div class="tool-usage-summary">
-      <span class="us-label">商用利用</span>
+      <span class="us-label">商用利用条件</span>
       <span class="us-value">{usagePolicySummary}</span>
     </div>
   )}

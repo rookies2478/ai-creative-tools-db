@@ -28,8 +28,8 @@ function triLabel(val: TriState) {
 }
 
 function fourStateBadge(val: FourState) {
-  if (val === 'no')      return { text: 'なし',   cls: 'bg-green-100 text-green-800' };
-  if (val === 'yes')     return { text: 'あり',   cls: 'bg-red-100 text-red-800' };
+  if (val === 'no')      return { text: '透かしなし',   cls: 'bg-green-100 text-green-800' };
+  if (val === 'yes')     return { text: '透かしあり',   cls: 'bg-red-100 text-red-800' };
   if (val === 'limited') return { text: '要確認', cls: 'bg-yellow-100 text-yellow-800' };
                          return { text: '要確認', cls: 'bg-gray-100 text-gray-600' };
 }
@@ -144,7 +144,7 @@ const jpr = triLabel(data.japanesePrompt);
           </tr>
         )}
         <tr>
-          <th class="whitespace-nowrap bg-gray-50 px-4 py-3 align-top text-left font-medium text-gray-600">商用利用</th>
+          <th class="whitespace-nowrap bg-gray-50 px-4 py-3 align-top text-left font-medium text-gray-600">商用利用条件</th>
           <td class="px-4 py-3">
             <span class={`rounded px-2 py-0.5 text-xs font-medium ${cu.badgeCls}`}>{cu.badge}</span>
             <p class="mt-1 text-xs leading-relaxed text-gray-500">{cu.desc}</p>

@@ -54,8 +54,7 @@ const {
   headerHeight = '68px',
 } = Astro.props;
 
-// マーキーはシームレスループのため2回繰り返す
-const marqueeLoop = [...marquee, ...marquee];
+// marqueeLoop は削除 — レンダリング側で aria-hidden 分離する
 ---
 
 <section class="fv-hero" data-fv-hero data-fv-theme={promptTheme} style={`--fv-header:${headerHeight}`}>
@@ -75,7 +74,8 @@ const marqueeLoop = [...marquee, ...marquee];
       <span class="tm-label">掲載ツール — 30+</span>
       <div class="tm-track">
         <div class="tm-row">
-          {marqueeLoop.map((name) => (<span class="tm-item">{name}</span>))}
+          {marquee.map((name) => (<span class="tm-item">{name}</span>))}
+          {marquee.map((name) => (<span class="tm-item" aria-hidden="true">{name}</span>))}
         </div>
       </div>
     </div>
@@ -189,6 +189,7 @@ const marqueeLoop = [...marquee, ...marquee];
   .fv-hero .gen-card .gname{font-family:var(--f-jp);font-weight:700;font-size:10.5px;color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.7);background:rgba(0,0,0,.32);backdrop-filter:blur(4px);padding:3px 7px;border-radius:999px;white-space:nowrap;}
   .fv-hero .gen-card .skel{position:absolute;inset:0;z-index:3;background:linear-gradient(100deg,#E9E8E0 28%,#F6F5F0 48%,#E9E8E0 68%);background-size:220% 100%;animation:fv-shimmer 1.25s linear infinite;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .5s var(--ease);}
   .fv-hero .gen-card.generating .skel{opacity:1;pointer-events:auto;}
+  .fv-hero .gen-card.generating .ghead{opacity:0;}
   @keyframes fv-shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
   .fv-hero .genstate{display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--muted);}
   .fv-hero .genstate .spin{width:22px;height:22px;border-radius:50%;border:2.4px solid var(--line-strong);border-top-color:var(--brand);animation:fv-spin .8s linear infinite;}

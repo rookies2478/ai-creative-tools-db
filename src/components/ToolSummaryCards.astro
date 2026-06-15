@@ -28,7 +28,7 @@ function fpBadge(val: FreePlan): { text: string; cls: string } {
 function wmBadge(val: FourState): { text: string; cls: string } {
   if (val === 'no')  return { text: '透かしなし', cls: 'bg-green-100 text-green-800' };
   if (val === 'yes') return { text: '透かしあり', cls: 'bg-slate-100 text-slate-600' };
-                     return { text: '透かし：要確認', cls: 'bg-amber-100 text-amber-800' };
+                     return { text: '要確認', cls: 'bg-amber-100 text-amber-800' };
 }
 
 function triText(val: TriState): { text: string; cls: string } {
@@ -61,7 +61,7 @@ const priceText = data.lowestPaidPlan ?? '要確認';
 
     <!-- 商用利用 -->
     <div class="rounded-lg border border-gray-200 bg-white px-3 py-2.5 sm:col-span-3">
-      <p class="mb-1 text-xs font-semibold text-gray-500">商用利用</p>
+      <p class="mb-1 text-xs font-semibold text-gray-500">商用利用条件</p>
       <span class={`rounded px-2 py-0.5 text-xs font-medium ${cu.cls}`}>{cu.text}</span>
       <p class="mt-1 text-xs leading-relaxed text-gray-600">{cu.desc}</p>
       {data.commercialUseNote && (

@@ -81,8 +81,8 @@ const payload = JSON.stringify({ video: videoTools, image: imageTools });
               <th class="cmp-th cmp-col-tool">ツール</th>
               <th class="cmp-th">無料枠</th>
               <th class="cmp-th">透かし</th>
-              <th class="cmp-th">日本語</th>
-              <th class="cmp-th">商用利用</th>
+              <th class="cmp-th">日本語対応</th>
+              <th class="cmp-th">商用利用条件</th>
               <th class="cmp-th">最安料金</th>
               <th class="cmp-th">詳細</th>
             </tr>
@@ -350,7 +350,7 @@ const payload = JSON.stringify({ video: videoTools, image: imageTools });
     var DATA = JSON.parse(root.dataset.cmpPayload || '{"video":[],"image":[]}');
     var MARK = {
       free:      { y:['○','あり'],     c:['△','要確認'], n:['×','なし'] },
-      watermark: { y:['○','なし'],     c:['△','要確認'], n:['×','あり'] },
+      watermark: { y:['○','透かしなし'], c:['△','要確認'], n:['×','透かしあり'] },
       japanese:  { y:['○','対応'],     c:['△','要確認'], n:['×','非対応'] },
       commercial:{ y:['○','案内あり'], c:['△','要確認'], n:['×','非対応'] },
     };

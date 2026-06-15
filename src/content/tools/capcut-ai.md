@@ -5,10 +5,10 @@ category: "video"
 officialUrl: "https://www.capcut.com/"
 freePlan: true
 commercialUse: "limited"
-commercialUseNote: "CapCutの利用規約では、ユーザーがアップロード・利用する素材について必要な権利や許諾を持つ必要があると案内されています。第三者AI技術を使う機能では追加条件に従う必要があります。商用利用・広告利用・クライアントワークを前提にする場合は、CapCut本体の利用規約だけでなく、素材・音源・テンプレート・AI機能ごとの条件確認が必要です。このページは法的助言ではありません。"
+commercialUseNote: "CapCutの利用規約では、ユーザーがアップロード・利用する素材について必要な権利や許諾を持つ必要があると案内されています。第三者AI技術を使う機能では追加条件に従う必要があります。また、利用規約では「音源および楽曲への権利ライセンスは付与されない」と明記されており、CapCut内の音源を商用目的で利用する場合は別途確認が必要です。AI生成コンテンツの合法性はユーザーが責任を負うとされています。商用利用・広告利用・クライアントワークを前提にする場合は、CapCut本体の利用規約だけでなく、素材・音源・テンプレート・AI機能ごとの条件確認が必要です。このページは法的助言ではありません。"
 japaneseUi: true
 japanesePrompt: true
-watermark: "yes"
+watermark: "limited"
 bestFor:
   - "SNS動画"
   - "ショート動画"
@@ -31,9 +31,9 @@ weaknesses:
   - "料金・機能・透かし条件がプランや地域・時期によって変わる可能性がある"
   - "無料利用時の出力条件（透かし・書き出し品質等）に注意が必要"
   - "ビジネス利用・クライアントワークでは規約の詳細確認が重要"
-lastReviewed: "2026-05-24"
-nextReviewDue: "2026-06-24"
-verifiedAt: "2026-06-08"
+lastReviewed: "2026-06-15"
+nextReviewDue: "2026-09-15"
+verifiedAt: "2026-06-15"
 officialSourceUrl: "https://www.capcut.com/help/new-capcut-subscription-pricing"
 pricingModel: "subscription"
 freePlanNote: "CapCutには無料で使える機能がある一方、AI機能・素材・テンプレート・書き出し条件・料金は地域やプラットフォーム、アプリ内のサブスクリプション表示によって変わる可能性があります。最新の公式情報確認が必要です。"
@@ -52,7 +52,7 @@ features:
   promptAssist: true
   upscale: false
   apiAvailable: false
-watermarkCondition: "無料利用・テンプレート・素材・書き出し条件により透かしやロゴ表示の扱いが変わる可能性があります。透かし条件はプラン・機能・出力形式ごとに最新の公式画面で確認してください。"
+watermarkCondition: "公式情報によると、通常の編集機能で制作した動画は無料でも透かしなしでエクスポートできます。テンプレート使用時はCapCutのアウトロクリップ（ロゴ入りエンディング）が自動追加される場合がありますが、タイムラインから削除することで除去できます。プレミアム素材やステッカー等のPro要素を含む場合は透かし条件が異なる場合があります。最新の透かし条件は公式ヘルプおよびアプリ内で確認してください。"
 japaneseDocs: true
 useCases:
   - sns
@@ -84,6 +84,12 @@ sourceRefs:
   - label: "CapCut プライバシーポリシー（公式）"
     url: "https://www.capcut.com/clause/privacy-policy"
     type: policy
+  - label: "CapCut 透かしなしエクスポート方法（公式ヘルプ）"
+    url: "https://www.capcut.com/help/how-to-export-video-without-watermark"
+    type: help
+  - label: "CapCut テンプレート動画の透かし削除（公式ヘルプ）"
+    url: "https://www.capcut.com/help/remove-watermark-when-exporting-video"
+    type: help
 sources:
   - title: "CapCut 公式サイト"
     url: "https://www.capcut.com/"
@@ -95,6 +101,10 @@ sources:
     url: "https://www.capcut.com/clause/terms-of-service"
   - title: "CapCut プライバシーポリシー（公式）"
     url: "https://www.capcut.com/clause/privacy-policy"
+  - title: "CapCut 透かしなしエクスポート方法（公式ヘルプ）"
+    url: "https://www.capcut.com/help/how-to-export-video-without-watermark"
+  - title: "CapCut テンプレート動画の透かし削除（公式ヘルプ）"
+    url: "https://www.capcut.com/help/remove-watermark-when-exporting-video"
 faqs:
   - question: "無料で使えますか？"
     answer: "CapCutには無料で使える機能があります。ただしAI機能・テンプレート・素材・書き出し条件・透かしの有無はプランや地域、プラットフォームによって異なる可能性があります。最新の条件は公式サイトおよびアプリ内サブスクリプションページでご確認ください。"
@@ -103,7 +113,7 @@ faqs:
   - question: "日本語で使えますか？"
     answer: "CapCutには日本語の公式ページおよびアプリが提供されており、日本語UIで利用可能です。AI動画生成や細かい演出の指定では、日本語入力でも利用できる場合がありますが、英語や具体的な構成指示の方が安定する可能性があります。"
   - question: "透かしは入りますか？"
-    answer: "無料利用・テンプレート・素材・書き出し条件により透かしやロゴ表示の扱いが変わる可能性があります。最新の透かし条件はプラン・機能・出力形式ごとに公式画面でご確認ください。"
+    answer: "公式情報によると、通常の編集機能で制作した動画は無料でも透かしなしでエクスポートできます。テンプレート使用時はCapCutのアウトロクリップ（ロゴ入りエンディング）が自動追加される場合がありますが、タイムラインから削除することで除去できます。プレミアム素材・ステッカー等のPro要素を含む場合は条件が異なる場合があります。最新情報は公式ヘルプでご確認ください。"
   - question: "料金プランはどうなっていますか？"
     answer: "CapCut公式ヘルプでは、最新価格はアプリ内サブスクリプションページで確認するよう案内されています。プラン名・料金・機能制限は地域・プラットフォーム・時期で変わる可能性があるため、必ず最新の公式情報をご確認ください。"
   - question: "Runway・Pika・Kling AIなどとどう違いますか？"
@@ -163,6 +173,8 @@ CapCutの[利用規約](https://www.capcut.com/clause/terms-of-service)では、
 
 - **CapCut本体の利用規約：** CapCut自体の利用条件・商用利用に関する条項
 - **素材・音源・テンプレートの利用条件：** CapCut内で使用できる素材・BGM・テンプレートは、それぞれ個別のライセンス条件が設定されている場合があります
+- **音源・楽曲の利用条件：** 利用規約では「音源および楽曲への権利ライセンスは付与されない」と明記されています。CapCut内の音源を商用目的で使用する場合は別途権利確認が必要です
+- **AI生成コンテンツの責任：** 利用規約では「AI生成コンテンツの合法性はユーザーが責任を負う」とされています
 - **第三者AI技術を使う機能：** AI機能によっては第三者の技術・モデルを使用している場合があり、追加の利用条件に従う必要があります
 - **SNS広告・クライアントワーク・企業アカウント運用：** 特に公式規約の詳細確認が必要です
 
@@ -178,11 +190,11 @@ CapCutには日本語の公式ページ（[capcut.com/ja-jp](https://www.capcut.
 
 ## 透かしに関する確認メモ
 
-CapCutの透かし（ウォーターマーク・ロゴ表示）の扱いは、**無料利用・テンプレート・素材・書き出し条件により変わる可能性があります**。
+公式ヘルプによると、通常の編集機能で制作した動画は**無料でも透かし（ウォーターマーク）なしでエクスポートできます**。
 
-- 無料プラン利用時・特定テンプレート・素材によっては透かしやCapCutロゴが表示される場合があります
-- 有料プランや特定機能では透かしの条件が異なる場合があります
-- **透かし条件はプラン・機能・出力形式ごとに最新の公式画面でご確認ください**
+- **テンプレート使用時：** CapCutのアウトロクリップ（ロゴ入りエンディング）が自動追加される場合がある。タイムライン末尾からそのクリップを削除することで透かしを除去できます
+- **プレミアム素材・ステッカー等のPro要素：** 含む場合は透かし条件が異なる場合があります
+- **最新の透かし条件は[公式ヘルプ](https://www.capcut.com/help/how-to-export-video-without-watermark)でご確認ください**
 
 ## どんな人に向いているか
 

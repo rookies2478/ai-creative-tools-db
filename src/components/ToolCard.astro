@@ -37,7 +37,7 @@ function jpBadge(ui: TriState, prompt: TriState) {
 function wmBadge(val: FourState) {
   if (val === 'no')      return { text: '透かしなし',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
   if (val === 'yes')     return { text: '透かしあり',   cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
-  if (val === 'limited') return { text: 'プランによる', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === 'limited') return { text: 'プランによって異なる', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
                          return { text: '要確認',       cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
 }
 

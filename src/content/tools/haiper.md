@@ -9,7 +9,7 @@ currency: "unknown"
 commercialUse: "unknown"
 commercialUseNote: "Haiperのコンシューマー向けWebアプリは2025年2月にシャットダウンされており、現時点での商用利用条件の確認が困難な状況です。旧公式FAQでは有料メンバーになると透かしなし動画を生成でき商用利用可能と案内されていましたが、現在のサービス状況は変わっています。最新情報は公式サイトをご確認ください。このページは法的助言ではありません。"
 japaneseUi: false
-japanesePrompt: true
+japanesePrompt: "unknown"
 watermark: "unknown"
 bestFor:
   - "AI動画生成ツールの過去情報・比較参考（現在のサービス状況は公式サイトで要確認）"

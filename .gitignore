@@ -13,3 +13,6 @@ backup-*.patch
 backup-*.txt
 design_handoff_aicreative_navi/
 tool-samples-inbox/
+docs/seo-research/*.xlsx
+docs/seo-research/*.csv
+docs/seo-research/*.zip

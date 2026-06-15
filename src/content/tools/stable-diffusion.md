@@ -125,6 +125,22 @@ faqs:
     answer: "ローカル環境（Windows/Mac/Linux）での実行が基本です。Stability AI PlatformのAPI経由でのクラウド利用も可能です。最新料金は公式サイトをご確認ください。"
   - question: "Stable Diffusion 3.5とはどのようなモデルですか？"
     answer: "2024年10月に公式発表されたStability AIのモデル系統です。Large（8.1Bパラメータ）・Large Turbo・Mediumのバリアントが公開されています。ライセンスはSD 3.x系と同様にStability AI Community Licenseが適用されています。詳細は公式サイトをご確認ください。"
+  - question: "Stable Diffusionとは何ですか？"
+    answer: "Stability AIが開発・公開したオープンソースのAI画像生成モデルです。モデルウェイトが公開されているため、GPU搭載のPCがあれば自分のローカル環境で無料実行できます。AUTOMATIC1111 Web UIやComfyUIなどのフロントエンドツールと組み合わせて使われることが多く、LoRAやカスタムモデルによる高度なカスタマイズが可能です。"
+  - question: "LoRAとは何ですか？"
+    answer: "LoRA（Low-Rank Adaptation）は、Stable Diffusionのモデル（Checkpoint）に追加適用できる軽量な追加学習ファイルです。特定のキャラクター・スタイル・画風・構図などを再現するために使われます。Civitaiなどで多数公開されており、複数のLoRAを組み合わせることも可能です。LoRAにはそれぞれ独自のライセンスが設定されている場合があり、商用利用前にライセンスの確認が必要です。"
+  - question: "VAEとは何ですか？"
+    answer: "VAE（Variational Autoencoder）は、Stable Diffusionの生成画像の色味・シャープさ・全体的な品質に影響を与える補助モデルです。適切なVAEを適用することで色のくすみや不自然さが改善される場合があります。モデルによってはCheckpointにVAEが組み込まれているケースもあります。"
+  - question: "Checkpointとは何ですか？"
+    answer: "Checkpointはモデルの学習済み重みを保存したファイルで、「モデルファイル」とも呼ばれます。CivitaiなどからCheckpointをダウンロードして差し替えることで、生成スタイルや得意とする表現が変わります。使用するCheckpointごとにライセンスが異なるため、商用利用前にライセンスを必ずご確認ください。"
+  - question: "Seedとは何ですか？"
+    answer: "Seedは生成のランダム性を決定する数値です。同じSeed値・同じプロンプト・同じ設定の組み合わせにすることで、近似した画像を再現しやすくなります。ただし環境やモデルバージョンによって完全な再現が保証されない場合があります。"
+  - question: "Stable Diffusionは無料で使えますか？"
+    answer: "ローカル環境での実行は無料です。ただしGPU搭載PCと環境構築が必要です。Stability AI PlatformなどクラウドAPI経由では別途料金が発生します。最新のAPI料金は[Stability AI Platform公式サイト](https://platform.stability.ai/pricing)でご確認ください。"
+  - question: "Stable Diffusionで生成した画像は商用利用できますか？"
+    answer: "利用するモデルのバージョンによってライセンスが異なります。SD 1.x/2.x/SDXLはCreativeML Open RAIL-Mライセンス（収益制限なしで条件付き可能な場合あり）、SD 3.x/3.5以降はStability AI Community Licenseが適用され、年間総収益100万ドル未満は商用利用できる場合があるとされています。また、コミュニティ公開のカスタムモデルやLoRAにはそれぞれ独自のライセンスがある場合があります。「商用利用できます」とは断定できません。必ず使用するモデルのライセンスを個別にご確認ください。このページは法的助言ではありません。"
+  - question: "モデルやLoRAのライセンスはどこで確認できますか？"
+    answer: "Stability AI公式モデルのライセンスは[Stability AI公式ライセンスページ](https://stability.ai/license)で案内されています。コミュニティ公開のカスタムモデルやLoRAはCivitaiなどの配布ページに個別のライセンスが記載されている場合があります。利用前に必ず各配布元のライセンスをご確認ください。詳しくは[AI画像の商用利用チェックリスト](/guides/ai-image-commercial-use-checklist/)もご参照ください。"
   - question: "AUTOMATIC1111とComfyUIの違いは何ですか？"
     answer: "どちらもStable Diffusionを動かすためのフロントエンドツールです。AUTOMATIC1111 Web UIは歴史が長くチュートリアルが豊富ですが、開発ペースが落ちています。ComfyUIはノードベースのワークフロー構築が可能で、VRAM効率・新モデルへの対応速度に優れており、2025〜2026年にかけて主流ツールとしての地位を確立しつつあります。用途に合わせて選択することを推奨します。"
 ---
@@ -134,6 +150,27 @@ faqs:
 Stability AIが開発・公開したオープンソースのAI画像生成モデル。モデルウェイトが公開されているため、ローカル環境（自分のPC）で無料で実行できます。2024年10月にはSD 3.5系（Large・Large Turbo・Medium）が公式発表され、より高品質・軽量なローカル実行が可能になっています。AUTOMATIC1111 Web UIやComfyUIなどのフロントエンドツールと組み合わせて使われることが多く、カスタムモデル・LoRAを活用した高度な生成が可能です。
 
 [AI画像生成カテゴリ一覧へ](/categories/image-generation/)
+
+## Stable Diffusionの基本用語
+
+### LoRA・VAE・Checkpoint・Seed・CFG Scaleとは
+
+Stable Diffusionを使う上で頻繁に登場する用語を整理します。
+
+**Checkpoint（チェックポイント）**
+モデルの学習済み重みを保存したファイル。「モデルファイル」とも呼ばれます。CivitaiなどからダウンロードしたCheckpointを差し替えることで、生成スタイルや得意とする表現が大きく変わります。使用するCheckpointごとにライセンスが異なるため、商用利用前にライセンスの確認が必要です。
+
+**LoRA（ローラ）**
+Checkpointに追加的に適用できる軽量な追加学習ファイル。特定のキャラクター・スタイル・構図などを再現するために使われます。本体モデルほどの容量ではなく複数を組み合わせることも可能です。LoRAにも独自のライセンスが設定されている場合があります。
+
+**VAE（Variational Autoencoder）**
+画像の色味・シャープさ・全体的な見た目の品質に影響する補助モデル。適切なVAEを適用することで、色のくすみや不自然さが改善される場合があります。モデルによってはCheckpointにVAEが組み込まれているケースもあります。
+
+**Seed（シード）**
+生成のランダム性を決定する数値。同じSeed値・同じプロンプト・同じ設定の組み合わせにすることで、近似した画像を再現しやすくなります。完全な再現は環境・モデルバージョンによって保証されない場合があります。
+
+**CFG Scale（Classifier-Free Guidance Scale）**
+プロンプトへの忠実度を調整するパラメータ。値が高いほどプロンプトに強く従いますが、過度に高い場合はアーティファクト（不自然な描画崩れ）が増えることがあります。一般的に7〜12程度がよく使われますが、モデルや用途によって最適値は異なります。
 
 ## Stable Diffusionを選ぶ理由
 

@@ -1,6 +1,6 @@
 ---
 name: "Kling AI"
-shortDescription: "テキストや画像からリアル寄りのAI動画を生成できるサービス。無料枠あり。有料プランでは商用利用が案内されています。"
+shortDescription: "テキストや画像からリアル寄りのAI動画を生成できるサービス。無料枠あり。有料プランでは商用利用が案内されています。※公式サイト（klingai.com）の一部ページはHTTP 446により直接確認できていないため、料金・商用利用条件等は第三者情報に基づく部分があります。最新情報は公式サイトで必ずご確認ください。"
 category: "video"
 officialUrl: "https://klingai.com"
 freePlan: "limited"

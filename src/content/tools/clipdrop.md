@@ -6,7 +6,7 @@ officialUrl: "https://clipdrop.co/"
 freePlan: "limited"
 freePlanNote: "無料枠では一部の画像編集系機能を試せる場合があります。公式料金ページではBackground Removal（20回/24時間）・Image Upscaler x2（20回/24時間）・Cleanup（20回/24時間）・Relight（20回/24時間）・Text Remover（50回/24時間）などの無料利用枠が示されています。ただし、管理者環境ではtext-to-image生成（Stable Diffusion XL）は有料版でのみ利用できる状態を確認しました。対象機能や回数は変更される場合があるため、最新情報は公式サイトをご確認ください。"
 commercialUse: "unknown"
-commercialUseNote: "公式Terms（https://clipdrop.co/terms-visitor）ではサービス利用条件を確認できますが、生成・編集した画像の商用利用可否や権利関係については確認時点で断定しにくい状況です。商用利用を前提にする場合は、最新の公式Terms・元画像の権利・第三者権利を必ず確認してください。本記事は法的助言ではありません。"
+commercialUseNote: "公式Terms（https://clipdrop.co/terms-visitor）ではサービス利用条件を確認できますが、生成・編集した画像の商用利用可否や権利関係については確認時点で断定しにくい状況です。また、2024年にClipdropはJasper.aiに統合されており、clipdrop.co 上の利用規約条件とJasper API側の条件が異なる可能性があります。特にAPIを利用する場合は、Jasper API側の利用規約も合わせて確認が必要です。商用利用を前提にする場合は、最新の公式Terms・元画像の権利・第三者権利を必ず確認してください。本記事は法的助言ではありません。"
 japaneseUi: false
 japanesePrompt: false
 watermark: "unknown"
@@ -122,6 +122,8 @@ faqs:
 Clipdropは、背景削除・画像拡張・アップスケール・不要物削除・文字削除などのAI画像編集機能を中心に使えるオールインワン型ツールです。インストール不要でWebブラウザからアクセスでき、Freeプランで画像編集系機能の一部を試すことができます。ECサイトの商品画像加工・SNS素材の編集・広告バナーの制作など、実務向けの用途に向いています。なお、管理者環境ではtext-to-image生成機能（Stable Diffusion XL）は有料版でのみ利用できる状態を確認しました。最新の利用条件は公式サイトでご確認ください。
 
 > **サービス体制について：** Clipdropは2023年にStability AIに買収され、2024年にJasper.aiに統合されました。現在も[clipdrop.co](https://clipdrop.co/)でサービスは継続されていますが、APIはJasper APIに移行しています。今後のサービス方針については公式アナウンスをご確認ください。
+>
+> **⚠️ 商用利用条件の注意：** clipdrop.co 上の利用規約（Clipdrop Terms）と、Jasper API側の利用規約は内容が異なる可能性があります。API経由での利用・大量処理・商用利用を前提にする場合は、[Clipdrop利用規約](https://clipdrop.co/terms-visitor)とJasper API側の規約の両方を確認することを推奨します。本記事は法的助言ではありません。
 
 ## 主な機能
 

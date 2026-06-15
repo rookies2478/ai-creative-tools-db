@@ -249,19 +249,42 @@ const jpr = triLabel(data.japanesePrompt);
         <tr>
           <th class="whitespace-nowrap bg-gray-50 px-4 py-3 text-left font-medium text-gray-600">公式サイト</th>
           <td class="px-4 py-3">
-            <a
-              href={data.officialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs text-blue-600 hover:underline"
-            >
-              公式サイトで確認 ↗
-            </a>
+            {(data as any).affiliateUrl ? (
+              <a
+                href={(data as any).affiliateUrl}
+                target="_blank"
+                rel="sponsored nofollow noopener noreferrer"
+                class="text-xs text-blue-600 hover:underline"
+              >
+                公式サイトで確認する ↗
+              </a>
+            ) : data.officialUrl ? (
+              <a
+                href={data.officialUrl}
+                target="_blank"
+                rel="sponsored nofollow noopener noreferrer"
+                class="text-xs text-blue-600 hover:underline"
+              >
+                公式サイトで確認する ↗
+              </a>
+            ) : null}
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  {((data as any).affiliateUrl || data.officialUrl) && (
+    <div class="tst-cta">
+      <a
+        href={(data as any).affiliateUrl ?? data.officialUrl}
+        target="_blank"
+        rel="sponsored nofollow noopener noreferrer"
+        class="tst-cta-btn"
+      >
+        料金・利用条件を公式サイトで確認する ↗
+      </a>
+    </div>
+  )}
   <div class="tst-legend">
     <span class="tst-li tst-ok"><span class="tst-ic">○</span>あり / 対応</span>
     <span class="tst-li tst-warn"><span class="tst-ic">△</span>要確認</span>
@@ -271,6 +294,25 @@ const jpr = triLabel(data.japanesePrompt);
 </section>
 
 <style>
+  .tst-cta {
+    padding: 14px 16px 0;
+  }
+  .tst-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #4B3FE4;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background 0.18s;
+  }
+  .tst-cta-btn:hover {
+    background: #3a2fcb;
+  }
   .tst-legend {
     display: flex;
     gap: 14px;

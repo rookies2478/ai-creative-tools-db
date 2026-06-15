@@ -91,6 +91,12 @@ function triInfo(val: TriState): { text: string; cls: string } {
   return                        { text: '要確認', cls: 'warn' };
 }
 
+function formatDate(iso: string): string {
+  const m = iso.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!m) return iso;
+  return `${m[1]}年${parseInt(m[2], 10)}月${parseInt(m[3], 10)}日`;
+}
+
 function sourceTypeLabel(type: string): string {
   const m: Record<string, string> = {
     official: '公式', pricing: '料金', terms: '規約',
@@ -167,11 +173,18 @@ function capVal(val: boolean | undefined): string {
 function styleCtrlLabel(v: string): string {
   return v === 'high' ? '高' : v === 'medium' ? '中' : '低';
 }
+
+const descCategory = data.category === 'video'
+  ? 'AI動画生成ツール'
+  : data.category === 'both'
+  ? 'AI画像・動画生成ツール'
+  : 'AI画像生成ツール';
+const pageDescription = `${data.name}の特徴、料金、無料プランの有無、日本語対応、商用利用条件の確認ポイントを整理。${descCategory}としての使い方や注意点もまとめています。最新情報は公式サイトをご確認ください。`;
 ---
 
 <BaseLayout
   title={`${data.name}の商用利用・料金・無料枠を比較｜AI生成ツールDB`}
-  description={`${data.name}の商用利用条件・料金プラン・無料枠・透かし・日本語対応状況をまとめています。最新情報は公式サイトをご確認ください。`}
+  description={pageDescription}
   canonicalPath={`/tools/${entry.slug}/`}
   ogType="article"
   jsonLd={jsonLd}
@@ -233,11 +246,11 @@ function styleCtrlLabel(v: string): string {
 
       <!-- CTA -->
       <div class="td-hero-cta">
-        {data.officialUrl && (
+        {(data.affiliateUrl ?? data.officialUrl) && (
           <a
-            href={data.officialUrl}
+            href={data.affiliateUrl ?? data.officialUrl}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="sponsored nofollow noopener noreferrer"
             class="btn btn-primary"
           >
             公式サイトで確認する <span class="arr">↗</span>
@@ -515,6 +528,18 @@ function styleCtrlLabel(v: string): string {
           ※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。
         </p>
       </div>
+      {(data.affiliateUrl ?? data.officialUrl) && (
+        <div style="margin-top:16px;">
+          <a
+            href={data.affiliateUrl ?? data.officialUrl}
+            target="_blank"
+            rel="sponsored nofollow noopener noreferrer"
+            class="btn btn-primary"
+          >
+            料金・利用条件を公式サイトで確認する <span class="arr">↗</span>
+          </a>
+        </div>
+      )}
     </section>
 
     <!-- ===== 向いている人・向いていない人 ===== -->
@@ -738,7 +763,7 @@ function styleCtrlLabel(v: string): string {
           ))}
         </ul>
         <div class="td-checklist-cta">
-          <a href={data.officialUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <a href={data.affiliateUrl ?? data.officialUrl} target="_blank" rel="sponsored nofollow noopener noreferrer" class="btn btn-primary">
             {data.conversionGuide.primaryCtaLabel ?? `${data.name}の公式サイトで最新条件を確認する`} <span class="arr">↗</span>
           </a>
           {data.usagePolicy?.termsUrl && (
@@ -762,23 +787,29 @@ function styleCtrlLabel(v: string): string {
       <h2 class="td-section-h">情報の鮮度・参照元</h2>
       <div class="td-freshness">
         <dl class="fr-row">
-          <div style="display:flex;gap:6px;">
-            <dt>最終確認日：</dt>
-            <dd>{data.lastReviewed ?? '—'}</dd>
-          </div>
+          {data.lastReviewed && (
+            <div style="display:flex;gap:6px;">
+              <dt>最終確認日：</dt>
+              <dd>{formatDate(data.lastReviewed)}</dd>
+            </div>
+          )}
           {data.nextReviewDue && (
             <div style="display:flex;gap:6px;">
               <dt>次回確認予定：</dt>
-              <dd>{data.nextReviewDue}</dd>
+              <dd>{formatDate(data.nextReviewDue)}</dd>
             </div>
           )}
           {data.verifiedAt && (
             <div style="display:flex;gap:6px;">
-              <dt>情報検証日：</dt>
-              <dd>{data.verifiedAt}</dd>
+              <dt>公式情報確認日：</dt>
+              <dd>{formatDate(data.verifiedAt)}</dd>
             </div>
           )}
         </dl>
+        <p style="margin-top:12px;font-size:12.5px;color:var(--muted);line-height:1.75;">
+          料金・利用条件は変更される場合があります。最新情報は公式サイトをご確認ください。<br />
+          商用利用条件や入力素材の扱いは、プランや用途によって異なる場合があります。本記事は法的助言ではありません。
+        </p>
 
         {/* sourceRefs優先、なければsources */}
         {data.sourceRefs && data.sourceRefs.length > 0 ? (

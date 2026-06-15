@@ -164,8 +164,8 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
     </div>
 
     <div class="tdp-actions">
-      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel="noopener">{primaryCta.label} <span class="ext">↗</span></a>
-      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel="noopener">{secondaryCta.label} <span class="ext">↗</span></a> : null}
+      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel="sponsored nofollow noopener noreferrer">{primaryCta.label} <span class="ext">↗</span></a>
+      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel="sponsored nofollow noopener noreferrer">{secondaryCta.label} <span class="ext">↗</span></a> : null}
     </div>
 
     <div class="tdp-caution">
@@ -361,7 +361,8 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
       <div class="tdp-datebox">
         {lastChecked && <div class="row"><b>最終確認日</b><span class="mono">{lastChecked}</span></div>}
         {nextCheck && <div class="row"><b>次回確認予定</b><span class="mono">{nextCheck}</span></div>}
-        {verifiedDate && <div class="row"><b>情報検証日</b><span class="mono">{verifiedDate}</span></div>}
+        {verifiedDate && <div class="row"><b>公式情報確認日</b><span class="mono">{verifiedDate}</span></div>}
+        <p style="margin-top:10px;font-size:12px;color:var(--muted);line-height:1.75;grid-column:1/-1;">料金・利用条件は変更される場合があります。最新情報は公式サイトをご確認ください。商用利用条件や入力素材の扱いは、プランや用途によって異なる場合があります。本記事は法的助言ではありません。</p>
       </div>
       {sources.length > 0 && (
         <div class="tdp-srcbox">
@@ -392,7 +393,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
   <!-- ===== 関連ツール ===== -->
   {relatedTools.length > 0 && (
     <section class="tdp-sec band">
-      <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Related tools</span><h2>このツールと比較されるAIツール</h2><p>{toolName}と一緒に検討されることの多いAIツールです。</p></div>
+      <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Related tools</span><h2>あわせて比較したいAIツール</h2><p>同じカテゴリで{toolName}と比較されることの多いAIツールです。</p></div>
       <div class="tdp-toolcards reveal" data-stagger>
         {relatedTools.map((t) => (
           <article class="tdp-toolcard">

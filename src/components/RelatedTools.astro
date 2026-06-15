@@ -9,15 +9,23 @@ interface Props {
 
 const { currentSlug, category } = Astro.props;
 const allTools = await getCollection('tools');
+
+function categoryMatches(toolCat: string, current: string): boolean {
+  if (current === 'both') return toolCat === 'image' || toolCat === 'video' || toolCat === 'both';
+  if (current === 'image') return toolCat === 'image' || toolCat === 'both';
+  if (current === 'video') return toolCat === 'video' || toolCat === 'both';
+  return false;
+}
+
 const related = allTools
-  .filter((t) => t.slug !== currentSlug && t.data.category === category)
+  .filter((t) => t.slug !== currentSlug && categoryMatches(t.data.category, category))
   .sort((a, b) => a.slug.localeCompare(b.slug))
-  .slice(0, 3);
+  .slice(0, 6);
 ---
 
 {related.length > 0 && (
   <section class="mb-10">
-    <h2 class="mb-4 text-lg font-semibold text-gray-800">このツールと比較されるAIツール</h2>
+    <h2 class="mb-4 text-lg font-semibold text-gray-800">同じカテゴリの関連ツール</h2>
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {related.map((tool) => <ToolCard tool={tool} />)}
     </div>

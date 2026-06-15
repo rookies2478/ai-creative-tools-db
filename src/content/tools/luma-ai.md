@@ -32,9 +32,9 @@ weaknesses:
   - "商用利用時は有料プランへのアップグレードと公式規約確認が必要"
   - "日本語UIは公式情報で明確に確認できていない"
   - "動画生成はプロンプト調整・試行が必要な場合がある"
-lastReviewed: "2026-06-05"
-nextReviewDue: "2026-06-24"
-verifiedAt: "2026-06-08"
+lastReviewed: "2026-06-15"
+nextReviewDue: "2026-09-15"
+verifiedAt: "2026-06-15"
 officialSourceUrl: "https://lumalabs.ai/pricing"
 pricingModel: "subscription_credit"
 freePlanNote: "Freeプランにはlimited monthly credits / limited usageが案内されています。非商用利用限定・透かしありとされているため、無料利用時は用途と出力条件の公式確認が必要です。"
@@ -96,7 +96,7 @@ usagePolicy:
   creditRequiredNote: "公式規約での明記は確認できていない。最新規約を参照すること。"
   officialSourceUrl: "https://lumalabs.ai/pricing"
   termsUrl: "https://lumalabs.ai/legal/terms-of-service"
-  lastReviewed: "2026-06-05"
+  lastReviewed: "2026-06-15"
 capabilityFit:
   imageGeneration: false
   videoGeneration: true
@@ -118,9 +118,9 @@ conversionGuide:
     - "生成に使う素材（画像・動画）に第三者の権利が含まれていないか確認したか？"
     - "人物・著名人・ブランドロゴを含む動画を使用する場合、権利関係を別途確認したか？"
 reviewed:
-  pricing: "2026-05-15"
+  pricing: "2026-06-15"
   terms: "2026-05-15"
-  features: "2026-06-05"
+  features: "2026-06-15"
 sourceRefs:
   - label: "Luma AI 公式サイト"
     url: "https://lumalabs.ai/"

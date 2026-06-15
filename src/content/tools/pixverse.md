@@ -29,9 +29,9 @@ weaknesses:
   - "公式利用規約上、アウトプットはデフォルト非商用。商用目的には別途認可または商用ライセンスが必要とされている"
   - "日本語プロンプト対応状況は公式に明示されておらず要確認（unknown）"
   - "無料プランの毎日クレジットは当日未使用分が翌日に失効する点に注意"
-lastReviewed: "2026-06-05"
-nextReviewDue: "2026-09-05"
-verifiedAt: "2026-06-08"
+lastReviewed: "2026-06-15"
+nextReviewDue: "2026-09-15"
+verifiedAt: "2026-06-15"
 officialSourceUrl: "https://pixverse.ai/en/terms-of-service"
 pricingModel: "subscription_credit"
 freePlanNote: "無料プラン（Basic）あり。複数の第三者情報では、初回サインアップ時に90クレジット付与・毎日60クレジットが補充（当日未使用分は翌日失効）と報告されています。透かしあり・生成回数制限あり。詳細は公式サイトをご確認ください。"
@@ -101,9 +101,9 @@ faqs:
   - question: "SNSやショート動画の制作に使えますか？"
     answer: "公式ブログでもSNS向けコンテンツ制作やクリエイター向けの用途が案内されており、短尺動画制作に適したユースケースとして紹介されています。商用利用条件については別途公式利用規約をご確認ください。"
 reviewed:
-  pricing: "2026-06-05"
+  pricing: "2026-06-15"
   terms: "2026-06-05"
-  features: "2026-06-05"
+  features: "2026-06-15"
 ---
 
 ## PixVerseとは

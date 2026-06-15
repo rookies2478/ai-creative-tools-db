@@ -49,10 +49,12 @@ useCases:
   - video
   - youtube
 limitations:
-  - "無料プランでは透かしあり"
-  - "商用利用条件は要確認"
+  - "無料プランでは透かしあり・商用利用不可とされている"
+  - "商用利用条件はプラン（Standard/Pro/Master等）により異なる場合があります。公式の利用規約・料金・支払いポリシーをご確認ください"
   - "日本語UI非対応"
   - "データポリシー・利用規約は公式サイトで要確認"
+  - "入力素材（人物・ブランドロゴ・第三者著作物等）の権利関係はユーザーが事前に確認する必要があります"
+  - "出力動画の商用利用・二次利用・収益化条件はプランや用途によって異なる場合があります"
 sources:
   - title: "Hailuo AI 公式サイト"
     url: "https://hailuoai.video"
@@ -66,10 +68,10 @@ sourceRefs:
     type: official
   - label: "Hailuo AI 利用規約"
     url: "https://hailuoai.video/doc/terms-of-service.html"
-    type: official
+    type: terms
   - label: "Hailuo AI 料金・支払いポリシー"
     url: "https://hailuoai.video/doc/payment-policy.html"
-    type: official
+    type: pricing
 faqs:
   - question: "無料で使えますか？"
     answer: "無料枠が用意されています。ただし、ダウンロード動画に透かしが入り、商用利用は認められていないとされています。生成回数にも制限があります。詳細は公式サイトをご確認ください。"

@@ -33,7 +33,7 @@ weaknesses:
 lastReviewed: "2026-06-06"
 nextReviewDue: "2026-09-06"
 verifiedAt: "2026-06-08"
-officialSourceUrl: "https://www.seaart.ai/"
+officialSourceUrl: "https://image.cdn2.seaart.me/20250802/d2790ce8-f8e8-4ea4-a4a1-c958c728566e.html"
 pricingModel: "subscription"
 freePlanNote: "無料プランあり。詳細な機能制限・クレジット数は変更される可能性があるため、最新の公式サイトをご確認ください。"
 paidPlanNote: "VIPプランおよびSVIP（初級・標準・プロフェッショナル・マスター）プランが案内されています。プラン名・料金・クレジット条件は変更される可能性があるため、最新の公式サイトをご確認ください。"
@@ -58,6 +58,7 @@ limitations:
   - "透かし条件は公式情報から未確認"
   - "入力素材（アップロード画像・参照素材等）の著作権・権利はユーザーが事前に確認する必要があります"
   - "出力コンテンツの商用利用前に、プラン条件・利用規約・モデルライセンスを合わせて確認してください"
+  - "VIP/SVIPプランの料金・詳細条件は非ログイン状態では確認が困難なため、公式サイトへのログイン後に会員ページでご確認ください"
 reviewed:
   pricing: "2026-06-06"
   terms: "2026-06-06"

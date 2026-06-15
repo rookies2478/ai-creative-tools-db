@@ -31,7 +31,7 @@ weaknesses:
 lastReviewed: "2026-06-13"
 nextReviewDue: "2026-07-13"
 verifiedAt: "2026-06-13"
-officialSourceUrl: "https://creator.nightcafe.studio/"
+officialSourceUrl: "https://nightcafe.studio/policies/terms-of-service"
 pricingModel: "subscription_credit"
 platforms:
   - web

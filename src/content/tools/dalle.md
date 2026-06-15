@@ -28,7 +28,7 @@ weaknesses:
 lastReviewed: "2026-06-15"
 nextReviewDue: "2026-09-15"
 verifiedAt: "2026-06-15"
-officialSourceUrl: "https://openai.com/dall-e-3"
+officialSourceUrl: "https://openai.com/policies/usage-policies"
 pricingModel: "subscription_credit"
 freePlanNote: "ChatGPT無料プランで制限付き利用できる場合あり"
 paidPlanNote: "ChatGPT Plus等の有料プランで利用枠が拡大。API利用は従量課金（dall-e-3 APIは2026年5月12日にdeprecated。API経由では後継のgpt-image-1等への移行が案内されています）。"

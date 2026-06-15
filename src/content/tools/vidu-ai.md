@@ -53,11 +53,12 @@ useCases:
   - ad_creative
 limitations:
   - "無料プランでは透かしあり（有料プランでは条件が異なる場合あり）"
-  - "商用利用は有料ユーザーのみとされているが、公式規約の確認が必須"
+  - "商用利用は有料ユーザーのみとされているが、公式規約の確認が必須。プランや用途によって条件が異なる場合があります"
   - "ユーザー投稿コンテンツには世界規模・無償・取消不能のライセンスがViduに付与される（AIトレーニング目的を含む・アカウント削除後も継続）"
   - "機密性の高い素材・個人情報・人物画像・第三者著作物のアップロードは特に慎重な検討が必要"
   - "日本語UI非対応・日本語プロンプト対応状況は公式情報で未確認"
   - "中国企業（Shengshu Technology）提供サービス。データ管轄・プライバシーポリシーは公式サイトで要確認"
+  - "商用利用条件に関する専用のヘルプ・FAQページURLは現時点で確認できていません。最新の条件は公式利用規約（vidu.com/terms）でご確認ください"
 usagePolicy:
   commercialUseStatus: "paid-only"
   commercialUseByPlan:
@@ -89,10 +90,10 @@ sourceRefs:
     type: official
   - label: "Vidu AI料金ページ"
     url: "https://www.vidu.com/pricing"
-    type: official
+    type: pricing
   - label: "Vidu AI利用規約"
     url: "https://www.vidu.com/terms"
-    type: official
+    type: terms
 faqs:
   - question: "無料で使えますか？"
     answer: "公式サイトでは全ユーザーへの無料クレジット提供と、オフピークモードでの無制限無料生成が案内されています。ただし、無料プランでは透かしが付く場合があり、詳細な制限は公式サイトをご確認ください。"

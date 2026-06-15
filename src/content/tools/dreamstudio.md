@@ -29,7 +29,7 @@ weaknesses:
 lastReviewed: "2026-06-14"
 nextReviewDue: "2026-07-14"
 verifiedAt: "2026-06-14"
-officialSourceUrl: "https://stability.ai/brandstudio"
+officialSourceUrl: "https://stability.ai/brand-studio-plans"
 pricingModel: "credit"
 platforms:
   - web
@@ -51,6 +51,8 @@ limitations:
   - "料金・クレジット条件は予告なく変更される可能性がある"
   - "商用利用時はStability AIライセンス・Acceptable Use Policyの確認が必要"
   - "日本語UIは公式情報のみでは確認不可"
+  - "公式利用規約（Terms of Service）の専用URLは現時点で確認できていません。最新の規約は公式サイト（stability.ai）でご確認ください"
+  - "入力素材（参照画像等）の著作権・権利はユーザーが事前に確認する必要があります"
 reviewed:
   pricing: "2026-05-14"
   terms: "2026-05-14"

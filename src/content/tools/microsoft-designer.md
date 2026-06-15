@@ -28,7 +28,7 @@ weaknesses:
 lastReviewed: "2026-06-14"
 nextReviewDue: "2026-07-14"
 verifiedAt: "2026-06-14"
-officialSourceUrl: "https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer"
+officialSourceUrl: "https://www.microsoft.com/servicesagreement"
 pricingModel: "subscription"
 pricingSummary: "Microsoftアカウントで無料利用できる範囲がありますが、公式FAQでは個人的・非商用利用向けと案内されています。頻繁に利用する場合やMicrosoft 365 / Copilot Pro連携機能では、サブスクリプションが必要になる場合があります。最新情報は公式サイトをご確認ください。"
 freePlanNote: "Microsoftアカウントで無料利用できる範囲があります。公式FAQでは個人的・非商用利用向けと案内されており、頻繁に作成するユーザーにはサブスクリプションが必要になる場合があります。生成回数や対象機能は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
@@ -64,9 +64,6 @@ sourceRefs:
   - label: "Microsoftサービス規約（公式）"
     url: "https://www.microsoft.com/servicesagreement"
     type: terms
-  - label: "Microsoft Designer よくある質問（公式・日本語）"
-    url: "https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer"
-    type: help
 sources:
   - title: "Microsoft Designer 公式サイト"
     url: "https://designer.microsoft.com/"

@@ -29,7 +29,7 @@ weaknesses:
 lastReviewed: "2026-06-15"
 nextReviewDue: "2026-09-15"
 verifiedAt: "2026-06-15"
-officialSourceUrl: "https://www.adobe.com/products/firefly/plans.html"
+officialSourceUrl: "https://www.adobe.com/legal/licenses-terms/adobe-gen-ai-user-guidelines.html"
 pricingModel: "subscription_credit"
 freePlanNote: "無料プランで一定数の生成クレジットあり（数量は変更の可能性あり）"
 paidPlanNote: "Firefly Standard $9.99/月（画像・ベクター生成無制限、動画クレジット2,000/月）、Firefly Pro $29.99/月（動画クレジット7,000/月）。Creative Cloud All Appsに含まれる場合あり。"

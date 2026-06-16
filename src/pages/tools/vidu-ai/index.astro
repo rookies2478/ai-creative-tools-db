@@ -30,8 +30,8 @@ const jsonLd = JSON.stringify([
 ---
 
 <BaseLayout
-  title="Vidu AIの商用利用・料金・無料枠まとめ｜AI動画生成ツールDB"
-  description="Vidu AIのAI動画生成における商用利用条件・料金プラン・無料枠・透かし・利用規約の注意点を整理。参照画像による一貫性維持・アニメ動画生成・音効生成機能を搭載。最新情報は公式サイトをご確認ください。"
+  title="Vidu AIの料金・使い方・商用利用・画像から動画まとめ｜AI動画生成ツールDB"
+  description="Vidu AIの料金プラン・無料枠・使い方・画像から動画・参照画像機能・スマホ対応・商用利用条件・利用規約の注意点を整理。最新情報は公式サイトをご確認ください。"
   canonicalPath="/tools/vidu-ai/"
   ogType="article"
   jsonLd={jsonLd}
@@ -53,7 +53,7 @@ const jsonLd = JSON.stringify([
       category="AI動画生成"
       checkedDate={d?.lastReviewed ?? '2026-06-04'}
       headingHtml='Vidu AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="Vidu AIは中国のShengshu Technology（生数科技）が開発したAI動画生成サービスです。テキスト・画像・最大7枚の参照画像から動画を生成でき、アニメ動画生成や音効生成にも対応しています。公式利用規約では有料ユーザーに商用利用ライセンスが拡張されると明記されていますが、<b>ユーザーが投稿したコンテンツには世界規模・無期限・取消不能のライセンスがViduに付与される点への注意が必要です。</b>"
+      lead="Vidu AIは中国のShengshu Technology（生数科技）が開発したAI動画生成サービスです。テキスト入力・画像アップロード・最大7枚の参照画像から動画を生成でき、画像から動画への変換や参照画像を使ったキャラクター一貫性維持、アニメ動画生成、音効生成にも対応しています。基本的な使い方はプロンプト入力または画像指定→動画生成→プレビューという流れです。スマホからはWebブラウザ経由での利用が案内されている場合がありますが、対応状況は公式サイトでご確認ください。公式利用規約では有料ユーザーに商用利用ライセンスが拡張されると明記されていますが、<b>ユーザーが投稿したコンテンツには世界規模・無期限・取消不能のライセンスがViduに付与される点への注意が必要です。</b>"
       specs={[
         { lb: '商用利用', badge: { s: 'paid', label: '有料プランのみ（公式規約）' } },
         { lb: '無料枠', badge: { s: 'cond', label: 'あり（制限・透かし）' } },
@@ -233,6 +233,9 @@ const jsonLd = JSON.stringify([
         { q: 'アップロードしたコンテンツはどう扱われますか？', a: '公式利用規約によると、ユーザーが投稿したコンテンツには、Viduに対して世界規模・無償・取消不能のライセンスが付与されます。このライセンスはAIトレーニング目的での利用も含まれ、アカウント削除後も継続します。機密性の高い素材の取り扱いには注意が必要です。' },
         { q: '日本語で使えますか？', a: '公式サイトに言語切替オプションが存在しますが、日本語UIへの対応は確認できていません。日本語プロンプトへの対応状況についても公式サイトで最新情報をご確認ください。' },
         { q: '運営会社はどこですか？', a: 'Vidu AIは中国のShengshu Technology（生数科技）が開発しています。データの取り扱いポリシーは公式サイトでご確認ください。' },
+        { q: 'Vidu AIの使い方を教えてください', a: '基本的な流れは、プロンプトを入力するか画像をアップロードし、必要に応じて参照画像や素材を指定し、動画を生成・プレビューするという流れです。参照画像機能（Reference to Video）では最大7枚の画像をアップロードしてキャラクターやシーンの一貫性を保てるとされています。機能名や操作手順は変更される場合があるため、最新の使い方は公式サイトでご確認ください。' },
+        { q: 'Vidu AIはスマホで使えますか？', a: 'WebブラウザからVidu AIにアクセスできる場合がありますが、スマホ専用アプリの有無・対応OS・スマホ上での生成時間や保存形式については公式サイトの最新情報をご確認ください。プランや用途によって対応状況が異なる場合があります。' },
+        { q: 'Vidu AIの参照画像機能を使う前に何を確認すべきですか？', a: 'アップロードする画像の権利関係（自身が権利を持つ画像か）を確認してください。人物・顔画像・ロゴ・ブランド・第三者の著作物が含まれる場合は、それぞれの利用条件や肖像権・商標権の観点からも確認が必要です。また、ユーザーが投稿したコンテンツにはViduへの世界規模・取消不能ライセンスが付与される点も念頭に置いてください。このページは法的助言ではありません。最新情報は公式利用規約をご確認ください。' },
       ]}
       relatedTools={[
         { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
@@ -241,14 +244,20 @@ const jsonLd = JSON.stringify([
       ]}
       nextReads={[
         { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
+        { href: '/guides/video-generation-credit-cost-comparison/', title: 'AI動画生成クレジット費用比較', desc: '各ツールのクレジット単価・料金を比較' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール一覧', desc: '無料枠・無料プランがあるAIツールをまとめて確認' },
+        { href: '/conditions/japanese/', title: '日本語対応AIツール一覧', desc: '日本語UIまたは日本語プロンプトに対応したツール' },
         { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
         { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
         { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
         { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+        { href: '/tools/hailuo-ai/', title: 'Hailuo AI', desc: '動画生成・音楽生成にも対応するAIツール' },
       ]}
       conditions={[
         { label: 'ツール一覧', href: '/tools/' },
         { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '日本語対応AIツール', href: '/conditions/japanese/' },
         { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
         { label: '透かしなしツール', href: '/conditions/no-watermark/' },
         { label: '全ツール比較表', href: '/comparisons/' },

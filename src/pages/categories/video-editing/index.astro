@@ -18,6 +18,14 @@ const faqs = [
     q: '商用利用前に確認すべきことは？',
     a: '収益化コンテンツや広告・クライアント案件への利用を前提にする場合は、各ツールの公式利用規約で商用利用条件をご確認ください。使用する素材・音源・テンプレートごとに利用条件が異なることがあります。本記事は法的助言ではありません。<a href="/guides/commercial-use-copyright/">商用利用・著作権の考え方ガイド</a>もご参照ください。',
   },
+  {
+    q: 'AI動画編集ツールはスマホでも使えますか？',
+    a: 'CapCut AIはスマホアプリが提供されているとされています。InVideo AIはブラウザベースのツールですが、スマホ操作の使い勝手はプランやデバイス環境によって異なる場合があるとされています。スマホで問題なく使えるとは断定できません。用途・操作性は各公式サイトをご確認ください。',
+  },
+  {
+    q: 'AI動画生成ツールで作った動画を編集するにはどうすればよいですか？',
+    a: 'RunwayやPika・Kling AIなどのAI動画生成ツールで作ったクリップは、動画ファイルとしてエクスポートし、CapCut AIやInVideo AIなど動画編集ツールに取り込んで字幕追加・カット・BGM調整などの編集が可能とされています。各ツールの対応フォーマット・エクスポート条件は異なる場合があります。また、生成したクリップの利用条件（商用利用・透かし）は元の生成ツールの規約に従いますので、編集ツールへの取り込み前に確認してください。本記事は法的助言ではありません。<a href="/categories/video-generation/">AI動画生成ツール一覧</a>もご参照ください。',
+  },
 ];
 
 const faqJsonLd = JSON.stringify({
@@ -41,7 +49,7 @@ const tools = [
     ja: '対応',
     commercial: '要確認',
     wmNote: '無料プランでは透かし（CapCutロゴ）が入る場合があります。有料プランで除去できるとされています。最新の公式情報をご確認ください。',
-    useNote: 'SNS・ショート動画・縦型動画に特化。自動字幕・AI音声・背景削除など多数のAI機能。スマホ・PCどちらでも使える。',
+    useNote: 'SNS・ショート動画・縦型動画に特化。自動字幕・AI音声・背景削除など多数のAI機能。スマホアプリおよびPCブラウザで利用できるとされています。操作感はデバイスや環境によって異なる場合があります。',
   },
   {
     name: 'InVideo AI',
@@ -72,7 +80,7 @@ function mark(val: string) {
 
 <BaseLayout
   title="AI動画編集ツール比較｜AIを使った動画編集・字幕・カット自動化"
-  description="AIを活用した動画編集ツールの比較ページです。AI動画生成との違い、選び方、用途別の使い分け、比較ポイントを整理しています。最新情報は公式サイトをご確認ください。"
+  description="AI動画編集ツールの比較ページです。字幕自動生成・スマホ対応・テンプレート・無料枠・商用利用確認ポイントを整理します。AI動画生成で作った素材の編集にも活用できます。プランや用途によって条件が異なるため、最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/video-editing/"
   jsonLd={faqJsonLd}
 >
@@ -116,7 +124,7 @@ function mark(val: string) {
         <div class="stats">
           <div class="stat"><span class="n">3</span><span class="t">掲載ツール</span></div>
           <div class="stat"><span class="n">7</span><span class="t">比較ポイント</span></div>
-          <div class="stat"><span class="n">4</span><span class="t">よくある質問</span></div>
+          <div class="stat"><span class="n">6</span><span class="t">よくある質問</span></div>
         </div>
       </header>
 

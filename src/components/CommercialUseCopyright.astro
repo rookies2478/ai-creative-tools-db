@@ -60,12 +60,12 @@ export interface Props {
 const {
   headingHtml = 'AI画像生成の<span class="hl"><span class="phrase-nowrap">商用利用</span>・著作権ガイド</span>',
   lead = 'AI画像・動画生成ツールを仕事や副業で使う前に確認したい、商用利用条件と著作権のポイントを整理しました。公式規約・プラン・透かし条件の見方を解説します。最新情報は必ず各公式サイトをご確認ください。',
-  checkedDate = '2026-05-07',
-  nextCheckDate = '2026-08-07',
+  checkedDate = '2026-06-16',
+  nextCheckDate = '2026-09-16',
   stats = [
     { n: '5', label: '確認すべきポイント' },
-    { n: '9', label: '対象ツール' },
-    { n: '6', label: 'よくある質問' },
+    { n: '12', label: '対象ツール' },
+    { n: '8', label: 'よくある質問' },
   ],
   conclusionHtml = '<p>商用利用の可否は<b>ツールとプランの組み合わせ</b>によって異なります。無料プランでは商用利用不可、有料プランでは可能という構造が多く見られます。</p><p>「商用利用可」とされている場合でも、透かしの除去・クレジット表記・大企業向けの収益条件など、追加の要件がある場合があります。利用前に各ツールの公式利用規約を必ずご確認ください。</p>',
   disclaimer = 'このガイドは情報提供を目的としており、法的アドバイスではありません。商用利用の判断は各ツールの最新利用規約を必ず確認し、重要な場面では専門家（弁護士等）への相談に基づいて行ってください。',
@@ -88,6 +88,9 @@ const {
     { name: 'Runway', slug: 'runway', initial: 'R', status: 'cond', statusLabel: '〇 条件あり', note: '全プランで商用利用可とされているが、無料プランでは透かしあり・クレジット一度限りのため実用に制限がある。', date: '2026-05-05' },
     { name: 'Pika', slug: 'pika', initial: 'P', status: 'plan', statusLabel: '△ プランによる', note: '無料プランでは商用利用不可。有料プランで可能とされている。', date: '2026-05-05' },
     { name: 'Kling AI', slug: 'kling-ai', initial: 'K', status: 'plan', statusLabel: '△ プランによる', note: '無料プランでは商用利用不可。プラットフォームが生成コンテンツへの永続的なライセンスを保持する条項あり。中国系サービスのためデータポリシーも要確認。', date: '2026-05-05' },
+    { name: 'Luma AI', slug: 'luma-ai', initial: 'L', status: 'plan', statusLabel: '△ プランによる', note: '公式情報では有料プランで商用利用できる場合があるとされています。無料プランの条件はプランページでご確認ください。最新情報は公式サイトをご確認ください。', date: '2026-06-16' },
+    { name: 'Hailuo AI', slug: 'hailuo-ai', initial: 'H', status: 'plan', statusLabel: '△ 要確認', note: '商用利用条件はプランおよび規約によって異なる場合があります。公式利用規約と料金ページをご確認ください。', date: '2026-06-16' },
+    { name: 'Haiper', slug: 'haiper', initial: 'H', status: 'plan', statusLabel: '△ 要確認', note: '商用利用条件はプランおよび規約によって異なる場合があります。公式利用規約と料金ページをご確認ください。', date: '2026-06-16' },
   ],
   freePlan = [
     { name: 'Midjourney', initial: 'M', note: '無料プランなし（2024年末に廃止されたとされている）。' },
@@ -99,6 +102,9 @@ const {
     { name: 'Runway', initial: 'R', note: '125クレジット（初回のみ・更新なし）。商用利用できる場合があるが透かしあり。' },
     { name: 'Pika', initial: 'P', note: '月80クレジット程度（毎月更新）。商用利用不可。' },
     { name: 'Kling AI', initial: 'K', note: '1日66クレジット程度（翌日繰越なし・透かしあり）。商用利用不可。' },
+    { name: 'Luma AI', initial: 'L', note: '無料プランの商用利用条件は公式プランページをご確認ください。' },
+    { name: 'Hailuo AI', initial: 'H', note: '無料プランの商用利用条件は公式プランページをご確認ください。' },
+    { name: 'Haiper', initial: 'H', note: '無料プランの商用利用条件は公式プランページをご確認ください。' },
   ],
   watermark = [
     { name: 'Midjourney', initial: 'M', note: '有料プランでは透かしなし。' },
@@ -110,6 +116,9 @@ const {
     { name: 'Runway', initial: 'R', note: '無料プランでは透かしあり。有料プランでは透かしなし。' },
     { name: 'Pika', initial: 'P', note: '無料プランでは透かしあり。有料プランでは透かしなし。' },
     { name: 'Kling AI', initial: 'K', note: '無料プランでは透かしあり。有料プランでは透かしなし。' },
+    { name: 'Luma AI', initial: 'L', note: '透かし条件は公式情報から未確認。最新情報は公式サイトをご確認ください。' },
+    { name: 'Hailuo AI', initial: 'H', note: '透かし条件は公式情報から未確認。最新情報は公式サイトをご確認ください。' },
+    { name: 'Haiper', initial: 'H', note: '透かし条件は公式情報から未確認。最新情報は公式サイトをご確認ください。' },
   ],
   checklist = [
     { html: '使用するツールの<b>公式利用規約（Terms of Service）</b>を確認した' },
@@ -128,6 +137,8 @@ const {
     { q: 'SNS広告に使っても問題ありませんか？', a: '利用するツールの商用利用許可の有無に加えて、次の点も個別に確認することを推奨します。生成コンテンツに第三者の著作権・商標・肖像権等に関わる要素が含まれていないか、ツールの利用規約で広告利用が制限されていないか、掲載するプラットフォームのポリシーに抵触しないか。これらは各ツールの最新公式情報と、必要に応じて専門家への確認に基づいて判断することを推奨します。' },
     { q: '生成した画像・動画を素材として販売できますか？', a: '素材集・テンプレートとしての販売（再頒布）は、ツールによって明示的に禁止または制限されている場合があります。利用規約の「再頒布」「再販」「サブライセンス」に関する条項を事前に確認してください。ツールによって扱いが異なるため、各ツールの最新公式情報でご確認ください。' },
     { q: 'クライアントへの納品物に使っても問題ありませんか？', a: '商用利用を許可しているツールでは、クライアントへの成果物納品は一般的に想定される商用利用の範囲に含まれる場合があります。ただし、納品物に含まれる生成コンテンツへの第三者の権利侵害リスク、ツールの利用規約上の制限の有無、クライアントが求めるコンプライアンス要件等を確認した上で使用することを推奨します。' },
+    { q: 'Stable DiffusionやLoRA・Checkpointを使う場合、何を確認すべきですか？', a: 'Stable Diffusion本体のライセンスに加えて、使用するモデル・LoRA・Checkpointそれぞれのライセンスや利用条件を個別に確認する必要があります。CivitaiやHugging Faceなどで配布されているモデルはライセンスが一様ではなく、商用利用を制限するもの・許可するもの・確認が必要なものが混在しています。配布元のモデルカード・利用規約・ライセンス表記を必ずご確認ください。なお、本記事は法的助言ではありません。重要な場面では専門家への相談を推奨します。<br><br>→ <a href="/tools/stable-diffusion/">Stable Diffusion 詳細ページ</a> / <a href="/guides/ai-image-commercial-use-checklist/">AI画像の商用利用チェックリスト</a>' },
+    { q: 'Runway・Kling AI・Luma AIなど動画生成AIで作った動画を使う前に何を確認すべきですか？', a: '動画生成AIの商用利用条件はプラン・ツール・用途によって異なる場合があります。確認すべき主なポイントは次の通りです。①使用するプランが商用利用を許可しているか（無料プランでは不可とされているツールもあります）、②生成動画に透かしが入るか、③生成コンテンツへのプラットフォームのライセンス保持条項がないか、④AIが生成したコンテンツであることの表示が求められるか。各ツールの公式利用規約・料金ページ・ヘルプページをご確認ください。なお、本記事は法的助言ではありません。<br><br>→ <a href="/categories/video-generation/">動画生成AIツール一覧</a> / <a href="/tools/luma-ai/">Luma AI詳細</a> / <a href="/tools/haiper/">Haiper詳細</a> / <a href="/tools/hailuo-ai/">Hailuo AI詳細</a>' },
   ],
   notes = [
     '各ツールの利用規約は予告なく変更されます。定期的に公式規約を確認してください。',
@@ -157,6 +168,9 @@ const {
     { name: 'Runway', slug: 'runway', initial: 'R' },
     { name: 'Pika', slug: 'pika', initial: 'P' },
     { name: 'Kling AI', slug: 'kling-ai', initial: 'K' },
+    { name: 'Luma AI', slug: 'luma-ai', initial: 'L' },
+    { name: 'Hailuo AI', slug: 'hailuo-ai', initial: 'H' },
+    { name: 'Haiper', slug: 'haiper', initial: 'H' },
   ],
   toolsBase = '/tools/',
 } = Astro.props as Props;
@@ -353,7 +367,7 @@ const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
     <div class="cuc-sechead reveal">
       <span class="cuc-eyebrow">FAQ</span>
       <h2>よくある質問</h2>
-      <p>無料プラン・透かし・著作権の帰属・SNS広告・素材販売・クライアント納品について、確認のポイントをお答えします。</p>
+      <p>無料プラン・透かし・著作権の帰属・SNS広告・素材販売・クライアント納品・Stable Diffusionのモデル/LoRA・動画生成AIの商用利用について、確認のポイントをお答えします。</p>
     </div>
     <div class="cuc-faq reveal">
       {faqs.map((f) => (

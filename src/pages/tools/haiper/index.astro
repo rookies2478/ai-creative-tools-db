@@ -30,8 +30,8 @@ const jsonLd = JSON.stringify([
 ---
 
 <BaseLayout
-  title="Haiperの商用利用・料金・無料枠まとめ｜AI動画生成ツールDB"
-  description="HaiperのAI動画生成における商用利用条件・料金プラン・無料枠・透かし・利用規約の注意点を整理。Web App / iOS App / API対応。商用利用・透かし条件は要確認（旧公式FAQ情報あり）。最新情報は公式サイトをご確認ください。"
+  title="Haiperの使い方・料金・商用利用確認・比較まとめ｜AI動画生成ツールDB"
+  description="Haiperの使い方・料金・スマホ対応・画像から動画の確認ポイントと、RunwayやPika・Luma AIとの比較をまとめました。商用利用・透かし条件は要確認（旧公式FAQ情報あり）。Web App / iOS App / API対応。最新情報は公式サイトをご確認ください。"
   canonicalPath="/tools/haiper/"
   ogType="article"
   jsonLd={jsonLd}
@@ -232,6 +232,9 @@ const jsonLd = JSON.stringify([
         { q: 'APIは使えますか？', a: '公式ドキュメントではAPI提供が案内されています。API料金・利用条件の詳細は公式APIドキュメントをご確認ください。' },
         { q: '日本語で使えますか？', a: '公式情報だけでは日本語UIの対応を明確に確認できていません。日本語プロンプトで試せる場合でも、動画生成では英語プロンプトの方が安定する可能性があります。最新の対応状況は公式サイトでご確認ください。' },
         { q: '料金はどのくらいですか？', a: 'プラン名・料金・クレジット条件は変更される可能性があるため、必ず最新の公式料金ページをご確認ください。' },
+        { q: 'Haiperの使い方を確認するには何を見ればよいですか？', a: '基本的な利用手順は公式サイト（haiper.ai）や公式ドキュメント（docs.haiper.ai）を参照するのが確実です。旧公式FAQ・旧ヘルプが残っている場合でも、現在のサービス提供状況・画面構成は公式サイトで直接確認してください。' },
+        { q: 'Haiperはスマホで使えますか？', a: '旧公式FAQではiOS App経由での利用が案内されていましたが、現在のiOS App稼働状況は公式サイトでご確認ください。WebブラウザからWebアプリにアクセスできる可能性はありますが、スマホでの動作・保存形式・対応OSの詳細は要確認です。最新情報は公式サイトをご確認ください。' },
+        { q: 'RunwayやPika、Luma AIと比べるときは何を確認すべきですか？', a: '各ツールを比較する際は、生成品質・操作性・画像から動画への対応・料金・無料枠・商用利用条件・透かしの有無を確認するとよいでしょう。Haiperの商用利用・透かし条件は現在要確認のため、商用利用を前提にする場合は各ツールの最新の公式規約を必ずご確認ください。このページは法的助言ではありません。' },
       ]}
       relatedTools={[
         { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
@@ -244,6 +247,8 @@ const jsonLd = JSON.stringify([
         { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
         { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
         { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+        { href: '/comparisons/runway-vs-pika/', title: 'Runway vs Pika 比較', desc: 'RunwayとPikaの料金・機能・商用利用条件の違い' },
+        { href: '/conditions/free/', title: '無料で試せるAI動画生成ツール', desc: '無料枠のあるAI動画生成ツール一覧' },
       ]}
       conditions={[
         { label: 'ツール一覧', href: '/tools/' },

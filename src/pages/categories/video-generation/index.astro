@@ -45,6 +45,14 @@ const faqs = [
     q: '生成動画の著作権や肖像権はどう確認すればよいですか？',
     a: 'AI生成動画の著作権・所有権の扱いはツール・プラン・利用規約・各国の法律によって異なります。公式情報では、RunwayはユーザーがOwnershipを保持するとされていますが、その他のツールは規約上確認が必要なものが多い状況です。また、生成動画に実在の人物・著名人の顔・ブランドロゴ・商標・第三者の著作物が含まれる場合は、ツールの利用規約とは別に肖像権・商標権・著作権の観点から個別確認が必要です。本記事は法的助言ではありません。重要な商用利用の場面では専門家（弁護士等）へのご相談を推奨します。<a href="/guides/commercial-use-copyright/">商用利用・著作権の考え方ガイド</a>もご参照ください。',
   },
+  {
+    q: '動画生成AIのランキングはどのように見ればよいですか？',
+    a: 'ランキングは評価軸（料金・無料枠・日本語対応・画像から動画・商用利用条件・透かし有無など）によって結果が大きく変わります。「映像品質を重視したい」「まず無料枠から試したい」「日本語プロンプトで使いたい」など、目的別に候補を絞ることをおすすめします。本ページの用途別おすすめ早見表や<a href="/guides/video-generation-credit-cost-comparison/">料金・クレジット比較ガイド</a>も参考にしてください。ランキングは目的や評価軸によって変わるため、絶対的な順位として断定するものではありません。最新情報は各公式サイトをご確認ください。',
+  },
+  {
+    q: 'スマホで使えるAI動画生成ツールはありますか？',
+    a: 'スマホからの利用は、ブラウザ経由での利用・専用アプリの有無・生成時間・透かし条件・ログイン要否などを確認する必要があります。公式情報では、CapCut AIはiOS/Androidアプリが案内されており、HaiperはiOS・APIでの利用が確認されています。その他のツールはWebブラウザ経由でのスマホ利用が想定されますが、対応状況・使い勝手はツールや時期によって異なります。スマホ対応状況・無料枠は変更される場合があるため、最新情報は各公式サイトをご確認ください。<a href="/conditions/free/">無料枠のあるAIツール比較</a>もご参照ください。',
+  },
 ];
 
 const faqJsonLd = JSON.stringify({
@@ -80,8 +88,8 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
 ---
 
 <BaseLayout
-  title="AI動画生成ツールを比較する｜用途別・商用利用・日本語対応"
-  description="AI動画生成ツール（Runway・Pika・Kling AI・Luma AIなど）をテキスト→動画・画像→動画・SNS動画・YouTubeショート・広告動画・Bロールなど用途別に比較。無料枠・透かし・商用利用条件・日本語対応を横断確認できます。最新情報は各公式サイトをご確認ください。"
+  title="AI動画生成ツールおすすめ比較｜ランキング・料金・商用利用・日本語対応"
+  description="AI動画生成ツール（Runway・Pika・Kling AI・Luma AIなど）のおすすめ比較ページ。テキスト→動画・画像→動画・SNS動画・YouTubeショート・広告動画など用途別にランキングの目安・料金・無料枠・透かし・商用利用条件・日本語対応を横断確認できます。最新情報は各公式サイトをご確認ください。"
   canonicalPath="/categories/video-generation/"
   jsonLd={faqJsonLd}
 >
@@ -132,7 +140,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
         <div class="cvg-stats">
           <div class="cvg-stat"><span class="n">8</span><span class="t">AI動画生成ツール</span></div>
           <div class="cvg-stat"><span class="n">6</span><span class="t">用途別に比較</span></div>
-          <div class="cvg-stat"><span class="n">8</span><span class="t">よくある質問</span></div>
+          <div class="cvg-stat"><span class="n">10</span><span class="t">よくある質問</span></div>
         </div>
       </header>
 
@@ -716,7 +724,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
         <div class="cvg-sechead reveal">
           <span class="cvg-eyebrow">FAQ</span>
           <h2>よくある質問</h2>
-          <p>動画生成と動画編集／アバター動画の違い、無料枠、商用利用、日本語プロンプトについて、確認のポイントをお答えします。</p>
+          <p>動画生成と動画編集／アバター動画の違い、無料枠、商用利用、日本語プロンプト、ランキングの見方、スマホ対応について、確認のポイントをお答えします。</p>
         </div>
         <div class="cvg-faq reveal">
           {faqs.map((f) => (

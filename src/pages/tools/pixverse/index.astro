@@ -30,8 +30,8 @@ const jsonLd = JSON.stringify([
 ---
 
 <BaseLayout
-  title="PixVerseの商用利用・料金・無料枠まとめ｜AI動画生成ツールDB"
-  description="PixVerseのAI動画生成における商用利用条件・料金プラン・無料枠・透かし・利用規約の注意点を整理。V6モデル搭載・日本語UI対応。商用利用には別途認可が必要と公式規約に記載。最新情報は公式サイトをご確認ください。"
+  title="PixVerseの使い方・料金・商用利用・スマホ対応まとめ｜AI動画生成ツールDB"
+  description="PixVerseの使い方・料金プラン・商用利用条件・無料枠・スマホ対応・画像から動画・Runway／Pikaとの比較ポイントを整理。V6モデル搭載・日本語UI対応。商用利用には別途認可が必要と公式規約に記載。最新情報は公式サイトをご確認ください。"
   canonicalPath="/tools/pixverse/"
   ogType="article"
   jsonLd={jsonLd}
@@ -53,7 +53,7 @@ const jsonLd = JSON.stringify([
       category="AI動画生成"
       checkedDate={d?.lastReviewed ?? '2026-06-05'}
       headingHtml='PixVerseの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="PixVerseはテキストや画像からAI動画を生成できるサービスです。V6モデルを搭載し、最大15秒の動画生成とextend機能（最大8秒延長）に対応しています。公式サイトは日本語UIで提供されており、無料プラン（Basic）では初回クレジット付与と毎日のクレジット補充で試すことができます。<b>ただし公式利用規約では、アウトプットの利用はデフォルトで非商用目的に限定されており、商用目的での利用には別途の認可または商用ライセンスが必要と案内されています。</b>"
+      lead="PixVerseはテキストや画像からAI動画を生成できるサービスです。V6モデルを搭載し、最大15秒の動画生成とextend機能（最大8秒延長）に対応しています。基本的な使い方はプロンプト入力または画像指定→動画生成→プレビューという流れで、画像から動画への変換にも対応しています。公式サイトは日本語UIで提供されており、無料プラン（Basic）では初回クレジット付与と毎日のクレジット補充で試すことができます。スマートフォンからはWebブラウザ経由で利用できる場合がありますが、対応状況は公式サイトでご確認ください。<b>ただし公式利用規約では、アウトプットの利用はデフォルトで非商用目的に限定されており、商用目的での利用には別途の認可または商用ライセンスが必要と案内されています。</b>"
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '要認可（公式規約）' } },
         { lb: '無料枠', badge: { s: 'cond', label: '毎日60cr補充（透かし）' } },
@@ -235,7 +235,9 @@ const jsonLd = JSON.stringify([
         { q: '動画はどのくらいの長さまで生成できますか？', a: 'V6モデルでは最大15秒の動画生成が可能で、extend機能を使うとさらに最大8秒の延長ができるとされています。詳細は公式サイトをご確認ください。' },
         { q: '透かしはありますか？', a: '無料プランでは透かしが付与されるとされています。有料プランでの透かし条件は公式サイトでご確認ください。' },
         { q: '料金はどのくらいですか？', a: '複数の第三者情報ではStandard $10/月〜Ultra $199/月の複数ティアが報告されています。料金は変更される場合があります。最新の料金・プラン内容は必ず公式サイトをご確認ください。' },
-        { q: 'RunwayやPikaとどう使い分けるとよいですか？', a: 'PixVerseは日本語UIに対応しており、無料枠で試しやすい点が特徴です。Runwayは映像編集機能が充実、Pikaはシンプルな操作性が強みです。生成スタイルや機能の違いを実際に試して比較するとよいでしょう。' },
+        { q: 'PixVerseの使い方を教えてください', a: 'PixVerseの基本的な利用の流れは、アカウント登録後にテキストプロンプトを入力するか画像素材を指定して動画を生成し、プレビューして確認・必要に応じて再生成するという流れです。テキスト→動画・画像→動画の両方に対応しており、画像から動画を利用する場合は入力画像の権利関係（人物・ロゴ・ブランド・第三者素材の扱い）を事前にご確認ください。詳しい操作手順や最新の機能仕様は変更される場合があるため、公式ヘルプページをご確認ください。' },
+        { q: 'PixVerseはスマホで使えますか？', a: 'PixVerseはWebアプリとして提供されており、スマートフォンのブラウザから利用できる場合があります。スマートフォン専用アプリの提供状況・対応OS・スマホでの生成時間や保存形式については公式情報が変更される場合があるため、最新情報は公式サイトをご確認ください。' },
+        { q: 'RunwayやPikaと比べて、PixVerseはどんな用途に向いていますか？', a: '評価軸によって向き不向きは異なります。PixVerseは日本語UIに対応しており、無料枠で毎日クレジット補充があるため試しやすい点が特徴とされています。Runwayはプロ向けの映像編集機能やAPI連携が充実しており、Pikaは操作のシンプルさと低コスト（有料プラン$8/月〜・年払い）が特徴とされています。料金・無料枠・画像から動画の精度・商用利用条件などはプランや時期によって変わる場合があるため、最新情報は各公式サイトをご確認ください。本記事は法的助言ではありません。<br><br>→ <a href="/comparisons/runway-vs-pika/">RunwayとPika 比較記事</a> / <a href="/categories/video-generation/">AI動画生成ツール一覧</a>' },
       ]}
       relatedTools={[
         { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
@@ -244,10 +246,12 @@ const jsonLd = JSON.stringify([
       ]}
       nextReads={[
         { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
-        { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
+        { href: '/comparisons/runway-vs-pika/', title: 'RunwayとPika 比較', desc: '料金・機能・商用利用条件を軸に比較' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール一覧', desc: '無料枠・無料プランがあるAIツールをまとめて確認' },
         { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
         { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
         { href: '/conditions/japanese/', title: '日本語UIのAIツール一覧', desc: '日本語UIに対応しているAIツール' },
+        { href: '/guides/video-generation-credit-cost-comparison/', title: 'AI動画生成 クレジット・料金比較', desc: '主要ツールのクレジット消費量・コストを比較' },
         { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
       ]}
       conditions={[

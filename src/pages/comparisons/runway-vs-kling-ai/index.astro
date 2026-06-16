@@ -42,6 +42,14 @@ const faqs = [
     q: 'RunwayとKling AIはどちらが映像制作向きですか？',
     a: 'Runwayは背景削除・動画延長・音声ダビング・API連携など映像制作向けの多機能なツールを統合しており、映像制作・広告動画の試作用途での候補になります。Kling AIはリアル寄りの動画生成と動きの自然さを重視したい場合の候補になります。用途に合わせて公式情報をご確認の上、選択してください。',
   },
+  {
+    q: 'RunwayとKling AIで画像から動画を作る場合、何を確認すべきですか？',
+    a: '画像から動画を作る際は、入力画像の権利（自作・購入素材・第三者素材の区別）、人物・ブランド素材が含まれる場合の肖像権・商標権の確認、生成上限・透かしの有無・動画時間・解像度・再生成のしやすさを事前に確認することをおすすめします。また、料金・無料枠・クレジット消費は変わる場合があるため、最新情報は各公式サイトをご確認ください。商用利用条件はプランや用途によって異なる場合があります。本記事は法的助言ではありません。',
+  },
+  {
+    q: '初めてAI動画生成を試す場合、RunwayとKling AIのどちらを選ぶべきですか？',
+    a: 'どちらが常に優れているとは断定できません。Kling AIは無料プランで毎日クレジットが付与される（翌日繰越なし・商用利用不可・透かしあり）とされており、継続的に試しやすい面があります。Runwayは映像制作向けの多機能なワークフローや編集ツールを確認したい場合の候補になります。どちらも英語UI主体です。まずは無料プランの生成上限・透かし・商用利用条件を各公式サイトで確認し、用途に合った方を試してみることをおすすめします。最新の料金・条件は公式サイトをご確認ください。本記事は法的助言ではありません。',
+  },
 ];
 
 const comparisonRows = [
@@ -73,6 +81,8 @@ const relatedLinks = [
   { href: '/tools/hailuo-ai/', label: 'Hailuo AI詳細' },
   { href: '/comparisons/runway-vs-pika/', label: 'RunwayとPikaを比較' },
   { href: '/comparisons/', label: 'AI画像・動画ツール比較表' },
+  { href: '/conditions/free/', label: '無料で使えるAIツール一覧' },
+  { href: '/guides/video-generation-credit-cost-comparison/', label: 'AI動画生成クレジットコスト比較' },
 ];
 
 const sources = [
@@ -88,7 +98,7 @@ const articleJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "RunwayとKling AIを比較｜AI動画生成ならどちらを選ぶ？",
-  "description": "RunwayとKling AIの特徴、無料プラン、商用利用条件、日本語対応、透かし、向いている用途を比較します。映像制作寄りかリアル動画生成かで選び方が異なります。",
+  "description": "RunwayとKling AIの特徴・料金・無料枠・画像から動画・商用利用確認ポイント・透かし・日本語対応を比較します。映像制作寄りかリアル動画生成かで選び方が異なります。プランや用途によって条件が異なるため、最新情報は公式サイトをご確認ください。",
   "url": "https://aicreative-db.com/comparisons/runway-vs-kling-ai/",
   "mainEntityOfPage": "https://aicreative-db.com/comparisons/runway-vs-kling-ai/",
   "author": { "@type": "Organization", "name": "AIクリエイティブナビ編集部" },
@@ -100,7 +110,7 @@ const articleJsonLd = JSON.stringify({
 
 <ComparisonVsArticle
   title="RunwayとKling AIを比較｜AI動画生成ならどちらを選ぶ？ | AIクリエイティブナビ"
-  description="RunwayとKling AIの特徴、無料プラン、商用利用条件、日本語対応、透かし、向いている用途を比較します。映像制作寄りかリアル動画生成かで選び方が異なります。"
+  description="RunwayとKling AIの特徴・料金・無料枠・画像から動画・商用利用確認ポイント・透かし・日本語対応を比較します。映像制作寄りかリアル動画生成かで選び方が異なります。プランや用途によって条件が異なるため、最新情報は公式サイトをご確認ください。"
   canonicalPath="/comparisons/runway-vs-kling-ai/"
   jsonLd={articleJsonLd}
   breadcrumbLabel="RunwayとKling AI比較"

@@ -30,8 +30,8 @@ const jsonLd = JSON.stringify([
 ---
 
 <BaseLayout
-  title="Hailuo AIの商用利用・料金・無料枠まとめ｜AI動画生成ツールDB"
-  description="Hailuo AIのAI動画生成における商用利用条件・料金プラン・無料枠・透かし・利用規約の注意点を整理。中国企業MiniMax運営のツールで、利用規約の確認が特に重要です。最新情報は公式サイトをご確認ください。"
+  title="Hailuo AIの使い方・料金・商用利用まとめ｜AI動画生成ツールDB"
+  description="Hailuo AIの使い方・料金プラン・商用利用条件・無料枠・スマホ対応・日本語対応・利用規約の注意点を整理。MiniMax運営で利用規約確認が特に重要。Kling AI・Luma AIとの比較ポイントも解説。最新情報は公式サイトをご確認ください。"
   canonicalPath="/tools/hailuo-ai/"
   ogType="article"
   jsonLd={jsonLd}
@@ -52,8 +52,8 @@ const jsonLd = JSON.stringify([
       toolName="Hailuo AI"
       category="AI動画生成"
       checkedDate={d?.lastReviewed ?? '2026-06-06'}
-      headingHtml='Hailuo AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="Hailuo AI（MiniMax運営）はテキストや画像からAI動画を生成するツールです。動画延長機能では最大3分の長尺動画にも対応。無料プランでは透かしあり・生成回数制限があります。Standard以上のプランでIP保持・商用利用可とされていますが、<b>利用規約にHailuo AIへの広範なコンテンツライセンスが含まれることが報告されているため、利用前に必ず利用規約をご確認ください。</b>"
+      headingHtml='Hailuo AIの<span class="hl"><span class="phrase-nowrap">使い方</span>・料金・商用利用</span>まとめ'
+      lead="Hailuo AI（MiniMax運営）はテキストや画像からAI動画を生成するツールです。動画延長機能では最大3分の長尺動画にも対応。無料プランでは透かしあり・生成回数制限があります。Standard以上のプランでIP保持・商用利用可とされていますが、<b>利用規約にHailuo AIへの広範なコンテンツライセンスが含まれることが報告されているため、利用前に必ず利用規約をご確認ください。</b>スマホ対応・日本語プロンプト対応の状況は最新の公式情報でご確認ください。"
       specs={[
         { lb: '商用利用', badge: { s: 'paid', label: 'Standard以上（要確認）' } },
         { lb: '無料枠', badge: { s: 'cond', label: '生成回数制限（透かし）' } },
@@ -235,6 +235,9 @@ const jsonLd = JSON.stringify([
         { q: '動画の最大長はどのくらいですか？', a: 'Pro以上のプランで最大10秒、Standard以下では最大6秒の動画生成が可能とされています。動画延長機能を使うと最大3分まで延長できるとされています。最新仕様は公式サイトでご確認ください。' },
         { q: '透かしはありますか？', a: '無料プランでは生成動画に透かしが付与されるとされています。Standard以上では透かしなしとされていますが、最新仕様は公式サイトでご確認ください。' },
         { q: '利用規約の注意点は何ですか？', a: '利用規約にHailuo AI（MiniMax）への広範なコンテンツライセンスが含まれるとの報告があります。特に商用利用や重要なコンテンツを生成する場合は、利用前に公式利用規約を詳しくご確認ください。' },
+        { q: 'Hailuo AIの使い方を教えてください', a: 'Hailuo AIの基本的な利用の流れは、アカウント登録後にWebアプリからプロンプト（テキスト）を入力するか、必要に応じて画像を指定して動画を生成する形になります。生成後にプレビューを確認し、必要に応じて再生成や動画延長を行うことができます。機能名・UIの操作手順・仕様は変更される場合があるため、最新の操作方法は公式サイトのドキュメントをご確認ください。また、利用前に利用規約（Terms of Service）の確認が特に推奨されます。' },
+        { q: 'Hailuo AIはスマホで使えますか？', a: 'Hailuo AIはWebアプリとして提供されており、スマートフォンのブラウザから利用できる場合があります。ただし、専用アプリの有無・対応OS・生成時間・ファイル保存形式はプランや仕様変更によって異なる場合があるため、最新情報は公式サイトでご確認ください。' },
+        { q: 'Hailuo AIは日本語で使えますか？', a: 'UIは英語のみとされています。日本語プロンプトへの対応状況は確認できていないため「要確認」として扱っています。日本語での動画生成を検討する場合は、公式サイトのサポート情報またはヘルプページをご確認ください。本記事は法的助言ではありません。' },
       ]}
       relatedTools={[
         { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
@@ -246,13 +249,18 @@ const jsonLd = JSON.stringify([
         { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
         { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
         { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール一覧', desc: '無料枠あり・無料プランで試せるAIツール' },
+        { href: '/conditions/japanese/', title: '日本語対応AIツール一覧', desc: '日本語UI・プロンプト対応のAIツール' },
         { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+        { href: '/guides/video-generation-credit-cost-comparison/', title: 'AI動画生成 クレジット・料金比較', desc: '主要ツールのクレジット消費量・コストを比較' },
       ]}
       conditions={[
         { label: 'ツール一覧', href: '/tools/' },
         { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
         { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
         { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '日本語対応AIツール', href: '/conditions/japanese/' },
         { label: '全ツール比較表', href: '/comparisons/' },
       ]}
     />

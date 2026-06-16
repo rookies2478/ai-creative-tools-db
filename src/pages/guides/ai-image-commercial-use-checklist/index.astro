@@ -6,8 +6,8 @@ import GuideCheckList from '../../../components/GuideCheckList.astro';
 import GuideFAQ from '../../../components/GuideFAQ.astro';
 
 const title = 'AI画像を商用利用する前に確認すべきチェックリスト';
-const description = 'AI画像生成ツールで作った画像をSNS・広告・YouTube・仕事で使う前に確認したい7つのポイントを整理しました。ツールごとの利用条件・公式情報の見方・用途別の注意点を解説します。';
-const lastReviewed = '2026-05-14';
+const description = 'AI画像生成ツールで作った画像をSNS・広告・YouTube・仕事で使う前に確認したい実務チェックリスト。Stable Diffusion・Adobe Firefly・Midjourney・Canva AIなどを対象に、プランごとの利用条件・公式情報の見方・用途別の注意点を整理しました。本記事は法的助言ではありません。';
+const lastReviewed = '2026-06-16';
 
 // ── チェックリスト ─────────────────────────────────────
 const checklistItems = [
@@ -47,6 +47,18 @@ const faqItems = [
   {
     q: '判断に迷った場合はどうすればよいですか？',
     a: '公式サポートへ確認するか、権利関係に詳しい専門家へ相談することをおすすめします。本記事は法的助言ではありません。',
+  },
+  {
+    q: 'Stable Diffusionのモデル・LoRA・Checkpointを使うとき、商用利用で何を確認すべきですか？',
+    a: 'Stable Diffusion本体のライセンスに加えて、使用するモデル・LoRA・Checkpointそれぞれのライセンスや利用条件を個別に確認する必要があります。Hugging FaceやCivitai、GitHubなどで配布されているモデルはライセンスが一様ではなく、商用利用を制限するもの・許可するもの・個別確認が必要なものが混在しています。配布元のモデルカード・利用規約・ライセンス表記を必ずご確認ください。最新情報は各配布元の公式ページをご確認ください。本記事は法的助言ではありません。<br><br>→ <a href="/tools/stable-diffusion/" class="text-blue-600 underline underline-offset-2">Stable Diffusion 詳細ページ</a> / <a href="/guides/commercial-use-copyright/" class="text-blue-600 underline underline-offset-2">商用利用・著作権ガイド</a>',
+  },
+  {
+    q: 'Canva AIで作った画像は商用利用できますか？',
+    a: 'Canva AIで生成した画像の商用利用条件は、利用するプラン・使用した素材やテンプレートの種類・利用用途によって異なる場合があります。AI生成コンテンツであることの明示が条件とされる場合があります。また、Canvaのテンプレートや素材を組み合わせている場合は、AI生成部分だけでなく、組み合わせた各素材それぞれのライセンス条件も個別に確認が必要です。Canvaの公式利用規約・コンテンツライセンス規約・料金プランページをご確認ください。本記事は法的助言ではありません。<br><br>→ <a href="/tools/canva-ai-image-generator/" class="text-blue-600 underline underline-offset-2">Canva AI画像生成 詳細ページ</a>',
+  },
+  {
+    q: 'Adobe Fireflyで作った画像を広告に使う前に何を確認すべきですか？',
+    a: 'Adobe Fireflyで生成した画像を広告利用する前に、以下の点を確認することを推奨します。①利用するプランで商用利用・広告利用が許可されているか、②ベータ（β）表示の機能は商用利用対象外とされているため、使用する機能のステータスを確認する、③可視透かしが入らない設定・プランか確認する、④生成画像に人物・ブランド・ロゴ・商標・第三者の著作物に関わる要素が含まれていないか確認する、⑤掲載先（Google広告・SNS広告等）のポリシーに抵触しないか確認する。Adobeの公式利用規約・「コマーシャルセーフ」に関するヘルプページをご確認ください。本記事は法的助言ではありません。<br><br>→ <a href="/tools/adobe-firefly/" class="text-blue-600 underline underline-offset-2">Adobe Firefly 詳細ページ</a>',
   },
 ];
 
@@ -422,6 +434,7 @@ const toolInfo = [
       <h2 class="mb-3 text-sm font-semibold text-slate-600" id="related-heading">関連ページ</h2>
       <ul class="flex flex-wrap gap-3 text-sm">
         <li><a href="/guides/commercial-use-copyright/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">商用利用・著作権ガイド</a></li>
+        <li><a href="/categories/image-generation/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">AI画像生成ツール一覧</a></li>
         <li><a href="/comparisons/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">比較表</a></li>
         <li><a href="/tools/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">ツール一覧</a></li>
         <li><a href="/conditions/free/" class="rounded-full border border-slate-300 px-4 py-1.5 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:rounded-full transition-colors">無料で使えるツール</a></li>

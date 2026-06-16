@@ -491,11 +491,12 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
   /* spec strip */
   .tdp-spec{margin-top:30px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;}
   .tdp-specgrid{display:grid;grid-template-columns:repeat(5,1fr);}
-  .tdp-specitem{padding:20px 22px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:9px;}
+  .tdp-specitem{padding:20px 22px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:9px;min-width:0;}
   .tdp-specitem:last-child{border-right:none;}
   .tdp-specitem .lb{font-family:var(--f-jp);font-weight:700;font-size:11.5px;color:var(--muted);letter-spacing:.02em;}
-  .tdp-specitem .vl{font-size:14px;color:var(--ink);font-weight:700;line-height:1.4;}
-  .tdp-specitem .vl.mono{font-family:var(--f-mono);font-size:12.5px;font-weight:700;color:var(--ink-soft);}
+  .tdp-specitem .vl{font-size:14px;color:var(--ink);font-weight:700;line-height:1.4;overflow-wrap:anywhere;}
+  .tdp-specitem .vl.mono{font-family:var(--f-mono);font-size:12.5px;font-weight:700;color:var(--ink-soft);overflow-wrap:anywhere;}
+  .tdp-specitem .tdp-st{white-space:normal;max-width:100%;}
   .tdp-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;}
   .tdp-actions .btn .ext{transition:transform .2s var(--ease);}
   .tdp-actions .btn:hover .ext{transform:translate(2px,-2px);}

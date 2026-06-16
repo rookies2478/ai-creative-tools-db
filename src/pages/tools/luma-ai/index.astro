@@ -30,8 +30,8 @@ const jsonLd = JSON.stringify([
 ---
 
 <BaseLayout
-  title="Luma AIの商用利用・料金・無料枠まとめ｜AI動画生成ツールDB"
-  description="Luma AIのAI動画生成における商用利用条件・料金プラン・無料枠・透かし・日本語対応を公式情報をもとに整理。Ray3モデルの特徴と注意点もまとめ。最新情報は公式サイトをご確認ください。"
+  title="Luma AIの使い方・料金・商用利用まとめ｜AI動画生成ツールDB"
+  description="Luma AIの使い方・料金プラン・商用利用条件・無料枠・画像から動画・スマホ対応・日本語対応を公式情報をもとに整理。Dream Machine（Ray3）の特徴とRunway・Kling AIとの比較ポイントも解説。最新情報は公式サイトをご確認ください。"
   canonicalPath="/tools/luma-ai/"
   ogType="article"
   jsonLd={jsonLd}
@@ -52,8 +52,8 @@ const jsonLd = JSON.stringify([
       toolName="Luma AI"
       category="AI動画生成"
       checkedDate={d?.lastReviewed ?? '2026-06-05'}
-      headingHtml='Luma AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="Luma AIはテキストや画像からAI動画を生成するツールです。Ray3モデルで最大20秒（720p）の動画生成・動画延長・アップスケール・APIに対応。無料プランは限定クレジット付与で非商用のみ・透かしありとされています。Plus（$30/月）以上のプランで商用利用できるとされていますが、最新条件は公式サイトでご確認ください。"
+      headingHtml='Luma AIの<span class="hl"><span class="phrase-nowrap">使い方</span>・料金・商用利用</span>まとめ'
+      lead="Luma AIはテキストや画像からAI動画を生成するツールです。Dream Machineとも呼ばれ、Ray3モデルで最大20秒（720p）の動画生成・動画延長・アップスケール・APIに対応。無料プランは限定クレジット付与で非商用のみ・透かしありとされています。Plus（$30/月）以上のプランで商用利用できるとされていますが、機能名・仕様・条件は変更される場合があるため、最新情報は公式サイトでご確認ください。"
       specs={[
         { lb: '商用利用', badge: { s: 'paid', label: 'Plus以上（要確認）' } },
         { lb: '無料枠', badge: { s: 'cond', label: '限定クレジット（非商用・透かし）' } },
@@ -234,6 +234,9 @@ const jsonLd = JSON.stringify([
         { q: '動画の最大長はどのくらいですか？', a: 'Ray3モデルで最大20秒（720p）の動画生成が可能とされています。最新仕様はプランによって異なる場合があるため、公式サイトでご確認ください。' },
         { q: '透かしはありますか？', a: '無料プランでは生成動画に透かしが付与されるとされています。Plusプラン以上では透かしなしとされていますが、最新仕様は公式サイトでご確認ください。' },
         { q: 'APIは利用できますか？', a: 'Luma AIはAPI提供を行っており、動画生成機能をサービスやプロダクトに組み込むことができます。API料金・仕様は公式ドキュメントをご確認ください。' },
+        { q: 'Luma AIの使い方を教えてください', a: 'Luma AIの基本的な利用の流れは、アカウント登録後にWebアプリからプロンプト（テキスト）を入力するか、画像を指定して動画を生成する形になります。生成後にプレビューを確認し、必要に応じて再生成や動画延長・アップスケールを行うことができます。機能名（Dream Machineなど）や操作UI・仕様は変更される場合があるため、最新の操作方法は公式サイトのドキュメントをご確認ください。' },
+        { q: 'Luma AIはスマホで使えますか？', a: 'LumaAIはWebアプリとして提供されており、スマートフォンのブラウザから利用できる場合があります。ただし、専用アプリの有無・対応OS・生成時間・ファイル保存形式はプランや仕様変更によって異なる場合があるため、最新情報は公式サイトでご確認ください。' },
+        { q: 'Luma AIで画像から動画を作るには何を確認すべきですか？', a: 'Luma AIは画像を入力素材として動画を生成する機能を提供しています。利用前に確認すべき主なポイントは次の通りです。①入力画像の著作権：自分が権利を持つ画像か、または使用許諾を得た画像かどうか。②人物・ロゴ・ブランドの扱い：第三者の肖像権・商標権を侵害するコンテンツの生成は禁止されています。③商用利用条件：画像から動画を生成した場合も、商用利用にはPlusプラン以上が必要とされています。④最新仕様の確認：入力画像のファイル形式・解像度・クレジット消費量はプランや仕様変更により変わる場合があります。最新情報は公式サイトでご確認ください。本記事は法的助言ではありません。' },
       ]}
       relatedTools={[
         { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
@@ -245,13 +248,18 @@ const jsonLd = JSON.stringify([
         { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
         { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
         { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
+        { href: '/conditions/free/', title: '無料で使えるAIツール一覧', desc: '無料枠あり・無料プランで試せるAIツール' },
+        { href: '/conditions/japanese/', title: '日本語対応AIツール一覧', desc: '日本語UI・プロンプト対応のAIツール' },
         { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+        { href: '/guides/video-generation-credit-cost-comparison/', title: 'AI動画生成 クレジット・料金比較', desc: '主要ツールのクレジット消費量・コストを比較' },
       ]}
       conditions={[
         { label: 'ツール一覧', href: '/tools/' },
         { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
         { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
         { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: '無料で使えるAIツール', href: '/conditions/free/' },
+        { label: '日本語対応AIツール', href: '/conditions/japanese/' },
         { label: '全ツール比較表', href: '/comparisons/' },
       ]}
     />

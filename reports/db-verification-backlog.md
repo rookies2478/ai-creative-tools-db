@@ -75,6 +75,41 @@
 
 ---
 
+## B候補 partial / no_fixed_price 明示化監査（2026-06-22）
+
+対象：8件（invideo-ai / capcut-ai / dalle / gemini-image-generation / microsoft-designer / nightcafe / ideogram / clipdrop）  
+DB変更：なし（監査・分類のみ）
+
+| slug | 現状 | suggestedStatus | 理由 | DB反映推奨 |
+|---|---|---|---|---|
+| invideo-ai | 未設定 | partial（hold） | 「約$20/月〜」で月額断定不可。公式URL有。 | hold（「約」解消後にconfirmed再検討） |
+| capcut-ai | 未設定 | no_fixed_price | 地域・プラットフォーム差あり。固定月額なし。 | yes |
+| dalle | 未設定 | partial | ChatGPT Plus内包。DALL·E単体独立料金なし。 | yes |
+| gemini-image-generation | 未設定 | partial | Google One AI Premium内包。独立料金なし。 | yes |
+| microsoft-designer | 未設定 | partial | M365/Copilot Pro内包の可能性。独立料金ページ未確認。 | yes |
+| nightcafe | 未設定 | partial | pricingSourceUrlがブログURL。currency=unknown。月額未確認。 | yes |
+| ideogram | 未設定 | partial | docs URLあり・USD。最安プラン月額未確認。 | yes |
+| clipdrop | 未設定 | partial | 公式料金ページあり。Proプラン「--per month」で金額非開示。 | yes |
+
+### 禁止事項チェック（2026-06-22）
+
+断定表現「商用利用できます / 著作権的に問題ありません / 安全です / 自由に使えます」の増加：なし（DB変更なし）
+
+### 次回DB反映候補
+
+| slug | suggestedStatus | 優先度 |
+|---|---|---|
+| capcut-ai | no_fixed_price | 高 |
+| dalle | partial | 高 |
+| gemini-image-generation | partial | 高 |
+| microsoft-designer | partial | 高 |
+| nightcafe | partial | 中 |
+| ideogram | partial | 中 |
+| clipdrop | partial | 中 |
+| invideo-ai | partial | 低（「約」解消後） |
+
+---
+
 ## 注意事項
 
 - 推測で埋めない。公式情報が確認できない場合は unknown / 要確認を維持する

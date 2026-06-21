@@ -118,6 +118,44 @@ commit：849e9f1
 
 ---
 
+## B候補 partial / no_fixed_price 明示化監査（2026-06-22）
+
+対象8件：invideo-ai / capcut-ai / dalle / gemini-image-generation / microsoft-designer / nightcafe / ideogram / clipdrop  
+方針：DB値変更なし。suggestedStatus の分類のみ。
+
+| slug | 現状 | suggestedStatus | 理由 | 次回対応 |
+|---|---|---|---|---|
+| invideo-ai | 未設定 | partial | lowestPaidPlan「約$20/月〜」で「約」付き。公式URL（invideo.io/pricing/）はあるが月額が断定できない | 公式料金ページで正確な月額確認後にconfirmed検討。「約」解消まで confirmed 化しない |
+| capcut-ai | 未設定 | no_fixed_price | 地域・プラットフォームにより料金が異なる。公式も「アプリ内確認」案内。固定月額なし | DB反映候補：yes。needsReview=yes 維持 |
+| dalle | 未設定 | partial | ChatGPT Plus等有料プランに内包。DALL·E単体の独立料金ページなし | DB反映候補：yes。needsReview=yes 維持 |
+| gemini-image-generation | 未設定 | partial | Google One AI Premium等に内包。Gemini画像生成単体の独立料金ページなし | DB反映候補：yes。needsReview=yes 維持 |
+| microsoft-designer | 未設定 | partial | Microsoft 365 / Copilot Pro等に内包の可能性。独立料金ページ未確認 | DB反映候補：yes。needsReview=yes 維持 |
+| nightcafe | 未設定 | partial | pricingSourceUrl がブログURL（料金表でない）。currency=unknown。有料プラン月額未確認 | DB反映候補：yes。専用料金ページURL確認後に再評価 |
+| ideogram | 未設定 | partial | 公式docsURLあり・currency=USD。ただし最安有料プラン月額が未確認 | DB反映候補：yes。透かし条件・月額確認後にconfirmed検討 |
+| clipdrop | 未設定 | partial | 公式料金ページあり（clipdrop.co/pricing）。Proプラン「--per month」で金額非開示 | DB反映候補：yes。Jasper AI統合後の料金公開を待って再確認 |
+
+### DB反映候補まとめ
+
+| slug | suggestedStatus | 反映可否 |
+|---|---|---|
+| capcut-ai | no_fixed_price | yes |
+| dalle | partial | yes |
+| gemini-image-generation | partial | yes |
+| microsoft-designer | partial | yes |
+| nightcafe | partial | yes |
+| ideogram | partial | yes |
+| clipdrop | partial | yes |
+| invideo-ai | partial | hold（「約」解消後にconfirmed再検討） |
+
+### 明示見送り候補
+
+| slug | 理由 |
+|---|---|
+| invideo-ai | 「約$20/月〜」で金額不明確。partial として DB 反映はできるが confirmed 化は不可。慎重扱い継続 |
+| kling-ai | 今回対象外。前回矛盾未解消のまま保留継続 |
+
+---
+
 ## 注意事項
 
 - A候補9件中7件（runway/midjourney/leonardo-ai/luma-ai/pika/canva-ai-image-generator/playground-ai）を2026-06-22に反映済み
@@ -130,7 +168,7 @@ commit：849e9f1
 
 ## 次回アクション推奨順
 
-1. **A候補 残2件**（kling-ai・invideo-ai）：kling-ai は前回矛盾解消後に確認。invideo-ai は公式料金ページで正確な月額を再確認後に confirmed 検討
-2. **B候補 no_fixed_price（capcut-ai）**：.md に `pricingStatus: "no_fixed_price"` 追加
-3. **B候補 partial（8件）**：needsReview=yes のまま `pricingStatus: "partial"` 追加
-4. **ideogram・nightcafe・tensor-art**：公式料金ページURL再確認後に confirmed への昇格を検討
+1. **B候補 DB反映（7件）**：capcut-ai(no_fixed_price) / dalle・gemini-image-generation・microsoft-designer・nightcafe・ideogram・clipdrop(partial) を .md に追加
+2. **invideo-ai**：公式料金ページで「約」なしの正確月額確認後に confirmed 検討。それまで partial 維持
+3. **kling-ai**：前回矛盾解消後に confirmed 再検討
+4. **ideogram・nightcafe**：公式料金ページURL（専用ページ）確認後に confirmed への昇格を検討

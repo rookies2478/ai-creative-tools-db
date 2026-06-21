@@ -224,3 +224,51 @@ Haiperのnoindexは`curl -s https://aicreative-db.com/tools/haiper/ | grep -i ro
 ## 最終判定
 
 **PASS** — 全確認項目クリア。要目視確認リストの全件が curl で解消済み。
+
+---
+
+## 追加確認（2026-06-22）
+
+実施日：2026-06-22  
+目的：master push後の本番反映状態確認（確認のみ・修正なし）
+
+### HTTPステータス確認（12URL）
+
+| URL | status |
+|---|---:|
+| https://aicreative-db.com/ | 200 ✅ |
+| https://aicreative-db.com/tools/ | 200 ✅ |
+| https://aicreative-db.com/categories/image-generation/ | 200 ✅ |
+| https://aicreative-db.com/categories/video-generation/ | 200 ✅ |
+| https://aicreative-db.com/comparisons/free-ai-image-generators/ | 200 ✅ |
+| https://aicreative-db.com/comparisons/canva-ai-vs-adobe-firefly/ | 200 ✅ |
+| https://aicreative-db.com/comparisons/adobe-firefly-vs-microsoft-designer/ | 200 ✅ |
+| https://aicreative-db.com/tools/adobe-firefly/ | 200 ✅ |
+| https://aicreative-db.com/tools/hailuo-ai/ | 200 ✅ |
+| https://aicreative-db.com/tools/dreamstudio/ | 200 ✅ |
+| https://aicreative-db.com/tools/haiper/ | 200 ✅ |
+| https://aicreative-db.com/sitemap.xml | 200 ✅ |
+
+404・500・異常リダイレクト：なし
+
+### 個別確認項目
+
+| 確認項目 | 結果 |
+|---|---|
+| /tools/ 「すべて表示」チップ | ✅ FOUND |
+| Hailuo AI 14.99（USD）表示 | ✅ FOUND |
+| DreamStudio Brand Studio注記 | ✅ FOUND |
+| Adobe Firefly 1,580円/月表示 | ✅ FOUND |
+| Haiper noindex,follow meta | ✅ `content="noindex,follow"` 確認 |
+| Haiper sitemap除外 | ✅ 含まれていない |
+| sitemap URL数 | ✅ 77件 |
+| 禁止表現（5ページ確認） | ✅ なし |
+
+### ローカルbuild再確認
+
+- 終了コード：0
+- ページ数：79ページ
+- WARN：なし
+- 結果：✅ **PASS**
+
+### 判定：PASS — 全項目クリア

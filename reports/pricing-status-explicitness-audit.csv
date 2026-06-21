@@ -1,12 +1,12 @@
 slug,toolName,currentPricingStatus,pricingText,currency,pricingSourceUrl,sourceStrength,suggestedStatus,priority,reason,nextAction
-canva-ai-image-generator,Canva AI画像生成,（未設定）,"$15/月（Canva Pro・月払い）／$120/年",USD,https://www.canva.com/pricing/,strong,confirmed,A,公式料金URLあり・USD・$15/月・CSV confirmed済み,pricingStatus: confirmed を .md に追加
-invideo-ai,InVideo AI,（未設定）,"約$20/月〜（透かしあり無料プランあり）",USD,（未設定）,medium,confirmed,A,公式料金URL（invideo.io/pricing/）あり・CSV confirmed済み・「約」付きのため精度注意,pricingStatus: confirmed + pricingSourceUrl を .md に追加
+canva-ai-image-generator,Canva AI画像生成,confirmed,"$15/月（Canva Pro・月払い）／$120/年",USD,https://www.canva.com/pricing/,strong,confirmed,A,公式料金URLあり・USD・$15/月・CSV confirmed済み,【2026-06-22反映済み】pricingStatus: confirmed + needsReview: false を .md に追加
+invideo-ai,InVideo AI,（未設定）,"約$20/月〜（透かしあり無料プランあり）",USD,（未設定）,medium,confirmed,A,公式料金URL（invideo.io/pricing/）あり・CSV confirmed済み・「約」付きのため精度注意,【見送り】lowestPaidPlanに「約」付きで金額不明確・公式料金ページで正確月額再確認後に検討
 kling-ai,Kling AI,（未設定）,"$6.99/月〜。無料プランあり",USD,（未設定）,strong,confirmed,A,公式料金URL（klingai.com/global/pricing）あり・CSV confirmed済み,pricingStatus: confirmed + pricingSourceUrl を .md に追加
 leonardo-ai,Leonardo AI,confirmed,"$10/月（Apprentice年払い）／$12/月（月払い）",USD,https://leonardo.ai/pricing/,strong,confirmed,A,公式料金URL（leonardo.ai/pricing/）あり・CSV confirmed済み,【2026-06-22反映済み】pricingStatus: confirmed を .md に追加
 luma-ai,Luma AI,confirmed,"$30/月（Plusプラン・月払い）。Plus/Pro/Ultra三段階",USD,https://lumalabs.ai/pricing,strong,confirmed,A,公式料金URL（lumalabs.ai/pricing）あり・CSV confirmed済み,【2026-06-22反映済み】pricingStatus: confirmed を .md に追加
 midjourney,Midjourney,confirmed,"$10/月（Basicプラン・月払い）／$8/月（年払い）",USD,https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans,strong,confirmed,A,公式ドキュメントURLあり・USD・$10/月・CSV confirmed済み,【2026-06-22反映済み】pricingStatus: confirmed を .md に追加
 pika,Pika,confirmed,"$8/月（年払い）。無料プランあり",USD,https://pika.art/pricing,strong,confirmed,A,公式料金URL（pika.art/pricing）あり・CSV confirmed済み,【2026-06-22反映済み】pricingStatus: confirmed を .md に追加
-playground-ai,Playground AI,（未設定）,"$12/月（Pro年払い）／$15/月（月払い）",USD,（未設定）,strong,confirmed,A,公式料金URL（playground.com/design/pricing）あり・CSV confirmed済み,pricingStatus: confirmed を .md に追加
+playground-ai,Playground AI,confirmed,"$12/月（Pro年払い）／$15/月（月払い）",USD,（未設定）,strong,confirmed,A,公式料金URL（playground.com/design/pricing）あり・CSV confirmed済み,【2026-06-22反映済み】pricingStatus: confirmed + needsReview: false を .md に追加
 runway,Runway,confirmed,"$12/月（Standard年払い）／$14/月（月払い）",USD,https://runwayml.com/pricing/,strong,confirmed,A,公式料金URL（runwayml.com/pricing/）あり・CSV confirmed済み,【2026-06-22反映済み】pricingStatus: confirmed を .md に追加
 capcut-ai,CapCut AI,（未設定）,"地域・プラットフォームにより異なる",N/A,https://www.capcut.com/help/new-capcut-subscription-pricing,medium,no_fixed_price,B,公式が「アプリ内確認」案内・金額未定義,pricingStatus: no_fixed_price を .md に追加
 clipdrop,Clipdrop,（未設定）,"無料枠あり。有料プランは公式ページ参照",Unknown,https://clipdrop.co/pricing,medium,partial,B,公式料金ページあり・金額「--per month」で非開示,pricingStatus: partial を .md に追加（needsReview=yes）

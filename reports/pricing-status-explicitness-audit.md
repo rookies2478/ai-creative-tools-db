@@ -97,10 +97,31 @@ build：PASS（79ページ・終了コード0・WARNゼロ）
 
 ---
 
+## 2026-06-22 DB反映済み（第2バッチ）
+
+| slug | field | before | after | 判定理由 |
+|---|---|---|---|---|
+| canva-ai-image-generator | pricingStatus | （未設定） | confirmed | 公式料金URL（canva.com/pricing/）・USD・$15/月 明確 |
+| canva-ai-image-generator | needsReview | （未設定） | false | confirmed化に伴い更新 |
+| playground-ai | pricingStatus | （未設定） | confirmed | 公式料金URL（playground.com/design/pricing）・USD・$12/月 明確 |
+| playground-ai | needsReview | （未設定） | false | confirmed化に伴い更新 |
+
+### 見送り
+
+| slug | 理由 |
+|---|---|
+| invideo-ai | lowestPaidPlan に「約」付き（約$20/月〜）で金額が明確でない。手順条件「金額が明確」を満たさず confirmed 化見送り |
+| kling-ai | 前回確認結果との矛盾あり・今回対象外 |
+
+build：PASS（79ページ・終了コード0・WARNゼロ・.astroキャッシュクリア後）  
+commit：849e9f1
+
+---
+
 ## 注意事項
 
-- A候補9件中5件（runway/midjourney/leonardo-ai/luma-ai/pika）を2026-06-22に反映済み
-- 見送り：kling-ai（前回確認結果と矛盾あり・今回対象外）・canva-ai-image-generator/invideo-ai/playground-ai（次バッチ候補）
+- A候補9件中7件（runway/midjourney/leonardo-ai/luma-ai/pika/canva-ai-image-generator/playground-ai）を2026-06-22に反映済み
+- 見送り：kling-ai（前回確認結果と矛盾あり）・invideo-ai（「約」付きで金額不明確）
 - B 候補は CSV 記録の status を .md に反映させる際、needsReview=yes を維持
 - 商用利用・著作権・透かし条件は断定しない
 - haiper（service_changed）・hailuo-ai（confirmed済み）・seaart-ai・pixverse・vidu-ai（unconfirmed維持）は今回対象外
@@ -109,7 +130,7 @@ build：PASS（79ページ・終了コード0・WARNゼロ）
 
 ## 次回アクション推奨順
 
-1. **A候補 残4件**（canva-ai-image-generator/invideo-ai/playground-ai/kling-ai）：kling-aiは前回矛盾解消後に確認
+1. **A候補 残2件**（kling-ai・invideo-ai）：kling-ai は前回矛盾解消後に確認。invideo-ai は公式料金ページで正確な月額を再確認後に confirmed 検討
 2. **B候補 no_fixed_price（capcut-ai）**：.md に `pricingStatus: "no_fixed_price"` 追加
 3. **B候補 partial（8件）**：needsReview=yes のまま `pricingStatus: "partial"` 追加
 4. **ideogram・nightcafe・tensor-art**：公式料金ページURL再確認後に confirmed への昇格を検討

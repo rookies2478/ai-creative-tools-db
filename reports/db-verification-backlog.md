@@ -11,11 +11,11 @@
 | 項目 | 件数 |
 |---|---:|
 | 総ツール数 | 26 |
-| pricingStatus: confirmed（フィールド明示） | 8 |
+| pricingStatus: confirmed（フィールド明示） | 10 |
 | pricingStatus: partial（フィールド明示） | 1 |
 | pricingStatus: unconfirmed | 3 |
 | pricingStatus: service_changed | 1 |
-| pricingStatus: フィールドなし（未設定） | 13 |
+| pricingStatus: フィールドなし（未設定） | 11 |
 | needsReview: yes/true | 3 |
 | currency: unknown（値） | 6 |
 | currency: フィールドなし/空（実質不明） | 3 |

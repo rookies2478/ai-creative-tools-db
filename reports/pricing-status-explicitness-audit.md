@@ -177,9 +177,20 @@ build：PASS（79ページ・終了コード0・WARNゼロ）
 
 ---
 
+## 2026-06-22 DB反映済み（第4バッチ）
+
+| slug | field | before | after | 判定理由 |
+|---|---|---|---|---|
+| gemini-image-generation | pricingStatus | （未設定） | partial | Google One AI Premium等に内包。Gemini画像生成単体の独立料金ページなし。pricingSourceUrl（gemini advanced）あり |
+| microsoft-designer | pricingStatus | （未設定） | partial | Microsoft 365 / Copilot Pro等に内包の可能性。独立料金ページ未確認。公式FAQあり |
+
+needsReview：既存DB形式に合わせ未追加（他ファイルに同フィールド存在しないため）
+
+---
+
 ## 次回アクション推奨順
 
-1. **B候補 DB反映（残5件）**：~~capcut-ai~~ ~~dalle~~ / gemini-image-generation・microsoft-designer・nightcafe・ideogram・clipdrop(partial) を .md に追加
+1. **B候補 DB反映（残3件）**：~~capcut-ai~~ ~~dalle~~ ~~gemini-image-generation~~ ~~microsoft-designer~~ / nightcafe・ideogram・clipdrop(partial) を .md に追加
 2. **invideo-ai**：公式料金ページで「約」なしの正確月額確認後に confirmed 検討。それまで partial 維持
 3. **kling-ai**：前回矛盾解消後に confirmed 再検討
 4. **ideogram・nightcafe**：公式料金ページURL（専用ページ）確認後に confirmed への昇格を検討

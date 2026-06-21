@@ -25,6 +25,18 @@
 
 ---
 
+## 直近修正サマリー（2026-06-22・第4バッチ）
+
+| slug | 修正内容 |
+|---|---|
+| gemini-image-generation | pricingStatus: partial を frontmatter に追加（Google One AI Premium等に内包・独立料金なし） |
+| microsoft-designer | pricingStatus: partial を frontmatter に追加（Microsoft 365/Copilot Pro内包の可能性・独立料金ページ未確認） |
+
+build：build実行予定  
+commit：（本バッチ）
+
+---
+
 ## 直近修正サマリー（2026-06-22・第3バッチ）
 
 | slug | 修正内容 |

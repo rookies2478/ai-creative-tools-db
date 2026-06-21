@@ -60,6 +60,7 @@ const jsonLd = JSON.stringify([
         { lb: '料金目安', text: 'アプリ内で確認（地域・プラットフォームで変動）', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: '条件により変動（要確認）' } },
         { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://www.capcut.com/' }}
       secondaryCta={{ label: '料金・利用規約を確認（公式）', href: 'https://www.capcut.com/help/new-capcut-subscription-pricing' }}
@@ -128,7 +129,7 @@ const jsonLd = JSON.stringify([
           [{ html: '対応環境', rk: true }, { html: 'Web / iOS / Android / Windows / Mac' }],
           [{ html: '運営', rk: true }, { html: 'ByteDance（TikTokの親会社）' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-24', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.capcut.com/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.capcut.com/" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 商用利用時は素材・音源・テンプレートの個別確認が重要です。料金・条件は変更される可能性があります。',
       }}

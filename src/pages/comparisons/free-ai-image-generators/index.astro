@@ -266,8 +266,8 @@ const articleJsonLd = JSON.stringify({
 ---
 
 <BaseLayout
-  title="無料プランで比較するAI画像生成ツール【無料枠・透かし・商用利用】| AIクリエイティブナビ"
-  description="AI画像生成ツールの無料枠を比較。完全無料・無料プラン・無料クレジットの違い、透かしの有無、商用利用条件、生成回数、日本語対応など、無料で使うときのチェックポイントを整理しています。"
+  title="無料AI画像生成ツール比較表｜14ツールの無料枠・透かし・商用利用条件を横断確認 | AIクリエイティブナビ"
+  description="14ツールの無料プラン・完全無料・無料クレジットの種類・透かし有無・商用利用条件・生成回数・日本語対応を比較表で横断確認できます。DB絞り込みは /conditions/free/ も合わせてご活用ください。"
   canonicalPath="/comparisons/free-ai-image-generators/"
   jsonLd={articleJsonLd}
 >
@@ -302,6 +302,25 @@ const articleJsonLd = JSON.stringify({
         <li>本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。</li>
       </ul>
     </div>
+
+    <!-- 目的別結論 -->
+    <section class="fai-sec fai-conc-sec">
+      <h2 class="fai-h2">先に結論：目的別に選ぶなら</h2>
+      <div class="fai-conc-grid">
+        <div class="fai-conc-card">
+          <p class="fai-conc-label">まず無料で試したい</p>
+          <p class="fai-conc-body"><a href="/categories/image-generation/" class="fai-conc-link">AI画像生成ツール</a>の中では、Canva AI・Adobe Firefly・Gemini画像生成などが<a href="/conditions/free/" class="fai-conc-link">無料枠あり</a>の比較候補です。無料枠の範囲・生成回数・透かしの有無は公式で確認してから使い始めるとスムーズです。</p>
+        </div>
+        <div class="fai-conc-card">
+          <p class="fai-conc-label">商用利用前提で確認したい</p>
+          <p class="fai-conc-body">無料プランと有料プランで<a href="/conditions/commercial-use/" class="fai-conc-link">商用利用</a>条件が異なるケースが多いです。条件は必ず公式規約をご確認ください。詳細は<a href="/guides/commercial-use-copyright/" class="fai-conc-link">商用利用と著作権ガイド</a>も参考にしてください。本記事は法的助言ではありません。</p>
+        </div>
+        <div class="fai-conc-card">
+          <p class="fai-conc-label">品質・実務利用を重視したい</p>
+          <p class="fai-conc-body">無料枠はあくまでお試しです。出力品質・解像度・生成回数・透かしなしが必要な場合は、有料プランの検討が現実的です。各ツールの詳細ページで有料プランの条件をご確認ください。</p>
+        </div>
+      </div>
+    </section>
 
     <!-- 向いている人 -->
     <section class="fai-sec">
@@ -379,6 +398,7 @@ const articleJsonLd = JSON.stringify({
     <section class="fai-sec">
       <h2 class="fai-h2">簡易比較表</h2>
       <p class="fai-table-note">以下は参考情報です。内容は変更される場合があります。最新情報は各ツールの公式サイトをご確認ください。</p>
+      <p class="fai-scroll-hint" aria-hidden="true">← 横にスクロールできます →</p>
       <div class="fai-table-wrap">
         <table class="fai-table">
           <thead>
@@ -387,8 +407,8 @@ const articleJsonLd = JSON.stringify({
               <th>無料枠の種類</th>
               <th>透かし</th>
               <th>日本語対応</th>
-              <th>生成後の編集</th>
               <th>無料プラン商用<span class="fai-th-note">※1</span></th>
+              <th>生成後の編集</th>
               <th>商用利用メモ<span class="fai-th-note">※2</span></th>
               <th>詳細</th>
             </tr>
@@ -400,8 +420,8 @@ const articleJsonLd = JSON.stringify({
                 <td>{freeType}</td>
                 <td>{watermark}</td>
                 <td>{japanese}</td>
-                <td>{editability}</td>
                 <td class="fai-td-note">{freePlanCommercial}</td>
+                <td>{editability}</td>
                 <td class="fai-td-note">{commercialNote}</td>
                 <td><a href={`/tools/${slug}/`} class="fai-td-link">詳細 →</a></td>
               </tr>
@@ -726,6 +746,16 @@ const articleJsonLd = JSON.stringify({
 
   /* ===== Table ===== */
   .fai-table-note { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; }
+  .fai-scroll-hint {
+    display: none;
+    font-size: 11.5px;
+    color: var(--muted, #6A7180);
+    text-align: center;
+    margin: 0 0 6px;
+  }
+  @media (max-width: 680px) {
+    .fai-scroll-hint { display: block; }
+  }
   .fai-table-wrap {
     overflow-x: auto;
     border-radius: 14px;
@@ -897,12 +927,43 @@ const articleJsonLd = JSON.stringify({
     line-height: 1.6;
   }
 
+  /* ===== Conclusion grid ===== */
+  .fai-conc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .fai-conc-card {
+    background: var(--brand-tint);
+    border: 1px solid #C7C2F5;
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .fai-conc-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--brand-ink);
+    margin-bottom: 8px;
+  }
+  .fai-conc-body {
+    font-size: 13px;
+    color: var(--ink-body);
+    line-height: 1.7;
+  }
+  .fai-conc-link {
+    color: var(--brand-ink);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .fai-conc-link:hover { opacity: .75; }
+
   /* ===== Responsive ===== */
   @media (max-width: 680px) {
     .fai-2col { grid-template-columns: 1fr; }
     .fai-tool-body { grid-template-columns: 1fr; }
     .fai-check-grid { grid-template-columns: 1fr; }
     .fai-samples-grid { grid-template-columns: 1fr; }
+    .fai-conc-grid { grid-template-columns: 1fr; }
   }
   @media (min-width: 681px) and (max-width: 900px) {
     .fai-samples-grid { grid-template-columns: repeat(2, 1fr); }

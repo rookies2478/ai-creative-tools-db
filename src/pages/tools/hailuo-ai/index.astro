@@ -57,9 +57,10 @@ const jsonLd = JSON.stringify([
       specs={[
         { lb: '商用利用', badge: { s: 'paid', label: 'Standard以上（要確認）' } },
         { lb: '無料枠', badge: { s: 'cond', label: '生成回数制限（透かし）' } },
-        { lb: '料金目安', text: '$9.99〜$14.99/月程度（要確認）', mono: true },
+        { lb: '料金', text: 'Standard $14.99〜（USD・要公式確認）', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: '無料あり・Standard以上なし（要確認）' } },
         { lb: '日本語UI', badge: { s: 'na', label: '非対応' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://hailuoai.video' }}
       secondaryCta={{ label: '利用規約を確認（公式）', href: 'https://hailuoai.video/doc/terms-of-service.html' }}
@@ -74,8 +75,8 @@ const jsonLd = JSON.stringify([
           det: '無料プランでは生成回数制限があり、透かしが付与されるとされています。具体的なクレジット数・制限内容は変更される可能性があります。最新情報は公式サイトでご確認ください。',
         },
         {
-          title: '最安料金目安', sum: '$9.99〜$14.99/月程度（要公式確認）', sumMono: true,
-          det: '2026年6月時点の第三者情報に基づくおおよその目安です。正確な料金・プラン内容は公式サイトでご確認ください。料金は変更される可能性があります。',
+          title: '料金', sum: 'Standard $14.99/月〜（USD）', sumMono: true,
+          det: '2026-06-21公式料金ページ（hailuoai.video/subscribe）確認：Standard $14.99/月・Pro $54.99/月・Master $119.99/月（USD）。料金・プラン内容は変更される可能性があります。最新情報は必ず公式サイトをご確認ください。',
         },
         {
           title: '透かし', badge: { s: 'cond', label: '無料あり・Standard以上なし（要確認）' },
@@ -106,7 +107,6 @@ const jsonLd = JSON.stringify([
         '中国企業（MiniMax）運営でデータ取り扱いへの注意が必要',
         '日本語UIに非対応',
         '日本語プロンプト対応状況が不明',
-        '正確な料金情報の直接確認が必要',
       ]}
       limits={[
         '利用規約の確認が特に重要（広範なコンテンツライセンス条項が含まれるとの報告）',
@@ -119,7 +119,7 @@ const jsonLd = JSON.stringify([
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>生成回数制限</span><br>透かしあり。条件は変更される可能性あり。' }],
-          [{ html: '最安料金', rk: true }, { html: '<span class="mono">$9.99〜$14.99/月程度（要公式確認）</span><br>正確な料金は公式サイトで確認。' }],
+          [{ html: '料金', rk: true }, { html: 'Standard $14.99/月〜（USD）<br>※2026-06-21公式確認。最新の料金は公式サイトでご確認ください。' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st paid sm"><span class="d"></span>Standard以上（要確認）</span><br>利用規約の確認が特に重要。最新条件は必ず公式サイトをご確認ください。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料あり・Standard以上なし（要確認）</span>' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>非対応</span>' }],
@@ -127,7 +127,7 @@ const jsonLd = JSON.stringify([
           [{ html: '最大動画長', rk: true }, { html: 'Pro以上10秒・Standard以下6秒（延長で最大3分）' }],
           [{ html: '運営', rk: true }, { html: 'MiniMax（中国）' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-06', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://hailuoai.video" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://hailuoai.video" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 利用規約の確認が特に重要です。料金・条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
       }}
@@ -142,13 +142,13 @@ const jsonLd = JSON.stringify([
           headers: ['プラン', '料金', '備考'],
           rows: [
             [{ html: '無料', rk: true }, { html: '無料' }, { html: '生成回数制限・透かしあり' }],
-            [{ html: 'Standard', rk: true }, { html: '要公式確認', mono: true }, { html: '商用利用可とされる（要公式確認）' }],
-            [{ html: 'Pro以上', rk: true }, { html: '$9.99〜$14.99/月程度（要確認）', mono: true }, { html: '最大10秒の動画生成・要公式確認' }],
+            [{ html: 'Standard', rk: true }, { html: '$14.99/月（USD）', mono: true }, { html: '商用利用可とされる（要公式確認）' }],
+            [{ html: 'Pro以上', rk: true }, { html: '$54.99〜/月（USD）', mono: true }, { html: '最大10秒の動画生成・要公式確認' }],
           ],
         },
         notes: [
-          '料金は2026年6月時点の第三者情報に基づくおおよその目安です',
-          '正確な料金・プラン内容は必ず公式サイトでご確認ください',
+          '上記料金は2026-06-21公式サイト（hailuoai.video/subscribe）確認時点の情報です',
+          '料金・プラン内容は変更される可能性があります。最新情報は必ず公式サイトでご確認ください',
           '<b>利用規約の確認が特に重要です</b>',
         ],
       }}
@@ -218,7 +218,7 @@ const jsonLd = JSON.stringify([
         { html: '中国企業（MiniMax）運営のデータポリシーを確認したか' },
         { html: '利用プランがStandard以上かどうか（無料プランは商用不可）' },
         { html: '生成動画に使用する入力画像・映像の権利関係' },
-        { html: '正確な料金・プラン内容を公式サイトで確認したか' },
+        { html: '料金・プラン内容の最新情報を公式サイトで確認したか（料金は変更される場合あり）' },
       ]}
       lastChecked={d?.lastReviewed ?? '2026-06-06'}
       nextCheck={d?.nextReviewDue ?? '2026-07-06'}

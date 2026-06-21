@@ -221,6 +221,24 @@
   color: var(--text-2, #6b7280);
 }
 
+/* ---------- inputMaterialRisk 補足ラベル ---------- */
+.tool-imr { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
+.imr-badge {
+  display: inline-block;
+  font-size: .69rem;
+  font-weight: 600;
+  font-family: var(--f-jp, sans-serif);
+  padding: 2px 8px;
+  border-radius: 5px;
+  line-height: 1.6;
+}
+.imr-badge.imr-low  { background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; }
+.imr-badge.imr-med  { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+.imr-badge.imr-high { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+.imr-badge.attr-limited { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+.imr-badge.attr-unknown { background: #f8fafc; color: #94a3b8; border: 1px solid #e2e8f0; }
+.imr-badge.attr-note    { background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; }
+
 /* ---------- Section base ---------- */
 .tp-section { padding: 64px 0; }
 
@@ -243,9 +261,21 @@
 }
 @media (max-width: 720px) {
   .tools-list { grid-template-columns: 1fr; }
+  .toolbar-inner { flex-direction: column; align-items: stretch; gap: 10px; }
+  .tb-label { display: none; }
+  .filter-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 3px;
+  }
+  .filter-chips::-webkit-scrollbar { display: none; }
+  .fchip { min-height: 44px; }
   .toolbar-right { margin-left: 0; width: 100%; }
   .tool-search { flex: 1; }
   .tool-search input { width: 100%; }
+  .tool-links a { padding: 5px 0; }
   .page-stat + .page-stat { padding-left: 0; border-left: none; }
   .cta-strip .btn { margin-left: 0; width: 100%; justify-content: center; }
 }

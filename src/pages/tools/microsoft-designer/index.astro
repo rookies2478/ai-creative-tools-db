@@ -69,6 +69,7 @@ const jsonLd = JSON.stringify([
         { lb: '料金目安', text: '要公式確認', mono: true },
         { lb: '透かし', badge: { s: 'na', label: '要確認' } },
         { lb: '日本語UI', badge: { s: 'ok', label: '〇 対応' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://designer.microsoft.com/' }}
       secondaryCta={{ label: 'よくある質問（公式）', href: 'https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer' }}
@@ -135,7 +136,7 @@ const jsonLd = JSON.stringify([
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>〇 対応</span>' }],
           [{ html: '対応環境', rk: true }, { html: 'Web' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-26', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://designer.microsoft.com/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://designer.microsoft.com/" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。',
       }}

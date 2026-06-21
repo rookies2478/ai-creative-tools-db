@@ -67,6 +67,9 @@ const relatedLinks = [
   { href: '/conditions/free/', label: '無料枠ありAIツール' },
   { href: '/conditions/japanese/', label: '日本語対応AIツール' },
   { href: '/conditions/no-watermark/', label: '透かしなしAIツール' },
+  { href: '/comparisons/dalle-vs-midjourney/', label: 'DALL·E vs Midjourney比較' },
+  { href: '/comparisons/midjourney-vs-adobe-firefly/', label: 'Midjourney vs Adobe Firefly比較' },
+  { href: '/comparisons/midjourney-vs-leonardo-ai/', label: 'Midjourney vs Leonardo AI比較' },
   { href: '/comparisons/', label: 'AI画像・動画ツール比較表' },
 ];
 
@@ -106,6 +109,13 @@ const articleJsonLd = JSON.stringify({
   toolASlug="stable-diffusion"
   toolBName="Midjourney"
   toolBSlug="midjourney"
+  quickDecisionRows={[
+    { purpose: '完全無料・ローカルで試したい人', candidate: 'Stable Diffusion', checkPoint: 'GPU搭載PCと環境構築の知識が必要' },
+    { purpose: '環境構築なしで手軽に始めたい人', candidate: 'Midjourney', checkPoint: '有料プランのみ（無料プランなし）。英語UIへの慣れが必要' },
+    { purpose: '高度なカスタマイズ・LoRAを活用したい人', candidate: 'Stable Diffusion', checkPoint: 'モデルのライセンスを個別に確認。LoRAはそれぞれ独自条件あり' },
+    { purpose: 'アート調高品質画像を手軽に生成したい人', candidate: 'Midjourney', checkPoint: '英語プロンプト推奨。有料プランのみ' },
+    { purpose: '商用利用前提で確認したい人', candidate: '両方とも公式規約・ライセンスを確認', checkPoint: 'SDはモデルバージョンごとにライセンスが異なる。個別確認が必須' },
+  ]}
   conclusionA={{
     label: '無料・ローカル・自由度重視 →',
     toolName: 'Stable Diffusion',

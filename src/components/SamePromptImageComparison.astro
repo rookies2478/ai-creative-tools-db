@@ -1,0 +1,151 @@
+---
+import type { GeneratedImage } from '../data/generatedImages';
+
+interface Props {
+  imageA: GeneratedImage;
+  imageB: GeneratedImage;
+  toolAName: string;
+  toolBName: string;
+}
+
+const { imageA, imageB, toolAName, toolBName } = Astro.props;
+---
+
+<section class="spic-wrap">
+  <h2 class="spic-heading">同一プロンプトで作成した画像サンプル</h2>
+  <p class="spic-lead">
+    このセクションでは、同じプロンプト条件で作成したAスキーム画像を並べています。<br />
+    画像は比較の参考材料であり、1枚の結果だけでツール性能を断定するものではありません。<br />
+    料金、商用利用条件、入力素材、表記条件はプランや用途によって異なる場合があります。最新情報は公式サイトをご確認ください。
+  </p>
+  <div class="spic-grid">
+    {[{ img: imageA, name: toolAName }, { img: imageB, name: toolBName }].map(({ img, name }) => (
+      <figure class="spic-card">
+        <p class="spic-tool-name">{name}</p>
+        <img
+          src={img.file}
+          alt={img.alt}
+          width="640"
+          height="360"
+          loading="lazy"
+          decoding="async"
+          class="spic-img"
+        />
+        <figcaption class="spic-caption">
+          <p class="spic-caption-text">このツールで作成した実例サンプル</p>
+          <dl class="spic-meta">
+            <div>
+              <dt>promptVersion：</dt>
+              <dd>{img.promptVersion}</dd>
+            </div>
+            <div>
+              <dt>生成日：</dt>
+              <dd>{img.generatedAt}</dd>
+            </div>
+            <div>
+              <dt>確認日：</dt>
+              <dd>{img.reviewedAt}</dd>
+            </div>
+          </dl>
+          <p class="spic-notice">
+            ※ 本画像は管理者が{name}で作成した参考作例サンプルです。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。公式出力・代表結果を保証するものではありません。
+          </p>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+  <p class="spic-footer-note">
+    ※ 同一プロンプト・同一バージョンで作成したサンプルです。画像の違いはツール間の優劣を断定するものではありません。商用利用・著作権条件はプランや規約によって異なります。最新の公式情報をご確認ください。本記事は法的助言ではありません。
+  </p>
+</section>
+
+<style>
+  .spic-wrap {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--surface-1, #f8fafc);
+    border: 1px solid var(--border-subtle, #e2e8f0);
+    border-radius: 12px;
+  }
+  .spic-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main, #1e293b);
+    margin: 0 0 0.75rem;
+  }
+  .spic-lead {
+    font-size: 0.875rem;
+    color: var(--text-sub, #475569);
+    line-height: 1.7;
+    margin: 0 0 1.25rem;
+  }
+  .spic-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 640px) {
+    .spic-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .spic-card {
+    background: #fff;
+    border: 1px solid var(--border-subtle, #e2e8f0);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0;
+  }
+  .spic-tool-name {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--brand-ink, #2563eb);
+    background: var(--surface-2, #eff6ff);
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border-subtle, #e2e8f0);
+  }
+  .spic-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+  .spic-caption {
+    padding: 0.75rem;
+  }
+  .spic-caption-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-sub, #475569);
+    margin: 0 0 0.5rem;
+  }
+  .spic-meta {
+    font-size: 0.6875rem;
+    color: var(--text-muted, #64748b);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0 0 0.5rem;
+  }
+  .spic-meta div {
+    display: flex;
+    gap: 0.25rem;
+  }
+  .spic-meta dt {
+    font-weight: 600;
+    color: var(--text-sub, #475569);
+  }
+  .spic-notice {
+    font-size: 0.6875rem;
+    color: var(--text-muted, #94a3b8);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .spic-footer-note {
+    font-size: 0.75rem;
+    color: var(--text-muted, #94a3b8);
+    line-height: 1.7;
+    margin: 1rem 0 0;
+  }
+</style>

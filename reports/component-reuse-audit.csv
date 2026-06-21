@@ -1,0 +1,6 @@
+component,usedIn,duplicatedLogic,labelDictionaryUsed,issue,priority,action
+ToolCard.astro,"HomePickupFeed, RelatedTools","freeBadge/cuBadge/jpBadge/wmBadge/platformLabels","getCategoryLabel（2026-06-21 差し替え済み）","freePlanテキストが「無料枠あり」と他3つの「あり」で揺れ。catLabel揺れは解消済み",中,"freeBadgeはCSS乖離あり次回以降（B）"
+ToolsListCard.astro,/tools/index.astro,"freeLabel/commercialLabel/jaLabel/wmLabel/inputMaterialLabel/platformLabels","COMMERCIAL_PLAN_SUMMARIES, getAttributionLabel, getCategoryLabel（2026-06-21 差し替え済み）","catLabel揺れ解消済み。inputMaterialLabelが独自実装（INPUT_MATERIAL_LABELSと重複）",中,"inputMaterialLabel→INPUT_MATERIAL_LABELS 検討（B）"
+ToolSummaryTable.astro,各ツール詳細ページ,"freePlanBadge/commercialUseDetail/fourStateBadge/triLabel/platformLabels","DISCLAIMER_NOTE（差し替え済み）","commercialUseDetailがCOMMERCIAL_LABELSと構造同等だが未使用。platformLabelsのdesktop/localが日本語で他コンポと揺れ",中,"commercialUseDetail→COMMERCIAL_LABELS 差し替え検討（B）。platformLabels日本語は意図的の可能性あり（C）"
+CompareTablePreview.astro,HomeComparisonTable,"freeBadge/cuBadge/jpBadge/wmBadge","DISCLAIMER_NOTE（差し替え済み）","freeBadge/cuBadge等が独自実装でToolCard.astroと重複だがCSS同一",低,"共通化は大規模リファクタになるため見送り（C）"
+SamePromptImageComparison.astro,"comparisons/adobe-firefly-vs-microsoft-designer, comparisons/canva-ai-vs-adobe-firefly",なし（専用実装）,なし,Aスキーム画像比較専用。表示ロジック重複なし,なし,共通化しない（C）方針維持

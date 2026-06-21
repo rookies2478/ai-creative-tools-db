@@ -29,10 +29,15 @@ weaknesses:
   - "無料クレジット数・料金条件は変更される可能性がある"
   - "商用利用時は第三者権利や最新公式規約の確認が必要"
   - "AI生成物の法的扱いは国・地域の著作権法によって変わる可能性がある"
-lastReviewed: "2026-06-13"
-nextReviewDue: "2026-07-13"
-verifiedAt: "2026-06-13"
+lastReviewed: "2026-06-19"
+nextReviewDue: "2026-09-19"
+verifiedAt: "2026-06-19"
 officialSourceUrl: "https://www.fotor.com/jp/pricing/"
+pricingSourceUrl: "https://www.fotor.com/jp/pricing/"
+pricingSourceNote: "日本語公式料金ページ（fotor.com/jp）。公式ページでUSD建てを確認（Basic: US$0表記）。Pro・Pro+プランの月額は動的ロードのため公式サイトで要確認。最新情報は公式サイトをご確認ください。"
+currency: "USD"
+pricingText: "Basic無料プランあり（US$0）・有料プランは公式ページ参照"
+pricingStatus: "partial"
 pricingModel: "subscription_credit"
 freePlanNote: "公式料金ページではBasic無料プランが案内されているが、無料クレジット・生成回数・保存期間・機能制限は変更される可能性があるため、最新の公式情報確認が必要。"
 platforms:
@@ -55,6 +60,9 @@ useCases:
 limitations:
   - "無料プランでは透かき・クレジット制限・機能制限あり（条件は変更の可能性あり）"
   - "AI生成物の著作権の法的扱いは国・地域で異なる可能性がある"
+usagePolicy:
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "image-to-image・背景除去など画像アップロードが多用される設計。公式ヘルプでは第三者の権利・商標・保護作品を侵害しない責任はユーザー側にあると明記されている。"
 reviewed:
   pricing: "2026-05-14"
   terms: "2026-05-14"

@@ -57,9 +57,10 @@ const jsonLd = JSON.stringify([
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '要認可（公式規約）' } },
         { lb: '無料枠', badge: { s: 'cond', label: '毎日60cr補充（透かし）' } },
-        { lb: '料金目安', text: '$10〜$199/月程度（要確認）', mono: true },
+        { lb: '料金', text: '要公式確認', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: '無料あり・有料要確認' } },
         { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://pixverse.ai' }}
       secondaryCta={{ label: '利用規約を確認（公式）', href: 'https://pixverse.ai/en/terms-of-service' }}
@@ -74,8 +75,8 @@ const jsonLd = JSON.stringify([
           det: '無料プラン（Basic）では、初回サインアップ時に90クレジット付与・毎日60クレジットが補充（当日未使用分は翌日失効）と複数の情報源で報告されています。透かしあり・生成回数制限あり。詳細は公式サイトでご確認ください。',
         },
         {
-          title: '最安料金目安', sum: '$10/月程度（Standard・要公式確認）', sumMono: true,
-          det: '複数の第三者情報ではStandard $10/月〜Ultra $199/月の複数ティアが報告されています。2026年6月時点の参考値です。正確な料金・プラン内容は公式サイトでご確認ください。',
+          title: '料金', sum: '要公式確認', sumMono: true,
+          det: '有料プランあり（USD建て）。公式料金ページが確認できないため月額は不明です。最新の料金・プラン内容は公式サイトでご確認ください。',
         },
         {
           title: '透かし', badge: { s: 'cond', label: '無料あり・有料要確認' },
@@ -119,7 +120,7 @@ const jsonLd = JSON.stringify([
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>毎日60cr補充</span><br>透かしあり。当日未使用分は翌日失効。' }],
-          [{ html: '最安料金', rk: true }, { html: '<span class="mono">$10/月程度（Standard・要公式確認）</span><br>正確な料金は公式サイトで確認。' }],
+          [{ html: '料金', rk: true }, { html: '要公式確認<br>最新の料金は公式サイトでご確認ください。' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要認可（公式規約）</span><br>デフォルト非商用。商用には別途認可または商用ライセンスが必要。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料あり・有料要確認</span>' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span>' }],
@@ -127,7 +128,7 @@ const jsonLd = JSON.stringify([
           [{ html: '最大動画長', rk: true }, { html: '最大15秒（V6）・extend機能で+8秒' }],
           [{ html: '対応環境', rk: true }, { html: 'Web' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-05', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://pixverse.ai" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://pixverse.ai" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 商用利用条件の確認が重要です。料金・条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
       }}

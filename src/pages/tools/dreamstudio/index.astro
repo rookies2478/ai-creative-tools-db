@@ -39,7 +39,7 @@ const jsonLd = JSON.stringify([
 
 <BaseLayout
   title="Brand Studio（旧DreamStudio）の商用利用・料金・無料枠まとめ｜AI生成ツールDB"
-  description="Brand Studio（旧DreamStudio / Stability AI）の商用利用条件・料金・クレジット・ライセンスを公式情報をもとに整理。Stable Diffusionとの違いも解説。最新情報は公式サイトをご確認ください。"
+  description="Brand Studio（旧DreamStudio）はStability AI公式のクラウドサービスです。ローカル実行型のStable Diffusionとは別個のサービス・ライセンス体系である点を前提に、商用利用条件・料金・クレジット・ライセンスを整理しています。最新情報は公式サイトをご確認ください。"
   canonicalPath="/tools/dreamstudio/"
   ogType="article"
   jsonLd={jsonLd}
@@ -65,10 +65,11 @@ const jsonLd = JSON.stringify([
       lead="Brand Studio（旧DreamStudio）はStability AIが提供するAI画像生成サービスです。ブラウザ上でStable Diffusion系モデルを使い、プロンプト・ネガティブプロンプト・各種パラメータを調整して画像を生成できます。Stable Diffusion本体のオープンソースモデル・DreamStudioのサービス・Stability AIのライセンスは別個のものであり、混同しないことが重要です。"
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '条件あり（要ライセンス確認）' } },
-        { lb: '無料枠', badge: { s: 'na', label: '要確認（初回クレジット等）' } },
-        { lb: '料金目安', text: 'クレジット消費制（要公式確認）', mono: true },
+        { lb: '無料枠', badge: { s: 'cond', label: 'Trial 1000cr（使い切り）' } },
+        { lb: '料金目安', text: 'Core $50/月（USD）・Trial 無料1000cr', mono: true },
         { lb: '透かし', badge: { s: 'na', label: '要確認' } },
         { lb: '日本語UI', badge: { s: 'na', label: '要確認' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://stability.ai/brandstudio' }}
       secondaryCta={{ label: 'Stability AIライセンス（公式）', href: 'https://stability.ai/license' }}
@@ -79,12 +80,12 @@ const jsonLd = JSON.stringify([
           det: 'DreamStudio利用規約では、ユーザーがプロンプト・生成コンテンツ・共有結果について責任を負うとされています。商用利用を検討する際は、Stability AIライセンスの内容と商用利用条件・Acceptable Use Policyの禁止事項・第三者の権利・素材を使用する場合の権利確認が必要です。なお、Stable Diffusion本体のオープンソースモデルのライセンスと、DreamStudioサービスの利用規約は別のものです。混同しないようにご注意ください。このページは法的助言ではありません。',
         },
         {
-          title: '無料枠', badge: { s: 'na', label: '要確認（初回クレジット等）' },
-          det: '無料枠や初回クレジットの有無は変更される可能性があります。最新の状況はBrand Studio公式サイトでご確認ください。',
+          title: '無料枠', badge: { s: 'cond', label: 'Trial 1000cr（使い切り）' },
+          det: '2026-06-21公式確認：Trial（1000クレジット・クレジット使用後終了）。Coreプランの全機能が利用可能。無料枠の条件は変更される可能性があります。最新情報は公式サイトでご確認ください。',
         },
         {
-          title: '最安料金目安', sum: 'クレジット消費制（要公式確認）', sumMono: true,
-          det: 'DreamStudioはクレジット消費制のサービスです。クレジット単価・付与条件は変更される可能性があるため、最新の料金・クレジット条件は公式サイトでご確認ください。',
+          title: '最安料金目安', sum: 'Core $50/月（USD・5000cr/月）', sumMono: true,
+          det: 'Stability AI公式情報では、Brand Studio（旧DreamStudio）向けのプランとして案内されています。旧DreamStudio単体の料金体系とは異なる可能性があるため、最新情報は公式サイトをご確認ください。2026-06-21公式確認（stability.ai/brand-studio-plans）：Core $50/月（USD・5000クレジット/月・翌月繰越なし）。Enterprise はカスタム価格。料金・クレジット条件は変更される可能性があります。',
         },
         {
           title: '透かし', badge: { s: 'na', label: '要確認' },
@@ -130,15 +131,15 @@ const jsonLd = JSON.stringify([
         kind: 'spec',
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成（Stability AI公式サービス）' }],
-          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>無料枠・初回クレジットの有無は変更の可能性あり。最新情報は公式確認要。' }],
-          [{ html: '最安料金', rk: true }, { html: '<span class="mono">クレジット消費制（要公式確認）</span><br>クレジット単価・付与条件は変更の可能性あり。' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>Trial 1000cr（使い切り）</span><br>クレジット使用後終了。条件は変更の可能性あり。最新情報は公式確認要。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">Core $50/月（USD・5000cr/月）</span><br>※Brand Studio（旧DreamStudio）プランとして案内（2026-06-21公式確認）。料金・クレジット条件は変更の可能性あり。' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（要ライセンス確認）</span><br>Stability AIライセンス・Acceptable Use Policyの確認が必要。SDモデルとBrand Studioの規約は別物。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>公式情報のみでは断定できません。' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>公式情報のみでは確認できていません。' }],
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span><br>Stable Diffusion系は英語プロンプトの方が安定しやすい傾向あり。' }],
           [{ html: '対応環境', rk: true }, { html: 'Web（ブラウザ）/ API' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-14', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://stability.ai/brandstudio" target="_blank" rel="noopener">Brand Studio公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://stability.ai/brandstudio" target="_blank" rel="noopener noreferrer">Brand Studio公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 料金・機能・商用利用条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
       }}
@@ -152,14 +153,16 @@ const jsonLd = JSON.stringify([
           kind: 'cmp',
           headers: ['利用形態', '料金目安'],
           rows: [
-            [{ html: '初回クレジット', rk: true }, { html: '付与有無・数量は変更の可能性あり（要公式確認）', mono: false }],
-            [{ html: 'クレジット追加購入', rk: true }, { html: '公式サイトで確認', mono: false }],
+            [{ html: 'Trial', rk: true }, { html: '無料（1000クレジット・使い切り）', mono: false }],
+            [{ html: 'Core', rk: true }, { html: '$50/月（USD・5000クレジット/月・翌月繰越なし）', mono: false }],
+            [{ html: 'Enterprise', rk: true }, { html: 'カスタム価格（年間有効期限・無制限ユーザー）', mono: false }],
           ],
         },
         notes: [
-          'クレジット単価・付与条件は変更される可能性があります',
-          '無料枠や初回クレジットの有無は公式サイトでご確認ください',
-          '<b>最新料金は公式サイトでご確認ください</b>',
+          'Stability AI公式情報では、Brand Studio（旧DreamStudio）向けのプランとして案内されています。旧DreamStudio単体の料金体系とは異なる可能性があるため、最新情報は公式サイトをご確認ください',
+          '上記は2026-06-21公式サイト（stability.ai/brand-studio-plans）確認時点の情報です',
+          '料金・クレジット条件は変更される可能性があります。最新情報は公式サイトでご確認ください',
+          '追加クレジット購入はCoreプランで可能',
         ],
       }}
       commercial={{
@@ -183,7 +186,7 @@ const jsonLd = JSON.stringify([
         'ローカル版Stable Diffusionの経験者がブラウザでの手軽な検証に使いたい人',
       ]}
       whoNot={[
-        '無料で始めたい人（無料枠の有無は要確認）',
+        '無料で始めたい人（Trial 1000クレジット使い切り後は有料）',
         'LoRAやカスタムモデルを活用したい人（ローカル版の方が適している）',
         '日本語UIを重視する人（対応状況は要確認）',
       ]}

@@ -1,0 +1,20 @@
+カテゴリ,確認項目,状態,備考
+絞り込みUI,選択中チップの視認,PASS,aria-pressed="true"で背景黒/カテゴリ色に変化
+絞り込みUI,リセット操作の分かりやすさ,修正済み,「すべて」→「すべて表示」に変更
+絞り込みUI,絞り込み結果件数,PASS,result-countで動的更新（N件）
+絞り込みUI,0件時の案内,PASS,imgEmpty/vidEmptyで案内表示済み
+絞り込みUI,スマホタップしやすさ,PASS,min-height: 44px実装済み
+絞り込みUI,横スクロール操作性,PASS,flex-wrap:nowrap + overflow-x:auto
+絞り込みUI,条件名の長さ,PASS,最長「商用利用の案内あり」10文字
+絞り込みUI,platformLabels日本語統一,PASS,getPlatformLabel()で一元管理
+詳細ページCTA,一覧カード→詳細ページ遷移,PASS,「詳しく見る →」統一
+詳細ページCTA,ToolSummaryTableのCTA,PASS,「料金・利用条件を公式サイトで確認する ↗」統一
+詳細ページCTA,ボタン文言の表記揺れ,PASS,「詳しく見る」と「公式サイト ↗」で統一
+詳細ページCTA,強すぎる表現,PASS,「おすすめ」「今すぐ登録」等なし
+詳細ページCTA,Haiper通常CTA,PASS,「おすすめ」表現なし・現行方針維持
+スマホ比較表,free-ai-image-generators スクロールヒント,PASS,fai-scroll-hint（720px以下表示）あり
+スマホ比較表,free-ai-image-generators 列数,注意,6列・現状の横スクロールで対応
+スマホ比較表,categories/image-generation,PASS,CompareTablePreview・ctp-scroll-hintあり
+スマホ比較表,categories/video-generation,PASS,同上
+スマホ比較表,canva-ai-vs-adobe-firefly,PASS,cp-scroll-hint（720px以下）・2列で読みやすい
+スマホ比較表,adobe-firefly-vs-microsoft-designer,PASS,同上

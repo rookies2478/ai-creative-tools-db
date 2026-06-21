@@ -1,0 +1,56 @@
+file,linkText,url,linkType,rel,target,issue
+src/components/AdobeFireflyTool.astro,公式サイトで確認 ↗,https://firefly.adobe.com,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/AdobeFireflyTool.astro,CTA primaryCta,dynamic,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/AdobeFireflyTool.astro,sources リンク,dynamic,source,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/AdobeFireflyTool.astro,公式 ↗,dynamic,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/CanvaAiTool.astro,公式サイトで確認 ↗,https://www.canva.com,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/LeonardoAiTool.astro,公式サイトで確認 ↗,https://leonardo.ai,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/MicrosoftDesignerTool.astro,公式サイトで確認 ↗,https://designer.microsoft.com/,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/MidjourneyTool.astro,公式サイトで確認 ↗,https://www.midjourney.com,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/TdpToolPage.astro,CTA primaryCta,dynamic,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/TdpToolPage.astro,sources リンク,dynamic,source,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/TdpToolPage.astro,公式 ↗,dynamic,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/ToolDetailPage.astro,CTA primaryCta,dynamic,official,sponsored nofollow noopener noreferrer,_blank,affiliateUrl未設定時もsponsored付与（見送り）
+src/components/ToolDetailPage.astro,CTA secondaryCta,dynamic,official,sponsored nofollow noopener noreferrer,_blank,affiliateUrl未設定時もsponsored付与（見送り）
+src/components/ToolDetailPage.astro,sources リンク,dynamic,source,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/ToolDetailPage.astro,公式 ↗,dynamic,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/ToolSummaryTable.astro,CTA 1,dynamic,official,sponsored nofollow noopener noreferrer,_blank,affiliateUrl未設定時もsponsored付与（見送り）
+src/components/ToolSummaryTable.astro,CTA 2,dynamic,official,sponsored nofollow noopener noreferrer,_blank,affiliateUrl未設定時もsponsored付与（見送り）
+src/components/ToolSummaryTable.astro,CTA 3,dynamic,official,sponsored nofollow noopener noreferrer,_blank,affiliateUrl未設定時もsponsored付与（見送り）
+src/components/UsagePolicySummary.astro,officialSourceUrl,dynamic,source,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/components/UsagePolicySummary.astro,termsUrl,dynamic,terms,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/[slug].astro,CTA affiliate/official,dynamic,affiliate,sponsored nofollow noopener noreferrer,_blank,affiliateUrl未設定時もsponsored付与（見送り）
+src/pages/tools/[slug].astro,CTA 2,dynamic,official,sponsored nofollow noopener noreferrer,_blank,affiliateUrl未設定時もsponsored付与（見送り）
+src/pages/tools/canva-ai-image-generator/index.astro,公式サイトで確認 ↗,https://www.canva.com,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/capcut-ai/index.astro,公式サイトで確認 ↗,https://www.capcut.com/,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/clipdrop/index.astro,公式サイトで確認 ↗,https://clipdrop.co/,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/dalle/index.astro,公式サイトで確認 ↗,https://openai.com/dall-e-3,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/dreamstudio/index.astro,Brand Studio公式サイトで確認 ↗,https://stability.ai/brandstudio,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/fotor-ai/index.astro,公式サイトで確認 ↗,https://www.fotor.com/jp/ai-image-generator/,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/gemini-image-generation/index.astro,公式サイトで確認 ↗,https://gemini.google/jp/overview/image-generation/?hl=ja-JP,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/hailuo-ai/index.astro,公式サイトで確認 ↗,https://hailuoai.video,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/haiper/index.astro,公式サイトで確認 ↗,https://haiper.ai/,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/ideogram/index.astro,公式サイトで確認 ↗,https://ideogram.ai/,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/invideo-ai/index.astro,公式サイトで確認 ↗,https://invideo.io,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/kling-ai/index.astro,公式サイトで確認 ↗,https://klingai.com,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/leonardo-ai/index.astro,公式サイトで確認 ↗,https://leonardo.ai,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/luma-ai/index.astro,公式サイトで確認 ↗,https://lumalabs.ai/,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/microsoft-designer/index.astro,公式サイトで確認 ↗,https://designer.microsoft.com/,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/midjourney/index.astro,公式サイトで確認 ↗,https://www.midjourney.com,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/nightcafe/index.astro,公式サイトで確認 ↗,https://creator.nightcafe.studio/,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/pika/index.astro,公式サイトで確認 ↗,https://pika.art,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/pixverse/index.astro,公式サイトで確認 ↗,https://pixverse.ai,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/playground-ai/index.astro,公式サイトで確認 ↗,https://playground.com/,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/runway/index.astro,公式サイトで確認 ↗,https://runwayml.com,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/seaart-ai/index.astro,公式サイトで確認 ↗,https://www.seaart.ai/ja,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/stable-diffusion/index.astro,公式サイトで確認 ↗,https://stability.ai,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/tensor-art/index.astro,公式サイトで確認 ↗,https://tensor.art/,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/tools/vidu-ai/index.astro,公式サイトで確認 ↗,https://www.vidu.com,official,noopener noreferrer（修正済）,_blank,noreferrer漏れ→修正済
+src/pages/categories/image-generation/index.astro,FLUX.1-schnell,https://huggingface.co/black-forest-labs/FLUX.1-schnell,docs,なし,なし（同タブ）,target/rel欠落（次回対応候補）
+src/pages/comparisons/free-ai-image-generators/index.astro,各公式サイト（14件）,multiple,official/pricing,noopener noreferrer,_blank,問題なし
+src/pages/comparisons/invideo-ai-vs-capcut-ai/index.astro,公式サイト・利用規約,multiple,official/terms,noopener noreferrer,_blank,問題なし
+src/pages/comparisons/midjourney-vs-leonardo-ai/index.astro,料金・利用規約,multiple,pricing/terms,noopener noreferrer,_blank,問題なし
+src/pages/comparisons/runway-vs-kling-ai/index.astro,料金・利用規約,multiple,pricing/terms,noopener noreferrer,_blank,問題なし
+src/pages/comparisons/runway-vs-pika/index.astro,利用規約,multiple,terms,noopener noreferrer,_blank,問題なし
+src/pages/guides/video-generation-credit-cost-comparison/index.astro,料金・商用利用,multiple,pricing/help,noopener noreferrer,_blank,問題なし
+src/pages/privacy-policy/index.astro,Google・Microsoft各種,multiple,privacy/help,noopener noreferrer,_blank,問題なし

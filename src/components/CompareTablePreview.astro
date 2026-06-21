@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { DISCLAIMER_NOTE } from '../data/labelDictionary';
 
 interface Props {
   tools: CollectionEntry<'tools'>[];
@@ -15,15 +16,18 @@ const { tools, limit = 5 } = Astro.props;
 const preview = tools.slice(0, limit);
 
 function freeBadge(val: FreePlan) {
-  if (val === true)  return { text: 'あり',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (val === false) return { text: 'なし',   cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
-                     return { text: '要確認', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === true)      return { text: 'あり',       cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === false)     return { text: 'なし',       cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+  if (val === 'limited') return { text: '条件付き',   cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+                         return { text: '要公式確認', cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
 }
 
 function cuBadge(val: CommercialUse) {
-  if (val === 'ok') return { text: '案内あり', cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (val === 'no') return { text: '非対応',   cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
-                    return { text: '要確認',   cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === 'ok')        return { text: '案内あり',      cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === 'paid-only') return { text: '有料プラン向け', cls: 'bg-sky-50 text-sky-700 ring-1 ring-inset ring-sky-200' };
+  if (val === 'limited')   return { text: '条件あり',      cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === 'no')        return { text: '非対応',        cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+                           return { text: '要公式確認',    cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
 }
 
 function jpBadge(ui: TriState, prompt: TriState) {
@@ -33,13 +37,15 @@ function jpBadge(ui: TriState, prompt: TriState) {
 }
 
 function wmBadge(val: FourState) {
-  if (val === 'no')  return { text: '透かしなし',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (val === 'yes') return { text: '透かしあり',   cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
-                     return { text: '要確認', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === 'no')      return { text: '透かしなし',         cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === 'yes')     return { text: '透かしあり',         cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+  if (val === 'limited') return { text: 'プランによって異なる', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+                         return { text: '要確認',             cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
 }
 ---
 
 <div class="overflow-x-auto">
+  <p class="ctp-scroll-hint" aria-hidden="true">← 横にスクロールできます →</p>
   <table class="w-full min-w-[560px] border-collapse text-sm">
     <thead>
       <tr class="bg-blue-50/60 text-left text-[11px] font-bold uppercase tracking-wide text-slate-500 border-b border-slate-200">
@@ -87,7 +93,7 @@ function wmBadge(val: FourState) {
     <span class="ctp-li ctp-warn"><span class="ctp-ic">△</span>要確認</span>
     <span class="ctp-li ctp-na"><span class="ctp-ic">×</span>なし / 非対応</span>
   </div>
-  <p class="ctp-note">※ 値は確認日時点の参考値です。無料枠・商用利用・対応状況はプランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。</p>
+  <p class="ctp-note">{DISCLAIMER_NOTE}</p>
 </div>
 
 <style>
@@ -117,6 +123,15 @@ function wmBadge(val: FourState) {
   .ctp-ok .ctp-ic   { background: #e6f3ec; color: #1e8a4c; }
   .ctp-warn .ctp-ic { background: #f8efd9; color: #a06a09; }
   .ctp-na .ctp-ic   { background: #efefea; color: #6a7180; }
+  .ctp-scroll-hint {
+    display: none;
+    font-size: 11.5px;
+    color: #98a0ad;
+    margin: 0 0 6px;
+  }
+  @media (max-width: 680px) {
+    .ctp-scroll-hint { display: block; }
+  }
   .ctp-note {
     margin: 8px 0 0;
     font-size: 11px;

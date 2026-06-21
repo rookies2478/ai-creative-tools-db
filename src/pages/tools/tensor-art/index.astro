@@ -69,6 +69,7 @@ const jsonLd = JSON.stringify([
         { lb: '料金目安', text: '無料〜Proプラン（公式確認）', mono: true },
         { lb: '透かし', badge: { s: 'na', label: '要確認' } },
         { lb: '日本語UI', badge: { s: 'na', label: '要確認' } },
+        { lb: '入力素材', badge: { s: 'na', label: '要注意' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://tensor.art/' }}
       secondaryCta={{ label: '利用規約（公式）', href: 'https://tensor.art/about/terms-of-service-new' }}
@@ -139,7 +140,7 @@ const jsonLd = JSON.stringify([
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span><br>SD系モデルは英語プロンプトの方が安定しやすい傾向あり。' }],
           [{ html: '対応環境', rk: true }, { html: 'Web（ブラウザ）' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-14', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://tensor.art/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://tensor.art/" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 商用利用条件はモデルごとに異なります。最新情報は必ず公式サイトでご確認ください。',
       }}
@@ -244,6 +245,7 @@ const jsonLd = JSON.stringify([
         { q: '透かしは入りますか？', a: '透かし条件はモデル・機能・プランにより変わる可能性があります。公式情報のみでは断定できないため、最新の条件はTensor.Art公式画面でご確認ください。' },
         { q: 'LoRAやCheckpointはどう使いますか？', a: 'Tensor.Artではプラットフォーム上でモデル・LoRA・Checkpointを選択して利用できます。商用利用時は選択するモデルごとのライセンスを必ず確認してください。' },
         { q: 'ローカル版Stable Diffusionと何が違いますか？', a: 'Tensor.ArtはブラウザURLで動作するサービスのため、ローカル環境の構築やGPUが不要です。一方で、ローカル版と比べてカスタマイズ性は限られる場合があります。' },
+        { q: 'コミュニティのモデルライブラリはどう活用できますか？', a: '他ユーザーが公開したモデル・LoRA・Checkpointをそのまま試せるため、スタイルや出力傾向を作例と比較しながら選ぶことができます。ただしモデルごとにライセンスが異なるため、商用利用前は各モデルのライセンスを個別にご確認ください。' },
       ]}
       relatedTools={[
         { name: 'Stable Diffusion', slug: 'stable-diffusion', initial: 'S', cat: '画像生成', badges: [{ s: 'cond', label: '商用：モデル依存' }, { s: 'ok', label: '無料枠：ローカル無料' }, { s: 'cond', label: '日本語UI：拡張機能で可' }], platforms: ['ローカル', 'API'], official: 'https://stability.ai' },

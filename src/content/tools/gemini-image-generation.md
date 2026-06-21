@@ -32,6 +32,8 @@ lastReviewed: "2026-06-13"
 nextReviewDue: "2026-07-13"
 verifiedAt: "2026-06-13"
 officialSourceUrl: "https://policies.google.com/terms/generative-ai/use-policy"
+pricingSourceUrl: "https://gemini.google.com/advanced?hl=ja"
+pricingSourceNote: "公式ページURLは設定済み。ただし月額・プラン名称・Google One AI Premiumとの関係は要確認。Gemini画像生成の有料機能はGoogleの有料プランに内包されており独立した料金ページは存在しない。最新情報は公式サイトをご確認ください。"
 pricingModel: "subscription"
 freePlanNote: "Google AIの無料プランでもGeminiアプリの画像生成・編集が案内されています。利用上限・モデル・機能はプランや時期によって変わる可能性があるため、最新の公式情報をご確認ください。"
 paidPlanNote: "Google AI Plus / Pro / Ultraなどの有料プランで上限・機能が拡張される場合があります。料金はプランや時期により変更される可能性があるため、最新の料金は公式ページでご確認ください。"
@@ -56,6 +58,9 @@ limitations:
   - "透かし条件はプランや機能によって変わる可能性があるため実際の出力画面と公式情報で確認が必要"
   - "画像内テキストは崩れる場合がある"
   - "利用上限・モデルはプラン・時期により変わる可能性がある"
+usagePolicy:
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "参照写真のスタイル適用など画像アップロードが可能。Google生成AI利用ポリシーにより、人物・商標・第三者素材を含む入力には肖像権・商標権の観点から別途確認が必要。"
 reviewed:
   pricing: "2026-05-15"
   terms: "2026-05-15"

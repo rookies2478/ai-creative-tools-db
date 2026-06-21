@@ -99,9 +99,10 @@ const {
   specs = [
     { lb: '商用利用', badge: { s: 'paid', label: '有料向け' } },
     { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
-    { lb: '料金目安', text: '$9.99/月〜', mono: true },
+    { lb: '料金目安', text: '1,580円/月（税込）〜', mono: true },
     { lb: '透かし', badge: { s: 'cond', label: 'プランによる' } },
     { lb: '日本語UI', badge: { s: 'ok', label: '〇 対応' } },
+    { lb: '入力素材', badge: { s: 'cond', label: '別途確認' } },
   ],
   primaryCta = { label: '公式サイトで確認する', href: 'https://firefly.adobe.com' },
   secondaryCta = { label: '料金プラン（公式）', href: 'https://www.adobe.com/products/firefly/plans.html' },
@@ -109,7 +110,7 @@ const {
   basicInfo = [
     { title: '商用利用', badge: { s: 'paid', label: '有料向け' }, wide: true, sum: '有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。', det: 'Adobe公式情報上、Fireflyは商用利用を想定したAI生成サービスとして案内されています。ただしベータ機能（β表示）、第三者素材、利用プランや用途によって扱いが変わる可能性があります。商用利用前に最新のAdobe公式利用条件をご確認ください。' },
     { title: '無料枠', badge: { s: 'cond', label: '限定的' }, det: '無料プランで一定数の生成クレジットあり（数量は変更の可能性あり）。' },
-    { title: '最安料金目安', sum: '$9.99/月（Firefly Standard・プロモ価格適用時）', sumMono: true, det: 'Firefly Standard $9.99/月〜。Creative Cloud All Appsに含まれる場合あり。' },
+    { title: '最安料金目安', sum: '1,580円/月（税込）（Firefly Standard・日本語公式料金ページ確認）', sumMono: true, det: 'Firefly Standard 1,580円/月（税込）〜（日本語公式料金ページ確認）。Creative Cloud All Appsに含まれる場合あり。最新情報は公式サイトをご確認ください。' },
     { title: '透かし', badge: { s: 'cond', label: 'プランによる' }, det: 'プランによっては可視透かしあり。全プランでC2PAメタデータ（コンテンツクレデンシャル）が埋め込まれる場合があります。' },
     { title: '日本語対応', lang: [{ label: 'UI', badge: { s: 'ok', label: '〇 対応' } }, { label: 'プロンプト', badge: { s: 'ok', label: '〇 対応' } }] },
     { title: '対応環境', feats: ['Web'] },
@@ -144,7 +145,7 @@ const {
     rows: [
       [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成' }],
       [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br />無料プランで一定数の生成クレジットあり（数量は変更の可能性あり）' }],
-      [{ html: '最安料金', rk: true }, { html: '<span class="mono">$9.99/月〜</span><br />Firefly Standard $9.99/月〜。Creative Cloud All Appsに含まれる場合あり。' }],
+      [{ html: '最安料金', rk: true }, { html: '<span class="mono">1,580円/月（税込）〜</span><br />Firefly Standard 1,580円/月（税込）〜（日本語公式料金ページ確認）。Creative Cloud All Appsに含まれる場合あり。最新情報は公式サイトをご確認ください。' }],
       [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st paid sm"><span class="d"></span>有料向け</span><br />有料プランで商用利用可能と案内されています。最新情報は公式サイトをご確認ください。' }],
       [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>プランによる</span><br />プランによっては可視透かしあり。全プランでC2PAメタデータ埋め込み' }],
       [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>〇 対応</span>' }],
@@ -152,7 +153,7 @@ const {
       [{ html: '対応環境', rk: true }, { html: 'Web' }],
       [{ html: '情報確認日', rk: true }, { html: '2026-06-15', mono: true }],
       [{ html: '次回確認予定', rk: true }, { html: '2026-09-15', mono: true }],
-      [{ html: '公式サイト', rk: true }, { html: '<a href="https://firefly.adobe.com" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+      [{ html: '公式サイト', rk: true }, { html: '<a href="https://firefly.adobe.com" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
     ],
     note: '※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。',
   },
@@ -167,7 +168,7 @@ const {
       headers: ['プラン', '料金', '生成クレジット'],
       rows: [
         [{ html: '無料', rk: true }, { html: '無料', mono: true }, { html: '一定数のクレジットが提供される場合あり' }],
-        [{ html: 'Standard', rk: true }, { html: '$9.99/月〜', mono: true }, { html: '有料プランで拡大' }],
+        [{ html: 'Standard', rk: true }, { html: '1,580円/月（税込）〜', mono: true }, { html: '有料プランで拡大' }],
       ],
     },
     notes: [
@@ -323,8 +324,8 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
     </div>
 
     <div class="tdp-actions">
-      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel="noopener">{primaryCta.label} <span class="ext">↗</span></a>
-      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel="noopener">{secondaryCta.label} <span class="ext">↗</span></a> : null}
+      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel="noopener noreferrer">{primaryCta.label} <span class="ext">↗</span></a>
+      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel="noopener noreferrer">{secondaryCta.label} <span class="ext">↗</span></a> : null}
     </div>
 
     <div class="tdp-caution">
@@ -485,7 +486,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
       <div class="tdp-srcbox">
         <h3>参照元</h3>
         <div class="tdp-srclist">
-          {sources.map((s) => (<a class="tdp-srclink" href={s.href} target="_blank" rel="noopener"><span class="tag">{s.tag}</span>{s.label}<span class="ext">↗</span></a>))}
+          {sources.map((s) => (<a class="tdp-srclink" href={s.href} target="_blank" rel="noopener noreferrer"><span class="tag">{s.tag}</span>{s.label}<span class="ext">↗</span></a>))}
         </div>
       </div>
     </div>
@@ -515,7 +516,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
           {t.platforms ? <div class="plats">{t.platforms.map((p) => (<span class="plat">{p}</span>))}</div> : null}
           <div class="tact">
             {toolUrl(t.slug) ? <a href={toolUrl(t.slug)}>詳しく見る →</a> : null}
-            {t.official ? <a class="ghost" href={t.official} target="_blank" rel="noopener">公式 ↗</a> : null}
+            {t.official ? <a class="ghost" href={t.official} target="_blank" rel="noopener noreferrer">公式 ↗</a> : null}
           </div>
         </article>
       ))}
@@ -598,7 +599,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
 
   /* spec strip */
   .tdp-spec{margin-top:30px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;}
-  .tdp-specgrid{display:grid;grid-template-columns:repeat(5,1fr);}
+  .tdp-specgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));}
   .tdp-specitem{padding:20px 22px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:9px;}
   .tdp-specitem:last-child{border-right:none;}
   .tdp-specitem .lb{font-family:var(--f-jp);font-weight:700;font-size:11.5px;color:var(--muted);letter-spacing:.02em;}

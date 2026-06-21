@@ -1,0 +1,23 @@
+imageId,file,toolSlug,sampleType,promptVersion,comparisonEligible,pageSlug,canUseForComparison,reason,candidatePage,phase1Status
+1,adobe-firefly-tool-output-home-01.webp,adobe-firefly,tool-output,home-showcase-v1,false,home,false,home-showcase-v1はcomparisonEligible:false固定,なし,対象外
+2,leonardo-ai-tool-output-home-01.webp,leonardo-ai,tool-output,home-showcase-v1,false,home,false,home-showcase-v1はcomparisonEligible:false固定,なし,対象外
+3,stable-diffusion-tool-output-home-01.webp,stable-diffusion,tool-output,home-showcase-v1,false,home,false,home-showcase-v1はcomparisonEligible:false固定,なし,対象外
+4,stable-diffusion-reference-visual-01.webp,—,reference-visual,reference-visual-v1,false,stable-diffusion,false,Bスキーム・FLUX.1-schnell生成・Stable Diffusion本体の出力ではない,なし,対象外
+5,image-generation-reference-visual-01.webp,—,reference-visual,reference-visual-v1,false,categories/image-generation,false,Bスキーム・カテゴリ参考ビジュアル,なし,対象外
+6,video-generation-reference-visual-01.webp,—,reference-visual,reference-visual-v1,false,categories/video-generation,false,Bスキーム・カテゴリ参考ビジュアル,なし,対象外
+7,free-ai-image-tools-reference-visual-01.webp,—,reference-visual,reference-visual-v1,false,guides/free-ai-image-tools,false,Bスキーム・ガイド参考ビジュアル,なし,対象外
+8,midjourney-reference-visual-01.webp,—,reference-visual,reference-visual-v1,false,midjourney,false,Bスキーム・Meta AI生成・Midjourney本体の出力ではない。有料版未使用のためAスキーム化予定なし,なし,Midjourney除外確定・Bスキームのみ維持
+9,adobe-firefly-tool-output-01.webp,adobe-firefly,tool-output,image-tool-benchmark-v1,true,adobe-firefly,true,Aスキーム・comparisonEligible:true・model確定,/comparisons/canva-ai-vs-adobe-firefly/ /comparisons/adobe-firefly-vs-microsoft-designer/ /comparisons/midjourney-vs-adobe-firefly/,Phase1実装済み（2記事）
+10,leonardo-ai-tool-output-01.webp,leonardo-ai,tool-output,image-tool-benchmark-v1,true,leonardo-ai,true,Aスキーム・comparisonEligible:true・model確定,/comparisons/midjourney-vs-leonardo-ai/,Midjourney除外確定により対象外
+11,stable-diffusion-tool-output-01.webp,stable-diffusion,tool-output,image-tool-benchmark-v1,true,stable-diffusion,true,Aスキーム・comparisonEligible:true・model確定,/comparisons/stable-diffusion-vs-midjourney/,Midjourney除外確定により対象外
+12,canva-ai-image-generator-tool-output-01.webp,canva-ai-image-generator,tool-output,image-tool-benchmark-v1,true,canva-ai-image-generator,true,Aスキーム・comparisonEligible:true・model確定,/comparisons/canva-ai-vs-adobe-firefly/,Phase1実装済み
+13,fotor-ai-tool-output-01.webp,fotor-ai,tool-output,image-tool-benchmark-v1,true,fotor-ai,true,Aスキーム・comparisonEligible:true・model確定,なし（比較記事なし）,対象記事なし
+14,gemini-image-generation-tool-output-01.webp,gemini-image-generation,tool-output,image-tool-benchmark-v1,true,gemini-image-generation,true,Aスキーム・comparisonEligible:true・model確定,なし（比較記事なし）,対象記事なし
+15,dalle-tool-output-01.webp,dalle,tool-output,image-tool-benchmark-v1,true,dalle,true,Aスキーム・comparisonEligible:true・model確定,/comparisons/dalle-vs-midjourney/,Midjourney除外確定により対象外
+16,dreamstudio-tool-output-01.webp,dreamstudio,tool-output,image-tool-benchmark-v1,true,dreamstudio,true,Aスキーム・comparisonEligible:true・model確定,なし（比較記事なし）,対象記事なし
+17,ideogram-tool-output-01.webp,ideogram,tool-output,image-tool-benchmark-v1,true,ideogram,true（保留）,Aスキームだがmodel:要確認・比較記事利用前に解決推奨,なし（比較記事なし）,model要確認・保留
+18,microsoft-designer-tool-output-01.webp,microsoft-designer,tool-output,image-tool-benchmark-v1,true,microsoft-designer,true,Aスキーム・comparisonEligible:true・model確定,/comparisons/adobe-firefly-vs-microsoft-designer/,Phase1実装済み
+19,nightcafe-tool-output-01.webp,nightcafe,tool-output,image-tool-benchmark-v1,true,nightcafe,true（保留）,Aスキームだがmodel:要確認・比較記事利用前に解決推奨,なし（比較記事なし）,model要確認・保留
+20,playground-ai-tool-output-01.webp,playground-ai,tool-output,image-tool-benchmark-v1,true,playground-ai,true（保留）,Aスキームだがmodel:要確認・比較記事利用前に解決推奨,なし（比較記事なし）,model要確認・保留
+21,seaart-ai-tool-output-01.webp,seaart-ai,tool-output,image-tool-benchmark-v1,true,seaart-ai,true（保留）,Aスキームだがmodel:要確認・比較記事利用前に解決推奨,なし（比較記事なし）,model要確認・保留
+22,tensor-art-tool-output-01.webp,tensor-art,tool-output,image-tool-benchmark-v1,true,tensor-art,true（保留）,Aスキームだがmodel:要確認・比較記事利用前に解決推奨,なし（比較記事なし）,model要確認・保留

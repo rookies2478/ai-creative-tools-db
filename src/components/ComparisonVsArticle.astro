@@ -18,6 +18,12 @@ export interface ComparisonRow {
 export interface RelatedLink { href: string; label: string; }
 export interface SourceLink { href: string; label: string; }
 
+export interface QuickDecisionRow {
+  purpose: string;
+  candidate: string;
+  checkPoint: string;
+}
+
 export interface Props {
   title: string;
   description: string;
@@ -36,6 +42,7 @@ export interface Props {
   conclusionA: ConclusionCard;
   conclusionB: ConclusionCard;
   conclusionNote?: string;
+  quickDecisionRows?: QuickDecisionRow[];
   comparisonRows: ComparisonRow[];
   faqs: { q: string; a: string }[];
   relatedLinks: RelatedLink[];
@@ -64,6 +71,7 @@ const {
   conclusionA,
   conclusionB,
   conclusionNote,
+  quickDecisionRows,
   comparisonRows,
   faqs,
   relatedLinks,
@@ -117,6 +125,35 @@ function formatDate(iso: string): string {
         <p class="cp-date">掲載ツール情報の最終確認：{formatDate(latestDate)} ／ 掲載情報は変更される場合があります</p>
       )}
     </header>
+
+    <!-- ===== 先に結論テーブル ===== -->
+    {quickDecisionRows && quickDecisionRows.length > 0 && (
+      <section class="cp-qd">
+        <h2 class="cp-qd-h2">先に結論：どちらを選ぶ？</h2>
+        <p class="cp-scroll-hint" aria-hidden="true">← 横にスクロールできます →</p>
+        <div class="cp-qd-wrap">
+          <table class="cp-qd-table">
+            <thead>
+              <tr>
+                <th class="cp-qd-th">目的</th>
+                <th class="cp-qd-th">向いている候補</th>
+                <th class="cp-qd-th">確認ポイント</th>
+              </tr>
+            </thead>
+            <tbody>
+              {quickDecisionRows.map(({ purpose, candidate, checkPoint }, i) => (
+                <tr class={i % 2 === 0 ? 'cp-qd-even' : 'cp-qd-odd'}>
+                  <td class="cp-qd-td cp-qd-purpose">{purpose}</td>
+                  <td class="cp-qd-td cp-qd-candidate">{candidate}</td>
+                  <td class="cp-qd-td cp-qd-check">{checkPoint}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="cp-qd-note">プランや用途によって条件が異なる場合があります。最新情報は<a href="/guides/commercial-use-copyright/">公式サイト・利用規約</a>をご確認ください。本記事は法的助言ではありません。</p>
+      </section>
+    )}
 
     <!-- ===== 注意バナー ===== -->
     <div class="cp-notice" role="note">
@@ -173,6 +210,7 @@ function formatDate(iso: string): string {
         {toolAName}と{toolBName}の基本比較表
       </h2>
       <p class="cp-table-note-top">以下は参考情報です。内容は変更される場合があります。最新情報は各公式サイトでご確認ください。</p>
+      <p class="cp-scroll-hint" aria-hidden="true">← 横にスクロールできます →</p>
       <div class="cp-table-wrap">
         <table class="cp-table">
           <thead>
@@ -372,6 +410,79 @@ function formatDate(iso: string): string {
     font-size: 12px;
     color: var(--faint);
     margin: 0;
+  }
+
+  /* 先に結論テーブル */
+  .cp-qd {
+    margin-bottom: 36px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 24px 24px 20px;
+  }
+  .cp-qd-h2 {
+    font-family: var(--f-jp);
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--brand-ink);
+    margin: 0 0 16px;
+  }
+  .cp-qd-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    margin-bottom: 12px;
+  }
+  .cp-qd-table {
+    width: 100%;
+    min-width: 420px;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: var(--surface);
+  }
+  .cp-qd-th {
+    text-align: left;
+    padding: 10px 14px;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--brand-ink);
+    background: var(--brand-tint);
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  .cp-qd-even { background: var(--surface); }
+  .cp-qd-odd  { background: var(--surface-2); }
+  .cp-qd-td {
+    padding: 10px 14px;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+    line-height: 1.6;
+  }
+  .cp-qd-purpose {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 12.5px;
+    white-space: nowrap;
+  }
+  .cp-qd-candidate {
+    color: var(--brand-ink);
+    font-weight: 600;
+    font-size: 12.5px;
+  }
+  .cp-qd-check {
+    color: var(--ink-soft);
+    font-size: 12px;
+  }
+  .cp-qd-note {
+    font-size: 12px;
+    color: var(--faint);
+    margin: 0;
+  }
+  .cp-qd-note a {
+    color: var(--brand-ink);
+  }
+  @media (max-width: 600px) {
+    .cp-qd { padding: 18px 16px 16px; }
   }
 
   /* 注意バナー */
@@ -861,8 +972,17 @@ function formatDate(iso: string): string {
   }
 
   /* レスポンシブ */
+  .cp-scroll-hint {
+    display: none;
+    font-size: 11.5px;
+    color: var(--muted);
+    text-align: center;
+    margin: 0 0 6px;
+  }
+
   @media (max-width: 680px) {
     .cp-x { padding: 32px 16px 60px; }
+    .cp-scroll-hint { display: block; }
     .cp-conclusion-grid,
     .cp-x :global(.cp-2col),
     .cp-x :global(.cp-suited-grid),

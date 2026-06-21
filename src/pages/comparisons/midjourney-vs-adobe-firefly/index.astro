@@ -49,7 +49,7 @@ const faqs = [
 ];
 
 const comparisonRows = [
-  { item: '料金（最低プラン）', toolA: '$10/月（Basicプラン・月払い）', toolB: '$9.99/月（Firefly Standardプラン）' },
+  { item: '料金（最低プラン）', toolA: '$10/月（Basicプラン・月払い）', toolB: '1,580円/月（税込）〜（Firefly Standardプラン・日本語公式料金ページ確認）' },
   { item: '無料プラン', toolA: 'なし（2024年末廃止）', toolB: 'あり（クレジット数・条件は要確認）' },
   { item: '商用利用', toolA: '有料プランで可能な場合あり（条件あり）', toolB: '商用利用を想定した設計（β機能は対象外）' },
   { item: '日本語UI', toolA: '非対応（英語のみ）', toolB: '対応' },
@@ -66,6 +66,8 @@ const relatedLinks = [
   { href: '/tools/midjourney/', label: 'Midjourney詳細' },
   { href: '/tools/adobe-firefly/', label: 'Adobe Firefly詳細' },
   { href: '/categories/image-generation/', label: 'AI画像生成ツール一覧' },
+  { href: '/categories/design/', label: 'AIデザインツール一覧' },
+  { href: '/comparisons/canva-ai-vs-adobe-firefly/', label: 'Canva AI vs Adobe Firefly比較' },
   { href: '/guides/commercial-use-copyright/', label: '商用利用・著作権ガイド' },
   { href: '/conditions/commercial-use/', label: '商用利用確認しやすいAIツール' },
   { href: '/conditions/free/', label: '無料枠ありAIツール' },
@@ -111,6 +113,13 @@ const articleJsonLd = JSON.stringify({
   toolASlug="midjourney"
   toolBName="Adobe Firefly"
   toolBSlug="adobe-firefly"
+  quickDecisionRows={[
+    { purpose: 'まず無料で試したい人', candidate: 'Adobe Firefly', checkPoint: '無料枠の上限・条件は変更される場合あり。公式で要確認' },
+    { purpose: '日本語UIで操作したい人', candidate: 'Adobe Firefly', checkPoint: '日本語UI・日本語プロンプト対応。Midjourneyは英語のみ' },
+    { purpose: 'アート調・高品質ビジュアル重視', candidate: 'Midjourney', checkPoint: '有料プランのみ（無料プランなし）。英語UIへの慣れが必要' },
+    { purpose: '商用利用前提で確認したい人', candidate: '両方とも公式規約を確認', checkPoint: 'プラン・用途・β機能の有無によって条件が異なる場合あり' },
+    { purpose: 'Adobe製品と連携したい人', candidate: 'Adobe Firefly', checkPoint: 'Photoshop・Illustrator連携可。利用条件は公式で確認' },
+  ]}
   conclusionA={{
     label: 'アート調・雰囲気重視 →',
     toolName: 'Midjourney',

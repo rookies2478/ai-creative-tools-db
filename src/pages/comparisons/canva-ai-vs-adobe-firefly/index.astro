@@ -1,6 +1,15 @@
 ---
 import ComparisonVsArticle from '../../../components/ComparisonVsArticle.astro';
+import SamePromptImageComparison from '../../../components/SamePromptImageComparison.astro';
+import { generatedImages } from '../../../data/generatedImages';
 import { getEntry } from 'astro:content';
+
+const imgCanva = generatedImages.find(
+  (i) => i.sourceToolSlug === 'canva-ai-image-generator' && i.sampleType === 'tool-output' && i.comparisonEligible === true && i.promptVersion === 'image-tool-benchmark-v1'
+)!;
+const imgFirefly = generatedImages.find(
+  (i) => i.sourceToolSlug === 'adobe-firefly' && i.sampleType === 'tool-output' && i.comparisonEligible === true && i.promptVersion === 'image-tool-benchmark-v1'
+)!;
 
 const [toolCanva, toolFirefly] = await Promise.all([
   getEntry('tools', 'canva-ai-image-generator'),
@@ -39,7 +48,7 @@ const faqs = [
 const comparisonRows = [
   { item: '主な用途', toolA: 'Canvaテンプレートと一体利用・SNS投稿・バナー・プレゼン資料・ブログ用画像', toolB: '画像生成・Adobe Creative Cloud連携・商用素材作成' },
   { item: '無料利用のしやすさ', toolA: '無料プランで一定回数の生成が可能（回数は変更の可能性あり）', toolB: '無料プランで一定数の生成クレジットあり（数量は変更の可能性あり）' },
-  { item: '料金', toolA: '$15/月〜（Canva Pro・月払い）／$120/年（年払い）', toolB: '$9.99/月〜（Firefly Standardプラン・プロモ価格適用時）' },
+  { item: '料金', toolA: '$15/月〜（Canva Pro・月払い）／$120/年（年払い）', toolB: '1,580円/月（税込）〜（Firefly Standardプラン・日本語公式料金ページ確認）' },
   { item: '商用利用条件', toolA: '公式情報上、条件付きで可能な場合あり。AI生成コンテンツであることの明示が条件となる場合あり', toolB: '公式情報上、商用利用を想定したサービスとして案内あり。ベータ機能は対象外' },
   { item: '日本語UI', toolA: '対応', toolB: '対応' },
   { item: '日本語プロンプト', toolA: '対応', toolB: '対応' },
@@ -54,6 +63,8 @@ const relatedLinks = [
   { href: '/tools/canva-ai-image-generator/', label: 'Canva AI画像生成詳細' },
   { href: '/tools/adobe-firefly/', label: 'Adobe Firefly詳細' },
   { href: '/categories/image-generation/', label: 'AI画像生成ツール一覧' },
+  { href: '/categories/design/', label: 'AIデザインツール一覧' },
+  { href: '/comparisons/adobe-firefly-vs-microsoft-designer/', label: 'Adobe Firefly vs Microsoft Designer比較' },
   { href: '/guides/commercial-use-copyright/', label: '商用利用・著作権ガイド' },
   { href: '/conditions/free/', label: '無料枠ありAIツール' },
   { href: '/conditions/commercial-use/', label: '商用利用確認しやすいAIツール' },
@@ -101,6 +112,13 @@ const articleJsonLd = JSON.stringify({
   toolASlug="canva-ai-image-generator"
   toolBName="Adobe Firefly"
   toolBSlug="adobe-firefly"
+  quickDecisionRows={[
+    { purpose: 'テンプレートと一体でデザインしたい人', candidate: 'Canva AI', checkPoint: 'AI生成コンテンツの明示条件など規約を確認' },
+    { purpose: 'Adobe製品を使い慣れている人', candidate: 'Adobe Firefly', checkPoint: 'Creative Cloud連携。β機能は商用利用対象外とされる' },
+    { purpose: '無料で試したい人', candidate: '両方とも無料枠あり', checkPoint: '各ツールの無料枠の上限・条件は変更される場合あり。公式で確認' },
+    { purpose: '文字入れ・レイアウト調整もまとめてやりたい人', candidate: 'Canva AI', checkPoint: 'Canvaエディタで画像生成から文字入れまで一体利用可能' },
+    { purpose: '商用利用前提で確認したい人', candidate: '両方とも公式規約を確認', checkPoint: 'プラン・用途・Canva素材の有無によって条件が異なる場合あり' },
+  ]}
   conclusionA={{
     label: 'テンプレート・デザイン一体型重視 →',
     toolName: 'Canva AI',
@@ -187,6 +205,14 @@ const articleJsonLd = JSON.stringify({
       </ul>
     </div>
   </section>
+
+  <!-- ===== 同一プロンプト比較 ===== -->
+  <SamePromptImageComparison
+    imageA={imgCanva}
+    imageB={imgFirefly}
+    toolAName="Canva AI"
+    toolBName="Adobe Firefly"
+  />
 
   <!-- ===== 他ツール ===== -->
   <section class="cp-body-sec">

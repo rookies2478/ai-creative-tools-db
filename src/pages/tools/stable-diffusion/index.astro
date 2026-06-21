@@ -73,6 +73,7 @@ const jsonLd = JSON.stringify([
         { lb: '料金目安', text: 'ローカル無料 / API別途', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: '一部バージョンで付与' } },
         { lb: '日本語UI', badge: { s: 'cond', label: '拡張機能で対応可' } },
+        { lb: '入力素材', badge: { s: 'na', label: '要注意' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://stability.ai' }}
       secondaryCta={{ label: 'ライセンス情報（公式）', href: 'https://stability.ai/license' }}
@@ -141,7 +142,7 @@ const jsonLd = JSON.stringify([
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span><br>英語プロンプトの方が精度が高い傾向あり' }],
           [{ html: '対応環境', rk: true }, { html: 'ローカル（Win/Mac/Linux） / API' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-06', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://stability.ai" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://stability.ai" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ ライセンス・料金はモデルバージョン・利用形態により異なります。最新情報は必ず公式サイトでご確認ください。',
       }}

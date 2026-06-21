@@ -12,12 +12,23 @@ const faqs = [
 
 const faqJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((f) => ({
-    "@type": "Question",
-    "name": f.q,
-    "acceptedAnswer": { "@type": "Answer", "text": f.a }
-  }))
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "AIクリエイティブナビ", "item": "https://aicreative-db.com/" },
+        { "@type": "ListItem", "position": 2, "name": "用途別AI画像生成ツール比較", "item": "https://aicreative-db.com/use-cases/ai-image-use-case-comparison/" }
+      ]
+    }
+  ]
 });
 
 const useCases = [
@@ -96,8 +107,8 @@ const useCases = [
 ---
 
 <BaseLayout
-  title="用途別AI画像生成ツール比較：サムネ・SNS・広告・EC・ブログ向けに探す | AIクリエイティブナビ"
-  description="YouTubeサムネ・SNS投稿画像・広告バナー・EC商品画像・ブログアイキャッチ向けのAI画像生成ツールを用途別に比較。商用利用条件・透かし・日本語対応・無料枠を確認して、目的に合ったツールを選ぶ参考にしてください。"
+  title="AI画像生成ツールの用途別の選び方｜初めて使う方向け：サムネ・SNS・広告・EC・ブログ | AIクリエイティブナビ"
+  description="AI画像生成ツールを何に使えばいいか迷っている方向けに、YouTubeサムネ・SNS投稿・広告バナー・EC商品画像・ブログアイキャッチの6用途別に特化した比較ページを案内します。用途によって確認すべき条件（商用利用・透かし・日本語対応）が異なるため、まず用途から選ぶのが効率的です。"
   canonicalPath="/use-cases/ai-image-use-case-comparison/"
   jsonLd={faqJsonLd}
 >
@@ -117,12 +128,10 @@ const useCases = [
 
       <!-- Hero -->
       <header class="cp-head">
-        <span class="eyebrow">Use-case Comparison Hub</span>
-        <h1>用途別<span class="hl">AI画像生成ツール比較</span></h1>
+        <span class="eyebrow">Use-case Guide for Beginners</span>
+        <h1>AI画像生成ツールの<span class="hl">用途別の選び方</span></h1>
         <p class="lead">
-          AI画像生成ツールを選ぶとき、用途によって確認すべき条件は大きく異なります。
-          YouTubeサムネなら商用利用条件と文字入れのしやすさ、EC商品画像なら背景除去機能、広告バナーなら商用利用条件と透かしの有無が重要です。
-          このページでは、<a href="/categories/image-generation/">AI画像生成ツール</a>を6つの主要用途ごとに特化した比較ページへ案内します。
+          「AI画像生成を使ってみたいが、何から始めればいいかわからない」という方向けに、まず<b>用途から選ぶ</b>ことをおすすめします。<a href="/categories/image-generation/">AI画像生成ツール</a>は用途によって確認すべき条件が大きく異なります。YouTubeサムネなら商用利用条件と文字入れのしやすさ、EC商品画像なら背景除去機能、広告バナーなら商用利用条件と透かしの有無が特に重要です。このページでは6つの主要用途ごとに特化した比較ページへ案内します。まず「自分は何を作りたいか」を確認してから、該当の用途ページをご覧ください。
         </p>
         <div class="stats">
           <div class="stat"><span class="n">6</span><span class="t">用途別ページ</span></div>

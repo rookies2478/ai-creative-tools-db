@@ -1,0 +1,24 @@
+file,sizeKB,width,height,usedIn,imageType,issue,action
+public/images/generated/tools/stable-diffusion-tool-output-home-01.webp,136,1024,1024,HomeHeroAnimated (FV),Bスキーム,圧縮済み（1919KB→136KB -93% WebP q82 2026-06-21）,完了
+public/images/generated/tools/adobe-firefly-tool-output-home-01.webp,175,1376,768,HomeHeroAnimated (FV),Bスキーム,圧縮済み（1898KB→175KB -91% WebP q82 2026-06-21）,完了
+public/images/generated/tools/leonardo-ai-tool-output-home-01.webp,765,unknown,unknown,HomeHeroAnimated (FV),Bスキーム,500KB超・FV画像,圧縮禁止（報告のみ）
+public/ogp.png,940,unknown,unknown,OGP共通,通常,500KB超,圧縮禁止（報告のみ）
+public/images/generated/tools/stable-diffusion-reference-visual-01.webp,271,unknown,unknown,ToolDetailPage,Aスキーム,300KB超,圧縮禁止（報告のみ）
+public/images/generated/tools/adobe-firefly-tool-output-01.webp,106,800,450,ToolDetailPage・AdobeFireflyTool,Aスキーム,問題なし,なし
+public/images/generated/tools/ideogram-tool-output-01.webp,89,800,450,ToolDetailPage,Aスキーム,問題なし,なし
+public/images/generated/tools/dalle-tool-output-01.webp,82,800,450,ToolDetailPage,Aスキーム,問題なし,なし
+public/images/generated/tools/dreamstudio-tool-output-01.webp,67,800,450,ToolDetailPage,Aスキーム,問題なし,なし
+public/images/generated/tools/gemini-image-generation-tool-output-01.webp,67,800,450,ToolDetailPage,Aスキーム,問題なし,なし
+public/images/generated/tools/seaart-ai-tool-output-01.webp,63,800,450,ToolDetailPage,Aスキーム,問題なし,なし
+public/images/generated/tools/microsoft-designer-tool-output-01.webp,55,800,450,ToolDetailPage・comparisons,Aスキーム,問題なし,なし
+public/images/generated/tools/playground-ai-tool-output-01.webp,52,800,450,ToolDetailPage,Aスキーム,問題なし,なし
+public/images/generated/tools/nightcafe-tool-output-01.webp,50,800,450,ToolDetailPage,Aスキーム,問題なし,なし
+public/images/generated/tools/midjourney-reference-visual-01.webp,47,unknown,unknown,comparisons,Aスキーム,問題なし,なし
+public/images/generated/tools/fotor-ai-tool-output-01.webp,46,800,450,ToolDetailPage,Aスキーム,問題なし,なし
+public/images/generated/categories/image-generation-reference-visual-01.webp,45,1200,675,image-generation カテゴリ,通常,width/height属性なし→追加済み,width/height追加
+public/images/generated/categories/video-generation-reference-visual-01.webp,44,unknown,unknown,video-generation カテゴリ（未使用確認済み）,通常,img タグ参照なし,なし
+public/images/generated/tools/tensor-art-tool-output-01.webp,37,800,450,ToolDetailPage,Aスキーム,問題なし,なし
+public/images/generated/tools/stable-diffusion-tool-output-01.webp,36,800,450,ToolDetailPage,Aスキーム,問題なし,なし
+public/images/generated/tools/canva-ai-image-generator-tool-output-01.webp,35,800,450,ToolDetailPage,Aスキーム,問題なし,なし
+public/images/generated/tools/leonardo-ai-tool-output-01.webp,27,800,450,ToolDetailPage,Aスキーム,問題なし,なし
+public/images/generated/guides/free-ai-image-tools-reference-visual-01.webp,20,unknown,unknown,ガイドページ,通常,問題なし,なし

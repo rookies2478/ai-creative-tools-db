@@ -30,6 +30,7 @@ nextReviewDue: "2026-06-24"
 verifiedAt: "2026-06-08"
 officialSourceUrl: "https://runwayml.com/pricing/"
 pricingModel: "subscription_credit"
+pricingStatus: "confirmed"
 freePlanNote: "125クレジット（初回のみ・更新なし）"
 paidPlanNote: "Standard $12/月〜（年払い）。月625クレジット程度。"
 platforms:
@@ -277,7 +278,9 @@ Runwayは主に3つの使い方があります。
 - [YouTube向けAI動画生成の活用](/use-cases/youtube/) — YouTube動画にAI生成を活用する際の確認ポイント
 - [AI動画生成の用途別選び方](/use-cases/) — 用途に合わせたAIツールの確認ポイント
 - [RunwayとPikaを比較](/comparisons/runway-vs-pika/) — 料金・無料枠・商用利用・用途別の選び方を比較
+- [RunwayとKling AIを比較](/comparisons/runway-vs-kling-ai/) — 映像クオリティ・料金・商用利用条件の比較
 - [AI動画生成ツール比較](/comparisons/ai-image-video-tools/) — AI画像・動画生成ツールの横断比較
+- [AI動画編集ツール一覧](/categories/video-editing/) — AI動画編集ツールの比較・選び方
 - [透かしなしAI動画ツール](/conditions/no-watermark/) — 透かしの有無・条件をまとめた一覧
 - [商用利用できるAI動画ツール](/conditions/commercial-use/) — 商用利用条件を確認できるツール一覧
 

@@ -22,21 +22,42 @@ const faqs = [
 
 const faqJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((faq) => ({
-    "@type": "Question",
-    "name": faq.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.a.replace(/<[^>]+>/g, '')
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a.replace(/<[^>]+>/g, '')
+        }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AIクリエイティブナビ",
+          "item": "https://aicreative-db.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI音声・ナレーション",
+          "item": "https://aicreative-db.com/categories/voice-narration/"
+        }
+      ]
     }
-  }))
+  ]
 });
 ---
 
 <BaseLayout
   title="AI音声・ナレーションツール比較｜テキスト読み上げ・音声生成AIツール"
-  description="AIを活用したテキスト読み上げ・音声生成・ナレーション自動化ツールの比較ページです。AI動画生成・アバター動画との組み合わせや、解説コンテンツ・ポッドキャスト向けの用途別選び方を整理しています。最新情報は公式サイトをご確認ください。"
+  description="AI動画生成・AIアバター動画のナレーション追加や音声生成を検討している方向けに、AI音声・TTS・ナレーションツールの基本的な確認ポイントを整理した周辺カテゴリページです。AI動画生成・アバター動画ツールとの接続・組み合わせ方もあわせて説明しています。最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/voice-narration/"
   jsonLd={faqJsonLd}
 >
@@ -74,9 +95,8 @@ const faqJsonLd = JSON.stringify({
         <span class="eyebrow">Voice &amp; narration</span>
         <h1>AI音声・ナレーション<span class="hl">ツール比較</span></h1>
         <p class="lead">
-          AIを活用したテキスト読み上げ（TTS）・音声生成・ナレーション自動化ツールの比較・選び方を整理するページです。
-          <a href="/categories/video-generation/">AI動画生成</a>や
-          <a href="/categories/avatar-video/">AIアバター動画</a>制作でのナレーション追加、解説コンテンツ・ポッドキャスト向けの参考にしてください。
+          このページは<b>AI動画生成・AIアバター動画のナレーション用途で確認する周辺カテゴリ</b>として位置づけています。
+          <a href="/categories/video-generation/">AI動画生成</a>や<a href="/categories/avatar-video/">AIアバター動画</a>で制作した動画にナレーションを追加したい方、または音声生成ツールを単独で活用したい方向けに、テキスト読み上げ（TTS）・音声クローン・ナレーション自動化の基本的な確認ポイントを整理しています。現時点では本サイトDBへのAI音声ツール個別ページは未収録です。ツール詳細は各公式サイトをご確認ください。
         </p>
         <div class="stats">
           <div class="stat"><span class="n">2</span><span class="t">主な用途</span></div>
@@ -245,6 +265,7 @@ const faqJsonLd = JSON.stringify({
             <a class="taglink" href="/categories/video-generation/"><span class="ld"></span>AI動画生成ツール一覧</a>
             <a class="taglink" href="/categories/video-editing/"><span class="ld"></span>AI動画編集ツール</a>
             <a class="taglink" href="/categories/design/"><span class="ld"></span>AIデザインツール</a>
+            <a class="taglink" href="/comparisons/invideo-ai-vs-capcut-ai/"><span class="ld"></span>InVideo AI vs CapCut AI 比較</a>
             <a class="taglink" href="/conditions/free/"><span class="ld"></span>無料で試せるAIツール</a>
             <a class="taglink" href="/conditions/commercial-use/"><span class="ld"></span>商用利用を確認しやすいAIツール</a>
           </div>

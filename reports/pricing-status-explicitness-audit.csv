@@ -1,0 +1,19 @@
+slug,toolName,currentPricingStatus,pricingText,currency,pricingSourceUrl,sourceStrength,suggestedStatus,priority,reason,nextAction
+canva-ai-image-generator,Canva AI画像生成,（未設定）,"$15/月（Canva Pro・月払い）／$120/年",USD,https://www.canva.com/pricing/,strong,confirmed,A,公式料金URLあり・USD・$15/月・CSV confirmed済み,pricingStatus: confirmed を .md に追加
+invideo-ai,InVideo AI,（未設定）,"約$20/月〜（透かしあり無料プランあり）",USD,（未設定）,medium,confirmed,A,公式料金URL（invideo.io/pricing/）あり・CSV confirmed済み・「約」付きのため精度注意,pricingStatus: confirmed + pricingSourceUrl を .md に追加
+kling-ai,Kling AI,（未設定）,"$6.99/月〜。無料プランあり",USD,（未設定）,strong,confirmed,A,公式料金URL（klingai.com/global/pricing）あり・CSV confirmed済み,pricingStatus: confirmed + pricingSourceUrl を .md に追加
+leonardo-ai,Leonardo AI,confirmed,"$10/月（Apprentice年払い）／$12/月（月払い）",USD,https://leonardo.ai/pricing/,strong,confirmed,A,公式料金URL（leonardo.ai/pricing/）あり・CSV confirmed済み,【2026-06-22反映済み】pricingStatus: confirmed を .md に追加
+luma-ai,Luma AI,confirmed,"$30/月（Plusプラン・月払い）。Plus/Pro/Ultra三段階",USD,https://lumalabs.ai/pricing,strong,confirmed,A,公式料金URL（lumalabs.ai/pricing）あり・CSV confirmed済み,【2026-06-22反映済み】pricingStatus: confirmed を .md に追加
+midjourney,Midjourney,confirmed,"$10/月（Basicプラン・月払い）／$8/月（年払い）",USD,https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans,strong,confirmed,A,公式ドキュメントURLあり・USD・$10/月・CSV confirmed済み,【2026-06-22反映済み】pricingStatus: confirmed を .md に追加
+pika,Pika,confirmed,"$8/月（年払い）。無料プランあり",USD,https://pika.art/pricing,strong,confirmed,A,公式料金URL（pika.art/pricing）あり・CSV confirmed済み,【2026-06-22反映済み】pricingStatus: confirmed を .md に追加
+playground-ai,Playground AI,（未設定）,"$12/月（Pro年払い）／$15/月（月払い）",USD,（未設定）,strong,confirmed,A,公式料金URL（playground.com/design/pricing）あり・CSV confirmed済み,pricingStatus: confirmed を .md に追加
+runway,Runway,confirmed,"$12/月（Standard年払い）／$14/月（月払い）",USD,https://runwayml.com/pricing/,strong,confirmed,A,公式料金URL（runwayml.com/pricing/）あり・CSV confirmed済み,【2026-06-22反映済み】pricingStatus: confirmed を .md に追加
+capcut-ai,CapCut AI,（未設定）,"地域・プラットフォームにより異なる",N/A,https://www.capcut.com/help/new-capcut-subscription-pricing,medium,no_fixed_price,B,公式が「アプリ内確認」案内・金額未定義,pricingStatus: no_fixed_price を .md に追加
+clipdrop,Clipdrop,（未設定）,"無料枠あり。有料プランは公式ページ参照",Unknown,https://clipdrop.co/pricing,medium,partial,B,公式料金ページあり・金額「--per month」で非開示,pricingStatus: partial を .md に追加（needsReview=yes）
+dalle,DALL·E,（未設定）,"ChatGPT Plus等の有料プランで利用枠拡大",USD,https://openai.com/chatgpt/pricing/,medium,partial,B,ChatGPT Plus依存・独立料金なし,pricingStatus: partial を .md に追加（needsReview=yes）
+gemini-image-generation,Gemini画像生成,（未設定）,"Google AIプランで利用可。無料枠・有料枠あり",（未設定）,https://gemini.google.com/advanced?hl=ja,medium,partial,B,Google One AI Premium内包・独立料金なし,pricingStatus: partial を .md に追加（needsReview=yes）
+ideogram,Ideogram,（未設定）,"要公式確認",USD,https://docs.ideogram.ai/plans-and-pricing/available-plans,medium,partial,B,docs URLあり・USD設定済み・月額は要公式確認,pricingStatus: partial を .md に追加（needsReview=yes継続）
+microsoft-designer,Microsoft Designer,（未設定）,"Microsoftアカウントで無料利用可",USD,https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer,weak,partial,B,FAQ URLあり・独立料金ページ未確認,pricingStatus: partial を .md に追加（needsReview=yes）
+nightcafe,NightCafe,（未設定）,"無料利用・無料クレジットあり",unknown,https://nightcafe.studio/blogs/info/is-nightcafe-free,weak,partial,B,公式ブログURL（料金表でない）・currency=unknown,pricingStatus: partial を .md に追加後、専用料金ページURL確認
+stable-diffusion,Stable Diffusion,（未設定）,"ローカル実行は無料。クラウドAPIは要確認",USD,https://platform.stability.ai/pricing,medium,partial,B,ローカル/API二重構造・ライセンス複雑,pricingStatus: partial を .md に追加（confirmed化しない）
+tensor-art,Tensor.Art,（未設定）,"無料利用枠・クレジット制あり",unknown,https://tensor.art/event/propropdate,weak,partial,B,クレジット制・イベントURLは変更リスクあり,pricingStatus: partial を .md に追加後、専用料金ページURL確認

@@ -66,6 +66,7 @@ const jsonLd = JSON.stringify([
         { lb: '料金目安', text: '$10/月〜', mono: true },
         { lb: '透かし', badge: { s: 'ok', label: 'なし（有料）' } },
         { lb: '日本語UI', badge: { s: 'na', label: '× 非対応' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://www.midjourney.com' }}
       secondaryCta={{ label: 'プラン比較（公式）', href: 'https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans' }}
@@ -133,7 +134,7 @@ const jsonLd = JSON.stringify([
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span><br>英語より精度が低い傾向あり' }],
           [{ html: '対応環境', rk: true }, { html: 'Discord / Web' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-06', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.midjourney.com" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.midjourney.com" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。',
       }}

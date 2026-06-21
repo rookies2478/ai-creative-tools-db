@@ -69,6 +69,7 @@ const jsonLd = JSON.stringify([
         { lb: '料金目安', text: 'Google AIプランによる', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: 'SynthID付与あり' } },
         { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://gemini.google/jp/overview/image-generation/?hl=ja-JP' }}
       secondaryCta={{ label: 'Google生成AI利用ポリシー（公式）', href: 'https://policies.google.com/terms/generative-ai/use-policy' }}
@@ -137,7 +138,7 @@ const jsonLd = JSON.stringify([
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span><br>画像内テキストは崩れる場合あり' }],
           [{ html: '対応環境', rk: true }, { html: 'Web / iOS / Android' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-15', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://gemini.google/jp/overview/image-generation/?hl=ja-JP" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://gemini.google/jp/overview/image-generation/?hl=ja-JP" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。',
       }}

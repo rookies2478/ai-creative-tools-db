@@ -26,10 +26,17 @@ weaknesses:
   - "商用利用時はライセンス・禁止事項・第三者権利の確認が必要"
   - "日本語UIは公式情報のみでは確認できない"
   - "初心者には設定項目がやや多く感じる場合がある"
-lastReviewed: "2026-06-14"
-nextReviewDue: "2026-07-14"
-verifiedAt: "2026-06-14"
+lastReviewed: "2026-06-21"
+nextReviewDue: "2026-09-21"
+verifiedAt: "2026-06-21"
 officialSourceUrl: "https://stability.ai/brand-studio-plans"
+pricingSourceUrl: "https://stability.ai/brand-studio-plans"
+pricingSourceNote: "Brand Studio料金ページ（Stability AI公式）。2026-06-21確認：Trial（無料・1000クレジット・クレジット使用後終了）/ Core $50/月（USD・5000クレジット/月・翌月繰越なし）/ Enterprise（カスタム価格）。旧DreamStudioからBrand Studioにリブランド済み。料金・クレジット条件は変更の可能性あり。最新情報は公式サイトをご確認ください。"
+freePlanNote: "Trial（1000クレジット・クレジット使用後終了）。Coreプランの全機能利用可。詳細・最新情報は公式サイトをご確認ください。"
+currency: "USD"
+pricingStatus: "confirmed"
+needsReview: false
+lowestPaidPlan: "Core $50/月（USD）"
 pricingModel: "credit"
 platforms:
   - web
@@ -53,8 +60,11 @@ limitations:
   - "日本語UIは公式情報のみでは確認不可"
   - "公式利用規約（Terms of Service）の専用URLは現時点で確認できていません。最新の規約は公式サイト（stability.ai）でご確認ください"
   - "入力素材（参照画像等）の著作権・権利はユーザーが事前に確認する必要があります"
+usagePolicy:
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "image-to-image・インペインティングで参照画像のアップロードが可能。limitationsにて「入力素材（参照画像等）の著作権・権利はユーザーが事前に確認する必要があります」と明記されている。Stability AI Acceptable Use Policyの確認も必要。"
 reviewed:
-  pricing: "2026-05-14"
+  pricing: "2026-06-21"
   terms: "2026-05-14"
   features: "2026-05-14"
 sourceRefs:

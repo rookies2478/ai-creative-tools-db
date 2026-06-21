@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import ToolLogo from './ToolLogo.astro';
 import FreshnessLabel from './FreshnessLabel.astro';
+import { getCategoryLabel, getPlatformLabel } from '../data/labelDictionary';
 
 interface Props {
   tool: CollectionEntry<'tools'>;
@@ -16,16 +17,18 @@ const { tool } = Astro.props;
 const { data, slug } = tool;
 
 function freeBadge(val: FreePlan) {
-  if (val === true)      return { text: '無料枠あり', cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (val === false)     return { text: '無料枠なし', cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
-                         return { text: '無料枠：要確認', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === true)      return { text: '無料枠あり',   cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === false)     return { text: '無料枠なし',   cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+  if (val === 'limited') return { text: '無料枠：条件付き', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+                         return { text: '無料枠：要公式確認', cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
 }
 
 function cuBadge(val: CommercialUse) {
-  if (val === 'ok')        return { text: '商用利用：案内あり',    cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (val === 'ok')        return { text: '商用利用：案内あり',      cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
   if (val === 'paid-only') return { text: '商用利用：有料プラン向け', cls: 'bg-sky-50 text-sky-700 ring-1 ring-inset ring-sky-200' };
-  if (val === 'no')        return { text: '商用利用：非対応',       cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
-                           return { text: '商用利用：要確認',       cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === 'limited')   return { text: '商用利用：条件あり',       cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (val === 'no')        return { text: '商用利用：非対応',         cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+                           return { text: '商用利用：要公式確認',     cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
 }
 
 function jpBadge(ui: TriState, prompt: TriState) {
@@ -41,16 +44,7 @@ function wmBadge(val: FourState) {
                          return { text: '要確認',       cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
 }
 
-function catLabel(cat: string) {
-  if (cat === 'image') return '画像生成';
-  if (cat === 'video') return '動画生成';
-  return '画像・動画';
-}
 
-const platformLabels: Record<string, string> = {
-  web: 'Web', discord: 'Discord', ios: 'iOS', android: 'Android',
-  desktop: 'Desktop', api: 'API', local: 'Local',
-};
 const displayPlatforms = (data.platforms ?? []).slice(0, 3);
 
 const fp = freeBadge(data.freePlan);
@@ -65,7 +59,7 @@ const wm = wmBadge(data.watermark);
     <ToolLogo slug={slug} name={data.name} size="sm" />
     <div class="min-w-0">
       <p class="truncate font-bold text-slate-900">{data.name}</p>
-      <span class="text-[10px] font-medium text-blue-600">{catLabel(data.category)}</span>
+      <span class="text-[10px] font-medium text-blue-600">{getCategoryLabel(data.category)}</span>
     </div>
   </div>
 
@@ -87,7 +81,7 @@ const wm = wmBadge(data.watermark);
     <div class="mt-2 flex flex-wrap gap-1.5">
       {displayPlatforms.map((p) => (
         <span class="rounded px-1.5 py-0.5 text-[10px] font-medium bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200">
-          {platformLabels[p] ?? p}
+          {getPlatformLabel(p)}
         </span>
       ))}
     </div>

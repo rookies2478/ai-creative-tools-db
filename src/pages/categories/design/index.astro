@@ -22,15 +22,36 @@ const faqs = [
 
 const faqJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((faq) => ({
-    "@type": "Question",
-    "name": faq.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.a.replace(/<[^>]+>/g, '')
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a.replace(/<[^>]+>/g, '')
+        }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AIクリエイティブナビ",
+          "item": "https://aicreative-db.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AIデザイン",
+          "item": "https://aicreative-db.com/categories/design/"
+        }
+      ]
     }
-  }))
+  ]
 });
 
 const tools = [
@@ -72,7 +93,7 @@ function mark(val: string) {
 
 <BaseLayout
   title="AIデザインツール比較｜バナー・SNS投稿・LP制作向けAIツール"
-  description="AIを活用したデザイン自動化ツールの比較ページです。Canva AI・Adobe Firefly・Microsoft DesignerなどのAIデザインツールを用途・料金・特徴で比較。バナー・SNS投稿・LP制作向けの選び方を整理しています。最新情報は公式サイトをご確認ください。"
+  description="テンプレートベースのレイアウト・デザイン制作を補助するAIツールの比較ページです。ゼロからの画像生成に特化した /categories/image-generation/ とは異なり、バナー・SNS素材・LP素材などの「デザイン仕上げ」用途向けのCanva AI・Adobe Firefly・Microsoft Designerを整理しています。最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/design/"
   jsonLd={faqJsonLd}
 >
@@ -279,6 +300,8 @@ function mark(val: string) {
             <a class="taglink" href="/categories/video-generation/"><span class="ld"></span>AI動画生成ツール一覧</a>
             <a class="taglink" href="/categories/voice-narration/"><span class="ld"></span>AI音声・ナレーションツール</a>
             <a class="taglink" href="/comparisons/canva-ai-vs-adobe-firefly/"><span class="ld"></span>Canva AI vs Adobe Firefly 比較</a>
+            <a class="taglink" href="/comparisons/adobe-firefly-vs-microsoft-designer/"><span class="ld"></span>Adobe Firefly vs Microsoft Designer 比較</a>
+            <a class="taglink" href="/comparisons/midjourney-vs-adobe-firefly/"><span class="ld"></span>Midjourney vs Adobe Firefly 比較</a>
             <a class="taglink" href="/conditions/free/"><span class="ld"></span>無料で試せるAIツール</a>
             <a class="taglink" href="/conditions/commercial-use/"><span class="ld"></span>商用利用を確認しやすいAIツール</a>
             <a class="taglink" href="/guides/commercial-use-copyright/"><span class="ld"></span>商用利用・著作権の考え方ガイド</a>

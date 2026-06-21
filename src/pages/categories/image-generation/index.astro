@@ -12,10 +12,11 @@ const primaryImageTools = primaryImageSlugs
   .map((s) => imageTools.find((t) => t.slug === s))
   .filter(Boolean);
 
-const primaryVideoSlugs = ['runway', 'pika', 'kling-ai', 'luma-ai', 'hailuo-ai', 'haiper'];
+const primaryVideoSlugs = ['runway', 'pika', 'kling-ai', 'luma-ai', 'hailuo-ai'];
 const primaryVideoTools = primaryVideoSlugs
   .map((s) => videoTools.find((t) => t.slug === s))
-  .filter(Boolean);
+  .filter(Boolean)
+  .filter((t) => t!.data.pricingStatus !== 'service_changed');
 
 const referenceImage = generatedImages.find((img) => img.pageSlug === 'categories/image-generation' && img.sampleType === 'reference-visual');
 
@@ -65,6 +66,10 @@ const faqs = [
     a: 'アニメ・イラスト調の画像生成では、Stable Diffusion系ツール（DreamStudio・Tensor.Artなど）、SeaArt AI、Leonardo AIなどが候補として挙がることがあります。用途や画風によって向いているツールは変わり、「アニメ調に強い」とされるツールでも生成結果はプロンプト・モデル・設定によって大きく異なります。既存キャラクター・著作物を模したプロンプトを使う場合は、著作権・商標権の観点から別途確認が必要です。<a href="/use-cases/anime-illustration/">アニメ・イラスト向けツール比較</a>もご参照ください。本記事は法的助言ではありません。',
   },
   {
+    q: 'AI画像生成ツールは画質だけで選んでもよいですか？',
+    a: '画質だけでなく、無料枠・料金・商用利用条件・入力素材の扱い・透かし・文字入り画像への対応・スマホでの使いやすさなどを分けて確認すると選びやすくなります。商用利用や権利関係は公式情報を確認してください。本記事は法的助言ではありません。',
+  },
+  {
     q: 'AI画像生成ツールを無料で試すときに最初に確認すべき点は何ですか？',
     a: '無料枠で試す前に確認しておくとよい点として、①生成回数・クレジットの上限、②透かしの有無、③商用利用条件（無料プランでは商用不可のツールも多い）、④日本語プロンプトへの対応状況、⑤アカウント登録の要否があります。特に商用目的での利用を検討している場合は、無料枠での試用段階から利用規約を確認することをおすすめします。最新情報は各公式サイトをご確認ください。<a href="/conditions/free/">無料枠のあるAIツール比較</a>・<a href="/guides/ai-image-commercial-use-checklist/">AI画像生成商用利用チェックリスト</a>もご参照ください。本記事は法的助言ではありません。',
   },
@@ -72,20 +77,41 @@ const faqs = [
 
 const faqJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((faq) => ({
-    "@type": "Question",
-    "name": faq.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.a.replace(/<[^>]+>/g, '')
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a.replace(/<[^>]+>/g, '')
+        }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AIクリエイティブナビ",
+          "item": "https://aicreative-db.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI画像生成",
+          "item": "https://aicreative-db.com/categories/image-generation/"
+        }
+      ]
     }
-  }))
+  ]
 });
 
 const imageToolCards = [
   { name: 'Midjourney',           slug: 'midjourney',               initial: 'M', role: '画像生成', commercial: '有料プランで案内あり（要確認）',      free: 'なし',       jp: '要確認', note: '透かしなし',   price: '$10/月（Basic・月払い）', platforms: 'Discord、Web', date: '2026-06-10' },
-  { name: 'Adobe Firefly',        slug: 'adobe-firefly',            initial: 'A', role: '画像生成', commercial: '無料:条件付き / 有料:案内あり',       free: '要確認',     jp: '対応',   note: 'プランによる', price: '$9.99/月（Firefly Standard・プロモ適用時）', platforms: 'Web', date: '2026-06-10' },
+  { name: 'Adobe Firefly',        slug: 'adobe-firefly',            initial: 'A', role: '画像生成', commercial: '無料:条件付き / 有料:案内あり',       free: '要確認',     jp: '対応',   note: 'プランによる', price: '1,580円/月（税込）〜（Firefly Standard）', platforms: 'Web', date: '2026-06-19' },
   { name: 'Canva AI',             slug: 'canva-ai-image-generator', initial: 'C', role: '画像生成', commercial: '条件付き（要公式確認）',              free: '要確認',     jp: '対応',   note: '要確認',       price: '$15/月（Canva Pro・月払い）', platforms: 'Web、iOS、Android', date: '2026-06-10' },
   { name: 'Leonardo AI',          slug: 'leonardo-ai',              initial: 'L', role: '画像生成', commercial: '無料:不可の場合あり / 有料:条件付き', free: '要確認',     jp: '要確認', note: '要確認',       price: '$10/月（Apprentice・年払い）', platforms: 'Web、API', date: '2026-06-10' },
   { name: 'Stable Diffusion',     slug: 'stable-diffusion',         initial: 'S', role: '画像生成', commercial: 'モデル・利用形態による',              free: '無料枠あり', jp: '要確認', note: 'プランによる', price: '要公式確認', platforms: 'Local、API', date: '2026-06-10' },
@@ -150,14 +176,14 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
           </span>
           <span class="cig-checked">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            記事内容の最終確認 <b>2026-06-10</b>
+            記事内容の最終確認 <b>2026-06-18</b>
           </span>
         </div>
         <h1 class="cig-h1">AI画像生成<span class="phrase-nowrap">ツールを</span><span class="hl">比較する</span></h1>
         <p class="cig-lead">イラスト、写真風画像、SNS投稿、広告バナー、ブログアイキャッチ、YouTubeサムネイル、EC商品画像、デザイン案や企画ラフなど、作りたい画像の用途に合わせてAI画像生成ツールの選び方を整理します。ツールによって無料枠・透かし・商用利用条件・日本語対応・画像編集機能・得意な画風が異なります。無料枠・透かし・商用利用条件・日本語対応を横断的に確認できます。</p>
         <div class="cig-stats">
           <div class="cig-stat"><span class="n">16</span><span class="t">AI画像生成ツール</span></div>
-          <div class="cig-stat"><span class="n">6</span><span class="t">用途別に比較</span></div>
+          <div class="cig-stat"><span class="n">7</span><span class="t">用途別に比較</span></div>
           <div class="cig-stat"><span class="n">12</span><span class="t">よくある質問</span></div>
         </div>
       </header>
@@ -183,6 +209,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
           <p>AI画像生成ツールは、用途によって向いているツールが変わります。まずは作りたい画像の種類から候補を絞り、下の比較表で料金・無料枠・透かし・商用利用条件を確認してください。</p>
         </div>
         <div class="reveal">
+          <p class="cig-gtcap">← 横にスクロールできます →</p>
           <div class="cig-tablewrap">
             <table class="cig-gt guide">
               <thead>
@@ -231,6 +258,13 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
                   <td class="cig-note">画風、プロンプト指定、人物・ロゴ・既存キャラクターの扱い</td>
                   <td><span class="cig-linklist"><a href="/tools/midjourney/">Midjourney →</a><a href="/tools/dalle/">DALL·E →</a><a href="/tools/stable-diffusion/">Stable Diffusion →</a></span></td>
                 </tr>
+                <tr>
+                  <td class="cig-situation">業務利用前に条件を確認したい</td>
+                  <td class="cig-cand">Adobe Firefly / Midjourney / Canva AI</td>
+                  <td class="cig-note">商用利用条件・プラン別ライセンスの案内が確認しやすい候補</td>
+                  <td class="cig-note">プラン別商用利用条件、素材・フォント・テンプレートの扱い、生成物の所有権規定</td>
+                  <td><span class="cig-linklist"><a href="/tools/adobe-firefly/">Adobe Firefly →</a><a href="/guides/commercial-use-copyright/">商用利用ガイド →</a><a href="/guides/ai-image-commercial-use-checklist/">チェックリスト →</a></span></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -246,6 +280,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
           <p>「AI画像系ツール」は大きく3種類に分かれます。目的に合ったカテゴリを選ぶことがツール選びの第一歩です。</p>
         </div>
         <div class="reveal">
+          <p class="cig-gtcap">← 横にスクロールできます →</p>
           <div class="cig-tablewrap">
             <table class="cig-gt diff">
               <thead>
@@ -339,12 +374,70 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
         <p class="cig-foot reveal">各条件の詳細は各ツールの詳細ページおよび公式サイトでご確認ください。</p>
       </section>
 
+      <!-- ===== 実務での比較軸 ===== -->
+      <section class="cig-sec band">
+        <div class="cig-sechead reveal">
+          <span class="cig-eyebrow">Selection criteria</span>
+          <h2>実務でAI画像生成ツールを選ぶときの比較軸</h2>
+          <p>AI画像生成ツールは、画質だけでなく、無料枠・商用利用条件・入力素材・文字入り画像への対応・スマホでの使いやすさなどを分けて確認すると選びやすくなります。料金や利用条件は変更される場合があるため、最新情報は公式サイトをご確認ください。</p>
+        </div>
+        <div class="cig-axgrid reveal" data-stagger>
+          <div class="cig-axcard">
+            <span class="cig-axn">1</span>
+            <div class="cig-axbody">
+              <h3>無料枠を確認する</h3>
+              <p>無料で試せるか、生成回数や透かしの有無、保存形式などを確認します。無料枠は変更される場合があります。</p>
+              <a class="cig-axlink" href="/conditions/free/">無料枠のあるツール →</a>
+            </div>
+          </div>
+          <div class="cig-axcard">
+            <span class="cig-axn">2</span>
+            <div class="cig-axbody">
+              <h3>商用利用前提で確認する</h3>
+              <p>無料・有料プランだけでなく、入力素材・表記義務・第三者素材・人物・商標の扱いを分けて確認します。本記事は法的助言ではありません。</p>
+              <span class="cig-axlinks">
+                <a class="cig-axlink" href="/conditions/commercial-use/">商用利用条件を見る →</a>
+                <a class="cig-axlink" href="/guides/commercial-use-copyright/">考え方ガイド →</a>
+              </span>
+            </div>
+          </div>
+          <div class="cig-axcard">
+            <span class="cig-axn">3</span>
+            <div class="cig-axbody">
+              <h3>文字入り画像を作りたい</h3>
+              <p>バナー・広告・SNS投稿などで文字入り画像を作る場合は、文字再現の得意不得意や編集機能を確認します。日本語文字の再現性はツールやモデルによって変わります。</p>
+            </div>
+          </div>
+          <div class="cig-axcard">
+            <span class="cig-axn">4</span>
+            <div class="cig-axbody">
+              <h3>実写風かイラスト向きかを見る</h3>
+              <p>商品イメージ・人物風・背景素材・イラスト・アート表現など、用途によって向いているツールが変わります。1枚の生成例だけで性能を断定しないようにします。</p>
+            </div>
+          </div>
+          <div class="cig-axcard">
+            <span class="cig-axn">5</span>
+            <div class="cig-axbody">
+              <h3>スマホ・ブラウザでの使いやすさ</h3>
+              <p>ブラウザだけで使えるか、スマホでも操作しやすいか、アプリが必要かを確認します。未確認の場合は要公式確認として扱います。</p>
+            </div>
+          </div>
+          <div class="cig-axcard">
+            <span class="cig-axn">6</span>
+            <div class="cig-axbody">
+              <h3>入力素材の扱いを確認する</h3>
+              <p>画像アップロード・人物写真・ブランド素材・第三者素材を使う場合は、生成ツールの規約とは別に素材側の権利確認が必要です。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ===== 横断比較表 ===== -->
       <section class="cig-sec">
         <div class="cig-sechead reveal">
           <span class="cig-eyebrow">Comparison table</span>
           <h2>AI画像生成ツール 横断比較表</h2>
-          <p>以下は <b>2026-06-10</b> 時点の調査に基づく整理です。料金・無料枠・透かし・商用利用条件・利用条件はプランや時期によって変わる場合があります。人物・ロゴ・第三者素材を含む生成物の扱いは各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
+          <p>以下は公式情報や既存DBで確認できる範囲をもとに整理しています（<b>2026-06-18</b> 時点）。「条件あり」「要公式確認」の項目はプランや用途によって条件が異なる場合があります。商用利用・入力素材・人物・商標・第三者素材は別論点として確認してください。本記事は法的助言ではありません。</p>
         </div>
         <p class="cig-gtcap reveal">← 横にスクロールできます →</p>
         <div class="reveal">
@@ -440,6 +533,15 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
             </ul>
             <a class="cig-morelink" href="/use-cases/youtube-thumbnail/">サムネイル向けを比較 →</a>
           </div>
+          <div class="cig-pickcard">
+            <h3 class="ph">写真風・リアル系の高品質画像を作りたい</h3>
+            <ul>
+              <li><a class="nm" href="/tools/midjourney/">Midjourney</a><span class="nt">— フォトリアル〜アーティスティックな幅広い表現</span></li>
+              <li><a class="nm" href="/tools/dalle/">DALL·E</a><span class="nt">— ChatGPT経由でテキスト指示が直感的</span></li>
+              <li><a class="nm" href="/tools/stable-diffusion/">Stable Diffusion</a><span class="nt">— ローカル実行・高カスタマイズ性</span></li>
+            </ul>
+            <a class="cig-morelink" href="/use-cases/realistic-photo/">写真風向けを比較 →</a>
+          </div>
         </div>
         <p class="cig-foot reveal">掲載ツールの条件・機能は変更される場合があります。商用利用・著作権に関しては各ツールの公式利用規約をご確認ください。本ページは法的助言ではありません。</p>
       </section>
@@ -490,7 +592,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
         {referenceImage && (
           <figure class="cig-refvisual reveal">
             <div class="img">
-              <img src={referenceImage.file} alt={referenceImage.alt} loading="lazy" />
+              <img src={referenceImage.file} alt={referenceImage.alt} width="1200" height="675" loading="lazy" decoding="async" />
             </div>
             <figcaption>
               <p class="cap">{referenceImage.caption}</p>
@@ -686,10 +788,34 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
             <p>MidjourneyとLeonardo AIの無料枠・商用利用条件・用途の違いを比較。</p>
             <span class="go">比較記事を読む →</span>
           </a>
-          <a class="cig-artcard" href="/comparisons/ai-image-video-tools/">
-            <span class="tag">画像生成と動画生成の違いを知りたい</span>
-            <h3>AI動画生成 vs AI画像生成ツール</h3>
-            <p>AI動画生成ツールとAI画像生成ツールの違いや使い分けを整理した比較ページ。</p>
+          <a class="cig-artcard" href="/comparisons/dalle-vs-midjourney/">
+            <span class="tag">ChatGPT連携 vs アーティスティック生成</span>
+            <h3>DALL·E vs Midjourney</h3>
+            <p>DALL·EとMidjourneyの画風・操作感・商用利用条件・無料枠の違いを比較。</p>
+            <span class="go">比較記事を読む →</span>
+          </a>
+          <a class="cig-artcard" href="/comparisons/midjourney-vs-adobe-firefly/">
+            <span class="tag">クリエイティブ生成 vs 商用向けデザイン</span>
+            <h3>Midjourney vs Adobe Firefly</h3>
+            <p>MidjourneyとAdobe Fireflyの利用条件・画風・商用利用条件の違いを比較。</p>
+            <span class="go">比較記事を読む →</span>
+          </a>
+          <a class="cig-artcard" href="/comparisons/canva-ai-vs-adobe-firefly/">
+            <span class="tag">デザインツール型 vs 素材生成型</span>
+            <h3>Canva AI vs Adobe Firefly</h3>
+            <p>Canva AIとAdobe Fireflyの操作性・テンプレート・商用利用条件の違いを比較。</p>
+            <span class="go">比較記事を読む →</span>
+          </a>
+          <a class="cig-artcard" href="/comparisons/free-ai-image-generators/">
+            <span class="tag">無料で試せる画像生成を比較</span>
+            <h3>無料AI画像生成ツール比較</h3>
+            <p>無料枠の有無、透かし、日本語対応、同一プロンプトの参考作例を確認したい方向け。</p>
+            <span class="go">無料プランで比較する →</span>
+          </a>
+          <a class="cig-artcard" href="/comparisons/stable-diffusion-vs-midjourney/">
+            <span class="tag">オープンソース vs クラウド生成</span>
+            <h3>Stable Diffusion vs Midjourney</h3>
+            <p>ローカル実行・カスタマイズ性と使いやすさ・品質の違いを比較。</p>
             <span class="go">比較記事を読む →</span>
           </a>
           <a class="cig-artcard" href="/conditions/commercial-use/">
@@ -697,18 +823,6 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
             <h3>商用利用条件を確認しやすいAIツール</h3>
             <p>商用利用に関する条件・プランを確認しやすいツールを整理したページ。</p>
             <span class="go">条件を確認する →</span>
-          </a>
-          <a class="cig-artcard" href="/conditions/free/">
-            <span class="tag">無料で試したい</span>
-            <h3>無料枠のあるAIツール比較</h3>
-            <p>無料枠・フリープランのあるAIツールを横断比較するページ。</p>
-            <span class="go">無料枠を確認する →</span>
-          </a>
-          <a class="cig-artcard" href="/comparisons/free-ai-image-generators/">
-            <span class="tag">無料で試せる画像生成を比較</span>
-            <h3>無料AI画像生成ツール比較</h3>
-            <p>無料枠の有無、透かし、日本語対応、同一プロンプトの参考作例を確認したい方向け。</p>
-            <span class="go">無料プランで比較する →</span>
           </a>
           <a class="cig-artcard" href="/comparisons/">
             <span class="tag">すべての比較記事を見る</span>
@@ -750,7 +864,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
         </ul>
         <div class="cig-freshness reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          <span><b>情報の鮮度：</b>記事内容の最終確認日 <span class="mono">2026-06-10</span>（次回確認予定 <span class="mono">2026-09-10</span>）</span>
+          <span><b>情報の鮮度：</b>記事内容の最終確認日 <span class="mono">2026-06-18</span>（次回確認予定 <span class="mono">2026-09-18</span>）</span>
         </div>
         <div class="cig-disclaimer reveal" style="margin-top:18px;max-width:880px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
@@ -775,6 +889,14 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
                 <li><a href="/tools/dalle/"><span class="ld"></span>DALL·E</a></li>
                 <li><a href="/tools/ideogram/"><span class="ld"></span>Ideogram</a></li>
                 <li><a href="/tools/microsoft-designer/"><span class="ld"></span>Microsoft Designer</a></li>
+                <li><a href="/tools/seaart-ai/"><span class="ld"></span>SeaArt AI</a></li>
+                <li><a href="/tools/fotor-ai/"><span class="ld"></span>Fotor AI</a></li>
+                <li><a href="/tools/gemini-image-generation/"><span class="ld"></span>Gemini画像生成</a></li>
+                <li><a href="/tools/nightcafe/"><span class="ld"></span>NightCafe</a></li>
+                <li><a href="/tools/playground-ai/"><span class="ld"></span>Playground AI</a></li>
+                <li><a href="/tools/clipdrop/"><span class="ld"></span>Clipdrop</a></li>
+                <li><a href="/tools/dreamstudio/"><span class="ld"></span>DreamStudio</a></li>
+                <li><a href="/tools/tensor-art/"><span class="ld"></span>Tensor.Art</a></li>
               </ul>
             </div>
             <div class="cig-relcol">
@@ -785,12 +907,15 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
                 <li><a href="/conditions/no-watermark/"><span class="ld"></span>透かしなしで使いやすいAIツール</a></li>
                 <li><a href="/conditions/japanese/"><span class="ld"></span>日本語対応ツール</a></li>
                 <li><a href="/comparisons/ai-image-video-tools/"><span class="ld"></span>AI動画vs画像生成ツール比較</a></li>
+                <li><a href="/comparisons/midjourney-vs-leonardo-ai/"><span class="ld"></span>Midjourney vs Leonardo AI 比較</a></li>
+                <li><a href="/comparisons/adobe-firefly-vs-microsoft-designer/"><span class="ld"></span>Adobe Firefly vs Microsoft Designer 比較</a></li>
                 <li><a href="/guides/commercial-use-copyright/"><span class="ld"></span>商用利用・著作権ガイド</a></li>
                 <li><a href="/comparisons/"><span class="ld"></span>全ツール比較表</a></li>
                 <li><a href="/use-cases/"><span class="ld"></span>用途別AI画像生成ツール比較</a></li>
                 <li><a href="/use-cases/sns-post-image/"><span class="ld"></span>SNS投稿画像向け比較</a></li>
                 <li><a href="/use-cases/ad-banner/"><span class="ld"></span>広告バナー向け比較</a></li>
                 <li><a href="/categories/video-generation/"><span class="ld"></span>AI動画生成ツール一覧</a></li>
+                <li><a href="/categories/design/"><span class="ld"></span>AIデザインツール一覧</a></li>
                 <li><a href="/tools/"><span class="ld"></span>全AIツール一覧</a></li>
               </ul>
             </div>
@@ -1034,6 +1159,18 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
   .cig-disclaimer svg { width: 18px; height: 18px; color: var(--muted); flex: none; margin-top: 2px; }
   .cig-disclaimer p { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
 
+  /* 実務での比較軸カード */
+  .cig-axgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .cig-axcard { display: flex; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .cig-axn { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--brand-tint); color: var(--brand-ink); font-size: 13px; font-weight: 700; display: grid; place-items: center; margin-top: 2px; }
+  .cig-axbody { flex: 1; }
+  .cig-axbody h3 { font-family: var(--f-jp); font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; line-height: 1.4; }
+  .cig-axbody p { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+  .cig-axlinks { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .cig-axlink { display: inline-block; font-size: 12.5px; font-weight: 600; color: var(--brand-ink); text-decoration: none; margin-top: 8px; }
+  .cig-axlinks .cig-axlink { margin-top: 0; }
+  .cig-axlink:hover { text-decoration: underline; }
+
   /* 関連ページ */
   .cig-finder { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 34px 34px 30px; }
   .cig-finder h2 { font-size: clamp(20px, 2.4vw, 26px); margin-bottom: 6px; }
@@ -1069,10 +1206,12 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
     .cig-pickgrid { grid-template-columns: 1fr; }
     .cig-refvisual { grid-template-columns: 1fr; }
     .cig-relgrid { grid-template-columns: 1fr; }
+    .cig-axgrid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 720px) {
     .cig-sec { padding: 48px 0; }
     .cig-points { grid-template-columns: 1fr; }
+    .cig-axgrid { grid-template-columns: 1fr; }
     .cig-cardgrid, .cig-cardgrid.two, .cig-artgrid, .cig-twocol { grid-template-columns: 1fr; }
     .cig-tcard .tmeta { grid-template-columns: 1fr; }
     .cig-relcol ul { grid-template-columns: 1fr; }

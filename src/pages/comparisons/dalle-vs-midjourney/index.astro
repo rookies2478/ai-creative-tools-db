@@ -106,6 +106,13 @@ const articleJsonLd = JSON.stringify({
   toolASlug="dalle"
   toolBName="Midjourney"
   toolBSlug="midjourney"
+  quickDecisionRows={[
+    { purpose: 'まず無料・手軽に試したい人', candidate: 'DALL·E（ChatGPT経由）', checkPoint: 'ChatGPT無料プランの制限内容を公式で確認' },
+    { purpose: '日本語UIで使いたい人', candidate: 'DALL·E', checkPoint: 'ChatGPTの日本語UIで操作可能。追加設定不要' },
+    { purpose: 'アート調・高品質ビジュアル重視', candidate: 'Midjourney', checkPoint: '有料プランのみ。英語UIへの慣れが必要' },
+    { purpose: 'ChatGPTを既に使っている人', candidate: 'DALL·E', checkPoint: 'ChatGPTに統合済み。別サービス登録が不要' },
+    { purpose: '商用利用前提で確認したい人', candidate: '両方とも公式規約を確認', checkPoint: 'OpenAIとMidjourney各々の規約を別々に確認。プラン・用途で条件が異なる場合あり' },
+  ]}
   conclusionA={{
     label: 'ChatGPT連携・手軽さ重視 →',
     toolName: 'DALL·E',

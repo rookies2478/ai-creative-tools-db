@@ -13,12 +13,23 @@ const faqs = [
 
 const faqJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((f) => ({
-    "@type": "Question",
-    "name": f.q,
-    "acceptedAnswer": { "@type": "Answer", "text": f.a }
-  }))
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "AIクリエイティブナビ", "item": "https://aicreative-db.com/" },
+        { "@type": "ListItem", "position": 2, "name": "SNS投稿画像向けAI画像生成", "item": "https://aicreative-db.com/use-cases/sns-post-image/" }
+      ]
+    }
+  ]
 });
 
 const tools = [
@@ -72,6 +83,7 @@ const tools = [
         <p class="lead">
           X・Instagram・TikTok・Facebook・LinkedInなどへの投稿画像をAI画像生成ツールで作るとき、商用利用条件・透かしの有無・文字入れのしやすさ・日本語対応が重要なポイントになります。
           このページでは<a href="/categories/image-generation/">AI画像生成ツール</a>の中から、SNS投稿画像向けの8ツールを比較軸で整理します。ロゴ・ブランド・広告利用については断定できないため、最新の公式規約でご確認ください。
+          SNSとブログ両方で使うアイキャッチ素材の制作を検討している場合は<a href="/use-cases/sns-blog-eyecatch/">SNS・ブログアイキャッチ向けAI画像生成ツール比較</a>も参照してください。
         </p>
         <div class="stats">
           <div class="stat"><span class="n">8</span><span class="t">参照ツール</span></div>

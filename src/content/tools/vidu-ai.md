@@ -30,10 +30,14 @@ weaknesses:
   - "日本語UI非対応"
   - "ユーザー投稿コンテンツへの広範なライセンス（AIトレーニング含む・取消不能）が付与される"
   - "日本語プロンプト対応状況は公式情報で未確認"
-lastReviewed: "2026-06-15"
-nextReviewDue: "2026-09-15"
-verifiedAt: "2026-06-15"
+lastReviewed: "2026-06-21"
+nextReviewDue: "2026-09-21"
+verifiedAt: "2026-06-21"
 officialSourceUrl: "https://www.vidu.com/pricing"
+pricingSourceUrl: "https://www.vidu.com/pricing"
+pricingSourceNote: "公式料金ページURLは設定済み。2026-06-21再確認：vidu.com/pricing は「Loading pricing plans...」のみ表示で具体的な料金・通貨・プラン名を取得できず。currency・具体的月額は公式サイトを直接ご確認ください。"
+pricingStatus: "unconfirmed"
+needsReview: true
 pricingModel: "subscription_credit"
 freePlanNote: "無料枠あり（制限あり）。詳細は公式サイトをご確認ください。"
 paidPlanNote: "有料プランあり。料金・条件は公式サイトをご確認ください。"
@@ -110,7 +114,7 @@ faqs:
   - question: "アップロードしたコンテンツはどう扱われますか？"
     answer: "公式利用規約によると、ユーザーが投稿したコンテンツには、Viduに対して世界規模・無償・取消不能のライセンスが付与されます。このライセンスはAIトレーニング目的での利用も含まれ、アカウント削除後も継続します。機密性の高い素材の取り扱いには注意が必要です。最新の公式利用規約を直接ご確認ください。本記事は法的助言ではありません。"
 reviewed:
-  pricing: "2026-06-15"
+  pricing: "2026-06-21"
   terms: "2026-06-15"
   features: "2026-06-15"
 ---
@@ -190,9 +194,11 @@ Vidu AIは中国企業（Shengshu Technology）が提供するサービスです
 ## 関連ページ
 
 - [AI動画生成ツール一覧](/categories/video-generation/) — 主要AI動画生成ツールの比較・選び方
+- [AI動画編集ツール一覧](/categories/video-editing/) — AI動画編集ツールの比較・選び方
 - [YouTube向けAI動画生成の活用](/use-cases/youtube/) — YouTube動画にAI生成を活用する際の確認ポイント
 - [ショート動画向けAI動画生成](/use-cases/shorts/) — ショート動画用途での選び方・注意点
 - [AI動画生成の用途別選び方](/use-cases/) — 用途に合わせたAIツールの確認ポイント
 - [無料で試せるAIツール](/conditions/free/) — 無料枠のあるAIツール一覧
 - [透かしなしAI動画ツール](/conditions/no-watermark/) — 透かしの有無・条件をまとめた一覧
 - [商用利用できるAI動画ツール](/conditions/commercial-use/) — 商用利用条件を確認できるツール一覧
+- [商用利用と著作権の考え方ガイド](/guides/commercial-use-copyright/) — 商用利用前に確認すべき基礎知識

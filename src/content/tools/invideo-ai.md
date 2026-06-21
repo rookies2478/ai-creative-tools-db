@@ -51,6 +51,9 @@ limitations:
   - "商用利用は有料プランが前提"
   - "日本語はフル最適化対象だが、UIの日本語対応は部分的な可能性あり（要確認）"
   - "純粋なAI映像生成よりもテンプレート型"
+usagePolicy:
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "公式利用規約（invideo.io/terms-and-conditions/）では、使用するストック素材・音楽・テンプレートはStoryblocks等の別途ライセンスに従い、サブライセンス・素材単体の再販は禁止とされている。人物が含まれる場合は書面による同意が必要とされている。入力・使用素材ごとのライセンス確認が必要。"
 sources:
   - title: "InVideo AI 公式サイト"
     url: "https://invideo.io"

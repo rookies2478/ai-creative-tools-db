@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import FreshnessLabel from './FreshnessLabel.astro';
+import { COMMERCIAL_PLAN_SUMMARIES, getAttributionLabel, getCategoryLabel, getPlatformLabel } from '../data/labelDictionary';
 
 interface Props {
   tool: CollectionEntry<'tools'>;
@@ -41,15 +42,17 @@ const badgeMap: Record<string, { letter: string; color: string }> = {
 const badge = badgeMap[slug] ?? { letter: data.name[0].toUpperCase(), color: '#4B3FE4' };
 
 function freeLabel(v: unknown): string {
-  if (v === true) return 'あり';
-  if (v === false) return 'なし';
-  return '要確認';
+  if (v === true)        return 'あり';
+  if (v === false)       return 'なし';
+  if (v === 'limited')   return '条件付き';
+  return '要公式確認';
 }
 function commercialLabel(v: unknown): string {
   if (v === 'ok')        return '案内あり';
   if (v === 'paid-only') return '有料プラン向け';
+  if (v === 'limited')   return '条件あり';
   if (v === 'no')        return '非対応';
-  return '要確認';
+  return '要公式確認';
 }
 function jaLabel(ui: unknown, prompt: unknown): string {
   if (ui === true) return '対応';
@@ -61,6 +64,12 @@ function wmLabel(v: unknown): string {
   if (v === 'yes') return '透かしあり';
   if (v === 'limited') return 'プランによって異なる';
   return '要確認';
+}
+function inputMaterialLabel(v: unknown): { text: string; cls: string } | null {
+  if (v === 'low')    return { text: '入力素材：別途確認', cls: 'imr-low' };
+  if (v === 'medium') return { text: '入力素材：注意あり', cls: 'imr-med' };
+  if (v === 'high')   return { text: '入力素材：要注意',   cls: 'imr-high' };
+  return null;
 }
 function condClass(field: string, val: string): string {
   if (field === 'commercial') return val === '案内あり' ? 'ok' : val === '有料プラン向け' ? 'warn' : 'na';
@@ -74,29 +83,13 @@ function condClass(field: string, val: string): string {
   return 'na';
 }
 
-const USAGE_POLICY_SUMMARIES: Record<string, string> = {
-  'adobe-firefly':            '有料:商用案内あり / 無料:条件付き',
-  'runway':                   '全プランで商用案内あり（入力素材は別確認）',
-  'midjourney':               '無料プランなし / 有料:商用案内あり',
-  'kling-ai':                 '無料:商用不可 / 有料(Standard以上):案内あり',
-  'pika':                     '無料:商用不可 / 有料:条件付き（要確認）',
-  'luma-ai':                  '無料:商用不可 / 有料(Plus以上):案内あり',
-  'canva-ai-image-generator': '条件付き / AI生成明示等が条件の場合あり',
-  'leonardo-ai':              '無料:商用不可 / 有料+Private設定:案内あり',
-  'ideogram':                 '条件付き（要公式確認）',
-  'stable-diffusion':         'モデル・利用形態による（要個別確認）',
-};
-
 const usagePolicySummary: string | null =
-  (data.usagePolicy != null && USAGE_POLICY_SUMMARIES[slug] != null)
-    ? USAGE_POLICY_SUMMARIES[slug]
+  (data.usagePolicy != null && COMMERCIAL_PLAN_SUMMARIES[slug] != null)
+    ? COMMERCIAL_PLAN_SUMMARIES[slug]
     : null;
 
-const platformLabels: Record<string, string> = {
-  web: 'Web', ios: 'iOS', android: 'Android', api: 'API',
-  discord: 'Discord', desktop: 'Desktop', local: 'Local',
-};
-
+const imrLabel = inputMaterialLabel(data.usagePolicy?.inputMaterialRisk);
+const attrLabel = getAttributionLabel(data.watermark as 'yes' | 'no' | 'limited' | 'unknown');
 const commercialVal = commercialLabel(data.commercialUse);
 const freeVal       = freeLabel(data.freePlan);
 const jaVal         = jaLabel(data.japaneseUi, data.japanesePrompt);
@@ -107,14 +100,12 @@ const dataCommercial = commercialVal === '案内あり' ? '1' : '0';
 const dataJa         = jaVal === '対応' ? '1' : '0';
 const dataNowm       = wmVal === '透かしなし' ? '1' : '0';
 
-const catLabel = data.category === 'image' ? '画像生成'
-               : data.category === 'video' ? '動画生成'
-               : '画像・動画';
+const catLabel = getCategoryLabel(data.category);
 
 const dataCat = (data.category === 'both') ? 'image' : data.category;
 
 const price = data.lowestPaidPlan ?? '要公式確認';
-const displayPlatforms = (data.platforms ?? []).map((p: string) => platformLabels[p] ?? p);
+const displayPlatforms = (data.platforms ?? []).map((p: string) => getPlatformLabel(p));
 ---
 
 <article class="tool"
@@ -156,6 +147,13 @@ const displayPlatforms = (data.platforms ?? []).map((p: string) => platformLabel
     <div class="tool-usage-summary">
       <span class="us-label">商用利用条件</span>
       <span class="us-value">{usagePolicySummary}</span>
+    </div>
+  )}
+
+  {(imrLabel || attrLabel) && (
+    <div class="tool-imr">
+      {imrLabel && <span class={`imr-badge ${imrLabel.cls}`}>{imrLabel.text}</span>}
+      {attrLabel && <span class={`imr-badge ${attrLabel.cls}`}>{attrLabel.text}</span>}
     </div>
   )}
 

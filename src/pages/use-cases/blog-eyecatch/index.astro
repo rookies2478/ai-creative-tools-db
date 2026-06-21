@@ -10,16 +10,28 @@ const faqs = [
   { q: 'Microsoft DesignerはブログのアイキャッチにOKですか？', a: 'Microsoft Designerは公式FAQ・利用規約上では個人的な非商用使用向けと案内されています。アフィリエイト記事や収益ブログを前提とする場合は、最新の公式規約を必ずご確認ください。本記事は法的助言ではありません。' },
   { q: 'アイキャッチ画像にAI生成であることを明示する必要がありますか？', a: 'プラットフォームや媒体によっては、AI生成画像であることの明示を求めるルールがある場合があります。利用先のブログサービス・SNSの最新ガイドラインをご確認ください。' },
   { q: '文字入れが必要な場合、どのツールが向いていますか？', a: '文字入れ・レイアウト編集をツール内で完結させたい場合は、CanvaのようなデザインツールにAI画像生成機能が統合されたツールが使いやすい場合があります。AI生成画像を別の編集ツールと組み合わせる方法もあります。各ツールの機能は公式サイトでご確認ください。' },
+  { q: 'SNS投稿への流用を前提にアイキャッチを作る場合、このページと何が違いますか？', a: 'このページはブログ・オウンドメディア・note・アフィリエイト記事のアイキャッチ（16:9表示・記事内容との整合性重視）に特化した9ツール比較です。SNS投稿への流用・正方形や縦長フォーマット・SNS横断での複数プラットフォーム対応を重視する場合は、SNS・ブログアイキャッチ向けのページもご参照ください。' },
 ];
 
 const faqJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((f) => ({
-    "@type": "Question",
-    "name": f.q,
-    "acceptedAnswer": { "@type": "Answer", "text": f.a }
-  }))
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "AIクリエイティブナビ", "item": "https://aicreative-db.com/" },
+        { "@type": "ListItem", "position": 2, "name": "ブログアイキャッチ向けAI画像生成", "item": "https://aicreative-db.com/use-cases/blog-eyecatch/" }
+      ]
+    }
+  ]
 });
 
 const tools = [
@@ -72,7 +84,7 @@ const tools = [
         <h1>ブログアイキャッチ向け<span class="hl">AI画像生成ツール比較</span></h1>
         <p class="lead">
           ブログ・オウンドメディア・note・アフィリエイト記事のアイキャッチ画像をAIで作るとき、商用利用条件・透かしの有無・日本語タイトル入れのしやすさ・テンプレートの充実度が重要なポイントになります。
-          このページでは<a href="/categories/image-generation/">AI画像生成ツール</a>の中から、ブログアイキャッチ向けの9ツールを比較軸で整理します。アフィリエイト・AdSense利用については断定できないため、最新の公式規約でご確認ください。
+          このページでは<a href="/categories/image-generation/">AI画像生成ツール</a>の中から、ブログアイキャッチ向けの9ツールを比較軸で整理します。アフィリエイト・AdSense利用については断定できないため、最新の公式規約でご確認ください。SNS投稿への流用より、記事内容との整合性・クリック前の内容理解・16:9表示を重視する用途に特化しています。SNS横断での利用は<a href="/use-cases/sns-blog-eyecatch/">SNS・ブログ画像向けページ</a>もご参照ください。
         </p>
         <div class="stats">
           <div class="stat"><span class="n">9</span><span class="t">参照ツール</span></div>
@@ -105,7 +117,7 @@ const tools = [
           </li>
           <li>
             <span class="pn">03</span>
-            <span class="pt"><b>文字入れ・デザイン編集のしやすさ：</b>アイキャッチには文字やデザイン要素を重ねることが多いため、テキスト追加・レイアウト編集・書き出し形式の柔軟さも重要です。</span>
+            <span class="pt"><b>文字入れ・デザイン編集のしやすさ：</b>アイキャッチには文字やデザイン要素を重ねることが多いため、テキスト追加・レイアウト編集・書き出し形式の柔軟さも重要です。ブログアイキャッチは16:9（横長）での表示が多く、記事タイトルや内容を示す文字を重ねやすいツールを選ぶと使いやすい場合があります。</span>
           </li>
           <li>
             <span class="pn">04</span>

@@ -29,6 +29,8 @@ lastReviewed: "2026-06-15"
 nextReviewDue: "2026-09-15"
 verifiedAt: "2026-06-15"
 officialSourceUrl: "https://openai.com/policies/usage-policies"
+pricingSourceUrl: "https://openai.com/chatgpt/pricing/"
+pricingSourceNote: "ChatGPT料金ページ（公式）。DALL·Eは独立した月額プランを持たず、ChatGPT Plus等の有料プランに内包される。月額・プラン詳細は公式サイトをご確認ください。"
 pricingModel: "subscription_credit"
 freePlanNote: "ChatGPT無料プランで制限付き利用できる場合あり"
 paidPlanNote: "ChatGPT Plus等の有料プランで利用枠が拡大。API利用は従量課金（dall-e-3 APIは2026年5月12日にdeprecated。API経由では後継のgpt-image-1等への移行が案内されています）。"
@@ -53,6 +55,9 @@ limitations:
   - "単独プランなし。ChatGPT等の有料プランが必要な場合あり"
   - "スタイルの自由度・表現の幅が限定的な傾向"
   - "画像内への日本語テキスト生成は精度が低い傾向"
+usagePolicy:
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "テキストから画像生成が主体だが、image-to-image・インペインティングで画像アップロードが可能。人物・著名人・ブランドロゴ・第三者著作物の入力・生成には肖像権・商標権・著作権の観点から別途確認が必要（OpenAI利用規約）。"
 reviewed:
   pricing: "2026-05-26"
   terms: "2026-05-26"

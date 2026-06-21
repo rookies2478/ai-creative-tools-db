@@ -38,12 +38,23 @@ const faqs = [
 
 const faqJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((f) => ({
-    "@type": "Question",
-    "name": f.q,
-    "acceptedAnswer": { "@type": "Answer", "text": f.a }
-  }))
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "AIクリエイティブナビ", "item": "https://aicreative-db.com/" },
+        { "@type": "ListItem", "position": 2, "name": "広告バナー向けAI画像生成", "item": "https://aicreative-db.com/use-cases/ad-banner/" }
+      ]
+    }
+  ]
 });
 
 const tools = [

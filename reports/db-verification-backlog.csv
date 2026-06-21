@@ -1,0 +1,36 @@
+slug,toolName,field,currentValue,issueType,priority,recommendedAction,sourceStatus
+pixverse,PixVerse,pricingStatus,unconfirmed,pricing_unconfirmed,A,【2026-06-21再確認済み】pixverse.ai/pricing・/en/pricing ともに404。ログイン後アプリ内またはヘルプで料金確認要,weak
+pixverse,PixVerse,currency,unknown,currency_unknown,A,通貨（USD/JPY等）を公式で確認,weak
+pixverse,PixVerse,needsReview,yes,needs_review,A,確認後にno更新,weak
+seaart-ai,SeaArt AI,pricingStatus,unconfirmed,pricing_unconfirmed,A,【2026-06-21再確認済み】/pricing・/ja で非ログイン時に具体価格・通貨表示なし。ログイン後VIP/SVIP会員ページで確認要,weak
+seaart-ai,SeaArt AI,currency,unknown,currency_unknown,A,通貨を公式で確認,weak
+seaart-ai,SeaArt AI,commercialUse,unknown,commercial_unknown,A,公式利用規約で確認（断定しない）,weak
+seaart-ai,SeaArt AI,watermark,unknown,watermark_unknown,A,公式プランページで透かし条件を確認,weak
+clipdrop,Clipdrop,pricingStatus,partial,pricing_partial,A,【2026-06-21再確認済み】Proプラン「--per month」（金額非開示）。ログイン後またはサポート経由で確認要,medium
+clipdrop,Clipdrop,currency,unknown,currency_unknown,A,通貨を公式で確認,medium
+clipdrop,Clipdrop,commercialUse,unknown,commercial_unknown,A,公式利用規約で確認（断定しない）,medium
+clipdrop,Clipdrop,watermark,unknown,watermark_unknown,A,公式プランページで透かし条件を確認,medium
+kling-ai,Kling AI,pricingStatus,partial,pricing_partial,A,公式料金ページでプラン一覧・通貨を確認,medium
+kling-ai,Kling AI,needsReview,yes,needs_review,A,確認後にno更新,medium
+vidu-ai,Vidu AI,pricingStatus,unconfirmed,pricing_unconfirmed,A,【2026-06-21再確認済み】vidu.com/pricingは動的ロードのため料金・通貨取得不可。次回実ブラウザ確認要,medium
+vidu-ai,Vidu AI,currency,unknown,currency_unknown,A,通貨を公式で確認,medium
+vidu-ai,Vidu AI,inputMaterialRisk,high,input_material_risk,A,公式利用規約で入力素材ポリシーを要確認（断定しない）,medium
+ideogram,Ideogram,pricingStatus,partial,pricing_partial,A,docs.ideogram.ai/plans-and-pricing で最新プランを確認,medium
+ideogram,Ideogram,watermark,unknown,watermark_unknown,A,公式プランページで透かし条件を確認,medium
+ideogram,Ideogram,needsReview,yes,needs_review,A,確認後にno更新,medium
+gemini-image-generation,Gemini画像生成,currency,unknown,currency_unknown,B,Google公式料金ページで通貨を確認,strong
+tensor-art,Tensor.Art,currency,unknown,currency_unknown,B,公式料金ページで通貨を確認,medium
+tensor-art,Tensor.Art,watermark,unknown,watermark_unknown,B,公式プランページで透かし条件を確認,medium
+capcut-ai,CapCut AI,currency,unknown,currency_unknown,B,公式サブスクリプション料金ページで通貨を確認,strong
+nightcafe,NightCafe,pricingStatus,partial,pricing_partial,B,公式クレジット料金ページで通貨・具体額を確認,medium
+nightcafe,NightCafe,currency,unknown,currency_unknown,B,通貨を公式で確認,medium
+fotor-ai,Fotor AI,pricingStatus,partial,pricing_partial,B,公式料金ページで有料プランの具体価格を確認,medium
+microsoft-designer,Microsoft Designer,pricingStatus,partial,pricing_partial,B,Microsoft 365 連携プランの料金条件を公式で確認,medium
+microsoft-designer,Microsoft Designer,watermark,unknown,watermark_unknown,B,透かし条件を公式で確認,medium
+canva-ai-image-generator,Canva AI画像生成,watermark,unknown,watermark_unknown,B,Canva公式ヘルプでAI生成画像の透かし有無を確認,strong
+leonardo-ai,Leonardo AI,watermark,unknown,watermark_unknown,B,公式プランページで透かし条件を確認,strong
+playground-ai,Playground AI,watermark,unknown,watermark_unknown,B,公式料金ページで無料プランの透かし有無を確認,strong
+haiper,Haiper,pricingStatus,service_changed,service_changed,C,サービスシャットダウン済み。推測補完不可。noindex管理継続,missing
+haiper,Haiper,commercialUse,unknown,commercial_unknown,C,サービスシャットダウン済み。確認困難。保留,missing
+haiper,Haiper,watermark,unknown,watermark_unknown,C,サービスシャットダウン済み。確認困難。保留,missing
+stable-diffusion,Stable Diffusion,inputMaterialRisk,high,input_material_risk,C,RAIL-Mライセンス複雑。公式ライセンスページ既記載。現状安全範囲内,strong

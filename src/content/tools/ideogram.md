@@ -23,13 +23,15 @@ strengths:
 weaknesses:
   - "日本語UIや日本語テキスト生成の扱いは確認が必要"
   - "商用利用時は第三者権利や利用規約の確認が必要"
-lastReviewed: "2026-06-14"
-nextReviewDue: "2026-07-14"
-verifiedAt: "2026-06-14"
+lastReviewed: "2026-06-21"
+nextReviewDue: "2026-09-21"
+verifiedAt: "2026-06-21"
 officialSourceUrl: "https://docs.ideogram.ai/plans-and-pricing/available-plans"
+pricingSourceUrl: "https://docs.ideogram.ai/plans-and-pricing/available-plans"
+pricingSourceNote: "公式ドキュメントの料金プランページ。currency=USDと推定されるが月額・プラン構成は要公式確認。最新情報は公式サイトをご確認ください。"
 pricingModel: "subscription_credit"
 pricingSummary: "無料プランでは制限付きのクレジット枠が案内されています。有料プランでは生成容量や優先処理などが増える場合があります。クレジット数・料金・対象機能は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
-freePlanNote: "公式ドキュメントでは、無料プランで週次のクレジット枠が案内されています。クレジット数や生成条件は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
+freePlanNote: "公式ドキュメントでは、無料プランで週10クレジットが案内されています（2026-06-21確認）。クレジット数や生成条件は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
 platforms:
   - web
 signupRequired: true
@@ -67,7 +69,7 @@ usagePolicy:
   termsUrl: "https://ideogram.ai/legal/tos"
   lastReviewed: "2026-06-14"
 reviewed:
-  pricing: "2026-05-26"
+  pricing: "2026-06-21"
   terms: "2026-05-26"
   features: "2026-05-26"
 sourceRefs:

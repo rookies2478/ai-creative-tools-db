@@ -69,6 +69,7 @@ const jsonLd = JSON.stringify([
         { lb: '料金目安', text: '無料〜VIP/SVIP（公式確認）', mono: true },
         { lb: '透かし', badge: { s: 'na', label: '要確認' } },
         { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
       primaryCta={{ label: '公式サイト（日本語）で確認する', href: 'https://www.seaart.ai/ja' }}
       secondaryCta={{ label: '利用規約（公式）', href: 'https://image.cdn2.seaart.me/20250802/d2790ce8-f8e8-4ea4-a4a1-c958c728566e.html' }}
@@ -138,7 +139,7 @@ const jsonLd = JSON.stringify([
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応（とされている）</span><br>モデルや用途によっては英語の方が安定する場合あり。' }],
           [{ html: '対応環境', rk: true }, { html: 'Web（ブラウザ）' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-06', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.seaart.ai/ja" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.seaart.ai/ja" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 料金・機能・商用利用条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
       }}

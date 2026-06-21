@@ -32,6 +32,7 @@ nextReviewDue: "2026-07-06"
 verifiedAt: "2026-06-08"
 officialSourceUrl: "https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans"
 pricingModel: "subscription"
+pricingStatus: "confirmed"
 paidPlanNote: "Basic $10/月〜。年払いで割引あり。"
 platforms:
   - discord

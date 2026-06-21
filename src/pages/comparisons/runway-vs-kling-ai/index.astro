@@ -122,6 +122,13 @@ const articleJsonLd = JSON.stringify({
   toolASlug="runway"
   toolBName="Kling AI"
   toolBSlug="kling-ai"
+  quickDecisionRows={[
+    { purpose: '無料で継続的に試したい人', candidate: 'Kling AI', checkPoint: '毎日クレジット付与・翌日繰越なし・商用利用不可・透かしあり' },
+    { purpose: '映像制作・多機能ツールを使いたい人', candidate: 'Runway', checkPoint: '無料枠は初回125クレジットのみ。継続利用は有料プランが現実的' },
+    { purpose: '料金を抑えて有料プランに移行したい人', candidate: 'Kling AI', checkPoint: 'Standard $6.99/月〜（条件は変更される場合あり）' },
+    { purpose: '背景削除・音声ダビングなど編集機能も必要', candidate: 'Runway', checkPoint: '対応機能一覧と料金を公式で確認' },
+    { purpose: '商用利用前提で確認したい人', candidate: '両方とも公式規約を確認', checkPoint: 'Runwayは無料プランで透かしあり。Kling AIは有料プランから商用利用可とされる' },
+  ]}
   conclusionA={{
     label: '映像制作・多機能重視 →',
     toolName: 'Runway',

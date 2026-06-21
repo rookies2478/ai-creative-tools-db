@@ -33,10 +33,12 @@ weaknesses:
   - "日本語UI・日本語プロンプト対応は公式情報のみでは確認できない"
   - "2024年にJasperに統合されAPIがJasper APIに移行しており、今後の方針変更リスクがある"
   - "Proプランの料金が公式サイトで非表示となっており、価格確認にはサービス内ログインが必要な可能性がある"
-lastReviewed: "2026-06-06"
-nextReviewDue: "2026-07-06"
+lastReviewed: "2026-06-21"
+nextReviewDue: "2026-07-21"
 verifiedAt: "2026-06-08"
 officialSourceUrl: "https://clipdrop.co/pricing"
+pricingSourceUrl: "https://clipdrop.co/pricing"
+pricingSourceNote: "公式料金ページ（clipdrop.co/pricing）。Freeプランは案内されているが、Proプランの料金は「--per month」表示で金額非開示（2026-06-21確認）。2024年にJasper AI傘下に統合済み。currency・月額は要公式確認。"
 pricingModel: "subscription"
 platforms:
   - web
@@ -62,8 +64,11 @@ limitations:
   - "日本語UIは公式情報のみでは確認不可"
   - "2024年のJasper統合によりAPIがJasper APIに移行済み"
   - "Proプランの料金は公式サイトで現在非表示"
+usagePolicy:
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "背景削除・アップスケール・不要物削除など、主要機能はすべて画像アップロードが前提。weaknessesにて「アップロードする元画像の著作権・権利確認が必要」と明記されている。元画像に人物・商標・第三者著作物が含まれる場合は別途確認が必要（clipdrop.co/terms-visitor）。"
 reviewed:
-  pricing: "2026-06-06"
+  pricing: "2026-06-21"
   terms: "2026-05-14"
   features: "2026-06-06"
 sourceRefs:

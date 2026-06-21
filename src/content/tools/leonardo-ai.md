@@ -30,6 +30,7 @@ nextReviewDue: "2026-09-15"
 verifiedAt: "2026-06-15"
 officialSourceUrl: "https://leonardo.ai/pricing/"
 pricingModel: "subscription_credit"
+pricingStatus: "confirmed"
 freePlanNote: "1日150トークン程度（変更の可能性あり）"
 paidPlanNote: "Apprentice $10/月〜（年払い）。公式情報では、有料プランやPrivate設定などの条件が関係すると案内されています。利用前に最新の公式規約をご確認ください。"
 platforms:
@@ -219,5 +220,5 @@ Leonardo AIはゲーム・イラスト・キャラクター画像の生成に強
 - **人物・ブランド・第三者素材：** 著名人、ブランドロゴ、第三者が権利を持つ素材を扱う場合は、別途確認が必要です
 - **本記事は法的助言ではありません**
 
-[AIツール一覧へ](/tools/) ／ [無料で使えるAIツール](/conditions/free/) ／ [商用利用と著作権について](/guides/commercial-use-copyright/)
+[AIツール一覧へ](/tools/) ／ [無料で使えるAIツール](/conditions/free/) ／ [商用利用と著作権について](/guides/commercial-use-copyright/) ／ [MidjourneyとLeonardo AIを比較する](/comparisons/midjourney-vs-leonardo-ai/)
 

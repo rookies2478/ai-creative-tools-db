@@ -51,21 +51,46 @@ const faqs = [
   },
   {
     q: 'スマホで使えるAI動画生成ツールはありますか？',
-    a: 'スマホからの利用は、ブラウザ経由での利用・専用アプリの有無・生成時間・透かし条件・ログイン要否などを確認する必要があります。公式情報では、CapCut AIはiOS/Androidアプリが案内されており、HaiperはiOS・APIでの利用が確認されています。その他のツールはWebブラウザ経由でのスマホ利用が想定されますが、対応状況・使い勝手はツールや時期によって異なります。スマホ対応状況・無料枠は変更される場合があるため、最新情報は各公式サイトをご確認ください。<a href="/conditions/free/">無料枠のあるAIツール比較</a>もご参照ください。',
+    a: 'スマホからの利用は、ブラウザ経由での利用・専用アプリの有無・生成時間・透かし条件・ログイン要否などを確認する必要があります。公式情報では、CapCut AIはiOS/Androidアプリが案内されています。その他のツールはWebブラウザ経由でのスマホ利用が想定されますが、対応状況・使い勝手はツールや時期によって異なります。スマホ対応状況・無料枠は変更される場合があるため、最新情報は各公式サイトをご確認ください。<a href="/conditions/free/">無料枠のあるAIツール比較</a>もご参照ください。',
+  },
+  {
+    q: '広告・プロモーション動画向きのAIツールはどれですか？',
+    a: '広告・プロモーション動画の用途では、①映像品質と表現の自由度、②プランごとの商用利用条件、③透かしの有無、④素材（人物・ブランドロゴ・商標）の扱いを重点的に確認することをおすすめします。公式情報ではRunwayが映像制作向けの多機能ワークフローと商用利用の条件を案内しており、Kling AI・Luma AIも映像品質で候補に挙がることがあります。商用利用を前提にする場合は、各ツールの公式利用規約でプランごとの条件を事前に確認してください。本記事は法的助言ではありません。<a href="/guides/commercial-use-copyright/">商用利用・著作権の考え方ガイド</a>もご参照ください。',
   },
 ];
 
 const faqJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((faq) => ({
-    "@type": "Question",
-    "name": faq.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.a.replace(/<[^>]+>/g, '')
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a.replace(/<[^>]+>/g, '')
+        }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AIクリエイティブナビ",
+          "item": "https://aicreative-db.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI動画生成",
+          "item": "https://aicreative-db.com/categories/video-generation/"
+        }
+      ]
     }
-  }))
+  ]
 });
 
 const videoToolCards = [
@@ -74,7 +99,7 @@ const videoToolCards = [
   { name: 'Kling AI',  slug: 'kling-ai',  initial: 'K', role: '動画生成', commercial: '無料:非商用のみ / 有料Standard以上:案内あり', free: '要確認', jp: '要確認', note: 'プランによる', price: '$6.99〜（要公式確認）', platforms: 'Web', date: '2026-06-08' },
   { name: 'Luma AI',   slug: 'luma-ai',   initial: 'L', role: '動画生成', commercial: '無料:非商用のみ / 有料Plus以上:案内あり', free: '無料枠あり', jp: '要確認', note: '無料:透かしあり', price: '$30/月（Plus・月払い）', platforms: 'Web、API', date: '2026-06-08' },
   { name: 'Hailuo AI', slug: 'hailuo-ai', initial: 'H', role: '動画生成', commercial: '要確認', free: '要確認', jp: '要確認', note: 'プランによる', price: '要公式確認', platforms: 'Web', date: '2026-06-08' },
-  { name: 'Haiper',    slug: 'haiper',    initial: 'H', role: '動画生成', commercial: '要確認', free: '無料枠あり', jp: '要確認', note: '透かしあり', price: '要公式確認', platforms: 'Web、iOS、API', date: '2026-06-08' },
+  { name: 'Haiper',    slug: 'haiper',    initial: 'H', role: '動画生成（サービス変更済み）', commercial: '要確認', free: '要確認', jp: '要確認', note: '⚠️コンシューマー向けサービスは2025年2月シャットダウン済み。現役おすすめではありません。', price: '要公式確認（サービス変更あり）', platforms: 'Web、iOS、API（要確認）', date: '2026-06-15' },
   { name: 'Vidu AI',   slug: 'vidu-ai',   initial: 'V', role: '動画生成', commercial: '要確認', free: '要確認', jp: '要確認', note: 'プランによる', price: '要公式確認', platforms: 'Web', date: '2026-06-08' },
   { name: 'PixVerse',  slug: 'pixverse',  initial: 'P', role: '動画生成', commercial: '要確認', free: '要確認', jp: '対応', note: 'プランによる', price: '要公式確認', platforms: 'Web', date: '2026-06-08' },
 ];
@@ -132,15 +157,15 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
           </span>
           <span class="cvg-checked">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            記事内容の最終確認 <b>2026-06-08</b>
+            記事内容の最終確認 <b>2026-06-18</b>
           </span>
         </div>
         <h1 class="cvg-h1">AI動画生成ツールを<span class="hl">比較する</span></h1>
         <p class="cvg-lead">SNS動画、YouTubeショート、広告動画、商品紹介、映像ラフ、企画提案、Bロール作成など、テキストや画像から短尺動画を生成するAIツールを比較整理します。ツールによって無料枠・生成秒数・透かし・解像度・商用利用条件・日本語プロンプト対応・画像から動画への対応が異なります。無料枠・透かし・商用利用条件・日本語対応を横断的に確認できます。商用利用・著作権・肖像権・商標・入力素材は別途確認が必要です。</p>
         <div class="cvg-stats">
           <div class="cvg-stat"><span class="n">8</span><span class="t">AI動画生成ツール</span></div>
-          <div class="cvg-stat"><span class="n">6</span><span class="t">用途別に比較</span></div>
-          <div class="cvg-stat"><span class="n">10</span><span class="t">よくある質問</span></div>
+          <div class="cvg-stat"><span class="n">7</span><span class="t">用途別に比較</span></div>
+          <div class="cvg-stat"><span class="n">11</span><span class="t">よくある質問</span></div>
         </div>
       </header>
 
@@ -158,6 +183,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
           <p>映像品質・無料枠・日本語対応・画像から動画化したいかによって選び方が変わります。まず目的別に候補を絞ってから、下の比較表で料金・無料枠・透かし・商用利用条件を確認してください。</p>
         </div>
         <div class="reveal">
+          <p class="cvg-gtcap">← 横にスクロールできます →</p>
           <div class="cvg-tablewrap">
             <table class="cvg-gt guide">
               <thead>
@@ -166,10 +192,17 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
               <tbody>
                 <tr>
                   <td class="cvg-situation">初心者がまず試したい</td>
-                  <td class="cvg-cand">Pika / Haiper</td>
+                  <td class="cvg-cand">Pika / Kling AI</td>
                   <td class="cvg-note">操作が比較的シンプルで、無料枠から試しやすい候補</td>
                   <td class="cvg-note">無料枠の上限、透かし、生成回数</td>
-                  <td><span class="cvg-linklist"><a href="/tools/pika/">Pika →</a><a href="/tools/haiper/">Haiper →</a></span></td>
+                  <td><span class="cvg-linklist"><a href="/tools/pika/">Pika →</a><a href="/tools/kling-ai/">Kling AI →</a></span></td>
+                </tr>
+                <tr>
+                  <td class="cvg-situation">広告・プロモーション向きを探したい</td>
+                  <td class="cvg-cand">Runway / Kling AI / Luma AI</td>
+                  <td class="cvg-note">映像品質・商用利用条件の確認がしやすい候補</td>
+                  <td class="cvg-note">プラン別商用利用条件、透かし、素材権利</td>
+                  <td><span class="cvg-linklist"><a href="/tools/runway/">Runway →</a><a href="/tools/kling-ai/">Kling AI →</a><a href="/guides/commercial-use-copyright/">商用ガイド →</a></span></td>
                 </tr>
                 <tr>
                   <td class="cvg-situation">映像品質を重視したい</td>
@@ -221,6 +254,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
           <p>「動画系AIツール」は大きく3種類に分かれます。目的に合ったカテゴリを選ぶことが、ツール選びの第一歩です。</p>
         </div>
         <div class="reveal">
+          <p class="cvg-gtcap">← 横にスクロールできます →</p>
           <div class="cvg-tablewrap">
             <table class="cvg-gt diff">
               <thead>
@@ -321,7 +355,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
         <div class="cvg-sechead reveal">
           <span class="cvg-eyebrow">Comparison table</span>
           <h2>AI動画生成ツール 横断比較表</h2>
-          <p>以下は <b>2026-06-08</b> 時点の調査に基づく整理です。料金・無料枠・透かし・生成時間・クレジット消費・利用条件は、プランや時期によって変わる場合があります。人物・ロゴ・第三者素材を含む生成物の扱いは各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
+          <p>以下は <b>2026-06-18</b> 時点の調査に基づく整理です。料金・無料枠・透かし・生成時間・クレジット消費・利用条件は、プランや時期によって変わる場合があります。人物・ロゴ・第三者素材を含む生成物の扱いは各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
         </div>
         <p class="cvg-gtcap reveal">← 横にスクロールできます →</p>
         <div class="reveal">
@@ -355,15 +389,19 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
                     f.textToVideo && f.imageToVideo ? 'テキスト・画像' :
                     f.textToVideo ? 'テキスト' :
                     f.imageToVideo ? '画像' : '—';
+                  const isServiceChanged = tool.data.pricingStatus === 'service_changed';
                   return (
-                    <tr>
+                    <tr class={isServiceChanged ? 'is-changed' : ''}>
                       <td>
                         <div class="cvg-tool">
                           <span class="b">{(tool.data.name || '?').charAt(0)}</span>
-                          <a class="nm" href={`/tools/${tool.slug}/`}>{tool.data.name}</a>
+                          <div style="display:flex;flex-direction:column;gap:2px;">
+                            <a class="nm" href={`/tools/${tool.slug}/`}>{tool.data.name}</a>
+                            {isServiceChanged && <span class="cvg-svcbadge">⚠️ サービス変更済み</span>}
+                          </div>
                         </div>
                       </td>
-                      <td class="cvg-note">{tool.data.bestFor?.[0] ?? '—'}</td>
+                      <td class="cvg-note">{isServiceChanged ? '⚠️ コンシューマー向け終了済み（API/B2Bのみ）' : (tool.data.bestFor?.[0] ?? '—')}</td>
                       <td class="cvg-note nowrap">{inputLabel}</td>
                       <td class="cvg-note nowrap">
                         {tool.data.freePlan && tool.data.freePlan !== 'no' ? 'あり' : 'なし／要確認'}
@@ -408,7 +446,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
             <h3 class="ph">まず無料枠から試したい</h3>
             <ul>
               <li><a class="nm" href="/tools/pika/">Pika</a><span class="nt">— 無料枠あり・操作しやすいとされる</span></li>
-              <li><a class="nm" href="/tools/kling-ai/">Kling AI</a><span class="nt">— 無料枠あり・クレジット制</span></li>
+              <li><a class="nm" href="/tools/kling-ai/">Kling AI</a><span class="nt">— 無料枠あり・クレジット制（日付更新あり）</span></li>
               <li><a class="nm" href="/tools/hailuo-ai/">Hailuo AI</a><span class="nt">— 無料枠あり・短尺向け</span></li>
             </ul>
             <a class="cvg-morelink" href="/conditions/free/">無料枠のあるAIツール →</a>
@@ -418,7 +456,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
             <ul>
               <li><a class="nm" href="/tools/pika/">Pika</a><span class="nt">— 短尺・縦型フォーマット向きとされる</span></li>
               <li><a class="nm" href="/tools/hailuo-ai/">Hailuo AI</a><span class="nt">— 短尺・スムーズな動きが評価されることがある</span></li>
-              <li><a class="nm" href="/tools/haiper/">Haiper</a><span class="nt">— 操作シンプル・初心者向けとされる</span></li>
+              <li><a class="nm" href="/tools/pixverse/">PixVerse</a><span class="nt">— アニメ調・スタイライズドの短尺向きとされる</span></li>
             </ul>
             <a class="cvg-morelink" href="/use-cases/shorts/">Shorts向けツールを見る →</a>
           </div>
@@ -468,8 +506,8 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
                 </tr>
                 <tr>
                   <td><div class="cvg-tool"><span class="b">H</span><a class="nm" href="/tools/haiper/">Haiper</a></div></td>
-                  <td class="cvg-note">短尺・スタイライズドおよびリアル系どちらも生成可。シンプルな操作感で試しやすいとされる。日本語プロンプト対応とされる。</td>
-                  <td class="cvg-note nowrap"><span class="cvg-userbadge">初心者向け</span></td>
+                  <td class="cvg-note">⚠️ <b>コンシューマー向けサービスは2025年2月シャットダウン済み。</b>API/B2B向けのみとされています。現在の利用可否は<a href="/tools/haiper/">詳細ページ</a>および公式サイトをご確認ください。本ページでは現役おすすめツールとして扱っていません。</td>
+                  <td class="cvg-note nowrap"><span class="cvg-userbadge">サービス変更済み</span></td>
                 </tr>
                 <tr>
                   <td><div class="cvg-tool"><span class="b">V</span><a class="nm" href="/tools/vidu-ai/">Vidu AI</a></div></td>
@@ -579,7 +617,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
           </div>
           <div class="cvg-splitcard">
             <h3>顔出しなし動画</h3>
-            <p>テキスト→動画で人物不要の映像を作る用途ではPixVerse・Hailuo AI・Haiper等が候補になります。</p>
+            <p>テキスト→動画で人物不要の映像を作る用途ではPixVerse・Hailuo AI・Vidu AI等が候補になります。</p>
             <a class="cvg-morelink" href="/use-cases/faceless-video/">顔出しなし動画向けツール →</a>
           </div>
           <div class="cvg-splitcard">
@@ -726,7 +764,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
         <div class="cvg-sechead reveal">
           <span class="cvg-eyebrow">FAQ</span>
           <h2>よくある質問</h2>
-          <p>動画生成と動画編集／アバター動画の違い、無料枠、商用利用、日本語プロンプト、ランキングの見方、スマホ対応について、確認のポイントをお答えします。</p>
+          <p>動画生成と動画編集／アバター動画の違い、無料枠、商用利用、広告・プロモーション向き、日本語プロンプト、ランキングの見方、スマホ対応について、確認のポイントをお答えします。</p>
         </div>
         <div class="cvg-faq reveal">
           {faqs.map((f) => (
@@ -751,7 +789,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
         </ul>
         <div class="cvg-freshness reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          <span><b>情報の鮮度：</b>記事内容の最終確認日 <span class="mono">2026-06-08</span>（次回確認予定 <span class="mono">2026-09-06</span>）</span>
+          <span><b>情報の鮮度：</b>記事内容の最終確認日 <span class="mono">2026-06-18</span>（次回確認予定 <span class="mono">2026-09-18</span>）</span>
         </div>
         <div class="cvg-disclaimer reveal" style="margin-top:18px;max-width:880px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
@@ -786,12 +824,17 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
                 <li><a href="/conditions/no-watermark/"><span class="ld"></span>透かしなしで使いやすいAIツール</a></li>
                 <li><a href="/conditions/japanese/"><span class="ld"></span>日本語対応ツール</a></li>
                 <li><a href="/comparisons/runway-vs-pika/"><span class="ld"></span>Runway vs Pika 比較</a></li>
+                <li><a href="/comparisons/runway-vs-kling-ai/"><span class="ld"></span>Runway vs Kling AI 比較</a></li>
+                <li><a href="/comparisons/invideo-ai-vs-capcut-ai/"><span class="ld"></span>InVideo AI vs CapCut AI 比較</a></li>
                 <li><a href="/guides/video-generation-credit-cost-comparison/"><span class="ld"></span>料金・クレジット消費を比較</a></li>
                 <li><a href="/guides/commercial-use-copyright/"><span class="ld"></span>商用利用・著作権ガイド</a></li>
                 <li><a href="/guides/commercial-use-cost-comparison/"><span class="ld"></span>商用利用プラン別の料金比較</a></li>
                 <li><a href="/comparisons/ai-image-video-tools/"><span class="ld"></span>AI動画vs画像生成ツール比較</a></li>
                 <li><a href="/comparisons/"><span class="ld"></span>全ツール比較表</a></li>
                 <li><a href="/categories/image-generation/"><span class="ld"></span>AI画像生成ツール一覧</a></li>
+                <li><a href="/categories/video-editing/"><span class="ld"></span>AI動画編集ツール一覧</a></li>
+                <li><a href="/categories/avatar-video/"><span class="ld"></span>AIアバター動画ツール一覧</a></li>
+                <li><a href="/categories/voice-narration/"><span class="ld"></span>AI音声・ナレーションツール</a></li>
                 <li><a href="/tools/"><span class="ld"></span>全AIツール一覧</a></li>
               </ul>
             </div>
@@ -906,6 +949,8 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
   .cvg-detail { font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--brand-ink); white-space: nowrap; }
   .cvg-detail:hover { text-decoration: underline; text-underline-offset: 3px; }
   .cvg-userbadge { display: inline-flex; font-family: var(--f-jp); font-weight: 700; font-size: 12px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px; white-space: nowrap; }
+  .cvg-svcbadge { font-family: var(--f-jp); font-size: 11px; font-weight: 700; color: var(--warn); background: var(--warn-tint); border: 1px solid color-mix(in srgb, var(--warn) 28%, var(--line)); border-radius: 6px; padding: 2px 7px; white-space: nowrap; }
+  table.cvg-gt tbody tr.is-changed { background: var(--warn-tint); opacity: .85; }
   .cvg-foot { margin-top: 14px; font-size: 12px; color: var(--faint); line-height: 1.7; max-width: 920px; }
 
   /* クイックピック */

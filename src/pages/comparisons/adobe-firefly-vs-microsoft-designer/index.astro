@@ -1,6 +1,15 @@
 ---
 import ComparisonVsArticle from '../../../components/ComparisonVsArticle.astro';
+import SamePromptImageComparison from '../../../components/SamePromptImageComparison.astro';
+import { generatedImages } from '../../../data/generatedImages';
 import { getEntry } from 'astro:content';
+
+const imgFireflyComp = generatedImages.find(
+  (i) => i.sourceToolSlug === 'adobe-firefly' && i.sampleType === 'tool-output' && i.comparisonEligible === true && i.promptVersion === 'image-tool-benchmark-v1'
+)!;
+const imgDesigner = generatedImages.find(
+  (i) => i.sourceToolSlug === 'microsoft-designer' && i.sampleType === 'tool-output' && i.comparisonEligible === true && i.promptVersion === 'image-tool-benchmark-v1'
+)!;
 
 const [toolFirefly, toolDesigner] = await Promise.all([
   getEntry('tools', 'adobe-firefly'),
@@ -39,7 +48,7 @@ const faqs = [
 const comparisonRows = [
   { item: '主な用途', toolA: '画像生成・Adobe Creative Cloud連携・商用素材作成', toolB: 'SNS画像・バナー・プレゼン素材・デザインテンプレート' },
   { item: '無料利用のしやすさ', toolA: '無料プランで一定数の生成クレジットあり（数量は変更の可能性あり）', toolB: 'Microsoftアカウントで無料利用できる機能あり（詳細は公式参照）' },
-  { item: '料金', toolA: '$9.99/月〜（Firefly Standardプラン・プロモ価格適用時）', toolB: '要公式確認' },
+  { item: '料金', toolA: '1,580円/月（税込）〜（Firefly Standardプラン・日本語公式料金ページ確認）', toolB: '要公式確認' },
   { item: '商用利用条件', toolA: '公式情報上、商用利用を想定したサービスとして案内あり。ベータ機能は対象外', toolB: '公式FAQで個人的な非商用使用に関する記載あり。商用利用前に公式情報の確認が必要' },
   { item: '日本語UI', toolA: '対応', toolB: '対応' },
   { item: '日本語プロンプト', toolA: '対応', toolB: '対応しているとされています' },
@@ -53,6 +62,8 @@ const relatedLinks = [
   { href: '/tools/adobe-firefly/', label: 'Adobe Firefly詳細' },
   { href: '/tools/microsoft-designer/', label: 'Microsoft Designer詳細' },
   { href: '/categories/image-generation/', label: 'AI画像生成ツール一覧' },
+  { href: '/categories/design/', label: 'AIデザインツール一覧' },
+  { href: '/comparisons/canva-ai-vs-adobe-firefly/', label: 'Canva AI vs Adobe Firefly比較' },
   { href: '/guides/commercial-use-copyright/', label: '商用利用・著作権ガイド' },
   { href: '/conditions/free/', label: '無料枠ありAIツール' },
   { href: '/conditions/commercial-use/', label: '商用利用確認しやすいAIツール' },
@@ -194,6 +205,14 @@ const articleJsonLd = JSON.stringify({
       </ul>
     </div>
   </section>
+
+  <!-- ===== 同一プロンプト比較 ===== -->
+  <SamePromptImageComparison
+    imageA={imgFireflyComp}
+    imageB={imgDesigner}
+    toolAName="Adobe Firefly"
+    toolBName="Microsoft Designer"
+  />
 
   <!-- ===== 他ツール ===== -->
   <section class="cp-body-sec">

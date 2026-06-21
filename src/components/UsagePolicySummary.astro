@@ -152,12 +152,12 @@ function rightsLabel(s?: string): string {
         <span class="ups-label">公式確認ソース</span>
         <span class="ups-val ups-links">
           {policy.officialSourceUrl && (
-            <a href={policy.officialSourceUrl} target="_blank" rel="noopener" class="ups-link">
+            <a href={policy.officialSourceUrl} target="_blank" rel="noopener noreferrer" class="ups-link">
               公式情報を確認する <span class="ups-ext">↗</span>
             </a>
           )}
           {policy.termsUrl && (
-            <a href={policy.termsUrl} target="_blank" rel="noopener" class="ups-link">
+            <a href={policy.termsUrl} target="_blank" rel="noopener noreferrer" class="ups-link">
               利用規約を確認する <span class="ups-ext">↗</span>
             </a>
           )}

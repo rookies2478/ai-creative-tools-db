@@ -31,7 +31,7 @@ const jsonLd = JSON.stringify([
 
 <BaseLayout
   title="Vidu AIの料金・使い方・商用利用・画像から動画まとめ｜AI動画生成ツールDB"
-  description="Vidu AIの料金プラン・無料枠・使い方・画像から動画・参照画像機能・スマホ対応・商用利用条件・利用規約の注意点を整理。最新情報は公式サイトをご確認ください。"
+  description="Vidu AIは最大7枚の参照画像によるキャラクター一貫性維持・アニメ動画生成・音効生成に対応した中国発AI動画生成サービスです。料金プラン・無料枠・画像から動画・商用利用条件・利用規約の注意点（ユーザー投稿への広範なライセンス付与）を整理しています。最新情報は公式サイトをご確認ください。"
   canonicalPath="/tools/vidu-ai/"
   ogType="article"
   jsonLd={jsonLd}
@@ -60,6 +60,7 @@ const jsonLd = JSON.stringify([
         { lb: '料金目安', text: '要公式確認', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: '無料あり・有料要確認' } },
         { lb: '日本語UI', badge: { s: 'na', label: '非対応' } },
+        { lb: '入力素材', badge: { s: 'na', label: '要注意' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://www.vidu.com' }}
       secondaryCta={{ label: '利用規約を確認（公式）', href: 'https://www.vidu.com/terms-of-service' }}
@@ -129,7 +130,7 @@ const jsonLd = JSON.stringify([
           [{ html: '最大動画長', rk: true }, { html: '最大16秒（Vidu Q3モデル）' }],
           [{ html: '運営', rk: true }, { html: 'Shengshu Technology（中国）' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-04', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.vidu.com" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.vidu.com" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 利用規約のライセンス条項を必ずご確認ください。料金・条件は変更される可能性があります。',
       }}

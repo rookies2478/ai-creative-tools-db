@@ -30,15 +30,36 @@ const faqs = [
 
 const faqJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((faq) => ({
-    "@type": "Question",
-    "name": faq.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.a.replace(/<[^>]+>/g, '')
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a.replace(/<[^>]+>/g, '')
+        }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AIクリエイティブナビ",
+          "item": "https://aicreative-db.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI動画編集",
+          "item": "https://aicreative-db.com/categories/video-editing/"
+        }
+      ]
     }
-  }))
+  ]
 });
 
 const tools = [
@@ -80,7 +101,7 @@ function mark(val: string) {
 
 <BaseLayout
   title="AI動画編集ツール比較｜AIを使った動画編集・字幕・カット自動化"
-  description="AI動画編集ツールの比較ページです。字幕自動生成・スマホ対応・テンプレート・無料枠・商用利用確認ポイントを整理します。AI動画生成で作った素材の編集にも活用できます。プランや用途によって条件が異なるため、最新情報は公式サイトをご確認ください。"
+  description="撮影済み動画・AI動画生成素材への字幕自動生成・カット補助・BGM調整など後処理工程向けAI動画編集ツールの比較ページです。ゼロから動画を生成する /categories/video-generation/ とは異なり、素材の編集・仕上げに特化したツールを整理しています。最新情報は公式サイトをご確認ください。"
   canonicalPath="/categories/video-editing/"
   jsonLd={faqJsonLd}
 >
@@ -293,6 +314,9 @@ function mark(val: string) {
           <div class="taglinks">
             <a class="taglink" href="/categories/video-generation/"><span class="ld"></span>AI動画生成ツール一覧</a>
             <a class="taglink" href="/categories/avatar-video/"><span class="ld"></span>AIアバター動画ツール</a>
+            <a class="taglink" href="/categories/voice-narration/"><span class="ld"></span>AI音声・ナレーションツール</a>
+            <a class="taglink" href="/comparisons/invideo-ai-vs-capcut-ai/"><span class="ld"></span>InVideo AI vs CapCut AI 比較</a>
+            <a class="taglink" href="/comparisons/runway-vs-pika/"><span class="ld"></span>Runway vs Pika 比較</a>
             <a class="taglink" href="/use-cases/shorts/"><span class="ld"></span>縦型・Shorts向けAIツール</a>
             <a class="taglink" href="/conditions/free/"><span class="ld"></span>無料で試せるAIツール</a>
             <a class="taglink" href="/conditions/no-watermark/"><span class="ld"></span>透かし条件で選ぶ</a>

@@ -58,11 +58,17 @@ const STATIC_PATHS = [
   '/editorial-policy/',
 ];
 
+const SITEMAP_EXCLUDED_PATHS = new Set([
+  '/tools/haiper/',
+]);
+
 export const GET: APIRoute = async () => {
   const tools = await getCollection('tools');
   const toolUrls = tools.map((t) => `/tools/${t.slug}/`);
 
-  const allPaths = [...STATIC_PATHS, ...toolUrls];
+  const allPaths = [...STATIC_PATHS, ...toolUrls].filter(
+    (p) => !SITEMAP_EXCLUDED_PATHS.has(p)
+  );
 
   const urls = allPaths
     .map((path) => `  <url><loc>${SITE}${path}</loc></url>`)

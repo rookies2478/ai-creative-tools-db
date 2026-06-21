@@ -1,0 +1,80 @@
+url,page_type,classification,title,has_faq,has_comparison,body_length_approx,center_relevance,reason,recommended_action
+/,top,A,AIクリエイティブナビ,yes,yes,medium,high,導線ハブ・全カテゴリリンク,公開継続
+/about/,other,A,サイトについて,no,no,short,high,信頼性担保,公開継続
+/contact/,other,A,お問い合わせ,no,no,short,high,必須ページ,公開継続
+/privacy-policy/,other,A,プライバシーポリシー,no,no,short,high,必須ページ,公開継続
+/disclaimer/,other,A,免責事項,no,no,short,high,必須ページ,公開継続
+/editorial-policy/,other,A,編集方針,no,no,short,high,信頼性担保,公開継続
+/404,other,A,404,no,no,short,high,必須ページ,公開継続
+/tools/,tool_list,A,AIクリエイティブツール一覧,yes,yes,long,high,全ツールハブ・独自比較軸あり,公開継続
+/categories/image-generation/,category,A,AI画像生成ツール一覧,yes,yes,long,high,中心カテゴリ・主導線,公開継続
+/categories/video-generation/,category,A,AI動画生成ツール一覧,yes,yes,long,high,中心カテゴリ・主導線,公開継続
+/categories/video-editing/,category,B,AI動画編集ツール一覧,yes,yes,medium,medium,ツール数少・詳細との差別化薄,改善済み（2026-06-21・description更新・後処理用途特化軸として差別化）
+/categories/avatar-video/,category,B,AIアバター動画ツール一覧,yes,yes,medium,medium,ツール数少・本サイト強みカテゴリでない,改善済み（2026-06-21・description更新・アバターキャラクター特化軸として差別化）
+/categories/design/,category,B,AIデザインツール一覧,yes,yes,medium,medium,画像生成カテゴリとの意図被り,改善済み（2026-06-21・description更新・デザイン仕上げ用途特化として差別化）
+/categories/voice-narration/,category,B,AI音声・ナレーションツール一覧,yes,no,medium,low,AI動画・アバター動画接続ガイドとして明確化,改善済み（2026-06-21・description/lead更新・noindex未実施）
+/conditions/free/,condition,A,無料で使えるAI動画生成・AI画像生成ツール比較,yes,yes,long,high,独自比較軸・FAQ充実,公開継続
+/conditions/no-watermark/,condition,A,透かしなしAI画像生成ツール比較,yes,yes,medium,high,透かし特化・差別化あり,公開継続
+/conditions/commercial-use/,condition,A,AI画像・動画生成ツールの商用利用条件比較,yes,yes,long,high,商用利用条件比較・独自軸・FAQ豊富,公開継続
+/conditions/japanese/,condition,B,日本語対応AI画像生成ツール比較,yes,yes,medium,medium,guides/japanese-ai-image-toolsと意図被り,改善済み（2026-06-21・description更新・DB絞り込み一覧としての役割分担明確化）
+/guides/,guide_list,A,ガイド一覧,no,no,short,high,ガイドハブ,公開継続
+/guides/commercial-use-copyright/,guide,A,AI生成画像の商用利用・著作権の考え方,yes,no,long,high,著作権の考え方・深掘り,公開継続
+/guides/ai-image-commercial-use-checklist/,guide,A,AI画像を商用利用する前に確認すべきチェックリスト,yes,yes,long,high,チェックリスト形式・実務向け独自軸,公開継続
+/guides/free-ai-image-tools/,guide,B,無料で使えるAI画像生成ツール,yes,no,medium,medium,conditions/freeと意図被り,改善済み（2026-06-21・title/description更新・選び方手順ガイドとして差別化）
+/guides/watermark-credit-guide/,guide,B,AI画像の透かし・クレジット表記ガイド,yes,no,medium,medium,conditions/no-watermarkと意図被り,改善済み（2026-06-21・description更新・透かし条件の読み方・クレジット表記手順として差別化）
+/guides/japanese-ai-image-tools/,guide,B,日本語対応AI画像生成ツールガイド,yes,no,medium,medium,conditions/japaneseと意図被り,改善済み（2026-06-21・description更新・3種類の日本語対応区分ガイドとして差別化）
+/guides/commercial-use-cost-comparison/,guide,A,商用利用コスト比較,yes,yes,long,high,コスト比較軸・条件ページと補完,公開継続
+/guides/video-generation-credit-cost-comparison/,guide,A,AI動画生成クレジットコスト比較,yes,yes,long,high,動画生成特化・クレジットコスト比較軸,公開継続
+/prompts/,guide_misc,B,AI画像・AI動画生成のプロンプト活用ガイド,yes,no,medium,medium,単独流入弱い・競合多い,改善済み（2026-06-21・description更新・実践ガイドとして位置付け明確化・ツール一覧との役割分担追記）
+/templates/,guide_misc,B,AI制作の実務テンプレート集,yes,no,medium,medium,単独流入弱い,改善済み（2026-06-21・description更新・実務向けリソース集として位置付け明確化・/prompts/ 誘導追記）
+/comparisons/,comparison_list,A,比較記事一覧,no,no,short,high,比較ハブ,公開継続
+/comparisons/dalle-vs-midjourney/,comparison,A,DALL·E vs Midjourney 比較,yes,yes,long,high,高需要クエリ・独自比較軸,公開継続
+/comparisons/midjourney-vs-adobe-firefly/,comparison,A,Midjourney vs Adobe Firefly 比較,yes,yes,long,high,商用利用比較軸・差別化あり,公開継続
+/comparisons/midjourney-vs-leonardo-ai/,comparison,A,Midjourney vs Leonardo AI 比較,yes,yes,long,high,両ツール詳細あり・補完関係,公開継続
+/comparisons/stable-diffusion-vs-midjourney/,comparison,A,Stable Diffusion vs Midjourney 比較,yes,yes,long,high,高需要・ローカルvsSaaS軸,公開継続
+/comparisons/runway-vs-pika/,comparison,A,Runway vs Pika 比較,yes,yes,long,high,動画生成中心・需要あり,公開継続
+/comparisons/runway-vs-kling-ai/,comparison,A,Runway vs Kling AI 比較,yes,yes,long,high,動画生成・独自比較軸,公開継続
+/comparisons/invideo-ai-vs-capcut-ai/,comparison,A,InVideo AI vs CapCut AI 比較,yes,yes,long,high,SNS動画特化・差別化あり,公開継続
+/comparisons/adobe-firefly-vs-microsoft-designer/,comparison,A,Adobe Firefly vs Microsoft Designer 比較,yes,yes,long,high,商用利用差別化軸,公開継続
+/comparisons/canva-ai-vs-adobe-firefly/,comparison,A,Canva AI vs Adobe Firefly 比較,yes,yes,long,high,日本語対応・商用利用比較,公開継続
+/comparisons/free-ai-image-generators/,comparison,B,無料AI画像生成ツール比較,yes,yes,medium,medium,conditions/freeと意図被り,改善済み（2026-06-21・title/description更新・14ツール比較表として差別化）
+/comparisons/ai-image-video-tools/,comparison,B,AI画像・動画ツール横断比較,yes,yes,medium,medium,使い分け方・どちらを選ぶか軸に特化,改善済み（2026-06-21・title/description/heading/lead更新・noindex未実施）
+/use-cases/,uc_list,A,用途別AI画像生成ツール,no,no,short,high,ユースケースハブ,公開継続
+/use-cases/ad-banner/,use_case,A,広告バナー向けAI画像生成ツール比較,yes,yes,long,high,広告バナー特化・FAQ充実,公開継続
+/use-cases/anime-illustration/,use_case,A,アニメ・イラスト向けAI画像生成ツール,yes,yes,long,high,アニメ特化・明確な検索需要,公開継続
+/use-cases/realistic-photo/,use_case,A,実写・写真風AI画像生成ツール,yes,yes,long,high,実写特化,公開継続
+/use-cases/ec-product-image/,use_case,A,EC商品画像向けAI画像生成ツール,yes,yes,long,high,EC特化・商用利用軸,公開継続
+/use-cases/youtube/,use_case,A,YouTube向けAI動画生成ツール,yes,yes,long,high,YouTube動画制作全般,公開継続
+/use-cases/youtube-thumbnail/,use_case,A,YouTubeサムネイル向けAI画像生成ツール,yes,yes,long,high,サムネイル特化・独自軸,公開継続
+/use-cases/shorts/,use_case,A,ショート動画向けAI動画生成ツール,yes,yes,long,high,ショート動画特化,公開継続
+/use-cases/faceless-video/,use_case,A,顔出しなし動画向けAI動画生成ツール,yes,yes,long,high,顔出しなし動画特化,公開継続
+/use-cases/sns-post-image/,use_case,B,SNS投稿画像向けAI画像生成ツール,yes,yes,medium,medium,sns-blog-eyecatchと意図被り,改善済み（2026-06-21・lead文にsns-blog-eyecatchへの差別化cross-link追加）
+/use-cases/sns-blog-eyecatch/,use_case,B,SNS・ブログアイキャッチ向けAI画像生成ツール,yes,yes,medium,medium,SNS横断・正方形縦長フォーマット特化に差別化済み（2026-06-21）,差別化済み・経過観察
+/use-cases/blog-eyecatch/,use_case,B,ブログアイキャッチ向けAI画像生成ツール,yes,yes,medium,medium,16:9・アフィリエイト・note特化に差別化済み（2026-06-21）,差別化済み・経過観察
+/use-cases/ai-image-use-case-comparison/,use_case,B,用途別AI画像生成ツール比較,yes,yes,medium,medium,初めて使う方向け用途選びハブとして明確化,改善済み（2026-06-21・title/description/h1/lead更新・noindex未実施）
+/tools/midjourney/,tool_detail,A,Midjourney,yes,yes,long,high,高需要・FAQ・比較軸・公式ソースあり,公開継続
+/tools/dalle/,tool_detail,A,DALL·E,yes,yes,long,high,高需要・独自軸あり,公開継続
+/tools/stable-diffusion/,tool_detail,A,Stable Diffusion,yes,yes,long,high,高需要・ローカル実行軸,公開継続
+/tools/adobe-firefly/,tool_detail,A,Adobe Firefly,yes,yes,long,high,商用利用軸・Adobeブランド需要,公開継続
+/tools/canva-ai-image-generator/,tool_detail,A,Canva AI画像生成,yes,yes,long,high,日本語UI・無料枠・商用利用軸,公開継続
+/tools/gemini-image-generation/,tool_detail,A,Gemini 画像生成,yes,yes,long,high,Google製・差別化あり,公開継続
+/tools/leonardo-ai/,tool_detail,A,Leonardo AI,yes,yes,long,high,ゲーム・クリエイティブ特化軸,公開継続
+/tools/ideogram/,tool_detail,A,Ideogram,yes,yes,long,high,テキストレンダリング特化軸,公開継続
+/tools/playground-ai/,tool_detail,A,Playground AI,yes,yes,long,high,無料枠・多スタイル軸,公開継続
+/tools/clipdrop/,tool_detail,A,Clipdrop,yes,yes,long,high,背景削除・写真編集特化軸,公開継続
+/tools/microsoft-designer/,tool_detail,A,Microsoft Designer,yes,yes,long,high,非商用明示・独自注意点,公開継続
+/tools/fotor-ai/,tool_detail,A,Fotor AI,yes,yes,long,high,日本語UI・デザイン一体型軸,公開継続
+/tools/seaart-ai/,tool_detail,A,SeaArt AI,yes,yes,long,high,アニメ特化・日本語UI対応,公開継続
+/tools/tensor-art/,tool_detail,B,Tensor Art,yes,no,medium,medium,掲載情報量やや薄・FAQ数少,改善済み（2026-06-21・FAQ1件追加・モデルライブラリ活用軸を追記）
+/tools/nightcafe/,tool_detail,B,NightCafe,yes,no,medium,medium,掲載情報量やや薄・差別化軸弱,改善済み（2026-06-21・description更新・コミュニティ型プラットフォーム軸を前面化）
+/tools/dreamstudio/,tool_detail,B,DreamStudio,yes,no,medium,medium,Stable Diffusion詳細との差別化薄,改善済み（2026-06-21・description更新・クラウドサービス固有軸として差別化）
+/tools/runway/,tool_detail,A,Runway,yes,yes,long,high,動画生成中心・独自比較軸,公開継続
+/tools/kling-ai/,tool_detail,A,Kling AI,yes,yes,long,high,画像→動画特化・需要あり,公開継続
+/tools/luma-ai/,tool_detail,A,Luma AI,yes,yes,long,high,高品質動画生成軸,公開継続
+/tools/pika/,tool_detail,A,Pika,yes,yes,long,high,手軽な短尺動画軸,公開継続
+/tools/hailuo-ai/,tool_detail,A,Hailuo AI,yes,yes,long,high,動画生成・海外需要,公開継続
+/tools/pixverse/,tool_detail,A,PixVerse,yes,yes,long,high,動画生成・SNS向け,公開継続
+/tools/vidu-ai/,tool_detail,B,Vidu AI,yes,no,medium,medium,情報が少ない・差別化軸弱,改善済み（2026-06-21・description更新・7参照画像・アニメ動画・音効生成の独自特徴を前面化）
+/tools/invideo-ai/,tool_detail,A,InVideo AI,yes,yes,long,high,動画編集特化・日本語需要あり,公開継続
+/tools/capcut-ai/,tool_detail,A,CapCut AI,yes,yes,long,high,SNS動画・日本語対応,公開継続
+/tools/haiper/,tool_detail,D,Haiper,yes,no,long,medium,コンシューマーサービス2025年2月シャットダウン済み,noindex,follow実施済み（2026-06-20・draft化なし・URL維持）

@@ -35,6 +35,7 @@ const jsonLd = JSON.stringify([
   canonicalPath="/tools/haiper/"
   ogType="article"
   jsonLd={jsonLd}
+  noindex={true}
 >
 
   <nav class="tdp-bc" aria-label="パンくずリスト">
@@ -126,7 +127,7 @@ const jsonLd = JSON.stringify([
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要確認</span>' }],
           [{ html: '対応環境', rk: true }, { html: 'Web / iOS / API' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-24', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://haiper.ai/" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://haiper.ai/" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 条件・料金は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
       }}

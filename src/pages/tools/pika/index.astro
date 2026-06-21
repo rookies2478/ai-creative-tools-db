@@ -60,6 +60,7 @@ const jsonLd = JSON.stringify([
         { lb: '料金目安', text: '$8/月〜（年払い）', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: '無料プランあり・有料なし' } },
         { lb: '日本語UI', badge: { s: 'cond', label: '部分対応' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://pika.art' }}
       secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://pika.art/pricing' }}
@@ -127,7 +128,7 @@ const jsonLd = JSON.stringify([
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span>' }],
           [{ html: '最大動画長', rk: true }, { html: '最大10秒（Pikaframesで最大25秒）' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-05', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://pika.art" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://pika.art" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 料金・クレジット数・商用利用条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
       }}

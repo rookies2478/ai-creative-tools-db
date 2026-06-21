@@ -1,0 +1,142 @@
+slug,toolName,category,siteOrigin,urlType,url,evidenceLevel,usedFor,needsReview,pricingStatus,lastReviewed,verifiedAt,note
+adobe-firefly,Adobe Firefly,image,overseas,official-top,https://firefly.adobe.com,strong,officialUrl,no,confirmed,2026-06-15,2026-06-15,
+adobe-firefly,Adobe Firefly,image,overseas,official-terms,https://www.adobe.com/legal/licenses-terms/adobe-gen-ai-user-guidelines.html,strong,officialSourceUrl,no,confirmed,2026-06-15,2026-06-15,
+adobe-firefly,Adobe Firefly,image,overseas,official-pricing,https://www.adobe.com/jp/products/firefly/plans.html,strong,pricingSourceUrl,no,confirmed,2026-06-19,2026-06-19,日本語公式料金ページ（JPY確認済み）
+adobe-firefly,Adobe Firefly,image,overseas,official-help,https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/adobe-firefly-faq.html,strong,sourceRef:policy,no,confirmed,2026-06-15,2026-06-15,Adobe Firefly FAQ（公式）
+adobe-firefly,Adobe Firefly,image,overseas,official-top,https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/generative-credits-overview.html,strong,sourceRef:pricing,no,confirmed,2026-06-15,2026-06-15,生成クレジット概要（公式）
+canva-ai-image-generator,Canva AI画像生成,image,overseas,official-top,https://www.canva.com,strong,officialUrl,no,confirmed,2026-06-15,2026-06-15,
+canva-ai-image-generator,Canva AI画像生成,image,overseas,official-pricing,https://www.canva.com/pricing/,strong,officialSourceUrl,no,confirmed,2026-06-15,2026-06-15,
+canva-ai-image-generator,Canva AI画像生成,image,overseas,official-terms,https://www.canva.com/policies/ai-product-terms/,strong,sourceRef:policy,no,confirmed,2026-06-15,2026-06-15,Canva AI Product Terms（公式）
+canva-ai-image-generator,Canva AI画像生成,image,overseas,official-top,https://www.canva.com/policies/content-license-agreement/,strong,sourceRef:commercial,no,confirmed,2026-06-15,2026-06-15,Canvaコンテンツライセンス（公式）
+canva-ai-image-generator,Canva AI画像生成,image,overseas,official-terms,https://www.canva.com/policies/terms-of-use/,strong,sourceRef:terms,no,confirmed,2026-06-15,2026-06-15,Canva利用規約（公式）
+canva-ai-image-generator,Canva AI画像生成,image,overseas,official-help,https://www.canva.com/help/generate-with-dreamlab/,strong,sourceRef:help,no,confirmed,2026-06-15,2026-06-15,Canva Dream Labヘルプ（公式）
+canva-ai-image-generator,Canva AI画像生成,image,overseas,official-help,https://www.canva.com/help/ai-access/,strong,sourceRef:help,no,confirmed,2026-06-15,2026-06-15,Canva AIアクセス・利用上限ヘルプ（公式）
+capcut-ai,CapCut AI,video,overseas,official-top,https://www.capcut.com/,strong,officialUrl,no,no_fixed_price,2026-06-15,2026-06-15,
+capcut-ai,CapCut AI,video,overseas,official-help,https://www.capcut.com/help/new-capcut-subscription-pricing,strong,officialSourceUrl,no,no_fixed_price,2026-06-15,2026-06-15,
+capcut-ai,CapCut AI,video,overseas,official-top,https://www.capcut.com/ja-jp/tools/ai-video-generator,strong,sourceRef:official,no,no_fixed_price,2026-06-15,2026-06-15,CapCut AI動画生成（公式）
+capcut-ai,CapCut AI,video,overseas,official-terms,https://www.capcut.com/clause/terms-of-service,strong,sourceRef:terms,no,no_fixed_price,2026-06-15,2026-06-15,CapCut 利用規約（公式）
+capcut-ai,CapCut AI,video,overseas,official-terms,https://www.capcut.com/clause/privacy-policy,strong,sourceRef:policy,no,no_fixed_price,2026-06-15,2026-06-15,CapCut プライバシーポリシー（公式）
+capcut-ai,CapCut AI,video,overseas,official-help,https://www.capcut.com/help/how-to-export-video-without-watermark,strong,sourceRef:help,no,no_fixed_price,2026-06-15,2026-06-15,CapCut 透かしなしエクスポート方法（公式ヘルプ）
+capcut-ai,CapCut AI,video,overseas,official-help,https://www.capcut.com/help/remove-watermark-when-exporting-video,strong,sourceRef:help,no,no_fixed_price,2026-06-15,2026-06-15,CapCut テンプレート動画の透かし削除（公式ヘルプ）
+clipdrop,Clipdrop,image,overseas,official-top,https://clipdrop.co/,strong,officialUrl,yes,partial,2026-06-06,2026-06-08,
+clipdrop,Clipdrop,image,overseas,official-pricing,https://clipdrop.co/pricing,strong,officialSourceUrl,yes,partial,2026-06-21,2026-06-08,Proプラン料金「--per month」非開示のまま確認（2026-06-21）
+clipdrop,Clipdrop,image,overseas,official-top,https://clipdrop.co/tools,strong,sourceRef:official,yes,partial,2026-06-06,2026-06-08,Clipdropツール一覧（公式）
+clipdrop,Clipdrop,image,overseas,official-terms,https://clipdrop.co/terms-visitor,strong,sourceRef:terms,yes,partial,2026-06-06,2026-06-08,Clipdrop利用規約（公式）
+clipdrop,Clipdrop,image,overseas,official-terms,https://clipdrop.co/privacy,strong,sourceRef:policy,yes,partial,2026-06-06,2026-06-08,Clipdropプライバシーポリシー（公式）
+clipdrop,Clipdrop,image,overseas,official-top,https://clipdrop.co/apis,strong,sourceRef:docs,yes,partial,2026-06-06,2026-06-08,Clipdrop API（公式）
+dalle,DALL·E,image,overseas,official-top,https://openai.com/dall-e-3,strong,officialUrl,yes,partial,2026-06-15,2026-06-15,
+dalle,DALL·E,image,overseas,official-terms,https://openai.com/policies/usage-policies,strong,officialSourceUrl,yes,partial,2026-06-15,2026-06-15,
+dalle,DALL·E,image,overseas,official-pricing,https://openai.com/chatgpt/pricing/,strong,pricingSourceUrl,yes,partial,2026-06-15,2026-06-15,ChatGPT料金ページ（公式）。DALL·Eは独立した月額プランを持たず、ChatGPT Plus等の有料プランに内包される。月額・プラン詳細は公式サイトをご確認ください。
+dalle,DALL·E,image,overseas,official-pricing,https://openai.com/pricing,strong,sourceRef:pricing,yes,partial,2026-06-15,2026-06-15,OpenAI API料金（公式）
+dalle,DALL·E,image,overseas,official-help,https://help.openai.com/en/articles/8912793-c2pa-and-synthid-in-openai-generated-images,strong,sourceRef:help,yes,partial,2026-06-15,2026-06-15,C2PAとSynthID — OpenAI生成画像（公式ヘルプ）
+dalle,DALL·E,image,overseas,official-top,https://developers.openai.com/api/docs/deprecations,strong,sourceRef:official,yes,partial,2026-06-15,2026-06-15,OpenAI APIモデルdeprecations（公式）
+dreamstudio,Brand Studio（旧DreamStudio）,image,overseas,official-top,https://stability.ai/brandstudio,strong,officialUrl,no,confirmed,2026-06-21,2026-06-21,
+dreamstudio,Brand Studio（旧DreamStudio）,image,overseas,official-pricing,https://stability.ai/brand-studio-plans,strong,officialSourceUrl,no,confirmed,2026-06-21,2026-06-21,2026-06-21確認：Trial無料1000cr / Core $50/月 USD 5000cr/月 / Enterprise カスタム
+dreamstudio,Brand Studio（旧DreamStudio）,image,overseas,official-top,https://stability.ai/license,strong,sourceRef:policy,no,confirmed,2026-06-21,2026-06-21,Stability AIライセンス（公式）
+dreamstudio,Brand Studio（旧DreamStudio）,image,overseas,official-terms,https://stability.ai/acceptable-use-policy,strong,sourceRef:policy,no,confirmed,2026-06-21,2026-06-21,Stability AI Acceptable Use Policy（公式）
+dreamstudio,Brand Studio（旧DreamStudio）,image,overseas,official-terms,https://stability.ai/privacy-policy,strong,sourceRef:policy,no,confirmed,2026-06-21,2026-06-21,Stability AIプライバシーポリシー（公式）
+fotor-ai,Fotor AI,image,overseas,official-top,https://www.fotor.com/jp/ai-image-generator/,strong,officialUrl,yes,partial,2026-06-19,2026-06-19,
+fotor-ai,Fotor AI,image,overseas,official-pricing,https://www.fotor.com/jp/pricing/,strong,officialSourceUrl,yes,partial,2026-06-19,2026-06-19,公式料金ページでUSD確認（2026-06-19）
+fotor-ai,Fotor AI,image,overseas,official-help,https://support.fotor.com/hc/en-us/articles/17767970123417-Are-the-AI-generated-images-commercially-available-Do-I-have-ownership-of-them,strong,sourceRef:commercial,yes,partial,2026-06-13,2026-06-13,AI生成画像の商用利用・所有権について（公式ヘルプ）
+fotor-ai,Fotor AI,image,overseas,official-help,https://support.fotor.com/hc/en-us/articles/900006654446-Commercial-Use,strong,sourceRef:commercial,yes,partial,2026-06-13,2026-06-13,Commercial Use（公式ヘルプ）
+fotor-ai,Fotor AI,image,overseas,official-terms,https://www.fotor.com/termsofservice,strong,sourceRef:terms,yes,partial,2026-06-13,2026-06-13,Fotor利用規約（公式）
+fotor-ai,Fotor AI,image,overseas,official-terms,https://www.fotor.com/privacy,strong,sourceRef:policy,yes,partial,2026-06-13,2026-06-13,Fotorプライバシーポリシー（公式）
+gemini-image-generation,Gemini画像生成,image,overseas,official-top,https://gemini.google/jp/overview/image-generation/?hl=ja-JP,strong,officialUrl,yes,partial,2026-06-13,2026-06-13,
+gemini-image-generation,Gemini画像生成,image,overseas,official-terms,https://policies.google.com/terms/generative-ai/use-policy,strong,officialSourceUrl,yes,partial,2026-06-13,2026-06-13,
+gemini-image-generation,Gemini画像生成,image,overseas,official-pricing,https://gemini.google.com/advanced?hl=ja,strong,pricingSourceUrl,yes,partial,2026-06-13,2026-06-13,公式ページURLは設定済み。ただし月額・プラン名称・Google One AI Premiumとの関係は要確認。Gemini画像生成の有料機能はGoogleの有料プランに内包されており独立した料金ページは存在しない。最新情報は公式サイトをご
+gemini-image-generation,Gemini画像生成,image,overseas,official-terms,https://policies.google.com/terms?hl=ja,strong,sourceRef:terms,yes,partial,2026-06-13,2026-06-13,Google利用規約（公式）
+gemini-image-generation,Gemini画像生成,image,overseas,official-terms,https://policies.google.com/privacy?hl=ja,strong,sourceRef:policy,yes,partial,2026-06-13,2026-06-13,Googleプライバシーポリシー（公式）
+hailuo-ai,Hailuo AI,video,overseas,official-top,https://hailuoai.video,strong,officialUrl,no,confirmed,2026-06-21,2026-06-21,
+hailuo-ai,Hailuo AI,video,overseas,official-terms,https://hailuoai.video/doc/terms-of-service.html,strong,officialSourceUrl,no,confirmed,2026-06-21,2026-06-21,
+hailuo-ai,Hailuo AI,video,overseas,official-pricing,https://hailuoai.video/subscribe,strong,pricingSourceUrl,no,confirmed,2026-06-21,2026-06-21,公式料金ページ。2026-06-21確認：Standard $14.99/月・Pro $54.99/月・Master $119.99/月（USD）。最新の料金はhailuoai.video公式サイトをご確認ください。
+haiper,Haiper,video,overseas,official-top,https://haiper.ai/,strong,officialUrl,no,service_changed,2026-06-15,2026-06-15,
+haiper,Haiper,video,overseas,official-pricing,https://docs.haiper.ai/pricing,strong,officialSourceUrl,no,service_changed,2026-06-15,2026-06-15,
+haiper,Haiper,video,overseas,official-docs,https://docs.haiper.ai/introduction,strong,sourceRef:docs,no,service_changed,2026-06-15,2026-06-15,Haiper ドキュメント（Introduction）
+haiper,Haiper,video,overseas,official-pricing,https://docs.haiper.ai/api-reference/api-pricing,strong,sourceRef:pricing,no,service_changed,2026-06-15,2026-06-15,Haiper API料金（公式）
+haiper,Haiper,video,overseas,official-help,https://book.haiper.ai/haiper-video-generator/faq,strong,sourceRef:help,no,service_changed,2026-06-15,2026-06-15,Haiper FAQ（公式）
+haiper,Haiper,video,overseas,official-terms,https://static2.haiper.ai/public/terms-of-use-11072024.html,strong,sourceRef:terms,no,service_changed,2026-06-15,2026-06-15,Haiper 利用規約（旧公式）
+haiper,Haiper,video,overseas,official-top,https://netmind.ai/blogDetail/Forging-the-Future-of-AI-NetMind-ai-Pioneering-Collaboration-with-Haiper-AI,strong,sourceRef:official,no,service_changed,2026-06-15,2026-06-15,NetMind.AI × Haiper 提携発表（公式）
+ideogram,Ideogram,image,overseas,official-top,https://ideogram.ai/,strong,officialUrl,yes,partial,2026-06-14,2026-06-14,
+ideogram,Ideogram,image,overseas,official-pricing,https://docs.ideogram.ai/plans-and-pricing/available-plans,strong,officialSourceUrl,yes,partial,2026-06-14,2026-06-14,
+ideogram,Ideogram,image,overseas,official-docs,https://docs.ideogram.ai/,strong,sourceRef:docs,yes,partial,2026-06-14,2026-06-14,Ideogram ドキュメント（公式）
+ideogram,Ideogram,image,overseas,official-help,https://docs.ideogram.ai/frequently-asked-questions,strong,sourceRef:help,yes,partial,2026-06-14,2026-06-14,Ideogram よくある質問（公式）
+ideogram,Ideogram,image,overseas,official-terms,https://ideogram.ai/legal/tos,strong,sourceRef:terms,yes,partial,2026-06-14,2026-06-14,Ideogram 利用規約（公式）
+ideogram,Ideogram,image,overseas,official-pricing,https://ideogram.ai/pricing,strong,sourceRef:pricing,yes,partial,2026-06-14,2026-06-14,Ideogram 料金プラン（公式）
+ideogram,Ideogram,image,overseas,official-docs,https://docs.ideogram.ai/using-ideogram/getting-started/signup-and-registration,strong,sourceRef:docs,yes,partial,2026-06-14,2026-06-14,Ideogram 登録・開始方法（公式ドキュメント）
+invideo-ai,InVideo AI,video,overseas,official-top,https://invideo.io,strong,officialUrl,no,confirmed,2026-06-15,2026-06-15,
+invideo-ai,InVideo AI,video,overseas,official-pricing,https://invideo.io/pricing/,strong,officialSourceUrl,no,confirmed,2026-06-15,2026-06-15,
+invideo-ai,InVideo AI,video,overseas,official-terms,https://invideo.io/terms-and-conditions/,strong,sourceRef:terms,no,confirmed,2026-06-15,2026-06-15,InVideo AI Terms and Conditions（公式利用規約）
+invideo-ai,InVideo AI,video,overseas,official-pricing,https://help.invideo.io/en/articles/11528140-invideo-plans-and-credits-everything-you-need-to-know,strong,sourceRef:help,no,confirmed,2026-06-15,2026-06-15,InVideo AI プラン・クレジット詳細（公式ヘルプ）
+invideo-ai,InVideo AI,video,overseas,official-help,https://help.invideo.io/en/articles/9387980-can-i-generate-a-video-in-other-languages,strong,sourceRef:help,no,confirmed,2026-06-15,2026-06-15,InVideo AI 対応言語（公式ヘルプ）
+kling-ai,Kling AI,video,overseas,official-top,https://klingai.com,strong,officialUrl,no,confirmed,2026-06-04,2026-06-08,
+kling-ai,Kling AI,video,overseas,official-pricing,https://klingai.com/global/pricing,strong,officialSourceUrl,no,confirmed,2026-06-04,2026-06-08,
+kling-ai,Kling AI,video,overseas,official-top,https://klingai.com/docs/user-policy,strong,sourceRef:official,no,confirmed,2026-06-04,2026-06-08,Kling AI ユーザーポリシー（確認時点でHTTP 446により直接確認不可）
+kling-ai,Kling AI,video,overseas,official-top,https://klingai.com/global/docs/payment-policy,strong,sourceRef:official,no,confirmed,2026-06-04,2026-06-08,Kling AI 決済ポリシー（確認時点でHTTP 446により直接確認不可）
+kling-ai,Kling AI,video,overseas,official-pricing,https://app.klingai.com/global/membership/membership-plan,strong,sourceRef:official,no,confirmed,2026-06-04,2026-06-08,Kling AI メンバーシッププラン（確認時点でHTTP 446により直接確認不可）
+leonardo-ai,Leonardo AI,image,overseas,official-top,https://leonardo.ai,strong,officialUrl,no,confirmed,2026-06-15,2026-06-15,
+leonardo-ai,Leonardo AI,image,overseas,official-pricing,https://leonardo.ai/pricing/,strong,officialSourceUrl,no,confirmed,2026-06-15,2026-06-15,
+leonardo-ai,Leonardo AI,image,overseas,official-terms,https://leonardo.ai/terms-of-service/,strong,sourceRef:terms,no,confirmed,2026-06-15,2026-06-15,Leonardo AI利用規約（公式）
+leonardo-ai,Leonardo AI,image,overseas,official-top,https://leonardo.ai/news/can-you-use-ai-generated-images-commercially/,strong,sourceRef:commercial,no,confirmed,2026-06-15,2026-06-15,Leonardo AI商用利用ガイド（公式）
+leonardo-ai,Leonardo AI,image,overseas,official-help,https://leonardo.ai/faq/,strong,sourceRef:help,no,confirmed,2026-06-15,2026-06-15,Leonardo AI FAQ（公式）
+luma-ai,Luma AI,video,overseas,official-top,https://lumalabs.ai/,strong,officialUrl,no,confirmed,2026-06-15,2026-06-15,
+luma-ai,Luma AI,video,overseas,official-pricing,https://lumalabs.ai/pricing,strong,officialSourceUrl,no,confirmed,2026-06-15,2026-06-15,
+luma-ai,Luma AI,video,overseas,official-top,https://dream-machine.lumalabs.ai/,strong,sourceRef:official,no,confirmed,2026-06-15,2026-06-15,Dream Machine 公式ページ
+luma-ai,Luma AI,video,overseas,official-pricing,https://lumalabs.ai/learning-hub/dream-machine-support-pricing-information,strong,sourceRef:help,no,confirmed,2026-06-15,2026-06-15,Dream Machine サポート・料金情報（公式ラーニングハブ）
+luma-ai,Luma AI,video,overseas,official-terms,https://lumalabs.ai/terms,strong,sourceRef:terms,no,confirmed,2026-06-15,2026-06-15,Luma AI 利用規約（公式）
+luma-ai,Luma AI,video,overseas,official-terms,https://lumalabs.ai/privacy,strong,sourceRef:policy,no,confirmed,2026-06-15,2026-06-15,Luma AI プライバシーポリシー（公式）
+microsoft-designer,Microsoft Designer,image,overseas,official-top,https://designer.microsoft.com/,strong,officialUrl,yes,partial,2026-06-14,2026-06-14,
+microsoft-designer,Microsoft Designer,image,overseas,official-terms,https://www.microsoft.com/servicesagreement,strong,officialSourceUrl,yes,partial,2026-06-14,2026-06-14,
+microsoft-designer,Microsoft Designer,image,overseas,official-help,https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer,medium,pricingSourceUrl,yes,partial,2026-06-14,2026-06-14,公式FAQページ（Microsoft公式）。Microsoft Designerの有料機能はMicrosoft 365 / Copilot Pro等に内包されており独立した月額料金ページは存在しない可能性が高い。月額・currency は要
+midjourney,Midjourney,image,overseas,official-top,https://www.midjourney.com,strong,officialUrl,no,confirmed,2026-06-06,2026-06-08,
+midjourney,Midjourney,image,overseas,official-pricing,https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans,strong,officialSourceUrl,no,confirmed,2026-06-06,2026-06-08,
+midjourney,Midjourney,image,overseas,official-terms,https://docs.midjourney.com/docs/terms-of-service,strong,sourceRef:terms,no,confirmed,2026-06-06,2026-06-08,Midjourney利用規約（公式）
+midjourney,Midjourney,image,overseas,official-terms,https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service,strong,sourceRef:terms,no,confirmed,2026-06-06,2026-06-08,Midjourney利用規約（2026年版・公式）
+midjourney,Midjourney,image,overseas,official-top,https://docs.midjourney.com/hc/en-us/articles/27870375276557-Using-Images-Videos-Commercially,strong,sourceRef:commercial,no,confirmed,2026-06-06,2026-06-08,Midjourney商用利用ガイド（公式）
+nightcafe,NightCafe,image,overseas,official-top,https://creator.nightcafe.studio/,strong,officialUrl,yes,partial,2026-06-17,2026-06-17,
+nightcafe,NightCafe,image,overseas,official-terms,https://nightcafe.studio/policies/terms-of-service,strong,officialSourceUrl,yes,partial,2026-06-17,2026-06-17,
+nightcafe,NightCafe,image,overseas,official-blog,https://nightcafe.studio/blogs/info/is-nightcafe-free,weak,pricingSourceUrl,yes,partial,2026-06-17,2026-06-17,公式ブログ記事（料金専用ページではない）。無料枠の案内はあるが有料プランの月額・tier構成を明示した料金表ページURLは未確認。最新の料金はNightCafe公式サイトをご確認ください。
+nightcafe,NightCafe,image,overseas,official-top,https://nightcafe.studio/,strong,sourceRef:official,yes,partial,2026-06-17,2026-06-17,NightCafe公式サイト
+nightcafe,NightCafe,image,overseas,official-help,https://help.nightcafe.studio/portal/en/kb/articles/does-the-license-allow-me-to-sell-my-creations-or-use-them-for-commercial-purposes,strong,sourceRef:commercial,yes,partial,2026-06-17,2026-06-17,NightCafeヘルプ：生成物の商用利用・販売について
+nightcafe,NightCafe,image,overseas,official-help,https://help.nightcafe.studio/portal/en/kb/articles/can-i-sell-my-creations-through-nightcafe,strong,sourceRef:commercial,yes,partial,2026-06-17,2026-06-17,NightCafeヘルプ：作品の販売について
+nightcafe,NightCafe,image,overseas,official-help,https://help.nightcafe.studio/portal/en/kb/articles/can-i-sell-my-creations-as-nfts,strong,sourceRef:help,yes,partial,2026-06-17,2026-06-17,NightCafeヘルプ：NFTとしての販売について
+nightcafe,NightCafe,image,overseas,official-terms,https://nightcafe.studio/policies/privacy-policy,strong,sourceRef:policy,yes,partial,2026-06-17,2026-06-17,NightCafeプライバシーポリシー
+pika,Pika,video,overseas,official-top,https://pika.art,strong,officialUrl,no,confirmed,2026-06-15,2026-06-15,
+pika,Pika,video,overseas,official-pricing,https://pika.art/pricing,strong,officialSourceUrl,no,confirmed,2026-06-15,2026-06-15,
+pika,Pika,video,overseas,official-terms,https://pika.art/terms-of-service,strong,sourceRef:terms,no,confirmed,2026-06-15,2026-06-15,Pika利用規約（公式）
+pixverse,PixVerse,video,overseas,official-top,https://pixverse.ai,strong,officialUrl,yes,unconfirmed,2026-06-17,2026-06-17,
+pixverse,PixVerse,video,overseas,official-terms,https://pixverse.ai/en/terms-of-service,strong,officialSourceUrl,yes,unconfirmed,2026-06-17,2026-06-17,
+pixverse,PixVerse,video,overseas,missing,unknown,missing,pricingSourceUrl,yes,unconfirmed,2026-06-21,2026-06-17,pricingSourceUrl=unknown・pixverse.ai/pricing・/en/pricing ともに404（2026-06-21確認）。引き続き未確認
+pixverse,PixVerse,video,overseas,official-blog,https://pixverse.ai/blog,medium,sourceRef:official,yes,unconfirmed,2026-06-17,2026-06-17,PixVerse公式ブログ
+pixverse,PixVerse,video,overseas,official-docs,https://docs.platform.pixverse.ai,strong,sourceRef:official,yes,unconfirmed,2026-06-17,2026-06-17,PixVerse Platform APIドキュメント
+pixverse,PixVerse,video,overseas,official-pricing,https://docs.platform.pixverse.ai/pricing-796039m0,strong,sourceRef:official,yes,unconfirmed,2026-06-17,2026-06-17,PixVerse Platform 料金ページ
+playground-ai,Playground AI,image,overseas,official-top,https://playground.com/,strong,officialUrl,no,confirmed,2026-06-06,2026-06-08,
+playground-ai,Playground AI,image,overseas,official-pricing,https://playground.com/design/pricing,strong,officialSourceUrl,no,confirmed,2026-06-06,2026-06-08,
+playground-ai,Playground AI,image,overseas,official-terms,https://playground.com/terms,strong,sourceRef:terms,no,confirmed,2026-06-06,2026-06-08,Playground AI利用規約（公式）
+playground-ai,Playground AI,image,overseas,official-help,https://help.playgroundai.com/en/articles/6848773-how-does-copyright-work-do-i-own-the-designs-i-create,strong,sourceRef:commercial,no,confirmed,2026-06-06,2026-06-08,著作権・所有権について（公式ヘルプ）
+playground-ai,Playground AI,image,overseas,official-help,https://help.playgroundai.com/en/,strong,sourceRef:help,no,confirmed,2026-06-06,2026-06-08,Playground AIヘルプセンター（公式）
+runway,Runway,video,overseas,official-top,https://runwayml.com,strong,officialUrl,no,confirmed,2026-06-05,2026-06-08,
+runway,Runway,video,overseas,official-pricing,https://runwayml.com/pricing/,strong,officialSourceUrl,no,confirmed,2026-06-05,2026-06-08,
+runway,Runway,video,overseas,official-terms,https://runwayml.com/terms-of-use/,strong,sourceRef:terms,no,confirmed,2026-06-05,2026-06-08,Runway利用規約（公式）
+runway,Runway,video,overseas,official-help,https://help.runwayml.com/hc/en-us/articles/18927776141715-Usage-rights,strong,sourceRef:commercial,no,confirmed,2026-06-05,2026-06-08,Runway利用権（使用権）について（公式ヘルプ）
+runway,Runway,video,overseas,official-help,https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes,strong,sourceRef:commercial,no,confirmed,2026-06-05,2026-06-08,Runway：商用利用について（公式ヘルプ）
+runway,Runway,video,overseas,official-pricing,https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details,strong,sourceRef:help,no,confirmed,2026-06-05,2026-06-08,Runway無料プラン詳細（公式ヘルプ）
+seaart-ai,SeaArt AI,image,overseas,official-top,https://www.seaart.ai/,strong,officialUrl,yes,unconfirmed,2026-06-17,2026-06-17,
+seaart-ai,SeaArt AI,image,overseas,missing,,missing,pricingSourceUrl,yes,unconfirmed,2026-06-21,2026-06-17,pricingSourceUrl未設定。seaart.ai/pricing・/ja 再確認（2026-06-21）：非ログインで具体価格・通貨表示なし
+seaart-ai,SeaArt AI,image,overseas,official-top,https://www.seaart.ai/ja,strong,sourceRef:official,yes,unconfirmed,2026-06-17,2026-06-17,SeaArt AI 公式サイト（日本語）
+seaart-ai,SeaArt AI,image,overseas,cdn-image,https://image.cdn2.seaart.me/20250802/d2790ce8-f8e8-4ea4-a4a1-c958c728566e.html,weak,sourceRef:terms,yes,unconfirmed,2026-06-17,2026-06-17,SeaArt AI 利用規約（公式・2025年8月版）
+seaart-ai,SeaArt AI,image,overseas,cdn-image,https://image.cdn2.seaart.me/20250710/e6a1e6bb-9c1b-4f63-af4e-011f28596d77.html,weak,sourceRef:policy,yes,unconfirmed,2026-06-17,2026-06-17,SeaArt AI プライバシーポリシー（公式）
+stable-diffusion,Stable Diffusion,image,overseas,official-top,https://stability.ai,strong,officialUrl,yes,partial,2026-06-06,2026-06-08,
+stable-diffusion,Stable Diffusion,image,overseas,official-terms,https://stability.ai/license,strong,officialSourceUrl,yes,partial,2026-06-06,2026-06-08,
+stable-diffusion,Stable Diffusion,image,overseas,official-pricing,https://platform.stability.ai/pricing,strong,pricingSourceUrl,yes,partial,2026-06-06,2026-06-08,公式料金ページURLは設定済み。ただしローカル利用/API利用、月額プラン、クレジット体系の最新性は要確認。最新情報は公式サイトをご確認ください。
+stable-diffusion,Stable Diffusion,image,overseas,official-news,https://stability.ai/news-updates/introducing-stable-diffusion-3-5,medium,sourceRef:official,yes,partial,2026-06-06,2026-06-08,Stable Diffusion 3.5 リリースアナウンス（公式）
+stable-diffusion,Stable Diffusion,image,overseas,official-docs,https://github.com/CompVis/stable-diffusion,strong,sourceRef:docs,yes,partial,2026-06-06,2026-06-08,Stable Diffusion GitHub（CompVis）
+stable-diffusion,Stable Diffusion,image,overseas,official-docs,https://github.com/AUTOMATIC1111/stable-diffusion-webui,strong,sourceRef:docs,yes,partial,2026-06-06,2026-06-08,AUTOMATIC1111 Web UI（GitHub）
+stable-diffusion,Stable Diffusion,image,overseas,official-docs,https://docs.comfy.org,strong,sourceRef:docs,yes,partial,2026-06-06,2026-06-08,ComfyUI 公式ドキュメント
+tensor-art,Tensor.Art,image,overseas,official-top,https://tensor.art/,strong,officialUrl,yes,partial,2026-06-17,2026-06-17,
+tensor-art,Tensor.Art,image,overseas,official-terms,https://tensor.art/about/terms-of-service-new,strong,officialSourceUrl,yes,partial,2026-06-17,2026-06-17,
+tensor-art,Tensor.Art,image,overseas,official-news,https://tensor.art/event/proupdate,weak,pricingSourceUrl,yes,partial,2026-06-17,2026-06-17,Proプラン案内の公式イベントページ。料金額の詳細は変更される可能性あり。専用の公式料金ページURL（/pricing等）は未確認。最新の料金は公式サイトをご確認ください。
+tensor-art,Tensor.Art,image,overseas,official-top,https://tensorart.me/workflow,strong,sourceRef:docs,yes,partial,2026-06-17,2026-06-17,Tensor.Art Workflow（公式）
+tensor-art,Tensor.Art,image,overseas,official-terms,https://tensor.art/about/privacy-policy,strong,sourceRef:policy,yes,partial,2026-06-17,2026-06-17,Tensor.Artプライバシーポリシー（公式）
+vidu-ai,Vidu AI,video,overseas,official-top,https://www.vidu.com,strong,officialUrl,yes,unconfirmed,2026-06-21,2026-06-21,
+vidu-ai,Vidu AI,video,overseas,official-pricing,https://www.vidu.com/pricing,strong,officialSourceUrl,yes,unconfirmed,2026-06-21,2026-06-21,2026-06-21再確認：動的ロードのため料金・通貨取得不可
+vidu-ai,Vidu AI,video,overseas,official-terms,https://www.vidu.com/terms,strong,sourceRef:terms,yes,unconfirmed,2026-06-21,2026-06-21,Vidu AI利用規約

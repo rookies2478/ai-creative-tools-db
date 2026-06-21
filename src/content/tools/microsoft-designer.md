@@ -29,6 +29,8 @@ lastReviewed: "2026-06-14"
 nextReviewDue: "2026-07-14"
 verifiedAt: "2026-06-14"
 officialSourceUrl: "https://www.microsoft.com/servicesagreement"
+pricingSourceUrl: "https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer"
+pricingSourceNote: "公式FAQページ（Microsoft公式）。Microsoft Designerの有料機能はMicrosoft 365 / Copilot Pro等に内包されており独立した月額料金ページは存在しない可能性が高い。月額・currency は要公式確認。最新情報は公式サイトをご確認ください。"
 pricingModel: "subscription"
 pricingSummary: "Microsoftアカウントで無料利用できる範囲がありますが、公式FAQでは個人的・非商用利用向けと案内されています。頻繁に利用する場合やMicrosoft 365 / Copilot Pro連携機能では、サブスクリプションが必要になる場合があります。最新情報は公式サイトをご確認ください。"
 freePlanNote: "Microsoftアカウントで無料利用できる範囲があります。公式FAQでは個人的・非商用利用向けと案内されており、頻繁に作成するユーザーにはサブスクリプションが必要になる場合があります。生成回数や対象機能は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
@@ -50,6 +52,9 @@ useCases:
 limitations:
   - "商用利用条件は公式規約の確認が必要"
   - "一部機能は地域・年齢制限の対象になる場合がある"
+usagePolicy:
+  inputMaterialRisk: "medium"
+  inputMaterialNote: "テンプレートと組み合わせた画像アップロード・編集が可能。人物・ブランド・第三者素材を含む場合はMicrosoftサービス規約・肖像権・商標権の観点から別途確認が必要。"
 reviewed:
   pricing: "2026-05-26"
   terms: "2026-05-26"

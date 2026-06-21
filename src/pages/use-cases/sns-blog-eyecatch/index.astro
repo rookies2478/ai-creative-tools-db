@@ -30,16 +30,31 @@ const faqs = [
     q: '文字入れが必要な場合、どのツールが向いていますか？',
     a: '文字入れ・レイアウト編集をツール内で完結させたい場合は、CanvaのようなデザインツールにAI画像生成機能が統合されたツールが使いやすい場合があります。AI生成画像を別の編集ツールと組み合わせる方法もあります。各ツールの機能は公式サイトでご確認ください。',
   },
+  {
+    q: 'ブログアイキャッチ専用の比較ページと何が違いますか？',
+    a: 'このページはSNS投稿への流用・正方形や縦長など複数フォーマット・SNS横断での複数プラットフォーム利用を前提にした5ツール比較です。ブログ・オウンドメディア・note・アフィリエイト記事のアイキャッチ（16:9・記事内容との整合性・アフィリエイト収益化の注意点）に特化した比較は、ブログアイキャッチ向けのページをご参照ください。',
+  },
 ];
 
 const faqJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((f) => ({
-    "@type": "Question",
-    "name": f.q,
-    "acceptedAnswer": { "@type": "Answer", "text": f.a }
-  }))
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "AIクリエイティブナビ", "item": "https://aicreative-db.com/" },
+        { "@type": "ListItem", "position": 2, "name": "SNS・ブログアイキャッチ向けAI画像生成", "item": "https://aicreative-db.com/use-cases/sns-blog-eyecatch/" }
+      ]
+    }
+  ]
 });
 
 const tools = [
@@ -108,7 +123,7 @@ const tools = [
 
 <BaseLayout
   title="SNS・ブログアイキャッチ向けAI画像生成ツール比較【商用利用・透かし・日本語対応】| AIクリエイティブナビ"
-  description="SNS投稿やブログのアイキャッチ画像作成に向いているAI画像生成ツールを、商用利用条件・透かし・文字入れのしやすさ・日本語対応・料金の観点で比較できます。各ツールの詳細は公式サイトでご確認ください。"
+  description="SNS投稿やブログのアイキャッチ画像作成に向いているAI画像生成ツールを比較。正方形・縦長など複数フォーマットへの展開、SNS横断での商用利用条件・透かし・文字入れのしやすさ・日本語対応を整理しています。各ツールの詳細は公式サイトでご確認ください。"
   canonicalPath="/use-cases/sns-blog-eyecatch/"
   jsonLd={faqJsonLd}
 >
@@ -143,7 +158,7 @@ const tools = [
         <h1>SNS・ブログアイキャッチ向け<span class="hl">AI画像生成ツール比較</span></h1>
         <p class="lead">
           SNS投稿やブログのアイキャッチ画像では、見た目の分かりやすさ・文字入れのしやすさ・商用利用条件・透かしの有無・編集しやすさ・日本語対応が重要なポイントになります。
-          このページでは<a href="/categories/image-generation/">AI画像生成ツール</a>の中から、SNS・ブログ用途で確認したいポイントや選び方を整理します。
+          このページでは<a href="/categories/image-generation/">AI画像生成ツール</a>の中から、SNS・ブログ用途で確認したいポイントや選び方を整理します。正方形・縦長・SNS投稿流用など複数フォーマットへの展開や、SNS・ブログ横断での利用を前提とした比較です。ブログ記事のアイキャッチ（16:9・アフィリエイト・note・オウンドメディア）に特化した比較は<a href="/use-cases/blog-eyecatch/">ブログアイキャッチ向けページ</a>もご参照ください。
         </p>
         <div class="stats">
           <div class="stat"><span class="n">5</span><span class="t">参照ツール</span></div>
@@ -176,7 +191,7 @@ const tools = [
           </li>
           <li>
             <span class="pn">03</span>
-            <span class="pt"><b>文字入れ・デザイン編集のしやすさ：</b>アイキャッチには文字やデザイン要素を重ねることが多いため、テキスト追加・レイアウト編集・書き出し形式の柔軟さも選ぶポイントになります。外部ツールと組み合わせる前提で選ぶ場合も確認しておくと安心です。</span>
+            <span class="pt"><b>文字入れ・フォーマット対応のしやすさ：</b>アイキャッチには文字やデザイン要素を重ねることが多いため、テキスト追加・レイアウト編集・書き出し形式の柔軟さも選ぶポイントになります。SNS向けでは正方形（1:1）・縦長（9:16）など複数比率への展開が必要な場合もあるため、サイズ変更・複数フォーマット書き出しに対応しているかも確認しておくと安心です。</span>
           </li>
           <li>
             <span class="pn">04</span>
@@ -355,6 +370,7 @@ const tools = [
           <h2>関連ページ</h2>
           <p class="finder-lead">他のカテゴリ・条件・ガイドからも、用途に合ったAIツールを探せます。</p>
           <div class="taglinks">
+            <a class="taglink" href="/use-cases/blog-eyecatch/"><span class="ld"></span>ブログアイキャッチ向けツール</a>
             <a class="taglink" href="/use-cases/anime-illustration/"><span class="ld"></span>アニメ・イラスト風AIツール</a>
             <a class="taglink" href="/use-cases/realistic-photo/"><span class="ld"></span>実写・写真風AIツール</a>
             <a class="taglink" href="/use-cases/youtube-thumbnail/"><span class="ld"></span>YouTubeサムネ向けツール</a>

@@ -1,0 +1,14 @@
+page,tableName,columns,rows,scrollHint,mobileRisk,recommendation,priority
+/categories/image-generation/,用途別おすすめ早見表,5,7,追加済み,high,スクロールヒント追加（実施済み）,A
+/categories/image-generation/,ツールカテゴリ比較表,4,3,追加済み,medium,スクロールヒント追加（実施済み）,A
+/categories/image-generation/,横断比較表,8,16,あり,medium,現状維持,C
+/categories/image-generation/,主要ツール特徴表,3,8,あり,low,現状維持,C
+/categories/video-generation/,用途別おすすめ早見表,5,7,追加済み,high,スクロールヒント追加（実施済み）,A
+/categories/video-generation/,ツールカテゴリ比較表,4,3,追加済み,medium,スクロールヒント追加（実施済み）,A
+/categories/video-generation/,横断比較表,5,12,あり,medium,現状維持,C
+/categories/video-generation/,主要ツール特徴表,3,8,あり,low,現状維持,C
+/comparisons/free-ai-image-generators/,簡易比較表,8,14,あり,high,列順変更実施済み（無料プラン商用をcol5へ移動）,B
+/comparisons/*/ComparisonVsArticle,先に結論テーブル,3,5,あり,low,現状維持,C
+/comparisons/*/ComparisonVsArticle,基本比較表,3,10,あり,low,現状維持,C
+/components/CompareTablePreview,ツール比較プレビュー,6,5,あり,medium,現状維持,C
+/components/ToolSummaryTable,比較ポイント早見表,2,15,不要（2列）,low,現状維持,C

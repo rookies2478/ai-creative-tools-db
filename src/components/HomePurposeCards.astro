@@ -1,0 +1,137 @@
+---
+// HomePurposeCards.astro
+// 目的別入口カード（3枚）— 既存URLのみにリンク
+---
+
+<section class="hp-section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <span class="eyebrow">目的別に探す</span>
+      <h2>まず、用途に近い入口から</h2>
+      <p>AI画像生成・AI動画生成ツールは、目的によって確認すべきポイントが変わります。まずは用途に近い入口から比較してください。</p>
+    </div>
+
+    <div class="hp-grid" data-stagger>
+
+      <a href="/categories/image-generation/" class="hp-card reveal">
+        <span class="hp-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </span>
+        <div class="hp-body">
+          <h3>初心者向けに探す</h3>
+          <p>まず試しやすいAI画像生成・AI動画生成ツールを、無料枠や日本語対応の有無を見ながら比較できます。</p>
+        </div>
+        <span class="hp-cta">AI画像生成ツールを見る <span class="arr">→</span></span>
+      </a>
+
+      <a href="/conditions/commercial-use/" class="hp-card reveal">
+        <span class="hp-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+            <circle cx="12" cy="12" r="1"/>
+            <path d="M6 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/>
+          </svg>
+        </span>
+        <div class="hp-body">
+          <h3>商用利用前提で確認する</h3>
+          <p>商用利用条件は、ツール・プラン・入力素材・用途によって異なる場合があります。公式情報を確認しながら比較してください。本記事は法的助言ではありません。</p>
+        </div>
+        <span class="hp-cta">商用利用の確認ポイントを見る <span class="arr">→</span></span>
+      </a>
+
+      <a href="/conditions/free/" class="hp-card reveal">
+        <span class="hp-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </span>
+        <div class="hp-body">
+          <h3>無料・低コストで試す</h3>
+          <p>無料枠や料金目安を確認しながら、まず試しやすいAIツールを探せます。無料枠や条件は変更される場合があります。最新情報は公式サイトをご確認ください。</p>
+        </div>
+        <span class="hp-cta">無料で試せるツールを見る <span class="arr">→</span></span>
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .hp-section {
+    padding: 80px 0 64px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .hp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .hp-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px 22px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .2s var(--ease), box-shadow .2s, border-color .2s;
+  }
+  .hp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--brand) 40%, var(--line));
+  }
+  .hp-ico {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--brand-tint);
+    color: var(--brand-ink);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    transition: transform .2s var(--ease);
+  }
+  .hp-card:hover .hp-ico { transform: scale(1.06) rotate(-3deg); }
+  .hp-ico svg { width: 22px; height: 22px; }
+  .hp-body { flex: 1; }
+  .hp-card h3 {
+    font-family: var(--f-jp);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .hp-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+  .hp-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brand-ink);
+    padding-top: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .hp-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .hp-section { padding: 56px 0 44px; }
+  }
+</style>

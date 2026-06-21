@@ -60,6 +60,7 @@ const jsonLd = JSON.stringify([
         { lb: '料金目安', text: '約$20/月〜（年払い）', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: '無料あり・有料なし' } },
         { lb: '日本語UI', badge: { s: 'na', label: '非対応' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://invideo.io' }}
       secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://invideo.io/pricing/' }}
@@ -127,7 +128,7 @@ const jsonLd = JSON.stringify([
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>部分対応（品質要確認）</span>' }],
           [{ html: '対応環境', rk: true }, { html: 'Web' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-25', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://invideo.io" target="_blank" rel="noopener">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://invideo.io" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 料金・条件は変更される可能性があります。素材ライセンスの個別確認が重要です。最新情報は公式サイトでご確認ください。',
       }}

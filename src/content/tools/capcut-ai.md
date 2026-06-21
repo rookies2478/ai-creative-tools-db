@@ -36,6 +36,7 @@ nextReviewDue: "2026-09-15"
 verifiedAt: "2026-06-15"
 officialSourceUrl: "https://www.capcut.com/help/new-capcut-subscription-pricing"
 pricingModel: "subscription"
+pricingStatus: "no_fixed_price"
 freePlanNote: "CapCutには無料で使える機能がある一方、AI機能・素材・テンプレート・書き出し条件・料金は地域やプラットフォーム、アプリ内のサブスクリプション表示によって変わる可能性があります。最新の公式情報確認が必要です。"
 paidPlanNote: "CapCut公式ヘルプでは、最新価格はアプリ内サブスクリプションページで確認するよう案内されています。プラン名・料金・機能制限は地域・プラットフォーム・時期で変わる可能性があるため、必ず最新の公式情報をご確認ください。"
 platforms:

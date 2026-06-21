@@ -12,10 +12,11 @@
 |---|---:|
 | 総ツール数 | 26 |
 | pricingStatus: confirmed（フィールド明示） | 10 |
-| pricingStatus: partial（フィールド明示） | 1 |
+| pricingStatus: partial（フィールド明示） | 2 |
+| pricingStatus: no_fixed_price（フィールド明示） | 1 |
 | pricingStatus: unconfirmed | 3 |
 | pricingStatus: service_changed | 1 |
-| pricingStatus: フィールドなし（未設定） | 11 |
+| pricingStatus: フィールドなし（未設定） | 9 |
 | needsReview: yes/true | 3 |
 | currency: unknown（値） | 6 |
 | currency: フィールドなし/空（実質不明） | 3 |
@@ -54,7 +55,7 @@
 |---|---|---|---|---|
 | gemini-image-generation | Gemini画像生成 | pricingStatus:confirmed だが currency:unknown | confirmed / currency:"unknown" | Google公式料金ページで通貨を確認（JPY / USD 混在の可能性） |
 | tensor-art | Tensor.Art | pricingStatus:confirmed だが currency:unknown / watermark:unknown | confirmed / currency:"unknown" / watermark:"unknown" | 公式料金ページで通貨・透かし条件を確認 |
-| capcut-ai | CapCut AI | pricingStatus:confirmed だが currency:unknown | confirmed / currency:"unknown" | 公式サブスクリプション料金ページで通貨を確認 |
+| capcut-ai | CapCut AI | pricingStatus:no_fixed_price / currency:N/A | no_fixed_price / currency:"N/A"（固定月額なし） | 地域・プラットフォーム差あり・公式「アプリ内確認」案内・currency:N/A維持 |
 | nightcafe | NightCafe | pricingStatus:partial / currency:unknown | partial / currency:"unknown" | 公式クレジット料金ページで通貨・具体額を確認 |
 | fotor-ai | Fotor AI | pricingStatus:partial（有料プラン金額未記載） | partial / pricingText に「公式ページ参照」 | 公式料金ページで有料プランの具体価格を確認 |
 | microsoft-designer | Microsoft Designer | pricingStatus:partial / watermark:unknown | partial / watermark:"unknown" | Microsoft 365 連携プランの料金条件と透かし条件を公式で確認 |
@@ -99,8 +100,8 @@ DB変更：なし（監査・分類のみ）
 
 | slug | suggestedStatus | 優先度 |
 |---|---|---|
-| capcut-ai | no_fixed_price | 高 |
-| dalle | partial | 高 |
+| ~~capcut-ai~~ | ~~no_fixed_price~~ | **【2026-06-22反映済み】** |
+| ~~dalle~~ | ~~partial~~ | **【2026-06-22反映済み】** |
 | gemini-image-generation | partial | 高 |
 | microsoft-designer | partial | 高 |
 | nightcafe | partial | 中 |

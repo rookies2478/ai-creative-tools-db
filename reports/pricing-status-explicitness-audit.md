@@ -166,9 +166,20 @@ commit：849e9f1
 
 ---
 
+## 2026-06-22 DB反映済み（第3バッチ）
+
+| slug | field | before | after | 判定理由 |
+|---|---|---|---|---|
+| capcut-ai | pricingStatus | （未設定） | no_fixed_price | 地域・プラットフォームにより料金が異なる・公式が「アプリ内確認」案内・固定月額なし |
+| dalle | pricingStatus | （未設定） | partial | ChatGPT Plus等有料プランに内包・DALL·E単体の独立料金ページなし |
+
+build：PASS（79ページ・終了コード0・WARNゼロ）
+
+---
+
 ## 次回アクション推奨順
 
-1. **B候補 DB反映（7件）**：capcut-ai(no_fixed_price) / dalle・gemini-image-generation・microsoft-designer・nightcafe・ideogram・clipdrop(partial) を .md に追加
+1. **B候補 DB反映（残5件）**：~~capcut-ai~~ ~~dalle~~ / gemini-image-generation・microsoft-designer・nightcafe・ideogram・clipdrop(partial) を .md に追加
 2. **invideo-ai**：公式料金ページで「約」なしの正確月額確認後に confirmed 検討。それまで partial 維持
 3. **kling-ai**：前回矛盾解消後に confirmed 再検討
 4. **ideogram・nightcafe**：公式料金ページURL（専用ページ）確認後に confirmed への昇格を検討

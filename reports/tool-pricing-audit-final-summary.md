@@ -25,6 +25,18 @@
 
 ---
 
+## 直近修正サマリー（2026-06-22・第3バッチ）
+
+| slug | 修正内容 |
+|---|---|
+| capcut-ai | pricingStatus: no_fixed_price を frontmatter に追加（地域・プラットフォーム依存・固定月額なし） |
+| dalle | pricingStatus: partial を frontmatter に追加（ChatGPT Plus内包・DALL·E単体独立料金なし） |
+
+build：79ページ・終了コード0・WARNゼロ  
+commit：（本バッチ）
+
+---
+
 ## 直近修正サマリー（2026-06-22・第2バッチ）
 
 | slug | 修正内容 |

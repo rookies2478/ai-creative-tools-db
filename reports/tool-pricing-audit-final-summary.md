@@ -25,6 +25,20 @@
 
 ---
 
+## 直近修正サマリー（2026-06-22・第5バッチ）
+
+| slug | 修正内容 |
+|---|---|
+| ideogram | pricingStatus: partial を frontmatter に追加（subscription_credit型・最安プラン月額未確認・confirmed化しない） |
+| nightcafe | pricingStatus: partial を frontmatter に追加（pricingSourceUrl=ブログURL・currency=unknown・月額未確認） |
+| clipdrop | pricingStatus: partial を frontmatter に追加（Proプラン「--per month」非開示・Jasper AI統合後不透明・confirmed化しない） |
+
+confirmed化：なし  
+build：（build実行予定）  
+commit：（本バッチ）
+
+---
+
 ## 直近修正サマリー（2026-06-22・第4バッチ）
 
 | slug | 修正内容 |

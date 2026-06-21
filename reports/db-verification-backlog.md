@@ -104,9 +104,9 @@ DB変更：なし（監査・分類のみ）
 | ~~dalle~~ | ~~partial~~ | **【2026-06-22反映済み】** |
 | ~~gemini-image-generation~~ | ~~partial~~ | **【2026-06-22第4バッチ反映済み】** |
 | ~~microsoft-designer~~ | ~~partial~~ | **【2026-06-22第4バッチ反映済み】** |
-| ~~nightcafe~~ | ~~partial~~ | **【2026-06-22追加監査完了】** suggestedStatus=partial確定。DB反映推奨yes |
-| ~~ideogram~~ | ~~partial~~ | **【2026-06-22追加監査完了】** suggestedStatus=partial確定。DB反映推奨yes |
-| ~~clipdrop~~ | ~~partial~~ | **【2026-06-22追加監査完了】** suggestedStatus=partial確定。DB反映推奨yes（Proプラン非開示・confirmed化不可） |
+| ~~nightcafe~~ | ~~partial~~ | **【2026-06-22第5バッチ反映済み】** pricingStatus: partial を .md に追加 |
+| ~~ideogram~~ | ~~partial~~ | **【2026-06-22第5バッチ反映済み】** pricingStatus: partial を .md に追加 |
+| ~~clipdrop~~ | ~~partial~~ | **【2026-06-22第5バッチ反映済み】** pricingStatus: partial を .md に追加（Proプラン非開示・confirmed化不可） |
 | invideo-ai | partial | 低（「約」解消後） |
 
 ---

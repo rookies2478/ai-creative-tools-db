@@ -40,6 +40,7 @@ officialSourceUrl: "https://clipdrop.co/pricing"
 pricingSourceUrl: "https://clipdrop.co/pricing"
 pricingSourceNote: "公式料金ページ（clipdrop.co/pricing）。Freeプランは案内されているが、Proプランの料金は「--per month」表示で金額非開示（2026-06-21確認）。2024年にJasper AI傘下に統合済み。currency・月額は要公式確認。"
 pricingModel: "subscription"
+pricingStatus: "partial"
 platforms:
   - web
   - api

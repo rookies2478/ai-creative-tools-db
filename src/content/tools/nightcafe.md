@@ -36,6 +36,7 @@ currency: "unknown"
 pricingSourceUrl: "https://nightcafe.studio/blogs/info/is-nightcafe-free"
 pricingSourceNote: "公式ブログ記事（料金専用ページではない）。無料枠の案内はあるが有料プランの月額・tier構成を明示した料金表ページURLは未確認。最新の料金はNightCafe公式サイトをご確認ください。"
 pricingModel: "subscription_credit"
+pricingStatus: "partial"
 platforms:
   - web
 signupRequired: true

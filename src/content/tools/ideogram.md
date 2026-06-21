@@ -30,6 +30,7 @@ officialSourceUrl: "https://docs.ideogram.ai/plans-and-pricing/available-plans"
 pricingSourceUrl: "https://docs.ideogram.ai/plans-and-pricing/available-plans"
 pricingSourceNote: "公式ドキュメントの料金プランページ。currency=USDと推定されるが月額・プラン構成は要公式確認。最新情報は公式サイトをご確認ください。"
 pricingModel: "subscription_credit"
+pricingStatus: "partial"
 pricingSummary: "無料プランでは制限付きのクレジット枠が案内されています。有料プランでは生成容量や優先処理などが増える場合があります。クレジット数・料金・対象機能は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
 freePlanNote: "公式ドキュメントでは、無料プランで週10クレジットが案内されています（2026-06-21確認）。クレジット数や生成条件は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
 platforms:

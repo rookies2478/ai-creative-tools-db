@@ -29,6 +29,8 @@ lastReviewed: "2026-06-15"
 nextReviewDue: "2026-09-15"
 verifiedAt: "2026-06-15"
 officialSourceUrl: "https://www.canva.com/pricing/"
+pricingStatus: "confirmed"
+needsReview: false
 pricingModel: "subscription_credit"
 freePlanNote: "無料プランでDream Lab月20プロンプトまで（月初リセット、変更の可能性あり）"
 paidPlanNote: "Canva Pro $15/月〜（月払い）／$120/年（年払い）。有料プランはPremium AI toolsの月間利用枠が無料プランより多く案内されています。利用枠はプランとAIツール種別によって異なるため、最新の状況はCanva公式ヘルプをご確認ください。"

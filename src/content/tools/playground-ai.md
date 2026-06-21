@@ -33,6 +33,8 @@ lastReviewed: "2026-06-06"
 nextReviewDue: "2026-09-06"
 verifiedAt: "2026-06-08"
 officialSourceUrl: "https://playground.com/design/pricing"
+pricingStatus: "confirmed"
+needsReview: false
 pricingModel: "subscription_credit"
 lowestPaidPlan: "$12/月（Proプラン・年払い）／$15/月（月払い）"
 currency: "USD"

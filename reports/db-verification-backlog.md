@@ -1,6 +1,6 @@
 # DB要確認バックログ
 
-作成日：2026-06-21  
+作成日：2026-06-21（更新：2026-06-22）  
 対象：src/content/tools/ 全26ファイル  
 方針：DB修正なし・公式未確認項目は推測補完しない・この記事は法的助言ではない
 
@@ -12,11 +12,11 @@
 |---|---:|
 | 総ツール数 | 26 |
 | pricingStatus: confirmed（フィールド明示） | 10 |
-| pricingStatus: partial（フィールド明示） | 2 |
+| pricingStatus: partial（フィールド明示） | 7 |
 | pricingStatus: no_fixed_price（フィールド明示） | 1 |
 | pricingStatus: unconfirmed | 3 |
 | pricingStatus: service_changed | 1 |
-| pricingStatus: フィールドなし（未設定） | 9 |
+| pricingStatus: フィールドなし（未設定） | **4**（2026-06-22時点・前回9→4に減少） |
 | needsReview: yes/true | 3 |
 | currency: unknown（値） | 6 |
 | currency: フィールドなし/空（実質不明） | 3 |

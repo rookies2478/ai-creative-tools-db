@@ -1,0 +1,5 @@
+page,haiperVisible,serviceChangedShown,recommendationRisk,pricingRisk,rightsRisk,action,notes
+/conditions/free/,no,n/a,none,none,none,none,freePlan:false filtered by DB query. FAQ text mentions Haiper conditionally (要確認 language).
+/conditions/commercial-use/,yes,yes,none,none,none,already fixed,CommercialUse.astro note updated 2026-06-22 with service_changed info.
+/conditions/no-watermark/,no,n/a,none,none,none,none,Haiper not in NoWatermark.astro data.
+/conditions/japanese/,yes,partial,low→none,low→none,none,fixed free:あり→要確認,ja:unknown renders as 要確認. free:あり was inconsistent with DB freePlan:false. Changed to free:要確認 (△).

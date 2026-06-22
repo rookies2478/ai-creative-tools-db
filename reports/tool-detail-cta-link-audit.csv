@@ -1,0 +1,27 @@
+slug,toolName,primaryCta,categoryLink,comparisonLink,conditionsLink,externalRelOk,noindex,pricingStatus,pricingDisplayOk,forbiddenExpression,abSchemeOk,issues
+adobe-firefly,Adobe Firefly,yes,yes,yes,yes,ok,no,confirmed,ok,none,ok,none
+canva-ai-image-generator,Canva AI画像生成,yes,yes,yes,yes,ok,no,confirmed,ok,none,ok,none
+capcut-ai,CapCut AI,yes,yes,yes,yes,ok,no,no_fixed_price,ok,none,ok,none
+clipdrop,Clipdrop,yes,yes,yes,yes,ok,no,partial,ok,none,ok,none
+dalle,DALL·E,yes,yes,yes,yes,ok,no,partial,ok,none,ok,none
+dreamstudio,Brand Studio（旧DreamStudio）,yes,yes,yes,yes,ok,no,confirmed,ok,none,ok,none
+fotor-ai,Fotor AI,yes,yes,yes,yes,ok,no,partial,ok,none,ok,none
+gemini-image-generation,Gemini画像生成,yes,yes,yes,yes,ok,no,partial,ok,none,ok,none
+hailuo-ai,Hailuo AI,yes,yes,yes,yes,ok,no,confirmed,ok,none,ok,none
+haiper,Haiper,yes,yes,yes,yes,ok,yes,service_changed,ok,none,ok,none
+ideogram,Ideogram,yes,yes,yes,yes,ok,no,partial,ok,none,ok,none
+invideo-ai,InVideo AI,yes,yes,yes,yes,ok,no,unset,ok,none,ok,none
+kling-ai,Kling AI,yes,yes,yes,yes,ok,no,unset,ok,none,ok,none
+leonardo-ai,Leonardo AI,yes,yes,yes,yes,ok,no,confirmed,ok,none,ok,none
+luma-ai,Luma AI,yes,yes,yes,yes,ok,no,confirmed,ok,none,ok,none
+microsoft-designer,Microsoft Designer,yes,yes,yes,yes,ok,no,partial,ok,none,ok,none
+midjourney,Midjourney,yes,yes,yes,yes,ok,no,confirmed,ok,none,ok,none
+nightcafe,NightCafe,yes,yes,yes,yes,ok,no,partial,ok,none,ok,none
+pika,Pika,yes,yes,yes,yes,ok,no,confirmed,ok,none,ok,none
+pixverse,PixVerse,yes,yes,yes,yes,ok,no,unconfirmed,ok,none,ok,none
+playground-ai,Playground AI,yes,yes,yes,yes,ok,no,confirmed,ok,none,ok,none
+runway,Runway,yes,yes,yes,yes,ok,no,confirmed,ok,none,ok,none
+seaart-ai,SeaArt AI,yes,yes,yes,yes,ok,no,unconfirmed,ok,none,ok,none
+stable-diffusion,Stable Diffusion,yes,yes,yes,yes,ok,no,unset,ok,none,ok,none
+tensor-art,Tensor.Art,yes,yes,yes,yes,ok,no,unset,ok,none,ok,none
+vidu-ai,Vidu AI,yes,yes,yes,yes,ok,no,unconfirmed,ok,none,ok,none

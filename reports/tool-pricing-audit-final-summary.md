@@ -233,6 +233,14 @@ missing URL（2件）: pixverse pricingSourceUrl（unknown）/ seaart-ai pricing
 
 ---
 
+## フェーズ完了（2026-06-22）
+
+pricingStatus整理フェーズは完了。  
+詳細は `reports/pricing-status-completion-summary.md` を参照。  
+残り未設定4件（invideo-ai / kling-ai / stable-diffusion / tensor-art）は保留継続。
+
+---
+
 ## DQ補正記録（2026-06-21）
 
 | ツール | pricingStatus | needsReview | currency | 変更内容 |

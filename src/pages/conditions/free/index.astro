@@ -63,12 +63,25 @@ const customRelatedSolid = [
   { label: '商用利用・著作権の考え方ガイド', href: '/guides/commercial-use-copyright/' },
   { label: 'AI画像の商用利用チェックリスト', href: '/guides/ai-image-commercial-use-checklist/' },
 ];
+
+const stripHtml = (s: string) => s.replace(/<[^>]+>/g, '');
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: customFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: stripHtml(f.a) },
+  })),
+});
 ---
 
 <BaseLayout
   title="無料で使えるAI動画生成・AI画像生成ツール比較｜無料枠・スマホ対応・透かし・商用利用条件を確認"
   description="無料プランで試せるAI動画生成・AI画像生成・AI動画編集・AIアバター動画ツールを比較。スマホ対応・透かしの有無・無料枠の内容・商用利用条件を整理しています。登録不要かどうかを含め、最新情報は各公式サイトをご確認ください。本記事は法的助言ではありません。"
   canonicalPath="/conditions/free/"
+  jsonLd={faqSchema}
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
     <nav class="mb-6 text-sm text-slate-500" aria-label="パンくずリスト">

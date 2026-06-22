@@ -1,13 +1,59 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ConditionChips from '../../../components/ConditionChips.astro';
-import NoWatermark from '../../../components/NoWatermark.astro';
+import NoWatermark, { type WmStatus, type Tool } from '../../../components/NoWatermark.astro';
+
+const entries = await getCollection('tools');
+
+const tools: Tool[] = entries.map((e) => {
+  const free    = e.data.freePlan;
+  const ui      = e.data.japaneseUi;
+  const cu      = e.data.commercialUse;
+  const wm      = e.data.watermark as WmStatus;
+  return {
+    name:       e.data.name,
+    slug:       e.slug,
+    initial:    e.data.name.charAt(0),
+    free:       (free === true || free === 'limited') ? 'あり' : free === false ? 'なし' : '要確認',
+    ja:         ui === true ? '対応' : ui === false ? '非対応' : '要確認',
+    commercial: cu === 'ok' ? '案内あり' : cu === 'no' ? '不可' : '要確認',
+    wm,
+    wmNote:     e.data.watermarkCondition ?? '透かし条件は公式サイト・実際の出力画面でご確認ください。',
+    freeNote:   e.data.freePlanNote       ?? '詳細は公式サイトをご確認ください。',
+  };
+});
+
+const toolCount = tools.length.toString();
+
+const stripHtml = (s: string) => s.replace(/<[^>]+>/g, '');
+
+const pageFaqs = [
+  { q:'透かしなしで使えるAI画像生成ツールはありますか？', a:'透かし条件はプランや機能によって変わる可能性があります。無料プランでも透かしなしで出力できるツールがある一方、有料プランへの移行で透かしが外れるツールもあります。一覧表の「透かし条件」欄で各ツールの状況を確認し、実際の出力画面で透かしの有無をご確認ください。' },
+  { q:'無料プランでは透かしが入りますか？', a:'ツールによって異なります。無料プランで透かしなしの出力ができるものもあれば、透かしが入るものもあります。透かし条件はプランや出力形式によって変わる可能性があるため、各ツールの公式情報でご確認ください。' },
+  { q:'有料プランにすると透かしは消えますか？', a:'有料プランでは透かしなしになる場合があります。ただし、出力形式（静止画・動画・編集機能など）によって透かし条件が異なる可能性があります。最新の公式情報で対象プランと機能を確認したうえで、実際の出力画面で透かしの有無をご確認ください。' },
+  { q:'YouTubeサムネやSNS画像で透かしは問題になりますか？', a:'YouTubeサムネイル・SNS画像・広告バナー・商品画像などで透かし入りの画像を使うと、見栄えや信頼性に影響する場合があります。収益化を伴う用途では特に注意が必要です。透かしの有無に加え、商用利用条件も公式規約で事前に確認することを推奨します。本記事は法的助言ではありません。' },
+  { q:'商用利用では透かし以外に何を確認すべきですか？', a:'透かしを除去できることと商用利用が許可されていることは別の問題です。商用利用を前提にする場合は、①利用規約における商用利用の定義と許可範囲、②プランごとの条件、③クレジット表記義務、④禁止コンテンツ・用途の制限、を最新の公式規約でご確認ください。本記事は法的助言ではありません。' },
+  { q:'透かしの有無はどこで確認すればいいですか？', a:'公式情報や実際の出力画面で確認する必要があります。本サイトの一覧表は確認時点の情報をまとめたものですが、ツール側の方針変更により条件が変わる場合があります。各ツールの詳細ページに公式情報へのリンクを掲載していますので、あわせてご活用ください。' },
+  { q:'透かしがなければ自由に使えますか？', a:'透かしの有無と商用利用条件は別の問題です。透かしなしで出力できる場合でも、商用利用の可否・クレジット表記義務・利用規約の制限は別途公式情報をご確認ください。また、プランや用途によって条件が変わる場合があります。本記事は法的助言ではありません。' },
+];
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: pageFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: stripHtml(f.a) },
+  })),
+});
 ---
 
 <BaseLayout
   title="透かしなしAI画像生成ツール比較｜無料枠・商用利用条件も確認"
   description="透かしなし、または有料プランで透かしを外せるAI画像生成・AI動画生成ツールを比較。透かし条件と商用利用条件は別問題のため、最新情報は公式サイトをご確認ください。"
   canonicalPath="/conditions/no-watermark/"
+  jsonLd={faqSchema}
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
 
@@ -21,7 +67,14 @@ import NoWatermark from '../../../components/NoWatermark.astro';
 
     <ConditionChips currentPath="/conditions/no-watermark/" />
 
-    <NoWatermark />
+    <NoWatermark
+      {tools}
+      stats={[
+        { n: toolCount, label: '対象ツール' },
+        { n: '4',       label: '透かしタイプ' },
+        { n: '7',       label: 'よくある質問' },
+      ]}
+    />
 
   </div>
 </BaseLayout>

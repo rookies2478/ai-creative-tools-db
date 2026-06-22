@@ -2,12 +2,35 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ConditionChips from '../../components/ConditionChips.astro';
 import ComparisonHub from '../../components/ComparisonHub.astro';
+
+const stripHtml = (s: string) => s.replace(/<[^>]+>/g, '');
+
+const pageFaqs = [
+  { q:'どの比較記事から読めばよいですか？', a:'AI画像生成とAI動画生成をまとめて見たい場合は全ツール横断比較が出発点になります。動画生成ならRunwayとPikaの比較、画像生成ならMidjourneyやAdobe Fireflyなどのツール別比較記事が参考になります。' },
+  { q:'無料ツールだけを比較したい場合はどこを見ればよいですか？', a:'無料枠のあるツールを条件別に探す場合は無料で試せるツール一覧が参考になります。AI画像生成ツールに絞って詳しく比較したい場合は無料AI画像生成ツール比較も参照してください。' },
+  { q:'比較記事の商用利用情報だけで判断できますか？', a:'商用利用条件はツール・プラン・用途によって異なる場合があります。比較記事はあくまで参考情報であり、判断の根拠には公式規約をご確認ください。本サイトは商用利用・著作権について断定しません。' },
+  { q:'比較表の○△×はどのように読めばよいですか？', a:'○は対応あり、△は条件付きまたは要確認、×は非対応の目安を示しています。ただしいずれもプランや用途・確認時点によって変わる場合があります。最終的な判断は各公式サイトの最新情報をご確認ください。' },
+  { q:'無料枠はどの程度使えますか？', a:'無料枠の内容（クレジット数・生成可能枚数・有効期限）はツールやプランによって大きく異なります。また無料プランでは透かしが入る場合や、商用利用が制限される場合があります。' },
+  { q:'商用利用条件はどこで確認すればよいですか？', a:'本サイトの比較情報は参考にとどめ、実際の商用利用前には必ず各公式の利用規約をご確認ください。プラン・用途・生成物の種類によって条件が異なる場合があります。' },
+  { q:'AI動画生成とAI画像生成、どちらを選べばよいですか？', a:'静止画・イラスト・デザイン素材が目的であればAI画像生成ツール、映像や動きのあるコンテンツが目的であればAI動画生成ツールが向いています。まず比較表で全体像を確認するのが近道です。' },
+];
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: pageFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: stripHtml(f.a) },
+  })),
+});
 ---
 
 <BaseLayout
   title="AIツール比較記事一覧｜AIクリエイティブナビ"
   description="AI画像生成・AI動画生成を中心に、無料枠・商用利用条件・透かし・用途別の違いを確認できる比較記事をまとめています。"
   canonicalPath="/comparisons/"
+  jsonLd={faqSchema}
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
 

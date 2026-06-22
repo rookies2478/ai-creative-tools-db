@@ -1,0 +1,5 @@
+page,updated,addedSelectionGuide,addedCautions,addedFaq,internalLinksOk,rightsExpressionOk,haiperOk,notes
+/conditions/free/,true,既存7問で充足,既存leadで充足,false,true,true,true,/comparisons/free-ai-image-generators/追加
+/conditions/commercial-use/,true,既存6ポイント維持,既存noticeで充足,true,true,true,true,商用利用だけでは不十分FAQ追加・比較リンク追加
+/conditions/no-watermark/,true,既存5ポイント維持,既存noticeで充足,true,true,true,true,透かし≠自由利用FAQ追加
+/conditions/japanese/,true,既存5ポイント+3TypeCard維持,既存noticeで充足,true,true,true,true,日本語対応≠文字生成FAQ追加

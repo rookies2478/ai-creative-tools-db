@@ -1,6 +1,6 @@
 # sitemap vs build 差分監査レポート
 
-日付：2026-06-21（更新：2026-06-21 /tools/haiper/ sitemap除外対応）  
+日付：2026-06-21（更新：2026-06-22 sitemap URL数差異調査）  
 監査範囲：src/pages/, src/content/tools/, src/pages/sitemap.xml.ts, 公開サイト https://aicreative-db.com/sitemap.xml
 
 ---
@@ -118,3 +118,35 @@ SITEMAP_EXCLUDED_PATHS除外: 1件（/tools/haiper/）
 | ページ数 | 79 |
 | WARN | なし |
 | 実行コマンド | `/c/Program Files/nodejs/npm.cmd` run build |
+
+---
+
+## 2026-06-22 sitemap URL数差異調査
+
+### 調査経緯
+
+前回チェックでWebFetchモデルが本番sitemapを75件と返したため、期待値77との差異を調査。
+
+### 調査結果
+
+| 項目 | 件数 |
+|---|---|
+| buildページ数 | 79 |
+| local sitemap URL数 | 77 |
+| production sitemap URL数 | 77 |
+| 差分 | 0（一致） |
+
+**結論：差異なし。** 前回WebFetchのAIモデルが75と誤カウントしたもの。実際のlocal・production sitemapは両方77件で一致。
+
+### 確認項目
+
+| URL | local sitemap | production sitemap | 結果 |
+|---|---|---|---|
+| /tools/ideogram/ | ✓ | ✓ | OK |
+| /tools/nightcafe/ | ✓ | ✓ | OK |
+| /tools/clipdrop/ | ✓ | ✓ | OK |
+| /tools/haiper/ | ✗（除外済み） | ✗ | OK（意図的除外） |
+
+### 判定
+
+**A：問題なし。** 期待値を77件として維持。実装修正不要。

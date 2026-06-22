@@ -1,0 +1,11 @@
+page,pageType,categoryLinks,toolLinks,comparisonLinks,conditionLinks,guideLinks,mobileOk,pricingExpressionOk,rightsExpressionOk,haiperOk,issues,action
+/categories/image-generation/,category,yes,yes,yes,yes,yes,ok,ok,ok,n/a,none,none
+/categories/video-generation/,category,yes,yes,yes,yes,yes,ok,ok,ok,n/a,none,none
+/categories/video-editing/,category,yes,yes,yes,yes,yes,ok,ok,ok,n/a,none,none
+/categories/avatar-video/,category,yes,yes,yes,yes,no→yes,ok,ok,ok,n/a,guides direct link missing,added /guides/commercial-use-copyright/ taglink
+/categories/design/,category,yes,yes,yes,yes,yes,ok,ok,ok,n/a,none,none
+/categories/voice-narration/,category,yes,yes,yes,yes,no→yes,ok,ok,ok,n/a,guides direct link missing,added /guides/commercial-use-copyright/ taglink
+/conditions/free/,condition,yes,yes(via slug),yes,yes,yes,ok,ok,ok,partial△,Haiper listed as freePlan:あり without shutdown note. Tool type has no note field.,flagged as remaining issue
+/conditions/commercial-use/,condition,yes,yes(via slug),yes,yes,yes,ok,ok,ok,fixed✅,Haiper note said旧FAQ without shutdown context,updated note to include service_changed info
+/conditions/no-watermark/,condition,yes,yes(via links),yes,yes,yes,ok,ok,ok,n/a,none,none
+/conditions/japanese/,condition,yes,yes(via slug),yes,yes,yes,ok,ok,ok,partial△,Haiper listed without service_changed warning. Tool type has no note field.,flagged as remaining issue

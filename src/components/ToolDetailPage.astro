@@ -375,17 +375,28 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
 
   <!-- ===== FAQ ===== -->
   {faqs.length > 0 && (
-    <section class="tdp-sec">
-      <div class="tdp-sechead reveal"><span class="tdp-eyebrow">FAQ</span><h2>よくある質問</h2><p>無料枠・商用利用・用途・日本語対応・透かし・対応環境について、確認のポイントをお答えします。</p></div>
-      <div class="tdp-faq reveal">
-        {faqs.map((f) => (
-          <div class="tdp-faqitem" aria-expanded="false">
-            <button class="tdp-faqq" type="button"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button>
-            <div class="tdp-faqa"><div class="tdp-faqa-in" set:html={f.a}></div></div>
-          </div>
-        ))}
-      </div>
-    </section>
+    <>
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map((f) => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": { "@type": "Answer", "text": f.a },
+        })),
+      })} />
+      <section class="tdp-sec">
+        <div class="tdp-sechead reveal"><span class="tdp-eyebrow">FAQ</span><h2>よくある質問</h2><p>無料枠・商用利用・用途・日本語対応・透かし・対応環境について、確認のポイントをお答えします。</p></div>
+        <div class="tdp-faq reveal">
+          {faqs.map((f) => (
+            <div class="tdp-faqitem" aria-expanded="false">
+              <button class="tdp-faqq" type="button"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button>
+              <div class="tdp-faqa"><div class="tdp-faqa-in" set:html={f.a}></div></div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   )}
 
   <!-- ===== 関連ツール ===== -->

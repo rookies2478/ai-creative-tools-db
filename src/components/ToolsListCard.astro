@@ -47,12 +47,21 @@ function freeLabel(v: unknown): string {
   if (v === 'limited')   return '条件付き';
   return '要公式確認';
 }
-function commercialLabel(v: unknown): string {
-  if (v === 'ok')        return '案内あり';
-  if (v === 'paid-only') return '有料プラン向け';
-  if (v === 'limited')   return '条件あり';
-  if (v === 'no')        return '非対応';
-  return '要公式確認';
+function freeCommercialLabel(freePlan: unknown, commercialUse: unknown): { text: string; cls: string } {
+  if (freePlan === false) return { text: '無料プランなし', cls: 'na' };
+  if (freePlan === 'unknown') return { text: '要確認', cls: 'na' };
+  if (commercialUse === 'ok') return { text: '案内あり', cls: 'ok' };
+  if (commercialUse === 'limited') return { text: '条件あり', cls: 'warn' };
+  if (commercialUse === 'no') return { text: '× 不可', cls: 'na' };
+  if (commercialUse === 'paid-only') return { text: '有料のみ', cls: 'na' };
+  return { text: '要確認', cls: 'na' };
+}
+function paidCommercialLabel(v: unknown): { text: string; cls: string } {
+  if (v === 'ok') return { text: '案内あり', cls: 'ok' };
+  if (v === 'paid-only') return { text: '案内あり', cls: 'ok' };
+  if (v === 'limited') return { text: '条件あり', cls: 'warn' };
+  if (v === 'no') return { text: '不可', cls: 'na' };
+  return { text: '要確認', cls: 'na' };
 }
 function jaLabel(ui: unknown, prompt: unknown): string {
   if (ui === true) return '対応';
@@ -73,7 +82,6 @@ function inputMaterialLabel(v: unknown): { text: string; cls: string } | null {
   return null;
 }
 function condClass(field: string, val: string): string {
-  if (field === 'commercial') return val === '案内あり' ? 'ok' : val === '有料プラン向け' ? 'warn' : 'na';
   if (field === 'free') return val === 'あり' ? 'ok' : 'na';
   if (field === 'ja') return val === '対応' ? 'ok' : val === '部分対応' ? 'warn' : 'na';
   if (field === 'watermark') {
@@ -83,6 +91,13 @@ function condClass(field: string, val: string): string {
   }
   return 'na';
 }
+function priceSortKey(data: { lowestPaidPlan?: string; freePlan: unknown; currency?: string }): number {
+  if (!data.lowestPaidPlan) return data.freePlan === false ? 99999 : 0;
+  const m = data.lowestPaidPlan.match(/[\d,]+/);
+  if (!m) return 99999;
+  const n = parseInt(m[0].replace(',', ''), 10);
+  return data.currency === 'USD' ? n * 150 : n;
+}
 
 const usagePolicySummary: string | null =
   (data.usagePolicy != null && COMMERCIAL_PLAN_SUMMARIES[slug] != null)
@@ -91,15 +106,18 @@ const usagePolicySummary: string | null =
 
 const imrLabel = inputMaterialLabel(data.usagePolicy?.inputMaterialRisk);
 const attrLabel = getAttributionLabel(data.watermark as 'yes' | 'no' | 'limited' | 'unknown');
-const commercialVal = commercialLabel(data.commercialUse);
-const freeVal       = freeLabel(data.freePlan);
-const jaVal         = jaLabel(data.japaneseUi, data.japanesePrompt);
-const wmVal         = wmLabel(data.watermark);
+const freeComm  = freeCommercialLabel(data.freePlan, data.commercialUse);
+const paidComm  = paidCommercialLabel(data.commercialUse);
+const freeVal   = freeLabel(data.freePlan);
+const jaVal     = jaLabel(data.japaneseUi, data.japanesePrompt);
+const wmVal     = wmLabel(data.watermark);
 
 const dataFree       = freeVal === 'あり' ? '1' : '0';
-const dataCommercial = commercialVal === '案内あり' ? '1' : '0';
+const dataCommercial = (data.commercialUse === 'ok' || data.commercialUse === 'paid-only') ? '1' : '0';
 const dataJa         = jaVal === '対応' ? '1' : '0';
 const dataNowm       = wmVal === '透かしなし' ? '1' : '0';
+const dataSortPrice  = priceSortKey({ lowestPaidPlan: data.lowestPaidPlan, freePlan: data.freePlan, currency: data.currency });
+const dataUpdated    = data.lastReviewed ?? '';
 
 const catLabel = getCategoryLabel(data.category);
 
@@ -116,6 +134,8 @@ const displayPlatforms = (data.platforms ?? []).map((p: string) => getPlatformLa
   data-commercial={dataCommercial}
   data-ja={dataJa}
   data-nowm={dataNowm}
+  data-sort-price={dataSortPrice}
+  data-updated={dataUpdated}
 >
   <div class="tool-head">
     <span class="tool-badge" style={`background:${badge.color};`}>{badge.letter}</span>
@@ -126,9 +146,13 @@ const displayPlatforms = (data.platforms ?? []).map((p: string) => getPlatformLa
   </div>
 
   <div class="tool-cond">
-    <span class={`cond ${condClass('commercial', commercialVal)}`}>
-      <span class="ck">商用</span>
-      <span class="cv"><span class="d"></span>{commercialVal}</span>
+    <span class={`cond ${freeComm.cls}`}>
+      <span class="ck">無料商用</span>
+      <span class="cv"><span class="d"></span>{freeComm.text}</span>
+    </span>
+    <span class={`cond ${paidComm.cls}`}>
+      <span class="ck">有料商用</span>
+      <span class="cv"><span class="d"></span>{paidComm.text}</span>
     </span>
     <span class={`cond ${condClass('free', freeVal)}`}>
       <span class="ck">無料枠</span>
@@ -179,5 +203,13 @@ const displayPlatforms = (data.platforms ?? []).map((p: string) => getPlatformLa
         </a>
       )}
     </div>
+  </div>
+
+  <div class="tool-condlinks">
+    <span class="cl-label">条件別：</span>
+    <a class="cl" href="/conditions/commercial-use/">商用利用</a>
+    <a class="cl" href="/conditions/free/">無料枠</a>
+    <a class="cl" href="/conditions/no-watermark/">透かし</a>
+    <a class="cl" href="/conditions/japanese/">日本語</a>
   </div>
 </article>

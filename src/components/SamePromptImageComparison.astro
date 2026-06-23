@@ -9,19 +9,55 @@ interface Props {
 }
 
 const { imageA, imageB, toolAName, toolBName } = Astro.props;
+
+function schemeLabel(img: GeneratedImage): 'A' | 'B' {
+  if (img.sampleType === 'tool-output' && img.comparisonEligible === true && img.promptVersion === 'image-tool-benchmark-v1') return 'A';
+  return 'B';
+}
+
+function schemeBadgeText(img: GeneratedImage): string {
+  return schemeLabel(img) === 'A' ? 'このツールで作成した実例サンプル' : 'AI生成サンプル（参考）';
+}
+
+const schemeA = schemeLabel(imageA);
+const schemeB = schemeLabel(imageB);
+const hasNonEligible = schemeA === 'B' || schemeB === 'B';
 ---
 
 <section class="spic-wrap">
+  <!-- スキーム説明ブロック -->
+  <div class="spic-scheme-legend">
+    <p class="spic-scheme-title">このセクションの画像について</p>
+    <ul class="spic-scheme-list">
+      <li>
+        <span class="spic-scheme-badge spic-scheme-a">Aスキーム</span>
+        <span>管理者が<strong>そのツール本体</strong>で作成した実例サンプル（sampleType: tool-output / image-tool-benchmark-v1 / comparisonEligible: true）。比較の主参考材料として使用できます。</span>
+      </li>
+      <li>
+        <span class="spic-scheme-badge spic-scheme-b">Bスキーム</span>
+        <span>別モデル・別ツールで生成した<strong>参考ビジュアル</strong>（reference-visual または comparisonEligible: false）。対象ツールの実出力ではありません。主比較材料にしないでください。</span>
+      </li>
+    </ul>
+    <p class="spic-scheme-note">
+      同一プロンプト・同一バージョンで作成した比較サンプルです。1枚の結果だけでツール性能を断定するものではありません。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。
+    </p>
+  </div>
+
+  {hasNonEligible && (
+    <div class="spic-warn" role="alert">
+      <strong>注意：</strong>このセクションにBスキーム（参考ビジュアル）画像が含まれています。Bスキーム画像はツール実例・公式出力・代表結果ではありません。主比較材料として使用しないでください。
+    </div>
+  )}
+
   <h2 class="spic-heading">同一プロンプトで作成した画像サンプル</h2>
-  <p class="spic-lead">
-    このセクションでは、同じプロンプト条件で作成したAスキーム画像を並べています。<br />
-    画像は比較の参考材料であり、1枚の結果だけでツール性能を断定するものではありません。<br />
-    料金、商用利用条件、入力素材、表記条件はプランや用途によって異なる場合があります。最新情報は公式サイトをご確認ください。
-  </p>
+
   <div class="spic-grid">
-    {[{ img: imageA, name: toolAName }, { img: imageB, name: toolBName }].map(({ img, name }) => (
-      <figure class="spic-card">
-        <p class="spic-tool-name">{name}</p>
+    {[{ img: imageA, name: toolAName, scheme: schemeA }, { img: imageB, name: toolBName, scheme: schemeB }].map(({ img, name, scheme }) => (
+      <figure class={`spic-card${scheme === 'B' ? ' spic-card--b' : ''}`}>
+        <div class="spic-card-header">
+          <p class="spic-tool-name">{name}</p>
+          <span class={`spic-scheme-badge spic-scheme-${scheme.toLowerCase()}`}>{scheme}スキーム</span>
+        </div>
         <img
           src={img.file}
           alt={img.alt}
@@ -32,7 +68,9 @@ const { imageA, imageB, toolAName, toolBName } = Astro.props;
           class="spic-img"
         />
         <figcaption class="spic-caption">
-          <p class="spic-caption-text">このツールで作成した実例サンプル</p>
+          <p class={`spic-caption-text spic-caption-${scheme === 'A' ? 'a' : 'b'}`}>
+            {schemeBadgeText(img)}
+          </p>
           <dl class="spic-meta">
             <div>
               <dt>promptVersion：</dt>
@@ -46,16 +84,44 @@ const { imageA, imageB, toolAName, toolBName } = Astro.props;
               <dt>確認日：</dt>
               <dd>{img.reviewedAt}</dd>
             </div>
+            {img.model && (
+              <div>
+                <dt>モデル：</dt>
+                <dd>{img.model}</dd>
+              </div>
+            )}
           </dl>
+
+          <details class="spic-prompt-details">
+            <summary class="spic-prompt-summary">プロンプト詳細を表示</summary>
+            <div class="spic-prompt-body">
+              <p class="spic-prompt-label">使用プロンプト</p>
+              <p class="spic-prompt-text">{img.prompt}</p>
+              {img.negativePrompt && (
+                <>
+                  <p class="spic-prompt-label">ネガティブプロンプト</p>
+                  <p class="spic-prompt-text">{img.negativePrompt}</p>
+                </>
+              )}
+              <p class="spic-prompt-disc">
+                ※ プロンプトは参考情報です。同一プロンプトでも生成結果は毎回異なる場合があります。
+              </p>
+            </div>
+          </details>
+
           <p class="spic-notice">
-            ※ 本画像は管理者が{name}で作成した参考作例サンプルです。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。公式出力・代表結果を保証するものではありません。
+            {scheme === 'A'
+              ? `※ 本画像は管理者が${name}で作成した参考作例サンプルです（Aスキーム）。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。公式出力・代表結果を保証するものではありません。`
+              : `※ 本画像はAI生成サンプル（参考・Bスキーム）です。${name}の実出力・公式出力・代表結果ではありません。主比較材料として使用しないでください。`
+            }
           </p>
         </figcaption>
       </figure>
     ))}
   </div>
+
   <p class="spic-footer-note">
-    ※ 同一プロンプト・同一バージョンで作成したサンプルです。画像の違いはツール間の優劣を断定するものではありません。商用利用・著作権条件はプランや規約によって異なります。最新の公式情報をご確認ください。本記事は法的助言ではありません。
+    ※ 1枚の画像だけでツール性能を断定するものではありません。商用利用・著作権条件はプランや規約によって異なります。実在人物・著名人・ブランドロゴ・商標・第三者が権利を持つ素材に関しては、別途確認が必要です。最新の公式情報をご確認ください。本記事は法的助言ではありません。
   </p>
 </section>
 
@@ -63,21 +129,88 @@ const { imageA, imageB, toolAName, toolBName } = Astro.props;
   .spic-wrap {
     margin: 2rem 0;
     padding: 1.5rem;
-    background: var(--surface-1, #f8fafc);
-    border: 1px solid var(--border-subtle, #e2e8f0);
-    border-radius: 12px;
+    background: var(--surface-2, #FAFAF6);
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: 14px;
   }
-  .spic-heading {
-    font-size: 1.25rem;
+
+  /* スキーム説明ブロック */
+  .spic-scheme-legend {
+    margin-bottom: 1.25rem;
+    padding: 1rem 1.25rem;
+    background: #fff;
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: 10px;
+  }
+  .spic-scheme-title {
+    font-size: 0.8125rem;
     font-weight: 700;
-    color: var(--text-main, #1e293b);
-    margin: 0 0 0.75rem;
+    color: var(--ink, #16181D);
+    margin: 0 0 0.5rem;
   }
-  .spic-lead {
-    font-size: 0.875rem;
-    color: var(--text-sub, #475569);
+  .spic-scheme-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .spic-scheme-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--ink-soft, #3A3E47);
+    line-height: 1.65;
+  }
+  .spic-scheme-list li strong {
+    color: var(--ink, #16181D);
+  }
+  .spic-scheme-note {
+    font-size: 0.75rem;
+    color: var(--muted, #6A7180);
     line-height: 1.7;
-    margin: 0 0 1.25rem;
+    margin: 0;
+  }
+
+  /* スキームバッジ */
+  .spic-scheme-badge {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+    flex: none;
+  }
+  .spic-scheme-a {
+    background: #ECEBFB;
+    color: #2E25A6;
+    border: 1px solid rgba(46,37,166,.25);
+  }
+  .spic-scheme-b {
+    background: #FEF3C7;
+    color: #92400E;
+    border: 1px solid rgba(146,64,14,.25);
+  }
+
+  /* 警告 */
+  .spic-warn {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: #FEF3C7;
+    border: 1px solid #FDE68A;
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    color: #92400E;
+    line-height: 1.65;
+  }
+
+  .spic-heading {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--ink, #16181D);
+    margin: 0 0 0.75rem;
   }
   .spic-grid {
     display: grid;
@@ -85,25 +218,33 @@ const { imageA, imageB, toolAName, toolBName } = Astro.props;
     gap: 1rem;
   }
   @media (max-width: 640px) {
-    .spic-grid {
-      grid-template-columns: 1fr;
-    }
+    .spic-grid { grid-template-columns: 1fr; }
   }
   .spic-card {
     background: #fff;
-    border: 1px solid var(--border-subtle, #e2e8f0);
+    border: 1px solid var(--line, #E3E2D9);
     border-radius: 8px;
     overflow: hidden;
     margin: 0;
   }
+  .spic-card--b {
+    border-color: #FDE68A;
+    opacity: .92;
+  }
+  .spic-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0.5rem 0.75rem;
+    background: var(--surface-2, #FAFAF6);
+    border-bottom: 1px solid var(--line, #E3E2D9);
+  }
   .spic-tool-name {
     font-size: 0.8125rem;
     font-weight: 700;
-    color: var(--brand-ink, #2563eb);
-    background: var(--surface-2, #eff6ff);
+    color: var(--brand-ink, #2E25A6);
     margin: 0;
-    padding: 0.5rem 0.75rem;
-    border-bottom: 1px solid var(--border-subtle, #e2e8f0);
   }
   .spic-img {
     width: 100%;
@@ -117,35 +258,81 @@ const { imageA, imageB, toolAName, toolBName } = Astro.props;
   .spic-caption-text {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--text-sub, #475569);
     margin: 0 0 0.5rem;
   }
+  .spic-caption-a { color: #2E25A6; }
+  .spic-caption-b { color: #92400E; }
+
   .spic-meta {
     font-size: 0.6875rem;
-    color: var(--text-muted, #64748b);
+    color: var(--muted, #64748b);
     display: flex;
     flex-direction: column;
     gap: 2px;
     margin: 0 0 0.5rem;
   }
-  .spic-meta div {
-    display: flex;
-    gap: 0.25rem;
+  .spic-meta div { display: flex; gap: 0.25rem; }
+  .spic-meta dt { font-weight: 600; color: var(--ink-soft, #475569); }
+
+  /* プロンプト詳細 */
+  .spic-prompt-details {
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: 6px;
+    overflow: hidden;
   }
-  .spic-meta dt {
+  .spic-prompt-summary {
+    font-size: 0.6875rem;
     font-weight: 600;
-    color: var(--text-sub, #475569);
+    color: var(--brand-ink, #2E25A6);
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+    background: var(--surface-2, #FAFAF6);
+    list-style: none;
   }
+  .spic-prompt-summary::-webkit-details-marker { display: none; }
+  .spic-prompt-summary::before { content: '▶ '; font-size: 0.6rem; }
+  details[open] .spic-prompt-summary::before { content: '▼ '; }
+  .spic-prompt-body {
+    padding: 0.6rem 0.75rem;
+    background: #fff;
+  }
+  .spic-prompt-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--ink-soft, #475569);
+    margin: 0 0 2px;
+  }
+  .spic-prompt-text {
+    font-size: 0.6875rem;
+    color: var(--ink-soft, #475569);
+    line-height: 1.6;
+    font-family: monospace;
+    word-break: break-word;
+    margin: 0 0 0.5rem;
+    background: var(--surface-2, #f8fafc);
+    padding: 4px 6px;
+    border-radius: 4px;
+  }
+  .spic-prompt-disc {
+    font-size: 0.625rem;
+    color: var(--muted, #94a3b8);
+    margin: 0;
+    line-height: 1.6;
+  }
+
   .spic-notice {
     font-size: 0.6875rem;
-    color: var(--text-muted, #94a3b8);
+    color: var(--muted, #94a3b8);
     line-height: 1.6;
     margin: 0;
   }
   .spic-footer-note {
     font-size: 0.75rem;
-    color: var(--text-muted, #94a3b8);
+    color: var(--muted, #94a3b8);
     line-height: 1.7;
     margin: 1rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line, #E3E2D9);
   }
 </style>

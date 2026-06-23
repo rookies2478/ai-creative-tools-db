@@ -110,6 +110,18 @@ const editToolCards = [
 ];
 
 const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(Boolean);
+
+type VidExtra = { freeCount: string; smartphone: string; textLabel: string; trend: string; commercialCheck: string };
+const vidExtra: Record<string, VidExtra> = {
+  'runway':    { freeCount: '△あり（初回限定）',   smartphone: '△（ブラウザ経由）', textLabel: '!別論点',  trend: 'リアル寄り',           commercialCheck: '確認項目少なめ（全プランで案内）' },
+  'pika':      { freeCount: '△あり（要確認）',     smartphone: '△（ブラウザ経由）', textLabel: '!別論点',  trend: '両方対応',             commercialCheck: 'プランや用途による' },
+  'kling-ai':  { freeCount: '△あり（要確認）',     smartphone: '△（ブラウザ経由）', textLabel: '!別論点',  trend: 'リアル寄り',           commercialCheck: 'プランや用途による' },
+  'luma-ai':   { freeCount: '△あり（要確認）',     smartphone: '△（ブラウザ経由）', textLabel: '!別論点',  trend: 'リアル寄り',           commercialCheck: 'プランや用途による' },
+  'hailuo-ai': { freeCount: '△あり（要確認）',     smartphone: '△（ブラウザ経由）', textLabel: '!別論点',  trend: 'リアル寄り',           commercialCheck: '要公式確認' },
+  'haiper':    { freeCount: '⚠️サービス変更済み', smartphone: '⚠️サービス変更済み', textLabel: '⚠️',     trend: '⚠️サービス変更済み',   commercialCheck: '⚠️サービス変更済み' },
+  'vidu-ai':   { freeCount: '△あり（要確認）',     smartphone: '△（ブラウザ経由）', textLabel: '!別論点',  trend: '両方対応',             commercialCheck: '要公式確認' },
+  'pixverse':  { freeCount: '△あり（要確認）',     smartphone: '△（ブラウザ経由）', textLabel: '!別論点',  trend: 'アニメ・スタイライズド寄り', commercialCheck: '要公式確認' },
+};
 ---
 
 <BaseLayout
@@ -357,12 +369,23 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
           <h2>AI動画生成ツール 横断比較表</h2>
           <p>以下は <b>2026-06-18</b> 時点の調査に基づく整理です。料金・無料枠・透かし・生成時間・クレジット消費・利用条件は、プランや時期によって変わる場合があります。人物・ロゴ・第三者素材を含む生成物の扱いは各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
         </div>
+        <div class="cvg-legend reveal">
+          <p class="cvg-legend-title">表示記号の見方</p>
+          <ul class="cvg-legend-list">
+            <li><span class="sym ok">○</span>可・対応（条件による場合があります）</li>
+            <li><span class="sym partial">△</span>条件付き可／要確認</li>
+            <li><span class="sym no">×</span>不可または未対応</li>
+            <li><span class="sym unknown">－</span>未明記または情報なし</li>
+            <li><span class="sym other">!</span>別論点として確認が必要</li>
+          </ul>
+          <p class="cvg-legend-note">「商用確認の目安」は当サイトが確認項目数を整理したものであり、商用利用の可否を断定するものではありません。プランや用途により条件が異なる場合があります。最新情報は各公式サイトをご確認ください。</p>
+        </div>
         <p class="cvg-gtcap reveal">← 横にスクロールできます →</p>
         <div class="reveal">
           <div class="cvg-tablewrap">
             <table class="cvg-gt cross">
               <thead>
-                <tr><th>ツール名</th><th>主な用途</th><th>入力タイプ</th><th>無料枠</th><th>商用利用条件</th><th>日本語対応</th><th>透かし</th><th>動画延長</th><th>最大動画尺</th><th>詳細</th></tr>
+                <tr><th>ツール名</th><th>主な用途</th><th>入力タイプ</th><th>無料枠</th><th>無料回数目安</th><th>スマホ可否</th><th>文字入り画像</th><th>実写・アニメ傾向</th><th>商用確認の目安</th><th>商用利用条件</th><th>日本語対応</th><th>透かし</th><th>動画延長</th><th>最大動画尺</th><th>詳細</th></tr>
               </thead>
               <tbody>
                 {primaryTools.map((tool) => {
@@ -390,6 +413,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
                     f.textToVideo ? 'テキスト' :
                     f.imageToVideo ? '画像' : '—';
                   const isServiceChanged = tool.data.pricingStatus === 'service_changed';
+                  const ex = vidExtra[tool.slug] ?? { freeCount: '－', smartphone: '－', textLabel: '－', trend: '－', commercialCheck: '要公式確認' };
                   return (
                     <tr class={isServiceChanged ? 'is-changed' : ''}>
                       <td>
@@ -406,6 +430,11 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
                       <td class="cvg-note nowrap">
                         {tool.data.freePlan && tool.data.freePlan !== 'no' ? 'あり' : 'なし／要確認'}
                       </td>
+                      <td class="cvg-note nowrap">{ex.freeCount}</td>
+                      <td class="cvg-note nowrap">{ex.smartphone}</td>
+                      <td class="cvg-note">{ex.textLabel}</td>
+                      <td class="cvg-note">{ex.trend}</td>
+                      <td class="cvg-note">{ex.commercialCheck}</td>
                       <td class="cvg-note">{cuLabel}</td>
                       <td class="cvg-note nowrap">{jpLabel}</td>
                       <td class="cvg-note">{wmLabel}</td>
@@ -421,7 +450,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
               </tbody>
             </table>
           </div>
-          <p class="cvg-foot">商用利用条件・透かし条件はプランや時期により変更される場合があります。最大動画尺や延長機能はモデル・プラン・提供時期によって変わる場合があります。各ツールの公式利用規約・公式サイトを必ずご確認ください。</p>
+          <p class="cvg-foot">商用利用条件・透かし条件はプランや時期により変更される場合があります。最大動画尺や延長機能はモデル・プラン・提供時期によって変わる場合があります。各ツールの公式利用規約・公式サイトを必ずご確認ください。本記事は法的助言ではありません。</p>
         </div>
       </section>
 
@@ -557,6 +586,13 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
                   <a class="primary" href={`/tools/${t.slug}/`}>詳しく見る</a>
                 </span>
               </footer>
+              <div class="tconds">
+                <span class="tconds-label">条件を確認：</span>
+                <a href="/conditions/free/">無料枠</a>
+                <a href="/conditions/no-watermark/">透かし</a>
+                <a href="/conditions/commercial-use/">商用利用</a>
+                <a href="/conditions/japanese/">日本語</a>
+              </div>
             </article>
           ))}
         </div>
@@ -925,7 +961,7 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
   table.cvg-gt { width: 100%; border-collapse: collapse; }
   table.cvg-gt.guide { min-width: 880px; }
   table.cvg-gt.diff { min-width: 720px; }
-  table.cvg-gt.cross { min-width: 1100px; }
+  table.cvg-gt.cross { min-width: 1680px; }
   table.cvg-gt.char { min-width: 760px; }
   table.cvg-gt thead th { font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--ink-soft); background: var(--surface-2); padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
   table.cvg-gt tbody td { padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
@@ -987,6 +1023,23 @@ const splitChips = (s: string) => s.split(/[、,]/).map((p) => p.trim()).filter(
   .cvg-tcard .tlinks { display: inline-flex; align-items: center; gap: 14px; }
   .cvg-tcard .tlinks .primary { font-family: var(--f-jp); font-weight: 700; font-size: 13px; color: var(--brand-ink); white-space: nowrap; }
   .cvg-tcard .tlinks .primary:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .tconds { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--line); }
+  .tconds-label { font-family: var(--f-jp); font-weight: 700; font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+  .tconds a { font-family: var(--f-jp); font-size: 11.5px; font-weight: 600; color: var(--brand-ink); background: var(--brand-tint); border: 1px solid color-mix(in srgb, var(--brand) 22%, var(--line)); border-radius: 6px; padding: 2px 8px; white-space: nowrap; transition: background .14s; }
+  .tconds a:hover { background: color-mix(in srgb, var(--brand) 16%, #fff); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* 凡例ブロック */
+  .cvg-legend { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 16px; }
+  .cvg-legend-title { font-family: var(--f-jp); font-weight: 700; font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .cvg-legend-list { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  .cvg-legend-list li { font-size: 12px; color: var(--ink-soft); display: flex; align-items: center; gap: 6px; }
+  .cvg-legend-list .sym { font-family: var(--f-jp); font-weight: 700; font-size: 13px; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; border-radius: 5px; flex: none; }
+  .cvg-legend-list .sym.ok { color: var(--ok); background: var(--ok-tint); }
+  .cvg-legend-list .sym.partial { color: var(--warn); background: var(--warn-tint); }
+  .cvg-legend-list .sym.no { color: var(--no); background: var(--no-tint); }
+  .cvg-legend-list .sym.unknown { color: var(--na); background: var(--na-tint); }
+  .cvg-legend-list .sym.other { color: var(--brand-ink); background: var(--brand-tint); }
+  .cvg-legend-note { font-size: 11px; color: var(--faint); line-height: 1.65; }
 
   /* 用途別の選び分け */
   .cvg-splitgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }

@@ -2,10 +2,15 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+import { generatedVideos } from '../../../data/generatedVideos';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'luma-ai');
 const d = entry?.data;
+
+const lumaSampleVideo = generatedVideos.find(
+  (v) => v.pageSlug === 'luma-ai' && v.sampleType === 'tool-video-output' && v.isSameToolAsPage
+) ?? null;
 
 const jsonLd = JSON.stringify([
   {
@@ -263,6 +268,7 @@ const jsonLd = JSON.stringify([
         { label: '日本語対応AIツール', href: '/conditions/japanese/' },
         { label: '全ツール比較表', href: '/comparisons/' },
       ]}
+      sampleVideo={lumaSampleVideo}
     />
   </div>
 

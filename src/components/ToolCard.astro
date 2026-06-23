@@ -32,9 +32,11 @@ function cuBadge(val: CommercialUse) {
 }
 
 function jpBadge(ui: TriState, prompt: TriState) {
-  if (ui === true)                       return { text: '日本語：対応',  cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
-  if (ui === false && prompt === false)   return { text: '日本語：非対応', cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
-                                          return { text: '日本語：要確認', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+  if (ui === true)                                                        return { text: '日本語：対応',    cls: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200' };
+  if (ui === false && prompt === false)                                   return { text: '日本語：非対応',  cls: 'bg-slate-100 text-slate-500 ring-1 ring-inset ring-slate-200' };
+  if (ui === 'partial' || (ui === false && (prompt === true || prompt === 'partial')))
+                                                                          return { text: '日本語：部分対応', cls: 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200' };
+                                                                          return { text: '日本語：要確認',  cls: 'bg-slate-50 text-slate-400 ring-1 ring-inset ring-slate-100' };
 }
 
 function wmBadge(val: FourState) {

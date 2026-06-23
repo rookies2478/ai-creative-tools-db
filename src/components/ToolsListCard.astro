@@ -57,6 +57,7 @@ function commercialLabel(v: unknown): string {
 function jaLabel(ui: unknown, prompt: unknown): string {
   if (ui === true) return '対応';
   if (ui === false && prompt === false) return '非対応';
+  if (ui === 'partial' || (ui === false && (prompt === true || prompt === 'partial'))) return '部分対応';
   return '要確認';
 }
 function wmLabel(v: unknown): string {
@@ -74,7 +75,7 @@ function inputMaterialLabel(v: unknown): { text: string; cls: string } | null {
 function condClass(field: string, val: string): string {
   if (field === 'commercial') return val === '案内あり' ? 'ok' : val === '有料プラン向け' ? 'warn' : 'na';
   if (field === 'free') return val === 'あり' ? 'ok' : 'na';
-  if (field === 'ja') return val === '対応' ? 'ok' : 'na';
+  if (field === 'ja') return val === '対応' ? 'ok' : val === '部分対応' ? 'warn' : 'na';
   if (field === 'watermark') {
     if (val === '透かしなし') return 'ok';
     if (val === '透かしあり') return 'warn';

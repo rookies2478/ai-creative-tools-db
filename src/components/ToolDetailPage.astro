@@ -359,9 +359,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
     <div class="tdp-sechead reveal"><span class="tdp-eyebrow">Sources</span><h2>情報の鮮度・参照元</h2><p>本ページの情報は、各ツールの公式サイト・料金ページ・利用規約等をもとに整理したものです。掲載内容は確認時点の情報です。</p></div>
     <div class="tdp-srcgrid reveal" data-stagger>
       <div class="tdp-datebox">
-        {lastChecked && <div class="row"><b>最終確認日</b><span class="mono">{lastChecked}</span></div>}
-        {nextCheck && <div class="row"><b>次回確認予定</b><span class="mono">{nextCheck}</span></div>}
-        {verifiedDate && <div class="row"><b>公式情報確認日</b><span class="mono">{verifiedDate}</span></div>}
+        {(lastChecked || verifiedDate) && <div class="row"><b>情報確認日</b><span class="mono">{lastChecked || verifiedDate}</span></div>}
         <p style="margin-top:10px;font-size:12px;color:var(--muted);line-height:1.75;grid-column:1/-1;">料金・利用条件は変更される場合があります。最新情報は公式サイトをご確認ください。商用利用条件や入力素材の扱いは、プランや用途によって異なる場合があります。本記事は法的助言ではありません。</p>
       </div>
       {sources.length > 0 && (

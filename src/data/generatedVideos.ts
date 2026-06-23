@@ -28,6 +28,28 @@ export interface GeneratedVideo {
 
 export const generatedVideos: GeneratedVideo[] = [
   {
+    file: '/videos/generated/tools/kling-ai-tool-video-output-01.mp4',
+    poster: '/videos/generated/tools/kling-ai-tool-video-output-01-poster.webp',
+    alt: 'Kling AIで作成した短尺実例サンプル動画。公式出力・代表結果・性能証明ではありません。',
+    caption: 'このツールで作成した短尺実例動画',
+    sampleType: 'tool-video-output',
+    comparisonEligible: false,
+    isSameToolAsPage: true,
+    sourceToolSlug: 'kling-ai',
+    promptVersion: 'video-tool-benchmark-v1',
+    prompt: 'A cinematic 5-second video of a modern creative workspace, a laptop on a desk showing abstract colorful motion graphics, soft natural light, slow camera push-in, clean minimal interior, high detail, no text, no logo, no people, no brand.',
+    negativePrompt: 'text, letters, logo, watermark, brand mark, celebrity, real person, existing character, distorted objects, flicker, low quality, blurry, violent, sexual, medical, legal, financial, nsfw',
+    model: 'Kling AI 2.0',
+    provider: 'Kling AI',
+    modelUrl: 'https://klingai.com',
+    durationSec: 5,
+    resolution: '1280x720',
+    generatedAt: '2026-06-24',
+    reviewedAt: '2026-06-24',
+    pageSlug: 'kling-ai',
+    usageNote: 'この動画は管理者がKling AIで作成した短尺サンプルです。1本の動画だけでツールの品質や性能を断定するものではありません。無料プランで生成したため透かし（KlingAI 3.0）が含まれています。商用利用条件や素材の権利は公式情報をご確認ください。本記事は法的助言ではありません。',
+  },
+  {
     file: '/videos/generated/tools/runway-tool-video-output-01.mp4',
     poster: '/videos/generated/tools/runway-tool-video-output-01-poster.webp',
     alt: 'Runwayで作成した短尺実例サンプル動画。公式出力・代表結果・性能証明ではありません。',

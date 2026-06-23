@@ -14,7 +14,7 @@
  *
  * ヘッダー / フッター / パンくず / 条件ナビ は既存 Layout 側のものを使う想定。
  */
-export type WmStatus = 'none' | 'paid' | 'meta' | 'unknown';
+export type WmStatus = 'no' | 'limited' | 'yes' | 'unknown';
 export interface Tool {
   name: string;
   slug: string;            // /tools/{slug}/ へのリンクに使用
@@ -43,10 +43,10 @@ export interface Props {
 }
 
 const STATUS: Record<WmStatus, { label: string; cls: string }> = {
-  none:    { label: '透かしなし',  cls: 'none' },
-  paid:    { label: '有料で除去',  cls: 'paid' },
-  meta:    { label: 'メタデータ型', cls: 'meta' },
-  unknown: { label: '要確認',      cls: 'unknown' },
+  no:      { label: '透かしなし',         cls: 'none' },
+  limited: { label: 'プランによって異なる', cls: 'paid' },
+  yes:     { label: '透かしあり',          cls: 'has' },
+  unknown: { label: '要確認',              cls: 'unknown' },
 };
 
 const DEFAULT_POINTS: Point[] = [
@@ -57,44 +57,7 @@ const DEFAULT_POINTS: Point[] = [
   { title:'公式情報で最終確認', body:'本サイトの情報は確認時点のものです。ツール側の方針変更により条件が変わる場合があります。<a href="/tools/">各ツールの詳細ページ</a>の公式リンクから最新情報をご確認ください。' },
 ];
 
-const DEFAULT_TOOLS: Tool[] = [
-  { name:'Adobe Firefly', slug:'adobe-firefly', initial:'A', free:'要確認', ja:'対応', commercial:'要確認', wm:'meta',
-    wmNote:'プランによっては可視透かしが入る場合があります。全プランでC2PAメタデータ（コンテンツクレデンシャル）が埋め込まれるとされています。最新の公式情報と実際の出力画面でご確認ください。',
-    freeNote:'無料プランで一定数の生成クレジットがあるとされています（数量は変更の可能性あり）。' },
-  { name:'DALL·E', slug:'dalle', initial:'D', free:'要確認', ja:'対応', commercial:'案内あり', wm:'meta',
-    wmNote:'C2PAメタデータ（不可視）が埋め込まれる場合があるとされています。可視透かしの有無は出力形式・利用環境によって異なる可能性があります。',
-    freeNote:'ChatGPT無料プランで制限付き利用できる場合があります。' },
-  { name:'Hailuo AI', slug:'hailuo-ai', initial:'H', free:'要確認', ja:'要確認', commercial:'要確認', wm:'paid',
-    wmNote:'無料プランでは透かしありとされています。有料プランの透かし条件は公式サイトをご確認ください。',
-    freeNote:'無料枠あり（透かしあり・生成回数制限あり）。詳細は公式サイトをご確認ください。' },
-  { name:'Kling AI', slug:'kling-ai', initial:'K', free:'要確認', ja:'要確認', commercial:'要確認', wm:'paid',
-    wmNote:'無料プランでは透かしが入る可能性があり、有料プランでは条件が変わる場合があります。最新の公式料金ページをご確認ください。',
-    freeNote:'1日66クレジット程度（翌日繰越なし・透かしあり・商用利用不可）とされています。' },
-  { name:'NightCafe', slug:'nightcafe', initial:'N', free:'あり', ja:'要確認', commercial:'要確認', wm:'none',
-    wmNote:'NightCafe公式ブログでは「without any watermarks」と案内されています。ただし仕様は変更される可能性があるため、最新の公式画面でご確認ください。',
-    freeNote:'公式ブログでは無料利用や無料クレジットが案内されています。ただし無料クレジット数・付与条件・有料プランは変更される可能性があるため、最新の公式情報をご確認ください。' },
-  { name:'Midjourney', slug:'midjourney', initial:'M', free:'なし', ja:'要確認', commercial:'要確認', wm:'none',
-    wmNote:'有料プランでは透かしなしとされています。無料プランは提供されていない場合があります。',
-    freeNote:'有料プランのみ。無料枠は提供されていない場合があります。' },
-  { name:'Pika', slug:'pika', initial:'P', free:'要確認', ja:'要確認', commercial:'要確認', wm:'paid',
-    wmNote:'無料プランでは透かしあり、有料プランでは透かしなしとされています。最新の公式情報をご確認ください。',
-    freeNote:'月80クレジット程度（毎月更新・商用利用不可）とされています。' },
-  { name:'PixVerse', slug:'pixverse', initial:'P', free:'要確認', ja:'対応', commercial:'要確認', wm:'paid',
-    wmNote:'無料プランでは透かしありとされています。有料プランの透かし条件は公式サイトをご確認ください。',
-    freeNote:'無料プラン（Basic）あり。複数の第三者情報では、初回サインアップ時に90クレジット付与・毎日60クレジットが補充（当日未使用分は翌日失効）と報告されています。透かしあり・生成回数制限あり。詳細は公式サイトをご確認ください。' },
-  { name:'InVideo AI', slug:'invideo-ai', initial:'I', free:'あり', ja:'要確認', commercial:'要確認', wm:'paid',
-    wmNote:'無料プランでは透かしあり、有料プランでは透かしなしで出力できるとされています。',
-    freeNote:'無料プランあり（透かしあり・エクスポート制限あり）。詳細は公式サイトをご確認ください。' },
-  { name:'Runway', slug:'runway', initial:'R', free:'要確認', ja:'要確認', commercial:'要確認', wm:'paid',
-    wmNote:'無料プランでは透かしあり、有料プランでは透かしなしとされています。',
-    freeNote:'125クレジット（初回のみ・更新なし）とされています。' },
-  { name:'Stable Diffusion', slug:'stable-diffusion', initial:'S', free:'あり', ja:'要確認', commercial:'要確認', wm:'meta',
-    wmNote:'一部バージョンで不可視透かし（invisible watermark）が埋め込まれる場合があるとされています。可視透かしは通常入りませんが、利用環境やモデルによって異なる可能性があります。',
-    freeNote:'ローカル実行は無料（GPU搭載PCと環境構築が必要）。' },
-  { name:'Vidu AI', slug:'vidu-ai', initial:'V', free:'要確認', ja:'要確認', commercial:'要確認', wm:'paid',
-    wmNote:'無料プランでは透かしありとされています。有料プランの透かし条件は公式サイトをご確認ください。',
-    freeNote:'無料枠あり（制限あり）。詳細は公式サイトをご確認ください。' },
-];
+const DEFAULT_TOOLS: Tool[] = [];
 
 const DEFAULT_FAQS: Faq[] = [
   { q:'透かしなしで使えるAI画像生成ツールはありますか？', a:'透かし条件はプランや機能によって変わる可能性があります。無料プランでも透かしなしで出力できるツールがある一方、有料プランへの移行で透かしが外れるツールもあります。上の一覧表の「透かし条件」欄で各ツールの状況を確認し、実際の出力画面で透かしの有無をご確認ください。' },
@@ -112,9 +75,9 @@ const {
   notice = '透かしの有無は、無料プラン・有料プラン・出力形式によって変わる場合があります。また、透かしを除去できることと商用利用が許可されていることは別の問題です。掲載情報は調査時点の内容であり、実務利用前には必ず各ツールの公式サイト・最新の利用規約をご確認ください。本サイトの内容は法的助言ではありません。',
   toolsBase = '/tools/',
   stats = [
-    { n:'12', label:'対象ツール' },
+    { n:'26', label:'対象ツール' },
     { n:'4',  label:'透かしタイプ' },
-    { n:'6',  label:'よくある質問' },
+    { n:'7',  label:'よくある質問' },
   ],
   points = DEFAULT_POINTS,
   tools = DEFAULT_TOOLS,
@@ -147,7 +110,7 @@ const ini = (t: Tool) => t.initial ?? t.name.charAt(0);
 const presentStatuses = Array.from(new Set(tools.map((t) => t.wm)));
 const filterChips: { st: WmStatus | 'all'; label: string }[] = [
   { st: 'all', label: 'すべて' },
-  ...(['none','paid','meta','unknown'] as WmStatus[]).filter((s) => presentStatuses.includes(s)).map((s) => ({ st: s, label: STATUS[s].label })),
+  ...(['no','limited','yes','unknown'] as WmStatus[]).filter((s) => presentStatuses.includes(s)).map((s) => ({ st: s, label: STATUS[s].label })),
 ];
 ---
 
@@ -181,9 +144,9 @@ const filterChips: { st: WmStatus | 'all'; label: string }[] = [
       <p>各ツールの透かし条件は、確認時点の公式情報をもとに以下の4タイプで整理しています。透かしの有無はプラン・機能・出力形式によって変わる場合があります。実務利用前には実際の出力画面と公式情報でご確認ください。</p>
     </div>
     <div class="status-grid">
-      <div class="status-card none"><span class="st none"><span class="d"></span>透かしなし <small>none</small></span><p>公式情報上、可視透かしが入らないと案内されているツールです。仕様は変更される可能性があるため、出力画面でご確認ください。</p></div>
-      <div class="status-card paid"><span class="st paid"><span class="d"></span>有料で除去 <small>paid</small></span><p>無料プランでは透かしが入り、有料プランで透かしなし出力ができる場合があるツールです。対象プランを公式情報で確認してください。</p></div>
-      <div class="status-card meta"><span class="st meta"><span class="d"></span>メタデータ型 <small>meta</small></span><p>可視透かしは入らないものの、C2PAなどの不可視メタデータ（来歴情報）が埋め込まれる場合があるツールです。</p></div>
+      <div class="status-card none"><span class="st none"><span class="d"></span>透かしなし <small>no</small></span><p>公式情報上、可視透かしが入らないと案内されているツールです。仕様は変更される可能性があるため、出力画面でご確認ください。</p></div>
+      <div class="status-card paid"><span class="st paid"><span class="d"></span>プランによって異なる <small>limited</small></span><p>無料プランでは透かしが入り、有料プランで透かしなし出力ができる場合があるツールです。対象プランを公式情報で確認してください。</p></div>
+      <div class="status-card has"><span class="st has"><span class="d"></span>透かしあり <small>yes</small></span><p>現在確認できている情報では、透かしが入るとされているツールです。詳細は公式サイトでご確認ください。</p></div>
       <div class="status-card unknown"><span class="st unknown"><span class="d"></span>要確認 <small>unknown</small></span><p>公式情報から透かし条件を確認できていないツールです。利用前に必ず公式情報と出力画面をご確認ください。</p></div>
     </div>
   </section>
@@ -253,8 +216,8 @@ const filterChips: { st: WmStatus | 'all'; label: string }[] = [
     </div>
     <div class="nw-legend">
       <span class="li"><span class="st none"><span class="d"></span>透かしなし</span></span>
-      <span class="li"><span class="st paid"><span class="d"></span>有料で除去</span></span>
-      <span class="li"><span class="st meta"><span class="d"></span>メタデータ型</span></span>
+      <span class="li"><span class="st paid"><span class="d"></span>プランによって異なる</span></span>
+      <span class="li"><span class="st has"><span class="d"></span>透かしあり</span></span>
       <span class="li"><span class="mk yes">○</span>あり / 対応</span>
       <span class="li"><span class="mk cond">△</span>要確認</span>
       <span class="li"><span class="mk no">×</span>なし / 非対応</span>
@@ -373,7 +336,7 @@ const filterChips: { st: WmStatus | 'all'; label: string }[] = [
   .nw-x .st small{opacity:.7;font-weight:600;}
   .nw-x .st.none{color:var(--ok);background:var(--ok-tint);}
   .nw-x .st.paid{color:var(--brand-ink);background:var(--brand-tint);}
-  .nw-x .st.meta{color:var(--image);background:var(--image-tint);}
+  .nw-x .st.has{color:var(--video);background:var(--video-tint);}
   .nw-x .st.unknown{color:var(--na);background:var(--na-tint);}
 
   /* ステータス凡例 */
@@ -383,7 +346,7 @@ const filterChips: { st: WmStatus | 'all'; label: string }[] = [
   .nw-x .status-card p{font-size:12.5px;color:var(--muted);line-height:1.7;}
   .nw-x .status-card.none{border-top:3px solid var(--ok);}
   .nw-x .status-card.paid{border-top:3px solid var(--brand);}
-  .nw-x .status-card.meta{border-top:3px solid var(--image);}
+  .nw-x .status-card.has{border-top:3px solid var(--video);}
   .nw-x .status-card.unknown{border-top:3px solid var(--na);}
 
   /* 選び方ポイント */
@@ -401,14 +364,14 @@ const filterChips: { st: WmStatus | 'all'; label: string }[] = [
   .nw-x .schip{font-family:var(--f-jp);font-weight:600;font-size:13px;padding:8px 15px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-soft);cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;transition:transform .16s var(--ease),background .16s,border-color .16s,color .16s;}
   .nw-x .schip:hover{border-color:var(--brand);color:var(--brand-ink);}
   .nw-x .schip .d{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.8;}
-  .nw-x .schip .d[data-tone="none"]{color:var(--ok);}
-  .nw-x .schip .d[data-tone="paid"]{color:var(--brand);}
-  .nw-x .schip .d[data-tone="meta"]{color:var(--image);}
+  .nw-x .schip .d[data-tone="no"]{color:var(--ok);}
+  .nw-x .schip .d[data-tone="limited"]{color:var(--brand);}
+  .nw-x .schip .d[data-tone="yes"]{color:var(--video);}
   .nw-x .schip .d[data-tone="unknown"]{color:var(--na);}
   .nw-x .schip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink);}
-  .nw-x .schip[data-st="none"][aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:#fff;}
-  .nw-x .schip[data-st="paid"][aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff;}
-  .nw-x .schip[data-st="meta"][aria-pressed="true"]{background:var(--image);border-color:var(--image);color:#fff;}
+  .nw-x .schip[data-st="no"][aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:#fff;}
+  .nw-x .schip[data-st="limited"][aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff;}
+  .nw-x .schip[data-st="yes"][aria-pressed="true"]{background:var(--video);border-color:var(--video);color:#fff;}
   .nw-x .schip[aria-pressed="true"] .d{color:#fff;}
   .nw-x .statusbar-right{margin-left:auto;display:flex;align-items:center;gap:14px;}
   .nw-x .nw-search{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line-strong);border-radius:999px;padding:8px 15px;transition:border-color .15s,box-shadow .15s;}

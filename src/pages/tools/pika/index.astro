@@ -2,10 +2,18 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+import { generatedVideos } from '../../../data/generatedVideos';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'pika');
 const d = entry?.data;
+
+const pikaSampleVideo = generatedVideos.find(
+  (v) =>
+    v.pageSlug === 'pika' &&
+    v.sampleType === 'tool-video-output' &&
+    v.isSameToolAsPage
+) ?? null;
 
 const jsonLd = JSON.stringify([
   {
@@ -49,6 +57,7 @@ const jsonLd = JSON.stringify([
 
   <div class="tdp-wrap">
     <ToolDetailPage
+      sampleVideo={pikaSampleVideo}
       toolName="Pika"
       category="AI動画生成"
       checkedDate={d?.lastReviewed ?? '2026-06-05'}

@@ -201,6 +201,7 @@ const faqs = [
 const comparisonTargetSlugs = [
   'canva-ai-image-generator',
   'adobe-firefly',
+  'midjourney',
   'leonardo-ai',
   'stable-diffusion',
   'fotor-ai',
@@ -218,6 +219,7 @@ const comparisonTargetSlugs = [
 const toolNameMap: Record<string, string> = {
   'canva-ai-image-generator': 'Canva AI画像生成',
   'adobe-firefly': 'Adobe Firefly',
+  'midjourney': 'Midjourney',
   'leonardo-ai': 'Leonardo AI',
   'stable-diffusion': 'Stable Diffusion',
   'fotor-ai': 'Fotor AI',
@@ -446,7 +448,7 @@ const articleJsonLd = JSON.stringify({
       <h2 class="fai-h2">同一プロンプトで生成した参考作例</h2>
       <div class="fai-samples-notice">
         <p>以下は、管理者が同一プロンプトを使って各ツールで作成した参考作例です。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。1枚の画像だけでツールの品質や性能を断定するものではありません。商用利用条件は各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
-        <p class="fai-samples-sub">Midjourneyは本記事作成時点で無料生成枠を確認しにくいため、同一プロンプト画像サンプルの対象には含めていません。Clipdropは画像編集系機能が中心で、管理者環境では無料版で同一条件の画像生成を確認できなかったため対象外としています。</p>
+        <p class="fai-samples-sub">Midjourneyは無料プランがない（有料プランのみ）ため、無料プラン比較の主対象外ですが、管理者が有料プランで同一プロンプトを使って作成した参考作例を掲載しています。Clipdropは画像編集系機能が中心で、管理者環境では同一条件の画像生成を確認できなかったため対象外としています。</p>
       </div>
       <div class="fai-samples-grid">
         {benchmarkSamples.map((img) => (
@@ -464,7 +466,12 @@ const articleJsonLd = JSON.stringify({
             </div>
             <div class="fai-sample-body">
               <p class="fai-sample-tool">{toolNameMap[img.sourceToolSlug ?? ''] ?? img.sourceToolSlug}</p>
-              <p class="fai-sample-label">管理者作成の参考作例</p>
+              <p class="fai-sample-label">このツールで作成した実例サンプル</p>
+              {img.caption && <p class="fai-sample-caption">{img.caption}</p>}
+              <dl class="fai-sample-meta">
+                {img.generatedAt && <div><dt>生成日：</dt><dd>{img.generatedAt}</dd></div>}
+                {img.reviewedAt && <div><dt>確認日：</dt><dd>{img.reviewedAt}</dd></div>}
+              </dl>
               {img.sourceToolSlug === 'gemini-image-generation' && (
                 <p class="fai-sample-gemini-note">※ Gemini画像生成では、SynthIDなどの透かしが使用される場合があります。透かしの扱いは用途・プランによって異なる場合があるため、最新の公式情報をご確認ください。</p>
               )}
@@ -895,9 +902,26 @@ const articleJsonLd = JSON.stringify({
   }
   .fai-sample-label {
     font-size: 10.5px;
-    color: var(--ink-soft);
-    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2E25A6;
+    margin-bottom: 4px;
   }
+  .fai-sample-caption {
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-bottom: 4px;
+  }
+  .fai-sample-meta {
+    font-size: 10px;
+    color: var(--muted, #64748b);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin: 0 0 6px;
+  }
+  .fai-sample-meta div { display: flex; gap: 0.25rem; }
+  .fai-sample-meta dt { font-weight: 600; }
   .fai-sample-gemini-note {
     font-size: 10px;
     color: var(--amber-text);

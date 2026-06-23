@@ -1,6 +1,15 @@
 ---
 import ComparisonVsArticle from '../../../components/ComparisonVsArticle.astro';
+import SamePromptImageComparison from '../../../components/SamePromptImageComparison.astro';
+import { generatedImages } from '../../../data/generatedImages';
 import { getEntry } from 'astro:content';
+
+const imgFirefly = generatedImages.find(
+  (i) => i.sourceToolSlug === 'adobe-firefly' && i.sampleType === 'tool-output' && i.comparisonEligible === true && i.promptVersion === 'image-tool-benchmark-v1'
+)!;
+const imgMidjourney = generatedImages.find(
+  (i) => i.sourceToolSlug === 'midjourney' && i.sampleType === 'tool-output' && i.comparisonEligible === true && i.promptVersion === 'image-tool-benchmark-v1'
+)!;
 
 const [toolMidjourney, toolFirefly] = await Promise.all([
   getEntry('tools', 'midjourney'),
@@ -240,6 +249,14 @@ const articleJsonLd = JSON.stringify({
       </ul>
     </div>
   </section>
+
+  <!-- ===== 同一プロンプト比較 ===== -->
+  <SamePromptImageComparison
+    imageA={imgMidjourney}
+    imageB={imgFirefly}
+    toolAName="Midjourney"
+    toolBName="Adobe Firefly"
+  />
 
   <!-- ===== 他ツール ===== -->
   <section class="cp-body-sec">

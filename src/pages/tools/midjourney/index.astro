@@ -8,8 +8,10 @@ const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'midjourney');
 const d = entry?.data;
 const sampleImage = generatedImages.find((img) =>
-  img.pageSlug === 'midjourney' &&
-  img.sampleType === 'reference-visual'
+  img.sourceToolSlug === 'midjourney' &&
+  img.sampleType === 'tool-output' &&
+  img.comparisonEligible === true &&
+  img.promptVersion === 'image-tool-benchmark-v1'
 ) ?? null;
 
 const jsonLd = JSON.stringify([

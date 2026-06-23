@@ -35,14 +35,14 @@ export interface Props {
 }
 
 const {
-  headingHtml = 'AIツール<br><span class="hl">比較記事</span>一覧',
-  lead = 'AI画像生成・AI動画生成ツールを、用途・料金・無料枠・商用利用条件・透かし・日本語対応などの観点で比較した記事をまとめています。どのツールを選ぶか迷ったとき、まずこのページから目的に合った比較記事を探してみてください。',
+  headingHtml = 'AIツール<br><span class="hl">比較・選び方</span>ガイド',
+  lead = 'AI画像生成・AI動画生成ツールを無料枠・商用利用条件・透かし・日本語対応などの観点で比較したページです。ツール選びに迷ったとき、まずここから目的に合った比較記事や比較表を探してみてください。',
   notice = '商用利用条件や著作権はツール・プラン・用途によって異なる場合があります。比較記事はあくまで参考情報です。掲載内容は確認時点のもので、最新情報や具体的な利用可否は必ず各公式サイトでご確認ください。本サイトは商用利用・著作権について断定せず、本記事群は法的助言ではありません。',
   stats = [
     { n:'11', label:'比較記事' },
-    { n:'6', label:'画像生成', tone:'image' },
-    { n:'4', label:'動画生成', tone:'video' },
-    { n:'5', label:'比較観点' },
+    { n:'6', label:'画像生成ツール', tone:'image' },
+    { n:'4', label:'動画生成ツール', tone:'video' },
+    { n:'6', label:'比較観点' },
   ] as Stat[],
   router = [
     { goal:'AI画像生成とAI動画生成をまとめて比較したい', links:[{ label:'AI画像・動画生成ツール比較表', href:'/comparisons/ai-image-video-tools/' }] },
@@ -80,6 +80,14 @@ const {
       a:'無料枠のあるツールを条件別に探す場合は<a href="/conditions/free/">無料で試せるツール一覧</a>が参考になります。AI画像生成ツールに絞って詳しく比較したい場合は<a href="/comparisons/free-ai-image-generators/">無料AI画像生成ツール比較</a>も参照してください。' },
     { q:'比較記事の商用利用情報だけで判断できますか？',
       a:'商用利用条件はツール・プラン・用途によって異なる場合があります。比較記事はあくまで参考情報であり、判断の根拠には公式規約をご確認ください。本サイトは商用利用・著作権について断定しません。詳しくは<a href="/guides/commercial-use-copyright/">商用利用・著作権ガイド</a>もあわせて参照してください。' },
+    { q:'比較表の○△×はどのように読めばよいですか？',
+      a:'○は対応あり、△は条件付きまたは要確認、×は非対応の目安を示しています。ただしいずれもプランや用途・確認時点によって変わる場合があります。最終的な判断は各公式サイトの最新情報をご確認ください。' },
+    { q:'無料枠はどの程度使えますか？',
+      a:'無料枠の内容（クレジット数・生成可能枚数・有効期限）はツールやプランによって大きく異なります。また無料プランでは透かしが入る場合や、商用利用が制限される場合があります。詳しくは<a href="/comparisons/free-ai-image-generators/">無料AI画像生成ツール比較</a>や<a href="/conditions/free/">無料で試せるツール一覧</a>をご確認ください。' },
+    { q:'商用利用条件はどこで確認すればよいですか？',
+      a:'本サイトの比較情報は参考にとどめ、実際の商用利用前には必ず各公式の利用規約をご確認ください。プラン・用途・生成物の種類によって条件が異なる場合があります。<a href="/guides/commercial-use-copyright/">商用利用・著作権ガイド</a>も参照してください。' },
+    { q:'AI動画生成とAI画像生成、どちらを選べばよいですか？',
+      a:'静止画・イラスト・デザイン素材が目的であればAI画像生成ツール、映像や動きのあるコンテンツが目的であればAI動画生成ツールが向いています。まず<a href="/comparisons/ai-image-video-tools/">AI画像・動画生成ツール比較表</a>で全体像を確認するのが近道です。' },
   ] as Faq[],
   related = [
     { label:'無料で試せる', href:'/conditions/free/' },
@@ -120,6 +128,59 @@ const pad2 = (i: number) => String(i + 1).padStart(2, '0');
       <p><b>ご利用前に：</b>{notice}</p>
     </div>
   )}
+
+  <!-- ===== このページで比較できること ===== -->
+  <section class="chub-sec can-compare">
+    <div class="sec-head">
+      <span class="eyebrow">What you can compare</span>
+      <h2>このページで比較できること</h2>
+      <p>比較記事・比較表でカバーしている主なカテゴリと観点です。</p>
+    </div>
+    <div class="compare-chips-grid">
+      <div class="compare-chip video">
+        <span class="chip-icon">🎬</span>
+        <div>
+          <strong>AI動画生成ツール</strong>
+          <p>Runway・Kling AI・Pika・InVideo AIなど主要ツールの料金・無料枠・商用条件を比較</p>
+        </div>
+      </div>
+      <div class="compare-chip image">
+        <span class="chip-icon">🖼</span>
+        <div>
+          <strong>AI画像生成ツール</strong>
+          <p>Midjourney・DALL·E・Stable Diffusion・Adobe Fireflyなどを複数観点で比較</p>
+        </div>
+      </div>
+      <div class="compare-chip free">
+        <span class="chip-icon">🆓</span>
+        <div>
+          <strong>無料枠</strong>
+          <p>クレジット数・期間制限・無料プランの制約（透かし・商用利用不可等）を確認</p>
+        </div>
+      </div>
+      <div class="compare-chip neutral">
+        <span class="chip-icon">💧</span>
+        <div>
+          <strong>透かし</strong>
+          <p>無料プラン・有料プランそれぞれで透かしが入るかどうかの目安を確認</p>
+        </div>
+      </div>
+      <div class="compare-chip neutral">
+        <span class="chip-icon">🗾</span>
+        <div>
+          <strong>日本語対応</strong>
+          <p>UI・プロンプト・サポートの日本語対応状況（プランや機能によって異なる場合あり）</p>
+        </div>
+      </div>
+      <div class="compare-chip warn">
+        <span class="chip-icon">📋</span>
+        <div>
+          <strong>商用利用条件の確認ポイント</strong>
+          <p>プラン・用途ごとの条件の違いを整理。断定はせず、公式規約確認を推奨</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ===== どの比較記事を読む？ ===== -->
   <section class="chub-sec band">
@@ -333,6 +394,26 @@ const pad2 = (i: number) => String(i + 1).padStart(2, '0');
   .chub-x .taglink.solid{background:var(--ink);color:var(--surface);border-color:var(--ink);}
   .chub-x .taglink.solid:hover{background:var(--brand);border-color:var(--brand);color:var(--on-brand);}
 
+  /* このページで比較できること */
+  .chub-x .can-compare{padding-top:52px;padding-bottom:52px;}
+  .chub-x .compare-chips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .chub-x .compare-chip{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;display:flex;gap:14px;align-items:flex-start;}
+  .chub-x .compare-chip.video{border-left:3px solid var(--video);}
+  .chub-x .compare-chip.image{border-left:3px solid var(--image);}
+  .chub-x .compare-chip.free{border-left:3px solid var(--ok);}
+  .chub-x .compare-chip.warn{border-left:3px solid var(--warn);}
+  .chub-x .compare-chip.neutral{border-left:3px solid var(--brand);}
+  .chub-x .compare-chip .chip-icon{font-size:22px;flex:none;line-height:1;}
+  .chub-x .compare-chip strong{display:block;font-family:var(--f-jp);font-weight:700;font-size:14px;color:var(--ink);margin-bottom:6px;line-height:1.4;}
+  .chub-x .compare-chip p{font-size:13px;color:var(--muted);line-height:1.65;margin:0;}
+
+  @media (max-width:980px){
+    .chub-x .compare-chips-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:720px){
+    .chub-x .compare-chips-grid{grid-template-columns:1fr;}
+  }
+
   /* reveal（任意・JSが付与） */
   @media (prefers-reduced-motion: no-preference){
     .chub-x .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
@@ -375,7 +456,7 @@ const pad2 = (i: number) => String(i + 1).padStart(2, '0');
 
     /* スクロール表示アニメーション */
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const targets = Array.from(root.querySelectorAll<HTMLElement>('.sec-head, .router, .cmp-grid, .faq-list, .finder'));
+    const targets = Array.from(root.querySelectorAll<HTMLElement>('.sec-head, .router, .cmp-grid, .compare-chips-grid, .faq-list, .finder'));
     targets.forEach((el) => el.classList.add('reveal'));
     if (reduce || !('IntersectionObserver' in window)) {
       targets.forEach((el) => el.classList.add('in'));

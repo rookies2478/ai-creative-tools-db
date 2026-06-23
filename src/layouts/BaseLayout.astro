@@ -71,11 +71,10 @@ const canonicalUrl = canonicalPath && Astro.site
     <!-- ===== HEADER ===== -->
     <header class="nv-topbar">
       <div class="nv-inner">
-        <a href="/" class="nv-logo">
-          <span class="nv-mark">AI</span>
+        <a href="/" class="nv-logo" aria-label="AIクリエイティブナビ トップページ">
+          <span class="nv-mark" aria-hidden="true">AI</span>
           <span class="nv-wordmark">
-            <span class="nv-name">AIクリエイティブナビ</span>
-            <span class="nv-sub">aicreative-db.com</span>
+            <span class="nv-name">クリエイティブナビ</span>
           </span>
         </a>
 
@@ -129,11 +128,10 @@ const canonicalUrl = canonicalPath && Astro.site
         <div class="nf-grid">
           <!-- About -->
           <div class="nf-about">
-            <a href="/" class="nv-logo nf-logo-light">
-              <span class="nv-mark">AI</span>
+            <a href="/" class="nv-logo nf-logo-light" aria-label="AIクリエイティブナビ トップページ">
+              <span class="nv-mark" aria-hidden="true">AI</span>
               <span class="nv-wordmark">
-                <span class="nv-name">AIクリエイティブナビ</span>
-                <span class="nv-sub">aicreative-db.com</span>
+                <span class="nv-name">クリエイティブナビ</span>
               </span>
             </a>
             <p class="nf-desc">AI動画生成・AI画像生成を中心に、料金・無料枠・商用利用条件・日本語対応などを比較するAIクリエイティブツール比較メディアです。</p>
@@ -168,6 +166,7 @@ const canonicalUrl = canonicalPath && Astro.site
           <div class="nf-col">
             <h4>ガイド・サイト情報</h4>
             <ul>
+              <li><a href="/use-cases/">用途別ガイド一覧</a></li>
               <li><a href="/guides/commercial-use-copyright/">商用利用・著作権ガイド</a></li>
               <li><a href="/guides/free-ai-image-tools/">無料ツールの選び方</a></li>
               <li><a href="/guides/watermark-credit-guide/">透かし・クレジット表記</a></li>

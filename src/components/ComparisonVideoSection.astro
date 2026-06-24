@@ -1,0 +1,57 @@
+---
+import GeneratedVideoSample from './GeneratedVideoSample.astro';
+import type { GeneratedVideo } from '../data/generatedVideos';
+
+interface Props {
+  leftLabel: string;
+  rightLabel: string;
+  leftVideo?: GeneratedVideo;
+  rightVideo?: GeneratedVideo;
+}
+
+const { leftLabel, rightLabel, leftVideo, rightVideo } = Astro.props;
+---
+
+{(leftVideo || rightVideo) && (
+  <section class="cp-body-sec">
+    <h2 class="cp-body-h2">実例動画サンプル</h2>
+    <p class="cvs-desc">本動画は、管理者が各ツールで生成した短尺実例動画です。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。1本の動画だけでツール性能を断定するものではありません。商用利用条件は各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
+    <div class="cvs-2col">
+      {leftVideo && (
+        <div class="cvs-col">
+          <p class="cvs-tool-label">{leftLabel}</p>
+          <GeneratedVideoSample video={leftVideo} />
+        </div>
+      )}
+      {rightVideo && (
+        <div class="cvs-col">
+          <p class="cvs-tool-label">{rightLabel}</p>
+          <GeneratedVideoSample video={rightVideo} />
+        </div>
+      )}
+    </div>
+  </section>
+)}
+
+<style>
+.cvs-desc {
+  font-size: 13px;
+  color: var(--ink-soft, #3A3E47);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+.cvs-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 640px) {
+  .cvs-2col { grid-template-columns: 1fr; }
+}
+.cvs-tool-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink, #1A1D23);
+  margin: 0 0 8px;
+}
+</style>

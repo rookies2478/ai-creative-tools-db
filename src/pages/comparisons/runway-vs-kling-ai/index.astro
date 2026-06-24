@@ -1,6 +1,6 @@
 ---
 import ComparisonVsArticle from '../../../components/ComparisonVsArticle.astro';
-import GeneratedVideoSample from '../../../components/GeneratedVideoSample.astro';
+import ComparisonVideoSection from '../../../components/ComparisonVideoSection.astro';
 import { getEntry } from 'astro:content';
 import { generatedVideos } from '../../../data/generatedVideos';
 
@@ -159,26 +159,12 @@ const articleJsonLd = JSON.stringify({
   ]}
 >
   <!-- ===== 実例動画サンプル ===== -->
-  {(videoRunway || videoKlingAi) && (
-    <section class="cp-body-sec">
-      <h2 class="cp-body-h2">実例動画サンプル</h2>
-      <p class="cp-video-desc">本動画は、管理者が各ツールで生成した短尺実例動画です。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。1本の動画だけでツール性能を断定するものではありません。商用利用条件は各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
-      <div class="cp-video-2col">
-        {videoRunway && (
-          <div class="cp-video-col">
-            <p class="cp-video-tool-label">Runway</p>
-            <GeneratedVideoSample video={videoRunway} />
-          </div>
-        )}
-        {videoKlingAi && (
-          <div class="cp-video-col">
-            <p class="cp-video-tool-label">Kling AI</p>
-            <GeneratedVideoSample video={videoKlingAi} />
-          </div>
-        )}
-      </div>
-    </section>
-  )}
+  <ComparisonVideoSection
+    leftLabel="Runway"
+    rightLabel="Kling AI"
+    leftVideo={videoRunway}
+    rightVideo={videoKlingAi}
+  />
 
   <!-- ===== Runwayの特徴 ===== -->
   <section class="cp-body-sec">
@@ -338,25 +324,3 @@ const articleJsonLd = JSON.stringify({
   </section>
 </ComparisonVsArticle>
 
-<style>
-.cp-video-desc {
-  font-size: 13px;
-  color: var(--ink-soft, #3A3E47);
-  line-height: 1.75;
-  margin-bottom: 16px;
-}
-.cp-video-2col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-@media (max-width: 640px) {
-  .cp-video-2col { grid-template-columns: 1fr; }
-}
-.cp-video-tool-label {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink, #1A1D23);
-  margin: 0 0 8px;
-}
-</style>

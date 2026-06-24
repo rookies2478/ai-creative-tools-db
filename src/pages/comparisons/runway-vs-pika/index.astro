@@ -1,6 +1,11 @@
 ---
 import ComparisonVsArticle from '../../../components/ComparisonVsArticle.astro';
+import GeneratedVideoSample from '../../../components/GeneratedVideoSample.astro';
 import { getEntry } from 'astro:content';
+import { generatedVideos } from '../../../data/generatedVideos';
+
+const videoRunway = generatedVideos.find(v => v.pageSlug === 'runway' && v.sampleType === 'tool-video-output');
+const videoPika = generatedVideos.find(v => v.pageSlug === 'pika' && v.sampleType === 'tool-video-output');
 
 const [toolRunway, toolPika] = await Promise.all([
   getEntry('tools', 'runway'),
@@ -137,6 +142,28 @@ const articleJsonLd = JSON.stringify({
     '本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。',
   ]}
 >
+  <!-- ===== 実例動画サンプル ===== -->
+  {(videoRunway || videoPika) && (
+    <section class="cp-body-sec">
+      <h2 class="cp-body-h2">実例動画サンプル</h2>
+      <p class="cp-video-desc">本動画は、管理者が各ツールで生成した短尺実例動画です。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。1本の動画だけでツール性能を断定するものではありません。商用利用条件は各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
+      <div class="cp-video-2col">
+        {videoRunway && (
+          <div class="cp-video-col">
+            <p class="cp-video-tool-label">Runway</p>
+            <GeneratedVideoSample video={videoRunway} />
+          </div>
+        )}
+        {videoPika && (
+          <div class="cp-video-col">
+            <p class="cp-video-tool-label">Pika</p>
+            <GeneratedVideoSample video={videoPika} />
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
   <!-- ===== Runwayの特徴 ===== -->
   <section class="cp-body-sec">
     <h2 class="cp-body-h2">Runwayの特徴</h2>
@@ -264,3 +291,26 @@ const articleJsonLd = JSON.stringify({
     </div>
   </section>
 </ComparisonVsArticle>
+
+<style>
+.cp-video-desc {
+  font-size: 13px;
+  color: var(--ink-soft, #3A3E47);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+.cp-video-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 640px) {
+  .cp-video-2col { grid-template-columns: 1fr; }
+}
+.cp-video-tool-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink, #1A1D23);
+  margin: 0 0 8px;
+}
+</style>

@@ -65,11 +65,11 @@ export const generatedVideos: GeneratedVideo[] = [
     provider: 'Pika',
     modelUrl: 'https://pika.art',
     durationSec: 5,
-    resolution: '要確認',
+    resolution: '784x470',
     generatedAt: '2026-06-24',
     reviewedAt: '2026-06-24',
     pageSlug: 'pika',
-    usageNote: 'この動画は管理者がPikaで生成した短尺実例動画です。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。商用利用条件や素材の権利は公式情報をご確認ください。本記事は法的助言ではありません。',
+    usageNote: 'この動画は管理者がPikaで生成した短尺実例動画です。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。目視確認では透かしは目立ちませんが、透かし有無の最終確認は公式情報をご確認ください。商用利用条件や素材の権利は公式情報をご確認ください。本記事は法的助言ではありません。',
   },
   {
     file: '/videos/generated/tools/runway-tool-video-output-01.mp4',

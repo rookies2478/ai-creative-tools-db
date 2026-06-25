@@ -74,6 +74,8 @@ const jsonLd = JSON.stringify({
         <button class="fchip" data-filter="video" data-cat="video" aria-pressed="false">AI動画生成</button>
         <button class="fchip" data-filter="free"       aria-pressed="false"><span class="ld"></span>無料で試せる</button>
         <button class="fchip" data-filter="commercial" aria-pressed="false"><span class="ld"></span>商用利用の案内あり</button>
+        <button class="fchip" data-filter="comm-free"  aria-pressed="false"><span class="ld"></span>無料プランで商用条件あり</button>
+        <button class="fchip" data-filter="comm-paid"  aria-pressed="false"><span class="ld"></span>有料プランで商用条件あり</button>
         <button class="fchip" data-filter="ja"         aria-pressed="false"><span class="ld"></span>日本語対応</button>
         <button class="fchip" data-filter="nowm"       aria-pressed="false"><span class="ld"></span>透かしなし</button>
       </div>
@@ -336,6 +338,8 @@ const jsonLd = JSON.stringify({
       case 'video':      return card.getAttribute('data-cat') === 'video';
       case 'free':       return card.getAttribute('data-free') === '1';
       case 'commercial': return card.getAttribute('data-commercial') === '1';
+      case 'comm-free':  return card.getAttribute('data-comm-free') === '1';
+      case 'comm-paid':  return card.getAttribute('data-comm-paid') === '1';
       case 'ja':         return card.getAttribute('data-ja') === '1';
       case 'nowm':       return card.getAttribute('data-nowm') === '1';
       default:           return true;

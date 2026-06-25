@@ -140,6 +140,15 @@ const dataJa         = jaVal === '対応' ? '1' : '0';
 const dataNowm       = wmVal === '透かしなし' ? '1' : '0';
 const dataSortPrice  = priceSortKey({ lowestPaidPlan: data.lowestPaidPlan, freePlan: data.freePlan, currency: data.currency });
 const dataUpdated    = data.lastReviewed ?? '';
+const dataCommFree   = (
+  (data.freePlan === true || data.freePlan === 'limited') &&
+  (data.commercialUse === 'ok' || data.commercialUse === 'limited')
+) ? '1' : '0';
+const dataCommPaid   = (
+  data.commercialUse === 'ok' ||
+  data.commercialUse === 'limited' ||
+  data.commercialUse === 'paid-only'
+) ? '1' : '0';
 
 const catLabel = getCategoryLabel(data.category);
 
@@ -158,6 +167,8 @@ const displayPlatforms = (data.platforms ?? []).map((p: string) => getPlatformLa
   data-nowm={dataNowm}
   data-sort-price={dataSortPrice}
   data-updated={dataUpdated}
+  data-comm-free={dataCommFree}
+  data-comm-paid={dataCommPaid}
 >
   <div class="tool-head">
     <span class="tool-badge" style={`background:${badge.color};`}>{badge.letter}</span>

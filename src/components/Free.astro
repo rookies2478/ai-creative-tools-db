@@ -22,6 +22,9 @@ export interface Tool {
   slug: string;            // /tools/{slug}/ へのリンクに使用
   initial?: string;        // バッジ頭文字（省略時は name の先頭）
   freePlan: FreePlan;      // 無料プランの状態
+  ja?: string;             // 日本語対応: '対応' | '部分対応' | '非対応' | '要確認'
+  commercial?: string;     // 商用利用条件: '公式案内あり' | '有料プラン向け' | '条件あり' | '非対応' | '要確認'
+  watermark?: string;      // 透かし: 'なし' | 'あり' | '要確認'
 }
 export interface Category { variant: CatVariant; title: string; body: string; linkLabel: string; href: string; icon?: string; }
 export interface Point { title: string; body: string; icon?: string; } // body は HTML 文字列可
@@ -289,7 +292,7 @@ const hasLimited = tools.some((t) => t.freePlan === 'limited');
     <div class="cu-table-wrap">
       <table class="cu free-table">
         <thead>
-          <tr><th class="col-tool">ツール</th><th>無料プラン</th><th>詳細</th></tr>
+          <tr><th class="col-tool">ツール</th><th>無料プラン</th><th>日本語対応</th><th>商用利用条件</th><th>透かし</th><th>詳細</th></tr>
         </thead>
         <tbody>
           {tools.map((t) => {
@@ -298,11 +301,14 @@ const hasLimited = tools.some((t) => t.freePlan === 'limited');
               <tr data-name={t.name.toLowerCase()} data-free={b.key}>
                 <td><div class="cu-tool"><span class="b">{ini(t)}</span><span class="nm">{t.name}</span></div></td>
                 <td><span class={`st ${b.cls}`}><span class="d"></span>{b.label}</span></td>
+                <td class="fp-meta">{t.ja ?? '要確認'}</td>
+                <td class="fp-meta">{t.commercial ?? '要確認'}</td>
+                <td class="fp-meta">{t.watermark ?? '要確認'}</td>
                 <td><a class="cu-detail" href={`${toolsBase}${t.slug}/`}>詳細 →</a></td>
               </tr>
             );
           })}
-          <tr class="cu-empty-row" hidden><td colspan="3">条件に一致するツールはありません。</td></tr>
+          <tr class="cu-empty-row" hidden><td colspan="6">条件に一致するツールはありません。</td></tr>
         </tbody>
       </table>
     </div>
@@ -505,6 +511,7 @@ const hasLimited = tools.some((t) => t.freePlan === 'limited');
   .fp-x .cu-tool .b{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:var(--brand-tint);color:var(--brand-ink);font-family:var(--f-latin);font-weight:700;font-size:13px;flex:none;}
   .fp-x .cu-tool .nm{font-family:var(--f-jp);font-weight:700;font-size:14.5px;color:var(--ink);white-space:nowrap;}
   .fp-x table.cu td .st{margin:0 auto;}
+  .fp-x .fp-meta{font-size:12.5px;color:var(--ink-soft);white-space:nowrap;}
   .fp-x .cu-detail{font-family:var(--f-jp);font-weight:700;font-size:12.5px;color:var(--brand-ink);white-space:nowrap;}
   .fp-x .cu-detail:hover{text-decoration:underline;text-underline-offset:3px;}
   .fp-x .cu-empty-row td{text-align:center;color:var(--muted);padding:36px;}

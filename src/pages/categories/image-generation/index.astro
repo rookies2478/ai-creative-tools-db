@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { generatedImages } from '../../../data/generatedImages';
+import ComparisonLegend from '../../../components/ComparisonLegend.astro';
 
 const allTools = await getCollection('tools');
 const imageTools = allTools.filter((t) => t.data.category === 'image' || t.data.category === 'both');
@@ -459,32 +460,30 @@ const imgExtra: Record<string, ImgExtra> = {
           <h2>AI画像生成ツール 横断比較表</h2>
           <p>以下は公式情報や既存DBで確認できる範囲をもとに整理しています（<b>2026-06-18</b> 時点）。「条件あり」「要公式確認」の項目はプランや用途によって条件が異なる場合があります。商用利用・入力素材・人物・商標・第三者素材は別論点として確認してください。本記事は法的助言ではありません。</p>
         </div>
-        <div class="cig-legend reveal">
-          <p class="cig-legend-title">表示記号の見方</p>
-          <ul class="cig-legend-list">
-            <li><span class="sym ok">○</span>可・対応（条件による場合があります）</li>
-            <li><span class="sym partial">△</span>条件付き可／要確認</li>
-            <li><span class="sym no">×</span>不可または未対応</li>
-            <li><span class="sym unknown">－</span>未明記または情報なし</li>
-            <li><span class="sym other">!</span>別論点として確認が必要</li>
-          </ul>
-          <p class="cig-legend-note">「商用確認の目安」は当サイトが確認項目数を整理したものであり、商用利用の可否を断定するものではありません。プランや用途により条件が異なる場合があります。最新情報は各公式サイトをご確認ください。</p>
-        </div>
+        <ComparisonLegend commercialCheckNote={true} />
         <p class="cig-gtcap reveal">← 横にスクロールできます →</p>
         <div class="reveal">
           <div class="cig-tablewrap">
             <table class="cig-gt cross">
               <thead>
-                <tr><th>ツール名</th><th>主な用途</th><th>入力タイプ</th><th>無料枠</th><th>無料回数目安</th><th>スマホ可否</th><th>文字入り画像</th><th>実写・イラスト傾向</th><th>商用確認の目安</th><th>商用利用条件</th><th>日本語対応</th><th>透かし</th><th>詳細</th></tr>
+                <tr><th>ツール名</th><th>主な用途</th><th>入力タイプ</th><th>無料枠</th><th>無料回数目安</th><th>スマホ可否</th><th>文字入り画像</th><th>実写・イラスト傾向</th><th>商用確認の目安</th><th>商用（無料）</th><th>商用（有料）</th><th>日本語対応</th><th>透かし</th><th>詳細</th></tr>
               </thead>
               <tbody>
                 {primaryImageTools.map((tool) => {
                   const cu = tool.data.commercialUse;
-                  const cuLabel =
-                    cu === 'ok' ? '条件付きで利用可能な場合あり（要公式確認）' :
-                    cu === 'paid-only' ? '有料プラン前提の場合あり（要公式確認）' :
-                    cu === 'limited' ? '条件付きで利用可能な場合あり（要公式確認）' :
-                    '要公式確認';
+                  const fp = tool.data.freePlan;
+                  const freeCuLabel =
+                    fp === false ? '無料プランなし' :
+                    cu === 'ok' ? '案内あり' :
+                    cu === 'limited' ? '条件あり' :
+                    cu === 'no' ? '× 不可' :
+                    cu === 'paid-only' ? '有料のみ' :
+                    '要確認';
+                  const paidCuLabel =
+                    cu === 'ok' || cu === 'paid-only' ? '案内あり' :
+                    cu === 'limited' ? '条件あり' :
+                    cu === 'no' ? '不可' :
+                    '要確認';
                   const wm = tool.data.watermark;
                   const wmLabel =
                     wm === 'no' ? 'なし（条件による）' :
@@ -521,7 +520,8 @@ const imgExtra: Record<string, ImgExtra> = {
                       <td class="cig-note">{ex.textInImage}</td>
                       <td class="cig-note">{ex.trend}</td>
                       <td class="cig-note">{ex.commercialCheck}</td>
-                      <td class="cig-note">{cuLabel}</td>
+                      <td class="cig-note nowrap">{freeCuLabel}</td>
+                      <td class="cig-note nowrap">{paidCuLabel}</td>
                       <td class="cig-note nowrap">{jpLabel}</td>
                       <td class="cig-note">{wmLabel}</td>
                       <td><a class="cig-detail" href={`/tools/${tool.slug}/`}>詳細 →</a></td>

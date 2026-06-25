@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ComparisonLegend from '../../../components/ComparisonLegend.astro';
 
 const allTools = await getCollection('tools');
 const videoTools = allTools.filter(
@@ -369,17 +370,7 @@ const vidExtra: Record<string, VidExtra> = {
           <h2>AI動画生成ツール 横断比較表</h2>
           <p>以下は <b>2026-06-18</b> 時点の調査に基づく整理です。料金・無料枠・透かし・生成時間・クレジット消費・利用条件は、プランや時期によって変わる場合があります。人物・ロゴ・第三者素材を含む生成物の扱いは各ツールの公式情報をご確認ください。本記事は法的助言ではありません。</p>
         </div>
-        <div class="cvg-legend reveal">
-          <p class="cvg-legend-title">表示記号の見方</p>
-          <ul class="cvg-legend-list">
-            <li><span class="sym ok">○</span>可・対応（条件による場合があります）</li>
-            <li><span class="sym partial">△</span>条件付き可／要確認</li>
-            <li><span class="sym no">×</span>不可または未対応</li>
-            <li><span class="sym unknown">－</span>未明記または情報なし</li>
-            <li><span class="sym other">!</span>別論点として確認が必要</li>
-          </ul>
-          <p class="cvg-legend-note">「商用確認の目安」は当サイトが確認項目数を整理したものであり、商用利用の可否を断定するものではありません。プランや用途により条件が異なる場合があります。最新情報は各公式サイトをご確認ください。</p>
-        </div>
+        <ComparisonLegend commercialCheckNote={true} />
         <p class="cvg-gtcap reveal">← 横にスクロールできます →</p>
         <div class="reveal">
           <div class="cvg-tablewrap">

@@ -7,12 +7,37 @@ import Free, { type FreePlan } from '../../../components/Free.astro';
 const entries = await getCollection('tools');
 const tools = entries
   .filter((e) => e.data.freePlan === true || e.data.freePlan === 'limited')
-  .map((e) => ({
-    name: e.data.name,
-    slug: e.slug,
-    initial: e.data.name.charAt(0),
-    freePlan: (e.data.freePlan === true ? 'あり' : 'limited') as FreePlan,
-  }));
+  .map((e) => {
+    const cu = e.data.commercialUse;
+    const commercial =
+      cu === 'ok' ? '公式案内あり' :
+      cu === 'paid-only' ? '有料プラン向け' :
+      cu === 'limited' ? '条件あり' :
+      cu === 'no' ? '非対応' :
+      '要確認';
+    const jaUi = e.data.japaneseUi;
+    const jaPrompt = e.data.japanesePrompt;
+    const ja =
+      jaUi === true ? '対応' :
+      jaUi === false && jaPrompt === false ? '非対応' :
+      (jaUi === 'partial' || jaPrompt === true || jaPrompt === 'partial') ? '部分対応' :
+      '要確認';
+    const wm = e.data.watermark;
+    const watermark =
+      wm === 'no' ? 'なし' :
+      wm === 'yes' ? 'あり' :
+      wm === 'limited' ? 'プランによる' :
+      '要確認';
+    return {
+      name: e.data.name,
+      slug: e.slug,
+      initial: e.data.name.charAt(0),
+      freePlan: (e.data.freePlan === true ? 'あり' : 'limited') as FreePlan,
+      ja,
+      commercial,
+      watermark,
+    };
+  });
 
 const customFaqs = [
   {

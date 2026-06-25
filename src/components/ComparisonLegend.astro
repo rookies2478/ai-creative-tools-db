@@ -1,0 +1,98 @@
+---
+/**
+ * ComparisonLegend.astro
+ * 比較表の共通記号凡例コンポーネント
+ * ○/△/×/－/! の意味を統一して表示する
+ * 商用利用・著作権・肖像権・商標の断定禁止注記を含む
+ */
+interface Props {
+  /** 「商用確認の目安」列がある場合の補足注記 */
+  commercialCheckNote?: boolean;
+  /** 追加の注記（HTMLテキスト可） */
+  extraNote?: string;
+  /** reveal アニメーションクラスを付与するか */
+  reveal?: boolean;
+}
+const { commercialCheckNote = false, extraNote, reveal = true } = Astro.props;
+---
+
+<div class={`cmp-legend${reveal ? ' reveal' : ''}`}>
+  <p class="cmp-legend-title">表示記号の見方</p>
+  <ul class="cmp-legend-list">
+    <li><span class="sym ok">○</span>可・対応（条件による場合があります）</li>
+    <li><span class="sym partial">△</span>条件付き可／要確認</li>
+    <li><span class="sym no">×</span>不可または未対応</li>
+    <li><span class="sym unknown">－</span>未明記または情報なし</li>
+    <li><span class="sym other">!</span>別論点として確認が必要</li>
+  </ul>
+  {commercialCheckNote && (
+    <p class="cmp-legend-note">「商用確認の目安」は当サイトが確認項目数を整理したものであり、商用利用の可否を断定するものではありません。プランや用途により条件が異なる場合があります。最新情報は各公式サイトをご確認ください。</p>
+  )}
+  <p class="cmp-legend-disclaimer">
+    ⚠️ 商用利用・著作権・肖像権・商標については、本表で可否を断定することはできません。プラン・用途・生成コンテンツ・入力素材の内容・各国の法律によって扱いが異なる場合があります。実務利用前に各ツールの最新公式規約をご確認ください。本記事は法的助言ではありません。
+  </p>
+  {extraNote && <p class="cmp-legend-note" set:html={extraNote} />}
+</div>
+
+<style>
+  .cmp-legend {
+    background: var(--surface-2, #f8f9fb);
+    border: 1px solid var(--line, #e2e5ea);
+    border-radius: var(--radius, 10px);
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+  .cmp-legend-title {
+    font-family: var(--f-jp, sans-serif);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--muted, #6a7180);
+    margin: 0 0 10px;
+  }
+  .cmp-legend-list {
+    list-style: none;
+    margin: 0 0 10px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+  .cmp-legend-list li {
+    font-size: 12px;
+    color: var(--ink-soft, #444b5a);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cmp-legend-list .sym {
+    font-family: var(--f-jp, sans-serif);
+    font-weight: 700;
+    font-size: 13px;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    flex: none;
+  }
+  .cmp-legend-list .sym.ok      { color: var(--ok, #16a34a);      background: var(--ok-tint, #dcfce7); }
+  .cmp-legend-list .sym.partial { color: var(--warn, #b45309);     background: var(--warn-tint, #fef3c7); }
+  .cmp-legend-list .sym.no      { color: var(--no, #dc2626);       background: var(--no-tint, #fee2e2); }
+  .cmp-legend-list .sym.unknown { color: var(--na, #6b7280);       background: var(--na-tint, #f3f4f6); }
+  .cmp-legend-list .sym.other   { color: var(--brand-ink, #4338ca); background: var(--brand-tint, #ede9fe); }
+  .cmp-legend-note {
+    font-size: 11px;
+    color: var(--faint, #9ca3af);
+    line-height: 1.65;
+    margin: 0 0 6px;
+  }
+  .cmp-legend-disclaimer {
+    font-size: 11px;
+    color: var(--faint, #9ca3af);
+    line-height: 1.65;
+    margin: 6px 0 0;
+    padding-top: 6px;
+    border-top: 1px solid var(--line, #e2e5ea);
+  }
+</style>

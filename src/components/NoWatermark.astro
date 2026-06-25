@@ -14,6 +14,7 @@
  *
  * ヘッダー / フッター / パンくず / 条件ナビ は既存 Layout 側のものを使う想定。
  */
+import ComparisonLegend from './ComparisonLegend.astro';
 export type WmStatus = 'no' | 'limited' | 'yes' | 'unknown';
 export interface Tool {
   name: string;
@@ -25,6 +26,7 @@ export interface Tool {
   wm: WmStatus;            // 透かしステータス（バッジ＋絞り込み）
   wmNote: string;          // 透かし条件の説明（プレーンテキスト）
   freeNote: string;        // 無料枠の条件の説明（プレーンテキスト）
+  verifiedAt?: string;     // 公式確認日
 }
 export interface Point { title: string; body: string; }   // body は HTML 文字列可
 export interface Faq { q: string; a: string; }             // a は HTML 文字列可
@@ -194,7 +196,7 @@ const filterChips: { st: WmStatus | 'all'; label: string }[] = [
     <div class="nw-table-wrap">
       <table class="nw-tbl">
         <thead>
-          <tr><th class="col-tool">ツール</th><th>無料枠</th><th>日本語対応</th><th>商用利用条件</th><th>透かし条件</th><th>詳細</th></tr>
+          <tr><th class="col-tool">ツール</th><th>無料枠</th><th>商用利用条件</th><th>透かし条件</th><th>日本語対応</th><th>公式確認日</th><th>詳細</th></tr>
         </thead>
         <tbody>
           {tools.map((t) => {
@@ -203,26 +205,19 @@ const filterChips: { st: WmStatus | 'all'; label: string }[] = [
               <tr data-name={t.name.toLowerCase()} data-st={t.wm}>
                 <td><div class="nw-tool"><span class="b">{ini(t)}</span><span class="nm">{t.name}</span></div></td>
                 <td><span class={`mk ${f.cls}`} title={t.free}>{f.ch}</span></td>
-                <td><span class={`mk ${j.cls}`} title={t.ja}>{j.ch}</span></td>
                 <td><span class={`mk ${c.cls}`} title={t.commercial}>{c.ch}</span></td>
                 <td><span class={`st ${STATUS[t.wm].cls}`}><span class="d"></span>{STATUS[t.wm].label}</span></td>
+                <td><span class={`mk ${j.cls}`} title={t.ja}>{j.ch}</span></td>
+                <td class="col-date">{t.verifiedAt ?? '－'}</td>
                 <td><a class="nw-detail" href={`${toolsBase}${t.slug}/`}>詳細 →</a></td>
               </tr>
             );
           })}
-          <tr class="nw-empty-row" hidden><td colspan="6">条件に一致するツールはありません。</td></tr>
+          <tr class="nw-empty-row" hidden><td colspan="7">条件に一致するツールはありません。</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="nw-legend">
-      <span class="li"><span class="st none"><span class="d"></span>透かしなし</span></span>
-      <span class="li"><span class="st paid"><span class="d"></span>プランによって異なる</span></span>
-      <span class="li"><span class="st has"><span class="d"></span>透かしあり</span></span>
-      <span class="li"><span class="mk yes">○</span>あり / 対応</span>
-      <span class="li"><span class="mk cond">△</span>要確認</span>
-      <span class="li"><span class="mk no">×</span>なし / 非対応</span>
-      <span class="nw-legend-sp">透かし条件はステータスで表示</span>
-    </div>
+    <ComparisonLegend commercialCheckNote={false} reveal={false} />
     <p class="note">※ 値は確認日時点の参考値です。無料枠・商用利用・透かし条件はプランや出力形式により異なる場合があります。最新情報は必ず公式サイト・実際の出力画面でご確認ください。</p>
   </section>
 
@@ -384,7 +379,8 @@ const filterChips: { st: WmStatus | 'all'; label: string }[] = [
 
   /* 表 */
   .nw-x .nw-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-sm);}
-  .nw-x table.nw-tbl{width:100%;border-collapse:collapse;min-width:760px;}
+  .nw-x table.nw-tbl{width:100%;border-collapse:collapse;min-width:840px;}
+  .nw-x table.nw-tbl .col-date{font-size:12px;color:var(--muted);white-space:nowrap;}
   .nw-x table.nw-tbl thead th{font-family:var(--f-jp);font-weight:700;font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);padding:15px 16px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
   .nw-x table.nw-tbl thead th.col-tool{text-align:left;}
   .nw-x table.nw-tbl tbody td{padding:13px 16px;text-align:center;border-bottom:1px solid var(--line);vertical-align:middle;}

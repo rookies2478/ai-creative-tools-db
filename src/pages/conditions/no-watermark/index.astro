@@ -21,6 +21,7 @@ const tools: Tool[] = entries.map((e) => {
     wm,
     wmNote:     e.data.watermarkCondition ?? '透かし条件は公式サイト・実際の出力画面でご確認ください。',
     freeNote:   e.data.freePlanNote       ?? '詳細は公式サイトをご確認ください。',
+    verifiedAt: e.data.verifiedAt ?? '',
   };
 });
 

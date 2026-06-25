@@ -14,6 +14,7 @@
  *
  * ヘッダー / フッター / パンくず / 条件ナビ は既存 Layout 側のものを使う想定。
  */
+import ComparisonLegend from './ComparisonLegend.astro';
 export type JaStatus = 'ok' | 'partial' | 'unknown';   // 対応 / 一部対応 / 要確認
 export type Mark = '○' | '△' | '×' | '?';              // 詳細マトリクスの評価
 
@@ -28,6 +29,7 @@ export interface Tool {
   free: string;            // 無料枠: 'あり' | 'なし' | '要確認'
   commercial: string;      // 商用利用: '案内あり' | '要確認' など（参考列・○/△で表示）
   wm: string;              // 透かし: 'なし' | 'あり' | '要確認'（列は「透かしなし＝○」評価）
+  verifiedAt?: string;     // 公式確認日
 }
 export interface TypeCard { variant: 'ui' | 'prompt' | 'docs'; title: string; body: string; }
 export interface Point { title: string; body: string; }   // body は HTML 文字列可
@@ -243,7 +245,7 @@ const filterChips: { st: JaStatus | 'all'; label: string }[] = [
     <div class="ja-table-wrap">
       <table class="ja-tbl">
         <thead>
-          <tr><th class="col-tool">ツール</th><th>無料枠</th><th>日本語対応</th><th>商用利用条件</th><th>透かしなし</th><th>詳細</th></tr>
+          <tr><th class="col-tool">ツール</th><th>無料枠</th><th>商用利用条件</th><th>透かし</th><th>日本語対応</th><th>公式確認日</th><th>詳細</th></tr>
         </thead>
         <tbody>
           {tools.map((t) => {
@@ -252,25 +254,19 @@ const filterChips: { st: JaStatus | 'all'; label: string }[] = [
               <tr data-name={t.name.toLowerCase()} data-st={t.ja}>
                 <td><div class="ja-tool"><span class="b">{ini(t)}</span><span class="nm">{t.name}</span></div></td>
                 <td><span class={`mk ${f.cls}`} title={t.free}>{f.ch}</span></td>
-                <td><span class={`st ${STATUS[t.ja].cls}`}><span class="d"></span>{STATUS[t.ja].label}</span></td>
                 <td><span class={`mk ${c.cls}`} title={t.commercial}>{c.ch}</span></td>
                 <td><span class={`mk ${w.cls}`} title={t.wm}>{w.ch}</span></td>
+                <td><span class={`st ${STATUS[t.ja].cls}`}><span class="d"></span>{STATUS[t.ja].label}</span></td>
+                <td class="col-date">{t.verifiedAt ?? '－'}</td>
                 <td><a class="ja-detail" href={`${toolsBase}${t.slug}/`}>詳細 →</a></td>
               </tr>
             );
           })}
-          <tr class="ja-empty-row" hidden><td colspan="6">条件に一致するツールはありません。</td></tr>
+          <tr class="ja-empty-row" hidden><td colspan="7">条件に一致するツールはありません。</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="ja-legend">
-      <span class="li"><span class="st ok"><span class="d"></span>対応</span></span>
-      <span class="li"><span class="st unknown"><span class="d"></span>要確認</span></span>
-      <span class="li"><span class="mk yes">○</span>あり / 対応 / 透かしなし</span>
-      <span class="li"><span class="mk cond">△</span>要確認</span>
-      <span class="li"><span class="mk no">×</span>なし / 非対応</span>
-      <span class="ja-legend-sp">透かしなし列は「透かしなし＝○」で評価</span>
-    </div>
+    <ComparisonLegend commercialCheckNote={false} reveal={false} />
     <p class="note">※ 値は確認日時点の参考値です。無料枠・商用利用・対応状況はプランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。</p>
   </section>
 
@@ -443,7 +439,8 @@ const filterChips: { st: JaStatus | 'all'; label: string }[] = [
 
   /* 表 */
   .ja-x .ja-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-sm);}
-  .ja-x table.ja-tbl{width:100%;border-collapse:collapse;min-width:720px;}
+  .ja-x table.ja-tbl{width:100%;border-collapse:collapse;min-width:820px;}
+  .ja-x table.ja-tbl .col-date{font-size:12px;color:var(--muted);white-space:nowrap;}
   .ja-x table.ja-tbl.matrix{min-width:640px;}
   .ja-x table.ja-tbl thead th{font-family:var(--f-jp);font-weight:700;font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);padding:15px 16px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
   .ja-x table.ja-tbl thead th.col-tool{text-align:left;}

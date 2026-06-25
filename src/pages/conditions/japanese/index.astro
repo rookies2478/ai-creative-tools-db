@@ -41,6 +41,7 @@ const tools: Tool[] = entries.map((e) => {
     free:       (free === true || free === 'limited') ? 'あり' : free === false ? 'なし' : '要確認',
     commercial: cu === 'ok' ? '案内あり' : cu === 'no' ? '不可' : '要確認',
     wm:         wm === 'no' ? 'なし' : wm === 'yes' ? 'あり' : '要確認',
+    verifiedAt: e.data.verifiedAt ?? '',
   };
 });
 

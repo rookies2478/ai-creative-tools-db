@@ -13,6 +13,7 @@
  *
  * ヘッダー / フッター / パンくず は既存 Layout 側のものを使う想定。
  */
+import ComparisonLegend from './ComparisonLegend.astro';
 export type Status = 'ok' | 'paid' | 'limited' | 'no' | 'unknown';
 export interface Tool {
   name: string;
@@ -23,6 +24,7 @@ export interface Tool {
   wm: string;              // 透かし: 'なし' | 'あり' | '要確認'（列は「透かしなし＝○」評価）
   commercial: Status;      // 商用利用ステータス
   note: string;            // 各ツールの注意点（プレーンテキスト）
+  verifiedAt?: string;     // 公式確認日
 }
 export interface Faq { q: string; a: string; } // a は HTML 文字列可
 export interface RelatedLink { label: string; href: string; solid?: boolean; }
@@ -222,7 +224,7 @@ const filterChips: { st: Status | 'all'; label: string }[] = [
     <div class="cu-table-wrap">
       <table class="cu">
         <thead>
-          <tr><th class="col-tool">ツール</th><th>無料枠</th><th>日本語対応</th><th>商用利用条件</th><th>透かしなし</th><th>詳細</th></tr>
+          <tr><th class="col-tool">ツール</th><th>無料枠</th><th>商用利用条件</th><th>透かし</th><th>日本語対応</th><th>公式確認日</th><th>詳細</th></tr>
         </thead>
         <tbody>
           {tools.map((t) => {
@@ -231,9 +233,10 @@ const filterChips: { st: Status | 'all'; label: string }[] = [
               <tr data-name={t.name.toLowerCase()} data-st={t.commercial}>
                 <td><div class="cu-tool"><span class="b">{ini(t)}</span><span class="nm">{t.name}</span></div></td>
                 <td><span class={`mk ${f.cls}`} title={t.free}>{f.ch}</span></td>
-                <td><span class={`mk ${j.cls}`} title={t.ja}>{j.ch}</span></td>
                 <td><span class={`st ${STATUS[t.commercial].code === 'paid-only' ? 'paid' : t.commercial}`}><span class="d"></span>{STATUS[t.commercial].label}</span></td>
                 <td><span class={`mk ${w.cls}`} title={t.wm}>{w.ch}</span></td>
+                <td><span class={`mk ${j.cls}`} title={t.ja}>{j.ch}</span></td>
+                <td class="col-date">{t.verifiedAt ?? '－'}</td>
                 <td><a class="cu-detail" href={`${toolsBase}${t.slug}/`}>詳細 →</a></td>
               </tr>
             );
@@ -241,13 +244,8 @@ const filterChips: { st: Status | 'all'; label: string }[] = [
         </tbody>
       </table>
     </div>
-    <div class="cu-legend">
-      <span class="li"><span class="mk yes">○</span>あり / 対応 / 透かしなし</span>
-      <span class="li"><span class="mk cond">△</span>要確認</span>
-      <span class="li"><span class="mk no">×</span>なし / 透かしあり</span>
-      <span class="cu-legend-sp">商用利用列はステータス（ok / paid-only / limited）で表示</span>
-    </div>
-    <p class="note">※ 値は確認日時点の参考値です。無料枠・商用利用・対応状況はプランや用途により異なる場合があります。透かしなし列は「透かしなし＝○」で評価しています。最新情報は必ず公式サイトでご確認ください。</p>
+    <ComparisonLegend commercialCheckNote={true} reveal={false} />
+    <p class="note">※ 値は確認日時点の参考値です。無料枠・商用利用・対応状況はプランや用途により異なる場合があります。透かし列は「透かしなし＝○」で評価しています。最新情報は必ず公式サイトでご確認ください。</p>
   </section>
 
   <!-- ===== 各ツールの注意点 ===== -->
@@ -405,7 +403,8 @@ const filterChips: { st: Status | 'all'; label: string }[] = [
 
   /* 表 */
   .cu-x .cu-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-sm);}
-  .cu-x table.cu{width:100%;border-collapse:collapse;min-width:720px;}
+  .cu-x table.cu{width:100%;border-collapse:collapse;min-width:800px;}
+  .cu-x table.cu .col-date{font-size:12px;color:var(--muted);white-space:nowrap;}
   .cu-x table.cu thead th{font-family:var(--f-jp);font-weight:700;font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);padding:15px 16px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap;}
   .cu-x table.cu thead th.col-tool{text-align:left;}
   .cu-x table.cu tbody td{padding:13px 16px;text-align:center;border-bottom:1px solid var(--line);vertical-align:middle;}

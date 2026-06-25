@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolsListCard from '../../components/ToolsListCard.astro';
+import ComparisonLegend from '../../components/ComparisonLegend.astro';
 import '../../styles/tools-page.css';
 
 const allTools = await getCollection('tools');
@@ -109,6 +110,8 @@ const jsonLd = JSON.stringify({
           <b>ご注意：</b>料金・無料枠・商用利用条件・透かしの有無は変更される場合があります。最新情報は各公式サイトをご確認ください。本記事は法的助言ではありません。
         </p>
       </div>
+
+      <ComparisonLegend commercialCheckNote={true} reveal={true} />
 
       <!-- AI画像生成ブロック -->
       <div class="tool-block" id="block-image" style="margin-top:44px;">

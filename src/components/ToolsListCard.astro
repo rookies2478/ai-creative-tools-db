@@ -47,21 +47,40 @@ function freeLabel(v: unknown): string {
   if (v === 'limited')   return '条件付き';
   return '要公式確認';
 }
-function freeCommercialLabel(freePlan: unknown, commercialUse: unknown): { text: string; cls: string } {
-  if (freePlan === false) return { text: '無料プランなし', cls: 'na' };
-  if (freePlan === 'unknown') return { text: '要確認', cls: 'na' };
-  if (commercialUse === 'ok') return { text: '案内あり', cls: 'ok' };
-  if (commercialUse === 'limited') return { text: '条件あり', cls: 'warn' };
-  if (commercialUse === 'no') return { text: '× 不可', cls: 'na' };
-  if (commercialUse === 'paid-only') return { text: '有料のみ', cls: 'na' };
-  return { text: '要確認', cls: 'na' };
+function freeCommercialLabel(freePlan: unknown, commercialUse: unknown): { sym: string; text: string; cls: string } {
+  if (freePlan === false) return { sym: '×', text: '無料プランなし', cls: 'na' };
+  if (freePlan === 'unknown') return { sym: '－', text: '要確認', cls: 'na' };
+  if (commercialUse === 'ok') return { sym: '○', text: '案内あり', cls: 'ok' };
+  if (commercialUse === 'limited') return { sym: '△', text: '条件あり', cls: 'warn' };
+  if (commercialUse === 'no') return { sym: '×', text: '不可', cls: 'na' };
+  if (commercialUse === 'paid-only') return { sym: '×', text: '有料のみ', cls: 'na' };
+  return { sym: '－', text: '要確認', cls: 'na' };
 }
-function paidCommercialLabel(v: unknown): { text: string; cls: string } {
-  if (v === 'ok') return { text: '案内あり', cls: 'ok' };
-  if (v === 'paid-only') return { text: '案内あり', cls: 'ok' };
-  if (v === 'limited') return { text: '条件あり', cls: 'warn' };
-  if (v === 'no') return { text: '不可', cls: 'na' };
-  return { text: '要確認', cls: 'na' };
+function paidCommercialLabel(v: unknown): { sym: string; text: string; cls: string } {
+  if (v === 'ok') return { sym: '○', text: '案内あり', cls: 'ok' };
+  if (v === 'paid-only') return { sym: '○', text: '案内あり', cls: 'ok' };
+  if (v === 'limited') return { sym: '△', text: '条件あり', cls: 'warn' };
+  if (v === 'no') return { sym: '×', text: '不可', cls: 'na' };
+  return { sym: '－', text: '要確認', cls: 'na' };
+}
+function freeSym(v: unknown): string {
+  if (v === true) return '○';
+  if (v === false) return '×';
+  if (v === 'limited') return '△';
+  return '－';
+}
+function jaSym(ui: unknown, prompt: unknown): string {
+  const label = jaLabel(ui, prompt);
+  if (label === '対応') return '○';
+  if (label === '部分対応') return '△';
+  if (label === '非対応') return '×';
+  return '－';
+}
+function wmSym(v: unknown): string {
+  if (v === 'no') return '○';
+  if (v === 'yes') return '×';
+  if (v === 'limited') return '△';
+  return '－';
 }
 function jaLabel(ui: unknown, prompt: unknown): string {
   if (ui === true) return '対応';
@@ -82,7 +101,7 @@ function inputMaterialLabel(v: unknown): { text: string; cls: string } | null {
   return null;
 }
 function condClass(field: string, val: string): string {
-  if (field === 'free') return val === 'あり' ? 'ok' : 'na';
+  if (field === 'free') return val === 'あり' ? 'ok' : val === '条件付き' ? 'warn' : 'na';
   if (field === 'ja') return val === '対応' ? 'ok' : val === '部分対応' ? 'warn' : 'na';
   if (field === 'watermark') {
     if (val === '透かしなし') return 'ok';
@@ -111,6 +130,9 @@ const paidComm  = paidCommercialLabel(data.commercialUse);
 const freeVal   = freeLabel(data.freePlan);
 const jaVal     = jaLabel(data.japaneseUi, data.japanesePrompt);
 const wmVal     = wmLabel(data.watermark);
+const freeSymVal = freeSym(data.freePlan);
+const jaSymVal   = jaSym(data.japaneseUi, data.japanesePrompt);
+const wmSymVal   = wmSym(data.watermark);
 
 const dataFree       = freeVal === 'あり' ? '1' : '0';
 const dataCommercial = (data.commercialUse === 'ok' || data.commercialUse === 'paid-only') ? '1' : '0';
@@ -147,24 +169,24 @@ const displayPlatforms = (data.platforms ?? []).map((p: string) => getPlatformLa
 
   <div class="tool-cond">
     <span class={`cond ${freeComm.cls}`}>
-      <span class="ck">無料商用</span>
-      <span class="cv"><span class="d"></span>{freeComm.text}</span>
+      <span class="ck">商用（無料）</span>
+      <span class="cv"><span class="sym">{freeComm.sym}</span>{freeComm.text}</span>
     </span>
     <span class={`cond ${paidComm.cls}`}>
-      <span class="ck">有料商用</span>
-      <span class="cv"><span class="d"></span>{paidComm.text}</span>
+      <span class="ck">商用（有料）</span>
+      <span class="cv"><span class="sym">{paidComm.sym}</span>{paidComm.text}</span>
     </span>
     <span class={`cond ${condClass('free', freeVal)}`}>
       <span class="ck">無料枠</span>
-      <span class="cv"><span class="d"></span>{freeVal}</span>
+      <span class="cv"><span class="sym">{freeSymVal}</span>{freeVal}</span>
     </span>
     <span class={`cond ${condClass('ja', jaVal)}`}>
       <span class="ck">日本語対応</span>
-      <span class="cv"><span class="d"></span>{jaVal}</span>
+      <span class="cv"><span class="sym">{jaSymVal}</span>{jaVal}</span>
     </span>
     <span class={`cond ${condClass('watermark', wmVal)}`}>
       <span class="ck">透かし</span>
-      <span class="cv"><span class="d"></span>{wmVal}</span>
+      <span class="cv"><span class="sym">{wmSymVal}</span>{wmVal}</span>
     </span>
   </div>
 

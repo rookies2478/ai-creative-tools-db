@@ -98,7 +98,7 @@ faqs:
 
 Microsoft DesignerはMicrosoftが提供するAIデザイン・画像生成サービスです。Microsoftアカウントでブラウザから利用でき、SNS投稿用画像・バナー・プレゼン素材などのビジュアル作成に活用されています。テキストプロンプトからの画像生成に加え、テンプレートを使ったデザイン編集機能も備えています。
 
-[AI画像生成カテゴリ一覧へ](/categories/image-generation/)
+[AI画像生成カテゴリ一覧へ](/categories/image-generation/) ／ [AIデザインツール一覧へ](/categories/design/)
 
 ## Microsoft Designerを選ぶ理由
 

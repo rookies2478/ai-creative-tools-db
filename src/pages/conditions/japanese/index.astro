@@ -59,7 +59,7 @@ const pageFaqs = [
   { q:'日本語対応なら画像内の日本語文字も得意ですか？', a:'日本語UIや日本語プロンプトに対応していても、画像内に日本語テキストを正確に描画する機能は別問題です。ほとんどのAI画像生成ツールで文字が崩れたり読めない状態になったりすることがあります。SNS画像やバナーにテキストを入れる場合は、別途画像編集ツールでテキストを追加する方法が安定します。' },
 ];
 
-const faqSchema = JSON.stringify({
+const faqSchemaObj = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: pageFaqs.map((f) => ({
@@ -67,14 +67,25 @@ const faqSchema = JSON.stringify({
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: stripHtml(f.a) },
   })),
-});
+};
+
+const breadcrumbSchemaObj = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+    { '@type': 'ListItem', position: 2, name: '日本語対応AIツール', item: 'https://aicreative-db.com/conditions/japanese/' },
+  ],
+};
+
+const combinedSchema = JSON.stringify([faqSchemaObj, breadcrumbSchemaObj]);
 ---
 
 <BaseLayout
   title="日本語対応AI画像生成ツール比較｜日本語UI・プロンプト・ドキュメントを確認"
   description="画像生成AI・動画生成AIの日本語対応を「日本語UI / 日本語プロンプト / 日本語ドキュメント」の3種類に分けて比較。無料枠・透かし・商用利用条件もあわせて確認できます。最新情報は公式サイトをご確認ください。"
   canonicalPath="/conditions/japanese/"
-  jsonLd={faqSchema}
+  jsonLd={combinedSchema}
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
 

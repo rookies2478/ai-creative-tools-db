@@ -39,7 +39,7 @@ const pageFaqs = [
   { q:'透かしがなければ自由に使えますか？', a:'透かしの有無と商用利用条件は別の問題です。透かしなしで出力できる場合でも、商用利用の可否・クレジット表記義務・利用規約の制限は別途公式情報をご確認ください。また、プランや用途によって条件が変わる場合があります。本記事は法的助言ではありません。' },
 ];
 
-const faqSchema = JSON.stringify({
+const faqSchemaObj = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: pageFaqs.map((f) => ({
@@ -47,14 +47,25 @@ const faqSchema = JSON.stringify({
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: stripHtml(f.a) },
   })),
-});
+};
+
+const breadcrumbSchemaObj = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+    { '@type': 'ListItem', position: 2, name: '透かしなしで使えるAIツール', item: 'https://aicreative-db.com/conditions/no-watermark/' },
+  ],
+};
+
+const combinedSchema = JSON.stringify([faqSchemaObj, breadcrumbSchemaObj]);
 ---
 
 <BaseLayout
   title="透かしなしAI画像生成ツール比較｜無料枠・商用利用条件も確認"
   description="AI画像生成・AI動画生成ツールの透かし有無を、無料枠・有料プラン・商用利用条件・日本語対応とあわせて比較します。透かし条件はプランや出力形式により異なる場合があるため、最新情報は公式サイトをご確認ください。"
   canonicalPath="/conditions/no-watermark/"
-  jsonLd={faqSchema}
+  jsonLd={combinedSchema}
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
 

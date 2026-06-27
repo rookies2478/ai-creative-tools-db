@@ -92,7 +92,7 @@ const customRelatedSolid = [
 
 const stripHtml = (s: string) => s.replace(/<[^>]+>/g, '');
 
-const faqSchema = JSON.stringify({
+const faqSchemaObj = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: customFaqs.map((f) => ({
@@ -100,14 +100,25 @@ const faqSchema = JSON.stringify({
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: stripHtml(f.a) },
   })),
-});
+};
+
+const breadcrumbSchemaObj = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+    { '@type': 'ListItem', position: 2, name: '無料で使えるAIツール', item: 'https://aicreative-db.com/conditions/free/' },
+  ],
+};
+
+const combinedSchema = JSON.stringify([faqSchemaObj, breadcrumbSchemaObj]);
 ---
 
 <BaseLayout
   title="無料で使えるAI動画生成・AI画像生成ツール比較｜無料枠・スマホ対応・透かし・商用利用条件を確認"
   description="無料枠のあるAI画像生成・AI動画生成ツールを、商用利用条件・透かし・日本語対応・確認日とあわせて比較します。無料範囲や制限は変更される場合があるため、最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。"
   canonicalPath="/conditions/free/"
-  jsonLd={faqSchema}
+  jsonLd={combinedSchema}
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
     <nav class="mb-6 text-sm text-slate-500" aria-label="パンくずリスト">

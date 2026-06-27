@@ -41,7 +41,7 @@ const pageFaqs = [
   { q:'商用利用の可否だけ確認すれば十分ですか？', a:'商用利用条件の確認に加えて、入力素材・第三者素材・人物・ロゴ・商標の扱い、透かしの有無、クレジット表記義務も別途確認が必要です。用途によってはプランの変更が必要な場合もあります。本記事は法的助言ではありません。' },
 ];
 
-const faqSchema = JSON.stringify({
+const faqSchemaObj = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: pageFaqs.map((f) => ({
@@ -49,14 +49,25 @@ const faqSchema = JSON.stringify({
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: stripHtml(f.a) },
   })),
-});
+};
+
+const breadcrumbSchemaObj = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+    { '@type': 'ListItem', position: 2, name: '商用利用条件を確認したいAIクリエイティブツール', item: 'https://aicreative-db.com/conditions/commercial-use/' },
+  ],
+};
+
+const combinedSchema = JSON.stringify([faqSchemaObj, breadcrumbSchemaObj]);
 ---
 
 <BaseLayout
   title="AI画像・動画生成ツールの商用利用条件比較｜公式規約・料金・透かしを整理"
   description="AI画像・動画生成ツールの商用利用条件を比較。確認ポイントは①公式規約の商用利用範囲②無料/有料プランの条件差③透かし・クレジット表記義務の3点。最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。"
   canonicalPath="/conditions/commercial-use/"
-  jsonLd={faqSchema}
+  jsonLd={combinedSchema}
 >
   <div class="mx-auto max-w-5xl px-6 pt-8 pb-2">
     <nav class="mb-6 text-sm text-slate-500">

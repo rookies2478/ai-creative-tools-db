@@ -204,6 +204,29 @@ const tools = [
         </div>
       </header>
 
+      <!-- 先に結論 -->
+      <section class="uc-conc">
+        <h2 class="uc-conc-h2">先に結論</h2>
+        <p class="uc-conc-lead">YouTubeサムネイルを作る場合は、文字入れのしやすさ、テンプレートの有無、商用利用条件、透かしの有無を優先して確認します。無料で試す場合は無料枠と透かし条件、収益化を前提とする場合は公式の利用条件を必ずご確認ください。本記事は法的助言ではありません。</p>
+        <div class="uc-conc-grid">
+          <div class="uc-conc-card">
+            <p class="uc-conc-label">無料で試したい人</p>
+            <p class="uc-conc-body">Canva・Ideogramなど無料枠のあるツールから試すと始めやすい傾向があります。透かしの有無と生成回数の制限は事前に確認を推奨します。</p>
+            <a href="/conditions/free/" class="uc-conc-link">無料枠を比較する →</a>
+          </div>
+          <div class="uc-conc-card">
+            <p class="uc-conc-label">商用前提（YouTube収益化）で使う人</p>
+            <p class="uc-conc-body">商用利用条件はプランや用途によって異なる場合があります。収益化を前提とする場合は、各ツールの最新の公式規約を必ずご確認ください。</p>
+            <a href="/conditions/commercial-use/" class="uc-conc-link">商用条件を確認する →</a>
+          </div>
+          <div class="uc-conc-card">
+            <p class="uc-conc-label">仕上がり・クオリティ重視の人</p>
+            <p class="uc-conc-body">CanvaやFotor AIは生成・文字入れ・サイズ調整まで一体化。より高品質なビジュアルを求める場合はツール一覧で比較できます。</p>
+            <a href="/tools/" class="uc-conc-link">ツール一覧を見る →</a>
+          </div>
+        </div>
+      </section>
+
       <!-- Notice -->
       <div class="notice">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
@@ -557,6 +580,21 @@ const tools = [
   }
   @media (prefers-reduced-motion: reduce) {
     .cp-x * { transition-duration: .001ms !important; }
+  }
+
+  /* 先に結論 */
+  .uc-conc { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px 30px; margin-bottom: 28px; }
+  .uc-conc-h2 { font-size: 17px; font-weight: 700; color: var(--ink); margin: 0 0 10px; }
+  .uc-conc-lead { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; margin: 0 0 20px; }
+  .uc-conc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .uc-conc-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+  .uc-conc-label { font-size: 12px; font-weight: 700; color: var(--brand-ink); margin: 0; }
+  .uc-conc-body { font-size: 13px; color: var(--ink-soft); line-height: 1.65; margin: 0; flex: 1; }
+  .uc-conc-link { font-size: 12.5px; font-weight: 700; color: var(--brand-ink); text-decoration: none; margin-top: 6px; }
+  .uc-conc-link:hover { text-decoration: underline; }
+  @media (max-width: 720px) {
+    .uc-conc { padding: 20px 18px; }
+    .uc-conc-grid { grid-template-columns: 1fr; }
   }
 </style>
 

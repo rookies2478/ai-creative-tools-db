@@ -1,6 +1,24 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import UseCasesIndex from '../../components/UseCasesIndex.astro';
+
+const allTools = await getCollection('tools');
+function countByTag(tag: string): number {
+  return allTools.filter((t) => (t.data.useCases ?? []).includes(tag as never)).length;
+}
+const toolCounts: Record<string, number> = {
+  '/use-cases/youtube-thumbnail/': countByTag('youtube'),
+  '/use-cases/sns-post-image/':    countByTag('sns'),
+  '/use-cases/ad-banner/':         countByTag('ad_creative'),
+  '/use-cases/blog-eyecatch/':     countByTag('blog'),
+  '/use-cases/ec-product-image/':  countByTag('product_image'),
+  '/use-cases/anime-illustration/': countByTag('illustration'),
+  '/use-cases/sns-blog-eyecatch/': allTools.filter((t) => {
+    const uc = (t.data.useCases ?? []) as string[];
+    return uc.includes('sns') || uc.includes('blog');
+  }).length,
+};
 ---
 
 <BaseLayout
@@ -18,6 +36,7 @@ import UseCasesIndex from '../../components/UseCasesIndex.astro';
 
     <UseCasesIndex
       headingHtml='目的別に<span class="hl">AIツール</span>を探す'
+      toolCounts={toolCounts}
     />
 
   </div>

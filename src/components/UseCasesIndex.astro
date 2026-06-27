@@ -4,6 +4,7 @@ const {
   headingHtml = '用途別<span class="hl">AIツール記事</span>一覧',
   lead = '作りたいアウトプットから、関連するAI画像生成・AI動画生成ツールや選び方を探せます。用途によって必要な機能や確認すべき条件は異なります。',
   notice = '掲載内容は確認時点の情報です。最新情報や具体的な利用可否は必ず各公式サイトでご確認ください。本記事群は法的助言ではありません。プランや用途によって条件が異なる場合があります。',
+  toolCounts = {} as Record<string, number>,
   feature = {
     label: 'まとめ',
     title: '用途別AI画像生成ツール比較',
@@ -103,6 +104,9 @@ const iconSvg = (k?: string) => ICONS[k ?? 'grid'] ?? ICONS['grid'];
           </div>
           <h3 class="uci-cardttl">{c.title}</h3>
           <p class="uci-carddesc">{c.desc}</p>
+          {toolCounts[c.href] != null && (
+            <span class="uci-toolcount">候補ツール：{toolCounts[c.href]}件</span>
+          )}
           <span class="uci-read">{c.cta ?? '読む'}<span class="ar">→</span></span>
         </a>
       ))}
@@ -202,6 +206,7 @@ const iconSvg = (k?: string) => ICONS[k ?? 'grid'] ?? ICONS['grid'];
   .uci-cardttl { font-size: 17px; font-weight: 700; line-height: 1.42; color: var(--ink); margin-bottom: 10px; text-wrap: pretty; }
   .uci-card:hover .uci-cardttl { color: var(--brand-ink); }
   .uci-carddesc { font-size: 13px; color: var(--muted); line-height: 1.78; flex: 1; }
+  .uci-toolcount { display: inline-block; margin-top: 10px; font-family: var(--f-jp); font-size: 11.5px; font-weight: 600; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; }
   .uci-read { margin-top: 18px; font-family: var(--f-jp); font-weight: 700; font-size: 12.5px; color: var(--brand-ink); display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
   .uci-read .ar { transition: transform .2s var(--ease); }
   .uci-card:hover .uci-read .ar { transform: translateX(3px); }

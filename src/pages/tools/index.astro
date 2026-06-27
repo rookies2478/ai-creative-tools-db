@@ -89,9 +89,8 @@ const jsonLd = JSON.stringify({
         <label class="sort-label" for="sortSelect">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="14" height="14"><path d="M3 6h18M7 12h10M11 18h2"/></svg>
           <select id="sortSelect" aria-label="並び替え">
-            <option value="default">デフォルト順</option>
-            <option value="price-asc">料金（安い順）</option>
-            <option value="updated-desc">更新日（新しい順）</option>
+            <option value="default">標準順</option>
+            <option value="updated-desc">更新日が新しい順</option>
           </select>
         </label>
         <span class="result-count" id="resultCount" aria-live="polite"><b>{totalCount}</b> 件</span>
@@ -367,6 +366,7 @@ const jsonLd = JSON.stringify({
 
     const total = nImg + nVid;
     if (resultCount) resultCount.innerHTML = '<b>' + total + '</b> 件';
+    sortCards();
   }
 
   chips.forEach((chip) => {
@@ -380,6 +380,16 @@ const jsonLd = JSON.stringify({
 
   /* ---- ソート ---- */
   const sortSelect = document.getElementById('sortSelect') as HTMLSelectElement | null;
+
+  // 初期DOM順を記録
+  ['imgGrid', 'vidGrid'].forEach((id) => {
+    const grid = document.getElementById(id);
+    if (!grid) return;
+    grid.querySelectorAll<HTMLElement>('.tool').forEach((card, i) => {
+      card.dataset.order = String(i);
+    });
+  });
+
   function sortCards(): void {
     ['imgGrid', 'vidGrid'].forEach((id) => {
       const grid = document.getElementById(id);
@@ -387,12 +397,12 @@ const jsonLd = JSON.stringify({
       const cards = Array.from(grid.querySelectorAll<HTMLElement>('.tool'));
       const mode = sortSelect?.value ?? 'default';
       cards.sort((a, b) => {
-        if (mode === 'price-asc') {
-          return (Number(a.dataset.sortPrice ?? 99999)) - (Number(b.dataset.sortPrice ?? 99999));
-        }
         if (mode === 'updated-desc') {
           const da = a.dataset.updated ?? '';
           const db = b.dataset.updated ?? '';
+          if (!da && !db) return 0;
+          if (!da) return 1;
+          if (!db) return -1;
           return db.localeCompare(da);
         }
         return (Number(a.dataset.order ?? 0)) - (Number(b.dataset.order ?? 0));

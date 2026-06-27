@@ -1,6 +1,16 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import WatermarkCreditGuide from '../../../components/WatermarkCreditGuide.astro';
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "ガイド一覧", "item": "https://aicreative-db.com/guides/" },
+    { "@type": "ListItem", "position": 3, "name": "透かし・クレジット表記ガイド" }
+  ]
+});
 ---
 
 <BaseLayout
@@ -8,6 +18,7 @@ import WatermarkCreditGuide from '../../../components/WatermarkCreditGuide.astro
   description="AI画像・動画生成ツールの透かし条件の読み方・クレジット表記の確認手順・メタデータ・著作権まわりの注意点を解説したガイドです。透かしなしツールの絞り込みは /conditions/no-watermark/ も合わせてご活用ください。最新情報は公式サイトをご確認ください。"
   canonicalPath="/guides/watermark-credit-guide/"
   ogType="article"
+  jsonLd={breadcrumb}
 >
   <div class="mx-auto max-w-3xl px-6 py-12">
     <WatermarkCreditGuide />

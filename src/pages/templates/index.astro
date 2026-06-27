@@ -31,6 +31,15 @@ const faqItems = [
     a: '本ページのチェックリストは確認ポイントの整理を目的としており、法的助言ではありません。商用利用に関する具体的な判断は各ツールの最新公式規約を確認した上で、必要に応じて専門家へご相談ください。',
   },
 ];
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "実務テンプレート集" }
+  ]
+});
 ---
 
 <BaseLayout
@@ -38,6 +47,7 @@ const faqItems = [
   description={description}
   canonicalPath="/templates/"
   ogType="article"
+  jsonLd={breadcrumb}
 >
   <div class="mx-auto max-w-3xl px-6 py-12">
 

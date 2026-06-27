@@ -39,6 +39,15 @@ const faqItems = [
     a: 'まず要素を一つずつ変えて試すことをお勧めします。スタイル・被写体・背景・色調・カメラアングルなどを個別に調整してみてください。また、ツール固有のパラメータ（--ar、--style等）の活用や、参照画像（image-to-image）の利用も有効な場合があります。',
   },
 ];
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "プロンプト活用ガイド" }
+  ]
+});
 ---
 
 <BaseLayout
@@ -46,6 +55,7 @@ const faqItems = [
   description={description}
   canonicalPath="/prompts/"
   ogType="article"
+  jsonLd={breadcrumb}
 >
   <div class="mx-auto max-w-3xl px-6 py-12">
 

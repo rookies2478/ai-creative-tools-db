@@ -6,6 +6,16 @@ import JapaneseAiToolsGuide from '../../../components/JapaneseAiToolsGuide.astro
 const entry = await getEntry('guides', 'japanese-ai-image-tools');
 if (!entry) throw new Error('guide not found: japanese-ai-image-tools');
 const { data } = entry;
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "ガイド一覧", "item": "https://aicreative-db.com/guides/" },
+    { "@type": "ListItem", "position": 3, "name": "日本語対応AI画像生成ツール比較" }
+  ]
+});
 ---
 
 <BaseLayout
@@ -13,6 +23,7 @@ const { data } = entry;
   description={data.description}
   canonicalPath="/guides/japanese-ai-image-tools/"
   ogType="article"
+  jsonLd={breadcrumb}
 >
   <div class="mx-auto max-w-3xl px-6 py-12">
     <JapaneseAiToolsGuide

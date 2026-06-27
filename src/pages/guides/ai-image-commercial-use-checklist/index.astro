@@ -159,6 +159,16 @@ const toolInfo = [
     notes: '無料プランでは画像の権利がLeonardo.AIに帰属し商用利用不可とされています。有料プラン＋Privateモードが商用利用の条件とされています。公式規約で最新条件をご確認ください。',
   },
 ];
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "ガイド一覧", "item": "https://aicreative-db.com/guides/" },
+    { "@type": "ListItem", "position": 3, "name": "商用利用前確認チェックリスト" }
+  ]
+});
 ---
 
 <BaseLayout
@@ -166,6 +176,7 @@ const toolInfo = [
   description={description}
   canonicalPath="/guides/ai-image-commercial-use-checklist/"
   ogType="article"
+  jsonLd={breadcrumb}
 >
   <div class="mx-auto max-w-3xl px-6 py-12">
 

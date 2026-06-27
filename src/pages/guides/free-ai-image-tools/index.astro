@@ -6,6 +6,16 @@ import FreeAiImageTools from '../../../components/FreeAiImageTools.astro';
 const entry = await getEntry('guides', 'free-ai-image-tools');
 if (!entry) throw new Error('guide not found: free-ai-image-tools');
 const { data } = entry;
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "ガイド一覧", "item": "https://aicreative-db.com/guides/" },
+    { "@type": "ListItem", "position": 3, "name": "無料AI画像生成ツールを選ぶガイド" }
+  ]
+});
 ---
 
 <BaseLayout
@@ -13,6 +23,7 @@ const { data } = entry;
   description={data.description}
   canonicalPath="/guides/free-ai-image-tools/"
   ogType="article"
+  jsonLd={breadcrumb}
 >
   <div class="mx-auto max-w-5xl px-6 py-12">
     <FreeAiImageTools />

@@ -1,6 +1,16 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import CommercialUseCopyright from '../../../components/CommercialUseCopyright.astro';
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "ガイド一覧", "item": "https://aicreative-db.com/guides/" },
+    { "@type": "ListItem", "position": 3, "name": "商用利用と著作権ガイド" }
+  ]
+});
 ---
 
 <BaseLayout
@@ -8,6 +18,7 @@ import CommercialUseCopyright from '../../../components/CommercialUseCopyright.a
   description="AI画像生成・AI動画生成ツールを仕事や副業で使う前に確認したい、商用利用条件・著作権・肖像権・商標・第三者素材の注意点を整理します。本記事は法的助言ではありません。"
   canonicalPath="/guides/commercial-use-copyright/"
   ogType="article"
+  jsonLd={breadcrumb}
 >
   <div class="mx-auto max-w-3xl px-6 py-12">
     <CommercialUseCopyright

@@ -465,6 +465,16 @@ const faqItems = [
     a: '透かしの除去と商用利用の許可は別の問題です。有料プランで透かしを除去できても、商用利用が許可されているかどうかはプランと利用規約で別途確認が必要です。また、透かしを別ツールで除去することは利用規約に違反する場合があります。商用利用前に必ず各ツールの最新利用規約をご確認ください。本記事は法的助言ではありません。',
   },
 ];
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "ガイド一覧", "item": "https://aicreative-db.com/guides/" },
+    { "@type": "ListItem", "position": 3, "name": "AI動画生成ツールの料金・クレジット消費比較" }
+  ]
+});
 ---
 
 <BaseLayout
@@ -472,6 +482,7 @@ const faqItems = [
   description={data.description}
   canonicalPath="/guides/video-generation-credit-cost-comparison/"
   ogType="article"
+  jsonLd={breadcrumb}
 >
   <div class="mx-auto max-w-3xl px-6 py-12">
 

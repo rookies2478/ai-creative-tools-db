@@ -1,12 +1,22 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GuidesIndex from '../../components/GuidesIndex.astro';
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "ガイド一覧" }
+  ]
+});
 ---
 
 <BaseLayout
   title="AI画像・動画生成ガイド一覧｜無料・商用利用・日本語対応・透かし条件を確認｜AIクリエイティブナビ"
   description="AI画像生成・AI動画生成ツールを選ぶ前に確認したい、無料枠、商用利用、著作権、日本語対応、透かし・クレジット表記などのガイドをまとめています。条件はツール・プランによって異なる場合があります。"
   canonicalPath="/guides/"
+  jsonLd={breadcrumb}
 >
   <main class="mx-auto max-w-5xl px-6">
     <GuidesIndex

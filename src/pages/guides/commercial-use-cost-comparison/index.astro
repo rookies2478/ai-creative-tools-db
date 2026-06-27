@@ -306,6 +306,16 @@ const faqItems = [
     a: 'AIツール市場は急速に発展しており、各社が競争的にプランを改定しています。利用前の最新規約確認が特に重要な分野です。',
   },
 ];
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "ガイド一覧", "item": "https://aicreative-db.com/guides/" },
+    { "@type": "ListItem", "position": 3, "name": "商用利用条件と実質コスト比較" }
+  ]
+});
 ---
 
 <BaseLayout
@@ -313,6 +323,7 @@ const faqItems = [
   description={data.description}
   canonicalPath="/guides/commercial-use-cost-comparison/"
   ogType="article"
+  jsonLd={breadcrumb}
 >
   <div class="mx-auto max-w-3xl px-6 py-12">
 

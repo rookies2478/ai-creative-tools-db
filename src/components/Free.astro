@@ -1,4 +1,5 @@
 ---
+import ComparisonFootnote from './ComparisonFootnote.astro';
 /**
  * Free.astro
  * 「無料で使えるAIクリエイティブツール」条件ページ本文
@@ -319,7 +320,7 @@ const hasLimited = tools.some((t) => t.freePlan === 'limited');
       <span class="li"><span class="st limited"><span class="d"></span>制限あり（回数・透かし・機能などに条件）</span></span>
       <span class="cu-legend-sp">無料枠の条件は変更される場合があります</span>
     </div>
-    <p class="note">※ 無料枠の条件は変更される場合があります。最新情報は各公式サイトでご確認ください。</p>
+    <ComparisonFootnote />
   </section>
 
   <!-- ===== 商用利用前の注意点 ===== -->

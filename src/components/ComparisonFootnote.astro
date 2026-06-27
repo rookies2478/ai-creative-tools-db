@@ -1,0 +1,19 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<p class:list={['cf-note', className]}>
+  記号や条件は、公式情報・確認時点の内容をもとに整理しています。プランや用途、地域、時期によって条件が変わる場合があります。最新情報は各公式サイトをご確認ください。商用利用・著作権・肖像権・商標に関する記載は法的助言ではありません。
+</p>
+
+<style>
+  .cf-note {
+    font-size: 11px;
+    color: var(--faint, #9ca3af);
+    line-height: 1.7;
+    margin: 8px 0 0;
+  }
+</style>

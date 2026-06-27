@@ -14,6 +14,7 @@
  * ヘッダー / フッター / パンくず は既存 Layout 側のものを使う想定。
  */
 import ComparisonLegend from './ComparisonLegend.astro';
+import ComparisonFootnote from './ComparisonFootnote.astro';
 export type Status = 'ok' | 'paid' | 'limited' | 'no' | 'unknown';
 export interface Tool {
   name: string;
@@ -245,7 +246,7 @@ const filterChips: { st: Status | 'all'; label: string }[] = [
       </table>
     </div>
     <ComparisonLegend commercialCheckNote={true} reveal={false} />
-    <p class="note">※ 値は確認日時点の参考値です。無料枠・商用利用・対応状況はプランや用途により異なる場合があります。透かし列は「透かしなし＝○」で評価しています。最新情報は必ず公式サイトでご確認ください。</p>
+    <ComparisonFootnote />
   </section>
 
   <!-- ===== 各ツールの注意点 ===== -->

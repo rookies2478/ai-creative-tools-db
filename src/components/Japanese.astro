@@ -15,6 +15,7 @@
  * ヘッダー / フッター / パンくず / 条件ナビ は既存 Layout 側のものを使う想定。
  */
 import ComparisonLegend from './ComparisonLegend.astro';
+import ComparisonFootnote from './ComparisonFootnote.astro';
 export type JaStatus = 'ok' | 'partial' | 'unknown';   // 対応 / 一部対応 / 要確認
 export type Mark = '○' | '△' | '×' | '?';              // 詳細マトリクスの評価
 
@@ -267,7 +268,7 @@ const filterChips: { st: JaStatus | 'all'; label: string }[] = [
       </table>
     </div>
     <ComparisonLegend commercialCheckNote={false} reveal={false} />
-    <p class="note">※ 値は確認日時点の参考値です。無料枠・商用利用・対応状況はプランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。</p>
+    <ComparisonFootnote />
   </section>
 
   <!-- ===== 日本語対応の詳細マトリクス ===== -->

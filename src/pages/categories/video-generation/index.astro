@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ComparisonLegend from '../../../components/ComparisonLegend.astro';
+import ComparisonFootnote from '../../../components/ComparisonFootnote.astro';
 
 const allTools = await getCollection('tools');
 const videoTools = allTools.filter(
@@ -441,7 +442,7 @@ const vidExtra: Record<string, VidExtra> = {
               </tbody>
             </table>
           </div>
-          <p class="cvg-foot">商用利用条件・透かし条件はプランや時期により変更される場合があります。最大動画尺や延長機能はモデル・プラン・提供時期によって変わる場合があります。各ツールの公式利用規約・公式サイトを必ずご確認ください。本記事は法的助言ではありません。</p>
+          <ComparisonFootnote />
         </div>
       </section>
 

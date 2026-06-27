@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { generatedImages } from '../../../data/generatedImages';
 import ComparisonLegend from '../../../components/ComparisonLegend.astro';
+import ComparisonFootnote from '../../../components/ComparisonFootnote.astro';
 
 const allTools = await getCollection('tools');
 const imageTools = allTools.filter((t) => t.data.category === 'image' || t.data.category === 'both');
@@ -531,7 +532,7 @@ const imgExtra: Record<string, ImgExtra> = {
               </tbody>
             </table>
           </div>
-          <p class="cig-foot">商用利用条件・透かし条件はプランや時期により変更される場合があります。各ツールの公式利用規約・公式サイトを必ずご確認ください。本記事は法的助言ではありません。</p>
+          <ComparisonFootnote />
         </div>
       </section>
 

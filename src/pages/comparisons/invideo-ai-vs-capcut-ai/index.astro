@@ -86,7 +86,7 @@ const sources = [
   { href: 'https://www.capcut.com/clause/terms-of-service', label: 'CapCut利用規約（公式）' },
 ];
 
-const articleJsonLd = JSON.stringify({
+const articleJsonLd = JSON.stringify([{
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "InVideo AIとCapCut AIを比較｜動画制作・SNS動画ならどちらを選ぶ？",
@@ -97,7 +97,15 @@ const articleJsonLd = JSON.stringify({
   "publisher": { "@type": "Organization", "name": "AIクリエイティブナビ", "url": "https://aicreative-db.com/" },
   "datePublished": "2026-06-11",
   "dateModified": "2026-06-11",
-});
+}, {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "比較記事", "item": "https://aicreative-db.com/comparisons/" },
+    { "@type": "ListItem", "position": 3, "name": "InVideo AIとCapCut AI比較", "item": "https://aicreative-db.com/comparisons/invideo-ai-vs-capcut-ai/" },
+  ],
+}]);
 ---
 
 <ComparisonVsArticle

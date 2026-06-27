@@ -284,26 +284,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-200 text-xs font-bold text-slate-600">10</span>
           免責
         </h2>
-        <ul class="space-y-2 pl-1">
-          <li class="flex items-start gap-2">
-            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>
-            本サイトは情報提供を目的としています。
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>
-            掲載内容は法的・税務的・専門的助言ではありません。
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span>
-            各ツールの利用前に、公式サイト・利用規約・料金ページを必ずご確認ください。
-          </li>
-        </ul>
+        <p class="text-sm text-slate-600">
+          本サイトは情報提供を目的としており、法的・税務的・専門的助言ではありません。詳細は<a href="/disclaimer/" class="text-indigo-600 hover:underline">免責事項ページ</a>をご覧ください。
+        </p>
       </section>
 
     </div>
 
-    <nav class="mt-10 border-t border-slate-200 pt-6 text-sm">
+    <nav class="mt-10 border-t border-slate-200 pt-6 text-sm flex flex-wrap gap-4">
       <a href="/" class="text-indigo-600 hover:underline">← トップに戻る</a>
+      <a href="/about/" class="text-slate-500 hover:underline">運営者情報</a>
+      <a href="/disclaimer/" class="text-slate-500 hover:underline">免責事項</a>
     </nav>
 
   </div>

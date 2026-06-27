@@ -17,7 +17,6 @@
 .tool-meta { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding-top: 12px; border-top: 1px solid var(--line); margin-top: auto; }
 .tool-price { font-family: var(--f-mono); font-size: 12.5px; color: var(--ink); font-weight: 700; }
 .tool-price span { color: var(--muted); font-weight: 400; }
-.tool-date { font-size: 11px; color: var(--faint); font-family: var(--f-mono); }
 .tool-links { display: flex; flex-direction: column; gap: 4px; text-align: right; }
 .tool-links a { font-size: 12.5px; font-weight: 600; font-family: var(--f-jp); }
 .tool-links .detail { color: var(--brand-ink); }

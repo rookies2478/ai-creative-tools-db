@@ -118,9 +118,9 @@ const {
     { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', initial: 'C', watermark: '公式情報から未確認。', freeNote: '無料プランで一定回数の生成が可能（回数は変更の可能性あり）。', commercial: { s: 'cond', label: '△ 条件付き' }, platforms: 'Web、iOS、Android' },
     { name: 'CapCut AI', slug: 'capcut-ai', initial: 'C', watermark: '無料利用・テンプレート・素材・書き出し条件により、透かしやロゴ表示の扱いが変わる可能性があります。最新の公式画面でご確認ください。', freeNote: '無料プランあり。', commercial: { s: 'cond', label: '△ 条件付き' }, platforms: 'Web、iOS、Android、Desktop' },
     { name: 'Clipdrop', slug: 'clipdrop', initial: 'C', watermark: 'Freeプランの透かし有無は機能・プランにより異なる可能性があります。最新の条件は公式画面でご確認ください。', freeNote: '無料プランあり。', commercial: { s: 'na', label: '要確認' }, platforms: 'Web、API' },
-    { name: 'DALL·E', slug: 'dalle', initial: 'D', watermark: 'C2PAメタデータ（不可視）が埋め込まれる場合あり。', freeNote: 'ChatGPT無料プランで制限付き利用できる場合あり。', commercial: { s: 'ok', label: '〇 可能（公式情報）' }, platforms: 'Web、API' },
+    { name: 'DALL·E', slug: 'dalle', initial: 'D', watermark: 'C2PAメタデータ（不可視）が埋め込まれる場合あり。', freeNote: 'ChatGPT無料プランで制限付き利用できる場合あり。', commercial: { s: 'ok', label: '〇 案内あり（公式情報）' }, platforms: 'Web、API' },
     { name: 'DreamStudio', slug: 'dreamstudio', initial: 'D', watermark: '公式情報のみでは透かしの有無・条件を断定できません。最新の条件は公式サイトでご確認ください。', freeNote: '無料プランなし。', commercial: { s: 'cond', label: '△ 条件付き' }, platforms: 'Web' },
-    { name: 'Fotor AI', slug: 'fotor-ai', initial: 'F', watermark: 'Basicプランでは書き出し時に透かしが入る場合あり。有料プランでは透かしなし書き出しが案内されています。', freeNote: '無料プランあり。', commercial: { s: 'ok', label: '〇 可能（公式情報）' }, platforms: 'Web' },
+    { name: 'Fotor AI', slug: 'fotor-ai', initial: 'F', watermark: 'Basicプランでは書き出し時に透かしが入る場合あり。有料プランでは透かしなし書き出しが案内されています。', freeNote: '無料プランあり。', commercial: { s: 'ok', label: '〇 案内あり（公式情報）' }, platforms: 'Web' },
     { name: 'Gemini画像生成', slug: 'gemini-image-generation', initial: 'G', watermark: 'SynthIDによる目に見えない透かしと目に見える透かしが使用されると公式ページで案内されています。プランや機能によって変わる可能性があります。', freeNote: '無料プランあり。', commercial: { s: 'cond', label: '△ 条件付き' }, platforms: 'Web、iOS、Android' },
     { name: 'Hailuo AI', slug: 'hailuo-ai', initial: 'H', watermark: '無料プランでは透かしあり。有料プランの条件は公式サイトをご確認ください。', freeNote: '無料枠あり（透かしあり・生成回数制限あり）。詳細は公式サイトをご確認ください。', commercial: { s: 'paid', label: '★ 有料プラン向け' }, platforms: 'Web' },
     { name: 'Haiper', slug: 'haiper', initial: 'H', watermark: '公式FAQでは有料メンバーになると透かしなし動画を生成できると案内されています。無料利用時やプランによって条件が異なる可能性があります。', freeNote: '無料プランあり。', commercial: { s: 'paid', label: '★ 有料プラン向け' }, platforms: 'Web、iOS、API' },
@@ -148,7 +148,7 @@ const {
   ],
   paidChanges = [
     { lead: '透かし除去', body: '多くのツールで、有料プランに移行すると透かしなし出力が可能になります。' },
-    { lead: '商用利用許可', body: 'Pika・Kling AIなど、有料プランで初めて商用利用が許可されるツールがあります。' },
+    { lead: '商用利用の案内あり', body: 'Pika・Kling AIなど、有料プランで商用利用が案内されているツールがあります。' },
     { lead: '生成量の拡大', body: 'クレジット数や生成回数の上限が緩和される場合があります。' },
   ],
   planDiffNote = 'ただし有料プランでも、商用利用に追加条件がある場合があります。必ず公式情報をご確認ください。',
@@ -168,9 +168,9 @@ const {
     { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', initial: 'C', freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-24' },
     { name: 'CapCut AI', slug: 'capcut-ai', initial: 'C', watermark: { s: 'no', label: '× あり' }, freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-24' },
     { name: 'Clipdrop', slug: 'clipdrop', initial: 'C', freePlan: { s: 'ok', label: '〇 無料プランあり' }, date: '2026-06-06' },
-    { name: 'DALL·E', slug: 'dalle', initial: 'D', watermark: { s: 'cond', label: '△ 条件付き' }, freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'ok', label: '〇 可能（公式情報）' }, date: '2026-05-26' },
+    { name: 'DALL·E', slug: 'dalle', initial: 'D', watermark: { s: 'cond', label: '△ 条件付き' }, freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'ok', label: '〇 案内あり（公式情報）' }, date: '2026-05-26' },
     { name: 'DreamStudio', slug: 'dreamstudio', initial: 'D', freePlan: { s: 'no', label: '× 無料プランなし' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-14' },
-    { name: 'Fotor AI', slug: 'fotor-ai', initial: 'F', watermark: { s: 'no', label: '× あり' }, freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'ok', label: '〇 可能（公式情報）' }, date: '2026-05-14' },
+    { name: 'Fotor AI', slug: 'fotor-ai', initial: 'F', watermark: { s: 'no', label: '× あり' }, freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'ok', label: '〇 案内あり（公式情報）' }, date: '2026-05-14' },
     { name: 'Gemini画像生成', slug: 'gemini-image-generation', initial: 'G', watermark: { s: 'no', label: '× あり' }, freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-15' },
     { name: 'Hailuo AI', slug: 'hailuo-ai', initial: 'H', watermark: { s: 'cond', label: '△ 条件付き' }, freePlan: { s: 'cond', label: '△ 制限付き無料' }, date: '2026-06-06' },
     { name: 'Haiper', slug: 'haiper', initial: 'H', watermark: { s: 'no', label: '× あり' }, freePlan: { s: 'ok', label: '〇 無料プランあり' }, date: '2026-05-24' },
@@ -330,7 +330,7 @@ const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
         </article>
       ))}
     </div>
-    <p class="wcg-foot reveal">※ 「商用利用」のマークは記事の編集方針に基づく目安です（★＝有料プラン向け／〇＝公式情報で可能／△＝条件付き／要確認＝公式情報で断定できず）。法的判断の根拠ではありません。</p>
+    <p class="wcg-foot reveal">※ 「商用利用」のマークは記事の編集方針に基づく目安です（★＝有料プラン向け／〇＝公式情報で案内あり／△＝条件付き／要確認＝公式情報で断定できず）。法的判断の根拠ではありません。</p>
   </section>
 
   <!-- ===== 無料プランと有料プランの違い ===== -->

@@ -79,7 +79,7 @@ const DEFAULT_TOOLS: Tool[] = [
 ];
 
 const DEFAULT_POINTS: Point[] = [
-  { title:'公式規約の確認', body:'「商用利用OK」と案内されていても、生成内容（第三者の肖像・ブランド・著作物が含まれる場合など）によっては別途権利処理が必要な場合があります。「公式規約では〜と案内されています」という形で最新情報を確認する習慣が重要です。' },
+  { title:'公式規約の確認', body:'「商用利用の案内あり」と表示されていても、生成内容（第三者の肖像・ブランド・著作物が含まれる場合など）によっては別途権利処理が必要な場合があります。「公式規約では〜と案内されています」という形で最新情報を確認する習慣が重要です。' },
   { title:'無料・有料プランの条件差', body:'無料プランでは商用利用が制限され、有料プランに移行すると商用利用が可能になるツールがあります。<a href="/conditions/free/">無料で使えるツール</a>のページも参照し、プランごとの条件を確認してください。' },
   { title:'透かしの有無', body:'無料プランでは透かしが入る場合があります。商用成果物に透かしが入ると実務利用が難しい場面もあるため、<a href="/conditions/no-watermark/">透かしなしツール</a>のページも確認してください。' },
   { title:'日本語対応', body:'日本語プロンプトや日本語UIに対応しているかは、国内での実務利用時の操作性に影響します。<a href="/conditions/japanese/">日本語対応ツール</a>のページで詳細を確認できます。' },
@@ -174,11 +174,11 @@ const filterChips: { st: Status | 'all'; label: string }[] = [
       <p>各ツールの商用利用欄は、確認時点の公式情報をもとに以下の5段階で整理しています。「公式案内あり」であっても、用途・プラン・生成内容によって条件が変わる場合があります。商用利用を前提にする場合は、最新の公式規約をご確認ください。</p>
     </div>
     <div class="status-grid">
-      <div class="status-card ok"><span class="st ok"><span class="d"></span>公式案内あり <small>ok</small></span><p>公式規約で商用利用が案内されています。ただしプラン・用途・生成内容によって条件が変わる場合があります。</p></div>
-      <div class="status-card paid"><span class="st paid"><span class="d"></span>有料プラン向け <small>paid-only</small></span><p>有料プランで商用利用が案内されています。無料プランでは商用利用に制限がある場合があります。</p></div>
-      <div class="status-card limited"><span class="st limited"><span class="d"></span>条件あり <small>limited</small></span><p>一定の条件のもとで商用利用が案内されています。用途・生成内容・プランによって異なります。</p></div>
-      <div class="status-card no"><span class="st no"><span class="d"></span>非対応 <small>no</small></span><p>公式規約で商用利用が禁止または制限されている、または非対応の可能性があるツールです。</p></div>
-      <div class="status-card unknown"><span class="st unknown"><span class="d"></span>要確認 <small>unknown</small></span><p>公式情報から商用利用条件を確認できていません。利用前に必ず公式規約をご確認ください。</p></div>
+      <div class="status-card ok"><span class="st ok"><span class="d"></span>公式案内あり</span><p>公式規約で商用利用が案内されています。ただしプラン・用途・生成内容によって条件が変わる場合があります。</p></div>
+      <div class="status-card paid"><span class="st paid"><span class="d"></span>有料プラン向け</span><p>有料プランで商用利用が案内されています。無料プランでは商用利用に制限がある場合があります。</p></div>
+      <div class="status-card limited"><span class="st limited"><span class="d"></span>条件あり</span><p>一定の条件のもとで商用利用が案内されています。用途・生成内容・プランによって異なります。</p></div>
+      <div class="status-card no"><span class="st no"><span class="d"></span>非対応</span><p>公式規約で商用利用が禁止または制限されている、または非対応の可能性があるツールです。</p></div>
+      <div class="status-card unknown"><span class="st unknown"><span class="d"></span>要確認</span><p>公式情報から商用利用条件を確認できていません。利用前に必ず公式規約をご確認ください。</p></div>
     </div>
   </section>
 
@@ -187,7 +187,7 @@ const filterChips: { st: Status | 'all'; label: string }[] = [
     <div class="sec-head">
       <span class="eyebrow">Checkpoints</span>
       <h2>商用利用ツールを選ぶ際のポイント</h2>
-      <p>「商用利用OK」と案内されていても、生成内容やプランによって条件は変わります。実務で使う前に確認しておきたい観点を整理しました。</p>
+      <p>「案内あり」と表示されていても、生成内容やプランによって条件は変わります。実務で使う前に確認しておきたい観点を整理しました。</p>
     </div>
     <ol class="points">
       {points.map((p, i) => (

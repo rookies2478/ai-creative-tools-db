@@ -34,13 +34,31 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <section class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
         <h2 class="mb-4 text-base font-semibold text-[#2E25A6]">お問い合わせの種別</h2>
-        <p class="mb-3 text-slate-600">本サイトへのお問い合わせとして、以下を受け付ける予定です。</p>
+        <p class="mb-3 text-slate-600">本サイトへのお問い合わせとして、以下を受け付けています。</p>
         <ul class="space-y-2 pl-1">
           {[
             '掲載情報の誤りや古い情報の修正依頼',
             'ツール運営者・開発者からの情報提供・修正依頼',
             '広告掲載・提携に関するご連絡',
             'サイトに関するご意見・ご要望',
+          ].map(item => (
+            <li class="flex items-start gap-2">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-400"></span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+        <h2 class="mb-4 text-base font-semibold text-[#2E25A6]">メール送信時にご記載ください</h2>
+        <ul class="space-y-2 pl-1 mb-0">
+          {[
+            '件名：お問い合わせの種別（例：「情報修正依頼：[ツール名]」）',
+            'お問い合わせの種別（上記リストから選択）',
+            '対象ツール名または対象ページURL（該当する場合）',
+            '具体的なご要望・情報の内容',
+            '修正依頼の場合は参考となる公式情報ソースURL（あれば）',
           ].map(item => (
             <li class="flex items-start gap-2">
               <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-400"></span>

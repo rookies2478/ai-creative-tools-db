@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UseCaseConclusion from '../../../components/UseCaseConclusion.astro';
 
 const faqs = [
   {
@@ -163,6 +164,30 @@ const tools = [
           <div class="stat"><span class="n">7</span><span class="t">よくある質問</span></div>
         </div>
       </header>
+
+      <UseCaseConclusion
+        lead="アニメ・イラスト風の画像を作る場合は、ツールの得意な画風・商用利用条件・透かしの有無を優先して確認します。既存キャラクター・二次創作・学習モデルの扱いはツールごとに異なる場合があるため、最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。"
+        cards={[
+          {
+            label: '無料で試したい人',
+            body: 'Stable Diffusion（ローカル）やNightCafe・Tensor Artなど無料枠のあるツールから試すと始めやすい傾向があります。透かしの有無は事前に確認を推奨します。',
+            href: '/conditions/free/',
+            cta: '無料枠を比較する',
+          },
+          {
+            label: '商用前提で使う人',
+            body: '商用利用条件はツールやモデル・プランによって異なる場合があります。既存キャラクターや二次創作への利用は別途権利の確認が必要です。',
+            href: '/conditions/commercial-use/',
+            cta: '商用条件を確認する',
+          },
+          {
+            label: '画風・クオリティ重視の人',
+            body: '得意な画風はツールによって大きく異なります。複数のツールを比較しながら、用途に合った画風を確認することを推奨します。',
+            href: '/categories/image-generation/',
+            cta: 'AI画像生成ツール一覧を見る',
+          },
+        ]}
+      />
 
       <!-- Notice -->
       <div class="notice">

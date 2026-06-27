@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UseCaseConclusion from '../../../components/UseCaseConclusion.astro';
 
 const faqs = [
   { q: 'EC商品画像にAI画像生成ツールを使えますか？', a: '各ツールの公式サイト・利用規約・商用利用条件をご確認ください。ECサイトや販売目的での利用に利用できるかどうかは、ツールの商用利用条件によって異なります。本記事は法的助言ではありません。' },
@@ -90,6 +91,30 @@ const tools = [
           <div class="stat"><span class="n">7</span><span class="t">よくある質問</span></div>
         </div>
       </header>
+
+      <UseCaseConclusion
+        lead="EC商品画像をAIで作る場合は、商用利用条件・背景除去機能の有無・透かし・出力品質を優先して確認します。EC販売・商品紹介への利用は商用とみなされる場合があります。最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。"
+        cards={[
+          {
+            label: '無料で試したい人',
+            body: '無料枠のあるツールから試すと始めやすい傾向があります。EC商品画像では商用利用条件の確認が特に重要です。透かしの有無も事前に確認を推奨します。',
+            href: '/conditions/free/',
+            cta: '無料枠を比較する',
+          },
+          {
+            label: '商用前提（EC出品・販売）で使う人',
+            body: 'EC販売を前提とする場合は、各ツールの商用利用条件を必ずご確認ください。ECモールの画像ガイドラインへの適合も別途確認が必要です。',
+            href: '/conditions/commercial-use/',
+            cta: '商用条件を確認する',
+          },
+          {
+            label: '品質・使いやすさ重視の人',
+            body: '背景除去・商品フォーカス・高解像度出力などの機能はツールによって異なります。ツール一覧から比較して選べます。',
+            href: '/categories/image-generation/',
+            cta: 'AI画像生成ツール一覧を見る',
+          },
+        ]}
+      />
 
       <!-- Notice -->
       <div class="notice">

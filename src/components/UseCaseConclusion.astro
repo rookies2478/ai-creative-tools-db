@@ -1,0 +1,96 @@
+---
+interface Card {
+  label: string;
+  body: string;
+  href: string;
+  cta: string;
+}
+
+interface Props {
+  lead: string;
+  cards: Card[];
+}
+
+const { lead, cards } = Astro.props;
+---
+
+<section class="uc-conc">
+  <h2 class="uc-conc-h2">先に結論</h2>
+  <p class="uc-conc-lead">{lead}</p>
+  <div class="uc-conc-grid">
+    {cards.map((card) => (
+      <div class="uc-conc-card">
+        <p class="uc-conc-label">{card.label}</p>
+        <p class="uc-conc-body">{card.body}</p>
+        <a href={card.href} class="uc-conc-link">{card.cta} →</a>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .uc-conc {
+    background: var(--surface-2, #FAFAF6);
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: var(--radius-lg, 22px);
+    padding: 28px 30px;
+    margin-bottom: 28px;
+  }
+  .uc-conc-h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink, #16181D);
+    margin: 0 0 10px;
+  }
+  .uc-conc-lead {
+    font-size: 13.5px;
+    color: var(--ink-soft, #3A3E47);
+    line-height: 1.7;
+    margin: 0 0 20px;
+  }
+  .uc-conc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .uc-conc-card {
+    background: var(--surface, #FFFFFF);
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: var(--radius, 14px);
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .uc-conc-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--brand-ink, #2E25A6);
+    margin: 0;
+  }
+  .uc-conc-body {
+    font-size: 13px;
+    color: var(--ink-soft, #3A3E47);
+    line-height: 1.65;
+    margin: 0;
+    flex: 1;
+  }
+  .uc-conc-link {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--brand-ink, #2E25A6);
+    text-decoration: none;
+    margin-top: 6px;
+  }
+  .uc-conc-link:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 720px) {
+    .uc-conc {
+      padding: 20px 18px;
+    }
+    .uc-conc-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

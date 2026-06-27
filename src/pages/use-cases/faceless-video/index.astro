@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UseCaseConclusion from '../../../components/UseCaseConclusion.astro';
 
 const faqs = [
   { q: '顔出しなし動画はAI動画生成ツールだけで作れますか？', a: 'AI動画生成ツールはテキスト・画像から映像クリップを生成しますが、字幕・ナレーション・BGMの追加には別途ツールとの組み合わせが必要になる場合があります。AI動画編集ツール（CapCut AI・InVideo AIなど）を組み合わせるか、アバター動画ツールを使う方法もあります。' },
@@ -76,6 +77,30 @@ const faqJsonLd = JSON.stringify({
           <div class="stat"><span class="n">6</span><span class="t">よくある質問</span></div>
         </div>
       </header>
+
+      <UseCaseConclusion
+        lead="顔出しなし動画をAIで作る場合は、AIアバター・ナレーション・動画生成ツールの組み合わせを検討します。商用利用条件はツールやプランによって異なります。「顔出しなし」であっても商用利用条件・音声・肖像権の確認は別途必要です。本記事は法的助言ではありません。"
+        cards={[
+          {
+            label: '無料で試したい人',
+            body: 'InVideo AI・CapCut AIなど無料枠のあるツールから試すと始めやすい傾向があります。AIアバター機能の無料枠条件は事前に確認を推奨します。',
+            href: '/conditions/free/',
+            cta: '無料枠を比較する',
+          },
+          {
+            label: '商用前提（収益化・案件）で使う人',
+            body: 'AIアバター・ナレーションの商用利用条件はツールごとに異なります。収益化を前提とする場合は各ツールの最新の公式規約を必ずご確認ください。',
+            href: '/conditions/commercial-use/',
+            cta: '商用条件を確認する',
+          },
+          {
+            label: '映像クオリティ重視の人',
+            body: 'AIアバターの自然さ・言語対応・動画生成品質はツールによって異なります。カテゴリページから比較できます。',
+            href: '/categories/avatar-video/',
+            cta: 'AIアバター動画ツール一覧を見る',
+          },
+        ]}
+      />
 
       <!-- Notice -->
       <div class="notice">

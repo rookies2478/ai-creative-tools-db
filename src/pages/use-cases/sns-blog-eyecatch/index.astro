@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UseCaseConclusion from '../../../components/UseCaseConclusion.astro';
 
 const faqs = [
   {
@@ -167,6 +168,30 @@ const tools = [
           <div class="stat"><span class="n">7</span><span class="t">よくある質問</span></div>
         </div>
       </header>
+
+      <UseCaseConclusion
+        lead="SNS・ブログのアイキャッチ画像をAIで作る場合は、文字入れのしやすさ・商用利用条件・透かしの有無を優先して確認します。広告収益やアフィリエイトがある媒体では商用とみなされる場合があります。最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。"
+        cards={[
+          {
+            label: '無料で試したい人',
+            body: '無料枠のあるツールから試すと始めやすい傾向があります。透かしの有無と生成回数の制限は事前に確認を推奨します。',
+            href: '/conditions/free/',
+            cta: '無料枠を比較する',
+          },
+          {
+            label: '商用前提（収益化・案件）で使う人',
+            body: '広告収益・アフィリエイトがあるブログやSNSは商用とみなされる場合があります。各ツールの最新の公式規約を必ずご確認ください。',
+            href: '/conditions/commercial-use/',
+            cta: '商用条件を確認する',
+          },
+          {
+            label: '仕上がり・実務品質重視の人',
+            body: 'AI生成・文字入れ・テンプレート編集まで一体化したツールを選ぶと効率的です。ツール一覧から用途に合ったものを比較できます。',
+            href: '/categories/image-generation/',
+            cta: 'AI画像生成ツール一覧を見る',
+          },
+        ]}
+      />
 
       <!-- Notice -->
       <div class="notice">

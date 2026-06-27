@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UseCaseConclusion from '../../../components/UseCaseConclusion.astro';
 
 const faqs = [
   {
@@ -163,6 +164,30 @@ const tools = [
           <div class="stat"><span class="n">7</span><span class="t">よくある質問</span></div>
         </div>
       </header>
+
+      <UseCaseConclusion
+        lead="実写・写真風の画像を作る場合は、リアルな表現力・商用利用条件・透かしの有無を優先して確認します。人物・実在する場所・ブランドが含まれる場合は肖像権・商標権等の別途確認が必要です。本記事は法的助言ではありません。"
+        cards={[
+          {
+            label: '無料で試したい人',
+            body: 'Stable Diffusion（ローカル）や無料枠のあるツールから試すと始めやすい傾向があります。透かしの有無と生成回数の制限は事前に確認を推奨します。',
+            href: '/conditions/free/',
+            cta: '無料枠を比較する',
+          },
+          {
+            label: '商用前提で使う人',
+            body: '実写系画像の商用利用はプランや用途によって条件が異なります。人物・ブランド・商品が含まれる場合は肖像権・商標権の確認も別途必要です。',
+            href: '/conditions/commercial-use/',
+            cta: '商用条件を確認する',
+          },
+          {
+            label: '表現品質重視の人',
+            body: 'リアルな表現力はツールによって大きく異なります。複数ツールを比較しながら、用途に合ったものを選ぶことを推奨します。',
+            href: '/categories/image-generation/',
+            cta: 'AI画像生成ツール一覧を見る',
+          },
+        ]}
+      />
 
       <!-- Notice -->
       <div class="notice">

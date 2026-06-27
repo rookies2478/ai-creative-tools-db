@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UseCaseConclusion from '../../../components/UseCaseConclusion.astro';
 
 const faqs = [
   { q: 'YouTube ShortsにAI動画生成ツールを使ってもよいですか？', a: '各ツールの公式サイト・利用規約・商用利用条件をご確認ください。YouTubeのショートへの投稿に利用できるかどうかは、ツールの条件やYouTube側のポリシーによっても異なります。本記事は法的助言ではありません。' },
@@ -76,6 +77,30 @@ const faqJsonLd = JSON.stringify({
           <div class="stat"><span class="n">6</span><span class="t">よくある質問</span></div>
         </div>
       </header>
+
+      <UseCaseConclusion
+        lead="縦型・Shorts動画をAIで作る場合は、縦型フォーマット（9:16）への対応・商用利用条件・透かしの有無を優先して確認します。収益化を前提とする場合は、各ツールの最新の公式規約と各プラットフォームのポリシーを必ずご確認ください。本記事は法的助言ではありません。"
+        cards={[
+          {
+            label: '無料で試したい人',
+            body: 'CapCut AI・InVideo AIなど無料枠のある動画ツールから試すと始めやすい傾向があります。透かしの有無と商用利用条件は事前に確認を推奨します。',
+            href: '/conditions/free/',
+            cta: '無料枠を比較する',
+          },
+          {
+            label: '商用前提（収益化・案件）で使う人',
+            body: '収益化を前提とする場合、商用利用条件はプランや用途によって異なります。BGM・素材・人物表現の扱いも各ツールの最新の公式規約をご確認ください。',
+            href: '/conditions/commercial-use/',
+            cta: '商用条件を確認する',
+          },
+          {
+            label: '映像クオリティ重視の人',
+            body: 'AI動画生成ツールごとに得意なスタイル・出力品質が異なります。ツール一覧から縦型・Shorts用途に合ったツールを比較できます。',
+            href: '/categories/video-generation/',
+            cta: 'AI動画生成ツール一覧を見る',
+          },
+        ]}
+      />
 
       <!-- Notice -->
       <div class="notice">

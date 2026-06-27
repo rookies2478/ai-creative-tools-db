@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GuideFAQ from '../../../components/GuideFAQ.astro';
+import ComparisonFootnote from '../../../components/ComparisonFootnote.astro';
 import { getEntry } from 'astro:content';
 import { generatedImages } from '../../../data/generatedImages';
 
@@ -441,6 +442,7 @@ const articleJsonLd = JSON.stringify({
           <li>本記事は法的助言ではありません。最新情報は各公式サイトをご確認ください。</li>
         </ul>
       </div>
+      <ComparisonFootnote />
     </section>
 
     <!-- 同一プロンプト生成サンプル -->

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GuideFAQ from './GuideFAQ.astro';
+import ComparisonFootnote from './ComparisonFootnote.astro';
 
 export interface ConclusionCard {
   label: string;
@@ -249,6 +250,8 @@ function formatDate(iso: string): string {
         </div>
       )}
     </section>
+
+    <ComparisonFootnote />
 
     <!-- ===== 各ページ固有コンテンツ ===== -->
     <slot />

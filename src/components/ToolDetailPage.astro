@@ -390,7 +390,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
         <div class="tdp-faq reveal">
           {faqs.map((f) => (
             <div class="tdp-faqitem" aria-expanded="false">
-              <button class="tdp-faqq" type="button"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button>
+              <h3 class="tdp-faqh"><button class="tdp-faqq" type="button"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button></h3>
               <div class="tdp-faqa"><div class="tdp-faqa-in" set:html={f.a}></div></div>
             </div>
           ))}
@@ -622,6 +622,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
   /* ===== FAQ ===== */
   .tdp-faq{max-width:860px;}
   .tdp-faqitem{border-bottom:1px solid var(--line);}
+  .tdp-faqh{margin:0;padding:0;font-size:inherit;font-weight:inherit;line-height:inherit;}
   .tdp-faqitem:first-child{border-top:1px solid var(--line);}
   .tdp-faqq{width:100%;text-align:left;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:22px 6px;font-family:var(--f-jp);font-weight:700;font-size:15.5px;color:var(--ink);}
   .tdp-faqq .qm{font-family:var(--f-latin);color:var(--brand);font-size:16px;flex:none;}

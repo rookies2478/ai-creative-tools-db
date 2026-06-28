@@ -266,7 +266,10 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
         {commercial && <>
           <h3>商用利用について</h3>
           <p>{commercial.lead}</p>
-          <ul>{commercial.points.map((p) => (<li set:html={p}></li>))}</ul>
+          <ul>
+            {commercial.points.map((p) => (<li set:html={p}></li>))}
+            <li>クレジット表記・帰属義務の有無は、プラン・利用規約・生成コンテンツの内容によって異なる場合があります。最新の公式規約でご確認ください。</li>
+          </ul>
           <div class="tdp-quote"><b>免責事項：</b>{commercial.disclaimer}</div>
           {commercial.more ? <a class="tdp-inline-more" href={commercial.more.href}>{commercial.more.label}</a> : null}
         </>}

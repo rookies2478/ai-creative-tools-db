@@ -20,7 +20,7 @@ function triMark(val: boolean | 'partial' | 'unknown' | undefined): Mark {
   if (val === true) return '○';
   if (val === 'partial') return '△';
   if (val === false) return '×';
-  return '?';
+  return '－';
 }
 
 const tools: Tool[] = entries.map((e) => {
@@ -37,7 +37,7 @@ const tools: Tool[] = entries.map((e) => {
     ja:         mapJa(ui, prompt),
     ui:         triMark(ui),
     prompt:     triMark(prompt),
-    docs:       docs === true ? '○' : docs === false ? '×' : '?',
+    docs:       docs === true ? '○' : docs === false ? '×' : '－',
     free:       (free === true || free === 'limited') ? 'あり' : free === false ? 'なし' : '要確認',
     commercial: cu === 'ok' ? '案内あり' : cu === 'no' ? '不可' : '要確認',
     wm:         wm === 'no' ? 'なし' : wm === 'yes' ? 'あり' : '要確認',

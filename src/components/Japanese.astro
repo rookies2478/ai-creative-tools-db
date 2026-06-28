@@ -17,7 +17,7 @@
 import ComparisonLegend from './ComparisonLegend.astro';
 import ComparisonFootnote from './ComparisonFootnote.astro';
 export type JaStatus = 'ok' | 'partial' | 'unknown';   // 対応 / 一部対応 / 要確認
-export type Mark = '○' | '△' | '×' | '?';              // 詳細マトリクスの評価
+export type Mark = '○' | '△' | '×' | '－';              // 詳細マトリクスの評価
 
 export interface Tool {
   name: string;
@@ -82,23 +82,23 @@ const DEFAULT_TOOLS: Tool[] = [
   { name:'CapCut AI',        slug:'capcut-ai',                initial:'C', ja:'ok',      ui:'○', prompt:'○', docs:'○', free:'あり',   commercial:'要確認', wm:'あり' },
   { name:'Adobe Firefly',    slug:'adobe-firefly',            initial:'A', ja:'ok',      ui:'○', prompt:'○', docs:'○', free:'要確認', commercial:'要確認', wm:'要確認' },
   { name:'DALL·E',           slug:'dalle',                    initial:'D', ja:'ok',      ui:'○', prompt:'△', docs:'×', free:'要確認', commercial:'案内あり', wm:'要確認' },
-  { name:'DreamStudio',      slug:'dreamstudio',              initial:'D', ja:'unknown', ui:'×', prompt:'○', docs:'?', free:'なし',   commercial:'要確認', wm:'要確認' },
+  { name:'DreamStudio',      slug:'dreamstudio',              initial:'D', ja:'unknown', ui:'×', prompt:'○', docs:'－', free:'なし',   commercial:'要確認', wm:'要確認' },
   { name:'Fotor AI',         slug:'fotor-ai',                 initial:'F', ja:'ok',      ui:'○', prompt:'○', docs:'○', free:'あり',   commercial:'案内あり', wm:'あり' },
   { name:'Gemini画像生成',    slug:'gemini-image-generation',  initial:'G', ja:'ok',      ui:'○', prompt:'○', docs:'○', free:'あり',   commercial:'要確認', wm:'あり' },
   { name:'Haiper',           slug:'haiper',                   initial:'H', ja:'unknown', ui:'×', prompt:'○', docs:'×', free:'要確認', commercial:'要確認', wm:'あり' },
-  { name:'Leonardo AI',      slug:'leonardo-ai',              initial:'L', ja:'unknown', ui:'?', prompt:'△', docs:'×', free:'要確認', commercial:'要確認', wm:'要確認' },
+  { name:'Leonardo AI',      slug:'leonardo-ai',              initial:'L', ja:'unknown', ui:'－', prompt:'△', docs:'×', free:'要確認', commercial:'要確認', wm:'要確認' },
   { name:'Kling AI',         slug:'kling-ai',                 initial:'K', ja:'unknown', ui:'△', prompt:'○', docs:'×', free:'要確認', commercial:'要確認', wm:'要確認' },
   { name:'Microsoft Designer', slug:'microsoft-designer',     initial:'M', ja:'ok',      ui:'○', prompt:'○', docs:'×', free:'あり',   commercial:'要確認', wm:'要確認' },
   { name:'Luma AI',          slug:'luma-ai',                  initial:'L', ja:'unknown', ui:'×', prompt:'○', docs:'×', free:'あり',   commercial:'要確認', wm:'あり' },
-  { name:'NightCafe',        slug:'nightcafe',                initial:'N', ja:'unknown', ui:'×', prompt:'○', docs:'?', free:'あり',   commercial:'要確認', wm:'なし' },
+  { name:'NightCafe',        slug:'nightcafe',                initial:'N', ja:'unknown', ui:'×', prompt:'○', docs:'－', free:'あり',   commercial:'要確認', wm:'なし' },
   { name:'Midjourney',       slug:'midjourney',               initial:'M', ja:'unknown', ui:'×', prompt:'△', docs:'×', free:'なし',   commercial:'要確認', wm:'なし' },
   { name:'Pika',             slug:'pika',                     initial:'P', ja:'unknown', ui:'△', prompt:'△', docs:'×', free:'要確認', commercial:'要確認', wm:'要確認' },
-  { name:'PixVerse',         slug:'pixverse',                 initial:'P', ja:'ok',      ui:'○', prompt:'?', docs:'×', free:'要確認', commercial:'要確認', wm:'要確認' },
+  { name:'PixVerse',         slug:'pixverse',                 initial:'P', ja:'ok',      ui:'○', prompt:'－', docs:'×', free:'要確認', commercial:'要確認', wm:'要確認' },
   { name:'InVideo AI',       slug:'invideo-ai',               initial:'I', ja:'unknown', ui:'×', prompt:'△', docs:'×', free:'あり',   commercial:'要確認', wm:'要確認' },
   { name:'Runway',           slug:'runway',                   initial:'R', ja:'unknown', ui:'×', prompt:'△', docs:'×', free:'要確認', commercial:'要確認', wm:'要確認' },
   { name:'SeaArt AI',        slug:'seaart-ai',                initial:'S', ja:'ok',      ui:'○', prompt:'○', docs:'○', free:'あり',   commercial:'要確認', wm:'要確認' },
   { name:'Stable Diffusion', slug:'stable-diffusion',         initial:'S', ja:'unknown', ui:'△', prompt:'△', docs:'×', free:'あり',   commercial:'要確認', wm:'要確認' },
-  { name:'Tensor.Art',       slug:'tensor-art',               initial:'T', ja:'unknown', ui:'×', prompt:'○', docs:'?', free:'あり',   commercial:'要確認', wm:'要確認' },
+  { name:'Tensor.Art',       slug:'tensor-art',               initial:'T', ja:'unknown', ui:'×', prompt:'○', docs:'－', free:'あり',   commercial:'要確認', wm:'要確認' },
 ];
 
 const DEFAULT_FAQS: Faq[] = [
@@ -153,7 +153,7 @@ function matrixCls(m: Mark) {
   if (m === '○') return 'yes';
   if (m === '△') return 'cond';
   if (m === '×') return 'no';
-  return 'q';
+  return 'na';
 }
 const ini = (t: Tool) => t.initial ?? t.name.charAt(0);
 const presentStatuses = Array.from(new Set(tools.map((t) => t.ja)));
@@ -301,7 +301,7 @@ const filterChips: { st: JaStatus | 'all'; label: string }[] = [
       <span class="li"><span class="mk yes">○</span>対応</span>
       <span class="li"><span class="mk cond">△</span>一部対応</span>
       <span class="li"><span class="mk no">×</span>非対応</span>
-      <span class="li"><span class="mk q">?</span>不明</span>
+      <span class="li"><span class="mk na">－</span>不明</span>
       <span class="ja-legend-sp">日本語対応状況はアップデートにより変わる場合があります</span>
     </div>
   </section>
@@ -457,7 +457,7 @@ const filterChips: { st: JaStatus | 'all'; label: string }[] = [
   .ja-x .mk.yes{background:var(--ok-tint);color:var(--ok);}
   .ja-x .mk.cond{background:var(--warn-tint);color:var(--warn);}
   .ja-x .mk.no{background:var(--na-tint);color:var(--na);}
-  .ja-x .mk.q{background:var(--na-tint);color:var(--faint);}
+  .ja-x .mk.na{background:var(--na-tint);color:var(--faint);}
   .ja-x table.ja-tbl td .st{margin:0 auto;}
   .ja-x .ja-detail{font-family:var(--f-jp);font-weight:700;font-size:12.5px;color:var(--brand-ink);white-space:nowrap;}
   .ja-x .ja-detail:hover{text-decoration:underline;text-underline-offset:3px;}

@@ -324,8 +324,8 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
     </div>
 
     <div class="tdp-actions">
-      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel="noopener noreferrer">{primaryCta.label} <span class="ext">↗</span></a>
-      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel="noopener noreferrer">{secondaryCta.label} <span class="ext">↗</span></a> : null}
+      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel="nofollow noopener noreferrer">{primaryCta.label} <span class="ext">↗</span></a>
+      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel="nofollow noopener noreferrer">{secondaryCta.label} <span class="ext">↗</span></a> : null}
     </div>
 
     <div class="tdp-caution">
@@ -408,7 +408,10 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
 
       <h3>商用利用について</h3>
       <p>{commercial.lead}</p>
-      <ul>{commercial.points.map((p) => (<li set:html={p}></li>))}</ul>
+      <ul>
+        {commercial.points.map((p) => (<li set:html={p}></li>))}
+        <li>クレジット表記・帰属義務の有無は、プラン・利用規約・生成コンテンツの内容によって異なる場合があります。最新の公式規約でご確認ください。</li>
+      </ul>
       <div class="tdp-quote"><b>免責事項：</b>{commercial.disclaimer}</div>
       {commercial.more ? <a class="tdp-inline-more" href={commercial.more.href}>{commercial.more.label}</a> : null}
 
@@ -493,17 +496,30 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
   </section>
 
   <!-- ===== FAQ ===== -->
-  <section class="tdp-sec">
-    <div class="tdp-sechead reveal"><span class="tdp-eyebrow">FAQ</span><h2>よくある質問</h2><p>無料枠・商用利用・用途・日本語対応・透かし・対応環境について、確認のポイントをお答えします。</p></div>
-    <div class="tdp-faq reveal">
-      {faqs.map((f) => (
-        <div class="tdp-faqitem" aria-expanded="false">
-          <button class="tdp-faqq" type="button"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button>
-          <div class="tdp-faqa"><div class="tdp-faqa-in" set:html={f.a}></div></div>
+  {faqs.length > 0 && (
+    <>
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map((f) => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": { "@type": "Answer", "text": f.a },
+        })),
+      })} />
+      <section class="tdp-sec">
+        <div class="tdp-sechead reveal"><span class="tdp-eyebrow">FAQ</span><h2>よくある質問</h2><p>無料枠・商用利用・用途・日本語対応・透かし・対応環境について、確認のポイントをお答えします。</p></div>
+        <div class="tdp-faq reveal">
+          {faqs.map((f) => (
+            <div class="tdp-faqitem" aria-expanded="false">
+              <h3 class="tdp-faqh"><button class="tdp-faqq" type="button"><span class="qm">Q</span>{f.q}<span class="ind"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button></h3>
+              <div class="tdp-faqa"><div class="tdp-faqa-in" set:html={f.a}></div></div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  </section>
+      </section>
+    </>
+  )}
 
   <!-- ===== 関連ツール ===== -->
   <section class="tdp-sec band">
@@ -729,6 +745,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
   /* ===== FAQ ===== */
   .tdp-faq{max-width:860px;}
   .tdp-faqitem{border-bottom:1px solid var(--line);}
+  .tdp-faqh{margin:0;padding:0;font-size:inherit;font-weight:inherit;line-height:inherit;}
   .tdp-faqitem:first-child{border-top:1px solid var(--line);}
   .tdp-faqq{width:100%;text-align:left;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:22px 6px;font-family:var(--f-jp);font-weight:700;font-size:15.5px;color:var(--ink);}
   .tdp-faqq .qm{font-family:var(--f-latin);color:var(--brand);font-size:16px;flex:none;}

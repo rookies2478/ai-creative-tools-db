@@ -26,7 +26,7 @@ export interface GeneratedImage {
 export const generatedImages: GeneratedImage[] = [
   {
     file: '/images/generated/tools/adobe-firefly-tool-output-home-01.webp',
-    alt: 'Adobe Fireflyで作成したトップページ用参考作例サンプル。公式出力・代表結果ではありません。',
+    alt: 'Adobe Fireflyで作成したトップページ用参考作例サンプル。ビジュアル傾向：プロンプト非公開のため未記載。公式出力・代表結果ではありません。',
     caption: '管理者がAdobe Fireflyで作成したトップページ用の参考作例サンプルです。image-tool-benchmark-v1 の同一条件比較用画像ではありません。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。公式出力・代表結果を示すものではありません。',
     sampleType: 'tool-output',
     comparisonEligible: false,
@@ -46,7 +46,7 @@ export const generatedImages: GeneratedImage[] = [
   },
   {
     file: '/images/generated/tools/leonardo-ai-tool-output-home-01.webp',
-    alt: 'Leonardo AIで作成したトップページ用参考作例サンプル。公式出力・代表結果ではありません。',
+    alt: 'Leonardo AIで作成したトップページ用参考作例サンプル。ビジュアル傾向：プロンプト非公開のため未記載。公式出力・代表結果ではありません。',
     caption: '管理者がLeonardo AIで作成したトップページ用の参考作例サンプルです。image-tool-benchmark-v1 の同一条件比較用画像ではありません。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。公式出力・代表結果を示すものではありません。',
     sampleType: 'tool-output',
     comparisonEligible: false,
@@ -66,7 +66,7 @@ export const generatedImages: GeneratedImage[] = [
   },
   {
     file: '/images/generated/tools/stable-diffusion-tool-output-home-01.webp',
-    alt: 'Stable Diffusionで作成したトップページ用参考作例サンプル。公式出力・代表結果ではありません。',
+    alt: 'Stable Diffusionで作成したトップページ用参考作例サンプル。ビジュアル傾向：プロンプト非公開のため未記載。公式出力・代表結果ではありません。',
     caption: '管理者がStable Diffusionで作成したトップページ用の参考作例サンプルです。image-tool-benchmark-v1 の同一条件比較用画像ではありません。生成結果はプロンプト・設定・モデル・タイミングによって変わる場合があります。公式出力・代表結果を示すものではありません。',
     sampleType: 'tool-output',
     comparisonEligible: false,

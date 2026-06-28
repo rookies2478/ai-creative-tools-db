@@ -2,6 +2,8 @@
 import type { GeneratedImage } from '../data/generatedImages';
 import UsagePolicySummary from './UsagePolicySummary.astro';
 import type { UsagePolicyData } from './UsagePolicySummary.astro';
+import VerifiedSummary from './VerifiedSummary.astro';
+import type { VerifiedSummaryData } from './VerifiedSummary.astro';
 /* =========================================================
    AdobeFireflyTool.astro
    ツール詳細ページ：/tools/adobe-firefly/ の記事本文
@@ -89,6 +91,7 @@ export interface Props {
   usagePolicy?: UsagePolicyData;
   watermarkRaw?: string;
   watermarkConditionRaw?: string;
+  verifiedSummary?: VerifiedSummaryData;
 }
 
 const {
@@ -291,6 +294,7 @@ const {
   usagePolicy,
   watermarkRaw,
   watermarkConditionRaw,
+  verifiedSummary,
 } = Astro.props as Props;
 
 const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
@@ -345,6 +349,8 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
       </figure>
     </div>
   )}
+
+  {verifiedSummary && <VerifiedSummary data={verifiedSummary} />}
 
   <!-- ===== 基本情報 ===== -->
   <section class="tdp-sec">

@@ -70,6 +70,15 @@ const jsonLd = JSON.stringify([
       usagePolicy={d?.usagePolicy}
       watermarkRaw={d?.watermark}
       watermarkConditionRaw={d?.watermarkCondition}
+      verifiedSummary={{
+        generatedAt: '2026-06-14',
+        model: 'Adobe Firefly',
+        generationType: 'テキスト→画像',
+        durationOrFormat: 'WebP',
+        prompt: 'A clean modern creative workspace for AI image generation, a stylish desk with a large monitor showing an abstract colorful digital artwork, soft natural light, minimal interior, high detail, balanced composition, professional blog eyecatch style, no text, no logo, no brand, no people',
+        negativePrompt: 'text, letters, words, logo, watermark, trademark, brand mark, celebrity, real person, existing character, distorted hands, face, low quality, blurry, extra objects, messy layout, medical, legal, financial, violent, sexual',
+        checkedItems: ['出力サンプル', 'プロンプト', 'モデル名', '生成日', '透かし（C2PAメタデータ）', '商用利用条件'],
+      }}
     />
   </div>
 

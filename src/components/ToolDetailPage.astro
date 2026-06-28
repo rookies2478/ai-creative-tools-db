@@ -4,6 +4,8 @@ import type { GeneratedVideo } from '../data/generatedVideos';
 import GeneratedVideoSample from './GeneratedVideoSample.astro';
 import UsagePolicySummary from './UsagePolicySummary.astro';
 import type { UsagePolicyData, LabelOverrides } from './UsagePolicySummary.astro';
+import VerifiedSummary from './VerifiedSummary.astro';
+import type { VerifiedSummaryData } from './VerifiedSummary.astro';
 /*
   ToolDetailPage.astro
   汎用ツール詳細ページコンポーネント（AdobeFireflyTool.astroと同一デザインシステム）
@@ -82,6 +84,7 @@ export interface Props {
   toolsBase?: string;
   sampleImage?: GeneratedImage | null;
   sampleVideo?: GeneratedVideo | null;
+  verifiedSummary?: VerifiedSummaryData;
 }
 
 const {
@@ -131,6 +134,7 @@ const {
   toolsBase = '/tools/',
   sampleImage = null,
   sampleVideo = null,
+  verifiedSummary,
 } = Astro.props as Props;
 
 const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
@@ -195,6 +199,8 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
       <GeneratedVideoSample video={sampleVideo} />
     </div>
   )}
+
+  {verifiedSummary && <VerifiedSummary data={verifiedSummary} />}
 
   <!-- ===== 基本情報 ===== -->
   <section class="tdp-sec">

@@ -1,0 +1,254 @@
+---
+export interface VerifiedSummaryData {
+  generatedAt: string;
+  model: string;
+  generationType: string;
+  durationOrFormat?: string;
+  prompt: string;
+  negativePrompt?: string;
+  checkedItems?: string[];
+}
+
+interface Props {
+  data: VerifiedSummaryData;
+}
+
+const { data } = Astro.props as Props;
+---
+
+<section class="vs-wrap" aria-label="実機検証サマリー">
+  <div class="vs-header">
+    <svg class="vs-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M9 12l2 2 4-4"/>
+      <circle cx="12" cy="12" r="9"/>
+    </svg>
+    <span class="vs-label">実際に生成して検証しました</span>
+  </div>
+  <p class="vs-desc">このページでは、対象ツールを実際に使用して{data.generationType === 'テキスト→画像' ? '画像' : '動画'}を生成し、生成条件・出力サンプル・無料枠・透かし・商用利用時の注意点を整理しています。</p>
+
+  <div class="vs-grid">
+    <div class="vs-item">
+      <span class="vs-key">検証日</span>
+      <span class="vs-val mono">{data.generatedAt}</span>
+    </div>
+    <div class="vs-item">
+      <span class="vs-key">使用モデル</span>
+      <span class="vs-val">{data.model}</span>
+    </div>
+    <div class="vs-item">
+      <span class="vs-key">生成方式</span>
+      <span class="vs-val">{data.generationType}</span>
+    </div>
+    {data.durationOrFormat && (
+      <div class="vs-item">
+        <span class="vs-key">生成尺 / 形式</span>
+        <span class="vs-val mono">{data.durationOrFormat}</span>
+      </div>
+    )}
+  </div>
+
+  <details class="vs-prompt-detail">
+    <summary class="vs-prompt-toggle">使用プロンプトを表示</summary>
+    <div class="vs-prompt-body">
+      <div class="vs-prompt-block">
+        <span class="vs-pk">プロンプト</span>
+        <span class="vs-pv">{data.prompt}</span>
+      </div>
+      {data.negativePrompt && (
+        <div class="vs-prompt-block">
+          <span class="vs-pk">ネガティブプロンプト</span>
+          <span class="vs-pv">{data.negativePrompt}</span>
+        </div>
+      )}
+    </div>
+  </details>
+
+  {data.checkedItems && data.checkedItems.length > 0 && (
+    <div class="vs-checked">
+      <span class="vs-ck-label">確認項目：</span>
+      <ul class="vs-ck-list">
+        {data.checkedItems.map((item) => (
+          <li class="vs-ck-item">{item}</li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  <p class="vs-note">詳しい生成サンプルはページ内の実例セクションでご確認いただけます。</p>
+</section>
+
+<style>
+.vs-wrap {
+  background: var(--ok-tint, #E6F3EC);
+  border: 1px solid color-mix(in srgb, var(--ok, #1E8A4C) 20%, transparent);
+  border-radius: var(--radius, 14px);
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.vs-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.vs-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--ok, #1E8A4C);
+  flex-shrink: 0;
+}
+
+.vs-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ok, #1E8A4C);
+  letter-spacing: 0.01em;
+}
+
+.vs-desc {
+  font-size: 13.5px;
+  color: var(--ink-soft, #3A3E47);
+  line-height: 1.65;
+  margin: 0 0 16px;
+}
+
+.vs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px 16px;
+  margin-bottom: 14px;
+}
+
+.vs-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vs-key {
+  font-size: 11px;
+  color: var(--muted, #6A7180);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.vs-val {
+  font-size: 13px;
+  color: var(--ink, #16181D);
+  font-weight: 500;
+}
+
+.vs-val.mono {
+  font-family: var(--f-mono);
+  font-size: 12px;
+}
+
+.vs-prompt-detail {
+  border-top: 1px solid color-mix(in srgb, var(--ok, #1E8A4C) 15%, transparent);
+  padding-top: 12px;
+  margin-bottom: 12px;
+}
+
+.vs-prompt-toggle {
+  font-size: 12.5px;
+  color: var(--ok, #1E8A4C);
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vs-prompt-toggle::before {
+  content: '▶';
+  font-size: 9px;
+  transition: transform 0.2s;
+}
+
+details[open] .vs-prompt-toggle::before {
+  transform: rotate(90deg);
+}
+
+.vs-prompt-body {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vs-prompt-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vs-pk {
+  font-size: 11px;
+  color: var(--muted, #6A7180);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.vs-pv {
+  font-size: 12px;
+  color: var(--ink-soft, #3A3E47);
+  font-family: var(--f-mono);
+  line-height: 1.6;
+  background: color-mix(in srgb, var(--ok, #1E8A4C) 8%, transparent);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm, 10px);
+  word-break: break-word;
+}
+
+.vs-checked {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.vs-ck-label {
+  font-size: 12px;
+  color: var(--muted, #6A7180);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.vs-ck-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.vs-ck-item {
+  font-size: 11.5px;
+  background: color-mix(in srgb, var(--ok, #1E8A4C) 12%, transparent);
+  color: var(--ok, #1E8A4C);
+  border-radius: 100px;
+  padding: 2px 10px;
+  font-weight: 500;
+}
+
+.vs-note {
+  font-size: 12px;
+  color: var(--muted, #6A7180);
+  margin: 0;
+  border-top: 1px solid color-mix(in srgb, var(--ok, #1E8A4C) 15%, transparent);
+  padding-top: 10px;
+}
+
+@media (max-width: 600px) {
+  .vs-wrap { padding: 16px; }
+  .vs-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>

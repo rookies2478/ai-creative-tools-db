@@ -148,7 +148,7 @@ function mark(field: 'free' | 'commercial' | 'wm', val: string) {
   else if (field === 'wm') { if (val === 'なし') { cls = 'yes'; ch = '○'; } else if (val === 'あり') { cls = 'no'; ch = '×'; } }
   return { cls, ch };
 }
-/* 詳細マトリクスの ○/△/×/? → クラス */
+/* 詳細マトリクスの ○/△/×/－ → クラス */
 function matrixCls(m: Mark) {
   if (m === '○') return 'yes';
   if (m === '△') return 'cond';
@@ -301,7 +301,7 @@ const filterChips: { st: JaStatus | 'all'; label: string }[] = [
       <span class="li"><span class="mk yes">○</span>対応</span>
       <span class="li"><span class="mk cond">△</span>一部対応</span>
       <span class="li"><span class="mk no">×</span>非対応</span>
-      <span class="li"><span class="mk na">－</span>不明</span>
+      <span class="li"><span class="mk na">－</span>未確認</span>
       <span class="ja-legend-sp">日本語対応状況はアップデートにより変わる場合があります</span>
     </div>
   </section>

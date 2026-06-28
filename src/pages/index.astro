@@ -117,6 +117,8 @@ const jsonLd = JSON.stringify([
 >
 
   <HomeHeroAnimated
+    titleLines={['AI画像・動画生成ツールを、', '実際の生成サンプル付きで比較']}
+    lead={'プロンプト・モデル名・生成日・透かし・商用利用条件まで記録した、<b>実機検証型</b>のAIクリエイティブツールDBです。'}
     videoHref="/categories/video-generation/"
     imageHref="/categories/image-generation/"
   />
@@ -157,6 +159,56 @@ const jsonLd = JSON.stringify([
     </div>
   </section>
 
+  <!-- ===== このサイトで確認できること ===== -->
+  <section class="home-verify-block">
+    <div class="hvb-inner">
+      <div class="hvb-head">
+        <span class="hvb-kicker">WHAT YOU CAN CHECK</span>
+        <h2 class="hvb-title">このサイトで確認できること</h2>
+        <p class="hvb-sub">公式情報だけでは分かりにくい「実際の出力」「無料枠の制限」「商用利用時の注意点」を、ツール別に記録・整理しています。</p>
+      </div>
+      <ul class="hvb-list" aria-label="確認できる情報の一覧">
+        <li class="hvb-item">
+          <span class="hvb-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </span>
+          <div>
+            <span class="hvb-item-title">実際に生成した画像・動画サンプル</span>
+            <span class="hvb-item-desc">公式のプロモーション素材ではなく、実際に生成した出力を掲載しています。</span>
+          </div>
+        </li>
+        <li class="hvb-item">
+          <span class="hvb-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 3l2.3 6.2L21.5 11l-6.2 2.3L13 19.5 10.7 13.3 4.5 11l6.2-2.3z"/></svg>
+          </span>
+          <div>
+            <span class="hvb-item-title">使用プロンプト・ネガティブプロンプト・モデル名</span>
+            <span class="hvb-item-desc">どの条件で生成したかを可能な範囲で記録。再現性の参考として確認できます。</span>
+          </div>
+        </li>
+        <li class="hvb-item">
+          <span class="hvb-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </span>
+          <div>
+            <span class="hvb-item-title">生成日・検証バージョン</span>
+            <span class="hvb-item-desc">AIツールは頻繁に更新されます。情報の鮮度が分かるよう検証日を明記しています。</span>
+          </div>
+        </li>
+        <li class="hvb-item">
+          <span class="hvb-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+          </span>
+          <div>
+            <span class="hvb-item-title">無料枠・透かし・商用利用・日本語対応</span>
+            <span class="hvb-item-desc">副業・SNS運用・仕事利用の前に確認すべき条件を、ツールごとに整理しています。</span>
+          </div>
+        </li>
+      </ul>
+      <p class="hvb-policy">掲載順位は広告・アフィリエイトの有無ではなく、比較軸・用途・確認情報に基づいて整理しています。</p>
+    </div>
+  </section>
+
   <HomeCriteriaStrip />
   <HomePurposeCards />
   <HomePillarCards />
@@ -169,6 +221,110 @@ const jsonLd = JSON.stringify([
   <HomeCtaBanner />
 
 </BaseLayout>
+
+<style>
+/* ── このサイトで確認できること ───────────────────── */
+.home-verify-block {
+  background: #F4F4EE;
+  border-top: 1px solid #E3E2D9;
+  border-bottom: 1px solid #E3E2D9;
+  padding: clamp(40px, 6vw, 72px) 0;
+}
+.hvb-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 40px);
+}
+.hvb-head {
+  margin-bottom: 36px;
+}
+.hvb-kicker {
+  display: inline-block;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #6A7180;
+  margin-bottom: 12px;
+}
+.hvb-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 2px;
+  background: #4B3FE4;
+  vertical-align: middle;
+  margin-right: 9px;
+}
+.hvb-title {
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 900;
+  color: #16181D;
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+.hvb-sub {
+  font-size: 15px;
+  line-height: 1.85;
+  color: #3A3E47;
+  max-width: 660px;
+  margin: 0;
+}
+.hvb-list {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.hvb-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid #E3E2D9;
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.hvb-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: #ECEBFB;
+  color: #2E25A6;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.hvb-icon svg { width: 18px; height: 18px; }
+.hvb-item-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #16181D;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+.hvb-item-desc {
+  display: block;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #6A7180;
+}
+.hvb-policy {
+  font-size: 13px;
+  color: #6A7180;
+  line-height: 1.7;
+  border-left: 3px solid #4B3FE4;
+  padding-left: 14px;
+  margin: 0;
+}
+@media (max-width: 640px) {
+  .hvb-list { grid-template-columns: 1fr; }
+}
+</style>
 
 <script>
 // Scroll reveal — IntersectionObserver + load + rAF + 8s failsafe

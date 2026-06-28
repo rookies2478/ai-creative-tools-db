@@ -23,6 +23,8 @@ export interface FvTool {
 export interface Props {
   /** 見出し（<br> 区切り用に2行で渡せます） */
   titleLines?: string[];
+  /** ファーストビューのリード文（省略時はデフォルト） */
+  lead?: string;
   /** ボタンのリンク先（既存サイトのURLに合わせて） */
   videoHref?: string;
   imageHref?: string;
@@ -40,6 +42,7 @@ export interface Props {
 
 const {
   titleLines = ['AIクリエイティブ', 'ツール比較ナビ'],
+  lead,
   videoHref = '/categories/video-generation/',
   imageHref = '/categories/image-generation/',
   videoLabel = 'AI動画生成ツールを比較',
@@ -63,9 +66,7 @@ const {
   <div class="left">
     <span class="kicker">AI CREATIVE TOOL NAVI</span>
     <h1>{titleLines.map((l, i) => (<>{i > 0 && <br />}{l}</>))}</h1>
-    <p class="lead">
-      AI動画生成・AI画像生成を中心に、<b>商用利用</b>・<b>著作権</b>・<b>透かし</b>・<b>無料枠</b>・<b>日本語対応</b>の5つの視点で比較。
-    </p>
+    <p class="lead" set:html={lead ?? 'AI動画生成・AI画像生成を中心に、<b>商用利用</b>・<b>著作権</b>・<b>透かし</b>・<b>無料枠</b>・<b>日本語対応</b>の5つの視点で比較。'} />
     <div class="cta">
       <a class="btn btn-primary" href={videoHref}>{videoLabel} <span class="arr">→</span></a>
       <a class="btn btn-ghost" href={imageHref}>{imageLabel}</a>

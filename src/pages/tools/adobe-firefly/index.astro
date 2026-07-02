@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import AdobeFireflyTool from '../../../components/AdobeFireflyTool.astro';
 import { generatedImages } from '../../../data/generatedImages';
+import { buildNextReads, buildConditionTags } from '../../../data/toolRelatedLinks';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'adobe-firefly');
@@ -70,6 +71,12 @@ const jsonLd = JSON.stringify([
       usagePolicy={d?.usagePolicy}
       watermarkRaw={d?.watermark}
       watermarkConditionRaw={d?.watermarkCondition}
+      nextReads={buildNextReads('adobe-firefly')}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        ...buildConditionTags('adobe-firefly'),
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
       verifiedSummary={{
         generatedAt: '2026-06-14',
         model: 'Adobe Firefly',

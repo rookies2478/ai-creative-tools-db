@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
 import { generatedImages } from '../../../data/generatedImages';
+import { buildNextReads, buildConditionTags } from '../../../data/toolRelatedLinks';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'midjourney');
@@ -255,21 +256,10 @@ const jsonLd = JSON.stringify([
         { name: 'Leonardo AI', slug: 'leonardo-ai', initial: 'L', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料枠：限定' }, { s: 'na', label: '日本語UI：要確認' }], platforms: ['Web', 'API'], official: 'https://leonardo.ai' },
         { name: 'DALL·E', slug: 'dalle', initial: 'D', cat: '画像生成', badges: [{ s: 'ok', label: '商用：案内あり' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web', 'API'], official: 'https://openai.com/dall-e-3' },
       ]}
-      nextReads={[
-        { href: '/comparisons/midjourney-vs-leonardo-ai/', title: 'Midjourney と Leonardo AI を比較', desc: 'アート調ビジュアルかゲーム・イラスト特化かで選び分け' },
-        { href: '/comparisons/midjourney-vs-adobe-firefly/', title: 'Midjourney と Adobe Firefly を比較', desc: 'アート調かデザイン制作か、用途で選び分け' },
-        { href: '/comparisons/dalle-vs-midjourney/', title: 'DALL·E と Midjourney を比較', desc: 'プロンプト忠実度とアート表現の違い' },
-        { href: '/comparisons/stable-diffusion-vs-midjourney/', title: 'Stable Diffusion と Midjourney を比較', desc: 'ローカル実行かクラウドかの選び分け' },
-        { href: '/categories/image-generation/', title: 'AI画像生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
-        { href: '/comparisons/ai-image-video-tools/', title: '全ツール比較表で見る', desc: '商用利用・無料枠・日本語対応・透かしを横並び' },
-      ]}
+      nextReads={buildNextReads('midjourney')}
       conditions={[
         { label: 'ツール一覧', href: '/tools/' },
-        { label: '無料で使えるAIツール', href: '/conditions/free/' },
-        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
-        { label: '日本語対応ツール', href: '/conditions/japanese/' },
-        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
-        { label: 'AI画像生成ツール一覧', href: '/categories/image-generation/' },
+        ...buildConditionTags('midjourney'),
         { label: '全ツール比較表', href: '/comparisons/' },
       ]}
     />

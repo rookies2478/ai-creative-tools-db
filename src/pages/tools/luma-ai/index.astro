@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
 import { generatedVideos } from '../../../data/generatedVideos';
+import { buildNextReads, buildConditionTags } from '../../../data/toolRelatedLinks';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'luma-ai');
@@ -249,23 +250,10 @@ const jsonLd = JSON.stringify([
         { name: 'Kling AI', slug: 'kling-ai', initial: 'K', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料のみ' }, { s: 'cond', label: '無料：1日66cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://klingai.com' },
         { name: 'Pika', slug: 'pika', initial: 'P', cat: '動画生成', badges: [{ s: 'cond', label: '商用：有料で可' }, { s: 'cond', label: '無料：月80cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://pika.art' },
       ]}
-      nextReads={[
-        { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
-        { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
-        { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
-        { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
-        { href: '/conditions/free/', title: '無料で使えるAIツール一覧', desc: '無料枠あり・無料プランで試せるAIツール' },
-        { href: '/conditions/japanese/', title: '日本語対応AIツール一覧', desc: '日本語UI・プロンプト対応のAIツール' },
-        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
-        { href: '/guides/video-generation-credit-cost-comparison/', title: 'AI動画生成 クレジット・料金比較', desc: '主要ツールのクレジット消費量・コストを比較' },
-      ]}
+      nextReads={buildNextReads('luma-ai')}
       conditions={[
         { label: 'ツール一覧', href: '/tools/' },
-        { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
-        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
-        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
-        { label: '無料で使えるAIツール', href: '/conditions/free/' },
-        { label: '日本語対応AIツール', href: '/conditions/japanese/' },
+        ...buildConditionTags('luma-ai'),
         { label: '全ツール比較表', href: '/comparisons/' },
       ]}
       sampleVideo={lumaSampleVideo}

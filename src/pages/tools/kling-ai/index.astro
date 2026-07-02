@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
 import { generatedVideos } from '../../../data/generatedVideos';
+import { buildNextReads, buildConditionTags } from '../../../data/toolRelatedLinks';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'kling-ai');
@@ -249,20 +250,10 @@ const jsonLd = JSON.stringify([
         { name: 'Luma AI', slug: 'luma-ai', initial: 'L', cat: '動画生成', badges: [{ s: 'paid', label: '商用：Plus以上' }, { s: 'cond', label: '無料：限定' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://lumalabs.ai/' },
         { name: 'Pika', slug: 'pika', initial: 'P', cat: '動画生成', badges: [{ s: 'cond', label: '商用：有料で可' }, { s: 'cond', label: '無料：月80cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://pika.art' },
       ]}
-      nextReads={[
-        { href: '/comparisons/runway-vs-kling-ai/', title: 'Runway と Kling AI を比較', desc: '映像制作向け多機能かコスト重視かで選び分け' },
-        { href: '/comparisons/runway-vs-pika/', title: 'Runway と Pika を比較', desc: 'プロ向け多機能か手軽な操作性かで選び分け' },
-        { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要ツールを商用利用・無料枠などで比較' },
-        { href: '/comparisons/', title: '比較ページ一覧', desc: 'ツール間の詳細な比較記事' },
-        { href: '/conditions/commercial-use/', title: '商用利用条件を確認', desc: '商用利用できるAIツールの一覧' },
-        { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
-        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
-      ]}
+      nextReads={buildNextReads('kling-ai')}
       conditions={[
         { label: 'ツール一覧', href: '/tools/' },
-        { label: 'AI動画生成ツール一覧', href: '/categories/video-generation/' },
-        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
-        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        ...buildConditionTags('kling-ai'),
         { label: '全ツール比較表', href: '/comparisons/' },
       ]}
       sampleVideo={klingAiSampleVideo}

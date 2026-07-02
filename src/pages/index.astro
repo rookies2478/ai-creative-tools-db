@@ -98,21 +98,12 @@ const cmpVideoTools: CmpTool[] = videoTools.map(toCmpTool);
 const cmpImageTools: CmpTool[] = imageTools.map(toCmpTool);
 // --- ここまで ---
 
-const jsonLd = JSON.stringify([
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "AIクリエイティブナビ",
-    "url": "https://aicreative-db.com/"
-  }
-]);
 ---
 
 <BaseLayout
   title="AIクリエイティブナビ｜動画生成・画像生成を中心に目的別で探せる"
   description="AI画像生成・AI動画生成ツールを商用利用・料金・無料枠・透かし・日本語対応で比較できるDBです。副業・SNS運用・仕事での利用前に条件を確認できます。最新情報は公式サイトをご確認ください。"
   canonicalPath="/"
-  jsonLd={jsonLd}
   homePage={true}
 >
 

@@ -46,6 +46,19 @@ const canonicalUrl = canonicalPath && Astro.site
     <meta property="og:site_name" content="AIクリエイティブナビ" />
     <meta property="og:image" content="https://aicreative-db.com/ogp.png" />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "AIクリエイティブナビ",
+      "alternateName": "AI画像・動画生成DB",
+      "url": "https://aicreative-db.com/",
+      "description": "AI画像生成・AI動画生成ツールを、生成サンプル・プロンプト・商用利用・無料枠・透かし・日本語対応などの観点で比較するサイト",
+      "publisher": {
+        "@type": "Organization",
+        "name": "AIクリエイティブナビ運営者",
+        "url": "https://aicreative-db.com/about/"
+      }
+    })} />
     {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
     {import.meta.env.PROD && (
       <>

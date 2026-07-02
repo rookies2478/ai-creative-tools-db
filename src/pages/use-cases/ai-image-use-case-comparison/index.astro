@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UseCaseFreshnessNote from '../../../components/UseCaseFreshnessNote.astro';
 
 const faqs = [
   { q: '用途別にAI画像生成ツールを選ぶメリットは何ですか？', a: '用途によって、確認すべき条件（商用利用条件・透かし・文字入れ・解像度）の優先度が大きく異なります。たとえば広告用途なら商用利用条件の確認が最重要で、ブログなら無料枠の充実度が優先されることが多いです。用途を軸に絞り込むことで、比較すべきポイントを効率よく確認できます。' },
@@ -139,6 +140,7 @@ const useCases = [
           <div class="stat"><span class="n">6</span><span class="t">よくある質問</span></div>
         </div>
       </header>
+      <UseCaseFreshnessNote />
 
       <!-- Notice -->
       <div class="notice">

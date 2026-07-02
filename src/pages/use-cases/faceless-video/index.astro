@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UseCaseFreshnessNote from '../../../components/UseCaseFreshnessNote.astro';
 import UseCaseConclusion from '../../../components/UseCaseConclusion.astro';
 
 const faqs = [
@@ -101,6 +102,7 @@ const faqJsonLd = JSON.stringify({
           },
         ]}
       />
+      <UseCaseFreshnessNote />
 
       <!-- Notice -->
       <div class="notice">

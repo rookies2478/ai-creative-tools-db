@@ -137,9 +137,15 @@ const articleJsonLd = JSON.stringify([{
   jsonLd={articleJsonLd}
   breadcrumbLabel="RunwayとPika比較"
   h1="RunwayとPikaを比較（pika or runway）"
-  lead="「Pikaにするか、Runwayにするか」迷う場合は料金・無料枠の更新条件・商用利用条件・透かし・UIの使いやすさを確認して選んでください。どちらも無料プランでは透かしや商用利用制限があります。最新条件は各公式サイトでご確認ください。"
+  lead="無料枠で継続的に試したい場合はPikaが、映像制作向けの編集機能まで含めて使いたい場合はRunwayが候補になります。Pikaの無料クレジットは毎月更新、Runwayは初回125クレジットのみとされ、無料で続けられるかどうかが最初の分かれ目です。どちらも無料プランでは透かしや商用利用制限があるため、商用前提なら有料プランの条件確認が前提になります。"
   category="AI動画生成ツール比較"
   latestDate={latestDate}
+  quickDecisionRows={[
+    { purpose: '無料で継続的に試したい', candidate: 'Pika', checkPoint: '無料枠の更新条件と上限を確認' },
+    { purpose: '編集機能・映像制作ワークフロー重視', candidate: 'Runway', checkPoint: '無料枠だけでなく継続利用時のプラン条件も確認' },
+    { purpose: '商用利用前提', candidate: '両方とも公式規約を確認', checkPoint: '無料プランは透かしや利用条件の制限に注意' },
+    { purpose: '透かしなし出力が必要', candidate: '有料プランの条件を確認', checkPoint: '透かしの有無はプランや出力条件で変わる場合があります' },
+  ]}
   toolAName="Runway"
   toolASlug="runway"
   toolBName="Pika"

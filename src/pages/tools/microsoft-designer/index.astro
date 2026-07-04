@@ -38,8 +38,8 @@ const jsonLd = JSON.stringify([
 ---
 
 <BaseLayout
-  title="マイクロソフトデザイナー（Microsoft Designer）の使い方・無料・商用利用条件まとめ｜AIクリエイティブナビ"
-  description="マイクロソフトデザイナー（Microsoft Designer）の無料で使える機能・使い方・商用利用条件・日本語対応を公式情報をもとに整理。SNS画像・バナー・プレゼン素材の作成に向いています。最新情報は公式サイトをご確認ください。"
+  title="Microsoft Designer 商用利用はできる？料金・無料範囲を整理"
+  description="Microsoft Designerの商用利用条件と料金を整理。用途やアカウント種別で条件が異なる可能性があるため、公式情報で確認すべきポイントもまとめています。"
   canonicalPath="/tools/microsoft-designer/"
   ogType="article"
   jsonLd={jsonLd}
@@ -62,7 +62,7 @@ const jsonLd = JSON.stringify([
       category="AI画像生成"
       checkedDate={d?.lastReviewed ?? '2026-05-26'}
       headingHtml='Microsoft Designerの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="MicrosoftのAIデザイン・画像生成サービス。Microsoftアカウントで利用でき、SNS画像・バナー・プレゼン素材の作成に向いている。料金・商用利用・日本語対応を公式情報をもとに整理しています。"
+      lead="Microsoft Designerを商用利用できるか・料金はいくらかを、公式FAQやサービス規約の確認ポイントとあわせて整理します。MicrosoftのAIデザイン・画像生成サービスで、Microsoftアカウントで利用でき、SNS画像・バナー・プレゼン素材の作成に向いています。"
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '条件あり' } },
         { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
@@ -169,6 +169,10 @@ const jsonLd = JSON.stringify([
         ],
         disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。利用前にMicrosoftサービス規約および公式FAQの最新版をご確認ください。',
         more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      commercialExtra={{
+        title: '商用利用前に公式で確認すべき3つのポイント',
+        html: 'Microsoft Designerで作成した画像をビジネスで使う前に、利用中のアカウント種別、Microsoftサービス規約の生成コンテンツに関する条項、人物・ブランド素材を含む場合の追加条件を確認しておくことが重要です。用途や契約状況によって条件が異なる可能性があるため、商用案件では公式FAQや規約の確認を前提にしてください。あわせて<a href="/conditions/commercial-use/">生成AIツールの商用利用条件比較</a>、<a href="/tools/adobe-firefly/">Adobe Fireflyの商用利用条件</a>、<a href="/use-cases/ad-banner/">広告バナー向けAIツールの比較</a>もご参照ください。',
       }}
       integrationTitle="Microsoft系サービスとの連携"
       integration="Microsoft DesignerはMicrosoftアカウントと連携しており、Microsoft 365環境と組み合わせた制作フローに取り入れやすいとされています。PowerPointなどのプレゼン資料に使うビジュアル素材の案出しや、Teams・OneDriveとの連携も利用環境によっては活用できます。各機能の利用可否はアカウント種別やプランによって異なります。最新の対応状況は公式サイトでご確認ください。"

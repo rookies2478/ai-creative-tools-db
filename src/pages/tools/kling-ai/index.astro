@@ -36,8 +36,8 @@ const jsonLd = JSON.stringify([
 ---
 
 <BaseLayout
-  title="Kling AIの料金・無料枠・商用利用条件まとめ｜AIクリエイティブナビ"
-  description="Kling AI（klingai）の料金プラン・無料枠（1日66クレジット程度・透かしあり・商用利用不可）・商用利用条件（Standard以上で可とされる）を公式情報をもとに整理。RunwayやPikaとの比較ポイントも解説。最新情報は公式サイトをご確認ください。"
+  title="Kling AIの商用利用条件と無料枠｜有料プランと確認ポイント"
+  description="Kling AIの商用利用は有料プランで認められているとされています。無料枠は非商用・透かしありとされる点や、契約前に公式規約で確認すべきポイントを整理しました。"
   canonicalPath="/tools/kling-ai/"
   ogType="article"
   jsonLd={jsonLd}
@@ -59,7 +59,7 @@ const jsonLd = JSON.stringify([
       category="AI動画生成"
       checkedDate={d?.lastReviewed ?? '2026-06-04'}
       headingHtml='Kling AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="Kling AIはKuaishou（中国）が運営するAI動画生成ツールです。テキストや画像から最大10秒の動画を生成でき、動画延長機能では最大3分まで延長が可能です。無料プランでは1日66クレジットが付与されますが、透かしあり・商用利用不可とされています。商用利用はStandard以上の有料プランで可能とされていますが、最新条件は必ず公式サイトでご確認ください。"
+      lead="Kling AIの商用利用は有料プランで認められているとされており、このページでは無料枠との条件の違い・透かし・公式規約で確認すべきポイントを整理します。Kling AIはKuaishou（中国）が運営するAI動画生成ツールです。テキストや画像から最大10秒の動画を生成でき、動画延長機能では最大3分まで延長が可能です。無料プランでは1日66クレジットが付与されますが、透かしあり・商用利用不可とされています。商用利用はStandard以上の有料プランで可能とされていますが、最新条件は必ず公式サイトでご確認ください。"
       specs={[
         { lb: '商用利用', badge: { s: 'paid', label: '有料プランのみ（要確認）' } },
         { lb: '無料枠', badge: { s: 'cond', label: '1日66クレジット（透かし・商用不可）' } },
@@ -166,6 +166,7 @@ const jsonLd = JSON.stringify([
           'Standard以上の有料プランで商用利用できるとされています（要公式確認）',
           '公式価格ページへの直接アクセスが困難な場合があります（HTTP 446等）',
           '利用規約・商用利用条件は変更される可能性があります',
+          '他ツールの条件とあわせて確認したい場合は<a href="/conditions/commercial-use/">生成AIツールの商用利用条件比較</a>もご参照ください',
         ],
         disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のKling AI公式サイトおよび利用規約をご確認ください。',
         more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
@@ -216,6 +217,7 @@ const jsonLd = JSON.stringify([
         '無料プランでは生成動画に透かしが付与されるとされています',
         '有料プランでは透かしなしとされていますが、最新仕様は公式サイトでご確認ください',
         '透かしの有無はプランによって異なります',
+        '<a href="/conditions/no-watermark/">透かしなしで使えるAI生成ツールの確認ポイント</a>や<a href="/categories/video-generation/">動画生成AIツール一覧</a>もあわせてご参照ください',
       ]}
       watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
       usagePolicy={d?.usagePolicy}

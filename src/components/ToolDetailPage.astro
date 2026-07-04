@@ -58,6 +58,7 @@ export interface Props {
   aboutMore?: { label: string; href: string };
   pricing?: { table: RichTable; notes: string[] };
   commercial?: { lead: string; points: string[]; disclaimer: string; more?: { label: string; href: string } };
+  commercialExtra?: { title: string; html: string };
   usagePolicy?: UsagePolicyData;
   usagePolicyLabelOverrides?: LabelOverrides;
   usagePolicySdNote?: string;
@@ -108,6 +109,7 @@ const {
   aboutMore,
   pricing,
   commercial,
+  commercialExtra,
   usagePolicy,
   usagePolicyLabelOverrides,
   usagePolicySdNote,
@@ -278,6 +280,11 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
           </ul>
           <div class="tdp-quote"><b>免責事項：</b>{commercial.disclaimer}</div>
           {commercial.more ? <a class="tdp-inline-more" href={commercial.more.href}>{commercial.more.label}</a> : null}
+        </>}
+
+        {commercialExtra && <>
+          <h3>{commercialExtra.title}</h3>
+          <p set:html={commercialExtra.html}></p>
         </>}
 
         {usagePolicy && (

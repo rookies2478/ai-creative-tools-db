@@ -7,3 +7,17 @@
 /categories/no-watermark/ /conditions/no-watermark/   301
 /compare/             /comparisons/                   301
 /compare/:slug/       /comparisons/:slug/             301
+
+/tools/d-id/                              /categories/avatar-video/              301
+/tools/heygen/                             /categories/avatar-video/              301
+/tools/synthesia/                          /categories/avatar-video/              301
+/tools/veed/                               /categories/video-editing/             301
+/tools/descript/                           /categories/video-editing/             301
+
+/comparisons/ai-video-watermark-comparison/ /conditions/no-watermark/             301
+/comparisons/kling-ai-vs-luma-ai/          /categories/video-generation/          301
+/comparisons/pika-vs-hailuo-ai/            /categories/video-generation/          301
+/comparisons/free-ai-video-tools/          /categories/video-generation/          301
+
+/guides/ai-commercial-use-checklist/       /guides/commercial-use-copyright/      301
+/guides/ai-commercial-use-trouble-cases/    /guides/commercial-use-copyright/      301

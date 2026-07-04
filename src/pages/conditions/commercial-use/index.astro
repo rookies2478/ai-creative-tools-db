@@ -64,8 +64,8 @@ const combinedSchema = JSON.stringify([faqSchemaObj, breadcrumbSchemaObj]);
 ---
 
 <BaseLayout
-  title="AI画像・動画生成ツールの商用利用条件比較｜公式規約・料金・透かしを整理"
-  description="AI画像・動画生成ツールの商用利用条件を比較。確認ポイントは①公式規約の商用利用範囲②無料/有料プランの条件差③透かし・クレジット表記義務の3点。最新情報は公式サイトをご確認ください。本記事は法的助言ではありません。"
+  title="生成AI 商用利用できるツール一覧比較｜条件まとめ"
+  description="生成AIツールの商用利用可否をツール別に一覧比較。確認ポイントは規約範囲・無料/有料プランの違い・透かし表記の3点です。本記事は法的助言ではありません。"
   canonicalPath="/conditions/commercial-use/"
   jsonLd={combinedSchema}
 >
@@ -81,6 +81,7 @@ const combinedSchema = JSON.stringify([faqSchemaObj, breadcrumbSchemaObj]);
   </div>
   <div class="mx-auto max-w-5xl px-6 pb-16">
     <CommercialUse
+      lead="このページでは、主要なAI画像・動画生成ツールの商用利用条件を一覧で比較できます。用途・プラン・生成内容によって条件は異なる場合があり、規約はツール側の判断で随時変更されることがあります。"
       tools={toolsData}
       stats={[
         { n: toolCount, label: '対象ツール' },

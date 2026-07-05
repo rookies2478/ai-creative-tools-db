@@ -24,6 +24,7 @@ const STATIC_PATHS = [
   '/comparisons/invideo-ai-vs-capcut-ai/',
   '/comparisons/midjourney-vs-leonardo-ai/',
   '/comparisons/ai-image-video-tools/',
+  '/comparisons/ec-product-image-ai-tools/',
   '/conditions/free/',
   '/conditions/commercial-use/',
   '/conditions/japanese/',

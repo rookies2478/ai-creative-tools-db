@@ -1,0 +1,271 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'heygen');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'HeyGen', item: 'https://aicreative-db.com/tools/heygen/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'HeyGen',
+    operatingSystem: 'Web',
+    applicationCategory: 'VideoApplication',
+    description: 'HeyGenはAIアバター、リップシンク、動画翻訳、ボイスクローンなどを使い、研修・マーケティング・セールス・ローカライズ向けの動画を作成できるAIアバター動画ツール。無料プランと有料プランで商用利用条件が異なるため公式Termsの確認が必要。',
+    url: 'https://www.heygen.com/',
+  },
+]);
+---
+
+<BaseLayout
+  title="HeyGenとは？AIアバター動画生成の特徴・料金・商用利用の確認ポイント"
+  description="HeyGenは、AIアバターや動画翻訳、ボイスクローンを使って研修・マーケティング・営業向け動画を作成できるAI動画生成ツールです。料金・無料プラン・商用利用・透かし・肖像権確認のポイントを整理します。"
+  canonicalPath="/tools/heygen/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">HeyGen</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="HeyGen"
+      category="AIアバター動画"
+      checkedDate={d?.lastReviewed ?? '2026-07-05'}
+      headingHtml='HeyGen（ヘイジェン）'
+      lead="HeyGenは、AIアバター、リップシンク、動画翻訳、ボイスクローンなどを使って、研修・マーケティング・セールス・ローカライズ向けの動画を作成できるAI動画生成ツールです。<b>無料プランと有料プランで商用利用や出力条件が異なる可能性があるため、利用前に公式Termsの確認が必要です。</b>"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: 'プランにより異なる（要確認）' } },
+        { lb: '無料枠', badge: { s: 'cond', label: 'あり（透かし・1分制限）' } },
+        { lb: '料金目安', text: '要確認（公式Pricing参照）', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: '無料あり・有料は要確認' } },
+        { lb: '日本語UI', badge: { s: 'cond', label: '不明（要確認）' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり（肖像権・音声権）' } },
+      ]}
+      primaryCta={{ label: '公式サイトで最新の料金・機能を確認する', href: 'https://www.heygen.com/' }}
+      secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://www.heygen.com/pricing' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: 'プランにより異なる（要確認）' }, wide: true,
+          sum: '無料プランは商用利用・販売・再配布・マネタイズに制限があるとされています。有料プラン（Creator以上）では商用利用に対応する条件が案内されていますが、<b>最新の公式Termsを必ず確認してください。</b>人物画像・音声を扱う場合は本人同意や第三者権利の確認も必要です。',
+          det: 'HeyGenはAIアバター・音声を扱うサービスのため、商用利用時は出力条件に加えて肖像権・音声権・なりすまし禁止事項の確認が重要です。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: 'あり（透かし・1分制限）' },
+          det: '無料プランがあり、クレジットカード不要で利用できるとされています。ただし動画は最大1分・透かし付きです。詳細は公式サイトでご確認ください。',
+        },
+        {
+          title: '最安料金目安', sum: '要確認（公式Pricing参照）', sumMono: true,
+          det: 'Free / Creator / Pro / Business / Enterpriseなどのプランがあるとされていますが、料金は変更される場合があります。最新のプラン内容は必ず公式サイトでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: '無料あり・有料は要確認' },
+          det: '無料プランでは透かしが付与されます。Creator以上のプランでは透かし削除機能があるとされていますが、最新仕様は公式サイトでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'cond', label: '不明（要確認）' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '対応の可能性あり（要確認）' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web'] },
+        { title: '主な機能', wide: true, feats: ['AIアバター・リップシンク', '動画翻訳', 'ボイスクローン', 'AI Studio（テキストベース編集）', '研修・マーケティング・セールス・SNS動画向け'] },
+      ]}
+      useCases={[
+        '<b>研修・eラーニング向けのアバター解説動画</b>を作りたい場合',
+        '<b>動画翻訳・ボイスクローンを使った多言語マーケティング動画</b>の展開',
+        '<b>セールス・営業支援動画</b>や社内ナレッジ共有動画の制作',
+      ]}
+      pros={[
+        'AIアバターとリップシンクで人物が話す動画を生成できる',
+        '動画翻訳・ボイスクローンによる多言語展開に対応',
+        'AI Studioでテキストベースの編集ができる',
+        '研修・マーケティング・セールス・SNS動画に向いている',
+        'Enterprise向けにセキュリティ・管理機能の情報がある',
+      ]}
+      cons={[
+        '無料プランは商用利用・販売・再配布・マネタイズに制限がある',
+        '無料プランは動画最大1分・透かし付き',
+        '日本語UIの対応状況は公式情報で明確に確認できない',
+        '人物画像・声・アバターを扱う場合は本人同意・第三者権利の確認が必要',
+      ]}
+      limits={[
+        '無料プランでは商用利用・販売・再配布・マネタイズに制限がある',
+        '無料プランは動画最大1分・透かし付き',
+        '日本語UIは公式情報で明確に確認できない',
+        '人物画像・声・アバターを扱う場合は本人同意や第三者権利の確認が必要',
+        'AI生成物である旨の開示が法令や媒体ルール上必要になる場合がある',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AIアバター動画生成' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>あり（透かし・1分制限）</span><br>クレジットカード不要とされています。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">要確認（公式Pricing参照）</span>' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>プランにより異なる（要確認）</span><br>無料プランは商用利用・販売・再配布に制限あり。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料あり・有料は要確認</span>' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>不明（要確認）</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>対応の可能性あり（要確認）</span>' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-07-05', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.heygen.com/" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 料金・条件は変更される可能性があります。最新情報は公式サイトでご確認ください。',
+      }}
+      about={[
+        'HeyGenは、テキスト・画像・PDFなどからAIアバターが話す動画を生成できるツールです。AIアバター、リップシンク、動画翻訳、ボイスクローン、AI Studioなどの機能を使い、研修・マーケティング・セールス・ローカライズ向けの動画を作成できます。',
+        '<b>重要な注意点として、HeyGenは無料プランと有料プランで商用利用や出力条件が異なる可能性があるため、利用前に公式Termsを確認する必要があります。</b>人物画像・音声を扱う場合は本人同意や第三者権利の確認も必要です。このページは法的助言ではありません。',
+      ]}
+      aboutMore={{ label: 'AIアバター動画ツール一覧で比較する →', href: '/categories/avatar-video/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', '備考'],
+          rows: [
+            [{ html: '無料', rk: true }, { html: '無料' }, { html: '動画最大1分・透かしあり・商用利用等に制限あり' }],
+            [{ html: 'Creator以上', rk: true }, { html: '要確認（公式Pricing参照）', mono: true }, { html: '商用利用に対応する条件が案内・透かし削除機能あり（要確認）' }],
+          ],
+        },
+        notes: [
+          '料金は変更される場合があります',
+          '最新情報は公式サイトでご確認ください',
+          '<b>商用利用時は無料・有料プランの条件を公式Termsで個別に確認が必要です</b>',
+        ],
+      }}
+      commercial={{
+        lead: 'HeyGenは無料プランと有料プランで利用条件が異なるため、広告、SNS、研修、営業資料、販売コンテンツなどで使う前に、<b>公式Termsと契約プランの条件を確認してください。</b>人物画像や音声を使う場合は、本人同意、第三者権利、なりすまし・模倣生成の禁止事項も確認が必要です。',
+        points: [
+          '無料プランは商用利用・販売・再配布・マネタイズに制限があるとされています（要公式確認）',
+          '有料プラン（Creator以上）では商用利用に対応する条件が案内されています（要公式確認）',
+          '人物画像・音声・アバターを扱う場合は本人同意や第三者権利の確認が必要です',
+          'AI生成物である旨の開示が法令や媒体ルール上必要になる場合があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のHeyGen公式利用規約をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="HeyGenと他のAIアバター動画ツールの違い"
+      integration="HeyGenはAIアバター・リップシンク・動画翻訳・ボイスクローンを組み合わせて、研修やマーケティング向けの解説動画を作成できるツールです。Synthesiaはeラーニング・企業研修向け、D-IDはテキストと写真からのアバター動画生成APIが特徴とされています。用途やチーム利用の規模によって選び方が異なるため、各ツールの最新の公式情報をご確認ください。"
+      whoFor={[
+        '研修・eラーニング向けのアバター解説動画を作りたい人',
+        '動画翻訳・ボイスクローンで多言語マーケティング動画を展開したい人',
+        'セールス・営業支援動画を効率的に作りたい人',
+        '社内ナレッジ共有動画を人物出演なしで作りたい人',
+      ]}
+      whoNot={[
+        '商用利用条件を確認せずにそのまま使いたい人',
+        '日本語UIの明確な対応を前提にしたい人',
+        '本人同意なしで人物の画像・音声を使いたい人',
+        '純粋なAI映像生成（アバターではない実写風映像）を求める人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'HeyGen（このページ）', rk: true, me: true }, { html: '多言語アバター動画・動画翻訳・ボイスクローンを重視する場合' }],
+          [{ html: 'InVideo AI', rk: true }, { html: 'テキスト台本からのテンプレート型解説動画制作を重視する場合' }],
+        ],
+      }}
+      language={[
+        '<b>日本語UI：</b>公式情報で明確に確認できません。最新の公式画面でご確認ください',
+        '<b>日本語プロンプト：</b>多言語対応の一部として日本語入力に対応する可能性がありますが、品質や対応範囲は公式情報でご確認ください',
+        '日本語音声・字幕の品質は用途ごとに公式サイトでご確認ください',
+      ]}
+      watermark={[
+        '無料プランでは透かしが付与されるとされています',
+        'Creator以上のプランでは透かし削除機能があるとされています',
+        '最新仕様は公式サイトでご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '最新のHeyGen利用規約（Terms）を確認したか' },
+        { html: '利用中のプランで商用利用が認められているか' },
+        { html: '人物画像・音声について本人同意を得ているか' },
+        { html: 'なりすまし・第三者の模倣生成に該当しないか' },
+        { html: 'AI生成物である旨の開示が必要な媒体・法域か' },
+        { html: '法人利用の場合、データ利用・権限・社内ガイドラインとの整合を確認したか' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-07-05'}
+      nextCheck={d?.nextReviewDue ?? '2026-10-05'}
+      verifiedDate={d?.verifiedAt ?? '2026-07-05'}
+      sources={[
+        { tag: '公式', label: 'HeyGen 公式サイト', href: 'https://www.heygen.com/' },
+        { tag: '料金', label: 'HeyGen 料金プラン（公式）', href: 'https://www.heygen.com/pricing' },
+        { tag: '規約', label: 'HeyGen 利用規約（公式）', href: 'https://www.heygen.com/terms' },
+        { tag: '法人', label: 'HeyGen Enterprise（公式）', href: 'https://www.heygen.com/enterprise' },
+      ]}
+      faqs={[
+        { q: 'HeyGenは無料で使えますか？', a: '無料プランがあり、クレジットカード不要で動画を作成できるとされています。ただし動画は最大1分・透かし付きで、商用利用・販売・再配布・マネタイズには制限があります。詳細は公式サイトをご確認ください。' },
+        { q: 'HeyGenは商用利用できますか？', a: '無料プランは商用利用に制限があるとされています。有料プラン（Creator以上）では商用利用に対応する条件が案内されていますが、条件はプランによって異なるため、最新の公式Termsを必ずご確認ください。このページは法的助言ではありません。' },
+        { q: 'HeyGenは日本語に対応していますか？', a: '多言語対応（動画翻訳・ボイスクローンなど）は公式情報で確認できますが、日本語UIの対応状況は明確に確認できていません。最新の公式画面でご確認ください。' },
+        { q: 'HeyGenの動画にウォーターマークは入りますか？', a: '無料プランでは透かしが付与されるとされています。Creator以上の有料プランでは透かし削除機能があるとされていますが、最新仕様は公式Pricingページでご確認ください。' },
+        { q: 'HeyGenは法人・チーム利用に向いていますか？', a: 'Enterprise向けにSOC 2 Type II、GDPR、CCPA、AI Act、Data Privacy Frameworkなどのセキュリティ関連情報が公式に案内されています。法人利用ではデータ利用・アカウント管理・権限・社内ガイドラインとの整合を確認することをお勧めします。' },
+      ]}
+      relatedTools={[
+        { name: 'InVideo AI', slug: 'invideo-ai', initial: 'I', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料プランのみ' }, { s: 'cond', label: '無料：あり（透かし）' }], platforms: ['Web'], official: 'https://invideo.io' },
+      ]}
+      nextReads={[
+        { href: '/categories/avatar-video/', title: 'AIアバター動画ツール一覧', desc: 'HeyGenを含むアバター動画ツールの比較' },
+        { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要な動画生成ツールを比較' },
+        { href: '/conditions/commercial-use/', title: '商用利用を確認しやすいAIツール', desc: '商用利用条件比較' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+        { href: '/conditions/free/', title: '無料で試せるAIツール', desc: '無料枠のあるAIツール一覧' },
+        { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
+        { href: '/conditions/japanese/', title: '日本語対応AIツール', desc: '日本語対応状況を確認できるツール一覧' },
+        { href: '/tools/invideo-ai/', title: 'InVideo AI', desc: 'テキストから解説動画を自動生成できるツール' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: 'AIアバター動画ツール一覧', href: '/categories/avatar-video/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

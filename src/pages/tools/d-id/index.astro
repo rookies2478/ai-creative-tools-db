@@ -1,0 +1,277 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'd-id');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'D-ID', item: 'https://aicreative-db.com/tools/d-id/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'D-ID',
+    operatingSystem: 'Web',
+    applicationCategory: 'VideoApplication',
+    description: 'D-IDは、顔写真やAI生成顔から話すアバター動画を作成できるAI動画生成ツール。TTS、音声アップロード、音声クローン、APIに対応。Liteプランは非商用利用限定とされ、商用利用可否はプランごとに公式規約の確認が必要。',
+    url: 'https://www.d-id.com/',
+  },
+]);
+---
+
+<BaseLayout
+  title="D-IDとは？写真から話すアバター動画を作るAIツールの特徴・料金・商用利用"
+  description="D-IDは、顔写真やAI生成顔から話すアバター動画を作成できるAI動画生成ツールです。料金・無料トライアル・商用利用・透かし・日本語対応・API利用時の確認ポイントを整理します。"
+  canonicalPath="/tools/d-id/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">D-ID</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="D-ID"
+      category="AIアバター動画"
+      checkedDate={d?.lastReviewed ?? '2026-07-05'}
+      headingHtml='D-ID（Creative Reality Studio）'
+      lead="D-IDは、顔写真やAI生成顔、テキスト、音声などを使って、話すアバター動画を生成できるAI動画生成ツールです。TTS、音声アップロード、音声クローン、APIにも対応しており、多言語の説明動画やサービス組み込み向けのアバター動画制作に活用できます。<b>Liteプランは非商用利用限定とされているため、商用利用前にプランの確認が必要です。</b>"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: 'Lite限定は非商用（要確認）' } },
+        { lb: '無料枠', badge: { s: 'cond', label: 'Trialあり（透かし）' } },
+        { lb: '料金目安', text: '要確認（公式Pricing参照）', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: 'Trial/Liteあり・上位は要確認' } },
+        { lb: '日本語UI', badge: { s: 'cond', label: '不明（要確認）' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり（肖像権・音声権）' } },
+      ]}
+      primaryCta={{ label: '公式サイトで最新の料金・機能を確認する', href: 'https://www.d-id.com/' }}
+      secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://www.d-id.com/pricing/studio/' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: 'Lite限定は非商用（要確認）' }, wide: true,
+          sum: 'Liteプランは非商用利用限定とされています。Lite以外のプランでは商用利用可能とされていますが、<b>EULA / Studio EULA / 最新の公式Pricingを必ず確認してください。</b>顔写真・音声を扱う場合は本人同意や第三者権利の確認も必要です。',
+          det: 'D-IDは顔写真・音声を扱うサービスのため、商用利用時は出力条件に加えて肖像権・音声権・なりすまし禁止事項の確認が重要です。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: 'Trialあり（透かし）' },
+          det: 'Free Trialがあるとされています。Trial / Liteには透かしが表示され、動画時間は15秒単位で切り上げ課金、分数は月次更新で繰越されない旨の記載があります。詳細は公式サイトでご確認ください。',
+        },
+        {
+          title: '最安料金目安', sum: '要確認（公式Pricing参照）', sumMono: true,
+          det: 'Studio（Lite以上）とAPIでプラン体系が分かれているとされています。料金は変更される場合があるため、最新のプラン内容は必ず公式サイトでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: 'Trial/Liteあり・上位は要確認' },
+          det: 'Trial / Liteプランでは透かしが表示されるとされています。Lite以外のプランでの透かし有無は公式情報で明確に確認できないため、最新の公式Pricingページでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'cond', label: '不明（要確認）' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '不明（要確認）' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web'] },
+        { title: '主な機能', wide: true, feats: ['顔写真・AI生成顔からのアバター動画生成', 'TTS・音声アップロード', '音声クローン', 'API・リアルタイム生成', '多言語対応（日本語を含むという公式記載あり）'] },
+      ]}
+      useCases={[
+        '<b>顔写真から作る説明動画</b>を作りたい場合',
+        '<b>TTS・音声クローンを使った多言語ナレーション動画</b>の展開',
+        '<b>APIを使ったサービス内アバター機能の組み込み</b>',
+      ]}
+      pros={[
+        '顔写真やAI生成顔から話すアバター動画を生成できる',
+        'TTS、音声アップロード、音声クローンに対応',
+        'APIでアバター動画生成機能をサービスに組み込める',
+        'Studioは119言語対応、アバターは日本語を含むという公式記載がある',
+        'ISO/IEC 27001など複数のセキュリティ・コンプライアンス情報がある',
+      ]}
+      cons={[
+        'Liteプランは非商用利用限定とされている',
+        'Trial / Liteには透かしが表示される',
+        '上位プランの透かし有無・動画長さ・出力品質・ダウンロード条件は公式情報で明確に確認できない',
+        '顔写真・人物素材・音声を使う場合は本人同意・第三者権利の確認が必要',
+      ]}
+      limits={[
+        'Liteプランは非商用利用限定とされている',
+        'Trial / Liteには透かしが表示される',
+        '上位プランの透かし有無や動画長さ、出力品質、ダウンロード条件は公式情報で明確に確認できない',
+        '顔写真・人物素材・音声を扱う場合は本人同意や第三者権利の確認が必要',
+        '政治利用、なりすまし、フェイクニュース、著作権侵害などは禁止・制限用途とされる',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AIアバター動画生成' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>Trialあり（透かし）</span><br>動画時間は15秒単位で切り上げ課金とされています。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">要確認（公式Pricing参照）</span>' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>Lite限定は非商用（要確認）</span><br>Lite以外は商用利用可能とされるが要公式確認。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>Trial/Liteあり・上位は要確認</span>' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>不明（要確認）</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>不明（要確認）</span>' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-07-05', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.d-id.com/" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 料金・条件は変更される可能性があります。最新情報は公式サイトでご確認ください。',
+      }}
+      about={[
+        'D-IDは、顔写真やAI生成顔、テキスト、音声などを使って、話すアバター動画を生成できるツールです。TTS、音声アップロード、音声クローン、APIにも対応しており、多言語の説明動画やサービス組み込み向けのアバター動画制作に活用できます。',
+        '<b>重要な注意点として、Liteプランは非商用利用限定とされているため、商用利用前に対象プランと最新のEULA / Studio EULA / Pricingを確認する必要があります。</b>顔写真・音声を扱う場合は本人同意や第三者権利の確認も必要です。このページは法的助言ではありません。',
+      ]}
+      aboutMore={{ label: 'AIアバター動画ツール一覧で比較する →', href: '/categories/avatar-video/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', '備考'],
+          rows: [
+            [{ html: 'Trial / Lite', rk: true }, { html: '無料〜要確認', mono: true }, { html: '透かしあり・Liteは非商用利用限定' }],
+            [{ html: 'Lite以外（Studio上位・API）', rk: true }, { html: '要確認（公式Pricing参照）', mono: true }, { html: '商用利用可能とされるが透かし・動画長さ等は要確認' }],
+          ],
+        },
+        notes: [
+          '料金は変更される場合があります',
+          '最新情報は公式サイトでご確認ください',
+          '<b>動画時間は15秒単位で切り上げ課金、分数は月次更新で繰越なしとされています</b>',
+        ],
+      }}
+      commercial={{
+        lead: 'D-IDでは、EULAやStudio EULA上でプランによって商用利用条件が異なります。特にLiteプランは非商用利用限定とされているため、広告、SNS、研修、営業資料、販売コンテンツ、API組み込みなどで使う前に、<b>対象プランと最新の公式規約を確認してください。</b>顔写真・音声・人物素材を使う場合は、本人同意、第三者権利、なりすましやフェイクニュースなどの禁止用途も確認が必要です。',
+        points: [
+          'Liteプランは非商用利用限定とされています（要公式確認）',
+          'Lite以外のプランでは商用利用可能とされています（要公式確認）',
+          '顔写真・人物素材・音声を扱う場合は本人同意や第三者権利の確認が必要です',
+          '政治利用、なりすまし、フェイクニュース、著作権侵害などは禁止・制限用途とされています',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のD-ID公式EULA・利用規約をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="D-IDと他のAIアバター動画ツールの違い"
+      integration="D-IDはテキストと写真からのアバター動画生成APIが特徴で、サービスへの組み込みやリアルタイム生成用途に向いているとされています。HeyGenはリップシンク・動画翻訳・ボイスクローンを組み合わせたマーケティング向けの解説動画に強みがあり、Synthesiaは240以上のAIアバターと多数の言語に対応したeラーニング・企業研修向けの動画制作に向いています。用途やチーム利用の規模によって選び方が異なるため、各ツールの最新の公式情報をご確認ください。"
+      whoFor={[
+        '顔写真から作る説明動画を作りたい人',
+        'TTS・音声クローンで多言語ナレーション動画を展開したい人',
+        'APIを使ってアバター動画生成機能をサービスに組み込みたい人',
+        'カスタマーサポート向け・企業説明向けの動画を作りたい人',
+      ]}
+      whoNot={[
+        '商用利用条件を確認せずにそのまま使いたい人',
+        '日本語UIの明確な対応を前提にしたい人',
+        '本人同意なしで人物の画像・音声を使いたい人',
+        '純粋なAI映像生成（アバターではない実写風映像）を求める人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'D-ID（このページ）', rk: true, me: true }, { html: '写真からのアバター動画生成・API組み込みを重視する場合' }],
+          [{ html: 'HeyGen', rk: true }, { html: 'リップシンク・動画翻訳・ボイスクローンを重視する場合' }],
+          [{ html: 'Synthesia', rk: true }, { html: '多数のAIアバター・多言語音声を使った研修・eラーニング動画を重視する場合' }],
+        ],
+      }}
+      language={[
+        '<b>日本語UI：</b>公式情報で明確に確認できません。最新の公式画面でご確認ください',
+        '<b>日本語プロンプト：</b>Studioは119言語対応、アバターは日本語を含むという公式記載がありますが、品質や対応範囲は公式情報でご確認ください',
+        'Video Translateは日本語を含む40以上の言語に対応するという公式記載があります',
+      ]}
+      watermark={[
+        'Trial / Liteプランでは透かしが表示されるとされています',
+        '動画時間は15秒単位で切り上げ課金され、分数は月次更新で繰越されないとされています',
+        '上位プランの透かし有無は公式情報で明確に確認できないため最新の公式サイトでご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '最新のD-ID EULA / Studio EULAを確認したか' },
+        { html: '利用中のプランで商用利用が認められているか（Liteは非商用利用限定）' },
+        { html: '顔写真・音声について本人同意を得ているか' },
+        { html: 'なりすまし・フェイクニュース・第三者の模倣生成に該当しないか' },
+        { html: 'AI生成物である旨の開示が必要な媒体・法域か' },
+        { html: '法人利用の場合、データ保持・権限・社内ガイドラインとの整合を確認したか' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-07-05'}
+      nextCheck={d?.nextReviewDue ?? '2026-10-05'}
+      verifiedDate={d?.verifiedAt ?? '2026-07-05'}
+      sources={[
+        { tag: '公式', label: 'D-ID 公式サイト', href: 'https://www.d-id.com/' },
+        { tag: '料金', label: 'D-ID Studio 料金プラン（公式）', href: 'https://www.d-id.com/pricing/studio/' },
+        { tag: '料金', label: 'D-ID API 料金プラン（公式）', href: 'https://www.d-id.com/pricing/api/' },
+        { tag: '規約', label: 'D-ID EULA（公式）', href: 'https://www.d-id.com/eula/' },
+        { tag: '規約', label: 'D-ID Studio EULA（公式）', href: 'https://www.d-id.com/studio-end-user-license-agreement/' },
+        { tag: '法人', label: 'D-ID セキュリティ・コンプライアンス（公式）', href: 'https://www.d-id.com/security-and-privacy-compliance/' },
+      ]}
+      faqs={[
+        { q: 'D-IDは無料で使えますか？', a: 'Free Trialがあるとされています。ただしTrial / Liteには透かしが表示され、Liteプランは非商用利用限定とされています。動画時間は15秒単位で切り上げ課金され、分数は月次更新で繰越されない旨の記載もあります。詳細は公式サイトをご確認ください。' },
+        { q: 'D-IDの生成動画は商用利用できますか？', a: 'Liteプランは非商用利用限定とされ、Lite以外のプランでは商用利用可能とされています。ただし条件はプランや契約内容によって異なるため、EULA / Studio EULA / Products Terms of Use / 最新の公式Pricingを必ずご確認ください。このページは法的助言ではありません。' },
+        { q: 'D-IDは日本語に対応していますか？', a: 'Studioは119言語対応、アバターは日本語を含む、Video Translateは日本語を含む40以上の言語に対応という公式記載があります。ただし日本語音声の自然さやUI表示、字幕・翻訳の品質は用途ごとに公式画面でご確認ください。' },
+        { q: 'D-IDの動画に透かしは入りますか？', a: 'Trial / Liteプランでは透かしが表示されるとされています。Lite以外のプランでの透かし有無は公式情報で明確に確認できないため、最新の公式Pricingページでご確認ください。' },
+        { q: 'D-IDはAPIとしてサービスに組み込めますか？', a: 'D-IDはAPIを提供しており、アバター動画生成機能をサービスに組み込む用途やリアルタイム生成用途でも検討できるとされています。データ保持期間や利用条件はAPIとStudioで異なる場合があるため、公式情報でご確認ください。' },
+      ]}
+      relatedTools={[
+        { name: 'HeyGen', slug: 'heygen', initial: 'H', cat: 'アバター動画', badges: [{ s: 'cond', label: '商用：プランにより異なる' }, { s: 'cond', label: '無料：あり（透かし）' }], platforms: ['Web'], official: 'https://www.heygen.com/' },
+        { name: 'Synthesia', slug: 'synthesia', initial: 'S', cat: 'アバター動画', badges: [{ s: 'cond', label: '商用：プランにより異なる' }, { s: 'cond', label: '無料：あり（透かし）' }], platforms: ['Web'], official: 'https://www.synthesia.io/' },
+      ]}
+      nextReads={[
+        { href: '/categories/avatar-video/', title: 'AIアバター動画ツール一覧', desc: 'D-IDを含むアバター動画ツールの比較' },
+        { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要な動画生成ツールを比較' },
+        { href: '/conditions/commercial-use/', title: '商用利用を確認しやすいAIツール', desc: '商用利用条件比較' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+        { href: '/conditions/free/', title: '無料で試せるAIツール', desc: '無料枠のあるAIツール一覧' },
+        { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
+        { href: '/conditions/japanese/', title: '日本語対応AIツール', desc: '日本語対応状況を確認できるツール一覧' },
+        { href: '/tools/heygen/', title: 'HeyGen', desc: 'AIアバター・動画翻訳・ボイスクローンで動画を作成できるツール' },
+        { href: '/tools/synthesia/', title: 'Synthesia', desc: '多数のAIアバターと多言語対応が特徴のビジネス向け動画生成ツール' },
+        { href: '/tools/invideo-ai/', title: 'InVideo AI', desc: 'テキストから解説動画を自動生成できるツール' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: 'AIアバター動画ツール一覧', href: '/categories/avatar-video/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

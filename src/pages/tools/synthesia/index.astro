@@ -1,0 +1,275 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+
+const tools = await getCollection('tools');
+const entry = tools.find((t) => t.slug === 'synthesia');
+const d = entry?.data;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'トップ', item: 'https://aicreative-db.com/' },
+      { '@type': 'ListItem', position: 2, name: 'ツール一覧', item: 'https://aicreative-db.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Synthesia', item: 'https://aicreative-db.com/tools/synthesia/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Synthesia',
+    operatingSystem: 'Web',
+    applicationCategory: 'VideoApplication',
+    description: 'Synthesiaは240以上のAIアバターと1000以上のAI音声、160以上の言語対応でテキストから動画を生成できるビジネス向けAI動画生成ツール。研修・マーケティング・社内コミュニケーション向けの動画制作に対応。生成動画の権利は組織に帰属するとされ、商用利用条件は公式Termsの確認が必要。',
+    url: 'https://www.synthesia.io/',
+  },
+]);
+---
+
+<BaseLayout
+  title="Synthesiaとは？AIアバター動画生成ツールの特徴・料金・商用利用を解説"
+  description="Synthesiaは、AIアバターやAI音声、翻訳、自動字幕を使って研修・マーケティング・社内向け動画を作成できるAI動画生成ツールです。料金・無料プラン・商用利用・透かし・法人向けセキュリティの確認ポイントを整理します。"
+  canonicalPath="/tools/synthesia/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+
+  <nav class="tdp-bc" aria-label="パンくずリスト">
+    <div class="wrap">
+      <a href="/">トップ</a>
+      <span class="sep">/</span>
+      <a href="/tools/">ツール一覧</a>
+      <span class="sep">/</span>
+      <span class="cur">Synthesia</span>
+    </div>
+  </nav>
+
+  <div class="tdp-wrap">
+    <ToolDetailPage
+      toolName="Synthesia"
+      category="AIアバター動画"
+      checkedDate={d?.lastReviewed ?? '2026-07-05'}
+      headingHtml='Synthesia（シンセシア）'
+      lead="Synthesiaは、テキストからAIアバターが話す動画を生成できる、ビジネス向けのAI動画生成プラットフォームです。AIアバター、AI音声、翻訳、自動字幕、ブランド管理機能などを使い、研修・マーケティング・社内コミュニケーション向けの動画制作に活用できます。<b>生成動画の権利は個人ではなく組織（契約主体）に帰属するとされており、商用利用の可否や条件は利用前に公式規約の確認が必要です。</b>"
+      specs={[
+        { lb: '商用利用', badge: { s: 'cond', label: 'プランにより異なる（要確認）' } },
+        { lb: '無料枠', badge: { s: 'cond', label: 'あり（透かし・分数制限）' } },
+        { lb: '料金目安', text: '要確認（公式Pricing参照）', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: 'Basicあり・有料は要確認' } },
+        { lb: '日本語UI', badge: { s: 'cond', label: '不明（要確認）' } },
+        { lb: '入力素材', badge: { s: 'cond', label: '注意あり（肖像権・音声権）' } },
+      ]}
+      primaryCta={{ label: '公式サイトで最新の料金・機能を確認する', href: 'https://www.synthesia.io/' }}
+      secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://www.synthesia.io/pricing' }}
+      basicInfo={[
+        {
+          title: '商用利用', badge: { s: 'cond', label: 'プランにより異なる（要確認）' }, wide: true,
+          sum: '生成動画の権利は個人ではなく組織（契約主体）に帰属するとされています。商用利用の条件はプラン・契約内容によって異なるため、<b>Customer Terms / User Terms / Acceptable Use Policyなど最新の公式規約を必ず確認してください。</b>人物アバター・音声を扱う場合は本人同意や第三者権利の確認も必要です。',
+          det: 'Synthesiaはアバター・音声を扱うサービスのため、商用利用時は出力条件に加えて肖像権・音声権・なりすまし禁止事項の確認が重要です。このページは法的助言ではありません。',
+        },
+        {
+          title: '無料枠', badge: { s: 'cond', label: 'あり（透かし・分数制限）' },
+          det: 'Basic（無料）プランがあり、クレジットカード不要で試用できるとされています。ただし月10分までの制限やロゴ（透かし）があります。詳細は公式サイトでご確認ください。',
+        },
+        {
+          title: '最安料金目安', sum: '要確認（公式Pricing参照）', sumMono: true,
+          det: 'Basic / Starter / Creator / Enterpriseなどのプランがあるとされていますが、料金は変更される場合があります。最新のプラン内容は必ず公式サイトでご確認ください。',
+        },
+        {
+          title: '透かし', badge: { s: 'cond', label: 'Basicあり・有料は要確認' },
+          det: 'Basic（無料）プランではロゴ（透かし）が付与されます。Starter以上のプランではロゴ削除機能があるとされていますが、最新仕様は公式サイトでご確認ください。',
+        },
+        {
+          title: '日本語対応',
+          lang: [
+            { label: 'UI', badge: { s: 'cond', label: '不明（要確認）' } },
+            { label: 'プロンプト', badge: { s: 'cond', label: '不明（要確認）' } },
+          ],
+        },
+        { title: '対応環境', feats: ['Web'] },
+        { title: '主な機能', wide: true, feats: ['AIアバター・AI音声（テキストから動画）', 'ワンクリック翻訳・自動字幕', 'ブランドキット・チーム管理', '研修・マーケティング・社内コミュニケーション向け'] },
+      ]}
+      useCases={[
+        '<b>研修・eラーニング向けのアバター解説動画</b>を作りたい場合',
+        '<b>翻訳・自動字幕を使った多言語マーケティング動画</b>の展開',
+        '<b>社内コミュニケーション動画</b>や製品説明動画の制作',
+      ]}
+      pros={[
+        '240以上のAIアバターと1000以上のAI音声、160以上の言語に対応',
+        'テキストから動画生成・ワンクリック翻訳・自動字幕に対応',
+        'ブランドキットやチーム管理など法人向けの運用機能がある',
+        '研修・eラーニング・社内コミュニケーション動画に向いている',
+        'Enterprise向けにセキュリティ・認証・管理機能の確認先がある',
+      ]}
+      cons={[
+        'Basic無料枠は分数・透かしなどの制限がある',
+        '日本語UIの対応状況は公式情報で明確に確認できない',
+        '生成動画の権利は組織（契約主体）に帰属するとされ、個人利用の位置づけが分かりにくい',
+        'ストックアバターの用途（広告・放送・商標利用など）には制限がある',
+      ]}
+      limits={[
+        'Basic無料枠は分数・透かしなどの制限がある',
+        '日本語UIは公式情報で明確に確認できない',
+        '人物アバター・音声を扱う場合は本人同意や第三者権利の確認が必要',
+        'なりすまし、身元詐称、肖像権侵害にあたる利用は避ける必要がある',
+        'ストックアバターの用途（NFT化・商標登録・国際TV広告など）には制限がある',
+      ]}
+      quickTable={{
+        kind: 'spec',
+        rows: [
+          [{ html: 'カテゴリ', rk: true }, { html: 'AIアバター動画生成' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>あり（透かし・分数制限）</span><br>クレジットカード不要とされています。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">要確認（公式Pricing参照）</span>' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>プランにより異なる（要確認）</span><br>生成動画の権利は組織（契約主体）に帰属するとされる。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>Basicあり・有料は要確認</span>' }],
+          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>不明（要確認）</span>' }],
+          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>不明（要確認）</span>' }],
+          [{ html: '対応環境', rk: true }, { html: 'Web' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-07-05', mono: true }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.synthesia.io/" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
+        ],
+        note: '※ 料金・条件は変更される可能性があります。最新情報は公式サイトでご確認ください。',
+      }}
+      about={[
+        'Synthesiaは、テキストからAIアバターが話す動画を生成できるビジネス向けのAI動画生成プラットフォームです。240以上のAIアバター、1000以上のAI音声、160以上の言語に対応し、翻訳・自動字幕・ブランドキット・チーム管理などの機能を使って、研修・マーケティング・社内コミュニケーション向けの動画を作成できます。',
+        '<b>重要な注意点として、生成動画の権利は個人ではなく組織（契約主体）に帰属するとされているため、商用利用の可否や条件は利用前に公式規約を確認する必要があります。</b>人物アバター・音声を扱う場合は本人同意や第三者権利の確認も必要です。このページは法的助言ではありません。',
+      ]}
+      aboutMore={{ label: 'AIアバター動画ツール一覧で比較する →', href: '/categories/avatar-video/' }}
+      pricing={{
+        table: {
+          kind: 'cmp',
+          headers: ['プラン', '料金', '備考'],
+          rows: [
+            [{ html: 'Basic（無料）', rk: true }, { html: '無料' }, { html: '月10分まで・ロゴ（透かし）あり' }],
+            [{ html: 'Starter以上', rk: true }, { html: '要確認（公式Pricing参照）', mono: true }, { html: 'ロゴ削除機能あり（要確認）・クレジット制/分数制/席数課金が組み合わさる' }],
+          ],
+        },
+        notes: [
+          '料金は変更される場合があります',
+          '最新情報は公式サイトでご確認ください',
+          '<b>商用利用時は契約主体・プランの条件を公式Termsで個別に確認が必要です</b>',
+        ],
+      }}
+      commercial={{
+        lead: 'Synthesiaで生成した動画を広告、SNS、研修、営業資料、社内外向けコンテンツで使う場合は、契約主体、利用プラン、<b>Customer Terms / User Terms / Acceptable Use Policyの条件を確認してください。</b>人物アバターや音声を使う場合は、本人同意、第三者権利、なりすまし・身元詐称に関する禁止事項も確認が必要です。',
+        points: [
+          '生成動画の権利は個人ではなく組織（契約主体）に帰属するとされています（要公式確認）',
+          '商用利用の条件はプラン・契約内容によって異なります（要公式確認）',
+          '人物アバター・音声を扱う場合は本人同意や第三者権利の確認が必要です',
+          'ストックアバターの用途（広告・放送・商標利用など）には制限があります',
+        ],
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のSynthesia公式利用規約をご確認ください。',
+        more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      integrationTitle="Synthesiaと他のAIアバター動画ツールの違い"
+      integration="Synthesiaは240以上のAIアバターと160言語対応の音声で、eラーニング・企業研修向けの動画を作成できるツールです。HeyGenはリップシンク・動画翻訳・ボイスクローンを組み合わせたマーケティング向けの解説動画に強みがあり、D-IDはテキストと写真からのアバター動画生成APIが特徴とされています。用途やチーム利用の規模によって選び方が異なるため、各ツールの最新の公式情報をご確認ください。"
+      whoFor={[
+        '研修・eラーニング向けのアバター解説動画を作りたい人',
+        '多言語のマーケティング・社内コミュニケーション動画を展開したい人',
+        '法人・チームでの動画制作運用（ブランドキット・権限管理）をしたい人',
+        '社内ナレッジ共有動画を人物出演なしで作りたい人',
+      ]}
+      whoNot={[
+        '商用利用条件を確認せずにそのまま使いたい人',
+        '日本語UIの明確な対応を前提にしたい人',
+        '本人同意なしで人物の画像・音声を使いたい人',
+        '純粋なAI映像生成（アバターではない実写風映像）を求める人',
+      ]}
+      selectTable={{
+        kind: 'cmp',
+        headers: ['ツール', '向いているケース'],
+        rows: [
+          [{ html: 'Synthesia（このページ）', rk: true, me: true }, { html: '多数のAIアバター・多言語音声を使った研修・eラーニング動画を重視する場合' }],
+          [{ html: 'HeyGen', rk: true }, { html: 'リップシンク・動画翻訳・ボイスクローンを重視する場合' }],
+          [{ html: 'InVideo AI', rk: true }, { html: 'テキスト台本からのテンプレート型解説動画制作を重視する場合' }],
+        ],
+      }}
+      language={[
+        '<b>日本語UI：</b>公式情報で明確に確認できません。最新の公式画面でご確認ください',
+        '<b>日本語プロンプト：</b>160以上の言語対応の一部として日本語入力に対応する可能性がありますが、品質や対応範囲は公式情報でご確認ください',
+        '日本語音声・字幕の品質は用途ごとに公式サイトでご確認ください',
+      ]}
+      watermark={[
+        'Basic（無料）プランではロゴ（透かし）が付与されるとされています',
+        'Starter以上のプランではロゴ削除機能があるとされています',
+        '最新仕様は公式サイトでご確認ください',
+      ]}
+      watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
+      checklist={[
+        { html: '最新のSynthesia利用規約（Customer Terms / User Terms / Acceptable Use Policy）を確認したか' },
+        { html: '利用中のプラン・契約主体で商用利用が認められているか' },
+        { html: 'AIアバター・音声について本人同意を得ているか' },
+        { html: 'なりすまし・身元詐称・第三者の模倣生成に該当しないか' },
+        { html: 'ストックアバターの用途制限（広告・放送・商標利用など）に該当しないか' },
+        { html: '法人利用の場合、データ利用・権限・社内ガイドラインとの整合を確認したか' },
+      ]}
+      lastChecked={d?.lastReviewed ?? '2026-07-05'}
+      nextCheck={d?.nextReviewDue ?? '2026-10-05'}
+      verifiedDate={d?.verifiedAt ?? '2026-07-05'}
+      sources={[
+        { tag: '公式', label: 'Synthesia 公式サイト', href: 'https://www.synthesia.io/' },
+        { tag: '料金', label: 'Synthesia 料金プラン（公式）', href: 'https://www.synthesia.io/pricing' },
+        { tag: 'ポリシー', label: 'Synthesia Acceptable Use Policy（公式）', href: 'https://www.synthesia.io/legal/acceptable-use-policy' },
+        { tag: '規約', label: 'Synthesia User Terms（公式）', href: 'https://www.synthesia.io/legal/user-terms-of-service' },
+        { tag: '法人', label: 'Synthesia Enterprise（公式）', href: 'https://www.synthesia.io/enterprise' },
+      ]}
+      faqs={[
+        { q: 'Synthesiaは無料で使えますか？', a: 'Basic（無料）プランがあり、クレジットカード不要で試用できるとされています。ただし月10分までの制限やロゴ（透かし）などの条件があるため、詳細は公式Pricingページをご確認ください。' },
+        { q: 'Synthesiaは商用利用できますか？', a: '生成動画の権利は個人ではなく組織（契約主体）に帰属するとされ、商用利用の条件はプラン・契約内容によって異なります。広告・SNS・研修・営業資料などで使う前に、Customer Terms / User Terms / Acceptable Use Policyなど最新の公式規約を必ずご確認ください。このページは法的助言ではありません。' },
+        { q: 'Synthesiaは日本語に対応していますか？', a: '160以上の言語対応が公式に案内されていますが、日本語UIの明記は確認できていません。日本語音声・字幕・UI表示などは用途ごとに最新の公式画面でご確認ください。' },
+        { q: 'Synthesiaの動画にウォーターマークは入りますか？', a: 'Basic（無料）プランではロゴ（透かし）が付与されるとされています。Starter以上の有料プランではロゴ削除機能があるとされていますが、最新仕様は公式Pricingページでご確認ください。' },
+        { q: 'Synthesiaは法人・チーム利用に向いていますか？', a: 'Enterprise向けにSOC 2 Type II、GDPR、ISO 42001、SAML/SSOなどのセキュリティ関連情報が公式に案内されています。法人利用ではデータ利用・アカウント管理・権限・社内ガイドラインとの整合を確認することをお勧めします。' },
+      ]}
+      relatedTools={[
+        { name: 'HeyGen', slug: 'heygen', initial: 'H', cat: 'アバター動画', badges: [{ s: 'cond', label: '商用：プランにより異なる' }, { s: 'cond', label: '無料：あり（透かし）' }], platforms: ['Web'], official: 'https://www.heygen.com/' },
+        { name: 'InVideo AI', slug: 'invideo-ai', initial: 'I', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料プランのみ' }, { s: 'cond', label: '無料：あり（透かし）' }], platforms: ['Web'], official: 'https://invideo.io' },
+      ]}
+      nextReads={[
+        { href: '/categories/avatar-video/', title: 'AIアバター動画ツール一覧', desc: 'Synthesiaを含むアバター動画ツールの比較' },
+        { href: '/categories/video-generation/', title: 'AI動画生成ツール一覧', desc: '主要な動画生成ツールを比較' },
+        { href: '/conditions/commercial-use/', title: '商用利用を確認しやすいAIツール', desc: '商用利用条件比較' },
+        { href: '/guides/commercial-use-copyright/', title: '商用利用・著作権ガイド', desc: 'AI生成コンテンツを商用利用する際の注意点まとめ' },
+        { href: '/conditions/free/', title: '無料で試せるAIツール', desc: '無料枠のあるAIツール一覧' },
+        { href: '/conditions/no-watermark/', title: '透かしなしツール一覧', desc: '透かしなしで利用できるAIツール' },
+        { href: '/conditions/japanese/', title: '日本語対応AIツール', desc: '日本語対応状況を確認できるツール一覧' },
+        { href: '/tools/heygen/', title: 'HeyGen', desc: 'AIアバター・動画翻訳・ボイスクローンで動画を作成できるツール' },
+        { href: '/tools/invideo-ai/', title: 'InVideo AI', desc: 'テキストから解説動画を自動生成できるツール' },
+      ]}
+      conditions={[
+        { label: 'ツール一覧', href: '/tools/' },
+        { label: 'AIアバター動画ツール一覧', href: '/categories/avatar-video/' },
+        { label: '商用利用を確認しやすいツール', href: '/conditions/commercial-use/' },
+        { label: '透かしなしツール', href: '/conditions/no-watermark/' },
+        { label: '全ツール比較表', href: '/comparisons/' },
+      ]}
+    />
+  </div>
+
+</BaseLayout>
+
+<style>
+  .tdp-bc {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line, #E3E2D9);
+    background: var(--surface, #fff);
+  }
+  .tdp-bc .wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted, #6A7180);
+  }
+  .tdp-bc a { color: var(--muted, #6A7180); text-decoration: none; }
+  .tdp-bc a:hover { text-decoration: underline; }
+  .tdp-bc .sep { color: var(--faint, #98A0AD); }
+  .tdp-bc .cur { color: var(--ink-soft, #3A3E47); font-weight: 600; }
+  .tdp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  @media (max-width: 720px) { .tdp-wrap { padding: 0 18px; } }
+</style>

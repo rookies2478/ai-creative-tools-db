@@ -39,7 +39,7 @@ const {
   lead = 'AI画像生成・AI動画生成ツールを無料枠・商用利用条件・透かし・日本語対応などの観点で比較したページです。ツール選びに迷ったとき、まずここから目的に合った比較記事や比較表を探してみてください。',
   notice = '商用利用条件や著作権はツール・プラン・用途によって異なる場合があります。比較記事はあくまで参考情報です。掲載内容は確認時点のもので、最新情報や具体的な利用可否は必ず各公式サイトでご確認ください。本サイトは商用利用・著作権について断定せず、本記事群は法的助言ではありません。',
   stats = [
-    { n:'11', label:'比較記事' },
+    { n:'12', label:'比較記事' },
     { n:'6', label:'画像生成ツール', tone:'image' },
     { n:'4', label:'動画生成ツール', tone:'video' },
     { n:'6', label:'比較観点' },
@@ -53,6 +53,7 @@ const {
     { goal:'MidjourneyとLeonardo AIを比較したい', links:[{ label:'Midjourney vs Leonardo AI', href:'/comparisons/midjourney-vs-leonardo-ai/' }] },
     { goal:'MidjourneyとAdobe Fireflyを比較したい', links:[{ label:'Midjourney vs Adobe Firefly', href:'/comparisons/midjourney-vs-adobe-firefly/' }] },
     { goal:'Canva AIとAdobe Fireflyを比較したい', links:[{ label:'Canva AI vs Adobe Firefly', href:'/comparisons/canva-ai-vs-adobe-firefly/' }] },
+    { goal:'EC・商品画像向けのAI画像生成ツールを比較したい', links:[{ label:'商品画像生成AIおすすめ比較', href:'/comparisons/ec-product-image-ai-tools/' }] },
   ] as RouterRow[],
   featured = {
     catLabel:'比較表 / 横断',
@@ -72,6 +73,7 @@ const {
     { tone:'image', catLabel:'画像生成', title:'Stable Diffusion vs Midjourney', desc:'無料利用・画質・商用利用・自由度の違いを比較。', href:'/comparisons/stable-diffusion-vs-midjourney/' },
     { tone:'image', catLabel:'画像生成', title:'Canva AI vs Adobe Firefly', desc:'デザイン制作に使いやすいAI画像生成ツールはどちらか比較。', href:'/comparisons/canva-ai-vs-adobe-firefly/' },
     { tone:'image', catLabel:'画像生成', title:'Adobe Firefly vs Microsoft Designer', desc:'商用利用・デザイン制作で選ぶAI画像生成ツールを比較。', href:'/comparisons/adobe-firefly-vs-microsoft-designer/' },
+    { tone:'image', catLabel:'EC向け', title:'商品画像生成AIおすすめ比較', desc:'EC向けの商品画像生成AIを、背景差し替え型・テンプレート合成型・生成型で比較します。', href:'/comparisons/ec-product-image-ai-tools/' },
   ] as Article[],
   faqs = [
     { q:'どの比較記事から読めばよいですか？',

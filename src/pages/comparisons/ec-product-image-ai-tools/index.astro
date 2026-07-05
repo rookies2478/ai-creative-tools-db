@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+
+const typeTable = [
+  {
+    type: '背景差し替え型',
+    desc: '実物写真を活かしたい人向け。背景除去・背景生成・補正が中心。',
+    tools: [
+      { name: 'Fotor AI', slug: 'fotor-ai' },
+      { name: 'Clipdrop', slug: 'clipdrop' },
+    ],
+  },
+  {
+    type: 'テンプレート合成型',
+    desc: '広告・SNS・LP向けに整えたい人向け。レイアウト・文字入れ・ブランドトーンを整えやすい。',
+    tools: [
+      { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator' },
+      { name: 'Microsoft Designer', slug: 'microsoft-designer' },
+    ],
+  },
+  {
+    type: '生成型',
+    desc: '背景・イメージ画像・商品まわりのビジュアルを作りたい人向け。写真の正確性より表現・雰囲気を重視。',
+    tools: [
+      { name: 'Adobe Firefly', slug: 'adobe-firefly' },
+      { name: 'DALL·E', slug: 'dalle' },
+      { name: 'Stable Diffusion', slug: 'stable-diffusion' },
+      { name: 'Gemini画像生成', slug: 'gemini-image-generation' },
+    ],
+  },
+];
+
+const tableRows = [
+  { name: 'Fotor AI', slug: 'fotor-ai', type: '背景差し替え型', bg: '◎（背景除去・背景生成）', commercial: '要確認', free: '無料プランあり（Basic）', watermark: '無料プランでは入る場合あり', japanese: '◯' },
+  { name: 'Clipdrop', slug: 'clipdrop', type: '背景差し替え型', bg: '◎（背景除去・背景生成に特化）', commercial: 'プランにより異なる', free: '無料枠あり', watermark: 'プランにより異なる', japanese: '×（UIは英語中心）' },
+  { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', type: 'テンプレート合成型', bg: '◯（テンプレート連携）', commercial: '条件付き（公式未明記）', free: '無料プランあり（回数制限）', watermark: '要確認', japanese: '◯' },
+  { name: 'Microsoft Designer', slug: 'microsoft-designer', type: 'テンプレート合成型', bg: '△', commercial: '個人向け案内あり（要公式確認）', free: '無料プランあり（Microsoftアカウント）', watermark: '要確認', japanese: '△' },
+  { name: 'Adobe Firefly', slug: 'adobe-firefly', type: '生成型', bg: '◎（背景編集・合成）', commercial: '条件付き（クレジット切れ後は要確認）', free: '無料クレジットあり（月次）', watermark: '要確認', japanese: '◯' },
+  { name: 'Stable Diffusion', slug: 'stable-diffusion', type: '生成型', bg: '△（環境依存）', commercial: 'モデルライセンスによる', free: 'ローカル実行なら基本無料', watermark: '基本なし（設定による）', japanese: '△' },
+];
+
+const faqs = [
+  {
+    q: '商品画像生成AIは無料で使えますか？',
+    a: '無料プラン・無料枠のあるツールはありますが、生成回数・出力サイズ・透かし・商用利用条件はツールやプランによって異なります。詳細は無料プランの範囲を確認できる<a href="/conditions/free/">無料で試せるツール一覧</a>や<a href="/comparisons/free-ai-image-generators/">無料AI画像生成ツール比較</a>をご確認ください。',
+  },
+  {
+    q: 'AIで作った商品画像は商用利用できますか？',
+    a: '商用利用条件はツール・プラン・生成方法によって異なる場合があります。EC販売・広告での利用を前提とする場合は、必ず<a href="/conditions/commercial-use/">商用利用条件</a>を公式規約で確認してください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '商品写真の背景だけを変えたい場合はどのタイプが向いていますか？',
+    a: '実物の商品写真を活かしたい場合は、背景除去・背景生成が中心の「背景差し替え型」（Fotor AI・Clipdropなど）が出発点になります。具体的な作り方は<a href="/use-cases/ec-product-image/">EC商品画像のAI活用ガイド</a>で解説しています。',
+  },
+  {
+    q: 'ECモールの商品画像にAI生成画像を使ってもよいですか？',
+    a: 'Amazon・楽天・Yahoo!ショッピングなどECモールごとに商品画像のガイドラインが定められています。AI生成画像の使用可否はモールの規約を個別に確認してください。実物との差異にも注意が必要です。',
+  },
+  {
+    q: '商品画像生成AIと通常の画像生成AIの違いは何ですか？',
+    a: '明確な区分があるわけではなく、通常の画像生成AIの中に、背景除去・背景生成に強いツールと、イメージ生成に強いツールが混在しています。EC用途では実物との一致度・商用利用条件を重視して選ぶのがポイントです。',
+  },
+];
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a.replace(/<[^>]+>/g, '') }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+        { "@type": "ListItem", "position": 2, "name": "比較記事", "item": "https://aicreative-db.com/comparisons/" },
+        { "@type": "ListItem", "position": 3, "name": "商品画像生成AIおすすめ比較", "item": "https://aicreative-db.com/comparisons/ec-product-image-ai-tools/" }
+      ]
+    }
+  ]
+});
+---
+
+<BaseLayout
+  title="商品画像生成AIおすすめ比較【EC向け】背景差し替え・生成タイプ別の選び方"
+  description="EC・ネットショップ向けの商品画像生成AIをタイプ別（背景差し替え型・テンプレート合成型・生成型）に比較。商用利用・無料枠・透かしの確認ポイントも整理します。条件は公式サイトでご確認ください。"
+  canonicalPath="/comparisons/ec-product-image-ai-tools/"
+  jsonLd={faqJsonLd}
+>
+  <div class="epc-wrap">
+
+    <nav class="epc-breadcrumb" aria-label="パンくずリスト">
+      <a href="/">トップ</a>
+      <span aria-hidden="true">/</span>
+      <a href="/comparisons/">比較記事</a>
+      <span aria-hidden="true">/</span>
+      <span>商品画像生成AIおすすめ比較</span>
+    </nav>
+
+    <div class="epc-hero">
+      <p class="epc-eyebrow">EC向け比較</p>
+      <h1 class="epc-h1">商品画像生成AIおすすめ比較｜EC向けツールをタイプ別に選ぶ</h1>
+      <p class="epc-lead">
+        商品画像を作れるAIツールは、実物写真の背景を差し替える「背景差し替え型」、テンプレートに商品写真をはめ込む「テンプレート合成型」、背景やイメージ画像を生成する「生成型」に分かれます。実物の商品写真を活かしたいEC出品なら背景差し替え型、LPやSNS向けに整えたいならテンプレート合成型が出発点です。ただし商用利用条件・透かし・ECモールの画像ガイドラインはツールやプランによって異なるため、利用前に公式規約をご確認ください。
+      </p>
+    </div>
+
+    <div class="epc-notice">
+      <p class="epc-notice-h">ご確認ください</p>
+      <ul>
+        <li>商用利用条件・無料枠・透かしの有無は、ツールやプランによって変更される場合があります。</li>
+        <li>最新情報は各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。</li>
+        <li>実際の作り方・ECモール規約・実物との差異の確認は<a href="/use-cases/ec-product-image/">EC商品画像のAI活用ガイド</a>で詳しく解説しています。</li>
+        <li>本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。</li>
+      </ul>
+    </div>
+
+    <!-- 結論 -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">結論：商品画像生成AIは3タイプで選ぶ</h2>
+      <div class="epc-type-grid">
+        {typeTable.map(({ type, desc, tools }) => (
+          <div class="epc-type-card">
+            <p class="epc-type-name">{type}</p>
+            <p class="epc-type-desc">{desc}</p>
+            <div class="epc-type-tools">
+              {tools.map((t) => (
+                <a href={`/tools/${t.slug}/`} class="epc-type-tool">{t.name} →</a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 比較表 -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">商品画像生成AIの比較表</h2>
+      <p class="epc-table-note">以下は参考情報です。商用利用・無料枠・透かしの条件は変更される場合があります。最新情報は各ツールの公式サイトをご確認ください。</p>
+      <p class="epc-scroll-hint" aria-hidden="true">← 横にスクロールできます →</p>
+      <div class="epc-table-wrap">
+        <table class="epc-table">
+          <thead>
+            <tr>
+              <th>ツール</th>
+              <th>タイプ</th>
+              <th>背景除去・背景生成</th>
+              <th>商用利用</th>
+              <th>無料枠</th>
+              <th>透かし</th>
+              <th>日本語対応</th>
+              <th>詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableRows.map(({ name, slug, type, bg, commercial, free, watermark, japanese }, i) => (
+              <tr class={i % 2 === 0 ? 'epc-tr-even' : 'epc-tr-odd'}>
+                <td class="epc-td-name">{name}</td>
+                <td>{type}</td>
+                <td>{bg}</td>
+                <td class="epc-td-note">{commercial}</td>
+                <td class="epc-td-note">{free}</td>
+                <td>{watermark}</td>
+                <td>{japanese}</td>
+                <td><a href={`/tools/${slug}/`} class="epc-td-link">詳細 →</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="epc-table-foot">◎：中心的な強み、◯：対応、△：条件付きまたは要確認、×：非対応。商用利用・無料枠・透かしは公式規約を確認してください。</p>
+      <p class="epc-table-extra">DALL·E・Gemini画像生成も生成型の候補です。詳細は<a href="/tools/dalle/">DALL·E</a>・<a href="/tools/gemini-image-generation/">Gemini画像生成</a>の各ページをご確認ください。</p>
+    </section>
+
+    <!-- タイプ別の選び方 -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">タイプ別の選び方</h2>
+      <div class="epc-way-grid">
+        <div class="epc-way-card">
+          <p class="epc-way-h">背景差し替え型を選ぶケース</p>
+          <p class="epc-way-body">実物の商品写真をそのまま使い、背景だけをEC用に整えたい場合に向いています。撮影済みの商品写真がある場合の出発点です。代表候補は<a href="/tools/fotor-ai/">Fotor AI</a>・<a href="/tools/clipdrop/">Clipdrop</a>です。</p>
+        </div>
+        <div class="epc-way-card">
+          <p class="epc-way-h">テンプレート合成型を選ぶケース</p>
+          <p class="epc-way-body">商品写真を広告・SNS・LP用のレイアウトに整えたい場合に向いています。文字入れやブランドトーンを統一しやすい構成です。代表候補は<a href="/tools/canva-ai-image-generator/">Canva AI画像生成</a>・<a href="/tools/microsoft-designer/">Microsoft Designer</a>です。</p>
+        </div>
+        <div class="epc-way-card">
+          <p class="epc-way-h">生成型を選ぶケース</p>
+          <p class="epc-way-body">商品まわりのイメージ画像・背景の世界観を作りたい場合に向いています。写真そのものの正確性より表現・雰囲気を重視する用途です。代表候補は<a href="/tools/adobe-firefly/">Adobe Firefly</a>・<a href="/tools/dalle/">DALL·E</a>・<a href="/tools/stable-diffusion/">Stable Diffusion</a>・<a href="/tools/gemini-image-generation/">Gemini画像生成</a>です。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EC販売で使う前に確認すること -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">EC販売で使う前に確認すること</h2>
+      <ul class="epc-check-list">
+        <li><b>商用利用条件：</b>EC販売・広告での利用が認められているか、ツール・プランごとに確認してください。詳細は<a href="/conditions/commercial-use/">商用利用条件を確認できるツール一覧</a>へ。</li>
+        <li><b>透かし：</b>無料プランでは透かしが入る場合があります。詳細は<a href="/conditions/no-watermark/">透かしなしツール一覧</a>へ。</li>
+        <li><b>無料枠：</b>生成回数・出力サイズの上限はツールごとに異なります。詳細は<a href="/conditions/free/">無料で試せるツール一覧</a>へ。</li>
+        <li><b>ECモールの画像ガイドライン：</b>Amazon・楽天・Yahoo!ショッピングなど、モールごとに商品画像の規約が定められています。個別に確認してください。</li>
+        <li><b>実物との差異：</b>生成画像が実際の商品と大きく異なる場合、購入者とのトラブルや景品表示法上の問題につながる可能性があります。</li>
+        <li><b>ブランド・ロゴ・人物素材：</b>第三者のロゴ・ブランド名・人物を含む画像は、商標権・肖像権に関わる場合があります。</li>
+      </ul>
+      <p class="epc-check-more">具体的な作り方・注意点は<a href="/use-cases/ec-product-image/">EC商品画像のAI活用ガイド</a>で詳しく解説しています。著作権・商用利用の考え方全般は<a href="/guides/commercial-use-copyright/">商用利用と著作権ガイド</a>もご確認ください。</p>
+    </section>
+
+    <!-- FAQ -->
+    <GuideFAQ items={faqs} title="よくある質問" />
+
+    <!-- 関連ページ -->
+    <section class="epc-related">
+      <h2 class="epc-related-h">関連ページ</h2>
+      <div class="epc-related-links">
+        <a href="/use-cases/ec-product-image/" class="epc-related-link">EC商品画像のAI活用ガイド</a>
+        <a href="/conditions/commercial-use/" class="epc-related-link">商用利用を確認しやすいAIツール</a>
+        <a href="/conditions/free/" class="epc-related-link">無料で試せるツール一覧</a>
+        <a href="/conditions/no-watermark/" class="epc-related-link">透かしなしツール</a>
+        <a href="/guides/commercial-use-copyright/" class="epc-related-link">商用利用と著作権ガイド</a>
+        <a href="/comparisons/" class="epc-related-link">比較記事一覧</a>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .epc-wrap {
+    --brand: #4B3FE4;
+    --brand-ink: #2E25A6;
+    --brand-tint: #ECEBFB;
+    --line: #E5E7EB;
+    --surface: #FFFFFF;
+    --surface-2: #F9FAFB;
+    --ink-body: #374151;
+    --ink-soft: #6B7280;
+    --faint: #9CA3AF;
+    --amber-bg: #FFFBEB;
+    --amber-border: #FDE68A;
+    --amber-text: #92400E;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    color: var(--ink-body);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .epc-breadcrumb { display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: 12.5px; color: var(--ink-soft); margin-bottom: 32px; }
+  .epc-breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+  .epc-breadcrumb a:hover { color: var(--brand); text-decoration: underline; }
+
+  .epc-hero { margin-bottom: 36px; }
+  .epc-eyebrow { display: inline-block; background: var(--brand-tint); color: var(--brand-ink); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; border-radius: 20px; padding: 3px 12px; margin-bottom: 14px; }
+  .epc-h1 { font-size: clamp(22px, 3.2vw, 32px); font-weight: 800; line-height: 1.3; text-wrap: balance; color: #111827; margin-bottom: 14px; }
+  .epc-lead { font-size: 14.5px; color: var(--ink-soft); line-height: 1.8; max-width: 680px; }
+
+  .epc-notice { background: var(--amber-bg); border: 1px solid var(--amber-border); border-radius: 14px; padding: 18px 22px; margin-bottom: 48px; color: var(--amber-text); font-size: 13px; line-height: 1.7; }
+  .epc-notice-h { font-weight: 700; margin-bottom: 8px; }
+  .epc-notice ul { padding-left: 18px; }
+  .epc-notice li + li { margin-top: 5px; }
+  .epc-notice a { color: var(--amber-text); text-decoration: underline; }
+
+  .epc-sec { margin-bottom: 56px; }
+  .epc-h2 { font-size: clamp(17px, 2.2vw, 22px); font-weight: 800; color: #111827; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--brand-tint); }
+
+  .epc-type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .epc-type-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; box-shadow: var(--shadow-sm); }
+  .epc-type-name { font-size: 15px; font-weight: 800; color: var(--brand-ink); margin-bottom: 8px; }
+  .epc-type-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 14px; }
+  .epc-type-tools { display: flex; flex-direction: column; gap: 6px; }
+  .epc-type-tool { font-size: 12.5px; font-weight: 600; color: var(--brand-ink); text-decoration: none; }
+  .epc-type-tool:hover { text-decoration: underline; }
+
+  .epc-table-note { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; }
+  .epc-scroll-hint { display: none; font-size: 11.5px; color: var(--ink-soft); text-align: center; margin: 0 0 6px; }
+  @media (max-width: 680px) { .epc-scroll-hint { display: block; } }
+  .epc-table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+  .epc-table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 12.5px; }
+  .epc-table thead tr { background: var(--brand-tint); }
+  .epc-table th { text-align: left; padding: 12px 14px; font-size: 11.5px; font-weight: 700; color: var(--brand-ink); border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .epc-tr-even { background: var(--surface); }
+  .epc-tr-odd { background: var(--surface-2); }
+  .epc-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink-body); vertical-align: top; line-height: 1.55; }
+  .epc-td-name { font-weight: 600; color: #111827; white-space: nowrap; }
+  .epc-td-note { font-size: 11.5px; color: var(--ink-soft); }
+  .epc-td-link { color: var(--brand-ink); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .epc-td-link:hover { text-decoration: underline; }
+  .epc-table-foot { margin-top: 8px; font-size: 11.5px; color: var(--faint); }
+  .epc-table-extra { margin-top: 10px; font-size: 12.5px; color: var(--ink-soft); }
+  .epc-table-extra a { color: var(--brand-ink); }
+
+  .epc-way-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .epc-way-card { background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+  .epc-way-h { font-size: 13.5px; font-weight: 700; color: #111827; margin-bottom: 10px; }
+  .epc-way-body { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; }
+  .epc-way-body a { color: var(--brand-ink); }
+
+  .epc-check-list { padding-left: 18px; font-size: 13.5px; color: var(--ink-body); line-height: 1.8; }
+  .epc-check-list li + li { margin-top: 10px; }
+  .epc-check-list a { color: var(--brand-ink); }
+  .epc-check-more { margin-top: 16px; font-size: 12.5px; color: var(--ink-soft); }
+  .epc-check-more a { color: var(--brand-ink); }
+
+  .epc-related { margin-top: 32px; }
+  .epc-related-h { font-size: 14px; font-weight: 700; color: var(--ink-soft); margin-bottom: 12px; }
+  .epc-related-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .epc-related-link { border: 1px solid var(--line); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ink-body); text-decoration: none; transition: background .15s, border-color .15s; }
+  .epc-related-link:hover { background: var(--brand-tint); border-color: #C7C2F5; color: var(--brand-ink); }
+
+  @media (max-width: 680px) {
+    .epc-type-grid { grid-template-columns: 1fr; }
+    .epc-way-grid { grid-template-columns: 1fr; }
+  }
+</style>

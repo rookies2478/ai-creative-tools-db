@@ -39,6 +39,7 @@ const pageFaqs = [
   { q:'商用利用前に確認すべき公式情報は何ですか？', a:'主に以下の3点を確認することを推奨します：①利用規約（Terms of Service）における商用利用の定義と許可範囲、②プランごとの料金ページにおける商用利用の記載、③コンテンツポリシー（禁止コンテンツ・用途）。本記事は法的助言ではありません。' },
   { q:'「条件あり」と表示されていれば商用利用できますか？', a:'利用できる場合がありますが、プラン・用途・生成コンテンツの内容・利用規約によって条件が変わります。実際に使う前に、必ず各ツールの最新公式情報をご確認ください。' },
   { q:'商用利用の可否だけ確認すれば十分ですか？', a:'商用利用条件の確認に加えて、入力素材・第三者素材・人物・ロゴ・商標の扱い、透かしの有無、クレジット表記義務も別途確認が必要です。用途によってはプランの変更が必要な場合もあります。本記事は法的助言ではありません。' },
+  { q:'Stable Diffusionで作った画像は商用利用できますか？', a:'Stable Diffusionは、利用するモデル、配布元、ライセンス、実行環境によって確認すべき条件が変わります。商用利用を検討する場合は、利用しているモデルのライセンス、配布元の規約、生成物の用途、素材や人物・ブランドの権利を確認してください。詳しくは<a href="/tools/stable-diffusion/">Stable Diffusionページ</a>と<a href="/guides/commercial-use-copyright/">著作権・肖像権の確認ガイド</a>も参照してください。' },
 ];
 
 const faqSchemaObj = {
@@ -64,8 +65,8 @@ const combinedSchema = JSON.stringify([faqSchemaObj, breadcrumbSchemaObj]);
 ---
 
 <BaseLayout
-  title="生成AI 商用利用できるツール一覧比較｜条件まとめ"
-  description="生成AIツールの商用利用可否をツール別に一覧比較。確認ポイントは規約範囲・無料/有料プランの違い・透かし表記の3点です。本記事は法的助言ではありません。"
+  title="AI画像・動画生成ツールの商用利用条件まとめ｜確認すべき権利・規約"
+  description="AI画像生成・動画生成ツールを商用利用する前に確認したい、利用規約・ライセンス・著作権・肖像権・透かし・無料プランの注意点を整理。Stable Diffusion、Midjourney、Adobe Firefly、Runwayなど主要ツールの確認導線もまとめます。"
   canonicalPath="/conditions/commercial-use/"
   jsonLd={combinedSchema}
 >
@@ -86,7 +87,7 @@ const combinedSchema = JSON.stringify([faqSchemaObj, breadcrumbSchemaObj]);
       stats={[
         { n: toolCount, label: '対象ツール' },
         { n: '5', label: 'ステータス段階' },
-        { n: '8', label: 'よくある質問' },
+        { n: '9', label: 'よくある質問' },
       ]}
     />
     <section class="mt-10">
@@ -99,8 +100,19 @@ const combinedSchema = JSON.stringify([faqSchemaObj, breadcrumbSchemaObj]);
         <li><a href="/tools/stable-diffusion/" class="hover:underline">Stable Diffusionのモデルライセンス確認</a></li>
         <li><a href="/tools/runway/" class="hover:underline">Runwayの動画・画像利用時の権利確認</a></li>
         <li><a href="/tools/midjourney/" class="hover:underline">Midjourneyの商用利用・料金確認</a></li>
+        <li><a href="/tools/adobe-firefly/" class="hover:underline">Adobe Fireflyの商用利用・ライセンス確認</a></li>
+        <li><a href="/tools/kling-ai/" class="hover:underline">Kling AIの商用利用・プラン確認</a></li>
+        <li><a href="/tools/canva-ai-image-generator/" class="hover:underline">Canva AI画像生成の商用利用確認</a></li>
+        <li><a href="/tools/leonardo-ai/" class="hover:underline">Leonardo AIの商用利用・料金確認</a></li>
         <li><a href="/guides/commercial-use-copyright/" class="hover:underline">生成AI画像・動画の著作権確認ガイド</a></li>
       </ul>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-bold text-slate-900">主要AIツール別に商用利用条件を確認する</h2>
+      <p class="mt-3 text-slate-600 leading-relaxed">
+        AI画像・動画生成ツールは、同じ「商用利用」といっても、無料プラン・有料プラン・生成モデル・素材・出力形式によって条件が変わる場合があります。特にStable Diffusionのように利用するモデルや配布元によって条件が変わるもの、MidjourneyやRunway、Kling AIのようにプラン・規約確認が重要なものは、各ツールページと公式規約をあわせて確認してください。
+      </p>
     </section>
   </div>
 </BaseLayout>

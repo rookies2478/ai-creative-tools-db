@@ -179,6 +179,10 @@ const jsonLd = JSON.stringify([
         disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のライセンスおよびStability AI公式サイトをご確認ください。',
         more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
       }}
+      commercialExtra={{
+        title: 'Stable Diffusionを商用利用する前に確認すること',
+        html: 'Stable Diffusionは、利用するモデル・配布元・ライセンス条件によって商用利用時の確認点が変わります。ツール名だけで判断せず、使用するモデルのライセンス、生成物の用途、追加学習モデルやLoRAなどの権利条件を確認してください。主要AI画像生成ツールの商用利用条件は<a href="/conditions/commercial-use/">こちらの一覧</a>、生成AI画像の著作権や権利確認の考え方は<a href="/guides/commercial-use-copyright/">こちらのガイド</a>でも整理しています。',
+      }}
       integrationTitle="AUTOMATIC1111・ComfyUIなどのフロントエンドについて"
       integration="Stable Diffusionをローカル実行する際は、AUTOMATIC1111 Web UIやComfyUIなどのフロントエンドツールと組み合わせて利用するのが一般的です。AUTOMATIC1111は歴史が長くチュートリアルが豊富で、ComfyUIはノードベースのワークフロー構築が可能で2025〜2026年にかけて主流ツールとしての地位を確立しつつあります。最新の状況は各ツールの公式ページでご確認ください。"
       whoFor={[

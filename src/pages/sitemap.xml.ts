@@ -25,6 +25,7 @@ const STATIC_PATHS = [
   '/comparisons/midjourney-vs-leonardo-ai/',
   '/comparisons/ai-image-video-tools/',
   '/comparisons/ec-product-image-ai-tools/',
+  '/comparisons/ad-banner-ai-tools/',
   '/conditions/free/',
   '/conditions/commercial-use/',
   '/conditions/japanese/',

@@ -6,8 +6,9 @@ interface FAQItem {
 interface Props {
   items: FAQItem[];
   title?: string;
+  emitSchema?: boolean;
 }
-const { items, title = 'よくある質問' } = Astro.props;
+const { items, title = 'よくある質問', emitSchema = true } = Astro.props;
 ---
 
 <section class="my-8" aria-labelledby="faq-heading">
@@ -41,19 +42,21 @@ const { items, title = 'よくある質問' } = Astro.props;
   </div>
 </section>
 
-<!-- schema.org FAQPage structured data -->
-<script type="application/ld+json" set:html={JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": items.map(item => ({
-    "@type": "Question",
-    "name": item.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": item.a
-    }
-  }))
-})} />
+{emitSchema && (
+  <!-- schema.org FAQPage structured data -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": items.map(item => ({
+      "@type": "Question",
+      "name": item.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.a
+      }
+    }))
+  })} />
+)}
 
 <style>
   details > summary::-webkit-details-marker {

@@ -100,7 +100,7 @@ const {
       {tools.map((t) => (
         <div class="gen-card">
           {t.img
-            ? <img class="gen-img" src={t.img} alt={t.alt ?? `${t.name} の作例`} loading="eager" decoding="async" />
+            ? <img class="gen-img" src={t.img} alt={t.alt ?? `${t.name} の作例`} loading="eager" decoding="async" width="800" height="1200" />
             : <div class="gen-ph" aria-hidden="true"></div>}
           <div class="ghead"><span class="gbadge" style={`background:${t.color}`}>{t.initial}</span><span class="gname">{t.name}</span></div>
           <div class="skel"><div class="genstate"><span class="spin"></span><span class="gt">{t.name}</span></div></div>

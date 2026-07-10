@@ -13,13 +13,9 @@ const toolOutputBase = (image: import('../../../data/generatedImages').Generated
   image.sampleType === 'tool-output' &&
   image.sourceToolSlug === toolSlug &&
   image.isSameToolAsPage === true;
-const benchmarkSampleImage = generatedImages.find((image) =>
+const sampleImage = generatedImages.find((image) =>
   toolOutputBase(image) && image.promptVersion === 'image-tool-benchmark-v1'
-);
-const fallbackSampleImage = generatedImages.find((image) =>
-  toolOutputBase(image) && image.promptVersion === 'home-showcase-v1'
-);
-const sampleImage = benchmarkSampleImage ?? fallbackSampleImage ?? null;
+) ?? null;
 
 const jsonLd = JSON.stringify([
   {

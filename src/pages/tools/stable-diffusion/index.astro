@@ -40,8 +40,8 @@ const jsonLd = JSON.stringify([
 ---
 
 <BaseLayout
-  title="Stable Diffusionとは？商用利用・無料利用の注意点"
-  description="Stable Diffusionの特徴、使い方、商用利用、無料利用、料金確認のポイントを整理。画像生成AIとして使う前に、モデル・ライセンス・利用規約・著作権まわりの注意点を確認できます。"
+  title="Stable Diffusionの商用利用・著作権・ライセンスまとめ｜注意点を解説"
+  description="Stable Diffusionの商用利用、著作権、ライセンスの確認ポイントを整理。モデルバージョンや配布元による条件の違い、CreativeML Open RAIL-M / Stability AI Community Licenseの注意点をまとめます。本記事は法的助言ではありません。"
   canonicalPath="/tools/stable-diffusion/"
   ogType="article"
   jsonLd={jsonLd}
@@ -177,7 +177,7 @@ const jsonLd = JSON.stringify([
       }}
       commercialExtra={{
         title: 'Stable Diffusionを商用利用する前に確認すること',
-        html: 'Stable Diffusionは、利用するモデル・配布元・ライセンス条件によって商用利用時の確認点が変わります。ツール名だけで判断せず、使用するモデルのライセンス、生成物の用途、追加学習モデルやLoRAなどの権利条件を確認してください。主要AI画像生成ツールの商用利用条件は<a href="/conditions/commercial-use/">こちらの一覧</a>、生成AI画像の著作権や権利確認の考え方は<a href="/guides/commercial-use-copyright/">こちらのガイド</a>でも整理しています。',
+        html: 'Stable Diffusionは、利用するモデル・配布元・ライセンス条件によって商用利用時の確認点が変わります。ツール名だけで判断せず、使用するモデルのライセンス、生成物の用途、追加学習モデルやLoRAなどの権利条件を確認してください。生成物の著作権は、国・地域、利用するモデル、入力素材、用途によって判断が異なる場合があり、現在も議論や係争がある論点として報告されています。断定は避け、必要に応じて専門家への相談を推奨します。主要AI画像生成ツールの商用利用条件は<a href="/conditions/commercial-use/">こちらの一覧</a>、生成AI画像の著作権や権利確認の考え方は<a href="/guides/commercial-use-copyright/">こちらのガイド</a>でも整理しています。',
       }}
       integrationTitle="AUTOMATIC1111・ComfyUIなどのフロントエンドについて"
       integration="Stable Diffusionをローカル実行する際は、AUTOMATIC1111 Web UIやComfyUIなどのフロントエンドツールと組み合わせて利用するのが一般的です。AUTOMATIC1111は歴史が長くチュートリアルが豊富で、ComfyUIはノードベースのワークフロー構築が可能で2025〜2026年にかけて主流ツールとしての地位を確立しつつあります。最新の状況は各ツールの公式ページでご確認ください。"
@@ -255,6 +255,8 @@ const jsonLd = JSON.stringify([
         { q: 'AUTOMATIC1111とComfyUIの違いは何ですか？', a: 'どちらもStable Diffusionを動かすためのフロントエンドツールです。AUTOMATIC1111はチュートリアルが豊富で導入事例が多く、ComfyUIはノードベースのワークフロー構築が可能で新モデルへの対応速度に優れています。用途に合わせて選択することを推奨します。' },
         { q: 'SD 3.5とは何ですか？', a: '2024年10月に公式発表されたStability AIのモデル系統です。Large（8.1Bパラメータ）・Large Turbo・Mediumのバリアントが公開されています。ライセンスはSD 3.x系と同様にStability AI Community Licenseが適用されています。詳細は公式サイトをご確認ください。' },
         { q: 'コミュニティモデル（Civitai等）のライセンスはどうなりますか？', a: 'Civitaiなどで公開されているカスタムモデル・LoRAはそれぞれ独自のライセンスを持つ場合があります。商用利用する際は各モデルのライセンス・配布ページで利用条件を確認する必要があります。' },
+        { q: 'Stable Diffusionの生成画像の著作権は誰にありますか？', a: '生成物の権利関係は、国や地域、利用するモデル、配布元のライセンス、入力素材、用途によって判断が異なる場合があります。商用利用や公開利用を行う場合は、利用しているモデルのライセンスと配布元の規約を確認し、必要に応じて専門家へ相談してください。本記事は法的助言ではありません。' },
+        { q: 'CreativeML Open RAIL-MとStability AI Community Licenseは何が違いますか？', a: 'Stable Diffusionのモデルによって適用されるライセンスや利用条件が異なる場合があります。SD 1.x / 2.x / SDXLではCreativeML Open RAIL-Mが参照されることが多く、SD 3.x / 3.5系ではStability AI Community Licenseなど別の条件が案内されています。利用前に、使用するモデル名、配布元、ライセンス本文、商用利用条件を確認してください。' },
       ]}
       relatedTools={[
         { name: 'Midjourney', slug: 'midjourney', initial: 'M', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'na', label: '無料枠：なし' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Discord', 'Web'], official: 'https://www.midjourney.com' },

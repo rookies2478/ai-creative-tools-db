@@ -254,7 +254,7 @@ const jpr = triLabel(data.japanesePrompt);
               <a
                 href={data.officialUrl}
                 target="_blank"
-                rel="sponsored nofollow noopener noreferrer"
+                rel="nofollow noopener noreferrer"
                 class="text-xs text-blue-600 hover:underline"
               >
                 公式サイトで確認する ↗
@@ -270,7 +270,7 @@ const jpr = triLabel(data.japanesePrompt);
       <a
         href={(data as any).affiliateUrl ?? data.officialUrl}
         target="_blank"
-        rel="sponsored nofollow noopener noreferrer"
+        rel={(data as any).affiliateUrl ? 'sponsored nofollow noopener noreferrer' : 'nofollow noopener noreferrer'}
         class="tst-cta-btn"
       >
         料金・利用条件を公式サイトで確認する ↗

@@ -330,8 +330,8 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
     </div>
 
     <div class="tdp-actions">
-      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel="sponsored nofollow noopener noreferrer">{primaryCta.label} <span class="ext">↗</span></a>
-      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel="sponsored nofollow noopener noreferrer">{secondaryCta.label} <span class="ext">↗</span></a> : null}
+      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel="nofollow noopener noreferrer">{primaryCta.label} <span class="ext">↗</span></a>
+      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel="nofollow noopener noreferrer">{secondaryCta.label} <span class="ext">↗</span></a> : null}
     </div>
 
     <div class="tdp-caution">

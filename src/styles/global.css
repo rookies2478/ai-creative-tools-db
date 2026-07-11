@@ -195,6 +195,9 @@ html { overflow-x: clip; }
   color: #2563eb;
   background-color: #eff6ff;
 }
+@media (max-width: 720px) {
+  .chip { min-height: 44px; }
+}
 
 /* Primary CTA button */
 .primary-btn {

@@ -278,6 +278,7 @@
   }
   .filter-chips::-webkit-scrollbar { display: none; }
   .fchip { min-height: 44px; }
+  .sort-label { min-height: 44px; }
   .toolbar-right { margin-left: 0; width: 100%; }
   .tool-search { flex: 1; }
   .tool-search input { width: 100%; }

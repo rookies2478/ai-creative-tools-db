@@ -137,4 +137,5 @@ Enterprise向けにはSOC 2 Type II、GDPR、ISO 42001、SAML/SSOなどのセキ
 ## 関連ページ
 
 - [AIアバター動画ツール一覧](/categories/avatar-video/) — アバター動画ツールの比較・選び方
+- [HeyGen・D-ID・Synthesia比較](/comparisons/avatar-video-ai-tools/) — 用途別の選び方を比較
 - [商用利用を確認しやすいAIツール](/conditions/commercial-use/) — 商用利用条件比較

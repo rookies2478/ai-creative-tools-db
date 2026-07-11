@@ -1,0 +1,360 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+
+const positioning = [
+  {
+    name: 'HeyGen',
+    slug: 'heygen',
+    desc: '研修・営業支援・多言語マーケティング向けの候補になります。動画翻訳やボイスクローンで多言語展開しやすい構成です。',
+  },
+  {
+    name: 'D-ID',
+    slug: 'd-id',
+    desc: '顔写真から作る説明動画や、APIによるサービス組み込みに向いています。リアルタイム生成用途でも検討候補になります。',
+  },
+  {
+    name: 'Synthesia',
+    slug: 'synthesia',
+    desc: '研修・eラーニング・社内コミュニケーション動画に向いています。240以上のアバターと多言語対応が特徴です。',
+  },
+];
+
+const tableRows = [
+  {
+    name: 'HeyGen',
+    slug: 'heygen',
+    free: '○（動画最大1分・クレジットカード不要）',
+    watermark: '△（無料プランは付与、Creator以上で削除機能あり）',
+    commercial: '△（無料プランは商用利用に制限。有料プランは条件付きで案内。プランにより異なる場合があります）',
+    japanese: '△（多言語対応、日本語音声は要確認）／UI：要確認',
+    voice: '多言語ボイスクローン・動画翻訳に対応',
+    bestFor: '研修・営業支援・多言語マーケティング',
+  },
+  {
+    name: 'D-ID',
+    slug: 'd-id',
+    free: '○（Free Trial、15秒単位で課金）',
+    watermark: '△（Trial／Liteは付与、それ以外は要確認）',
+    commercial: '△（Liteプランは非商用限定。それ以外は条件付きで商用利用可とされる。プランにより異なる場合があります）',
+    japanese: '○（Studio 119言語対応、アバターは日本語含むと公式記載）／UI：要確認',
+    voice: 'TTS・音声アップロード・音声クローンに対応',
+    bestFor: '顔写真からの説明動画・API組み込み',
+  },
+  {
+    name: 'Synthesia',
+    slug: 'synthesia',
+    free: '○（Basicプラン、月10分まで）',
+    watermark: '△（Basicは付与、Starter以上で削除機能あり）',
+    commercial: '△（生成動画の権利は組織＝契約主体に帰属。条件はプランにより異なる場合があります）',
+    japanese: '△（160以上の言語対応、日本語は要確認）／UI：要確認',
+    voice: '1000以上のAI音声・自動字幕・ワンクリック翻訳',
+    bestFor: '研修・eラーニング・社内コミュニケーション',
+  },
+];
+
+const useCases = [
+  {
+    h: '研修動画',
+    body: '同じ内容を安定した品質で繰り返し使いたい場合、アバターと台本を差し替えるだけで改訂できる点が向いています。HeyGen・Synthesiaはどちらも研修・eラーニング向けの機能が案内されています。',
+  },
+  {
+    h: '営業・提案動画',
+    body: '多言語展開や短時間での量産を重視する場合の候補になります。HeyGenは営業支援・多言語マーケティング向けの案内があります。',
+  },
+  {
+    h: '顔出しなしYouTube',
+    body: '顔を出さずに解説動画を作りたい場合の選択肢になります。ただし収益化・広告運用での利用条件はツール・プランによって異なるため、事前に公式規約を確認してください。',
+  },
+  {
+    h: '多言語ナレーション動画',
+    body: 'D-IDはStudioで119言語対応、Video Translateで日本語を含む40以上の言語対応が公式に案内されています。Synthesiaも160以上の言語に対応しています。',
+  },
+  {
+    h: 'SNSショート動画',
+    body: '短尺・量産向けの用途です。無料枠には透かしや分数制限があるため、SNS投稿で使う場合は事前に条件を確認してください。',
+  },
+];
+
+const faqs = [
+  {
+    q: 'HeyGen・D-ID・Synthesiaは無料で試せますか？',
+    a: 'いずれも無料プランまたはFree Trialが用意されています。HeyGenは動画最大1分、D-IDはFree Trial（15秒単位課金）、Synthesiaは月10分までとされています。無料プランには透かしが付与される場合があります。詳細は各ツールの公式サイトをご確認ください。',
+  },
+  {
+    q: '3ツールで一番日本語に強いのはどれですか？',
+    a: '日本語UI対応はいずれも公式情報で明確に確認できておらず、要確認です。日本語音声・ナレーションについては、D-IDがStudioで119言語対応・アバターに日本語を含むと公式に案内しています。実際の音声の自然さは用途ごとに確認してください。',
+  },
+  {
+    q: '研修動画を作るならどれが向いていますか？',
+    a: 'HeyGen・Synthesiaはどちらも研修・eラーニング向けの機能が案内されています。アバターの種類や多言語対応、チーム管理機能の有無で選ぶとよいでしょう。詳細は各<a href="/tools/heygen/">HeyGen</a>・<a href="/tools/synthesia/">Synthesia</a>の詳細ページをご確認ください。',
+  },
+  {
+    q: '顔出しなしYouTube動画にはどれが向いていますか？',
+    a: '3ツールとも顔出しなしの解説動画に使える候補になります。ただし収益化・広告運用を伴う場合は、商用利用条件がツール・プランによって異なるため、事前に<a href="/conditions/commercial-use/">商用利用条件</a>を公式規約で確認してください。',
+  },
+  {
+    q: '自社サービスにアバター動画機能を組み込みたい場合はどうすればよいですか？',
+    a: 'D-IDはAPIを提供しており、アバター動画生成機能をサービスに組み込む用途やリアルタイム生成用途の候補になります。APIとStudioでデータ保持や利用条件が異なる場合があるため、詳細は<a href="/tools/d-id/">D-ID</a>の詳細ページと公式情報をご確認ください。',
+  },
+  {
+    q: '他人の顔や声を使ってアバター動画を作ってもよいですか？',
+    a: '本人の同意なく他者の顔・声・写真を使用することは、肖像権やパブリシティ権の観点から問題になる場合があります。カスタムアバターや音声クローン機能を使う際は、本人同意や利用権限の確認が必要です。詳細は各ツールの利用規約と関連法令をご確認ください。本記事は法的助言ではありません。',
+  },
+];
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a.replace(/<[^>]+>/g, '') }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+        { "@type": "ListItem", "position": 2, "name": "比較記事", "item": "https://aicreative-db.com/comparisons/" },
+        { "@type": "ListItem", "position": 3, "name": "AIアバター動画生成ツール比較", "item": "https://aicreative-db.com/comparisons/avatar-video-ai-tools/" }
+      ]
+    }
+  ]
+});
+---
+
+<BaseLayout
+  title="AIアバター動画生成ツール比較｜HeyGen・D-ID・Synthesiaの選び方"
+  description="HeyGen・D-ID・Synthesiaを無料枠・透かし条件・商用利用の確認ポイント・日本語対応・用途別の向き不向きで比較。研修動画、営業動画、顔出しなしYouTubeなど目的別の選び方を整理します。"
+  canonicalPath="/comparisons/avatar-video-ai-tools/"
+  jsonLd={faqJsonLd}
+>
+  <div class="epc-wrap">
+
+    <nav class="epc-breadcrumb" aria-label="パンくずリスト">
+      <a href="/">トップ</a>
+      <span aria-hidden="true">/</span>
+      <a href="/comparisons/">比較記事</a>
+      <span aria-hidden="true">/</span>
+      <span>AIアバター動画生成ツール比較</span>
+    </nav>
+
+    <div class="epc-hero">
+      <p class="epc-eyebrow">アバター動画比較</p>
+      <h1 class="epc-h1">AIアバター動画生成ツール比較｜HeyGen・D-ID・Synthesiaの選び方</h1>
+      <p class="epc-lead">
+        HeyGen・D-ID・Synthesiaは、いずれもテキスト原稿からAIアバターが話す動画を生成できるツールですが、得意とする用途や料金体系の考え方が異なります。<a href="/categories/avatar-video/">AIアバター動画ツール一覧</a>ではInVideo AIを含めた4ツールを簡易比較していますが、このページではHeyGen・D-ID・Synthesiaの3ツールに絞り、用途別の選び方と商用利用・肖像権の確認ポイントを深掘りします。
+      </p>
+    </div>
+
+    <div class="epc-notice">
+      <p class="epc-notice-h">ご確認ください</p>
+      <ul>
+        <li>無料枠・透かし・商用利用条件は、ツールやプランによって変更される場合があります。</li>
+        <li>最新情報は各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。</li>
+        <li>日本語UIの対応状況は3ツールとも公式情報で明確に確認できておらず、要確認です。</li>
+        <li>本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。</li>
+      </ul>
+    </div>
+
+    <!-- 3ツールの位置づけ早見 -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">3ツールの位置づけ早見</h2>
+      <div class="epc-type-grid">
+        {positioning.map(({ name, slug, desc }) => (
+          <div class="epc-type-card">
+            <p class="epc-type-name">{name}</p>
+            <p class="epc-type-desc">{desc}</p>
+            <div class="epc-type-tools">
+              <a href={`/tools/${slug}/`} class="epc-type-tool">{name}の詳細を見る →</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 比較表 -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">HeyGen・D-ID・Synthesiaの比較表</h2>
+      <p class="epc-table-note">以下は参考情報です。無料枠・透かし・商用利用条件は変更される場合があります。最新情報は各ツールの公式サイトをご確認ください。</p>
+      <p class="epc-scroll-hint" aria-hidden="true">← 横にスクロールできます →</p>
+      <div class="epc-table-wrap">
+        <table class="epc-table">
+          <thead>
+            <tr>
+              <th>ツール</th>
+              <th>無料枠</th>
+              <th>透かし</th>
+              <th>商用利用の確認ポイント</th>
+              <th>日本語対応</th>
+              <th>音声・ナレーション</th>
+              <th>得意用途</th>
+              <th>詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableRows.map(({ name, slug, free, watermark, commercial, japanese, voice, bestFor }, i) => (
+              <tr class={i % 2 === 0 ? 'epc-tr-even' : 'epc-tr-odd'}>
+                <td class="epc-td-name">{name}</td>
+                <td>{free}</td>
+                <td class="epc-td-note">{watermark}</td>
+                <td class="epc-td-note">{commercial}</td>
+                <td class="epc-td-note">{japanese}</td>
+                <td class="epc-td-note">{voice}</td>
+                <td>{bestFor}</td>
+                <td><a href={`/tools/${slug}/`} class="epc-td-link">詳細 →</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="epc-table-foot">○：対応、△：条件付きまたは要確認。商用利用・無料枠・透かしは公式規約を確認してください。具体的な月額料金は公式情報での確認が必要なため本記事では断定していません。</p>
+    </section>
+
+    <!-- 用途別おすすめ -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">用途別の選び方</h2>
+      <div class="epc-way-grid">
+        {useCases.map(({ h, body }) => (
+          <div class="epc-way-card">
+            <p class="epc-way-h">{h}</p>
+            <p class="epc-way-body">{body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 料金体系・無料枠・透かし条件の見方 -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">料金体系・無料枠・透かし条件の見方</h2>
+      <p class="epc-table-note">
+        3ツールとも、無料プランと有料プランで動画の長さ・透かしの有無・商用利用条件が異なるとされています。課金方式もHeyGen・Synthesiaはクレジット／分数制、D-IDは15秒単位の時間課金など、ツールによって考え方が異なります。具体的な月額料金は変更される可能性があるため、本記事では断定せず、比較の観点として「無料枠の有無」「透かし条件」「商用利用がプランによって条件が異なる点」を整理しています。最新の料金は各ツールの公式Pricingページをご確認ください。
+      </p>
+    </section>
+
+    <!-- 商用利用・肖像権・本人同意の注意点 -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">商用利用・肖像権・本人同意の注意点</h2>
+      <ul class="epc-check-list">
+        <li><b>商用利用条件：</b>広告・研修・営業資料などで使う場合、商用利用の可否や条件はツール・プラン・用途によって異なる場合があります。必ず<a href="/conditions/commercial-use/">商用利用を確認しやすいAIツール</a>と各ツールの公式規約をご確認ください。</li>
+        <li><b>本人同意・肖像権：</b>実在人物の顔・声・写真を使ってカスタムアバターや音声クローンを作る場合は、本人の同意や利用権限の確認が必要です。同意のない利用は肖像権・パブリシティ権の観点から問題になる場合があります。</li>
+        <li><b>なりすまし・第三者の模倣：</b>他者になりすます目的や、本人と誤解させるような使い方は、各ツールの利用規約で禁止されている場合があります。</li>
+        <li><b>ブランド・ロゴ・第三者素材：</b>動画内で使用するロゴ・ブランド名・第三者の著作物は、商標権・著作権の観点から別途確認が必要です。</li>
+      </ul>
+      <p class="epc-check-more">商用利用・著作権の考え方全般は<a href="/guides/commercial-use-copyright/">商用利用と著作権ガイド</a>で解説しています。本記事は情報提供を目的としており、法的助言ではありません。</p>
+    </section>
+
+    <!-- FAQ -->
+    <GuideFAQ items={faqs} title="よくある質問" emitSchema={false} />
+
+    <!-- 関連ページ -->
+    <section class="epc-related">
+      <h2 class="epc-related-h">関連ページ</h2>
+      <div class="epc-related-links">
+        <a href="/categories/avatar-video/" class="epc-related-link">AIアバター動画ツール一覧</a>
+        <a href="/tools/heygen/" class="epc-related-link">HeyGen</a>
+        <a href="/tools/d-id/" class="epc-related-link">D-ID</a>
+        <a href="/tools/synthesia/" class="epc-related-link">Synthesia</a>
+        <a href="/use-cases/faceless-video/" class="epc-related-link">顔出しなし動画向けAIツール</a>
+        <a href="/conditions/commercial-use/" class="epc-related-link">商用利用を確認しやすいAIツール</a>
+        <a href="/guides/commercial-use-copyright/" class="epc-related-link">商用利用と著作権ガイド</a>
+        <a href="/comparisons/" class="epc-related-link">比較記事一覧</a>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .epc-wrap {
+    --brand: #4B3FE4;
+    --brand-ink: #2E25A6;
+    --brand-tint: #ECEBFB;
+    --line: #E5E7EB;
+    --surface: #FFFFFF;
+    --surface-2: #F9FAFB;
+    --ink-body: #374151;
+    --ink-soft: #6B7280;
+    --faint: #9CA3AF;
+    --amber-bg: #FFFBEB;
+    --amber-border: #FDE68A;
+    --amber-text: #92400E;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    color: var(--ink-body);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .epc-breadcrumb { display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: 12.5px; color: var(--ink-soft); margin-bottom: 32px; }
+  .epc-breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+  .epc-breadcrumb a:hover { color: var(--brand); text-decoration: underline; }
+
+  .epc-hero { margin-bottom: 36px; }
+  .epc-eyebrow { display: inline-block; background: var(--brand-tint); color: var(--brand-ink); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; border-radius: 20px; padding: 3px 12px; margin-bottom: 14px; }
+  .epc-h1 { font-size: clamp(22px, 3.2vw, 32px); font-weight: 800; line-height: 1.3; text-wrap: balance; color: #111827; margin-bottom: 14px; }
+  .epc-lead { font-size: 14.5px; color: var(--ink-soft); line-height: 1.8; max-width: 680px; }
+  .epc-lead a { color: var(--brand-ink); font-weight: 600; }
+
+  .epc-notice { background: var(--amber-bg); border: 1px solid var(--amber-border); border-radius: 14px; padding: 18px 22px; margin-bottom: 48px; color: var(--amber-text); font-size: 13px; line-height: 1.7; }
+  .epc-notice-h { font-weight: 700; margin-bottom: 8px; }
+  .epc-notice ul { padding-left: 18px; }
+  .epc-notice li + li { margin-top: 5px; }
+  .epc-notice a { color: var(--amber-text); text-decoration: underline; }
+
+  .epc-sec { margin-bottom: 56px; }
+  .epc-h2 { font-size: clamp(17px, 2.2vw, 22px); font-weight: 800; color: #111827; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--brand-tint); }
+
+  .epc-type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .epc-type-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; box-shadow: var(--shadow-sm); }
+  .epc-type-name { font-size: 15px; font-weight: 800; color: var(--brand-ink); margin-bottom: 8px; }
+  .epc-type-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 14px; }
+  .epc-type-tools { display: flex; flex-direction: column; gap: 6px; }
+  .epc-type-tool { font-size: 12.5px; font-weight: 600; color: var(--brand-ink); text-decoration: none; }
+  .epc-type-tool:hover { text-decoration: underline; }
+
+  .epc-table-note { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; }
+  .epc-scroll-hint { display: none; font-size: 11.5px; color: var(--ink-soft); text-align: center; margin: 0 0 6px; }
+  @media (max-width: 680px) { .epc-scroll-hint { display: block; } }
+  .epc-table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+  .epc-table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 12.5px; }
+  .epc-table thead tr { background: var(--brand-tint); }
+  .epc-table th { text-align: left; padding: 12px 14px; font-size: 11.5px; font-weight: 700; color: var(--brand-ink); border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .epc-tr-even { background: var(--surface); }
+  .epc-tr-odd { background: var(--surface-2); }
+  .epc-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink-body); vertical-align: top; line-height: 1.55; }
+  .epc-td-name { font-weight: 600; color: #111827; white-space: nowrap; }
+  .epc-td-note { font-size: 11.5px; color: var(--ink-soft); }
+  .epc-td-link { color: var(--brand-ink); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .epc-td-link:hover { text-decoration: underline; }
+  .epc-table-foot { margin-top: 8px; font-size: 11.5px; color: var(--faint); }
+
+  .epc-way-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .epc-way-card { background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+  .epc-way-h { font-size: 13.5px; font-weight: 700; color: #111827; margin-bottom: 10px; }
+  .epc-way-body { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; }
+  .epc-way-body a { color: var(--brand-ink); }
+
+  .epc-check-list { padding-left: 18px; font-size: 13.5px; color: var(--ink-body); line-height: 1.8; }
+  .epc-check-list li + li { margin-top: 10px; }
+  .epc-check-list a { color: var(--brand-ink); }
+  .epc-check-more { margin-top: 16px; font-size: 12.5px; color: var(--ink-soft); }
+  .epc-check-more a { color: var(--brand-ink); }
+
+  .epc-related { margin-top: 32px; }
+  .epc-related-h { font-size: 14px; font-weight: 700; color: var(--ink-soft); margin-bottom: 12px; }
+  .epc-related-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .epc-related-link { border: 1px solid var(--line); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ink-body); text-decoration: none; transition: background .15s, border-color .15s; }
+  .epc-related-link:hover { background: var(--brand-tint); border-color: #C7C2F5; color: var(--brand-ink); }
+
+  @media (max-width: 680px) {
+    .epc-type-grid { grid-template-columns: 1fr; }
+    .epc-way-grid { grid-template-columns: 1fr; }
+  }
+</style>

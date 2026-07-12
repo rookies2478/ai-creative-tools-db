@@ -81,7 +81,7 @@ usagePolicy:
   peopleLogoRisk: "high"
   peopleLogoNote: "実在の人物・著名人・ブランドロゴを含む画像は肖像権・商標権等の観点から別途確認が必要。本記事は法的助言ではない。"
   creditRequiredStatus: "not-required"
-  creditRequiredNote: "Canva公式情報ではクレジット表記の義務は確認されていない。ただし用途に応じてCanva AI Product Termsを確認すること。"
+  creditRequiredNote: "Canvaへのクレジット表記義務は確認されていない。ただし、AI生成物を人間制作物であるかのように誤認させること、およびAI生成物に付与されるC2PA等のプロヴェナンス情報やメタデータを削除・改変することは規約上禁止されており、公開先の規約や地域法令によっては開示が必要な場合がある。用途に応じてCanva AI Product Termsを確認すること。"
   officialSourceUrl: "https://www.canva.com/policies/ai-product-terms/"
   termsUrl: "https://www.canva.com/policies/terms-of-use/"
   lastReviewed: "2026-05-24"
@@ -100,14 +100,14 @@ conversionGuide:
   primaryCtaLabel: "無料枠・透かし・商用利用条件を公式サイトで確認する"
   primaryCtaReason: "AI生成コンテンツの商用利用条件・透かし有無・無料枠の回数制限を最新公式情報で確認することを推奨。"
   beforeClickChecklist:
-    - "AI生成画像の商用利用にはAI生成コンテンツであることの明示が条件の場合がある。用途を確認したか？"
+    - "Canva公式規約上、AI生成物を人間制作物であるかのように誤認させることは禁止されている。一般的な開示義務は規約上確認できないが、公開先プラットフォームや地域法令によっては開示が必要な場合がある。用途を確認したか？"
     - "Canvaのテンプレート・素材を組み合わせる場合、各素材のライセンス条件を確認したか？"
     - "実在の人物・著名人・ブランドロゴを含む画像を使用する場合、権利関係を別途確認したか？"
     - "商用案件に使う場合、最新のCanvaコンテンツライセンスを確認したか？"
     - "無料プランの生成回数制限と用途が一致しているか確認したか？"
 reviewed:
   pricing: "2026-05-04"
-  terms: "2026-05-04"
+  terms: "2026-07-12"
   features: "2026-05-04"
 sourceRefs:
   - label: "Canva料金プラン（公式）"

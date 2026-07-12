@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: 'Adobe FireflyとMicrosoft Designerは商用利用できますか？',
-    a: 'Adobe Fireflyは公式情報上、商用利用を想定したサービスとして案内されています。ただしベータ機能（β表示）は商用利用対象外とされています。Microsoft Designerは公式FAQで個人的な非商用使用に関する記載があるため、商用利用を前提にする場合は特に公式情報の確認が必要です。どちらも用途・プラン・規約により条件が異なる可能性があります。本記事は法的助言ではありません。最新の公式規約をご確認ください。',
+    a: 'Adobe Fireflyは公式情報上、商用利用を想定したサービスとして案内されています。ただしベータ機能（β表示）は商用利用対象外とされています。Microsoft Designerは利用規約上、個人的利用に限定され、trade or commerce（取引・商業）の過程での利用は認められていません。企業広告・販売物・クライアントワークなど商用目的での利用を検討している場合は、商用利用条件が明示されたAdobe Firefly等の利用をおすすめします。CopilotやMicrosoft 365の契約条件をDesigner単体に流用しないようご注意ください。本記事は法的助言ではありません。最新の公式規約をご確認ください。',
   },
   {
     q: 'SNS画像やバナー作成にはどちらが向いていますか？',
@@ -49,7 +49,7 @@ const comparisonRows = [
   { item: '主な用途', toolA: '画像生成・Adobe Creative Cloud連携・商用素材作成', toolB: 'SNS画像・バナー・プレゼン素材・デザインテンプレート' },
   { item: '無料利用のしやすさ', toolA: '無料プランで一定数の生成クレジットあり（数量は変更の可能性あり）', toolB: 'Microsoftアカウントで無料利用できる機能あり（詳細は公式参照）' },
   { item: '料金', toolA: '1,580円/月（税込）〜（Firefly Standardプラン・日本語公式料金ページ確認）', toolB: '要公式確認' },
-  { item: '商用利用条件', toolA: '公式情報上、商用利用を想定したサービスとして案内あり。ベータ機能は対象外', toolB: '公式FAQで個人的な非商用使用に関する記載あり。商用利用前に公式情報の確認が必要' },
+  { item: '商用利用条件', toolA: '公式情報上、商用利用を想定したサービスとして案内あり。ベータ機能は対象外', toolB: '非商用限定（利用規約上、trade or commerceでの利用は認められていません）' },
   { item: '日本語UI', toolA: '対応', toolB: '対応' },
   { item: '日本語プロンプト', toolA: '対応', toolB: '対応しているとされています' },
   { item: '透かし', toolA: 'プランによっては可視透かしあり。全プランでC2PAメタデータ埋め込み', toolB: '要公式確認' },
@@ -80,6 +80,7 @@ const sources = [
   { href: 'https://www.adobe.com/products/firefly/plans.html', label: 'Adobe Firefly料金プラン（公式）' },
   { href: 'https://www.adobe.com/legal/licenses-terms/adobe-gen-ai-user-guidelines.html', label: 'Adobe生成AIユーザーガイドライン（公式）' },
   { href: 'https://designer.microsoft.com', label: 'Microsoft Designer公式サイト' },
+  { href: 'https://designer.microsoft.com/termsOfUse.pdf', label: 'Microsoft Designer利用規約（公式）' },
   { href: 'https://www.microsoft.com/en-us/servicesagreement', label: 'Microsoftサービス規約（公式）' },
 ];
 
@@ -128,9 +129,9 @@ const articleJsonLd = JSON.stringify([{
     label: 'Microsoft連携・手軽さ重視 →',
     toolName: 'Microsoft Designer',
     toolHref: '/tools/microsoft-designer/',
-    body: 'Microsoftアカウントで手軽に始められ、テンプレートを使ったSNS画像・バナー・プレゼン素材の作成に向いているとされています。日本語対応。ただし公式FAQで個人的な非商用使用に関する記載があるため、商用利用を前提にする場合は公式情報の確認が特に重要です。',
+    body: 'Microsoftアカウントで手軽に始められ、テンプレートを使ったSNS画像・バナー・プレゼン素材の作成に向いているとされています。日本語対応。ただし利用規約上、個人的利用に限定され、trade or commerce（取引・商業）の過程での利用は認められていません。商用利用を前提とする場合は、商用条件が明示されたAdobe Firefly等の利用をご検討ください。',
   }}
-  conclusionNote="Microsoft Designerは公式FAQで個人的な非商用使用に関する記載があります。商用利用を前提にする場合は必ず最新の公式規約をご確認ください。本記事は法的助言ではありません。"
+  conclusionNote="Microsoft Designerは利用規約上、個人的利用に限定され、trade or commerce（取引・商業）の過程での利用は認められていません。企業広告・販売物・クライアントワークなど商用利用を前提とする場合はAdobe Firefly等をご検討ください。本記事は法的助言ではありません。"
   comparisonRows={comparisonRows}
   faqs={faqs}
   relatedLinks={relatedLinks}
@@ -138,7 +139,7 @@ const articleJsonLd = JSON.stringify([{
   noticeItems={[
     '料金・無料枠・商用利用条件・透かし条件は変更される場合があります。',
     '最新情報は各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。',
-    '<strong>Microsoft Designerの商用利用については</strong>、公式FAQで個人的な非商用使用に関する記載があります。商用利用前に特に公式情報のご確認をおすすめします。',
+    '<strong>Microsoft Designerの商用利用については</strong>、利用規約上、個人的利用に限定され、trade or commerce（取引・商業）の過程での利用は認められていません。商用利用を前提とする場合は商用条件が明示された別ツールをご検討ください。',
     '人物・著名人・ブランドロゴ・第三者素材を扱う場合は、別途確認が必要です。',
     '本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。',
   ]}
@@ -172,8 +173,8 @@ const articleJsonLd = JSON.stringify([{
   <section class="cp-body-sec">
     <h2 class="cp-body-h2">商用利用に関する注意点</h2>
     <div class="cp-caution-box">
-      <p style="font-weight:700;margin-bottom:8px;">Microsoft Designerの商用利用は特に確認が必要です</p>
-      <p style="font-size:13px;line-height:1.7;">公式FAQでは個人的な非商用使用に関する記載があります。SNS広告・広告バナー・企業資料など商用目的での利用を前提にする場合は、<strong>必ず最新の公式規約をご確認ください</strong>。本記事は法的助言ではありません。</p>
+      <p style="font-weight:700;margin-bottom:8px;">Microsoft Designerは非商用限定です</p>
+      <p style="font-size:13px;line-height:1.7;">Microsoft Designerの利用規約上、Designerの利用は個人的利用に限定され、trade or commerce（取引・商業）の過程での利用は認められていません。SNS広告・広告バナー・企業資料など商用目的での利用は避け、CopilotやMicrosoft 365の契約条件をDesigner単体に流用しないようご注意ください。商用利用を前提とする場合は商用条件が明示された別ツールをご検討ください。本記事は法的助言ではありません。</p>
     </div>
     <p style="font-size:13px;color:var(--ink-soft);margin-top:8px;">Adobe Fireflyは商用利用を想定した設計（ベータ機能は対象外）。最新条件は公式規約をご確認ください。<a href="/conditions/commercial-use/" style="color:var(--brand-ink);">商用利用確認しやすいAIツール一覧 →</a></p>
   </section>

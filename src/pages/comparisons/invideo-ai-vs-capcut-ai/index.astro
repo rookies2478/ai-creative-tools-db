@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     q: 'InVideo AIとCapCut AIに透かしは入りますか？',
-    a: 'InVideo AIは無料プランでは透かしが入るとされています。有料プランでは透かしなしで出力できるとされています。CapCut AIは無料利用・テンプレート・素材・書き出し条件により透かしやロゴ表示の扱いが変わる可能性があります。どちらも最新の条件は公式サイトでご確認ください。',
+    a: 'InVideo AIは無料プランでは透かしが入るとされています。有料プランでは透かしなしで出力できるとされています。CapCut AIは公式ヘルプによると、通常の編集機能で作成した動画は多くの場合、無料でも透かしなしで書き出せるとされています。テンプレート利用時はCapCutのブランドクリップが末尾に自動追加される場合がありますが、タイムラインから削除できます。Pro素材・AI機能ごとの条件は公式情報で明確に確認できていません。どちらも最新の条件は公式サイトでご確認ください。',
   },
   {
     q: 'InVideo AIとCapCut AIはどちらが日本語で使えますか？',
@@ -52,8 +52,8 @@ const comparisonRows = [
   { item: '商用利用（有料プラン）', toolA: '有料プランで対応しているとされる（条件あり）', toolB: '素材・テンプレート・AI機能ごとの条件確認が必要' },
   { item: '日本語UI', toolA: '非対応（英語主体）', toolB: '対応（日本語公式ページ・アプリあり）' },
   { item: '日本語プロンプト', toolA: '一部対応（英語の方が品質安定）', toolB: '対応（英語・具体的指示の方が安定する場合あり）' },
-  { item: '透かし（無料プラン）', toolA: 'あり', toolB: '条件により異なる（公式確認推奨）' },
-  { item: '透かし（有料プラン）', toolA: 'なし（有料プランでは出力可）', toolB: '条件により異なる（公式確認推奨）' },
+  { item: '透かし（無料プラン）', toolA: 'あり', toolB: '通常編集は透かしなし（テンプレは要確認）' },
+  { item: '透かし（有料プラン）', toolA: 'なし（有料プランでは出力可）', toolB: '通常編集は透かしなし（テンプレは要確認）' },
   { item: 'テキスト→動画', toolA: '対応（台本型）', toolB: '対応（テンプレート+AI生成）' },
   { item: '画像→動画', toolA: '非対応（要確認）', toolB: '対応' },
   { item: 'AIナレーション', toolA: '対応', toolB: '対応' },
@@ -84,6 +84,8 @@ const sources = [
   { href: 'https://www.capcut.com/ja-jp/tools/ai-video-generator', label: 'CapCut AI動画生成（公式・日本語）' },
   { href: 'https://www.capcut.com/help/new-capcut-subscription-pricing', label: 'CapCutサブスクリプション・料金（公式ヘルプ）' },
   { href: 'https://www.capcut.com/clause/terms-of-service', label: 'CapCut利用規約（公式）' },
+  { href: 'https://www.capcut.com/help/how-to-export-video-without-watermark', label: 'CapCut 透かしなしエクスポート方法（公式ヘルプ）' },
+  { href: 'https://www.capcut.com/help/remove-watermark-when-exporting-video', label: 'CapCut テンプレート動画の透かし削除（公式ヘルプ）' },
 ];
 
 const articleJsonLd = JSON.stringify([{

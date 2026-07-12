@@ -116,7 +116,7 @@ const {
   toolDetails = [
     { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', watermark: 'プランによっては可視透かしあり。全プランでC2PAメタデータ（コンテンツクレデンシャル）が埋め込まれます。', freeNote: '無料プランで一定数の生成クレジットあり（数量は変更の可能性あり）。', commercial: { s: 'paid', label: '★ 有料プラン向け' }, platforms: 'Web' },
     { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', initial: 'C', watermark: '公式情報から未確認。', freeNote: '無料プランで一定回数の生成が可能（回数は変更の可能性あり）。', commercial: { s: 'cond', label: '△ 条件付き' }, platforms: 'Web、iOS、Android' },
-    { name: 'CapCut AI', slug: 'capcut-ai', initial: 'C', watermark: '無料利用・テンプレート・素材・書き出し条件により、透かしやロゴ表示の扱いが変わる可能性があります。最新の公式画面でご確認ください。', freeNote: '無料プランあり。', commercial: { s: 'cond', label: '△ 条件付き' }, platforms: 'Web、iOS、Android、Desktop' },
+    { name: 'CapCut AI', slug: 'capcut-ai', initial: 'C', watermark: '公式ヘルプによると、通常の編集機能で作成した動画は多くの場合、無料でも透かしなしで書き出せます。テンプレート利用時はブランドクリップが末尾に自動追加される場合がありますが削除可能です。Pro素材・AI機能ごとの条件は公式情報で明確に確認できていません。', freeNote: '無料プランあり。', commercial: { s: 'cond', label: '△ 条件付き' }, platforms: 'Web、iOS、Android、Desktop' },
     { name: 'Clipdrop', slug: 'clipdrop', initial: 'C', watermark: 'Freeプランの透かし有無は機能・プランにより異なる可能性があります。最新の条件は公式画面でご確認ください。', freeNote: '無料プランあり。', commercial: { s: 'na', label: '要確認' }, platforms: 'Web、API' },
     { name: 'DALL·E', slug: 'dalle', initial: 'D', watermark: 'C2PAメタデータ（不可視）が埋め込まれる場合あり。', freeNote: 'ChatGPT無料プランで制限付き利用できる場合あり。', commercial: { s: 'ok', label: '〇 案内あり（公式情報）' }, platforms: 'Web、API' },
     { name: 'DreamStudio', slug: 'dreamstudio', initial: 'D', watermark: '公式情報のみでは透かしの有無・条件を断定できません。最新の条件は公式サイトでご確認ください。', freeNote: '無料プランなし。', commercial: { s: 'cond', label: '△ 条件付き' }, platforms: 'Web' },
@@ -166,7 +166,7 @@ const {
   statusTools = [
     { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', watermark: { s: 'cond', label: '△ 条件付き' }, freePlan: { s: 'cond', label: '△ 制限付き無料' }, date: '2026-05-24' },
     { name: 'Canva AI画像生成', slug: 'canva-ai-image-generator', initial: 'C', freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-24' },
-    { name: 'CapCut AI', slug: 'capcut-ai', initial: 'C', watermark: { s: 'no', label: '× あり' }, freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-24' },
+    { name: 'CapCut AI', slug: 'capcut-ai', initial: 'C', watermark: { s: 'cond', label: '△ 条件付き（通常編集は透かしなし）' }, freePlan: { s: 'ok', label: '〇 無料プランあり' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-07-12' },
     { name: 'Clipdrop', slug: 'clipdrop', initial: 'C', freePlan: { s: 'ok', label: '〇 無料プランあり' }, date: '2026-06-06' },
     { name: 'DALL·E', slug: 'dalle', initial: 'D', watermark: { s: 'cond', label: '△ 条件付き' }, freePlan: { s: 'cond', label: '△ 制限付き無料' }, commercial: { s: 'ok', label: '〇 案内あり（公式情報）' }, date: '2026-05-26' },
     { name: 'DreamStudio', slug: 'dreamstudio', initial: 'D', freePlan: { s: 'no', label: '× 無料プランなし' }, commercial: { s: 'cond', label: '△ 条件付き' }, date: '2026-05-14' },

@@ -58,7 +58,7 @@ const jsonLd = JSON.stringify([
         { lb: '商用利用', badge: { s: 'cond', label: '要確認（素材ごとに条件あり）' } },
         { lb: '無料枠', badge: { s: 'cond', label: 'あり（機能・条件制限）' } },
         { lb: '料金目安', text: 'アプリ内で確認（地域・プラットフォームで変動）', mono: true },
-        { lb: '透かし', badge: { s: 'cond', label: '条件により変動（要確認）' } },
+        { lb: '透かし', badge: { s: 'cond', label: '通常編集は透かしなし（テンプレは要確認）' } },
         { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
@@ -79,8 +79,8 @@ const jsonLd = JSON.stringify([
           det: 'CapCut公式ヘルプでは、最新価格はアプリ内サブスクリプションページで確認するよう案内されています。プラン名・料金・機能制限は地域・プラットフォーム（iOS / Android / Web / PC）・時期によって変わる可能性があります。',
         },
         {
-          title: '透かし', badge: { s: 'cond', label: '条件により変動（要確認）' },
-          det: '無料利用・テンプレート・素材・書き出し条件により透かしやロゴ表示の扱いが変わる可能性があります。透かし条件はプラン・機能・出力形式ごとに最新の公式画面でご確認ください。',
+          title: '透かし', badge: { s: 'cond', label: '通常編集は透かしなし（テンプレは要確認）' },
+          det: 'CapCut公式ヘルプによると、通常の編集機能で作成した動画は、多くの場合、無料でも透かしなしで書き出せるとされています。テンプレート利用時はCapCutのブランドクリップ（アウトロ等）が末尾に自動追加される場合がありますが、タイムラインから削除できます。Pro素材やAI機能ごとの透かし条件は公式情報で明確に確認できていないため、最新の公式画面でご確認ください。',
         },
         {
           title: '日本語対応',
@@ -123,7 +123,7 @@ const jsonLd = JSON.stringify([
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>あり（機能・条件制限）</span><br>プラン・地域によって異なる。' }],
           [{ html: '最安料金', rk: true }, { html: 'アプリ内で確認（地域・プラットフォームで変動）' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要確認（素材ごとに条件あり）</span><br>素材・音源・テンプレートの個別確認が必要。' }],
-          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件により変動（要確認）</span>' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>通常編集は透かしなし（テンプレは要確認）</span><br>テンプレートのブランドクリップは削除可能。Pro素材・AI機能は要確認。' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span>' }],
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span>' }],
           [{ html: '対応環境', rk: true }, { html: 'Web / iOS / Android / Windows / Mac' }],
@@ -197,7 +197,7 @@ const jsonLd = JSON.stringify([
         rows: [
           [{ html: '動画タイプ', rk: true }, { html: '編集・テンプレート', me: true }, { html: 'AI映像生成' }, { html: 'テンプレート型' }, { html: 'AI映像生成' }, { html: 'AI映像生成' }],
           [{ html: '商用利用', rk: true }, { html: '素材ごとに要確認', me: true }, { html: '全プラン・条件あり' }, { html: '有料プランのみ' }, { html: '有料プランのみ' }, { html: '有料プランで可' }],
-          [{ html: '透かし（無料）', rk: true }, { html: '条件により変動', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
+          [{ html: '透かし（無料）', rk: true }, { html: '通常編集は透かしなし', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
           [{ html: '日本語UI', rk: true }, { html: '対応', me: true }, { html: '非対応' }, { html: '非対応' }, { html: '部分対応' }, { html: '部分対応' }],
           [{ html: 'スマホApp', rk: true }, { html: 'iOS / Android', me: true }, { html: 'なし' }, { html: 'なし' }, { html: 'なし' }, { html: 'なし' }],
         ],
@@ -209,8 +209,9 @@ const jsonLd = JSON.stringify([
         '日本語ユーザー向けのサポート情報も提供されています',
       ]}
       watermark={[
-        '無料利用・テンプレート・素材・書き出し条件により透かしやロゴ表示の扱いが変わる可能性があります',
-        '透かし条件はプラン・機能・出力形式ごとに最新の公式画面でご確認ください',
+        'CapCut公式ヘルプによると、通常の編集機能で作成した動画は、多くの場合、無料でも透かしなしで書き出せるとされています',
+        'テンプレート利用時はCapCutのブランドクリップが末尾に自動追加される場合がありますが、タイムラインから削除できます',
+        'Pro素材・AI機能ごとの透かし条件は公式情報で明確に確認できていないため、最新の公式画面でご確認ください',
       ]}
       watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
       checklist={[
@@ -231,12 +232,14 @@ const jsonLd = JSON.stringify([
         { tag: '料金', label: 'CapCut サブスクリプション・料金（公式ヘルプ）', href: 'https://www.capcut.com/help/new-capcut-subscription-pricing' },
         { tag: '利用規約', label: 'CapCut 利用規約（公式）', href: 'https://www.capcut.com/clause/terms-of-service' },
         { tag: 'プライバシー', label: 'CapCut プライバシーポリシー（公式）', href: 'https://www.capcut.com/clause/privacy-policy' },
+        { tag: '透かし', label: 'CapCut 透かしなしエクスポート方法（公式ヘルプ）', href: 'https://www.capcut.com/help/how-to-export-video-without-watermark' },
+        { tag: '透かし', label: 'CapCut テンプレート動画の透かし削除（公式ヘルプ）', href: 'https://www.capcut.com/help/remove-watermark-when-exporting-video' },
       ]}
       faqs={[
         { q: 'CapCut AIは無料で使えますか？', a: 'CapCutには無料で使える機能があります。ただしAI機能・テンプレート・素材・書き出し条件・透かしの有無はプランや地域、プラットフォームによって異なる可能性があります。最新の条件は公式サイトおよびアプリ内サブスクリプションページでご確認ください。' },
         { q: 'CapCut AIは商用利用できますか？', a: 'CapCutの利用規約では、利用する素材について必要な権利・許諾を持つ必要があることが案内されています。商用利用・広告利用・クライアントワークを前提にする場合は、CapCut本体の規約だけでなく、使用する素材・音源・テンプレート・AI機能ごとの条件を公式で確認することが必要です。このページは法的助言ではありません。' },
         { q: '日本語で使えますか？', a: 'CapCutには日本語の公式ページおよびアプリが提供されており、日本語UIで利用可能です。AI動画生成でも日本語入力を使える場合がありますが、英語や具体的な構成指示の方が安定する可能性があります。' },
-        { q: '透かしはありますか？', a: '無料利用・テンプレート・素材・書き出し条件により透かしやロゴ表示の扱いが変わる可能性があります。最新の透かし条件はプラン・機能・出力形式ごとに公式画面でご確認ください。' },
+        { q: '透かしはありますか？', a: 'CapCut公式ヘルプによると、通常の編集機能で作成した動画は、多くの場合、無料でも透かしなしで書き出せるとされています。テンプレート利用時はCapCutのブランドクリップ（アウトロ等）が末尾に自動追加される場合がありますが、タイムラインから削除できます。Pro素材・AI機能ごとの透かし条件は公式情報で明確に確認できていないため、最新の公式画面でご確認ください。' },
         { q: 'Runway・Kling AIなどとどう違いますか？', a: 'CapCut AIは動画編集・テンプレート・自動字幕・AI機能を組み合わせたSNS動画向けの編集ツールです。RunwayやKling AIのような純粋なAI動画生成ツールとは異なり、編集・加工・テンプレート活用を中心に設計されています。' },
         { q: 'テンプレートや音楽の商用利用はできますか？', a: 'CapCut内で使用できるテンプレート・BGM・素材は、それぞれ個別のライセンス条件が設定されている場合があります。商用利用前は各素材のライセンス条件を公式サイトで確認してください。このページは法的助言ではありません。' },
         { q: '料金プランはどうなっていますか？', a: 'CapCut公式ヘルプでは、最新価格はアプリ内サブスクリプションページで確認するよう案内されています。プラン名・料金・機能制限は地域・プラットフォーム・時期で変わる可能性があるため、必ず最新の公式情報をご確認ください。' },

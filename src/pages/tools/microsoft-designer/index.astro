@@ -62,12 +62,12 @@ const jsonLd = JSON.stringify([
       category="AI画像生成"
       checkedDate={d?.lastReviewed ?? '2026-05-26'}
       headingHtml='Microsoft Designerの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="Microsoft Designerとは何か、AI画像生成の使い方、料金・無料枠、商用利用できるかを、公式FAQやサービス規約の確認ポイントとあわせて整理します。MicrosoftのAIデザイン・画像生成サービスで、Microsoftアカウントで利用でき、SNS画像・バナー・プレゼン素材の作成に向いています。"
+      lead="Microsoft Designerの利用規約では、Designerの利用は個人的利用に限定され、trade or commerce（取引・商業）の過程での利用は認められていません。企業広告・販売物・クライアントワークなど商用目的での利用は避け、商用利用を前提とする場合は商用条件が明示された別ツールをご検討ください。CopilotやMicrosoft 365の契約条件をDesigner単体に流用しないようご注意ください。以下ではAI画像生成の使い方、料金・無料枠についても、公式FAQやサービス規約の確認ポイントとあわせて整理します。"
       specs={[
-        { lb: '商用利用', badge: { s: 'cond', label: '条件あり' } },
+        { lb: '商用利用', badge: { s: 'na', label: '非商用限定' } },
         { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
         { lb: '料金目安', text: '要公式確認', mono: true },
-        { lb: '透かし', badge: { s: 'na', label: '要確認' } },
+        { lb: '透かし', badge: { s: 'cond', label: 'C2PA付与あり' } },
         { lb: '日本語UI', badge: { s: 'ok', label: '〇 対応' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
@@ -75,9 +75,9 @@ const jsonLd = JSON.stringify([
       secondaryCta={{ label: 'よくある質問（公式）', href: 'https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer' }}
       basicInfo={[
         {
-          title: '商用利用', badge: { s: 'cond', label: '条件あり' }, wide: true,
-          sum: '用途・アカウント種別・最新規約により条件が異なる可能性があります。',
-          det: 'Microsoft Designerの公式FAQでは、Microsoftアカウントでの個人的な利用や非商用利用に関する記載があります。商用利用の可否や条件は、用途・アカウント種別・Microsoftの最新規約により異なる可能性があるため、公式情報をご確認ください。',
+          title: '商用利用', badge: { s: 'na', label: '非商用限定' }, wide: true,
+          sum: '利用規約上、個人的利用に限定され、trade or commerce（取引・商業）での利用は認められていません。',
+          det: 'Microsoft Designerの利用規約（Designer for Web Image Generator and Brand Kit Terms）では、Designerの利用は個人的利用に限定され、trade or commerce（取引・商業）の過程での利用は認められていないと明記されています。公式FAQでも個人的・非商用利用向けと案内されており、企業広告・販売物・受託制作等の商用利用は想定されていません。CopilotやMicrosoft 365の契約条件をDesigner単体に流用しないようご注意ください。',
         },
         {
           title: '無料枠', badge: { s: 'cond', label: '限定的' },
@@ -88,8 +88,8 @@ const jsonLd = JSON.stringify([
           det: 'Microsoftアカウントで無料利用できる範囲がありますが、公式FAQでは個人的・非商用利用向けと案内されています。頻繁に利用する場合やMicrosoft 365 / Copilot Pro連携機能では、サブスクリプションが必要になる場合があります。最新情報は公式サイトをご確認ください。',
         },
         {
-          title: '透かし', badge: { s: 'na', label: '要確認' },
-          det: '透かしの有無・条件は現時点での公式情報では確認できていません。最新の条件は公式サイトでご確認ください。',
+          title: '透かし', badge: { s: 'cond', label: 'C2PA付与あり' },
+          det: 'Microsoft DesignerのAI生成物にはC2PA Content Credentialsが付与される場合があります。これは画面上に常時表示される可視透かしとは異なり、AI生成物であることを識別するためのメタデータです。保存・再編集・ファイル変換の過程でメタデータの扱いが変わる可能性があります。「透かしなし」とは断定できません。',
         },
         {
           title: '日本語対応',
@@ -115,12 +115,12 @@ const jsonLd = JSON.stringify([
         '日本語UI対応で英語ツールに慣れていない場合でも使いやすい',
       ]}
       cons={[
-        '商用利用条件は用途やアカウント種別により確認が必要',
+        '利用規約上、商用利用（trade or commerce）は認められておらず個人的利用に限定される',
         '一部機能は地域・年齢・サブスクリプション条件に左右される可能性がある',
-        '透かしの有無が公式情報から確認できていない',
+        'AI生成物にはC2PA Content Credentialsが付与される場合がある',
       ]}
       limits={[
-        '商用利用条件は公式規約の確認が必要',
+        '利用規約上、商用利用（trade or commerce）は認められておらず個人的利用に限定される',
         '一部機能は地域・年齢制限の対象になる場合がある',
         'APIによる自動化・組み込みには非対応（公式情報による）',
       ]}
@@ -130,8 +130,8 @@ const jsonLd = JSON.stringify([
           [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br>Microsoftアカウントで無料利用できる範囲があります。公式FAQでは個人的・非商用利用向けと案内されており、頻繁に作成するユーザーにはサブスクリプションが必要になる場合があります。' }],
           [{ html: '最安料金', rk: true }, { html: '<span class="mono">要公式確認</span>' }],
-          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり</span><br>用途・アカウント種別・最新規約により条件が異なります。最新情報は公式サイトをご確認ください。' }],
-          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>公式情報から確認できていません' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>非商用限定</span><br>利用規約上、個人的利用に限定され、trade or commerceでの利用は認められていません。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>C2PA付与あり</span><br>可視透かしとは異なるメタデータ形式です' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>〇 対応</span>' }],
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>〇 対応</span>' }],
           [{ html: '対応環境', rk: true }, { html: 'Web' }],
@@ -160,19 +160,19 @@ const jsonLd = JSON.stringify([
         ],
       }}
       commercial={{
-        lead: '商用利用の可否や条件は、用途・アカウント種別・Microsoftの最新規約により異なる可能性があります。',
+        lead: 'Microsoft Designerの利用規約では、Designerの利用は個人的利用に限定され、trade or commerce（取引・商業）の過程での利用は認められていないと明記されています。',
         points: [
-          'Microsoftアカウントの種別（個人・法人・教育機関など）によって条件が変わる可能性があります',
-          '生成物の利用条件（配布・販売・広告利用など）は公式規約でご確認ください',
-          'テンプレート・素材・ブランド・ロゴの権利関係は個別確認が必要です',
-          '第三者の商標・肖像・著作物が含まれていないか確認が必要です',
+          '利用規約（Designer for Web Image Generator and Brand Kit Terms）1(b)：Designerの利用は個人的利用のみを目的とし、取引・商業目的での利用は認められていません',
+          '企業広告、販売物、クライアントワーク、商用SNS素材など商用目的での利用は避けてください',
+          '商用利用を前提とする場合は、商用条件が明示された別ツールの利用をご検討ください',
+          'CopilotやMicrosoft 365の契約条件は別サービスのものであり、Designer単体の商用利用条件には適用されません',
         ],
-        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。利用前にMicrosoftサービス規約および公式FAQの最新版をご確認ください。',
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。利用前にMicrosoft Designer利用規約・Microsoftサービス規約および公式FAQの最新版をご確認ください。',
         more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
       }}
       commercialExtra={{
-        title: '商用利用前に公式で確認すべき3つのポイント',
-        html: 'Microsoft Designerで作成した画像をビジネスで使う前に、利用中のアカウント種別、Microsoftサービス規約の生成コンテンツに関する条項、人物・ブランド素材を含む場合の追加条件を確認しておくことが重要です。用途や契約状況によって条件が異なる可能性があるため、商用案件では公式FAQや規約の確認を前提にしてください。あわせて<a href="/conditions/commercial-use/">生成AIツールの商用利用条件比較</a>、<a href="/tools/adobe-firefly/">Adobe Fireflyの商用利用条件</a>、<a href="/use-cases/ad-banner/">広告バナー向けAIツールの比較</a>もご参照ください。',
+        title: '商用利用を検討する場合の確認ポイント',
+        html: 'Microsoft Designerは利用規約上、個人的利用に限定されており、trade or commerce（取引・商業）の過程での利用は認められていません。企業広告・販売物・クライアントワークなど商用目的での利用を検討している場合は、商用利用条件が明示された別ツールの利用をおすすめします。あわせて<a href="/conditions/commercial-use/">生成AIツールの商用利用条件比較</a>、<a href="/tools/adobe-firefly/">Adobe Fireflyの商用利用条件</a>、<a href="/use-cases/ad-banner/">広告バナー向けAIツールの比較</a>もご参照ください。',
       }}
       integrationTitle="Microsoft系サービスとの連携"
       integration="Microsoft DesignerはMicrosoftアカウントと連携しており、Microsoft 365環境と組み合わせた制作フローに取り入れやすいとされています。PowerPointなどのプレゼン資料に使うビジュアル素材の案出しや、Teams・OneDriveとの連携も利用環境によっては活用できます。各機能の利用可否はアカウント種別やプランによって異なります。最新の対応状況は公式サイトでご確認ください。"
@@ -186,7 +186,7 @@ const jsonLd = JSON.stringify([
       whoNot={[
         '高精度なアート調ビジュアルを重視する人（Midjourneyが候補）',
         'Adobe製品との連携を優先する人（Adobe Fireflyが候補）',
-        '公式条件を確認せずに商用案件へ使いたい人',
+        '企業広告・販売物・クライアントワークなど商用利用を前提とする人（利用規約上、個人的利用に限定されます）',
         'APIによる自動化・組み込みを必要とする人',
       ]}
       selectTable={{
@@ -216,18 +216,19 @@ const jsonLd = JSON.stringify([
         '<b>日本語プロンプト：</b>対応しているとされていますが、機能の詳細は公式サイトでご確認ください',
       ]}
       watermark={[
-        '透かしの有無・条件は現時点での公式情報では確認できていません',
-        '最新の条件は公式サイトでご確認ください',
+        'AI生成物にはC2PA Content Credentialsが付与される場合があります',
+        '可視透かしとは異なり、AI生成物を識別するためのメタデータです',
+        '画面上に常にロゴや文字が表示されるとは限りません',
+        '保存・再編集・ファイル変換の過程でメタデータの扱いが変わる可能性があります',
       ]}
       watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
       checklist={[
-        { html: 'Microsoftアカウントの種別（個人・法人・教育機関など）' },
-        { html: '利用プランと適用される利用規約' },
-        { html: '生成物の利用条件（配布・販売・広告利用など）' },
+        { html: '利用規約上、Designerは個人的利用に限定され商用利用（trade or commerce）は認められていないこと' },
+        { html: '企業広告・販売物・クライアントワーク等での利用を計画していないか' },
         { html: 'テンプレート・素材・ブランド・ロゴの権利関係' },
         { html: '第三者の商標・肖像・著作物が含まれていないか' },
         { html: '地域・年齢制限の対象かどうか' },
-        { html: 'Microsoftサービス規約・公式FAQの最新情報' },
+        { html: 'Microsoft Designer利用規約・Microsoftサービス規約・公式FAQの最新情報' },
         { html: '利用時点での最新の利用条件' },
       ]}
       lastChecked={d?.lastReviewed ?? '2026-06-14'}
@@ -236,13 +237,14 @@ const jsonLd = JSON.stringify([
       sources={[
         { tag: '公式', label: 'Microsoft Designer 公式サイト', href: 'https://designer.microsoft.com/' },
         { tag: 'ヘルプ', label: 'Microsoft Designer よくある質問（公式）', href: 'https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer' },
+        { tag: '規約', label: 'Microsoft Designer利用規約（公式）', href: 'https://designer.microsoft.com/termsOfUse.pdf' },
         { tag: '規約', label: 'Microsoftサービス規約（公式）', href: 'https://www.microsoft.com/servicesagreement' },
       ]}
       faqs={[
         { q: 'Microsoft Designerは無料で使えますか？', a: 'Microsoftアカウントで無料利用できる範囲があります。公式FAQでは個人的・非商用利用向けと案内されており、頻繁に作成するユーザーにはサブスクリプションが必要になる場合があります。生成回数や対象機能は変更される可能性があるため、最新の状況は公式サイトでご確認ください。' },
-        { q: 'Microsoft Designerは商用利用できますか？', a: '商用利用の可否や条件は、用途・アカウント種別・Microsoftの最新規約により異なる可能性があります。利用前に公式FAQおよびMicrosoftサービス規約の最新版をご確認ください。このページは法的助言ではありません。' },
+        { q: 'Microsoft Designerは商用利用できますか？', a: 'Microsoft Designerの利用規約（Designer for Web Image Generator and Brand Kit Terms）では、Designerの利用は個人的利用に限定され、trade or commerce（取引・商業）の過程での利用は認められていないと明記されています。企業広告・販売物・クライアントワークなど商用目的での利用は避けてください。CopilotやMicrosoft 365の契約条件をDesigner単体に流用しないようご注意ください。このページは法的助言ではありません。' },
         { q: 'Microsoft Designerは日本語で使えますか？', a: '日本語UIに対応しています。日本語プロンプトにも対応しているとされています。' },
-        { q: 'Microsoft Designerに透かしは入りますか？', a: '透かしの有無・条件は公式情報では確認できていません。最新の条件は公式サイトでご確認ください。' },
+        { q: 'Microsoft Designerに透かしは入りますか？', a: 'AI生成物にはC2PA Content Credentialsが付与される場合があります。これは可視透かしとは異なり、AI生成物であることを識別するためのメタデータで、画面上に常にロゴや文字が表示されるとは限りません。保存・再編集・ファイル変換の過程でメタデータの扱いが変わる可能性があります。「透かしなし」とは断定できません。' },
         { q: 'どんな用途に向いていますか？', a: 'SNS投稿用画像、広告バナー案、ブログアイキャッチ、プレゼン資料用ビジュアルなど、デザインテンプレートと画像生成を組み合わせた用途に向いています。Microsoftアカウントを持っていれば手軽に始められます。' },
         { q: 'Canva AI画像生成やAdobe Fireflyとどう違いますか？', a: 'Microsoft DesignerはMicrosoftアカウントとの連携や、Microsoft系サービスとの相性が特徴です。Canva AI画像生成はCanvaのテンプレートとデザインフローの中で使いたい場合に、Adobe FireflyはAdobe製品との連携や商用条件の確認を重視する場合に向いています。用途に合わせてご検討ください。' },
       ]}

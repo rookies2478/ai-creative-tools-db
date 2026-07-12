@@ -6,8 +6,8 @@ officialUrl: "https://designer.microsoft.com/"
 freePlan: "limited"
 lowestPaidPlan: "要公式確認"
 currency: "USD"
-commercialUse: "limited"
-commercialUseNote: "Microsoft Designerの公式FAQでは、Microsoftアカウントでの個人的な利用や非商用利用に関する記載があります。商用利用の可否や条件は、用途・アカウント種別・Microsoftの最新規約により異なる可能性があるため、公式情報をご確認ください。"
+commercialUse: "no"
+commercialUseNote: "Microsoft Designer利用規約（Designer for Web Image Generator and Brand Kit Terms）では、Designerの利用は個人的利用に限定され、trade or commerce（取引・商業）の過程での利用は認められていないと明記されています。公式FAQでも個人的・非商用利用向けと案内されており、企業広告・販売物・受託制作等の商用利用は想定されていません。最新の利用条件は公式規約でご確認ください。"
 japaneseUi: true
 japanesePrompt: true
 watermark: "unknown"
@@ -23,11 +23,11 @@ strengths:
   - "SNS投稿や資料用のビジュアル作成に向いている"
   - "テンプレートを使ったデザイン制作が手軽"
 weaknesses:
-  - "商用利用条件は用途やアカウント種別により確認が必要"
+  - "利用規約上、商用利用（trade or commerce）は認められておらず個人的利用に限定される"
   - "一部機能は地域・年齢・サブスクリプション条件に左右される可能性がある"
-lastReviewed: "2026-06-14"
-nextReviewDue: "2026-07-14"
-verifiedAt: "2026-06-14"
+lastReviewed: "2026-07-12"
+nextReviewDue: "2026-08-12"
+verifiedAt: "2026-07-12"
 officialSourceUrl: "https://www.microsoft.com/servicesagreement"
 pricingSourceUrl: "https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer"
 pricingSourceNote: "公式FAQページ（Microsoft公式）。Microsoft Designerの有料機能はMicrosoft 365 / Copilot Pro等に内包されており独立した月額料金ページは存在しない可能性が高い。月額・currency は要公式確認。最新情報は公式サイトをご確認ください。"
@@ -51,14 +51,14 @@ useCases:
   - design
   - business
 limitations:
-  - "商用利用条件は公式規約の確認が必要"
+  - "利用規約上、商用利用（trade or commerce）は認められておらず個人的利用に限定される"
   - "一部機能は地域・年齢制限の対象になる場合がある"
 usagePolicy:
   inputMaterialRisk: "medium"
   inputMaterialNote: "テンプレートと組み合わせた画像アップロード・編集が可能。人物・ブランド・第三者素材を含む場合はMicrosoftサービス規約・肖像権・商標権の観点から別途確認が必要。"
 reviewed:
   pricing: "2026-05-26"
-  terms: "2026-05-26"
+  terms: "2026-07-12"
   features: "2026-05-26"
 sourceRefs:
   - label: "Microsoft Designer 公式サイト"
@@ -67,6 +67,9 @@ sourceRefs:
   - label: "Microsoft Designer よくある質問（公式）"
     url: "https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer"
     type: help
+  - label: "Microsoft Designer利用規約（公式）"
+    url: "https://designer.microsoft.com/termsOfUse.pdf"
+    type: terms
   - label: "Microsoftサービス規約（公式）"
     url: "https://www.microsoft.com/servicesagreement"
     type: terms
@@ -75,15 +78,15 @@ sources:
     url: "https://designer.microsoft.com/"
   - title: "Microsoft Designer よくある質問（公式）"
     url: "https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer"
+  - title: "Microsoft Designer利用規約（公式）"
+    url: "https://designer.microsoft.com/termsOfUse.pdf"
   - title: "Microsoftサービス規約（公式）"
     url: "https://www.microsoft.com/servicesagreement"
-  - title: "Microsoft Designer よくある質問（公式・日本語）"
-    url: "https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer"
 faqs:
   - question: "Microsoft Designerは無料で使えますか？"
     answer: "Microsoftアカウントがあれば無料で利用できる場合があります。利用可能な機能や制限は変更される可能性があるため、最新の状況は公式サイトでご確認ください。"
   - question: "Microsoft Designerは商用利用できますか？"
-    answer: "商用利用の可否や条件は、用途・アカウント種別・Microsoftの最新規約により異なる可能性があります。利用前に公式FAQおよびMicrosoftサービス規約の最新版をご確認ください。このページは法的助言ではありません。"
+    answer: "Microsoft Designerの利用規約では、Designerの利用は個人的利用に限定され、trade or commerce（取引・商業）の過程での利用は認められていないと明記されています。企業広告・販売物・クライアントワークなど商用目的での利用は避けてください。CopilotやMicrosoft 365の契約条件をDesigner単体に流用しないようご注意ください。このページは法的助言ではありません。"
   - question: "Microsoft Designerは日本語で使えますか？"
     answer: "日本語UIに対応しています。日本語プロンプトにも対応しているとされていますが、機能の詳細は公式サイトでご確認ください。"
   - question: "Microsoft Designerに透かしは入りますか？"

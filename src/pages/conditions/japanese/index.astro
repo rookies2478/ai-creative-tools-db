@@ -23,6 +23,46 @@ function triMark(val: boolean | 'partial' | 'unknown' | undefined): Mark {
   return '－';
 }
 
+// mdの「## 日本語〜」見出しセクションから、日本語対応の補足noteを抽出する。
+// 推測は行わず、本文に既に書かれている内容のみを整形して使う。
+function extractJaNote(body: string | undefined): string {
+  if (!body) return '';
+  const normalized = body.replace(/\r\n/g, '\n');
+  const headingMatch = normalized.match(/^##\s*日本語[^\n]*$/m);
+  if (!headingMatch) return '';
+  const startIdx = (headingMatch.index ?? 0) + headingMatch[0].length;
+  const nextIdx = normalized.indexOf('\n## ', startIdx);
+  let sec = normalized.slice(startIdx, nextIdx === -1 ? undefined : nextIdx);
+
+  // ページ内の「日本語対応AIツールを比較する」自己参照リンク行は補足として不要なので除外
+  sec = sec.replace(/^\[日本語対応AIツールを比較する\]\(\/conditions\/japanese\/\)\s*$/m, '');
+
+  if (/^\|/m.test(sec)) {
+    // Markdown表（| 項目 | 状況 |）は「項目：状況」の並びに変換
+    const rows = sec.split('\n').filter((l) => l.trim().startsWith('|'));
+    const dataRows = rows.filter((r) => !/^\|\s*-+\s*\|/.test(r) && !/^\|\s*項目\s*\|/.test(r));
+    sec = dataRows
+      .map((r) => {
+        const cells = r.split('|').map((c) => c.trim()).filter(Boolean);
+        return cells.length >= 2 ? `${cells[0]}：${cells[1]}` : '';
+      })
+      .filter(Boolean)
+      .join('／');
+  } else {
+    sec = sec
+      .split('\n')
+      .map((l) => l.replace(/^-\s*/, '').trim())
+      .filter(Boolean)
+      .join('／');
+  }
+
+  return sec
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 const tools: Tool[] = entries.map((e) => {
   const ui      = e.data.japaneseUi;
   const prompt  = e.data.japanesePrompt;
@@ -42,6 +82,7 @@ const tools: Tool[] = entries.map((e) => {
     commercial: cu === 'ok' ? '案内あり' : cu === 'no' ? '不可' : cu === 'limited' ? '条件あり' : '要確認',
     wm:         wm === 'no' ? 'なし' : wm === 'yes' ? 'あり' : wm === 'limited' ? 'プランによって異なる' : '要確認',
     verifiedAt: e.data.verifiedAt ?? '',
+    note:       extractJaNote((e as { body?: string }).body),
   };
 });
 

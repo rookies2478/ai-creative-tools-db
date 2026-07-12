@@ -17,7 +17,7 @@ const tools: Tool[] = entries.map((e) => {
     initial:    e.data.name.charAt(0),
     free:       (free === true || free === 'limited') ? 'あり' : free === false ? 'なし' : '要確認',
     ja:         ui === true ? '対応' : ui === false ? '非対応' : '要確認',
-    commercial: cu === 'ok' ? '案内あり' : cu === 'no' ? '不可' : '要確認',
+    commercial: cu === 'ok' ? '案内あり' : cu === 'no' ? '不可' : cu === 'limited' ? '条件あり' : '要確認',
     wm,
     wmNote:     e.data.watermarkCondition ?? '透かし条件は公式サイト・実際の出力画面でご確認ください。',
     freeNote:   e.data.freePlanNote       ?? '詳細は公式サイトをご確認ください。',

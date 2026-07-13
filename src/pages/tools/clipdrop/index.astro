@@ -48,7 +48,7 @@ const jsonLd = JSON.stringify([
   </nav>
 
   <div class="tdp-wrap">
-    <ToolDetailPage
+    <ToolDetailPage japanBilling={d?.japanBilling}
       toolName="Clipdrop"
       category="AI画像編集・生成"
       checkedDate={d?.lastReviewed ?? '2026-06-06'}
@@ -239,7 +239,7 @@ const jsonLd = JSON.stringify([
         { q: 'JasperとClipdropの関係は何ですか？', a: 'Clipdropは2023年にStability AIに買収され、2024年にJasper.aiに統合されました。現在もclipdrop.coでサービスは継続されていますが、APIはJasper APIに移行しています。今後のサービス方針については公式アナウンスをご確認ください。' },
       ]}
       relatedTools={[
-        { name: 'Playground AI', slug: 'playground-ai', initial: 'P', cat: '画像生成・編集', badges: [{ s: 'cond', label: '商用：有料プランで案内' }, { s: 'cond', label: '無料：非商用のみ' }, { s: 'cond', label: '日本語：要確認' }], platforms: ['Web'], official: 'https://playground.com/' },
+        { name: 'Playground AI', slug: 'playground-ai', initial: 'P', cat: '画像生成・編集', badges: [{ s: 'cond', label: '商用：有料プランで案内' }, { s: 'cond', label: '無料：非商用のみ' }, { s: 'cond', label: '日本語：要確認' }], platforms: ['Web'], official: 'https://playgroundai.com/' },
         { name: 'Adobe Firefly', slug: 'adobe-firefly', initial: 'A', cat: '画像生成', badges: [{ s: 'paid', label: '商用：有料向け' }, { s: 'cond', label: '無料枠：限定' }, { s: 'ok', label: '日本語：対応' }], platforms: ['Web'], official: 'https://firefly.adobe.com' },
         { name: 'Stable Diffusion', slug: 'stable-diffusion', initial: 'S', cat: '画像生成', badges: [{ s: 'cond', label: '商用：モデル依存' }, { s: 'ok', label: 'ローカル：無料' }, { s: 'cond', label: '日本語：拡張で対応' }], platforms: ['ローカル', 'API'], official: 'https://stability.ai' },
       ]}

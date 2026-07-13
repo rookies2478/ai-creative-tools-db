@@ -117,6 +117,23 @@ reviewed:
   pricing: "2026-06-21"
   terms: "2026-06-15"
   features: "2026-06-15"
+japanBilling:
+  japanOfficialUrl: "https://www.vidu.com/ja"
+  providerName: "Shengshu Technology（海外向け運営は香港法人ShengShu AI HK Limited）"
+  providerCountry: "中国"
+  isJapaneseService: false
+  pricingUrl: "https://www.vidu.com/pricing"
+  billingCurrency: "要公式確認（米国App StoreではUSD表記）"
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: "unknown"
+  taxDisplay: "unknown"
+  purchaseChannels: ["web", "appstore", "googleplay"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "日本語公式ページがありますが、Web版の請求通貨・日本円決済の可否は要公式確認です。クレジット制（Subscription/Purchased/Bonus）のため、価格・通貨・税は公式購入画面でご確認ください。Web版とアプリ版で価格が異なる場合があります。"
+  billingCategory: "B"
+  sourceUrls:
+    - "https://www.vidu.com/pricing"
+    - "https://www.vidu.com/terms"
 ---
 
 ## Vidu AIとは

@@ -121,6 +121,22 @@ faqs:
     answer: "UIは英語のみです。日本語テキスト生成の精度については公式情報での確認をおすすめします。"
   - question: "Ideogramに透かしは入りますか？"
     answer: "透かしの有無・条件は公式情報では確認できていません。最新の条件は公式サイトでご確認ください。"
+japanBilling:
+  providerName: "Ideogram AI, Inc."
+  providerCountry: "カナダ"
+  isJapaneseService: false
+  pricingUrl: "https://ideogram.ai/pricing"
+  billingCurrency: "USD"
+  jpyDirectBilling: "card-conversion"
+  localizedJpyDisplay: false
+  taxDisplay: "unknown"
+  purchaseChannels: ["web"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "公式料金は米ドル建てです。日本円での実際の支払額は、決済時の為替レート、カード会社の海外事務手数料、税等により変動します。iOSアプリ内課金の有無・価格差は要公式確認です。最終金額は公式購入画面をご確認ください。"
+  billingCategory: "C"
+  sourceUrls:
+    - "https://ideogram.ai/pricing"
+    - "https://docs.ideogram.ai/plans-and-pricing/available-plans"
 ---
 
 ## Ideogramとは

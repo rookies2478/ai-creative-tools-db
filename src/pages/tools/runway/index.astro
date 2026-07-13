@@ -54,7 +54,7 @@ const jsonLd = JSON.stringify([
   </nav>
 
   <div class="tdp-wrap">
-    <ToolDetailPage
+    <ToolDetailPage japanBilling={d?.japanBilling}
       toolName="Runway"
       category="AI動画生成"
       checkedDate={d?.lastReviewed ?? '2026-06-05'}
@@ -253,7 +253,7 @@ const jsonLd = JSON.stringify([
         { q: 'Kling AIやPikaと比べるときは何を見ればよいですか？', a: '各ツールを比較する際は、生成品質・操作性・画像から動画への対応・料金・無料枠・商用利用条件・透かしの有無などを確認するとよいでしょう。Runwayは映像編集機能やAPIが充実しているとされており、Kling AIはコスト重視・日本語プロンプト対応が特徴とされています。Pikaは手軽な操作性・低コストが特徴とされています。用途や評価軸によって向き不向きが変わるため、実際に公式情報を比較してご検討ください。最新情報は各公式サイトをご確認ください。' },
       ]}
       relatedTools={[
-        { name: 'Kling AI', slug: 'kling-ai', initial: 'K', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料のみ' }, { s: 'cond', label: '無料：1日66cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://klingai.com' },
+        { name: 'Kling AI', slug: 'kling-ai', initial: 'K', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料のみ' }, { s: 'cond', label: '無料：1日66cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://kling.ai' },
         { name: 'Luma AI', slug: 'luma-ai', initial: 'L', cat: '動画生成', badges: [{ s: 'paid', label: '商用：Plus以上' }, { s: 'cond', label: '無料：限定' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://lumalabs.ai/' },
         { name: 'Pika', slug: 'pika', initial: 'P', cat: '動画生成', badges: [{ s: 'cond', label: '商用：有料で可' }, { s: 'cond', label: '無料：月80cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://pika.art' },
       ]}

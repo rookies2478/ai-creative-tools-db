@@ -1,0 +1,104 @@
+---
+/*
+  JapanBillingInfo.astro
+  日本の利用者向け課金情報（通貨・日本円決済・税・購入経路・確認日）を
+  tools コレクションの japanBilling フィールドから表示する。
+*/
+export interface JapanBillingData {
+  japanOfficialUrl?: string;
+  providerName?: string;
+  providerCountry?: string;
+  isJapaneseService?: boolean;
+  pricingUrl?: string;
+  billingCurrency?: string;
+  jpyDirectBilling?: 'jpy-direct' | 'card-conversion' | 'app-store-only' | 'channel-dependent' | 'unknown';
+  localizedJpyDisplay?: boolean | 'unknown';
+  taxDisplay?: 'tax-included' | 'tax-excluded' | 'tax-at-checkout' | 'region-dependent' | 'unknown';
+  purchaseChannels?: string[];
+  pricingCheckedAt?: string;
+  pricingNote?: string;
+  billingCategory?: 'A' | 'B' | 'C' | 'D' | 'E';
+  sourceUrls?: string[];
+}
+
+export interface Props {
+  billing: JapanBillingData;
+}
+
+const { billing } = Astro.props as Props;
+
+const jpyLabel: Record<string, string> = {
+  'jpy-direct': '日本円で直接請求',
+  'card-conversion': '外貨請求（カード会社が円換算）',
+  'app-store-only': 'アプリ内購入のみ日本円',
+  'channel-dependent': '購入経路により異なる',
+  'unknown': '要公式確認',
+};
+
+const taxLabel: Record<string, string> = {
+  'tax-included': '税込表示',
+  'tax-excluded': '税別表示',
+  'tax-at-checkout': '決済時に税計算',
+  'region-dependent': '地域により異なる',
+  'unknown': '公式ページ上では確認できない',
+};
+
+const channelLabel: Record<string, string> = {
+  web: 'Web',
+  appstore: 'Apple App Store',
+  googleplay: 'Google Play',
+  api: 'API課金',
+  enterprise: '法人問い合わせ',
+  desktop: 'デスクトップアプリ',
+  discord: 'Discord',
+  microsoftstore: 'Microsoft Store',
+  adobe: 'Adobeアカウント',
+};
+
+const rows: { lb: string; val: string }[] = [];
+if (billing.billingCurrency) rows.push({ lb: '公式料金の通貨', val: billing.billingCurrency });
+if (billing.jpyDirectBilling) rows.push({ lb: '日本円決済', val: jpyLabel[billing.jpyDirectBilling] });
+if (billing.localizedJpyDisplay !== undefined) rows.push({ lb: '日本円価格の表示', val: billing.localizedJpyDisplay === true ? 'あり' : billing.localizedJpyDisplay === false ? 'なし' : '要公式確認' });
+if (billing.taxDisplay) rows.push({ lb: '税の表示', val: taxLabel[billing.taxDisplay] });
+if (billing.purchaseChannels?.length) rows.push({ lb: '購入経路', val: billing.purchaseChannels.map((c) => channelLabel[c] ?? c).join(' / ') });
+if (billing.providerName) rows.push({ lb: '運営会社', val: `${billing.providerName}${billing.providerCountry ? `（${billing.providerCountry}）` : ''}${billing.isJapaneseService === false ? '・海外サービス' : billing.isJapaneseService === true ? '・日本のサービス' : ''}` });
+if (billing.pricingCheckedAt) rows.push({ lb: '料金情報の確認日', val: billing.pricingCheckedAt });
+---
+
+{rows.length > 0 && (
+  <div class="jbi">
+    <h3>日本から利用する場合の課金情報</h3>
+    <dl class="jbi-grid">
+      {rows.map((r) => (
+        <div class="jbi-row">
+          <dt>{r.lb}</dt>
+          <dd>{r.val}</dd>
+        </div>
+      ))}
+    </dl>
+    {billing.pricingNote && <p class="jbi-note">{billing.pricingNote}</p>}
+    {(billing.pricingUrl || billing.japanOfficialUrl) && (
+      <p class="jbi-links">
+        {billing.pricingUrl && <a href={billing.pricingUrl} target="_blank" rel="nofollow noopener noreferrer">公式料金ページで最新価格を確認 ↗</a>}
+        {billing.japanOfficialUrl && <a href={billing.japanOfficialUrl} target="_blank" rel="nofollow noopener noreferrer">日本向け公式ページ ↗</a>}
+      </p>
+    )}
+  </div>
+)}
+
+<style>
+  .jbi {
+    margin: 1.25rem 0 1.5rem;
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--line, #e2e8f0);
+    border-radius: 12px;
+    background: var(--bg-soft, #f8fafc);
+  }
+  .jbi h3 { margin: 0 0 .65rem; font-size: .95rem; }
+  .jbi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .5rem .9rem; margin: 0; }
+  .jbi-row dt { font-size: .72rem; opacity: .65; margin-bottom: .1rem; }
+  .jbi-row dd { margin: 0; font-size: .85rem; font-weight: 600; }
+  .jbi-note { margin: .8rem 0 0; font-size: .78rem; line-height: 1.7; opacity: .85; }
+  .jbi-links { margin: .6rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; font-size: .8rem; }
+  .jbi-links a { text-decoration: underline; }
+</style>

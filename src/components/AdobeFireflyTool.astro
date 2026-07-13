@@ -4,6 +4,8 @@ import UsagePolicySummary from './UsagePolicySummary.astro';
 import type { UsagePolicyData } from './UsagePolicySummary.astro';
 import VerifiedSummary from './VerifiedSummary.astro';
 import type { VerifiedSummaryData } from './VerifiedSummary.astro';
+import JapanBillingInfo from './JapanBillingInfo.astro';
+import type { JapanBillingData } from './JapanBillingInfo.astro';
 /* =========================================================
    AdobeFireflyTool.astro
    ツール詳細ページ：/tools/adobe-firefly/ の記事本文
@@ -68,6 +70,7 @@ export interface Props {
   about?: string[];                    // html可（段落）
   aboutMore?: { label: string; href: string };
   pricing?: { table: RichTable; notes: string[] };  // notes html可
+  japanBilling?: JapanBillingData;
   commercial?: { lead: string; points: string[]; disclaimer: string; more?: { label: string; href: string } };
   integration?: string;
   whoFor?: string[];
@@ -297,6 +300,7 @@ const {
   watermarkRaw,
   watermarkConditionRaw,
   verifiedSummary,
+  japanBilling,
 } = Astro.props as Props;
 
 const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
@@ -413,6 +417,8 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
         <tbody>{pricing.table.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={c.html}></td>))}</tr>))}</tbody>
       </table></div>
       <ul>{pricing.notes.map((n) => (<li set:html={n}></li>))}</ul>
+
+      {japanBilling && <JapanBillingInfo billing={japanBilling} />}
 
       <h3>商用利用について</h3>
       <p>{commercial.lead}</p>

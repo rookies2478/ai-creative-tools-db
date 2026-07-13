@@ -7,6 +7,8 @@ freePlan: true
 commercialUse: "limited"
 commercialUseNote: "Google公式情報上、Geminiの画像生成機能や利用プランは確認できますが、商用利用・広告利用・クライアントワークへの具体的な可否は用途・プラン・利用規約・生成AI禁止利用ポリシー・第三者権利の確認が必要です。商用利用を前提にする場合は最新の公式規約・ポリシーをご確認ください。このページは法的助言ではありません。"
 japaneseUi: true
+lowestPaidPlan: "Google AI Plus ¥725/月（日本向け公式表示・JPY）"
+currency: "JPY"
 japanesePrompt: true
 watermark: "yes"
 bestFor:
@@ -104,6 +106,23 @@ faqs:
     answer: "Google公式ページでは、Geminiで作成されたビジュアルにはSynthIDによる目に見えない透かしと目に見える透かしが使用されると案内されています。透かし条件はプランや機能によって変わる可能性があるため、実際の出力画面と公式情報でご確認ください。"
   - question: "どの環境で使えますか？"
     answer: "WebブラウザのほかiOS・Androidアプリからも利用できます。Googleアカウントへのサインインが必要です。"
+japanBilling:
+  japanOfficialUrl: "https://gemini.google/jp/overview/image-generation/?hl=ja-JP"
+  providerName: "Google"
+  providerCountry: "米国"
+  isJapaneseService: false
+  pricingUrl: "https://gemini.google/jp/subscriptions/"
+  billingCurrency: "JPY"
+  jpyDirectBilling: "jpy-direct"
+  localizedJpyDisplay: true
+  taxDisplay: "unknown"
+  purchaseChannels: ["web", "appstore", "googleplay", "api"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "日本の公式サブスクリプションページに日本円で価格が明記されています（Google AI Plus ¥725/月、Google AI Pro ¥2,900/月等）。税込・税別の区別は公式ページ上では確認できません。Gemini API／Google AI Studioの画像生成は米ドル建て従量課金で、一般利用者向けプランとは別の料金体系です。"
+  billingCategory: "A"
+  sourceUrls:
+    - "https://gemini.google/jp/subscriptions/"
+    - "https://gemini.google/jp/overview/image-generation/?hl=ja-JP"
 ---
 
 ## Gemini画像生成とは

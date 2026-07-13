@@ -30,7 +30,7 @@ const jsonLd = JSON.stringify([
     operatingSystem: 'Web',
     applicationCategory: 'VideoApplication',
     description: 'Kling AIは中国Kuaishou運営のAI動画生成ツール。テキスト・画像から最大10秒の動画を生成でき、動画延長（最大3分）にも対応。無料プランは1日66クレジット付与。',
-    url: 'https://klingai.com',
+    url: 'https://kling.ai',
   },
 ]);
 ---
@@ -54,7 +54,7 @@ const jsonLd = JSON.stringify([
   </nav>
 
   <div class="tdp-wrap">
-    <ToolDetailPage
+    <ToolDetailPage japanBilling={d?.japanBilling}
       toolName="Kling AI"
       category="AI動画生成"
       checkedDate={d?.lastReviewed ?? '2026-06-04'}
@@ -63,13 +63,13 @@ const jsonLd = JSON.stringify([
       specs={[
         { lb: '商用利用', badge: { s: 'paid', label: '有料プランのみ（要確認）' } },
         { lb: '無料枠', badge: { s: 'cond', label: '1日66クレジット（透かし・商用不可）' } },
-        { lb: '料金目安', text: '$6.99/月〜', mono: true },
+        { lb: '料金目安', text: 'USD建て（要公式確認）', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: '無料プランあり・有料なし' } },
         { lb: '日本語UI', badge: { s: 'cond', label: '部分対応' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
-      primaryCta={{ label: '公式サイトで確認する', href: 'https://klingai.com' }}
-      secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://klingai.com/global/pricing' }}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://kling.ai' }}
+      secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://kling.ai/membership/membership-plan' }}
       basicInfo={[
         {
           title: '商用利用', badge: { s: 'paid', label: '有料プランのみ（要確認）' }, wide: true,
@@ -81,7 +81,7 @@ const jsonLd = JSON.stringify([
           det: '無料プランでは1日66クレジットが付与されるとされています。無料プランでは透かしが付与され、商用利用は不可とされています。クレジット数・条件は変更される可能性があります。',
         },
         {
-          title: '最安料金目安', sum: '$6.99/月〜（公式案内）', sumMono: true,
+          title: '最安料金目安', sum: 'USD建て（会員プラン価格はログイン後表示）', sumMono: true,
           det: '2026年6月時点の情報に基づきます。プラン内容・料金は変更される可能性があります。最新料金は公式サイトでご確認ください。',
         },
         {
@@ -99,13 +99,13 @@ const jsonLd = JSON.stringify([
         { title: '主な機能', wide: true, feats: ['テキスト→動画', '画像→動画', '動画延長（最大3分）', '最大10秒/クリップ'] },
       ]}
       useCases={[
-        '<b>コスト重視のAI動画生成</b>（$6.99/月〜と比較的安価）',
+        '<b>コスト重視のAI動画生成</b>（低価格帯プランの案内あり・価格は要公式確認）',
         '<b>日本語プロンプト</b>での動画生成（日本語プロンプト対応）',
         '<b>動画延長</b>で最大3分の動画を作成したい場合',
         '<b>無料枠での試用</b>（透かしあり・商用不可・1日66クレジット）',
       ]}
       pros={[
-        'AI動画生成ツールの中で最安クラスの料金（$6.99/月〜）',
+        'AI動画生成ツールの中で低価格帯とされる料金設定（USD建て・最新価格は要公式確認）',
         '日本語プロンプトに対応',
         '動画延長機能で最大3分の動画生成が可能',
         '無料プランでも1日66クレジット付与（透かしあり）',
@@ -127,19 +127,19 @@ const jsonLd = JSON.stringify([
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>1日66クレジット</span><br>透かしあり・商用利用不可。条件は変更される可能性あり。' }],
-          [{ html: '最安料金', rk: true }, { html: '<span class="mono">$6.99/月〜</span><br>最新料金は公式サイトで確認。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">USD建て・要公式確認</span><br>会員プラン価格はログイン後に表示されます。' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st paid sm"><span class="d"></span>有料プランのみ（要確認）</span><br>Standard以上で可とされる。最新条件は公式サイトを必ずご確認ください。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料プランあり・有料なし</span><br>有料プランでは透かしなしとされています。' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>部分対応</span>' }],
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span>' }],
           [{ html: '最大動画長', rk: true }, { html: '10秒/クリップ（延長で最大3分）' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-04', mono: true }],
-          [{ html: '公式サイト', rk: true }, { html: '<a href="https://klingai.com" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
+          [{ html: '公式サイト', rk: true }, { html: '<a href="https://kling.ai" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 料金・クレジット数・商用利用条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
       }}
       about={[
-        'Kling AIはKuaishou（快手）が運営するAI動画生成ツールです。テキストや画像から最大10秒の動画を生成でき、動画延長機能を使えば最大3分まで動画を延ばすことができます。料金が$6.99/月〜と比較的安価なことと、日本語プロンプトへの対応が特徴です。',
+        'Kling AIはKuaishou（快手）が運営するAI動画生成ツールです。テキストや画像から最大10秒の動画を生成でき、動画延長機能を使えば最大3分まで動画を延ばすことができます。低価格帯の会員プラン（USD建て・価格はログイン後表示）と、日本語プロンプトへの対応が特徴です。',
         '無料プランでは1日66クレジットが付与されますが、<b>透かしあり・商用利用不可</b>とされています。商用利用にはStandard以上の有料プランへの移行が必要です。公式価格ページへの直接アクセスが困難な場合があるため、<b>商用利用前は必ず公式サイトで最新条件をご確認ください。</b>',
       ]}
       aboutMore={{ label: 'AI動画生成ツール一覧で比較する →', href: '/categories/video-generation/' }}
@@ -149,7 +149,7 @@ const jsonLd = JSON.stringify([
           headers: ['プラン', '料金', '備考'],
           rows: [
             [{ html: '無料', rk: true }, { html: '無料' }, { html: '1日66クレジット・透かしあり・商用不可' }],
-            [{ html: 'Standard', rk: true }, { html: '$6.99/月〜', mono: true }, { html: '商用利用可とされる（要公式確認）' }],
+            [{ html: 'Standard', rk: true }, { html: 'USD建て（要公式確認）', mono: true }, { html: '商用利用可とされる（要公式確認）' }],
             [{ html: '上位プラン', rk: true }, { html: '要公式確認', mono: true }, { html: '要公式確認' }],
           ],
         },
@@ -174,7 +174,7 @@ const jsonLd = JSON.stringify([
       integrationTitle="Kling AIの動画延長機能について"
       integration="Kling AIでは動画延長（Extend）機能により、1クリップ10秒の動画を最大3分まで延長することができるとされています。ストーリー性のある動画や長尺コンテンツの制作に活用できる場合があります。動画延長機能のクレジット消費量・最大延長時間は変更される可能性があるため、最新仕様は公式サイトでご確認ください。"
       whoFor={[
-        'コスト重視でAI動画生成を始めたい人（$6.99/月〜）',
+        'コスト重視でAI動画生成を始めたい人',
         '日本語プロンプトで動画生成したい人',
         '動画延長機能で最大3分の動画を作りたい人',
         '無料枠で試用してから有料移行を検討したい人',
@@ -233,8 +233,8 @@ const jsonLd = JSON.stringify([
       nextCheck={d?.nextReviewDue ?? '2026-07-04'}
       verifiedDate={d?.verifiedAt ?? '2026-06-08'}
       sources={[
-        { tag: '料金', label: 'Kling AI 料金プラン（公式・要確認）', href: 'https://klingai.com/global/pricing' },
-        { tag: '公式', label: 'Kling AI 公式サイト', href: 'https://klingai.com' },
+        { tag: '料金', label: 'Kling AI 料金プラン（公式・要確認）', href: 'https://kling.ai/membership/membership-plan' },
+        { tag: '公式', label: 'Kling AI 公式サイト', href: 'https://kling.ai' },
       ]}
       faqs={[
         { q: 'Kling AIは無料で使えますか？', a: '無料プランで1日66クレジットが付与されます。ただし無料プランでは透かしが付与され、商用利用は不可とされています。' },

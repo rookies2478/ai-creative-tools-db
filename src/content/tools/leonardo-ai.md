@@ -118,6 +118,22 @@ faqs:
     answer: "はい、必要です。アップロードする参照画像・素材の著作権・権利はユーザー自身が事前に確認する必要があります（usagePolicy参照）。第三者が権利を持つ画像・イラスト・写真・ブランド素材等を無断でアップロードすることは避けてください。実在の人物・著名人・ブランドロゴを含む生成画像は、肖像権・商標権の観点から別途確認が必要です。本記事は法的助言ではありません。"
   - question: "無料プランと有料プランで商用利用条件はどう違いますか？"
     answer: "2026年1月更新の公式利用規約では、無料プランは非独占的ライセンスで商用利用が可能とされていますが、所有権はLeonardo.AIが保持し他ユーザーも同一画像を使用できます。有料プランでは完全な所有権・知的財産権がユーザーに帰属するとされており、Private設定時は他ユーザーへの公開対象外になります。ただし条件は変更される可能性があります。プランや用途によって条件が異なる場合があるため、利用前に最新の公式利用規約をご確認ください。このページは法的助言ではありません。"
+japanBilling:
+  providerName: "Leonardo Interactive Pty Ltd（Canvaグループ）"
+  providerCountry: "オーストラリア"
+  isJapaneseService: false
+  pricingUrl: "https://leonardo.ai/pricing"
+  billingCurrency: "USD"
+  jpyDirectBilling: "channel-dependent"
+  localizedJpyDisplay: false
+  taxDisplay: "tax-excluded"
+  purchaseChannels: ["web", "appstore"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "Web版の公式料金は米ドル建て・税抜表示で、適用される税は決済時に加算されます。日本円での実際の支払額は決済時の為替レートやカード会社の海外事務手数料により変動します。iOSアプリ内課金（App Store）はWeb版と価格・プラン構成が異なる場合があります。"
+  billingCategory: "D"
+  sourceUrls:
+    - "https://leonardo.ai/pricing"
+    - "https://leonardo.ai/terms-of-service"
 ---
 
 ## Leonardo AIとは

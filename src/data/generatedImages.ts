@@ -332,7 +332,7 @@ export const generatedImages: GeneratedImage[] = [
     negativePrompt: 'text, letters, words, logo, watermark, trademark, brand mark, celebrity, real person, existing character, distorted hands, face, low quality, blurry, extra objects, messy layout, medical, legal, financial, violent, sexual',
     model: '要確認',
     provider: 'Playground AI',
-    modelUrl: 'https://playground.com/',
+    modelUrl: 'https://playgroundai.com/',
     generatedAt: '2026-06-14',
     reviewedAt: '2026-06-14',
     pageSlug: 'playground-ai',

@@ -32,7 +32,7 @@ lastReviewed: "2026-06-17"
 nextReviewDue: "2026-09-17"
 verifiedAt: "2026-06-17"
 officialSourceUrl: "https://nightcafe.studio/policies/terms-of-service"
-currency: "unknown"
+currency: "USD"
 pricingSourceUrl: "https://nightcafe.studio/blogs/info/is-nightcafe-free"
 pricingSourceNote: "公式ブログ記事（料金専用ページではない）。無料枠の案内はあるが有料プランの月額・tier構成を明示した料金表ページURLは未確認。最新の料金はNightCafe公式サイトをご確認ください。"
 pricingModel: "subscription_credit"
@@ -116,6 +116,22 @@ faqs:
     answer: "Stable DiffusionやDALL-Eをはじめ複数の生成モデルが利用できます。利用可能なモデルは変更される可能性があるため、最新情報は公式サイトでご確認ください。"
   - question: "どの環境で使えますか？"
     answer: "Webブラウザから利用できます。インストールは不要です。"
+japanBilling:
+  providerName: "NightCafe Studio Pty Ltd"
+  providerCountry: "オーストラリア"
+  isJapaneseService: false
+  pricingUrl: "https://creator.nightcafe.studio/pricing"
+  billingCurrency: "USD"
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: false
+  taxDisplay: "unknown"
+  purchaseChannels: ["web"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "公式表記は米ドル建てです（決済はPaddle経由）。月額サブスクリプション（PRO）と単発クレジットパック購入の2系統があり、単純な月額比較は適切ではありません。日本円決済の可否・税の扱いはチェックアウト画面で決まるため、公式購入画面をご確認ください。"
+  billingCategory: "E"
+  sourceUrls:
+    - "https://creator.nightcafe.studio/pricing"
+    - "https://nightcafe.studio/blogs/info/is-nightcafe-free"
 ---
 
 ## NightCafeとは

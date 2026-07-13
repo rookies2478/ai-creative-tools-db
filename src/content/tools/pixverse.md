@@ -115,6 +115,23 @@ reviewed:
   pricing: "2026-06-21"
   terms: "2026-06-05"
   features: "2026-06-15"
+japanBilling:
+  providerName: "AIVORA PTE. LTD.（利用規約記載の運営法人）"
+  providerCountry: "シンガポール"
+  isJapaneseService: false
+  pricingUrl: "https://app.pixverse.ai/subscribe"
+  billingCurrency: "要公式確認（公式ブログ言及はUSD）"
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: "unknown"
+  taxDisplay: "unknown"
+  purchaseChannels: ["web", "appstore", "googleplay", "api"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "Web版の料金はログイン後にのみ表示されるため、現行価格・通貨は要公式確認です。APIメンバーシップはWebサブスクリプションと別契約であることが公式ドキュメントに明記されています。Web版とアプリ版で価格・通貨・条件が異なる場合があります。"
+  billingCategory: "D"
+  sourceUrls:
+    - "https://pixverse.ai/en/terms-of-service"
+    - "https://app.pixverse.ai/subscribe"
+    - "https://docs.platform.pixverse.ai/subscribe-api-plans-882969m0"
 ---
 
 ## PixVerseとは

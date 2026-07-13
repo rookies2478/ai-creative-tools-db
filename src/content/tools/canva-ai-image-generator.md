@@ -4,8 +4,8 @@ shortDescription: "Canvaのデザインツールに統合されたAI画像生成
 category: "image"
 officialUrl: "https://www.canva.com"
 freePlan: "limited"
-lowestPaidPlan: "$15/月（Canva Pro・月払い）／$120/年（年払い）"
-currency: "USD"
+lowestPaidPlan: "Canva Pro ¥1,180/月（App Store日本の公式表記）／Web契約の通貨は要公式確認"
+currency: "unknown"
 commercialUse: "limited"
 commercialUseNote: "Canva公式情報上、AI生成画像は個人・商用問わず利用できるとされています。ただし多くの法域（米国を含む）ではAI生成コンテンツに著作権保護が付与されない場合があるとされており、他者による複製を排除できない可能性があります。商用利用に適しているかどうかの確認はユーザーの責任とされています。利用前にCanva AI Product Termsをご確認ください。"
 japaneseUi: true
@@ -160,6 +160,23 @@ faqs:
     answer: "Canvaはデザイン編集まで含めた実務・SNS用途向けの一体型ツールです。Midjourneyはアート調・雰囲気重視の高品質な画像生成に特化しており、細かなスタイル調整を重視する場合に比較されやすいです。"
   - question: "人物や著名人の画像を生成できますか？"
     answer: "人物・著名人・ブランドロゴ・第三者の著作物に関連する画像を生成・利用する場合は、肖像権・商標権・著作権などの観点から別途確認が必要です。本記事は法的助言ではありません。"
+japanBilling:
+  japanOfficialUrl: "https://www.canva.com/ja_jp/"
+  providerName: "Canva Pty Ltd"
+  providerCountry: "オーストラリア"
+  isJapaneseService: false
+  pricingUrl: "https://www.canva.com/ja_jp/pricing/"
+  billingCurrency: "購入経路により異なる（App Store日本はJPY／Web契約は要公式確認）"
+  jpyDirectBilling: "channel-dependent"
+  localizedJpyDisplay: "unknown"
+  taxDisplay: "unknown"
+  purchaseChannels: ["web", "appstore", "googleplay", "enterprise"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "App Store日本のアプリ内課金ではCanva Proが日本円建て（¥1,180/月・¥11,800/年）であることを公式ページで確認しています。日本語の公式料金ページはありますが、Web契約時の表示通貨・請求通貨は要公式確認です。Web版とアプリ版では価格・通貨・税・キャンペーン条件が異なる場合があります。現行プラン名はCanva Pro／Canva Business等です。"
+  billingCategory: "D"
+  sourceUrls:
+    - "https://www.canva.com/ja_jp/pricing/"
+    - "https://apps.apple.com/jp/app/id897446215"
 ---
 
 ## 比較記事

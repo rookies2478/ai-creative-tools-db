@@ -56,7 +56,7 @@ const jsonLd = JSON.stringify([
   </nav>
 
   <div class="tdp-wrap">
-    <ToolDetailPage
+    <ToolDetailPage japanBilling={d?.japanBilling}
       sampleImage={sampleImage}
       toolName="Canva AI画像生成"
       category="AI画像生成"
@@ -66,7 +66,7 @@ const jsonLd = JSON.stringify([
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '条件あり' } },
         { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
-        { lb: '料金目安', text: '$15/月〜', mono: true },
+        { lb: '料金目安', text: '¥1,180/月〜（アプリ内課金）', mono: true },
         { lb: '透かし', badge: { s: 'na', label: '要確認' } },
         { lb: '日本語UI', badge: { s: 'ok', label: '〇 対応' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
@@ -84,8 +84,8 @@ const jsonLd = JSON.stringify([
           det: '無料プランで一定回数の生成が可能です。生成可能回数はプランや時期により変更される可能性があります。',
         },
         {
-          title: '最安料金目安', sum: '$15/月（Canva Pro・月払い）／$120/年（年払い）', sumMono: true,
-          det: 'Canva Pro $15/月〜（月払い）。年払いで$120/年。生成回数が無料プランより拡大します。',
+          title: '最安料金目安', sum: 'Canva Pro ¥1,180/月（App Store日本の公式表記）', sumMono: true,
+          det: 'App Store日本のアプリ内課金ではCanva Pro ¥1,180/月・¥11,800/年。Web契約時の表示通貨・請求通貨は要公式確認です。生成回数が無料プランより拡大します。',
         },
         {
           title: '透かし', badge: { s: 'na', label: '要確認' },
@@ -130,7 +130,7 @@ const jsonLd = JSON.stringify([
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br>無料プランで一定回数の生成が可能（回数は変更の可能性あり）' }],
-          [{ html: '最安料金', rk: true }, { html: '<span class="mono">$15/月〜</span><br>Canva Pro $15/月〜（月払い）。年払い$120/年。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">¥1,180/月〜</span><br>Canva Pro（App Store日本のアプリ内課金）。Web契約の通貨は要公式確認。' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり</span><br>人間制作物と偽ることは規約上禁止。一般的な開示義務は確認できないが、公開先・地域法令により表示が必要な場合あり。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>公式情報から確認できていません' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>〇 対応</span>' }],
@@ -152,10 +152,11 @@ const jsonLd = JSON.stringify([
           headers: ['プラン', '料金', 'AI画像生成'],
           rows: [
             [{ html: '無料', rk: true }, { html: '無料', mono: true }, { html: '一定回数まで利用可能な場合がある' }],
-            [{ html: 'Canva Pro', rk: true }, { html: '$15/月〜', mono: true }, { html: '生成回数が拡大する場合がある' }],
+            [{ html: 'Canva Pro', rk: true }, { html: '¥1,180/月〜（App Store日本）', mono: true }, { html: '生成回数が拡大する場合がある' }],
           ],
         },
         notes: [
+          'Web版とApple App Store／Google Playでは、価格、通貨、税、キャンペーン条件が異なる場合があります。Web契約時の請求通貨は公式購入画面をご確認ください',
           '無料プランの生成可能回数はプランや時期により変更される可能性があります',
           '<b>最新の生成回数・制限はCanva公式ヘルプでご確認ください</b>',
         ],

@@ -154,6 +154,22 @@ faqs:
     answer: "プランによっては可視透かしが入る場合があります。全プラン共通でC2PAの不可視メタデータが埋め込まれる場合があります。最新の条件は公式サイトでご確認ください。"
   - question: "どの環境で使えますか？"
     answer: "Webブラウザから利用できます。PhotoshopやIllustratorとの連携も可能です。"
+japanBilling:
+  japanOfficialUrl: "https://www.adobe.com/jp/products/firefly.html"
+  providerName: "Adobe"
+  providerCountry: "米国"
+  isJapaneseService: false
+  pricingUrl: "https://www.adobe.com/jp/products/firefly/plans.html"
+  billingCurrency: "JPY"
+  jpyDirectBilling: "jpy-direct"
+  localizedJpyDisplay: true
+  taxDisplay: "tax-included"
+  purchaseChannels: ["web", "appstore", "googleplay", "enterprise"]
+  pricingCheckedAt: "2026-06-19"
+  pricingNote: "日本向け公式ページでは日本円・税込価格が表示されます（Firefly Standard 1,580円/月・2026-06-19確認）。Firefly単体プランとCreative Cloud各プランに付帯する生成クレジットは別のものです。最新価格・契約条件は公式料金ページをご確認ください。"
+  billingCategory: "A"
+  sourceUrls:
+    - "https://www.adobe.com/jp/products/firefly/plans.html"
 ---
 
 ## Adobe Fireflyとは

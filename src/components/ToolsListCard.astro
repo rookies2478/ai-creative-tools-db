@@ -155,6 +155,20 @@ const catLabel = getCategoryLabel(data.category);
 const dataCat = (data.category === 'both') ? 'image' : data.category;
 
 const price = data.lowestPaidPlan ?? '要公式確認';
+
+const jb = data.japanBilling;
+const jpyBillLabel: Record<string, string> = {
+  'jpy-direct': '日本円決済◯',
+  'card-conversion': '外貨請求（円換算）',
+  'app-store-only': 'アプリのみ日本円',
+  'channel-dependent': '経路により異なる',
+  'unknown': '日本円決済 要確認',
+};
+const jbSummary = jb
+  ? [jb.billingCurrency ? `料金通貨：${jb.billingCurrency}` : null, jb.jpyDirectBilling ? jpyBillLabel[jb.jpyDirectBilling] : null]
+      .filter(Boolean)
+      .join('｜')
+  : '';
 const displayPlatforms = (data.platforms ?? []).map((p: string) => getPlatformLabel(p));
 ---
 
@@ -224,6 +238,7 @@ const displayPlatforms = (data.platforms ?? []).map((p: string) => getPlatformLa
   <div class="tool-meta">
     <div>
       <span class="tool-price">{price}</span>
+      {jbSummary && <div class="tool-billing">{jbSummary}</div>}
       <div style="margin-top:4px;">
         <FreshnessLabel verifiedAt={data.verifiedAt} lastReviewed={data.lastReviewed} variant="card" />
       </div>

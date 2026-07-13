@@ -121,6 +121,22 @@ faqs:
     answer: "公式料金ページでは、Background Removal・Cleanup・Relightが20回/24時間、Text Removerが50回/24時間といった利用上限が案内されています。ただし制限内容は変更される可能性があるため、最新の条件は公式サイトでご確認ください。"
   - question: "JasperとClipdropの関係は何ですか？"
     answer: "Clipdropは2023年にStability AIに買収され、2024年にJasper.aiに統合されました。現在もclipdrop.co でサービスは継続されていますが、APIはJasper APIに移行しています。今後のサービス方針については公式アナウンスをご確認ください。"
+japanBilling:
+  providerName: "Jasper.ai（2024年2月にStability AIから移管）"
+  providerCountry: "米国（要公式確認）"
+  isJapaneseService: false
+  pricingUrl: "https://clipdrop.co/pricing"
+  billingCurrency: "要公式確認"
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: false
+  taxDisplay: "unknown"
+  purchaseChannels: ["web", "api"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "運営は現在Jasper.ai（公式サイトに移管経緯の記載あり）。Proサブスクリプションの金額・通貨は公式料金ページ上で動的表示のため要公式確認です。最新の価格・通貨・税は公式購入画面をご確認ください。"
+  billingCategory: "E"
+  sourceUrls:
+    - "https://clipdrop.co/"
+    - "https://clipdrop.co/pricing"
 ---
 
 ## Clipdropとは

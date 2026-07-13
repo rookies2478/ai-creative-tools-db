@@ -147,6 +147,22 @@ faqs:
     answer: "Pikaは短尺動画の生成や画像からの動画化を手軽に試したい場合の候補とされています。Runwayは映像制作・編集寄りの機能を重視する場合の候補、Kling AIはリアル寄りの動画生成を比較検討したい場合の候補とされています。ただし、各ツールの用途・料金・商用利用条件は変更される可能性があるため、最新情報は各ツールの公式サイトでご確認ください。本記事は法的助言ではありません。"
   - question: "PikaとHailuo AIはどちらが向いていますか？"
     answer: "Pikaはシンプルな操作で短尺動画を手軽に試したい場合の候補とされています。Hailuo AIは映像品質が高いとされる場合があります。各ツールの詳細は[AI動画生成ツール一覧](/categories/video-generation/)でご確認ください。"
+japanBilling:
+  providerName: "Pika（iOSアプリ販売者はMellis, Inc.）"
+  providerCountry: "米国"
+  isJapaneseService: false
+  pricingUrl: "https://pika.art/pricing"
+  billingCurrency: "USD"
+  jpyDirectBilling: "channel-dependent"
+  localizedJpyDisplay: false
+  taxDisplay: "tax-at-checkout"
+  purchaseChannels: ["web", "appstore"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "公式料金は米ドル建てで、公式料金ページに「居住国により付加価値税（VAT）が加算される場合がある」と明記されています。日本円での実際の支払額は決済時の為替レート、カード会社の海外事務手数料により変動します。iOSアプリ（Pika Video）はApp Store課金でWeb版と価格体系が異なります。"
+  billingCategory: "D"
+  sourceUrls:
+    - "https://pika.art/pricing"
+    - "https://apps.apple.com/us/app/pika-video/id6680155400"
 ---
 
 ## Pikaとは

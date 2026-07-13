@@ -110,6 +110,23 @@ faqs:
     answer: "技術的には生成可能な場合がありますが、実在の人物・著名人・ブランドロゴ・第三者の著作物を含む画像を作成・利用する際は、肖像権・商標権・著作権などの観点から別途確認が必要です。本記事は法的助言ではありません。"
   - question: "DALL·EとMidjourneyはどう違いますか？"
     answer: "DALL·EはChatGPTと統合されておりテキスト指示への忠実度が高い傾向があります。Midjourneyはアートやイラストなどスタイリッシュなビジュアルやクリエイティブな表現を得意とするとされています。用途や優先事項に応じて選び分けることが有効です。"
+japanBilling:
+  japanOfficialUrl: "https://openai.com/ja-JP/chatgpt/pricing/"
+  providerName: "OpenAI"
+  providerCountry: "米国"
+  isJapaneseService: false
+  pricingUrl: "https://openai.com/ja-JP/chatgpt/pricing/"
+  billingCurrency: "購入経路により異なる（App Store日本はJPY／Web契約は要公式確認）"
+  jpyDirectBilling: "channel-dependent"
+  localizedJpyDisplay: "unknown"
+  taxDisplay: "unknown"
+  purchaseChannels: ["web", "appstore", "googleplay", "api"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "DALL·E系の画像生成はChatGPTの契約経由で利用します。App Store日本のアプリ内課金では日本円建て（ChatGPT Plus ¥3,000/月等）を確認しています。Webサイトから直接契約する場合の請求通貨は要公式確認です。OpenAI APIの画像生成は米ドル建て従量課金で、ChatGPTのサブスクリプションとは別の料金体系です。Web版とアプリ版では価格・通貨・条件が異なる場合があります。"
+  billingCategory: "D"
+  sourceUrls:
+    - "https://apps.apple.com/jp/app/chatgpt/id6448311069"
+    - "https://openai.com/ja-JP/chatgpt/pricing/"
 ---
 
 ## DALL·Eとは

@@ -107,6 +107,22 @@ faqs:
     answer: "DreamStudioはStability AIが提供するブラウザ操作のサービスで、ローカル環境の構築なしにStable Diffusion系モデルを利用できます。ローカル版のStable Diffusionと比べてセットアップ不要で手軽に始められますが、クレジット消費制の有料サービスです。"
   - question: "どの環境で使えますか？"
     answer: "Webブラウザから利用できます。ローカル環境の構築やインストールは不要です。"
+japanBilling:
+  providerName: "Stability AI"
+  providerCountry: "英国発（現本社所在地は要公式確認）"
+  isJapaneseService: false
+  pricingUrl: "https://stability.ai/brand-studio-plans"
+  billingCurrency: "USD"
+  jpyDirectBilling: "card-conversion"
+  localizedJpyDisplay: false
+  taxDisplay: "unknown"
+  purchaseChannels: ["web"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "旧DreamStudioは「Brand Studio」に改称され、ブランド企業向け制作プラットフォームへ位置付けが変わっています。公式料金は米ドル建て（Core $50/月）で、日本円での実際の支払額は決済時の為替レート、カード会社の海外事務手数料、税等により変動します。税表示は公式料金ページ上では確認できません。"
+  billingCategory: "C"
+  sourceUrls:
+    - "https://stability.ai/brandstudio"
+    - "https://stability.ai/brand-studio-plans"
 ---
 
 ## DreamStudioとは

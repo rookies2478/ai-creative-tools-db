@@ -99,6 +99,22 @@ reviewed:
   pricing: "2026-07-05"
   terms: "2026-07-05"
   features: "2026-07-05"
+japanBilling:
+  providerName: "D-ID"
+  providerCountry: "イスラエル（米国法人表記あり・要公式確認）"
+  isJapaneseService: false
+  pricingUrl: "https://www.d-id.com/pricing/studio/"
+  billingCurrency: "要公式確認（USD建てとみられる）"
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: false
+  taxDisplay: "unknown"
+  purchaseChannels: ["web", "api"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "プラン構成（Trial/Lite/Pro/Advanced/Enterprise）は公式FAQで確認済みですが、現行価格・通貨は公式料金ページでご確認ください。日本語公式ページ・日本円請求の記載はありません。API課金はStudioサブスクリプションと別体系です。"
+  billingCategory: "C"
+  sourceUrls:
+    - "https://www.d-id.com/pricing/studio/"
+    - "https://www.d-id.com/faqs/"
 ---
 
 ## D-IDとは

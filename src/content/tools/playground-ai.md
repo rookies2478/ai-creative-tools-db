@@ -2,7 +2,7 @@
 name: "Playground AI"
 shortDescription: "画像生成・画像編集・デザイン制作をまとめて行えるAIグラフィックデザインツール。無料枠から始められる。"
 category: "image"
-officialUrl: "https://playground.com/"
+officialUrl: "https://playgroundai.com/"
 freePlan: true
 commercialUse: "limited"
 commercialUseNote: "公式料金ページでは、無料プランは「Non-commercial use（非商用のみ）」と明記されており、ProおよびPro Plusプランでは「World-wide, royalty free license」として商用利用が案内されています。また公式利用規約では、ユーザーが作成したAssetsの所有権はユーザーにあり、個人・商用目的での利用が認められています。ただし、第三者の著作権・商標・ロゴ・保護作品・特定アーティスト風などを侵害しない責任はユーザー側にあります。公開AssetsはPlayground上で他ユーザーにリミックスされる可能性があります。商用利用を前提にする場合は、有料プランへの加入と最新の公式規約のご確認が必要です。本記事は法的助言ではありません。"
@@ -32,7 +32,7 @@ weaknesses:
 lastReviewed: "2026-06-06"
 nextReviewDue: "2026-09-06"
 verifiedAt: "2026-06-08"
-officialSourceUrl: "https://playground.com/design/pricing"
+officialSourceUrl: "https://playgroundai.com/design/pricing"
 pricingStatus: "confirmed"
 needsReview: false
 pricingModel: "subscription_credit"
@@ -68,13 +68,13 @@ reviewed:
   features: "2026-06-06"
 sourceRefs:
   - label: "Playground AI公式サイト"
-    url: "https://playground.com/"
+    url: "https://playgroundai.com/"
     type: official
   - label: "Playground AI料金プラン（公式）"
-    url: "https://playground.com/design/pricing"
+    url: "https://playgroundai.com/design/pricing"
     type: pricing
   - label: "Playground AI利用規約（公式）"
-    url: "https://playground.com/terms"
+    url: "https://playgroundai.com/terms"
     type: terms
   - label: "著作権・所有権について（公式ヘルプ）"
     url: "https://help.playgroundai.com/en/articles/6848773-how-does-copyright-work-do-i-own-the-designs-i-create"
@@ -84,11 +84,11 @@ sourceRefs:
     type: help
 sources:
   - title: "Playground AI公式サイト"
-    url: "https://playground.com/"
+    url: "https://playgroundai.com/"
   - title: "Playground AI料金プラン（公式）"
-    url: "https://playground.com/design/pricing"
+    url: "https://playgroundai.com/design/pricing"
   - title: "Playground AI利用規約（公式）"
-    url: "https://playground.com/terms"
+    url: "https://playgroundai.com/terms"
   - title: "著作権・所有権について（公式ヘルプ）"
     url: "https://help.playgroundai.com/en/articles/6848773-how-does-copyright-work-do-i-own-the-designs-i-create"
   - title: "Playground AIヘルプセンター（公式）"
@@ -108,6 +108,21 @@ faqs:
     answer: "公式サイトではGPT Image 2・Nano Banana Pro・Seedreamなど複数のAIモデルが案内されています。利用可能なモデルは変更される可能性があるため、最新の情報は公式サイトでご確認ください。"
   - question: "どの環境で使えますか？"
     answer: "Webブラウザから利用できます。インストールは不要です。"
+japanBilling:
+  providerName: "Playground（法人正式名は要公式確認）"
+  providerCountry: "米国（要公式確認）"
+  isJapaneseService: false
+  pricingUrl: "https://playgroundai.com/design/pricing"
+  billingCurrency: "USD"
+  jpyDirectBilling: "card-conversion"
+  localizedJpyDisplay: false
+  taxDisplay: "unknown"
+  purchaseChannels: ["web", "appstore"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "公式料金は米ドル建てです（Pro $15/月・年払い時$12/月相当）。日本円での実際の支払額は決済時の為替レート、カード会社の海外事務手数料、税等により変動します。旧Playground AI（画像生成専用）からAIデザインスタジオへ提供形態が変わっており、画像生成はデザインツールの一機能として提供されています。"
+  billingCategory: "D"
+  sourceUrls:
+    - "https://playgroundai.com/design/pricing"
 ---
 
 ## Playground AIとは
@@ -131,7 +146,7 @@ Playground AIは、**画像生成・画像編集・デザイン制作**をブラ
 
 ## 無料プラン・料金に関する注意点
 
-[公式料金ページ](https://playground.com/design/pricing)では、無料プランとProプラン・Pro Plusプランが案内されています。
+[公式料金ページ](https://playgroundai.com/design/pricing)では、無料プランとProプラン・Pro Plusプランが案内されています。
 
 | プラン | 料金（目安）| 商用利用 |
 |--------|-----------|---------|
@@ -139,20 +154,20 @@ Playground AIは、**画像生成・画像編集・デザイン制作**をブラ
 | Pro | $12/月〜（年払い） | 商用利用可（ライセンス案内あり） |
 | Pro Plus | $36/月〜（年払い） | 商用利用可（ライセンス案内あり） |
 
-> **注意：** 料金・プラン内容・生成回数・機能制限は変更される可能性があります。最新の情報は[Playground AI公式料金ページ](https://playground.com/design/pricing)でご確認ください。
+> **注意：** 料金・プラン内容・生成回数・機能制限は変更される可能性があります。最新の情報は[Playground AI公式料金ページ](https://playgroundai.com/design/pricing)でご確認ください。
 
 ## 商用利用・著作権に関する注意点
 
-[公式料金ページ](https://playground.com/design/pricing)では、無料プランは「Non-commercial use（非商用のみ）」と案内されています。ProおよびPro Plusプランでは「World-wide, royalty free license」として商用利用が案内されています。
+[公式料金ページ](https://playgroundai.com/design/pricing)では、無料プランは「Non-commercial use（非商用のみ）」と案内されています。ProおよびPro Plusプランでは「World-wide, royalty free license」として商用利用が案内されています。
 
-また[公式利用規約](https://playground.com/terms)では、ユーザーが作成したAssetsの所有権はユーザーにあり、個人・商用目的での利用が認められています。
+また[公式利用規約](https://playgroundai.com/terms)では、ユーザーが作成したAssetsの所有権はユーザーにあり、個人・商用目的での利用が認められています。
 
 ただし、以下の点にご注意ください。
 
 - 商用利用には有料プラン（ProまたはPro Plus）への加入が必要とされています
 - 第三者の著作権・商標・ロゴ・保護作品・特定アーティストのスタイルなどを侵害しない責任はユーザー側にあります
 - 公開設定にしたAssetsは、Playground上で他のユーザーにリミックスされる可能性があります
-- 商用利用を前提にする場合は、最新の[公式利用規約](https://playground.com/terms)をご確認ください
+- 商用利用を前提にする場合は、最新の[公式利用規約](https://playgroundai.com/terms)をご確認ください
 
 > **免責事項：** このページは情報提供を目的としており、法的助言ではありません。
 
@@ -162,7 +177,7 @@ Playground AIは、**画像生成・画像編集・デザイン制作**をブラ
 
 ## 透かしに関する確認メモ
 
-公式情報のみでは、生成画像への透かし（ウォーターマーク）の有無・条件を断定できません。プランや仕様の変更により条件が変わる可能性があります。最新の状況は[Playground AI公式サイト](https://playground.com/)でご確認ください。
+公式情報のみでは、生成画像への透かし（ウォーターマーク）の有無・条件を断定できません。プランや仕様の変更により条件が変わる可能性があります。最新の状況は[Playground AI公式サイト](https://playgroundai.com/)でご確認ください。
 
 ## どんな人に向いているか
 
@@ -174,13 +189,13 @@ Playground AIは、**画像生成・画像編集・デザイン制作**をブラ
 ## FAQ
 
 **Q. 無料で使えますか？**
-公式料金ページでは無料プランが案内されており、3時間ごとに最大10枚の画像生成が可能とされています。ただし無料プランは非商用利用のみとされており、生成回数・機能制限は変更される可能性があります。最新の情報は[公式料金ページ](https://playground.com/design/pricing)でご確認ください。
+公式料金ページでは無料プランが案内されており、3時間ごとに最大10枚の画像生成が可能とされています。ただし無料プランは非商用利用のみとされており、生成回数・機能制限は変更される可能性があります。最新の情報は[公式料金ページ](https://playgroundai.com/design/pricing)でご確認ください。
 
 **Q. 商用利用できますか？**
-公式料金ページでは、無料プランは「Non-commercial use（非商用のみ）」と案内されており、ProおよびPro Plusプランでは商用利用向けのライセンスが案内されています。商用利用には有料プランへの加入が必要とされています。最新の[公式利用規約](https://playground.com/terms)をご確認ください。このページは法的助言ではありません。
+公式料金ページでは、無料プランは「Non-commercial use（非商用のみ）」と案内されており、ProおよびPro Plusプランでは商用利用向けのライセンスが案内されています。商用利用には有料プランへの加入が必要とされています。最新の[公式利用規約](https://playgroundai.com/terms)をご確認ください。このページは法的助言ではありません。
 
 **Q. 有料プランはいくらですか？**
-公式料金ページでは、Proプランが月$12（年払い）または月$15（月払い）と案内されています。ただし料金・プラン内容は変更される可能性があります。最新の情報は[公式料金ページ](https://playground.com/design/pricing)でご確認ください。
+公式料金ページでは、Proプランが月$12（年払い）または月$15（月払い）と案内されています。ただし料金・プラン内容は変更される可能性があります。最新の情報は[公式料金ページ](https://playgroundai.com/design/pricing)でご確認ください。
 
 **Q. 日本語で使えますか？**
 公式情報のみでは日本語UIおよび日本語プロンプト対応を明確に確認できません。最新の状況は[ヘルプセンター](https://help.playgroundai.com/en/)でご確認ください。
@@ -189,7 +204,7 @@ Playground AIは、**画像生成・画像編集・デザイン制作**をブラ
 公式情報のみでは断定できません。最新の条件は公式サイトでご確認ください。
 
 **Q. どのAIモデルが使えますか？**
-公式サイトではGPT Image 2・Nano Banana Pro・Seedreamなど複数のAIモデルが案内されています。利用可能なモデルは変更される可能性があるため、最新の情報は[公式サイト](https://playground.com/)でご確認ください。
+公式サイトではGPT Image 2・Nano Banana Pro・Seedreamなど複数のAIモデルが案内されています。利用可能なモデルは変更される可能性があるため、最新の情報は[公式サイト](https://playgroundai.com/)でご確認ください。
 
 **Q. どの環境で使えますか？**
 Webブラウザから利用できます。インストールは不要です。
@@ -219,4 +234,4 @@ Playground AIはStable Diffusionなどのオープンソース画像生成モデ
 
 ## APIアクセス・プロ向け機能の確認ポイント
 
-APIアクセスやプロ向け機能（バッチ生成・高解像度出力・モデルカスタマイズ等）の提供状況は、公式サイトおよびヘルプセンターでご確認ください。機能・プランの内容は変更される可能性があります。開発・業務用途での利用を検討する場合は、最新の[公式ドキュメント](https://playground.com/)と利用規約をご確認のうえ、商用利用条件（有料プランへの加入が必要とされています）も合わせてご確認ください。
+APIアクセスやプロ向け機能（バッチ生成・高解像度出力・モデルカスタマイズ等）の提供状況は、公式サイトおよびヘルプセンターでご確認ください。機能・プランの内容は変更される可能性があります。開発・業務用途での利用を検討する場合は、最新の[公式ドキュメント](https://playgroundai.com/)と利用規約をご確認のうえ、商用利用条件（有料プランへの加入が必要とされています）も合わせてご確認ください。

@@ -51,7 +51,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 - [Runway](https://runwayml.com)
 - [Pika](https://pika.art)
 - [Luma AI](https://lumalabs.ai)
-- [Kling AI](https://klingai.com)
+- [Kling AI](https://kling.ai)
 - [Vidu AI](https://www.vidu.com)
 
 ---
@@ -272,7 +272,7 @@ Dream Machineを中心にAI動画生成を提供。無料プランはnon-commerc
 
 確認時点でhttp 446により公式料金ページ・利用規約ページへの直接アクセスが制限されていたため、商用利用条件を公式本文で十分に確認できていません。本DBでは商用利用条件を `unknown` として扱っています。商用利用を前提にする場合は、最新の公式料金ページ・利用規約・有料サービス規約をご確認ください。
 
-参照：[Kling AI公式サイト](https://klingai.com)
+参照：[Kling AI公式サイト](https://kling.ai)
 
 ---
 
@@ -342,7 +342,7 @@ Midjourneyは年間総収益が100万ドルを超える企業に対してPro/Meg
 | Pika | 料金プラン | https://pika.art/pricing |
 | Pika | 利用規約 | https://pika.art/terms-of-service |
 | Luma AI | 料金プラン | https://lumalabs.ai/pricing |
-| Kling AI | 公式サイト | https://klingai.com |
+| Kling AI | 公式サイト | https://kling.ai |
 | Vidu AI | 料金ページ | https://www.vidu.com/pricing |
 | Vidu AI | 利用規約 | https://www.vidu.com/terms-of-service |
 

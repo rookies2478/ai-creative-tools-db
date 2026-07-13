@@ -152,6 +152,23 @@ faqs:
     answer: "アート調のイラスト、コンセプトビジュアル、SNS投稿画像、ブログアイキャッチ案、サムネイル案などに向いています。ただし用途によって確認すべき利用条件があります。商用利用の場合は公式規約をご確認ください。"
   - question: "Midjourneyで人物や著名人・ブランドロゴを含む画像を作成できますか？"
     answer: "技術的には生成可能な場合がありますが、実在の人物・著名人・ブランドロゴ・第三者の著作物を含む画像を作成・利用する際は、肖像権・商標権・著作権などの観点から別途確認が必要です。本記事は法的助言ではありません。"
+japanBilling:
+  providerName: "Midjourney, Inc."
+  providerCountry: "米国"
+  isJapaneseService: false
+  pricingUrl: "https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans"
+  billingCurrency: "USD"
+  jpyDirectBilling: "card-conversion"
+  localizedJpyDisplay: false
+  taxDisplay: "tax-at-checkout"
+  purchaseChannels: ["web"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "公式料金は米ドル建てです。公式ヘルプ（Payment Currency）で請求はUSDのみと明記されており、日本円での直接請求はできません。実際の円支払額は決済時の為替レート、カード会社の海外事務手数料により変動し、税は居住地に応じて決済時に別途加算されます。最終金額は公式購入画面をご確認ください。"
+  billingCategory: "C"
+  sourceUrls:
+    - "https://docs.midjourney.com/hc/en-us/articles/27868831424525-Payment-Currency"
+    - "https://docs.midjourney.com/hc/en-us/articles/27868801261325-Tax-VAT-Charges"
+    - "https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans"
 ---
 
 ## まとめ

@@ -126,6 +126,23 @@ faqs:
     answer: "SNS向けショート動画、字幕付き動画、テンプレートを使った動画編集、AI生成動画の仕上げ・投稿用調整などで比較されやすいです。TikTok・Instagramリール・YouTubeショートを日常的に作る方や、動画編集補助としてAIを活用したい方に向いています。"
   - question: "CapCut AIはAI動画生成ツールですか？"
     answer: "AI動画生成そのものより、AIを使った編集補助・自動字幕生成・テンプレート活用・投稿向け調整などで使われることが多いです。テキストや画像からの動画生成を中心に比較する場合は、RunwayやPika・Kling AI・Luma AIなども候補として確認することをおすすめします。"
+japanBilling:
+  japanOfficialUrl: "https://www.capcut.com/ja-jp/"
+  providerName: "ByteDance（アプリ配信主体はBytedance Pte. Ltd）"
+  providerCountry: "中国（配信法人はシンガポール）"
+  isJapaneseService: false
+  pricingUrl: "https://www.capcut.com/ja-jp/help/new-capcut-subscription-pricing"
+  billingCurrency: "購入経路により異なる（App Store日本はJPY／Web版は要公式確認）"
+  jpyDirectBilling: "channel-dependent"
+  localizedJpyDisplay: true
+  taxDisplay: "unknown"
+  purchaseChannels: ["web", "appstore", "googleplay", "desktop"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "価格は地域・プラットフォーム・キャンペーンで変動すると公式ヘルプに明記されており、固定の公式料金表はありません。App Store日本のアプリ内課金では日本円建て（例：スタンダード月額¥1,080）を確認していますが、Web版の請求通貨は要公式確認です。Web版とアプリ版で価格・通貨・条件が異なる場合があります。CapCut Commerce Pro等の別製品とは料金体系が異なります。"
+  billingCategory: "D"
+  sourceUrls:
+    - "https://www.capcut.com/ja-jp/help/new-capcut-subscription-pricing"
+    - "https://apps.apple.com/jp/app/id1500855883"
 ---
 
 ## CapCut AIとは

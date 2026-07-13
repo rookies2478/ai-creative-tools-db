@@ -174,6 +174,22 @@ faqs:
     answer: "本格的な映像表現・編集機能を重視するならRunway、手軽な短尺動画生成ならPika、画像から動画生成や候補を広く比較したい場合はKling AIやLuma AIも選択肢になります。用途・プラン・商用利用条件をそれぞれ公式サイトで確認の上、比較することを推奨します。"
   - question: "人物・ブランドロゴ・第三者素材を使って動画を作れますか？"
     answer: "技術的に生成できる場合でも、著名人・実在人物・第三者のブランドロゴ・著作物を含む素材を使用する際は、肖像権・著作権・商標権などの観点から別途確認が必要です。本記事は法的助言ではありません。利用前に公式利用規約および関連法令をご確認ください。"
+japanBilling:
+  providerName: "Luma AI, Inc."
+  providerCountry: "米国"
+  isJapaneseService: false
+  pricingUrl: "https://lumalabs.ai/pricing"
+  billingCurrency: "USD（Web）／iOSアプリはApp Store課金"
+  jpyDirectBilling: "channel-dependent"
+  localizedJpyDisplay: false
+  taxDisplay: "unknown"
+  purchaseChannels: ["web", "appstore"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "Web版の公式料金は米ドル建てです。日本円での実際の支払額は決済時の為替レート、カード会社の海外事務手数料、税等により変動します。iOSアプリ（Luma Dream Machine）はApp Store課金でWeb版と価格体系が異なります（アプリ内はLite/Plus/Unlimited等の別構成・日本円価格は要公式確認）。"
+  billingCategory: "D"
+  sourceUrls:
+    - "https://lumalabs.ai/pricing"
+    - "https://apps.apple.com/us/app/luma-dream-machine/id6478852867"
 ---
 
 ## Luma AI / Dream Machineとは

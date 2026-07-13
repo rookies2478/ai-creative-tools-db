@@ -94,6 +94,22 @@ reviewed:
   pricing: "2026-06-15"
   terms: "2026-06-15"
   features: "2026-06-15"
+japanBilling:
+  providerName: "InVideo"
+  providerCountry: "米国／インド"
+  isJapaneseService: false
+  pricingUrl: "https://invideo.io/pricing/"
+  billingCurrency: "要公式確認（USD建てとみられる）"
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: false
+  taxDisplay: "unknown"
+  purchaseChannels: ["web"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "プラン構成（Plus/Max等・クレジット制）は公式ヘルプで確認済みですが、現行価格・通貨は公式料金ページでご確認ください。日本語公式ページは確認できず、日本円請求の公式記載もありません。"
+  billingCategory: "C"
+  sourceUrls:
+    - "https://invideo.io/pricing/"
+    - "https://help.invideo.io/en/articles/11528140-what-plans-does-invideo-offer-and-what-s-included-in-each"
 ---
 
 ## InVideo AIとは

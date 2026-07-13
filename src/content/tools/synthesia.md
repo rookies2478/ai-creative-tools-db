@@ -4,7 +4,7 @@ shortDescription: "AIアバターとAI音声、多言語翻訳、自動字幕を
 category: "video"
 officialUrl: "https://www.synthesia.io/"
 freePlan: true
-lowestPaidPlan: "要確認"
+lowestPaidPlan: "Starter $18/月（USD・年払い時）／$29/月（月払い）"
 currency: "USD"
 commercialUse: "limited"
 commercialUseNote: "生成動画の権利は個人ではなく組織（契約主体）に帰属するとされています。商用利用の可否や条件はプラン・契約内容によって異なるため、Customer Terms / User Terms / Acceptable Use Policyなど最新の公式規約を必ずご確認ください。人物アバター・音声を扱う場合は本人同意や第三者権利、なりすまし禁止事項の確認も必要です。本記事は法的助言ではありません。"
@@ -93,6 +93,23 @@ reviewed:
   pricing: "2026-07-05"
   terms: "2026-07-05"
   features: "2026-07-05"
+japanBilling:
+  japanOfficialUrl: "https://www.synthesia.io/ja"
+  providerName: "Synthesia"
+  providerCountry: "イギリス（要公式確認）"
+  isJapaneseService: false
+  pricingUrl: "https://www.synthesia.io/pricing"
+  billingCurrency: "USD（日本語LPには円建て表示あり）"
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: true
+  taxDisplay: "unknown"
+  purchaseChannels: ["web"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "英語版の公式料金ページは米ドル建てです（Starter：年払い$18/月相当、月払い$29/月）。日本語公式ページでは日本円価格（Starter ¥4,690/月等）が表示されますが、実際の請求通貨がJPYかは公式に明記されておらず要確認です。税、契約期間、購入経路による差は公式購入画面をご確認ください。契約単位はワークスペースです。"
+  billingCategory: "B"
+  sourceUrls:
+    - "https://www.synthesia.io/pricing"
+    - "https://www.synthesia.io/ja"
 ---
 
 ## Synthesiaとは

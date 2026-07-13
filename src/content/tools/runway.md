@@ -173,6 +173,21 @@ faqs:
     answer: "Gen-3・Gen-4などのモデルごとのクレジット消費レートや料金詳細は、Runway公式料金ページおよびヘルプセンターで案内されています。モデルや生成設定によってクレジット消費量が異なるため、最新情報は[Runway公式料金ページ](https://runwayml.com/pricing/)でご確認ください。"
   - question: "どの環境で使えますか？"
     answer: "Webブラウザから利用できます。API経由での利用も可能です。"
+japanBilling:
+  providerName: "Runway AI, Inc."
+  providerCountry: "米国"
+  isJapaneseService: false
+  pricingUrl: "https://runwayml.com/pricing"
+  billingCurrency: "USD"
+  jpyDirectBilling: "card-conversion"
+  localizedJpyDisplay: false
+  taxDisplay: "unknown"
+  purchaseChannels: ["web"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "公式料金は米ドル建てで、日本語公式ページはありません。日本円での実際の支払額は決済時の為替レート、カード会社の海外事務手数料、税等により変動します。最終金額は公式購入画面をご確認ください。"
+  billingCategory: "C"
+  sourceUrls:
+    - "https://runwayml.com/pricing"
 ---
 
 ## Runwayとは

@@ -110,6 +110,22 @@ faqs:
     answer: "Tensor.Artでは豊富なモデル・LoRA・Checkpointをプラットフォーム上で選択して利用できます。商用利用時は選択するモデルごとのライセンスを必ず確認してください。"
   - question: "どの環境で使えますか？"
     answer: "Webブラウザから利用できます。インストールは不要です。"
+japanBilling:
+  providerName: "要公式確認（規約上の法人名非開示）"
+  providerCountry: "要公式確認"
+  isJapaneseService: false
+  pricingUrl: "https://tensor.art/purchase/vip"
+  billingCurrency: "USD"
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: "unknown"
+  taxDisplay: "unknown"
+  purchaseChannels: ["web"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "運営法人名は公式規約に明記されておらず要公式確認です。公式表記は米ドル建て（Proサブスク等）ですが、日本円決済の可否・税の扱いは公式購入画面でご確認ください。"
+  billingCategory: "E"
+  sourceUrls:
+    - "https://tensor.art/about/terms-of-service-new"
+    - "https://tensor.art/purchase/vip"
 ---
 
 ## Tensor.Artとは

@@ -149,6 +149,23 @@ faqs:
     answer: "生成物の権利関係は、国や地域、利用するモデル、配布元のライセンス、入力素材、用途によって判断が異なる場合があります。商用利用や公開利用を行う場合は、利用しているモデルのライセンスと配布元の規約を確認し、必要に応じて専門家へ相談してください。本記事は法的助言ではありません。"
   - question: "CreativeML Open RAIL-MとStability AI Community Licenseは何が違いますか？"
     answer: "Stable Diffusionのモデルによって適用されるライセンスや利用条件が異なる場合があります。SD 1.x / 2.x / SDXLではCreativeML Open RAIL-Mが参照されることが多く、SD 3.x / 3.5系ではStability AI Community Licenseなど別の条件が案内されています。利用前に、使用するモデル名、配布元、ライセンス本文、商用利用条件を確認してください。"
+japanBilling:
+  providerName: "Stability AI（Stable Diffusionはオープンモデル群の名称）"
+  providerCountry: "英国発（現本社所在地は要公式確認）"
+  isJapaneseService: false
+  pricingUrl: "https://platform.stability.ai/pricing"
+  billingCurrency: "利用形態により異なる（ローカル無料／API USD従量）"
+  jpyDirectBilling: "channel-dependent"
+  localizedJpyDisplay: false
+  taxDisplay: "unknown"
+  purchaseChannels: ["local", "api", "サードパーティホスティング"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "Stable Diffusionは単一の有料サービスではありません。ローカル実行は無料（ライセンス条件あり）、公式API（Stability AI Platform）は米ドル建て従量課金、各社ホスティングサービスは各社の料金体系に従います。月額サブスクリプションとしての単純比較は適切ではありません。"
+  billingCategory: "E"
+  sourceUrls:
+    - "https://stability.ai/"
+    - "https://stability.ai/terms-of-service"
+    - "https://platform.stability.ai/legal/terms-of-service"
 ---
 
 ## Stable Diffusionとは

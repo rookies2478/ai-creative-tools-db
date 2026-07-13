@@ -41,7 +41,7 @@ export const generatedVideos: GeneratedVideo[] = [
     negativePrompt: 'text, letters, logo, watermark, brand mark, celebrity, real person, existing character, distorted objects, flicker, low quality, blurry, violent, sexual, medical, legal, financial, nsfw',
     model: 'Kling AI 2.0',
     provider: 'Kling AI',
-    modelUrl: 'https://klingai.com',
+    modelUrl: 'https://kling.ai',
     durationSec: 5,
     resolution: '1280x720',
     generatedAt: '2026-06-24',

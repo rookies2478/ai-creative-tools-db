@@ -103,6 +103,23 @@ faqs:
     answer: "SeaArt AIはアニメ風・イラスト系・キャラクター系のビジュアル制作と相性がよいとされています。コミュニティ上に公開されているモデルや作品を参考にしながら利用できる環境が整っており、スタイルの選択肢が広い点が特徴です。"
   - question: "SeaArt AIではどんな機能が使えますか？"
     answer: "画像生成（テキストから・画像から）、画像編集、動画生成（Seedance 2.0搭載）、AIキャラクターチャット、背景除去、画像アップスケール、消しゴムツールなど多数の機能が案内されています。機能・対応モデルは変更される可能性があるため、最新の公式サイトをご確認ください。"
+japanBilling:
+  japanOfficialUrl: "https://www.seaart.ai/ja"
+  providerName: "STAR CLUSTER PTE. LTD.（日本販売はシーアートジャパン株式会社）"
+  providerCountry: "シンガポール"
+  isJapaneseService: false
+  pricingUrl: "https://www.seaart.ai/mall"
+  billingCurrency: "地域別（日本向けはJPY・消費税込）"
+  jpyDirectBilling: "jpy-direct"
+  localizedJpyDisplay: true
+  taxDisplay: "tax-included"
+  purchaseChannels: ["web", "appstore", "googleplay"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "日本向けには特定商取引法に基づく表記（販売事業者：シーアートジャパン株式会社）があり、「表示価格は消費税を含みます」と明記されています。サブスクリプション（SVIP 4段階）と都度課金のコイン購入が併存する2階建て課金で、具体的な価格は購入画面でご確認ください。Web版とアプリ版では販売元・価格が異なる場合があります。"
+  billingCategory: "D"
+  sourceUrls:
+    - "https://www.seaart.ai/mall"
+    - "https://apps.apple.com/jp/app/id6478189868"
 ---
 
 ## SeaArt AIとは

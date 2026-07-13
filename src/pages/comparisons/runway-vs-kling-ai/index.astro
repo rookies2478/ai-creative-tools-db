@@ -58,7 +58,7 @@ const faqs = [
 ];
 
 const comparisonRows = [
-  { item: '料金（最低有料プラン）', toolA: '$12/月（Standardプラン・年払い）', toolB: '$6.99/月（Standardプラン・月払い）' },
+  { item: '料金（最低有料プラン）', toolA: '$12/月（Standardプラン・年払い・USD）', toolB: 'USD建て（価格はログイン後表示・要公式確認）' },
   { item: '無料プラン', toolA: '125クレジット（初回のみ・更新なし）', toolB: '1日66クレジット程度（翌日繰越なし）' },
   { item: '無料プランの継続性', toolA: '一度使い切ると更新なし', toolB: '毎日クレジット付与（継続的に試せる）' },
   { item: '商用利用（無料プラン）', toolA: '公式情報上制限なしとされるが透かしあり', toolB: '個人・非商用利用のみ（商用利用不可とされる）' },
@@ -95,8 +95,8 @@ const sources = [
   { href: 'https://runwayml.com/terms-of-use/', label: 'Runway利用規約（公式）' },
   { href: 'https://help.runwayml.com/hc/en-us/articles/18927776141715-Usage-rights', label: 'Runway利用権について（公式ヘルプ）' },
   { href: 'https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes', label: 'Runway：商用利用について（公式ヘルプ）' },
-  { href: 'https://klingai.com/global/pricing', label: 'Kling AI料金ページ（公式・確認時点でHTTP 446により直接確認不可）' },
-  { href: 'https://klingai.com/docs/user-policy', label: 'Kling AIユーザーポリシー（公式・確認時点でHTTP 446により直接確認不可）' },
+  { href: 'https://kling.ai/membership/membership-plan', label: 'Kling AI料金ページ（公式・確認時点でHTTP 446により直接確認不可）' },
+  { href: 'https://kling.ai/docs/user-policy', label: 'Kling AIユーザーポリシー（公式・確認時点でHTTP 446により直接確認不可）' },
 ];
 
 const articleJsonLd = JSON.stringify([{
@@ -138,7 +138,7 @@ const articleJsonLd = JSON.stringify([{
   quickDecisionRows={[
     { purpose: '無料で継続的に試したい人', candidate: 'Kling AI', checkPoint: '毎日クレジット付与・翌日繰越なし・商用利用不可・透かしあり' },
     { purpose: '映像制作・多機能ツールを使いたい人', candidate: 'Runway', checkPoint: '無料枠は初回125クレジットのみ。継続利用は有料プランが現実的' },
-    { purpose: '料金を抑えて有料プランに移行したい人', candidate: 'Kling AI', checkPoint: 'Standard $6.99/月〜（条件は変更される場合あり）' },
+    { purpose: '料金を抑えて有料プランに移行したい人', candidate: 'Kling AI', checkPoint: '低価格帯プランの案内あり（USD建て・価格は公式購入画面で要確認）' },
     { purpose: '背景削除・音声ダビングなど編集機能も必要', candidate: 'Runway', checkPoint: '対応機能一覧と料金を公式で確認' },
     { purpose: '商用利用前提で確認したい人', candidate: '両方とも公式規約を確認', checkPoint: 'Runwayは無料プランで透かしあり。Kling AIは有料プランから商用利用可とされる' },
   ]}
@@ -210,7 +210,7 @@ const articleJsonLd = JSON.stringify([{
         <ul>
           <li>リアル寄りのAI動画生成を試したい場合の候補とされている</li>
           <li>無料プランで毎日クレジットが付与されるとされている（翌日繰越なし）</li>
-          <li>Runwayより料金が低め（Standard $6.99/月）</li>
+          <li>Runwayより料金が低めとされる（USD建て・最新価格は要公式確認）</li>
           <li>テキスト→動画・画像→動画・動画延長（Extend）に対応</li>
         </ul>
       </div>
@@ -238,8 +238,8 @@ const articleJsonLd = JSON.stringify([{
       </div>
       <div class="cp-card">
         <h3 class="cp-card-h3">Kling AI</h3>
-        <p>無料プランで1日66クレジット程度が付与されるとされています（翌日繰越なし）。有料プランはStandard $6.99/月〜（月払い）と案内されています。クレジット繰越不可・生成失敗時の返金なしの場合があります。</p>
-        <p style="margin-top:8px;font-size:12px;color:var(--faint);">最新の料金は<a href="https://klingai.com/global/pricing" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Kling AI公式料金ページ</a>をご確認ください（確認時点でHTTP 446により直接確認できない場合があります）。</p>
+        <p>無料プランで1日66クレジット程度が付与されるとされています（翌日繰越なし）。有料プランはUSD建てで、価格はログイン後の公式購入画面に表示されます（要公式確認）。クレジット繰越不可・生成失敗時の返金なしの場合があります。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">最新の料金は<a href="https://kling.ai/membership/membership-plan" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Kling AI公式料金ページ</a>をご確認ください（確認時点でHTTP 446により直接確認できない場合があります）。</p>
       </div>
     </div>
   </section>
@@ -267,7 +267,7 @@ const articleJsonLd = JSON.stringify([{
       <div class="cp-card">
         <h3 class="cp-card-h3">Kling AI</h3>
         <p>公式規約（2026年4月21日付・第三者情報源による）では、<strong>Standard以上の有料プランで商用利用が認められているとされています</strong>。無料プランは個人・非商用利用のみとされています。公式ページはHTTP 446により直接確認できない場合があります。</p>
-        <p style="margin-top:8px;font-size:12px;color:var(--faint);">利用前に最新の<a href="https://klingai.com/docs/user-policy" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Kling AIユーザーポリシー</a>をご確認ください。</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--faint);">利用前に最新の<a href="https://kling.ai/docs/user-policy" target="_blank" rel="noopener noreferrer" style="color:var(--brand-ink);">Kling AIユーザーポリシー</a>をご確認ください。</p>
       </div>
     </div>
     <div class="cp-caution-box">
@@ -295,7 +295,7 @@ const articleJsonLd = JSON.stringify([{
         <ul class="cp-suited-list">
           <li>リアル寄りの動画生成や自然な動きを試したい人</li>
           <li>毎日の無料枠で継続的に試したい人（商用利用不可・透かしあり）</li>
-          <li>コストを抑えて有料プランに移行したい人（最低$6.99/月）</li>
+          <li>コストを抑えて有料プランに移行したい人（USD建て・最新価格は要公式確認）</li>
           <li>SNS向けのリアル寄り短尺動画を試したい人</li>
         </ul>
       </div>

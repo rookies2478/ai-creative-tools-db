@@ -173,6 +173,35 @@ const tools = defineCollection({
       consistencyControl: z.enum(['high', 'medium', 'low', 'unknown']).optional(),
     }).optional(),
 
+    japanBilling: z.object({
+      japanOfficialUrl: z.string().url().optional(),
+      providerName: z.string().optional(),
+      providerCountry: z.string().optional(),
+      isJapaneseService: z.boolean().optional(),
+      pricingUrl: z.string().url().optional(),
+      billingCurrency: z.string().optional(),
+      jpyDirectBilling: z.enum([
+        'jpy-direct',        // 日本円で直接請求
+        'card-conversion',   // 外貨請求をカード会社が円換算
+        'app-store-only',    // App Store / Google Play のみ日本円
+        'channel-dependent', // 購入経路により異なる
+        'unknown',           // 要公式確認
+      ]).optional(),
+      localizedJpyDisplay: z.union([z.boolean(), z.literal('unknown')]).optional(),
+      taxDisplay: z.enum([
+        'tax-included',   // 税込表示
+        'tax-excluded',   // 税別表示
+        'tax-at-checkout',// 決済時に税計算
+        'region-dependent',
+        'unknown',        // 公式ページ上では確認できない
+      ]).optional(),
+      purchaseChannels: z.array(z.string()).optional(),
+      pricingCheckedAt: z.string().optional(),
+      pricingNote: z.string().optional(),
+      billingCategory: z.enum(['A', 'B', 'C', 'D', 'E']).optional(),
+      sourceUrls: z.array(z.string().url()).optional(),
+    }).optional(),
+
     conversionGuide: z.object({
       primaryCtaLabel: z.string().optional(),
       primaryCtaReason: z.string().optional(),

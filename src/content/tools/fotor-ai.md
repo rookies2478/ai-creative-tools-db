@@ -114,6 +114,23 @@ faqs:
     answer: "公式ページではBasic無料プランが案内されており、AI画像生成・AIペイント・スケッチ生成などの機能を無料で試せる場合があります。ただし無料クレジット数・生成回数・機能制限は変更される可能性があり、書き出し時に透かしが入る場合があります。最新の無料枠条件は公式料金ページをご確認ください。"
   - question: "Fotor AIでスケッチ生成や顔生成・住宅ペイントはできますか？"
     answer: "公式サイトではAIペイント・スケッチ変換・顔生成・背景生成など複数のAI機能が案内されています。ただし対応機能・無料枠での利用可否・プランによる制限は変更される可能性があるため、最新の情報はFotor公式サイトでご確認ください。"
+japanBilling:
+  japanOfficialUrl: "https://www.fotor.com/jp/"
+  providerName: "Everimaging Limited"
+  providerCountry: "中国"
+  isJapaneseService: false
+  pricingUrl: "https://www.fotor.com/jp/pricing/"
+  billingCurrency: "USD（Web）／JPY（App Store日本ストア）"
+  jpyDirectBilling: "channel-dependent"
+  localizedJpyDisplay: false
+  taxDisplay: "unknown"
+  purchaseChannels: ["web", "appstore", "googleplay"]
+  pricingCheckedAt: "2026-07-13"
+  pricingNote: "日本語公式ページがありますが、Web版の料金は米ドル表示です。日本円建ての課金はApp Store日本ストア経由のアプリ内課金でのみ確認できています。Web版とアプリ版では価格・通貨・条件が異なる場合があります。税表示は公式料金ページ上では確認できません。"
+  billingCategory: "D"
+  sourceUrls:
+    - "https://www.fotor.com/jp/pricing/"
+    - "https://apps.apple.com/jp/app/id440159265"
 ---
 
 ## Fotor AIとは

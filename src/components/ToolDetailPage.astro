@@ -6,6 +6,8 @@ import UsagePolicySummary from './UsagePolicySummary.astro';
 import type { UsagePolicyData, LabelOverrides } from './UsagePolicySummary.astro';
 import VerifiedSummary from './VerifiedSummary.astro';
 import type { VerifiedSummaryData } from './VerifiedSummary.astro';
+import JapanBillingInfo from './JapanBillingInfo.astro';
+import type { JapanBillingData } from './JapanBillingInfo.astro';
 /*
   ToolDetailPage.astro
   汎用ツール詳細ページコンポーネント（AdobeFireflyTool.astroと同一デザインシステム）
@@ -86,6 +88,7 @@ export interface Props {
   sampleImage?: GeneratedImage | null;
   sampleVideo?: GeneratedVideo | null;
   verifiedSummary?: VerifiedSummaryData;
+  japanBilling?: JapanBillingData;
 }
 
 const {
@@ -137,6 +140,7 @@ const {
   sampleImage = null,
   sampleVideo = null,
   verifiedSummary,
+  japanBilling,
 } = Astro.props as Props;
 
 const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
@@ -270,6 +274,8 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
           </table></div>
           <ul>{pricing.notes.map((n) => (<li set:html={n}></li>))}</ul>
         </>}
+
+        {japanBilling && <JapanBillingInfo billing={japanBilling} />}
 
         {commercial && <>
           <h3>商用利用について</h3>

@@ -13,6 +13,8 @@
  *  - 画像はビルド時 props で渡す実 <img>。未指定ならプレースホルダ + 生成中スケルトン。
  *  - JS は [data-fv-hero] 配下のみを操作。prefers-reduced-motion を尊重。
  */
+import { getCollection } from 'astro:content';
+
 export interface FvTool {
   name: string;
   initial: string;
@@ -38,6 +40,8 @@ export interface Props {
   promptTheme?: string;
   /** ヘッダー高さ（min-height の差し引きに使用） */
   headerHeight?: string;
+  /** 掲載ツール数（未指定時はコレクション件数を自動集計） */
+  toolCount?: number;
 }
 
 const {
@@ -47,6 +51,7 @@ const {
   imageHref = '/categories/image-generation/',
   videoLabel = 'AI動画生成ツールを比較',
   imageLabel = 'AI画像生成ツールを比較',
+  toolCount,
   tools = [
     { name: 'Leonardo AI',      initial: 'L', color: '#E89B12', img: '/images/generated/tools/leonardo-ai-tool-output-home-01.webp',      alt: 'Leonardo AIで作成したAI画像生成の参考作例サンプル。ビジュアル傾向：プロンプト非公開のため未記載。公式出力・代表結果ではありません。' },
     { name: 'Adobe Firefly',    initial: 'A', color: '#D8453A', img: '/images/generated/tools/adobe-firefly-tool-output-home-01.webp',     alt: 'Adobe Fireflyで作成したAI画像生成の参考作例サンプル。ビジュアル傾向：プロンプト非公開のため未記載。公式出力・代表結果ではありません。' },
@@ -58,6 +63,8 @@ const {
 } = Astro.props;
 
 // marqueeLoop は削除 — レンダリング側で aria-hidden 分離する
+
+const publishedToolCount = toolCount ?? (await getCollection('tools')).length;
 ---
 
 <section class="fv-hero" data-fv-hero data-fv-theme={promptTheme} style={`--fv-header:${headerHeight}`}>
@@ -72,7 +79,7 @@ const {
       <a class="btn btn-ghost" href={imageHref}>{imageLabel}</a>
     </div>
     <div class="toolmarquee">
-      <span class="tm-label">掲載ツール — 26</span>
+      <span class="tm-label">掲載ツール — {publishedToolCount}</span>
       <div class="tm-track">
         <div class="tm-row">
           {marquee.map((name) => (<span class="tm-item">{name}</span>))}

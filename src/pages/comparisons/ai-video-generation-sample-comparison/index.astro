@@ -1,0 +1,331 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+import SamplePromptVideoGallery from '../../../components/SamplePromptVideoGallery.astro';
+import { generatedVideos } from '../../../data/generatedVideos';
+
+const toolMeta: Record<string, { name: string; impression: string }> = {
+  'kling-ai': { name: 'Kling AI', impression: '今回の作例では、デスク上のモーショングラフィックスがなめらかに動き、カメラのゆっくりしたプッシュインも安定していました。無料プランで生成したため透かし（KlingAI 3.0）が入っています。' },
+  'pika': { name: 'Pika', impression: '今回の作例では、抽象的な発光表現の動きが滑らかで、目視では透かしが目立ちにくい仕上がりでした。使用モデルの詳細は確認できていません。' },
+  'runway': { name: 'Runway', impression: '今回の作例では、3秒という短尺の中でもカメラのプッシュインが破綻なくまとまりました。Gen-4使用時の作例です。' },
+  'luma-ai': { name: 'Luma AI', impression: '今回の作例では、動きは滑らかでしたが、動画左上にLuma AIのロゴ透かしが常時表示されていました。' },
+};
+
+const galleryItems = generatedVideos
+  .filter((v) => v.sampleType === 'tool-video-output' && toolMeta[v.sourceToolSlug])
+  .map((v) => ({
+    video: v,
+    name: toolMeta[v.sourceToolSlug].name,
+    slug: v.sourceToolSlug,
+    note: toolMeta[v.sourceToolSlug].impression,
+  }));
+
+const tableRows = [
+  { slug: 'kling-ai', name: 'Kling AI', motion: '◯', camera: '◯（プッシュイン安定）', stability: '要確認（人物なし作例のため未検証）', watermark: 'あり（無料プランでは可視透かし）', i2v: '対応（image-to-video可）', free: '無料枠あり（制限付き）', fit: '動きの滑らかさを試したい人' },
+  { slug: 'pika', name: 'Pika', motion: '◯', camera: '◯', stability: '要確認（人物なし作例のため未検証）', watermark: '目視では目立たず（要確認）', i2v: '対応（image-to-video可）', free: '無料枠あり（制限付き）', fit: 'エフェクト系の表現を試したい人' },
+  { slug: 'runway', name: 'Runway', motion: '◯', camera: '◯（短尺でも安定）', stability: '要確認（人物なし作例のため未検証）', watermark: 'プランにより異なる（要確認）', i2v: '対応（image-to-video可）', free: '無料クレジットあり（制限付き）', fit: '映像制作・多機能なツールを探す人' },
+  { slug: 'luma-ai', name: 'Luma AI', motion: '◯', camera: '◯', stability: '要確認（人物なし作例のため未検証）', watermark: 'あり（ロゴ常時表示）', i2v: '対応（image-to-video可）', free: '無料枠あり', fit: '無料枠でまず試したい人' },
+];
+
+const faqs = [
+  {
+    q: 'AI動画生成ツールの作例は毎回同じ結果になりますか？',
+    a: 'なりません。同じプロンプトを使っても、生成のたびに動き・カメラワーク・構図は変わります。モデルのアップデートや生成モード、プランによっても傾向が変わります。本記事の作例は「その時点・その条件での1例」としてご覧ください。',
+  },
+  {
+    q: '画像から動画を作る場合、どのツールが向いていますか？',
+    a: '今回検証した4ツール（Kling AI・Pika・Runway・Luma AI）はいずれもimage-to-video（画像から動画）に対応しています。ただし本記事の作例はtext-to-videoで生成したものです。image-to-videoの作例・比較は別記事で扱う予定です。',
+  },
+  {
+    q: '無料プランでも動画生成できますか？',
+    a: '今回検証した4ツールはいずれも無料枠がありますが、生成回数・動画尺・利用できるモデルに制限がある場合があります。詳細は各ツールページと<a href="/conditions/free/">無料で試せるツール一覧</a>をご確認ください。',
+  },
+  {
+    q: '動画に透かしは入りますか？',
+    a: 'ツールとプランによります。今回の作例では、Kling AI（無料プラン）とLuma AIの動画に透かしが確認できました。Pika・Runwayは目視で目立ちにくい、または要確認の状態でした。透かしなしの条件は<a href="/conditions/no-watermark/">透かしなしツール一覧</a>で確認できます。',
+  },
+  {
+    q: '作例動画を商用利用できますか？',
+    a: '本記事の作例動画は本サイトでの紹介目的のみに使用しており、二次利用・再配布はできません。ご自身で生成した動画の商用利用条件はツール・プランによって異なるため、<a href="/conditions/commercial-use/">商用利用条件の一覧</a>と各公式規約をご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '生成動画が破綻しやすいのはどんな場面ですか？',
+    a: '一般的に、人物の手や顔、複雑な背景、速い動きのあるシーンは破綻しやすいと言われています。今回の作例は人物を含まない静物・抽象モーション主体のため、人物表現の安定性については検証できていません。人物を含む動画の作例は今後の検証課題です。',
+  },
+];
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a.replace(/<[^>]+>/g, '') }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+        { "@type": "ListItem", "position": 2, "name": "比較記事", "item": "https://aicreative-db.com/comparisons/" },
+        { "@type": "ListItem", "position": 3, "name": "AI動画生成ツールの作例比較", "item": "https://aicreative-db.com/comparisons/ai-video-generation-sample-comparison/" }
+      ]
+    }
+  ]
+});
+---
+
+<BaseLayout
+  title="AI動画生成ツールの作例比較｜同じ条件で試した生成結果まとめ"
+  description="AI動画生成ツールで実際に動画を作成し、生成結果・プロンプト・動きの自然さ・破綻しやすいポイント・注意点を比較します。Runway、Kling AI、Pika、Luma AIなどの作例をもとに選び方を整理します。"
+  canonicalPath="/comparisons/ai-video-generation-sample-comparison/"
+  jsonLd={faqJsonLd}
+>
+  <div class="epc-wrap">
+
+    <nav class="epc-breadcrumb" aria-label="パンくずリスト">
+      <a href="/">トップ</a>
+      <span aria-hidden="true">/</span>
+      <a href="/comparisons/">比較記事</a>
+      <span aria-hidden="true">/</span>
+      <span>AI動画生成ツールの作例比較</span>
+    </nav>
+
+    <div class="epc-hero">
+      <p class="epc-eyebrow">運営者による一次検証</p>
+      <h1 class="epc-h1">AI動画生成ツールの作例比較｜同じ条件で試した生成結果まとめ</h1>
+      <p class="epc-lead">
+        本サイトの運営者が、Kling AI・Pika・Runway・Luma AIの4ツールで実際に動画を生成し、その作例を比較できるようにまとめた記事です。いずれも「ワークスペースを描いた抽象的なモーション映像」に近い条件のプロンプトで生成していますが、ツールごとにプロンプトの文言・動画尺・解像度は完全には統一されていません。<a href="/comparisons/ai-image-generation-sample-comparison/">AI画像生成ツールの作例比較</a>の動画版として、実際の生成結果から得られる傾向を確認できます。
+      </p>
+    </div>
+
+    <div class="epc-notice">
+      <p class="epc-notice-h">ご確認ください</p>
+      <ul>
+        <li>掲載作例は運営者が各ツールで作成した<strong>その時点・その条件での1例</strong>です。生成結果はプロンプト・モデル・設定・時期・プラン・生成モードによって変わります。</li>
+        <li>4ツールの動画は<strong>厳密に同一のプロンプトではありません</strong>（文言・尺の指定などに差があります）。本記事は「同一プロンプトでの性能比較」ではなく、各ツールの実出力の参考例として掲載しています。</li>
+        <li>本記事の評価は今回の作例条件での<strong>主観的な印象</strong>であり、ツール性能の絶対評価・ランキングではありません。</li>
+        <li>商用利用・透かし・無料枠の条件は変更される場合があります。必ず各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。</li>
+        <li>本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。</li>
+      </ul>
+    </div>
+
+    <section class="epc-sec">
+      <h2 class="epc-h2">この記事で分かること</h2>
+      <ul class="epc-check-list">
+        <li>Kling AI・Pika・Runway・Luma AIで実際に生成した短尺動画の作例</li>
+        <li>各作例の生成日・使用モデル・プロンプト・動画尺・解像度</li>
+        <li>今回の作例条件で感じた、動きの自然さ・カメラワーク・透かしの傾向</li>
+        <li>無料枠・商用利用・日本向け課金の確認先</li>
+        <li>目的別（映像制作向け・無料で試したい・image-to-videoを使いたい）の選び方の目安</li>
+      </ul>
+    </section>
+
+    <section class="epc-sec">
+      <h2 class="epc-h2">検証条件</h2>
+      <p class="epc-scroll-hint" aria-hidden="true">← 横にスクロールできます →</p>
+      <div class="epc-table-wrap">
+        <table class="epc-table">
+          <tbody>
+            <tr class="epc-tr-even"><th class="epc-cond-th">検証方法</th><td>各ツールの通常の生成画面から、抽象的なワークスペース映像を想定したプロンプトでtext-to-video生成</td></tr>
+            <tr class="epc-tr-odd"><th class="epc-cond-th">生成日</th><td>2026年6月15日〜24日（各作例に個別の生成日・確認日を記載）</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">使用ツール</th><td>Kling AI／Pika／Runway／Luma AIの4ツール</td></tr>
+            <tr class="epc-tr-odd"><th class="epc-cond-th">生成方式</th><td>text-to-video（画像から動画への生成ではありません）</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">プロンプトの統一性</th><td>いずれも「デスク・モニター・抽象モーショングラフィックス・人物なし・文字なし」を含む近い内容のプロンプトですが、文言・尺の指定はツールごとに異なります（各作例の「プロンプト詳細」参照）</td></tr>
+            <tr class="epc-tr-odd"><th class="epc-cond-th">動画尺</th><td>3秒〜5秒（ツールごとに異なる。各作例に個別記載）</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">解像度</th><td>784×470〜1280×720（ツールごとに異なる。各作例に個別記載）</td></tr>
+            <tr class="epc-tr-odd"><th class="epc-cond-th">掲載本数</th><td>各ツール1本（複数生成した中から1本を掲載。ベストカットの厳選比較ではありません）</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">加工</th><td>Web表示用の圧縮・フォーマット変換のみ。内容の修正・カット編集なし</td></tr>
+            <tr class="epc-tr-odd"><th class="epc-cond-th">プラン</th><td>ツールごとに無料枠または運営者契約中のプランで生成</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">注意</th><td>生成結果はモデル・設定・時期・プラン・生成モードによって変わります。本記事の作例は再現を保証するものではありません</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="epc-sec">
+      <SamplePromptVideoGallery items={galleryItems} heading="ツール別の作例動画（4ツール）" />
+    </section>
+
+    <section class="epc-sec">
+      <h2 class="epc-h2">生成結果の比較表</h2>
+      <p class="epc-table-note">「動きの自然さ」「カメラワーク」は今回の作例条件での主観評価です。人物・手・顔の安定性は、今回の作例が人物を含まないため未検証（要確認）としています。無料枠・透かしの条件は変更される場合があるため、最新情報は各公式サイトをご確認ください。</p>
+      <p class="epc-scroll-hint" aria-hidden="true">← 横にスクロールできます →</p>
+      <div class="epc-table-wrap">
+        <table class="epc-table">
+          <thead>
+            <tr>
+              <th>ツール</th>
+              <th>動きの自然さ</th>
+              <th>カメラワーク</th>
+              <th>人物・手・顔の安定性</th>
+              <th>透かし</th>
+              <th>image-to-video</th>
+              <th>無料で試しやすいか</th>
+              <th>向いている用途</th>
+              <th>詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableRows.map(({ slug, name, motion, camera, stability, watermark, i2v, free, fit }, i) => (
+              <tr class={i % 2 === 0 ? 'epc-tr-even' : 'epc-tr-odd'}>
+                <td class="epc-td-name">{name}</td>
+                <td>{motion}</td>
+                <td class="epc-td-note">{camera}</td>
+                <td class="epc-td-note">{stability}</td>
+                <td class="epc-td-note">{watermark}</td>
+                <td class="epc-td-note">{i2v}</td>
+                <td class="epc-td-note">{free}</td>
+                <td class="epc-td-note">{fit}</td>
+                <td><a href={`/tools/${slug}/`} class="epc-td-link">詳細 →</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="epc-table-foot">◯／要確認は今回の作例条件での主観評価・確認状況の目安です。商用利用条件は<a href="/conditions/commercial-use/">商用利用条件の一覧</a>と各公式規約をご確認ください。</p>
+    </section>
+
+    <section class="epc-sec">
+      <h2 class="epc-h2">今回の作例で感じた傾向</h2>
+      <div class="epc-way-grid">
+        <div class="epc-way-card">
+          <p class="epc-way-h">動きの自然さ・カメラワーク</p>
+          <p class="epc-way-body">今回の作例条件では、<a href="/tools/kling-ai/">Kling AI</a>・<a href="/tools/runway/">Runway</a>ともにカメラのプッシュイン（ズームイン）が破綻なくまとまる印象でした。<a href="/tools/pika/">Pika</a>・<a href="/tools/luma-ai/">Luma AI</a>も抽象モーションの滑らかさは扱いやすい印象でした。ただし短尺の抽象映像に限った印象であり、人物や複雑なシーンでは傾向が変わる可能性があります。</p>
+        </div>
+        <div class="epc-way-card">
+          <p class="epc-way-h">透かしの有無</p>
+          <p class="epc-way-body">無料プランで生成した<a href="/tools/kling-ai/">Kling AI</a>の作例には可視の透かしが確認できました。<a href="/tools/luma-ai/">Luma AI</a>もロゴ透かしが常時表示されていました。<a href="/tools/pika/">Pika</a>・<a href="/tools/runway/">Runway</a>は目視では目立ちにくいか、プランによって変わる可能性があり要確認です。</p>
+        </div>
+        <div class="epc-way-card">
+          <p class="epc-way-h">苦手だった表現・注意点</p>
+          <p class="epc-way-body">今回の作例はいずれも人物を含まない静物・抽象モーション主体のため、人物の手や顔の安定性については検証できていません。一般に、人物・複雑な背景・速い動きは破綻しやすいと言われており、この点は今後の検証課題です。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="epc-sec">
+      <h2 class="epc-h2">目的別の選び方</h2>
+      <ul class="epc-check-list">
+        <li><b>映像制作向け・多機能を求める：</b><a href="/tools/runway/">Runway</a>は動画生成以外の編集機能も含む多機能ツールです。</li>
+        <li><b>まず無料で試したい：</b>4ツールとも無料枠がありますが、条件は変わります。<a href="/conditions/free/">無料で試せるツール一覧</a>で最新状況を確認してください。</li>
+        <li><b>透かしなしで使いたい：</b><a href="/conditions/no-watermark/">透かしなしツール一覧</a>を確認し、有料プランの条件も含めて公式情報で確認してください。</li>
+        <li><b>画像から動画を作りたい（image-to-video）：</b>4ツールとも対応していますが、本記事の作例はtext-to-videoです。image-to-videoの作例は別記事での検証を予定しています。</li>
+        <li><b>日本語UIで使いたい：</b><a href="/conditions/japanese/">日本語対応AIツール一覧</a>を確認してください。</li>
+        <li><b>日本円での決済状況を確認したい：</b><a href="/tools/">AIツール一覧</a>の各ツールページで日本向け課金情報を確認できます（最終確認は公式サイトで）。</li>
+      </ul>
+    </section>
+
+    <GuideFAQ items={faqs} title="よくある質問" emitSchema={false} />
+
+    <section class="epc-sec">
+      <h2 class="epc-h2">まとめ</h2>
+      <p class="epc-body-text">
+        今回検証した4ツールでは、短尺の抽象モーション映像において動き・カメラワークともに大きな破綻は見られませんでしたが、<strong>透かしの有無・動画尺・解像度の条件差</strong>がツール選びのポイントになる印象でした。人物を含む映像や複雑な背景での安定性は今回の検証範囲外のため、実際の用途に近いプロンプトで無料枠から試すことをおすすめします。商用利用の前には必ず<a href="/conditions/commercial-use/">商用利用条件</a>と各公式規約を確認してください。生成結果はモデルや時期により変わるため、本記事の作例はあくまで参考例としてご覧ください。
+      </p>
+    </section>
+
+    <section class="epc-related">
+      <h2 class="epc-related-h">関連ページ</h2>
+      <div class="epc-related-links">
+        <a href="/tools/" class="epc-related-link">AIツール一覧</a>
+        <a href="/categories/video-generation/" class="epc-related-link">AI動画生成カテゴリ</a>
+        <a href="/comparisons/ai-image-generation-sample-comparison/" class="epc-related-link">AI画像生成ツールの作例比較</a>
+        <a href="/comparisons/free-ai-image-generation-samples/" class="epc-related-link">無料AI画像生成ツールの作例比較</a>
+        <a href="/comparisons/runway-vs-pika/" class="epc-related-link">Runway vs Pika</a>
+        <a href="/comparisons/runway-vs-kling-ai/" class="epc-related-link">Runway vs Kling AI</a>
+        <a href="/conditions/free/" class="epc-related-link">無料で試せるツール一覧</a>
+        <a href="/conditions/commercial-use/" class="epc-related-link">商用利用条件の一覧</a>
+        <a href="/conditions/no-watermark/" class="epc-related-link">透かしなしツール</a>
+        <a href="/comparisons/" class="epc-related-link">比較記事一覧</a>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .epc-wrap {
+    --brand: #4B3FE4;
+    --brand-ink: #2E25A6;
+    --brand-tint: #ECEBFB;
+    --line: #E5E7EB;
+    --surface: #FFFFFF;
+    --surface-2: #F9FAFB;
+    --ink-body: #374151;
+    --ink-soft: #6B7280;
+    --faint: #9CA3AF;
+    --amber-bg: #FFFBEB;
+    --amber-border: #FDE68A;
+    --amber-text: #92400E;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    color: var(--ink-body);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .epc-breadcrumb { display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: 12.5px; color: var(--ink-soft); margin-bottom: 32px; }
+  .epc-breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+  .epc-breadcrumb a:hover { color: var(--brand); text-decoration: underline; }
+
+  .epc-hero { margin-bottom: 36px; }
+  .epc-eyebrow { display: inline-block; background: var(--brand-tint); color: var(--brand-ink); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; border-radius: 20px; padding: 3px 12px; margin-bottom: 14px; }
+  .epc-h1 { font-size: clamp(22px, 3.2vw, 32px); font-weight: 800; line-height: 1.3; text-wrap: balance; color: #111827; margin-bottom: 14px; }
+  .epc-lead { font-size: 14.5px; color: var(--ink-soft); line-height: 1.8; max-width: 680px; }
+  .epc-lead a { color: var(--brand-ink); font-weight: 600; }
+
+  .epc-notice { background: var(--amber-bg); border: 1px solid var(--amber-border); border-radius: 14px; padding: 18px 22px; margin-bottom: 48px; color: var(--amber-text); font-size: 13px; line-height: 1.7; }
+  .epc-notice-h { font-weight: 700; margin-bottom: 8px; }
+  .epc-notice ul { padding-left: 18px; }
+  .epc-notice li + li { margin-top: 5px; }
+
+  .epc-sec { margin-bottom: 56px; }
+  .epc-h2 { font-size: clamp(17px, 2.2vw, 22px); font-weight: 800; color: #111827; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--brand-tint); }
+
+  .epc-table-note { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; }
+  .epc-scroll-hint { display: none; font-size: 11.5px; color: var(--ink-soft); text-align: center; margin: 0 0 6px; }
+  @media (max-width: 680px) { .epc-scroll-hint { display: block; } }
+  .epc-table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+  .epc-table { width: 100%; min-width: 820px; border-collapse: collapse; font-size: 12.5px; }
+  .epc-table thead tr { background: var(--brand-tint); }
+  .epc-table th { text-align: left; padding: 12px 14px; font-size: 11.5px; font-weight: 700; color: var(--brand-ink); border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .epc-cond-th { background: var(--brand-tint); vertical-align: top; }
+  .epc-tr-even { background: var(--surface); }
+  .epc-tr-odd { background: var(--surface-2); }
+  .epc-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink-body); vertical-align: top; line-height: 1.55; }
+  .epc-td-name { font-weight: 600; color: #111827; white-space: nowrap; }
+  .epc-td-note { font-size: 11.5px; color: var(--ink-soft); }
+  .epc-td-link { color: var(--brand-ink); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .epc-td-link:hover { text-decoration: underline; }
+  .epc-table-foot { margin-top: 8px; font-size: 11.5px; color: var(--faint); }
+  .epc-table-foot a { color: var(--brand-ink); }
+
+  .epc-way-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .epc-way-card { background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+  .epc-way-h { font-size: 13.5px; font-weight: 700; color: #111827; margin-bottom: 10px; }
+  .epc-way-body { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; }
+  .epc-way-body a { color: var(--brand-ink); }
+
+  .epc-check-list { padding-left: 18px; font-size: 13.5px; color: var(--ink-body); line-height: 1.8; }
+  .epc-check-list li + li { margin-top: 10px; }
+  .epc-check-list a { color: var(--brand-ink); }
+
+  .epc-body-text { font-size: 14px; color: var(--ink-body); line-height: 1.85; }
+  .epc-body-text a { color: var(--brand-ink); }
+
+  .epc-related { margin-top: 32px; }
+  .epc-related-h { font-size: 14px; font-weight: 700; color: var(--ink-soft); margin-bottom: 12px; }
+  .epc-related-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .epc-related-link { border: 1px solid var(--line); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ink-body); text-decoration: none; transition: background .15s, border-color .15s; }
+  .epc-related-link:hover { background: var(--brand-tint); border-color: #C7C2F5; color: var(--brand-ink); }
+
+  @media (max-width: 680px) {
+    .epc-way-grid { grid-template-columns: 1fr; }
+  }
+</style>

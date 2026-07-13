@@ -1,0 +1,244 @@
+---
+import type { GeneratedVideo } from '../data/generatedVideos';
+
+interface GalleryItem {
+  video: GeneratedVideo;
+  name: string;
+  slug: string;
+  note?: string;
+}
+
+interface Props {
+  items: GalleryItem[];
+  heading?: string;
+}
+
+const { items, heading = 'ツール別の作例動画' } = Astro.props;
+
+const eligible = items.filter(({ video }) => video.sampleType === 'tool-video-output');
+---
+
+<section class="spvg-wrap">
+  <div class="spvg-legend">
+    <p class="spvg-legend-title">この動画について</p>
+    <p class="spvg-legend-body">
+      掲載動画はすべて、管理者が<strong>各ツール本体</strong>で作成した短尺の実例サンプルです（sampleType: tool-video-output）。おおむね近い内容のプロンプト（ワークスペースを描いた抽象的なモーション映像）で生成していますが、ツールごとにプロンプトの文言・動画尺・解像度が異なる場合があります。1本の動画だけでツールの品質・性能を断定するものではありません。生成結果はプロンプト・設定・モデル・タイミング・プランによって変わる場合があります。
+    </p>
+  </div>
+
+  <h2 class="spvg-heading">{heading}</h2>
+
+  <div class="spvg-grid">
+    {eligible.map(({ video, name, slug, note }) => (
+      <figure class="spvg-card">
+        <div class="spvg-card-header">
+          <a href={`/tools/${slug}/`} class="spvg-tool-name">{name} →</a>
+          <span class="spvg-badge">実例動画</span>
+        </div>
+        <div class="spvg-player">
+          <video
+            src={video.file}
+            poster={video.poster}
+            muted
+            loop
+            playsinline
+            preload="none"
+            controls
+            class="spvg-video"
+            aria-label={video.alt}
+          ></video>
+        </div>
+        <figcaption class="spvg-caption">
+          {note && <p class="spvg-note-text">{note}</p>}
+          <dl class="spvg-meta">
+            <div><dt>生成日：</dt><dd>{video.generatedAt}</dd></div>
+            <div><dt>モデル：</dt><dd>{video.model}</dd></div>
+            <div><dt>尺：</dt><dd>{video.durationSec}秒</dd></div>
+            <div><dt>解像度：</dt><dd>{video.resolution}</dd></div>
+          </dl>
+          <details class="spvg-prompt-details">
+            <summary class="spvg-prompt-summary">プロンプト詳細を表示</summary>
+            <div class="spvg-prompt-body">
+              <p class="spvg-prompt-label">使用プロンプト</p>
+              <p class="spvg-prompt-text">{video.prompt}</p>
+              {video.negativePrompt && (
+                <>
+                  <p class="spvg-prompt-label">ネガティブプロンプト</p>
+                  <p class="spvg-prompt-text">{video.negativePrompt}</p>
+                </>
+              )}
+            </div>
+          </details>
+          <p class="spvg-notice">※ {video.usageNote}</p>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <p class="spvg-footer-note">
+    ※ 1本の動画だけでツール性能を断定するものではありません。商用利用・著作権条件はプランや規約によって異なります。商用利用前には各ツールの最新の公式規約・料金ページをご確認ください。本記事は法的助言ではありません。
+  </p>
+</section>
+
+<style>
+  .spvg-wrap {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--surface-2, #FAFAF6);
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: 14px;
+  }
+  .spvg-legend {
+    margin-bottom: 1.25rem;
+    padding: 1rem 1.25rem;
+    background: #fff;
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: 10px;
+  }
+  .spvg-legend-title {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--ink, #16181D);
+    margin: 0 0 0.5rem;
+  }
+  .spvg-legend-body {
+    font-size: 0.8125rem;
+    color: var(--ink-soft, #3A3E47);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .spvg-legend-body strong { color: var(--ink, #16181D); }
+
+  .spvg-heading {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--ink, #16181D);
+    margin: 0 0 0.75rem;
+  }
+  .spvg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 640px) {
+    .spvg-grid { grid-template-columns: 1fr; }
+  }
+  .spvg-card {
+    background: #fff;
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0;
+  }
+  .spvg-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0.5rem 0.75rem;
+    background: var(--surface-2, #FAFAF6);
+    border-bottom: 1px solid var(--line, #E3E2D9);
+  }
+  .spvg-tool-name {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--brand-ink, #2E25A6);
+    margin: 0;
+    text-decoration: none;
+  }
+  .spvg-tool-name:hover { text-decoration: underline; }
+  .spvg-badge {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+    flex: none;
+    background: #ECEBFB;
+    color: #2E25A6;
+    border: 1px solid rgba(46,37,166,.25);
+  }
+  .spvg-player {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+  .spvg-video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
+  .spvg-caption { padding: 0.75rem; }
+  .spvg-note-text {
+    font-size: 0.75rem;
+    color: var(--ink-soft, #3A3E47);
+    line-height: 1.7;
+    margin: 0 0 0.5rem;
+  }
+  .spvg-meta {
+    font-size: 0.6875rem;
+    color: var(--muted, #64748b);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 12px;
+    margin: 0 0 0.5rem;
+  }
+  .spvg-meta div { display: flex; gap: 0.25rem; }
+  .spvg-meta dt { font-weight: 600; color: var(--ink-soft, #475569); }
+
+  .spvg-prompt-details {
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .spvg-prompt-summary {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--brand-ink, #2E25A6);
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+    background: var(--surface-2, #FAFAF6);
+    list-style: none;
+  }
+  .spvg-prompt-summary::-webkit-details-marker { display: none; }
+  .spvg-prompt-summary::before { content: '▶ '; font-size: 0.6rem; }
+  details[open] .spvg-prompt-summary::before { content: '▼ '; }
+  .spvg-prompt-body {
+    padding: 0.6rem 0.75rem;
+    background: #fff;
+  }
+  .spvg-prompt-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--ink-soft, #475569);
+    margin: 0 0 2px;
+  }
+  .spvg-prompt-text {
+    font-size: 0.6875rem;
+    color: var(--ink-soft, #475569);
+    line-height: 1.6;
+    font-family: monospace;
+    word-break: break-word;
+    margin: 0 0 0.5rem;
+    background: var(--surface-2, #f8fafc);
+    padding: 4px 6px;
+    border-radius: 4px;
+  }
+
+  .spvg-notice {
+    font-size: 0.6875rem;
+    color: var(--muted, #94a3b8);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .spvg-footer-note {
+    font-size: 0.75rem;
+    color: var(--muted, #94a3b8);
+    line-height: 1.7;
+    margin: 1rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line, #E3E2D9);
+  }
+</style>

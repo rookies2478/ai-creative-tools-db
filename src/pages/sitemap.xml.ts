@@ -27,6 +27,7 @@ const STATIC_PATHS = [
   '/comparisons/ec-product-image-ai-tools/',
   '/comparisons/ad-banner-ai-tools/',
   '/comparisons/ai-image-generation-sample-comparison/',
+  '/comparisons/ai-video-generation-sample-comparison/',
   '/comparisons/free-ai-image-generation-samples/',
   '/conditions/free/',
   '/conditions/commercial-use/',

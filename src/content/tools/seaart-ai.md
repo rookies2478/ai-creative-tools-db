@@ -115,8 +115,8 @@ japanBilling:
   taxDisplay: "tax-included"
   purchaseChannels: ["web", "appstore", "googleplay"]
   pricingCheckedAt: "2026-07-13"
-  pricingNote: "日本向けには特定商取引法に基づく表記（販売事業者：シーアートジャパン株式会社）があり、「表示価格は消費税を含みます」と明記されています。サブスクリプション（SVIP 4段階）と都度課金のコイン購入が併存する2階建て課金で、具体的な価格は購入画面でご確認ください。Web版とアプリ版では販売元・価格が異なる場合があります。"
-  billingCategory: "D"
+  pricingNote: "日本向けには特定商取引法に基づく表記（販売事業者：シーアートジャパン株式会社）があり、「表示価格は消費税を含みます」と明記されています。Web版は日本円・消費税込での決済に対応しています。サブスクリプション（SVIP 4段階）と都度課金のコイン購入が併存する2階建て課金で、具体的な価格は購入画面でご確認ください。なお、Web版とApple App Store／Google Playでは販売元・価格・キャンペーン条件が異なる場合があります。"
+  billingCategory: "A"
   sourceUrls:
     - "https://www.seaart.ai/mall"
     - "https://apps.apple.com/jp/app/id6478189868"

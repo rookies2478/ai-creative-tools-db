@@ -99,7 +99,7 @@ japanBilling:
   providerCountry: "イギリス（要公式確認）"
   isJapaneseService: false
   pricingUrl: "https://www.synthesia.io/pricing"
-  billingCurrency: "USD（日本語LPには円建て表示あり）"
+  billingCurrency: "料金ページはUSD表示（最終請求通貨は要公式確認・日本語LPには円建て表示あり）"
   jpyDirectBilling: "unknown"
   localizedJpyDisplay: true
   taxDisplay: "unknown"

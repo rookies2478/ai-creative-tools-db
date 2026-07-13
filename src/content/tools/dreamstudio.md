@@ -118,11 +118,12 @@ japanBilling:
   taxDisplay: "unknown"
   purchaseChannels: ["web"]
   pricingCheckedAt: "2026-07-13"
-  pricingNote: "旧DreamStudioは「Brand Studio」に改称され、ブランド企業向け制作プラットフォームへ位置付けが変わっています。公式料金は米ドル建て（Core $50/月）で、日本円での実際の支払額は決済時の為替レート、カード会社の海外事務手数料、税等により変動します。税表示は公式料金ページ上では確認できません。"
+  pricingNote: "DreamStudioはStability AI公式ヘルプで「Brand Studio（Formerly Dream Studio）」と明記されており、Brand Studioへ改称されています。料金はクレジット制で、無料Trial（1,000クレジットまで）／Core $50/月（5,000クレジット・繰越なし）／Enterprise（個別見積り）の構成です。公式料金は米ドル建てのため、日本円での実際の支払額は決済時の為替レート、カード会社の海外事務手数料、税等により変動します。税表示は公式料金ページ上では確認できません。"
   billingCategory: "C"
   sourceUrls:
     - "https://stability.ai/brandstudio"
     - "https://stability.ai/brand-studio-plans"
+    - "https://kb.stability.ai/knowledge-base/-fraud-alert-identifying-genuine-dream-studio-transactions-and-reporting-fraud"
 ---
 
 ## DreamStudioとは

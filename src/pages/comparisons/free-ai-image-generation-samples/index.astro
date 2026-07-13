@@ -1,0 +1,298 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+import SamplePromptImageGallery from '../../../components/SamplePromptImageGallery.astro';
+import { generatedImages } from '../../../data/generatedImages';
+
+// 無料枠で試しやすいツールに絞ったギャラリー（Aスキームのみ）
+const freeToolMeta: Record<string, { name: string; impression: string }> = {
+  'gemini-image-generation': { name: 'Gemini画像生成', impression: '今回の作例では、クリアな色調で破綻の少ない仕上がりでした。Googleアカウントがあれば無料枠で試しやすいツールです。' },
+  'stable-diffusion': { name: 'Stable Diffusion', impression: '今回の作例では、落ち着いたトーンでまとまりました。ローカル実行なら生成自体は基本無料ですが、環境構築の手間があります。' },
+  'canva-ai-image-generator': { name: 'Canva AI画像生成', impression: '今回の作例では、明るく温かみのある色調でした。無料プランでは生成回数に制限があります。' },
+  'fotor-ai': { name: 'Fotor AI', impression: '今回の作例では、鮮やかな色調でした。無料プランでは書き出し時に透かしが入る場合があります。' },
+  'seaart-ai': { name: 'SeaArt AI', impression: '今回の作例では、鮮やかな色使いでイラスト寄りの傾向でした。日本語UIがあり無料枠で始めやすいツールです。' },
+  'playground-ai': { name: 'Playground AI', impression: '今回の作例では、明るい色調でバランスよくまとまりました。無料枠の条件は変更される場合があります。' },
+  'nightcafe': { name: 'NightCafe', impression: '今回の作例では、アーティスティックな色調が特徴的でした。クレジット制の無料枠があります。' },
+  'tensor-art': { name: 'Tensor.Art', impression: '今回の作例では、細部の描き込みが多めでした。無料枠でも複数モデルを試せるのが特徴です。' },
+};
+
+const galleryItems = generatedImages
+  .filter(
+    (img) =>
+      img.sampleType === 'tool-output' &&
+      img.comparisonEligible === true &&
+      img.promptVersion === 'image-tool-benchmark-v1' &&
+      img.sourceToolSlug &&
+      freeToolMeta[img.sourceToolSlug]
+  )
+  .map((img) => ({
+    img,
+    name: freeToolMeta[img.sourceToolSlug!].name,
+    slug: img.sourceToolSlug!,
+    note: freeToolMeta[img.sourceToolSlug!].impression,
+  }));
+
+const tableRows = [
+  { slug: 'gemini-image-generation', name: 'Gemini画像生成', free: '無料枠あり', limit: '回数・モデル制限あり（要確認）', watermark: 'あり（SynthID等・要確認）', check: '商用利用条件・生成物の扱い' },
+  { slug: 'stable-diffusion', name: 'Stable Diffusion', free: 'ローカル実行なら基本無料', limit: 'PCスペック・環境構築が必要', watermark: '基本なし（環境による）', check: '使用モデルごとのライセンス' },
+  { slug: 'canva-ai-image-generator', name: 'Canva AI画像生成', free: '無料プランあり', limit: '生成回数に上限あり', watermark: '要確認', check: 'プラン別の商用利用条件' },
+  { slug: 'fotor-ai', name: 'Fotor AI', free: '無料プランあり（Basic）', limit: '無料クレジット制', watermark: '無料プランでは入る場合あり', check: '透かし条件・商用利用条件' },
+  { slug: 'seaart-ai', name: 'SeaArt AI', free: '無料枠あり', limit: 'クレジット制', watermark: '要確認', check: '商用利用条件（unknown扱い）' },
+  { slug: 'playground-ai', name: 'Playground AI', free: '無料枠あり', limit: '回数・機能制限あり（要確認）', watermark: '要確認', check: '最新の無料枠条件' },
+  { slug: 'nightcafe', name: 'NightCafe', free: '無料枠あり', limit: 'クレジット制', watermark: 'なし（要確認）', check: 'クレジット付与条件' },
+  { slug: 'tensor-art', name: 'Tensor.Art', free: '無料枠あり', limit: 'クレジット制', watermark: '要確認', check: 'モデルごとのライセンス' },
+  { slug: 'leonardo-ai', name: 'Leonardo AI', free: '無料枠あり（制限付き）', limit: 'トークン制', watermark: '要確認', check: 'プラン別の商用利用条件' },
+  { slug: 'ideogram', name: 'Ideogram', free: '無料枠あり', limit: '回数制限あり', watermark: '要確認', check: '商用利用条件' },
+  { slug: 'adobe-firefly', name: 'Adobe Firefly', free: '無料クレジットあり（月次）', limit: 'クレジット消費制', watermark: 'プランにより可視透かしの場合あり', check: '透かし・商用利用条件' },
+  { slug: 'microsoft-designer', name: 'Microsoft Designer', free: '無料枠あり（Microsoftアカウント）', limit: 'ブースト回数制', watermark: '要確認', check: '商用利用条件（個人向け中心）' },
+];
+
+const faqs = [
+  {
+    q: '無料プランでも有料プランと同じ品質で生成できますか？',
+    a: '無料プランでは、使用できるモデル・解像度・生成回数・優先度が有料プランと異なる場合があります。本記事の作例がどのプランで生成されたかは各作例の条件をご確認ください。品質の感じ方も用途により変わります。',
+  },
+  {
+    q: '完全に無料で使い続けられるツールはありますか？',
+    a: '「完全無料」と断定できるツールはありません。無料枠はクレジット制・回数制のものが多く、条件も変更される場合があります。ローカル実行のStable Diffusionは生成自体に料金がかかりませんが、PC環境と使用モデルのライセンス確認が必要です。最新の条件は<a href="/conditions/free/">無料で試せるツール一覧</a>と各公式料金ページをご確認ください。',
+  },
+  {
+    q: '無料プランで作った画像を商用利用できますか？',
+    a: 'ツール・プランによって条件が異なり、無料プランでは商用利用が制限される場合があります。商用利用前には必ず<a href="/conditions/commercial-use/">商用利用条件の一覧</a>と各公式規約をご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '無料プランでは透かしが入りますか？',
+    a: 'ツールによります。たとえばFotor AIの無料プランでは書き出し時に透かしが入る場合があると案内されています。透かし条件は変更されることがあるため、<a href="/conditions/no-watermark/">透かしなしツール一覧</a>と各公式情報をご確認ください。',
+  },
+  {
+    q: '無料で試すならどのツールから始めればよいですか？',
+    a: '一概には言えませんが、日本語UIで始めやすいものとしてはCanva・SeaArt AI・Gemini画像生成などが候補になりやすい印象です。作例の傾向は本文のギャラリーを、条件の詳細は各ツールページをご確認ください。',
+  },
+];
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a.replace(/<[^>]+>/g, '') }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+        { "@type": "ListItem", "position": 2, "name": "比較記事", "item": "https://aicreative-db.com/comparisons/" },
+        { "@type": "ListItem", "position": 3, "name": "無料で試せるAI画像生成ツールの作例比較", "item": "https://aicreative-db.com/comparisons/free-ai-image-generation-samples/" }
+      ]
+    }
+  ]
+});
+---
+
+<BaseLayout
+  title="無料で試せるAI画像生成ツールの作例比較｜どこまで作れるか実例で確認"
+  description="無料プランや無料クレジットで試せるAI画像生成ツールについて、実際の作例・プロンプト・透かし・制限・商用利用前の確認点をまとめます。生成結果や無料枠の条件は変更される場合があります。"
+  canonicalPath="/comparisons/free-ai-image-generation-samples/"
+  jsonLd={faqJsonLd}
+>
+  <div class="epc-wrap">
+
+    <nav class="epc-breadcrumb" aria-label="パンくずリスト">
+      <a href="/">トップ</a>
+      <span aria-hidden="true">/</span>
+      <a href="/comparisons/">比較記事</a>
+      <span aria-hidden="true">/</span>
+      <span>無料で試せるAI画像生成ツールの作例比較</span>
+    </nav>
+
+    <div class="epc-hero">
+      <p class="epc-eyebrow">運営者による一次検証</p>
+      <h1 class="epc-h1">無料で試せるAI画像生成ツールの作例比較｜どこまで作れるか実例で確認</h1>
+      <p class="epc-lead">
+        無料プラン・無料クレジットで試せるAI画像生成ツールについて、運営者が同一の共通プロンプトで実際に生成した作例をまとめました。無料枠の条件（回数・透かし・商用利用）とあわせて、「まずどれを試すか」を判断する材料になります。ツール別の条件一覧は<a href="/conditions/free/">無料で試せるツール一覧</a>、全ツールの作例は<a href="/comparisons/ai-image-generation-sample-comparison/">AI画像生成ツールの作例比較</a>をご覧ください。
+      </p>
+    </div>
+
+    <div class="epc-notice">
+      <p class="epc-notice-h">ご確認ください</p>
+      <ul>
+        <li>無料枠の内容（クレジット数・回数・透かし・商用利用条件）はツール・プランによって異なり、<strong>変更される場合があります</strong>。</li>
+        <li>掲載作例はその時点・その条件での1例です。無料プランでは使用できるモデルが異なり、結果の傾向も変わる場合があります。</li>
+        <li>最新の条件は各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。</li>
+        <li>本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。</li>
+      </ul>
+    </div>
+
+    <section class="epc-sec">
+      <h2 class="epc-h2">この記事で分かること</h2>
+      <ul class="epc-check-list">
+        <li>無料枠のあるAI画像生成ツールで実際に生成した作例（同一プロンプト）</li>
+        <li>各ツールの無料枠の形式（回数制・クレジット制など）と主な制限</li>
+        <li>無料プランでの透かしの有無と確認先</li>
+        <li>商用利用前に確認すべきポイント</li>
+      </ul>
+    </section>
+
+    <section class="epc-sec">
+      <h2 class="epc-h2">検証条件</h2>
+      <ul class="epc-check-list">
+        <li><b>生成日：</b>2026年6月13日〜14日（各作例に個別記載）</li>
+        <li><b>生成方式：</b>text-to-image。共通プロンプト（image-tool-benchmark-v1）を使用。プロンプト全文は下のギャラリーの「共通プロンプトを表示」から確認できます</li>
+        <li><b>ネガティブプロンプト：</b>対応ツールのみ共通のものを使用</li>
+        <li><b>掲載枚数：</b>各ツール1枚。加工はWeb表示用のリサイズ・WebP変換のみ</li>
+        <li><b>プラン：</b>ツールごとに無料枠または運営者契約中のプランで生成しています。無料プランで使えるモデルとは異なる場合があります</li>
+        <li><b>注意：</b>生成結果はモデル・設定・時期・プランによって変わります</li>
+      </ul>
+    </section>
+
+    <section class="epc-sec">
+      <SamplePromptImageGallery items={galleryItems} heading="無料枠で試しやすいツールの作例" />
+      <p class="epc-table-extra">このほか<a href="/tools/leonardo-ai/">Leonardo AI</a>・<a href="/tools/ideogram/">Ideogram</a>・<a href="/tools/adobe-firefly/">Adobe Firefly</a>・<a href="/tools/microsoft-designer/">Microsoft Designer</a>・<a href="/tools/dalle/">DALL·E</a>にも無料枠・無料クレジットがあります。作例は<a href="/comparisons/ai-image-generation-sample-comparison/">全ツールの作例比較</a>をご覧ください。</p>
+    </section>
+
+    <section class="epc-sec">
+      <h2 class="epc-h2">無料枠・制限の比較表</h2>
+      <p class="epc-table-note">以下は確認時点の参考情報です。無料枠・透かしの条件は変更される場合があります。最新情報は各ツールの公式料金ページをご確認ください。</p>
+      <p class="epc-scroll-hint" aria-hidden="true">← 横にスクロールできます →</p>
+      <div class="epc-table-wrap">
+        <table class="epc-table">
+          <thead>
+            <tr>
+              <th>ツール</th>
+              <th>無料枠</th>
+              <th>主な制限</th>
+              <th>透かし</th>
+              <th>商用利用前の確認点</th>
+              <th>詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableRows.map(({ slug, name, free, limit, watermark, check }, i) => (
+              <tr class={i % 2 === 0 ? 'epc-tr-even' : 'epc-tr-odd'}>
+                <td class="epc-td-name">{name}</td>
+                <td class="epc-td-note">{free}</td>
+                <td class="epc-td-note">{limit}</td>
+                <td class="epc-td-note">{watermark}</td>
+                <td class="epc-td-note">{check}</td>
+                <td><a href={`/tools/${slug}/`} class="epc-td-link">詳細 →</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="epc-table-foot">「要確認」は公式情報で断定できなかった項目です。<a href="/conditions/no-watermark/">透かしなしツール一覧</a>・<a href="/conditions/commercial-use/">商用利用条件の一覧</a>もあわせてご確認ください。</p>
+    </section>
+
+    <section class="epc-sec">
+      <h2 class="epc-h2">無料で試すときの注意点</h2>
+      <ul class="epc-check-list">
+        <li><b>無料枠は変わります：</b>クレジット数・回数・対象機能は予告なく変更される場合があります。</li>
+        <li><b>透かし：</b>無料プランでは書き出し時に透かしが入るツールがあります。公開用途の前に確認してください。</li>
+        <li><b>商用利用：</b>無料プランでは商用利用が制限される場合があります。<a href="/conditions/commercial-use/">商用利用条件の一覧</a>と公式規約を必ず確認してください。</li>
+        <li><b>モデルの違い：</b>無料プランと有料プランで使用できるモデルが異なる場合があり、生成結果の傾向も変わります。</li>
+      </ul>
+    </section>
+
+    <GuideFAQ items={faqs} title="よくある質問" emitSchema={false} />
+
+    <section class="epc-sec">
+      <h2 class="epc-h2">まとめ</h2>
+      <p class="epc-body-text">
+        無料枠のあるツールだけでも、今回の作例のとおり実用的な画像生成を試せます。ただし無料枠の条件・透かし・商用利用の扱いはツールごとに大きく異なり、変更もされます。まず2〜3ツールを無料枠で試して自分の用途との相性を確認し、本格利用や商用利用の前には必ず公式の料金ページ・利用規約を確認する流れがおすすめです。
+      </p>
+    </section>
+
+    <section class="epc-related">
+      <h2 class="epc-related-h">関連ページ</h2>
+      <div class="epc-related-links">
+        <a href="/comparisons/ai-image-generation-sample-comparison/" class="epc-related-link">AI画像生成ツールの作例比較</a>
+        <a href="/comparisons/free-ai-image-generators/" class="epc-related-link">無料AI画像生成ツール比較（条件編）</a>
+        <a href="/conditions/free/" class="epc-related-link">無料で試せるツール一覧</a>
+        <a href="/conditions/no-watermark/" class="epc-related-link">透かしなしツール</a>
+        <a href="/conditions/commercial-use/" class="epc-related-link">商用利用条件の一覧</a>
+        <a href="/categories/image-generation/" class="epc-related-link">AI画像生成カテゴリ</a>
+        <a href="/comparisons/" class="epc-related-link">比較記事一覧</a>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .epc-wrap {
+    --brand: #4B3FE4;
+    --brand-ink: #2E25A6;
+    --brand-tint: #ECEBFB;
+    --line: #E5E7EB;
+    --surface: #FFFFFF;
+    --surface-2: #F9FAFB;
+    --ink-body: #374151;
+    --ink-soft: #6B7280;
+    --faint: #9CA3AF;
+    --amber-bg: #FFFBEB;
+    --amber-border: #FDE68A;
+    --amber-text: #92400E;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    color: var(--ink-body);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .epc-breadcrumb { display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: 12.5px; color: var(--ink-soft); margin-bottom: 32px; }
+  .epc-breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+  .epc-breadcrumb a:hover { color: var(--brand); text-decoration: underline; }
+
+  .epc-hero { margin-bottom: 36px; }
+  .epc-eyebrow { display: inline-block; background: var(--brand-tint); color: var(--brand-ink); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; border-radius: 20px; padding: 3px 12px; margin-bottom: 14px; }
+  .epc-h1 { font-size: clamp(22px, 3.2vw, 32px); font-weight: 800; line-height: 1.3; text-wrap: balance; color: #111827; margin-bottom: 14px; }
+  .epc-lead { font-size: 14.5px; color: var(--ink-soft); line-height: 1.8; max-width: 680px; }
+  .epc-lead a { color: var(--brand-ink); font-weight: 600; }
+
+  .epc-notice { background: var(--amber-bg); border: 1px solid var(--amber-border); border-radius: 14px; padding: 18px 22px; margin-bottom: 48px; color: var(--amber-text); font-size: 13px; line-height: 1.7; }
+  .epc-notice-h { font-weight: 700; margin-bottom: 8px; }
+  .epc-notice ul { padding-left: 18px; }
+  .epc-notice li + li { margin-top: 5px; }
+
+  .epc-sec { margin-bottom: 56px; }
+  .epc-h2 { font-size: clamp(17px, 2.2vw, 22px); font-weight: 800; color: #111827; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--brand-tint); }
+
+  .epc-table-note { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; }
+  .epc-scroll-hint { display: none; font-size: 11.5px; color: var(--ink-soft); text-align: center; margin: 0 0 6px; }
+  @media (max-width: 680px) { .epc-scroll-hint { display: block; } }
+  .epc-table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+  .epc-table { width: 100%; min-width: 700px; border-collapse: collapse; font-size: 12.5px; }
+  .epc-table thead tr { background: var(--brand-tint); }
+  .epc-table th { text-align: left; padding: 12px 14px; font-size: 11.5px; font-weight: 700; color: var(--brand-ink); border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .epc-tr-even { background: var(--surface); }
+  .epc-tr-odd { background: var(--surface-2); }
+  .epc-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink-body); vertical-align: top; line-height: 1.55; }
+  .epc-td-name { font-weight: 600; color: #111827; white-space: nowrap; }
+  .epc-td-note { font-size: 11.5px; color: var(--ink-soft); }
+  .epc-td-link { color: var(--brand-ink); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .epc-td-link:hover { text-decoration: underline; }
+  .epc-table-foot { margin-top: 8px; font-size: 11.5px; color: var(--faint); }
+  .epc-table-foot a { color: var(--brand-ink); }
+  .epc-table-extra { margin-top: 10px; font-size: 12.5px; color: var(--ink-soft); }
+  .epc-table-extra a { color: var(--brand-ink); }
+
+  .epc-check-list { padding-left: 18px; font-size: 13.5px; color: var(--ink-body); line-height: 1.8; }
+  .epc-check-list li + li { margin-top: 10px; }
+  .epc-check-list a { color: var(--brand-ink); }
+
+  .epc-body-text { font-size: 14px; color: var(--ink-body); line-height: 1.85; }
+  .epc-body-text a { color: var(--brand-ink); }
+
+  .epc-related { margin-top: 32px; }
+  .epc-related-h { font-size: 14px; font-weight: 700; color: var(--ink-soft); margin-bottom: 12px; }
+  .epc-related-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .epc-related-link { border: 1px solid var(--line); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ink-body); text-decoration: none; transition: background .15s, border-color .15s; }
+  .epc-related-link:hover { background: var(--brand-tint); border-color: #C7C2F5; color: var(--brand-ink); }
+</style>

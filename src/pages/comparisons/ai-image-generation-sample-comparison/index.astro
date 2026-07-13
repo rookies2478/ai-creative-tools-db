@@ -1,0 +1,366 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+import SamplePromptImageGallery from '../../../components/SamplePromptImageGallery.astro';
+import { generatedImages } from '../../../data/generatedImages';
+
+// Aスキーム（管理者がツール本体で作成・共通プロンプト・比較利用可）のみ対象
+const benchmarkImages = generatedImages.filter(
+  (img) =>
+    img.sampleType === 'tool-output' &&
+    img.comparisonEligible === true &&
+    img.promptVersion === 'image-tool-benchmark-v1'
+);
+
+const toolMeta: Record<string, { name: string; impression: string }> = {
+  'adobe-firefly': { name: 'Adobe Firefly', impression: '今回の作例では、柔らかい自然光と明るめの色調でまとまり、写真風の落ち着いた雰囲気になりました。' },
+  'canva-ai-image-generator': { name: 'Canva AI画像生成', impression: '今回の作例では、明るく温かみのある色調で、SNS・ブログ向けの実用的な印象でした。' },
+  'dalle': { name: 'DALL·E', impression: '今回の作例では、シャープな描写と柔らかい室内光の組み合わせで、プロンプトの構図指定に素直な印象でした。' },
+  'gemini-image-generation': { name: 'Gemini画像生成', impression: '今回の作例では、クリアな色調と明るい自然光で、破綻の少ない仕上がりでした。' },
+  'midjourney': { name: 'Midjourney', impression: '今回の作例では、鮮明な色調で密度感のある画作りになり、ビジュアル重視の用途に合いそうな印象でした。' },
+  'stable-diffusion': { name: 'Stable Diffusion', impression: '今回の作例では、落ち着いたトーンとソフトな照明でまとまりました。モデルや設定で結果が大きく変わる前提のツールです。' },
+  'leonardo-ai': { name: 'Leonardo AI', impression: '今回の作例では、鮮明な色使いでデジタルアート寄りの華やかな印象でした。' },
+  'ideogram': { name: 'Ideogram', impression: '今回の作例では、輪郭が明確で鮮やかな色になりました。本来は文字入れが得意なツールですが、この作例では文字を意図的に排除しています。' },
+  'fotor-ai': { name: 'Fotor AI', impression: '今回の作例では、鮮やかな色調でまとまりました。生成後にそのまま編集・文字入れに移れるのが特徴です。' },
+  'microsoft-designer': { name: 'Microsoft Designer', impression: '今回の作例では、明るく洗練された色調で、デザイン用途に馴染みやすい印象でした。' },
+  'seaart-ai': { name: 'SeaArt AI', impression: '今回の作例では、鮮やかな色使いでイラスト・アート寄りの傾向を感じました。' },
+  'tensor-art': { name: 'Tensor.Art', impression: '今回の作例では、細部の描き込みが多めの仕上がりでした。選ぶモデルによって画風が大きく変わります。' },
+  'nightcafe': { name: 'NightCafe', impression: '今回の作例では、アーティスティックな色調が特徴的でした。' },
+  'playground-ai': { name: 'Playground AI', impression: '今回の作例では、明るい色調でバランスよくまとまりました。' },
+  'dreamstudio': { name: 'Brand Studio（旧DreamStudio）', impression: '今回の作例では、落ち着いた色調でまとまりました。' },
+};
+
+const galleryItems = benchmarkImages
+  .filter((img) => img.sourceToolSlug && toolMeta[img.sourceToolSlug])
+  .map((img) => ({
+    img,
+    name: toolMeta[img.sourceToolSlug!].name,
+    slug: img.sourceToolSlug!,
+    note: toolMeta[img.sourceToolSlug!].impression,
+  }));
+
+// 比較表（DB frontmatter を元にした参考情報）
+const tableRows = [
+  { slug: 'adobe-firefly', name: 'Adobe Firefly', photo: '◯', design: '◯', jp: '◯（日本語UI・日本語プロンプト対応）', free: '無料クレジットあり（月次）', watermark: 'プランにより可視透かしの場合あり', fit: '写真風・商用前提のデザイン素材' },
+  { slug: 'canva-ai-image-generator', name: 'Canva AI画像生成', photo: '△', design: '◎', jp: '◯（日本語UI・日本語プロンプト対応）', free: '無料プランあり（回数制限）', watermark: '要確認', fit: 'SNS画像・文字入れまで一括' },
+  { slug: 'dalle', name: 'DALL·E', photo: '◯', design: '◯', jp: '◯（日本語UI／プロンプトは条件付き）', free: '無料枠あり（制限付き）', watermark: '条件付き（要確認）', fit: '対話しながらの画像づくり' },
+  { slug: 'gemini-image-generation', name: 'Gemini画像生成', photo: '◯', design: '△', jp: '◯（日本語UI・日本語プロンプト対応）', free: '無料枠あり', watermark: 'あり（SynthID等・要確認）', fit: '手軽な試行・下書き素材' },
+  { slug: 'midjourney', name: 'Midjourney', photo: '◎', design: '◯', jp: '×（英語UI／日本語プロンプトは条件付き）', free: '無料プランなし', watermark: 'なし', fit: 'アート性重視のビジュアル' },
+  { slug: 'stable-diffusion', name: 'Stable Diffusion', photo: '◯', design: '◯', jp: '△（環境・モデルによる）', free: 'ローカル実行なら基本無料', watermark: '条件付き（環境による）', fit: '自由度重視・カスタマイズ' },
+  { slug: 'leonardo-ai', name: 'Leonardo AI', photo: '◯', design: '◎', jp: '△（日本語プロンプトは条件付き）', free: '無料枠あり（制限付き）', watermark: '要確認', fit: 'ゲーム・イラスト系素材' },
+  { slug: 'ideogram', name: 'Ideogram', photo: '◯', design: '◯', jp: '△（日本語文字は崩れる可能性あり）', free: '無料枠あり', watermark: '要確認', fit: '文字入りビジュアル（主に英語）' },
+  { slug: 'fotor-ai', name: 'Fotor AI', photo: '△', design: '◯', jp: '◯（日本語UI・日本語プロンプト対応）', free: '無料プランあり', watermark: '無料プランでは入る場合あり', fit: '生成＋写真編集の一括作業' },
+  { slug: 'microsoft-designer', name: 'Microsoft Designer', photo: '△', design: '◎', jp: '◯（日本語UI・日本語プロンプト対応）', free: '無料枠あり', watermark: '要確認', fit: 'SNS・資料向けデザイン' },
+  { slug: 'seaart-ai', name: 'SeaArt AI', photo: '◯', design: '◯', jp: '◯（日本語UI・日本語プロンプト対応）', free: '無料枠あり', watermark: '要確認', fit: 'イラスト・アニメ系' },
+  { slug: 'tensor-art', name: 'Tensor.Art', photo: '◯', design: '◯', jp: '△（UIは英語中心／日本語プロンプト可）', free: '無料枠あり', watermark: '要確認', fit: 'モデル選択で画風を変えたい人' },
+  { slug: 'nightcafe', name: 'NightCafe', photo: '◯', design: '◯', jp: '△（UIは英語／日本語プロンプト可）', free: '無料枠あり', watermark: 'なし（要確認）', fit: 'アート系の試行' },
+  { slug: 'playground-ai', name: 'Playground AI', photo: '◯', design: '◯', jp: '△（UIは英語）', free: '無料枠あり', watermark: '要確認', fit: '無料での試行・学習' },
+  { slug: 'dreamstudio', name: 'Brand Studio（旧DreamStudio）', photo: '◯', design: '◯', jp: '△（UIは英語／日本語プロンプト可）', free: '無料クレジットあり', watermark: '要確認', fit: 'Stability系モデルの試行' },
+];
+
+const faqs = [
+  {
+    q: 'AI画像生成ツールの作例は毎回同じ結果になりますか？',
+    a: 'なりません。同一プロンプトでも、生成のたびに結果は変わります。また、モデルのアップデート・プラン・設定・時期によっても傾向が変わります。本記事の作例は「その時点・その条件での1例」としてご覧ください。',
+  },
+  {
+    q: '作例と同じプロンプトを使えば同じ品質の画像が作れますか？',
+    a: '同じプロンプトを使っても、同一の画像が生成されることは基本的にありません。構図や雰囲気の傾向をつかむ参考としてプロンプトを公開しています。プロンプトの考え方は<a href="/prompts/">プロンプト集</a>も参考にしてください。',
+  },
+  {
+    q: '作例画像を商用利用できますか？',
+    a: '本記事の作例画像は本サイトでの紹介目的のみに使用しており、二次利用・再配布はできません。ご自身で生成した画像の商用利用条件はツール・プランによって異なるため、<a href="/conditions/commercial-use/">商用利用条件の一覧</a>と各公式規約をご確認ください。本記事は法的助言ではありません。',
+  },
+  {
+    q: '無料プランでも同じ品質で生成できますか？',
+    a: '無料プランでは、使用できるモデル・生成回数・解像度・透かしの有無が有料プランと異なる場合があります。詳細は<a href="/comparisons/free-ai-image-generation-samples/">無料で試せるAI画像生成ツールの作例比較</a>と各公式料金ページをご確認ください。',
+  },
+  {
+    q: '結局どのツールを選べばよいですか？',
+    a: '一概には言えません。今回の作例条件では、写真風の自然さを重視するならAdobe FireflyやMidjourney、デザイン・文字入れまで一括で行うならCanvaやMicrosoft Designer、自由度を重視するならStable Diffusion系が候補になりやすい印象でした。用途別の選び方は本文の「目的別の選び方」をご覧ください。',
+  },
+  {
+    q: '文字入り画像を作るならどのツールが向いていますか？',
+    a: '画像内への文字生成はIdeogramが知られていますが、日本語文字は崩れる可能性があります。日本語の文字入れは、CanvaやMicrosoft Designerなどのテンプレート編集型で画像生成後に文字を載せる方法が確実になりやすい傾向です。詳細は<a href="/comparisons/ad-banner-ai-tools/">バナー生成AI比較</a>もご覧ください。',
+  },
+];
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a.replace(/<[^>]+>/g, '') }
+      }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+        { "@type": "ListItem", "position": 2, "name": "比較記事", "item": "https://aicreative-db.com/comparisons/" },
+        { "@type": "ListItem", "position": 3, "name": "AI画像生成ツールの作例比較", "item": "https://aicreative-db.com/comparisons/ai-image-generation-sample-comparison/" }
+      ]
+    }
+  ]
+});
+---
+
+<BaseLayout
+  title="AI画像生成ツールの作例比較｜同じプロンプトで試した生成結果まとめ"
+  description="AI画像生成ツールで実際に画像を作成し、生成結果・プロンプト・得意な表現・注意点を比較します。Adobe Firefly、Canva、DALL·E、Gemini、Midjourneyなどの作例をもとに、選び方を整理します。"
+  canonicalPath="/comparisons/ai-image-generation-sample-comparison/"
+  jsonLd={faqJsonLd}
+>
+  <div class="epc-wrap">
+
+    <nav class="epc-breadcrumb" aria-label="パンくずリスト">
+      <a href="/">トップ</a>
+      <span aria-hidden="true">/</span>
+      <a href="/comparisons/">比較記事</a>
+      <span aria-hidden="true">/</span>
+      <span>AI画像生成ツールの作例比較</span>
+    </nav>
+
+    <div class="epc-hero">
+      <p class="epc-eyebrow">運営者による一次検証</p>
+      <h1 class="epc-h1">AI画像生成ツールの作例比較｜同じプロンプトで試した生成結果まとめ</h1>
+      <p class="epc-lead">
+        本サイトの運営者が、主要なAI画像生成ツールで<strong>同一の共通プロンプト</strong>を使って実際に画像を作成し、その作例を比較できるようにまとめた記事です。カタログ的なスペック比較ではなく、実際の生成結果をもとに「どのツールがどんな表現を得意としやすいか」の傾向を確認できます。各ツールの料金・商用利用条件などの詳細は<a href="/tools/">ツール一覧</a>と各ツールページをご覧ください。
+      </p>
+    </div>
+
+    <div class="epc-notice">
+      <p class="epc-notice-h">ご確認ください</p>
+      <ul>
+        <li>掲載作例は運営者が各ツールで作成した<strong>その時点・その条件での1例</strong>です。生成結果はプロンプト・モデル・設定・時期・プランによって変わります。</li>
+        <li>本記事の評価は今回の作例条件での<strong>主観的な印象</strong>であり、ツール性能の絶対評価・ランキングではありません。</li>
+        <li>商用利用・透かし・無料枠の条件は変更される場合があります。必ず各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。</li>
+        <li>本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。</li>
+      </ul>
+    </div>
+
+    <!-- この記事で分かること -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">この記事で分かること</h2>
+      <ul class="epc-check-list">
+        <li>主要なAI画像生成ツール15種で、同一プロンプトから実際に生成した作例</li>
+        <li>各作例の生成日・使用モデル・プロンプト（ネガティブプロンプト含む）</li>
+        <li>今回の作例条件で感じた、各ツールの得意そうな表現・注意点の傾向</li>
+        <li>無料枠・透かし・日本語対応・商用利用の確認先</li>
+        <li>目的別（写真風・デザイン・イラスト・自由度重視）の選び方の目安</li>
+      </ul>
+    </section>
+
+    <!-- 検証条件 -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">検証条件</h2>
+      <p class="epc-scroll-hint" aria-hidden="true">← 横にスクロールできます →</p>
+      <div class="epc-table-wrap">
+        <table class="epc-table">
+          <tbody>
+            <tr class="epc-tr-even"><th class="epc-cond-th">検証方法</th><td>各ツールの通常の生成画面から、同一の共通プロンプト（image-tool-benchmark-v1）でtext-to-image生成</td></tr>
+            <tr class="epc-tr-odd"><th class="epc-cond-th">生成日</th><td>2026年6月13日〜14日（各作例に個別の生成日・確認日を記載）</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">使用ツール</th><td>Adobe Firefly／Canva AI画像生成／DALL·E（ChatGPT経由）／Gemini画像生成／Midjourney／Stable Diffusion／Leonardo AI／Ideogram／Fotor AI／Microsoft Designer／SeaArt AI／Tensor.Art／NightCafe／Playground AI／Brand Studio（旧DreamStudio）の15ツール</td></tr>
+            <tr class="epc-tr-odd"><th class="epc-cond-th">ネガティブプロンプト</th><td>対応ツールでは共通のネガティブプロンプトを使用（各作例の「プロンプト詳細」参照）。非対応ツールは本文プロンプトのみ</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">掲載枚数</th><td>各ツール1枚（複数生成した中から1枚を掲載。ベストカットの厳選比較ではありません）</td></tr>
+            <tr class="epc-tr-odd"><th class="epc-cond-th">加工</th><td>Web表示用のリサイズ・WebP変換のみ。内容の修正・加筆・レタッチなし</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">プラン</th><td>ツールごとに無料枠または運営者契約中のプランで生成（プランにより使用可能モデルが異なる場合があります）</td></tr>
+            <tr class="epc-tr-odd"><th class="epc-cond-th">注意</th><td>生成結果はモデル・設定・時期・プランによって変わります。本記事の作例は再現を保証するものではありません</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 作例ギャラリー -->
+    <section class="epc-sec">
+      <SamplePromptImageGallery items={galleryItems} heading="ツール別の作例（同一プロンプト・15ツール）" />
+    </section>
+
+    <!-- 比較表 -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">生成結果の比較表</h2>
+      <p class="epc-table-note">「写真風」「デザイン向き」は今回の作例条件での主観評価です。無料枠・透かしの条件は変更される場合があるため、最新情報は各公式サイトをご確認ください。</p>
+      <p class="epc-scroll-hint" aria-hidden="true">← 横にスクロールできます →</p>
+      <div class="epc-table-wrap">
+        <table class="epc-table">
+          <thead>
+            <tr>
+              <th>ツール</th>
+              <th>写真風の自然さ</th>
+              <th>デザイン・イラスト向き</th>
+              <th>日本語指示</th>
+              <th>無料で試しやすいか</th>
+              <th>透かし</th>
+              <th>向いている用途</th>
+              <th>詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableRows.map(({ slug, name, photo, design, jp, free, watermark, fit }, i) => (
+              <tr class={i % 2 === 0 ? 'epc-tr-even' : 'epc-tr-odd'}>
+                <td class="epc-td-name">{name}</td>
+                <td>{photo}</td>
+                <td>{design}</td>
+                <td class="epc-td-note">{jp}</td>
+                <td class="epc-td-note">{free}</td>
+                <td class="epc-td-note">{watermark}</td>
+                <td class="epc-td-note">{fit}</td>
+                <td><a href={`/tools/${slug}/`} class="epc-td-link">詳細 →</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="epc-table-foot">◎／◯／△／×は今回の作例条件での主観評価の目安です（◎：印象的に扱いやすかった、◯：問題なく扱えた、△：条件付きまたは要確認、×：非対応）。商用利用条件は<a href="/conditions/commercial-use/">商用利用条件の一覧</a>と各公式規約をご確認ください。</p>
+    </section>
+
+    <!-- 得意・苦手の傾向 -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">今回の作例で感じた傾向</h2>
+      <div class="epc-way-grid">
+        <div class="epc-way-card">
+          <p class="epc-way-h">写真風の自然さ</p>
+          <p class="epc-way-body">今回のプロンプト条件では、<a href="/tools/midjourney/">Midjourney</a>と<a href="/tools/adobe-firefly/">Adobe Firefly</a>が光の表現・質感ともに扱いやすい印象でした。<a href="/tools/gemini-image-generation/">Gemini画像生成</a>や<a href="/tools/dalle/">DALL·E</a>も破綻が少なく安定していました。ただし写真風の得手不得手は被写体によって変わります。</p>
+        </div>
+        <div class="epc-way-card">
+          <p class="epc-way-h">デザイン・SNS素材向き</p>
+          <p class="epc-way-body"><a href="/tools/canva-ai-image-generator/">Canva</a>・<a href="/tools/microsoft-designer/">Microsoft Designer</a>・<a href="/tools/fotor-ai/">Fotor AI</a>は、生成後にそのままテンプレート編集・文字入れに移れる点が実用的でした。生成品質単体よりも「その後の編集フロー」で差が出る印象です。</p>
+        </div>
+        <div class="epc-way-card">
+          <p class="epc-way-h">苦手だった表現・注意点</p>
+          <p class="epc-way-body">今回の共通プロンプトは「文字なし」を指定していますが、ツールによっては画面内に文字風のノイズが出ることがありました。また日本語の文字入れは今回の検証範囲外です。細部（モニター内の絵柄など）の描写はどのツールも生成ごとにばらつきがありました。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 目的別の選び方 -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">目的別の選び方</h2>
+      <ul class="epc-check-list">
+        <li><b>写真風・ビジュアル重視：</b><a href="/tools/midjourney/">Midjourney</a>（有料のみ）、<a href="/tools/adobe-firefly/">Adobe Firefly</a>が候補になりやすい印象でした。</li>
+        <li><b>SNS・ブログ用の実用画像：</b><a href="/tools/canva-ai-image-generator/">Canva AI画像生成</a>・<a href="/tools/microsoft-designer/">Microsoft Designer</a>・<a href="/tools/fotor-ai/">Fotor AI</a>など編集機能一体型が便利です。詳しくは<a href="/use-cases/sns-post-image-samples/">SNS投稿画像の作例比較</a>へ。</li>
+        <li><b>まず無料で試したい：</b>無料枠のあるツールの作例を<a href="/comparisons/free-ai-image-generation-samples/">無料AI画像生成ツールの作例比較</a>にまとめています。<a href="/conditions/free/">無料で試せるツール一覧</a>も参照してください。</li>
+        <li><b>イラスト・アニメ系：</b><a href="/tools/seaart-ai/">SeaArt AI</a>・<a href="/tools/tensor-art/">Tensor.Art</a>・<a href="/tools/leonardo-ai/">Leonardo AI</a>はモデル選択の幅が広く、画風の調整がしやすい傾向です。</li>
+        <li><b>自由度・カスタマイズ重視：</b><a href="/tools/stable-diffusion/">Stable Diffusion</a>（ローカル実行）や<a href="/tools/dreamstudio/">Brand Studio</a>が候補です。</li>
+        <li><b>日本語UIで使いたい：</b><a href="/conditions/japanese/">日本語対応AIツール一覧</a>で条件別に確認できます。</li>
+        <li><b>透かしが気になる：</b><a href="/conditions/no-watermark/">透かしなしで使えるツール一覧</a>を確認してください。</li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <GuideFAQ items={faqs} title="よくある質問" emitSchema={false} />
+
+    <!-- まとめ -->
+    <section class="epc-sec">
+      <h2 class="epc-h2">まとめ</h2>
+      <p class="epc-body-text">
+        同一プロンプトで15ツールを試した結果、生成品質そのものの差以上に、<strong>色調の傾向・編集フローとの連携・無料枠や透かしの条件</strong>がツール選びの分かれ目になる印象でした。まずは無料枠のあるツールで自分の用途に近いプロンプトを試し、商用利用の前には必ず<a href="/conditions/commercial-use/">商用利用条件</a>と各公式規約を確認してください。生成結果はモデルや時期により変わるため、本記事の作例はあくまで参考例としてご覧ください。
+      </p>
+    </section>
+
+    <!-- 関連ページ -->
+    <section class="epc-related">
+      <h2 class="epc-related-h">関連ページ</h2>
+      <div class="epc-related-links">
+        <a href="/tools/" class="epc-related-link">AIツール一覧</a>
+        <a href="/categories/image-generation/" class="epc-related-link">AI画像生成カテゴリ</a>
+        <a href="/comparisons/free-ai-image-generation-samples/" class="epc-related-link">無料AI画像生成ツールの作例比較</a>
+        <a href="/use-cases/sns-post-image-samples/" class="epc-related-link">SNS投稿画像の作例比較</a>
+        <a href="/conditions/free/" class="epc-related-link">無料で試せるツール一覧</a>
+        <a href="/conditions/commercial-use/" class="epc-related-link">商用利用条件の一覧</a>
+        <a href="/conditions/japanese/" class="epc-related-link">日本語対応AIツール</a>
+        <a href="/conditions/no-watermark/" class="epc-related-link">透かしなしツール</a>
+        <a href="/comparisons/" class="epc-related-link">比較記事一覧</a>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .epc-wrap {
+    --brand: #4B3FE4;
+    --brand-ink: #2E25A6;
+    --brand-tint: #ECEBFB;
+    --line: #E5E7EB;
+    --surface: #FFFFFF;
+    --surface-2: #F9FAFB;
+    --ink-body: #374151;
+    --ink-soft: #6B7280;
+    --faint: #9CA3AF;
+    --amber-bg: #FFFBEB;
+    --amber-border: #FDE68A;
+    --amber-text: #92400E;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    color: var(--ink-body);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .epc-breadcrumb { display: flex; flex-wrap: wrap; gap: 4px 6px; font-size: 12.5px; color: var(--ink-soft); margin-bottom: 32px; }
+  .epc-breadcrumb a { color: var(--ink-soft); text-decoration: none; }
+  .epc-breadcrumb a:hover { color: var(--brand); text-decoration: underline; }
+
+  .epc-hero { margin-bottom: 36px; }
+  .epc-eyebrow { display: inline-block; background: var(--brand-tint); color: var(--brand-ink); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; border-radius: 20px; padding: 3px 12px; margin-bottom: 14px; }
+  .epc-h1 { font-size: clamp(22px, 3.2vw, 32px); font-weight: 800; line-height: 1.3; text-wrap: balance; color: #111827; margin-bottom: 14px; }
+  .epc-lead { font-size: 14.5px; color: var(--ink-soft); line-height: 1.8; max-width: 680px; }
+  .epc-lead a { color: var(--brand-ink); font-weight: 600; }
+
+  .epc-notice { background: var(--amber-bg); border: 1px solid var(--amber-border); border-radius: 14px; padding: 18px 22px; margin-bottom: 48px; color: var(--amber-text); font-size: 13px; line-height: 1.7; }
+  .epc-notice-h { font-weight: 700; margin-bottom: 8px; }
+  .epc-notice ul { padding-left: 18px; }
+  .epc-notice li + li { margin-top: 5px; }
+  .epc-notice a { color: var(--amber-text); text-decoration: underline; }
+
+  .epc-sec { margin-bottom: 56px; }
+  .epc-h2 { font-size: clamp(17px, 2.2vw, 22px); font-weight: 800; color: #111827; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--brand-tint); }
+
+  .epc-table-note { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; }
+  .epc-scroll-hint { display: none; font-size: 11.5px; color: var(--ink-soft); text-align: center; margin: 0 0 6px; }
+  @media (max-width: 680px) { .epc-scroll-hint { display: block; } }
+  .epc-table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+  .epc-table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 12.5px; }
+  .epc-table thead tr { background: var(--brand-tint); }
+  .epc-table th { text-align: left; padding: 12px 14px; font-size: 11.5px; font-weight: 700; color: var(--brand-ink); border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .epc-cond-th { background: var(--brand-tint); vertical-align: top; }
+  .epc-tr-even { background: var(--surface); }
+  .epc-tr-odd { background: var(--surface-2); }
+  .epc-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink-body); vertical-align: top; line-height: 1.55; }
+  .epc-td-name { font-weight: 600; color: #111827; white-space: nowrap; }
+  .epc-td-note { font-size: 11.5px; color: var(--ink-soft); }
+  .epc-td-link { color: var(--brand-ink); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .epc-td-link:hover { text-decoration: underline; }
+  .epc-table-foot { margin-top: 8px; font-size: 11.5px; color: var(--faint); }
+  .epc-table-foot a { color: var(--brand-ink); }
+
+  .epc-way-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .epc-way-card { background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+  .epc-way-h { font-size: 13.5px; font-weight: 700; color: #111827; margin-bottom: 10px; }
+  .epc-way-body { font-size: 12.5px; color: var(--ink-soft); line-height: 1.75; }
+  .epc-way-body a { color: var(--brand-ink); }
+
+  .epc-check-list { padding-left: 18px; font-size: 13.5px; color: var(--ink-body); line-height: 1.8; }
+  .epc-check-list li + li { margin-top: 10px; }
+  .epc-check-list a { color: var(--brand-ink); }
+
+  .epc-body-text { font-size: 14px; color: var(--ink-body); line-height: 1.85; }
+  .epc-body-text a { color: var(--brand-ink); }
+
+  .epc-related { margin-top: 32px; }
+  .epc-related-h { font-size: 14px; font-weight: 700; color: var(--ink-soft); margin-bottom: 12px; }
+  .epc-related-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .epc-related-link { border: 1px solid var(--line); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--ink-body); text-decoration: none; transition: background .15s, border-color .15s; }
+  .epc-related-link:hover { background: var(--brand-tint); border-color: #C7C2F5; color: var(--brand-ink); }
+
+  @media (max-width: 680px) {
+    .epc-way-grid { grid-template-columns: 1fr; }
+  }
+</style>

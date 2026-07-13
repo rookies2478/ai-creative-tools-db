@@ -1,0 +1,248 @@
+---
+import type { GeneratedImage } from '../data/generatedImages';
+
+interface GalleryItem {
+  img: GeneratedImage;
+  name: string;
+  slug: string;
+  note?: string;
+}
+
+interface Props {
+  items: GalleryItem[];
+  heading?: string;
+}
+
+const { items, heading = 'ツール別の作例サンプル' } = Astro.props;
+
+// Aスキーム（tool-output / image-tool-benchmark-v1 / comparisonEligible）のみ受け付ける
+const eligible = items.filter(
+  ({ img }) =>
+    img.sampleType === 'tool-output' &&
+    img.comparisonEligible === true &&
+    img.promptVersion === 'image-tool-benchmark-v1'
+);
+
+const benchmarkPrompt = eligible[0]?.img.prompt ?? '';
+const benchmarkNegative = eligible[0]?.img.negativePrompt ?? '';
+---
+
+<section class="spig-wrap">
+  <div class="spig-legend">
+    <p class="spig-legend-title">このセクションの画像について</p>
+    <p class="spig-legend-body">
+      掲載画像はすべて、管理者が<strong>各ツール本体</strong>で作成したAスキームの実例サンプルです（sampleType: tool-output / image-tool-benchmark-v1 / comparisonEligible: true）。同一の共通プロンプトで作成していますが、1枚の結果だけでツール性能を断定するものではありません。生成結果はプロンプト・設定・モデル・タイミング・プランによって変わる場合があります。
+    </p>
+    <details class="spig-prompt-details">
+      <summary class="spig-prompt-summary">共通プロンプト（image-tool-benchmark-v1）を表示</summary>
+      <div class="spig-prompt-body">
+        <p class="spig-prompt-label">使用プロンプト</p>
+        <p class="spig-prompt-text">{benchmarkPrompt}</p>
+        {benchmarkNegative && (
+          <>
+            <p class="spig-prompt-label">ネガティブプロンプト</p>
+            <p class="spig-prompt-text">{benchmarkNegative}</p>
+          </>
+        )}
+        <p class="spig-prompt-disc">※ プロンプトは参考情報です。同一プロンプトでも生成結果は毎回異なる場合があります。ネガティブプロンプト非対応のツールでは本文プロンプトのみで生成しています。</p>
+      </div>
+    </details>
+  </div>
+
+  <h2 class="spig-heading">{heading}</h2>
+
+  <div class="spig-grid">
+    {eligible.map(({ img, name, slug, note }) => (
+      <figure class="spig-card">
+        <div class="spig-card-header">
+          <a href={`/tools/${slug}/`} class="spig-tool-name">{name} →</a>
+          <span class="spig-badge">Aスキーム実例</span>
+        </div>
+        <img
+          src={img.file}
+          alt={img.alt}
+          width="640"
+          height="360"
+          loading="lazy"
+          decoding="async"
+          class="spig-img"
+        />
+        <figcaption class="spig-caption">
+          {note && <p class="spig-note-text">{note}</p>}
+          <dl class="spig-meta">
+            <div><dt>生成日：</dt><dd>{img.generatedAt}</dd></div>
+            <div><dt>確認日：</dt><dd>{img.reviewedAt}</dd></div>
+            <div><dt>モデル：</dt><dd>{img.model}</dd></div>
+          </dl>
+          <p class="spig-notice">
+            ※ 管理者が{name}で作成した参考作例サンプルです。公式出力・代表結果を保証するものではありません。
+          </p>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <p class="spig-footer-note">
+    ※ 1枚の画像だけでツール性能を断定するものではありません。商用利用・著作権条件はプランや規約によって異なります。商用利用前には各ツールの最新の公式規約・料金ページをご確認ください。本記事は法的助言ではありません。
+  </p>
+</section>
+
+<style>
+  .spig-wrap {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--surface-2, #FAFAF6);
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: 14px;
+  }
+  .spig-legend {
+    margin-bottom: 1.25rem;
+    padding: 1rem 1.25rem;
+    background: #fff;
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: 10px;
+  }
+  .spig-legend-title {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--ink, #16181D);
+    margin: 0 0 0.5rem;
+  }
+  .spig-legend-body {
+    font-size: 0.8125rem;
+    color: var(--ink-soft, #3A3E47);
+    line-height: 1.7;
+    margin: 0 0 0.75rem;
+  }
+  .spig-legend-body strong { color: var(--ink, #16181D); }
+
+  .spig-prompt-details {
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .spig-prompt-summary {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--brand-ink, #2E25A6);
+    padding: 0.45rem 0.65rem;
+    cursor: pointer;
+    background: var(--surface-2, #FAFAF6);
+    list-style: none;
+  }
+  .spig-prompt-summary::-webkit-details-marker { display: none; }
+  .spig-prompt-summary::before { content: '▶ '; font-size: 0.65rem; }
+  details[open] .spig-prompt-summary::before { content: '▼ '; }
+  .spig-prompt-body { padding: 0.65rem 0.8rem; background: #fff; }
+  .spig-prompt-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--ink-soft, #475569);
+    margin: 0 0 2px;
+  }
+  .spig-prompt-text {
+    font-size: 0.6875rem;
+    color: var(--ink-soft, #475569);
+    line-height: 1.6;
+    font-family: monospace;
+    word-break: break-word;
+    margin: 0 0 0.5rem;
+    background: var(--surface-2, #f8fafc);
+    padding: 4px 6px;
+    border-radius: 4px;
+  }
+  .spig-prompt-disc {
+    font-size: 0.625rem;
+    color: var(--muted, #94a3b8);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .spig-heading {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--ink, #16181D);
+    margin: 0 0 0.75rem;
+  }
+  .spig-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 640px) {
+    .spig-grid { grid-template-columns: 1fr; }
+  }
+  .spig-card {
+    background: #fff;
+    border: 1px solid var(--line, #E3E2D9);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0;
+  }
+  .spig-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0.5rem 0.75rem;
+    background: var(--surface-2, #FAFAF6);
+    border-bottom: 1px solid var(--line, #E3E2D9);
+  }
+  .spig-tool-name {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--brand-ink, #2E25A6);
+    margin: 0;
+    text-decoration: none;
+  }
+  .spig-tool-name:hover { text-decoration: underline; }
+  .spig-badge {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+    flex: none;
+    background: #ECEBFB;
+    color: #2E25A6;
+    border: 1px solid rgba(46,37,166,.25);
+  }
+  .spig-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+  }
+  .spig-caption { padding: 0.75rem; }
+  .spig-note-text {
+    font-size: 0.75rem;
+    color: var(--ink-soft, #3A3E47);
+    line-height: 1.7;
+    margin: 0 0 0.5rem;
+  }
+  .spig-meta {
+    font-size: 0.6875rem;
+    color: var(--muted, #64748b);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 12px;
+    margin: 0 0 0.5rem;
+  }
+  .spig-meta div { display: flex; gap: 0.25rem; }
+  .spig-meta dt { font-weight: 600; color: var(--ink-soft, #475569); }
+  .spig-notice {
+    font-size: 0.6875rem;
+    color: var(--muted, #94a3b8);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .spig-footer-note {
+    font-size: 0.75rem;
+    color: var(--muted, #94a3b8);
+    line-height: 1.7;
+    margin: 1rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line, #E3E2D9);
+  }
+</style>

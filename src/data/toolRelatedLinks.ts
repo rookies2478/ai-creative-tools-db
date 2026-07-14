@@ -36,6 +36,7 @@ export interface ToolRelatedLinks {
 export const toolRelatedLinks: Record<string, ToolRelatedLinks> = {
   'kling-ai': {
     comparisons: [
+      { href: '/comparisons/ai-video-generation-sample-comparison/', title: 'AI動画生成ツールの作例比較', desc: '実際の生成動画を比較したい方向け（Kling AI・Pika・Runway・Luma AI）' },
       { href: '/comparisons/runway-vs-kling-ai/', title: 'Runway と Kling AI を比較', desc: '映像制作向け多機能かコスト重視かで選び分け' },
     ],
     guides: [
@@ -56,6 +57,7 @@ export const toolRelatedLinks: Record<string, ToolRelatedLinks> = {
 
   runway: {
     comparisons: [
+      { href: '/comparisons/ai-video-generation-sample-comparison/', title: 'AI動画生成ツールの作例比較', desc: '実際の生成動画を比較したい方向け（Kling AI・Pika・Runway・Luma AI）' },
       { href: '/comparisons/runway-vs-kling-ai/', title: 'Runway と Kling AI を比較', desc: '映像制作向け多機能かコスト重視かで選び分け' },
       { href: '/comparisons/runway-vs-pika/', title: 'Runway と Pika を比較', desc: 'プロ向け多機能か手軽な操作性かで選び分け' },
     ],
@@ -74,6 +76,7 @@ export const toolRelatedLinks: Record<string, ToolRelatedLinks> = {
 
   pika: {
     comparisons: [
+      { href: '/comparisons/ai-video-generation-sample-comparison/', title: 'AI動画生成ツールの作例比較', desc: '実際の生成動画を比較したい方向け（Kling AI・Pika・Runway・Luma AI）' },
       { href: '/comparisons/runway-vs-pika/', title: 'Runway と Pika を比較', desc: 'プロ向け多機能か手軽な操作性かで選び分け' },
     ],
     guides: [
@@ -91,6 +94,7 @@ export const toolRelatedLinks: Record<string, ToolRelatedLinks> = {
   'luma-ai': {
     comparisons: [],
     guides: [
+      { href: '/comparisons/ai-video-generation-sample-comparison/', title: 'AI動画生成ツールの作例比較', desc: '実際の生成動画を比較したい方向け（Kling AI・Pika・Runway・Luma AI）' },
       { href: '/guides/video-generation-credit-cost-comparison/', title: 'AI動画生成の料金・クレジット比較ガイド', desc: '主要ツールのクレジット消費・料金体系を比較' },
     ],
     conditionTags: [
@@ -105,6 +109,7 @@ export const toolRelatedLinks: Record<string, ToolRelatedLinks> = {
 
   'adobe-firefly': {
     comparisons: [
+      { href: '/comparisons/ai-image-generation-sample-comparison/', title: 'AI画像生成ツールの作例比較', desc: '実際の生成結果を比較したい方向け（15ツールの作例）' },
       { href: '/comparisons/midjourney-vs-adobe-firefly/', title: 'Midjourney と Adobe Firefly を比較', desc: 'アート調かデザイン制作か、用途で選び分け' },
       { href: '/comparisons/adobe-firefly-vs-microsoft-designer/', title: 'Adobe Firefly と Microsoft Designer を比較', desc: '無料枠・商用利用・連携の違い' },
       { href: '/comparisons/canva-ai-vs-adobe-firefly/', title: 'Canva AI と Adobe Firefly を比較', desc: 'テンプレート制作と画像生成の違い' },
@@ -127,6 +132,7 @@ export const toolRelatedLinks: Record<string, ToolRelatedLinks> = {
   midjourney: {
     // 比較記事は4件あるが表示上限（最大3件）に合わせて優先度の高い3件に絞る
     comparisons: [
+      { href: '/comparisons/ai-image-generation-sample-comparison/', title: 'AI画像生成ツールの作例比較', desc: '実際の生成結果を比較したい方向け（15ツールの作例）' },
       { href: '/comparisons/midjourney-vs-adobe-firefly/', title: 'Midjourney と Adobe Firefly を比較', desc: 'アート調かデザイン制作か、用途で選び分け' },
       { href: '/comparisons/midjourney-vs-leonardo-ai/', title: 'Midjourney と Leonardo AI を比較', desc: 'アート性重視か使いやすさ重視かで選び分け' },
       { href: '/comparisons/dalle-vs-midjourney/', title: 'DALL·E と Midjourney を比較', desc: '自然言語での指示のしやすさと表現力の違い' },
@@ -148,6 +154,7 @@ export const toolRelatedLinks: Record<string, ToolRelatedLinks> = {
 
   'leonardo-ai': {
     comparisons: [
+      { href: '/comparisons/ai-image-generation-sample-comparison/', title: 'AI画像生成ツールの作例比較', desc: '実際の生成結果を比較したい方向け（15ツールの作例）' },
       { href: '/comparisons/midjourney-vs-leonardo-ai/', title: 'Midjourney と Leonardo AI を比較', desc: 'アート性重視か使いやすさ重視かで選び分け' },
     ],
     guides: [
@@ -165,6 +172,7 @@ export const toolRelatedLinks: Record<string, ToolRelatedLinks> = {
 
   'stable-diffusion': {
     comparisons: [
+      { href: '/comparisons/ai-image-generation-sample-comparison/', title: 'AI画像生成ツールの作例比較', desc: '実際の生成結果を比較したい方向け（15ツールの作例）' },
       { href: '/comparisons/stable-diffusion-vs-midjourney/', title: 'Stable Diffusion と Midjourney を比較', desc: '自由度・カスタマイズ性か手軽さかで選び分け' },
     ],
     guides: [

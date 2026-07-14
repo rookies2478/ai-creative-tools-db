@@ -55,6 +55,8 @@ const STATIC_PATHS = [
   '/guides/ai-image-commercial-use-checklist/',
   '/guides/video-generation-credit-cost-comparison/',
   '/guides/commercial-use-cost-comparison/',
+  '/guides/ai-tool-pricing-currency-japan/',
+  '/guides/ai-generation-credits-guide/',
   '/prompts/',
   '/templates/',
   '/about/',

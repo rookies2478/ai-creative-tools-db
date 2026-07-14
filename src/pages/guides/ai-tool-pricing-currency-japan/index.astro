@@ -1,0 +1,374 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideWarningBox from '../../../components/GuideWarningBox.astro';
+import GuideSummaryBox from '../../../components/GuideSummaryBox.astro';
+import GuideCheckList from '../../../components/GuideCheckList.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+import GuideComparisonTable from '../../../components/GuideComparisonTable.astro';
+import GuideFreshnessBox from '../../../components/GuideFreshnessBox.astro';
+
+const entry = await getEntry('guides', 'ai-tool-pricing-currency-japan');
+if (!entry) throw new Error('guide not found: ai-tool-pricing-currency-japan');
+const { data } = entry;
+
+// ── 比較表1：課金パターンの分類 ─────────────────────────────
+const patternHeaders = ['パターン', '料金表の見え方', '実際に円で支払う金額', '注意点'];
+const patternRows = [
+  [
+    { text: '日本円で直接請求' },
+    { text: '¥1,980/月 のように円建てで表示' },
+    { text: '表示金額のとおり（税の扱いは別途確認）' },
+    { text: '日本向けの決済経路が用意されているツールに限られる' },
+  ],
+  [
+    { text: '外貨建て・カード会社が円換算' },
+    { text: '$12/月 のようにドル等で表示' },
+    { text: '為替レート・カード会社の海外事務手数料により変動' },
+    { text: '表示額と実際の引き落とし額が一致しない場合がある' },
+  ],
+  [
+    { text: 'App Store／Google Playのみ日本円' },
+    { text: 'アプリ内課金画面でのみ円表示' },
+    { text: 'ストアの価格設定に従う（Web版と異なる場合あり）' },
+    { text: 'Web版とアプリ版で契約単位・価格が別になっている場合がある' },
+  ],
+  [
+    { text: '購入経路により異なる' },
+    { text: 'Web／アプリ／法人プランで表示が変わる' },
+    { text: '購入経路ごとに確認が必要' },
+    { text: 'どの経路で契約したかで解約方法も変わる場合がある' },
+  ],
+];
+
+// ── 比較表2：確認すべき項目一覧 ─────────────────────────────
+const itemHeaders = ['確認項目', '見るポイント', 'なぜ重要か'];
+const itemRows = [
+  [
+    { text: '公式料金の通貨' },
+    { text: 'JPY／USD／EURのどれで表示されているか' },
+    { text: 'ドル・ユーロ建ての場合、実際の円支払額は為替で変わる' },
+  ],
+  [
+    { text: '日本円決済の方式' },
+    { text: '日本円で直接請求／カード会社換算／アプリ内課金のみ／経路により異なる' },
+    { text: '「日本語ページがある」ことと「日本円で直接請求される」ことは別の話' },
+  ],
+  [
+    { text: '税の表示' },
+    { text: '税込表示／税別表示／決済時に税計算／地域により異なる' },
+    { text: '海外サービスは消費税の扱いが決済画面まで分からないことがある' },
+  ],
+  [
+    { text: '購入経路' },
+    { text: 'Web／App Store／Google Play／API／法人窓口 など' },
+    { text: '経路によって価格・支払い方法・解約手順が異なる場合がある' },
+  ],
+  [
+    { text: '運営会社・所在国' },
+    { text: '日本法人か海外法人か' },
+    { text: '海外事務手数料の有無や、問い合わせ窓口の言語に影響する' },
+  ],
+  [
+    { text: '料金情報の確認日' },
+    { text: '公式ページをいつ確認したか' },
+    { text: '料金・為替・税制は変更されることがあるため鮮度の把握が必要' },
+  ],
+];
+
+// ── チェックリスト ─────────────────────────────────────────
+const checklistItems = [
+  '公式料金ページの表示通貨（JPY／USD／EUR）を確認した',
+  '日本円決済が「直接請求」か「カード会社の円換算」かを確認した',
+  'Web版とApp Store／Google Play版で価格が異なっていないか確認した',
+  '税込表示か税別表示か、決済画面で最終確認した',
+  'カード会社の海外事務手数料が別途かかる可能性を確認した',
+  '月額制・年額制・クレジット制・従量課金のどれに該当するか確認した',
+  '無料プランの有無と、商用利用・透かし条件は別途確認する必要があることを理解した',
+  '実際の購入は必ず公式サイトの最新価格表示で行うことにした',
+];
+
+// ── FAQ ────────────────────────────────────────────────────
+const faqItems = [
+  {
+    q: 'AIツールのドル表示は日本円でいくらになりますか？',
+    a: '為替レート、利用するカードの海外事務手数料、決済のタイミングによって変わるため、本記事では固定額を示しません。実際の円支払額は、契約前にご自身のカード明細シミュレーションや公式の決済画面で確認することをおすすめします。',
+  },
+  {
+    q: '日本語ページがあるツールは日本円で支払えますか？',
+    a: '日本語UIや日本語ページの有無と、日本円で直接請求されるかどうかは別の問題です。日本語対応していても、決済は外貨建てでカード会社が円換算する場合があります。各ツールの料金ページで決済方法を個別に確認してください。',
+  },
+  {
+    q: 'Web版とアプリ版で料金が違うことはありますか？',
+    a: 'あります。App StoreやGoogle Playの手数料が価格に反映され、Web版より高く設定されている場合や、逆にWeb版のみのプランが存在する場合があります。契約前にWeb版・アプリ版それぞれの価格表示を見比べることをおすすめします。',
+  },
+  {
+    q: '税込か税別かはどこで確認できますか？',
+    a: '公式の料金ページまたは決済画面の表示で確認します。海外サービスの場合、料金ページ上では税の扱いが明記されておらず、決済時に税額が加算される「決済時税計算」方式のこともあります。最終的な支払額は決済画面で確認してください。',
+  },
+  {
+    q: '無料プランがあれば商用利用できますか？',
+    a: '料金表の見方と商用利用の可否は別の確認事項です。無料プランで生成した画像・動画が商用利用できるかどうかは、各ツールの利用規約を個別に確認する必要があります。詳しくは商用利用条件のページをご参照ください。',
+  },
+  {
+    q: 'クレジット制と月額制はどちらが分かりやすいですか？',
+    a: '月額制は毎月の支払額が固定されているため見通しやすい一方、クレジット制は生成量によって実質コストが変わります。クレジット制の仕組みについては、AI生成ツールのクレジット制ガイドで詳しく解説しています。',
+  },
+];
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "ガイド一覧", "item": "https://aicreative-db.com/guides/" },
+    { "@type": "ListItem", "position": 3, "name": "AI画像・動画生成ツールの料金表の見方" }
+  ]
+});
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  canonicalPath="/guides/ai-tool-pricing-currency-japan/"
+  ogType="article"
+  jsonLd={breadcrumb}
+>
+  <div class="mx-auto max-w-3xl px-6 py-12">
+
+    <div class="gh-hero">
+      <nav class="gh-bc" aria-label="パンくずリスト">
+        <a href="/">トップ</a><span aria-hidden="true"> / </span><a href="/guides/">ガイド一覧</a><span aria-hidden="true"> / </span><span aria-current="page">AI画像・動画生成ツールの料金表の見方</span>
+      </nav>
+      <div class="gh-meta">
+        <span class="gh-pill">ガイド</span>
+        <span class="gh-date">最終確認: {data.lastReviewed}</span>
+      </div>
+      <h1 class="gh-h1">{data.title}</h1>
+      <p class="gh-lead">{data.description}</p>
+    </div>
+
+    <style>
+      .gh-hero { padding: 8px 0 32px; border-bottom: 1px solid #E3E2D9; margin-bottom: 32px; }
+      .gh-bc { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 13px; color: #6A7180; margin-bottom: 18px; }
+      .gh-bc a { color: #6A7180; text-decoration: none; }
+      .gh-bc a:hover { color: #4B3FE4; text-decoration: underline; }
+      .gh-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+      .gh-pill { font-size: 12px; font-weight: 700; color: #2E25A6; background: #ECEBFB; padding: 4px 13px; border-radius: 999px; font-family: "Noto Sans JP", system-ui, sans-serif; }
+      .gh-date { font-size: 12px; color: #6A7180; font-family: "Space Mono", monospace; }
+      .gh-h1 { font-size: clamp(22px, 3vw, 36px); font-weight: 900; line-height: 1.22; letter-spacing: -0.01em; color: #16181D; text-wrap: balance; margin: 0 0 14px; font-family: "Zen Kaku Gothic New", "Noto Sans JP", system-ui, sans-serif; }
+      .gh-lead { font-size: 15px; color: #3A3E47; line-height: 1.75; max-width: 620px; margin: 0; }
+    </style>
+
+    <!-- この記事で分かること -->
+    <GuideSummaryBox title="この記事で分かること">
+      <p>
+        AI画像・動画生成ツールの料金表は、<strong class="font-semibold text-slate-900">表示通貨、日本円決済の方式、Web版とアプリ版の価格差、税の表示方法</strong>がツールごとに異なり、分かりにくいことがあります。
+        本記事では、料金表を見るときに確認すべきポイントを整理します。無料枠の比較や商用利用の可否そのものは扱いません。それぞれ関連ページをご参照ください。
+      </p>
+    </GuideSummaryBox>
+
+    <GuideWarningBox variant="warning" title="免責事項・重要事項">
+      本記事は情報提供を目的としており、法的・税務上の助言ではありません。為替レート・カード会社の手数料・税の扱いはご利用のカードや契約時期によって変わります。実際の支払額・税込／税別の別は、必ず各ツールの公式購入画面で最終確認してください。
+    </GuideWarningBox>
+
+    <!-- ── 料金表が分かりにくい理由 ── -->
+    <section class="my-10" aria-labelledby="why-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="why-heading">
+        AI画像・動画生成ツールの料金表が分かりにくい理由
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          海外発のAI画像・動画生成ツールは、米ドルなど外貨建てで料金を表示していることが多く、日本から利用する場合に「実際にいくら支払うのか」が分かりにくくなりがちです。
+          さらに、日本語ページが用意されていても、決済自体は外貨建てのままだったり、Web版とアプリ版で価格体系が異なっていたりすることがあります。
+        </p>
+        <p>
+          月額制・年額制のほかにクレジット制・従量課金を採用するツールもあり、料金表の見た目だけでは実質的なコストが比較しにくい構造になっています。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── 比較表1：課金パターン分類 ── -->
+    <section class="my-10" aria-labelledby="pattern-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="pattern-heading">
+        日本円決済のパターン分類
+      </h2>
+      <p class="mb-4 text-sm text-slate-500">
+        ツールごとに日本円決済の方式は異なります。以下は代表的なパターンの分類です。特定ツールの実際の分類は各ツールページの「日本から利用する場合の課金情報」でご確認ください。
+      </p>
+      <GuideComparisonTable
+        caption="日本円決済のパターン分類"
+        headers={patternHeaders}
+        rows={patternRows}
+        statusColIndex={-1}
+      />
+    </section>
+
+    <!-- ── 日本円表示とドル表示の違い ── -->
+    <section class="my-10" aria-labelledby="jpy-usd-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="jpy-usd-heading">
+        日本円表示とドル表示の違い
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          料金表がJPY（日本円）で表示されている場合でも、それが「日本円で直接請求される」ことを意味するとは限りません。表示上は円換算されていても、実際の決済は外貨建てで行われ、為替レートに応じた金額がカード明細に反映されるケースがあります。
+        </p>
+        <p>
+          一方、USD（ドル）建てで表示されているツールは、実際の円支払額が契約時の為替レートとカード会社の換算レート・海外事務手数料によって変動します。同じ「$12/月」でも、支払うタイミングによって円換算額は変わり得ます。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── 日本円で直接請求されるケース ── -->
+    <section class="my-10" aria-labelledby="jpy-direct-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="jpy-direct-heading">
+        日本円で直接請求されるケース
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          一部のツールは日本円建ての請求に対応しており、この場合は為替変動の影響を受けにくくなります。ただし、日本円請求に対応しているかどうかはツール・購入経路によって異なるため、契約前に公式料金ページで確認する必要があります。
+        </p>
+        <p>
+          日本円で直接請求される場合でも、税込表示か税別表示かは別途確認が必要です。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── ドル表示・外貨請求のケース ── -->
+    <section class="my-10" aria-labelledby="usd-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="usd-heading">
+        ドル表示・外貨請求のケース
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          料金が米ドルなど外貨で表示・請求される場合、実際に引き落とされる円額は、決済時の為替レートとカード発行会社が定める為替手数料（海外事務手数料）によって決まります。この手数料はカード会社ごとに料率が異なります。
+        </p>
+        <p>
+          そのため、本記事や各ツールページで「およそ○ドル」と案内されていても、それを固定の円換算額として断定することはできません。最終的な支払額はご自身のカード明細でご確認ください。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Web版とアプリ版の価格差 ── -->
+    <section class="my-10" aria-labelledby="app-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="app-heading">
+        Web版とApp Store／Google Playで価格が違うケース
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          App StoreやGoogle Play経由でアプリ内課金を行う場合、ストア側の手数料が価格に反映され、Web版で直接契約する場合と価格が異なることがあります。逆に、キャンペーン等でアプリ限定の価格が設定される場合もあります。
+        </p>
+        <p>
+          同じツールでも契約経路によって価格・支払い方法・解約手順が異なる場合があるため、契約前にWeb版とアプリ版それぞれの料金ページを見比べることをおすすめします。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── 税込・税別・決済時税計算の見方 ── -->
+    <section class="my-10" aria-labelledby="tax-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="tax-heading">
+        税込・税別・決済時税計算の見方
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          料金表示には、税込表示・税別表示・決済時に税額が計算される方式・地域によって異なる方式があります。海外サービスの場合、公式ページ上では税の扱いが明記されていないことも少なくありません。
+        </p>
+        <p>
+          税込か税別かを根拠なく断定することはできません。最終的な税の扱いは、決済画面に表示される金額で確認してください。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── 比較表2：確認項目一覧 ── -->
+    <section class="my-10" aria-labelledby="items-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="items-heading">
+        料金表を見るときに確認すべき項目
+      </h2>
+      <GuideComparisonTable
+        caption="料金表確認項目一覧"
+        headers={itemHeaders}
+        rows={itemRows}
+        statusColIndex={-1}
+      />
+    </section>
+
+    <!-- ── 月額制・年額制・クレジット制・従量課金の違い ── -->
+    <section class="my-10" aria-labelledby="model-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="model-heading">
+        月額制・年額制・クレジット制・従量課金の違い
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          AI画像・動画生成ツールの料金体系は、毎月固定額を支払う月額制、年払いでまとめて契約する年額制、生成量に応じてクレジットを消費するクレジット制、利用量に応じて課金される従量課金など、いくつかのパターンに分かれます。
+        </p>
+        <p>
+          クレジット制を採用しているツールが多く、月額料金だけでは実質コストが比較しにくい場合があります。クレジット制の詳しい仕組みは、<a href="/guides/ai-generation-credits-guide/" class="text-blue-600 hover:underline">AI生成ツールのクレジット制ガイド</a>で解説しています。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── チェックリスト ── -->
+    <section class="my-10">
+      <GuideCheckList
+        title="日本から課金する前のチェックリスト"
+        items={checklistItems}
+      />
+    </section>
+
+    <!-- ── よくある誤解 ── -->
+    <section class="my-10" aria-labelledby="misunderstanding-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="misunderstanding-heading">
+        よくある誤解
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          「日本語ページがある＝日本円で直接請求される」「JPY表示＝日本円で直接請求される」とは限りません。無料プランがあるからといって商用利用や透かしなし出力が保証されるわけでもありません。これらは料金表とは別に、各ツールの利用規約・条件ページで確認する必要があります。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="my-10">
+      <GuideFAQ items={faqItems} title="よくある質問（FAQ）" />
+    </section>
+
+    <!-- ── 注意事項 ── -->
+    <section class="my-10">
+      <GuideWarningBox variant="info">
+        <ul class="space-y-1.5 list-disc list-inside">
+          <li>料金・為替・税の扱いはツール側・カード会社側の都合で変更される場合があります</li>
+          <li>このガイドの情報は2026年7月14日時点のものです。最終的な支払額は必ず公式購入画面でご確認ください</li>
+          <li>本記事は法的・税務上の助言ではありません</li>
+        </ul>
+      </GuideWarningBox>
+    </section>
+
+    <GuideFreshnessBox lastReviewed={data.lastReviewed} nextReviewDue={data.nextReviewDue} />
+
+    <!-- 関連ページ -->
+    <section class="mb-8 space-y-6">
+      <div>
+        <h2 class="mb-3 text-sm font-semibold text-slate-600">関連ガイド・条件ページ</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          <li><a href="/guides/ai-generation-credits-guide/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700 hover:bg-blue-100 transition-colors">AI生成ツールのクレジット制ガイド</a></li>
+          <li><a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">無料枠のあるAIツール一覧</a></li>
+          <li><a href="/conditions/commercial-use/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">商用利用条件を確認しやすいAIツール</a></li>
+          <li><a href="/conditions/no-watermark/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">透かしなしツール一覧</a></li>
+          <li><a href="/conditions/japanese/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">日本語対応AIツール一覧</a></li>
+          <li><a href="/comparisons/ai-image-generation-sample-comparison/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">画像生成の作例比較</a></li>
+          <li><a href="/comparisons/ai-video-generation-sample-comparison/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">動画生成の作例比較</a></li>
+          <li><a href="/tools/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">ツール一覧</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="mb-6 text-xs text-slate-500 leading-relaxed">
+      最新の料金・決済条件は各公式サイトの購入画面で確認してください。掲載内容は2026年7月14日時点のものであり、法的・税務上の助言ではありません。
+    </p>
+
+    <nav class="border-t border-slate-200 pt-6 text-sm" aria-label="ページナビゲーション">
+      <a href="/guides/" class="text-blue-600 hover:underline">← ガイド一覧に戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

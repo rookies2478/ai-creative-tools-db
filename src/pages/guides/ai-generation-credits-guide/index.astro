@@ -1,0 +1,327 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideWarningBox from '../../../components/GuideWarningBox.astro';
+import GuideSummaryBox from '../../../components/GuideSummaryBox.astro';
+import GuideCheckList from '../../../components/GuideCheckList.astro';
+import GuideFAQ from '../../../components/GuideFAQ.astro';
+import GuideComparisonTable from '../../../components/GuideComparisonTable.astro';
+import GuideFreshnessBox from '../../../components/GuideFreshnessBox.astro';
+
+const entry = await getEntry('guides', 'ai-generation-credits-guide');
+if (!entry) throw new Error('guide not found: ai-generation-credits-guide');
+const { data } = entry;
+
+// ── 比較表1：クレジット制と月額制の違い ─────────────────────
+const modelHeaders = ['料金体系', '仕組み', '向いているケース'];
+const modelRows = [
+  [
+    { text: 'クレジット制' },
+    { text: '生成のたびにクレジットを消費する。解像度・秒数・モデルにより消費量が変わる' },
+    { text: '生成量にばらつきがあり、必要なときだけ多く使いたい場合' },
+  ],
+  [
+    { text: '月額制（サブスクリプション）' },
+    { text: '毎月固定額で一定の利用権が得られる' },
+    { text: '毎月の支払額を固定して見通しを立てたい場合' },
+  ],
+  [
+    { text: 'サブスクリプション＋クレジット併用' },
+    { text: '月額料金の中に一定のクレジットが含まれ、超過分は追加購入' },
+    { text: '多くのAI画像・動画生成ツールで採用されている方式' },
+  ],
+  [
+    { text: '従量課金' },
+    { text: '利用量（API呼び出し回数等）に応じて都度課金' },
+    { text: 'API連携など、利用量が変動しやすい用途' },
+  ],
+];
+
+// ── 比較表2：クレジット消費が増えやすい要因 ─────────────────
+const consumeHeaders = ['要因', 'クレジット消費への影響', '確認ポイント'];
+const consumeRows = [
+  [
+    { text: '生成の種類（画像／動画）' },
+    { text: '動画生成は画像生成より消費が重くなりやすい' },
+    { text: '静止画1枚と動画数秒では処理負荷が大きく異なるため' },
+  ],
+  [
+    { text: '解像度・画質設定' },
+    { text: '高解像度・高画質ほど消費量が増える傾向' },
+    { text: '出力設定ごとの消費量目安を公式ヘルプで確認' },
+  ],
+  [
+    { text: '動画の長さ' },
+    { text: '秒数が長いほど消費クレジットが増える' },
+    { text: '5秒・10秒など尺ごとの消費量を個別に確認' },
+  ],
+  [
+    { text: 'モデルの選択' },
+    { text: '高品質・高機能モデルほど消費が多い場合がある' },
+    { text: '標準モデルと上位モデルで消費量が異なることがある' },
+  ],
+  [
+    { text: '生成速度（高速生成オプション）' },
+    { text: '優先処理・高速生成オプションで消費が増える場合がある' },
+    { text: 'オプション適用前後の消費量差を確認' },
+  ],
+  [
+    { text: '商用利用向けオプション' },
+    { text: '透かしなし出力や商用ライセンス付き出力で条件が変わる場合がある' },
+    { text: 'クレジット数だけでなく商用利用条件も別途確認' },
+  ],
+];
+
+// ── チェックリスト ─────────────────────────────────────────
+const checklistItems = [
+  '無料クレジットが毎月付与されるのか、初回のみなのかを確認した',
+  '1回の生成（画像1枚／動画数秒）でどれくらいクレジットを消費するか確認した',
+  '動画生成の場合、解像度・秒数・モデルによる消費量の違いを確認した',
+  '余ったクレジットが翌月に繰り越せるか、失効するかを確認した',
+  '月額料金に含まれるクレジット数と、超過時の追加購入単価を確認した',
+  'クレジット数と商用利用可否・透かし条件は別の確認事項であると理解した',
+  '無料枠のクレジット数だけで比較・判断しないようにした',
+  '最終的な料金・クレジット条件は公式サイトで確認することにした',
+];
+
+// ── FAQ ────────────────────────────────────────────────────
+const faqItems = [
+  {
+    q: 'AI生成ツールのクレジットとは何ですか？',
+    a: 'クレジットは、画像や動画を生成するたびに消費される利用単位です。プランに応じて毎月一定数のクレジットが付与され、生成のたびに消費されます。クレジットが不足すると、追加購入するか有料プランへの移行が必要になる場合があります。',
+  },
+  {
+    q: '1クレジットで何枚作れますか？',
+    a: 'ツールによって大きく異なり、本記事では特定の枚数を断定しません。同じ「1クレジット」でも、ツールごとに意味づけが異なるため、公式ヘルプページで消費量の目安を個別に確認する必要があります。',
+  },
+  {
+    q: '動画生成はなぜクレジット消費が多いのですか？',
+    a: '動画生成は静止画1枚の生成に比べて処理負荷が大きく、秒数・解像度・使用モデルによって消費量が大きく変わる傾向があります。長尺・高解像度・高品質モデルを選ぶほど消費量が増えやすいとされています。',
+  },
+  {
+    q: '無料クレジットは毎月もらえますか？',
+    a: 'ツールによって異なります。毎月一定数が付与されるツールもあれば、登録時の初回のみ付与され、以降は付与されないツールもあります。契約前に無料クレジットの付与条件を公式ページで確認してください。',
+  },
+  {
+    q: '使わなかったクレジットは繰り越せますか？',
+    a: '繰り越しできるかどうかはツールによって異なります。翌月に繰り越せず失効するツールもあるため、無料枠・有料プランともに繰り越し条件を公式ヘルプで確認することをおすすめします。',
+  },
+  {
+    q: 'クレジットがあれば商用利用できますか？',
+    a: 'クレジットの保有と商用利用の可否は別の問題です。クレジットを消費して生成できても、その出力を商用利用してよいかどうかは、プランごとの利用規約で個別に確認する必要があります。詳しくは商用利用条件のページをご参照ください。',
+  },
+];
+
+const breadcrumb = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://aicreative-db.com/" },
+    { "@type": "ListItem", "position": 2, "name": "ガイド一覧", "item": "https://aicreative-db.com/guides/" },
+    { "@type": "ListItem", "position": 3, "name": "AI生成ツールのクレジット制ガイド" }
+  ]
+});
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  canonicalPath="/guides/ai-generation-credits-guide/"
+  ogType="article"
+  jsonLd={breadcrumb}
+>
+  <div class="mx-auto max-w-3xl px-6 py-12">
+
+    <div class="gh-hero">
+      <nav class="gh-bc" aria-label="パンくずリスト">
+        <a href="/">トップ</a><span aria-hidden="true"> / </span><a href="/guides/">ガイド一覧</a><span aria-hidden="true"> / </span><span aria-current="page">AI生成ツールのクレジット制ガイド</span>
+      </nav>
+      <div class="gh-meta">
+        <span class="gh-pill">ガイド</span>
+        <span class="gh-date">最終確認: {data.lastReviewed}</span>
+      </div>
+      <h1 class="gh-h1">{data.title}</h1>
+      <p class="gh-lead">{data.description}</p>
+    </div>
+
+    <style>
+      .gh-hero { padding: 8px 0 32px; border-bottom: 1px solid #E3E2D9; margin-bottom: 32px; }
+      .gh-bc { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 13px; color: #6A7180; margin-bottom: 18px; }
+      .gh-bc a { color: #6A7180; text-decoration: none; }
+      .gh-bc a:hover { color: #4B3FE4; text-decoration: underline; }
+      .gh-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+      .gh-pill { font-size: 12px; font-weight: 700; color: #2E25A6; background: #ECEBFB; padding: 4px 13px; border-radius: 999px; font-family: "Noto Sans JP", system-ui, sans-serif; }
+      .gh-date { font-size: 12px; color: #6A7180; font-family: "Space Mono", monospace; }
+      .gh-h1 { font-size: clamp(22px, 3vw, 36px); font-weight: 900; line-height: 1.22; letter-spacing: -0.01em; color: #16181D; text-wrap: balance; margin: 0 0 14px; font-family: "Zen Kaku Gothic New", "Noto Sans JP", system-ui, sans-serif; }
+      .gh-lead { font-size: 15px; color: #3A3E47; line-height: 1.75; max-width: 620px; margin: 0; }
+    </style>
+
+    <GuideSummaryBox title="この記事で分かること">
+      <p>
+        AI画像・動画生成ツールの多くは<strong class="font-semibold text-slate-900">クレジット制</strong>を採用しており、生成のたびにクレジットを消費する仕組みになっています。
+        本記事ではクレジット制そのものの考え方を整理します。個別ツールの無料枠比較やランキングは扱いません。無料枠の比較は無料枠ページ、料金表の通貨・税の見方は料金表の見方ガイドをご参照ください。
+      </p>
+    </GuideSummaryBox>
+
+    <GuideWarningBox variant="warning" title="免責事項・重要事項">
+      本記事は情報提供を目的としており、法的助言ではありません。クレジットの付与数・消費量・繰り越し条件・商用利用可否はツール・プランにより異なり、変更される場合があります。契約前に必ず各ツールの公式ヘルプ・利用規約をご確認ください。
+    </GuideWarningBox>
+
+    <!-- ── クレジット制とは ── -->
+    <section class="my-10" aria-labelledby="what-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="what-heading">
+        AI生成ツールのクレジット制とは
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          クレジット制とは、画像や動画を生成するたびに一定数の「クレジット」を消費する料金体系です。プランごとに毎月（あるいは初回のみ）一定数のクレジットが付与され、生成のたびにその一部が減っていきます。
+        </p>
+        <p>
+          クレジットは「何枚／何本作れるか」を決める単位になりやすいですが、同じ「1クレジット」でもツールごとに意味づけが異なります。あるツールの1クレジットと、別のツールの1クレジットを単純比較することはできません。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── 比較表1：クレジット制と月額制の違い ── -->
+    <section class="my-10" aria-labelledby="model-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="model-heading">
+        クレジット制と月額制の違い
+      </h2>
+      <GuideComparisonTable
+        caption="料金体系の分類"
+        headers={modelHeaders}
+        rows={modelRows}
+        statusColIndex={-1}
+      />
+      <p class="mt-3 text-xs text-slate-400">
+        通貨表示・税の扱いなど、料金表そのものの見方については<a href="/guides/ai-tool-pricing-currency-japan/" class="text-blue-600 hover:underline">AIツール料金表の見方ガイド</a>をご参照ください。
+      </p>
+    </section>
+
+    <!-- ── 無料クレジットと有料クレジットの違い ── -->
+    <section class="my-10" aria-labelledby="free-paid-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="free-paid-heading">
+        無料クレジットと有料クレジットの違い
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          無料クレジットは、毎月付与されるタイプと、登録時の初回のみ付与されるタイプに分かれます。初回のみのタイプは、使い切ると追加のクレジットが得られず、有料プランへの移行が前提になる場合があります。
+        </p>
+        <p>
+          有料クレジットは、月額プランに含まれる分と、それを超えたときに追加購入する分に分かれることが一般的です。追加購入分は、プランに含まれる分より単価が割高になる場合があります。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── 比較表2：消費が増えやすい要因 ── -->
+    <section class="my-10" aria-labelledby="consume-heading">
+      <h2 class="mb-2 text-lg font-semibold text-slate-900" id="consume-heading">
+        画像生成・動画生成でクレジット消費が増えやすい要因
+      </h2>
+      <p class="mb-4 text-sm text-slate-500">
+        以下は一般的な傾向であり、具体的な消費量はツールごとに公式ヘルプページで確認する必要があります。
+      </p>
+      <GuideComparisonTable
+        caption="クレジット消費が増えやすい要因"
+        headers={consumeHeaders}
+        rows={consumeRows}
+        statusColIndex={-1}
+      />
+    </section>
+
+    <!-- ── 動画生成で消費が増えやすい理由 ── -->
+    <section class="my-10" aria-labelledby="video-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="video-heading">
+        動画生成でクレジット消費が増えやすい理由
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          動画生成は静止画1枚の生成に比べて処理負荷が大きく、秒数が長くなるほど、また解像度・品質設定が高くなるほど消費クレジットが増える傾向があります。長尺・高解像度・高品質モデル・高速生成オプションを組み合わせると、消費量がさらに増える場合があります。
+        </p>
+        <p>
+          具体的な消費量の目安は、動画生成ツールの比較記事や各ツールページでも確認できますが、最新の正確な数値は各公式ヘルプページでご確認ください。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── クレジット制ツールを比較するときの確認項目 ── -->
+    <section class="my-10" aria-labelledby="compare-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="compare-heading">
+        クレジット制ツールを比較するときの確認項目
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          クレジット制のツールを比較する際は、月額料金だけでなく、月間クレジット付与数、1回あたりの消費量、繰り越しの可否、追加購入の単価をあわせて確認することが重要です。これらを組み合わせて初めて実質コストが見えてきます。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── 無料枠だけで判断しない方がよい理由 ── -->
+    <section class="my-10" aria-labelledby="freeplan-heading">
+      <h2 class="mb-4 text-lg font-semibold text-slate-900" id="freeplan-heading">
+        無料枠だけで判断しない方がよい理由
+      </h2>
+      <div class="rounded-xl border border-slate-100 bg-white px-6 py-5 shadow-sm text-sm text-slate-700 space-y-3">
+        <p>
+          無料クレジットの数だけを見て比較すると、実際の生成可能本数や商用利用の可否を見誤ることがあります。無料プランでは透かしが付く場合や、商用利用が制限されている場合もあるため、無料枠のクレジット数と商用利用条件・透かし条件は別々に確認する必要があります。
+        </p>
+        <p>
+          無料プランそのものの比較は<a href="/conditions/free/" class="text-blue-600 hover:underline">無料枠のあるAIツール一覧</a>で扱っています。
+        </p>
+      </div>
+    </section>
+
+    <!-- ── チェックリスト ── -->
+    <section class="my-10">
+      <GuideCheckList
+        title="クレジット制ツールを確認するときのチェックリスト"
+        items={checklistItems}
+      />
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="my-10">
+      <GuideFAQ items={faqItems} title="よくある質問（FAQ）" />
+    </section>
+
+    <!-- ── 注意事項 ── -->
+    <section class="my-10">
+      <GuideWarningBox variant="info">
+        <ul class="space-y-1.5 list-disc list-inside">
+          <li>クレジット付与数・消費量・繰り越し条件はツール側の判断で変更される場合があります</li>
+          <li>このガイドの情報は2026年7月14日時点のものです。利用前に必ず各公式サイトで最新情報をご確認ください</li>
+          <li>商用利用の判断は本記事の情報だけでなく、各ツールの最新利用規約を直接確認してください</li>
+          <li>本記事は法的助言ではありません</li>
+        </ul>
+      </GuideWarningBox>
+    </section>
+
+    <GuideFreshnessBox lastReviewed={data.lastReviewed} nextReviewDue={data.nextReviewDue} />
+
+    <!-- 関連ページ -->
+    <section class="mb-8 space-y-6">
+      <div>
+        <h2 class="mb-3 text-sm font-semibold text-slate-600">関連ガイド・比較ページ</h2>
+        <ul class="flex flex-wrap gap-3 text-sm">
+          <li><a href="/guides/ai-tool-pricing-currency-japan/" class="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-blue-700 hover:bg-blue-100 transition-colors">AI画像・動画生成ツールの料金表の見方</a></li>
+          <li><a href="/conditions/free/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">無料枠のあるAIツール一覧</a></li>
+          <li><a href="/comparisons/free-ai-image-generators/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">無料AI画像生成ツール比較</a></li>
+          <li><a href="/comparisons/free-ai-video-tools/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">無料AI動画生成ツール比較</a></li>
+          <li><a href="/categories/image-generation/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">AI画像生成ツール一覧</a></li>
+          <li><a href="/categories/video-generation/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">AI動画生成ツール一覧</a></li>
+          <li><a href="/comparisons/ai-image-generation-sample-comparison/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">画像生成の作例比較</a></li>
+          <li><a href="/comparisons/ai-video-generation-sample-comparison/" class="rounded-full border border-slate-200 px-4 py-1.5 hover:bg-slate-100 transition-colors">動画生成の作例比較</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="mb-6 text-xs text-slate-500 leading-relaxed">
+      最新のクレジット付与数・消費量は各公式サイトで確認してください。掲載内容は2026年7月14日時点のものであり、法的助言ではありません。
+    </p>
+
+    <nav class="border-t border-slate-200 pt-6 text-sm" aria-label="ページナビゲーション">
+      <a href="/guides/" class="text-blue-600 hover:underline">← ガイド一覧に戻る</a>
+    </nav>
+
+  </div>
+</BaseLayout>

@@ -121,3 +121,19 @@
 - 修正ファイル数: 3（DB1・コンポーネント2）
 - build検証: 92ページ生成、error 0、warning 0
 - commit予定: "Fix Tensor.Art japanesePrompt inconsistency"
+
+## AUD-10 Clipdrop japanesePrompt表記不一致（P2）
+
+- 対応日: 2026-07-25
+- 一次情報確認: `docs/research/clipdrop-japanese-prompt-verification-2026-07-25.md`
+- 対象ツール: Clipdrop
+- 対象項目: `japanesePrompt`
+- 修正前: DB `src/content/tools/clipdrop.md`(11) `japanesePrompt: false`（非対応確定）／ツールページ`src/pages/tools/clipdrop/index.astro`(89)は「要公式確認」バッジ（中立表現）のまま不一致
+- 修正後: DBは変更なし。一次情報（Clipdrop公式FAQが入力を「English text」と明示）でfalse判定を裏付け確認。ツールページのバッジを「非対応（英語推奨）」に修正し、DBの確定値と整合させた
+- DB変更の有無: なし
+- 一次情報: `https://clipdrop.co/ja/stable-diffusion`（WebFetchで内容確認、UIは英語のまま・FAQに"English text as an input"の記載あり）、`https://clipdrop.co/apis/docs/text-to-image`（言語制限の明記なし）
+- 同一問題として横展開修正:
+  - `src/pages/tools/playground-ai/index.astro`(250): relatedTools内Clipdrop行「日本語：要確認」→「日本語：非対応」（DB上japaneseUi/japanesePromptとも`false`のため）
+- 修正ファイル: 2（ツールページ2件、DBは変更なし）
+- build検証: 下記コミット時点のbuild結果を参照
+- commit予定: "Fix Clipdrop japanesePrompt labeling"

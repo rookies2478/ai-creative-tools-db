@@ -193,3 +193,68 @@
 - 修正ファイル数: 1
 - build検証: 92ページ、error 0、warning 0
 - commit予定: "Fix PixVerse Japanese UI coverage"
+
+## AUD-14 Luma AI paidPlanNote未反映（P2）
+
+- 重要度: P2
+- 対象: Luma AI／paidPlanNote（Pro/Ultra価格）
+- 判定: FIXED
+- 一次情報確認: `docs/research/aud-14-luma-ai-verification-2026-07-25.md`（WebFetchで`https://lumalabs.ai/pricing`を直接確認、Pro $90/月・Ultra $300/月がDB記載値と一致）
+- 修正前: `src/pages/tools/luma-ai/index.astro`の料金テーブルで上位プラン行が「要公式確認」×2
+- 修正後: Pro $90/月・Ultra $300/月の2行を具体値で追加
+- DB変更の有無: なし（`src/content/tools/luma-ai.md`のpaidPlanNoteは既に正確だったため）
+- 修正ファイル: `src/pages/tools/luma-ai/index.astro`
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-14 to AUD-18"
+
+## AUD-15 InVideo AI commercialUseカテゴリ一覧未反映（P2）
+
+- 重要度: P2
+- 対象: InVideo AI／commercialUse
+- 判定: FIXED
+- 一次情報確認: `docs/research/aud-15-invideo-ai-verification-2026-07-25.md`（DB自体が一次情報確認済み正本のため新規WebFetchは不要と判断）
+- 修正前: `src/pages/categories/video-generation/index.astro:111` `commercial: '要確認'`
+- 修正後: `commercial: '有料プランのみ'`（DBの`commercialUse: "paid-only"`を反映）
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/categories/video-generation/index.astro`
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-14 to AUD-18"
+
+## AUD-16 Hailuo AI カテゴリ一覧未反映（P2）
+
+- 重要度: P2
+- 対象: Hailuo AI／commercialUse・freePlan・lowestPaidPlan
+- 判定: FIXED
+- 一次情報確認: `docs/research/aud-16-hailuo-ai-verification-2026-07-25.md`（DB自体が一次情報確認済み正本のため新規WebFetchは不要と判断）
+- 修正前: `src/pages/categories/video-generation/index.astro:103` `commercial: '要確認'`, `free: '要確認'`, `price: '要公式確認'`
+- 修正後: `commercial: '有料プランのみ'`, `free: '無料枠あり'`, `price: 'Standard $14.99/月〜（USD）'`
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/categories/video-generation/index.astro`
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-14 to AUD-18"
+
+## AUD-17 Canva AI画像生成 FAQ欠落（P2）
+
+- 重要度: P2
+- 対象: Canva AI画像生成／faqs
+- 判定: FIXED
+- 一次情報確認: 不要（DB既存回答文をそのまま使用）。詳細は`docs/research/aud-17-canva-ai-faq-verification-2026-07-25.md`
+- 修正前: `src/pages/tools/canva-ai-image-generator/index.astro`のfaqs propが8件（DB9件のうち「どんな用途に向いていますか？」が欠落）
+- 修正後: 該当FAQを追加し9件に統一
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/tools/canva-ai-image-generator/index.astro`
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-14 to AUD-18"
+
+## AUD-18 Canva AI画像生成 オーファンコンポーネント（P2）
+
+- 重要度: P2
+- 対象: `src/components/CanvaAiTool.astro`
+- 判定: FIXED（削除）
+- 一次情報確認: 該当なし（参照調査のみ）。詳細は`docs/research/aud-18-orphan-components-verification-2026-07-25.md`
+- 修正前: どこからも参照されていない旧世代コンポーネントが旧$15/月・古いcheckedDateを保持したまま残置
+- 修正後: ファイルを削除。全文検索で参照0件・動的import/文字列参照なし・現行ページ（`ToolDetailPage.astro`使用）と機能重複なしを確認の上実施。build検証で92ページ生成・error 0を確認
+- DB変更の有無: なし
+- 修正ファイル: `src/components/CanvaAiTool.astro`（削除）
+- HOLDまたはNO_CHANGE理由: 該当なし。他4件のオーファンコンポーネント（LeonardoAiTool.astro等）は監査本文のAUD-18対象外のため今回未着手
+- commit予定: "Fix DB consistency issues AUD-14 to AUD-18"

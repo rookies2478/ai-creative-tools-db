@@ -47,3 +47,17 @@
 - 除外: Pika以外のツール（Runway・Kling AI等）の料金・機能情報は変更していない
 - 未確定のまま残した項目: 有料プラン（Standard/Pro/Fancy）の名称・料金体系が公式サイトで変更されている可能性を示す二次情報があったが、今回のAUD-03/04/05のスコープ外のため確認・変更は行っていない（将来の課題として研究記録に記載）
 - build検証: `npm run build` で92ページ生成、error 0・warning 0を確認
+
+## AUD-06 Synthesia カテゴリ一覧が確定情報を未反映（P1）
+
+- 対応日: 2026-07-24
+- 一次情報確認: `docs/research/synthesia-plan-features-verification-2026-07-24.md`（Synthesia公式料金ページ https://www.synthesia.io/pricing を直接確認）
+- 確認内容の要旨: Basic無料プラン（月10分・透かしあり・1,200クレジット/月・アバター9種）、Starter $18/月（年払い）〜$29/月（月払い）は一次情報と一致。商用利用の詳細条件・日本語UI対応は公式料金ページ本文からは断定できず、DBの`commercialUse: "limited"`・`japaneseUi: "unknown"`が妥当と確認
+- DB（`src/content/tools/synthesia.md`）: 変更なし。freePlan/commercialUse/japaneseUiとも一次情報と矛盾せず、フィールド間の相互矛盾もなし
+- 修正ファイル: `src/pages/categories/avatar-video/index.astro`（L59）のみ
+  - 修正前: `{ name: 'Synthesia', free: '要確認', ja: '要確認', commercial: '要確認', ... }`
+  - 修正後: `{ name: 'Synthesia', free: '無料枠あり（月10分・透かしあり）', ja: '要確認', commercial: '条件付き（要公式確認）', ... }`
+  - ja列は元々DBの`japaneseUi: "unknown"`と整合していたため変更なし
+- 除外: Synthesia以外のツール（HeyGen・D-ID・InVideo AI等、同ファイル内の他行）は変更していない
+- 全文検索: `src/content/tools/synthesia.md`・`src/pages/tools/synthesia/`・`src/pages/categories/`・`src/pages/comparisons/`配下のSynthesia関連記述は他に不一致なし（比較記事・専用ツールページは既にDB確定値と一致していた）
+- build検証: `npm run build` で92ページ生成、error 0・warning 0を確認

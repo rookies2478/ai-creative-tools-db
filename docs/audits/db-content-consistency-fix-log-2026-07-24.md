@@ -61,3 +61,18 @@
 - 除外: Synthesia以外のツール（HeyGen・D-ID・InVideo AI等、同ファイル内の他行）は変更していない
 - 全文検索: `src/content/tools/synthesia.md`・`src/pages/tools/synthesia/`・`src/pages/categories/`・`src/pages/comparisons/`配下のSynthesia関連記述は他に不一致なし（比較記事・専用ツールページは既にDB確定値と一致していた）
 - build検証: `npm run build` で92ページ生成、error 0・warning 0を確認
+
+## AUD-07 HeyGen カテゴリ一覧の日本語UI誤表記（P1）
+
+- 対応日: 2026-07-24
+- 一次情報確認: `docs/research/heygen-japanese-ui-verification-2026-07-24.md`（HeyGen公式ヘルプセンター help.heygen.com、公式Dashboard/Platform Overviewページ heygen.com/academy/platform-overview を確認。二次情報としてChrome拡張の存在も参照し、一次情報未確認である旨を明記）
+- 確認内容の要旨: HeyGen公式のヘルプセンター・製品概要ページには、ダッシュボードのUI表示言語を日本語に切り替える設定についての記載が見当たらない。日本語音声・動画翻訳機能は公式に案内されているが、これは日本語UI対応の根拠にはならない。非公式Chrome拡張による機械翻訳は存在するが、公式日本語UI対応ではない。
+- DB（`src/content/tools/heygen.md`）: 変更なし。`japaneseUi: "unknown"`は元々一次情報と矛盾せず正しかった。本文・FAQ・limitations・weaknesses全てで「日本語UIの対応状況は公式情報で明記されていない（要確認）」と一貫して記載されており、修正不要と判断。
+- 修正ファイル: `src/pages/categories/avatar-video/index.astro`（L58）のみ
+  - 修正前: `{ name: 'HeyGen',    free: '要確認', ja: '対応',  commercial: '要確認', note: '多言語AIアバター動画の代表ツール。カスタムアバター機能あり。',  href: '/tools/heygen/' },`
+  - 修正後: `{ name: 'HeyGen',    free: '要確認', ja: '要確認', commercial: '要確認', note: '多言語AIアバター動画の代表ツール。カスタムアバター機能あり。',  href: '/tools/heygen/' },`
+  - 同表内の他3ツール（Synthesia/D-ID/InVideo AI）は元々`ja: '要確認'`であり、修正後は表内で表記が統一された
+- 除外: HeyGen以外のツール（同ファイル内の他行）、日本語音声・字幕・翻訳・プロンプト等の別項目の記載は一切変更していない
+- 全文検索: `src/content/tools/heygen.md`・`src/pages/tools/heygen/`・`src/pages/categories/`・`src/pages/conditions/`・`src/pages/comparisons/`・`src/content/guides/`・`src/components/`・`src/data/`配下のHeyGen関連記述を確認。`src/content/guides/japanese-support-three-types.md`(95)は既に「要確認」「未確認」表記で一次情報・DBと整合しておりAUD-07の対象外・変更不要
+- build検証: `npm run build`実行結果は本記録末尾のcommitログ・作業報告に記載
+- commit予定: "Fix HeyGen Japanese UI labeling"

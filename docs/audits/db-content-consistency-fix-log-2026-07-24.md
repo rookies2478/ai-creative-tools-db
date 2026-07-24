@@ -175,3 +175,21 @@
 - 修正ファイル数: 3
 - build検証: 92ページ、error 0、warning 0
 - commit予定: "Fix Vidu AI terms URL"
+
+## AUD-13 PixVerse japaneseUi情報の未反映・ガイド記事FAQ欠落（P2）
+
+- 対応日: 2026-07-25
+- 一次情報確認: `docs/research/pixverse-japanese-ui-verification-2026-07-25.md`
+- 対象ツール: PixVerse
+- 対象項目: `japaneseUi`（DB）と`src/pages/guides/video-generation-credit-cost-comparison/index.astro`のFAQ配列
+- 修正前: DB`src/content/tools/pixverse.md`(11) `japaneseUi: true`は確定値。同ガイドのFAQ（faqItems、旧8件）にPixVerseへの言及が一切なく、日本語UI対応という強みが読者に伝わっていなかった（誤表記ではなく単なる欠落）
+- 一次情報での判定: WebFetchで`pixverse.ai`および`pixverse.ai/ja`を直接確認。URLパスベースの日本語ローカライズ（`/ja`）が実装されており、見出し・ナビ・本文はほぼ日本語化（利用規約等法務ページのみ英語のまま）。Google Playストア掲載（`hl=ja`）でもアプリ名が日本語化されていることを確認。ログイン後の実操作画面・iOS App Store掲載言語欄は一次情報で直接確認できず「判断できなかった項目」として研究記録に記載
+- 修正後: DB値は変更なし（`true`のまま、監査も値自体の誤りは指摘していないため）。ガイドFAQに新規質問「日本語UIで使えるAI動画生成ツールはありますか？」を追加し、PixVerseの日本語UI対応（Web版・法務ページ除く）とプロンプト対応unknownを明確に分離して説明
+- DB変更の有無: なし
+- FAQ変更の有無: あり（1件追加、9件目）。GuideFAQ.astroは同一`faqItems`配列から表示とJSON-LD（FAQPage構造化データ）を自動生成するため、追加のみで表示・構造化データは自動的に一致
+- 修正ファイル:
+  - `src/pages/guides/video-generation-credit-cost-comparison/index.astro`: FAQ新規1件追加
+- 除外: PixVerse以外のツールは変更していない。AUD-26（日本語対応3区分ガイドにPixVerse行なし）・AUD-27（japanesePrompt記号不統一）は対象外・未着手。`src/components/JapaneseAiToolsGuide.astro`(134)のjpPrompt「〇対応」表記がDB`japanesePrompt: "unknown"`と食い違う点を発見したが、AUD-13の対象外のため未修正（次回監査候補として記録のみ）
+- 修正ファイル数: 1
+- build検証: 92ページ、error 0、warning 0
+- commit予定: "Fix PixVerse Japanese UI coverage"

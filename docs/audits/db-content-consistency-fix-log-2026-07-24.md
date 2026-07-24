@@ -103,3 +103,21 @@
 - 全文検索: `Canva|USD|\$|ドル|円|月額|年額|月払い|年払い`等でCanva関連ファイルを再検索し、旧USD「$15/月」「$120/年」の残存がないことを確認（オーファンコンポーネント除く）
 - build検証: 下記コミット時点のbuild結果を参照
 - commit予定: "Fix outdated Canva AI pricing"
+
+## AUD-09 Tensor.Art japanesePrompt表記不一致（P2）
+
+- 対応日: 2026-07-25
+- 一次情報確認: `docs/research/tensor-art-japanese-prompt-verification-2026-07-25.md`
+- 対象ツール: Tensor.Art
+- 対象項目: `japanesePrompt`
+- 修正前: DB `src/content/tools/tensor-art.md`(11) `japanesePrompt: true`（完全対応）／ツールページ`src/pages/tools/tensor-art/index.astro`(98,140)は「△ 一部対応」バッジ表示のまま不一致
+- 修正後: DB値を`"partial"`に変更し、ツールページ側の既存表現（一次情報でも裏付けられたニュアンス）に整合。ツールページ側は変更なし。
+- DB変更の有無: あり（`true` → `"partial"`）
+- 一次情報: 公式一次情報でのプロンプト精度に関する明示記載はなし。複数の利用者・公式投稿ベースの二次情報が「動作はするが英語プロンプトの方が安定」という点で一致したため、この技術的実態を採用
+- 同一問題として横展開修正:
+  - `src/components/Japanese.astro`(102): `prompt:'○'` → `prompt:'△'`
+  - `src/components/JapaneseAiToolsGuide.astro`(138): `jpPrompt:{s:'ok',label:'〇 対応'}` → `{s:'cond',label:'△ 一部対応'}`
+- スキーマ変更: なし（triStateSchemaの既存`'partial'` literalで対応）
+- 修正ファイル数: 3（DB1・コンポーネント2）
+- build検証: 92ページ生成、error 0、warning 0
+- commit予定: "Fix Tensor.Art japanesePrompt inconsistency"

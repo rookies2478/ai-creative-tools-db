@@ -137,3 +137,21 @@
 - 修正ファイル: 2（ツールページ2件、DBは変更なし）
 - build検証: 下記コミット時点のbuild結果を参照
 - commit予定: "Fix Clipdrop japanesePrompt labeling"
+
+## AUD-11 NightCafe japanesePrompt表記不一致（P2）
+
+- 対応日: 2026-07-25
+- 一次情報確認: `docs/research/nightcafe-japanese-prompt-verification-2026-07-25.md`
+- 対象ツール: NightCafe
+- 対象項目: `japanesePrompt`
+- 修正前: DB `src/content/tools/nightcafe.md`(11) `japanesePrompt: true`（完全対応）／ツールページ`src/pages/tools/nightcafe/index.astro`(98)は「△ 一部対応」バッジ表示のまま不一致
+- 修正後: DB値を`"partial"`に変更し、ツールページ側の既存表現（実機ベースの記述と一致）に整合。ツールページ側は変更なし
+- DB変更の有無: あり（`true` → `"partial"`）
+- 一次情報: NightCafe公式FAQ（`https://creator.nightcafe.studio/faqs`）を確認したが、プロンプト入力言語（日本語対応・英語推奨・翻訳機能）に関する明示的な記載はなし。複数生成モデル（Stable Diffusion・DALL·E等）を横断的に使うプラットフォーム構造上、モデルにより日本語理解力が異なる可能性がある点を踏まえ、既存の実務的な「一部対応」記述を採用（AUD-09と同型の判断）
+- 同一問題として横展開修正:
+  - `src/components/Japanese.astro`(94): `prompt:'○'` → `prompt:'△'`
+  - `src/components/JapaneseAiToolsGuide.astro`(132): `jpPrompt:{s:'ok',label:'〇 対応'}` → `{s:'cond',label:'△ 一部対応'}`
+- スキーマ変更: なし（triStateSchemaの既存`'partial'` literalで対応）
+- 修正ファイル数: 3（DB1・コンポーネント2）
+- build検証: 下記コミット時点のbuild結果を参照
+- commit予定: "Fix NightCafe japanesePrompt inconsistency"

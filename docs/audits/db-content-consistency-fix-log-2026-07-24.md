@@ -155,3 +155,23 @@
 - 修正ファイル数: 3（DB1・コンポーネント2）
 - build検証: 下記コミット時点のbuild結果を参照
 - commit予定: "Fix NightCafe japanesePrompt inconsistency"
+
+## AUD-12 Vidu AI usagePolicy.termsUrl不一致（P2）
+
+- 対応日: 2026-07-25
+- 一次情報確認: `docs/research/vidu-ai-terms-url-verification-2026-07-25.md`
+- 対象ツール: Vidu AI
+- 対象項目: `usagePolicy.termsUrl` およびページ側・関連記事のハードコードURL
+- 修正前: DB `src/content/tools/vidu-ai.md`は全箇所（78,88,99,136）`https://www.vidu.com/terms`で統一済み・正しい。一方、ページ側`src/pages/tools/vidu-ai/index.astro`(66,227)と`src/content/guides/commercial-use-cost-comparison.md`(283,347)が`https://www.vidu.com/terms-of-service`という誤ったURLを保持
+- 一次情報での判定: WebFetchで両URLを直接確認。`https://www.vidu.com/terms`はHTTP 200・「Vidu Terms of Service」ページ（更新日2026年7月3日、契約主体Vidu Team）が正常表示。`https://www.vidu.com/terms-of-service`はHTTP 404 Not Found。DB側が正しく、ページ側・記事側が存在しない古いURLを参照していたことが原因（URL切れ、用途混同ではない）
+- 修正後: DBは変更なし（既に正しい値）。ページ側・記事側の4箇所を`https://www.vidu.com/terms`に統一
+- DB変更の有無: URLは変更なし。ただし今回再検証した事実を反映し`usagePolicy.lastReviewed`(79)を`2026-06-15`→`2026-07-25`、`reviewed.terms`(118)を`2026-06-15`→`2026-07-25`に更新
+- 一次情報: Vidu AI公式サイト `https://www.vidu.com/terms`（WebFetchで直接確認、2026-07-25）
+- 修正ファイル:
+  - `src/pages/tools/vidu-ai/index.astro`(66,227): `terms-of-service`→`terms`
+  - `src/content/guides/commercial-use-cost-comparison.md`(283,347): `terms-of-service`→`terms`
+  - `src/content/tools/vidu-ai.md`(79,118): 確認日更新のみ（URL変更なし）
+- 除外: Vidu AI以外のツールは変更していない。AUD-25（japaneseUi）は対象外・未着手
+- 修正ファイル数: 3
+- build検証: 92ページ、error 0、warning 0
+- commit予定: "Fix Vidu AI terms URL"

@@ -76,7 +76,7 @@ usagePolicy:
   peopleLogoRisk: "high"
   peopleLogoNote: "実在人物・著名人・ブランドロゴを含む動画は肖像権・商標権等の観点から別途確認が必要。本記事は法的助言ではない。"
   termsUrl: "https://www.vidu.com/terms"
-  lastReviewed: "2026-06-15"
+  lastReviewed: "2026-07-25"
 notFor:
   - "商用利用条件を確認せずに使いたい人（公式規約の確認が必要です）"
   - "日本語UIのみで操作したい人（日本語UI非対応です）"
@@ -115,7 +115,7 @@ faqs:
     answer: "公式利用規約によると、ユーザーが投稿したコンテンツには、Viduに対して世界規模・無償・取消不能のライセンスが付与されます。このライセンスはAIトレーニング目的での利用も含まれ、アカウント削除後も継続します。機密性の高い素材の取り扱いには注意が必要です。最新の公式利用規約を直接ご確認ください。本記事は法的助言ではありません。"
 reviewed:
   pricing: "2026-06-21"
-  terms: "2026-06-15"
+  terms: "2026-07-25"
   features: "2026-06-15"
 japanBilling:
   japanOfficialUrl: "https://www.vidu.com/ja"

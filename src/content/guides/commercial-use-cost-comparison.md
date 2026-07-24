@@ -280,7 +280,7 @@ Dream Machineを中心にAI動画生成を提供。無料プランはnon-commerc
 
 中国Shengshu Technology開発。公式利用規約では、有料ユーザーについて商用利用に拡張される旨が案内されています。無料プランでの商用利用可否・詳細条件は最新の公式規約をご確認ください。日本語UIは非対応。
 
-参照：[Vidu AI利用規約（公式）](https://www.vidu.com/terms-of-service) / [Vidu AI料金ページ（公式）](https://www.vidu.com/pricing)
+参照：[Vidu AI利用規約（公式）](https://www.vidu.com/terms) / [Vidu AI料金ページ（公式）](https://www.vidu.com/pricing)
 
 ---
 
@@ -344,7 +344,7 @@ Midjourneyは年間総収益が100万ドルを超える企業に対してPro/Meg
 | Luma AI | 料金プラン | https://lumalabs.ai/pricing |
 | Kling AI | 公式サイト | https://kling.ai |
 | Vidu AI | 料金ページ | https://www.vidu.com/pricing |
-| Vidu AI | 利用規約 | https://www.vidu.com/terms-of-service |
+| Vidu AI | 利用規約 | https://www.vidu.com/terms |
 
 ---
 

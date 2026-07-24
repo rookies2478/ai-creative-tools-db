@@ -68,7 +68,7 @@ const tools = [
     freeNote: '無料プランあり（日次トークン制）',
     point: '無料プランでも毎日一定量のトークンが付与されます。アート調・キャラクター系の画像生成を試したい方の比較対象にもなります。トークン数・出力品質・機能の制限は公式サイトでご確認ください。',
     bestFor: 'ゲーム・キャラクター・コンセプトアート向け',
-    caution: '無料プランの商用利用条件・透かしの有無は利用規約をご確認ください。',
+    caution: '無料プランも非独占的ライセンスで商用利用可能とされていますが、所有権はLeonardo.AIに帰属し他ユーザーも同一画像を使用できます。透かしの有無は利用規約をご確認ください。',
   },
   {
     name: 'Fotor AI',
@@ -149,7 +149,7 @@ const tableRows = [
   { name: 'Adobe Firefly', slug: 'adobe-firefly', freeType: '無料クレジット（月次）', watermark: '要確認', japanese: '◯', editability: '◯（Adobe製品連携）', freePlanCommercial: '条件付き（クレジット切れ後の透かしあり出力は商用不可の場合あり）', paidPlanCommercial: '案内あり（Adobeガイドライン・ベータ機能は対象外）', commercialNote: '無料クレジット範囲内でも条件があります。有料プランではAdobe生成AIユーザーガイドラインに基づく商用利用が案内されています。最新情報は公式をご確認ください。' },
   { name: 'DALL·E', slug: 'dalle', freeType: 'ChatGPT無料プラン経由（制限あり）', watermark: '要確認', japanese: '△', editability: '△', freePlanCommercial: '要確認（OpenAI利用規約参照）', paidPlanCommercial: '要確認（OpenAI利用規約参照）', commercialNote: '最新情報はOpenAI公式サイトをご確認ください。' },
   { name: 'Stable Diffusion', slug: 'stable-diffusion', freeType: 'ローカル実行（環境構築が必要）', watermark: '基本なし（設定による）', japanese: '△', editability: '△（環境依存）', freePlanCommercial: 'モデル・利用形態による（公式API・サービス規約による）', paidPlanCommercial: '公式API・サービス規約による', commercialNote: 'ローカル実行時はSD 1.x/2.x/SDXLはCreativeML Open RAIL-M等、SD 3.x以降はStability AI Community License。商用利用はモデルバージョンごとのライセンスを個別確認してください。' },
-  { name: 'Leonardo AI', slug: 'leonardo-ai', freeType: '無料プラン（日次トークン制）', watermark: '要確認', japanese: '△', editability: '△', freePlanCommercial: '不可の場合あり（公式FAQ・利用規約より）', paidPlanCommercial: '条件付き（有料プラン＋Private設定時に可能とされています）', commercialNote: '無料プランでは商用利用が認められていない場合があります。有料プランでもPrivate設定・モデル・用途によって条件が異なります。最新の公式規約をご確認ください。' },
+  { name: 'Leonardo AI', slug: 'leonardo-ai', freeType: '無料プラン（日次トークン制）', watermark: '要確認', japanese: '△', editability: '△', freePlanCommercial: '非独占ライセンスで条件付き可（所有権はLeonardo.AI）', paidPlanCommercial: '完全な所有権あり（Private設定利用可）', commercialNote: '無料プランも非独占的ライセンスで商用利用できるとされていますが、所有権はLeonardo.AIに帰属し他ユーザーも同一画像を使用できます。有料プランでは完全な所有権が得られます。最新の公式規約をご確認ください。' },
   { name: 'Fotor AI', slug: 'fotor-ai', freeType: '無料プランあり（Basic）', watermark: '無料プランでは入る場合あり', japanese: '◯', editability: '◯（写真編集・テンプレート連携）', freePlanCommercial: '公式未明記（要確認）', paidPlanCommercial: '有料で案内あり（要公式確認）', commercialNote: '公式ヘルプとCommercial Useページで案内内容に差異が見られます。商用利用を前提にする場合は最新の公式規約をご確認ください。' },
   { name: 'Gemini画像生成', slug: 'gemini-image-generation', freeType: 'Googleアカウントで利用可能（無料プランあり）', watermark: 'SynthID等の透かしあり', japanese: '◯', editability: '◯（画像編集・スタイル適用）', freePlanCommercial: '要確認（生成AI禁止利用ポリシー参照）', paidPlanCommercial: '要確認（生成AI禁止利用ポリシー参照）', commercialNote: '用途・プランによって条件が異なる場合があります。最新の公式規約・Google生成AI禁止利用ポリシーをご確認ください。' },
   { name: 'Brand Studio（旧DreamStudio）', slug: 'dreamstudio', freeType: '無料試用またはCore tier（要公式確認）', watermark: '要確認', japanese: '△', editability: '△', freePlanCommercial: 'モデルライセンス参照', paidPlanCommercial: 'Stability AI規約による', commercialNote: 'DreamStudioからBrand Studioへ移行した可能性があります。Stability AIライセンス・Acceptable Use Policyをご確認ください。' },

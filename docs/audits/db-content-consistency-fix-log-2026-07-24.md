@@ -76,3 +76,30 @@
 - 全文検索: `src/content/tools/heygen.md`・`src/pages/tools/heygen/`・`src/pages/categories/`・`src/pages/conditions/`・`src/pages/comparisons/`・`src/content/guides/`・`src/components/`・`src/data/`配下のHeyGen関連記述を確認。`src/content/guides/japanese-support-three-types.md`(95)は既に「要確認」「未確認」表記で一次情報・DBと整合しておりAUD-07の対象外・変更不要
 - build検証: `npm run build`実行結果は本記録末尾のcommitログ・作業報告に記載
 - commit予定: "Fix HeyGen Japanese UI labeling"
+
+## AUD-08 Canva AI 旧USD料金表記（P1）
+
+- 対応日: 2026-07-24
+- 一次情報確認: `docs/research/canva-ai-pricing-verification-2026-07-24.md`
+  - Canva公式料金ページ（https://www.canva.com/ja_jp/pricing/）はJS描画依存でWebFetch取得不可（静的シェルのみ取得、価格情報抽出不可）。
+  - 一次情報として確認できたのは、DBが2026-07-13の日本課金監査で既に確認済みの`japanBilling`セクション（App Store日本のアプリ内課金でCanva Pro ¥1,180/月・¥11,800/年）のみ。Web契約時の通貨・価格は今回も未確認のまま「要公式確認」を維持。
+  - 二次情報（Designrr等の第三者比較サイト）ではCanva Pro（グローバル/米ドル）$18/月・$144/年相当という記載があり、旧「$15/月・$120/年」表記自体が既に陳腐化していたことを示唆。ただし二次情報のみでは確定できないため、サイト・DBには採用せず、確認済みのJPY値（App Store日本）を採用。
+- 対象ツール: Canva AI画像生成（`canva-ai-image-generator`、監査書の対象ファイル名は`canva-ai.md`と記載されていたが実際のDBファイルは`src/content/tools/canva-ai-image-generator.md`）
+- DB本体も一部フィールドが旧USD表記のまま残っていたため、DB側も修正（詳細は下記）：
+  - `src/content/tools/canva-ai-image-generator.md`
+    - 36行目 `paidPlanNote`: 修正前「Canva Pro $15/月〜（月払い）／$120/年（年払い）。有料プランは…」→ 修正後「Canva Pro ¥1,180/月〜・¥11,800/年〜（App Store日本の公式表記）。Web契約時の価格・通貨は要公式確認です。有料プランは…」
+    - 231行目 本文料金表: 修正前「$15/月〜」→ 修正後「¥1,180/月〜（App Store日本、Web契約は要公式確認）」
+    - `lowestPaidPlan`(7行目)・`japanBilling`セクション(163-179行目)は既に正しいため変更なし
+- 記事側（AUD-08の直接対象）:
+  - `src/pages/comparisons/canva-ai-vs-adobe-firefly/index.astro`(51行目): 修正前「$15/月〜（Canva Pro・月払い）／$120/年（年払い）」→ 修正後「¥1,180/月〜（Canva Pro・App Store日本のアプリ内課金）。Web契約の通貨は要公式確認」（同記事内の他箇所87-88,133,155と表記統一）
+- 同一問題として横展開修正（Canva AI行のみ、他ツールは変更なし）:
+  - `src/content/guides/commercial-use-cost-comparison.md`（67,84,106行目）
+  - `src/pages/guides/commercial-use-cost-comparison/index.astro`（22,60,103行目）
+  - `src/pages/categories/image-generation/index.astro`（117行目、Canva AIカードのprice欄のみ）
+- 除外（今回は変更しない）:
+  - `src/components/CanvaAiTool.astro`（オーファンコンポーネント、AUD-18で別途対応予定のため対象外）
+  - `src/content/tools/playground-ai.md`・`src/pages/tools/playground-ai/index.astro`（USD表記だがPlayground AI自体の実料金であり別問題）
+  - Adobe Firefly側の既存値は変更なし（列見出し等の調整も今回は不要と判断、既存表記で問題なし）
+- 全文検索: `Canva|USD|\$|ドル|円|月額|年額|月払い|年払い`等でCanva関連ファイルを再検索し、旧USD「$15/月」「$120/年」の残存がないことを確認（オーファンコンポーネント除く）
+- build検証: 下記コミット時点のbuild結果を参照
+- commit予定: "Fix outdated Canva AI pricing"

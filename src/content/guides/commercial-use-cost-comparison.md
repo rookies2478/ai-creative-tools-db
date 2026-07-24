@@ -64,7 +64,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 | Adobe Firefly | 画像 | あり（制限付） | 1,580円/月（税込）〜 | あり |
 | DALL-E | 画像 | あり（制限付） | ChatGPT Plus等 | あり（ChatGPT準拠） |
 | Leonardo AI | 画像 | あり（制限付） | $12/月〜（月払い） | 要確認 |
-| Canva AI | 画像 | あり（制限付） | $15/月〜（月払い） | あり |
+| Canva AI | 画像 | あり（制限付） | ¥1,180/月〜（App Store日本、Web契約は要公式確認） | あり |
 | Runway | 動画 | あり（初回のみ） | $12/月〜（年払い） | なし |
 | Pika | 動画 | あり（制限付） | $8/月〜（年払い） | 一部あり |
 | Luma AI | 動画 | あり（制限付） | $30/月〜 | 要確認 |
@@ -81,7 +81,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 | Adobe Firefly | あり（数量は変更の可能性あり） | Standard 1,580円/月（税込）〜（一定の生成クレジット付与） | プランによって月間クレジット上限が変わる |
 | DALL-E | ChatGPT無料枠（制限付） | ChatGPT Plus等の有料プランで拡大 | API利用は別途従量課金（公式サイトで要確認） |
 | Leonardo AI | 1日150トークン程度 | Apprentice $12/月〜 | 生成サイズ・品質設定でトークン消費量が変わる |
-| Canva AI | Dream Lab 月20回程度 | Pro $15/月（月500回程度） | 生成回数制の場合が多い（詳細は公式確認） |
+| Canva AI | Dream Lab 月20回程度 | Pro ¥1,180/月〜（App Store日本、月500回程度） | 生成回数制の場合が多い（詳細は公式確認） |
 | Runway | 125クレジット（初回のみ） | Standard $12/月〜（月625クレジット程度） | 動画の長さ・解像度で消費量が変わる |
 | Pika | 月80クレジット程度 | Standard $8/月〜（月700クレジット程度） | 動画の秒数・解像度によって消費量が変わる場合あり |
 | Luma AI | 制限付き月間クレジット | Plus $30/月〜 | プランで月間クレジット上限が異なる |
@@ -103,7 +103,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 | Adobe Firefly | Standard | 1,580円/月（税込） | プランクレジット次第 | 要公式確認 |
 | DALL-E（API） | 従量 | 生成ごと課金 | 制限なし | 公式APIページで確認 |
 | Leonardo AI | Apprentice | $12/月 | トークン制（詳細は公式） | 要公式確認 |
-| Canva AI（Pro） | Pro | $15/月 | 月500回程度 | 約$0.03/枚 |
+| Canva AI（Pro） | Pro | ¥1,180/月〜（App Store日本） | 月500回程度 | 要公式確認（通貨換算のため参考値外） |
 
 > Midjourney Basicの「約200枚」はFast時間の目安です。Relax（低速）モードでは無制限生成が可能なプランもあります。詳細は公式比較ページをご確認ください。
 

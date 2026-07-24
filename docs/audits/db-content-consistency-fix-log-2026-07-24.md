@@ -28,3 +28,22 @@
 - 主な修正内容: 「無料プランは商用利用不可」「商用利用には有料プラン＋Private設定が必須」という逆方向の断定表現を、「無料プランも非独占的ライセンスで商用利用可能（ただし所有権はLeonardo.AI、他ユーザーも同一画像を使用可）／有料プランは完全な所有権」という表現に統一。commit: 本記録作成と同一コミット（詳細はgit logを参照）。
 - 除外: Leonardo AI以外のツール（Pika・Kling AI等の商用利用不可の記述）は変更していない。
 - オーファンコンポーネント`src/components/LeonardoAiTool.astro`: どこからも参照されていないため未修正（既存監査のAUD-31と同種の温存判断）。
+
+## AUD-03/04/05 Pika 動画長・Pikaframes・無料クレジット（P1）
+
+- 対応日: 2026-07-24
+- 一次情報確認: `docs/research/pika-features-pricing-verification-2026-07-24.md`（Pika公式料金ページ https://pika.art/pricing を直接確認）
+- 確認内容の要旨:
+  - 通常のText-to-Video / Image-to-Videoは5秒・10秒から選択（公式料金ページに明記）
+  - Pikaframes（複数画像間のフレーム補間・延長機能）は現在も提供されており、5秒/10秒/10〜15秒/15〜20秒/20〜25秒の区分で最大25秒程度まで対応
+  - 無料（Free）プランには毎月80クレジットが付与されると公式料金ページに明記（480p・透かしあり・商用利用不可）。付与周期は「毎月」であり、初回のみの付与ではない
+- DB（`src/content/tools/pika.md`）の修正:
+  - AUD-03: `features.maxVideoDuration`（旧: 5秒・10秒対応のみを記載）と`notBestFor`（旧: 「最大10〜25秒程度」と矛盾する表現）を統一。通常生成（5秒・10秒）とPikaframes（最大25秒）を明確に区分する記述に変更し、本文に「動画の長さについて」セクションを新設
+  - AUD-04: `features.videoExtend`を`false`→`true`に変更（Pikaframesが実際に提供されているため）。FAQに「Pikaframesとは何ですか？」を追加
+  - AUD-05: `freePlanNote`・`pricingDecision.freePlanLimitNote`・料金表・FAQを「クレジット数は公式に明記なし」から「毎月80クレジット（2026-07-24公式確認）」に変更。ただし変更・改定の可能性がある旨は維持
+  - `lastReviewed`/`verifiedAt`/`reviewed.pricing`/`reviewed.features`を2026-07-24に更新、`nextReviewDue`を2026-10-24に更新
+- 記事側の修正: `src/pages/tools/pika/index.astro`（無料枠クイックテーブル・FAQ・情報確認日のフォールバック値を80クレジット/月・2026-07-24に統一）
+- 変更しなかった箇所: 他ツールページ・比較記事・カテゴリページ・ガイド記事に既に存在した「月80クレジット程度（毎月更新）」「Pikaframes（最大25秒）」等の記述は、一次情報確認の結果、内容として正確だったため変更不要と判断（全文検索で確認、19箇所ほど該当）
+- 除外: Pika以外のツール（Runway・Kling AI等）の料金・機能情報は変更していない
+- 未確定のまま残した項目: 有料プラン（Standard/Pro/Fancy）の名称・料金体系が公式サイトで変更されている可能性を示す二次情報があったが、今回のAUD-03/04/05のスコープ外のため確認・変更は行っていない（将来の課題として研究記録に記載）
+- build検証: `npm run build` で92ページ生成、error 0・warning 0を確認

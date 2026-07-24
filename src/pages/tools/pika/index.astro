@@ -130,14 +130,14 @@ const jsonLd = JSON.stringify([
         kind: 'spec',
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成' }],
-          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>クレジット付与（要公式確認）</span><br>商用利用不可・透かしあり。クレジット数・条件は変更される可能性あり。' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>毎月80クレジット（2026-07-24公式確認）</span><br>商用利用不可・透かしあり・480p。付与量は時期・プラン改定により変わる可能性あり。' }],
           [{ html: '最安料金', rk: true }, { html: '<span class="mono">$8/月〜（年払い）</span><br>月払いでは料金が異なる場合あり。最新料金は公式サイトで確認。' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>有料プランで可（要確認）</span><br>プランによって条件が異なる場合あり。最新条件は必ず公式サイトをご確認ください。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料プランあり・有料なし</span><br>有料プランでは透かしなしとされています。' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>部分対応</span>' }],
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span>' }],
           [{ html: '最大動画長', rk: true }, { html: '最大10秒（Pikaframesで最大25秒）' }],
-          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-05', mono: true }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-07-24', mono: true }],
           [{ html: '公式サイト', rk: true }, { html: '<a href="https://pika.art" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
         note: '※ 料金・クレジット数・商用利用条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
@@ -240,7 +240,7 @@ const jsonLd = JSON.stringify([
         { tag: '公式', label: 'Pika 公式サイト', href: 'https://pika.art' },
       ]}
       faqs={[
-        { q: 'Pikaは無料で使えますか？', a: '無料プランでクレジットが付与されるとされていますが、クレジット数は変更される可能性があります。最新の無料枠条件は公式サイトをご確認ください。無料プランでは商用利用不可・透かしが付与されます。' },
+        { q: 'Pikaは無料で使えますか？', a: '公式料金ページ（2026-07-24確認）では毎月80クレジットが付与されると明記されています。ただし付与量は時期やプラン改定によって変わる可能性があるため、固定値として過信せず最新の無料枠条件は公式サイトをご確認ください。無料プランでは商用利用不可・透かしあり・480p出力という制約があります。' },
         { q: 'Pikaは商用利用できますか？', a: '有料プランでは商用利用できるとされていますが、プランによって条件が異なる場合があります。商用利用前は必ず最新の公式利用規約をご確認ください。このページは法的助言ではありません。' },
         { q: 'Pikaは日本語で使えますか？', a: 'UIは部分的に日本語対応しています。プロンプトは一部対応ですが、英語の方が精度が高い傾向があります。' },
         { q: '動画の最大長はどのくらいですか？', a: '通常は最大10秒の動画生成が可能です。Pikaframes機能を使用すると最大25秒まで延長できるとされています。最新仕様は公式サイトでご確認ください。' },

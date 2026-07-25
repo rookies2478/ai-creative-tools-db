@@ -116,20 +116,20 @@ const articleJsonLd = JSON.stringify([{
   lead="デザインテンプレート連携・商用利用条件・Adobe Creative Cloud連携の観点から2ツールを整理します。SNS画像・バナー・ブログアイキャッチなど用途別の判断ポイントを確認してください。"
   category="AI画像生成ツール比較"
   latestDate={latestDate}
-  toolAName="Canva AI"
+  toolAName="Canva AI画像生成"
   toolASlug="canva-ai-image-generator"
   toolBName="Adobe Firefly"
   toolBSlug="adobe-firefly"
   quickDecisionRows={[
-    { purpose: 'テンプレートと一体でデザインしたい人', candidate: 'Canva AI', checkPoint: '人間制作物と偽らないこと、公開先の開示要件など規約を確認' },
+    { purpose: 'テンプレートと一体でデザインしたい人', candidate: 'Canva AI画像生成', checkPoint: '人間制作物と偽らないこと、公開先の開示要件など規約を確認' },
     { purpose: 'Adobe製品を使い慣れている人', candidate: 'Adobe Firefly', checkPoint: 'Creative Cloud連携。β機能は商用利用対象外とされる' },
     { purpose: '無料で試したい人', candidate: '両方とも無料枠あり', checkPoint: '各ツールの無料枠の上限・条件は変更される場合あり。公式で確認' },
-    { purpose: '文字入れ・レイアウト調整もまとめてやりたい人', candidate: 'Canva AI', checkPoint: 'Canvaエディタで画像生成から文字入れまで一体利用可能' },
+    { purpose: '文字入れ・レイアウト調整もまとめてやりたい人', candidate: 'Canva AI画像生成', checkPoint: 'Canvaエディタで画像生成から文字入れまで一体利用可能' },
     { purpose: '商用利用前提で確認したい人', candidate: '両方とも公式規約を確認', checkPoint: 'プラン・用途・Canva素材の有無によって条件が異なる場合あり' },
   ]}
   conclusionA={{
     label: 'テンプレート・デザイン一体型重視 →',
-    toolName: 'Canva AI',
+    toolName: 'Canva AI画像生成',
     toolHref: '/tools/canva-ai-image-generator/',
     body: 'CanvaのデザインツールにAI画像生成が統合されており、SNS投稿・バナー・プレゼン資料をテンプレートと一体で作成できます。日本語UI対応。無料枠あり。生成画像の商用利用条件は公式規約で確認が必要です（人間制作物と偽ることは禁止。公開先や地域法令によっては開示が必要な場合あり）。',
   }}
@@ -157,7 +157,7 @@ const articleJsonLd = JSON.stringify([{
     <h2 class="cp-body-h2">デザインテンプレートとの連携</h2>
     <div class="cp-2col">
       <div class="cp-card">
-        <h3 class="cp-card-h3">Canva AI</h3>
+        <h3 class="cp-card-h3">Canva AI画像生成</h3>
         <ul>
           <li>Canvaのデザインエディターと統合された画像生成機能</li>
           <li>SNS投稿・バナー・プレゼン・ブログ用テンプレートと一体利用可能</li>
@@ -218,7 +218,7 @@ const articleJsonLd = JSON.stringify([{
   <SamePromptImageComparison
     imageA={imgCanva}
     imageB={imgFirefly}
-    toolAName="Canva AI"
+    toolAName="Canva AI画像生成"
     toolBName="Adobe Firefly"
   />
 

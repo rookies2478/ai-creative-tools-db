@@ -394,3 +394,73 @@
 - 修正ファイル: なし
 - HOLDまたはNO_CHANGE理由: DBへの新規URLフィールド追加はスキーマ変更に該当し今回のバッチ禁止事項に抵触するため見送り
 - commit予定: 対象外（変更なし）
+
+## AUD-29 D-ID 音声対応言語数とjapanesePrompt混同（P3）
+
+- 重要度: P3
+- 対象: D-ID／japanesePrompt（比較記事の表現）
+- 判定: FIXED
+- 不一致分類: 日本語UIと日本語プロンプトの混同（音声/字幕対応言語数とプロンプト対応の混同）
+- 一次情報確認: 不要（DB既確認済み）。`docs/research/aud-29-d-id-verification-2026-07-25.md`
+- 修正前: `src/pages/comparisons/avatar-video-ai-tools/index.astro:40` `japanese: '○（Studio 119言語対応、アバターは日本語含むと公式記載）／UI：要確認'`
+- 修正後: `japanese: '○（音声・字幕は119言語対応で日本語含むと公式記載）／UI：要確認／日本語プロンプト対応：要確認'`
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/comparisons/avatar-video-ai-tools/index.astro`
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-29 to AUD-33"
+
+## AUD-30 DALL·E lastReviewed日付ズレ（P3）
+
+- 重要度: P3
+- 対象: DALL·E／lastReviewed
+- 判定: FIXED
+- 不一致分類: 更新日不一致
+- 一次情報確認: 不要。`docs/research/aud-30-dalle-verification-2026-07-25.md`
+- 修正前: `src/pages/categories/image-generation/index.astro:120` `date: '2026-06-10'`
+- 修正後: `date: '2026-06-15'`（DBの`lastReviewed`と一致）
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/categories/image-generation/index.astro`
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-29 to AUD-33"
+
+## AUD-31 Microsoft Designer オーファンコンポーネント（P3）
+
+- 重要度: P3
+- 対象: `src/components/MicrosoftDesignerTool.astro`
+- 判定: FIXED（削除）
+- 不一致分類: オーファンファイル
+- 一次情報確認: 該当なし（参照調査のみ）。`docs/research/aud-31-microsoft-designer-orphan-verification-2026-07-25.md`
+- 修正前: どこからも参照されていない旧世代コンポーネントが「条件あり」「無料枠あり」「要確認」という古い値を保持したまま残置
+- 修正後: ファイルを削除。全文検索で参照0件・動的import/文字列参照なし・現行ページ（`ToolDetailPage.astro`使用）と機能重複なしを確認の上実施。build検証で92ページ生成・error 0を確認
+- DB変更の有無: なし
+- 修正ファイル: `src/components/MicrosoftDesignerTool.astro`（削除）
+- HOLDまたはNO_CHANGE理由: 該当なし。他のオーファンコンポーネント（LeonardoAiTool.astro等）は監査本文のAUD-31対象外のため今回未着手
+- commit予定: "Fix DB consistency issues AUD-29 to AUD-33"
+
+## AUD-32 Microsoft Designer カテゴリ一覧commercialUse未反映（P3）
+
+- 重要度: P3
+- 対象: Microsoft Designer／commercialUse
+- 判定: FIXED
+- 不一致分類: ハードコード未反映（ページが古い）
+- 一次情報確認: 不要（DB既確認済み）。`docs/research/aud-32-microsoft-designer-commercial-verification-2026-07-25.md`
+- 修正前: `src/pages/categories/image-generation/index.astro:122` `commercial: '要確認'`
+- 修正後: `commercial: '商用利用不可（個人利用限定）'`（DBの`commercialUse: "no"`を反映）
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/categories/image-generation/index.astro`
+- HOLDまたはNO_CHANGE理由: 該当なし。他ツール行の同種「要確認」定型文言はAUD-32の対象外のため今回未着手（カテゴリページ全体の一括棚卸しは別タスク）
+- commit予定: "Fix DB consistency issues AUD-29 to AUD-33"
+
+## AUD-33 Canva AI画像生成 name表記ゆれ（P3）
+
+- 重要度: P3
+- 対象: Canva AI画像生成／name
+- 判定: FIXED
+- 不一致分類: 表記ゆれ
+- 一次情報確認: 不要。`docs/research/aud-33-canva-ai-name-verification-2026-07-25.md`
+- 修正前: `src/pages/comparisons/canva-ai-vs-adobe-firefly/index.astro`内6箇所で短縮表記「Canva AI」
+- 修正後: DB正本`name: "Canva AI画像生成"`に統一
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/comparisons/canva-ai-vs-adobe-firefly/index.astro`
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-29 to AUD-33"

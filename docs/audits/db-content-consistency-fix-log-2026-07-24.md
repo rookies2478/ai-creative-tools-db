@@ -258,3 +258,69 @@
 - 修正ファイル: `src/components/CanvaAiTool.astro`（削除）
 - HOLDまたはNO_CHANGE理由: 該当なし。他4件のオーファンコンポーネント（LeonardoAiTool.astro等）は監査本文のAUD-18対象外のため今回未着手
 - commit予定: "Fix DB consistency issues AUD-14 to AUD-18"
+
+## AUD-19 Kling AI 運営国・会社情報の混同（P2）
+
+- 重要度: P2
+- 対象: Kling AI／japanBilling.providerCountry・providerName
+- 判定: FIXED
+- 一次情報確認: `docs/research/aud-19-kling-ai-verification-2026-07-25.md`（WebSearchでKling AI公式利用規約関連の二次情報を確認。`kling.ai`/`klingai.com`本体への直接WebFetchはHTTP 446でブロックされ取得不可）
+- 修正前: `src/pages/tools/kling-ai/index.astro`の4箇所（L32, L62, L117, L142, L245）で「Kling AIは中国Kuaishou運営」「運営が中国企業（Kuaishou）」と、開発元と運営法人を同一視して断定
+- 修正後: 「Kuaishou（中国）系が開発／運営法人（契約主体）はシンガポール法人（KLING AI PTE. LTD.）」という形に、開発元と運営法人を分離して表現
+- DB変更の有無: なし（DBは既に2026-07-13時点で正確に区分済み）
+- 修正ファイル: `src/pages/tools/kling-ai/index.astro`
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-19 to AUD-23"
+
+## AUD-20 Playground AI japaneseUiカテゴリ一覧未反映（P2）
+
+- 重要度: P2
+- 対象: Playground AI／japaneseUi
+- 判定: FIXED
+- 一次情報確認: `docs/research/aud-20-playground-ai-verification-2026-07-25.md`（DB自体が一次情報確認済み正本のため新規確認は不要と判断）
+- 修正前: `src/pages/categories/image-generation/index.astro:127` `jp: '要確認'`
+- 修正後: `jp: '非対応'`（DBの`japaneseUi: false`を反映）
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/categories/image-generation/index.astro`
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-19 to AUD-23"
+
+## AUD-21 DreamStudio japaneseUi表記不一致（P2・HOLD）
+
+- 重要度: P2
+- 対象: DreamStudio／japaneseUi
+- 判定: HOLD
+- 一次情報確認: `docs/research/aud-21-dreamstudio-verification-2026-07-25.md`
+- 監査記載の対象ファイル`src/components/Free.astro`(86)には該当フィールドが存在せず、実際の該当箇所は`src/components/Japanese.astro`(86)であることを確認（ファイル名の記載誤り）
+- 修正前: `Japanese.astro`の`ja`フィールドはDreamStudioのみでなく、DB上`japaneseUi: false`（非対応確定）の他ツール多数（Haiper、Leonardo AI、Kling AI、Luma AI、NightCafe、Midjourney、Pika、InVideo AI、Runway、Stable Diffusion、Tensor.Art等）も一律`ja:'unknown'`表示。`JaStatus`型が`'ok'|'partial'|'unknown'`の3値のみで「非対応」状態を表現できない構造的制約
+- 修正後: 変更なし
+- DB変更の有無: なし
+- 修正ファイル: なし
+- HOLDまたはNO_CHANGE理由: DreamStudio単体を直すには`JaStatus`型・`STATUS`マップへの新規状態追加が必要で、実質的に29ツール全件の`ja`値棚卸し＋型定義変更に相当し、今回のバッチで禁止されている「全29ツールのスキーマ変更」に該当するためHOLD
+- commit予定: 対象外（未修正）
+
+## AUD-22 NightCafe pricingUrl DB内部矛盾（P3）
+
+- 重要度: P3
+- 対象: NightCafe／pricingSourceUrl・pricingSourceNote
+- 判定: FIXED
+- 一次情報確認: `docs/research/aud-22-nightcafe-verification-2026-07-25.md`（WebFetchで`https://creator.nightcafe.studio/pricing`を直接確認、実在の料金ページであることを確認）
+- 修正前: `pricingSourceUrl`がブログ記事URL、`pricingSourceNote`が「料金表ページURLは未確認」という内容で、同ファイル内の`japanBilling.pricingUrl`（既に/pricingを指す）と矛盾
+- 修正後: `pricingSourceUrl`を`https://creator.nightcafe.studio/pricing`に統一し、`pricingSourceNote`を実態（月払い・四半期払い・年払いのプラン選択あり）に合わせて更新
+- DB変更の有無: あり（`src/content/tools/nightcafe.md`）
+- 修正ファイル: `src/content/tools/nightcafe.md`
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-19 to AUD-23"
+
+## AUD-23 CapCut AI providerCountry表記粒度（P3・NO_CHANGE）
+
+- 重要度: P3
+- 対象: CapCut AI／providerCountry
+- 判定: NO_CHANGE
+- 一次情報確認: 不要。`docs/research/aud-23-capcut-ai-verification-2026-07-25.md`
+- 内容: `providerCountry: "中国（配信法人はシンガポール）"`という表記は事実誤りではなく粒度の指摘（監査もP3改善提案扱い）。全文検索の結果、同種の括弧書き併記は他8ツール（dreamstudio, stable-diffusion, d-id, invideo-ai, clipdrop, heygen, synthesia, playground-ai）でも使用されており、CapCut AI単体を変更すると逆に不統一が拡大する
+- 修正前後: 変更なし
+- DB変更の有無: なし
+- 修正ファイル: なし
+- HOLDまたはNO_CHANGE理由: 表記統一は29ツール全件を対象にした横断的な意思決定が必要で、本バッチの大規模変更禁止に該当するためNO_CHANGE（統一自体は将来のガイドライン整備タスクとして先送り）
+- commit予定: 対象外（変更なし）

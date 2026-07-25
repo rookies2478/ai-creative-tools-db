@@ -324,3 +324,73 @@
 - 修正ファイル: なし
 - HOLDまたはNO_CHANGE理由: 表記統一は29ツール全件を対象にした横断的な意思決定が必要で、本バッチの大規模変更禁止に該当するためNO_CHANGE（統一自体は将来のガイドライン整備タスクとして先送り）
 - commit予定: 対象外（変更なし）
+
+## AUD-24 Runway japanesePrompt判定根拠（P3・NO_CHANGE）
+
+- 重要度: P3
+- 対象: Runway／japanesePrompt判定根拠
+- 判定: NO_CHANGE
+- 不一致分類: 表記ゆれ／根拠不足の指摘（事実誤りではない）
+- 一次情報確認: 不要。`docs/research/aud-24-runway-verification-2026-07-25.md`
+- 修正前: DB`japanesePrompt: "partial"`の判定根拠がfrontmatterの専用フィールドになく、FAQ本文にのみ「精度については公式情報での明確な記載は確認できていません」という保守的表現で存在
+- 修正後: 変更なし。既にquickTable・commercialセクション・FAQの3箇所で「英語プロンプトの方が精度が高い傾向がある」という具体的根拠が説明済みと確認
+- DB変更の有無: なし
+- 修正ファイル: なし
+- HOLDまたはNO_CHANGE理由: 根拠を専用noteフィールド化するには`config.ts`のスキーマ変更が必要で、今回のバッチルール（大規模スキーマ変更禁止）に抵触するため見送り。既存本文で実質的な根拠開示は充足していると判断
+- commit予定: 対象外（変更なし）
+
+## AUD-25 Vidu AI カテゴリ一覧japaneseUi未反映（P3）
+
+- 重要度: P3
+- 対象: Vidu AI／japaneseUi
+- 判定: FIXED
+- 不一致分類: ハードコード未反映（ページが古い）
+- 一次情報確認: 不要（DB既確認済み）。`docs/research/aud-25-vidu-ai-verification-2026-07-25.md`
+- 修正前: `src/pages/categories/video-generation/index.astro:105` `jp: '要確認'`
+- 修正後: `jp: '非対応'`（DBの`japaneseUi: false`を反映）
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/categories/video-generation/index.astro`
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-24 to AUD-28"
+
+## AUD-26 PixVerse 日本語対応3区分ガイド未掲載（P3）
+
+- 重要度: P3
+- 対象: PixVerse／japaneseUi（ガイド記事網羅性）
+- 判定: FIXED
+- 不一致分類: 単なる未掲載
+- 一次情報確認: 既存のPixVerse一次情報確認結果（AUD-13対応時、2026-07-25）を再利用。`docs/research/aud-26-pixverse-guide-verification-2026-07-25.md`
+- 修正前: `src/pages/guides/japanese-support-three-types/index.astro`の比較表にPixVerse行が存在しなかった
+- 修正後: PixVerse行を追加（日本語UI:〇対応／日本語プロンプト:？要確認／注意点にUI対応・法務ページ除く・プロンプト精度未確認の旨を明記）
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/guides/japanese-support-three-types/index.astro`
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-24 to AUD-28"
+
+## AUD-27 PixVerse japanesePrompt記号不統一（P3）
+
+- 重要度: P3
+- 対象: PixVerse／japanesePrompt表示記号
+- 判定: FIXED
+- 不一致分類: 表記ゆれ（記号統一の欠如。AUD-21の構造課題とは別種で、`Mark`型の値選択ミス）
+- 一次情報確認: 不要。`docs/research/aud-27-pixverse-symbol-verification-2026-07-25.md`
+- 修正前: `src/components/Japanese.astro:97` `prompt:'－'`
+- 修正後: `prompt:'△'`（他のunknown系ツールと統一）
+- DB変更の有無: なし
+- 修正ファイル: `src/components/Japanese.astro`（PixVerse行の1フィールドのみ。`JaStatus`型・`ja`フィールド・他ツール行・AUD-21関連箇所は無変更）
+- HOLDまたはNO_CHANGE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-24 to AUD-28"
+
+## AUD-28 Luma AI ライセンス条件URL（P3・NO_CHANGE）
+
+- 重要度: P3
+- 対象: Luma AI／ライセンス条件URL（sources配列）
+- 判定: NO_CHANGE
+- 不一致分類: 単なる未掲載（DB側に複数出典管理用フィールドがない設計差）
+- 一次情報確認: 済み。`docs/research/aud-28-luma-ai-license-url-verification-2026-07-25.md`（WebFetchで`https://lumalabs.ai/learning-hub/licensing`の実在・内容を確認）
+- 修正前: ページの`sources`配列にDB未記載の公式ライセンスガイドURLが含まれる
+- 修正後: 変更なし。URLは実在・内容確認済みの正当な公式一次情報であり、ページの`sources`配列（複数出典を列挙する構造）に含めること自体は問題でないと判断
+- DB変更の有無: なし（一度`usagePolicy.licensingGuideUrl`フィールド追加を試みたが、config.tsスキーマ変更に相当するため撤回・元に戻し済み。`git diff src/content/tools/luma-ai.md`で差分なしを確認）
+- 修正ファイル: なし
+- HOLDまたはNO_CHANGE理由: DBへの新規URLフィールド追加はスキーマ変更に該当し今回のバッチ禁止事項に抵触するため見送り
+- commit予定: 対象外（変更なし）

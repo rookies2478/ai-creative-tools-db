@@ -464,3 +464,157 @@
 - 修正ファイル: `src/pages/comparisons/canva-ai-vs-adobe-firefly/index.astro`
 - HOLDまたはNO_CHANGE理由: 該当なし
 - commit予定: "Fix DB consistency issues AUD-29 to AUD-33"
+
+## AUD-34 HeyGen lowestPaidPlan未反映（P3）
+
+- 重要度: P3
+- 対象: HeyGen／lowestPaidPlan
+- 判定: FIXED
+- 不一致分類: 料金更新漏れ
+- 一次情報確認: 不要（DB既確認済み）。`docs/research/aud-34-heygen-verification-2026-07-25.md`
+- 修正前: `src/pages/tools/heygen/index.astro:147` `[{ html: 'Creator以上', ... }, { html: '要確認（公式Pricing参照）', ... }, ...]`
+- 修正後: `[{ html: 'Creator', ... }, { html: '$29/月（月払い）／年払い時$24/月', ... }, ...]`
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/tools/heygen/index.astro`
+- HOLD/NO_CHANGE/OUT_OF_SCOPE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-34 to AUD-44"
+
+## AUD-35 Playground AI カテゴリ一覧commercialUse未反映（P3）
+
+- 重要度: P3
+- 対象: Playground AI／commercialUse
+- 判定: FIXED
+- 不一致分類: ハードコード未反映
+- 一次情報確認: 不要（DB既確認済み）。`docs/research/aud-35-playground-ai-verification-2026-07-25.md`
+- 修正前: `src/pages/categories/image-generation/index.astro:127` `commercial: '要確認'`
+- 修正後: `commercial: '無料:非商用のみ／Pro以上:商用可（案内あり）'`
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/categories/image-generation/index.astro`
+- HOLD/NO_CHANGE/OUT_OF_SCOPE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-34 to AUD-44"
+
+## AUD-36 SeaArt AI カテゴリ一覧freePlan曖昧表現（P3）
+
+- 重要度: P3
+- 対象: SeaArt AI／freePlan
+- 判定: FIXED
+- 不一致分類: ハードコード未反映
+- 一次情報確認: 不要（DB既確認済み）。`docs/research/aud-36-seaart-ai-verification-2026-07-25.md`
+- 修正前: `src/pages/categories/image-generation/index.astro:145` `freeCount: '△あり（要確認）'`
+- 修正後: `freeCount: '○あり'`
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/categories/image-generation/index.astro`
+- HOLD/NO_CHANGE/OUT_OF_SCOPE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-34 to AUD-44"
+
+## AUD-37 DreamStudio 名称表記ゆれ（P3・NO_CHANGE）
+
+- 重要度: P3
+- 対象: DreamStudio／name表記
+- 判定: NO_CHANGE
+- 不一致分類: 表記ゆれ（監査引用箇所の大半は既に解消済み）
+- 一次情報確認: 不要。`docs/research/aud-37-dreamstudio-name-verification-2026-07-25.md`
+- 内容: 監査が引用する4ファイル（Free.astro/JapaneseAiToolsGuide.astro/WatermarkCreditGuide.astro/categories/image-generation）のうち3ファイルは既に"Brand Studio（旧DreamStudio）"に修正済みを確認。Free.astroには該当記述が現在存在しない。新たに発見したサイドバーリンク（categories/image-generation:949）の短縮表記は、同一リスト内の他ツールとの表記統一を優先し変更を見送った
+- 修正前後: 変更なし
+- DB変更の有無: なし
+- 修正ファイル: なし
+- HOLD/NO_CHANGE/OUT_OF_SCOPE理由: NO_CHANGE。監査引用箇所は大半解消済みで、残る箇所はサイドバー内の意図的な短縮表記統一を優先
+- commit予定: 対象外（変更なし）
+
+## AUD-38 Gemini画像生成 freePlanバッジ粒度不統一（P3）
+
+- 重要度: P3
+- 対象: Gemini画像生成／freePlan
+- 判定: FIXED
+- 不一致分類: 表示記号不統一
+- 一次情報確認: 不要（DB既確認済み）。`docs/research/aud-38-gemini-free-plan-verification-2026-07-25.md`
+- 修正前: `src/pages/tools/gemini-image-generation/index.astro`の4箇所（L68,83,133,209）で`{ s: 'cond', label: '限定的' }`
+- 修正後: `{ s: 'ok', label: 'あり' }`（他コンポーネントFree.astro/JapaneseAiToolsGuide.astro/WatermarkCreditGuide.astroと統一）
+- DB変更の有無: なし
+- 修正ファイル: `src/pages/tools/gemini-image-generation/index.astro`
+- HOLD/NO_CHANGE/OUT_OF_SCOPE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-34 to AUD-44"
+
+## AUD-39 DALL·E ハイフン表記残存（P3）
+
+- 重要度: P3
+- 対象: DALL·E／name表記
+- 判定: FIXED
+- 不一致分類: 表記ゆれ
+- 一次情報確認: 不要。`docs/research/aud-39-dalle-hyphen-verification-2026-07-25.md`
+- 修正前: `src/content/guides/commercial-use-cost-comparison.md`(14箇所), `src/content/tools/nightcafe.md`(6箇所), `src/pages/guides/commercial-use-cost-comparison/index.astro`(6箇所), `src/pages/tools/nightcafe/index.astro`(4箇所)で「DALL-E」（ハイフン）表記
+- 修正後: 全30箇所を「DALL·E」（中点）に統一
+- DB変更の有無: なし
+- 修正ファイル: 上記4ファイル
+- HOLD/NO_CHANGE/OUT_OF_SCOPE理由: 該当なし
+- commit予定: "Fix DB consistency issues AUD-34 to AUD-44"
+
+## AUD-40 Kling AI 透かし文字列表記（P3・HOLD）
+
+- 重要度: P3
+- 対象: Kling AI／生成動画サンプルの透かし文字列
+- 判定: HOLD
+- 不一致分類: 表示記号不統一の可能性、または実際の透かし表示そのものの可能性（断定不可）
+- 一次情報確認: 実施できず。`docs/research/aud-40-kling-ai-watermark-text-verification-2026-07-25.md`（動画ファイルの実際のフレーム内容の目視確認が必要だが、テキストベースツールでは確認不可）
+- 内容: `generatedVideos.ts:50`のusageNoteと比較記事(L8)で「透かし（KlingAI 3.0）」という詰め表記・バージョン3.0の記述があるが、同エントリの`model`フィールドは「Kling AI 2.0」（スペースあり・バージョン2.0）で、スペース有無だけでなくバージョン番号も食い違う
+- 修正前後: 変更なし
+- DB変更の有無: なし
+- 修正ファイル: なし
+- HOLD/NO_CHANGE/OUT_OF_SCOPE理由: 監査報告書自身が「断定不可」「現物確認の上で要否判断」としており、動画の実際の透かし表示を確認せずに文字列を書き換えると事実と異なる記述になるリスクがあるためHOLD
+- commit予定: 対象外（未修正）
+
+## AUD-41 カテゴリページ一律「要確認」表示（P3・NO_CHANGE）
+
+- 重要度: P3
+- 対象: 全般（構造的指摘）
+- 判定: NO_CHANGE
+- 不一致分類: 監査指摘自体が現状に不適合
+- 一次情報確認: 不要。`docs/research/aud-41-category-page-conservative-display-verification-2026-07-25.md`
+- 内容: 監査報告書自身が「意図的な保守的表示の可能性が高く必須修正ではない」「対応不要（記録のみ）」と明記
+- 修正前後: 変更なし
+- DB変更の有無: なし
+- 修正ファイル: なし
+- HOLD/NO_CHANGE/OUT_OF_SCOPE理由: 監査報告書の判断をそのまま踏襲しNO_CHANGE
+- commit予定: 対象外（変更なし）
+
+## AUD-42 専用astroページのmd本文非表示構造リスク（P3・NO_CHANGE）
+
+- 重要度: P3
+- 対象: Synthesia／Gemini画像生成／HeyGen等（専用astroページ構造）
+- 判定: NO_CHANGE
+- 不一致分類: 構造的制約
+- 一次情報確認: 不要。`docs/research/aud-42-dedicated-page-md-body-hidden-verification-2026-07-25.md`
+- 内容: 専用astroページのprops手動指定構造自体は今回のバッチで変更せず（大規模改修に相当するため）。個別の発現例（AUD-34, AUD-38）は今回のバッチで対症療法的に修正済み
+- 修正前後: 変更なし（構造は維持）
+- DB変更の有無: なし
+- 修正ファイル: なし
+- HOLD/NO_CHANGE/OUT_OF_SCOPE理由: 監査自身が「更新チェックリスト運用の徹底」という運用対応を推奨しており、コード構造変更は今回のバッチルール（大規模変更禁止）に抵触するためNO_CHANGE
+- commit予定: 対象外（変更なし）
+
+## AUD-43 Gemini画像生成専用ページ構造リスク（P3・NO_CHANGE）
+
+- 重要度: P3
+- 対象: Gemini画像生成／ページ構造
+- 判定: NO_CHANGE
+- 不一致分類: 構造的制約（AUD-42と同一）
+- 一次情報確認: 不要。`docs/research/aud-43-gemini-page-structure-verification-2026-07-25.md`
+- 内容: AUD-38で個別データの乖離（freePlan粒度）は解消済み。ページ構造自体（props手動指定）は維持
+- 修正前後: 変更なし
+- DB変更の有無: なし
+- 修正ファイル: なし
+- HOLD/NO_CHANGE/OUT_OF_SCOPE理由: 監査自身が「実害なしだが将来リスク」「運用ルールの継続」としており必須修正ではないためNO_CHANGE
+- commit予定: 対象外（変更なし）
+
+## AUD-44 config.ts partial定義コメント不足（P3）
+
+- 重要度: P3
+- 対象: 全般（スキーマドキュメント）／`src/content/config.ts:4`
+- 判定: FIXED
+- 不一致分類: 根拠URL不足（判定基準のドキュメント不足）
+- 一次情報確認: 不要。`docs/research/aud-44-config-partial-definition-verification-2026-07-25.md`
+- 修正前: `triStateSchema`定義にコメントなし
+- 修正後: tri-state（true/'partial'/false/'unknown'）の判定基準を説明する4行のコメントを追加。型定義（`z.union([...])`）自体は変更なし
+- DB変更の有無: なし（コメントのみ、データ・スキーマ型は無変更）
+- 修正ファイル: `src/content/config.ts`
+- HOLD/NO_CHANGE/OUT_OF_SCOPE理由: 該当なし。AUD-21で凍結されている`Japanese.astro`のJaStatus型・STATUSマップには一切触れていないことを確認済み
+- commit予定: "Fix DB consistency issues AUD-34 to AUD-44"

@@ -17,7 +17,7 @@ const basicHeaders = ['ツール名', 'カテゴリ', '無料プラン', '最低
 const basicRows = [
   [{ text: 'Midjourney' }, { text: '画像' }, { text: 'なし' }, { text: '$10/月〜（月払い）' }, { text: 'なし' }],
   [{ text: 'Adobe Firefly' }, { text: '画像' }, { text: 'あり（制限付）' }, { text: '1,580円/月（税込）〜' }, { text: 'あり' }],
-  [{ text: 'DALL-E' }, { text: '画像' }, { text: 'あり（制限付）' }, { text: 'ChatGPT Plus等' }, { text: 'あり（ChatGPT準拠）' }],
+  [{ text: 'DALL·E' }, { text: '画像' }, { text: 'あり（制限付）' }, { text: 'ChatGPT Plus等' }, { text: 'あり（ChatGPT準拠）' }],
   [{ text: 'Leonardo AI' }, { text: '画像' }, { text: 'あり（制限付）' }, { text: '$12/月〜（月払い）' }, { text: '要確認' }],
   [{ text: 'Canva AI' }, { text: '画像' }, { text: 'あり（制限付）' }, { text: '¥1,180/月〜（App Store日本、Web契約は要公式確認）' }, { text: 'あり' }],
   [{ text: 'Runway' }, { text: '動画' }, { text: 'あり（初回のみ）' }, { text: '$12/月〜（年払い）' }, { text: 'なし' }],
@@ -43,7 +43,7 @@ const creditRows = [
     { text: 'プランによって月間クレジット上限が変わる' },
   ],
   [
-    { text: 'DALL-E' },
+    { text: 'DALL·E' },
     { text: 'ChatGPT無料枠（制限付）' },
     { text: 'ChatGPT Plus等の有料プランで拡大' },
     { text: 'API利用は別途従量課金（公式サイトで要確認）' },
@@ -98,7 +98,7 @@ const imageUnitRows = [
   [{ text: 'Midjourney' }, { text: 'Basic' }, { text: '$10/月' }, { text: '約200枚（標準品質）' }, { text: '約$0.05/枚' }],
   [{ text: 'Midjourney' }, { text: 'Standard' }, { text: '$30/月' }, { text: '約900枚（Fast時間内）' }, { text: '約$0.03/枚' }],
   [{ text: 'Adobe Firefly' }, { text: 'Standard' }, { text: '1,580円/月（税込）' }, { text: 'プランクレジット次第' }, { text: '要公式確認' }],
-  [{ text: 'DALL-E（API）' }, { text: '従量' }, { text: '生成ごと課金' }, { text: '制限なし' }, { text: '公式APIページで確認' }],
+  [{ text: 'DALL·E（API）' }, { text: '従量' }, { text: '生成ごと課金' }, { text: '制限なし' }, { text: '公式APIページで確認' }],
   [{ text: 'Leonardo AI' }, { text: 'Apprentice' }, { text: '$12/月' }, { text: 'トークン制（詳細は公式）' }, { text: '要公式確認' }],
   [{ text: 'Canva AI（Pro）' }, { text: 'Pro' }, { text: '¥1,180/月〜（App Store日本）' }, { text: '月500回程度' }, { text: '要公式確認（通貨換算のため参考値外）' }],
 ];
@@ -166,7 +166,7 @@ const commercialRows = [
     { text: 'ベータ機能（β表示）は商用利用対象外とされる', muted: true },
   ],
   [
-    { text: 'DALL-E' },
+    { text: 'DALL·E' },
     { text: 'ChatGPT無料プランで制限付き案内あり' },
     { text: 'OpenAI規約上の商用利用が案内されている' },
     { text: '記載なし' },
@@ -228,7 +228,7 @@ const watermarkHeaders = ['ツール名', '無料プランの透かし', '有料
 const watermarkRows = [
   [{ text: 'Midjourney' }, { text: '無料プランなし' }, { text: '透かしなし（有料プラン）' }, { text: '非公開' }, { text: '規約上の要件を確認' }],
   [{ text: 'Adobe Firefly' }, { text: 'プランによっては可視透かしあり' }, { text: 'プランによっては可視透かしあり' }, { text: 'C2PAメタデータ埋め込みあり' }, { text: '規約上の要件を確認' }],
-  [{ text: 'DALL-E' }, { text: '制限付き利用' }, { text: 'なし（C2PA不可視メタデータあり）' }, { text: 'C2PAメタデータ埋め込みあり（場合による）' }, { text: '規約上の要件を確認' }],
+  [{ text: 'DALL·E' }, { text: '制限付き利用' }, { text: 'なし（C2PA不可視メタデータあり）' }, { text: 'C2PAメタデータ埋め込みあり（場合による）' }, { text: '規約上の要件を確認' }],
   [{ text: 'Leonardo AI' }, { text: '詳細は公式確認' }, { text: '通常は透かしなしとされている' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
   [{ text: 'Canva AI' }, { text: '詳細は公式確認' }, { text: '詳細は公式確認' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
   [{ text: 'Runway' }, { text: '透かしあり' }, { text: '透かしなし（有料プラン）' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
@@ -299,7 +299,7 @@ const faqItems = [
   },
   {
     q: '日本語UIに対応しているツールはどれですか？',
-    a: 'Adobe Firefly、Canva AI、DALL-E（ChatGPT準拠）は日本語UIに対応しています。Midjourney、Runway、Luma AI、Vidu AIは英語インターフェースです。Kling AI・Pikaは一部日本語表示がある場合があります。',
+    a: 'Adobe Firefly、Canva AI、DALL·E（ChatGPT準拠）は日本語UIに対応しています。Midjourney、Runway、Luma AI、Vidu AIは英語インターフェースです。Kling AI・Pikaは一部日本語表示がある場合があります。',
   },
   {
     q: '料金・条件がよく変わるのはなぜですか？',

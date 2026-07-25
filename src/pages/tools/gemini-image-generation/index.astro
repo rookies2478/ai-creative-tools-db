@@ -65,7 +65,7 @@ const jsonLd = JSON.stringify([
       lead="Google GeminiアプリでAI画像生成・画像編集・テキスト入り画像・スタイル適用などができる機能です。Googleアカウントで手軽に利用できますが、商用利用には用途・プラン・生成AI禁止利用ポリシーの確認が必要です。"
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '条件あり（要確認）' } },
-        { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
+        { lb: '無料枠', badge: { s: 'ok', label: 'あり' } },
         { lb: '料金目安', text: 'Google AIプランによる', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: 'SynthID付与あり' } },
         { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
@@ -80,7 +80,7 @@ const jsonLd = JSON.stringify([
           det: '用途・プランによって条件が異なる可能性があります。Googleの生成AI禁止利用ポリシーに抵触しないかの確認が必要です。第三者の権利（著作権・肖像権等）に関わる生成物の利用には注意が必要です。利用規約は変更される可能性があります。最新の公式規約とポリシーをご確認ください。',
         },
         {
-          title: '無料枠', badge: { s: 'cond', label: '限定的' },
+          title: '無料枠', badge: { s: 'ok', label: 'あり' },
           det: 'Google AIの無料プランでもGeminiアプリの画像生成・編集が案内されています。利用上限・対応モデル・機能はプランや時期によって変わる可能性があります。最新の状況はGoogle公式でご確認ください。',
         },
         {
@@ -130,7 +130,7 @@ const jsonLd = JSON.stringify([
         kind: 'spec',
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成（Google Geminiアプリ内機能）' }],
-          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br>無料プランで画像生成・編集が案内されています。利用上限・機能はプランや時期により変わる可能性があります。' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>あり</span><br>無料プランで画像生成・編集が案内されています。利用上限・機能はプランや時期により変わる可能性があります。' }],
           [{ html: '料金', rk: true }, { html: 'Google AIプランによる（無料〜有料）。最新料金は公式サイトでご確認ください。' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（要確認）</span><br>用途・プラン・生成AI禁止利用ポリシーの確認が必要です。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>SynthID付与あり</span><br>目に見えない透かし（SynthID）と目に見える透かしが使用されると公式ページで案内されています。' }],
@@ -206,7 +206,7 @@ const jsonLd = JSON.stringify([
         headers: ['比較軸', 'Gemini画像生成', 'DALL·E', 'Adobe Firefly'],
         rows: [
           [{ html: '日本語UI', rk: true }, { html: '対応', me: true }, { html: '対応' }, { html: '対応' }],
-          [{ html: '無料枠', rk: true }, { html: '限定的', me: true }, { html: '限定的' }, { html: '限定的' }],
+          [{ html: '無料枠', rk: true }, { html: 'あり', me: true }, { html: '限定的' }, { html: '限定的' }],
           [{ html: '商用利用', rk: true }, { html: '要確認', me: true }, { html: '案内あり（条件確認）' }, { html: '有料向け案内あり' }],
           [{ html: '透かし', rk: true }, { html: 'SynthID付与', me: true }, { html: '要確認' }, { html: 'プランによる' }],
         ],

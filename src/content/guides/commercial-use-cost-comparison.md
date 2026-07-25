@@ -1,6 +1,6 @@
 ---
 title: "AI画像・動画生成ツールの商用利用条件と実質コスト比較ガイド"
-description: "Midjourney・Adobe Firefly・DALL-E・Leonardo AI・Canva AI（画像）、Runway・Pika・Luma AI・Kling AI・Vidu AI（動画）の商用利用条件・料金・クレジット消費・透かし条件を公式情報ベースで比較します。本記事は法的助言ではありません。"
+description: "Midjourney・Adobe Firefly・DALL·E・Leonardo AI・Canva AI（画像）、Runway・Pika・Luma AI・Kling AI・Vidu AI（動画）の商用利用条件・料金・クレジット消費・透かし条件を公式情報ベースで比較します。本記事は法的助言ではありません。"
 lastReviewed: "2026-06-04"
 nextReviewDue: "2026-09-04"
 ---
@@ -31,7 +31,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 商用利用の可否は**ツールとプランの組み合わせ**で変わります。主なパターンは次の3つです。
 
 1. **有料プランで商用利用条件が案内されている** — Midjourney、Adobe Firefly、Leonardo AI、Luma AI、Pikaなど
-2. **有料・無料ともに商用利用条件が案内されているが確認が必要** — DALL-E/ChatGPT Image、Canvaなど
+2. **有料・無料ともに商用利用条件が案内されているが確認が必要** — DALL·E/ChatGPT Image、Canvaなど
 3. **公式情報から条件が確認しにくい** — Kling AI（HTTP 446で公式ページ直接確認不可）、Vidu AI（詳細は公式規約参照）
 
 どのツールも「商用利用できる」と断言するのではなく、**利用前に最新の公式規約を確認する**ことが前提となります。
@@ -43,7 +43,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 ### 画像生成ツール
 - [Midjourney](https://www.midjourney.com)
 - [Adobe Firefly](https://firefly.adobe.com)
-- [DALL-E / ChatGPT Image](https://openai.com/dall-e-3)
+- [DALL·E / ChatGPT Image](https://openai.com/dall-e-3)
 - [Leonardo AI](https://leonardo.ai)
 - [Canva AI](https://www.canva.com)
 
@@ -62,7 +62,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 |--------|----------|------------|----------------|---------|
 | Midjourney | 画像 | なし | $10/月〜（月払い） | なし |
 | Adobe Firefly | 画像 | あり（制限付） | 1,580円/月（税込）〜 | あり |
-| DALL-E | 画像 | あり（制限付） | ChatGPT Plus等 | あり（ChatGPT準拠） |
+| DALL·E | 画像 | あり（制限付） | ChatGPT Plus等 | あり（ChatGPT準拠） |
 | Leonardo AI | 画像 | あり（制限付） | $12/月〜（月払い） | 要確認 |
 | Canva AI | 画像 | あり（制限付） | ¥1,180/月〜（App Store日本、Web契約は要公式確認） | あり |
 | Runway | 動画 | あり（初回のみ） | $12/月〜（年払い） | なし |
@@ -79,7 +79,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 |--------|-----------------|-----------------|---------------------|
 | Midjourney | なし | Basic $10/月（約200枚相当とされる） | 生成品質・解像度によって消費量が異なる場合あり |
 | Adobe Firefly | あり（数量は変更の可能性あり） | Standard 1,580円/月（税込）〜（一定の生成クレジット付与） | プランによって月間クレジット上限が変わる |
-| DALL-E | ChatGPT無料枠（制限付） | ChatGPT Plus等の有料プランで拡大 | API利用は別途従量課金（公式サイトで要確認） |
+| DALL·E | ChatGPT無料枠（制限付） | ChatGPT Plus等の有料プランで拡大 | API利用は別途従量課金（公式サイトで要確認） |
 | Leonardo AI | 1日150トークン程度 | Apprentice $12/月〜 | 生成サイズ・品質設定でトークン消費量が変わる |
 | Canva AI | Dream Lab 月20回程度 | Pro ¥1,180/月〜（App Store日本、月500回程度） | 生成回数制の場合が多い（詳細は公式確認） |
 | Runway | 125クレジット（初回のみ） | Standard $12/月〜（月625クレジット程度） | 動画の長さ・解像度で消費量が変わる |
@@ -101,7 +101,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 | Midjourney | Basic | $10/月 | 約200枚（標準品質） | 約$0.05/枚 |
 | Midjourney | Standard | $30/月 | 約900枚（Fast時間内） | 約$0.03/枚 |
 | Adobe Firefly | Standard | 1,580円/月（税込） | プランクレジット次第 | 要公式確認 |
-| DALL-E（API） | 従量 | 生成ごと課金 | 制限なし | 公式APIページで確認 |
+| DALL·E（API） | 従量 | 生成ごと課金 | 制限なし | 公式APIページで確認 |
 | Leonardo AI | Apprentice | $12/月 | トークン制（詳細は公式） | 要公式確認 |
 | Canva AI（Pro） | Pro | ¥1,180/月〜（App Store日本） | 月500回程度 | 要公式確認（通貨換算のため参考値外） |
 
@@ -131,7 +131,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 |--------|---------------------|---------------------|--------------|------|
 | Midjourney | 無料プランなし | 有料プランで商用利用が案内されている | 年間総収益100万ドル超はPro/Megaプラン必要とされる | 最新規約を要確認 |
 | Adobe Firefly | 有料プランが前提（無料枠はβ扱いに注意） | 商用利用が想定された設計と案内されている | 記載なし | ベータ機能（β表示）は商用利用対象外とされる |
-| DALL-E | ChatGPT無料プランで制限付き案内あり | OpenAI規約上の商用利用が案内されている | 記載なし | 用途・内容によりポリシー制限あり |
+| DALL·E | ChatGPT無料プランで制限付き案内あり | OpenAI規約上の商用利用が案内されている | 記載なし | 用途・内容によりポリシー制限あり |
 | Leonardo AI | 非独占ライセンスで商用利用可（所有権はLeonardo.AI） | 有料プラン＋Private設定で完全な所有権が案内 | 記載なし | 無料プランは所有権・独占権なしの点に注意 |
 | Canva AI | 商用利用が案内されているが独占的権利は保証されない | 同上 | 記載なし | 独占的権利を必要とする用途は要確認 |
 | Runway | 実用制限あり（透かし・クレジット数） | すべてのプランでOutput商用利用を制限しないと案内 | 記載なし | 最新規約を要確認 |
@@ -148,7 +148,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 |--------|------------------|------------------|----------------|-----------------|
 | Midjourney | 無料プランなし | 透かしなし（有料プラン） | 非公開 | 規約上の要件を確認 |
 | Adobe Firefly | プランによっては可視透かしあり | プランによっては可視透かしあり | C2PAメタデータ埋め込みあり | 規約上の要件を確認 |
-| DALL-E | 制限付き利用 | なし（C2PA不可視メタデータあり） | C2PAメタデータ埋め込みあり（場合による） | 規約上の要件を確認 |
+| DALL·E | 制限付き利用 | なし（C2PA不可視メタデータあり） | C2PAメタデータ埋め込みあり（場合による） | 規約上の要件を確認 |
 | Leonardo AI | 詳細は公式確認 | 通常は透かしなしとされている | 詳細は公式確認 | 規約上の要件を確認 |
 | Canva AI | 詳細は公式確認 | 詳細は公式確認 | 詳細は公式確認 | 規約上の要件を確認 |
 | Runway | 透かしあり | 透かしなし（有料プラン） | 詳細は公式確認 | 規約上の要件を確認 |
@@ -157,7 +157,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 | Kling AI | 透かしあり（場合による） | 条件は公式確認 | 詳細は公式確認 | 規約上の要件を確認 |
 | Vidu AI | 透かしあり | 条件は公式確認 | 詳細は公式確認 | 規約上の要件を確認 |
 
-> **C2PAについて：** C2PAはContent Authenticity Initiative（CAI）が策定したメタデータ標準で、画像がAI生成であることをファイルに記録します。可視透かしとは異なり、目視では確認できませんが、対応ツールでは確認可能です。Adobe FireflyやDALL-Eはこのメタデータを埋め込むとされています。
+> **C2PAについて：** C2PAはContent Authenticity Initiative（CAI）が策定したメタデータ標準で、画像がAI生成であることをファイルに記録します。可視透かしとは異なり、目視では確認できませんが、対応ツールでは確認可能です。Adobe FireflyやDALL·Eはこのメタデータを埋め込むとされています。
 
 ---
 
@@ -220,7 +220,7 @@ Adobe公式のAI画像生成サービス。商用利用を想定した設計と�
 
 ---
 
-### DALL-E / ChatGPT Image
+### DALL·E / ChatGPT Image
 
 ChatGPTに統合されており、追加設定なしで利用可能。OpenAI規約上、商用利用が案内されています。ただし、用途・生成内容・OpenAIポリシーによって制限される場合があります。API利用は従量課金（公式APIページで要確認）。
 
@@ -300,11 +300,11 @@ Midjourney（有料プラン）、Runway（有料プラン）、Pika（有料プ
 
 ### Q4. APIで大量生成する場合のコストはどう計算しますか？
 
-DALL-E・Runway・Luma AI・Leonardo AIなどはAPI提供があります。API料金は従量課金または別プランが多く、Webプランとは異なります。各ツールの公式APIドキュメントで最新料金をご確認ください。
+DALL·E・Runway・Luma AI・Leonardo AIなどはAPI提供があります。API料金は従量課金または別プランが多く、Webプランとは異なります。各ツールの公式APIドキュメントで最新料金をご確認ください。
 
 ### Q5. 日本語UIに対応しているツールはどれですか？
 
-Adobe Firefly、Canva AI、DALL-E（ChatGPT準拠）は日本語UIに対応しています。Midjourney、Runway、Luma AI、Vidu AIは英語インターフェースです。Kling AI・Pikaは一部日本語表示がある場合があります。詳しくは [日本語対応AIクリエイティブツール一覧](/categories/image-generation/) もご確認ください。
+Adobe Firefly、Canva AI、DALL·E（ChatGPT準拠）は日本語UIに対応しています。Midjourney、Runway、Luma AI、Vidu AIは英語インターフェースです。Kling AI・Pikaは一部日本語表示がある場合があります。詳しくは [日本語対応AIクリエイティブツール一覧](/categories/image-generation/) もご確認ください。
 
 ### Q6. 料金・条件がよく変わるのはなぜですか？
 
@@ -326,8 +326,8 @@ Midjourneyは年間総収益が100万ドルを超える企業に対してPro/Meg
 | Midjourney | 利用規約 | https://docs.midjourney.com/docs/terms-of-service |
 | Adobe Firefly | 料金プラン | https://www.adobe.com/products/firefly/plans.html |
 | Adobe Firefly | 生成AI利用ガイドライン | https://www.adobe.com/legal/licenses-terms/adobe-gen-ai-user-guidelines.html |
-| DALL-E / OpenAI | 利用規約 | https://openai.com/policies/usage-policies |
-| DALL-E / OpenAI | API料金 | https://openai.com/pricing |
+| DALL·E / OpenAI | 利用規約 | https://openai.com/policies/usage-policies |
+| DALL·E / OpenAI | API料金 | https://openai.com/pricing |
 | Leonardo AI | 料金プラン | https://leonardo.ai/pricing/ |
 | Leonardo AI | 利用規約 | https://leonardo.ai/terms-of-service/ |
 | Canva | AI Product Terms | https://www.canva.com/policies/ai-product-terms/ |

@@ -1,6 +1,11 @@
 import { defineCollection, z } from 'astro:content';
 
 const freePlanSchema = z.union([z.boolean(), z.literal('limited'), z.literal('unknown')]);
+// japaneseUi/japanesePrompt等のtri-state判定基準:
+//   true    = 公式情報で完全対応が確認できる
+//   'partial' = 一部対応（例: UIの一部のみ日本語、英語の方が精度が高い等）が公式情報または挙動から確認できる
+//   false   = 非対応であることが公式情報で確認できる
+//   'unknown' = 対応状況が公式情報から確認できていない（trueともfalseとも断定できない）
 const triStateSchema = z.union([z.boolean(), z.literal('partial'), z.literal('unknown')]);
 const fourStateSchema = z.enum(['yes', 'no', 'limited', 'unknown']);
 const commercialUseSchema = z.enum(['ok', 'paid-only', 'limited', 'no', 'unknown']);

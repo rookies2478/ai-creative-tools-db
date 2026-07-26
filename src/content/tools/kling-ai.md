@@ -121,9 +121,6 @@ sourceRefs:
   - label: "Kling AI 決済ポリシー（確認時点でHTTP 446により直接確認不可）"
     url: "https://kling.ai/docs/payment-policy"
     type: official
-  - label: "Kling AI メンバーシッププラン（確認時点でHTTP 446により直接確認不可）"
-    url: "https://kling.ai"
-    type: official
 sources:
   - title: "Kling AI 公式サイト"
     url: "https://kling.ai"

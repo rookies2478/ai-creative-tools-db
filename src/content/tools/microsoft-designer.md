@@ -33,8 +33,8 @@ pricingSourceUrl: "https://support.microsoft.com/ja-JP/designer/frequently-asked
 pricingSourceNote: "公式FAQページ（Microsoft公式）。Microsoft Designerの有料機能はMicrosoft 365 / Copilot Pro等に内包されており独立した月額料金ページは存在しない可能性が高い。月額・currency は要公式確認。最新情報は公式サイトをご確認ください。"
 pricingStatus: "partial"
 pricingModel: "subscription"
-pricingSummary: "Microsoftアカウントで無料利用できる範囲がありますが、公式FAQでは個人的・非商用利用向けと案内されています。頻繁に利用する場合やMicrosoft 365 / Copilot Pro連携機能では、サブスクリプションが必要になる場合があります。最新情報は公式サイトをご確認ください。"
 freePlanNote: "Microsoftアカウントで無料利用できる範囲があります。公式FAQでは個人的・非商用利用向けと案内されており、頻繁に作成するユーザーにはサブスクリプションが必要になる場合があります。生成回数や対象機能は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
+paidPlanNote: "頻繁に利用する場合やMicrosoft 365 / Copilot Pro連携機能では、サブスクリプションが必要になる場合があります。最新情報は公式サイトをご確認ください。"
 platforms:
   - web
 signupRequired: true

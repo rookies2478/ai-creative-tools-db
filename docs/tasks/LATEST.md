@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-26
-- latest_commit: 05fc6f0 (Add avatar video comparison to sitemap) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（clarify-synthesia-free-download-limitation）のcommit SHAはcommit実行後にGIT欄で別途報告する。
+- latest_commit: f9aeff3 (Clarify Synthesia free download limitation) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（verify-synthesia-free-download）のcommit SHAはcommit実行後にGIT欄で別途報告する。
 - branch: master
-- origin_sync: SYNCED (rev-list 0 0 at HEAD 05fc6f0)
-- working_tree: clarify-synthesia-free-download-limitation実装完了、全required_checks PASS。commit前（src/pages/categories/avatar-video/index.astro＋タスク運用ファイルのみ変更、未追跡の事前存在ファイルは変更なし）
+- origin_sync: SYNCED (rev-list 0 0 at HEAD f9aeff3)
+- working_tree: verify-synthesia-free-download実装完了、全required_checks PASS。commit前（docs/research/新規1件＋タスク運用ファイルのみ変更、ページ変更なし、未追跡の事前存在ファイルは変更なし）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,12 +14,12 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- latest_completed_task: docs/tasks/completed/2026-07-26-clarify-synthesia-free-download-limitation.md（結果: PASS、validate:data Errors: 0, Warnings: 0, Verify: 0、commit後にSHA確定）
+- latest_completed_task: docs/tasks/completed/2026-07-26-verify-synthesia-free-download.md（結果: CONFIRMED_DOWNLOAD_NOT_ALLOWED、既存UI表記を一次情報で確認・変更不要、commit後にSHA確定）
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- next_candidate: Resolve the broken link to the uncreated free AI video tools comparison page (from implement-validate-publish); hands-on verify PixVerse free video generation/download.
+- next_candidate: Fix the broken internal link to the existing video generation credit comparison guide.
 
 ## Notes
 
@@ -48,7 +48,11 @@
   - 残るERROR: broken-internal-link（/guides/ai-generation-credits-guide/ → /comparisons/free-ai-video-tools/、対象ページ未作成）。次タスク候補。
   - 対象ページ本体・canonical・noindex・sitemap生成ロジックの他部分・validatorは無変更。
   - GitHubへの変更は完了。本番sitemapへの反映は次回人間による手動デプロイ後（本番反映前は公開sitemapに変更が出ない）。
-- clarify-synthesia-free-download-limitation（本タスク）で、無料版動画独自ツール監査の結果判明したSynthesiaの「無料Basicプランはダウンロード不可（有料プランが必要）」という事実を、src/pages/categories/avatar-video/index.astroのSynthesia行に反映。
+- clarify-synthesia-free-download-limitation（commit f9aeff3）で、Synthesiaの「無料Basicプランはダウンロード不可（有料プランが必要）」という表記を、src/pages/categories/avatar-video/index.astroのSynthesia行に反映。
   - 「無料枠あり（月10分・透かしあり）」→「無料作成可／ダウンロード不可（月10分・透かしあり）」に修正し、note欄にもダウンロード制限を明記。
   - src/content/tools/synthesia.md・他ツールの表示は無変更（diffで1行のみの変更を確認済み）。Haiperのデフォルト配列（Free.astro）は今回のnon-goalsのため未修正。
+  - 事後監査で、当時この表記の一次情報記録がrepository内に存在しないことが判明（OFFICIAL_VERIFICATION_REQUIRED）。
+- verify-synthesia-free-download（本タスク）で、Synthesia公式pricingページ（https://www.synthesia.io/pricing）を実際にWebFetchで確認。機能比較表で「MP4 Downloads」「Remove Synthesia logo」がいずれもStarterプラン以上限定と明記されており、既存UI表記（無料作成可／ダウンロード不可）が一次情報と一致することを確認（判定: CONFIRMED_DOWNLOAD_NOT_ALLOWED）。
+  - ページ側の変更は不要（既存表記を維持）。docs/research/synthesia-free-download-verification-2026-07-26.mdに確認結果を新規記録。
+  - help center（https://www.synthesia.io/help）はHTTP 404で取得不能、unresolvedとして記録。src/content/tools/synthesia.mdは適切な既存フィールドがなく変更なし。
 - commit SHAは実行前の時点では確定しないため、未確定の値は記載しない。commit・push後の確定SHAはタスク完了報告のGIT欄で報告する。

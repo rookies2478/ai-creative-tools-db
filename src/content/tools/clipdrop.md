@@ -4,7 +4,7 @@ shortDescription: "背景削除・画像拡張・アップスケール・不要�
 category: "image"
 officialUrl: "https://clipdrop.co/"
 freePlan: "limited"
-freePlanNote: "無料枠では一部の画像編集系機能を試せる場合があります。公式料金ページではBackground Removal（20回/24時間）・Image Upscaler x2（20回/24時間）・Cleanup（20回/24時間）・Relight（20回/24時間）・Text Remover（50回/24時間）などの無料利用枠が示されています。ただし、管理者環境ではtext-to-image生成（Stable Diffusion XL）は有料版でのみ利用できる状態を確認しました。対象機能や回数は変更される場合があるため、最新情報は公式サイトをご確認ください。"
+freePlanNote: "無料枠では一部の画像編集系機能を試せる場合があります。公式料金ページ（2026-07-26再確認）ではBackground Removal（20回/24時間）・Image Upscaler x2（20回/24時間）・Cleanup（20回/24時間）・Relight（20回/24時間）・Text Remover（50回/24時間）などの無料利用枠が示されています。以前、管理者環境ではtext-to-image生成（Stable Diffusion XL）は有料版でのみ利用できる状態を確認していましたが、2026-07-26時点の公式料金表ではFreeプラン列にもText to image（生成）の記載があり、表記と過去の実挙動確認結果が一致しない状態です。実際のアクセス可否は今回未検証のため、最新の利用可否は公式サイトでのご自身の環境での確認をおすすめします。対象機能や回数は変更される場合があるため、最新情報は公式サイトをご確認ください。"
 commercialUse: "unknown"
 commercialUseNote: "公式Terms（https://clipdrop.co/terms-visitor）ではサービス利用条件を確認できますが、生成・編集した画像の商用利用可否や権利関係については確認時点で断定しにくい状況です。また、2024年にClipdropはJasper.aiに統合されており、clipdrop.co 上の利用規約条件とJasper API側の条件が異なる可能性があります。特にAPIを利用する場合は、Jasper API側の利用規約も合わせて確認が必要です。商用利用を前提にする場合は、最新の公式Terms・元画像の権利・第三者権利を必ず確認してください。本記事は法的助言ではありません。"
 japaneseUi: false
@@ -33,14 +33,15 @@ weaknesses:
   - "日本語UI・日本語プロンプト対応は公式情報のみでは確認できない"
   - "2024年にJasperに統合されAPIがJasper APIに移行しており、今後の方針変更リスクがある"
   - "Proプランの料金が公式サイトで非表示となっており、価格確認にはサービス内ログインが必要な可能性がある"
-lastReviewed: "2026-06-21"
-nextReviewDue: "2026-07-21"
-verifiedAt: "2026-06-08"
+lastReviewed: "2026-07-26"
+nextReviewDue: "2026-08-25"
+verifiedAt: "2026-07-26"
 officialSourceUrl: "https://clipdrop.co/pricing"
 pricingSourceUrl: "https://clipdrop.co/pricing"
-pricingSourceNote: "公式料金ページ（clipdrop.co/pricing）。Freeプランは案内されているが、Proプランの料金は「--per month」表示で金額非開示（2026-06-21確認）。2024年にJasper AI傘下に統合済み。currency・月額は要公式確認。"
+pricingSourceNote: "公式料金ページ（clipdrop.co/pricing、2026-07-26再確認）。Freeプランの利用上限（Background Removal・Image Upscaler x2・Cleanup・Relightが20回/24時間、Text Removerが50回/24時間）は変更なしを確認。Proプランの料金は引き続き「--per month」表示で金額非開示。運営はInitML（2023年Stability AI買収→2024年Jasper.ai移管）で変更なしを確認。なお公式料金表ではFreeプラン列にもText to image（生成）の記載が確認できたが、管理者環境での実際のアクセス可否は今回未検証のため、表記と実挙動が異なる可能性がある点は引き続き要確認（needsReview）。currency・Pro月額は要公式確認のまま。"
 pricingModel: "subscription"
 pricingStatus: "partial"
+needsReview: "yes"
 platforms:
   - web
   - api
@@ -69,9 +70,9 @@ usagePolicy:
   inputMaterialRisk: "medium"
   inputMaterialNote: "背景削除・アップスケール・不要物削除など、主要機能はすべて画像アップロードが前提。weaknessesにて「アップロードする元画像の著作権・権利確認が必要」と明記されている。元画像に人物・商標・第三者著作物が含まれる場合は別途確認が必要（clipdrop.co/terms-visitor）。"
 reviewed:
-  pricing: "2026-06-21"
+  pricing: "2026-07-26"
   terms: "2026-05-14"
-  features: "2026-06-06"
+  features: "2026-07-26"
 sourceRefs:
   - label: "Clipdrop公式サイト"
     url: "https://clipdrop.co/"
@@ -131,8 +132,8 @@ japanBilling:
   localizedJpyDisplay: false
   taxDisplay: "unknown"
   purchaseChannels: ["web", "api"]
-  pricingCheckedAt: "2026-07-13"
-  pricingNote: "運営は現在Jasper.ai（公式サイトに移管経緯の記載あり）。Proサブスクリプションの金額・通貨は公式料金ページ上で動的表示のため要公式確認です。最新の価格・通貨・税は公式購入画面をご確認ください。"
+  pricingCheckedAt: "2026-07-26"
+  pricingNote: "運営は現在Jasper.ai（公式サイトフッターの表記はInitML。2023年Stability AI買収→2024年Jasper.ai移管の経緯を2026-07-26に公式トップページで再確認）。Proサブスクリプションの金額・通貨は公式料金ページ上で動的表示（「--per month」表示）のため要公式確認です。最新の価格・通貨・税は公式購入画面をご確認ください。"
   billingCategory: "E"
   sourceUrls:
     - "https://clipdrop.co/"

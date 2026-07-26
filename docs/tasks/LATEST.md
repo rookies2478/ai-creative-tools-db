@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-26
-- latest_commit: f9aeff3 (Clarify Synthesia free download limitation) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（verify-synthesia-free-download）のcommit SHAはcommit実行後にGIT欄で別途報告する。
+- latest_commit: f9aeff3 (Clarify Synthesia free download limitation) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（fix-broken-link-free-ai-video-tools）のcommit SHAはcommit実行後にGIT欄で別途報告する。
 - branch: master
 - origin_sync: SYNCED (rev-list 0 0 at HEAD f9aeff3)
-- working_tree: verify-synthesia-free-download実装完了、全required_checks PASS。commit前（docs/research/新規1件＋タスク運用ファイルのみ変更、ページ変更なし、未追跡の事前存在ファイルは変更なし）
+- working_tree: fix-broken-link-free-ai-video-tools実装完了、全required_checks PASS。commit前（対象guideファイル1件＋タスク運用ファイルのみ変更、未追跡の事前存在ファイルは変更なし）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,12 +14,12 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- latest_completed_task: docs/tasks/completed/2026-07-26-verify-synthesia-free-download.md（結果: CONFIRMED_DOWNLOAD_NOT_ALLOWED、既存UI表記を一次情報で確認・変更不要、commit後にSHA確定）
+- latest_completed_task: docs/tasks/completed/2026-07-26-fix-broken-link-free-ai-video-tools.md（結果: broken-internal-link ERRORを既存ガイドへのリンク差し替えで解消。validate:publish Errors 1→0、Warnings 4のまま。commit後にSHA確定）
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- next_candidate: Fix the broken internal link to the existing video generation credit comparison guide.
+- next_candidate: Review the four long-meta-description warnings in a separate audit-only task.
 
 ## Notes
 
@@ -55,4 +55,9 @@
 - verify-synthesia-free-download（本タスク）で、Synthesia公式pricingページ（https://www.synthesia.io/pricing）を実際にWebFetchで確認。機能比較表で「MP4 Downloads」「Remove Synthesia logo」がいずれもStarterプラン以上限定と明記されており、既存UI表記（無料作成可／ダウンロード不可）が一次情報と一致することを確認（判定: CONFIRMED_DOWNLOAD_NOT_ALLOWED）。
   - ページ側の変更は不要（既存表記を維持）。docs/research/synthesia-free-download-verification-2026-07-26.mdに確認結果を新規記録。
   - help center（https://www.synthesia.io/help）はHTTP 404で取得不能、unresolvedとして記録。src/content/tools/synthesia.mdは適切な既存フィールドがなく変更なし。
+- fix-broken-link-free-ai-video-tools（本タスク）で、implement-validate-publish以降残っていた最後のbroken-internal-link ERRORを解消。
+  - src/pages/guides/ai-generation-credits-guide/index.astroの関連ページリンクを、未作成の`/comparisons/free-ai-video-tools/`から既存公開ガイド`/guides/video-generation-credit-cost-comparison/`へ差し替え。アンカーテキストも「無料AI動画生成ツール比較」→「AI動画生成ツールの料金・無料枠比較」に変更（遷移先の実際のスコープに合わせるため）。
+  - 新規比較ページは作成せず（既存ガイドが同一の主要検索意図をほぼ満たしており、新規作成はカニバリリスクが高いと判断）。
+  - validate:publish結果: Errors 1→0、Warnings 4（変更なし）。残るWarningsはlong-meta-description×4のみで、今回のスコープ外として維持。
+  - 対象ファイルは上記guideファイル1件のみ。sitemap.xml.ts・validate-publish.mjs・DB(src/content/tools)・title/meta/H1は無変更。
 - commit SHAは実行前の時点では確定しないため、未確定の値は記載しない。commit・push後の確定SHAはタスク完了報告のGIT欄で報告する。

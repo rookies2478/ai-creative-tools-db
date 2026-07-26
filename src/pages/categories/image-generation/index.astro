@@ -125,7 +125,7 @@ const imageToolCards = [
   { name: 'Gemini画像生成',       slug: 'gemini-image-generation',  initial: 'G', role: '画像生成', commercial: '要確認（公式ポリシー参照）',           free: '無料枠あり', jp: '対応',   note: '透かしあり',   price: '要公式確認', platforms: 'Web、iOS、Android', date: '2026-06-10' },
   { name: 'NightCafe',            slug: 'nightcafe',                initial: 'N', role: '画像生成', commercial: '要確認',                             free: '無料枠あり', jp: '要確認', note: '透かしなし',   price: '要公式確認', platforms: 'Web', date: '2026-06-10' },
   { name: 'Playground AI',        slug: 'playground-ai',            initial: 'P', role: '画像生成', commercial: '無料:非商用のみ／Pro以上:商用可（案内あり）', free: '無料枠あり', jp: '非対応', note: '要確認',       price: '$12/月（Pro・年払い）', platforms: 'Web', date: '2026-06-10' },
-  { name: 'Clipdrop',             slug: 'clipdrop',                 initial: 'C', role: '画像生成', commercial: '要確認',                             free: '無料枠あり', jp: '非対応', note: '要確認',       price: '要公式確認', platforms: 'Web、API', date: '2026-06-10' },
+  { name: 'Clipdrop',             slug: 'clipdrop',                 initial: 'C', role: '画像編集・生成', commercial: '要確認',                             free: '一部機能のみ無料（生成は要確認）', jp: '非対応', note: '背景除去は無料枠あり、画像生成は無料完了未確認',       price: '要公式確認', platforms: 'Web、API', date: '2026-07-26' },
   { name: 'Brand Studio（旧DreamStudio）', slug: 'dreamstudio',      initial: 'D', role: '画像生成', commercial: 'モデルライセンス参照',               free: 'Trial 1000cr（使い切り）', jp: '要確認', note: '要確認',       price: '要公式確認', platforms: 'Web', date: '2026-07-24' },
   { name: 'Tensor.Art',           slug: 'tensor-art',               initial: 'T', role: '画像生成', commercial: '要確認',                             free: '無料枠あり', jp: '要確認', note: '要確認',       price: '要公式確認', platforms: 'Web', date: '2026-06-10' },
 ];
@@ -147,7 +147,7 @@ const imgExtra: Record<string, ImgExtra> = {
   'gemini-image-generation':  { freeCount: '△あり（要確認）',       smartphone: '○（iOS/Android）',   textInImage: '△要確認', trend: '両方対応',         commercialCheck: 'プランや用途による' },
   'nightcafe':                { freeCount: '△あり（要確認）',       smartphone: '△（ブラウザ経由）',  textInImage: '△要確認', trend: '両方対応',         commercialCheck: '要公式確認' },
   'playground-ai':            { freeCount: '△あり（要確認）',       smartphone: '△（ブラウザ経由）',  textInImage: '△要確認', trend: '両方対応',         commercialCheck: '要公式確認' },
-  'clipdrop':                 { freeCount: '△あり（要確認）',       smartphone: '△（ブラウザ経由）',  textInImage: '△要確認', trend: '実写寄り',         commercialCheck: '要公式確認' },
+  'clipdrop':                 { freeCount: '△一部機能のみ無料（生成は要確認）', smartphone: '△（ブラウザ経由）',  textInImage: '△要確認', trend: '実写寄り',         commercialCheck: '要公式確認' },
   'dreamstudio':              { freeCount: '△Trial 1000cr（使い切り）', smartphone: '△（ブラウザ経由）',  textInImage: '△要確認', trend: '両方対応',         commercialCheck: 'モデルライセンスによる' },
   'tensor-art':               { freeCount: '△あり（要確認）',       smartphone: '△（ブラウザ経由）',  textInImage: '△要確認', trend: 'イラスト寄り',     commercialCheck: '要公式確認' },
 };

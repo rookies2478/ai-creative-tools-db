@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-26
-- latest_commit: 34e24d3 (implement-validate-publishタスク開始時点のHEAD) — 本タスク（implement-validate-publish）のcommit SHAはcommit実行後にGIT欄で別途報告する。
+- latest_commit: edd8937 (Add generated publish validation) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（fix-clipdrop-free-generation-wording）のcommit SHAはcommit実行後にGIT欄で別途報告する。
 - branch: master
-- origin_sync: SYNCED (rev-list 0 0 at HEAD 34e24d3)
-- working_tree: implement-validate-publish実装完了、全required_checks PASS。commit前（scripts/validate-publish.mjs新規・package.json追記・タスク運用ファイルのみ変更、未追跡の事前存在ファイルは変更なし）
+- origin_sync: SYNCED (rev-list 0 0 at HEAD edd8937)
+- working_tree: fix-clipdrop-free-generation-wording実装完了、全required_checks PASS。commit前（対象4ファイル＋タスク運用ファイルのみ変更、未追跡の事前存在ファイルは変更なし）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,12 +14,12 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- latest_completed_task: docs/tasks/completed/2026-07-26-implement-validate-publish.md（結果: implementation_status PASS、repository_publish_status FAIL_WITH_EXISTING_VIOLATIONS、commit後にSHA確定）
+- latest_completed_task: docs/tasks/completed/2026-07-26-fix-clipdrop-free-generation-wording.md（結果: PASS、validate:data Errors: 0, Warnings: 0, Verify: 0、commit後にSHA確定）
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- next_candidate: Fix validated publish violations in separate scoped tasks.
+- next_candidate: Fix validated publish violations in separate scoped tasks (from implement-validate-publish).
 
 ## Notes
 
@@ -38,4 +38,8 @@
   - 本タスクではsrc・DB・sitemap生成ロジックを一切変更していない（既存違反は次タスクで対応）。
   - GitHub Actionsへのvalidate:publish追加は今回のスコープ外。
 - validate:dataは全29ファイルでErrors: 0, Warnings: 0, Verify: 0を達成（維持）。
+- fix-clipdrop-free-generation-wording（本タスク）で、ユーザーの実機確認結果（無料版でClipdropの目的の画像生成を完了できなかった）を踏まえ、DB非連動の4ファイルのClipdrop表記を修正。
+  - 修正対象: src/pages/comparisons/ec-product-image-ai-tools/index.astro、src/pages/use-cases/ec-product-image/index.astro、src/components/FreeAiImageTools.astro、src/pages/categories/image-generation/index.astro
+  - 「無料で画像生成できる」「背景生成に特化」といった断定表現を排除し、「一部機能のみ無料」「背景除去：無料枠あり／背景生成：要確認」に統一。
+  - src/content/tools/clipdrop.md・src/pages/tools/clipdrop/index.astroは無変更（既に正確なため対象外）。DBスキーマ・featureフラグ・needsReviewは無変更。他ツールの表示内容も無変更（diffで確認済み）。
 - commit SHAは実行前の時点では確定しないため、未確定の値は記載しない。commit・push後の確定SHAはタスク完了報告のGIT欄で報告する。

@@ -2,10 +2,15 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+import { generatedVideos } from '../../../data/generatedVideos';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'pixverse');
 const d = entry?.data;
+
+const pixverseSampleVideo = generatedVideos.find(
+  (v) => v.pageSlug === 'pixverse' && v.sampleType === 'tool-video-output' && v.isSameToolAsPage
+) ?? null;
 
 const jsonLd = JSON.stringify([
   {
@@ -264,6 +269,7 @@ const jsonLd = JSON.stringify([
         { label: '透かしなしツール', href: '/conditions/no-watermark/' },
         { label: '日本語UIのAIツール', href: '/conditions/japanese/' },
       ]}
+      sampleVideo={pixverseSampleVideo}
     />
   </div>
 

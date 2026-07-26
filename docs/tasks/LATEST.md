@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-26
-- latest_commit: f9aeff3 (Clarify Synthesia free download limitation) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（fix-broken-link-free-ai-video-tools）のcommit SHAはcommit実行後にGIT欄で別途報告する。
+- latest_commit: 9f2edaa (Fix broken AI video comparison link) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（add-pixverse-generated-video）のcommit SHAはcommit実行後にGIT欄で別途報告する。
 - branch: master
-- origin_sync: SYNCED (rev-list 0 0 at HEAD f9aeff3)
-- working_tree: fix-broken-link-free-ai-video-tools実装完了、全required_checks PASS。commit前（対象guideファイル1件＋タスク運用ファイルのみ変更、未追跡の事前存在ファイルは変更なし）
+- origin_sync: SYNCED (rev-list 0 0 at HEAD 9f2edaa)
+- working_tree: add-pixverse-generated-video実装完了、全required_checks PASS。commit前（対象ファイル5件のみ変更、未追跡の事前存在ファイルは変更なし）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,7 +14,7 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- latest_completed_task: docs/tasks/completed/2026-07-26-fix-broken-link-free-ai-video-tools.md（結果: broken-internal-link ERRORを既存ガイドへのリンク差し替えで解消。validate:publish Errors 1→0、Warnings 4のまま。commit後にSHA確定）
+- latest_completed_task: docs/tasks/completed/2026-07-26-add-pixverse-generated-video.md（結果: ユーザーがDownloadsへ保存したPixVerse生成動画1件をgeneratedVideos.tsへ登録し、PixVerse個別ページへ表示。既存Kling AI/Luma AI/Pika/Runway動画は無変更。build 92ページ PASS、validate:data PASS、validate:scope PASS。commit後にSHA確定）
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
@@ -22,6 +22,8 @@
 - next_candidate: Review the four long-meta-description warnings in a separate audit-only task.
 
 ## Notes
+
+- add-pixverse-generated-video（本タスク）で、ユーザーがPixVerse V6（Image/Textモード・360P出力）で共通ベンチマークプロンプトを使い生成し、Windowsダウンロードフォルダへ保存した動画（PixVerse_V6_Image_Text_360P_A_cinematic_5secon.mp4、5.04秒・640x360・h264/aac・透かし"PixVerse.ai"確認済み）をリポジトリへコピーし、src/data/generatedVideos.tsへ既存4件と同形式で1件追加。src/pages/tools/pixverse/index.astroへsampleVideo propを既存Kling AIページと同一パターンで配線。元Downloadsファイルは無変更・無削除。サンドボックス権限によりdist/配下のHTML直接確認・ブラウザ実表示確認は未実施（要人手確認）。
 
 - bootstrap-github-shared-context（commit 41c7bde）でGitHub共有コンテキスト基盤導入。
 - implement-validate-data（commit 55f6321）でvalidate:data新規実装（当時Errors 5・Warnings 3）。

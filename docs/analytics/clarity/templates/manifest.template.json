@@ -1,0 +1,64 @@
+{
+  "manifest_version": "1.0",
+  "analysis_type": "clarity",
+  "run_id": "run-HHMMSS",
+  "status": "success",
+  "generated_at": "YYYY-MM-DDTHH:mm:ssZ",
+  "completed_at": "YYYY-MM-DDTHH:mm:ssZ",
+  "project_identifier": "REPLACE_WITH_PROJECT_ID",
+  "period": {
+    "label": "7d|14d|28d|custom",
+    "start_date": "YYYY-MM-DD",
+    "end_date": "YYYY-MM-DD",
+    "timezone": "Asia/Tokyo"
+  },
+  "acquisition": {
+    "method": "mcp|manual|api",
+    "tool": "REPLACE"
+  },
+  "filters": {
+    "device": null,
+    "country": null,
+    "page_url": null
+  },
+  "datasets": {
+    "overview": {
+      "file": "overview.json",
+      "present": true
+    },
+    "pages": {
+      "file": "pages.json",
+      "present": true
+    },
+    "devices": {
+      "file": "devices.json",
+      "present": true
+    },
+    "countries": {
+      "file": "countries.json",
+      "present": true
+    },
+    "behaviors": {
+      "file": "behaviors.json",
+      "present": true
+    }
+  },
+  "required_datasets": [
+    "overview",
+    "pages",
+    "devices",
+    "countries",
+    "behaviors"
+  ],
+  "optional_datasets": [],
+  "privacy": {
+    "contains_raw_recordings": false,
+    "contains_personal_data": false,
+    "aggregation_only": true
+  },
+  "validation": {
+    "errors": [],
+    "warnings": []
+  },
+  "notes": []
+}

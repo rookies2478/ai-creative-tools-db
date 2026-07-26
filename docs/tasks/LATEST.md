@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-26
-- latest_commit: 9f2edaa (Fix broken AI video comparison link) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（add-pixverse-generated-video）のcommit SHAはcommit実行後にGIT欄で別途報告する。
+- latest_commit: 5451573 (Add PixVerse generated video sample) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（create-analytics-storage-foundation）のcommit SHAはcommit実行後にGIT欄で別途報告する。
 - branch: master
-- origin_sync: SYNCED (rev-list 0 0 at HEAD 9f2edaa)
-- working_tree: add-pixverse-generated-video実装完了、全required_checks PASS。commit前（対象ファイル5件のみ変更、未追跡の事前存在ファイルは変更なし）
+- origin_sync: SYNCED (rev-list 0 0 at HEAD 5451573)
+- working_tree: create-analytics-storage-foundation実装完了、全required_checks PASS。commit前（対象ファイル10件のみ変更、未追跡の事前存在ファイルは変更なし）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,16 +14,18 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- latest_completed_task: docs/tasks/completed/2026-07-26-add-pixverse-generated-video.md（結果: ユーザーがDownloadsへ保存したPixVerse生成動画1件をgeneratedVideos.tsへ登録し、PixVerse個別ページへ表示。既存Kling AI/Luma AI/Pika/Runway動画は無変更。build 92ページ PASS、validate:data PASS、validate:scope PASS。commit後にSHA確定）
+- latest_completed_task: docs/tasks/completed/2026-07-26-create-analytics-storage-foundation.md（結果: GSC/Clarity分析run保存のための基盤構造・manifestテンプレート・分析要約テンプレート・READMEを新規作成。取得API・認証・rotationは非対象。build 92ページ PASS、validate:data PASS、validate:scope PASS。commit後にSHA確定）
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- next_candidate: Review the four long-meta-description warnings in a separate audit-only task.
+- next_candidate: Define GSC acquisition method and input contract.
 
 ## Notes
 
-- add-pixverse-generated-video（本タスク）で、ユーザーがPixVerse V6（Image/Textモード・360P出力）で共通ベンチマークプロンプトを使い生成し、Windowsダウンロードフォルダへ保存した動画（PixVerse_V6_Image_Text_360P_A_cinematic_5secon.mp4、5.04秒・640x360・h264/aac・透かし"PixVerse.ai"確認済み）をリポジトリへコピーし、src/data/generatedVideos.tsへ既存4件と同形式で1件追加。src/pages/tools/pixverse/index.astroへsampleVideo propを既存Kling AIページと同一パターンで配線。元Downloadsファイルは無変更・無削除。サンドボックス権限によりdist/配下のHTML直接確認・ブラウザ実表示確認は未実施（要人手確認）。
+- create-analytics-storage-foundation（本タスク）で、docs/analytics/README.md・docs/analytics/gsc/README.md・docs/analytics/clarity/README.mdを新規作成し、GSC 8データセット・Clarity 5データセットのmanifest.template.json（JSON parse検証済み）とanalysis-summary.template.mdを両方式で作成。latest成功run判定ルール（status=success・completed_at存在・required_datasets全present・validation.errors=0・同日複数runはcompleted_at最新）をREADMEに明記。.gitignoreは`docs/analytics/**/raw/`除外ルールが既存済みのため無変更。secret/token/credential項目は一切含めていない。実データ日付ディレクトリ・rawディレクトリ・.gitkeep・latest symlinkは作成せず。
+
+- add-pixverse-generated-video（commit 5451573）で、ユーザーがPixVerse V6（Image/Textモード・360P出力）で共通ベンチマークプロンプトを使い生成し、Windowsダウンロードフォルダへ保存した動画（PixVerse_V6_Image_Text_360P_A_cinematic_5secon.mp4、5.04秒・640x360・h264/aac・透かし"PixVerse.ai"確認済み）をリポジトリへコピーし、src/data/generatedVideos.tsへ既存4件と同形式で1件追加。src/pages/tools/pixverse/index.astroへsampleVideo propを既存Kling AIページと同一パターンで配線。元Downloadsファイルは無変更・無削除。事後監査でvalidate:data/build/validate:publish/diff-check全PASSを再確認済み。
 
 - bootstrap-github-shared-context（commit 41c7bde）でGitHub共有コンテキスト基盤導入。
 - implement-validate-data（commit 55f6321）でvalidate:data新規実装（当時Errors 5・Warnings 3）。

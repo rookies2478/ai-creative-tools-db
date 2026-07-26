@@ -1,0 +1,89 @@
+{
+  "manifest_version": "1.0",
+  "analysis_type": "gsc",
+  "run_id": "run-HHMMSS",
+  "status": "success",
+  "generated_at": "YYYY-MM-DDTHH:mm:ssZ",
+  "completed_at": "YYYY-MM-DDTHH:mm:ssZ",
+  "property": "REPLACE_WITH_PROPERTY",
+  "period": {
+    "label": "14d|28d|3m|custom",
+    "start_date": "YYYY-MM-DD",
+    "end_date": "YYYY-MM-DD",
+    "timezone": "Asia/Tokyo"
+  },
+  "comparison_period": {
+    "enabled": false,
+    "start_date": null,
+    "end_date": null
+  },
+  "search_type": "web",
+  "row_limit": 0,
+  "pagination": {
+    "paginated": false,
+    "pages_fetched": 0
+  },
+  "acquisition": {
+    "method": "manual|api",
+    "tool": "REPLACE",
+    "script": null
+  },
+  "datasets": {
+    "totals": {
+      "file": "totals.csv",
+      "present": true,
+      "rows": 0
+    },
+    "daily": {
+      "file": "daily.csv",
+      "present": true,
+      "rows": 0
+    },
+    "queries": {
+      "file": "queries.csv",
+      "present": true,
+      "rows": 0
+    },
+    "pages": {
+      "file": "pages.csv",
+      "present": true,
+      "rows": 0
+    },
+    "query-pages": {
+      "file": "query-pages.csv",
+      "present": true,
+      "rows": 0
+    },
+    "devices": {
+      "file": "devices.csv",
+      "present": true,
+      "rows": 0
+    },
+    "countries": {
+      "file": "countries.csv",
+      "present": true,
+      "rows": 0
+    },
+    "sitemaps": {
+      "file": "sitemaps.csv",
+      "present": true,
+      "rows": 0
+    }
+  },
+  "required_datasets": [
+    "totals",
+    "daily",
+    "queries",
+    "pages",
+    "query-pages",
+    "devices",
+    "countries",
+    "sitemaps"
+  ],
+  "optional_datasets": [],
+  "validation": {
+    "errors": [],
+    "warnings": []
+  },
+  "notes": []
+}

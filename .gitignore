@@ -16,3 +16,20 @@ tool-samples-inbox/
 docs/seo-research/*.xlsx
 docs/seo-research/*.csv
 docs/seo-research/*.zip
+
+# Analytics raw
+docs/analytics/gsc/**/raw/
+docs/analytics/clarity/**/raw/
+
+# Secrets
+*.pem
+*.key
+service-account*.json
+
+# Local credentials
+credentials/
+secrets/
+
+# Local analysis
+*.zip
+prod_check.html

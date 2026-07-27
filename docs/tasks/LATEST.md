@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-27
-- latest_commit: ff73fe6 (Align GSC manual export contract) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（clarify-heygen-free-download-limitation）のcommit SHAはcommit実行後にGIT欄で別途報告する。
+- latest_commit: e4f95f6 (Clarify HeyGen free download limitation) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（implement-gsc-manual-zip-importer）のcommit SHAはcommit実行後にGIT欄で別途報告する。
 - branch: master
-- origin_sync: SYNCED (rev-list 0 0 at HEAD ff73fe6)
-- working_tree: clarify-heygen-free-download-limitation実装完了、全required_checks PASS。commit前（対象ファイル4件のみ変更、未追跡の事前存在ファイルは変更なし）
+- origin_sync: SYNCED (rev-list 0 0 at HEAD e4f95f6)
+- working_tree: implement-gsc-manual-zip-importer実装完了、全required_checks PASS。commit前（対象ファイル7件のみ変更、未追跡の事前存在ファイルは変更なし）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,14 +14,16 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- latest_completed_task: docs/tasks/completed/2026-07-27-align-gsc-manual-export-contract.md（結果: GSC READMEとmanifest.template.jsonを、API取得前提の8データセット構成から実際のGSC UI手動ZIPエクスポート実態（7ファイル）に合わせて改定。独立監査で保存先ディレクトリ構造の説明欠落を指摘され、README追記後にcommit ff73fe6としてpush済み。build 92ページ PASS、validate:data PASS、validate:scope PASS）
+- latest_completed_task: docs/tasks/completed/2026-07-27-implement-gsc-manual-zip-importer.md（結果: GSC UI手動ZIPエクスポートをヘッダー優先で検査しraw構造・manifestへ変換するimporterを新規実装。Node標準機能のみで新規npm依存なし。fixture test 18/18 PASS、実ZIP（property全体export）でのdry-run success確認・repository外での一時apply検証済み。build 92ページ PASS、validate:data PASS、validate:scope PASS）
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- next_candidate: Hailuo AIの無料プラン・ダウンロード可否の実機確認。
+- next_candidate: Run the GSC importer against a real 3-month property export and create the first analysis summary.
 
 ## Notes
+
+- implement-gsc-manual-zip-importer（本タスク）で、scripts/import-gsc-manual-export.mjs・scripts/gsc-import-lib.mjs・scripts/test-import-gsc-manual-export.mjsを新規実装。GSC UI手動ZIPをNode標準の`zlib`/`crypto`/`fs`のみで読み取り専用検査（store/deflate対応、ZIP Slip・絶対path・symlink entry拒否、MAX_ENTRIES=64・エントリ20MB・全体100MB上限）。CSVヘッダー優先でdataset識別（ファイル名は使わない）。UTF-8/BOM対応、decode失敗はcp932等へフォールバックせずwarning。daily/queries/pages/countries/devices/search-appearanceを英語ヘッダーへ正規化、CTR百分率→小数変換。totals.csvはdailyからimpression加重平均で導出（単純平均ではない）。dry-runが既定で書き込みゼロ、apply時は一時ディレクトリ→renameで不完全run防止、既存run directory上書き禁止。manifest_version 1.1でscope/filters/source_files等の契約に準拠、secret・absolute local pathは記録しない。fixture 18項目全PASS。実際に保持していた`aicreative-db.com-Performance-on-Search-2026-07-10.zip`（property全体export）でdry-run実行しstatus=success確認、続けてrepository外の一時ディレクトリへのapplyでmanifest.json・totals.csv等の生成とJSON parse成功を確認後、生成物は削除・元ZIPは無変更・repositoryへは一切コピーしていない。page scope（単一ツールページzip）での実データdry-runは未実施。package-lock.jsonは存在せず、新規npm依存も追加していない。
 
 - clarify-heygen-free-download-limitation（本タスク）で、ユーザーの実機確認結果（HeyGen無料プランは動画作成可能だが、作成した動画ファイルは無料でダウンロードできなかった）を、src/content/tools/heygen.md（DB正本）のfreePlanNote・weaknesses・limitations・faqs・本文に反映。「今回の実機確認では」という限定表現を用い、全アカウント・全地域での永続的な断定は避けた。src/pages/tools/heygen/index.astro（専用ページ）・src/pages/categories/avatar-video/index.astro（カテゴリ比較表）・src/pages/comparisons/avatar-video-ai-tools/index.astro（比較記事の比較表・FAQ、従来「○（動画最大1分・クレジットカード不要）」のみでダウンロード制限の記載がなかった）を同内容に同期。HeyGenの独自動画は追加せず、他ツールの表記は無変更。build 92ページ PASS、validate:data PASS（Errors 0, Warnings 0, Verify 0）、validate:scope PASS、diff check PASS。
 

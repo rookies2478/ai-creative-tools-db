@@ -181,6 +181,65 @@ query-pagesやsitemapsが存在しないことは、それ単体ではstatusをp
 
 エンコーディングはUTF-8を第一候補とするが、importer実装時にはBOMの有無とdecode failureを検証する必要がある（**今回はコードを実装しない**）。
 
+## importer（scripts/import-gsc-manual-export.mjs）
+
+初期実装済み。GSC UI手動ZIPエクスポートを読み取り専用で検査し、標準raw構造とmanifestへ変換する。新規npm依存は追加していない（Node標準の`zlib`/`crypto`/`fs`のみで、ZIP読み取り・展開・SHA-256計算まで完結）。
+
+### 実行方法
+
+```
+# dry-run（既定・書き込みなし）
+npm run analytics:gsc:import -- --input "path/to/export.zip" --date 2026-07-10 --label 3m --scope property
+
+# apply（validation success時のみ書き込み）
+npm run analytics:gsc:import -- --input "path/to/export.zip" --date 2026-07-10 --label 3m --scope property --apply
+
+# ページ単位export
+npm run analytics:gsc:import -- --input "path/to/export.zip" --date 2026-07-10 --label 3m --scope page --page-url https://aicreative-db.com/tools/example/
+```
+
+- `--dry-run`と`--apply`の同時指定は禁止。未指定時は`--dry-run`扱い。
+- `--input` / `--date` / `--label` / `--scope`は必須。`--scope page`時は`--page-url`必須、`--scope property`時は`--page-url`指定不可。
+- 出力先はrepository root基準の規定path（`docs/analytics/gsc/YYYY-MM-DD/raw/run-HHMMSS/`）固定で、直接指定はできない。
+
+### 対応エンコーディング
+
+UTF-8・UTF-8 BOM付きに対応。デコード失敗（U+FFFD置換文字の混入）を検出した場合はcp932等へ自動フォールバックせず、当該エントリを`warnings`に記録してスキップする（required datasetがそれで欠落すればstatusはpartial/failedになる）。
+
+### dataset識別
+
+ヘッダー優先（1.CSVヘッダー 2.フィルタCSV内容 3.ファイル名 4.archive内順序）で実装済み。同一datasetの候補が複数見つかった場合は自動選択せず`validation.errors`へ記録し、成功扱いにしない。
+
+### 正規化ヘッダー
+
+`daily.csv`/`queries.csv`/`pages.csv`/`countries.csv`/`devices.csv`/`search-appearance.csv`はいずれも`date|query|page|country|device|search_appearance, clicks, impressions, ctr, position`へ統一する。CTRは`"33.33%"`のような百分率文字列を0〜1の小数へ変換する（`1`を超える数値も百分率とみなして/100する）。不正な数値は0へ黙って丸めず`validation.errors`に記録する。
+
+### totals計算
+
+`daily.csv`から`totals.csv`を導出する。単純平均は行わない。
+
+- `clicks = sum(clicks)`
+- `impressions = sum(impressions)`
+- `ctr = clicks / impressions`
+- `position = sum(position * impressions) / sum(impressions)`（impression加重平均）
+- `impressions`合計が0の場合は`ctr = 0`、`position`は空欄とし、manifestの`validation.warnings`に記録する。
+
+### 出力構造とエラー処理
+
+apply時は`docs/analytics/gsc/YYYY-MM-DD/raw/run-HHMMSS/`へ、一時ディレクトリに全ファイルを書き込んでから最終ディレクトリへrenameする（途中失敗時は不完全runを残さない）。既存の同名run directoryがある場合は上書きせずエラー終了する。`query-pages.csv`/`sitemaps.csv`は生成せず、manifestに`present: false`として記録する。manifestは最後に書き込む。`raw/`はGit管理対象外（既存`.gitignore`ルールをそのまま利用）。source ZIPは読み取り専用で扱い、一切変更・削除しない。
+
+### ZIP安全性
+
+MAX_ENTRIES=64、MAX_ENTRY_UNCOMPRESSED_BYTES=20MB、MAX_TOTAL_UNCOMPRESSED_BYTES=100MBの上限を設定。絶対path・`../`を含むentry・Unix symlink entryは読み取り前に拒否する。store（method 0）とdeflate（method 8）のみ対応し、それ以外の圧縮方式は拒否する。
+
+### status判定とapply可否
+
+partial/failed状態ではapplyしない（`validation.errors`が1件でもあれば書き込みを拒否する）方針で初期実装している。
+
+### secret・APIについて
+
+credential・token・cookie・APIは一切扱わない。manifestにabsolute local pathやusernameは記録しない（source_filesはbasenameのみ）。
+
 ## 分析期間
 
 - 現在の既存ZIPはいずれも期間ラベル`3m`（過去3か月間）。

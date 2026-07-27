@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-28
-- latest_commit: 3bd8969 (Add first valid Clarity MCP analysis) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（add-hailuo-ai-generated-video）のcommit SHAはcommit実行後にGIT欄で別途報告する。
+- latest_commit: (このタスクcommit実行後にGIT欄で別途報告する)
 - branch: master
-- origin_sync: SYNCED (rev-list 0 0 at HEAD 3bd8969)
-- working_tree: add-hailuo-ai-generated-video実装完了、全required_checks PASS。commit前（対象ファイルのみ変更、未追跡の事前存在ファイルは変更なし）。作業途中、別task（implement-analytics-raw-rotation）由来の未コミット変更が混在していたためgit stash（stash message: stash-implement-analytics-raw-rotation-unrelated）で一時退避済み。本タスクcommit後に復元予定。
+- origin_sync: SYNCED at HEAD 3bd8969 (commit前、rev-list 0 0)
+- working_tree: implement-analytics-raw-rotation実装完了、全required_checks PASS（rotation tests 22/22, dry-run scanned:3/eligible:0/protected:3/files_deleted:0, validate:data Errors 0, build 92ページ, validate:publish Errors 0/Warnings 4, diff-check PASS, validate:scope PASS）。commit前。
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,14 +14,14 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- current_active_task: none（add-hailuo-ai-generated-videoはcompletedへ移動）
-- latest_completed_task: docs/tasks/completed/2026-07-27-add-hailuo-ai-generated-video.md（結果: ユーザーがHailuo AIで共通ベンチマークプロンプトを使い生成しWindows Downloadsフォルダへ保存した動画を登録。source file `Hailuo_Video_...538161416680415234.mp4`（389,241 bytes）をffprobe実測（h264/1366x768/24fps/音声なし/duration 5.875秒）で確認、metadata内AIGCタグにContentProducer="MiniMax"記載、フレーム抽出で画面右下「MINIMAX | Hailuo AI」透かしを目視確認。public/videos/generated/tools/hailuo-ai-tool-video-output-01.mp4へ無編集コピー、poster作成。generatedVideos.tsへ1件追加（comparisonEligible: false、isSameToolAsPage: true、model「Hailuo AI（モデル詳細要確認）」、usageNoteにユーザー実機確認・無料生成/DL・実測尺・透かし・モデル未確認を明記）。hailuo-ai/index.astroへ既存CapCut AI等と同一パターンでsampleVideo propを配線。build 92ページ PASS、validate:data PASS（Errors 0/Warnings 0）、validate:scope PASS、diff check PASS。dist/tools/hailuo-ai/index.htmlで動画・poster参照を確認、他6ツールへの誤混入なしを確認。dist/への直接アクセスが本環境権限でブロックされたため、video要素個別属性・ブラウザ実表示・mobile確認は未実施。本番反映なし）
+- current_active_task: none（implement-analytics-raw-rotationはcompletedへ移動）
+- latest_completed_task: docs/tasks/completed/2026-07-28-implement-analytics-raw-rotation.md（結果: analytics raw run（GSC/Clarity）の保持期間ルールに基づく安全削除ツールをscripts/rotate-analytics-raw.mjs・scripts/analytics-rotation-lib.mjsとして新規実装。dry-runが既定、--applyで実削除。retention超過かつ最新successでなくanalysis-summary/completed taskから未参照のrunのみeligible、それ以外（保護対象・invalid manifest・symlink・tracked file含有・traversal-like run_id）は削除しない設計。fixture 22件全PASS。実raw（GSC 1件・Clarity 2件、うち1件failed run）でdry-run実行しscanned:3/eligible:0/protected:3/invalid:0/files_deleted:0を確認、--applyは未実行。docs/analytics/README.md・gsc/README.md・clarity/README.mdへrotationルールの説明を追記。他タスク（add-hailuo-ai-generated-video）との混在はなく、対象ファイルのみをcommit。実rawディレクトリへの変更なし、本番反映なし）
 - paused_tasks: なし
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- next_candidate: hailuo-ai動画のdist生成HTML実表示確認（権限解除後）、implement-analytics-raw-rotationのstash復元・再開、または次のツール動画の登録候補選定
+- next_candidate: 次28日サイクルでのanalytics rotation --apply実行、hailuo-ai動画のdist生成HTML実表示確認（権限解除後）、または次のツール動画の登録候補選定
 
 ## Notes
 

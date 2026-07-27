@@ -59,6 +59,10 @@ docs/analytics/clarity/
 
 分析要約（analysis-summary.md）には`related_gsc_analysis`欄で、対応するGSC分析runへの参照を必須とする。Clarity単体の分析要約は作成しない。
 
+## raw retention
+
+`scripts/rotate-analytics-raw.mjs`によるraw run整理のretentionは90日固定。詳細は[docs/analytics/README.md](../README.md)を参照。
+
 ## manifestの`source_run`
 
 同一runの生データを再参照できるよう、manifestには`run_id`を記録し、analysis-summaryの`source_run`欄と一致させる。

@@ -74,6 +74,45 @@ failed／partialなrunはlatest成功runとして扱わない。latest専用の�
 
 analysis-summary作成前に、rawファイルの行数・期間の連続性・欠損の有無を確認し、`data_quality`欄に記録する。
 
-## 削除・retentionについて
+## 削除・retention（rotation runner）
 
-raw削除・ローテーション自動化は本タスクの対象外。後続タスクで定義する。
+`scripts/rotate-analytics-raw.mjs`により、GSC/Clarityのraw run（`docs/analytics/**/raw/run-*/`）を保持期限に基づき安全に整理できる。rawのみが対象で、analysis-summary・source ZIP・Git管理ファイルは削除しない。
+
+### retention一覧
+
+| type | label | retention |
+| --- | --- | --- |
+| GSC | 14d | 90日 |
+| GSC | 28d | 365日 |
+| GSC | 3m | 365日 |
+| GSC | 不明 | 自動削除しない（protected） |
+| Clarity | - | 90日 |
+
+### 実行例
+
+```
+# dry-run（既定・削除0件）
+npm run analytics:rotate -- --dry-run
+
+# apply（明示時のみ削除）
+npm run analytics:rotate -- --apply
+
+# 対象限定・基準日指定
+npm run analytics:rotate -- --type gsc --dry-run
+npm run analytics:rotate -- --as-of 2026-07-27 --dry-run
+```
+
+`--dry-run`と`--apply`の同時指定はエラー。`--dry-run`は既定（未指定時も同じ）。
+
+### 保護ルール
+
+- 各type/period（GSCはlabel別、Clarityは全体）のlatest success runを最低1件保護
+- analysis-summary.mdの`source_run`、completed task本文で参照されるrun_idを保護
+- manifest欠損・parse失敗・status≠success・label不明・generated_at不明・retention判定不能なrunは保護（invalidまたはprotected扱いで削除しない）
+- symlink・path traversal疑い・Git管理ファイルを含むrunは削除対象にできない
+- source ZIP（`docs/analytics/**/raw/`外）は本ツールの対象外
+
+### 運用
+
+- 手動実行のみ。定期実行・GitHub Actions schedule化は未実装（後続タスクで検討）。
+- fixtureテスト: `npm run analytics:rotate:test`（実rawを使わず一時ディレクトリで検証）。

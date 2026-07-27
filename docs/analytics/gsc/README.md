@@ -248,6 +248,10 @@ credential・token・cookie・APIは一切扱わない。manifestにabsolute loc
 - ファイル名の日付だけで期間を決めない。フィルタCSVの内容またはユーザー入力から期間を確定する。
 - 全datasetで同一期間であることを検証する。
 
+## raw retention
+
+`scripts/rotate-analytics-raw.mjs`によるraw run整理のretentionは、label別に90日（14d）／365日（28d, 3m）。詳細は[docs/analytics/README.md](../README.md)を参照。label不明のrunは自動削除しない。
+
 ## GSCとClarityの混同禁止
 
 GSCの数値とClarityの行動データは性質が異なるため、分析要約内で混同しないこと。少数データで断定的な結論を出さないこと。GSCプロパティやsitemap設定の変更直後は数値変動の原因が判別できないためHOLD判断があり得る。実装判断はrawではなく`analysis-summary.md`に記録する。

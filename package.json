@@ -12,7 +12,9 @@
     "validate:data": "node scripts/validate-data.mjs",
     "validate:publish": "node scripts/validate-publish.mjs",
     "analytics:gsc:import": "node scripts/import-gsc-manual-export.mjs",
-    "analytics:gsc:test": "node scripts/test-import-gsc-manual-export.mjs"
+    "analytics:gsc:test": "node scripts/test-import-gsc-manual-export.mjs",
+    "analytics:rotate": "node scripts/rotate-analytics-raw.mjs",
+    "analytics:rotate:test": "node scripts/test-rotate-analytics-raw.mjs"
   },
   "engines": {
     "node": ">=24.0.0"

@@ -15,18 +15,16 @@
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
 - latest_completed_task: docs/tasks/completed/2026-07-27-add-paused-task-state.md（結果: docs/tasks/paused/を新設しCapCut taskをpausedへ移動、validate:task/validate:scopeをpaused対応に拡張。Clarity active taskのtarget_filesへoperational prerequisiteとして本改善を追加。build 92ページ PASS、validate:data PASS、validate:publish PASS(Errors 0/Warnings 4)、validate:scope PASS）
-- current_active_task: run-first-clarity-mcp-analysis
-- active_status: HOLD due to Clarity project mismatch（aicreative-db.comプロジェクトへの再接続待ち）
-- operational_prerequisite: paused task state added（docs/tasks/paused/、validate:task・validate:scope拡張済み）
+- current_active_task: none（run-first-clarity-mcp-analysisはcompletedへ移動）
+- latest_completed_task: docs/tasks/completed/2026-07-27-run-first-clarity-mcp-analysis.md（結果: clarity-ai-creative MCP経由で`/tools/stable-diffusion/`の初回aggregate-only分析を実行。domain=aicreative-db.com確認済み、28日間3セッション、rage/dead/quickback/excessive scroll全て0、data_quality=LOW（セッション数不足）、implementation_now=false。前回run-131108は別プロジェクト誤接続によるfailedで、本タスクのrun-143000で正式に置き換え。build 92ページ PASS、validate:data PASS、validate:publish PASS(Errors 0/Warnings 4)、validate:scope PASS）
 - paused_tasks:
-  - add-capcut-ai-generated-video（pause_reason: Clarity優先、resume_condition: Clarity MCP再接続・初回分析完了または正式クローズ後）
+  - add-capcut-ai-generated-video（pause_reason: Clarity優先、resume_condition: Clarity MCP初回分析完了後 — 完了済み。次回active化可能）
 - paused_changes_preserved: yes（src/data/generatedVideos.ts、src/pages/tools/capcut-ai/index.astro、capcut-ai動画/poster、いずれも未commit保持）
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- required_user_action: reconnect Clarity MCP to aicreative-db.com
-- next_candidate: rerun first Clarity analysis after reconnection
+- next_candidate: セッション数が十分蓄積された時点でClarity再run、または CapCut paused task をactiveへ復帰
 
 ## Notes
 

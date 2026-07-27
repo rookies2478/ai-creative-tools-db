@@ -1,11 +1,26 @@
 {
-  "manifest_version": "1.0",
+  "manifest_version": "1.1",
   "analysis_type": "gsc",
+  "processing_stage": "raw",
   "run_id": "run-HHMMSS",
   "status": "success",
   "generated_at": "YYYY-MM-DDTHH:mm:ssZ",
   "completed_at": "YYYY-MM-DDTHH:mm:ssZ",
+  "source_export_date": "YYYY-MM-DD",
+  "imported_at": "YYYY-MM-DDTHH:mm:ssZ",
   "property": "REPLACE_WITH_PROPERTY",
+  "scope": {
+    "type": "property|page",
+    "page_url": null
+  },
+  "filters": {
+    "search_type": "web",
+    "page": null,
+    "query": null,
+    "country": null,
+    "device": null,
+    "search_appearance": null
+  },
   "period": {
     "label": "14d|28d|3m|custom",
     "start_date": "YYYY-MM-DD",
@@ -17,70 +32,138 @@
     "start_date": null,
     "end_date": null
   },
-  "search_type": "web",
-  "row_limit": 0,
-  "pagination": {
-    "paginated": false,
-    "pages_fetched": 0
-  },
   "acquisition": {
-    "method": "manual|api",
-    "tool": "REPLACE",
+    "method": "manual-ui-export",
+    "source": "google-search-console",
+    "source_report": "performance",
+    "input_format": "zip",
+    "tool": "Google Search Console UI",
     "script": null
   },
+  "source_files": [
+    {
+      "name": "REPLACE_WITH_SOURCE_ZIP_NAME.zip",
+      "type": "zip",
+      "sha256": null,
+      "size_bytes": 0
+    }
+  ],
   "datasets": {
-    "totals": {
-      "file": "totals.csv",
-      "present": true,
-      "rows": 0
-    },
     "daily": {
       "file": "daily.csv",
+      "source_type": "exported",
       "present": true,
-      "rows": 0
+      "empty": false,
+      "rows": 0,
+      "required": true,
+      "derived": false,
+      "notes": []
     },
     "queries": {
       "file": "queries.csv",
+      "source_type": "exported",
       "present": true,
-      "rows": 0
+      "empty": false,
+      "rows": 0,
+      "required": true,
+      "derived": false,
+      "notes": []
     },
     "pages": {
       "file": "pages.csv",
+      "source_type": "exported",
       "present": true,
-      "rows": 0
-    },
-    "query-pages": {
-      "file": "query-pages.csv",
-      "present": true,
-      "rows": 0
-    },
-    "devices": {
-      "file": "devices.csv",
-      "present": true,
-      "rows": 0
+      "empty": false,
+      "rows": 0,
+      "required": true,
+      "derived": false,
+      "notes": []
     },
     "countries": {
       "file": "countries.csv",
+      "source_type": "exported",
       "present": true,
-      "rows": 0
+      "empty": false,
+      "rows": 0,
+      "required": true,
+      "derived": false,
+      "notes": []
+    },
+    "devices": {
+      "file": "devices.csv",
+      "source_type": "exported",
+      "present": true,
+      "empty": false,
+      "rows": 0,
+      "required": true,
+      "derived": false,
+      "notes": []
+    },
+    "search-appearance": {
+      "file": "search-appearance.csv",
+      "source_type": "exported",
+      "present": true,
+      "empty": true,
+      "rows": 0,
+      "required": true,
+      "derived": false,
+      "notes": ["データがない場合はヘッダーのみでもpresent=trueとして扱う"]
+    },
+    "filters": {
+      "file": "filters.csv",
+      "source_type": "exported",
+      "present": true,
+      "empty": false,
+      "rows": 0,
+      "required": true,
+      "derived": false,
+      "notes": []
+    },
+    "totals": {
+      "file": null,
+      "source_type": "derived",
+      "present": false,
+      "empty": false,
+      "rows": 0,
+      "required": false,
+      "derived": true,
+      "notes": ["dailyから正規化時に集計する。raw段階ではpresent=false。normalized段階ではpresent=trueにできる"]
+    },
+    "query-pages": {
+      "file": null,
+      "source_type": "unavailable",
+      "present": false,
+      "empty": false,
+      "rows": 0,
+      "required": false,
+      "derived": false,
+      "notes": ["GSC UIの通常エクスポートでは取得不可。API取得または別処理が必要"]
     },
     "sitemaps": {
-      "file": "sitemaps.csv",
-      "present": true,
-      "rows": 0
+      "file": null,
+      "source_type": "unavailable",
+      "present": false,
+      "empty": false,
+      "rows": 0,
+      "required": false,
+      "derived": false,
+      "notes": ["パフォーマンスレポートのZIPには含まれない。GSCのサイトマップ画面または別取得方式が必要"]
     }
   },
   "required_datasets": [
-    "totals",
     "daily",
     "queries",
     "pages",
-    "query-pages",
-    "devices",
     "countries",
+    "devices",
+    "search-appearance",
+    "filters"
+  ],
+  "optional_datasets": [
+    "totals",
+    "query-pages",
     "sitemaps"
   ],
-  "optional_datasets": [],
   "validation": {
     "errors": [],
     "warnings": []

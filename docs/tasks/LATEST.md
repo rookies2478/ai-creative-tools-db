@@ -1,10 +1,10 @@
 # Latest Project State
 
-- updated_at: 2026-07-26
-- latest_commit: 5451573 (Add PixVerse generated video sample) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（create-analytics-storage-foundation）のcommit SHAはcommit実行後にGIT欄で別途報告する。
+- updated_at: 2026-07-27
+- latest_commit: 15a5433 (Add analytics storage and summary templates) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（align-gsc-manual-export-contract）のcommit SHAはcommit実行後にGIT欄で別途報告する。
 - branch: master
-- origin_sync: SYNCED (rev-list 0 0 at HEAD 5451573)
-- working_tree: create-analytics-storage-foundation実装完了、全required_checks PASS。commit前（対象ファイル10件のみ変更、未追跡の事前存在ファイルは変更なし）
+- origin_sync: SYNCED (rev-list 0 0 at HEAD 15a5433)
+- working_tree: align-gsc-manual-export-contract実装完了、全required_checks PASS。commit前（対象ファイル3件のみ変更、未追跡の事前存在ファイルは変更なし）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,16 +14,18 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- latest_completed_task: docs/tasks/completed/2026-07-26-create-analytics-storage-foundation.md（結果: GSC/Clarity分析run保存のための基盤構造・manifestテンプレート・分析要約テンプレート・READMEを新規作成。取得API・認証・rotationは非対象。build 92ページ PASS、validate:data PASS、validate:scope PASS。commit後にSHA確定）
+- latest_completed_task: docs/tasks/completed/2026-07-27-align-gsc-manual-export-contract.md（結果: GSC READMEとmanifest.template.jsonを、API取得前提の8データセット構成から実際のGSC UI手動ZIPエクスポート実態（7ファイル）に合わせて改定。manual-first / API-compatible設計。build 92ページ PASS、validate:data PASS、validate:scope PASS。commit後にSHA確定）
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- next_candidate: Define GSC acquisition method and input contract.
+- next_candidate: Implement a dry-run GSC manual ZIP importer and normalization plan.
 
 ## Notes
 
-- create-analytics-storage-foundation（本タスク）で、docs/analytics/README.md・docs/analytics/gsc/README.md・docs/analytics/clarity/README.mdを新規作成し、GSC 8データセット・Clarity 5データセットのmanifest.template.json（JSON parse検証済み）とanalysis-summary.template.mdを両方式で作成。latest成功run判定ルール（status=success・completed_at存在・required_datasets全present・validation.errors=0・同日複数runはcompleted_at最新）をREADMEに明記。.gitignoreは`docs/analytics/**/raw/`除外ルールが既存済みのため無変更。secret/token/credential項目は一切含めていない。実データ日付ディレクトリ・rawディレクトリ・.gitkeep・latest symlinkは作成せず。
+- align-gsc-manual-export-contract（本タスク）で、docs/analytics/gsc/README.mdとmanifest.template.json（manifest_version 1.0→1.1）を実測GSC ZIP構造に合わせて全面改定。required_datasets を daily/queries/pages/countries/devices/search-appearance/filters の7件に変更し、totals（derived）・query-pages（unavailable）・sitemaps（unavailable）をoptional_datasetsへ移動。manifestに`processing_stage`（raw|normalized）・`scope`（property|page）・`filters`・`source_export_date`・`imported_at`・`source_files`を新規追加。データセット識別はファイル名でなくCSVヘッダー優先とする方針を明記。importer・CSVパース・API・secret実装は一切行っていない。docs/analytics/README.mdの既存latest-successルールと矛盾しないことを確認し無変更。
+
+- create-analytics-storage-foundation（commit 15a5433）で、docs/analytics/README.md・docs/analytics/gsc/README.md・docs/analytics/clarity/README.mdを新規作成し、GSC 8データセット・Clarity 5データセットのmanifest.template.json（JSON parse検証済み）とanalysis-summary.template.mdを両方式で作成。latest成功run判定ルール（status=success・completed_at存在・required_datasets全present・validation.errors=0・同日複数runはcompleted_at最新）をREADMEに明記。.gitignoreは`docs/analytics/**/raw/`除外ルールが既存済みのため無変更。secret/token/credential項目は一切含めていない。実データ日付ディレクトリ・rawディレクトリ・.gitkeep・latest symlinkは作成せず。事後audit（本タスクの前段階）で、GSC UI手動ZIP実物7件を読み取り確認し、8データセット構成との差分（query-pages/sitemaps欠落・totals統合・manifest.json未生成・ページフィルタ欄なし等）を特定した。
 
 - add-pixverse-generated-video（commit 5451573）で、ユーザーがPixVerse V6（Image/Textモード・360P出力）で共通ベンチマークプロンプトを使い生成し、Windowsダウンロードフォルダへ保存した動画（PixVerse_V6_Image_Text_360P_A_cinematic_5secon.mp4、5.04秒・640x360・h264/aac・透かし"PixVerse.ai"確認済み）をリポジトリへコピーし、src/data/generatedVideos.tsへ既存4件と同形式で1件追加。src/pages/tools/pixverse/index.astroへsampleVideo propを既存Kling AIページと同一パターンで配線。元Downloadsファイルは無変更・無削除。事後監査でvalidate:data/build/validate:publish/diff-check全PASSを再確認済み。
 

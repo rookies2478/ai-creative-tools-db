@@ -2,10 +2,15 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+import { generatedVideos } from '../../../data/generatedVideos';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'd-id');
 const d = entry?.data;
+
+const dIdSampleVideo = generatedVideos.find(
+  (v) => v.pageSlug === 'd-id' && v.sampleType === 'tool-video-output' && v.isSameToolAsPage
+) ?? null;
 
 const jsonLd = JSON.stringify([
   {
@@ -49,6 +54,7 @@ const jsonLd = JSON.stringify([
 
   <div class="tdp-wrap">
     <ToolDetailPage japanBilling={d?.japanBilling}
+      sampleVideo={dIdSampleVideo}
       toolName="D-ID"
       category="AIアバター動画"
       checkedDate={d?.lastReviewed ?? '2026-07-05'}

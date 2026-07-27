@@ -3,8 +3,8 @@
 - updated_at: 2026-07-28
 - latest_commit: (このタスクcommit実行後にGIT欄で別途報告する)
 - branch: master
-- origin_sync: SYNCED at HEAD fed2bf8 (commit前、rev-list 0 0)
-- working_tree: add-vidu-ai-generated-video実装完了、全required_checks PASS。commit前（対象ファイルのみ変更、未追跡の事前存在ファイルは変更なし）
+- origin_sync: SYNCED at HEAD ea4489f (commit前、rev-list 0 0)
+- working_tree: add-d-id-generated-video実装完了、全required_checks PASS。commit前（対象ファイルのみ変更、未追跡の事前存在ファイルは変更なし）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,8 +14,8 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- current_active_task: none（add-vidu-ai-generated-videoはcompletedへ移動）
-- latest_completed_task: docs/tasks/completed/2026-07-28-add-vidu-ai-generated-video.md（結果: ユーザーがVidu AIで共通ベンチマークプロンプトを使い生成しWindows Downloadsフォルダへ保存した動画を登録。初回のHEVC(H.265)版ファイルは既存6件（h264）との再生互換性懸念をユーザーへ確認し、ユーザーがh264版（vidu-video-3396873421137460.mp4、1,322,368 bytes）を用意し直したためそちらを採用。ffprobe実測（h264/aac/1920x1080/24fps/duration 5.041667秒）で確認、フレーム抽出で画面右下「Vidu AI」透かしを目視確認。public/videos/generated/tools/vidu-ai-tool-video-output-01.mp4へ無編集コピー、poster作成。generatedVideos.tsへ1件追加（comparisonEligible: false、isSameToolAsPage: true、model「Vidu AI（モデル詳細要確認）」、usageNoteにユーザー実機確認・無料生成/DL・実測尺・透かし・ProduceID表記からモデル名断定せず・無料クレジット制度未確認を明記）。vidu-ai/index.astroへ既存Hailuo AI等と同一パターンでsampleVideo propを配線。build 92ページ PASS、validate:data PASS（Errors 0/Warnings 0）、validate:scope PASS、diff check PASS。dist/tools/vidu-ai/index.htmlで動画・poster参照を確認、他7ツールへの誤混入なしを確認。dist/への直接アクセスが本環境権限でブロックされたため、video要素個別属性・ブラウザ実表示・mobile確認は未実施。本番反映なし）
+- current_active_task: none（add-d-id-generated-videoはcompletedへ移動）
+- latest_completed_task: docs/tasks/completed/2026-07-28-add-d-id-generated-video.md（結果: ユーザーがD-IDのFree Trialで生成しWindows Downloadsフォルダへ保存したAIアバター動画を登録。Downloads内の動画拡張子検索で作業当日作成の唯一の候補「Untitled video.mp4」（3,836,799 bytes）を特定。ffprobe実測（h264/aac/coded 1920x1920/25fps/duration 12.24秒、ただしSAR/DARメタデータは16:9を示し実ピクセル寸法と不一致・要確認として記録）で確認、フレーム抽出（n=10,60,150,270）で画面全体に繰り返し表示される「D-iD」フルスクリーン透かしを目視確認、人物はD-ID提供と見られるストックアバターで実在著名人ではないと判断。音声言語内容（日本語台本どおりか）は管理者側で再生確認していないためunknownとして記録し、ユーザー明示をprovenanceの主根拠とした。public/videos/generated/tools/d-id-tool-video-output-01.mp4へ無編集コピー（バイト数一致確認）、poster作成（ffmpeg libwebp、n=60フレーム、1920x1920）。generatedVideos.tsへ1件追加（comparisonEligible: false・D-IDの通常Text to Videoベンチマークとは条件が異なるため比較対象外、promptVersion新規"avatar-video-sample-v1"、model「D-ID（モデル詳細要確認）」、usageNoteに実機確認・Free Trial・実測値・フルスクリーン透かし・音声言語内容未確認・モデル名未確認・商用利用未確認を明記）。d-id/index.astroへ既存Hailuo AI等と同一パターンでsampleVideo propを配線。build 92ページ PASS、validate:task PASS、validate:data PASS（Errors 0/Warnings 0/Verify 0）、validate:scope PASS、git diff --check PASS（対象ファイルのみ+28行の追加のみ、既存エントリ・他ページは無変更）。dist/への直接アクセスが本環境権限でブロックされたため、生成HTML内の動画参照確認・video要素属性・ブラウザ実表示・mobile確認は未実施（過去タスクと同様の制約）。本番反映なし）
 - paused_tasks: なし
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch

@@ -7,6 +7,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const ACTIVE_DIR = "docs/tasks/active";
+const PAUSED_DIR = "docs/tasks/paused";
 const errors = [];
 
 function fail(msg) {
@@ -180,7 +181,66 @@ function main() {
     fail("preexisting_untracked_files が配列ではありません");
   }
 
+  validatePausedTasks();
+
   printAndExit();
+}
+
+function listPausedTaskFiles() {
+  let entries;
+  try {
+    entries = readdirSync(PAUSED_DIR);
+  } catch {
+    return [];
+  }
+  return entries.filter((f) => f.endsWith(".md") && f !== "README.md");
+}
+
+function validatePausedTasks() {
+  for (const file of listPausedTaskFiles()) {
+    const filePath = join(PAUSED_DIR, file);
+    const content = readFileSync(filePath, "utf8");
+    const yamlText = splitFrontmatter(content);
+    if (yamlText === null) {
+      fail(`${filePath}: YAML frontmatterが見つかりません`);
+      continue;
+    }
+    let data;
+    try {
+      data = parseYaml(yamlText);
+    } catch (e) {
+      fail(`${filePath}: YAML frontmatterの解析に失敗しました (${e.message})`);
+      continue;
+    }
+
+    if (data.status !== "PAUSED") {
+      fail(`${filePath}: status が PAUSED ではありません: ${data.status}`);
+    }
+    if (!data.task_id) {
+      fail(`${filePath}: task_id が空です`);
+    }
+    if (!data.goal || typeof data.goal !== "string" || data.goal.trim() === "") {
+      fail(`${filePath}: goal が空です`);
+    }
+    if (!["LOW", "MEDIUM", "HIGH"].includes(data.risk)) {
+      fail(`${filePath}: risk が LOW/MEDIUM/HIGH のいずれでもありません: ${data.risk}`);
+    }
+    if (!Array.isArray(data.target_files) || data.target_files.length === 0) {
+      fail(`${filePath}: target_files が空です`);
+    }
+    if (!data.pause_reason || typeof data.pause_reason !== "string" || data.pause_reason.trim() === "") {
+      fail(`${filePath}: pause_reason が空です`);
+    }
+    if (!data.resume_condition || typeof data.resume_condition !== "string" || data.resume_condition.trim() === "") {
+      fail(`${filePath}: resume_condition が空です`);
+    }
+    if (!Array.isArray(data.preserved_changes) || data.preserved_changes.length === 0) {
+      fail(`${filePath}: preserved_changes が空です`);
+    }
+    if (!Array.isArray(data.required_checks) || data.required_checks.length === 0) {
+      fail(`${filePath}: required_checks が空です`);
+    }
+  }
 }
 
 function printAndExit() {

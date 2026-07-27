@@ -14,12 +14,19 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- latest_completed_task: docs/tasks/completed/2026-07-27-add-data-publish-validation-to-ci.md（結果: GitHub Actions build workflow(.github/workflows/build.yml)へvalidate:data(build前)・validate:publish(build後)を追加。permissions: contents: readを新規明示。trigger・secrets・deployは変更なし。build 92ページ PASS、validate:data PASS、validate:publish PASS(Errors 0/Warnings 4)、validate:scope PASS）
+- latest_completed_task: docs/tasks/completed/2026-07-27-add-paused-task-state.md（結果: docs/tasks/paused/を新設しCapCut taskをpausedへ移動、validate:task/validate:scopeをpaused対応に拡張。Clarity active taskのtarget_filesへoperational prerequisiteとして本改善を追加。build 92ページ PASS、validate:data PASS、validate:publish PASS(Errors 0/Warnings 4)、validate:scope PASS）
+- current_active_task: run-first-clarity-mcp-analysis
+- active_status: HOLD due to Clarity project mismatch（aicreative-db.comプロジェクトへの再接続待ち）
+- operational_prerequisite: paused task state added（docs/tasks/paused/、validate:task・validate:scope拡張済み）
+- paused_tasks:
+  - add-capcut-ai-generated-video（pause_reason: Clarity優先、resume_condition: Clarity MCP再接続・初回分析完了または正式クローズ後）
+- paused_changes_preserved: yes（src/data/generatedVideos.ts、src/pages/tools/capcut-ai/index.astro、capcut-ai動画/poster、いずれも未commit保持）
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- next_candidate: Collect the next 28-day GSC export before making SEO changes.
+- required_user_action: reconnect Clarity MCP to aicreative-db.com
+- next_candidate: rerun first Clarity analysis after reconnection
 
 ## Notes
 

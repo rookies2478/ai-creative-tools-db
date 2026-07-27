@@ -8,6 +8,7 @@ import { execSync } from "node:child_process";
 import { join } from "node:path";
 
 const ACTIVE_DIR = "docs/tasks/active";
+const PAUSED_DIR = "docs/tasks/paused";
 
 const DANGEROUS_PATTERNS = [
   /^\.env$/,
@@ -147,6 +148,25 @@ function escapeRegex(s) {
   return s.replace(/[.+?^${}()|[\]\\]/g, "\\$&");
 }
 
+function loadPausedTasks() {
+  let entries;
+  try {
+    entries = readdirSync(PAUSED_DIR);
+  } catch {
+    return [];
+  }
+  const files = entries.filter((f) => f.endsWith(".md") && f !== "README.md");
+  const tasks = [];
+  for (const file of files) {
+    const filePath = join(PAUSED_DIR, file);
+    const content = readFileSync(filePath, "utf8");
+    const yamlText = splitFrontmatter(content);
+    if (yamlText === null) continue;
+    tasks.push({ filePath, data: parseYaml(yamlText) });
+  }
+  return tasks;
+}
+
 function main() {
   const { data } = loadActiveTask();
   const targetFiles = Array.isArray(data.target_files) ? data.target_files : [];
@@ -156,6 +176,24 @@ function main() {
       : []
     ).map(normalize)
   );
+
+  const pausedTasks = loadPausedTasks();
+  const pausedAllowedFiles = [];
+  for (const task of pausedTasks) {
+    const preserved = Array.isArray(task.data.preserved_changes)
+      ? task.data.preserved_changes
+      : [];
+    for (const f of preserved) {
+      const nf = normalize(f);
+      if (matchesTarget(nf, targetFiles)) {
+        console.error(
+          `validate:scope FAILED\n  - active taskとpaused task(${task.filePath})のscopeが重複しています: ${nf}`
+        );
+        process.exit(1);
+      }
+      pausedAllowedFiles.push(nf);
+    }
+  }
 
   const changed = gitChangedFiles();
   const outOfScope = [];
@@ -171,9 +209,10 @@ function main() {
       }
     }
 
-    if (!matchesTarget(file, targetFiles)) {
-      outOfScope.push(file);
-    }
+    if (matchesTarget(file, targetFiles)) continue;
+    if (matchesTarget(file, pausedAllowedFiles)) continue;
+
+    outOfScope.push(file);
   }
 
   if (dangerous.length > 0 || outOfScope.length > 0) {

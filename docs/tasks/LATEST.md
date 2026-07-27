@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-27
-- latest_commit: e4f95f6 (Clarify HeyGen free download limitation) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（implement-gsc-manual-zip-importer）のcommit SHAはcommit実行後にGIT欄で別途報告する。
+- latest_commit: 972b60e (Add GSC manual export importer) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（create-first-gsc-analysis-summary）のcommit SHAはcommit実行後にGIT欄で別途報告する。
 - branch: master
-- origin_sync: SYNCED (rev-list 0 0 at HEAD e4f95f6)
-- working_tree: implement-gsc-manual-zip-importer実装完了、全required_checks PASS。commit前（対象ファイル7件のみ変更、未追跡の事前存在ファイルは変更なし）
+- origin_sync: SYNCED (rev-list 0 0 at HEAD 972b60e)
+- working_tree: create-first-gsc-analysis-summary実装完了、全required_checks PASS。commit前（対象ファイル3件のみ変更、rawはGit非追跡のまま、未追跡の事前存在ファイルは変更なし）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,14 +14,16 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- latest_completed_task: docs/tasks/completed/2026-07-27-implement-gsc-manual-zip-importer.md（結果: GSC UI手動ZIPエクスポートをヘッダー優先で検査しraw構造・manifestへ変換するimporterを新規実装。Node標準機能のみで新規npm依存なし。fixture test 18/18 PASS、実ZIP（property全体export）でのdry-run success確認・repository外での一時apply検証済み。build 92ページ PASS、validate:data PASS、validate:scope PASS）
+- latest_completed_task: docs/tasks/completed/2026-07-27-create-first-gsc-analysis-summary.md（結果: 実際のGSC 3か月property全体exportをimporterで正式取込（run-094504, status=success）、docs/analytics/gsc/2026-07-10/analysis-summary.mdを新規作成。候補10件のうち上位6件は直近title/meta変更で評価期間不足、1件はquery-page不明、2件は母数・意図整合不足、1件は母数不足のためHOLD。selected_candidate: none。rawはGit非追跡のまま。build 92ページ PASS、validate:data PASS、validate:scope PASS）
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- next_candidate: Run the GSC importer against a real 3-month property export and create the first analysis summary.
+- next_candidate: Collect the next 28-day GSC export before making changes.
 
 ## Notes
+
+- create-first-gsc-analysis-summary（本タスク）で、`aicreative-db.com-Performance-on-Search-2026-07-10.zip`（property全体export、sha256 52dfdf3e...）をdry-run→apply（run-094504）で正式import。daily 65行（2026-05-05〜07-08、欠損なし）、queries 295行、pages 97行、countries 44行、devices 3行、search-appearance空、query-pages/sitemapsはunavailable（想定通り）。総クリック56・総インプレッション3,979・CTR 1.41%・加重平均順位16.3。docs/analytics/gsc/2026-07-10/analysis-summary.mdへcandidates 10件（C1〜C10）・HOLD理由・selected_candidate: none（implementation_now: false）を記録。判断根拠: トラフィック上位ページ（stable-diffusion, runway, fotor-ai, luma-ai, adobe-firefly-vs-microsoft-designer, kling-ai, gemini-image-generation, tensor-art）の大半が2026-07-05〜07-26にtitle/meta/snippet変更済みで、CTR/順位変化の帰属を判断するには評価期間が不足していることをGit履歴で確認。「stable diffusion」クエリ（順位2.37・インプレッション127・クリック0）はquery-pages非対応のため対応ページを断定できずHOLD。raw run・manifest・CSVはGit非追跡（`docs/analytics/gsc/**/raw/`の既存除外ルールで確認済み）、analysis-summary.mdのみtracked。ページ・DB・sitemapは無変更。副次的に、importer（scripts/gsc-import-lib.mjs）のFILTER_KEY_MAPが実データの「日付」キーではなく「期間」を想定しているバグを発見したが、本タスクのtarget_files外のため修正せず、別タスクでの修正を推奨として記録した。
 
 - implement-gsc-manual-zip-importer（本タスク）で、scripts/import-gsc-manual-export.mjs・scripts/gsc-import-lib.mjs・scripts/test-import-gsc-manual-export.mjsを新規実装。GSC UI手動ZIPをNode標準の`zlib`/`crypto`/`fs`のみで読み取り専用検査（store/deflate対応、ZIP Slip・絶対path・symlink entry拒否、MAX_ENTRIES=64・エントリ20MB・全体100MB上限）。CSVヘッダー優先でdataset識別（ファイル名は使わない）。UTF-8/BOM対応、decode失敗はcp932等へフォールバックせずwarning。daily/queries/pages/countries/devices/search-appearanceを英語ヘッダーへ正規化、CTR百分率→小数変換。totals.csvはdailyからimpression加重平均で導出（単純平均ではない）。dry-runが既定で書き込みゼロ、apply時は一時ディレクトリ→renameで不完全run防止、既存run directory上書き禁止。manifest_version 1.1でscope/filters/source_files等の契約に準拠、secret・absolute local pathは記録しない。fixture 18項目全PASS。実際に保持していた`aicreative-db.com-Performance-on-Search-2026-07-10.zip`（property全体export）でdry-run実行しstatus=success確認、続けてrepository外の一時ディレクトリへのapplyでmanifest.json・totals.csv等の生成とJSON parse成功を確認後、生成物は削除・元ZIPは無変更・repositoryへは一切コピーしていない。page scope（単一ツールページzip）での実データdry-runは未実施。package-lock.jsonは存在せず、新規npm依存も追加していない。
 

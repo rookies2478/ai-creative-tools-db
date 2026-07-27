@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-27
-- latest_commit: f5b8e2b (Add first GSC analysis summary) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（add-data-publish-validation-to-ci）のcommit SHAはcommit実行後にGIT欄で別途報告する。
+- latest_commit: 3bd8969 (Add first valid Clarity MCP analysis) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（add-capcut-ai-generated-video）のcommit SHAはcommit実行後にGIT欄で別途報告する。
 - branch: master
-- origin_sync: SYNCED (rev-list 0 0 at HEAD f5b8e2b)
-- working_tree: add-data-publish-validation-to-ci実装完了、全required_checks PASS。commit前（対象ファイル3件のみ変更、未追跡の事前存在ファイルは変更なし）
+- origin_sync: SYNCED (rev-list 0 0 at HEAD 3bd8969)
+- working_tree: add-capcut-ai-generated-video実装完了、全required_checks PASS。commit前（対象ファイルのみ変更、未追跡の事前存在ファイルは変更なし）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,17 +14,14 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- latest_completed_task: docs/tasks/completed/2026-07-27-add-paused-task-state.md（結果: docs/tasks/paused/を新設しCapCut taskをpausedへ移動、validate:task/validate:scopeをpaused対応に拡張。Clarity active taskのtarget_filesへoperational prerequisiteとして本改善を追加。build 92ページ PASS、validate:data PASS、validate:publish PASS(Errors 0/Warnings 4)、validate:scope PASS）
-- current_active_task: none（run-first-clarity-mcp-analysisはcompletedへ移動）
-- latest_completed_task: docs/tasks/completed/2026-07-27-run-first-clarity-mcp-analysis.md（結果: clarity-ai-creative MCP経由で`/tools/stable-diffusion/`の初回aggregate-only分析を実行。domain=aicreative-db.com確認済み、28日間3セッション、rage/dead/quickback/excessive scroll全て0、data_quality=LOW（セッション数不足）、implementation_now=false。前回run-131108は別プロジェクト誤接続によるfailedで、本タスクのrun-143000で正式に置き換え。build 92ページ PASS、validate:data PASS、validate:publish PASS(Errors 0/Warnings 4)、validate:scope PASS）
-- paused_tasks:
-  - add-capcut-ai-generated-video（pause_reason: Clarity優先、resume_condition: Clarity MCP初回分析完了後 — 完了済み。次回active化可能）
-- paused_changes_preserved: yes（src/data/generatedVideos.ts、src/pages/tools/capcut-ai/index.astro、capcut-ai動画/poster、いずれも未commit保持）
+- current_active_task: none（add-capcut-ai-generated-videoはcompletedへ移動）
+- latest_completed_task: docs/tasks/completed/2026-07-27-add-capcut-ai-generated-video.md（結果: ユーザーが実機操作でCapCut AI（Text to Video）にて生成・確認した動画をpaused状態から復帰させ登録完了。source file `動画1.mp4`（729,305 bytes）を`public/videos/generated/tools/capcut-ai-tool-video-output-01.mp4`へ無編集コピー、ffprobe実測でh264/1280x720/24fps/aac一致確認。generatedVideos.tsへ1件追加（comparisonEligible: true、isSameToolAsPage: true、usageNoteにユーザー実機確認・透かし「Ai」・モデル未確認を明記）。capcut-ai/index.astroへ既存Kling AI等と同一パターンでsampleVideo propを配線。build 92ページ PASS、validate:data PASS（Errors 0/Warnings 0）、validate:scope PASS、diff check PASS。dist/への直接アクセスが本環境の権限設定でブロックされたため、生成HTML内の実際の動画URL出現・ブラウザ/HTTP表示確認は未実施（ソース差分とfilter条件から動作を推定）。本番反映なし）
+- paused_tasks: なし
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- next_candidate: セッション数が十分蓄積された時点でClarity再run、または CapCut paused task をactiveへ復帰
+- next_candidate: capcut-ai動画のdist生成HTML実表示確認（権限解除後）、または次のツール動画の登録候補選定
 
 ## Notes
 

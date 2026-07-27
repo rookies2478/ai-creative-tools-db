@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-27
-- latest_commit: 15a5433 (Add analytics storage and summary templates) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（align-gsc-manual-export-contract）のcommit SHAはcommit実行後にGIT欄で別途報告する。
+- latest_commit: ff73fe6 (Align GSC manual export contract) — 本ファイル更新時点（本タスクcommit前）のHEAD。本タスク（clarify-heygen-free-download-limitation）のcommit SHAはcommit実行後にGIT欄で別途報告する。
 - branch: master
-- origin_sync: SYNCED (rev-list 0 0 at HEAD 15a5433)
-- working_tree: align-gsc-manual-export-contract実装完了、全required_checks PASS。commit前（対象ファイル3件のみ変更、未追跡の事前存在ファイルは変更なし）
+- origin_sync: SYNCED (rev-list 0 0 at HEAD ff73fe6)
+- working_tree: clarify-heygen-free-download-limitation実装完了、全required_checks PASS。commit前（対象ファイル4件のみ変更、未追跡の事前存在ファイルは変更なし）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,16 +14,18 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- latest_completed_task: docs/tasks/completed/2026-07-27-align-gsc-manual-export-contract.md（結果: GSC READMEとmanifest.template.jsonを、API取得前提の8データセット構成から実際のGSC UI手動ZIPエクスポート実態（7ファイル）に合わせて改定。manual-first / API-compatible設計。build 92ページ PASS、validate:data PASS、validate:scope PASS。commit後にSHA確定）
+- latest_completed_task: docs/tasks/completed/2026-07-27-align-gsc-manual-export-contract.md（結果: GSC READMEとmanifest.template.jsonを、API取得前提の8データセット構成から実際のGSC UI手動ZIPエクスポート実態（7ファイル）に合わせて改定。独立監査で保存先ディレクトリ構造の説明欠落を指摘され、README追記後にcommit ff73fe6としてpush済み。build 92ページ PASS、validate:data PASS、validate:scope PASS）
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- next_candidate: Implement a dry-run GSC manual ZIP importer and normalization plan.
+- next_candidate: Hailuo AIの無料プラン・ダウンロード可否の実機確認。
 
 ## Notes
 
-- align-gsc-manual-export-contract（本タスク）で、docs/analytics/gsc/README.mdとmanifest.template.json（manifest_version 1.0→1.1）を実測GSC ZIP構造に合わせて全面改定。required_datasets を daily/queries/pages/countries/devices/search-appearance/filters の7件に変更し、totals（derived）・query-pages（unavailable）・sitemaps（unavailable）をoptional_datasetsへ移動。manifestに`processing_stage`（raw|normalized）・`scope`（property|page）・`filters`・`source_export_date`・`imported_at`・`source_files`を新規追加。データセット識別はファイル名でなくCSVヘッダー優先とする方針を明記。importer・CSVパース・API・secret実装は一切行っていない。docs/analytics/README.mdの既存latest-successルールと矛盾しないことを確認し無変更。
+- clarify-heygen-free-download-limitation（本タスク）で、ユーザーの実機確認結果（HeyGen無料プランは動画作成可能だが、作成した動画ファイルは無料でダウンロードできなかった）を、src/content/tools/heygen.md（DB正本）のfreePlanNote・weaknesses・limitations・faqs・本文に反映。「今回の実機確認では」という限定表現を用い、全アカウント・全地域での永続的な断定は避けた。src/pages/tools/heygen/index.astro（専用ページ）・src/pages/categories/avatar-video/index.astro（カテゴリ比較表）・src/pages/comparisons/avatar-video-ai-tools/index.astro（比較記事の比較表・FAQ、従来「○（動画最大1分・クレジットカード不要）」のみでダウンロード制限の記載がなかった）を同内容に同期。HeyGenの独自動画は追加せず、他ツールの表記は無変更。build 92ページ PASS、validate:data PASS（Errors 0, Warnings 0, Verify 0）、validate:scope PASS、diff check PASS。
+
+- align-gsc-manual-export-contract（commit ff73fe6）で、docs/analytics/gsc/README.mdとmanifest.template.json（manifest_version 1.0→1.1）を実測GSC ZIP構造に合わせて全面改定。required_datasets を daily/queries/pages/countries/devices/search-appearance/filters の7件に変更し、totals（derived）・query-pages（unavailable）・sitemaps（unavailable）をoptional_datasetsへ移動。manifestに`processing_stage`（raw|normalized）・`scope`（property|page）・`filters`・`source_export_date`・`imported_at`・`source_files`を新規追加。データセット識別はファイル名でなくCSVヘッダー優先とする方針を明記。importer・CSVパース・API・secret実装は一切行っていない。docs/analytics/README.mdの既存latest-successルールと矛盾しないことを確認し無変更。独立監査で、改定時に旧版の保存先ディレクトリ構造（`docs/analytics/gsc/YYYY-MM-DD/raw/run-HHMMSS/`）の説明が削除されたまま補完されていないことを検出したため、README「実測済みGSC UI ZIP構造」節の直前に「保存先ディレクトリ構造」節を復元・追記してから独立commitした。HeyGenタスクの未commit変更とは明確に分離し、`git add`で対象ファイルを個別指定してcommit（`git add .`は不使用）。
 
 - create-analytics-storage-foundation（commit 15a5433）で、docs/analytics/README.md・docs/analytics/gsc/README.md・docs/analytics/clarity/README.mdを新規作成し、GSC 8データセット・Clarity 5データセットのmanifest.template.json（JSON parse検証済み）とanalysis-summary.template.mdを両方式で作成。latest成功run判定ルール（status=success・completed_at存在・required_datasets全present・validation.errors=0・同日複数runはcompleted_at最新）をREADMEに明記。.gitignoreは`docs/analytics/**/raw/`除外ルールが既存済みのため無変更。secret/token/credential項目は一切含めていない。実データ日付ディレクトリ・rawディレクトリ・.gitkeep・latest symlinkは作成せず。事後audit（本タスクの前段階）で、GSC UI手動ZIP実物7件を読み取り確認し、8データセット構成との差分（query-pages/sitemaps欠落・totals統合・manifest.json未生成・ページフィルタ欄なし等）を特定した。
 

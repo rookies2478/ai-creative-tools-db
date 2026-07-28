@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-28
-- latest_commit: (このタスクcommit実行後にGIT欄で別途報告する)
+- latest_commit: 338dac6
 - branch: master
-- origin_sync: SYNCED at HEAD b6085ef (commit前、rev-list 0 0)
-- working_tree: add-d-id-sample-to-avatar-video-comparison実装完了、全required_checks PASS。commit前（対象ファイルのみ変更、未追跡の事前存在ファイルは変更なし）
+- origin_sync: SYNCED at HEAD 338dac6 (push済み、rev-list 0 0)
+- working_tree: add-d-id-sample-to-avatar-video-comparison commit・push完了、working tree clean
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip

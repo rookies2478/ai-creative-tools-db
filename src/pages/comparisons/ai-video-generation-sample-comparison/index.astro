@@ -6,9 +6,13 @@ import { generatedVideos } from '../../../data/generatedVideos';
 
 const toolMeta: Record<string, { name: string; impression: string }> = {
   'kling-ai': { name: 'Kling AI', impression: '今回の作例では、デスク上のモーショングラフィックスがなめらかに動き、カメラのゆっくりしたプッシュインも安定していました。無料プランで生成したため透かし（KlingAI 3.0）が入っています。' },
-  'pika': { name: 'Pika', impression: '今回の作例では、抽象的な発光表現の動きが滑らかで、目視では透かしが目立ちにくい仕上がりでした。使用モデルの詳細は確認できていません。' },
   'runway': { name: 'Runway', impression: '今回の作例では、3秒という短尺の中でもカメラのプッシュインが破綻なくまとまりました。Gen-4使用時の作例です。' },
+  'pika': { name: 'Pika', impression: '今回の作例では、抽象的な発光表現の動きが滑らかで、目視では透かしが目立ちにくい仕上がりでした。使用モデルの詳細は確認できていません。' },
   'luma-ai': { name: 'Luma AI', impression: '今回の作例では、動きは滑らかでしたが、動画左上にLuma AIのロゴ透かしが常時表示されていました。' },
+  'pixverse': { name: 'PixVerse', impression: '今回の作例では、V6モデル・Image/Textモード・360P出力で生成しました。無料枠のため右上に「PixVerse.ai」の透かしが入り、音声トラックも含まれた出力をそのまま保存しています。' },
+  'hailuo-ai': { name: 'Hailuo AI', impression: '今回の作例では、実測約5.9秒の出力になりました。画面右下に「MINIMAX | Hailuo AI」の透かしが表示され、音声トラックは含まれていません。' },
+  'vidu-ai': { name: 'Vidu AI', impression: '今回の作例では、1920x1080の高解像度で出力されました。画面右下に「Vidu AI」の透かしが表示され、音声トラックも含まれています。使用モデルの正式名称は確認できていません。' },
+  'capcut-ai': { name: 'CapCut AI', impression: '今回の作例では、無料で生成・ダウンロードできました。左上に「Ai」の文字表示がありますが、CapCut固有の透かし表記と断定できる根拠はなく、音声トラックも含まれています。' },
 };
 
 const galleryItems = generatedVideos
@@ -21,10 +25,14 @@ const galleryItems = generatedVideos
   }));
 
 const tableRows = [
-  { slug: 'kling-ai', name: 'Kling AI', motion: '◯', camera: '◯（プッシュイン安定）', stability: '要確認（人物なし作例のため未検証）', watermark: 'あり（無料プランでは可視透かし）', i2v: '対応（image-to-video可）', free: '無料枠あり（制限付き）', fit: '動きの滑らかさを試したい人' },
-  { slug: 'pika', name: 'Pika', motion: '◯', camera: '◯', stability: '要確認（人物なし作例のため未検証）', watermark: '目視では目立たず（要確認）', i2v: '対応（image-to-video可）', free: '無料枠あり（制限付き）', fit: 'エフェクト系の表現を試したい人' },
-  { slug: 'runway', name: 'Runway', motion: '◯', camera: '◯（短尺でも安定）', stability: '要確認（人物なし作例のため未検証）', watermark: 'プランにより異なる（要確認）', i2v: '対応（image-to-video可）', free: '無料クレジットあり（制限付き）', fit: '映像制作・多機能なツールを探す人' },
-  { slug: 'luma-ai', name: 'Luma AI', motion: '◯', camera: '◯', stability: '要確認（人物なし作例のため未検証）', watermark: 'あり（ロゴ常時表示）', i2v: '対応（image-to-video可）', free: '無料枠あり', fit: '無料枠でまず試したい人' },
+  { slug: 'kling-ai', name: 'Kling AI', duration: '5秒', resolution: '1280x720', model: 'Kling AI 2.0', audio: '記録なし（要確認）', watermark: 'あり（KlingAI 3.0・無料プラン）', free: '無料プランで生成・DL確認済み' },
+  { slug: 'runway', name: 'Runway', duration: '3秒（ツール側制限）', resolution: '1280x720', model: 'Runway Gen-4', audio: '記録なし（要確認）', watermark: 'プランにより異なる（要確認）', free: '無料クレジットで生成・DL確認済み' },
+  { slug: 'pika', name: 'Pika', duration: '5秒', resolution: '784x470', model: 'Pika（モデル詳細不明）', audio: '記録なし（要確認）', watermark: '目視では目立たず（要確認）', free: '無料枠で生成・DL確認済み' },
+  { slug: 'luma-ai', name: 'Luma AI', duration: '5秒', resolution: '960x540', model: 'Luma AI（モデル詳細要確認）', audio: '記録なし（要確認）', watermark: 'あり（ロゴ常時表示）', free: '無料枠で生成・DL確認済み' },
+  { slug: 'pixverse', name: 'PixVerse', duration: '5秒', resolution: '640x360', model: 'PixVerse V6（モデル詳細要確認）', audio: 'あり', watermark: 'あり（PixVerse.ai・右上）', free: '無料枠で生成・DL確認済み' },
+  { slug: 'hailuo-ai', name: 'Hailuo AI', duration: '6秒（実測約5.9秒）', resolution: '1366x768', model: 'Hailuo AI（モデル詳細要確認）', audio: 'なし', watermark: 'あり（MINIMAX | Hailuo AI・右下）', free: '無料で生成・DL確認済み' },
+  { slug: 'vidu-ai', name: 'Vidu AI', duration: '5秒', resolution: '1920x1080', model: 'Vidu AI（モデル詳細要確認）', audio: 'あり', watermark: 'あり（Vidu AI・右下）', free: '無料で生成・DL確認済み' },
+  { slug: 'capcut-ai', name: 'CapCut AI', duration: '5秒', resolution: '1280x720', model: 'CapCut AI（モデル詳細要確認）', audio: 'あり', watermark: '「Ai」表示あり（左上・CapCut固有と断定できず）', free: '無料で生成・DL確認済み' },
 ];
 
 const faqs = [
@@ -34,15 +42,15 @@ const faqs = [
   },
   {
     q: '画像から動画を作る場合、どのツールが向いていますか？',
-    a: '今回検証した4ツール（Kling AI・Pika・Runway・Luma AI）はいずれもimage-to-video（画像から動画）に対応しています。ただし本記事の作例はtext-to-videoで生成したものです。image-to-videoの作例・比較は別記事で扱う予定です。',
+    a: '今回検証した8ツール（Kling AI・Runway・Pika・Luma AI・PixVerse・Hailuo AI・Vidu AI・CapCut AI）はいずれもimage-to-video（画像から動画）に対応しています。ただし本記事の作例はtext-to-videoで生成したものです。image-to-videoの作例・比較は別記事で扱う予定です。',
   },
   {
     q: '無料プランでも動画生成できますか？',
-    a: '今回検証した4ツールはいずれも無料枠がありますが、生成回数・動画尺・利用できるモデルに制限がある場合があります。詳細は各ツールページと<a href="/conditions/free/">無料で試せるツール一覧</a>をご確認ください。',
+    a: '今回検証した8ツールはいずれも無料枠・無料クレジットで生成・ダウンロードできましたが、生成回数・動画尺・利用できるモデルに制限がある場合があり、恒常的な無料プランとは限りません。詳細は各ツールページと<a href="/conditions/free/">無料で試せるツール一覧</a>をご確認ください。',
   },
   {
     q: '動画に透かしは入りますか？',
-    a: 'ツールとプランによります。今回の作例では、Kling AI（無料プラン）とLuma AIの動画に透かしが確認できました。Pika・Runwayは目視で目立ちにくい、または要確認の状態でした。透かしなしの条件は<a href="/conditions/no-watermark/">透かしなしツール一覧</a>で確認できます。',
+    a: 'ツールとプランによります。今回の作例では、Kling AI・Luma AI・PixVerse・Hailuo AI・Vidu AIの動画に透かしが確認できました。Pika・Runwayは目視で目立ちにくい、または要確認の状態でした。CapCut AIには左上に「Ai」の文字表示がありますが、CapCut固有の透かし表記と断定できる根拠はありません。透かしなしの条件は<a href="/conditions/no-watermark/">透かしなしツール一覧</a>で確認できます。',
   },
   {
     q: '作例動画を商用利用できますか？',
@@ -79,7 +87,7 @@ const faqJsonLd = JSON.stringify({
 
 <BaseLayout
   title="AI動画生成ツールの作例比較｜同じ条件で試した生成結果まとめ"
-  description="AI動画生成ツールで実際に動画を作成し、生成結果・プロンプト・動きの自然さ・破綻しやすいポイント・注意点を比較します。Runway、Kling AI、Pika、Luma AIなどの作例をもとに選び方を整理します。"
+  description="AI動画生成ツールで実際に動画を作成し、生成結果・プロンプト・動きの自然さ・破綻しやすいポイント・注意点を比較します。Runway、Kling AI、Pika、Luma AI、PixVerse、Hailuo AI、Vidu AI、CapCut AIなどの作例をもとに選び方を整理します。"
   canonicalPath="/comparisons/ai-video-generation-sample-comparison/"
   jsonLd={faqJsonLd}
 >
@@ -97,15 +105,15 @@ const faqJsonLd = JSON.stringify({
       <p class="epc-eyebrow">運営者による一次検証</p>
       <h1 class="epc-h1">AI動画生成ツールの作例比較｜同じ条件で試した生成結果まとめ</h1>
       <p class="epc-lead">
-        本サイトの運営者が、Kling AI・Pika・Runway・Luma AIの4ツールで実際に動画を生成し、その作例を比較できるようにまとめた記事です。いずれも「ワークスペースを描いた抽象的なモーション映像」に近い条件のプロンプトで生成していますが、ツールごとにプロンプトの文言・動画尺・解像度は完全には統一されていません。<a href="/comparisons/ai-image-generation-sample-comparison/">AI画像生成ツールの作例比較</a>の動画版として、実際の生成結果から得られる傾向を確認できます。
+        本サイトの運営者が、Kling AI・Runway・Pika・Luma AI・PixVerse・Hailuo AI・Vidu AI・CapCut AIの8ツールで実際に動画を生成し、その作例を比較できるようにまとめた記事です。いずれも共通スキームA（「ワークスペースを描いた抽象的なモーション映像」を想定したプロンプト）を基準に生成していますが、Runwayのみツール側の制限により尺が3秒、その他は基本5秒（Hailuo AIの実出力は約6秒）で、解像度・音声・透かしもツールごとに異なります。<a href="/comparisons/ai-image-generation-sample-comparison/">AI画像生成ツールの作例比較</a>の動画版として、実際の生成結果から得られる傾向を確認できます。
       </p>
     </div>
 
     <div class="epc-notice">
       <p class="epc-notice-h">ご確認ください</p>
       <ul>
-        <li>掲載作例は運営者が各ツールで作成した<strong>その時点・その条件での1例</strong>です。生成結果はプロンプト・モデル・設定・時期・プラン・生成モードによって変わります。</li>
-        <li>4ツールの動画は<strong>厳密に同一のプロンプトではありません</strong>（文言・尺の指定などに差があります）。本記事は「同一プロンプトでの性能比較」ではなく、各ツールの実出力の参考例として掲載しています。</li>
+        <li>掲載作例は運営者・運営者から確認を受けたユーザーが各ツールで作成した<strong>その時点・その条件での1例</strong>です。生成結果はプロンプト・モデル・設定・時期・プラン・生成モードによって変わります。</li>
+        <li>8ツールは<strong>同じスキームAのプロンプトを基準に生成していますが、動画時間・解像度・モデル・無料枠の設定はツールごとに異なります</strong>。本記事は「完全に同一条件での性能比較」ではなく、各ツールの実出力の参考例として掲載しています。</li>
         <li>本記事の評価は今回の作例条件での<strong>主観的な印象</strong>であり、ツール性能の絶対評価・ランキングではありません。</li>
         <li>商用利用・透かし・無料枠の条件は変更される場合があります。必ず各ツールの<strong>公式サイト・料金ページ・利用規約</strong>をご確認ください。</li>
         <li>本記事は情報提供を目的としており、<strong>法的助言ではありません</strong>。</li>
@@ -115,7 +123,7 @@ const faqJsonLd = JSON.stringify({
     <section class="epc-sec">
       <h2 class="epc-h2">この記事で分かること</h2>
       <ul class="epc-check-list">
-        <li>Kling AI・Pika・Runway・Luma AIで実際に生成した短尺動画の作例</li>
+        <li>Kling AI・Runway・Pika・Luma AI・PixVerse・Hailuo AI・Vidu AI・CapCut AIで実際に生成した短尺動画の作例（8ツール）</li>
         <li>各作例の生成日・使用モデル・プロンプト・動画尺・解像度</li>
         <li>今回の作例条件で感じた、動きの自然さ・カメラワーク・透かしの傾向</li>
         <li>無料枠・商用利用・日本向け課金の確認先</li>
@@ -129,24 +137,24 @@ const faqJsonLd = JSON.stringify({
       <div class="epc-table-wrap">
         <table class="epc-table">
           <tbody>
-            <tr class="epc-tr-even"><th class="epc-cond-th">検証方法</th><td>各ツールの通常の生成画面から、抽象的なワークスペース映像を想定したプロンプトでtext-to-video生成</td></tr>
-            <tr class="epc-tr-odd"><th class="epc-cond-th">生成日</th><td>2026年6月15日〜24日（各作例に個別の生成日・確認日を記載）</td></tr>
-            <tr class="epc-tr-even"><th class="epc-cond-th">使用ツール</th><td>Kling AI／Pika／Runway／Luma AIの4ツール</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">検証方法</th><td>各ツールの通常の生成画面から、共通スキームA（抽象的なワークスペース映像を想定したプロンプト）でtext-to-video生成</td></tr>
+            <tr class="epc-tr-odd"><th class="epc-cond-th">生成日</th><td>2026年6月15日〜7月27日（各作例に個別の生成日・確認日を記載）</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">使用ツール</th><td>Kling AI／Runway／Pika／Luma AI／PixVerse／Hailuo AI／Vidu AI／CapCut AIの8ツール</td></tr>
             <tr class="epc-tr-odd"><th class="epc-cond-th">生成方式</th><td>text-to-video（画像から動画への生成ではありません）</td></tr>
-            <tr class="epc-tr-even"><th class="epc-cond-th">プロンプトの統一性</th><td>いずれも「デスク・モニター・抽象モーショングラフィックス・人物なし・文字なし」を含む近い内容のプロンプトですが、文言・尺の指定はツールごとに異なります（各作例の「プロンプト詳細」参照）</td></tr>
-            <tr class="epc-tr-odd"><th class="epc-cond-th">動画尺</th><td>3秒〜5秒（ツールごとに異なる。各作例に個別記載）</td></tr>
-            <tr class="epc-tr-even"><th class="epc-cond-th">解像度</th><td>784×470〜1280×720（ツールごとに異なる。各作例に個別記載）</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">プロンプトの統一性</th><td>8ツールとも共通スキームAのプロンプト「A cinematic 5-second video of a modern creative workspace, a laptop on a desk showing abstract colorful motion graphics, soft natural light, slow camera push-in, clean minimal interior, high detail, no text, no logo, no people, no brand.」を基準に生成しています。<strong>完全に同一条件ではなく</strong>、Runwayのみツール側の制限で3秒指定のプロンプトを使用しています</td></tr>
+            <tr class="epc-tr-odd"><th class="epc-cond-th">動画尺</th><td>基本5秒。Runwayのみツール側の制限で3秒。Hailuo AIの実出力は約6秒（各作例に個別記載）</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">解像度</th><td>640×360〜1920×1080（ツールごとに異なる。各作例に個別記載）</td></tr>
             <tr class="epc-tr-odd"><th class="epc-cond-th">掲載本数</th><td>各ツール1本（複数生成した中から1本を掲載。ベストカットの厳選比較ではありません）</td></tr>
-            <tr class="epc-tr-even"><th class="epc-cond-th">加工</th><td>Web表示用の圧縮・フォーマット変換のみ。内容の修正・カット編集なし</td></tr>
-            <tr class="epc-tr-odd"><th class="epc-cond-th">プラン</th><td>ツールごとに無料枠または運営者契約中のプランで生成</td></tr>
-            <tr class="epc-tr-even"><th class="epc-cond-th">注意</th><td>生成結果はモデル・設定・時期・プラン・生成モードによって変わります。本記事の作例は再現を保証するものではありません</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">加工</th><td>Web表示用の圧縮・フォーマット変換のみ。透かし除去・内容の修正・カット編集なし</td></tr>
+            <tr class="epc-tr-odd"><th class="epc-cond-th">プラン</th><td>いずれも無料枠・無料クレジットで生成・ダウンロードできた出力（恒常的な無料プランとは限りません）</td></tr>
+            <tr class="epc-tr-even"><th class="epc-cond-th">注意</th><td>生成結果はモデル・設定・時期・プラン・生成モードによって変わります。本記事の作例は再現を保証するものではなく、単純な画質・性能ランキングではありません</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
     <section class="epc-sec">
-      <SamplePromptVideoGallery items={galleryItems} heading="ツール別の作例動画（4ツール）" />
+      <SamplePromptVideoGallery items={galleryItems} heading="ツール別の作例動画（8ツール）" />
     </section>
 
     <section class="epc-sec">
@@ -158,34 +166,32 @@ const faqJsonLd = JSON.stringify({
           <thead>
             <tr>
               <th>ツール</th>
-              <th>動きの自然さ</th>
-              <th>カメラワーク</th>
-              <th>人物・手・顔の安定性</th>
+              <th>動画時間</th>
+              <th>解像度</th>
+              <th>モデル</th>
+              <th>音声トラック</th>
               <th>透かし</th>
-              <th>image-to-video</th>
-              <th>無料で試しやすいか</th>
-              <th>向いている用途</th>
+              <th>無料生成・DL確認</th>
               <th>詳細</th>
             </tr>
           </thead>
           <tbody>
-            {tableRows.map(({ slug, name, motion, camera, stability, watermark, i2v, free, fit }, i) => (
+            {tableRows.map(({ slug, name, duration, resolution, model, audio, watermark, free }, i) => (
               <tr class={i % 2 === 0 ? 'epc-tr-even' : 'epc-tr-odd'}>
                 <td class="epc-td-name">{name}</td>
-                <td>{motion}</td>
-                <td class="epc-td-note">{camera}</td>
-                <td class="epc-td-note">{stability}</td>
+                <td class="epc-td-note">{duration}</td>
+                <td class="epc-td-note">{resolution}</td>
+                <td class="epc-td-note">{model}</td>
+                <td class="epc-td-note">{audio}</td>
                 <td class="epc-td-note">{watermark}</td>
-                <td class="epc-td-note">{i2v}</td>
                 <td class="epc-td-note">{free}</td>
-                <td class="epc-td-note">{fit}</td>
                 <td><a href={`/tools/${slug}/`} class="epc-td-link">詳細 →</a></td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p class="epc-table-foot">◯／要確認は今回の作例条件での主観評価・確認状況の目安です。商用利用条件は<a href="/conditions/commercial-use/">商用利用条件の一覧</a>と各公式規約をご確認ください。</p>
+      <p class="epc-table-foot">動画時間・解像度・モデル・透かしは各ツールの実出力の実測値・記録に基づきます。「記録なし（要確認）」は当時の確認記録がない項目です。商用利用条件は<a href="/conditions/commercial-use/">商用利用条件の一覧</a>と各公式規約をご確認ください。</p>
     </section>
 
     <section class="epc-sec">
@@ -193,11 +199,11 @@ const faqJsonLd = JSON.stringify({
       <div class="epc-way-grid">
         <div class="epc-way-card">
           <p class="epc-way-h">動きの自然さ・カメラワーク</p>
-          <p class="epc-way-body">今回の作例条件では、<a href="/tools/kling-ai/">Kling AI</a>・<a href="/tools/runway/">Runway</a>ともにカメラのプッシュイン（ズームイン）が破綻なくまとまる印象でした。<a href="/tools/pika/">Pika</a>・<a href="/tools/luma-ai/">Luma AI</a>も抽象モーションの滑らかさは扱いやすい印象でした。ただし短尺の抽象映像に限った印象であり、人物や複雑なシーンでは傾向が変わる可能性があります。</p>
+          <p class="epc-way-body">今回の作例条件では、<a href="/tools/kling-ai/">Kling AI</a>・<a href="/tools/runway/">Runway</a>ともにカメラのプッシュイン（ズームイン）が破綻なくまとまる印象でした。<a href="/tools/pika/">Pika</a>・<a href="/tools/luma-ai/">Luma AI</a>・<a href="/tools/pixverse/">PixVerse</a>・<a href="/tools/hailuo-ai/">Hailuo AI</a>・<a href="/tools/vidu-ai/">Vidu AI</a>・<a href="/tools/capcut-ai/">CapCut AI</a>も抽象モーションの滑らかさは扱いやすい印象でした。ただし短尺の抽象映像に限った印象であり、人物や複雑なシーンでは傾向が変わる可能性があります。</p>
         </div>
         <div class="epc-way-card">
-          <p class="epc-way-h">透かしの有無</p>
-          <p class="epc-way-body">無料プランで生成した<a href="/tools/kling-ai/">Kling AI</a>の作例には可視の透かしが確認できました。<a href="/tools/luma-ai/">Luma AI</a>もロゴ透かしが常時表示されていました。<a href="/tools/pika/">Pika</a>・<a href="/tools/runway/">Runway</a>は目視では目立ちにくいか、プランによって変わる可能性があり要確認です。</p>
+          <p class="epc-way-h">透かし・音声の有無</p>
+          <p class="epc-way-body">無料枠で生成した<a href="/tools/kling-ai/">Kling AI</a>・<a href="/tools/luma-ai/">Luma AI</a>・<a href="/tools/pixverse/">PixVerse</a>・<a href="/tools/hailuo-ai/">Hailuo AI</a>・<a href="/tools/vidu-ai/">Vidu AI</a>の作例には可視の透かしが確認できました。<a href="/tools/pika/">Pika</a>・<a href="/tools/runway/">Runway</a>は目視では目立ちにくいか、プランによって変わる可能性があり要確認です。音声トラックは<a href="/tools/pixverse/">PixVerse</a>・<a href="/tools/vidu-ai/">Vidu AI</a>・<a href="/tools/capcut-ai/">CapCut AI</a>にあり、<a href="/tools/hailuo-ai/">Hailuo AI</a>にはありませんでした。それ以外のツールは音声の記録がなく要確認です。</p>
         </div>
         <div class="epc-way-card">
           <p class="epc-way-h">苦手だった表現・注意点</p>
@@ -210,9 +216,9 @@ const faqJsonLd = JSON.stringify({
       <h2 class="epc-h2">目的別の選び方</h2>
       <ul class="epc-check-list">
         <li><b>映像制作向け・多機能を求める：</b><a href="/tools/runway/">Runway</a>は動画生成以外の編集機能も含む多機能ツールです。</li>
-        <li><b>まず無料で試したい：</b>4ツールとも無料枠がありますが、条件は変わります。<a href="/conditions/free/">無料で試せるツール一覧</a>で最新状況を確認してください。</li>
-        <li><b>透かしなしで使いたい：</b><a href="/conditions/no-watermark/">透かしなしツール一覧</a>を確認し、有料プランの条件も含めて公式情報で確認してください。</li>
-        <li><b>画像から動画を作りたい（image-to-video）：</b>4ツールとも対応していますが、本記事の作例はtext-to-videoです。image-to-videoの作例は別記事での検証を予定しています。</li>
+        <li><b>まず無料で試したい：</b>8ツールとも無料枠・無料クレジットで生成・ダウンロードできましたが、条件は変わります。<a href="/conditions/free/">無料で試せるツール一覧</a>で最新状況を確認してください。</li>
+        <li><b>透かしなしで使いたい：</b>今回の作例では<a href="/tools/kling-ai/">Kling AI</a>・<a href="/tools/luma-ai/">Luma AI</a>・<a href="/tools/pixverse/">PixVerse</a>・<a href="/tools/hailuo-ai/">Hailuo AI</a>・<a href="/tools/vidu-ai/">Vidu AI</a>に透かしが確認できました。<a href="/conditions/no-watermark/">透かしなしツール一覧</a>を確認し、有料プランの条件も含めて公式情報で確認してください。</li>
+        <li><b>画像から動画を作りたい（image-to-video）：</b>本記事の作例はtext-to-videoです。image-to-videoの作例は別記事での検証を予定しています。</li>
         <li><b>日本語UIで使いたい：</b><a href="/conditions/japanese/">日本語対応AIツール一覧</a>を確認してください。</li>
         <li><b>日本円での決済状況を確認したい：</b><a href="/tools/">AIツール一覧</a>の各ツールページで日本向け課金情報を確認できます（最終確認は公式サイトで）。</li>
       </ul>
@@ -223,7 +229,7 @@ const faqJsonLd = JSON.stringify({
     <section class="epc-sec">
       <h2 class="epc-h2">まとめ</h2>
       <p class="epc-body-text">
-        今回検証した4ツールでは、短尺の抽象モーション映像において動き・カメラワークともに大きな破綻は見られませんでしたが、<strong>透かしの有無・動画尺・解像度の条件差</strong>がツール選びのポイントになる印象でした。人物を含む映像や複雑な背景での安定性は今回の検証範囲外のため、実際の用途に近いプロンプトで無料枠から試すことをおすすめします。商用利用の前には必ず<a href="/conditions/commercial-use/">商用利用条件</a>と各公式規約を確認してください。生成結果はモデルや時期により変わるため、本記事の作例はあくまで参考例としてご覧ください。
+        今回検証した8ツールでは、共通スキームAのプロンプトを基準にしても、短尺の抽象モーション映像において動き・カメラワークともに大きな破綻は見られませんでしたが、<strong>動画尺・解像度・音声トラック・透かしの条件差</strong>がツール選びのポイントになる印象でした。Runwayのみツール側の制限で3秒、Hailuo AIの実出力は約6秒など、尺にも差があるため単純な優劣比較はできません。人物を含む映像や複雑な背景での安定性は今回の検証範囲外のため、実際の用途に近いプロンプトで無料枠から試すことをおすすめします。商用利用の前には必ず<a href="/conditions/commercial-use/">商用利用条件</a>と各公式規約を確認してください。生成結果はモデルや時期により変わるため、本記事の作例はあくまで参考例としてご覧ください。
       </p>
     </section>
 

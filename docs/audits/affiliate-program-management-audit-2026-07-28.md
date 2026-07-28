@@ -318,3 +318,13 @@ interface PublishedAffiliateLink {
 ## 16. Next Recommended Task
 
 `ToolDetailPage.astro`（および関連CTAコンポーネント）を直接Readして、現行のCTA/外部リンク描画ロジック（`affiliateUrl`参照有無、rel属性の出し分け）を再確認し、2026-06-22付レポートとの乖離を解消する調査タスクを次に実施する。これにより、案C実装時にCTA接続点を正確に設計できる。
+
+## 17. 訂正（2026-07-29追記）
+
+- 訂正理由: `docs/audits/affiliate-cta-rendering-audit-2026-07-28.md`（commit未定、本追記と同時にコミット）にて、本レポート6章の集計値を再検証した結果、以下の誤りが判明したため訂正する。
+- 訂正箇所:
+  1. 6章の29ツール分類について、単純合計が30になっていた（6.1:6 + 6.2:10 + 6.3:9 + 6.4:4 = 実際は29のはずが、完了報告のSUMMARYでは6.2を11件と誤記し、d-idを6.4表内に記載したまま完了報告では別途HOLD 1件として二重計上したため、合計が30と誤って報告された）。
+  2. 正しい排他的分類（Primary status）は: GO_CANDIDATE 6 / VERIFY_IN_ASP 10 / HOLD 1（d-id） / NONE_FOUND 9 / EXCLUDE 3（leonardo-ai, dalle, clipdrop）＝**合計29**。d-idは6.4表に記載していたが、招待制で公開応募窓口がなく現行有効性も未確認という性質上、EXCLUDEではなくHOLDに分類するのが適切と判断し、本訂正で正式にHOLD区分へ移す（6.4の記載自体は経緯の記録として残し、削除はしない）。
+  3. 「ASP管理画面確認要 約13件」という完了報告の記載も、再集計の結果**14件**が正確な値であった（詳細は`affiliate-cta-rendering-audit-2026-07-28.md`8章参照）。
+  4. `ToolDetailPage.astro`のCTAロジックについて15章で「本監査時点で確定できず」としていた点は、`affiliate-cta-rendering-audit-2026-07-28.md`4章で直接コード確認済み。結論: `ToolDetailPage.astro`自体はofficialUrl/affiliateUrlを一切参照せず、CTAのhrefは呼び出し元がハードコードした文字列。affiliateUrlを参照するコード（`[slug].astro`、`ToolSummaryTable.astro`）は現行29ツールに対して到達不能（dead code / orphanコンポーネント）であることが判明した。
+- 本訂正は上記4点のみを対象とし、6章の各ツールの調査内容（プログラムの有無・報酬率等の一次情報）自体は変更しない。

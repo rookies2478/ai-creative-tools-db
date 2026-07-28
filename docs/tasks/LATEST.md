@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-29
-- latest_commit: （push後に確定）
+- latest_commit: 3e48abe "Add reverse links to AI video sample pages"
 - branch: master
-- origin_sync: push後に確認予定
-- working_tree: add-reverse-links-and-fix-category-wording commit・push完了予定、working tree clean見込み
+- origin_sync: 確認済み（rev-list差分0・0）
+- working_tree: clean
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip

@@ -2,9 +2,36 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ConditionChips from '../../../components/ConditionChips.astro';
+import ComparisonFootnote from '../../../components/ComparisonFootnote.astro';
 import Free, { type FreePlan } from '../../../components/Free.astro';
+import { videoFreeDownloadStatus, type HandsOnStatus } from '../../../data/videoFreeDownloadStatus';
 
 const entries = await getCollection('tools');
+
+const handsOnLabel = (s: HandsOnStatus) => {
+  if (s === 'confirmed') return { ch: '○', cls: 'yes', label: '確認済み' };
+  if (s === 'failed') return { ch: '×', cls: 'no', label: '不可を確認' };
+  if (s === 'not-applicable') return { ch: '－', cls: 'na', label: '対象外' };
+  if (s === 'not-confirmed') return { ch: '!', cls: 'cond', label: '要検証' };
+  return { ch: '?', cls: 'cond', label: '未確認' };
+};
+
+const planTypeLabel: Record<string, string> = {
+  'ongoing-free-plan': '恒常的な無料プラン',
+  'free-trial': 'Free Trial（期間・回数限定）',
+  'limited-free-access': '無料枠あり（回数・クレジット制限）',
+  'paid-only': '有料のみ',
+  'service-unavailable': 'サービス対象外',
+  unknown: '要確認',
+};
+
+const videoFreeRows = videoFreeDownloadStatus.map((s) => {
+  const entry = entries.find((e) => e.slug === s.sourceToolSlug);
+  return {
+    ...s,
+    name: entry?.data.name ?? s.sourceToolSlug,
+  };
+});
 const tools = entries
   .filter((e) => e.data.freePlan === true || e.data.freePlan === 'limited')
   .map((e) => {
@@ -151,5 +178,72 @@ const combinedSchema = JSON.stringify([faqSchemaObj, breadcrumbSchemaObj]);
       related={customRelated}
       relatedSolid={customRelatedSolid}
     />
+
+    <section class="vfd-sec">
+      <h2 class="vfd-h2">動画生成AIの無料生成・無料ダウンロード実機確認</h2>
+      <p class="vfd-note">
+        動画生成AI13ツールについて、無料での生成可否と無料での動画ダウンロード可否を分けて確認した結果です。「無料で作れる」と「無料で保存できる」は別問題であるため、この2点を分離して掲載しています。Free Trial（期間・回数限定）と恒常的な無料プランも区別しています。「要検証」はリポジトリ内に十分な根拠がなく断定していない項目、「対象外」はサービス自体が一般利用者向けに提供されていない状態を示します。
+      </p>
+      <div class="vfd-table-wrap">
+        <table class="vfd-table">
+          <thead>
+            <tr>
+              <th>ツール</th>
+              <th>無料プラン種別</th>
+              <th>無料生成</th>
+              <th>無料ダウンロード</th>
+              <th>カード登録</th>
+              <th>透かし</th>
+              <th>確認日</th>
+              <th>詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            {videoFreeRows.map((r) => {
+              const gen = handsOnLabel(r.freeGeneration);
+              const dl = handsOnLabel(r.freeDownload);
+              const card = r.cardRequired === 'yes' ? '必要' : r.cardRequired === 'no' ? '不要' : '要確認';
+              return (
+                <tr>
+                  <td class="vfd-name">{r.name}</td>
+                  <td class="vfd-plan">{planTypeLabel[r.planType] ?? '要確認'}</td>
+                  <td><span class={`vfd-mk ${gen.cls}`} title={gen.label}>{gen.ch}</span></td>
+                  <td><span class={`vfd-mk ${dl.cls}`} title={dl.label}>{dl.ch}</span></td>
+                  <td class="vfd-note-cell">{card}</td>
+                  <td class="vfd-note-cell">{r.watermark}</td>
+                  <td class="vfd-note-cell">{r.verifiedAt ?? '－'}</td>
+                  <td><a class="vfd-link" href={r.detailUrl}>詳細 →</a></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p class="vfd-legend">○：確認済み　×：不可を確認　!：要検証　－：対象外</p>
+      <ComparisonFootnote />
+    </section>
   </div>
 </BaseLayout>
+
+<style>
+  .vfd-sec { max-width: 1024px; margin: 0 auto; padding: 0 24px 64px; }
+  .vfd-h2 { font-size: clamp(19px, 2.4vw, 24px); font-weight: 800; color: #111827; margin-bottom: 12px; }
+  .vfd-note { font-size: 13px; color: #6B7280; line-height: 1.75; margin-bottom: 18px; max-width: 760px; }
+  .vfd-table-wrap { overflow-x: auto; border: 1px solid #E5E7EB; border-radius: 12px; }
+  .vfd-table { width: 100%; min-width: 820px; border-collapse: collapse; font-size: 12.5px; }
+  .vfd-table thead tr { background: #F9FAFB; }
+  .vfd-table th { text-align: left; padding: 11px 13px; font-size: 11.5px; font-weight: 700; color: #374151; border-bottom: 1px solid #E5E7EB; white-space: nowrap; }
+  .vfd-table td { padding: 10px 13px; border-bottom: 1px solid #E5E7EB; color: #374151; vertical-align: top; }
+  .vfd-table tr:last-child td { border-bottom: none; }
+  .vfd-name { font-weight: 600; color: #111827; white-space: nowrap; }
+  .vfd-plan { font-size: 11.5px; color: #6B7280; white-space: nowrap; }
+  .vfd-note-cell { font-size: 11px; color: #6B7280; }
+  .vfd-mk { display: inline-flex; width: 22px; height: 22px; border-radius: 50%; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+  .vfd-mk.yes { background: #E6F3EC; color: #1E8A4C; }
+  .vfd-mk.no { background: #F8EFD9; color: #A06A09; }
+  .vfd-mk.cond { background: #F8EFD9; color: #A06A09; }
+  .vfd-mk.na { background: #EFEFEA; color: #6A7180; }
+  .vfd-link { color: #2E25A6; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .vfd-link:hover { text-decoration: underline; }
+  .vfd-legend { margin-top: 10px; font-size: 11.5px; color: #9CA3AF; }
+</style>

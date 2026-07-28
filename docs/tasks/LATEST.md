@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-28
-- latest_commit: 338dac6
+- latest_commit: b2e19a8（並行セッションによるaffiliate-program-management-audit追加。本タスクcommit実行後にGIT欄で別途報告する）
 - branch: master
-- origin_sync: SYNCED at HEAD 338dac6 (push済み、rev-list 0 0)
-- working_tree: add-d-id-sample-to-avatar-video-comparison commit・push完了、working tree clean
+- origin_sync: SYNCED at HEAD b2e19a8 (commit前、rev-list 0 0)
+- working_tree: add-video-free-download-status-data実装完了、全required_checks PASS。commit前（対象ファイルのみ変更）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,8 +14,9 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- current_active_task: none（add-d-id-sample-to-avatar-video-comparisonはcompletedへ移動）
-- latest_completed_task: docs/tasks/completed/2026-07-28-add-d-id-sample-to-avatar-video-comparison.md（結果: /comparisons/avatar-video-ai-tools/へD-IDのFree Trial独自動画実例（generatedVideos.ts既存1件、無変更）を「D-IDの日本語アバター動画実例」セクションとして新規追加。Free Trial・D-ID提供ストックアバター・日本語台本・約12秒・全画面「D-iD」透かし・無料ダウンロード確認済み・Text to Video比較対象外（HeyGen・Synthesiaとの直接比較ではない）を明記し、D-ID個別ページへ内部リンク設置。title/H1/canonical/JSON-LD/比較表/FAQ/他ツール記述は無変更。禁止表現（最高品質・最も自然・無料商用可・恒常無料・他ツールより優位・同一条件比較）不使用を確認。build 92ページ PASS、validate:task PASS、validate:data PASS（Errors 0/Warnings 0/Verify 0）、validate:scope PASS、git diff --check PASS、git diff --name-onlyでindex.astro 1件のみ変更を確認。動画・poster存在確認済み。dist/への直接アクセスは本環境権限でブロックのため生成HTML直接確認・ブラウザ実表示（1440/768/375px等）は未実施（過去タスクと同様の制約、次回持ち越し）。本番反映なし）
+- current_active_task: none（add-video-free-download-status-dataはcompletedへ移動）
+- latest_completed_task: docs/tasks/completed/2026-07-28-add-video-free-download-status-data.md（結果: 新規記事案「無料で動画を作ってダウンロードできるAIは？」のカニバリ監査でUPDATE_EXISTING判定となったことを受け、動画生成AI13ツール（kling-ai/luma-ai/pika/runway/pixverse/capcut-ai/hailuo-ai/vidu-ai/d-id/heygen/synthesia/invideo-ai/haiper）の無料生成・無料ダウンロード実機確認結果を管理する正本データsrc/data/videoFreeDownloadStatus.tsを新設（VideoFreePlanType/HandsOnStatus型）。PixVerse・CapCut AI・Hailuo AI・Vidu AI・D-IDはユーザー実機確認済み記録に基づきconfirmed、HeyGenは無料生成confirmed／無料DLはfailed（実機確認）、Synthesiaは無料生成confirmed／無料DLはfailed（公式pricing WebFetch確認）、Kling AI・Pika・Runway・Luma AIは無料ダウンロードの明示記録が不足するためnot-confirmed、InVideo AIはユーザー申告のみで裏付けtaskがなくnot-confirmed（正式task作成を推奨として記録）、Haiperはmd記載の2025年2月サービスシャットダウンを根拠にservice-unavailable/not-applicableとした。/conditions/free/index.astroへ既存<Free>コンポーネントを維持したまま「動画生成AIの無料生成・無料ダウンロード実機確認」セクションを新規追加（無料プラン種別・無料生成・無料ダウンロード・カード登録・透かし・確認日・詳細リンク列）。generatedVideos.ts・個別ツールページ・他の比較記事（ai-video-generation-sample-comparison・avatar-video-ai-tools）・title/H1/canonical/JSON-LDは無変更。新規記事は作成していない。build 92ページPASS、validate:task PASS、validate:data PASS（Errors 0/Warnings 0/Verify 0）、validate:scope PASS（並行セッションのaffiliate-program-management-audit-2026-07-28.mdが一時未追跡状態で検出されたが無関係な別セッション成果物と確認しpreexisting扱い、その後別セッションでcommit・push済みと確認）、git diff --check PASS、git diff --name-onlyで対象2ファイルのみ変更を確認。本番反映なし）
+- previous_completed_task: docs/tasks/completed/2026-07-28-add-d-id-sample-to-avatar-video-comparison.md（結果: /comparisons/avatar-video-ai-tools/へD-IDのFree Trial独自動画実例（generatedVideos.ts既存1件、無変更）を「D-IDの日本語アバター動画実例」セクションとして新規追加。Free Trial・D-ID提供ストックアバター・日本語台本・約12秒・全画面「D-iD」透かし・無料ダウンロード確認済み・Text to Video比較対象外（HeyGen・Synthesiaとの直接比較ではない）を明記し、D-ID個別ページへ内部リンク設置。title/H1/canonical/JSON-LD/比較表/FAQ/他ツール記述は無変更。禁止表現（最高品質・最も自然・無料商用可・恒常無料・他ツールより優位・同一条件比較）不使用を確認。build 92ページ PASS、validate:task PASS、validate:data PASS（Errors 0/Warnings 0/Verify 0）、validate:scope PASS、git diff --check PASS、git diff --name-onlyでindex.astro 1件のみ変更を確認。動画・poster存在確認済み。dist/への直接アクセスは本環境権限でブロックのため生成HTML直接確認・ブラウザ実表示（1440/768/375px等）は未実施（過去タスクと同様の制約、次回持ち越し）。本番反映なし）
 - previous_completed_task: docs/tasks/completed/2026-07-28-expand-video-comparison-and-fix-prompts.md（結果: ユーザー本人の実機確認により、Kling AI・Runway・Pika・Luma AI・PixVerse・CapCut AI・Hailuo AI・Vidu AIの8ツールがすべて共通スキームAプロンプトで生成されたことが確定。generatedVideos.tsのPika・Luma AIエントリのprompt（誤って別文面"A clean modern creative workspace..."が記録されていた）を正しいスキームAプロンプト（"A cinematic 5-second video of a modern creative workspace..."）へ訂正（他フィールド・Runwayの3秒記録は無変更）。既存の動画作例比較記事（/comparisons/ai-video-generation-sample-comparison/）へPixVerse・CapCut AI・Hailuo AI・Vidu AIを追加し4ツールから8ツールへ拡張（toolMeta・galleryItems・tableRows〔ツール/動画時間/解像度/モデル/音声トラック/透かし/無料生成DL確認/詳細リンクの実測値ベースへ再設計〕・検証条件表・リード文・傾向カード・目的別選び方・まとめ・FAQ・meta descriptionを同期、「4ツール」等の古い表記は全解消をgrep確認）。title/H1/canonical/breadcrumb/JSON-LD基本構造は無変更（具体的な数値表記がなかったため変更不要）。D-ID・HeyGen・Synthesia等は記事へ追加せず混入なしを確認。comparisonEligible（CapCut AIのみtrueで型定義上のfalse固定と矛盾）は今回変更せず、記事の抽出条件にも使用していない（別課題として記録）。build 92ページ PASS、validate:task PASS、validate:data PASS（Errors 0/Warnings 0/Verify 0）、validate:scope PASS、git diff --check PASS（generatedVideos.tsはprompt2行のみの変更を確認）。dist/への直接アクセスが本環境権限でブロックされたため生成HTML内の8ツール参照確認・ブラウザ実表示は未実施（過去タスクと同様の制約）。本番反映なし）
 - paused_tasks: なし
 - production_state: NOT_DEPLOYED

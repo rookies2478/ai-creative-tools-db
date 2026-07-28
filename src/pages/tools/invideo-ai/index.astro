@@ -2,10 +2,13 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
+import { resolveToolOutboundLink } from '../../../utils/resolveToolOutboundLink';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'invideo-ai');
 const d = entry?.data;
+
+const outboundLink = resolveToolOutboundLink({ toolSlug: 'invideo-ai', officialUrl: 'https://invideo.io' });
 
 const jsonLd = JSON.stringify([
   {
@@ -62,7 +65,8 @@ const jsonLd = JSON.stringify([
         { lb: '日本語UI', badge: { s: 'na', label: '非対応' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
-      primaryCta={{ label: '公式サイトで確認する', href: 'https://invideo.io' }}
+      primaryCta={{ label: '公式サイトで確認する', href: outboundLink.url, rel: outboundLink.rel }}
+      primaryCtaDisclosure={outboundLink.isAffiliate && outboundLink.disclosureRequired ? 'このページにはアフィリエイトリンクが含まれます。' : undefined}
       secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://invideo.io/pricing/' }}
       basicInfo={[
         {

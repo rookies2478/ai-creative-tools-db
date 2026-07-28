@@ -45,6 +45,7 @@ export const toolRelatedLinks: Record<string, ToolRelatedLinks> = {
     ],
     conditionTags: [
       { href: '/conditions/commercial-use/', label: '商用利用を確認しやすいツール' },
+      { href: '/conditions/free/', label: '無料で使えるAIツール' },
       { href: '/conditions/no-watermark/', label: '透かしなしツール' },
       { href: '/conditions/japanese/', label: '日本語対応ツール' },
     ],

@@ -4,7 +4,7 @@
 - latest_commit: (このタスクcommit実行後にGIT欄で別途報告する)
 - branch: master
 - origin_sync: SYNCED at HEAD b6085ef (commit前、rev-list 0 0)
-- working_tree: expand-video-comparison-and-fix-prompts実装完了、全required_checks PASS。commit前（対象ファイルのみ変更、未追跡の事前存在ファイルは変更なし）
+- working_tree: add-d-id-sample-to-avatar-video-comparison実装完了、全required_checks PASS。commit前（対象ファイルのみ変更、未追跡の事前存在ファイルは変更なし）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,8 +14,9 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- current_active_task: none（expand-video-comparison-and-fix-promptsはcompletedへ移動）
-- latest_completed_task: docs/tasks/completed/2026-07-28-expand-video-comparison-and-fix-prompts.md（結果: ユーザー本人の実機確認により、Kling AI・Runway・Pika・Luma AI・PixVerse・CapCut AI・Hailuo AI・Vidu AIの8ツールがすべて共通スキームAプロンプトで生成されたことが確定。generatedVideos.tsのPika・Luma AIエントリのprompt（誤って別文面"A clean modern creative workspace..."が記録されていた）を正しいスキームAプロンプト（"A cinematic 5-second video of a modern creative workspace..."）へ訂正（他フィールド・Runwayの3秒記録は無変更）。既存の動画作例比較記事（/comparisons/ai-video-generation-sample-comparison/）へPixVerse・CapCut AI・Hailuo AI・Vidu AIを追加し4ツールから8ツールへ拡張（toolMeta・galleryItems・tableRows〔ツール/動画時間/解像度/モデル/音声トラック/透かし/無料生成DL確認/詳細リンクの実測値ベースへ再設計〕・検証条件表・リード文・傾向カード・目的別選び方・まとめ・FAQ・meta descriptionを同期、「4ツール」等の古い表記は全解消をgrep確認）。title/H1/canonical/breadcrumb/JSON-LD基本構造は無変更（具体的な数値表記がなかったため変更不要）。D-ID・HeyGen・Synthesia等は記事へ追加せず混入なしを確認。comparisonEligible（CapCut AIのみtrueで型定義上のfalse固定と矛盾）は今回変更せず、記事の抽出条件にも使用していない（別課題として記録）。build 92ページ PASS、validate:task PASS、validate:data PASS（Errors 0/Warnings 0/Verify 0）、validate:scope PASS、git diff --check PASS（generatedVideos.tsはprompt2行のみの変更を確認）。dist/への直接アクセスが本環境権限でブロックされたため生成HTML内の8ツール参照確認・ブラウザ実表示は未実施（過去タスクと同様の制約）。本番反映なし）
+- current_active_task: none（add-d-id-sample-to-avatar-video-comparisonはcompletedへ移動）
+- latest_completed_task: docs/tasks/completed/2026-07-28-add-d-id-sample-to-avatar-video-comparison.md（結果: /comparisons/avatar-video-ai-tools/へD-IDのFree Trial独自動画実例（generatedVideos.ts既存1件、無変更）を「D-IDの日本語アバター動画実例」セクションとして新規追加。Free Trial・D-ID提供ストックアバター・日本語台本・約12秒・全画面「D-iD」透かし・無料ダウンロード確認済み・Text to Video比較対象外（HeyGen・Synthesiaとの直接比較ではない）を明記し、D-ID個別ページへ内部リンク設置。title/H1/canonical/JSON-LD/比較表/FAQ/他ツール記述は無変更。禁止表現（最高品質・最も自然・無料商用可・恒常無料・他ツールより優位・同一条件比較）不使用を確認。build 92ページ PASS、validate:task PASS、validate:data PASS（Errors 0/Warnings 0/Verify 0）、validate:scope PASS、git diff --check PASS、git diff --name-onlyでindex.astro 1件のみ変更を確認。動画・poster存在確認済み。dist/への直接アクセスは本環境権限でブロックのため生成HTML直接確認・ブラウザ実表示（1440/768/375px等）は未実施（過去タスクと同様の制約、次回持ち越し）。本番反映なし）
+- previous_completed_task: docs/tasks/completed/2026-07-28-expand-video-comparison-and-fix-prompts.md（結果: ユーザー本人の実機確認により、Kling AI・Runway・Pika・Luma AI・PixVerse・CapCut AI・Hailuo AI・Vidu AIの8ツールがすべて共通スキームAプロンプトで生成されたことが確定。generatedVideos.tsのPika・Luma AIエントリのprompt（誤って別文面"A clean modern creative workspace..."が記録されていた）を正しいスキームAプロンプト（"A cinematic 5-second video of a modern creative workspace..."）へ訂正（他フィールド・Runwayの3秒記録は無変更）。既存の動画作例比較記事（/comparisons/ai-video-generation-sample-comparison/）へPixVerse・CapCut AI・Hailuo AI・Vidu AIを追加し4ツールから8ツールへ拡張（toolMeta・galleryItems・tableRows〔ツール/動画時間/解像度/モデル/音声トラック/透かし/無料生成DL確認/詳細リンクの実測値ベースへ再設計〕・検証条件表・リード文・傾向カード・目的別選び方・まとめ・FAQ・meta descriptionを同期、「4ツール」等の古い表記は全解消をgrep確認）。title/H1/canonical/breadcrumb/JSON-LD基本構造は無変更（具体的な数値表記がなかったため変更不要）。D-ID・HeyGen・Synthesia等は記事へ追加せず混入なしを確認。comparisonEligible（CapCut AIのみtrueで型定義上のfalse固定と矛盾）は今回変更せず、記事の抽出条件にも使用していない（別課題として記録）。build 92ページ PASS、validate:task PASS、validate:data PASS（Errors 0/Warnings 0/Verify 0）、validate:scope PASS、git diff --check PASS（generatedVideos.tsはprompt2行のみの変更を確認）。dist/への直接アクセスが本環境権限でブロックされたため生成HTML内の8ツール参照確認・ブラウザ実表示は未実施（過去タスクと同様の制約）。本番反映なし）
 - paused_tasks: なし
 - production_state: NOT_DEPLOYED
 - current_phase: search-traffic-launch

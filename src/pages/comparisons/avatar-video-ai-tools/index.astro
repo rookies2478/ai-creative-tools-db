@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GuideFAQ from '../../../components/GuideFAQ.astro';
+import GeneratedVideoSample from '../../../components/GeneratedVideoSample.astro';
+import { generatedVideos } from '../../../data/generatedVideos';
+
+const dIdSampleVideo = generatedVideos.find(
+  (v) => v.pageSlug === 'd-id' && v.sampleType === 'tool-video-output' && v.isSameToolAsPage
+) ?? null;
 
 const positioning = [
   {
@@ -175,6 +181,17 @@ const faqJsonLd = JSON.stringify({
         ))}
       </div>
     </section>
+
+    <!-- D-ID実例 -->
+    {dIdSampleVideo && (
+      <section class="epc-sec">
+        <h2 class="epc-h2">D-IDの日本語アバター動画実例</h2>
+        <p class="epc-table-note">
+          以下はD-IDのFree Trialで、D-ID提供のストックアバターと日本語台本を使って作成した実例です。通常のText to Videoではなく、人物画像と音声を組み合わせるアバター動画生成の出力例として掲載しており、他ツールの共通ベンチマークプロンプトによるText to Video比較（HeyGen・Synthesiaを含む）とは条件が異なるため、比較対象には含めていません。無料トライアルでのダウンロードは確認済みですが、全画面に「D-iD」の透かしが表示されます。1本のみの確認結果であり、ツール全体の品質や商用利用可否を断定するものではありません。詳細は<a href="/tools/d-id/">D-ID詳細ページ</a>をご確認ください。
+        </p>
+        <GeneratedVideoSample video={dIdSampleVideo} />
+      </section>
+    )}
 
     <!-- 比較表 -->
     <section class="epc-sec">

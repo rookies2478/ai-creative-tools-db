@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-29
-- latest_commit: （push後に確定。直前commitは61a9fde "Add Impact site verification meta tag"）
+- latest_commit: 32f20e4 "Fix hidden video generation carousel"
 - branch: master
-- origin_sync: push後に確認予定
-- working_tree: fix-hero-ticker-clipping commit・push完了予定、working tree clean見込み
+- origin_sync: 確認済み（rev-list差分0・0）
+- working_tree: clean
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip

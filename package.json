@@ -12,6 +12,8 @@
     "validate:data": "node scripts/validate-data.mjs",
     "validate:publish": "node scripts/validate-publish.mjs",
     "validate:affiliate-links": "node scripts/validate-affiliate-links.mjs",
+    "analytics:gsc:fetch": "node scripts/analytics-gsc-fetch.mjs",
+    "analytics:gsc:fetch:test": "node scripts/test-analytics-gsc-fetch.mjs",
     "analytics:gsc:import": "node scripts/import-gsc-manual-export.mjs",
     "analytics:gsc:test": "node scripts/test-import-gsc-manual-export.mjs",
     "analytics:rotate": "node scripts/rotate-analytics-raw.mjs",
@@ -23,6 +25,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.0",
     "astro": "^5.7.0",
+    "googleapis": "^144.0.0",
     "tailwindcss": "^4.1.0"
   },
   "devDependencies": {

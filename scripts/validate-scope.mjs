@@ -16,6 +16,7 @@ const DANGEROUS_PATTERNS = [
   /\.pem$/,
   /\.key$/,
   /^service-account.*\.json$/,
+  /credentials.*\.json$/i,
   /^credentials\//,
   /^secrets\//,
   /^node_modules\//,

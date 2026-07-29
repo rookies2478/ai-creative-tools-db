@@ -2,18 +2,99 @@
 
 ## 取得方式の正式定義
 
-**Current official acquisition method: GSC UI manual ZIP export**
+**Current official acquisition method: GSC Search Analytics API（`scripts/analytics-gsc-fetch.mjs`）**
 
-理由：
+**Fallback acquisition method: GSC UI manual ZIP export（`scripts/import-gsc-manual-export.mjs`）**
 
-- 現在の運用で実際に利用されている（`aicreative-db.com-Performance-on-Search-*.zip`等）
-- 認証情報・API実装が不要
-- API実装前でも再現可能
-- property全体とページ単位の両方を取得可能
+API経路が使えない場合（未認証・権限不足・API無効化・ネットワーク不通等）のフォールバックとして、手動ZIP方式は削除せず維持する。手動ZIP方式への切替が必要な条件：
 
-**将来候補: GSC Search Analytics API**
+- `GOOGLE_APPLICATION_CREDENTIALS`が設定できない、または認証ファイルを用意できない
+- `GSC_AUTH_FAILED` / `GSC_PERMISSION_DENIED` / `GSC_API_DISABLED` / `GSC_PROPERTY_NOT_FOUND`のいずれかで実行が失敗する
+- ネットワーク到達性がない環境で実行する必要がある
 
-APIは現時点で未実装であり、正式取得方式としては扱わない。API化した場合も`manifest_version`の1.x系のまま互換性を維持する方針とする（`acquisition.method`の値が`"manual-ui-export"`から`"api"`へ変わるのみで、他のmanifest構造は変更しない設計）。
+manual importerの詳細は本ファイル後半の「importer（scripts/import-gsc-manual-export.mjs）」節を参照。
+
+## GSC Search Analytics API 取得（`scripts/analytics-gsc-fetch.mjs`）
+
+### 対応dataset
+
+`totals` / `daily` / `queries` / `pages` / `query-pages` / `devices` / `countries` / `search-appearance` / `sitemaps`
+
+`query-pages`と`sitemaps`はGSC UI手動exportでは取得できないが、API経路では取得できる。
+
+### 認証方式（読み取り専用）
+
+- 環境変数 `GOOGLE_APPLICATION_CREDENTIALS` に、**リポジトリ外**に保存したサービスアカウントJSONの絶対パスを設定する。
+- 使用スコープ: `https://www.googleapis.com/auth/webmasters.readonly`（読み取り専用）。
+- `GOOGLE_APPLICATION_CREDENTIALS`が未設定の場合、`GSC_CREDENTIALS_NOT_CONFIGURED`で明確に停止する（値の探索・推測は行わない）。
+- 認証ファイルの内容・鍵・メールアドレス・トークンはコード・ログ・manifest・Gitのいずれにも保存・出力しない。
+
+**Windows PowerShellでの設定例（値はダミー、実パスはユーザー環境ごとに異なる）**
+
+```powershell
+# 一時セッション用（このPowerShellウィンドウを閉じると消える）
+$env:GOOGLE_APPLICATION_CREDENTIALS = "C:\secure-outside-repo\gsc-service-account.json"
+
+# 永続設定（ユーザー環境変数として登録、新しいシェルから有効）
+setx GOOGLE_APPLICATION_CREDENTIALS "C:\secure-outside-repo\gsc-service-account.json"
+```
+
+一時セッション用（`$env:...`）は現在のシェルのみ有効、`setx`は新しいシェルから恒久的に有効になる点を区別すること。認証ファイルは本リポジトリ配下に置かない。
+
+### 設定（環境変数、非秘密）
+
+```
+GSC_SITE_URL=sc-domain:aicreative-db.com
+GSC_DEFAULT_DAYS=14
+GSC_DATA_LAG_DAYS=3
+```
+
+いずれも実行引数で上書き可能。
+
+### 実行例
+
+```
+# 既定（14日間、GSC_SITE_URL/GSC_DEFAULT_DAYS/GSC_DATA_LAG_DAYSに従う）
+npm run analytics:gsc:fetch
+
+# 日数指定
+npm run analytics:gsc:fetch -- --days 28
+
+# 期間指定（start/endとdaysの同時指定はエラー）
+npm run analytics:gsc:fetch -- --start 2026-07-14 --end 2026-07-27
+```
+
+### 保存先
+
+`docs/analytics/gsc/YYYY-MM-DD/raw/run-HHMMSS/`（既存のmanual export runと同一の保存構造。`YYYY-MM-DD`は`endDate`を使用）。
+
+出力ファイル: `totals.json` / `daily.csv` / `queries.csv` / `pages.csv` / `query-pages.csv` / `devices.csv` / `countries.csv` / `search-appearance.csv` / `sitemaps.json` / `manifest.json`。CSV/JSONいずれもUTF-8。
+
+`raw/`はGit管理外（既存の`docs/analytics/gsc/**/raw/`除外ルールをそのまま使用）。
+
+### ページングとtruncatedの意味
+
+- GSC Search Analytics APIの`rowLimit`/`startRow`でページングする。APIは全行の取得を保証しない。
+- 安全上限（最大ページ数・最大行数）を超えた場合、それ以上は取得を打ち切り、`success`扱いにせず`manifest.truncated`へ該当datasetキーを記録する。
+- `query-pages`は行数が増えやすいため、他datasetより低い安全上限（`QUERY_PAGES_MAX_ROWS`）を設定している。
+- truncated発生時、run全体は`failed`にはせず`partial`として扱う（取得できた範囲のデータは書き込むが、不完全であることをmanifestで明示する）。
+
+### sitemaps取得
+
+`sitemaps.list`（読み取り専用）を実行し、`path` / `lastSubmitted` / `lastDownloaded` / `isPending` / `isSitemapsIndex` / `type` / `warnings` / `errors` / `contents[].type` / `contents[].submitted`を記録する。`contents[].indexed`は使用しない。sitemapの送信・削除・更新は実装しない。
+
+### 秘密情報禁止
+
+- 認証ファイルのパス・メールアドレス・トークン・HTTP Authorizationヘッダー・JSON鍵の内容は、コード・ログ・manifest・commit・Gitのいずれにも含めない。
+- `manifest.credentialPathStored`は常に`false`。
+
+### mockテスト
+
+`scripts/test-analytics-gsc-fetch.mjs`（`npm run analytics:gsc:fetch:test`）は実Google APIへ一切接続せず、注入可能なmockクライアントで正常系・ページング・`query-pages`複合dimension・sitemaps・認証未設定・permission denied・rate limit・部分失敗・truncated・日付不正・totals/daily不一致・秘密情報非出力を検証する。GitHub Actionsでもこのmockテストのみ実行可能（実API接続なし）。
+
+## 将来候補としてのAPI化に関する既存注記（履歴）
+
+上記API実装により、`acquisition.method`が`"manual-ui-export"`から`"api"`相当（`analytics-gsc-fetch.mjs`のmanifestでは`method: "api"`）に対応する経路が追加された。`manifest_version`は1.x系のまま互換性を維持している。manual export側のmanifest構造（`acquisition.method: "manual-ui-export"`）自体は変更していない。
 
 ## 保存先ディレクトリ構造
 

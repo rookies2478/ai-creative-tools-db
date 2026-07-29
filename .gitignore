@@ -25,6 +25,7 @@ docs/analytics/clarity/**/raw/
 *.pem
 *.key
 service-account*.json
+*credentials*.json
 
 # Local credentials
 credentials/

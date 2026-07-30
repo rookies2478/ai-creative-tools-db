@@ -124,3 +124,47 @@ yes
 NEXT:
 本番へ手動反映し、/comparisons/ad-banner-ai-tools/ のMicrosoft Designer商用利用表示を確認する。
 ```
+
+## Production Verification (2026-07-30 追記)
+
+本番反映後、curlによるHTML取得(dist経由ではなく本番URLへの直接HTTPリクエスト)でDOM上の文言・title/H1/canonicalを確認。レイアウト崩れ(PC/スマホの視覚的レンダリング)はテキストベース確認のツールでは検証不可のため、崩れなしの断定はせず「HTML構造上の異常なし」として報告する。
+
+```
+RESULT: PASS
+
+SUMMARY:
+- 本番反映結果: /comparisons/ad-banner-ai-tools/ にMicrosoft Designerのcommercial表示修正が反映済み(HTTP 200)。
+- 表示文言: Microsoft Designer「個人利用限定（商用不可）」、旧文言「個人向け案内あり（要公式確認）」は検出されず。Fotor AI「要確認」、Ideogram「断定できず（要確認）」で維持。
+- 表示崩れ有無: HTML構造(比較表のマークアップ・行数)に異常なし。ただし本確認はcurlによるHTML取得ベースであり、ブラウザでの視覚的レンダリング確認(PC/スマホの実表示崩れ・横スクロール)は未実施のため、視覚崩れの有無はNOT_VERIFIED（HOLD対象ではないが限定的な確認である旨を明記）。
+
+PRODUCTION_CHECK:
+- URL: https://aicreative-db.com/comparisons/ad-banner-ai-tools/
+- HTTP status: 200
+- revised_text_present: true（「個人利用限定（商用不可）」検出）
+- old_text_absent: true（「個人向け案内あり（要公式確認）」は検出されず）
+- Fotor AI unchanged: true（「要確認」のまま）
+- Ideogram unchanged: true（「断定できず（要確認）」のまま）
+- desktop_layout: NOT_VERIFIED（HTML構造上の異常なしのみ確認。ブラウザ視覚確認は未実施）
+- mobile_layout: NOT_VERIFIED（同上。横スクロール有無の実機/ブラウザ確認は未実施）
+- title: 一致（"バナー生成AIおすすめ比較【広告・SNS向け】文字入れ・タイプ別の選び方"、意図しない変更なし）
+- H1: 一致（"バナー生成AIおすすめ比較｜広告・SNS向けツールをタイプ別に選ぶ"、意図しない変更なし）
+- canonical: 一致（https://aicreative-db.com/comparisons/ad-banner-ai-tools/、意図しない変更なし）
+
+CHANGED_FILES:
+- completed task: docs/tasks/completed/2026-07-30-align-microsoft-designer-commercial-label.md（本追記）
+- LATEST: docs/tasks/LATEST.md（production_state更新）
+
+GIT:
+- commit: (この後のcommitハッシュを参照)
+- push: 完了予定
+- origin_sync: 完了予定
+
+PRODUCTION:
+DEPLOYED
+
+LATEST_UPDATED:
+yes
+
+NEXT:
+比較ページのハードコード値とDB正本の不一致監査を実施する。
+```

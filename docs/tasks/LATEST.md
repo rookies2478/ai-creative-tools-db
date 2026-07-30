@@ -1,10 +1,10 @@
 # Latest Project State
 
 - updated_at: 2026-07-30
-- latest_commit: push後に確定（"GSC API 14-day analysis"）
+- latest_commit: 2f8a910 "Align Microsoft Designer commercial-use label"
 - branch: master
-- origin_sync: push後に確認
-- working_tree: push後clean見込み
+- origin_sync: 完了（ahead/behind 0/0）
+- working_tree: clean（本docs更新コミット前時点でclean）
 - preexisting_untracked_files:
   - aicreative-db.com-Performance-on-Search-2026-07-10.zip
   - gsc-fotor-ai-queries-2026-07-10.zip
@@ -14,8 +14,9 @@
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
   - prod_check.html
-- current_active_task: none（gsc-api-14day-analysisはcompletedへ移動）
-- latest_completed_task: docs/tasks/completed/2026-07-30-gsc-api-14day-analysis.md（結果: GSC Search Analytics APIによる最新確定日終了の連続14日間（2026-07-13〜2026-07-26、欠損日0）本取得を実施。manifest method=api・success=true・credentialPathStored=false、全9dataset success・truncated無し・totals/daily整合match。サイト全体クリック18・インプレッション2,329・CTR 0.77%・加重平均順位15.5。前回分析（2026-07-10、手動ZIP・約65日間）とは取得方式・期間長が異なるため増減率比較はINVALID。query-pagesのmulti-URL8件を全件確認しカニバリゼーション該当なし（正常なハブ＆スポーク）。候補3件抽出（実装は行わずimplementation_now: false）: C1 /tools/tensor-art/（tensor art、impr49・pos9.6・CTR0%、A1）、C2 /tools/stable-diffusion/（stable diffusion 商用利用、impr42・pos23.0、A2）、C3 /comparisons/ad-banner-ai-tools/（バナー生成ai比較/バナー作成ai比較、impr19/17・pos13.9/15.7、A1/A2境界）。候補3件はいずれもgit log --since=2026-06-01で該当変更なしを確認済み。HOLD: fotorの〜型自然文・AI対話調クエリ群（query意図不明確）、アバター動画生成ai比較（順位41でレンジ外）、最新のaiアバター動画生成ツールと料金は？（表示数僅少）。sitemap正常（90 URL submitted、warnings/errors 0）。記事・コード・DB・UIは一切変更していない。詳細はdocs/analytics/gsc/2026-07-26/analysis-summary.md参照。build不要と判断（分析・docsのみの変更のため）。validate:task PASS、validate:scope PASS、git diff --check PASS。rawはGit管理外を維持（git check-ignore -vで確認）。本番反映なし。次の推奨: C1（tensor-art）を対象としたtitle/meta/冒頭回答改善の個別active task作成）
+- current_active_task: none（align-microsoft-designer-commercial-labelはcompletedへ移動）
+- latest_completed_task: docs/tasks/completed/2026-07-30-align-microsoft-designer-commercial-label.md（結果: /comparisons/ad-banner-ai-tools/のMicrosoft Designer行commercial表示を、DB正本監査で確定した乖離に基づき修正。DB正本(src/content/tools/microsoft-designer.md commercialUse="no"、verifiedAt 2026-07-12、Microsoft Designer利用規約でtrade or commerceの過程での利用は認められないと明記)に対し、比較ページ(getCollection非連携・全項目ハードコード)の表示が旧文言「個人向け案内あり（要公式確認）」のまま乖離していたため、「個人利用限定（商用不可）」へ1行のみ修正。Fotor AI（DB="limited"、公式ヘルプ2文書間で案内不一致、KEEP_CURRENT）・Ideogram（DB watermark="unknown"、公式情報に明記なし、KEEP_CURRENT）は監査の結果、断定変更の根拠なしとして無変更のまま。DB正本・他ツール行・title/meta/H1/本文/内部リンク/CSS/URLは無変更。build 92ページ PASS、validate:task PASS（要:docs/tasks/active/へのtask file新規作成が必要だった）、validate:scope PASS、git diff --check PASS。dist/への直接アクセスは本環境権限でブロックのためgrepによるソース差分確認とbuildログで代替。commit 2f8a910、push完了（37784e4..2f8a910）、origin同期確認済み。本番反映なし）
+- previous_completed_task: docs/tasks/completed/2026-07-30-gsc-api-14day-analysis.md（結果: GSC Search Analytics APIによる最新確定日終了の連続14日間（2026-07-13〜2026-07-26、欠損日0）本取得を実施。manifest method=api・success=true・credentialPathStored=false、全9dataset success・truncated無し・totals/daily整合match。サイト全体クリック18・インプレッション2,329・CTR 0.77%・加重平均順位15.5。前回分析（2026-07-10、手動ZIP・約65日間）とは取得方式・期間長が異なるため増減率比較はINVALID。query-pagesのmulti-URL8件を全件確認しカニバリゼーション該当なし（正常なハブ＆スポーク）。候補3件抽出（実装は行わずimplementation_now: false）: C1 /tools/tensor-art/（tensor art、impr49・pos9.6・CTR0%、A1）、C2 /tools/stable-diffusion/（stable diffusion 商用利用、impr42・pos23.0、A2）、C3 /comparisons/ad-banner-ai-tools/（バナー生成ai比較/バナー作成ai比較、impr19/17・pos13.9/15.7、A1/A2境界）。候補3件はいずれもgit log --since=2026-06-01で該当変更なしを確認済み。HOLD: fotorの〜型自然文・AI対話調クエリ群（query意図不明確）、アバター動画生成ai比較（順位41でレンジ外）、最新のaiアバター動画生成ツールと料金は？（表示数僅少）。sitemap正常（90 URL submitted、warnings/errors 0）。記事・コード・DB・UIは一切変更していない。詳細はdocs/analytics/gsc/2026-07-26/analysis-summary.md参照。build不要と判断（分析・docsのみの変更のため）。validate:task PASS、validate:scope PASS、git diff --check PASS。rawはGit管理外を維持（git check-ignore -vで確認）。本番反映なし。次の推奨: C1（tensor-art）を対象としたtitle/meta/冒頭回答改善の個別active task作成）
 - previous_completed_task: docs/tasks/completed/2026-07-30-add-gsc-api-fetcher.md（結果: GSC Search Analytics APIによる自動取得機構を新規構築。詳細は当時のLATEST記録参照。実データ取得は未実施の状態でcompleted。その後ユーザー本人によりGoogle Cloud設定・認証テストが完了しPASS済みとなったことを踏まえ、本タスク（gsc-api-14day-analysis）で初のAPI本取得を実施）
 - previous_completed_task: docs/tasks/completed/2026-07-29-remove-hero-inner-scrollbar.md（結果: 直前のfix-hero-ticker-clipping修正（.fv-hero .leftへoverflow-y:auto追加）の副作用で、`.fv-hero`本体の固定max-height:calc(100svh - var(--fv-header) - 80px)とoverflow:hiddenが残っていたため、`.left`内コンテンツがビューポート高さ次第で本体上限を超え`.left`単体が縦スクロール領域化し、左右カラム境界に常時可視の縦スクロールバーが表示される問題が発生。`.fv-hero`のmax-height:calc(...)とoverflow:hiddenを削除しoverflow-x:hidden; overflow-y:visible;へ変更（min-height:420px維持）、`.fv-hero .left`のoverflow-y:autoを削除しoverflow:visibleへ変更し内部スクロール領域を廃止。`.toolmarquee{flex-shrink:0}`は維持しティッカー再クリップなし、@keyframes fv-marquee・ツール配列29件・.right・モバイル用メディアクエリ・title/H1/meta/canonicalは無変更。build 92ページ PASS（warning 0）、validate:task PASS、validate:data PASS（Errors 0/Warnings 0/Verify 0）、validate:scope PASS、git diff --check PASS。ブラウザ実表示・dist直接確認は未実施、ソースコード上でCSS反映をgrep確認済み。本番反映なし）
 - previous_completed_task: docs/tasks/completed/2026-07-29-fix-hero-ticker-clipping.md（結果: トップページhero内「掲載ツール — 29」直下のティッカー（横流しアニメーション）が親要素に隠れる表示不具合を修正。原因はsrc/components/HomeHeroAnimated.astroの.fv-hero{max-height:calc(100svh - var(--fv-header) - 80px);overflow:hidden}と.fv-hero .left{justify-content:center}の組み合わせで、.left内コンテンツ（kicker+h1 2行+lead+cta+toolmarquee）合計高さがビューポート高さ由来の上限を超えると上下対称にオーバーフローしoverflow:hiddenでクリップされ、最下部要素のティッカーが影響を受けやすい構造だったため（src/pages/index.astroがコンポーネントデフォルトより長いtitleLines・lead文言を渡している）。修正は.fv-hero .leftへoverflow-y:auto追加（通常時は見た目変化なし、はみ出す場合のみ.left単体がスクロール可能）、.toolmarqueeへflex-shrink:0追加のみ。.fv-hero本体のoverflow:hidden・max-height、@keyframes fv-marquee等のアニメーション定義、.right、モバイル用メディアクエリは無変更。HomeHeroAnimatedはsrc/pages/index.astroでのみ使用のため他ページへの影響なし。build 92ページ PASS（warningなし）、validate:task PASS、validate:scope PASS、git diff --check PASS。dist/への直接アクセスが本環境権限でブロックされたため生成HTML直接確認・1440/768/375px実機確認は未実施（過去タスクと同様の制約）。本番反映なし）
@@ -30,7 +31,7 @@
 - current_phase: search-traffic-launch
 - current_plan: AIクリエイティブナビ 計画書 Ver2.0
 - current_operations: AIクリエイティブナビ 運用ルール Ver4.0
-- next_candidate: Create individual active task to improve title/meta/opening-answer for /tools/tensor-art/ (candidate C1, query "tensor art", pos 9.6, CTR 0%) based on docs/analytics/gsc/2026-07-26/analysis-summary.md
+- next_candidate: 初回GSC候補3件（C1 tensor-art／C2 stable-diffusion／C3 ad-banner-ai-tools）はいずれも個別audit-only監査の結果HOLD確定。C3監査から派生したDB整合性監査でMicrosoft Designer表示乖離を発見・修正済み（本タスク）。次回14日GSC分析日（目安2026-08-13以降）にC2の効果測定とC3の順位再確認を実施。
 
 ## Notes
 

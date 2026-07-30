@@ -1,7 +1,7 @@
 ---
 task_id: "align-microsoft-designer-commercial-label"
 created_at: "2026-07-30"
-status: READY
+status: DONE
 risk: LOW
 current_phase: search-traffic-launch
 production_required: false
@@ -86,35 +86,41 @@ audit-only監査で、/comparisons/ad-banner-ai-tools/ のMicrosoft Designer行�
 ## Result Schema
 
 ```
-RESULT: PASS | HOLD | BLOCKED
+RESULT: PASS
 
 SUMMARY:
-1-3 lines
+Microsoft Designer行のcommercial表示を「個人向け案内あり（要公式確認）」から「個人利用限定（商用不可）」へ修正。
+根拠はDB正本(src/content/tools/microsoft-designer.md commercialUse="no"、verifiedAt 2026-07-12、
+Microsoft Designer利用規約でtrade or commerceの過程での利用は認められないと明記)。
+Fotor AI・Ideogram・他ツール行、title/meta/H1/本文/内部リンクは変更なし。DB正本も変更なし。
 
 CHANGED_FILES:
-count and paths
+2 files
+- src/pages/comparisons/ad-banner-ai-tools/index.astro
+- docs/tasks/active/2026-07-30-align-microsoft-designer-commercial-label.md
 
 CHECKS:
-- task_validation:
-- build:
-- diff_check:
-- scope_validation:
-- data_quality:
-- publish_check:
-- preview:
-- github_actions:
+- task_validation: PASS
+- build: PASS（92ページ、エラーなし）
+- diff_check: PASS（対象1行のみ、CRLF警告のみ）
+- scope_validation: PASS
+- data_quality: N/A（DB正本変更なしのため対象外）
+- publish_check: N/A（実行対象タスクの必須チェックに含まれず）
+- preview: distディレクトリがサンドボックス権限で読み取り不可のため生成HTML直接確認は不可。
+  ソース差分(grep)でold_text不在・new_text存在・他行不変を確認、buildログでビルドエラーなしを確認して代替確認とした。
+- github_actions: 未確認（push後のCI結果は本ツールから直接観測できず、必要ならGitHub側で確認）
 
 GIT:
-- commit:
-- push:
-- origin_sync:
+- commit: 2f8a910 "Align Microsoft Designer commercial-use label"
+- push: 完了（37784e4..2f8a910 master -> master）
+- origin_sync: 完了（ahead/behind 0/0）
 
 PRODUCTION:
-NOT_DEPLOYED | DEPLOYED | NEEDS_VERIFICATION
+NOT_DEPLOYED（本番反映は人間が手動で行う。ページ生成コードは変更されているためNEEDS_VERIFICATIONの余地もあるが、今回のルール上は明示的にNOT_DEPLOYED）
 
 LATEST_UPDATED:
-yes | no
+yes
 
 NEXT:
-one concrete next action
+本番へ手動反映し、/comparisons/ad-banner-ai-tools/ のMicrosoft Designer商用利用表示を確認する。
 ```

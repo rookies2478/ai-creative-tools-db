@@ -111,14 +111,32 @@ GIT:
 - push: 完了
 
 PRODUCTION:
-NOT_DEPLOYED
+DEPLOYED
 
 LATEST_UPDATED:
 yes
 
 NEXT:
-本番へ手動反映し、/comparisons/ec-product-image-ai-tools/ のMicrosoft Designer商用利用表示を確認する。
+/comparisons/free-ai-image-generators/ のMicrosoft Designer商用利用表示について、DB正本準拠の個別修正タスクへ進む。
 ```
+
+## Production Verification (2026-07-30)
+
+- URL: https://aicreative-db.com/comparisons/ec-product-image-ai-tools/
+- HTTP status: 200
+- 新文言「個人利用限定（商用不可）」: 本番HTML内に1件検出
+- 旧文言「個人向け案内あり（要公式確認）」: 本番HTML内に0件（残存なし）
+- Clipdrop表示「プランにより異なる」: 変更なし（1件検出、対象外）
+- Fotor AI表示「要確認」: 変更なし（1件検出、対象外）
+- Canva AI画像生成／Adobe Firefly／Stable Diffusion: 表記残存確認、意図しない変更なし
+- title: 「商品画像生成AIおすすめ比較【EC向け】背景差し替え・生成タイプ別の選び方」変更なし
+- H1: 「商品画像生成AIおすすめ比較｜EC向けツールをタイプ別に選ぶ」変更なし
+- canonical: https://aicreative-db.com/comparisons/ec-product-image-ai-tools/ 正しい
+- HTML structure: PASS（table 1件、行列構造に異常なし）
+- desktop_visual: NOT_VERIFIED（curl/HTML取得のみのため視覚確認は未実施）
+- mobile_visual: NOT_VERIFIED（curl/HTML取得のみのため視覚確認は未実施）
+
+判定: PASS（本番反映確認済み）。commit e2d93ce（実修正）・4ecfa6b（docs）が本番へ正しく反映されていることを確認。
 
 ## Verification Detail
 

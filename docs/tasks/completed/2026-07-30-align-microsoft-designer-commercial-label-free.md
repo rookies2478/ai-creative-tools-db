@@ -111,15 +111,30 @@ GIT:
 - push: 完了
 
 PRODUCTION:
-NOT_DEPLOYED
+DEPLOYED
 
 LATEST_UPDATED:
 yes
 
 NEXT:
-本番へ手動反映し、/comparisons/free-ai-image-generators/ のMicrosoft Designer
-無料・有料プラン商用利用表示を確認する。
+Clipdrop商用利用表示について公式情報audit-onlyを実施する。
 ```
+
+## Production Verification (2026-07-30)
+
+- URL: https://aicreative-db.com/comparisons/free-ai-image-generators/
+- HTTP status: 200
+- freePlanCommercial新文言「不可（個人利用限定）」: Microsoft Designer行のfai-td-note列（editability「◯（テンプレート連携）」直前）に1件検出
+- paidPlanCommercial: このページのテンプレート（src/pages/comparisons/free-ai-image-generators/index.astro）はfreePlanCommercialのみをtableRows.map内でレンダリングしており、paidPlanCommercialはデータ配列上に保持されるのみで元々HTML出力されない仕様（本タスクの変更前から不変）。よってpaidPlanCommercialの文言はHTML上で直接確認できないが、ソースコード上は同じ新文言に修正済みであることを確認済み（データ正本として保持）。
+- 旧値「要確認」: Microsoft Designer行のfreePlanCommercial列（fai-td-note）からは消滅。ページ内に残る他の「要確認」はwatermark列（DALL·E/Leonardo AI/Ideogram/NightCafe/Playground AI/SeaArt AI/Tensor Art等、多数のツールで共通）およびGemini画像生成・Brand Studio等のfreePlanCommercial列で、いずれも本タスクの対象外・無関係であることを確認
+- title: 「無料AI画像生成ツール比較表｜14ツールの無料枠・透かし・商用利用条件を横断確認 | AIクリエイティブナビ」変更なし
+- H1: 「無料プランで比較するAI画像生成ツール」変更なし
+- canonical: https://aicreative-db.com/comparisons/free-ai-image-generators/ 正しい
+- HTML structure: PASS（table 1件、行列構造に異常なし）
+- desktop_visual: NOT_VERIFIED（curl/HTML取得のみのため視覚確認は未実施）
+- mobile_visual: NOT_VERIFIED（curl/HTML取得のみのため視覚確認は未実施）
+
+判定: PASS（本番反映確認済み）。commit 8287ee0が本番へ正しく反映されていることを確認。paidPlanCommercialがHTML非表示である点はテンプレート仕様であり不具合ではない。
 
 ## Verification Detail
 

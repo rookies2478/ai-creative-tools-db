@@ -18,7 +18,14 @@ export interface ToolAffiliateLink {
   verifiedAt: string;
 }
 
-// InVideo AI: affiliatePrograms.ts上ではcandidate/not_appliedであり、
-// 実在確認できる承認済みURLが存在しないため、公開エントリはまだ作成しない。
-// 承認済みURL取得後にここへ1件追加すればよい（コンポーネント側の変更は不要）。
-export const toolAffiliateLinks: ToolAffiliateLink[] = [];
+export const toolAffiliateLinks: ToolAffiliateLink[] = [
+  {
+    toolSlug: 'invideo-ai',
+    url: 'https://invideo.sjv.io/c/7531370/883681/12258',
+    provider: 'Impact / InVideo',
+    enabled: true,
+    approvalStatus: 'approved',
+    disclosureRequired: true,
+    verifiedAt: '2026-08-01',
+  },
+];

@@ -51,26 +51,27 @@ export interface AffiliateProgram {
 export const affiliatePrograms: AffiliateProgram[] = [
   {
     toolSlug: 'invideo-ai',
-    status: 'candidate',
-    preferredProvider: 'InVideo',
+    status: 'active',
+    preferredProvider: 'Impact / InVideo',
     programs: [
       {
         provider: 'InVideo',
-        network: 'Impact.com',
-        programName: 'InVideo Affiliate Program',
+        network: 'Impact',
+        programName: 'InVideo application',
         commissionType: 'percentage',
         commissionValue: '月額プラン初月50%／年額プラン初年25%（リカーリングなし）',
         cookieDays: 120,
         japanEligible: 'unknown',
         mediaEligible: 'unknown',
-        approvalStatus: 'not_applied',
+        approvalStatus: 'approved',
         sourceType: 'official',
-        verifiedAt: '2026-07-28',
+        verifiedAt: '2026-08-01',
         notes:
-          '公開情報ベースで自己申込可・地域制限記載なしを確認済み（GO_CANDIDATE）。ただしASP応募・承認は未実施。実在する承認済みアフィリエイトURLは未取得のため、承認済みURLとして公開利用してはならない。根拠: docs/audits/affiliate-program-management-audit-2026-07-28.md 6.1章。',
+          'InVideo application approved on Impact. Public tracking link activated on 2026-08-01.',
       },
     ],
-    verifiedAt: '2026-07-28',
-    notes: 'pilot対象。承認完了まではtoolAffiliateLinks.tsに公開エントリを作らない、または enabled:false で登録する。',
+    verifiedAt: '2026-08-01',
+    notes:
+      'InVideo application approved on Impact. Public tracking link activated on 2026-08-01.',
   },
 ];

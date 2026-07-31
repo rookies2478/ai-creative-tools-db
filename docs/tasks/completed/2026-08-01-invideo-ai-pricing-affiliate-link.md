@@ -72,3 +72,49 @@ InVideo AIのprimary CTAは既にImpact承認済みリンク（https://invideo.s
 - resolveToolOutboundLink()にplacement引数（省略可、デフォルト'primary'）を追加し、toolSlug+placementで検索するよう拡張。
 - validate-affiliate-links.mjsの重複チェックキーをtoolSlugのみからtoolSlug+placementへ変更。
 - ToolDetailPage.astroのsecondaryCta型にoptionalなrelを追加し、指定時はそれを使用（未指定時は従来のnofollow noopener noreferrerを維持し他28ツールへ影響なし）。
+
+## Result
+
+PASS
+
+## Summary
+
+- `src/data/toolAffiliateLinks.ts`: `LinkPlacement`型（'primary'|'pricing'）と`ToolAffiliateLink.placement?`（省略時'primary'扱い）を追加。既存invideo-aiエントリへ`placement:'primary'`を明示付与し無変更維持、新規に`placement:'pricing'`（url: https://invideo.sjv.io/JkQeKe、他フィールドはprimaryと同値）を1件追加。
+- `src/utils/resolveToolOutboundLink.ts`: 引数に`placement?: 'primary'|'pricing'`（デフォルト`'primary'`）を追加し、検索条件を`toolSlug`+`(placement ?? 'primary')`の一致へ拡張。既存の呼び出し（placement省略）は従来どおりprimaryエントリに解決され後方互換。
+- `scripts/validate-affiliate-links.mjs`: 重複チェックキーを`toolSlug`単独から`toolSlug:placement`へ変更（placement省略時は'primary'扱い）。
+- `src/components/ToolDetailPage.astro`: `secondaryCta`型へoptionalな`rel`を追加し、指定時はそれを使用（未指定時は従来の`'nofollow noopener noreferrer'`を維持）。他28ツールは`rel`を渡していないため無影響。
+- `src/pages/tools/invideo-ai/index.astro`: `resolveToolOutboundLink({toolSlug:'invideo-ai', officialUrl:'https://invideo.io/pricing/', placement:'pricing'})`を追加呼び出しし、`secondaryCta`のhref/relをその結果へ接続。official fallback URL（https://invideo.io/pricing/）はコード上に維持。primaryCtaは無変更。
+- PR開示ロジック（`primaryCtaDisclosure`）は無変更。primary/pricing両方がaffiliate判定でも、開示表示はprimary側の条件1箇所のみに紐づくため重複表示なし。
+- 他28ツール・comparisons・categories・sources・relatedTools・affiliatePrograms.ts・privacy-policy・disclaimer・BaseLayout・package.jsonは無変更。
+
+## Changed Files
+
+- 変更: `src/data/toolAffiliateLinks.ts`, `src/utils/resolveToolOutboundLink.ts`, `scripts/validate-affiliate-links.mjs`, `src/components/ToolDetailPage.astro`, `src/pages/tools/invideo-ai/index.astro`
+- 新規→移動: `docs/tasks/active/2026-08-01-invideo-ai-pricing-affiliate-link.md` → `docs/tasks/completed/2026-08-01-invideo-ai-pricing-affiliate-link.md`
+- 更新: `docs/tasks/LATEST.md`
+
+## Checks
+
+- task validation: PASS
+- validate:affiliate-links: PASS
+- build: PASS（92ページ、error/warning無し）
+- diff check: PASS（CRLF警告のみ）
+- scope validation: PASS
+- secrets check: PASS
+- generated HTML直接確認: 未実施（dist/への直接アクセスが本環境権限でブロック。過去タスクと同一制約。ソースコードトレースとbuild成功で代替確認）
+
+## Git
+
+- branch: master
+- commit: f91ef71「Add InVideo AI pricing affiliate link」+ completed移動・LATEST更新の追加commit
+- push: 実施
+- origin sync: push後に確認
+- working tree: push後clean
+
+## Production
+
+- state: NOT_DEPLOYED
+
+## Next
+
+GitHub Actions成功確認後、本番反映し、primary/secondary両CTAの正常遷移とPR開示表示（1回のみ）をブラウザで確認する。

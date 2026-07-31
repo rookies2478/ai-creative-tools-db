@@ -13,7 +13,14 @@ const klingAiSampleVideo = generatedVideos.find(
   (v) => v.pageSlug === 'kling-ai' && v.sampleType === 'tool-video-output' && v.isSameToolAsPage
 ) ?? null;
 
-const jsonLd = JSON.stringify([
+const klingAiVideoObjectSource =
+  klingAiSampleVideo &&
+  klingAiSampleVideo.file === '/videos/generated/tools/kling-ai-tool-video-output-01.mp4' &&
+  klingAiSampleVideo.poster === '/videos/generated/tools/kling-ai-tool-video-output-01-poster.webp'
+    ? klingAiSampleVideo
+    : null;
+
+const jsonLdEntries = [
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -32,7 +39,24 @@ const jsonLd = JSON.stringify([
     description: 'Kling AIは中国Kuaishou系が開発したAI動画生成ツール（運営法人はシンガポール法人とされる）。テキスト・画像から最大10秒の動画を生成でき、動画延長（最大3分）にも対応。無料プランは1日66クレジット付与。',
     url: 'https://kling.ai',
   },
-]);
+];
+
+if (klingAiVideoObjectSource) {
+  jsonLdEntries.push({
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: 'Kling AI実例動画｜Kling AI 2.0',
+    description: klingAiVideoObjectSource.usageNote,
+    thumbnailUrl: ['https://aicreative-db.com/videos/generated/tools/kling-ai-tool-video-output-01-poster.webp'],
+    uploadDate: '2026-06-24',
+    duration: 'PT5S',
+    contentUrl: 'https://aicreative-db.com/videos/generated/tools/kling-ai-tool-video-output-01.mp4',
+    width: 1280,
+    height: 720,
+  });
+}
+
+const jsonLd = JSON.stringify(jsonLdEntries);
 ---
 
 <BaseLayout

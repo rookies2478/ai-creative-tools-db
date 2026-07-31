@@ -27,15 +27,19 @@ function isValidHttpUrl(value: string): boolean {
 export function resolveToolOutboundLink({
   toolSlug,
   officialUrl,
+  placement = 'primary',
 }: {
   toolSlug: string;
   officialUrl: string;
+  placement?: 'primary' | 'pricing';
 }): ResolvedOutboundLink {
   if (!officialUrl || !isValidHttpUrl(officialUrl)) {
     throw new Error(`resolveToolOutboundLink: officialUrl が無効です (toolSlug=${toolSlug})`);
   }
 
-  const entry = toolAffiliateLinks.find((link) => link.toolSlug === toolSlug);
+  const entry = toolAffiliateLinks.find(
+    (link) => link.toolSlug === toolSlug && (link.placement ?? 'primary') === placement
+  );
 
   const isUsable =
     !!entry &&

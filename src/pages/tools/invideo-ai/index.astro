@@ -9,6 +9,11 @@ const entry = tools.find((t) => t.slug === 'invideo-ai');
 const d = entry?.data;
 
 const outboundLink = resolveToolOutboundLink({ toolSlug: 'invideo-ai', officialUrl: 'https://invideo.io' });
+const pricingOutboundLink = resolveToolOutboundLink({
+  toolSlug: 'invideo-ai',
+  officialUrl: 'https://invideo.io/pricing/',
+  placement: 'pricing',
+});
 
 const jsonLd = JSON.stringify([
   {
@@ -67,7 +72,7 @@ const jsonLd = JSON.stringify([
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: outboundLink.url, rel: outboundLink.rel }}
       primaryCtaDisclosure={outboundLink.isAffiliate && outboundLink.disclosureRequired ? 'このページにはアフィリエイトリンクが含まれます。' : undefined}
-      secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://invideo.io/pricing/' }}
+      secondaryCta={{ label: '料金プランを確認（公式）', href: pricingOutboundLink.url, rel: pricingOutboundLink.rel }}
       basicInfo={[
         {
           title: '商用利用', badge: { s: 'paid', label: '有料プランのみ（要確認）' }, wide: true,

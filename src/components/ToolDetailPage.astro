@@ -47,7 +47,7 @@ export interface Props {
   lead: string;
   specs: SpecItem[];
   primaryCta: { label: string; href: string; rel?: string };
-  secondaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string; rel?: string };
   primaryCtaDisclosure?: string;
   caution?: string;
   basicInfo: InfoCard[];
@@ -177,7 +177,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
 
     <div class="tdp-actions">
       <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel={primaryCta.rel ?? 'nofollow noopener noreferrer'}>{primaryCta.label} <span class="ext">↗</span></a>
-      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel="nofollow noopener noreferrer">{secondaryCta.label} <span class="ext">↗</span></a> : null}
+      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel={secondaryCta.rel ?? 'nofollow noopener noreferrer'}>{secondaryCta.label} <span class="ext">↗</span></a> : null}
     </div>
     {primaryCtaDisclosure && <p class="tdp-pr-disclosure">{primaryCtaDisclosure}</p>}
 

@@ -108,6 +108,7 @@ function main() {
 
     for (const entryText of entries) {
       const toolSlug = getField(entryText, 'toolSlug');
+      const placement = getField(entryText, 'placement') || 'primary';
       const url = getField(entryText, 'url');
       const enabled = getField(entryText, 'enabled');
       const approvalStatus = getField(entryText, 'approvalStatus');
@@ -117,10 +118,11 @@ function main() {
         fail('toolAffiliateLinks に toolSlug のないエントリがあります');
         continue;
       }
-      if (seenSlugs.has(toolSlug)) {
-        fail(`toolAffiliateLinks に toolSlug の重複があります: ${toolSlug}`);
+      const dedupeKey = `${toolSlug}:${placement}`;
+      if (seenSlugs.has(dedupeKey)) {
+        fail(`toolAffiliateLinks に toolSlug+placement の重複があります: ${dedupeKey}`);
       }
-      seenSlugs.add(toolSlug);
+      seenSlugs.add(dedupeKey);
 
       if (enabled === true) {
         if (approvalStatus !== 'approved') {

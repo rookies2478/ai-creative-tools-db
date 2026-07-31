@@ -67,11 +67,11 @@ export const affiliatePrograms: AffiliateProgram[] = [
         sourceType: 'official',
         verifiedAt: '2026-08-01',
         notes:
-          'InVideo application approved on Impact. Public tracking link activated on 2026-08-01.',
+          'Default Copy Link destination returned an error. Replaced with a working deep link created through Impact.',
       },
     ],
     verifiedAt: '2026-08-01',
     notes:
-      'InVideo application approved on Impact. Public tracking link activated on 2026-08-01.',
+      'Default Copy Link destination returned an error. Replaced with a working deep link created through Impact.',
   },
 ];

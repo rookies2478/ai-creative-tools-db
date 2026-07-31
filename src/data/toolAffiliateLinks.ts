@@ -21,7 +21,7 @@ export interface ToolAffiliateLink {
 export const toolAffiliateLinks: ToolAffiliateLink[] = [
   {
     toolSlug: 'invideo-ai',
-    url: 'https://invideo.sjv.io/c/7531370/883681/12258',
+    url: 'https://invideo.sjv.io/enByKZ',
     provider: 'Impact / InVideo',
     enabled: true,
     approvalStatus: 'approved',

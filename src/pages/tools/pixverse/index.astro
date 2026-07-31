@@ -12,7 +12,14 @@ const pixverseSampleVideo = generatedVideos.find(
   (v) => v.pageSlug === 'pixverse' && v.sampleType === 'tool-video-output' && v.isSameToolAsPage
 ) ?? null;
 
-const jsonLd = JSON.stringify([
+const pixverseVideoObjectSource =
+  pixverseSampleVideo &&
+  pixverseSampleVideo.file === '/videos/generated/tools/pixverse-tool-video-output-01.mp4' &&
+  pixverseSampleVideo.poster === '/videos/generated/tools/pixverse-tool-video-output-01-poster.webp'
+    ? pixverseSampleVideo
+    : null;
+
+const jsonLdEntries = [
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -31,7 +38,24 @@ const jsonLd = JSON.stringify([
     description: 'PixVerseはテキスト・画像からAI動画を生成できるサービス。V6モデル搭載で最大15秒の動画生成・extend機能（最大8秒延長）に対応。日本語UIあり・無料枠あり。商用利用には別途認可または商用ライセンスが必要と公式規約に案内されています。',
     url: 'https://pixverse.ai',
   },
-]);
+];
+
+if (pixverseVideoObjectSource) {
+  jsonLdEntries.push({
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: 'PixVerse実例動画｜PixVerse V6',
+    description: pixverseVideoObjectSource.usageNote,
+    thumbnailUrl: ['https://aicreative-db.com/videos/generated/tools/pixverse-tool-video-output-01-poster.webp'],
+    uploadDate: '2026-07-26',
+    duration: 'PT5S',
+    contentUrl: 'https://aicreative-db.com/videos/generated/tools/pixverse-tool-video-output-01.mp4',
+    width: 640,
+    height: 360,
+  });
+}
+
+const jsonLd = JSON.stringify(jsonLdEntries);
 ---
 
 <BaseLayout

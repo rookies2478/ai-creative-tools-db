@@ -75,3 +75,46 @@ forbidden_operations:
 
 - toolAffiliateLinks.tsのurlフィールドのみ書き換え、他フィールドは無変更。
 - affiliatePrograms.tsはverifiedAtとnotesのみ更新。
+
+## Result
+
+PASS
+
+## Summary
+
+- `src/data/toolAffiliateLinks.ts`: invideo-aiエントリのurlを`https://invideo.sjv.io/c/7531370/883681/12258`から`https://invideo.sjv.io/enByKZ`へ1件のみ差し替え。toolSlug/provider/enabled/approvalStatus/disclosureRequired/verifiedAtは無変更、重複エントリなし。
+- `src/data/affiliatePrograms.ts`: invideo-aiレコードのnotes（プログラム内・トップレベル両方）を「デフォルトのCopy Linkが遷移先エラーになったため、ImpactのCreate a linkで作成した正常動作リンクへ差し替えた」事実へ更新。verifiedAtは2026-08-01のまま維持（同日差し替えのため日付変更なし）。commissionType/commissionValue/cookieDays/japanEligible/mediaEligible/sourceTypeは未確認情報のため無変更。
+- resolveToolOutboundLink.ts・invideo-ai/index.astro・ToolDetailPage.astro等は無変更。ソースコードトレースにより、invideo-aiが新URLでlinkType:affiliate、rel:'sponsored nofollow noopener noreferrer'、disclosureRequired:trueへ解決されることを確認。他28ツールは無変更。
+- 旧URL文字列（7531370/883681/12258）はsrc/data配下から検索してヒットせず消滅を確認。docs内の過去タスク履歴・LATEST.mdの記録としては残存（許容範囲、事実として保持）。
+
+## Changed Files
+
+- 変更: `src/data/affiliatePrograms.ts`, `src/data/toolAffiliateLinks.ts`
+- 新規→移動: `docs/tasks/active/2026-08-01-invideo-ai-affiliate-link-replace.md` → `docs/tasks/completed/2026-08-01-invideo-ai-affiliate-link-replace.md`
+- 更新: `docs/tasks/LATEST.md`
+
+## Checks
+
+- task validation: PASS
+- validate:affiliate-links: PASS
+- build: PASS（92ページ）
+- diff check: PASS（CRLF警告のみ）
+- scope validation: PASS
+- secrets check: PASS
+- generated HTML直接確認: 未実施（dist/への直接アクセスが本環境権限でブロック。過去タスクと同一制約。ソーストレースとbuild成功で代替）
+
+## Git
+
+- branch: master
+- commit: 0592aa8「Replace InVideo AI affiliate link」+ completed移動・LATEST更新の追加commit
+- push: 実施
+- origin sync: push後に確認
+- working tree: push後clean
+
+## Production
+
+- state: NOT_DEPLOYED
+
+## Next
+
+GitHub Actions成功確認後、本番反映し、新しいCTAリンク（https://invideo.sjv.io/enByKZ）の正常遷移をブラウザで確認する。

@@ -31,6 +31,7 @@ nextReviewDue: "2026-10-05"
 verifiedAt: "2026-07-05"
 officialSourceUrl: "https://www.synthesia.io/pricing"
 pricingModel: "subscription"
+pricingStatus: "partial"
 freePlanNote: "Basic（無料）プランがあり、クレジットカード不要で試用できるとされています。月10分までの制限や透かしなど条件があるため、最新仕様は公式Pricingでご確認ください。"
 paidPlanNote: "Basic / Starter / Creator / Enterpriseなどのプランがあるとされ、Starter以上でロゴ（透かし）削除機能が案内されています。クレジット制・分数制・席数課金が組み合わさる料金体系のため、料金や条件は変更される場合があります。最新情報は公式サイトをご確認ください。"
 platforms:

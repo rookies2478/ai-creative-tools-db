@@ -31,6 +31,7 @@ nextReviewDue: "2026-10-05"
 verifiedAt: "2026-07-05"
 officialSourceUrl: "https://www.d-id.com/pricing/studio/"
 pricingModel: "subscription"
+pricingStatus: "partial"
 freePlanNote: "Free Trialがあるとされています。Trial / Liteには透かしが表示され、Liteプランは非商用利用限定とされています。動画時間は15秒単位で切り上げ課金され、分数・クレジットは繰越されず月次更新とされています。詳細は公式Pricingでご確認ください。"
 paidPlanNote: "Studio（Lite以上）とAPIでプラン体系が分かれているとされています。Lite以外のプランで商用利用が可能とされていますが、料金・条件は変更される場合があるため公式サイトをご確認ください。API / Web版は時間残高を共有するという公式記載もあります。"
 platforms:

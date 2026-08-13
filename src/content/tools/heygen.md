@@ -32,6 +32,7 @@ nextReviewDue: "2026-10-05"
 verifiedAt: "2026-07-05"
 officialSourceUrl: "https://www.heygen.com/pricing"
 pricingModel: "subscription"
+pricingStatus: "partial"
 freePlanNote: "無料プランあり。クレジットカード不要、動画最大1分、透かし付きとされています。商用利用・販売・再配布・マネタイズには制限があるため公式Termsをご確認ください。無料で動画作成は可能ですが、今回の実機確認では生成した動画ファイルを無料でダウンロードできませんでした。保存・掲載には有料プランが必要となる可能性があります。"
 paidPlanNote: "Creator / Pro / Business / Enterpriseなどのプランがあるとされています。Creator以上で透かし削除に対応する案内がありますが、料金・条件は変更される場合があるため公式サイトをご確認ください。"
 platforms:

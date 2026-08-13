@@ -8,14 +8,18 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 
 // --- トークン読み取り ---
-const TOKEN_FILE = process.env.HF_TOKEN_FILE ?? 'C:\\dev\\Studio\\huggingface.co_API.txt';
+const TOKEN_FILE = process.env.HF_TOKEN_FILE;
+if (!TOKEN_FILE) {
+  console.error('環境変数 HF_TOKEN_FILE にトークンファイルのパスを指定してください');
+  process.exit(1);
+}
 if (!existsSync(TOKEN_FILE)) {
-  console.error('C:\\dev\\Studio\\huggingface.co_API.txt に作業用トークンファイルを配置してください');
+  console.error(`トークンファイルが見つかりません: ${TOKEN_FILE}`);
   process.exit(1);
 }
 const token = readFileSync(TOKEN_FILE, 'utf-8').trim();
 if (!token) {
-  console.error('C:\\dev\\Studio\\huggingface.co_API.txt に作業用トークンファイルを配置してください');
+  console.error(`トークンファイルが空です: ${TOKEN_FILE}`);
   process.exit(1);
 }
 
@@ -38,15 +42,30 @@ const TARGETS = {
 const NEGATIVE = 'logo, trademark, celebrity, real person, existing character, text, letters, words, numbers, brand mark, watermark, blurry, low quality, nsfw, face, human, person, body, portrait';
 
 // --- 引数チェック ---
-const target = process.argv[2];
+const args = process.argv.slice(2);
+const force = args.includes('--force');
+const positional = args.filter(a => a !== '--force');
+const unknown = positional.filter(a => a.startsWith('-'));
+if (unknown.length) {
+  console.error(`不明な引数: ${unknown.join(', ')}`);
+  process.exit(1);
+}
+const target = positional[0];
 if (!target || !TARGETS[target]) {
-  console.error('使い方: node scripts/generate-reference-image.mjs <target>');
+  console.error('使い方: node scripts/generate-reference-image.mjs <target> [--force]');
   console.error('target: image-generation | video-generation | free-ai-image-tools');
   process.exit(1);
 }
 
 const { out, prompt } = TARGETS[target];
 const outPath = join(root, out);
+
+// --- 上書きガード ---
+if (existsSync(outPath) && !force) {
+  console.error(`出力先が既に存在します: ${out}`);
+  console.error('上書きするには --force を指定してください');
+  process.exit(1);
+}
 
 // --- 生成 ---
 const MODEL = 'black-forest-labs/FLUX.1-schnell';

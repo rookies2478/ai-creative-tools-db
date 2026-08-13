@@ -4,10 +4,10 @@ shortDescription: "ベクター（SVG）生成に対応したAIデザインツ�
 category: "image"
 officialUrl: "https://www.recraft.ai"
 freePlan: "limited"
-lowestPaidPlan: "要公式確認（正確なティア名・価格は確認時点で未確定）"
-currency: "unknown"
+lowestPaidPlan: "Basic $12/月（年払い時$10/月〜）"
+currency: "USD"
 commercialUse: "limited"
-commercialUseNote: "公式料金ページ（recraft.ai/pricing）で確認できた内容として、無料プランで生成された画像はRecraftが所有し公開表示され、商用利用は不可とされています。有料プラン加入中に生成した画像は、解約後も所有権・商用利用権が継続するとされています。条件付きですが明文化されている点は他候補と比べても強い根拠です。正確な料金ティア・金額は確認時点で未確定のため、最新の条件は公式サイトで必ずご確認ください。本記事は法的助言ではありません。"
+commercialUseNote: "公式利用規約（recraft.ai/terms）第7.1条により、無料ティアで生成した画像（Free Tier Assets）はRecraftが所有し、商用利用は認められていません。第7.2条により、有料サブスクリプション中に生成した画像はユーザーに著作権が譲渡され所有権が帰属するとされています（ただしAIモデルの学習への利用は禁止）。解約後の権利継続については、規約第14条（解約時に本規約に基づく権利・ライセンスが終了する旨の記載）との関係が完全には一義的でないため、正確な適用条件は最新の公式規約で必ずご確認ください。本記事は法的助言ではありません。"
 japaneseUi: "unknown"
 japanesePrompt: "unknown"
 watermark: "unknown"
@@ -23,17 +23,17 @@ strengths:
   - "APIが提供されている"
 weaknesses:
   - "無料プランで生成した画像はRecraftが所有し公開表示され、商用利用不可"
-  - "正確な料金ティア・金額が確認時点で未確定（要公式確認）"
+  - "解約後の権利継続の正確な適用条件は要確認"
   - "日本語対応の詳細は公式情報のみでは確認できていない（要確認）"
   - "動画生成・アバター機能はない"
 lastReviewed: "2026-08-13"
 nextReviewDue: "2026-11-13"
 verifiedAt: "2026-08-13"
-officialSourceUrl: "https://www.recraft.ai/pricing"
+officialSourceUrl: "https://www.recraft.ai/docs/plans-and-billing/paid-plans"
 pricingModel: "credit"
-pricingStatus: "unconfirmed"
-freePlanNote: "無料プランが存在するとされていますが、正確なクレジット数・上限は確認時点で未確定です。無料プランで生成された画像はRecraftが所有し公開表示され、商用利用は不可とされています。"
-paidPlanNote: "有料プランは年払いで割引（約20%との情報あり、要確認）が適用されるとされていますが、正確なティア名・金額は確認時点で未確定です。有料プラン加入中に生成した画像は、解約後も所有権・商用利用権が継続するとされています。最新の料金・条件は公式サイトでご確認ください。"
+pricingStatus: "partial"
+freePlanNote: "公式ドキュメントによると、無料プランは1日最大3画像までアップロード可、1プロンプトあたり最大2画像生成、クレジット追加購入は有料プランのみとされています。無料プランの生成画像は公開され、コミュニティギャラリーに表示される場合があり、Recraftが所有し商用利用は不可とされています。1日あたりの正確なクレジット付与数は公式ドキュメントで確定できておらず要確認です。"
+paidPlanNote: "公式ドキュメント（recraft.ai/docs/plans-and-billing/paid-plans）によると、Basicは$12/月（年払い時$10/月、年額$120）で月1,000クレジット。Proはクレジット段階制（2,000クレジット$20/月〜、4,000クレジット$40/月〜、8,000クレジット$80/月〜、16,000クレジット$160/月〜、いずれも年払いで割引）。Teamsプランも同様のクレジット段階制です。有料プラン加入中に生成した画像はユーザーに著作権が譲渡されるとされています（解約後の扱いは要確認）。最新の料金・条件は公式サイトでご確認ください。"
 platforms:
   - web
   - api
@@ -51,15 +51,15 @@ useCases:
   - business
 limitations:
   - "無料プランの画像は商用利用不可（Recraft所有・公開表示）"
-  - "正確な料金ティア・価格が確認時点で未確定"
+  - "解約後の権利継続の正確な適用条件は要確認"
   - "日本語対応の詳細が未確認"
   - "動画生成・アバター機能はない"
 usagePolicy:
   commercialUseStatus: "limited"
   commercialUseByPlan:
-    free: "生成画像はRecraftが所有し公開表示され、商用利用不可とされています"
-    paid: "有料プラン加入中に生成した画像は、解約後も所有権・商用利用権が継続するとされています"
-  commercialUseNote: "公式料金ページ（recraft.ai/pricing）で確認できた内容です。条件付きですが明文化されている点は評価できますが、正確な適用条件・プラン名は最新の公式情報でご確認ください。本記事は法的助言ではありません。"
+    free: "無料ティアの生成画像（Free Tier Assets）はRecraftが所有し、商用利用は認められていません（利用規約第7.1条）"
+    paid: "有料サブスクリプション中に生成した画像はユーザーに著作権が譲渡され所有権が帰属するとされています（利用規約第7.2条、ただしAIモデル学習への利用は禁止）"
+  commercialUseNote: "公式利用規約（recraft.ai/terms）第7.1条・第7.2条で確認できた内容です。解約後の権利継続については規約第14条との関係が完全には一義的でないため、正確な適用条件は最新の公式規約でご確認ください。本記事は法的助言ではありません。"
   inputMaterialRisk: "medium"
   inputMaterialNote: "image-to-image・inpainting/outpaintingでは既存画像のアップロードが前提となるため、元画像の著作権・第三者権利の確認が必要です。"
 sources:
@@ -67,6 +67,12 @@ sources:
     url: "https://www.recraft.ai"
   - title: "Recraft料金プラン（公式）"
     url: "https://www.recraft.ai/pricing"
+  - title: "Recraft有料プラン詳細（公式ドキュメント）"
+    url: "https://www.recraft.ai/docs/plans-and-billing/paid-plans"
+  - title: "Recraft無料プラン詳細（公式ドキュメント）"
+    url: "https://www.recraft.ai/docs/plans-and-billing/free-plan"
+  - title: "Recraft利用規約（公式）"
+    url: "https://www.recraft.ai/terms"
   - title: "Recraft紹介制度（公式ドキュメント）"
     url: "https://www.recraft.ai/docs/plans-and-billing/referral-program"
 sourceRefs:
@@ -76,39 +82,51 @@ sourceRefs:
   - label: "Recraft料金プラン（公式）"
     url: "https://www.recraft.ai/pricing"
     type: pricing
+  - label: "Recraft有料プラン詳細（公式ドキュメント）"
+    url: "https://www.recraft.ai/docs/plans-and-billing/paid-plans"
+    type: pricing
+  - label: "Recraft無料プラン詳細（公式ドキュメント）"
+    url: "https://www.recraft.ai/docs/plans-and-billing/free-plan"
+    type: pricing
+  - label: "Recraft利用規約（公式）"
+    url: "https://www.recraft.ai/terms"
+    type: commercial
   - label: "Recraft紹介制度（公式ドキュメント）"
     url: "https://www.recraft.ai/docs/plans-and-billing/referral-program"
     type: docs
 faqs:
   - question: "無料で使えますか？"
-    answer: "無料プランがあるとされていますが、正確なクレジット数・利用上限は確認時点で未確定です。無料プランで生成した画像はRecraftが所有し公開表示され、商用利用はできないとされています。最新情報は公式サイトをご確認ください。"
+    answer: "無料プランがあり、公式ドキュメントによると1日最大3画像までアップロード可、1プロンプトあたり最大2画像生成とされています。無料プランで生成した画像は公開されコミュニティギャラリーに表示される場合があり、Recraftが所有し商用利用はできないとされています。最新情報は公式サイトをご確認ください。"
   - question: "商用利用できますか？"
-    answer: "公式料金ページによると、無料プランの生成画像は商用利用不可（Recraftが所有・公開表示）とされています。有料プラン加入中に生成した画像は、解約後も所有権・商用利用権が継続するとされています。正確な適用条件は最新の公式情報をご確認ください。本記事は法的助言ではありません。"
+    answer: "公式利用規約（第7.1条）によると、無料ティアの生成画像は商用利用不可（Recraftが所有）とされています。第7.2条により、有料サブスクリプション中に生成した画像はユーザーに著作権が譲渡され所有権が帰属するとされています（AIモデル学習への利用は禁止）。解約後の権利継続の正確な条件は最新の公式規約をご確認ください。本記事は法的助言ではありません。"
   - question: "日本語で使えますか？"
     answer: "日本語UI・日本語プロンプトの対応状況は、本記事の調査時点では公式情報から確認できていません。実際の対応状況は公式サイトでご確認ください。"
   - question: "ベクター（SVG）生成に対応していますか？"
     answer: "はい。Recraftはラスター画像生成に加えてベクター/SVG生成に対応しており、ロゴ・アイコン・ブランドスタイルの一貫性を重視したデザイン生成が特徴とされています。"
   - question: "料金はいくらですか？"
-    answer: "本記事の調査時点では、正確な有料プランのティア名・価格を公式情報から確定できませんでした。年払いで割引が適用されるとの情報がありますが、最新の正確な料金は公式サイトでご確認ください。"
+    answer: "公式ドキュメントによると、BasicプランはUSD $12/月（年払い時$10/月〜）です。Pro・Teamsプランはクレジット段階制で、2,000クレジット$20/月〜から16,000クレジット$160/月〜まで複数段階があり、年払いで割引が適用されます。最新の正確な料金は公式サイトでご確認ください。"
 reviewed:
   pricing: "2026-08-13"
   terms: "2026-08-13"
   features: "2026-08-13"
 japanBilling:
-  providerName: "Recraft（運営法人名は要公式確認）"
-  providerCountry: "要公式確認"
+  providerName: "Recraft Inc."
+  providerCountry: "米国（利用規約に記載、詳細所在地は要公式確認）"
   isJapaneseService: false
   pricingUrl: "https://www.recraft.ai/pricing"
-  billingCurrency: "unknown"
+  billingCurrency: "USD"
   jpyDirectBilling: "unknown"
   localizedJpyDisplay: "unknown"
   taxDisplay: "unknown"
   purchaseChannels: ["web"]
   pricingCheckedAt: "2026-08-13"
-  pricingNote: "公式料金ページで無料プランの商用利用不可・有料プラン加入中生成画像の権利継続という商用利用ポリシーは確認できましたが、正確なプラン名・価格・通貨は本タスクの調査範囲では確定できませんでした。最新情報は公式サイトをご確認ください。"
+  pricingNote: "公式ドキュメント・利用規約でBasic/Pro/Teamsのプラン構成・価格（USD）・無料/有料の商用利用区分・運営法人（Recraft Inc.）を確認しました。日本円建て請求・日本語対応は本タスクの調査範囲では確認できていません。最新情報は公式サイトをご確認ください。"
   billingCategory: "E"
   sourceUrls:
     - "https://www.recraft.ai/pricing"
+    - "https://www.recraft.ai/docs/plans-and-billing/paid-plans"
+    - "https://www.recraft.ai/docs/plans-and-billing/free-plan"
+    - "https://www.recraft.ai/terms"
     - "https://www.recraft.ai/docs/plans-and-billing/referral-program"
 ---
 
@@ -127,15 +145,20 @@ Recraftは、ラスター画像生成に加えてベクター（SVG）生成に�
 
 ## 無料プランと商用利用について
 
-公式料金ページ（recraft.ai/pricing）で確認できた内容として、無料プランで生成された画像はRecraftが所有し公開表示され、商用利用はできないとされています。一方、有料プランに加入中に生成した画像については、解約後も所有権・商用利用権が継続するとされています。この点は条件付きではあるものの明文化されており、他の類似ツールと比べても検証可能性が高い特徴です。
-
-ただし、正確な料金ティア名・金額については、本記事の調査時点では公式情報から確定できませんでした。最新の料金・条件は必ず公式サイトでご確認ください。
+公式利用規約（recraft.ai/terms）第7.1条により、無料ティアで生成された画像（Free Tier Assets）はRecraftが所有し、商用利用は認められていません。第7.2条により、有料サブスクリプション中に生成した画像はユーザーに著作権が譲渡され所有権が帰属するとされています（ただし生成物をAIモデルの学習に利用することは禁止）。解約後もこの権利が継続するかどうかは、規約第14条（解約時の権利・ライセンス終了規定）との関係が完全には一義的でなく、正確な適用条件は最新の公式規約でご確認ください。
 
 > **免責事項：** このページは情報提供を目的としており、法的助言ではありません。商用利用を前提にする場合は、最新の公式料金ページ・利用規約を必ずご確認ください。
 
-## 料金プランについて（要確認）
+## 料金プラン
 
-本記事の調査時点では、Recraftの正確な有料プランのティア名・価格を公式情報から確定できていません。年払いで割引（約20%との第三者情報あり、未確認）が適用されるとの情報がありますが、断定を避け「要公式確認」として扱っています。最新の正確な料金は[Recraft公式料金ページ](https://www.recraft.ai/pricing)でご確認ください。
+公式ドキュメント（recraft.ai/docs/plans-and-billing/paid-plans）確認時点（2026年8月）の情報です。料金は変更される場合があるため、最新情報は公式サイトをご確認ください。
+
+| プラン | クレジット | 料金目安（USD） |
+|---|---|---|
+| 無料 | 1日最大3画像アップロード・1プロンプト最大2画像 | 無料 |
+| Basic | 1,000クレジット/月 | $12/月（年払い時$10/月〜） |
+| Pro | 2,000〜16,000クレジット/月 | $20/月〜$160/月（年払いで割引） |
+| Teams | 2,000〜16,000クレジット/月 | プランにより変動（年払いで割引） |
 
 なお、Recraftには通常のコミッション型アフィリエイトとは異なる、クレジット付与型の[紹介制度（referral program）](https://www.recraft.ai/docs/plans-and-billing/referral-program)が存在することが公式ドキュメントで確認できています。
 

@@ -8,7 +8,7 @@ lowestPaidPlan: "Pro 約$7.50/月〜（年払い時、要公式確認）"
 currency: "USD"
 commercialUse: "paid-only"
 commercialUseNote: "公式ヘルプセンターの記事（Free accounts and commercial use）で、無料アカウントは個人的・非商用目的限定と明記されています。商用利用には有料プラン（Pro / Max / Ultra等）への加入が必要とされています。プランや用途によって条件が異なる場合があるため、最新情報は公式ヘルプ・利用規約をご確認ください。本記事は法的助言ではありません。"
-japaneseUi: "unknown"
+japaneseUi: true
 japanesePrompt: "unknown"
 watermark: "yes"
 watermarkCondition: "無料プランでは書き出し画像に透かしが入るとされています。有料プランでは透かしなしで書き出しできるとされています。最新の条件は公式サイトでご確認ください。"
@@ -25,7 +25,7 @@ weaknesses:
   - "無料プランは非商用限定（月250エクスポート、透かしあり）"
   - "商用利用には有料プランが必須"
   - "汎用のテキスト→画像生成ツールではなく、商品写真編集に特化している"
-  - "日本語UI・日本語プロンプト対応は公式情報のみでは確認できていない（要確認）"
+  - "日本語プロンプト対応は公式情報のみでは確認できていない（要確認）"
 lastReviewed: "2026-08-13"
 nextReviewDue: "2026-11-13"
 verifiedAt: "2026-08-13"
@@ -53,7 +53,7 @@ useCases:
 limitations:
   - "無料プランは非商用限定"
   - "商用利用には有料プランが必須"
-  - "日本語対応の詳細は公式情報のみでは確認できていない（要確認）"
+  - "日本語プロンプト対応の詳細は公式情報のみでは確認できていない（要確認）"
   - "動画生成・ベクター生成・アバター機能はない"
 usagePolicy:
   commercialUseStatus: "paid-only"
@@ -70,6 +70,8 @@ sources:
     url: "https://help.photoroom.com/en/collections/12478554-plans-and-pricing"
   - title: "Photoroom 無料アカウントと商用利用について（公式ヘルプ）"
     url: "https://help.photoroom.com/en/articles/12523455-free-accounts-and-commercial-use"
+  - title: "Photoroom 言語設定について（公式ヘルプ）"
+    url: "https://help.photoroom.com/en/articles/7323117-change-the-language-of-photoroom"
 sourceRefs:
   - label: "Photoroom公式サイト"
     url: "https://www.photoroom.com"
@@ -80,13 +82,16 @@ sourceRefs:
   - label: "Photoroom 無料アカウントと商用利用について（公式ヘルプ）"
     url: "https://help.photoroom.com/en/articles/12523455-free-accounts-and-commercial-use"
     type: commercial
+  - label: "Photoroom 言語設定について（公式ヘルプ）"
+    url: "https://help.photoroom.com/en/articles/7323117-change-the-language-of-photoroom"
+    type: docs
 faqs:
   - question: "無料で使えますか？"
     answer: "無料プランがあります。ただし月250エクスポートまで・透かしあり・個人的な非商用利用限定とされています。商用利用には有料プランへの加入が必要です。最新情報は公式サイトをご確認ください。"
   - question: "商用利用できますか？"
     answer: "公式ヘルプセンターによると、無料アカウントでの商用利用は認められておらず、商用利用にはPro・Max・Ultra等の有料プランが必要とされています。詳細・最新条件は公式ヘルプをご確認ください。本記事は法的助言ではありません。"
   - question: "日本語で使えますか？"
-    answer: "日本語UI・日本語プロンプトの対応状況は、本記事の調査時点では公式情報から確認できていません。実際の対応状況は公式サイトでご確認ください。"
+    answer: "公式ヘルプセンターの記事（言語設定について）で日本語UIへの切り替えに対応していることが確認できています。ただしプロンプト・検索入力欄への日本語入力対応の詳細は本記事の調査時点では確認できていません。"
   - question: "透かしは入りますか？"
     answer: "無料プランでは書き出し画像に透かしが入るとされています。有料プランでは透かしなしで書き出しできるとされています。最新の条件は公式サイトでご確認ください。"
   - question: "EC商品画像に向いていますか？"
@@ -147,7 +152,7 @@ API利用は上記サブスクリプションとは別料金体系（パート�
 
 ## 日本語対応について
 
-本記事の調査時点では、Photoroomの日本語UI・日本語プロンプト対応について公式情報から確認できていません。グローバルなEC事業者向け製品であることからローカライズの可能性はありますが、断定はできません。実際の対応状況は公式サイトでご確認ください。
+公式ヘルプセンターの記事「Change the language of Photoroom」で、日本語UIへの切り替えに対応していることが確認できています（Webアプリの設定またはphotoroom.comのフッター言語切替から変更可能）。一方、プロンプト・検索入力欄への日本語入力対応の詳細は、本記事の調査時点では確認できていません。実際の対応状況は公式サイトでご確認ください。
 
 ## どんな人に向いているか
 

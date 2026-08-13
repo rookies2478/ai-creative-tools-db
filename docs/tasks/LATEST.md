@@ -14,7 +14,8 @@
   - gsc-microsoft-designer-queries-2026-07-10.zip
   - gsc-runway-queries-2026-07-10.zip
   - gsc-stable-diffusion-queries-2026-07-10.zip
-  - prod_check.html
+  （prod_check.htmlは2026-08-13-resolve-prod-check-html-review.mdでDELETE_CANDIDATE確定・削除済み。gitignore対象untrackedファイルのため削除自体はGit履歴に非反映）
+- latest_completed_task: docs/tasks/completed/2026-08-13-resolve-prod-check-html-review.md（結果: 前タスクでREVIEW未確定だったprod_check.htmlを再検証。本番/conditions/commercial-use/を再取得しHTTP 200・title/canonical/H1一致・サイズほぼ同一を確認し再現可能と判定、リポジトリ全体検索で能動的依存（application source/scripts/package.json/CI/CLAUDE.md/docs/operations/active tasks）なしを確認、機密情報なしを確認。DELETE_CANDIDATE確定条件5件すべて充足のため削除。reports/・xlsx・home-showcase archive・scripts・application source・DB・package.jsonは無変更。本番反映なし〔ローカルファイル削除のみのため対象外〕）
 - gsc_manual_analysis_2026-08-13: 17日manual export分析（docs/analytics/gsc/2026-08-13/analysis-summary.md）、厳密比較NOT_COMPARABLE（前回API 14日run 07-13〜07-26と期間長・範囲不一致のため）
 - current_active_task: none（2026-08-13-remove-duplicate-reference-images-scriptはcompletedへ移動）
 - latest_completed_task: docs/tasks/completed/2026-08-13-remove-duplicate-reference-images-script.md（結果: scripts/generate-reference-image.mjs(singular)がscripts/generate-reference-images.mjs(plural)の全3出力（image-generation/video-generation/free-ai-image-tools）を機能的に完全代替することを最終確認（出力パス完全一致、prompt文言は微差あるが同一カテゴリ・同一スタイル意図、同一model FLUX.1-schnell、同一sharp WebP変換、同一retry挙動3回5秒待機）。リポジトリ全体でplural版への言及を検索した結果、package.json/.github/workflows/README.md/アプリケーションソースにヒットなし、docs内4件（LATEST.md・completed task 2件・audit doc 1件）は全てhistorical/audit referenceのみでactive依存なしと確認。上記条件が全て満たされたため`scripts/generate-reference-images.mjs`を削除。singular script（generate-reference-image.mjs）・sample script（generate-sample-image.mjs）・package.jsonは無変更、node --checkでsingular scriptの構文健全性を再確認。ライブHugging Face API呼び出し・画像生成は一切実施していない。validate:task PASS、validate:scope PASS、git diff --check PASS。commit・push後、本番反映なし（ローカルスクリプト削除のみのため対象外、production_state=DEPLOYED維持）。これで画像生成スクリプト監査〜安全性fix〜重複削除の一連の整理は完了）

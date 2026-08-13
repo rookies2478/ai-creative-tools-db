@@ -5,3 +5,4 @@
 - 保存対象: 運用ルールVer4.0の運用に付随する補助メモ・チェックリスト。
 - 保存しないもの: 運用ルール本文の全文転載、認証情報、本番デプロイ手順の実行スクリプト。
 - 正式な作業手順は「AIクリエイティブナビ 運用ルール Ver4.0」を参照。詳細は [docs/decisions/current-governance-documents.md](../decisions/current-governance-documents.md)。
+- `reports/`配下ファイルの位置づけ（historical/archive）は [reports-directory-policy.md](./reports-directory-policy.md) を参照。

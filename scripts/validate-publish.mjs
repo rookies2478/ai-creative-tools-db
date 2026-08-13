@@ -64,6 +64,32 @@ function loadSiteOrigin() {
 const SITE_ORIGIN = loadSiteOrigin();
 
 // ---------------------------------------------------------------------------
+// VideoObject適格pageSlug集合 — src/data/generatedVideos.tsをソースオブトゥルースとして
+// 正規表現抽出する（sampleType: 'tool-video-output' かつ isSameToolAsPage: true の
+// レコードが持つpageSlugのみ）。VideoObjectはこの集合に属さないツールページに
+// 出力された場合、漏出として扱う。2ツール（Kling AI/PixVerse）への決め打ちを避けるため、
+// データ側の条件をそのまま参照する。
+// ---------------------------------------------------------------------------
+
+function loadVideoObjectEligibleSlugs() {
+  const path = "src/data/generatedVideos.ts";
+  if (!existsSync(path)) return new Set();
+  const src = readFileSync(path, "utf8");
+  const entryBlocks = src.split(/\n\s*\{\n/).slice(1);
+  const slugs = new Set();
+  for (const block of entryBlocks) {
+    const isEligible =
+      /sampleType:\s*'tool-video-output'/.test(block) && /isSameToolAsPage:\s*true/.test(block);
+    if (!isEligible) continue;
+    const m = block.match(/pageSlug:\s*'([^']+)'/);
+    if (m) slugs.add(m[1]);
+  }
+  return slugs;
+}
+
+const VIDEOOBJECT_ELIGIBLE_SLUGS = loadVideoObjectEligibleSlugs();
+
+// ---------------------------------------------------------------------------
 // Violation collection
 // ---------------------------------------------------------------------------
 
@@ -328,6 +354,7 @@ function checkHtmlFile(file, content) {
 
   // G. JSON-LD
   const scriptMatches = extractAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g, content);
+  const typeCounts = new Map(); // "@type" -> count（同一ページ内、@graph配下も含む）
   for (const sm of scriptMatches) {
     const raw = sm[1].trim();
     if (raw === "") {
@@ -343,14 +370,45 @@ function checkHtmlFile(file, content) {
     }
     const entries = Array.isArray(parsed) ? parsed : [parsed];
     for (const entry of entries) {
-      checkJsonLdEntry(file, entry, { topLevel: true });
+      checkJsonLdEntry(file, entry, { topLevel: true, route, typeCounts });
     }
+  }
+
+  // VideoObject重複・スコープ（適格pageSlug集合外への漏出）チェック
+  const videoObjectCount = typeCounts.get("VideoObject") || 0;
+  if (videoObjectCount > 1) {
+    report("ERROR", file, "duplicate-videoobject", `同一ページ内にVideoObjectが${videoObjectCount}件`);
+  }
+  if (videoObjectCount >= 1) {
+    const toolsMatch = route.match(/^\/tools\/([^/]+)\/?$/);
+    if (toolsMatch) {
+      const slug = toolsMatch[1];
+      if (!VIDEOOBJECT_ELIGIBLE_SLUGS.has(slug)) {
+        report(
+          "ERROR",
+          file,
+          "videoobject-scope-violation",
+          `VideoObjectがsrc/data/generatedVideos.tsの適格pageSlug集合に含まれないページに出力されています: ${slug}`
+        );
+      }
+    }
+  }
+
+  // SoftwareApplication重複チェック（1ページ1件が現行実装の前提）
+  const softwareAppCount = typeCounts.get("SoftwareApplication") || 0;
+  if (softwareAppCount > 1) {
+    report(
+      "ERROR",
+      file,
+      "duplicate-softwareapplication",
+      `同一ページ内にSoftwareApplicationが${softwareAppCount}件`
+    );
   }
 }
 
 // JSON-LDは "@graph" 配下に複数エンティティをまとめる形式も正当（@contextは
 // 親からの継承のため@graph配下の子要素には@context必須としない）。
-function checkJsonLdEntry(file, entry, { topLevel }) {
+function checkJsonLdEntry(file, entry, { topLevel, route, typeCounts }) {
   if (typeof entry !== "object" || entry === null) {
     report("ERROR", file, "invalid-json-ld-entry", "JSON-LDエントリがオブジェクトではありません");
     return;
@@ -360,7 +418,7 @@ function checkJsonLdEntry(file, entry, { topLevel }) {
   }
   if (Array.isArray(entry["@graph"])) {
     for (const child of entry["@graph"]) {
-      checkJsonLdEntry(file, child, { topLevel: false });
+      checkJsonLdEntry(file, child, { topLevel: false, route, typeCounts });
     }
     return;
   }
@@ -368,11 +426,18 @@ function checkJsonLdEntry(file, entry, { topLevel }) {
     report("ERROR", file, "missing-json-ld-type", "@typeがありません");
     return;
   }
+  typeCounts.set(entry["@type"], (typeCounts.get(entry["@type"]) || 0) + 1);
   if (entry["@type"] === "FAQPage") {
     checkFaqPage(file, entry);
   }
   if (entry["@type"] === "BreadcrumbList") {
     checkBreadcrumbList(file, entry);
+  }
+  if (entry["@type"] === "VideoObject") {
+    checkVideoObject(file, entry);
+  }
+  if (entry["@type"] === "SoftwareApplication") {
+    checkSoftwareApplication(file, entry);
   }
 }
 
@@ -409,6 +474,56 @@ function checkBreadcrumbList(file, entry) {
       }
     }
   });
+}
+
+function isNonEmptyString(v) {
+  return typeof v === "string" && v.trim() !== "";
+}
+
+// ISO 8601 duration（現行サイトの実装形式 例: PT5S）の緩い構文チェック。
+// 過度に厳密なSchema.org準拠検証は行わない。
+const ISO8601_DURATION_RE = /^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+(\.\d+)?S)?)?$/;
+
+function checkVideoObject(file, entry) {
+  const requiredStringFields = ["name", "description", "uploadDate", "duration"];
+  for (const field of requiredStringFields) {
+    if (!isNonEmptyString(entry[field])) {
+      report("ERROR", file, "invalid-videoobject-field", `VideoObject.${field}が不正または空です`);
+    }
+  }
+
+  // thumbnailUrl: string または string配列を許容（現行実装は配列形式）
+  const thumb = entry.thumbnailUrl;
+  const thumbUrls = Array.isArray(thumb) ? thumb : thumb !== undefined ? [thumb] : [];
+  if (thumbUrls.length === 0 || !thumbUrls.every((u) => isNonEmptyString(u))) {
+    report("ERROR", file, "invalid-videoobject-thumbnailurl", "VideoObject.thumbnailUrlが不正または空です");
+  }
+
+  // 動画所在地: contentUrl または embedUrl のいずれか必須
+  const hasContentUrl = isNonEmptyString(entry.contentUrl);
+  const hasEmbedUrl = isNonEmptyString(entry.embedUrl);
+  if (!hasContentUrl && !hasEmbedUrl) {
+    report("ERROR", file, "missing-videoobject-location", "VideoObjectにcontentUrl/embedUrlのいずれもありません");
+  }
+
+  if (isNonEmptyString(entry.uploadDate) && Number.isNaN(Date.parse(entry.uploadDate))) {
+    report("ERROR", file, "invalid-videoobject-uploaddate", `VideoObject.uploadDateが日付として解釈できません: ${entry.uploadDate}`);
+  }
+
+  if (isNonEmptyString(entry.duration) && !ISO8601_DURATION_RE.test(entry.duration)) {
+    report("ERROR", file, "invalid-videoobject-duration", `VideoObject.durationがISO 8601形式ではありません: ${entry.duration}`);
+  }
+}
+
+function checkSoftwareApplication(file, entry) {
+  if (!isNonEmptyString(entry.name)) {
+    report("ERROR", file, "invalid-softwareapplication-name", "SoftwareApplication.nameが不正または空です");
+  }
+  if (!isNonEmptyString(entry.url)) {
+    report("ERROR", file, "invalid-softwareapplication-url", "SoftwareApplication.urlが不正または空です");
+  } else if (!/^https?:\/\//i.test(entry.url)) {
+    report("ERROR", file, "invalid-softwareapplication-url", `SoftwareApplication.urlがhttp(s)ではありません: ${entry.url}`);
+  }
 }
 
 // ---------------------------------------------------------------------------

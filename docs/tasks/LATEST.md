@@ -1,10 +1,12 @@
 # Latest Project State
 
 - updated_at: 2026-08-13
-- latest_commit: push後に確定（下記GIT欄参照）（reports-directory-archive-policy反映）
+- latest_commit: push後に確定（下記GIT欄参照）（add-photoroom-creatify-recraft反映）
 - branch: master
-- origin_sync: 完了（ahead/behind 0/0、push前時点）
-- current_active_task: none（2026-08-13-reports-directory-archive-policyはcompletedへ移動）
+- origin_sync: 完了（ahead/behind 0/0、push後に確定）
+- current_active_task: none（2026-08-13-add-photoroom-creatify-recraftはcompletedへ移動）
+- latest_completed_task: docs/tasks/completed/2026-08-13-add-photoroom-creatify-recraft.md（結果: 承認済み監査docs/audits/new-tool-candidates-consolidated-audit-2026-08-13.mdに基づき新規ツール3件（Photoroom/Creatify/Recraft）をsrc/content/tools配下に追加。専用astroページは新規作成せず既存の[slug].astro動的ルートで/tools/photoroom/・/tools/creatify/・/tools/recraft/を生成。カテゴリハブ（image-generation）・ec-product-image用途ページ・ad-banner用途ページ・ai-image-commercial-use-checklistガイドへ内部リンク追加。affiliateUrlは3件とも未設定（案C未完了のため）。build 95ページPASS、validate:scope PASS、validate:task PASS、git diff --check PASS（CRLF警告のみ）。VERIFY未解決項目あり: Photoroom（日本語UI/日本語プロンプト対応）、Creatify（日本語UI/日本語プロンプト対応・商用利用条件の公式未確認）、Recraft（日本語UI/日本語プロンプト対応・正確な料金ティア・運営会社/法人）。本番反映なし〔NOT_DEPLOYED、人間による手動デプロイが別途必要〕）
+- previous_active_task_now_completed: 2026-08-13-reports-directory-archive-policy（下記previous_completed_task欄に既存記録として継続）
 - latest_completed_task: docs/tasks/completed/2026-08-13-reports-directory-archive-policy.md（結果: reports/配下現行53ファイル〔docs/audits/reports-directory-classification-2026-08-13.mdでARCHIVE 53件確定済み〕を恒久的にhistorical/archiveとして扱う運用ポリシー`docs/operations/reports-directory-policy.md`を新規作成。現行source-of-truth優先順位（user instruction > active task > operations/decisions > LATEST.md > 現行コード/DB > 公式ソース > 現行audit > reports、CLAUDE.md常設ルール2番と整合）・reports参照可能場面（歴史的経緯調査等に限定、通常タスクでの一括読み込み禁止）・陳腐化警告（旧ツール数前提の結論は現行再検証必須、特定ツール数を恒久固定しない）・一括移行不要の結論・今後の運用アウトプット出力先（docs/audits・docs/research・docs/operations・docs/decisions・docs/tasks/completed・docs/analytics）・エージェント振る舞い（reports全件スキャン禁止・古い記録でDB上書き禁止・解決済みbacklog復活禁止・矛盾時VERIFY/HOLD）・削除ポリシー（本タスクでは削除承認せず、将来はスコープ限定監査＋クリーンアップタスク必須）を明文化。`reports/README.md`は不存在のため新規作成せず本ポリシーを単一の正本とし、`docs/operations/README.md`へポインタ1行追加のみ。reports/配下53ファイル・DB・アプリケーションソース・スクリプトは無変更。validate:task PASS、git diff --check PASS、validate:scope PASS。本番反映なし〔ドキュメントのみのため対象外〕）
 - working_tree: clean（本docs更新コミット前時点でclean）
 - sitemap_build_diff_2026-08-13: reports-directory-fresh-auditで観測されたbuild 92ページ対sitemap 90件の2件差分を特定。`/404.html`（暗黙的除外）・`/tools/haiper/`（sitemap.xml.ts明示除外＋noindex={true}、サービス終了ツール）の2件で両方ともINTENTIONAL_EXCLUSION、修正不要と結論。詳細はdocs/audits/sitemap-build-diff-2026-08-13.md・docs/tasks/completed/2026-08-13-sitemap-build-diff-audit.md参照。

@@ -9,7 +9,7 @@ const allTools = await getCollection('tools');
 const imageTools = allTools.filter((t) => t.data.category === 'image' || t.data.category === 'both');
 const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.category === 'both');
 
-const primaryImageSlugs = ['midjourney', 'adobe-firefly', 'canva-ai-image-generator', 'leonardo-ai', 'stable-diffusion', 'dalle', 'ideogram', 'microsoft-designer', 'seaart-ai', 'fotor-ai', 'gemini-image-generation', 'nightcafe', 'playground-ai', 'clipdrop', 'dreamstudio', 'tensor-art'];
+const primaryImageSlugs = ['midjourney', 'adobe-firefly', 'canva-ai-image-generator', 'leonardo-ai', 'stable-diffusion', 'dalle', 'ideogram', 'microsoft-designer', 'seaart-ai', 'fotor-ai', 'gemini-image-generation', 'nightcafe', 'playground-ai', 'clipdrop', 'dreamstudio', 'tensor-art', 'photoroom', 'recraft'];
 const primaryImageTools = primaryImageSlugs
   .map((s) => imageTools.find((t) => t.slug === s))
   .filter(Boolean);

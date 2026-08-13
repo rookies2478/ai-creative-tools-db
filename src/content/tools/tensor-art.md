@@ -36,10 +36,11 @@ lastReviewed: "2026-06-17"
 nextReviewDue: "2026-09-17"
 verifiedAt: "2026-06-17"
 officialSourceUrl: "https://tensor.art/about/terms-of-service-new"
-currency: "unknown"
+currency: "USD"
 pricingSourceUrl: "https://tensor.art/event/proupdate"
 pricingSourceNote: "Proプラン案内の公式イベントページ。料金額の詳細は変更される可能性あり。専用の公式料金ページURL（/pricing等）は未確認。最新の料金は公式サイトをご確認ください。"
 pricingModel: "subscription_credit"
+pricingStatus: "partial"
 platforms:
   - web
 signupRequired: true

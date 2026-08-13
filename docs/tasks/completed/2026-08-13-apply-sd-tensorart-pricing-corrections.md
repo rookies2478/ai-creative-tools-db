@@ -87,4 +87,17 @@ result: >
   midjourney/runway/stable-diffusionのreview-overdue、本タスク無関係）。build 92ページ PASS。
   validate:publish PASS（Errors 0, Warnings 4=既存long-meta-description、本タスク無関係）。
   git diff --check PASS（CRLF警告のみ、エラーなし）。validate:scope PASS。
+
+  【Production Verification 2026-08-13】ユーザーによる手動デプロイ完了報告を受け、
+  commit b06c093反映後の本番2URLを検証。https://aicreative-db.com/tools/stable-diffusion/
+  ・https://aicreative-db.com/tools/tensor-art/ ともHTTP 200（リダイレクトなし）、
+  canonical・title・H1いずれも正常（旧値と一致、崩れなし）、noindex等のrobots meta付与なし。
+  各ページ内「料金」関連セクションは崩れなくレンダリングされ、USD/円表記も正常表示（tensor-artの
+  currency修正by本タスクに起因する表示エラーなし）。JSON-LD 3ブロックとも正常parse（WebSite/
+  BreadcrumbList+SoftwareApplication配列/FAQPage、パースエラーなし。構造化データ自体は本タスクで
+  無変更）。主要外部リンク（stable-diffusion: stability.ai/license、platform.stability.ai/pricing、
+  huggingface.co license等／tensor-art: tensor.art本体、terms-of-service-new、event/proupdate、
+  purchase/vip等）出力確認、明らかな壊れ表記なし。ブラウザ実描画（PC/スマホ視覚確認）は本セッション
+  未接続のためNOT_VERIFIED、HTML/HTTP検証のみで代替。internal pricingStatusフィールド自体はUIで
+  意図的に非表示のため未検証（想定通り）。結論: 両URLとも本番反映健全、PRODUCTION_STATE=DEPLOYED。
 ---

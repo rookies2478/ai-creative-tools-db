@@ -147,3 +147,64 @@ yes
 NEXT:
 本番へ手動反映し、/comparisons/free-ai-image-generators/ のCanva AI画像生成の無料プラン商用利用表示を確認する。Clipdrop・Adobe FireflyはHOLD継続。
 ```
+
+## Production Verification (2026-08-13 追記)
+
+本番URL（https://aicreative-db.com/comparisons/free-ai-image-generators/）へcurlで直接HTTPリクエストし、HTML構造上のCanva行表示・commercialNote・title/H1/canonical/robotsを確認。視覚的レイアウト崩れ（PC/スマホの実表示）はテキストベース確認のツールでは検証不可のためNOT_VERIFIED。HTML構造上の異常（テーブル行・列崩れ）はなし。
+
+```
+RESULT: PASS
+
+SUMMARY:
+- 本番反映結果: /comparisons/free-ai-image-generators/ にCanva AI画像生成の新しい商用利用表示が反映済み（HTTP 200）。
+- Canva表示: 無料プラン商用利用列（※1）が「可」に変更、旧表示「条件付き（公式未明記）」はページ全体から検出されず。
+- 権利関係注意: 商用利用メモ列（※2）に「利用規約（Canva AI Product Terms）上は商用利用可能とされていますが、著作権の成立・排他的権利・第三者権利を侵害しないことをCanvaが保証するものではありません」の趣旨を確認。
+- 他ツールへの影響: Microsoft Designer行（「不可（個人利用限定）」）他ツール行に変化なし。
+- 視覚確認可否: curl/HTML取得のみのため視覚確認不可。HTML構造（テーブルの行・列並び）に異常なし。
+
+REPOSITORY_STATE:
+- branch: master
+- latest_commit_before: 46e4361
+- origin_sync_before: 完了（ahead/behind 0/0）
+- working_tree_before: clean
+
+PRODUCTION_CHECK:
+- URL: https://aicreative-db.com/comparisons/free-ai-image-generators/
+- HTTP_status: 200
+- Canva_freePlanCommercial: '可'（無料プラン商用列に検出）
+- old_value_absent: true（「条件付き（公式未明記）」はページ全体で検出されず）
+- rights_caveat_present: true（著作権成立・排他的権利・第三者権利非侵害・Canva非保証・公式確認推奨の趣旨を全て確認）
+- paidPlanCommercial_unchanged: true（この比較表テンプレートはpaidPlanCommercial列自体を描画しない仕様。ソース側の値も無変更を確認済み）
+- Microsoft_Designer_unchanged: true（「不可（個人利用限定）」のまま）
+- other_rows_unchanged: true（DALL·E/Stable Diffusion/Leonardo AI/Fotor AI等の表示に変化なし）
+- title: 一致（"無料AI画像生成ツール比較表｜14ツールの無料枠・透かし・商用利用条件を横断確認 | AIクリエイティブナビ"、意図しない変更なし）
+- H1: 一致（"無料プランで比較するAI画像生成ツール"、意図しない変更なし）
+- canonical: 一致（https://aicreative-db.com/comparisons/free-ai-image-generators/、意図しない変更なし）
+- noindex: absent（<meta name="robots">タグ自体が検出されず、index可能な状態を維持）
+- HTML_structure: PASS（テーブルの列数・行数・thead/tbody構造に異常なし）
+- desktop_visual: NOT_VERIFIED
+- mobile_visual: NOT_VERIFIED
+
+CHANGED_FILES:
+- completed task: docs/tasks/completed/2026-08-13-clarify-canva-ai-commercial-use-label.md（本追記）
+- LATEST: docs/tasks/LATEST.md（production_state更新）
+
+CHECKS:
+- diff_check: PASS
+- scope_validation: PASS（docsのみ）
+- secret_check: PASS
+
+GIT:
+- commit: (この後のcommitハッシュを参照)
+- push: 完了予定
+- origin_sync: 完了予定
+
+PRODUCTION:
+DEPLOYED
+
+LATEST_UPDATED:
+yes
+
+NEXT:
+本番確認PASS後、Clipdrop・Adobe FireflyはHOLD継続。次回正式14日GSC runでStable Diffusion / Runway / バナー比較 / Luma / Viduを再評価する。
+```

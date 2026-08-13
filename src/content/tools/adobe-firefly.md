@@ -6,7 +6,7 @@ officialUrl: "https://firefly.adobe.com"
 freePlan: "limited"
 lowestPaidPlan: "1,580円/月（税込）（Firefly Standardプラン）"
 currency: "JPY"
-commercialUse: "paid-only"
+commercialUse: "limited"
 commercialUseNote: "Adobe公式情報上、Fireflyは商用利用を想定したAI生成サービスとして案内されています。ただしベータ機能（β表示）、第三者素材、利用プランや用途によって扱いが変わる可能性があります。商用利用前に最新のAdobe公式利用条件をご確認ください。"
 japaneseUi: true
 japanesePrompt: true
@@ -72,7 +72,7 @@ pricingDecision:
   paidPlanRequiredForExport: false
   pricingNote: "Firefly Standard 1,580円/月（税込）〜（日本語公式料金ページ確認）。Creative Cloud All Appsプランに含まれる場合あり。クレジット上限後の透かし条件は最新プランで確認推奨。"
 usagePolicy:
-  commercialUseStatus: "paid-only"
+  commercialUseStatus: "limited"
   commercialUseByPlan:
     free: "商用利用に関する条件はプランや用途によって異なる。クレジット切れ後のPromotion（透かし）出力は商用利用不可の場合あり。"
     paid: "商用利用が案内されている（Adobe生成AIユーザーガイドライン）。ベータ機能は製品内で明示的に制限されていない限り商用利用可（Adobe公式FAQ、2026年確認）。Enterpriseはindemnification対象外の場合あり。"

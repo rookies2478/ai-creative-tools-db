@@ -79,6 +79,26 @@ const canonicalUrl = canonicalPath && Astro.site
         </script>
       </>
     )}
+    <script is:inline>
+      // Outbound CTA click tracking (official_site_click / affiliate_click).
+      // Delegated at document level so it works for any current/future
+      // element carrying data-outbound-type, with no dependency on when GA4
+      // itself has loaded. Never blocks or alters the link's own navigation
+      // (no preventDefault) - target="_blank" and existing rel are untouched.
+      document.addEventListener('click', function (event) {
+        const el = event.target.closest('[data-outbound-type]');
+        if (!el) return;
+        if (typeof window.gtag !== 'function') return;
+        const outboundType = el.getAttribute('data-outbound-type');
+        const eventName = outboundType === 'affiliate' ? 'affiliate_click' : 'official_site_click';
+        window.gtag('event', eventName, {
+          tool_name: el.getAttribute('data-tool-name') || '',
+          cta_position: el.getAttribute('data-cta-position') || '',
+          destination_url: el.href || '',
+          page_path: window.location.pathname
+        });
+      });
+    </script>
   </head>
   <body class:list={['min-h-screen text-slate-900 antialiased', homePage ? 'body-paper' : 'bg-white']}>
 

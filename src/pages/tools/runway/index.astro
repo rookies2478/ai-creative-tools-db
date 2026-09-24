@@ -68,8 +68,8 @@ const jsonLd = JSON.stringify([
         { lb: '日本語UI', badge: { s: 'na', label: '非対応' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
-      primaryCta={{ label: '公式サイトで確認する', href: 'https://runwayml.com' }}
-      secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://runwayml.com/pricing/' }}
+      primaryCta={{ label: '公式サイトで確認する', href: 'https://runwayml.com', outboundType: 'official', ctaPosition: 'hero' }}
+      secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://runwayml.com/pricing/', outboundType: 'official', ctaPosition: 'pricing' }}
       basicInfo={[
         {
           title: '商用利用', badge: { s: 'cond', label: '条件あり（要確認）' }, wide: true,

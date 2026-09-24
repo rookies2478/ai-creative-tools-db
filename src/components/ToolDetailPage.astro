@@ -46,8 +46,8 @@ export interface Props {
   headingHtml: string;
   lead: string;
   specs: SpecItem[];
-  primaryCta: { label: string; href: string; rel?: string };
-  secondaryCta?: { label: string; href: string; rel?: string };
+  primaryCta: { label: string; href: string; rel?: string; outboundType?: 'official' | 'affiliate'; ctaPosition?: string };
+  secondaryCta?: { label: string; href: string; rel?: string; outboundType?: 'official' | 'affiliate'; ctaPosition?: string };
   primaryCtaDisclosure?: string;
   caution?: string;
   basicInfo: InfoCard[];
@@ -176,8 +176,8 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
     </div>
 
     <div class="tdp-actions">
-      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel={primaryCta.rel ?? 'nofollow noopener noreferrer'}>{primaryCta.label} <span class="ext">↗</span></a>
-      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel={secondaryCta.rel ?? 'nofollow noopener noreferrer'}>{secondaryCta.label} <span class="ext">↗</span></a> : null}
+      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel={primaryCta.rel ?? 'nofollow noopener noreferrer'} data-outbound-type={primaryCta.outboundType} data-tool-name={primaryCta.outboundType ? toolName : undefined} data-cta-position={primaryCta.outboundType ? (primaryCta.ctaPosition ?? 'primary') : undefined}>{primaryCta.label} <span class="ext">↗</span></a>
+      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel={secondaryCta.rel ?? 'nofollow noopener noreferrer'} data-outbound-type={secondaryCta.outboundType} data-tool-name={secondaryCta.outboundType ? toolName : undefined} data-cta-position={secondaryCta.outboundType ? (secondaryCta.ctaPosition ?? 'secondary') : undefined}>{secondaryCta.label} <span class="ext">↗</span></a> : null}
     </div>
     {primaryCtaDisclosure && <p class="tdp-pr-disclosure">{primaryCtaDisclosure}</p>}
 

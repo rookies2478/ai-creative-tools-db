@@ -50,6 +50,50 @@ export interface AffiliateProgram {
 
 export const affiliatePrograms: AffiliateProgram[] = [
   {
+    toolSlug: 'pixverse',
+    status: 'active',
+    preferredProvider: 'PixVerse Affiliate',
+    programs: [{
+      provider: 'PixVerse',
+      network: 'Impact',
+      programName: 'PixVerse Affiliate',
+      approvalStatus: 'approved',
+      commissionType: 'unknown',
+      japanEligible: 'unknown',
+      mediaEligible: 'unknown',
+      sourceType: 'official',
+      verifiedAt: '2026-10-11',
+      notes: 'Approval independently confirmed by direct message from PixVerse representative Yuri (2026-08-31). No dedicated referral link has been verified or activated. Inquiry sent 2026-10-11; Japan eligibility and terms pending.',
+    }],
+    verifiedAt: '2026-10-11',
+    notes: 'Approved does NOT mean an affiliate link is published; public CTA remains the ordinary official URL pending verified tracking URL and eligibility.',
+  },
+  {
+    toolSlug: 'fotor',
+    status: 'verify',
+    programs: [{
+      provider: 'Fotor',
+      approvalStatus: 'applied',
+      sourceType: 'official',
+      verifiedAt: '2026-10-11',
+      notes: 'User reports submitted application 2026-10-10; OTP emails are login authentication, NOT approval. No confirmation or tracking URL verified.',
+    }],
+    verifiedAt: '2026-10-11',
+  },
+  {
+    toolSlug: 'runway',
+    status: 'verify',
+    programs: [{
+      provider: 'Runway',
+      approvalStatus: 'applied',
+      sourceType: 'official',
+      verifiedAt: '2026-10-11',
+      notes: 'User reports initial application August 2026 and reapplication/follow-up completion October 10. No approval/rejection notification verified. No affiliate URL.',
+    }],
+    verifiedAt: '2026-10-11',
+  },
+
+  {
     toolSlug: 'invideo-ai',
     status: 'active',
     preferredProvider: 'Impact / InVideo',

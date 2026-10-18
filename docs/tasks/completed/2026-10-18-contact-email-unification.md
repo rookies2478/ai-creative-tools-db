@@ -1,4 +1,4 @@
-# Active Task: AI Creative DB contact email unification
+# Completed Task: AI Creative DB contact email unification
 
 ## Goal
 Update publicly displayed AI Creative DB contact email from contact@aicreative-db.com to contact@movance.jp while preserving the old account for Fotor and historical correspondence.
@@ -19,3 +19,6 @@ Update publicly displayed AI Creative DB contact email from contact@aicreative-d
 
 ## Constraints
 No DNS, mail server, affiliate URL, authentication, or deployment configuration changes. No edits to historical Fotor ownership verification documents.
+
+## Result
+PASS: PR #8 merged as 762e86b; GitHub Build CI successful. Public contact page display and mailto updated to contact@movance.jp. Original contact@aicreative-db.com mailbox retained.

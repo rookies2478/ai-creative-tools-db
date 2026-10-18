@@ -75,7 +75,7 @@ function loadVideoObjectEligibleSlugs() {
   const path = "src/data/generatedVideos.ts";
   if (!existsSync(path)) return new Set();
   const src = readFileSync(path, "utf8");
-  const entryBlocks = src.split(/\n\s*\{\n/).slice(1);
+  const entryBlocks = src.split(/\r?\n\s*\{\r?\n/).slice(1);
   const slugs = new Set();
   for (const block of entryBlocks) {
     const isEligible =

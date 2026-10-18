@@ -5,6 +5,8 @@
 - branch: master
 - origin_sync: 8a12c14まで完了（ahead/behind 0/0、本コミット分はまだlocal onlyのためpush後に要再確認）
 - current_active_task: none（2026-10-18-pixverse-japan-eligibility-metadataはcompletedへ移動）
+- latest_completed_task: docs/tasks/completed/2026-10-18-invideo-lead-html-tags.md（InVideoページの`<b>`タグ露出3箇所をページ側文字列から除去。共通コンポーネント・CTA・計測属性不変。build 95ページ・validate:* PASS）
+- latest_completed_task: docs/tasks/completed/2026-10-18-invideo-ga4-release-readiness.md（master 9d6d0c8 のbuild 95ページ・validate:* PASS・CI success。dist InVideo CTAのdata属性・href・rel確認、PixVerse変更はdist無影響、本番との差分はinvideo-ai CTA属性のみ。本番未反映・手順未文書化〔人間判断〕）
 - latest_completed_task: docs/tasks/completed/2026-10-18-pixverse-japan-eligibility-metadata.md（PixVerse japanEligible=yes（内部メタデータのみ、出典=提携先返信2026-10-12）。CTA・URL不変。build 95ページ・validate:* PASS。approvalStatus未整合は人間確認待ち。PR #5）
 - latest_completed_task: docs/tasks/completed/2026-10-10-invideo-affiliate-ga4-click.md（InVideo hero/pricing CTAにGA4計測属性を付与（URL・文言不変）。build 95ページ・validate:* PASS・ローカルpreview静的DOM確認。GA4実到達はNOT_VERIFIED。PR #2）
 - latest_completed_task: docs/tasks/completed/2026-10-18-validate-publish-crlf-fix.md（CRLF環境のvalidate:publish偽陽性を修正。build 95ページ・validate:publish Errors 0（CRLF/LF両方）。PR #4、merge・本番反映は人間判断）

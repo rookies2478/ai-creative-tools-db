@@ -1,10 +1,11 @@
 # Latest Project State
 
 - updated_at: 2026-10-31
-- latest_commit: 08b71769b6f3bf325d15dac47be4d26e874d3a1b（PR #14 Tensor.Art CTR調査のHOLD_NO_CHANGE判断をmasterへsquash merge済み。サイトコードの変更なし）
+- latest_commit: 18fc0591f8798fe577f3cd8794501479c0e6f1af（PR #17 Stable Diffusion API料金修正をmasterへsquash merge済み。完了処理PRは別に記録）
 - branch: master
-- origin_sync: GitHubのmasterへPR #14反映確認済み。ローカル作業コピーとの同期状態は未確認。
-- current_active_task: none（Tensor.Artの2026年10月調査はHOLD_NO_CHANGEで完了・completedへ移動。次回確定GSCデータでIssue #12を再評価）
+- origin_sync: GitHub masterへPR #17の反映を確認。ローカルWindows作業コピーの同期は未確認。
+- current_active_task: none（2026-10-31-stable-diffusion-api-pricingはPR #17マージ後にcompletedへ移動。次タスクのactive指定はまだなし）
+- latest_completed_task: docs/tasks/completed/2026-10-31-stable-diffusion-api-pricing.md（Issue #16 / PR #17。Stability AIの現行API料金クレジット従量方式を公式情報と照合して、専用ページと正本MDの旧月額表記を修正。Claude Code required_checks PASS、CI PASS。本番反映は要確認）
 - latest_completed_task: docs/tasks/completed/2026-10-31-tensor-art-ctr-review.md（Issue #12 / PR #14。GSC確定2期間のTensor.Art検索意図を検証、ブランド系が大半で情報系2.6%のためtitle/meta変更はHOLD_NO_CHANGEと判断。コード変更0、Build CI PASS、2026-11-01..11-28確定データで再評価する余地あり）
 - latest_completed_task: docs/tasks/completed/2026-10-31-gpt-creative-audit.md（PR #11でPixVerse/Hailuo AIのHTMLタグ文字露出6箇所を修正、GitHub CI success、Claude Code local validation PASS。2026-10-31にmasterへsquash merge。PRの実装コードと別に完了記録を整理。本番反映状況は要確認）
 - latest_completed_task: docs/tasks/completed/2026-10-18-invideo-lead-html-tags.md（InVideoページの`<b>`タグ露出3箇所をページ側文字列から除去。共通コンポーネント・CTA・計測属性不変。build 95ページ・validate:* PASS）

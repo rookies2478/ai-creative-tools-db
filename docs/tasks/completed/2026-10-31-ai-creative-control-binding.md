@@ -1,7 +1,10 @@
 ---
 task_id: "2026-10-31-ai-creative-control-binding"
 created_at: "2026-10-31"
-status: READY
+status: COMPLETED
+completed_at: "2026-10-31"
+merge_pr: 19
+merge_sha: "6ccec7c4e2aa2b1dce6d55e6a669dd7554edf0c7"
 risk: MEDIUM
 current_phase: search-traffic-launch
 production_required: false
@@ -20,6 +23,8 @@ non_goals:
 
 target_files:
   - docs/tasks/active/2026-10-31-ai-creative-control-binding.md
+  - docs/tasks/completed/2026-10-31-ai-creative-control-binding.md
+  - docs/tasks/LATEST.md
   - AGENTS.md
   - .dev-control/CONTROL_BINDING.md
 
@@ -77,7 +82,7 @@ Windows側のWorker設定、registry、label、schedulerに対する副作用を
 
 ## Result Schema
 
-RESULT: VERIFY（Control BindingのGitHub側Draft差分作成、Windowsテスト未実施）
+RESULT: PASS_WITH_FINDINGS（Control Binding準備はPR #19としてmasterマージ済み。Worker有効化のWindows検証は未実施）
 
 CHANGED_FILES:
 - docs/tasks/active/2026-10-31-ai-creative-control-binding.md
@@ -92,12 +97,20 @@ CHECKS:
 - data_quality: NOT_RUN
 - publish_check: NOT_RUN
 - affiliate_links: NOT_RUN
-- github_actions: TO_VERIFY
+- github_actions: PASS（Build run 41179370464）
 
 GIT:
 - branch: chore/ai-creative-control-binding-20261031
 - origin_sync: TO_VERIFY
 
 PRODUCTION: NOT_DEPLOYED
-LATEST_UPDATED: no（承認・完了処理後に更新）
-NEXT: Claude Codeがrequired_checksを実行し、Supervisor/Human review後にmerge可否を判断
+LATEST_UPDATED: yes（完了処理PRにて更新）
+NEXT: dev-control-worker Issue #52 — disabled登録PRとWindows DryRun/RehearsalのHuman Gateを実施。本Workerはまだ未登録・未起動
+
+
+## Completion evidence and outstanding gates
+- Target docs-only PR #19 squash-merged as `6ccec7c4e2aa2b1dce6d55e6a669dd7554edf0c7`, GitHub Actions Build #129 PASS.
+- Dormant profile in worker PR #55 squash-merged as `44abe66cc73db5f722e0c66cb665af080ca31ace` (profile `queue.enabled:false`).
+- Independent Windows worker tests, target label inventory, single-active-task worker fail-closed test and registry addition: **NOT VERIFIED / NOT DONE**.
+- GitHub CI Build passed. This assistant did not run the complete task-specific validate:task/data/publish/affiliate-links/scope suite on a local clone; do not report those checks as PASS.
+- No source-code changes and no production deployment. Control Binding is a prerequisite only; NOT operational authorization.

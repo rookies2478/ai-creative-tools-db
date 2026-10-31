@@ -2,7 +2,7 @@
 
 **Issue:** [#12](https://github.com/rookies2478/ai-creative-tools-db/issues/12)
 **Scope:** `/tools/tensor-art/` metadata only; no deployment or affiliate changes
-**Current decision:** **VERIFY / HOLD** — do not alter title or description until query-level GSC raw is read back locally.
+**Final decision (2026-10-31):** **HOLD_NO_CHANGE / REVIEW COMPLETED.** Claude Code reviewed the query-level GSC raw, and there was no demonstrated informational-intent gap justifying a title or description edit. Refer to Sections 5–6 for the final evidence. Re-evaluate using the next finalized 28-day data window.
 
 ## 1. Evidence and limits
 

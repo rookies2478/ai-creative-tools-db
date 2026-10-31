@@ -56,10 +56,32 @@ This candidate adds no new specific price or legal claim. It reflects sections a
 6. Required validations: `npm run validate:task`, `npm run build`, `npm run validate:data`, `npm run validate:publish`, `npm run validate:affiliate-links`, `npm run validate:scope`, `git diff --check`, plus built HTML title/meta validation.
 7. For evaluation: record prechange (2026-10-01..28) as a baseline and assess matched page/query impressions, CTR, positions over subsequent finalized windows; do not attribute observational changes solely to the metadata edit.
 
-## 5. Current status
-- GPT researched existing repository and public page and created a scoped active task / audit.
-- GitHub branch: `seo/tensor-art-ctr-20261031`.
-- Source code modified: **NO**.
-- Query-level local raw verification: **NOT DONE**.
-- Final title/meta decision: **HOLD** pending local evidence.
-- Production: **NOT DEPLOYED by this task**.
+## 5. Local raw read-back (Claude Code, 2026-10-31)
+
+Source: `docs/analytics/gsc/2026-10-28/raw/run-124522` (current) and `docs/analytics/gsc/2026-09-30/raw/run-124530` (previous). Both manifests: method `api`, site `sc-domain:aicreative-db.com`, `truncated: []`. Raw is gitignored. Listed query rows cover 85.8% (current, 1,047/1,220) and 85.6% (previous, 648/757) of page impressions; the remainder is anonymized/unlisted and not inferred.
+
+| Query | Class | Prev clk/imp/pos | Cur clk/imp/pos | Cur CTR |
+| --- | --- | --- | --- | --- |
+| tensor art | brand/navigational | 1 / 576 / 8.5 | 1 / 867 / 8.9 | 0.12% |
+| tensor.art | brand/navigational | 1 / 41 / 9.6 | 0 / 115 / 8.6 | 0% |
+| tensor.art 料金 | commercial | 1 / 12 / 5.7 | 0 / 14 / 6.6 | 0% |
+| tensor lora | informational | 0 / 3 / 9.7 | 0 / 8 / 8.8 | 0% |
+| tensor hub art | brand variant | - | 0 / 8 / 9.6 | 0% |
+| tensorart | brand variant | - | 0 / 7 / 4.0 | 0% |
+| tensor art lora | informational | 0 / 1 / 8.0 | 0 / 2 / 9.5 | 0% |
+
+Findings:
+- Brand/navigational queries (tensor art, tensor.art, spelling and spacing variants) dominate: `tensor art` alone is 71.1% of current page impressions (867/1,220). Searcher intent is a review judgment, not Google data.
+- Informational/commercial queries (料金, 無料, LoRA, 使い方, 規制, etc.) total 32 impressions (2.6%) current and 21 (2.8%) previous, with 0 clicks except one previous 料金 click. The share did not grow.
+- Baseline title/description already contain 商用利用・料金・無料枠 and LoRA. No materially represented informational intent is missing from the baseline.
+- Page position is stable (8.4 -> 8.6). Impression growth (757 -> 1,220) came from brand queries; CTR of a brand query is mainly driven by users seeking the official site, which a snippet rewrite is unlikely to recover. 9 page clicks is too small a sample to attribute any CTR difference to metadata.
+- Candidates A/B/C add "とは" or reorder keywords for intents that the data does not show. Expected benefit is unsupported.
+
+## 6. Decision
+
+**HOLD. No change to `src/pages/tools/tensor-art/index.astro`.** The acceptance criterion (a materially represented informational intent absent from baseline metadata) is not met. Re-evaluate after the next finalized 28-day window (e.g. 2026-11-01..11-28) if 料金/LoRA/使い方 impressions grow to a meaningful share, using per-query rows with the same raw read-back.
+
+## 7. Current status
+- Source code modified: NO.
+- Query-level local raw verification: DONE.
+- Production: NOT DEPLOYED by this task.

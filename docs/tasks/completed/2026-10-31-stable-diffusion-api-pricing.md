@@ -1,7 +1,10 @@
 ---
 task_id: "2026-10-31-stable-diffusion-api-pricing"
 created_at: "2026-10-31"
-status: READY
+status: COMPLETED
+completed_at: "2026-10-31"
+merge_pr: 17
+merge_sha: "18fc0591f8798fe577f3cd8794501479c0e6f1af"
 risk: LOW
 current_phase: search-traffic-launch
 production_required: false
@@ -20,6 +23,8 @@ non_goals:
 
 target_files:
   - docs/tasks/active/2026-10-31-stable-diffusion-api-pricing.md
+  - docs/tasks/completed/2026-10-31-stable-diffusion-api-pricing.md
+  - docs/tasks/LATEST.md
   - docs/audits/stable-diffusion-api-pricing-2026-10-31.md
   - src/pages/tools/stable-diffusion/index.astro
   - src/content/tools/stable-diffusion.md
@@ -77,10 +82,17 @@ Issue #16。GSCのstable-diffusion系「料金/費用」クエリの実測（202
 
 既存のmasterにはactive taskがなく、本ブランチのactive task1件だけで作業する。GPTはGitHub差分の作成とPRまで実施し、ローカルCLIの必須検証はClaude Codeに引き継ぐ。CIにないvalidate:task/validate:scope/validate:affiliate-linksをPASSと推測しない。
 
-RESULT: VERIFY（コード差分作成・CI前）
+RESULT: PASS（公式料金検証と修正完了、PR #17 masterへマージ済み）
 CHANGED_FILES: target_filesのみ
-CHECKS: local NOT_RUN / GitHub CI TO_VERIFY
-GIT: review branch only
+CHECKS: Claude Code local validate:task/build(95 pages)/validate:data/validate:publish/validate:affiliate-links/validate:scope/git diff --check PASS; preview HTML旧料金0件、新料金確認、公式リンク維持。GitHub Build run 41172694111 SUCCESS。実ブラウザ目視は未実施。
+GIT: PR head 9c3736618dae9bc0b76c57aec6712b6eb948e6bd -> master squash merge 18fc0591f8798fe577f3cd8794501479c0e6f1af
 PRODUCTION: NOT_DEPLOYED by GPT; production release remains human-only
-LATEST_UPDATED: no
-NEXT: Claude Codeでローカルのrequired_checksとpreview確認、CI確認、差分の公式根拠照合後にレビュー
+LATEST_UPDATED: yes（本完了処理PRで同期）
+NEXT: human-only production release status check; future GSC price/fee query analysis is a separate scoped task
+
+
+## Final release boundary
+- Source changes were checked with official Stability AI API docs (the pricing URL redirects to docs.stability.ai/pricing) and independently passed Claude Code local checks plus GitHub Actions run 41172694111.
+- The HTML preview had no Stable Diffusion legacy $20/month, 6,000-credit text, and still linked the official pricing page.
+- No manual production deploy by GPT; Cloudflare Pages status was reported PASS by Claude Code but public live-site rollout remains unverified.
+- This record is an archival docs update, not a new source-code modification.

@@ -85,8 +85,8 @@ const jsonLd = JSON.stringify([
           det: 'GPU搭載PCと環境構築があればローカル実行は無料です。Stability AI Platform（クラウドAPI）は別途課金となります。',
         },
         {
-          title: '最安料金目安', sum: 'ローカル無料 / API：$20/月〜（公式案内）', sumMono: true,
-          det: 'ローカル実行は無料（GPU搭載PC・環境構築が必要）。クラウドAPI（Stability AI Platform）は2026年6月時点で$20/月・6,000クレジット等のプランが案内されています。最新料金は公式サイトでご確認ください。',
+          title: '最安料金目安', sum: 'ローカル無料 / API：クレジット従量', sumMono: true,
+          det: 'ローカル実行は無料（GPU搭載PC・環境構築が必要）。Stability AI Platformの公式APIはクレジット従量課金で、2026年10月31日の公式料金案内では1クレジット＝$0.01、モデル・処理ごとに必要クレジットが異なります。新規アカウントには25無料クレジットが案内されています。最新料金は公式サイトでご確認ください。',
         },
         {
           title: '透かし', badge: { s: 'cond', label: '一部バージョンで付与' },
@@ -132,7 +132,7 @@ const jsonLd = JSON.stringify([
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成（オープンソースモデル）' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>ローカル実行は無料</span><br>GPU搭載PCと環境構築が必要。API利用は別途課金。' }],
-          [{ html: '最安料金', rk: true }, { html: '<span class="mono">ローカル無料 / API $20/月〜</span><br>クラウドAPI（Stability AI Platform）は$20/月〜（要公式確認）' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">ローカル無料 / APIは従量課金</span><br>Stability AI Platform APIは1クレジット＝$0.01（2026年10月31日公式確認）。モデルごとに消費クレジットが異なる。' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（モデル依存）</span><br>SD 1.x/SDXL と SD 3.x以降でライセンスが異なります。必ずモデルのライセンスを確認してください。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>一部バージョンで付与</span><br>不可視透かしが埋め込まれる場合あり。バージョンごとに確認が必要。' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>拡張機能で対応可</span><br>AUTOMATIC1111等で拡張機能を導入した場合に対応できる場合あり' }],
@@ -155,7 +155,7 @@ const jsonLd = JSON.stringify([
           headers: ['利用形態', '料金'],
           rows: [
             [{ html: 'ローカル実行', rk: true }, { html: '無料（GPU搭載PC・環境構築が必要）', mono: false }],
-            [{ html: 'Stability AI Platform API', rk: true }, { html: '$20/月〜（6,000クレジット等・2026年6月時点）', mono: true }],
+            [{ html: 'Stability AI Platform API', rk: true }, { html: '従量課金（1クレジット＝$0.01・モデル別消費）', mono: false }],
           ],
         },
         notes: [

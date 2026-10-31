@@ -71,29 +71,33 @@ Claude Codeでrequired_checks・プレビュー・差分レビューを行って
 
 ## Result Schema
 
-RESULT: HOLD（変更はPRでレビュー待ち、ローカル検証未実施）
+RESULT: PASS（ローカル検証完了。人間レビュー待ち）
+
+SUMMARY:
+PR #11の5箇所に加え、PRが見落としたHailuo AIのヒーローlead（plain描画）の`<b>`を追加修正。build後のdistで両ページの`&lt;b&gt;`は0件。
 
 CHANGED_FILES:
 - docs/tasks/active/2026-10-31-gpt-creative-audit.md
 - docs/audits/gpt-creative-2026-10-31.md
 - src/pages/tools/pixverse/index.astro
-- src/pages/tools/hailuo-ai/index.astro
+- src/pages/tools/hailuo-ai/index.astro（追加修正: hero lead）
 
 CHECKS:
-- task_validation: NOT_RUN
-- build: NOT_RUN
-- diff_check: NOT_RUN
-- scope_validation: NOT_RUN
-- data_quality: NOT_RUN
-- publish_check: NOT_RUN
-- preview: NOT_RUN
+- task_validation: PASS
+- build: PASS（95ページ）
+- diff_check: PASS
+- scope_validation: PASS
+- data_quality: PASS（Errors 0 / Warnings 29）
+- publish_check: PASS（Errors 0 / Warnings 4）
+- affiliate_links: PASS
+- preview: PASS（astro preview。PixVerse/Hailuo AIに`&lt;b&gt;`なし。set:html領域のbはHTMLとして維持）
 - github_actions: TO_VERIFY
 
 GIT:
-- commit: review branch
-- push: GitHub connector branch writes
+- commit: local commit（pushは人間判断）
+- push: NOT_DONE
 - origin_sync: NOT_VERIFIED
 
 PRODUCTION: NOT_DEPLOYED
-LATEST_UPDATED: no（承認・検証後に更新）
-NEXT: Claude Codeで検証し、問題なければ完了タスクへ移動・LATEST更新して人間レビュー
+LATEST_UPDATED: no（target_filesにLATEST.mdがないため未更新）
+NEXT: 人間がPR #11をレビュー・merge後、GSC分析に基づく次タスクを起票する

@@ -31,3 +31,26 @@ Maintain a funnel ledger: GSC clicks and page impressions -> GA4 page views -> o
 ## Work on this branch
 - Only removes five `<b>` / `</b>` pairs from plain text fields across PixVerse and Hailuo. Does not alter set:html areas, copy facts, prices, disclosures, destinations or URLs.
 - Review PR is draft; local tests NOT_RUN. Verification and task completion are delegated to Claude Code in the existing task workflow; deployment remains manual.
+
+## Claude Code verification (2026-10-31)
+- PR差分は4ファイルのみ。plain描画（`{lead}` / `{c.sum}` / `{commercial.lead}`）の`<b>`除去は妥当。
+- 見落とし修正: hailuo-ai hero `lead`（ToolDetailPage `<p class="tdp-lead">{lead}</p>`）に`<b>`が残存していたため除去（計6箇所）。
+- `about` / `useCases` / `limits` 等の`set:html`領域は不変。
+
+## GSC analysis (API, site: sc-domain:aicreative-db.com)
+現28日 2026-10-01..10-28 vs 前28日 2026-09-03..09-30（データ遅延3日。raw保存先はGit管理外）。
+
+| 指標 | 前28日 | 現28日 |
+| --- | --- | --- |
+| clicks | 16 | 29 |
+| impressions | 2,571 | 2,807 |
+| CTR | 0.62% | 1.03% |
+| avg position | 10.85 | 12.73 |
+
+- /tools/tensor-art/: imp 1,220（全体の43%）, 9 clicks, CTR 0.7%, pos 8.6。「tensor art」867imp/CTR 0.1%。ブランド名クエリで順位は取れているがCTRが極端に低い。
+- /tools/stable-diffusion/: imp 205, 0 click, pos 12.2。「stable diffusion 料金/費用」計約85imp, pos 10-11（8月SEO編集後も1ページ目手前）。
+- /tools/pixverse/: 6 clicks（前3）, 「pixverse 商用利用」pos 4.6 CTR 9.1%。今回修正（商用利用リード）に直結するページ。
+- /categories/avatar-video/: imp 108, 0 click, pos 13.8。「aiアバター…比較したい」系クエリ複数。
+- /tools/luma-ai/: imp 112, pos 10.3。「luma sosi 詐欺」21imp（信頼性・安全性の訴求余地）。
+- /tools/runway/: imp 134→60, pos 10.6→13.4（下落）。
+- clicks母数が小さい（29）ため、順位・CTR差は暫定。1ページあたり数clickで断定しない。

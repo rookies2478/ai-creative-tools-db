@@ -45,11 +45,11 @@ nextReviewDue: "2026-08-11"
 verifiedAt: "2026-07-11"
 officialSourceUrl: "https://stability.ai/license"
 pricingSourceUrl: "https://platform.stability.ai/pricing"
-pricingSourceNote: "公式料金ページURLは設定済み。ただしローカル利用/API利用、月額プラン、クレジット体系の最新性は要確認。最新情報は公式サイトをご確認ください。"
+pricingSourceNote: "2026年10月31日に公式料金ページを確認。Stability AI Platform APIはクレジット従量課金（1クレジット=$0.01）で、モデル・処理ごとに消費量が異なります。価格は変わる可能性があるため、最新情報は公式サイトをご確認ください。"
 pricingModel: "local_free"
 pricingStatus: "partial"
 freePlanNote: "ローカル実行は無料（GPU搭載PCと環境構築が必要）"
-paidPlanNote: "クラウドAPI経由（Stability AI Platform）は別途課金。2026年6月時点の公式案内では$20/月で6,000クレジット等のプランが案内されています。最新料金は公式サイトをご確認ください。"
+paidPlanNote: "Stability AI Platformの公式APIはクレジット従量課金（2026年10月31日確認、1クレジット=$0.01）。生成モデルによって消費クレジットが異なり、新規アカウントには25無料クレジットが案内されています。最新料金は公式サイトをご確認ください。"
 platforms:
   - local
   - api
@@ -75,7 +75,7 @@ limitations:
   - "モデルごとにライセンスが異なり、個別確認が必要"
   - "日本語対応は拡張機能に依存する"
 reviewed:
-  pricing: "2026-06-06"
+  pricing: "2026-10-31"
   terms: "2026-06-06"
   features: "2026-06-06"
 sourceRefs:
@@ -160,7 +160,7 @@ japanBilling:
   localizedJpyDisplay: false
   taxDisplay: "unknown"
   purchaseChannels: ["local", "api", "サードパーティホスティング"]
-  pricingCheckedAt: "2026-07-13"
+  pricingCheckedAt: "2026-10-31"
   pricingNote: "Stable Diffusionは単一の有料サービスではありません。ローカル実行は無料（ライセンス条件あり）、公式API（Stability AI Platform）は米ドル建て従量課金、各社ホスティングサービスは各社の料金体系に従います。月額サブスクリプションとしての単純比較は適切ではありません。"
   billingCategory: "E"
   sourceUrls:
@@ -245,7 +245,7 @@ Checkpointに追加的に適用できる軽量な追加学習ファイル。特�
 ## 料金
 
 - **ローカル実行：** 無料（要GPU搭載PC・環境構築）
-- **クラウドAPI経由：** Stability AI Platformを利用する場合は別途費用が発生します。2026年6月時点の公式案内では$20/月プラン（6,000クレジット）等が案内されています。最新料金は[公式サイト](https://platform.stability.ai/pricing)をご確認ください
+- **クラウドAPI経由：** Stability AI Platformはクレジット従量課金です（2026年10月31日公式確認：1クレジット=$0.01。モデル・処理により消費量は異なります）。新規アカウントには25無料クレジットが案内されています。最新料金は[公式サイト](https://platform.stability.ai/pricing)をご確認ください
 
 ## 商用利用について
 

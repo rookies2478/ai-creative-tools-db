@@ -1,10 +1,11 @@
 # Latest Project State
 
-- updated_at: 2026-10-18
-- latest_commit: 8a12c14（PixVerse and Luma AI big keyword readiness audit）まではpush済み・origin反映確認済み。本タスク分（ga4-outbound-cta-tracking-fotor-runway）は本コミットに含まれるがpush未実施〔人間承認待ち〕
+- updated_at: 2026-10-31
+- latest_commit: 4173bfd27f54fe6b90fe54ca9f2462c81d7ffdf3（PR #11 HTMLエスケープ表示修正、masterへsquash merge済み）
 - branch: master
-- origin_sync: 8a12c14まで完了（ahead/behind 0/0、本コミット分はまだlocal onlyのためpush後に要再確認）
-- current_active_task: none（2026-10-18-pixverse-japan-eligibility-metadataはcompletedへ移動）
+- origin_sync: GitHubのmasterへPR #11反映確認済み。ローカル作業コピーとの同期状態は未確認。
+- current_active_task: none（2026-10-31-gpt-creative-auditはPR #11マージ後にcompletedへ移動。新規タスクはIssue #12から別途起票）
+- latest_completed_task: docs/tasks/completed/2026-10-31-gpt-creative-audit.md（PR #11でPixVerse/Hailuo AIのHTMLタグ文字露出6箇所を修正、GitHub CI success、Claude Code local validation PASS。2026-10-31にmasterへsquash merge。PRの実装コードと別に完了記録を整理。本番反映状況は要確認）
 - latest_completed_task: docs/tasks/completed/2026-10-18-invideo-lead-html-tags.md（InVideoページの`<b>`タグ露出3箇所をページ側文字列から除去。共通コンポーネント・CTA・計測属性不変。build 95ページ・validate:* PASS）
 - latest_completed_task: docs/tasks/completed/2026-10-18-invideo-ga4-release-readiness.md（master 9d6d0c8 のbuild 95ページ・validate:* PASS・CI success。dist InVideo CTAのdata属性・href・rel確認、PixVerse変更はdist無影響、本番との差分はinvideo-ai CTA属性のみ。本番未反映・手順未文書化〔人間判断〕）
 - latest_completed_task: docs/tasks/completed/2026-10-18-pixverse-japan-eligibility-metadata.md（PixVerse japanEligible=yes（内部メタデータのみ、出典=提携先返信2026-10-12）。CTA・URL不変。build 95ページ・validate:* PASS。approvalStatus未整合は人間確認待ち。PR #5）

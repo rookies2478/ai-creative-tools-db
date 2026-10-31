@@ -1,13 +1,16 @@
 ---
 task_id: "2026-10-31-gpt-creative-audit"
 created_at: "2026-10-31"
-status: READY
+status: COMPLETED
 risk: LOW
 current_phase: search-traffic-launch
 production_required: false
 db_change: false
 ui_change: true
 official_verification_required: false
+completed_at: "2026-10-31"
+merge_pr: 11
+merge_sha: "4173bfd27f54fe6b90fe54ca9f2462c81d7ffdf3"
 
 goal: "GPT監査で公開ページに確認されたPixVerseとHailuo AIのHTMLタグ露出を、専用ページの表示用プレーンテキストに限定して修正し、監査記録を残す。"
 
@@ -19,6 +22,8 @@ non_goals:
 
 target_files:
   - docs/tasks/active/2026-10-31-gpt-creative-audit.md
+  - docs/tasks/completed/2026-10-31-gpt-creative-audit.md
+  - docs/tasks/LATEST.md
   - docs/audits/gpt-creative-2026-10-31.md
   - src/pages/tools/pixverse/index.astro
   - src/pages/tools/hailuo-ai/index.astro
@@ -71,7 +76,7 @@ Claude Codeでrequired_checks・プレビュー・差分レビューを行って
 
 ## Result Schema
 
-RESULT: PASS（ローカル検証完了。人間レビュー待ち）
+RESULT: PASS（PR #11マージ済み。active taskをcompletedへ移管）
 
 SUMMARY:
 PR #11の5箇所に加え、PRが見落としたHailuo AIのヒーローlead（plain描画）の`<b>`を追加修正。build後のdistで両ページの`&lt;b&gt;`は0件。
@@ -91,13 +96,22 @@ CHECKS:
 - publish_check: PASS（Errors 0 / Warnings 4）
 - affiliate_links: PASS
 - preview: PASS（astro preview。PixVerse/Hailuo AIに`&lt;b&gt;`なし。set:html領域のbはHTMLとして維持）
-- github_actions: TO_VERIFY
+- github_actions: PASS（Build run 41166604053 / PR head e332e37）
 
 GIT:
-- commit: local commit（pushは人間判断）
-- push: NOT_DONE
-- origin_sync: NOT_VERIFIED
+- commit: e332e37b39cbe75c6c1c126d37e41e5eb19899e7（PR head）
+- push: DONE（PR #11へ反映）
+- origin_sync: masterへsquash merge済み（4173bfd27f54fe6b90fe54ca9f2462c81d7ffdf3）
 
-PRODUCTION: NOT_DEPLOYED
-LATEST_UPDATED: no（target_filesにLATEST.mdがないため未更新）
-NEXT: 人間がPR #11をレビュー・merge後、GSC分析に基づく次タスクを起票する
+PRODUCTION: NEEDS_VERIFICATION（GPTによる公開操作なし。外部自動配信の有無は未確認）
+LATEST_UPDATED: yes（完了処理PRでLATEST.mdを更新）
+NEXT: Issue #12のTensor.Art実測CTR監査を、別active taskを作成して開始する（自動実行対象ではない）
+
+
+## Completion / release boundary
+
+- 2026-10-31: PR #11 accepted and squash merged as `4173bfd27f54fe6b90fe54ca9f2462c81d7ffdf3`.
+- GitHub Actions PR Build run 41166604053 succeeded; Claude Code reported local validation and HTML preview checks passed.
+- Human-authored final merge confirmed; no separate production release action was performed by GPT. Live-site rollout status must be verified independently.
+- This move to `completed/` is a post-merge documentation lifecycle change; it does not alter tool content or CTA behavior.
+- GSC comparison is present in `docs/audits/gpt-creative-2026-10-31.md`, with local raw data intentionally excluded from Git.

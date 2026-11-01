@@ -41,9 +41,15 @@
 - UI support was not inferred from generation-language support.
 - Contradiction removed: canonical and detail page now both say unknown / 要確認. Listing pages (see remaining findings) still carry their own values.
 
-### D. Terms / commercial use
-- Evidence: Terms (updated 2026-08-12) grant a perpetual royalty-free non-exclusive license to commercialize Outputs, surviving cancellation; stock/music/fonts remain bound to third-party licenses; user responsible for AI disclosure where required. Free vs paid commercial difference is not stated in the terms body.
-- Final: `commercialUse: paid-only` and the detail-page badges were left as is (conservative, not reverified as paid-only). Added a note that the terms do not specify free/paid gating. VERIFY: free-plan commercial use. Watermark claims: pricing page is silent, left unchanged and marked 要確認 in weaknesses.
+### D. Terms / commercial use (revised after GPT review on PR #24)
+- Evidence: Terms (updated 2026-08-12) grant a perpetual royalty-free non-exclusive license to commercialize Outputs, surviving cancellation; Free and Paid plans are defined but the output license is not limited to paid plans. Stock, music and fonts remain bound to third-party licenses; user is responsible for AI disclosure where required.
+- Final: `commercialUse` changed from `paid-only` to `unknown`. Rendered wording says the Terms grant an output commercialization license while Free vs Paid gating is not confirmed; paid-only is no longer claimed anywhere in the four target files. VERIFY: plan-specific commercial rules from an official plan-specific source.
+
+### D2. Free plan / watermark / export (revised)
+- Additional official sources read 2026-11-01: https://help.invideo.io/en/articles/9380226-can-i-use-invideo-ai-for-free (dated 2026-07-28) and https://help.invideo.io/en/articles/9387948-why-are-there-still-watermarks-on-my-video-if-i-m-on-a-paid-plan (updated 2025-09-23).
+- Confirmed: a Free Plan exists, no card needed, limited credit allowance (amount not stated), reset weekly Monday 00:00 UTC, credit cost depends on model/settings, paid plans give a higher monthly allocation, free users may use and share videos on social media.
+- Not confirmed by current official evidence: free-plan watermark on exports, export count limits or formats, resolution cap, commercial use on the free plan. The 2025 watermark article only covers watermarks on preview and on projects exported before subscribing.
+- Final: `freePlan` stays true; `watermark` changed `limited` -> `unknown`; freePlanNote / watermarkCondition / FAQ / badges / tables now state only the confirmed facts and mark the rest 要公式確認. The prior claims "透かしあり・エクスポート回数制限" and "有料プランは透かしなし" were removed.
 
 ### E. Review dates
 - Updated to 2026-11-01: `lastReviewed`, `verifiedAt`, `reviewed.pricing/terms/features`, `japanBilling.pricingCheckedAt`. `nextReviewDue` = 2026-12-01 (pricing is promotion-driven).
@@ -58,5 +64,5 @@
 ## Unresolved (VERIFY)
 1. Regular (non-promotional) monthly and annual prices per plan.
 2. Japanese UI, prompt, narration, subtitles (official language help is unreachable).
-3. Free-plan commercial use and watermark rules.
+3. Free-plan commercial use, watermark, export limits and resolution.
 4. Whether templates still exist as a feature.

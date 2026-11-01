@@ -1,10 +1,11 @@
 # Latest Project State
 
-- updated_at: 2026-11-01
+- updated_at: 2026-11-02
 - latest_commit: 3b5d5ba6205e1282e8390d38dd17f4928b67f446（PR #29 GA4/Clarity計測安全修正をmasterへsquash merge）
 - branch: master
 - origin_sync: AI Creative DB masterへPR #29反映確認。GA4/Clarityはcanonical hostnameのみ起動、outbound destination_urlはorigin+pathnameのみ。Production実ブラウザ・GA4 Realtime確認済み。
-- current_active_task: none（2026-11-01-measurement-safetyはPR #29マージ後にcompletedへ移管）
+- current_active_task: none
+- latest_completed_task: docs/tasks/completed/2026-11-02-freshness-queue.md（Issue #32 / PR #33。公開内容を変更しないdeterministic freshness queue generatorを追加。2026-11-02時点39行、OVERDUE 35 / OK 4 / UNKNOWN 0。P0=4は再確認優先度heuristicでありbusiness value判定ではない。page trafficはUNKNOWN。Required checks PASS、本番未deploy。）
 - latest_completed_task: docs/tasks/completed/2026-11-01-growth-loop-site-record.md（Growth Loop第2サイト記録。docs/analytics/growth-loop.mdにAI Creative DB固有の状態を記録。Core実行はHOLD（site disabled・GSC権限NOT_VERIFIED）、データ取得なし、コード・本番変更なし。Core側はDraft PR #23。）
 - latest_completed_task: docs/tasks/completed/2026-11-01-measurement-safety.md（Issue #22 / PR #29。GA4/Clarityをaicreative-db.com exact hostnameのみで初期化、destination_urlをorigin+pathnameへ最小化。Preview request 0件、Production GA4 Realtime・Clarity起動確認。GA4/Clarity ID・affiliate URL不変。GA4拡張計測clickのlink_url query残りは別途検討。）
 - latest_completed_task: docs/tasks/completed/2026-11-01-invideo-derived-sync.md（Issue #25 / PR #27。カテゴリ・日本語表・InVideo vs CapCutの旧ハードコードを正本へ同期。Affiliate/GA4/Clarity不変。）

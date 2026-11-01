@@ -26,9 +26,9 @@ weaknesses:
   - "商用利用時は有料メンバー条件や最新規約確認が必要"
   - "日本語UIは公式情報で明確に確認できていない"
   - "動画生成はプロンプト調整・試行が必要な場合がある"
-lastReviewed: "2026-11-02"
-nextReviewDue: "2027-02-02"
-verifiedAt: "2026-11-02"
+lastReviewed: "2026-11-01"
+nextReviewDue: "2027-02-01"
+verifiedAt: "2026-11-01"
 officialSourceUrl: "https://docs.haiper.ai/pricing"
 pricingStatus: "service_changed"
 needsReview: "no"
@@ -59,9 +59,9 @@ limitations:
   - "商用利用条件・透かし条件は現在のサービス状況が変わっているため要確認"
   - "日本語UIは公式情報で明確に確認できていない"
 reviewed:
-  pricing: "2026-11-02"
+  pricing: "2026-11-01"
   terms: "2026-05-15"
-  features: "2026-11-02"
+  features: "2026-11-01"
 sourceRefs:
   - label: "Haiper 公式サイト"
     url: "https://haiper.ai/"
@@ -130,7 +130,7 @@ japanBilling:
   localizedJpyDisplay: false
   taxDisplay: "unknown"
   purchaseChannels: []
-  pricingCheckedAt: "2026-11-02"
+  pricingCheckedAt: "2026-11-01"
   pricingNote: "2026-11-02再確認でも、Haiper consumer向けの現行料金・購入導線は確証を得られませんでした。旧Haiper公式ドキュメント/FAQは残存。NetMindでHaiper Text2Videoモデル提供が確認できても、Haiper consumer serviceの再開・料金復活とは扱いません。pricingStatus=service_changedを維持します。"
   billingCategory: "E"
   sourceUrls:

@@ -37,7 +37,7 @@ Issue #32のfreshness queueでP0になった4件について、overdueを「誤�
 - Removed blanket “commercial use requires separate authorization/license” claim.
 - Replaced third-party price estimates with dated official values.
 - pricingStatus: unconfirmed -> confirmed.
-- Freshness metadata -> 2026-11-02.
+- Freshness metadata -> 2026-11-01 (UTC; review was 2026-11-02 JST).
 
 ## SeaArt AI
 
@@ -57,7 +57,7 @@ Issue #32のfreshness queueでP0になった4件について、overdueを「誤�
 - Removed “commercial use depends on VIP/SVIP and cannot be determined” as the primary claim.
 - Kept third-party/model/input rights caveats.
 - No invented paid-plan prices.
-- Freshness metadata -> 2026-11-02.
+- Freshness metadata -> 2026-11-01 (UTC; review was 2026-11-02 JST).
 
 ## Vidu AI
 
@@ -79,7 +79,7 @@ Issue #32のfreshness queueでP0になった4件について、overdueを「誤�
 - japaneseUi: false -> true.
 - pricingStatus: unconfirmed -> partial.
 - Exact price remains “official purchase screen” rather than invented value.
-- Freshness metadata -> 2026-11-02.
+- Freshness metadata -> 2026-11-01 (UTC; review was 2026-11-02 JST).
 
 ## Haiper
 
@@ -96,7 +96,7 @@ Issue #32のfreshness queueでP0になった4件について、overdueを「誤�
 
 ### Changed
 - service_changed retained.
-- Current review metadata -> 2026-11-02.
+- Current review metadata -> 2026-11-01 (UTC; review was 2026-11-02 JST).
 - Static page wording adjusted so historical Web/iOS/API/free-plan statements are not presented as current availability.
 
 ## Static override consistency
@@ -116,6 +116,10 @@ were reviewed and aligned. Updating only the content DB would have left public d
 - No production deploy.
 - No runtime analytics claim.
 - No exact SeaArt/Vidu price invented.
+
+## Date convention
+
+The actual re-review happened on 2026-11-02 JST. GitHub Actions executes in UTC and `validate:data` rejects a calendar date later than the runner's UTC date. Therefore tool metadata uses `2026-11-01` for `lastReviewed` / `verifiedAt` / reviewed pricing/features dates. The audit filename and narrative keep the local operating date 2026-11-02.
 
 ## Validation status
 

@@ -1,10 +1,11 @@
 # Latest Project State
 
 - updated_at: 2026-11-01
-- latest_commit: 2368263bc742e7903c5de832026802aa099103c3（PR #24 InVideo AI公式情報更新をmasterへsquash merge。post-merge Build/Cloudflare Pages PASS）
+- latest_commit: 348b795cde1ce59821a0c3272b61f15bb86f5a64（PR #27 InVideo派生ページ同期をmasterへsquash merge）
 - branch: master
-- origin_sync: AI Creative DB masterへPR #24反映確認。merge SHA 2368263bc742e7903c5de832026802aa099103c3。post-merge BuildとCloudflare Pages checkはsuccess。
-- current_active_task: none（2026-11-01-invideo-ai-official-refreshはPR #24マージ後にcompletedへ移管）
+- origin_sync: AI Creative DB masterへPR #27反映確認。InVideo canonical/detail/derived surfacesを2026-11-01正本へ同期。
+- current_active_task: none（2026-11-01-invideo-derived-syncはPR #27マージ後にcompletedへ移管）
+- latest_completed_task: docs/tasks/completed/2026-11-01-invideo-derived-sync.md（Issue #25 / PR #27。カテゴリ・日本語表・InVideo vs CapCutの旧ハードコードを正本へ同期。Affiliate/GA4/Clarity不変。）
 - latest_completed_task: docs/tasks/completed/2026-11-01-invideo-ai-official-refresh.md（Issue #23 / PR #24。InVideo AIを現行公式情報へ更新。agentic position、Starter/Plus/Max、commercialUse/watermark unknown、Affiliate URL不変。Build/Cloudflare Pages PASS。派生ページの残存driftはIssue #25。）
 - latest_completed_task: docs/tasks/completed/2026-10-31-ai-creative-control-binding.md（dev-control-worker Issue #52、PR #19。AGENTSとCONTROL_BINDINGを正式導入。Build CI PASS。Worker profile PR #55は無効のままmainへ反映、registryへの追加・ラベル・Windows QAは未実施）
 - latest_completed_task: docs/tasks/completed/2026-10-31-stable-diffusion-api-pricing.md（Issue #16 / PR #17。Stability AIの現行API料金クレジット従量方式を公式情報と照合して、専用ページと正本MDの旧月額表記を修正。Claude Code required_checks PASS、CI PASS。本番反映は要確認）

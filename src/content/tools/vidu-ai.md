@@ -30,9 +30,9 @@ weaknesses:
   - "日本語プロンプト対応状況は公式情報で未確認"
   - "ユーザー投稿コンテンツへの広範なライセンス（AIトレーニング含む・取消不能）が付与される"
   - "日本語プロンプト対応状況は公式情報で未確認"
-lastReviewed: "2026-11-02"
-nextReviewDue: "2027-02-02"
-verifiedAt: "2026-11-02"
+lastReviewed: "2026-11-01"
+nextReviewDue: "2027-02-01"
+verifiedAt: "2026-11-01"
 officialSourceUrl: "https://www.vidu.com/pricing"
 pricingSourceUrl: "https://www.vidu.com/pricing"
 pricingSourceNote: "2026-11-02に公式consumer料金ページを再確認。Subscription Credits / Purchased Credits / Bonus Credits、月払い・年払いの自動更新、Stripe課金は確認できたが、公開取得では具体的な現行プラン金額を安定して取得できない。価格・通貨・税は公式購入画面で確認する。API Platformのcredit pack料金とは別。"
@@ -114,9 +114,9 @@ faqs:
   - question: "アップロードしたコンテンツはどう扱われますか？"
     answer: "公式利用規約によると、ユーザーが投稿したコンテンツには、Viduに対して世界規模・無償・取消不能のライセンスが付与されます。このライセンスはAIトレーニング目的での利用も含まれ、アカウント削除後も継続します。機密性の高い素材の取り扱いには注意が必要です。最新の公式利用規約を直接ご確認ください。本記事は法的助言ではありません。"
 reviewed:
-  pricing: "2026-11-02"
+  pricing: "2026-11-01"
   terms: "2026-07-25"
-  features: "2026-11-02"
+  features: "2026-11-01"
 japanBilling:
   japanOfficialUrl: "https://www.vidu.com/ja"
   providerName: "Shengshu Technology（海外向け運営は香港法人ShengShu AI HK Limited）"
@@ -128,7 +128,7 @@ japanBilling:
   localizedJpyDisplay: "unknown"
   taxDisplay: "unknown"
   purchaseChannels: ["web", "appstore", "googleplay"]
-  pricingCheckedAt: "2026-11-02"
+  pricingCheckedAt: "2026-11-01"
   pricingNote: "日本語公式ページがありますが、Web版の請求通貨・日本円決済の可否は要公式確認です。クレジット制（Subscription/Purchased/Bonus）のため、価格・通貨・税は公式購入画面でご確認ください。Web版とアプリ版で価格が異なる場合があります。"
   billingCategory: "B"
   sourceUrls:

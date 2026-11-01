@@ -22,7 +22,7 @@ strengths:
   - "アニメ動画生成（Superior Anime Generation）機能を搭載"
   - "AI音効生成（AI Sound Effect Generator）機能あり"
   - "First & Last Frames Controlで動画の始端・終端を指定可能"
-  - "オフピークモードでの無制限無料生成が案内されている"
+  - "公式AI Video Generatorページで月40 free creditsが案内されている"
   - "有料プランでの商用利用が公式利用規約で明記されている"
 weaknesses:
   - "無料プランでは透かしが入る場合がある"
@@ -39,7 +39,7 @@ pricingSourceNote: "2026-11-02に公式consumer料金ページを再確認。Sub
 pricingStatus: "partial"
 needsReview: true
 pricingModel: "subscription_credit"
-freePlanNote: "無料枠あり。公式consumerサイトでは新規登録時のtrial credits等を案内。具体的な付与量・Off-Peak条件は変更されるため公式画面で確認してください。"
+freePlanNote: "無料枠あり。2026-11-02確認の公式AI Video Generatorページでは、全ユーザーに月40 free creditsを提供すると案内されています。無料出力の透かし・解像度・商用利用条件は公式ページ/規約で確認してください。"
 paidPlanNote: "月払い・年払いのsubscriptionと追加Purchased Creditsが案内されています。公開取得では現行プラン金額を安定確認できないため、公式購入画面で確認してください。"
 platforms:
   - web
@@ -100,7 +100,7 @@ sourceRefs:
     type: terms
 faqs:
   - question: "無料で使えますか？"
-    answer: "公式サイトでは全ユーザーへの無料クレジット提供と、オフピークモードでの無制限無料生成が案内されています。ただし、無料プランでは透かしが付く場合があり、詳細な制限は公式サイトをご確認ください。"
+    answer: "2026年11月2日時点の公式AI Video Generatorページでは、全ユーザーに月40 free creditsを提供すると案内されています。無料出力の透かし・解像度・商用利用条件は公式ページと最新規約をご確認ください。"
   - question: "商用利用できますか？"
     answer: "公式利用規約では「有料ユーザーについて商用利用にライセンスが拡張される（for paid users, this license extends to commercial use）」と明記されています。ただし、競合サービスの開発・第三者の著作物・人物・ロゴ・商標を含む場合は別途条件の確認が必要です。無料プランの商用利用可否は公式規約をご確認ください。本記事は法的助言ではありません。"
   - question: "日本語で使えますか？"

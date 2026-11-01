@@ -1,6 +1,6 @@
 ---
 name: "Vidu AI"
-shortDescription: "中国Shengshu Technologyが開発したAI動画生成サービス。テキスト・画像・最大7枚の参照画像から動画を生成でき、アニメ動画生成や音効生成にも対応している。"
+shortDescription: "Shengshu TechnologyのAI動画生成サービス。現行Vidu Q4は2K/4K出力、最大15枚の参照画像、最長16秒の動画に対応し、日本語UIも提供。"
 category: "video"
 officialUrl: "https://www.vidu.com"
 freePlan: "limited"
@@ -8,7 +8,7 @@ lowestPaidPlan: "要公式確認"
 currency: "unknown"
 commercialUse: "paid-only"
 commercialUseNote: "公式利用規約（Terms of Use）では「有料ユーザーについて商用利用にライセンスが拡張される（for paid users, this license extends to commercial use）」と明記されています。ただし、競合サービスの開発への利用は禁止されています。また、ユーザーが投稿したコンテンツには世界規模・無期限・取消不能のライセンスがViduに付与される点にも注意が必要です。無料プラン・第三者素材・人物・ロゴ・商標を含む場合は別途確認が必要です。最新の公式利用規約をご確認ください。本記事は法的助言ではありません。"
-japaneseUi: false
+japaneseUi: true
 japanesePrompt: "unknown"
 watermark: "limited"
 bestFor:
@@ -17,8 +17,8 @@ bestFor:
   - "オフピーク時間帯での無料動画生成試用"
 strengths:
   - "公式サイトによると約10秒での高速動画生成が可能とされている"
-  - "最大7枚の参照画像を使ったキャラクター・物体・シーンの一貫性維持に対応"
-  - "テキスト→動画・画像→動画・参照→動画の複数入力モードに対応"
+  - "Vidu Q4で最大15枚の参照画像を使ったキャラクター・物体・シーンの一貫性維持に対応"
+  - "Vidu Q4は2K/4K出力、最大15枚の参照画像、最長16秒の動画に対応"
   - "アニメ動画生成（Superior Anime Generation）機能を搭載"
   - "AI音効生成（AI Sound Effect Generator）機能あり"
   - "First & Last Frames Controlで動画の始端・終端を指定可能"
@@ -27,20 +27,20 @@ strengths:
 weaknesses:
   - "無料プランでは透かしが入る場合がある"
   - "料金・クレジット詳細は公式サイトで動的ロードのため事前確認が必要"
-  - "日本語UI非対応"
+  - "日本語プロンプト対応状況は公式情報で未確認"
   - "ユーザー投稿コンテンツへの広範なライセンス（AIトレーニング含む・取消不能）が付与される"
   - "日本語プロンプト対応状況は公式情報で未確認"
-lastReviewed: "2026-06-21"
-nextReviewDue: "2026-09-21"
-verifiedAt: "2026-06-21"
+lastReviewed: "2026-11-02"
+nextReviewDue: "2027-02-02"
+verifiedAt: "2026-11-02"
 officialSourceUrl: "https://www.vidu.com/pricing"
 pricingSourceUrl: "https://www.vidu.com/pricing"
-pricingSourceNote: "公式料金ページURLは設定済み。2026-06-21再確認：vidu.com/pricing は「Loading pricing plans...」のみ表示で具体的な料金・通貨・プラン名を取得できず。currency・具体的月額は公式サイトを直接ご確認ください。"
-pricingStatus: "unconfirmed"
+pricingSourceNote: "2026-11-02に公式consumer料金ページを再確認。Subscription Credits / Purchased Credits / Bonus Credits、月払い・年払いの自動更新、Stripe課金は確認できたが、公開取得では具体的な現行プラン金額を安定して取得できない。価格・通貨・税は公式購入画面で確認する。API Platformのcredit pack料金とは別。"
+pricingStatus: "partial"
 needsReview: true
 pricingModel: "subscription_credit"
-freePlanNote: "無料枠あり（制限あり）。詳細は公式サイトをご確認ください。"
-paidPlanNote: "有料プランあり。料金・条件は公式サイトをご確認ください。"
+freePlanNote: "無料枠あり。公式consumerサイトでは新規登録時のtrial credits等を案内。具体的な付与量・Off-Peak条件は変更されるため公式画面で確認してください。"
+paidPlanNote: "月払い・年払いのsubscriptionと追加Purchased Creditsが案内されています。公開取得では現行プラン金額を安定確認できないため、公式購入画面で確認してください。"
 platforms:
   - web
 signupRequired: true
@@ -48,7 +48,7 @@ features:
   textToVideo: true
   imageToVideo: true
   videoExtend: true
-  maxVideoDuration: "最大16秒（Vidu Q3モデル）"
+  maxVideoDuration: "最大16秒（Vidu Q4 / Q4 Preview）"
 watermarkCondition: "無料プランでは透かしあり。有料プランの条件は公式サイトをご確認ください。"
 japaneseDocs: false
 useCases:
@@ -60,7 +60,7 @@ limitations:
   - "商用利用は有料ユーザーのみとされているが、公式規約の確認が必須。プランや用途によって条件が異なる場合があります"
   - "ユーザー投稿コンテンツには世界規模・無償・取消不能のライセンスがViduに付与される（AIトレーニング目的を含む・アカウント削除後も継続）"
   - "機密性の高い素材・個人情報・人物画像・第三者著作物のアップロードは特に慎重な検討が必要"
-  - "日本語UI非対応・日本語プロンプト対応状況は公式情報で未確認"
+  - "日本語UIは公式日本語ページで確認済み。日本語プロンプト対応状況は要確認"
   - "中国企業（Shengshu Technology）提供サービス。データ管轄・プライバシーポリシーは公式サイトで要確認"
   - "商用利用条件に関する専用のヘルプ・FAQページURLは現時点で確認できていません。最新の条件は公式利用規約（vidu.com/terms）でご確認ください"
 usagePolicy:
@@ -79,7 +79,7 @@ usagePolicy:
   lastReviewed: "2026-07-25"
 notFor:
   - "商用利用条件を確認せずに使いたい人（公式規約の確認が必要です）"
-  - "日本語UIのみで操作したい人（日本語UI非対応です）"
+  - "日本語プロンプトの精度を公式情報で確認してから使いたい人（対応状況は要確認です）"
   - "透かしなしで無料出力を前提にしたい人（無料プランでは透かしが付く場合があります）"
 sources:
   - title: "Vidu AI 公式サイト"
@@ -104,19 +104,19 @@ faqs:
   - question: "商用利用できますか？"
     answer: "公式利用規約では「有料ユーザーについて商用利用にライセンスが拡張される（for paid users, this license extends to commercial use）」と明記されています。ただし、競合サービスの開発・第三者の著作物・人物・ロゴ・商標を含む場合は別途条件の確認が必要です。無料プランの商用利用可否は公式規約をご確認ください。本記事は法的助言ではありません。"
   - question: "日本語で使えますか？"
-    answer: "公式サイトに言語切替オプションが存在しますが、日本語UIへの対応は確認できていません。日本語プロンプトへの対応状況についても公式サイトで最新情報をご確認ください。"
+    answer: "公式日本語ページ（vidu.com/ja）が提供されており、日本語UIを確認できます。日本語プロンプトの対応範囲・精度は公式情報で十分確認できていないため、実利用時に最新状況をご確認ください。"
   - question: "どんな用途に向いていますか？"
-    answer: "公式サイトでは、テキスト・画像・最大7枚の参照画像からの動画生成に対応しており、マーケティング・広告・映画制作・アニメ制作などの用途例が紹介されています。ショート動画やSNS向けコンテンツの作成にも活用できるとされていますが、詳細な品質・制限は公式サイトでご確認ください。"
+    answer: "公式サイトでは、Vidu Q4で画像・参照素材を使った動画生成、2K/4K出力、最大15枚の参照画像、最長16秒の動画が案内されています。マーケティング・広告・映像制作等で利用する場合はプランと権利条件をご確認ください。"
   - question: "参照画像（Reference to Video）とは何ですか？"
-    answer: "公式サイトによると、最大7枚の画像をアップロードすることで、キャラクター・物体・シーンの一貫性を保ちながら動画を生成する機能です。複数のビジュアル要素を組み合わせた動画制作に活用できるとされています。詳細は公式サイトをご確認ください。"
+    answer: "現行Vidu Q4では最大15枚の参照画像が案内されており、キャラクター・物体・シーンの一貫性を保った動画制作に利用できます。利用可能な枚数やモデル条件は変更される可能性があるため公式画面で確認してください。"
   - question: "RunwayやPikaとどう使い分けるとよいですか？"
     answer: "Vidu AIは参照画像の一貫性維持やアニメ動画生成、音効生成機能が特徴とされています。Runwayは映像編集機能が豊富、Pikaはシンプルな操作が強みです。用途や必要機能に応じて複数ツールを比較してみることをおすすめします。"
   - question: "アップロードしたコンテンツはどう扱われますか？"
     answer: "公式利用規約によると、ユーザーが投稿したコンテンツには、Viduに対して世界規模・無償・取消不能のライセンスが付与されます。このライセンスはAIトレーニング目的での利用も含まれ、アカウント削除後も継続します。機密性の高い素材の取り扱いには注意が必要です。最新の公式利用規約を直接ご確認ください。本記事は法的助言ではありません。"
 reviewed:
-  pricing: "2026-06-21"
+  pricing: "2026-11-02"
   terms: "2026-07-25"
-  features: "2026-06-15"
+  features: "2026-11-02"
 japanBilling:
   japanOfficialUrl: "https://www.vidu.com/ja"
   providerName: "Shengshu Technology（海外向け運営は香港法人ShengShu AI HK Limited）"
@@ -128,7 +128,7 @@ japanBilling:
   localizedJpyDisplay: "unknown"
   taxDisplay: "unknown"
   purchaseChannels: ["web", "appstore", "googleplay"]
-  pricingCheckedAt: "2026-07-13"
+  pricingCheckedAt: "2026-11-02"
   pricingNote: "日本語公式ページがありますが、Web版の請求通貨・日本円決済の可否は要公式確認です。クレジット制（Subscription/Purchased/Bonus）のため、価格・通貨・税は公式購入画面でご確認ください。Web版とアプリ版で価格が異なる場合があります。"
   billingCategory: "B"
   sourceUrls:
@@ -138,11 +138,11 @@ japanBilling:
 
 ## Vidu AIとは
 
-Vidu AIは中国のShengshu Technology（生数科技）が開発したAI動画生成サービスです。テキスト・画像・最大7枚の参照画像から動画を生成できます。公式サイトによると約10秒での高速生成が可能とされており、アニメ動画生成（Superior Anime Generation）や音効生成（AI Sound Effect Generator）機能も搭載しています。
+Vidu AIはShengshu Technology（生数科技）が開発したAI動画生成サービスです。2026年11月時点の公式サイトではVidu Q4 / Q4 Previewが現行フラッグシップとして案内され、2K/4K出力、最大15枚の参照画像、最長16秒の動画に対応しています。公式日本語UIも提供されています。
 
 ## 参照画像を使った動画生成の活用シーン
 
-Vidu AIの「Reference to Video」機能では、最大7枚の参照画像をアップロードすることで、キャラクター・商品・背景など複数の視覚要素を一貫性を保ちながら動画に組み込むことができるとされています。公式サイトでは以下のような活用例が案内されています。
+Vidu AIの現行Q4「Reference to Video」では、最大15枚の参照画像を使い、キャラクター・商品・背景など複数の視覚要素を一貫性を保ちながら動画に組み込めると案内されています。公式サイトでは以下のような活用例が案内されています。
 
 - 特定キャラクターの外見を複数シーンにわたって維持したい場合
 - 商品ビジュアルを一貫した映像の中で見せたい場合

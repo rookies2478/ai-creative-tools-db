@@ -61,40 +61,56 @@ const canonicalUrl = canonicalPath && Astro.site
       }
     })} />
     {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
-    {import.meta.env.PROD && (
-      <>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YTH7GM5ZGT"></script>
-        <script is:inline>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-YTH7GM5ZGT');
-        </script>
-        <script is:inline>
-          (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "wo9noh1ex6");
-        </script>
-      </>
-    )}
-    <script is:inline>
+    <script>
+      import { shouldInitializeMeasurement, minimizeDestinationUrl } from '../utils/measurementSafety.mjs';
+
+      const runtimeWindow = window as any;
+
+      // Only the exact canonical production hostname may initialize GA4/Clarity.
+      // Cloudflare Pages previews are production builds too, so build mode alone
+      // is intentionally not sufficient.
+      if (shouldInitializeMeasurement(window.location.hostname, import.meta.env.PROD)) {
+        runtimeWindow.dataLayer = runtimeWindow.dataLayer || [];
+        runtimeWindow.gtag = function () {
+          runtimeWindow.dataLayer.push(arguments);
+        };
+        runtimeWindow.gtag('js', new Date());
+        runtimeWindow.gtag('config', 'G-YTH7GM5ZGT');
+
+        const gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-YTH7GM5ZGT';
+        document.head.appendChild(gtagScript);
+
+        runtimeWindow.clarity = runtimeWindow.clarity || function () {
+          (runtimeWindow.clarity.q = runtimeWindow.clarity.q || []).push(arguments);
+        };
+        const clarityScript = document.createElement('script');
+        clarityScript.async = true;
+        clarityScript.src = 'https://www.clarity.ms/tag/wo9noh1ex6';
+        document.head.appendChild(clarityScript);
+      }
+
       // Outbound CTA click tracking (official_site_click / affiliate_click).
-      // Delegated at document level so it works for any current/future
-      // element carrying data-outbound-type, with no dependency on when GA4
-      // itself has loaded. Never blocks or alters the link's own navigation
-      // (no preventDefault) - target="_blank" and existing rel are untouched.
+      // Navigation behavior is untouched; only the analytics destination value
+      // is minimized to origin + pathname (query/hash are never sent).
       document.addEventListener('click', function (event) {
+        if (!(event.target instanceof Element)) return;
         const el = event.target.closest('[data-outbound-type]');
         if (!el) return;
-        if (typeof window.gtag !== 'function') return;
+        if (typeof runtimeWindow.gtag !== 'function') return;
+
         const outboundType = el.getAttribute('data-outbound-type');
         const eventName = outboundType === 'affiliate' ? 'affiliate_click' : 'official_site_click';
-        window.gtag('event', eventName, {
+        const destinationUrl = minimizeDestinationUrl(
+          el.getAttribute('href') || '',
+          window.location.href
+        );
+
+        runtimeWindow.gtag('event', eventName, {
           tool_name: el.getAttribute('data-tool-name') || '',
           cta_position: el.getAttribute('data-cta-position') || '',
-          destination_url: el.href || '',
+          destination_url: destinationUrl,
           page_path: window.location.pathname
         });
       });

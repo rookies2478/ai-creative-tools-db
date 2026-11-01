@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/test-measurement-safety.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "validate:task": "node scripts/validate-task.mjs",

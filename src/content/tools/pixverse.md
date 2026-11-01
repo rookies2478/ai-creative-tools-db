@@ -29,9 +29,9 @@ weaknesses:
   - "公式利用規約では原則非商用だが、有料サービス利用中にPixVerse開発モデルで生成したアウトプットは条件付きで商用利用可能。第三者モデル等は別条件"
   - "日本語プロンプト対応状況は公式に明示されておらず要確認（unknown）"
   - "無料プランのクレジット付与・失効条件は変更される可能性があるため公式画面で確認"
-lastReviewed: "2026-11-02"
-nextReviewDue: "2027-02-02"
-verifiedAt: "2026-11-02"
+lastReviewed: "2026-11-01"
+nextReviewDue: "2027-02-01"
+verifiedAt: "2026-11-01"
 officialSourceUrl: "https://pixverse.ai/en/terms-of-service"
 pricingSourceNote: "PixVerse公式AI information pageを2026-11-02に再確認。Web料金は2026-10-15確認値としてBasic $0、Standard $10/月、Pro $30/月、Premium $60/月、Ultraは表示上$199/月（プロモーション）と案内。年払いは別。すべてUSDと明記され、checkout・税・promotionは変更され得るため最終請求額は購入画面で確認する。Platform/API料金とは別。"
 pricingStatus: "confirmed"
@@ -116,8 +116,8 @@ faqs:
   - question: "画像をアップロードして動画生成する場合、著作権に問題はありますか？"
     answer: "入力素材（アップロード画像・参照素材等）の著作権・権利はユーザー自身が事前に確認する必要があります。第三者が権利を持つ画像・イラスト・写真・ブランド素材等を無断でアップロードすることは避けてください。商用利用の場合は出力動画の扱いも含め、最新の公式利用規約をご確認ください。本記事は法的助言ではありません。"
 reviewed:
-  pricing: "2026-11-02"
-  terms: "2026-11-02"
+  pricing: "2026-11-01"
+  terms: "2026-11-01"
   features: "2026-06-15"
 japanBilling:
   providerName: "AIVORA PTE. LTD.（利用規約記載の運営法人）"
@@ -129,7 +129,7 @@ japanBilling:
   localizedJpyDisplay: "unknown"
   taxDisplay: "unknown"
   purchaseChannels: ["web", "appstore", "googleplay", "api"]
-  pricingCheckedAt: "2026-11-02"
+  pricingCheckedAt: "2026-11-01"
   pricingNote: "PixVerse公式AI information pageでWeb月額・年額とUSD表記を確認。Web版とPlatform/API、アプリ版は別契約・別価格になり得るため混同しない。税・地域・promotion・最終請求額はcheckoutで確認する。"
   billingCategory: "D"
   sourceUrls:

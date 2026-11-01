@@ -178,12 +178,12 @@ Vidu AIは中国企業（Shengshu Technology）が提供するサービスです
 
 - **テキスト→動画**：テキストプロンプトから動画を生成
 - **画像→動画**：静止画から動画を生成
-- **Reference to Video**：最大7枚の参照画像を使い、キャラクター・物体・シーンの一貫性を保った動画を生成
+- **Reference to Video**：Vidu Q4で最大15枚の参照画像を使い、キャラクター・物体・シーンの一貫性を保った動画を生成
 - **First & Last Frames Control**：動画の始端・終端フレームを指定して生成
 - **AI Sound Effect Generator**：AI音効生成機能
 - **AI Image Generator**：画像生成機能
 
-最大動画長はVidu Q3モデルで16秒とされています。詳細な仕様は公式サイトをご確認ください。
+最大動画長はVidu Q4 / Q4 Previewで最大16秒と案内されています。詳細な仕様は公式サイトをご確認ください。
 
 ## 料金プラン
 

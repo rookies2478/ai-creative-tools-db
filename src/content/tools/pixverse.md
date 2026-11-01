@@ -7,7 +7,7 @@ freePlan: "limited"
 lowestPaidPlan: "Standard $10/月（Web月払い・USD、2026-10-15公式確認）"
 currency: "USD"
 commercialUse: "paid-only"
-commercialUseNote: "公式利用規約（2026-10-29更新）では、アウトプットは原則非商用ですが、Subscription PlansまたはCredit Pack等の有料サービス利用中にPixVerse開発モデルで生成したアウトプットは、規約・法令順守を条件に商用利用可能と案内されています。第三者モデルのアウトプットは当該第三者のルールに従い、Platform Creative Materialsは別途制限があります。最新規約を確認してください。本記事は法的助言ではありません。"
+commercialUseNote: "現行の公式利用規約では、アウトプットは原則非商用ですが、Subscription PlansまたはCredit Pack等の有料サービス利用中にPixVerse開発モデルで生成したアウトプットは、規約・法令順守を条件に商用利用可能と案内されています。第三者モデルのアウトプットは当該第三者のルールに従い、Platform Creative Materialsは別途制限があります。最新規約を確認してください。本記事は法的助言ではありません。"
 japaneseUi: true
 japanesePrompt: "unknown"
 watermark: "limited"

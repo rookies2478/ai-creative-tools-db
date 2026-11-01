@@ -1,0 +1,40 @@
+page,kind,lastReviewed,nextReviewDue,status,overdueDays,daysUntilDue,claimTypes,riskFlags,commercialImportance,traffic,sourceAvailable,sourceCount,aspectReviewed,priority
+/tools/haiper/,tool,2026-06-15,2026-09-15,OVERDUE,48,,pricing;license;features,pricingStatus=service_changed;commercialUse=unknown,MEDIUM(claim exposure),UNKNOWN,YES,15,pricing=2026-05-15 terms=2026-05-15 features=2026-05-15,P0
+/tools/pixverse/,tool,2026-06-21,2026-09-21,OVERDUE,42,,pricing;license;features,pricingStatus=unconfirmed;commercialUse=paid-only,MEDIUM(claim exposure),UNKNOWN,YES,10,pricing=2026-06-21 terms=2026-06-05 features=2026-06-15,P0
+/tools/seaart-ai/,tool,2026-06-21,2026-09-21,OVERDUE,42,,pricing;license;features,pricingStatus=unconfirmed;commercialUse=unknown,MEDIUM(claim exposure),UNKNOWN,YES,8,pricing=2026-06-21 terms=2026-06-17 features=2026-06-06,P0
+/tools/vidu-ai/,tool,2026-06-21,2026-09-21,OVERDUE,42,,pricing;license;features,pricingStatus=unconfirmed;commercialUse=paid-only,MEDIUM(claim exposure),UNKNOWN,YES,8,pricing=2026-06-21 terms=2026-07-25 features=2026-06-15,P0
+/guides/free-ai-image-tools/,guide,2026-05-05,2026-08-04,OVERDUE,90,,pricing;features,none,MEDIUM(commercial-intent guide),UNKNOWN,NO,0,n/a,P1
+/tools/midjourney/,tool,2026-07-11,2026-08-10,OVERDUE,84,,pricing;license;features,commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,11,pricing=2026-07-11 terms=2026-07-11 features=2026-07-11,P1
+/tools/stable-diffusion/,tool,2026-07-11,2026-08-11,OVERDUE,83,,pricing;license;features,pricingStatus=partial;commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,16,pricing=2026-10-31 terms=2026-06-06 features=2026-06-06,P1
+/tools/microsoft-designer/,tool,2026-07-12,2026-08-12,OVERDUE,82,,pricing;license;features,pricingStatus=partial,MEDIUM(claim exposure),UNKNOWN,YES,10,pricing=2026-05-26 terms=2026-07-12 features=2026-05-26,P1
+/tools/clipdrop/,tool,2026-07-26,2026-08-25,OVERDUE,69,,pricing;license;features,pricingStatus=partial;commercialUse=unknown,MEDIUM(claim exposure),UNKNOWN,YES,14,pricing=2026-07-26 terms=2026-05-14 features=2026-07-26,P1
+/tools/gemini-image-generation/,tool,2026-07-26,2026-08-25,OVERDUE,69,,pricing;license;features,commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,12,pricing=2026-07-26 terms=2026-05-15 features=2026-07-26,P1
+/guides/commercial-use-cost-comparison/,guide,2026-06-04,2026-09-04,OVERDUE,59,,pricing;features,none,MEDIUM(commercial-intent guide),UNKNOWN,NO,0,n/a,P1
+/guides/video-generation-credit-cost-comparison/,guide,2026-06-04,2026-09-04,OVERDUE,59,,pricing;features,none,MEDIUM(commercial-intent guide),UNKNOWN,NO,0,n/a,P1
+/tools/playground-ai/,tool,2026-06-06,2026-09-06,OVERDUE,57,,pricing;license;features,commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,11,pricing=2026-06-06 terms=2026-06-06 features=2026-06-06,P1
+/tools/canva-ai-image-generator/,tool,2026-06-15,2026-09-15,OVERDUE,48,,pricing;license;features,commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,13,pricing=2026-05-04 terms=2026-07-12 features=2026-05-04,P1
+/tools/capcut-ai/,tool,2026-06-15,2026-09-15,OVERDUE,48,,pricing;license;features,commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,15,pricing=2026-05-15 terms=2026-05-15 features=2026-05-15,P1
+/tools/dalle/,tool,2026-06-15,2026-09-15,OVERDUE,48,,pricing;license;features,pricingStatus=partial,MEDIUM(claim exposure),UNKNOWN,YES,14,pricing=2026-05-26 terms=2026-05-26 features=2026-05-26,P1
+/tools/leonardo-ai/,tool,2026-06-15,2026-09-15,OVERDUE,48,,pricing;license;features,commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,9,pricing=2026-06-15 terms=2026-06-15 features=2026-05-04,P1
+/tools/luma-ai/,tool,2026-06-15,2026-09-15,OVERDUE,48,,pricing;license;features,commercialUse=paid-only,MEDIUM(claim exposure),UNKNOWN,YES,13,pricing=2026-06-15 terms=2026-05-15 features=2026-06-15,P1
+/tools/nightcafe/,tool,2026-06-17,2026-09-17,OVERDUE,46,,pricing;license;features,pricingStatus=partial;commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,18,pricing=2026-06-17 terms=2026-05-14 features=2026-05-14,P1
+/tools/tensor-art/,tool,2026-06-17,2026-09-17,OVERDUE,46,,pricing;license;features,pricingStatus=partial;commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,12,pricing=2026-06-17 terms=2026-05-14 features=2026-05-14,P1
+/tools/adobe-firefly/,tool,2026-06-19,2026-09-19,OVERDUE,44,,pricing;license;features,commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,10,pricing=2026-06-19 terms=2026-05-04 features=2026-05-04,P1
+/tools/fotor-ai/,tool,2026-06-19,2026-09-19,OVERDUE,44,,pricing;license;features,pricingStatus=partial;commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,14,pricing=2026-05-14 terms=2026-05-14 features=2026-05-14,P1
+/tools/dreamstudio/,tool,2026-06-21,2026-09-21,OVERDUE,42,,pricing;license;features,commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,12,pricing=2026-06-21 terms=2026-05-14 features=2026-05-14,P1
+/tools/hailuo-ai/,tool,2026-06-21,2026-09-21,OVERDUE,42,,pricing;license;features,commercialUse=paid-only,MEDIUM(claim exposure),UNKNOWN,YES,8,pricing=2026-06-21 terms=2026-06-06 features=2026-06-06,P1
+/tools/ideogram/,tool,2026-06-21,2026-09-21,OVERDUE,42,,pricing;license;features,pricingStatus=partial;commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,15,pricing=2026-06-21 terms=2026-05-26 features=2026-05-26,P1
+/tools/kling-ai/,tool,2026-06-21,2026-09-21,OVERDUE,42,,pricing;license;features,commercialUse=paid-only,MEDIUM(claim exposure),UNKNOWN,YES,8,pricing=2026-06-21 terms=2026-06-04 features=2026-06-04,P1
+/tools/d-id/,tool,2026-07-05,2026-10-05,OVERDUE,28,,pricing;license;features,pricingStatus=partial;commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,12,pricing=2026-07-05 terms=2026-07-05 features=2026-07-05,P1
+/tools/heygen/,tool,2026-07-05,2026-10-05,OVERDUE,28,,pricing;license;features,pricingStatus=partial;commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,9,pricing=2026-07-05 terms=2026-07-05 features=2026-07-05,P1
+/tools/synthesia/,tool,2026-07-05,2026-10-05,OVERDUE,28,,pricing;license;features,pricingStatus=partial;commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,10,pricing=2026-07-05 terms=2026-07-05 features=2026-07-05,P1
+/guides/ai-generation-credits-guide/,guide,2026-07-14,2026-10-14,OVERDUE,19,,pricing;features,none,MEDIUM(commercial-intent guide),UNKNOWN,NO,0,n/a,P1
+/guides/ai-tool-pricing-currency-japan/,guide,2026-07-14,2026-10-14,OVERDUE,19,,pricing;features,none,MEDIUM(commercial-intent guide),UNKNOWN,NO,0,n/a,P1
+/tools/pika/,tool,2026-07-24,2026-10-24,OVERDUE,9,,pricing;license;features,commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,7,pricing=2026-07-24 terms=2026-05-24 features=2026-07-24,P1
+/guides/japanese-ai-image-tools/,guide,2026-05-05,2026-08-04,OVERDUE,90,,pricing;features,none,LOW,UNKNOWN,NO,0,n/a,P2
+/tools/runway/,tool,2026-07-11,2026-08-11,OVERDUE,83,,pricing;license;features,none,LOW,UNKNOWN,YES,14,pricing=2026-05-05 terms=2026-05-05 features=2026-05-05,P2
+/guides/japanese-support-three-types/,guide,2026-07-14,2026-10-14,OVERDUE,19,,pricing;features,none,LOW,UNKNOWN,NO,0,n/a,P2
+/tools/creatify/,tool,2026-08-13,2026-11-13,OK,0,11,pricing;license;features,pricingStatus=unconfirmed;commercialUse=unknown,MEDIUM(claim exposure),UNKNOWN,YES,5,pricing=2026-08-13 terms=2026-08-13 features=2026-08-13,P3
+/tools/invideo-ai/,tool,2026-11-01,2026-12-01,OK,0,29,pricing;license;features,commercialUse=unknown,HIGH(approved affiliate link),UNKNOWN,YES,11,pricing=2026-11-01 terms=2026-11-01 features=2026-11-01,P3
+/tools/photoroom/,tool,2026-08-13,2026-11-13,OK,0,11,pricing;license;features,pricingStatus=partial;commercialUse=paid-only,MEDIUM(claim exposure),UNKNOWN,YES,9,pricing=2026-08-13 terms=2026-08-13 features=2026-08-13,P3
+/tools/recraft/,tool,2026-08-13,2026-11-13,OK,0,11,pricing;license;features,pricingStatus=partial;commercialUse=limited,MEDIUM(claim exposure),UNKNOWN,YES,13,pricing=2026-08-13 terms=2026-08-13 features=2026-08-13,P3

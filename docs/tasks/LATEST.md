@@ -1,10 +1,11 @@
 # Latest Project State
 
-- updated_at: 2026-10-31
-- latest_commit: 6ccec7c4e2aa2b1dce6d55e6a669dd7554edf0c7（PR #19 AGENTS.md / CONTROL_BINDING.md、masterへsquash merge済み。Worker登録・有効化は未実施）
+- updated_at: 2026-11-01
+- latest_commit: 2368263bc742e7903c5de832026802aa099103c3（PR #24 InVideo AI公式情報更新をmasterへsquash merge。post-merge Build/Cloudflare Pages PASS）
 - branch: master
-- origin_sync: AI Creative DBのmasterへPR #19反映確認。dev-control-worker mainにPR #55の無効プロファイル反映確認。Windowsローカルインストールとの同期は未確認。
-- current_active_task: none（2026-10-31-ai-creative-control-bindingはPR #19マージ後にcompletedへ移管。Worker登録/実行はまだ禁止）
+- origin_sync: AI Creative DB masterへPR #24反映確認。merge SHA 2368263bc742e7903c5de832026802aa099103c3。post-merge BuildとCloudflare Pages checkはsuccess。
+- current_active_task: none（2026-11-01-invideo-ai-official-refreshはPR #24マージ後にcompletedへ移管）
+- latest_completed_task: docs/tasks/completed/2026-11-01-invideo-ai-official-refresh.md（Issue #23 / PR #24。InVideo AIを現行公式情報へ更新。agentic position、Starter/Plus/Max、commercialUse/watermark unknown、Affiliate URL不変。Build/Cloudflare Pages PASS。派生ページの残存driftはIssue #25。）
 - latest_completed_task: docs/tasks/completed/2026-10-31-ai-creative-control-binding.md（dev-control-worker Issue #52、PR #19。AGENTSとCONTROL_BINDINGを正式導入。Build CI PASS。Worker profile PR #55は無効のままmainへ反映、registryへの追加・ラベル・Windows QAは未実施）
 - latest_completed_task: docs/tasks/completed/2026-10-31-stable-diffusion-api-pricing.md（Issue #16 / PR #17。Stability AIの現行API料金クレジット従量方式を公式情報と照合して、専用ページと正本MDの旧月額表記を修正。Claude Code required_checks PASS、CI PASS。本番反映は要確認）
 - latest_completed_task: docs/tasks/completed/2026-10-31-tensor-art-ctr-review.md（Issue #12 / PR #14。GSC確定2期間のTensor.Art検索意図を検証、ブランド系が大半で情報系2.6%のためtitle/meta変更はHOLD_NO_CHANGEと判断。コード変更0、Build CI PASS、2026-11-01..11-28確定データで再評価する余地あり）

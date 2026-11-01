@@ -4,7 +4,7 @@ shortDescription: "テキストから動画、画像から動画、キーフレ�
 category: "video"
 officialUrl: "https://haiper.ai/"
 freePlan: false
-lowestPaidPlan: "公式サイトで料金・購入導線を確認できません（2026年7月確認時点）"
+lowestPaidPlan: "コンシューマー向け現行料金・購入導線は確認できません（2026-11-02再確認）"
 currency: "unknown"
 commercialUse: "unknown"
 commercialUseNote: "Haiperのコンシューマー向けWebアプリは2025年2月にシャットダウンされており、現時点での商用利用条件の確認が困難な状況です。旧公式FAQでは有料メンバーになると透かしなし動画を生成でき商用利用可能と案内されていましたが、現在のサービス状況は変わっています。最新情報は公式サイトをご確認ください。このページは法的助言ではありません。"
@@ -26,15 +26,15 @@ weaknesses:
   - "商用利用時は有料メンバー条件や最新規約確認が必要"
   - "日本語UIは公式情報で明確に確認できていない"
   - "動画生成はプロンプト調整・試行が必要な場合がある"
-lastReviewed: "2026-06-15"
-nextReviewDue: "2026-09-15"
-verifiedAt: "2026-06-15"
+lastReviewed: "2026-11-01"
+nextReviewDue: "2027-02-01"
+verifiedAt: "2026-11-01"
 officialSourceUrl: "https://docs.haiper.ai/pricing"
 pricingStatus: "service_changed"
 needsReview: "no"
 pricingModel: "subscription_credit"
 freePlanNote: "コンシューマー向けWebアプリは2025年2月にシャットダウンされています。現在、無料プランが提供されているかは不明です。最新の公式情報をご確認ください。"
-paidPlanNote: "コンシューマー向けサービスはシャットダウン済み。APIサービスの現在の提供状況・料金は公式サイトで要確認です。"
+paidPlanNote: "コンシューマー向けサービスはシャットダウン済み。旧Haiper公式ドキュメントは残っていますが、現行consumer料金・購入導線は2026-11-02時点で確認できません。NetMind上でHaiperモデル提供が確認できても、Haiper consumer service再開の根拠にはしません。"
 platforms:
   - web
   - ios
@@ -59,9 +59,9 @@ limitations:
   - "商用利用条件・透かし条件は現在のサービス状況が変わっているため要確認"
   - "日本語UIは公式情報で明確に確認できていない"
 reviewed:
-  pricing: "2026-05-15"
+  pricing: "2026-11-01"
   terms: "2026-05-15"
-  features: "2026-05-15"
+  features: "2026-11-01"
 sourceRefs:
   - label: "Haiper 公式サイト"
     url: "https://haiper.ai/"
@@ -84,6 +84,9 @@ sourceRefs:
   - label: "NetMind.AI × Haiper 提携発表（公式）"
     url: "https://netmind.ai/blogDetail/Forging-the-Future-of-AI-NetMind-ai-Pioneering-Collaboration-with-Haiper-AI"
     type: official
+  - label: "Haiper Text2Video 2.0 on NetMind Power（NetMind公式）"
+    url: "https://blog.netmind.ai/article/Changing_the_Inference_Game%3A_Haiper_Text2Video_2.0_Among_a_Range_of_New_Models_Now_Live_on_NetMind_Power"
+    type: official
 sources:
   - title: "Haiper 公式サイト"
     url: "https://haiper.ai/"
@@ -99,6 +102,8 @@ sources:
     url: "https://static2.haiper.ai/public/terms-of-use-11072024.html"
   - title: "NetMind.AI × Haiper 提携発表（公式）"
     url: "https://netmind.ai/blogDetail/Forging-the-Future-of-AI-NetMind-ai-Pioneering-Collaboration-with-Haiper-AI"
+  - title: "Haiper Text2Video 2.0 on NetMind Power（NetMind公式）"
+    url: "https://blog.netmind.ai/article/Changing_the_Inference_Game%3A_Haiper_Text2Video_2.0_Among_a_Range_of_New_Models_Now_Live_on_NetMind_Power"
 faqs:
   - question: "無料で使えますか？"
     answer: "Haiperのコンシューマー向けWebアプリは2025年2月にシャットダウンされており、現在、無料プランが利用できるかは不明です。最新の利用可否は公式サイトをご確認ください。"
@@ -125,8 +130,8 @@ japanBilling:
   localizedJpyDisplay: false
   taxDisplay: "unknown"
   purchaseChannels: []
-  pricingCheckedAt: "2026-07-13"
-  pricingNote: "2026年7月確認時点で、公式サイト（haiper.ai）では生成機能や料金ページを確認できませんでした。サービスの提供状況は公式発表をご確認ください。"
+  pricingCheckedAt: "2026-11-01"
+  pricingNote: "2026-11-02再確認でも、Haiper consumer向けの現行料金・購入導線は確証を得られませんでした。旧Haiper公式ドキュメント/FAQは残存。NetMindでHaiper Text2Videoモデル提供が確認できても、Haiper consumer serviceの再開・料金復活とは扱いません。pricingStatus=service_changedを維持します。"
   billingCategory: "E"
   sourceUrls:
     - "https://haiper.ai/"
@@ -151,7 +156,7 @@ Haiperは、テキストから動画（text-to-video）、画像から動画（i
 - **テキストから動画生成（text-to-video）：** テキストプロンプトを入力して動画を生成
 - **画像から動画生成（image-to-video）：** アップロードした画像を起点に動画を生成
 - **キーフレーム指定：** 動画の始点・終点となる画像を指定した生成が案内されている
-- **Web App / iOS App：** ブラウザとiOSアプリの両方から利用可能
+- **Web App / iOS App：** 過去の公式情報ではブラウザとiOSアプリの利用が案内されていました。現在のconsumer提供状況は要確認
 - **API：** API経由での利用が案内されている（APIごとのクレジット消費量が公式ドキュメントに記載）
 
 各機能の詳細・対応プランは変更される可能性があります。最新情報は[公式サイト](https://haiper.ai/)および[公式ドキュメント](https://docs.haiper.ai/introduction)でご確認ください。
@@ -168,10 +173,10 @@ Haiperは、テキストから動画（text-to-video）、画像から動画（i
 
 ## 無料枠・クレジット・料金に関する注意点
 
-公式ドキュメントでは**Haiper Web App / iOS App向けのクレジット制動画生成**が案内されています。
+旧公式ドキュメントでは**Haiper Web App / iOS App向けのクレジット制動画生成**が案内されていますが、2026-11-02時点のconsumer提供状況・料金は確認できません。
 
 - **無料枠・利用上限・対象機能は変更される可能性があります**
-- 公式ドキュメントでは動画生成のクレジット消費量が案内されています
+- 旧公式ドキュメントには動画生成のクレジット消費量が残っていますが、現行consumer料金として扱いません
 - APIには別途API料金が案内されています
 
 **プラン名・料金・クレジット条件は変更される可能性があるため、最新の情報は[公式料金ページ](https://docs.haiper.ai/pricing)および[API料金ページ](https://docs.haiper.ai/api-reference/api-pricing)でご確認ください。**

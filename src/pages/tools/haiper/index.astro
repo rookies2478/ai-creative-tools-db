@@ -21,7 +21,7 @@ const jsonLd = JSON.stringify([
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Haiper',
-    operatingSystem: 'Web, iOS',
+    operatingSystem: 'Historical Web/iOS; current consumer availability unverified',
     applicationCategory: 'VideoApplication',
     description: 'Haiperはテキストから動画・画像から動画・キーフレーム指定などに対応するAI動画生成ツール。旧公式FAQでは有料メンバーで透かしなし・商用利用可と案内されていたが、現在の商用利用・透かし条件は要確認。最新情報は公式サイトをご確認ください。',
     url: 'https://haiper.ai/',
@@ -57,8 +57,8 @@ const jsonLd = JSON.stringify([
       lead="Haiperはテキストから動画・画像から動画・キーフレーム指定などに対応するAI動画生成ツールです。Web App・iOS App・API経由での利用が案内されていますが、<b>現在のサービス提供状況は公式サイトでご確認ください。</b>旧公式FAQでは有料メンバーになるとHaiperの透かしなし動画を生成でき、商用利用にも使えると案内されていました。ただし<b>現在の商用利用条件・透かし条件は要確認です。</b>商用利用前は最新の公式規約をご確認ください。"
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '要確認（旧FAQ情報あり）' } },
-        { lb: '無料枠', badge: { s: 'cond', label: 'クレジット制（要確認）' } },
-        { lb: '料金目安', text: '要公式確認', mono: true },
+        { lb: '無料枠', badge: { s: 'na', label: 'consumer提供状況未確認' } },
+        { lb: '料金目安', text: 'consumer現行料金未確認', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: '要確認（旧FAQ情報あり）' } },
         { lb: '日本語UI', badge: { s: 'na', label: '非対応（要確認）' } },
       ]}
@@ -75,7 +75,7 @@ const jsonLd = JSON.stringify([
           det: '公式ドキュメントではHaiper Web App / iOS App向けのクレジット制動画生成が案内されています。無料枠・利用上限・対象機能は変更される可能性があるため、最新の公式情報をご確認ください。',
         },
         {
-          title: '最安料金目安', sum: '要公式確認', sumMono: true,
+          title: '最安料金目安', sum: 'consumer現行料金未確認', sumMono: true,
           det: 'プラン名・料金・クレジット条件は変更される可能性があるため、必ず最新の公式料金ページをご確認ください。',
         },
         {
@@ -89,7 +89,7 @@ const jsonLd = JSON.stringify([
             { label: 'プロンプト', badge: { s: 'cond', label: '要確認' } },
           ],
         },
-        { title: '対応環境', feats: ['Web', 'iOS', 'API'] },
+        { title: '対応環境', feats: ['過去: Web / iOS / API', '現行consumer availability: 要確認'] },
         { title: '主な機能', wide: true, feats: ['テキスト→動画', '画像→動画', 'キーフレーム指定', 'Haiper Video 2.x', 'API対応'] },
       ]}
       useCases={[
@@ -100,8 +100,8 @@ const jsonLd = JSON.stringify([
       pros={[
         '旧公式FAQでは有料メンバーで透かしなし・商用利用可と案内されていた（現在の条件は要確認）',
         'テキスト・画像からの動画生成の両方に対応',
-        'Web App / iOS Appで手軽に試せる',
-        'API経由での利用が案内されている',
+        'Web App / iOS Appは過去に案内あり（現行consumer稼働は要確認）',
+        'APIは旧公式ドキュメントに案内あり。現行提供状況は要確認',
         'Haiper Video 2.xで複数の生成機能に対応',
       ]}
       cons={[
@@ -119,13 +119,13 @@ const jsonLd = JSON.stringify([
         kind: 'spec',
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成' }],
-          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>クレジット制（要確認）</span><br>詳細は公式サイトで確認。' }],
-          [{ html: '最安料金', rk: true }, { html: '<span class="mono">要公式確認</span>' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>consumer提供状況未確認</span><br>旧プラン情報を現行扱いしない。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">consumer現行料金未確認</span>' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要確認（旧FAQ情報あり）</span><br>現在の条件は公式サイトでご確認ください。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要確認（旧FAQ情報あり）</span>' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>非対応（要確認）</span>' }],
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要確認</span>' }],
-          [{ html: '対応環境', rk: true }, { html: 'Web / iOS / API' }],
+          [{ html: '対応環境', rk: true }, { html: '過去: Web / iOS / API<br>現行consumer availabilityは要確認' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-24', mono: true }],
           [{ html: '公式サイト', rk: true }, { html: '<a href="https://haiper.ai/" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
@@ -161,8 +161,8 @@ const jsonLd = JSON.stringify([
         disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のHaiper公式FAQ・利用規約を詳しくご確認ください。',
         more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
       }}
-      integrationTitle="HaiperのiOS App対応とAPI利用について"
-      integration="HaiperはWeb Appに加えてiOS Appでの利用が案内されていますが、現在の稼働状況は公式サイトでご確認ください。API経由での利用も案内されており、動画生成をワークフローに組み込みたい開発者向けの機能が用意されていました。公式ドキュメントでは動画生成のクレジット消費量が案内されていますが、現在の提供状況・料金は公式サイトでご確認ください。"
+      integrationTitle="Haiperの旧Web/iOS/API情報と現在の提供状況について"
+      integration="Haiperの旧公式情報ではWeb App・iOS App・APIが案内されていましたが、consumer向けWebアプリは2025年2月にシャットダウンされています。2026年11月2日時点でHaiper consumer向け現行料金・購入導線は確認できません。NetMind上でHaiper Text2Videoモデルが提供されていても、Haiper consumer serviceの再開とは扱いません。"
       whoFor={[
         'AI動画生成をスマートフォンで試したい人（iOS App案内あり・現在の稼働状況は要確認）',
         'API経由で動画生成を組み込みたい開発者（現在のAPI提供状況は公式で確認を）',
@@ -224,15 +224,16 @@ const jsonLd = JSON.stringify([
         { tag: 'ドキュメント', label: 'Haiper ドキュメント（Introduction）', href: 'https://docs.haiper.ai/introduction' },
         { tag: '料金', label: 'Haiper 料金・クレジット（公式）', href: 'https://docs.haiper.ai/pricing' },
         { tag: 'API料金', label: 'Haiper API料金（公式）', href: 'https://docs.haiper.ai/api-reference/api-pricing' },
-        { tag: 'FAQ', label: 'Haiper FAQ（公式）', href: 'https://book.haiper.ai/haiper-video-generator/faq' },
+        { tag: 'FAQ', label: 'Haiper FAQ（旧公式情報）', href: 'https://book.haiper.ai/haiper-video-generator/faq' },
+        { tag: 'モデル提供', label: 'Haiper Text2Video 2.0 on NetMind Power（NetMind公式）', href: 'https://blog.netmind.ai/article/Changing_the_Inference_Game%3A_Haiper_Text2Video_2.0_Among_a_Range_of_New_Models_Now_Live_on_NetMind_Power' },
       ]}
       faqs={[
-        { q: 'Haiperは無料で使えますか？', a: '公式ドキュメントではHaiper Web App / iOS App向けのクレジット制動画生成が案内されており、試用目的での無料利用は可能とされています。ただし無料枠・利用上限・対象機能は変更される可能性があるため、最新の公式情報をご確認ください。' },
+        { q: 'Haiperは無料で使えますか？', a: 'consumer向けWebアプリは2025年2月にシャットダウン済みで、2026年11月2日時点の現行consumer無料枠は確認できません。旧公式ドキュメントの無料・クレジット情報を現行プランとして扱わないでください。' },
         { q: 'Haiperは商用利用できますか？', a: '現在の商用利用条件は要確認です。旧公式FAQでは有料メンバーになるとHaiperの透かしなし動画を生成でき、商用利用にも使えると案内されていましたが、現在のサービス状況・条件は変わっている可能性があります。商用利用前は最新の公式規約・FAQをご確認ください。このページは法的助言ではありません。' },
         { q: '透かしはありますか？', a: '現在の透かし条件は要確認です。旧公式FAQでは有料メンバーになるとHaiperの透かしなし動画を生成できると案内されていましたが、現在のサービス状況・条件は変わっている可能性があるため、最新の公式情報でご確認ください。' },
         { q: 'APIは使えますか？', a: '公式ドキュメントではAPI提供が案内されています。API料金・利用条件の詳細は公式APIドキュメントをご確認ください。' },
         { q: '日本語で使えますか？', a: '公式情報だけでは日本語UIの対応を明確に確認できていません。日本語プロンプトで試せる場合でも、動画生成では英語プロンプトの方が安定する可能性があります。最新の対応状況は公式サイトでご確認ください。' },
-        { q: '料金はどのくらいですか？', a: 'プラン名・料金・クレジット条件は変更される可能性があるため、必ず最新の公式料金ページをご確認ください。' },
+        { q: '料金はどのくらいですか？', a: '2026年11月2日の再確認ではHaiper consumer向けの現行料金・購入導線を確認できませんでした。旧料金ドキュメントは残っていますが、現在の購入条件としては扱えません。' },
         { q: 'Haiperの使い方を確認するには何を見ればよいですか？', a: '基本的な利用手順は公式サイト（haiper.ai）や公式ドキュメント（docs.haiper.ai）を参照するのが確実です。旧公式FAQ・旧ヘルプが残っている場合でも、現在のサービス提供状況・画面構成は公式サイトで直接確認してください。' },
         { q: 'Haiperはスマホで使えますか？', a: '旧公式FAQではiOS App経由での利用が案内されていましたが、現在のiOS App稼働状況は公式サイトでご確認ください。WebブラウザからWebアプリにアクセスできる可能性はありますが、スマホでの動作・保存形式・対応OSの詳細は要確認です。最新情報は公式サイトをご確認ください。' },
         { q: 'RunwayやPika、Luma AIと比べるときは何を確認すべきですか？', a: '各ツールを比較する際は、生成品質・操作性・画像から動画への対応・料金・無料枠・商用利用条件・透かしの有無を確認するとよいでしょう。Haiperの商用利用・透かし条件は現在要確認のため、商用利用を前提にする場合は各ツールの最新の公式規約を必ずご確認ください。このページは法的助言ではありません。' },

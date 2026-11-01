@@ -1,13 +1,13 @@
 ---
 name: "PixVerse"
-shortDescription: "テキスト・画像からAI動画を生成できるサービス。V6モデル搭載、日本語UI対応、無料枠あり。"
+shortDescription: "テキスト・画像からAI動画を生成できるサービス。V6系モデル、日本語UI、無料のBasicプランに対応。Web版はStandard $10/月から（2026年10月公式確認）。"
 category: "video"
 officialUrl: "https://pixverse.ai"
 freePlan: "limited"
-lowestPaidPlan: "要公式確認"
-currency: "unknown"
+lowestPaidPlan: "Standard $10/月（Web月払い・USD、2026-10-15公式確認）"
+currency: "USD"
 commercialUse: "paid-only"
-commercialUseNote: "公式利用規約（pixverse.ai/en/terms-of-service）では、アウトプットの利用はデフォルトで非商用目的に限定されており、商用目的での利用には「別途の認可または商用ライセンス」が必要と案内されています。プラットフォーム提供素材の商用利用・政治目的・広告目的での外部収益化は明確に制限されています。プランや用途によって条件が異なる場合があります。最新の規約は公式サイトをご確認ください。本記事は法的助言ではありません。"
+commercialUseNote: "公式利用規約（2026-10-29更新）では、アウトプットは原則非商用ですが、Subscription PlansまたはCredit Pack等の有料サービス利用中にPixVerse開発モデルで生成したアウトプットは、規約・法令順守を条件に商用利用可能と案内されています。第三者モデルのアウトプットは当該第三者のルールに従い、Platform Creative Materialsは別途制限があります。最新規約を確認してください。本記事は法的助言ではありません。"
 japaneseUi: true
 japanesePrompt: "unknown"
 watermark: "limited"
@@ -29,16 +29,16 @@ weaknesses:
   - "公式利用規約上、アウトプットはデフォルト非商用。商用目的には別途認可または商用ライセンスが必要とされている"
   - "日本語プロンプト対応状況は公式に明示されておらず要確認（unknown）"
   - "無料プランの毎日クレジットは当日未使用分が翌日に失効する点に注意"
-lastReviewed: "2026-06-21"
-nextReviewDue: "2026-09-21"
-verifiedAt: "2026-06-17"
+lastReviewed: "2026-11-02"
+nextReviewDue: "2027-02-02"
+verifiedAt: "2026-11-02"
 officialSourceUrl: "https://pixverse.ai/en/terms-of-service"
-pricingSourceNote: "コンシューマー向け公式料金ページURLは未確認。pixverse.ai/pricing・pixverse.ai/en/pricing はいずれも404（2026-06-21確認）。sourceRefs内のdocs.platform.pixverse.ai/pricing-796039m0 はPlatform API料金ページであり、一般ユーザー向け料金ページとは別。最新の料金は公式サイト内（ログイン後等）でご確認ください。"
-pricingStatus: "unconfirmed"
-needsReview: "yes"
+pricingSourceNote: "PixVerse公式AI information pageを2026-11-02に再確認。Web料金は2026-10-15確認値としてBasic $0、Standard $10/月、Pro $30/月、Premium $60/月、Ultraは表示上$199/月（プロモーション）と案内。年払いは別。すべてUSDと明記され、checkout・税・promotionは変更され得るため最終請求額は購入画面で確認する。Platform/API料金とは別。"
+pricingStatus: "confirmed"
+needsReview: "no"
 pricingModel: "subscription_credit"
-freePlanNote: "無料プラン（Basic）あり。複数の第三者情報では、初回サインアップ時に90クレジット付与・毎日60クレジットが補充（当日未使用分は翌日失効）と報告されています。透かしあり・生成回数制限あり。詳細は公式サイトをご確認ください。"
-paidPlanNote: "有料プランあり（USD建て）。複数の第三者情報ではStandard $10/月〜Ultra $199/月の複数ティアが報告されています。料金・条件は公式サイトをご確認ください。"
+freePlanNote: "無料のBasic Webプランあり。2026-10-15時点の公式AI information pageでは、初回60クレジット＋毎日30クレジットと案内されています。無料枠は制限付きで、条件は変更される可能性があります。"
+paidPlanNote: "2026-10-15時点の公式Web月額表示はStandard $10、Pro $30、Premium $60、Ultra $199（表示上のプロモーション価格、参考価格$249）。USD。年払い・Teamは別料金で、最終条件はcheckoutで確認してください。"
 platforms:
   - web
 signupRequired: true
@@ -69,6 +69,8 @@ notFor:
 sources:
   - title: "PixVerse 公式サイト"
     url: "https://pixverse.ai"
+  - title: "PixVerse AI Information For AI Assistants（公式・料金確認）"
+    url: "https://pixverse.ai/en/ai-info-page"
   - title: "PixVerse 利用規約"
     url: "https://pixverse.ai/en/terms-of-service"
   - title: "PixVerse 公式ブログ"
@@ -79,6 +81,9 @@ sourceRefs:
   - label: "PixVerse公式サイト"
     url: "https://pixverse.ai"
     type: official
+  - label: "PixVerse AI Information For AI Assistants（公式・料金確認）"
+    url: "https://pixverse.ai/en/ai-info-page"
+    type: pricing
   - label: "PixVerse利用規約"
     url: "https://pixverse.ai/en/terms-of-service"
     type: official
@@ -105,27 +110,27 @@ faqs:
   - question: "RunwayやPikaとどう使い分けるとよいですか？"
     answer: "PixVerseは日本語UIに対応しており、無料枠で試しやすい点が特徴です。Runwayは映像編集機能が充実、Pikaはシンプルな操作性が強みです。生成スタイルや機能の違いを実際に試して比較するとよいでしょう。"
   - question: "有料プランはいくらですか？"
-    answer: "複数の第三者情報では、最安の有料プランはStandardプランで月$10（約1,200クレジット/月）と報告されています。上位プランとしてPro（$30/月）、Premium（$60/月）、Ultra（$199/月）なども報告されています。料金は変更される場合があります。最新の料金・プラン内容は必ず公式サイトをご確認ください。"
+    answer: "2026年10月15日時点の公式Web料金では、Standard $10/月（1,200クレジット）、Pro $30/月（6,000クレジット）、Premium $60/月（15,000クレジット）、Ultraは表示上$199/月（25,000クレジット）です。すべてUSDで、年払い・Team料金は別です。プロモーションや税、最終請求額はcheckoutで確認してください。"
   - question: "SNSやショート動画の制作に使えますか？"
     answer: "公式ブログでもSNS向けコンテンツ制作やクリエイター向けの用途が案内されており、短尺動画制作に適したユースケースとして紹介されています。商用利用条件については別途公式利用規約をご確認ください。"
   - question: "画像をアップロードして動画生成する場合、著作権に問題はありますか？"
     answer: "入力素材（アップロード画像・参照素材等）の著作権・権利はユーザー自身が事前に確認する必要があります。第三者が権利を持つ画像・イラスト・写真・ブランド素材等を無断でアップロードすることは避けてください。商用利用の場合は出力動画の扱いも含め、最新の公式利用規約をご確認ください。本記事は法的助言ではありません。"
 reviewed:
-  pricing: "2026-06-21"
-  terms: "2026-06-05"
+  pricing: "2026-11-02"
+  terms: "2026-11-02"
   features: "2026-06-15"
 japanBilling:
   providerName: "AIVORA PTE. LTD.（利用規約記載の運営法人）"
   providerCountry: "シンガポール"
   isJapaneseService: false
   pricingUrl: "https://app.pixverse.ai/subscribe"
-  billingCurrency: "要公式確認（公式ブログ言及はUSD）"
+  billingCurrency: "USD（Web公式料金、2026-10-15確認。最終請求はcheckoutで確認）"
   jpyDirectBilling: "unknown"
   localizedJpyDisplay: "unknown"
   taxDisplay: "unknown"
   purchaseChannels: ["web", "appstore", "googleplay", "api"]
-  pricingCheckedAt: "2026-07-13"
-  pricingNote: "Web版の料金はログイン後にのみ表示されるため、現行価格・通貨は要公式確認です。APIメンバーシップはWebサブスクリプションと別契約であることが公式ドキュメントに明記されています。Web版とアプリ版で価格・通貨・条件が異なる場合があります。"
+  pricingCheckedAt: "2026-11-02"
+  pricingNote: "PixVerse公式AI information pageでWeb月額・年額とUSD表記を確認。Web版とPlatform/API、アプリ版は別契約・別価格になり得るため混同しない。税・地域・promotion・最終請求額はcheckoutで確認する。"
   billingCategory: "D"
   sourceUrls:
     - "https://pixverse.ai/en/terms-of-service"
@@ -135,7 +140,7 @@ japanBilling:
 
 ## PixVerseとは
 
-PixVerseはテキストや画像からAI動画を生成できるサービスです。V6モデルを搭載し、最大15秒の動画生成とextend機能（最大8秒延長）に対応しています。公式サイト（pixverse.ai）は日本語UIで提供されており、日本語環境で操作しやすい点が特徴です。無料プラン（Basic）では初回クレジット付与と毎日のクレジット補充で動画生成を試すことができます。
+PixVerseはテキストや画像からAI動画を生成できるサービスです。V6モデルを搭載し、最大15秒の動画生成とextend機能（最大8秒延長）に対応しています。公式サイト（pixverse.ai）は日本語UIで提供されており、日本語環境で操作しやすい点が特徴です。無料プラン（Basic）では、公式情報上、初回60クレジットと毎日30クレジットで動画生成を試すことができます（2026-10-15確認）。
 
 公式ブログではSNSやYouTube向けショートコンテンツ、映画的なストーリー動画など幅広いクリエイター用途が案内されています。
 
@@ -161,11 +166,11 @@ PixVerseは日本語UIを備えたAI動画生成ツールとして、英語UIの
 
 | プラン | 月額（USD）| 月間クレジット目安 |
 |--------|-----------|-----------------|
-| Basic（無料） | $0 | 日60（毎日補充・当日失効） |
+| Basic（無料） | $0 | 初回60＋毎日30 |
 | Standard | $10 | 1,200 |
 | Pro | $30 | 6,000 |
 | Premium | $60 | 15,000 |
-| Ultra | $199 | 25,000 |
+| Ultra | $199（表示上のプロモーション価格） | 25,000 |
 
 上記は第三者情報を元にした参考値です。料金・クレジット数は変更される場合があります。最新の料金・プラン内容は必ず公式サイトをご確認ください。
 

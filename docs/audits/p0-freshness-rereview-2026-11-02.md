@@ -70,7 +70,8 @@ Issue #32のfreshness queueでP0になった4件について、overdueを「誤�
 ### Verified
 - Vidu Q4 current highlights: up to 4K, 16 seconds, 15 reference images, 3 reference audios.
 - Official Japanese UI/page exists.
-- Consumer pricing uses subscription/credit structure, but exact current plan amounts were not reliably available from the public fetched representation.
+- Consumer pricing uses subscription/credit structure, but exact current paid-plan amounts were not reliably available from the public fetched representation.
+- Current official AI Video Generator page states each user receives 40 free credits per month.
 - Existing consumer commercial-use classification remains paid-only; API/platform terms are not used to override consumer rules.
 
 ### Changed
@@ -78,7 +79,8 @@ Issue #32のfreshness queueでP0になった4件について、overdueを「誤�
 - max 7 reference images -> max 15.
 - japaneseUi: false -> true.
 - pricingStatus: unconfirmed -> partial.
-- Exact price remains “official purchase screen” rather than invented value.
+- Free allowance updated to 40 credits/month from the current official AI Video Generator page.
+- Exact paid price remains “official purchase screen” rather than invented value.
 - Freshness metadata -> 2026-11-01 (UTC; review was 2026-11-02 JST).
 
 ## Haiper

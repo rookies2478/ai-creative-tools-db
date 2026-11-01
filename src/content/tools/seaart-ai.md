@@ -32,9 +32,9 @@ weaknesses:
   - "利用するモデルごとにライセンス・権利条件の個別確認が必要な場合がある"
   - "機能が多く、初心者には確認項目が多い"
   - "有料プランの具体的な金額は公開取得では確認できず、購入画面での確認が必要"
-lastReviewed: "2026-11-02"
-nextReviewDue: "2027-02-02"
-verifiedAt: "2026-11-02"
+lastReviewed: "2026-11-01"
+nextReviewDue: "2027-02-01"
+verifiedAt: "2026-11-01"
 officialSourceUrl: "https://www.seaart.ai/"
 pricingModel: "subscription"
 freePlanNote: "無料プランあり。2026-11-02確認の公式Mall FAQでは、Freeユーザーに1日130 Staminaが付与され、標準的な画像生成で約21枚相当と案内されています。モデルごとの消費量・条件は変動するため公式画面で確認してください。"
@@ -65,8 +65,8 @@ usagePolicy:
   inputMaterialRisk: "medium"
   inputMaterialNote: "limitationsにて「入力素材（アップロード画像・参照素材等）の著作権・権利はユーザーが事前に確認する必要があります」と明記されている。利用するモデルごとにライセンス条件の個別確認も必要とされている（公式利用規約）。人物・商標・第三者著作物を含む入力には別途確認が必要。"
 reviewed:
-  pricing: "2026-11-02"
-  terms: "2026-11-02"
+  pricing: "2026-11-01"
+  terms: "2026-11-01"
   features: "2026-06-06"
 sourceRefs:
   - label: "SeaArt AI 公式サイト（日本語）"
@@ -119,7 +119,7 @@ japanBilling:
   localizedJpyDisplay: true
   taxDisplay: "tax-included"
   purchaseChannels: ["web", "appstore", "googleplay"]
-  pricingCheckedAt: "2026-11-02"
+  pricingCheckedAt: "2026-11-01"
   pricingNote: "日本向けには特定商取引法に基づく表記（販売事業者：シーアートジャパン株式会社）があり、「表示価格は消費税を含みます」と明記されています。Web版は日本円・消費税込での決済に対応しています。サブスクリプション（SVIP 4段階）と都度課金のコイン購入が併存する2階建て課金で、具体的な価格は購入画面でご確認ください。なお、Web版とApple App Store／Google Playでは販売元・価格・キャンペーン条件が異なる場合があります。"
   billingCategory: "A"
   sourceUrls:

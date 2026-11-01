@@ -194,3 +194,381 @@ const canonicalUrl = canonicalPath && Astro.site
               <li><a href="/categories/image-generation/">AI画像生成ツール</a></li>
               <li><a href="/categories/video-generation/">AI動画生成ツール</a></li>
               <li><a href="/categories/video-editing/">AI動画編集ツール</a></li>
+              <li><a href="/categories/avatar-video/">AIアバター動画ツール</a></li>
+              <li><a href="/categories/design/">AIデザインツール</a></li>
+              <li><a href="/categories/voice-narration/">AI音声・ナレーションツール</a></li>
+              <li><a href="/comparisons/">比較表</a></li>
+            </ul>
+          </div>
+
+          <!-- 目的別 -->
+          <div class="nf-col">
+            <h4>条件から探す</h4>
+            <ul>
+              <li><a href="/conditions/free/">無料で試せるAIツール</a></li>
+              <li><a href="/conditions/commercial-use/">商用利用を確認しやすいAIツール</a></li>
+              <li><a href="/conditions/japanese/">日本語対応AIツール</a></li>
+              <li><a href="/conditions/no-watermark/">透かしなしAIツール</a></li>
+            </ul>
+          </div>
+
+          <!-- ガイド＋サイト情報 -->
+          <div class="nf-col">
+            <h4>ガイド・サイト情報</h4>
+            <ul>
+              <li><a href="/use-cases/">用途別ガイド一覧</a></li>
+              <li><a href="/guides/commercial-use-copyright/">商用利用・著作権ガイド</a></li>
+              <li><a href="/guides/free-ai-image-tools/">無料ツールの選び方</a></li>
+              <li><a href="/guides/watermark-credit-guide/">透かし・クレジット表記</a></li>
+              <li><a href="/guides/japanese-ai-image-tools/">日本語対応ツールの選び方</a></li>
+              <li><a href="/about/">運営者情報</a></li>
+              <li><a href="/editorial-policy/">掲載方針・比較基準</a></li>
+              <li><a href="/privacy-policy/">プライバシーポリシー</a></li>
+              <li><a href="/contact/">お問い合わせ</a></li>
+              <li><a href="/disclaimer/">免責事項</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="nf-bottom">
+          <span class="nf-copy">© 2026 AIクリエイティブナビ</span>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
+
+<style>
+  /* ===== HEADER ===== */
+  .nv-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: color-mix(in srgb, var(--paper) 82%, transparent);
+    backdrop-filter: saturate(1.2) blur(14px);
+    -webkit-backdrop-filter: saturate(1.2) blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nv-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    height: 68px;
+  }
+  .nv-logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .nv-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: var(--brand);
+    color: var(--on-brand);
+    display: grid;
+    place-items: center;
+    font-family: var(--f-latin);
+    font-weight: 700;
+    font-size: 17px;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+  }
+  .nv-wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .nv-name {
+    font-family: var(--f-jp);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .nv-sub {
+    font-family: var(--f-latin);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .nv-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 6px;
+  }
+  .nv-nav a {
+    font-family: var(--f-jp);
+    font-weight: 600;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    padding: 9px 13px;
+    border-radius: 9px;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .nv-nav a:hover {
+    background: var(--surface);
+    color: var(--brand-ink);
+  }
+  .nv-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nv-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--f-jp);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--on-brand);
+    background: var(--brand);
+    padding: 10px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 6px 18px -6px color-mix(in srgb, var(--brand) 65%, transparent);
+    transition: background 0.18s, transform 0.18s;
+  }
+  .nv-cta:hover {
+    background: var(--brand-press);
+    transform: translateY(-1px);
+  }
+  .nv-arr {
+    transition: transform 0.2s var(--ease);
+  }
+  .nv-cta:hover .nv-arr {
+    transform: translateX(3px);
+  }
+  /* ===== HAMBURGER BUTTON (summary) ===== */
+  .nv-mobile-details {
+    display: none;
+    position: relative;
+    flex-shrink: 0;
+  }
+  /* suppress default triangle marker */
+  .nv-mobile-details > summary { list-style: none; }
+  .nv-mobile-details > summary::-webkit-details-marker { display: none; }
+  .nv-menu::-webkit-details-marker { display: none; }
+  .nv-menu::marker { content: ""; }
+
+  .nv-menu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 9px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    touch-action: manipulation;
+    position: relative;
+    z-index: 120;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+  .nv-menu svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+    flex: 0 0 auto;
+    pointer-events: none;
+  }
+  /* ===== MOBILE PANEL ===== */
+  .nv-mobile-panel {
+    position: fixed;
+    top: 68px;
+    left: 16px;
+    right: 16px;
+    max-width: calc(100vw - 32px);
+    z-index: 110;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 32px -8px rgba(20,22,28,.22);
+    padding: 12px 14px 20px;
+    max-height: calc(100svh - 90px);
+    overflow-y: auto;
+  }
+  .nv-mobile-cta {
+    display: block;
+    font-family: var(--f-jp);
+    font-weight: 700;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background: #4B3FE4;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nv-mobile-cta:hover,
+  .nv-mobile-cta:focus {
+    background: #2E25A6;
+  }
+  .nv-mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .nv-mobile-nav a {
+    display: block;
+    font-family: var(--f-jp);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 12px 14px;
+    border-radius: 10px;
+    transition: background 0.15s, color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nv-mobile-nav a:hover,
+  .nv-mobile-nav a:focus {
+    background: var(--surface-2);
+    color: var(--brand-ink);
+  }
+  .nv-mobile-divider {
+    height: 1px;
+    background: var(--line);
+    margin: 10px 0;
+  }
+
+  /* スマホ用ヘッダーCTA（デフォルト非表示） */
+  .nv-mobile-top-cta {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    .nv-nav { display: none; }
+    .nv-cta { display: none; }
+    .nv-mobile-details { display: block; }
+    .nv-inner { padding: 0 14px; gap: 8px; }
+    .nv-logo { min-width: 0; }
+    .nv-wordmark { min-width: 0; overflow: hidden; }
+    .nv-sub { font-size: 9px; }
+    .nv-mobile-top-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #4B3FE4, #2E25A6);
+      color: #fff;
+      font-family: var(--f-jp);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      text-decoration: none;
+      box-shadow: 0 10px 24px rgba(75, 63, 228, 0.22);
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .nv-sub { display: none; }
+    .nv-mobile-top-cta { font-size: 12px; padding: 0 10px; }
+  }
+
+  /* ===== FOOTER ===== */
+  .nf-footer {
+    background: var(--ink);
+    color: #fff;
+    padding: 64px 0 32px;
+  }
+  .nf-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  .nf-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .nf-logo-light .nv-name { color: #fff; }
+  .nf-logo-light .nv-sub  { color: rgba(255,255,255,.4); }
+  .nf-desc {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 16px;
+    max-width: 340px;
+  }
+  .nf-col h4 {
+    font-family: var(--f-latin);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .nf-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .nf-col a {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 13.5px;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nf-col a:hover { color: #fff; }
+  .nf-bottom {
+    padding-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nf-copy {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12.5px;
+    font-family: var(--f-mono);
+  }
+  @media (max-width: 980px) {
+    .nf-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .nf-about {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 720px) {
+    .nf-grid { grid-template-columns: 1fr; }
+    .nf-inner { padding: 0 18px; }
+    .nf-footer { padding: 48px 0 24px; }
+  }
+
+  /* focus-visible */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+</style>

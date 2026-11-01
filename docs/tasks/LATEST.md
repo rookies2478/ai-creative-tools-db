@@ -1,10 +1,11 @@
 # Latest Project State
 
 - updated_at: 2026-11-01
-- latest_commit: 348b795cde1ce59821a0c3272b61f15bb86f5a64（PR #27 InVideo派生ページ同期をmasterへsquash merge）
+- latest_commit: 3b5d5ba6205e1282e8390d38dd17f4928b67f446（PR #29 GA4/Clarity計測安全修正をmasterへsquash merge）
 - branch: master
-- origin_sync: AI Creative DB masterへPR #27反映確認。InVideo canonical/detail/derived surfacesを2026-11-01正本へ同期。
-- current_active_task: none（2026-11-01-invideo-derived-syncはPR #27マージ後にcompletedへ移管）
+- origin_sync: AI Creative DB masterへPR #29反映確認。GA4/Clarityはcanonical hostnameのみ起動、outbound destination_urlはorigin+pathnameのみ。Production実ブラウザ・GA4 Realtime確認済み。
+- current_active_task: none（2026-11-01-measurement-safetyはPR #29マージ後にcompletedへ移管）
+- latest_completed_task: docs/tasks/completed/2026-11-01-measurement-safety.md（Issue #22 / PR #29。GA4/Clarityをaicreative-db.com exact hostnameのみで初期化、destination_urlをorigin+pathnameへ最小化。Preview request 0件、Production GA4 Realtime・Clarity起動確認。GA4/Clarity ID・affiliate URL不変。GA4拡張計測clickのlink_url query残りは別途検討。）
 - latest_completed_task: docs/tasks/completed/2026-11-01-invideo-derived-sync.md（Issue #25 / PR #27。カテゴリ・日本語表・InVideo vs CapCutの旧ハードコードを正本へ同期。Affiliate/GA4/Clarity不変。）
 - latest_completed_task: docs/tasks/completed/2026-11-01-invideo-ai-official-refresh.md（Issue #23 / PR #24。InVideo AIを現行公式情報へ更新。agentic position、Starter/Plus/Max、commercialUse/watermark unknown、Affiliate URL不変。Build/Cloudflare Pages PASS。派生ページの残存driftはIssue #25。）
 - latest_completed_task: docs/tasks/completed/2026-10-31-ai-creative-control-binding.md（dev-control-worker Issue #52、PR #19。AGENTSとCONTROL_BINDINGを正式導入。Build CI PASS。Worker profile PR #55は無効のままmainへ反映、registryへの追加・ラベル・Windows QAは未実施）

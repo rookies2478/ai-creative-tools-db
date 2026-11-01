@@ -26,6 +26,10 @@ target_files:
   - src/content/tools/pixverse.md
   - src/content/tools/seaart-ai.md
   - src/content/tools/vidu-ai.md
+  - src/pages/tools/haiper/index.astro
+  - src/pages/tools/pixverse/index.astro
+  - src/pages/tools/seaart-ai/index.astro
+  - src/pages/tools/vidu-ai/index.astro
   - docs/tasks/LATEST.md
 
 reference_files:
@@ -59,6 +63,7 @@ acceptance_criteria:
   - "Haiperはservice_changedを維持し、current review結果だけを記録"
   - "4件ともlastReviewed / relevant reviewed metadataを2026-11-02 reviewに整合"
   - "affiliate data / URL / CTAは無変更"
+  - "static override詳細ページとtool DBの公開claimが同じEvidenceへ整合"
 
 forbidden_operations:
   - PRODUCTION_DEPLOY

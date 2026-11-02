@@ -25,6 +25,13 @@ assert.ok(bad.errors.some((m) => m.includes('would not be tracked')));
 const hard = auditTool('runway', { affiliate: [{ toolSlug: 'runway', placement: 'primary', url: 'https://runwayml.com', enabled: true, approved: true }], detailDefaultsOfficial: true });
 assert.ok(hard.errors.some((m) => m.includes('affiliate')));
 
+// secondary links: cell-link injection must be detected; dead TdpToolPage must not hide behind false positives
+const full = runAudit();
+assert.ok(full.ctaComponents.find((c) => c.name === 'ToolDetailPage.astro').usedByToolPages);
+assert.ok(!full.ctaComponents.find((c) => c.name === 'TdpToolPage.astro').usedByToolPages);
+assert.equal(auditTool('kling-ai', { affiliate: [], detailDefaultsOfficial: true, detailTracksCellLinks: false }).untrackedInlineExternal, 1);
+assert.equal(auditTool('kling-ai', { affiliate: [], detailDefaultsOfficial: true, detailTracksCellLinks: true }).untrackedInlineExternal, 0);
+
 // whole repo must be clean
 const r = runAudit();
 assert.deepEqual(r.errors, []);

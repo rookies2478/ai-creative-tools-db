@@ -155,6 +155,12 @@ const ctaAttrs = (cta: NonNullable<Props['primaryCta']>, fallbackPosition: strin
   'data-affiliate-provider': cta.outboundType === 'affiliate' ? cta.affiliateProvider : undefined,
 });
 
+// 表セル内の外部リンク(target=_blank)にも計測属性を付与する。href/rel/target/文言は変更しない。placement は "table"。
+const trackCellLinks = (html: string) => html.replace(/<a\s([^>]*?)>/g, (m, attrs: string) => {
+  if (/data-outbound-type/.test(attrs) || !/href="https?:\/\//.test(attrs) || !/target="_blank"/.test(attrs)) return m;
+  const esc = (v: string) => v.replace(/"/g, '&quot;');
+  return `<a ${attrs} data-outbound-type="official" data-tool-name="${esc(toolName)}" data-tool-slug="${esc(toolSlug)}" data-cta-position="table">`;
+});
 const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
 const tableClass = (t: RichTable) => `tdp-gt ${t.kind ?? 'cmp'}`;
 const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono ? 'mono' : ''].filter(Boolean).join(' ');
@@ -265,7 +271,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
     <div class="reveal">
       <div class="tdp-tablewrap"><table class={tableClass(quickTable)}>
         {quickTable.headers ? <thead><tr>{quickTable.headers.map((h) => (<th>{h}</th>))}</tr></thead> : null}
-        <tbody>{quickTable.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={c.html}></td>))}</tr>))}</tbody>
+        <tbody>{quickTable.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={trackCellLinks(c.html)}></td>))}</tr>))}</tbody>
       </table></div>
       {quickTable.note ? <p class="tdp-tnote">{quickTable.note}</p> : null}
     </div>
@@ -283,7 +289,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
           <h3>料金プラン</h3>
           <div class="tdp-tablewrap"><table class={tableClass(pricing.table)}>
             {pricing.table.headers ? <thead><tr>{pricing.table.headers.map((h) => (<th>{h}</th>))}</tr></thead> : null}
-            <tbody>{pricing.table.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={c.html}></td>))}</tr>))}</tbody>
+            <tbody>{pricing.table.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={trackCellLinks(c.html)}></td>))}</tr>))}</tbody>
           </table></div>
           <ul>{pricing.notes.map((n) => (<li set:html={n}></li>))}</ul>
         </>}
@@ -343,7 +349,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
         {selectTable && <>
           <div class="tdp-tablewrap"><table class={tableClass(selectTable)}>
             {selectTable.headers ? <thead><tr>{selectTable.headers.map((h) => (<th>{h}</th>))}</tr></thead> : null}
-            <tbody>{selectTable.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={c.html}></td>))}</tr>))}</tbody>
+            <tbody>{selectTable.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={trackCellLinks(c.html)}></td>))}</tr>))}</tbody>
           </table></div>
         </>}
 
@@ -351,7 +357,7 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
           <div class="tdp-sechead reveal" style="margin-top:44px;margin-bottom:18px;"><h2 style="font-size:21px;">主要ツールとの違い</h2></div>
           <div class="tdp-tablewrap"><table class={tableClass(versusTable)}>
             {versusTable.headers ? <thead><tr>{versusTable.headers.map((h) => (<th>{h}</th>))}</tr></thead> : null}
-            <tbody>{versusTable.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={c.html}></td>))}</tr>))}</tbody>
+            <tbody>{versusTable.rows.map((row) => (<tr>{row.map((c) => (<td class={cellClass(c)} set:html={trackCellLinks(c.html)}></td>))}</tr>))}</tbody>
           </table></div>
           {versusTable.note ? <p class="tdp-tnote">{versusTable.note}</p> : null}
         </>}

@@ -3,42 +3,42 @@
 生成: `npm run audit:cta -- --write`（手編集禁止）。契約: `docs/analytics/cta-event-schema.md`
 
 - ツール数: 32
-- errors: 0 / warnings: 53
+- errors: 0 / warnings: 51
 
 | tool_slug | template | CTA計測 | affiliate(resolver) | 未計測インライン外部リンク | status |
 |---|---|---|---|---|---|
 | adobe-firefly | AdobeFireflyTool | 2/2 | - | 0 | OK |
-| canva-ai-image-generator | ToolDetailPage | 2/2 | - | 1 | OK |
-| capcut-ai | ToolDetailPage | 2/2 | - | 1 | OK |
-| clipdrop | ToolDetailPage | 2/2 | - | 1 | OK |
+| canva-ai-image-generator | ToolDetailPage | 2/2 | - | 0 | OK |
+| capcut-ai | ToolDetailPage | 2/2 | - | 0 | OK |
+| clipdrop | ToolDetailPage | 2/2 | - | 0 | OK |
 | creatify | [slug].astro | 3/3 | - | 0 | OK |
-| d-id | ToolDetailPage | 2/2 | - | 1 | OK |
-| dalle | ToolDetailPage | 2/2 | - | 1 | OK |
-| dreamstudio | ToolDetailPage | 2/2 | - | 1 | OK |
-| fotor-ai | ToolDetailPage | 2/2 | - | 1 | OK |
-| gemini-image-generation | ToolDetailPage | 2/2 | - | 1 | OK |
-| hailuo-ai | ToolDetailPage | 2/2 | - | 1 | OK |
-| haiper | ToolDetailPage | 2/2 | - | 1 | OK |
-| heygen | ToolDetailPage | 2/2 | - | 1 | OK |
-| ideogram | ToolDetailPage | 2/2 | - | 1 | OK |
-| invideo-ai | ToolDetailPage | 2/2 | yes | 1 | OK |
-| kling-ai | ToolDetailPage | 2/2 | - | 1 | OK |
-| leonardo-ai | ToolDetailPage | 2/2 | - | 1 | OK |
-| luma-ai | ToolDetailPage | 2/2 | - | 1 | OK |
-| microsoft-designer | ToolDetailPage | 2/2 | - | 1 | OK |
-| midjourney | ToolDetailPage | 2/2 | - | 1 | OK |
-| nightcafe | ToolDetailPage | 2/2 | - | 1 | OK |
+| d-id | ToolDetailPage | 2/2 | - | 0 | OK |
+| dalle | ToolDetailPage | 2/2 | - | 0 | OK |
+| dreamstudio | ToolDetailPage | 2/2 | - | 0 | OK |
+| fotor-ai | ToolDetailPage | 2/2 | - | 0 | OK |
+| gemini-image-generation | ToolDetailPage | 2/2 | - | 0 | OK |
+| hailuo-ai | ToolDetailPage | 2/2 | - | 0 | OK |
+| haiper | ToolDetailPage | 2/2 | - | 0 | OK |
+| heygen | ToolDetailPage | 2/2 | - | 0 | OK |
+| ideogram | ToolDetailPage | 2/2 | - | 0 | OK |
+| invideo-ai | ToolDetailPage | 2/2 | yes | 0 | OK |
+| kling-ai | ToolDetailPage | 2/2 | - | 0 | OK |
+| leonardo-ai | ToolDetailPage | 2/2 | - | 0 | OK |
+| luma-ai | ToolDetailPage | 2/2 | - | 0 | OK |
+| microsoft-designer | ToolDetailPage | 2/2 | - | 0 | OK |
+| midjourney | ToolDetailPage | 2/2 | - | 0 | OK |
+| nightcafe | ToolDetailPage | 2/2 | - | 0 | OK |
 | photoroom | [slug].astro | 3/3 | - | 0 | OK |
-| pika | ToolDetailPage | 2/2 | - | 1 | OK |
-| pixverse | ToolDetailPage | 2/2 | - | 1 | OK |
-| playground-ai | ToolDetailPage | 2/2 | - | 1 | OK |
+| pika | ToolDetailPage | 2/2 | - | 0 | OK |
+| pixverse | ToolDetailPage | 2/2 | - | 0 | OK |
+| playground-ai | ToolDetailPage | 2/2 | - | 0 | OK |
 | recraft | [slug].astro | 3/3 | - | 0 | OK |
-| runway | ToolDetailPage | 2/2 | - | 1 | OK |
-| seaart-ai | ToolDetailPage | 2/2 | - | 1 | OK |
-| stable-diffusion | ToolDetailPage | 2/2 | - | 1 | OK |
-| synthesia | ToolDetailPage | 2/2 | - | 1 | OK |
-| tensor-art | ToolDetailPage | 2/2 | - | 1 | OK |
-| vidu-ai | ToolDetailPage | 2/2 | - | 1 | OK |
+| runway | ToolDetailPage | 2/2 | - | 0 | OK |
+| seaart-ai | ToolDetailPage | 2/2 | - | 0 | OK |
+| stable-diffusion | ToolDetailPage | 2/2 | - | 0 | OK |
+| synthesia | ToolDetailPage | 2/2 | - | 0 | OK |
+| tensor-art | ToolDetailPage | 2/2 | - | 0 | OK |
+| vidu-ai | ToolDetailPage | 2/2 | - | 0 | OK |
 
 ## CTA一覧
 
@@ -168,6 +168,4 @@
 - tensor-art: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')
 - vidu-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')
 - vidu-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')
-- component AdobeFireflyTool.astro renders a primary CTA but no tool page imports it (dead/duplicate CTA implementation)
 - component TdpToolPage.astro renders a primary CTA but no tool page imports it (dead/duplicate CTA implementation)
-- component ToolDetailPage.astro renders a primary CTA but no tool page imports it (dead/duplicate CTA implementation)

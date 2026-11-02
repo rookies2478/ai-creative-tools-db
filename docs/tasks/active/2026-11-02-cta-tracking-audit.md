@@ -30,6 +30,7 @@ target_files:
   - src/components/AdobeFireflyTool.astro
   - src/pages/tools/[slug].astro
   - src/pages/tools/invideo-ai/index.astro
+  - docs/analytics/asp-subid-design.md
 
 reference_files:
   - docs/tasks/LATEST.md
@@ -56,5 +57,7 @@ forbidden_operations:
 ---
 
 # Task
+
+Stacked follow-up (base = feat/cta-tracking-audit, PR #41): secondary link tracking (table/source/terms placements), audit dead-component false-positive fix, GA4 dimension list and ASP sub-id design doc. Merge after #41.
 
 Fork作業用。Draft PRのみ。

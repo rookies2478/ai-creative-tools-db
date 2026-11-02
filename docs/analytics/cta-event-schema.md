@@ -17,7 +17,7 @@ Static check: `npm run audit:cta` (CI) -> `reports/cta-tracking-audit.md`.
 |---|---|---|
 | `tool_slug` | `data-tool-slug` | **JOIN KEY.** = `src/content/tools/<slug>.md` = URL `/tools/<slug>/` = `toolAffiliateLinks.toolSlug` |
 | `tool_name` | `data-tool-name` | display name (legacy, kept) |
-| `placement` | `data-cta-position` | `hero` / `pricing` / `primary` / `secondary` / `checklist` |
+| `placement` | `data-cta-position` | `hero` / `pricing` / `primary` / `secondary` / `checklist` (main CTAs); `table` (official link inside comparison/quick table cell), `source` (official info/usage-guide button), `terms` (terms-of-use button). `table` links in `ToolDetailPage` are tagged at render by `trackCellLinks`. |
 | `cta_position` | same | legacy duplicate of `placement`, kept for GA4 continuity; drop after migration |
 | `link_type` | `data-outbound-type` | `official` / `affiliate` |
 | `affiliate_provider` | `data-affiliate-provider` | e.g. `Impact / InVideo`; empty for official |
@@ -43,3 +43,16 @@ Static check: `npm run audit:cta` (CI) -> `reports/cta-tracking-audit.md`.
 
 - Register custom dimensions in GA4 Admin (`tool_slug`, `placement`, `link_type`, `affiliate_provider`, `destination_domain`) before they appear in reports.
 - Browser real-click verification: see "Claude in Chrome確認待ち" in `reports/cta-tracking-audit.md` PR notes.
+
+## GA4 custom dimensions to register (event-scoped)
+
+`tool_slug`, `placement`, `link_type`, `affiliate_provider`, `destination_domain`, `page_path`, `tool_name`.
+Not needed: `cta_position` (legacy duplicate of `placement`), `destination_url` (high cardinality; keep for DebugView only, or register only if needed).
+
+## Known untracked (by design)
+
+- Related-tool "公式 ↗" links and source-list links in `ToolDetailPage` (point to other tools / reference sources; `tool_slug` would be misattributed).
+- Middle-click / keyboard-open in new tab (`auxclick`) is not captured; only `click`.
+- `TdpToolPage.astro` (+ Leonardo/Midjourney wrapper components) is unused by any page and has untracked CTAs; delete or instrument before reuse.
+
+ASP sub-id proposal: `asp-subid-design.md`.

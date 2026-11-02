@@ -1103,10 +1103,6 @@
       "usedByToolPages": true
     },
     {
-      "name": "TdpToolPage.astro",
-      "usedByToolPages": false
-    },
-    {
       "name": "ToolDetailPage.astro",
       "usedByToolPages": true
     }
@@ -1162,7 +1158,6 @@
     "tensor-art: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
     "tensor-art: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
     "vidu-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
-    "vidu-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
-    "component TdpToolPage.astro renders a primary CTA but no tool page imports it (dead/duplicate CTA implementation)"
+    "vidu-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
   ]
 }

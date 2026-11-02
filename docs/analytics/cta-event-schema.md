@@ -53,6 +53,6 @@ Not needed: `cta_position` (legacy duplicate of `placement`), `destination_url` 
 
 - Related-tool "公式 ↗" links and source-list links in `ToolDetailPage` (point to other tools / reference sources; `tool_slug` would be misattributed).
 - Middle-click / keyboard-open in new tab (`auxclick`) is not captured; only `click`.
-- `TdpToolPage.astro` (+ Leonardo/Midjourney wrapper components) is unused by any page and has untracked CTAs; delete or instrument before reuse.
+- Removed: `TdpToolPage.astro`, `LeonardoAiTool.astro`, `MidjourneyTool.astro` (orphan components, imported nowhere, with untracked CTAs). `audit:cta` still warns if a new CTA-rendering component is not imported by any tool page.
 
 ASP sub-id proposal: `asp-subid-design.md`.

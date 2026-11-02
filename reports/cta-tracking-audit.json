@@ -1,0 +1,1170 @@
+{
+  "generatedFor": "src/content/tools/*.md",
+  "toolCount": 32,
+  "tools": [
+    {
+      "slug": "adobe-firefly",
+      "template": "AdobeFireflyTool",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 0,
+      "rows": [
+        {
+          "slug": "adobe-firefly",
+          "cta": "primaryCta",
+          "placement": "hero",
+          "href": "(component prop)",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "adobe-firefly",
+          "cta": "secondaryCta",
+          "placement": "pricing",
+          "href": "(component prop)",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": []
+    },
+    {
+      "slug": "canva-ai-image-generator",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "canva-ai-image-generator",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://www.canva.com",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "canva-ai-image-generator",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://www.canva.com/pricing/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "canva-ai-image-generator: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "canva-ai-image-generator: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "capcut-ai",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "capcut-ai",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://www.capcut.com/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "capcut-ai",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://www.capcut.com/help/new-capcut-subscription-pricing",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "capcut-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "capcut-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "clipdrop",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "clipdrop",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://clipdrop.co/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "clipdrop",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://clipdrop.co/pricing",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "clipdrop: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "clipdrop: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "creatify",
+      "template": "[slug].astro",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 3,
+      "trackedCtaCount": 3,
+      "untrackedInlineExternal": 0,
+      "rows": [
+        {
+          "slug": "creatify",
+          "cta": "slug-cta-1",
+          "placement": "checklist",
+          "href": "data.affiliateUrl ?? data.officialUrl",
+          "type": "official|affiliate (frontmatter)",
+          "event": "official_site_click|affiliate_click",
+          "tracked": true
+        },
+        {
+          "slug": "creatify",
+          "cta": "slug-cta-2",
+          "placement": "hero",
+          "href": "data.affiliateUrl ?? data.officialUrl",
+          "type": "official|affiliate (frontmatter)",
+          "event": "official_site_click|affiliate_click",
+          "tracked": true
+        },
+        {
+          "slug": "creatify",
+          "cta": "slug-cta-3",
+          "placement": "pricing",
+          "href": "data.affiliateUrl ?? data.officialUrl",
+          "type": "official|affiliate (frontmatter)",
+          "event": "official_site_click|affiliate_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": []
+    },
+    {
+      "slug": "d-id",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "d-id",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://www.d-id.com/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "d-id",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://www.d-id.com/pricing/studio/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "d-id: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "d-id: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "dalle",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "dalle",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://openai.com/dall-e-3",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "dalle",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://openai.com/policies/usage-policies",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "dalle: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "dalle: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "dreamstudio",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "dreamstudio",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://stability.ai/brandstudio",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "dreamstudio",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://stability.ai/license",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "dreamstudio: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "dreamstudio: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "fotor-ai",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "fotor-ai",
+          "cta": "primaryCta",
+          "placement": "hero",
+          "href": "https://www.fotor.com/jp/ai-image-generator/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "fotor-ai",
+          "cta": "secondaryCta",
+          "placement": "pricing",
+          "href": "https://www.fotor.com/jp/pricing/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": []
+    },
+    {
+      "slug": "gemini-image-generation",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "gemini-image-generation",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://gemini.google/jp/overview/image-generation/?hl=ja-JP",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "gemini-image-generation",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://policies.google.com/terms/generative-ai/use-policy",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "gemini-image-generation: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "gemini-image-generation: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "hailuo-ai",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "hailuo-ai",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://hailuoai.video",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "hailuo-ai",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://hailuoai.video/doc/terms-of-service.html",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "hailuo-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "hailuo-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "haiper",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "haiper",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://haiper.ai/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "haiper",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://docs.haiper.ai/pricing",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "haiper: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "haiper: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "heygen",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "heygen",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://www.heygen.com/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "heygen",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://www.heygen.com/pricing",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "heygen: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "heygen: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "ideogram",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "ideogram",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://ideogram.ai/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "ideogram",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://ideogram.ai/legal/tos",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "ideogram: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "ideogram: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "invideo-ai",
+      "template": "ToolDetailPage",
+      "resolverUsed": true,
+      "affiliateEnabled": true,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "invideo-ai",
+          "cta": "primaryCta",
+          "placement": "hero",
+          "href": "(resolver:outboundLink.url)",
+          "type": "affiliate(resolver)",
+          "event": "affiliate_click|official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "invideo-ai",
+          "cta": "secondaryCta",
+          "placement": "pricing",
+          "href": "(resolver:pricingOutboundLink.url)",
+          "type": "affiliate(resolver)",
+          "event": "affiliate_click|official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": []
+    },
+    {
+      "slug": "kling-ai",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "kling-ai",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://kling.ai",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "kling-ai",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://kling.ai/membership/membership-plan",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "kling-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "kling-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "leonardo-ai",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "leonardo-ai",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://leonardo.ai",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "leonardo-ai",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://leonardo.ai/pricing/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "leonardo-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "leonardo-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "luma-ai",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "luma-ai",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://lumalabs.ai/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "luma-ai",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://lumalabs.ai/pricing",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "luma-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "luma-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "microsoft-designer",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "microsoft-designer",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://designer.microsoft.com/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "microsoft-designer",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://support.microsoft.com/ja-JP/designer/frequently-asked-questions-about-microsoft-designer",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "microsoft-designer: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "microsoft-designer: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "midjourney",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "midjourney",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://www.midjourney.com",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "midjourney",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "midjourney: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "midjourney: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "nightcafe",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "nightcafe",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://creator.nightcafe.studio/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "nightcafe",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://nightcafe.studio/policies/terms-of-service",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "nightcafe: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "nightcafe: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "photoroom",
+      "template": "[slug].astro",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 3,
+      "trackedCtaCount": 3,
+      "untrackedInlineExternal": 0,
+      "rows": [
+        {
+          "slug": "photoroom",
+          "cta": "slug-cta-1",
+          "placement": "checklist",
+          "href": "data.affiliateUrl ?? data.officialUrl",
+          "type": "official|affiliate (frontmatter)",
+          "event": "official_site_click|affiliate_click",
+          "tracked": true
+        },
+        {
+          "slug": "photoroom",
+          "cta": "slug-cta-2",
+          "placement": "hero",
+          "href": "data.affiliateUrl ?? data.officialUrl",
+          "type": "official|affiliate (frontmatter)",
+          "event": "official_site_click|affiliate_click",
+          "tracked": true
+        },
+        {
+          "slug": "photoroom",
+          "cta": "slug-cta-3",
+          "placement": "pricing",
+          "href": "data.affiliateUrl ?? data.officialUrl",
+          "type": "official|affiliate (frontmatter)",
+          "event": "official_site_click|affiliate_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": []
+    },
+    {
+      "slug": "pika",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "pika",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://pika.art",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "pika",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://pika.art/pricing",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "pika: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "pika: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "pixverse",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "pixverse",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://pixverse.ai",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "pixverse",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://pixverse.ai/en/terms-of-service",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "pixverse: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "pixverse: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "playground-ai",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "playground-ai",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://playgroundai.com/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "playground-ai",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://playgroundai.com/design/pricing",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "playground-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "playground-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "recraft",
+      "template": "[slug].astro",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 3,
+      "trackedCtaCount": 3,
+      "untrackedInlineExternal": 0,
+      "rows": [
+        {
+          "slug": "recraft",
+          "cta": "slug-cta-1",
+          "placement": "checklist",
+          "href": "data.affiliateUrl ?? data.officialUrl",
+          "type": "official|affiliate (frontmatter)",
+          "event": "official_site_click|affiliate_click",
+          "tracked": true
+        },
+        {
+          "slug": "recraft",
+          "cta": "slug-cta-2",
+          "placement": "hero",
+          "href": "data.affiliateUrl ?? data.officialUrl",
+          "type": "official|affiliate (frontmatter)",
+          "event": "official_site_click|affiliate_click",
+          "tracked": true
+        },
+        {
+          "slug": "recraft",
+          "cta": "slug-cta-3",
+          "placement": "pricing",
+          "href": "data.affiliateUrl ?? data.officialUrl",
+          "type": "official|affiliate (frontmatter)",
+          "event": "official_site_click|affiliate_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": []
+    },
+    {
+      "slug": "runway",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "runway",
+          "cta": "primaryCta",
+          "placement": "hero",
+          "href": "https://runwayml.com",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "runway",
+          "cta": "secondaryCta",
+          "placement": "pricing",
+          "href": "https://runwayml.com/pricing/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": []
+    },
+    {
+      "slug": "seaart-ai",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "seaart-ai",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://www.seaart.ai/ja",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "seaart-ai",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://image.cdn2.seaart.me/20250802/d2790ce8-f8e8-4ea4-a4a1-c958c728566e.html",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "seaart-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "seaart-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "stable-diffusion",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "stable-diffusion",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://stability.ai",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "stable-diffusion",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://stability.ai/license",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "stable-diffusion: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "stable-diffusion: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "synthesia",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "synthesia",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://www.synthesia.io/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "synthesia",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://www.synthesia.io/pricing",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "synthesia: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "synthesia: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "tensor-art",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "tensor-art",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://tensor.art/",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "tensor-art",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://tensor.art/about/terms-of-service-new",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "tensor-art: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "tensor-art: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    },
+    {
+      "slug": "vidu-ai",
+      "template": "ToolDetailPage",
+      "resolverUsed": false,
+      "affiliateEnabled": false,
+      "ctaCount": 2,
+      "trackedCtaCount": 2,
+      "untrackedInlineExternal": 1,
+      "rows": [
+        {
+          "slug": "vidu-ai",
+          "cta": "primaryCta",
+          "placement": "primary",
+          "href": "https://www.vidu.com",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        },
+        {
+          "slug": "vidu-ai",
+          "cta": "secondaryCta",
+          "placement": "secondary",
+          "href": "https://www.vidu.com/terms",
+          "type": "official",
+          "event": "official_site_click",
+          "tracked": true
+        }
+      ],
+      "errors": [],
+      "warns": [
+        "vidu-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+        "vidu-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')"
+      ]
+    }
+  ],
+  "ctaComponents": [
+    {
+      "name": "AdobeFireflyTool.astro",
+      "usedByToolPages": false
+    },
+    {
+      "name": "TdpToolPage.astro",
+      "usedByToolPages": false
+    },
+    {
+      "name": "ToolDetailPage.astro",
+      "usedByToolPages": false
+    }
+  ],
+  "errors": [],
+  "warns": [
+    "canva-ai-image-generator: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "canva-ai-image-generator: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "capcut-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "capcut-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "clipdrop: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "clipdrop: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "d-id: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "d-id: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "dalle: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "dalle: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "dreamstudio: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "dreamstudio: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "gemini-image-generation: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "gemini-image-generation: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "hailuo-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "hailuo-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "haiper: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "haiper: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "heygen: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "heygen: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "ideogram: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "ideogram: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "kling-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "kling-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "leonardo-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "leonardo-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "luma-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "luma-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "microsoft-designer: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "microsoft-designer: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "midjourney: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "midjourney: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "nightcafe: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "nightcafe: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "pika: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "pika: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "pixverse: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "pixverse: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "playground-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "playground-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "seaart-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "seaart-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "stable-diffusion: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "stable-diffusion: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "synthesia: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "synthesia: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "tensor-art: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "tensor-art: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "vidu-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "vidu-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
+    "component AdobeFireflyTool.astro renders a primary CTA but no tool page imports it (dead/duplicate CTA implementation)",
+    "component TdpToolPage.astro renders a primary CTA but no tool page imports it (dead/duplicate CTA implementation)",
+    "component ToolDetailPage.astro renders a primary CTA but no tool page imports it (dead/duplicate CTA implementation)"
+  ]
+}

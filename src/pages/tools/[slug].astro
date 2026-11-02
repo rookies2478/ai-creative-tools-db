@@ -251,6 +251,7 @@ const pageDescription = `${data.name}の特徴、料金、無料プランの有�
             href={data.affiliateUrl ?? data.officialUrl}
             target="_blank"
             rel={data.affiliateUrl ? 'sponsored nofollow noopener noreferrer' : 'nofollow noopener noreferrer'}
+            data-outbound-type={data.affiliateUrl ? 'affiliate' : 'official'} data-tool-name={data.name} data-tool-slug={entry.slug} data-cta-position="hero"
             class="btn btn-primary"
           >
             公式サイトで確認する <span class="arr">↗</span>
@@ -534,6 +535,7 @@ const pageDescription = `${data.name}の特徴、料金、無料プランの有�
             href={data.affiliateUrl ?? data.officialUrl}
             target="_blank"
             rel={data.affiliateUrl ? 'sponsored nofollow noopener noreferrer' : 'nofollow noopener noreferrer'}
+            data-outbound-type={data.affiliateUrl ? 'affiliate' : 'official'} data-tool-name={data.name} data-tool-slug={entry.slug} data-cta-position="pricing"
             class="btn btn-primary"
           >
             料金・利用条件を公式サイトで確認する <span class="arr">↗</span>
@@ -763,7 +765,7 @@ const pageDescription = `${data.name}の特徴、料金、無料プランの有�
           ))}
         </ul>
         <div class="td-checklist-cta">
-          <a href={data.affiliateUrl ?? data.officialUrl} target="_blank" rel={data.affiliateUrl ? 'sponsored nofollow noopener noreferrer' : 'nofollow noopener noreferrer'} class="btn btn-primary">
+          <a href={data.affiliateUrl ?? data.officialUrl} target="_blank" rel={data.affiliateUrl ? 'sponsored nofollow noopener noreferrer' : 'nofollow noopener noreferrer'} data-outbound-type={data.affiliateUrl ? 'affiliate' : 'official'} data-tool-name={data.name} data-tool-slug={entry.slug} data-cta-position="checklist" class="btn btn-primary">
             {data.conversionGuide.primaryCtaLabel ?? `${data.name}の公式サイトで最新条件を確認する`} <span class="arr">↗</span>
           </a>
           {data.usagePolicy?.termsUrl && (

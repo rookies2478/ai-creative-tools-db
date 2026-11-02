@@ -26,6 +26,11 @@ jobs:
       - name: Validate tool data
         run: npm run validate:data
 
+      - name: Audit CTA tracking
+        run: |
+          npm run audit:cta:test
+          npm run audit:cta
+
       - name: Build site
         run: npm run build
 

@@ -46,8 +46,8 @@ export interface Props {
   headingHtml: string;
   lead: string;
   specs: SpecItem[];
-  primaryCta: { label: string; href: string; rel?: string; outboundType?: 'official' | 'affiliate'; ctaPosition?: string };
-  secondaryCta?: { label: string; href: string; rel?: string; outboundType?: 'official' | 'affiliate'; ctaPosition?: string };
+  primaryCta: { label: string; href: string; rel?: string; outboundType?: 'official' | 'affiliate'; ctaPosition?: string; affiliateProvider?: string };
+  secondaryCta?: { label: string; href: string; rel?: string; outboundType?: 'official' | 'affiliate'; ctaPosition?: string; affiliateProvider?: string };
   primaryCtaDisclosure?: string;
   caution?: string;
   basicInfo: InfoCard[];
@@ -145,6 +145,16 @@ const {
   japanBilling,
 } = Astro.props as Props;
 
+// CTA計測属性（docs/analytics/cta-event-schema.md）。outboundType未指定でも official として必ず計測する。
+const toolSlug = Astro.url.pathname.split('/').filter(Boolean)[1] ?? '';
+const ctaAttrs = (cta: NonNullable<Props['primaryCta']>, fallbackPosition: string) => ({
+  'data-outbound-type': cta.outboundType ?? 'official',
+  'data-tool-name': toolName,
+  'data-tool-slug': toolSlug,
+  'data-cta-position': cta.ctaPosition ?? fallbackPosition,
+  'data-affiliate-provider': cta.outboundType === 'affiliate' ? cta.affiliateProvider : undefined,
+});
+
 const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
 const tableClass = (t: RichTable) => `tdp-gt ${t.kind ?? 'cmp'}`;
 const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono ? 'mono' : ''].filter(Boolean).join(' ');
@@ -176,8 +186,8 @@ const cellClass = (c: TableCell) => [c.rk ? 'rk' : '', c.me ? 'me' : '', c.mono 
     </div>
 
     <div class="tdp-actions">
-      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel={primaryCta.rel ?? 'nofollow noopener noreferrer'} data-outbound-type={primaryCta.outboundType} data-tool-name={primaryCta.outboundType ? toolName : undefined} data-cta-position={primaryCta.outboundType ? (primaryCta.ctaPosition ?? 'primary') : undefined}>{primaryCta.label} <span class="ext">↗</span></a>
-      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel={secondaryCta.rel ?? 'nofollow noopener noreferrer'} data-outbound-type={secondaryCta.outboundType} data-tool-name={secondaryCta.outboundType ? toolName : undefined} data-cta-position={secondaryCta.outboundType ? (secondaryCta.ctaPosition ?? 'secondary') : undefined}>{secondaryCta.label} <span class="ext">↗</span></a> : null}
+      <a href={primaryCta.href} class="btn btn-primary" target="_blank" rel={primaryCta.rel ?? 'nofollow noopener noreferrer'} {...ctaAttrs(primaryCta, 'primary')}>{primaryCta.label} <span class="ext">↗</span></a>
+      {secondaryCta ? <a href={secondaryCta.href} class="btn btn-ghost" target="_blank" rel={secondaryCta.rel ?? 'nofollow noopener noreferrer'} {...ctaAttrs(secondaryCta, 'secondary')}>{secondaryCta.label} <span class="ext">↗</span></a> : null}
     </div>
     {primaryCtaDisclosure && <p class="tdp-pr-disclosure">{primaryCtaDisclosure}</p>}
 

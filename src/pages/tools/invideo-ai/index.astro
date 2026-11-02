@@ -70,9 +70,9 @@ const jsonLd = JSON.stringify([
         { lb: '日本語UI', badge: { s: 'cond', label: '未確認（要公式確認）' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
-      primaryCta={{ label: '公式サイトで確認する', href: outboundLink.url, rel: outboundLink.rel, outboundType: outboundLink.linkType, ctaPosition: 'hero' }}
+      primaryCta={{ label: '公式サイトで確認する', href: outboundLink.url, rel: outboundLink.rel, outboundType: outboundLink.linkType, ctaPosition: 'hero', affiliateProvider: outboundLink.provider }}
       primaryCtaDisclosure={outboundLink.isAffiliate && outboundLink.disclosureRequired ? 'このページにはアフィリエイトリンクが含まれます。' : undefined}
-      secondaryCta={{ label: '料金プランを確認（公式）', href: pricingOutboundLink.url, rel: pricingOutboundLink.rel, outboundType: pricingOutboundLink.linkType, ctaPosition: 'pricing' }}
+      secondaryCta={{ label: '料金プランを確認（公式）', href: pricingOutboundLink.url, rel: pricingOutboundLink.rel, outboundType: pricingOutboundLink.linkType, ctaPosition: 'pricing', affiliateProvider: pricingOutboundLink.provider }}
       basicInfo={[
         {
           title: '商用利用', badge: { s: 'cond', label: '規約上ライセンスあり・プラン別は要確認' }, wide: true,

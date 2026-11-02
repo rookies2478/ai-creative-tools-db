@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
+import { ASP_SUBID_CONFIG, buildAspSubId, applyAspSubId, sanitizeSubIdPart } from '../src/utils/aspSubId.ts';
 import { CTA_PLACEMENTS, toCtaPlacement, toLinkPlacement, isCtaPlacement } from '../src/utils/ctaPlacement.ts';
-import { parseAffiliateEntries, parseCtaProp, isAffiliateHost, auditTool, auditPlacements, runAudit } from './audit-cta-tracking.mjs';
+import { parseAffiliateEntries, parseCtaProp, isAffiliateHost, auditTool, auditPlacements, auditAspSubId, runAudit } from './audit-cta-tracking.mjs';
 
 // parseCtaProp
 const c = parseCtaProp("primaryCta={{ label: 'x', href: 'https://a.example', outboundType: 'official', ctaPosition: 'hero' }}", 'primaryCta');
@@ -53,6 +54,40 @@ assert.ok(auditPlacements([], 'cta_position: a, placement: b,').length === 1);
 const mapped = "const l = resolveToolOutboundLink({ toolSlug: 'x', officialUrl: 'https://x.example', placement: 'pricing' });\nsecondaryCta={{ href: l.url, ctaPosition: 'pricing' }}";
 assert.deepEqual(auditPlacements([{ file: 'p.astro', text: mapped }], okLayout), []);
 assert.equal(auditPlacements([{ file: 'p.astro', text: mapped.replace("ctaPosition: 'pricing'", "ctaPosition: 'hero'") }], okLayout).length, 1);
+
+// ASP sub-id builder
+assert.equal(buildAspSubId('invideo-ai', 'hero'), 'invideo-ai.hero');
+assert.equal(buildAspSubId('InVideo AI', 'Pricing'), 'invideo-ai.pricing');
+assert.equal(buildAspSubId('a@b.com/x?y=1', 'hero'), 'a-b-com-x-y-1.hero');
+assert.equal(buildAspSubId('', 'hero'), null);
+assert.equal(buildAspSubId('x', '***'), null);
+const long = buildAspSubId('a'.repeat(80), 'pricing');
+assert.ok(long.length <= 40 && long.endsWith('.pricing'), long);
+for (const v of [buildAspSubId('invideo-ai', 'hero'), long]) assert.match(v, /^[a-z0-9-]+\.[a-z0-9-]+$/);
+assert.equal(sanitizeSubIdPart(' --Ab_C-- '), 'ab-c');
+// default config is OFF: URL is byte-identical
+assert.equal(ASP_SUBID_CONFIG.enabled, false);
+assert.deepEqual(ASP_SUBID_CONFIG.providerParams, {});
+const u = 'https://invideo.sjv.io/enByKZ';
+assert.equal(applyAspSubId(u, 'Impact / InVideo', 'invideo-ai.hero'), u);
+// enabled but unverified / unknown provider / no subId: still unchanged
+const on = (verified) => ({ enabled: true, providerParams: { P: { param: 'subId1', verified } } });
+assert.equal(applyAspSubId(u, 'P', 'invideo-ai.hero', on(false)), u);
+assert.equal(applyAspSubId(u, 'Other', 'invideo-ai.hero', on(true)), u);
+assert.equal(applyAspSubId(u, 'P', null, on(true)), u);
+assert.equal(applyAspSubId(u, 'P', 'invideo-ai.hero', { enabled: false, providerParams: on(true).providerParams }), u);
+// fully enabled + verified (synthetic config) appends the param
+assert.equal(applyAspSubId(u, 'P', 'invideo-ai.hero', on(true)), u + '?subId1=invideo-ai.hero');
+assert.equal(applyAspSubId(u + '?a=1', 'P', 'x.hero', on(true)), u + '?a=1&subId1=x.hero');
+// audit guard
+const goodAsp = 'export const ASP_SUBID_CONFIG: C = {\n  enabled: false,\n  providerParams: {},\n};';
+const goodRes = 'url: applyAspSubId(entry.url, entry.provider, s); buildAspSubId(a, b)';
+const goodLinks = "url: 'https://invideo.sjv.io/enByKZ',";
+assert.deepEqual(auditAspSubId(goodAsp, goodRes, goodLinks), []);
+assert.equal(auditAspSubId(goodAsp.replace('false', 'true'), goodRes, goodLinks).length, 1);
+assert.deepEqual(auditAspSubId(goodAsp.replace('false', 'true').replace('providerParams: {}', "providerParams: { P: { param: 'x', verified: true } }"), goodRes, goodLinks), []);
+assert.equal(auditAspSubId(goodAsp, 'url: entry.url', goodLinks).length, 1);
+assert.equal(auditAspSubId(goodAsp, goodRes, "url: 'https://x.sjv.io/a?subId1=zzz',").length, 1);
 
 // whole repo must be clean
 const r = runAudit();

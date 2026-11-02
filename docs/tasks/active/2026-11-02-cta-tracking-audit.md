@@ -36,6 +36,7 @@ target_files:
   - src/components/MidjourneyTool.astro
   - src/utils/ctaPlacement.ts
   - src/utils/resolveToolOutboundLink.ts
+  - src/utils/aspSubId.ts
 
 reference_files:
   - docs/tasks/LATEST.md
@@ -70,3 +71,5 @@ Fork作業用。Draft PRのみ。
 Stacked follow-up 2 (base = feat/cta-tracking-secondary-links, PR #42): delete verified-orphan components TdpToolPage / LeonardoAiTool / MidjourneyTool (no import, no dynamic import, no glob; flagged orphan in 2026-07 audits; no reuse planned).
 
 Stacked follow-up 3 (base = PR #43 branch): placement naming mapping (src/utils/ctaPlacement.ts), audit rules; cta_position kept (documented).
+
+Stacked follow-up 4 (base = placement-mapping PR #44 branch): ASP sub-id builder, DISABLED by default (no href change), audit rule + tests.

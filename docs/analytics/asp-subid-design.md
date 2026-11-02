@@ -1,6 +1,6 @@
-# ASP sub-id design (proposal, NOT implemented)
+# ASP sub-id design
 
-Status: design only. No affiliate URL, ASP setting or link table was changed. Implementing requires human approval (affiliate links are a protected path).
+Status: builder IMPLEMENTED but DISABLED. `ASP_SUBID_CONFIG.enabled = false` and `providerParams = {}` (src/utils/aspSubId.ts), so no live href changes. No affiliate URL, ASP console setting or link table was changed. Enabling requires human approval (affiliate links are a protected path) and a console-verified parameter name (`subId1` is NOT_VERIFIED).
 
 ## Goal
 Join ASP-side conversions to site-side `affiliate_click` events by `tool_slug` and `placement`.
@@ -17,12 +17,17 @@ Join ASP-side conversions to site-side `affiliate_click` events by `tool_slug` a
 | A8.net | `a8mat` is fixed; use per-link "ID" or `argument` if the program allows | confirm in console |
 | Others | confirm per ASP | do not assume |
 
-## Implementation sketch (future PR, human-approved)
-1. Add optional `subId` builder in `resolveToolOutboundLink` (single place that emits affiliate URLs): append the ASP-specific param from `${toolSlug}.${placement}`.
-2. `LinkPlacement` currently = `primary | pricing` in `toolAffiliateLinks.ts`, while DOM placements are `hero | pricing | checklist` (see cta-event-schema.md). Map explicitly: primary->hero (+checklist), pricing->pricing, or extend the type; do this in the same PR.
-3. Keep `data-affiliate-provider` for GA4; sub-id is only for the ASP report.
+## Implementation (this PR)
+1. `src/utils/aspSubId.ts` (pure): `buildAspSubId(toolSlug, placement)` -> `<tool_slug>.<placement>` (lowercase, `[a-z0-9-]` + one `.`, <= 40 chars, slug truncated first, null if empty); `applyAspSubId(url, provider, subId, config)`; `ASP_SUBID_CONFIG`.
+2. `resolveToolOutboundLink` computes `subId` from `toolSlug` + DOM placement (`toCtaPlacement(linkPlacement)`: primary->hero, pricing->pricing, see cta-event-schema.md "Placement mapping") and returns it as `ResolvedOutboundLink.subId` (informational) while `url = applyAspSubId(entry.url, ...)`.
+3. Guard: `applyAspSubId` returns the URL byte-for-byte unchanged unless `enabled === true` AND the provider entry exists with `verified: true`. Default: off, empty.
 4. `destination_url` sent to GA4 stays origin+pathname, so the sub-id never reaches GA4.
-5. Add `audit:cta` rule: every affiliate URL emitted by the resolver contains the sub-id param.
+5. `audit:cta` (`auditAspSubId`) enforces: `enabled` literal present; `enabled: true` requires all providerParams `verified: true`; resolver builds and applies the sub-id; no sub-id query param hard-coded in `toolAffiliateLinks.ts` while disabled. Unit tests: `scripts/test-audit-cta-tracking.mjs`.
+
+## How to enable (human steps, future)
+1. Confirm in the ASP console/program terms the exact sub-id parameter and allowed characters/length (the `.` separator and 40-char limit included).
+2. Add `providerParams['Impact / InVideo'] = { param: '<confirmed>', verified: true }` and set `enabled: true` in one approved PR; check built hrefs and ASP click reports before release.
+3. Keep `data-affiliate-provider` for GA4; sub-id is for the ASP report only.
 
 ## Join
 ASP report (sub-id) <-> GA4 (`tool_slug` + `placement` + `affiliate_provider`) <-> GSC (`/tools/<tool_slug>/`).

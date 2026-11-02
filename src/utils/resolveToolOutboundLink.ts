@@ -5,6 +5,7 @@
   根拠: docs/audits/affiliate-comparison-category-link-audit-2026-07-28.md 14章・15章
 */
 import { toolAffiliateLinks } from '../data/toolAffiliateLinks';
+import type { LinkPlacement } from '../data/toolAffiliateLinks';
 
 export interface ResolvedOutboundLink {
   url: string;
@@ -31,7 +32,8 @@ export function resolveToolOutboundLink({
 }: {
   toolSlug: string;
   officialUrl: string;
-  placement?: 'primary' | 'pricing';
+  // link-table placement; DOM placement mapping lives in ./ctaPlacement.ts
+  placement?: LinkPlacement;
 }): ResolvedOutboundLink {
   if (!officialUrl || !isValidHttpUrl(officialUrl)) {
     throw new Error(`resolveToolOutboundLink: officialUrl が無効です (toolSlug=${toolSlug})`);

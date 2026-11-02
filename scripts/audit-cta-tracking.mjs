@@ -8,6 +8,7 @@
 import { readFileSync, readdirSync, existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { CTA_PLACEMENTS, CTA_PLACEMENT_TO_LINK_PLACEMENT, LINK_PLACEMENT_TO_CTA_PLACEMENT } from '../src/utils/ctaPlacement.ts';
 
 export const AFFILIATE_HOST_HINTS = ['sjv.io', 'a8.net', 'afi-b.com', 'valuecommerce.com', 'accesstrade.net', 'moshimo.com', 'linksynergy.com', 'impact.com', 'shareasale.com', 'partnerstack.com', 'refersion.com', 'tapfiliate.com', 'firstpromoter.com'];
 export const REQUIRED_EVENT_PARAMS = ['tool_name', 'tool_slug', 'placement', 'link_type', 'affiliate_provider', 'destination_url', 'destination_domain', 'page_path'];
@@ -121,6 +122,37 @@ export function auditTool(slug, ctx) {
   return { slug, template, resolverUsed, affiliateEnabled: affEntries.length > 0, ctaCount: rows.length, trackedCtaCount: rows.filter((r) => r.tracked).length, untrackedInlineExternal: inline.length, rows, errors, warns };
 }
 
+// Placement naming rules (docs/analytics/cta-event-schema.md "Placement mapping").
+// srcs: [{file, text}] -> error strings. Pure so tests can feed synthetic input.
+export function auditPlacements(srcs, baseLayoutText) {
+  const errors = [];
+  const allowed = new Set(CTA_PLACEMENTS);
+  for (const { file, text } of srcs) {
+    for (const m of text.matchAll(/data-cta-position="([^"]*)"/g)) {
+      if (!allowed.has(m[1])) errors.push(`${file}: data-cta-position="${m[1]}" is not a documented placement (${CTA_PLACEMENTS.join('|')})`);
+    }
+    for (const m of text.matchAll(/ctaPosition:\s*'([^']*)'/g)) {
+      if (!allowed.has(m[1])) errors.push(`${file}: ctaPosition '${m[1]}' is not a documented placement (${CTA_PLACEMENTS.join('|')})`);
+    }
+    // resolver result -> CTA: link-table placement must map to the DOM placement it is rendered with
+    const resolved = new Map();
+    for (const m of text.matchAll(/const\s+(\w+)\s*=\s*resolveToolOutboundLink\(\{([\s\S]*?)\}\)/g)) {
+      resolved.set(m[1], (m[2].match(/placement:\s*'(\w+)'/) || [])[1] || 'primary');
+    }
+    for (const m of text.matchAll(/(primaryCta|secondaryCta)=\{\{([\s\S]*?)\}\}/g)) {
+      const v = (m[2].match(/href:\s*(\w+)\.url/) || [])[1];
+      if (!v || !resolved.has(v)) continue;
+      const linkPlacement = resolved.get(v);
+      const pos = (m[2].match(/ctaPosition:\s*'([^']*)'/) || [])[1];
+      if (!(linkPlacement in LINK_PLACEMENT_TO_CTA_PLACEMENT)) errors.push(`${file}: resolveToolOutboundLink placement '${linkPlacement}' is not a LinkPlacement`);
+      else if (CTA_PLACEMENT_TO_LINK_PLACEMENT[pos] !== linkPlacement) errors.push(`${file}: ${m[1]} ctaPosition '${pos}' does not map to link placement '${linkPlacement}'`);
+    }
+  }
+  // legacy duplicate: cta_position must stay identical to placement (both from one variable) until retired
+  if (!/cta_position:\s*ctaPosition,\s*placement:\s*ctaPosition,/.test(baseLayoutText)) errors.push('BaseLayout: cta_position and placement must both be emitted from the same ctaPosition variable');
+  return errors;
+}
+
 export function runAudit() {
   const slugs = readdirSync(join(ROOT, 'src/content/tools')).filter((f) => f.endsWith('.md')).map((f) => f.replace(/\.md$/, '')).sort();
   const detail = read('src/components/ToolDetailPage.astro');
@@ -142,6 +174,8 @@ export function runAudit() {
       global.push(`${f}: frontmatter affiliateUrl set but [slug].astro emits no data-affiliate-provider`);
     }
   }
+  const placementSrcs = readdirSync(join(ROOT, 'src'), { recursive: true }).map((f) => String(f).split(String.fromCharCode(92)).join('/')).filter((f) => f.endsWith('.astro')).map((f) => ({ file: 'src/' + f, text: read('src/' + f) }));
+  global.push(...auditPlacements(placementSrcs, base));
   const tools = slugs.map((s) => auditTool(s, ctx));
 
   // duplicate / dead CTA components

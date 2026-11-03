@@ -1,0 +1,23 @@
+name: Verify published commit (manual, read-only)
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: '40-character Git commit SHA of an explicitly published release'
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Compare published commit to approved release SHA
+        env:
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+        run: node scripts/verify-production-commit.mjs

@@ -40,7 +40,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "canva-ai-image-generator",
@@ -74,7 +74,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "capcut-ai",
@@ -108,7 +108,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "clipdrop",
@@ -182,7 +182,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "d-id",
@@ -216,7 +216,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "dalle",
@@ -250,7 +250,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "dreamstudio",
@@ -284,7 +284,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "fotor-ai",
@@ -315,7 +315,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "gemini-image-generation",
@@ -349,7 +349,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "hailuo-ai",
@@ -383,7 +383,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "haiper",
@@ -417,7 +417,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "heygen",
@@ -451,7 +451,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "ideogram",
@@ -485,7 +485,7 @@
       "affiliateEnabled": true,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "invideo-ai",
@@ -516,7 +516,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "kling-ai",
@@ -550,7 +550,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "leonardo-ai",
@@ -584,7 +584,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "luma-ai",
@@ -618,7 +618,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "microsoft-designer",
@@ -652,7 +652,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "midjourney",
@@ -686,7 +686,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "nightcafe",
@@ -760,7 +760,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "pika",
@@ -794,7 +794,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "pixverse",
@@ -828,7 +828,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "playground-ai",
@@ -902,7 +902,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "runway",
@@ -933,7 +933,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "seaart-ai",
@@ -967,7 +967,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "stable-diffusion",
@@ -1001,7 +1001,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "synthesia",
@@ -1035,7 +1035,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "tensor-art",
@@ -1069,7 +1069,7 @@
       "affiliateEnabled": false,
       "ctaCount": 2,
       "trackedCtaCount": 2,
-      "untrackedInlineExternal": 1,
+      "untrackedInlineExternal": 0,
       "rows": [
         {
           "slug": "vidu-ai",
@@ -1100,7 +1100,7 @@
   "ctaComponents": [
     {
       "name": "AdobeFireflyTool.astro",
-      "usedByToolPages": false
+      "usedByToolPages": true
     },
     {
       "name": "TdpToolPage.astro",
@@ -1108,7 +1108,7 @@
     },
     {
       "name": "ToolDetailPage.astro",
-      "usedByToolPages": false
+      "usedByToolPages": true
     }
   ],
   "errors": [],
@@ -1163,8 +1163,6 @@
     "tensor-art: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
     "vidu-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
     "vidu-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')",
-    "component AdobeFireflyTool.astro renders a primary CTA but no tool page imports it (dead/duplicate CTA implementation)",
-    "component TdpToolPage.astro renders a primary CTA but no tool page imports it (dead/duplicate CTA implementation)",
-    "component ToolDetailPage.astro renders a primary CTA but no tool page imports it (dead/duplicate CTA implementation)"
+    "component TdpToolPage.astro renders a primary CTA but no tool page imports it (dead/duplicate CTA implementation)"
   ]
 }

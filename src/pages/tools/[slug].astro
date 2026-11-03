@@ -260,7 +260,7 @@ const pageDescription = `${data.name}の特徴、料金、無料プランの有�
         {data.officialSourceUrl && data.officialSourceUrl !== data.officialUrl && (
           <a
             href={data.officialSourceUrl}
-            target="_blank"
+            target="_blank" data-outbound-type="official" data-tool-name={data.name} data-tool-slug={entry.slug} data-cta-position="source"
             rel="noopener noreferrer"
             class="btn btn-ghost"
           >
@@ -517,7 +517,7 @@ const pageDescription = `${data.name}の特徴、料金、無料プランの有�
             <tr>
               <th>公式サイト</th>
               <td>
-                <a href={data.officialUrl} target="_blank" rel="noopener noreferrer"
+                <a href={data.officialUrl} target="_blank" data-outbound-type="official" data-tool-name={data.name} data-tool-slug={entry.slug} data-cta-position="table" rel="noopener noreferrer"
                   style="color:var(--brand-ink);font-weight:600;font-size:13px;">
                   公式サイトで確認 ↗
                 </a>
@@ -731,12 +731,12 @@ const pageDescription = `${data.name}の特徴、料金、無料プランの有�
               <span class="up-label">公式確認先</span>
               <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
                 {data.usagePolicy.officialSourceUrl && (
-                  <a href={data.usagePolicy.officialSourceUrl} target="_blank" rel="noopener noreferrer" class="td-source-btn">
+                  <a href={data.usagePolicy.officialSourceUrl} target="_blank" data-outbound-type="official" data-tool-name={data.name} data-tool-slug={entry.slug} data-cta-position="source" rel="noopener noreferrer" class="td-source-btn">
                     商用利用ガイド ↗
                   </a>
                 )}
                 {data.usagePolicy.termsUrl && data.usagePolicy.termsUrl !== data.usagePolicy.officialSourceUrl && (
-                  <a href={data.usagePolicy.termsUrl} target="_blank" rel="noopener noreferrer" class="td-source-btn ghost">
+                  <a href={data.usagePolicy.termsUrl} target="_blank" data-outbound-type="official" data-tool-name={data.name} data-tool-slug={entry.slug} data-cta-position="terms" rel="noopener noreferrer" class="td-source-btn ghost">
                     利用規約 ↗
                   </a>
                 )}
@@ -769,7 +769,7 @@ const pageDescription = `${data.name}の特徴、料金、無料プランの有�
             {data.conversionGuide.primaryCtaLabel ?? `${data.name}の公式サイトで最新条件を確認する`} <span class="arr">↗</span>
           </a>
           {data.usagePolicy?.termsUrl && (
-            <a href={data.usagePolicy.termsUrl} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+            <a href={data.usagePolicy.termsUrl} target="_blank" data-outbound-type="official" data-tool-name={data.name} data-tool-slug={entry.slug} data-cta-position="terms" rel="noopener noreferrer" class="btn btn-ghost">
               利用規約を確認する <span class="arr">↗</span>
             </a>
           )}

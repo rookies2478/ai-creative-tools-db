@@ -110,7 +110,7 @@ export function auditTool(slug, ctx) {
   }
 
   // untracked external anchors written directly in the page file (table cells etc.)
-  const inline = [...pageSrc.matchAll(/<a\s[^>]*href="(https?:\/\/[^"]+)"[^>]*>/g)].filter((m) => !/data-outbound-type/.test(m[0]));
+  const inline = [...pageSrc.matchAll(/<a\s[^>]*href="(https?:\/\/[^"]+)"[^>]*>/g)].filter((m) => !/data-outbound-type/.test(m[0]) && !(usesDetail && ctx.detailTracksCellLinks && /target="_blank"/.test(m[0]) && !isAffiliateHost(m[1]))); // ToolDetailPage trackCellLinks injects attrs at render
   for (const m of inline) {
     if (/target="_blank"/.test(m[0]) && !/noopener/.test(m[0])) errors.push(`${slug}: target=_blank without noopener (${m[1]})`);
     if (isAffiliateHost(m[1])) errors.push(`${slug}: untracked affiliate-host link ${m[1]}`);
@@ -129,6 +129,7 @@ export function runAudit() {
   const ctx = {
     affiliate: parseAffiliateEntries(read('src/data/toolAffiliateLinks.ts')),
     detailDefaultsOfficial: /outboundType \?\? 'official'/.test(detail),
+    detailTracksCellLinks: /trackCellLinks\(c\.html\)/.test(detail),
   };
   if (!ctx.detailDefaultsOfficial) global.push('ToolDetailPage does not default outboundType to official');
   for (const p of REQUIRED_EVENT_PARAMS) {
@@ -148,7 +149,7 @@ export function runAudit() {
   const pagesText = pageFiles.map((f) => read('src/pages/tools/' + f.replace(/\\/g, '/'))).join('\n');
   const ctaComponents = readdirSync(join(ROOT, 'src/components'))
     .filter((f) => f.endsWith('.astro') && /class="btn btn-primary"/.test(read('src/components/' + f)) && /target="_blank"/.test(read('src/components/' + f)))
-    .map((f) => ({ name: f, usedByToolPages: pagesText.includes(`components/${f.replace('.astro', '')}'`) }));
+    .map((f) => ({ name: f, usedByToolPages: new RegExp('components/' + f.replace('.astro', '') + '(\\.astro)?[\'"]').test(pagesText) }));
   const errors = [...global, ...tools.flatMap((t) => t.errors)];
   const warns = tools.flatMap((t) => t.warns);
   for (const c of ctaComponents) {

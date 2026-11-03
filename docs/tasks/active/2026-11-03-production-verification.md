@@ -9,6 +9,7 @@ target_files:
   - scripts/write-deployment-commit.mjs
   - scripts/verify-production-commit.mjs
   - .github/workflows/verify-production-commit.yml
+  - .github/workflows/release-verifier-gates.yml
   - package.json
 reference_files:
   - CLAUDE.md

@@ -3,7 +3,7 @@
 生成: `npm run audit:cta -- --write`（手編集禁止）。契約: `docs/analytics/cta-event-schema.md`
 
 - ツール数: 32
-- errors: 0 / warnings: 51
+- errors: 0 / warnings: 50
 
 | tool_slug | template | CTA計測 | affiliate(resolver) | 未計測インライン外部リンク | status |
 |---|---|---|---|---|---|
@@ -168,4 +168,3 @@
 - tensor-art: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')
 - vidu-ai: primaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')
 - vidu-ai: secondaryCta has no explicit outboundType (relies on ToolDetailPage default 'official')
-- component TdpToolPage.astro renders a primary CTA but no tool page imports it (dead/duplicate CTA implementation)

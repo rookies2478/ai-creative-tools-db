@@ -31,6 +31,9 @@ target_files:
   - src/pages/tools/[slug].astro
   - src/pages/tools/invideo-ai/index.astro
   - docs/analytics/asp-subid-design.md
+  - src/components/TdpToolPage.astro
+  - src/components/LeonardoAiTool.astro
+  - src/components/MidjourneyTool.astro
 
 reference_files:
   - docs/tasks/LATEST.md
@@ -61,3 +64,5 @@ forbidden_operations:
 Stacked follow-up (base = feat/cta-tracking-audit, PR #41): secondary link tracking (table/source/terms placements), audit dead-component false-positive fix, GA4 dimension list and ASP sub-id design doc. Merge after #41.
 
 Fork作業用。Draft PRのみ。
+
+Stacked follow-up 2 (base = feat/cta-tracking-secondary-links, PR #42): delete verified-orphan components TdpToolPage / LeonardoAiTool / MidjourneyTool (no import, no dynamic import, no glob; flagged orphan in 2026-07 audits; no reuse planned).

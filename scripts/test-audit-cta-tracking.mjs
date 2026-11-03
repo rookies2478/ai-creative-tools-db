@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { parseAffiliateEntries, parseCtaProp, isAffiliateHost, auditTool, runAudit } from './audit-cta-tracking.mjs';
+import { CTA_PLACEMENTS, toCtaPlacement, toLinkPlacement, isCtaPlacement } from '../src/utils/ctaPlacement.ts';
+import { parseAffiliateEntries, parseCtaProp, isAffiliateHost, auditTool, auditPlacements, runAudit } from './audit-cta-tracking.mjs';
 
 // parseCtaProp
 const c = parseCtaProp("primaryCta={{ label: 'x', href: 'https://a.example', outboundType: 'official', ctaPosition: 'hero' }}", 'primaryCta');
@@ -33,6 +34,25 @@ assert.deepEqual(full.ctaComponents.filter((c) => !c.usedByToolPages).map((c) =>
 assert.ok(!full.ctaComponents.some((c) => /^(TdpToolPage|LeonardoAiTool|MidjourneyTool)\.astro$/.test(c.name)));
 assert.equal(auditTool('kling-ai', { affiliate: [], detailDefaultsOfficial: true, detailTracksCellLinks: false }).untrackedInlineExternal, 1);
 assert.equal(auditTool('kling-ai', { affiliate: [], detailDefaultsOfficial: true, detailTracksCellLinks: true }).untrackedInlineExternal, 0);
+
+// placement mapping
+assert.deepEqual([...CTA_PLACEMENTS].sort(), ['checklist', 'hero', 'pricing', 'primary', 'secondary', 'source', 'table', 'terms']);
+assert.equal(toCtaPlacement('primary'), 'hero');
+assert.equal(toCtaPlacement('pricing'), 'pricing');
+assert.equal(toLinkPlacement('hero'), 'primary');
+assert.equal(toLinkPlacement('checklist'), 'primary');
+assert.equal(toLinkPlacement('pricing'), 'pricing');
+for (const p of ['secondary', 'table', 'source', 'terms', 'bogus']) assert.equal(toLinkPlacement(p), null, p);
+assert.equal(isCtaPlacement('hero'), true);
+assert.equal(isCtaPlacement('Hero'), false);
+const okLayout = 'cta_position: ctaPosition, placement: ctaPosition,';
+assert.deepEqual(auditPlacements([{ file: 'a.astro', text: '<a data-cta-position="hero">' }], okLayout), []);
+assert.ok(auditPlacements([{ file: 'a.astro', text: '<a data-cta-position="heroo">' }], okLayout).length === 1);
+assert.ok(auditPlacements([{ file: 'a.astro', text: "primaryCta={{ ctaPosition: 'nope' }}" }], okLayout).length === 1);
+assert.ok(auditPlacements([], 'cta_position: a, placement: b,').length === 1);
+const mapped = "const l = resolveToolOutboundLink({ toolSlug: 'x', officialUrl: 'https://x.example', placement: 'pricing' });\nsecondaryCta={{ href: l.url, ctaPosition: 'pricing' }}";
+assert.deepEqual(auditPlacements([{ file: 'p.astro', text: mapped }], okLayout), []);
+assert.equal(auditPlacements([{ file: 'p.astro', text: mapped.replace("ctaPosition: 'pricing'", "ctaPosition: 'hero'") }], okLayout).length, 1);
 
 // whole repo must be clean
 const r = runAudit();

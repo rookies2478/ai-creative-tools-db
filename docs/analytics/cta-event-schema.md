@@ -39,6 +39,23 @@ Static check: `npm run audit:cta` (CI) -> `reports/cta-tracking-audit.md`.
 4. `target="_blank"` needs `noopener`.
 5. gtag event contains all params above.
 
+## Placement mapping (canonical)
+
+Code: `src/utils/ctaPlacement.ts` (`CTA_PLACEMENTS`, `LINK_PLACEMENT_TO_CTA_PLACEMENT`, `CTA_PLACEMENT_TO_LINK_PLACEMENT`). Enforced by `audit:cta` (`auditPlacements`).
+
+| DOM / GA4 `placement` | meaning | `toolAffiliateLinks.LinkPlacement` | can carry affiliate? |
+|---|---|---|---|
+| `hero` | main CTA at page top | `primary` | yes |
+| `primary` | primaryCta fallback when `ctaPosition` omitted | `primary` | yes |
+| `checklist` | CTA at end of checklist | `primary` | yes |
+| `pricing` | pricing-plan CTA | `pricing` | yes |
+| `secondary` | secondaryCta fallback when `ctaPosition` omitted | - | no (official only) |
+| `table` / `source` / `terms` | table-cell link / info button / terms button | - | no (official only) |
+
+Rules: `LinkPlacement` (link table key) stays `primary|pricing`; the DOM placement is what GA4 and the ASP sub-id use. A resolver call with link placement `L` must be rendered with a DOM placement `P` where `CTA_PLACEMENT_TO_LINK_PLACEMENT[P] === L` (audit-checked; e.g. invideo-ai: `primary`->`hero`, `pricing`->`pricing`). Any `data-cta-position`/`ctaPosition` literal outside the 8 documented values fails the audit.
+
+`cta_position` (legacy duplicate of `placement`) is NOT removed: it is a live GA4 payload key and GA4 report/continuity impact cannot be verified from the repo. Instead `audit:cta` enforces that both keys are emitted from the same variable so they cannot diverge. Remove only after GA4 reports are confirmed not to use it (human decision).
+
 ## Human-only follow-ups
 
 - Register custom dimensions in GA4 Admin (`tool_slug`, `placement`, `link_type`, `affiliate_provider`, `destination_domain`) before they appear in reports.

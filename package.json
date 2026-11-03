@@ -17,7 +17,8 @@
     "analytics:gsc:import": "node scripts/import-gsc-manual-export.mjs",
     "analytics:gsc:test": "node scripts/test-import-gsc-manual-export.mjs",
     "analytics:rotate": "node scripts/rotate-analytics-raw.mjs",
-    "analytics:rotate:test": "node scripts/test-rotate-analytics-raw.mjs"
+    "analytics:rotate:test": "node scripts/test-rotate-analytics-raw.mjs",
+    "postbuild": "node scripts/write-deployment-commit.mjs"
   },
   "engines": {
     "node": ">=24.0.0"

@@ -107,10 +107,22 @@ const canonicalUrl = canonicalPath && Astro.site
           window.location.href
         );
 
+        const ctaPosition = el.getAttribute('data-cta-position') || '';
+        let destinationDomain = '';
+        try { destinationDomain = new URL(destinationUrl).hostname; } catch (e) { destinationDomain = ''; }
+
+        // Schema: docs/analytics/cta-event-schema.md
+        // tool_name / cta_position / destination_url / page_path are legacy keys kept for GA4 continuity.
+        // tool_slug / placement / destination_domain / link_type / affiliate_provider are the join keys.
         runtimeWindow.gtag('event', eventName, {
           tool_name: el.getAttribute('data-tool-name') || '',
-          cta_position: el.getAttribute('data-cta-position') || '',
+          tool_slug: el.getAttribute('data-tool-slug') || '',
+          cta_position: ctaPosition,
+          placement: ctaPosition,
+          link_type: outboundType === 'affiliate' ? 'affiliate' : 'official',
+          affiliate_provider: el.getAttribute('data-affiliate-provider') || '',
           destination_url: destinationUrl,
+          destination_domain: destinationDomain,
           page_path: window.location.pathname
         });
       });

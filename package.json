@@ -12,6 +12,8 @@
     "validate:data": "node scripts/validate-data.mjs",
     "validate:publish": "node scripts/validate-publish.mjs",
     "validate:affiliate-links": "node scripts/validate-affiliate-links.mjs",
+    "audit:cta": "node scripts/audit-cta-tracking.mjs",
+    "audit:cta:test": "node scripts/test-audit-cta-tracking.mjs",
     "analytics:gsc:fetch": "node scripts/analytics-gsc-fetch.mjs",
     "analytics:gsc:fetch:test": "node scripts/test-analytics-gsc-fetch.mjs",
     "analytics:gsc:import": "node scripts/import-gsc-manual-export.mjs",

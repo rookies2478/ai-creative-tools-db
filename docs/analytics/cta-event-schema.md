@@ -73,3 +73,30 @@ Not needed: `cta_position` (legacy duplicate of `placement`), `destination_url` 
 - Removed: `TdpToolPage.astro`, `LeonardoAiTool.astro`, `MidjourneyTool.astro` (orphan components, imported nowhere, with untracked CTAs). `audit:cta` still warns if a new CTA-rendering component is not imported by any tool page.
 
 ASP sub-id proposal: `asp-subid-design.md`.
+
+## Browser QA checklist (human / Claude in Chrome; run on a Preview URL before any merge to master)
+
+Never click affiliate links through to the ASP on Preview/production QA (creates real click records). Inspect `href` and listeners instead; for official links, open in a new tab and close.
+
+### Measurement gating (what decides whether anything is sent)
+- `src/layouts/BaseLayout.astro` initializes gtag/GA4 (`G-YTH7GM5ZGT`) and Clarity only if `shouldInitializeMeasurement(window.location.hostname, import.meta.env.PROD)` is true.
+- `src/utils/measurementSafety.mjs`: true only when the build is production AND `hostname === 'aicreative-db.com'` (exact match). `www.`, `*.pages.dev` previews and `localhost` are all false (asserted in `scripts/test-measurement-safety.mjs`, which runs before `astro build` in `npm run build`).
+- The click handler returns early when `typeof window.gtag !== 'function'`, so on non-production hosts no `gtag`, no `dataLayer`, no gtag/Clarity script and no collect request exist; clicks emit nothing.
+- Only the HTML/JS is gated by host; the GA4 data stream itself has no server-side filter in this repo (GA4 settings are human-only).
+
+### Per-CTA checks (repeat for each type: hero, primary, secondary, pricing, table, affiliate, official)
+1. Display: CTA is visible, label unchanged, not overlapped.
+2. Attributes: `data-outbound-type` (affiliate|official), `data-cta-position` (one of 8 documented values), `data-tool-slug` = page slug, `data-tool-name`, `data-affiliate-provider` (affiliate only, empty on official).
+3. `href`: valid https, no broken/placeholder URL, no query/sub-id added while `ASP_SUBID_CONFIG.enabled === false` (affiliate hrefs byte-identical to master).
+4. `target="_blank"` with `rel` containing `noopener`; affiliate also `sponsored nofollow`.
+5. Affiliate vs official never both on the same anchor; the same anchor never carries both `data-outbound-type` values.
+6. Expected event (production host only): affiliate -> `affiliate_click`, official -> `official_site_click`; params `tool_slug`, `tool_name`, `placement` (= `cta_position`), `link_type`, `affiliate_provider`, `destination_url` (origin+path, no query/hash), `destination_domain`, `page_path`.
+7. 1 click = 1 event: exactly one handler (document-level delegated listener, no per-element duplicate); nested elements inside the anchor still produce one event; no double fire on touch/keyboard Enter.
+
+### Preview / localhost safety (must all hold on `*.pages.dev` and `localhost`)
+- `typeof window.gtag === 'undefined'`, `window.dataLayer` undefined, `window.clarity` undefined.
+- Network panel: no request to `googletagmanager.com`, `google-analytics.com` / `/g/collect`, or `clarity.ms`.
+- Clicking an official CTA navigates normally and sends nothing.
+
+### Production (post-release, human only)
+Verify in GA4 DebugView / Realtime on `aicreative-db.com` only after the human-approved release; register custom dimensions first (see above).

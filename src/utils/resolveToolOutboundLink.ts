@@ -6,6 +6,8 @@
 */
 import { toolAffiliateLinks } from '../data/toolAffiliateLinks';
 import type { LinkPlacement } from '../data/toolAffiliateLinks';
+import { toCtaPlacement } from './ctaPlacement';
+import { applyAspSubId, buildAspSubId } from './aspSubId';
 
 export interface ResolvedOutboundLink {
   url: string;
@@ -14,6 +16,8 @@ export interface ResolvedOutboundLink {
   isAffiliate: boolean;
   disclosureRequired: boolean;
   provider?: string;
+  /** `<tool_slug>.<placement>` ASP sub-id key (informational; only appended to url when ASP_SUBID_CONFIG enables it). */
+  subId?: string;
 }
 
 function isValidHttpUrl(value: string): boolean {
@@ -51,13 +55,16 @@ export function resolveToolOutboundLink({
     isValidHttpUrl(entry.url);
 
   if (isUsable && entry) {
+    const subId = buildAspSubId(toolSlug, toCtaPlacement(placement)) ?? undefined;
     return {
-      url: entry.url,
+      // href is unchanged unless ASP_SUBID_CONFIG.enabled (default OFF, param NOT_VERIFIED)
+      url: applyAspSubId(entry.url, entry.provider, subId ?? null),
       linkType: 'affiliate',
       rel: 'sponsored nofollow noopener noreferrer',
       isAffiliate: true,
       disclosureRequired: entry.disclosureRequired === true,
       provider: entry.provider,
+      subId,
     };
   }
 

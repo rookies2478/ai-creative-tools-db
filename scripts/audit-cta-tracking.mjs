@@ -153,6 +153,25 @@ export function auditPlacements(srcs, baseLayoutText) {
   return errors;
 }
 
+// ASP sub-id guard (docs/analytics/asp-subid-design.md). Pure: inputs are file texts.
+export function auditAspSubId(aspText, resolverText, linksText) {
+  const errors = [];
+  const en = (aspText.match(/export const ASP_SUBID_CONFIG[\s\S]*?enabled:\s*(true|false)/) || [])[1];
+  if (!en) errors.push('aspSubId: ASP_SUBID_CONFIG.enabled literal not found');
+  if (en === 'true') {
+    const cfg = (aspText.match(/export const ASP_SUBID_CONFIG[\s\S]*?providerParams:\s*\{([\s\S]*?)\},\s*\};/) || [])[1] || '';
+    if (!/verified:\s*true/.test(cfg) || /verified:\s*false/.test(cfg)) errors.push('aspSubId: enabled=true requires every providerParams entry to have verified: true (param name must be confirmed in the ASP console)');
+  }
+  if (!/applyAspSubId\(/.test(resolverText) || !/buildAspSubId\(/.test(resolverText)) errors.push('resolveToolOutboundLink must build and apply the sub-id via buildAspSubId/applyAspSubId');
+  if (/applyAspSubId\(/.test(resolverText) && !/url:\s*applyAspSubId\(entry\.url/.test(resolverText)) errors.push('resolveToolOutboundLink: affiliate url must be produced by applyAspSubId(entry.url, ...)');
+  if (en === 'false') {
+    for (const m of linksText.matchAll(/url:\s*'([^']*)'/g)) {
+      if (/[?&](subid\d*|sharedid|sub_id|clickref)=/i.test(m[1])) errors.push(`toolAffiliateLinks: sub-id query param hard-coded in ${m[1]} while ASP_SUBID_CONFIG is disabled`);
+    }
+  }
+  return errors;
+}
+
 export function runAudit() {
   const slugs = readdirSync(join(ROOT, 'src/content/tools')).filter((f) => f.endsWith('.md')).map((f) => f.replace(/\.md$/, '')).sort();
   const detail = read('src/components/ToolDetailPage.astro');
@@ -176,6 +195,7 @@ export function runAudit() {
   }
   const placementSrcs = readdirSync(join(ROOT, 'src'), { recursive: true }).map((f) => String(f).split(String.fromCharCode(92)).join('/')).filter((f) => f.endsWith('.astro')).map((f) => ({ file: 'src/' + f, text: read('src/' + f) }));
   global.push(...auditPlacements(placementSrcs, base));
+  global.push(...auditAspSubId(read('src/utils/aspSubId.ts'), read('src/utils/resolveToolOutboundLink.ts'), read('src/data/toolAffiliateLinks.ts')));
   const tools = slugs.map((s) => auditTool(s, ctx));
 
   // duplicate / dead CTA components

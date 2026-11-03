@@ -1,0 +1,47 @@
+name: Release verifier implementation gates
+on:
+  pull_request:
+    branches: [master]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Active task validation (while implementation in progress)
+        shell: bash
+        run: |
+          if find docs/tasks/active -maxdepth 1 -type f -name '*.md' ! -name 'README.md' | grep -q .; then
+            npm run validate:task
+          else
+            echo 'No active task; completed-task documentation is authoritative'
+          fi
+      - name: Verify task scope, when active
+        shell: bash
+        run: |
+          if find docs/tasks/active -maxdepth 1 -type f -name '*.md' ! -name 'README.md' | grep -q .; then
+            npm run validate:scope
+          fi
+          git diff --check origin/master...HEAD
+      - name: Quality gates
+        run: |
+          npm run build
+          npm run validate:data
+          npm run validate:publish
+          npm run validate:affiliate-links
+      - name: Prohibit unintended user-facing changes
+        shell: bash
+        run: |
+          git diff --name-only origin/master...HEAD | tee /tmp/deploy-changed.txt
+          if grep -E '^(src/|public/|astro\.config\.)' /tmp/deploy-changed.txt; then
+            echo 'Unexpected user-facing change'; exit 1
+          fi

@@ -29,15 +29,15 @@ const jsonLd = JSON.stringify([
     name: 'Luma AI',
     operatingSystem: 'Web, API',
     applicationCategory: 'VideoApplication',
-    description: 'Luma AIはテキスト・画像からAI動画を生成するツール。Ray3モデルで最大20秒の動画生成に対応。無料プランは限定クレジット・非商用のみ。Plusプラン以上で商用利用可とされる。',
+    description: 'Luma AIはLuma AppとAPIを提供するAIクリエイティブ基盤。現行動画モデルRay3.2でテキスト・画像からの動画生成、編集、リフレーム、複数キーフレームなどに対応。',
     url: 'https://lumalabs.ai/',
   },
 ]);
 ---
 
 <BaseLayout
-  title="Luma AI / Dream Machineの無料枠・料金・商用利用の注意点"
-  description="Luma AI / Dream Machineの動画生成機能、無料枠、料金プラン、商用利用、透かしの確認ポイントを整理します。無料枠や利用条件は変更される場合があるため、最新情報は公式サイトをご確認ください。"
+  title="Luma AI（Ray3.2）とは？料金・トライアル・商用利用の確認点"
+  description="Luma AIの現行Ray3.2、Plus・Pro・Ultra・Enterpriseのプラン構成、free trial credits、API料金、商用利用・透かしの確認ポイントを公式情報に基づき整理します。"
   canonicalPath="/tools/luma-ai/"
   ogType="article"
   jsonLd={jsonLd}
@@ -57,133 +57,133 @@ const jsonLd = JSON.stringify([
     <ToolDetailPage japanBilling={d?.japanBilling}
       toolName="Luma AI"
       category="AI動画生成"
-      checkedDate={d?.lastReviewed ?? '2026-06-05'}
-      headingHtml='Luma AIの<span class="hl"><span class="phrase-nowrap">使い方</span>・料金・商用利用</span>まとめ'
-      lead="Luma AI（Luma Dream Machine）はテキストや画像からAI動画を生成するツールで、Ray3モデルで最大20秒（720p）の動画生成・動画延長・アップスケール・APIに対応しています。無料枠は生成数・商用利用の両面で制限があり、有料プランと条件が異なります。無料プランは限定クレジット付与で非商用のみ・透かしありとされています。機能名・仕様・条件は変更される場合があるため、最新情報は公式サイトでご確認ください。"
+      checkedDate={d?.lastReviewed ?? '2026-11-05'}
+      headingHtml='Luma AI（Ray3.2）の<span class="hl"><span class="phrase-nowrap">料金</span>・トライアル・商用利用</span>まとめ'
+      lead="Luma AIは、クリエイター向けLuma Appと開発者向けAPIを提供するAIクリエイティブ基盤です。現行動画モデルはRay3.2で、テキスト・画像からの動画生成、動画編集、リフレーム、複数キーフレームなどに対応します。旧Dream MachineやRay2を現行モデルとして扱わないよう公式情報で明記されています。AppとAPIでは料金・無料枠・商用利用条件が異なるため、このページでは現行公式情報を分けて整理します。"
       specs={[
-        { lb: '商用利用', badge: { s: 'paid', label: 'Plus以上（要確認）' } },
-        { lb: '無料枠', badge: { s: 'cond', label: '限定クレジット（非商用・透かし）' } },
-        { lb: '料金目安', text: '$30/月〜（Plusプラン）', mono: true },
-        { lb: '透かし', badge: { s: 'cond', label: '無料プランあり・Plus以上なし' } },
-        { lb: '日本語UI', badge: { s: 'na', label: '非対応' } },
+        { lb: '商用利用', badge: { s: 'cond', label: 'App/APIで条件確認' } },
+        { lb: '無料枠', badge: { s: 'cond', label: 'free trial credits' } },
+        { lb: '料金目安', text: 'Plus〜（現行金額は要公式確認）', mono: true },
+        { lb: '透かし', badge: { s: 'cond', label: 'APIなし / App要確認' } },
+        { lb: '日本語UI', badge: { s: 'na', label: '要確認' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
       primaryCta={{ label: '公式サイトで確認する', href: 'https://lumalabs.ai/' }}
       secondaryCta={{ label: '料金プランを確認（公式）', href: 'https://lumalabs.ai/pricing' }}
       basicInfo={[
         {
-          title: '商用利用', badge: { s: 'paid', label: 'Plus以上（要確認）' }, wide: true,
-          sum: '無料プランでは商用利用不可とされています。Plusプラン（$30/月）以上で商用利用できるとされていますが、最新条件は公式サイトでご確認ください。',
-          det: '商用利用条件はPlusプラン以上で可とされています。無料プランは非商用のみとされています。利用規約は変更される可能性があるため、商用利用前は必ず最新の公式利用規約をご確認ください。このページは法的助言ではありません。',
+          title: '商用利用', badge: { s: 'cond', label: 'App/APIで条件確認' }, wide: true,
+          sum: 'Luma APIの公式FAQではAPI出力の商用利用が認められています。Luma Appの現行プラン別条件は最新規約・契約画面で確認が必要です。',
+          det: 'Trial出力は公式利用規約上、内部評価・テスト目的に限定されています。API出力は公式FAQで商用利用可と案内されていますが、Luma Appのプラン別権利条件を旧Dream Machineの条件から引き継いで断定しないでください。利用経路ごとに最新規約を確認してください。',
         },
         {
-          title: '無料枠', badge: { s: 'cond', label: '限定クレジット（非商用・透かし）' },
-          det: '無料プランでは限定クレジットが付与されますが、非商用のみ・透かしありとされています。クレジット数・条件は変更される可能性があります。',
+          title: '無料枠', badge: { s: 'cond', label: 'free trial credits' },
+          det: '現行公式情報ではPlus・Pro・Ultra・Enterpriseの各プランにfree trial creditsが案内されています。恒常的なFreeプランは確認できません。APIには無料枠がなく、最初の生成から従量課金です。',
         },
         {
-          title: '最安料金目安', sum: '$30/月（Plusプラン）〜（公式案内）', sumMono: true,
-          det: '2026年6月時点の公式案内に基づきます。Plusプランが商用利用可能な最安プランとされています。プラン内容・料金は変更される可能性があります。最新料金は公式サイトでご確認ください。',
+          title: '料金', sum: 'Plus / Pro / Ultra / Enterprise（現行金額は要公式確認）', sumMono: false,
+          det: 'Luma Appは月次クレジット制です。具体的な現行金額は公開公式面から安全に確認できないため断定しません。APIはAppとは別の従量課金体系です。',
         },
         {
-          title: '透かし', badge: { s: 'cond', label: '無料プランあり・Plus以上なし' },
-          det: '無料プランでは生成動画に透かしが付与されるとされています。Plusプラン以上では透かしなしとされていますが、最新仕様は公式サイトでご確認ください。',
+          title: '透かし', badge: { s: 'cond', label: 'APIなし / App要確認' },
+          det: '公式API FAQではAPI出力に透かしなしと案内されています。Luma Appの現行プラン別透かし条件は契約画面で確認してください。',
         },
         {
           title: '日本語対応',
           lang: [
-            { label: 'UI', badge: { s: 'na', label: '非対応' } },
-            { label: 'プロンプト', badge: { s: 'ok', label: '対応' } },
+            { label: 'UI', badge: { s: 'na', label: '要確認' } },
+            { label: 'プロンプト', badge: { s: 'na', label: '要確認' } },
           ],
         },
-        { title: '対応環境', feats: ['Web', 'API'] },
-        { title: '主な機能', wide: true, feats: ['テキスト→動画', '画像→動画', '動画延長', 'アップスケール', 'API', '最大20秒（Ray3 720p）'] },
+        { title: '対応環境', feats: ['Luma App（Web）', 'API'] },
+        { title: '主な機能', wide: true, feats: ['Ray3.2動画生成（5秒/10秒）', 'Modify Video V2（最大20秒・1080p）', 'リフレーム', '複数キーフレーム', 'HDR / 16-bit EXR', 'API'] },
       ]}
       useCases={[
-        '<b>最大20秒の高品質な動画生成</b>（Ray3 720pモデル）',
-        '<b>動画延長・アップスケール</b>で動画品質を向上させたい場合',
-        '<b>API連携</b>でサービスへの動画生成組み込みを検討している場合',
-        '<b>日本語プロンプト</b>での動画生成（プロンプト対応あり）',
+        '<b>Ray3.2で短尺動画を生成</b>したい場合（新規生成は5秒/10秒）',
+        '<b>既存動画を最大20秒・1080pで編集</b>したい場合（Modify Video V2）',
+        '<b>リフレーム・複数キーフレーム</b>を使った映像制作',
+        '<b>API連携</b>で動画生成・編集機能をプロダクトに組み込みたい場合',
       ]}
       pros={[
-        'Ray3モデルで最大20秒の動画生成が可能',
-        '動画延長・アップスケール機能も提供',
-        'API提供でプロダクトへの組み込みも可能',
-        '日本語プロンプトに対応',
+        '現行Ray3.2でテキスト・画像からの動画生成に対応',
+        '動画編集・リフレーム・複数キーフレームに対応',
+        'HDR・16-bit EXRなど高品質ワークフロー向け機能を案内',
+        'Luma AppとAPIの両方を提供',
       ]}
       cons={[
-        '商用利用可能な最安プランがPlus（$30/月）とやや高め',
-        '日本語UIに非対応',
-        '無料プランでは商用利用不可・透かしあり',
-        '無料枠のクレジット数が限定的',
+        '恒常的な無料プランは現行公式構成で確認できず、free trial creditsの案内に留まる',
+        'Luma Appの現行金額を公開公式面から安全に確認できない',
+        'AppとAPIで料金・無料枠・商用利用条件が異なる',
+        '日本語UI・日本語プロンプトの公式対応範囲は要確認',
       ]}
       limits={[
-        '無料プランでは商用利用不可・透かしあり',
-        '商用利用はPlusプラン（$30/月）以上が必要とされる',
-        '最大動画長は20秒（Ray3 720p・プラン・設定依存）',
-        'UIは英語のみ',
+        'Ray3.2の新規生成は5秒または10秒。Modify Video V2は最大20秒・1080p',
+        'APIは無料枠なしの従量課金',
+        'Trial出力は内部評価・テスト目的に限定',
+        'Luma Appの現行プラン金額・商用利用・透かし条件は契約画面で確認が必要',
       ]}
       quickTable={{
         kind: 'spec',
         rows: [
-          [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成' }],
-          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定クレジット</span><br>非商用のみ・透かしあり。条件は変更される可能性あり。' }],
-          [{ html: '最安料金', rk: true }, { html: '<span class="mono">$30/月〜（Plusプラン）</span><br>商用利用可能な最安プラン。最新料金は公式サイトで確認。' }],
-          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st paid sm"><span class="d"></span>Plus以上（要確認）</span><br>無料プランは非商用のみ。Plus以上で商用可とされる。最新条件は必ず公式サイトをご確認ください。' }],
-          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料プランあり・Plus以上なし</span><br>Plus以上では透かしなしとされています。' }],
-          [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>非対応</span>' }],
-          [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span>' }],
-          [{ html: '最大動画長', rk: true }, { html: '最大20秒（Ray3 720p・プラン依存）' }],
-          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-06-05', mono: true }],
+          [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成・動画編集' }],
+          [{ html: '現行モデル', rk: true }, { html: '<span class="mono">Ray3.2</span><br>新規動画生成は5秒/10秒。' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>free trial credits</span><br>恒常Freeプランは現行公式構成で未確認。APIは無料枠なし。' }],
+          [{ html: '料金', rk: true }, { html: 'Plus / Pro / Ultra / Enterprise<br>現行金額は公式契約画面で確認。APIは別の従量課金。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>App/APIで条件確認</span><br>API出力は公式FAQで商用利用可。Trialは内部評価・テスト目的に限定。' }],
+          [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>APIなし / App要確認</span>' }],
+          [{ html: '日本語対応', rk: true }, { html: '現行公式情報で明確な対応範囲を確認できず' }],
+          [{ html: '動画長', rk: true }, { html: '生成5秒/10秒、Modify Video V2は最大20秒・1080p' }],
+          [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-11-05', mono: true }],
           [{ html: '公式サイト', rk: true }, { html: '<a href="https://lumalabs.ai/" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
-        note: '※ 料金・クレジット数・商用利用条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
+        note: '※ Luma AppとAPIは料金体系・無料枠・権利条件が異なります。最新情報は各公式画面でご確認ください。',
       }}
       about={[
-        'Luma AIはテキストや画像からAI動画を生成するツールで、Ray3モデルによる最大20秒（720p）の動画生成・動画延長・アップスケール・APIを提供しています。動画生成品質の高さと機能の充実が特徴です。',
-        '無料プランは限定クレジット付与で非商用のみ・透かしありとされています。<b>商用利用にはPlusプラン（$30/月）以上が必要とされています。</b>商用利用条件・利用規約は変更される可能性があるため、最新情報は公式サイトでご確認ください。',
+        'Luma AIは、クリエイター向けのLuma Appと開発者向けAPIを提供するAIクリエイティブ基盤です。現行動画モデルはRay3.2で、旧Dream MachineやRay2を現行モデルとして扱わないよう公式情報で明記されています。',
+        'Ray3.2は新規動画生成のほか、動画編集・リフレーム・複数キーフレーム・HDR / 16-bit EXRなどの制作機能を備えています。<b>AppとAPIでは料金・無料枠・商用利用条件が異なるため、利用経路ごとに確認することが重要です。</b>',
       ]}
       aboutMore={{ label: 'AI動画生成ツール一覧で比較する →', href: '/categories/video-generation/' }}
       pricing={{
         table: {
           kind: 'cmp',
-          headers: ['プラン', '料金', '備考'],
+          headers: ['区分', '現行構成', '備考'],
           rows: [
-            [{ html: '無料', rk: true }, { html: '無料' }, { html: '限定クレジット・非商用のみ・透かしあり' }],
-            [{ html: 'Plus', rk: true }, { html: '$30/月', mono: true }, { html: '商用利用可とされる・透かしなし' }],
-            [{ html: 'Pro', rk: true }, { html: '$90/月', mono: true }, { html: 'Plusより多いクレジット枠が案内されている' }],
-            [{ html: 'Ultra', rk: true }, { html: '$300/月', mono: true }, { html: 'さらに多いクレジット枠が案内されている' }],
+            [{ html: 'Luma App', rk: true }, { html: 'Plus / Pro / Ultra' }, { html: '個人向け。現行金額は公式契約画面で確認' }],
+            [{ html: 'Enterprise', rk: true }, { html: 'Enterprise' }, { html: '法人向け。契約条件を個別確認' }],
+            [{ html: 'Trial', rk: true }, { html: 'free trial credits' }, { html: '恒常Freeプランとは別。利用規約上のTrial制限あり' }],
+            [{ html: 'API', rk: true }, { html: '従量課金', mono: false }, { html: '無料枠なし。Luma Appサブスクリプションとは別体系' }],
           ],
         },
         notes: [
-          '料金・クレジット数は2026年6月時点の公式案内に基づきます',
-          'プラン内容・料金は変更される可能性があります',
-          '<b>最新料金は公式サイトでご確認ください</b>',
+          '現行公式情報では年払いで最大20%節約との案内があります',
+          'Luma Appの未使用月次クレジットは請求サイクル終了時に失効すると公式Billing Policyで案内されています',
+          '<b>具体的な現行金額は公式料金・契約画面でご確認ください</b>',
         ],
       }}
       commercial={{
-        lead: '無料プランでは商用利用不可とされています。Plusプラン（$30/月）以上で商用利用できるとされていますが、利用規約は変更される可能性があるため商用利用前は必ず公式サイトでご確認ください。',
+        lead: 'Luma APIの公式FAQではAPI出力の商用利用が認められています。一方、Luma Appの現行プラン別条件は最新規約・契約画面で確認が必要です。Trial出力は内部評価・テスト目的に限定されています。',
         points: [
-          '無料プランでは商用利用不可（非商用のみ）とされています',
-          'Plusプラン（$30/月）以上で商用利用できるとされています',
-          '商用利用条件・利用規約は変更される可能性があります',
-          '第三者の権利侵害・禁止コンテンツは禁止されています',
+          'Luma API出力：公式FAQで商用利用可と案内',
+          'Trial：公式利用規約上、内部評価・テスト目的に限定',
+          'Luma App：現行プラン別の商用利用条件は最新規約・契約画面で確認',
+          '入力素材・人物・ブランド等の第三者権利は別途確認が必要',
         ],
-        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新のLuma AI公式利用規約をご確認ください。',
+        disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。App / API / Trialの利用経路ごとに最新のLuma AI公式利用規約・契約条件をご確認ください。',
         more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
       }}
-      integrationTitle="Luma AI Ray3モデルについて"
-      integration="Luma AIのRay3は高品質な動画生成を実現するモデルとして提供されています。テキスト・画像から最大20秒（720p）の動画を生成でき、動きの自然さや映像品質の向上が特徴とされています。Ray3のクレジット消費量・最大解像度・最大動画長はプランや設定によって異なるため、最新仕様は公式サイトでご確認ください。"
+      integrationTitle="Luma AI Ray3.2について"
+      integration="Ray3.2は現行のLuma動画モデルです。新規動画生成は5秒または10秒に対応し、Modify Video V2では最大20秒・1080pの編集、リフレーム、複数キーフレームなどに対応します。処理ごとに対応時間・解像度が異なるため、最新仕様は公式モデルガイドでご確認ください。"
       whoFor={[
-        '高品質な動画生成（最大20秒）を求めるクリエイター',
-        '動画延長・アップスケール機能も活用したい人',
-        'API連携でサービスへの組み込みを検討している開発者',
-        '日本語プロンプトで動画生成したい人',
+        'Ray3.2で短尺の高品質動画を生成したいクリエイター',
+        '既存動画の編集・リフレーム・複数キーフレームを活用したい人',
+        'HDR / EXRを含む制作ワークフローを検討している人',
+        'API連携で動画生成・編集機能を組み込みたい開発者',
       ]}
       whoNot={[
-        '商用利用を低コストで始めたい人（最安は$30/月）',
-        '日本語UIで操作したい人',
-        '無料プランで商用利用したい人',
-        '最大動画長20秒では不十分な用途（長尺動画）',
+        '恒常的な無料プランや無料API枠を前提にしたい人',
+        '現行料金を固定金額で事前把握したい人',
+        '日本語UIの公式対応を必須条件にしている人',
+        'App / API / Trialの利用条件確認を省略したい人',
       ]}
       selectTable={{
         kind: 'cmp',
@@ -200,53 +200,54 @@ const jsonLd = JSON.stringify([
         kind: 'cmp',
         headers: ['比較軸', 'Luma AI', 'Runway', 'Kling AI', 'Pika', 'Hailuo AI'],
         rows: [
-          [{ html: '最大動画長', rk: true }, { html: '最大20秒', me: true }, { html: '要公式確認' }, { html: '10秒（延長3分）' }, { html: '最大25秒' }, { html: '最大10秒' }],
-          [{ html: '商用利用', rk: true }, { html: 'Plus以上', me: true }, { html: '全プラン・条件あり' }, { html: '有料プランのみ' }, { html: '有料プランで可' }, { html: 'Standard以上' }],
-          [{ html: '透かし（無料）', rk: true }, { html: 'あり', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
-          [{ html: '日本語UI', rk: true }, { html: '非対応', me: true }, { html: '非対応' }, { html: '部分対応' }, { html: '部分対応' }, { html: '非対応' }],
-          [{ html: '無料枠', rk: true }, { html: '限定クレジット', me: true }, { html: '125cr（初回）' }, { html: '1日66cr' }, { html: '月80cr' }, { html: '生成回数制限' }],
+          [{ html: '最大動画長', rk: true }, { html: '生成5/10秒・編集最大20秒', me: true }, { html: '要公式確認' }, { html: '10秒（延長3分）' }, { html: '最大25秒' }, { html: '最大10秒' }],
+          [{ html: '商用利用', rk: true }, { html: 'API可 / App要確認', me: true }, { html: '全プラン・条件あり' }, { html: '有料プランのみ' }, { html: '有料プランで可' }, { html: 'Standard以上' }],
+          [{ html: '透かし（無料）', rk: true }, { html: 'APIなし / App要確認', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
+          [{ html: '日本語UI', rk: true }, { html: '要確認', me: true }, { html: '非対応' }, { html: '部分対応' }, { html: '部分対応' }, { html: '非対応' }],
+          [{ html: '無料枠', rk: true }, { html: 'trial credits', me: true }, { html: '125cr（初回）' }, { html: '1日66cr' }, { html: '月80cr' }, { html: '生成回数制限' }],
         ],
         note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
       }}
       language={[
-        '<b>日本語UI：</b>非対応。インターフェースは英語のみです',
-        '<b>日本語プロンプト：</b>対応。日本語での動画生成指示が可能とされています',
-        '公式ドキュメントは英語中心です',
+        '<b>日本語UI：</b>現行公式情報で正式対応範囲を明確に確認できていません',
+        '<b>日本語プロンプト：</b>現行公式情報で正式対応範囲を明確に確認できていません',
+        '重要な用途では実際のLuma Appで入力・出力を確認してください',
       ]}
       watermark={[
-        '無料プランでは生成動画に透かしが付与されるとされています',
-        'Plusプラン以上では透かしなしとされていますが、最新仕様は公式サイトでご確認ください',
-        '透かしの有無はプランによって異なります',
+        'Luma APIは公式FAQで出力に透かしなしと案内されています',
+        'Luma Appの現行プラン別透かし条件は契約画面で確認してください',
+        'Trialの用途制限と透かし条件は別の論点として確認してください',
       ]}
       watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
       usagePolicy={d?.usagePolicy}
       checklist={[
-        { html: '利用プランがPlusプラン以上かどうか（無料プランは商用不可）' },
-        { html: '最新のLuma AI利用規約・商用利用条件を公式サイトで確認したか' },
-        { html: '第三者の著作権・肖像権等を侵害するコンテンツでないか' },
-        { html: '生成動画に使用する入力画像・映像の権利関係' },
-        { html: 'クレジット消費量とコストの見積もり' },
-        { html: '公式サイトで最新の料金・プラン内容を確認したか' },
+        { html: 'Luma App / API / Trialのどの経路を利用するか' },
+        { html: '現行プラン金額・クレジット条件を公式契約画面で確認したか' },
+        { html: '商用案件では適用される利用規約・Trial制限を確認したか' },
+        { html: '第三者の著作権・肖像権・商標権を侵害する素材でないか' },
+        { html: '生成・編集の長さと解像度に応じたクレジット/コストを確認したか' },
+        { html: 'API利用時はAppと別の従量課金であることを確認したか' },
       ]}
-      lastChecked={d?.lastReviewed ?? '2026-06-05'}
-      nextCheck={d?.nextReviewDue ?? '2026-07-05'}
-      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      lastChecked={d?.lastReviewed ?? '2026-11-05'}
+      nextCheck={d?.nextReviewDue ?? '2027-02-05'}
+      verifiedDate={d?.verifiedAt ?? '2026-11-05'}
       sources={[
-        { tag: '料金', label: 'Luma AI 料金プラン（公式）', href: 'https://lumalabs.ai/pricing' },
-        { tag: '商用利用', label: 'Luma AI 商用利用・ライセンス条件（公式）', href: 'https://lumalabs.ai/learning-hub/licensing' },
-        { tag: '無料枠', label: 'Dream Machine 無料プラン・クレジット情報（公式）', href: 'https://lumalabs.ai/learning-hub/dream-machine-support-pricing-information' },
-        { tag: '公式', label: 'Luma AI 公式サイト', href: 'https://lumalabs.ai/' },
+        { tag: '公式', label: 'Luma AI 公式情報（LLM Info）', href: 'https://lumalabs.ai/llm-info' },
+        { tag: 'モデル', label: 'Ray3.2 モデル仕様（公式）', href: 'https://docs.agents.lumalabs.ai/guides/model/' },
+        { tag: '料金', label: 'Luma AI 料金・プラン（公式）', href: 'https://lumalabs.ai/pricing' },
+        { tag: 'API', label: 'Luma API FAQ（公式）', href: 'https://docs.agents.lumalabs.ai/guides/faq/' },
+        { tag: '規約', label: 'Luma AI 利用規約（公式）', href: 'https://lumalabs.ai/legal/terms-of-service' },
+        { tag: '請求', label: 'Luma AI Billing Policy（公式）', href: 'https://lumalabs.ai/legal/billing-policy' },
       ]}
       faqs={[
-        { q: 'Luma AIは無料で使えますか？', a: '無料プランで限定クレジットが付与されます。ただし無料プランでは非商用のみ・透かしが付与されます。' },
-        { q: 'Luma AIは商用利用できますか？', a: 'Plusプラン（$30/月）以上で商用利用できるとされています。無料プランでは商用利用不可です。商用利用前は必ず最新の公式利用規約をご確認ください。このページは法的助言ではありません。' },
-        { q: 'Luma AIは日本語で使えますか？', a: 'UIは英語のみです。プロンプトは日本語に対応しているとされています。' },
-        { q: '動画の最大長はどのくらいですか？', a: 'Ray3モデルで最大20秒（720p）の動画生成が可能とされています。最新仕様はプランによって異なる場合があるため、公式サイトでご確認ください。' },
-        { q: '透かしはありますか？', a: '無料プランでは生成動画に透かしが付与されるとされています。Plusプラン以上では透かしなしとされていますが、最新仕様は公式サイトでご確認ください。' },
-        { q: 'APIは利用できますか？', a: 'Luma AIはAPI提供を行っており、動画生成機能をサービスやプロダクトに組み込むことができます。API料金・仕様は公式ドキュメントをご確認ください。' },
-        { q: 'Luma AIの使い方を教えてください', a: 'Luma AIの基本的な利用の流れは、アカウント登録後にWebアプリからプロンプト（テキスト）を入力するか、画像を指定して動画を生成する形になります。生成後にプレビューを確認し、必要に応じて再生成や動画延長・アップスケールを行うことができます。機能名（Dream Machineなど）や操作UI・仕様は変更される場合があるため、最新の操作方法は公式サイトのドキュメントをご確認ください。' },
-        { q: 'Luma AIはスマホで使えますか？', a: 'LumaAIはWebアプリとして提供されており、スマートフォンのブラウザから利用できる場合があります。ただし、専用アプリの有無・対応OS・生成時間・ファイル保存形式はプランや仕様変更によって異なる場合があるため、最新情報は公式サイトでご確認ください。' },
-        { q: 'Luma AIで画像から動画を作るには何を確認すべきですか？', a: 'Luma AIは画像を入力素材として動画を生成する機能を提供しています。利用前に確認すべき主なポイントは次の通りです。①入力画像の著作権：自分が権利を持つ画像か、または使用許諾を得た画像かどうか。②人物・ロゴ・ブランドの扱い：第三者の肖像権・商標権を侵害するコンテンツの生成は禁止されています。③商用利用条件：画像から動画を生成した場合も、商用利用にはPlusプラン以上が必要とされています。④最新仕様の確認：入力画像のファイル形式・解像度・クレジット消費量はプランや仕様変更により変わる場合があります。最新情報は公式サイトでご確認ください。本記事は法的助言ではありません。' },
+        { q: 'Luma AIは無料で使えますか？', a: '現行公式情報では恒常的なFreeプランは確認できず、free trial creditsが案内されています。APIには無料枠がなく、最初の生成から従量課金です。' },
+        { q: 'Luma AIは商用利用できますか？', a: 'Luma APIの公式FAQではAPI出力の商用利用が認められています。Luma Appの現行プラン別条件は最新規約・契約画面で確認してください。Trial出力は内部評価・テスト目的に限定されています。本記事は法的助言ではありません。' },
+        { q: '現在の動画モデルは何ですか？', a: '現行動画モデルはRay3.2です。公式情報では旧Dream MachineやRay2を現行モデルとして混同しないよう明記されています。' },
+        { q: '動画の最大長はどのくらいですか？', a: 'Ray3.2の新規動画生成は5秒または10秒です。Modify Video V2では最大20秒・1080pの編集に対応します。' },
+        { q: '料金プランはどうなっていますか？', a: '現行公式情報ではPlus・Pro・Ultra・Enterpriseが案内されています。具体的な現行金額は公式契約画面でご確認ください。APIは別の従量課金です。' },
+        { q: '透かしはありますか？', a: 'Luma APIは公式FAQで出力に透かしなしと案内されています。Luma Appの現行プラン別条件は契約画面で確認してください。' },
+        { q: '日本語で使えますか？', a: '現行公式情報だけでは日本語UI・日本語プロンプトの正式対応範囲を明確に確認できていません。実際のLuma Appでご確認ください。' },
+        { q: 'APIは利用できますか？', a: '利用できます。Luma APIはLuma Appのサブスクリプションとは別の従量課金体系で、公式FAQでは無料枠なしと案内されています。' },
       ]}
       relatedTools={[
         { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },

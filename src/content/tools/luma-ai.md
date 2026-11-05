@@ -1,13 +1,13 @@
 ---
 name: "Luma AI"
-shortDescription: "テキストや画像から動画を生成できるAI動画生成ツール。Dream Machineを中心に、映像アイデアの検証から本格的な動画制作まで対応。"
+shortDescription: "Luma AppとRay3.2を中心に、テキスト・画像から動画生成、動画編集・リフレーム、API連携まで対応するAIクリエイティブ基盤。"
 category: "video"
 officialUrl: "https://lumalabs.ai/"
-freePlan: true
-lowestPaidPlan: "$30/月（Plusプラン・月払い）"
+freePlan: false
+lowestPaidPlan: "Plus（現行金額は公式サイトで要確認）"
 currency: "USD"
-commercialUse: "paid-only"
-commercialUseNote: "公式料金ページではPlus以上にCommercial useが案内されています。Dream Machineプラン比較ではWeb Plus以上にcommercial use allowed・no watermarksが案内されている一方、無料プランはnon-commercial use only・watermarksとされています。商用利用・広告利用・クライアントワークを前提にする場合は、有料プランへのアップグレードと最新の公式利用規約の確認が必要です。このページは法的助言ではありません。"
+commercialUse: "limited"
+commercialUseNote: "現行の公式API FAQではAPI出力の商用利用が認められ、API出力には透かしが付かないと案内されています。一方、Luma Appの現行プラン別の商用利用・透かし条件は公開情報だけでは十分に確認できません。Trialは公式利用規約上、内部評価・テスト目的に限定されています。AppとAPIを混同せず、商用利用前に最新の公式利用規約・契約画面をご確認ください。本記事は法的助言ではありません。"
 japaneseUi: false
 japanesePrompt: true
 watermark: "limited"
@@ -21,25 +21,25 @@ bestFor:
   - "商品・ブランド動画案"
   - "クリエイター向け映像制作"
 strengths:
-  - "テキストから動画・画像から動画の両方に対応"
-  - "AI動画生成カテゴリの代表的ツールの一つ"
-  - "commercial use allowedが案内されている有料プランが用意されている"
-  - "高解像度・HDR・アップスケール系のプランが用意されている"
-  - "映像アイデアの検証・プロトタイプ制作に向いている"
+  - "現行動画モデルRay3.2でテキスト・画像から動画生成に対応"
+  - "動画編集・リフレーム・複数キーフレームなどの制作機能に対応"
+  - "HDR・16-bit EXRなど高品質ワークフロー向け機能を案内"
+  - "Luma Appと開発者向けAPIの両方を提供"
+  - "API出力は公式FAQで商用利用可・透かしなしと案内"
 weaknesses:
-  - "無料プランは非商用利用限定・透かしありと案内されている"
-  - "クレジット制のため生成コスト管理が必要"
-  - "商用利用時は有料プランへのアップグレードと公式規約確認が必要"
-  - "日本語UIは公式情報で明確に確認できていない"
-  - "動画生成はプロンプト調整・試行が必要な場合がある"
-lastReviewed: "2026-06-15"
-nextReviewDue: "2026-09-15"
-verifiedAt: "2026-06-15"
-officialSourceUrl: "https://lumalabs.ai/pricing"
+  - "恒常的な無料プランは現行公式プラン構成で確認できず、free trial creditsの案内に留まる"
+  - "Luma Appの現行プラン金額を公開公式面から安全に確認できない"
+  - "Luma Appの商用利用・透かし条件は現行契約条件の確認が必要"
+  - "日本語UI・日本語プロンプトの公式対応範囲は明確に確認できていない"
+  - "AppとAPIで料金・無料枠・権利条件が異なるため混同に注意"
+lastReviewed: "2026-11-05"
+nextReviewDue: "2027-02-05"
+verifiedAt: "2026-11-05"
+officialSourceUrl: "https://lumalabs.ai/llm-info"
 pricingModel: "subscription_credit"
-pricingStatus: "confirmed"
-freePlanNote: "Freeプランにはlimited monthly credits / limited usageが案内されています。非商用利用限定・透かしありとされているため、無料利用時は用途と出力条件の公式確認が必要です。"
-paidPlanNote: "公式料金ページではPlus $30/月、Pro $90/月、Ultra $300/月が案内されています。Dream MachineプランではWeb Lite、Web Plus、Web Unlimitedなども案内されています。プラン名・料金・クレジット条件は変更される可能性があるため、最新の公式情報をご確認ください。"
+pricingStatus: "partial"
+freePlanNote: "現行公式情報ではPlus / Pro / Ultra / Enterpriseのプラン構成とfree trial creditsが案内されていますが、恒常的なFreeプランは確認できません。開発者向けAPIには無料枠がなく、最初の生成から従量課金と案内されています。"
+paidPlanNote: "現行公式情報では個人向けにPlus / Pro / Ultra、法人向けにEnterpriseが案内されています。年払いは最大20%節約とされていますが、現行の具体的な月額金額は公開公式面から安全に確認できないため断定しません。Luma Appは月次クレジット制、APIは従量課金で別体系です。"
 platforms:
   - web
   - api
@@ -48,11 +48,11 @@ features:
   textToVideo: true
   imageToVideo: true
   videoExtend: true
-  maxVideoDuration: "最大20秒（Ray3 720p SDR・モデルや解像度によって5〜10秒の場合あり）"
+  maxVideoDuration: "Ray3.2の新規生成は5秒または10秒。Modify Video V2は最大20秒・1080pに対応"
   upscale: true
   apiAvailable: true
   textToImage: false
-watermarkCondition: "無料プランでは透かしあり（non-commercial use only）。Web Plus以上ではno watermarks・commercial use allowedと案内。最新の公式画面で確認してください。"
+watermarkCondition: "公式API FAQではAPI出力に透かしなしと案内されています。Luma Appの現行プラン別透かし条件は公開公式情報だけでは十分に確認できないため、契約画面で要確認です。"
 japaneseDocs: false
 useCases:
   - video
@@ -61,44 +61,44 @@ useCases:
   - product_image
   - business
 limitations:
-  - "無料プランは非商用利用限定・透かしあり（Web Plus以上では透かしなし・商用利用可と案内されているが最新の公式画面で要確認）"
-  - "透かしの有無・商用利用可否はプランによって異なる（watermark: limited）"
-  - "クレジット制で生成コスト管理が必要"
-  - "商用利用は有料プラン前提（有料プランでも最新の公式規約確認が必要）"
+  - "Luma Appの恒常無料プラン・現行金額・プラン別商用利用条件は契約画面で要確認"
+  - "APIは無料枠なしの従量課金で、Luma Appのサブスクリプションとは別体系"
+  - "Trial出力は公式規約上、内部評価・テスト目的に限定"
+  - "動画生成・編集はモデル・解像度・長さに応じてクレジット消費が異なる"
 notFor:
-  - "無料プランで商用利用したい人（無料プランは非商用利用限定とされています）"
-  - "透かしなしで無料出力を前提にしたい人（無料プランでは透かしが付く場合があります）"
-  - "商用案件に利用する前に公式規約確認を省略したい人（最新の利用規約確認が必要です）"
+  - "恒常的な無料プランだけで継続利用したい人"
+  - "AppとAPIの料金・権利条件を確認せず商用案件へ使いたい人"
+  - "長尺動画編集を単一生成で完結したい人"
 notBestFor:
-  - "低コストで継続利用したい人（Plus $30/月〜と比較的高コスト）"
-  - "動画の細かい編集・構成調整が必要な人（生成ツールであり編集機能は限定的）"
-  - "日本語UIが必要な人（英語インターフェースのみ）"
+  - "現行価格を事前に固定金額で把握したい人（公式契約画面で要確認）"
+  - "日本語UIが必須の人（現行公式情報で対応範囲を明確に確認できていない）"
+  - "無料API枠を必要とする開発者（APIは無料枠なし）"
 difficulty: "beginner"
 pricingDecision:
-  hasFreePlan: "yes"
-  freePlanLimitNote: "月間クレジット制限あり・非商用利用限定・透かしあり。用途と条件に注意が必要。"
-  watermarkStatus: "free-only"
+  hasFreePlan: "no"
+  freePlanLimitNote: "恒常的なFreeプランは現行公式構成で確認できず、free trial creditsの案内のみ。APIには無料枠なし。"
+  watermarkStatus: "unknown"
   creditSystem: true
   paidPlanRequiredForExport: false
-  pricingNote: "Plus $30/月〜。商用利用にはPlus以上が必要とされている。クレジット制のため消費量管理が必要。最新プランは公式サイトで確認推奨。"
+  pricingNote: "Luma AppはPlus / Pro / Ultra / Enterpriseの現行プラン構成。具体的な現行金額は公開公式面から安全に確認できず、pricingStatus=partial。APIは別体系の従量課金。"
 usagePolicy:
-  commercialUseStatus: "paid-only"
+  commercialUseStatus: "limited"
   commercialUseByPlan:
-    free: "非商用利用のみ・透かしありとされている"
-    paid: "Web Plus以上でcommercial use allowed・no watermarksと案内されている"
-    enterprise: "要確認"
-  commercialUseNote: "無料プランは非商用利用のみ。商用利用にはPlus以上が必要。第三者権利・コンテンツ内容によって制限がある場合あり。"
+    free: "恒常無料プランは現行公式構成で確認できない。Trial出力は内部評価・テスト目的に限定。"
+    paid: "Luma Appの現行プラン別商用利用条件は最新規約・契約画面で要確認。API出力は公式FAQで商用利用可と案内。"
+    enterprise: "契約条件を個別確認"
+  commercialUseNote: "AppとAPIを混同しないこと。API出力は公式FAQで商用利用可・透かしなし。Trialは内部評価・テスト目的に限定。Luma Appの現行プラン別権利条件は最新規約と契約画面で確認する。"
   rightsStatus: "unknown"
-  rightsNote: "生成物の権利帰属は最新の公式利用規約で確認が必要。"
+  rightsNote: "生成物の権利・利用範囲は利用経路（Luma App / API / Trial）と最新規約・契約条件で確認が必要。"
   inputMaterialRisk: "medium"
   inputMaterialNote: "アップロードする画像・動画素材の権利関係はユーザーが確認する必要あり。"
   peopleLogoRisk: "high"
   peopleLogoNote: "実在の人物・著名人・ブランドロゴを含む動画は肖像権・商標権等の観点から別途確認が必要。本記事は法的助言ではない。"
   creditRequiredStatus: "unknown"
-  creditRequiredNote: "公式規約での明記は確認できていない。最新規約を参照すること。"
-  officialSourceUrl: "https://lumalabs.ai/pricing"
+  creditRequiredNote: "クレジット消費量はモデル・処理ごとに異なる。最新の公式App/API情報を確認すること。"
+  officialSourceUrl: "https://lumalabs.ai/llm-info"
   termsUrl: "https://lumalabs.ai/legal/terms-of-service"
-  lastReviewed: "2026-06-15"
+  lastReviewed: "2026-11-05"
 capabilityFit:
   imageGeneration: false
   videoGeneration: true
@@ -111,69 +111,69 @@ capabilityFit:
   styleControl: "medium"
   consistencyControl: "low"
 conversionGuide:
-  primaryCtaLabel: "無料枠・透かし・商用利用条件を公式サイトで確認する"
-  primaryCtaReason: "無料プランは非商用利用・透かしあり。商用利用にはPlus以上が必要。最新プランと条件を公式サイトで確認推奨。"
+  primaryCtaLabel: "現行プラン・Ray3.2・利用条件を公式サイトで確認する"
+  primaryCtaReason: "Luma AppとAPIで料金・無料枠・商用利用条件が異なるため、利用経路を決めたうえで最新条件を確認する。"
   beforeClickChecklist:
-    - "無料プランは非商用利用のみ・透かしありとされているが、用途が適合しているか確認したか？"
-    - "商用利用する場合はPlus（$30/月〜）以上が必要とされているが、コストを把握しているか？"
-    - "商用案件に使う場合、最新の公式利用規約を確認したか？"
+    - "Luma AppとAPIのどちらを使うか整理したか？"
+    - "Luma Appの現行プラン金額・クレジット条件を公式画面で確認したか？"
+    - "Trial出力の用途制限と、商用案件で適用される最新規約を確認したか？"
     - "生成に使う素材（画像・動画）に第三者の権利が含まれていないか確認したか？"
     - "人物・著名人・ブランドロゴを含む動画を使用する場合、権利関係を別途確認したか？"
 reviewed:
-  pricing: "2026-06-15"
-  terms: "2026-05-15"
-  features: "2026-06-15"
+  pricing: "2026-11-05"
+  terms: "2026-11-05"
+  features: "2026-11-05"
 sourceRefs:
-  - label: "Luma AI 公式サイト"
-    url: "https://lumalabs.ai/"
+  - label: "Luma AI 公式情報（LLM Info）"
+    url: "https://lumalabs.ai/llm-info"
     type: official
-  - label: "Dream Machine 公式ページ"
-    url: "https://dream-machine.lumalabs.ai/"
-    type: official
-  - label: "Luma AI 料金プラン（公式）"
+  - label: "Luma AI 料金・プラン（公式）"
     url: "https://lumalabs.ai/pricing"
     type: pricing
-  - label: "Dream Machine サポート・料金情報（公式ラーニングハブ）"
-    url: "https://lumalabs.ai/learning-hub/dream-machine-support-pricing-information"
+  - label: "Ray3.2 モデル仕様（公式）"
+    url: "https://docs.agents.lumalabs.ai/guides/model/"
+    type: official
+  - label: "Luma API FAQ（公式）"
+    url: "https://docs.agents.lumalabs.ai/guides/faq/"
     type: help
   - label: "Luma AI 利用規約（公式）"
-    url: "https://lumalabs.ai/terms"
+    url: "https://lumalabs.ai/legal/terms-of-service"
     type: terms
-  - label: "Luma AI プライバシーポリシー（公式）"
-    url: "https://lumalabs.ai/privacy"
+  - label: "Luma AI Billing Policy（公式）"
+    url: "https://lumalabs.ai/legal/billing-policy"
     type: policy
 sources:
-  - title: "Luma AI 公式サイト"
-    url: "https://lumalabs.ai/"
-  - title: "Dream Machine 公式ページ"
-    url: "https://dream-machine.lumalabs.ai/"
-  - title: "Luma AI 料金プラン（公式）"
+  - title: "Luma AI 公式情報（LLM Info）"
+    url: "https://lumalabs.ai/llm-info"
+  - title: "Luma AI 料金・プラン（公式）"
     url: "https://lumalabs.ai/pricing"
-  - title: "Dream Machine サポート・料金情報（公式ラーニングハブ）"
-    url: "https://lumalabs.ai/learning-hub/dream-machine-support-pricing-information"
+  - title: "Ray3.2 モデル仕様（公式）"
+    url: "https://docs.agents.lumalabs.ai/guides/model/"
+  - title: "Luma API FAQ（公式）"
+    url: "https://docs.agents.lumalabs.ai/guides/faq/"
   - title: "Luma AI 利用規約（公式）"
-    url: "https://lumalabs.ai/terms"
-  - title: "Luma AI プライバシーポリシー（公式）"
-    url: "https://lumalabs.ai/privacy"
+    url: "https://lumalabs.ai/legal/terms-of-service"
+  - title: "Luma AI Billing Policy（公式）"
+    url: "https://lumalabs.ai/legal/billing-policy"
 faqs:
   - question: "無料で使えますか？"
-    answer: "無料プランにはlimited monthly creditsが案内されており、試用目的での利用は可能です。ただし非商用利用限定・透かしありとされているため、商用利用や透かしなしの出力には有料プランが必要です。最新の条件は公式サイトでご確認ください。"
+    answer: "現行公式情報では恒常的なFreeプランは確認できず、各プランにfree trial creditsが案内されています。開発者向けAPIには無料枠がなく、最初の生成から従量課金です。"
   - question: "商用利用できますか？"
-    answer: "公式料金ページおよびDream Machineプラン比較では、商用利用はPlus以上（Web Plus以上）のプランに案内されています。無料プランはnon-commercial use onlyとされています。商用利用・広告利用・クライアントワークを前提にする場合は、有料プランへのアップグレードと最新の公式利用規約の確認が必要です。このページは法的助言ではありません。"
-  - question: "日本語で使えますか？"
-    answer: "公式情報だけでは日本語UIの対応を明確に確認できていません。日本語プロンプトは試せる場合がありますが、動画生成では英語プロンプトや具体的な構図・動きの指定の方が安定する可能性があります。最新の対応状況は公式サイトでご確認ください。"
-  - question: "透かしは入りますか？"
-    answer: "公式のDream Machineプラン比較では、無料プランにwatermarks、Web Plus以上にno watermarksが案内されています。プランや時期によって条件が変わる可能性があるため、最新の公式画面でご確認ください。"
+    answer: "Luma APIの公式FAQではAPI出力の商用利用が認められています。一方、Luma Appの現行プラン別条件は最新の利用規約・契約画面で確認が必要です。Trial出力は内部評価・テスト目的に限定されています。本記事は法的助言ではありません。"
+  - question: "現在の動画モデルは何ですか？"
+    answer: "現行の公式情報ではRay3.2が現在の動画モデルです。旧Dream MachineやRay2を現行モデルとして扱わないよう公式情報で明記されています。"
+  - question: "動画の長さはどのくらいですか？"
+    answer: "Ray3.2の新規動画生成は5秒または10秒が公式仕様です。Modify Video V2では最大20秒・1080pの編集に対応します。処理によって上限が異なるため、最新仕様を公式ドキュメントで確認してください。"
   - question: "料金プランはどうなっていますか？"
-    answer: "公式料金ページではPlus $30/月、Pro $90/月、Ultra $300/月が案内されています。Dream MachineプランではWeb Lite、Web Plus、Web Unlimitedなども案内されています。プラン名・料金・クレジット条件は変更される可能性があるため、必ず最新の公式料金ページをご確認ください。"
+    answer: "現行公式情報では個人向けPlus・Pro・Ultra、法人向けEnterpriseが案内されています。具体的な現行金額は公開公式面から安全に確認できないため、本サイトでは断定していません。"
   - question: "APIは使えますか？"
-    answer: "公式サイトではAPI提供が案内されています。詳細な利用条件・料金は公式ドキュメントをご確認ください。"
+    answer: "利用できます。Luma APIはLuma Appのサブスクリプションとは別の従量課金体系で、公式FAQでは無料枠なしと案内されています。"
+  - question: "透かしは入りますか？"
+    answer: "公式API FAQではAPI出力に透かしなしと案内されています。Luma Appの現行プラン別透かし条件は最新の契約画面で確認してください。"
+  - question: "日本語で使えますか？"
+    answer: "現行公式情報だけでは日本語UI・日本語プロンプトの正式対応範囲を明確に確認できていません。利用前にLuma Appの最新UIで確認してください。"
   - question: "Luma AIはどんな用途に向いていますか？"
-    answer: "短いAI動画の生成、SNS向け動画案の試作、画像素材からの動画化、広告やプロモーション映像のプロトタイプ制作などで比較されやすいです。Runway・Pika・Kling AIと並んでAI動画生成の候補として検討されることが多いツールです。"
-  - question: "Runway・Pika・Kling AIとどう比較すればよいですか？"
-    answer: "本格的な映像表現・編集機能を重視するならRunway、手軽な短尺動画生成ならPika、画像から動画生成や候補を広く比較したい場合はKling AIやLuma AIも選択肢になります。用途・プラン・商用利用条件をそれぞれ公式サイトで確認の上、比較することを推奨します。"
-  - question: "人物・ブランドロゴ・第三者素材を使って動画を作れますか？"
-    answer: "技術的に生成できる場合でも、著名人・実在人物・第三者のブランドロゴ・著作物を含む素材を使用する際は、肖像権・著作権・商標権などの観点から別途確認が必要です。本記事は法的助言ではありません。利用前に公式利用規約および関連法令をご確認ください。"
+    answer: "Ray3.2による短尺動画生成、画像から動画、動画編集・リフレーム、複数キーフレームを使った制作、HDR/EXRを含む高品質ワークフロー、API連携などに向いています。"
 japanBilling:
   providerName: "Luma AI, Inc."
   providerCountry: "米国"
@@ -184,31 +184,33 @@ japanBilling:
   localizedJpyDisplay: false
   taxDisplay: "unknown"
   purchaseChannels: ["web", "appstore"]
-  pricingCheckedAt: "2026-07-13"
-  pricingNote: "Web版の公式料金は米ドル建てです。日本円での実際の支払額は決済時の為替レート、カード会社の海外事務手数料、税等により変動します。iOSアプリ（Luma Dream Machine）はApp Store課金でWeb版と価格体系が異なります（アプリ内はLite/Plus/Unlimited等の別構成・日本円価格は要公式確認）。"
+  pricingCheckedAt: "2026-11-05"
+  pricingNote: "現行公式情報ではLuma AppにPlus / Pro / Ultra / Enterpriseのプランとfree trial creditsが案内されています。具体的な現行金額・日本円請求条件は公開公式面から安全に確認できないため、契約画面で確認してください。APIはAppとは別の従量課金です。"
   billingCategory: "D"
   sourceUrls:
     - "https://lumalabs.ai/pricing"
-    - "https://apps.apple.com/us/app/luma-dream-machine/id6478852867"
+    - "https://lumalabs.ai/legal/billing-policy"
 ---
 
-## Luma AI / Dream Machineとは
 
-Luma AIは、テキストや画像から動画を生成するAI動画生成サービスです。同社のDream Machineは、AI動画生成カテゴリの代表的ツールの一つとして位置づけられており、画像生成DBの拡張として動画生成にも対応する代表ツールとして本サイトに追加しています。
+## Luma AIとは
 
-テキストプロンプトからの動画生成（text-to-video）、画像を起点にした動画生成（image-to-video）のほか、動画の延長・アップスケールなどの機能が案内されています。
+Luma AIは、クリエイター向けの**Luma App**と開発者向けの**Luma API**を提供するAIクリエイティブ基盤です。現行の公式情報では、動画モデルは**Ray3.2**です。公式のLLM向け情報では、旧Dream MachineやRay2を現行モデルとして混同しないよう明記されています。
 
-> **注意：** 本記事は情報提供を目的としており、法的助言ではありません。商用利用・規約・プランの詳細は、必ず[Luma AI公式サイト](https://lumalabs.ai/)および[公式利用規約](https://lumalabs.ai/terms)の最新版をご確認ください。
+Ray3.2では、テキスト・画像からの動画生成に加え、動画編集、リフレーム、複数キーフレーム、HDR・16-bit EXRなどの高品質ワークフロー向け機能が案内されています。Luma AppとAPIは料金体系・無料枠・利用条件が異なるため、用途に応じて分けて確認することが重要です。
+
+> **注意：** 本記事は情報提供を目的としており、法的助言ではありません。料金・商用利用・Trial・APIの条件は、必ず[Luma AI公式情報](https://lumalabs.ai/llm-info)と[公式利用規約](https://lumalabs.ai/legal/terms-of-service)の最新版をご確認ください。
 
 ## 主な機能
 
-- **テキストから動画生成（text-to-video）：** テキストプロンプトを入力して動画を生成
-- **画像から動画生成（image-to-video）：** アップロードした画像を起点に動画を生成
-- **動画延長（video extend）：** 生成した動画をさらに延長
-- **アップスケール：** 高解像度・HDR出力に対応するプランが案内されている
-- **API：** API経由での利用が案内されている
+- **Ray3.2 動画生成：** テキストまたは画像から5秒・10秒の動画を生成
+- **Modify Video V2：** 最大20秒・1080pの動画編集に対応
+- **リフレーム：** 既存動画の構図・アスペクト調整
+- **複数キーフレーム：** 開始・中間・終了など複数の視覚条件を使った生成
+- **高品質出力：** HDR・16-bit EXRなどの制作ワークフロー向け機能
+- **API：** Luma Appとは別の従量課金で開発者向けに提供
 
-各機能の詳細・対応プランは変更される可能性があります。最新情報は[公式サイト](https://lumalabs.ai/)および[Dream Machine](https://dream-machine.lumalabs.ai/)でご確認ください。
+各機能の解像度・長さ・対応モデルは処理ごとに異なります。最新仕様は[Ray3.2公式モデルガイド](https://docs.agents.lumalabs.ai/guides/model/)でご確認ください。
 
 ## 向いている用途
 
@@ -220,58 +222,43 @@ Luma AIは、テキストや画像から動画を生成するAI動画生成サ�
 
 用途やプランによって条件が異なる可能性があります。商用利用・広告利用・クライアントワークを前提にする場合は、最新の公式規約をご確認ください。
 
-## 無料プラン・クレジット・料金に関する注意点
+## 料金・トライアル・クレジットに関する注意点
 
-公式のDream Machineプラン比較では、**Freeプランにlimited monthly credits / limited usage**が案内されています。
+現行の公式情報では、Luma Appの個人向けプランとして**Plus / Pro / Ultra**、法人向けに**Enterprise**が案内されています。各プランにはfree trial creditsの案内がありますが、従来の記事にあった恒常的なFreeプランや固定の$30 / $90 / $300という金額は、現行の公開公式面から安全に確認できないため削除しました。
 
-| プラン | 月額料金（目安） | 主な条件 |
-|---|---|---|
-| Free | 無料 | limited credits・非商用利用限定・透かしあり |
-| Plus（Web Plus相当） | $30/月〜（目安） | commercial use allowed・no watermarks案内 |
-| Pro | $90/月〜（目安） | 上位プラン |
-| Ultra | $300/月〜（目安） | 上位プラン |
-
-- **プラン名・料金・クレジット条件は変更される可能性があります**
-- Dream MachineプランではWeb Lite、Web Plus、Web Unlimitedなども案内されています
-- **最新のプラン内容は[Luma AI公式料金ページ](https://lumalabs.ai/pricing)および[Dream Machine料金情報](https://lumalabs.ai/learning-hub/dream-machine-support-pricing-information)でご確認ください**
+- **Luma App：** サブスクリプションごとに月次クレジットが付与される仕組み。未使用クレジットは請求サイクル終了時に失効すると公式Billing Policyで案内されています
+- **Free trial credits：** 現行プランに試用クレジットの案内があります。恒常的な無料プランとは区別してください
+- **Luma API：** Appとは別体系で、公式FAQでは無料枠なし・最初の生成から従量課金と案内されています
+- **年払い：** 現行公式情報では年払いで最大20%節約との案内があります
+- **具体的な現行金額：** 契約画面・公式料金ページで確認してください。本サイトでは未確認金額を推測しません
 
 ### クレジット・生成時間に関する注意
 
-- 生成時間や出力品質は**プロンプト・素材・サーバー混雑状況・プランによって変わる場合があります**
-- クレジット制の場合、**失敗した生成でもクレジットが消費される可能性があります**
-- 無料プランでは生成回数・解像度・保存期間・透かしなどに制限がある場合があります
-- 商用利用条件はプランや用途によって異なる場合があります。利用前に必ず公式規約をご確認ください
+Luma Appの公式Billing Policyでは、失敗した生成に対するクレジットは返却されると案内されています。APIは別の課金体系のため、Appのクレジット挙動をそのままAPIに当てはめないでください。動画の長さ・解像度・処理内容によって必要クレジットや料金が変わるため、実行前に各公式画面で確認してください。
 
 ## 商用利用・著作権・利用規約に関する注意点
 
-公式料金ページおよびDream Machineプラン比較では、**商用利用（commercial use）はPlus以上（Web Plus以上）のプランに案内**されています。
+現行の公式情報では、**Luma APIの出力は商用利用でき、API出力には透かしが付かない**と案内されています。一方で、Luma Appの現行プラン別の商用利用・透かし条件を、旧Dream Machineのプラン表から引き継いで断定することはできません。
 
-- **無料プラン：** non-commercial use only（非商用利用限定）と案内されています
-- **有料プラン（Plus以上）：** commercial use allowed・no watermarksと案内されています
-- **条件・規約は変更される可能性があります**
+また、現行利用規約では**Trialは内部評価・テスト目的**として扱われ、Trial出力の利用もその範囲に限定されています。商用案件では、Trial・Luma App・APIのどの経路で生成したかを確認したうえで、最新の規約・契約条件を確認してください。
 
-> **免責事項：** 商用利用・広告利用・クライアントワークを前提にする場合は、必ず[Luma AI利用規約](https://lumalabs.ai/terms)の最新版をご確認ください。本記事は法的助言ではありません。著作権・第三者の権利についても、生成コンテンツの内容によっては別途確認が必要な場合があります。
+> **免責事項：** 本記事は法的助言ではありません。商用利用・広告利用・クライアントワークを前提にする場合は、[Luma AI利用規約](https://lumalabs.ai/legal/terms-of-service)と契約画面の最新版をご確認ください。
 
 ### 人物・ブランドロゴ・第三者素材を扱う場合
 
 著名人・実在人物・第三者のブランドロゴ・著作物を含む素材をプロンプトや入力画像に使用する際は、**肖像権・著作権・商標権などの観点から別途確認が必要**です。技術的に生成できても、権利上の問題が発生する場合があります。詳しくは[商用利用・著作権の基本的な考え方](/guides/commercial-use-copyright/)もあわせてご確認ください。本記事は法的助言ではありません。
 
-## 日本語プロンプトに関する確認メモ
+## 日本語対応に関する確認メモ
 
-公式情報だけでは、Luma AI / Dream Machineの日本語UI対応を明確に確認できていません（japaneseUi: false）。
-
-日本語プロンプトで試せる場合でも、**動画生成では英語プロンプトや具体的な構図・動きの指定の方が安定する可能性**があります。より意図した動画を生成するには、英語で「カメラアングル・被写体の動き・シーンの雰囲気」を具体的に記述することを検討してください。
-
-最新の日本語対応状況は公式サイトでご確認ください。
+現行の公式情報だけでは、Luma Appの日本語UI・日本語プロンプトの正式な対応範囲を明確に確認できていません。日本語入力が技術的に可能な場合でも、公式のサポート対象として断定せず、実際のLuma Appで確認してください。
 
 ## 透かしに関する確認メモ
 
-公式のDream Machineプラン比較では、以下のように案内されています：
+- **Luma API：** 公式FAQで出力に透かしなしと案内
+- **Luma App：** 現行プラン別の透かし条件は公開公式情報だけでは十分に確認できないため、契約画面で確認
+- **Trial：** 商用利用可否とは別に、利用規約上のTrial用途制限を確認
 
-- **無料プラン：** watermarks（透かしあり）
-- **Web Plus以上：** no watermarks（透かしなし）・commercial use allowed
-
-**無料プランでは透かしあり、有料プランでは透かしなしが案内されています。ただし最新の公式画面で確認してください。** プランや時期によって条件が変わる可能性があります。
+旧Dream MachineのFree / Web Plus表を現行Luma Appの条件として流用しないよう注意してください。
 
 ## どんな人に向いているか
 
@@ -285,14 +272,14 @@ Luma AIは、テキストや画像から動画を生成するAI動画生成サ�
 - **向いていない人：**
   - 長尺動画編集まで1ツールで完結したい人（→ 動画編集機能は限定的）
   - 毎回同じ人物・構図・動きを完全に再現したい人（→ AI生成の性質上、毎回同一の出力は保証されない）
-  - 商用利用条件を確認せずに案件へ使いたい人（→ 無料プランは非商用利用限定・有料プランでも規約確認が必要）
-  - 無料枠だけで大量生成・高解像度・透かしなしを前提にしたい人（→ 無料プランはlimited credits・透かしあり）
+  - App / API / Trialの利用条件を確認せずに商用案件へ使いたい人
+  - 恒常無料プランや無料API枠を前提に大量生成したい人
   - 日本語UIを必須とする人（→ 公式情報で明確に確認できていない）
 
 ## 実務利用前に確認したいポイント
 
-- [ ] 利用するプランと商用利用条件（無料プランは非商用利用限定とされています）
-- [ ] 透かしの有無（無料プランは透かしありとされています）
+- [ ] 利用経路（Luma App / API / Trial）と適用される商用利用条件
+- [ ] 透かしの有無（APIは透かしなし、Appは現行契約画面で確認）
 - [ ] 生成物の利用範囲（掲載媒体・収益化・クライアントワークの可否）
 - [ ] 人物・著名人・ブランドロゴ・第三者素材を使う場合の権利関係
 - [ ] クレジット消費レートと生成コスト（動画の長さ・解像度によって変動）
@@ -306,13 +293,13 @@ Luma AIは、テキストや画像から動画を生成するAI動画生成サ�
 - テキストから動画・画像から動画・動画延長をまとめて試したい場合
 - SNS・広告向けの動画プロトタイプを素早く作りたい場合
 - Runway・Pika・Kling AI以外の動画生成候補も幅広く比較したい場合
-- 商用利用前提でPlus以上のプランへのアップグレードを検討している場合
+- Luma AppとAPIを使い分けながら商用制作・開発連携を検討している場合
 
 ## 他ツールも比較したいケース
 
-- **商用利用を無料プランで行いたい場合** → 無料プランは非商用利用限定のため有料プランへの移行と規約確認が必要です
+- **商用利用条件を明確にしたい場合** → App / API / Trialで条件が異なるため、利用経路ごとの最新規約を確認してください
 - **映像編集補助機能も欲しい場合** → [Runway](/tools/runway/) は編集ツール群も内包しています
-- **日本語UIを優先したい場合** → Luma AIはUIが英語のため、日本語対応を重視する場合は他ツールを確認してください
+- **日本語UIを優先したい場合** → 現行公式情報で日本語UIの対応範囲を明確に確認できていないため、実際のAppで確認するか他ツールも比較してください
 - **コストを抑えて短尺動画を手軽に試したい場合** → [Pika](/tools/pika/) も比較候補になります
 - **リアル系の動きを比較したい場合** → [Kling AI](/tools/kling-ai/) も並べて確認するとよいでしょう。詳しくは[AI動画生成ツール一覧](/categories/video-generation/)もご参照ください
 - **動画生成ツール全体を横断比較したい場合** → [AI動画生成ツール一覧](/categories/video-generation/) をご参照ください

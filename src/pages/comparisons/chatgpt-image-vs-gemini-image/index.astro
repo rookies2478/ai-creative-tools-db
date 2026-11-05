@@ -8,7 +8,7 @@ const comparisonRows = [
   { item: "既存のDALL·Eとの関係", toolA: "旧DALL·E記事と現行ChatGPT画像生成機能は区別する", toolB: "GoogleのGemini画像生成として案内" },
   { item: "無料利用", toolA: "利用枠はアカウント・プラン・時期で変動", toolB: "利用枠はアカウント・プラン・時期で変動" },
   { item: "商用利用", toolA: "公式利用規約・生成物と入力素材の権利を確認", toolB: "Google公式規約・生成物と入力素材の権利を確認" },
-  { item: "透かし・識別情報", toolA: "可視透かしとメタデータの違いを含め公式確認", toolB: "可視透かしと識別情報の違いを含め公式確認" },
+  { item: "透かし・識別情報", toolA: "生成画像の可視透かし・C2PA等の付与仕様は利用機能ごとに公式確認", toolB: "Gemini AppsのAI生成メディアには不可視SynthID、Content Credentials（C2PA）。可視透かしは設定による" },
 ];
 const faqs = [
   {
@@ -33,6 +33,7 @@ const sources = [
   { href: "https://openai.com/policies/terms-of-use/", label: "OpenAI利用規約" },
   { href: "https://support.google.com/gemini/answer/14286560?hl=ja", label: "Gemini画像生成ヘルプ" },
   { href: "https://gemini.google.com/", label: "Geminiアプリ" },
+  { href: "https://support.google.com/gemini/answer/17405358?hl=ja", label: "Gemini Apps 可視透かし設定・SynthID（公式）" },
 ];
 const relatedLinks = [
   {href:'/tools/dalle/',label:"ChatGPT画像生成関連ツール詳細"},

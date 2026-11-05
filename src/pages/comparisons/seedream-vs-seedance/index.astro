@@ -7,8 +7,8 @@ const comparisonRows = [
   { item: "サービスとの関係", toolA: "Dreaminaなどで扱われる画像生成モデル名", toolB: "Dreaminaなどで扱われる動画生成モデル名" },
   { item: "入力素材", toolA: "文章や画像など（機能・環境による）", toolB: "文章や画像など（機能・環境による）" },
   { item: "結果の評価", toolA: "解像感・レイアウト・文字の再現性を確認", toolB: "動き・連続性・時間・音声の可否を確認" },
-  { item: "料金と無料枠", toolA: "Dreaminaの該当モデル・プランを確認", toolB: "Dreaminaの該当モデル・プランを確認" },
-  { item: "商用利用・透かし", toolA: "プランと出力条件・元素材の権利を確認", toolB: "プランと出力条件・元素材の権利を確認" },
+  { item: "料金と無料枠", toolA: "Dreamina Freeあり、Basic USD15/月・1575クレジット（モデル消費量は別確認）", toolB: "Dreamina Freeあり、Basic USD15/月・1575クレジット（モデル消費量は別確認）" },
+  { item: "商用利用・透かし", toolA: "Dreamina日本向け規約は原則非商用。許諾の書面確認が必要。Basic以上は可視透かし削除を案内", toolB: "Dreamina日本向け規約は原則非商用。許諾の書面確認が必要。Basic以上は可視透かし削除を案内" },
 ];
 const faqs = [
   {
@@ -17,11 +17,11 @@ const faqs = [
   },
   {
     "q": "無料で利用できますか？",
-    "a": "無料利用やクレジット付与、生成回数は時期・地域・アカウント・プランで変動するため、各公式料金・ヘルプページをご確認ください。"
+    "a": "Dreaminaの公式日本語料金表に無料プランがあります。通常表示はBasic USD15/月・1575クレジット、Standard USD36/月・3885、Advanced USD79/月・8645。最終的な料金・税・割引は購入画面で確認してください。"
   },
   {
     "q": "商用利用や透かしの条件は？",
-    "a": "生成物だけでなく入力画像・実在人物・ブランド素材の権利にも注意が必要です。商用利用の可否、可視透かし、識別情報は最新の公式規約と機能説明で確認してください。本記事は法的助言ではありません。"
+    "a": "Dreamina日本向け利用規約はサービスを原則として私的・非商用用途と説明しています。一方、別の公式ヘルプは商用利用を適用規約・機能別条件によると記載しており、矛盾しています。日本向け広告・受託・販売は有料プランでも事前の書面確認を推奨します。Basic以上の透かし削除特典は商用許諾ではありません。"
   },
   {
     "q": "どちらの画質が上ですか？",
@@ -32,6 +32,7 @@ const sources = [
   { href: "https://dreamina.capcut.com/", label: "Dreamina公式" },
   { href: "https://dreamina.capcut.com/ja-jp/pricing/dreamina-price", label: "Dreamina料金" },
   { href: "https://dreamina.capcut.com/help", label: "Dreaminaヘルプ" },
+  { href: "https://www.capcut.com/clause/dreamina-terms-of-service?lang=ja-JP&region=JP", label: "日本向けDreamina利用規約" },
 ];
 const relatedLinks = [
   {href:'/tools/dreamina/',label:"Seedream関連ツール詳細"},

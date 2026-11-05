@@ -4,6 +4,8 @@ shortDescription: "カメラワークを活かしたAI映像や広告向けク�
 category: "both"
 officialUrl: "https://higgsfield.ai/"
 freePlan: "limited"
+lowestPaidPlan: "Basic USD 9/月相当（年額契約時、月次契約価格は公式で確認）"
+currency: "USD"
 commercialUse: "limited"
 commercialUseNote: "公式ヘルプは「全ユーザーが商用利用可能」と案内する一方、公式料金比較表のCommercial use欄ではFreeはNot included、Basic以上はIncludedと明記しており矛盾する。安全側ではFreeを商用利用不可扱いとし、有料Basic以上を商用利用可能な候補とする。無料素材の商用利用を希望する場合はHiggsfieldサポートに書面確認する。"
 japaneseUi: "unknown"

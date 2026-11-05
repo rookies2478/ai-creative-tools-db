@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDetailPage from '../../../components/ToolDetailPage.astro';
 import { generatedImages } from '../../../data/generatedImages';
+import { resolveToolOutboundLink } from '../../../utils/resolveToolOutboundLink';
 
 const tools = await getCollection('tools');
 const entry = tools.find((t) => t.slug === 'fotor-ai');
@@ -14,6 +15,17 @@ const sampleImage = generatedImages.find((image) =>
   image.isSameToolAsPage === true &&
   image.promptVersion === 'image-tool-benchmark-v1'
 ) ?? null;
+
+const primaryOutbound = resolveToolOutboundLink({
+  toolSlug,
+  officialUrl: 'https://www.fotor.com/jp/ai-image-generator/',
+  placement: 'primary',
+});
+const pricingOutbound = resolveToolOutboundLink({
+  toolSlug,
+  officialUrl: 'https://www.fotor.com/jp/pricing/',
+  placement: 'pricing',
+});
 
 const jsonLd = JSON.stringify([
   {
@@ -71,8 +83,9 @@ const jsonLd = JSON.stringify([
         { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
-      primaryCta={{ label: '公式サイトで確認する', href: 'https://www.fotor.com/jp/ai-image-generator/', outboundType: 'official', ctaPosition: 'hero' }}
-      secondaryCta={{ label: '料金プラン（公式）', href: 'https://www.fotor.com/jp/pricing/', outboundType: 'official', ctaPosition: 'pricing' }}
+      primaryCta={{ label: 'Fotor AIを確認する', href: primaryOutbound.url, rel: primaryOutbound.rel, outboundType: primaryOutbound.linkType, ctaPosition: 'hero', affiliateProvider: primaryOutbound.provider }}
+      secondaryCta={{ label: '料金プランを確認する', href: pricingOutbound.url, rel: pricingOutbound.rel, outboundType: pricingOutbound.linkType, ctaPosition: 'pricing', affiliateProvider: pricingOutbound.provider }}
+      primaryCtaDisclosure={primaryOutbound.isAffiliate ? 'PR：上記リンクはFotorのアフィリエイトリンクです。当サイトが報酬を受け取る場合がありますが、掲載順位・評価には影響しません。' : undefined}
       basicInfo={[
         {
           title: '商用利用', badge: { s: 'cond', label: '条件あり（要規約確認）' }, wide: true,

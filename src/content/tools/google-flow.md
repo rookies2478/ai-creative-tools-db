@@ -33,7 +33,6 @@ features:
   imageToVideo: true
 pricingStatus: "unconfirmed"
 watermarkCondition: "無料・有料プランにおける可視透かしの有無、その他の識別メタデータは公式情報で再確認が必要です。"
-commercialUse: "unknown"
 sources:
   - title: "Google Flow 公式"
     url: "https://labs.google/fx/tools/flow"

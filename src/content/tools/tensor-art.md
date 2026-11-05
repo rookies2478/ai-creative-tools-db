@@ -4,9 +4,9 @@ shortDescription: "Stable Diffusion系モデル・LoRA・Checkpoint・Workflow�
 category: "image"
 officialUrl: "https://tensor.art/"
 freePlan: true
-freePlanNote: "無料利用枠やクレジット制の内容は変更される可能性があります。最新の公式画面・公式案内でご確認ください。"
+freePlanNote: "公式Feature UpdateではDaily Creditsは毎日50 creditsまでtop upされ、未使用分がある場合は翌日に50 creditsが追加されるのではなく上限50まで補充される仕組みと案内されています。条件は変更される可能性があるため最新の公式画面も確認してください。"
 commercialUse: "limited"
-commercialUseNote: "公式Termsでは、Tensor.Art側はモデルやAI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で自由に使用できると案内されています。また公式情報では、Pro Segmentモデルで生成した画像について商用利用に関する案内があります。ただし、利用するモデル・LoRA・AI Toolsが商用利用可能かどうかは個別確認が必要であり、全モデルで商用利用可能というわけではありません。商用利用不可モデルを使った場合の責任はユーザー側にあるとされています。また、コミュニティに公開されているAssets（モデル・LoRA・Checkpoint等）については、投稿者が個別に設定したライセンス条件が適用される場合があります。商用利用・再配布・改変の可否は各Assetページの条件を個別にご確認ください。商用利用を前提にする場合は、最新の公式規約・モデルのライセンス・各Assetページの条件をご確認ください。本記事は法的助言ではありません。"
+commercialUseNote: "現行公式TermsではTensor.Art側はモデルやAI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で使用できると案内しています。ただし、利用するモデル・LoRA・AI Toolsの商用利用可否は個別確認が必要で、商用利用不可モデルを使った場合の責任はユーザー側とされています。Pro Model / Pro AI Toolは参加要件として生成画像の商用利用が可能であることを求めていますが、これはTensor.Art上の全モデル・全Assetが商用利用可能という意味ではありません。商用利用前に公式規約と各Assetのライセンスを個別確認してください。本記事は法的助言ではありません。"
 japaneseUi: false
 japanesePrompt: "partial"
 watermark: "unknown"
@@ -32,13 +32,13 @@ weaknesses:
   - "無料枠・料金・クレジット条件が変更される可能性がある"
   - "日本語UIや透かし条件は公式情報のみでは確認が必要"
   - "モデル選択や設定項目が多く、初心者にはやや難しい場合がある"
-lastReviewed: "2026-06-17"
-nextReviewDue: "2026-09-17"
-verifiedAt: "2026-06-17"
+lastReviewed: "2026-11-05"
+nextReviewDue: "2027-02-05"
+verifiedAt: "2026-11-05"
 officialSourceUrl: "https://tensor.art/about/terms-of-service-new"
 currency: "USD"
 pricingSourceUrl: "https://tensor.art/event/proupdate"
-pricingSourceNote: "Proプラン案内の公式イベントページ。料金額の詳細は変更される可能性あり。専用の公式料金ページURL（/pricing等）は未確認。最新の料金は公式サイトをご確認ください。"
+pricingSourceNote: "2026-11-05に公式Pro Membership Adjustmentsページを再確認。Daily Pass $1、Monthly Pro $9.9（1k bonus credits）、Quarterly Pro $19.9（5k bonus credits）が案内されています。Yearly Proはoriginal $119.9に対するspecial offer $59.9表記のため、$59.9を恒常価格として扱いません。purchase/vipのcheckout価格は安定抽出できないためpricingStatus=partialを維持します。"
 pricingModel: "subscription_credit"
 pricingStatus: "partial"
 platforms:
@@ -68,9 +68,9 @@ usagePolicy:
   inputMaterialRisk: "high"
   inputMaterialNote: "公式利用規約・limitationsで「投稿・アップロードした素材（元画像・参照素材等）の著作権・権利はユーザーが事前に確認する必要がある」と明記されている。利用するモデル・LoRA・Checkpointのライセンスは各Assetごとに個別確認が必要（商用利用不可モデルを使った場合の責任はユーザー側）。人物・商標・第三者著作物を含む入力への注意が特に重要。"
 reviewed:
-  pricing: "2026-06-17"
-  terms: "2026-05-14"
-  features: "2026-05-14"
+  pricing: "2026-11-05"
+  terms: "2026-11-05"
+  features: "2026-11-05"
 sourceRefs:
   - label: "Tensor.Art公式サイト"
     url: "https://tensor.art/"
@@ -81,9 +81,15 @@ sourceRefs:
   - label: "Tensor.Art Proプラン案内（公式）"
     url: "https://tensor.art/event/proupdate"
     type: pricing
-  - label: "Tensor.Art Workflow（公式）"
-    url: "https://tensorart.me/workflow"
-    type: docs
+  - label: "Tensor.Art Daily Credits案内（公式）"
+    url: "https://tensor.art/event/notice"
+    type: help
+  - label: "Tensor.Art Pro Model（公式）"
+    url: "https://tensor.art/event/vipmodels-learn-more"
+    type: official
+  - label: "Tensor.Art Pro AI Tool（公式）"
+    url: "https://tensor.art/event/proaitool"
+    type: official
   - label: "Tensor.Artプライバシーポリシー（公式）"
     url: "https://tensor.art/about/privacy-policy"
     type: policy
@@ -94,21 +100,27 @@ sources:
     url: "https://tensor.art/about/terms-of-service-new"
   - title: "Tensor.Art Proプラン案内（公式）"
     url: "https://tensor.art/event/proupdate"
-  - title: "Tensor.Art Workflow（公式）"
-    url: "https://tensorart.me/workflow"
+  - title: "Tensor.Art Daily Credits案内（公式）"
+    url: "https://tensor.art/event/notice"
+  - title: "Tensor.Art Pro Model（公式）"
+    url: "https://tensor.art/event/vipmodels-learn-more"
+  - title: "Tensor.Art Pro AI Tool（公式）"
+    url: "https://tensor.art/event/proaitool"
   - title: "Tensor.Artプライバシーポリシー（公式）"
     url: "https://tensor.art/about/privacy-policy"
 faqs:
   - question: "無料で使えますか？"
-    answer: "無料利用枠が案内されています。ただしクレジット制の仕組みや利用回数は変更される可能性があるため、最新の状況はTensor.Art公式サイトでご確認ください。"
+    answer: "公式Feature UpdateではDaily Creditsは毎日50 creditsまでtop upされる仕組みと案内されています。未使用分がある場合は翌日に50 creditsが追加されるのではなく、上限50まで補充されます。条件は変更される可能性があるため最新の公式画面もご確認ください。"
   - question: "商用利用できますか？"
-    answer: "公式Termsでは、Tensor.Art側はAI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で使用できると案内されています。ただし、利用するモデル・LoRAが商用利用可能かどうかは個別確認が必要です。商用利用不可モデルを使った場合の責任はユーザー側にあるとされています。最新の公式規約とモデルごとのライセンスをご確認ください。このページは法的助言ではありません。"
+    answer: "公式TermsではTensor.Art側は生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で使用できると案内しています。ただしモデル・LoRA・AI Toolごとの商用利用可否は個別確認が必要です。Pro Model / Pro AI Toolは商用利用可能であることが参加要件ですが、全Assetが商用利用可能という意味ではありません。このページは法的助言ではありません。"
   - question: "日本語プロンプトは使えますか？"
     answer: "日本語プロンプトでも使える場合がありますが、Stable Diffusion系モデルやLoRAでは英語プロンプトの方が意図通りに生成されやすい傾向があります。意図した画像が生成されない場合は英語プロンプトも試してみてください。"
   - question: "透かしは入りますか？"
     answer: "透かし条件はモデル・機能・プランにより変わる可能性があります。公式情報のみでは断定できないため、最新の条件はTensor.Art公式画面でご確認ください。"
   - question: "LoRAやCheckpointはどう使いますか？"
     answer: "Tensor.Artでは豊富なモデル・LoRA・Checkpointをプラットフォーム上で選択して利用できます。商用利用時は選択するモデルごとのライセンスを必ず確認してください。"
+  - question: "料金はいくらですか？"
+    answer: "公式Pro Membership AdjustmentsページではDaily Pass $1、Monthly Pro $9.9、Quarterly Pro $19.9が案内されています。Yearlyの$59.9はspecial offer表記のため恒常価格として扱わず、最新の公式購入画面をご確認ください。"
   - question: "どの環境で使えますか？"
     answer: "Webブラウザから利用できます。インストールは不要です。"
 japanBilling:
@@ -121,8 +133,8 @@ japanBilling:
   localizedJpyDisplay: "unknown"
   taxDisplay: "unknown"
   purchaseChannels: ["web"]
-  pricingCheckedAt: "2026-07-13"
-  pricingNote: "運営法人名は公式規約に明記されておらず要公式確認です。公式表記は米ドル建て（Proサブスク等）ですが、日本円決済の可否・税の扱いは公式購入画面でご確認ください。"
+  pricingCheckedAt: "2026-11-05"
+  pricingNote: "公式Pro Membership AdjustmentsではDaily Pass $1、Monthly Pro $9.9、Quarterly Pro $19.9が案内されています。Yearly $59.9はspecial offer表記のため恒常価格として扱いません。日本円決済・税・checkout時点の最終価格は公式購入画面で確認してください。"
   billingCategory: "E"
   sourceUrls:
     - "https://tensor.art/about/terms-of-service-new"
@@ -160,9 +172,11 @@ Tensor.ArtはStable Diffusion系のモデル・LoRA・Checkpointをブラウザ�
 
 ## 無料プラン・クレジット・Proプランに関する注意点
 
-Tensor.Artには無料利用枠が案内されており、クレジット制で画像生成が可能です。有料プランとしてDaily Pass・Monthly Pro Subscription・Quarterly・Yearly・Credits Packなどが案内されています。
+Tensor.Artにはクレジット制の無料利用枠があります。現行の公式Feature Updateでは、Daily Creditsは毎日**50 creditsまでtop up**される仕組みと案内されています。未使用分がある場合に50 creditsが追加されるのではなく、残高が50未満の場合に上限50まで補充されます。
 
-> **注意：** 無料枠の回数・クレジット量・有料プランの料金・特典は変更される可能性があります。最新の料金・プラン内容は[Tensor.Art Proプラン案内（公式）](https://tensor.art/event/proupdate)および[Tensor.Art公式サイト](https://tensor.art/)でご確認ください。
+有料側は公式Pro Membership Adjustmentsページで、**Daily Pass $1、Monthly Pro $9.9、Quarterly Pro $19.9**が案内されています。Yearly Proにはoriginal $119.9とspecial offer $59.9の記載がありますが、special offerは恒常価格として扱わず最新の購入画面で確認してください。
+
+> **注意：** 無料クレジット・料金・特典は変更される可能性があります。最新条件は[Daily Credits案内](https://tensor.art/event/notice)、[Proプラン案内](https://tensor.art/event/proupdate)、公式購入画面でご確認ください。
 
 ## 商用利用・著作権・モデルライセンスに関する注意点
 
@@ -171,6 +185,7 @@ Tensor.Artには無料利用枠が案内されており、クレジット制で�
 ただし、以下の点に注意が必要です。
 
 - **利用するモデル・LoRA・AI Toolsが商用利用可能かどうかは個別確認が必要です**
+- **Pro Model / Pro AI Toolは生成画像を商用利用できることが参加要件**ですが、全モデル・全Assetが商用利用可能という意味ではありません
 - 商用利用不可モデルを使った場合の責任はユーザー側にあるとされています
 - **コミュニティに公開されているAssets（モデル・LoRA・Checkpoint等）は投稿者が個別に設定したライセンスが適用される場合があります。各Assetページの商用利用条件を個別に確認してください**
 - アップロードする元画像・参照素材の著作権・使用権の確認も必要です
@@ -200,7 +215,7 @@ Tensor.Artには無料利用枠が案内されており、クレジット制で�
 ## FAQ
 
 **Q. 無料で使えますか？**
-無料利用枠が案内されています。ただしクレジット制の仕組みや利用回数は変更される可能性があるため、最新の状況は[Tensor.Art公式サイト](https://tensor.art/)でご確認ください。
+公式Feature UpdateではDaily Creditsは毎日50 creditsまでtop upされる仕組みと案内されています。条件は変更される可能性があるため、最新の状況は[Tensor.Art公式サイト](https://tensor.art/)でご確認ください。
 
 **Q. 商用利用できますか？**
 公式Termsでは、Tensor.Art側はAI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で使用できると案内されています。ただし、利用するモデル・LoRAが商用利用可能かどうかは個別確認が必要です。商用利用不可モデルを使った場合の責任はユーザー側にあるとされています。商用利用前に最新の[公式規約](https://tensor.art/about/terms-of-service-new)とモデルのライセンスをご確認ください。このページは法的助言ではありません。

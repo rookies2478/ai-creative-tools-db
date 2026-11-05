@@ -6,9 +6,9 @@ const comparisonRows = [
   { item: "動画モデルとの関係", toolA: "Flowは制作環境。Veoはモデル名", toolB: "Kling AI側の提供モデルは時期で変わる" },
   { item: "テキストから動画", toolA: "提供機能・プラン・地域を公式で確認", toolB: "対応機能を公式で確認" },
   { item: "画像から動画", toolA: "入力素材と提供機能を公式で確認", toolB: "入力素材と提供機能を公式で確認" },
-  { item: "無料利用", toolA: "クレジット等の利用枠は要公式確認", toolB: "クレジット等の利用枠は要公式確認" },
+  { item: "無料利用", toolA: "Google AIプラン未契約なら1日50 Flowクレジット（混雑時間は動画生成が制限される場合あり）", toolB: "モデルとプラン別の最新クレジット条件を公式会員ページで確認" },
   { item: "商用利用", toolA: "プラン別の規約と素材権利を確認", toolB: "プラン別の規約と素材権利を確認" },
-  { item: "透かし", toolA: "可視透かし・識別情報は要公式確認", toolB: "可視透かし・識別情報は要公式確認" },
+  { item: "透かし", toolA: "Veo等の生成物には不可視SynthIDを常時付与。可視透かしは地域・プラン・設定による", toolB: "無料と有料、出力形式ごとの可視透かしはKling公式で個別確認" },
   { item: "日本語", toolA: "UI・プロンプトは個別に要確認", toolB: "UI・プロンプトは個別に要確認" },
 ];
 const faqs = [
@@ -18,11 +18,11 @@ const faqs = [
   },
   {
     "q": "無料で利用できますか？",
-    "a": "無料利用やクレジット付与、生成回数は時期・地域・アカウント・プランで変動するため、各公式料金・ヘルプページをご確認ください。"
+    "a": "Google Flowは公式ヘルプにGoogle AIプラン未契約者への1日50クレジットが明記されています。UTC 14〜17時の混雑時は無料ユーザーが動画生成できない場合があります。Kling AIのモデル別クレジットは最新の料金画面で確認してください。"
   },
   {
     "q": "商用利用や透かしの条件は？",
-    "a": "生成物だけでなく入力画像・実在人物・ブランド素材の権利にも注意が必要です。商用利用の可否、可視透かし、識別情報は最新の公式規約と機能説明で確認してください。本記事は法的助言ではありません。"
+    "a": "Google FlowでVeo等を用いて生成したコンテンツには不可視のSynthIDが付与されます。可視透かしは地域・プラン・設定で異なります。商用利用は利用規約と第三者権利を別途確認してください。Kling AIも契約プランとモデル別の条件を確認する必要があります。"
   },
   {
     "q": "どちらの画質が上ですか？",
@@ -32,6 +32,8 @@ const faqs = [
 const sources = [
   { href: "https://labs.google/fx/tools/flow", label: "Google Flow公式" },
   { href: "https://one.google.com/about/google-ai-plans/", label: "Google AIプラン" },
+  { href: "https://support.google.com/flow/answer/16526234?hl=ja", label: "Google Flow クレジット（公式）" },
+  { href: "https://support.google.com/flow/answer/16353333?hl=ja", label: "Google Flow 透かし（公式）" },
   { href: "https://kling.ai/", label: "Kling AI公式" },
   { href: "https://kling.ai/membership/membership-plan", label: "Kling AIプラン" },
 ];

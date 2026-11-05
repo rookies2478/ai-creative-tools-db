@@ -61,7 +61,7 @@ const jsonLd = JSON.stringify([
     <ToolDetailPage japanBilling={d?.japanBilling}
       toolName="Stable Diffusion"
       category="AI画像生成"
-      checkedDate={d?.lastReviewed ?? '2026-06-06'}
+      checkedDate={d?.lastReviewed ?? '2026-11-05'}
       headingHtml='Stable Diffusionとは？<span class="hl"><span class="phrase-nowrap">無料・料金</span>・商用利用</span>まとめ'
       lead="Stable Diffusionは、特定の1社が提供するホスト型SaaSツールではなく、Stability AIが公開したオープンソースのAI画像生成モデルを中核とするエコシステムです。GPU搭載PCがあればローカル環境で無料実行でき、Stability AI公式のAPI、あるいは第三者によるホスト型サービスや派生モデル（Civitai等）を通じても利用できます。「商用利用できる／できない」も一律には決まらず、使用するモデルのバージョン・配布元によって条件が異なります。このページでは、Stable Diffusionの基本、無料での使い方、料金・商用利用前に確認すべきポイントを整理しています。"
       specs={[
@@ -77,8 +77,8 @@ const jsonLd = JSON.stringify([
       basicInfo={[
         {
           title: '商用利用', badge: { s: 'cond', label: '条件あり（モデル依存）' }, wide: true,
-          sum: '利用するモデルのバージョンによってライセンスが異なります。SD 1.x/2.x/SDXLとSD 3.x/3.5以降では条件が異なります。',
-          det: 'SD 1.x / 2.x は CreativeML Open RAIL-M ライセンス、SDXL は CreativeML Open RAIL++-M ライセンスが適用されており、いずれも収益制限なしで条件付き商用利用できる場合があります（両ライセンスは別物です）。SD 3.x / 3.5 以降は Stability AI Community License で年間総収益100万ドル未満の場合に商用利用できる場合があるとされています（100万ドル以上はEnterprise Licenseが必要）。コミュニティ公開モデル・派生モデル（Civitai等）は各モデル・配布者ごとに独自ライセンスが設けられていることがあります。ライセンス条件は変更される可能性があるため、利用するモデルの配布ページでライセンスを必ず個別にご確認ください。',
+          sum: '現行のStability AI Core ModelsはCommunity Licenseで整理されています。旧モデル・第三者配布モデル・派生モデルは別条件の場合があるため個別確認が必要です。',
+          det: '現行のStability AI公式Licenseでは、Core ModelsはCommunity Licenseの対象として案内され、個人・研究者・小規模事業者等は年間総収益100万ドル未満の場合に商用利用できます。年間総収益100万ドル以上の組織はEnterprise Licenseが必要です。2026年5月20日更新のCore Models一覧にはStable Diffusion 3.5 Medium / Large / Large Turboなどが掲載されています。旧モデル、第三者配布モデル、派生モデル、LoRA等は別ライセンスが適用される場合があるため、モデル名・配布元ごとに個別確認してください。',
         },
         {
           title: '無料枠', badge: { s: 'ok', label: 'ローカル実行は無料' },
@@ -122,7 +122,7 @@ const jsonLd = JSON.stringify([
         '一部バージョンで不可視透かしが埋め込まれる場合がある',
       ]}
       limits={[
-        'SD 3.x以降は年間総収益100万ドル超の場合エンタープライズライセンスが必要とされている',
+        '現行Stability AI Core Modelsは年間総収益100万ドル以上の組織でEnterprise Licenseが必要と案内されている',
         'コミュニティモデルのライセンスは個別確認が必要',
         'ローカル実行にはGPU搭載PCと環境構築が必要',
         '日本語UIは標準では非対応（拡張機能が必要）',
@@ -133,7 +133,7 @@ const jsonLd = JSON.stringify([
           [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成（オープンソースモデル）' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>ローカル実行は無料</span><br>GPU搭載PCと環境構築が必要。API利用は別途課金。' }],
           [{ html: '最安料金', rk: true }, { html: '<span class="mono">ローカル無料 / APIは従量課金</span><br>Stability AI Platform APIは1クレジット＝$0.01（2026年10月31日公式確認）。モデルごとに消費クレジットが異なる。' }],
-          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（モデル依存）</span><br>SD 1.x/SDXL と SD 3.x以降でライセンスが異なります。必ずモデルのライセンスを確認してください。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（モデル依存）</span><br>現行Core ModelsはCommunity License。旧・第三者配布モデル等は各ライセンスを個別確認。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>一部バージョンで付与</span><br>不可視透かしが埋め込まれる場合あり。バージョンごとに確認が必要。' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>拡張機能で対応可</span><br>AUTOMATIC1111等で拡張機能を導入した場合に対応できる場合あり' }],
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span><br>英語プロンプトの方が精度が高い傾向あり' }],
@@ -145,7 +145,7 @@ const jsonLd = JSON.stringify([
       }}
       about={[
         'Stable Diffusionは、Stability AIが開発・公開したオープンソースのAI画像生成モデルです。モデルウェイトが公開されているため、GPU搭載PCがあればローカル環境で無料実行できます。AUTOMATIC1111 Web UIやComfyUIなどのフロントエンドと組み合わせて広く使われています。',
-        'カスタムモデル・LoRA・ControlNetなどの拡張により高度なカスタマイズが可能ですが、<b>モデルごとにライセンスが異なる</b>ため、商用利用前は必ず使用するモデルのライセンスを確認する必要があります。2024年10月にはSD 3.5系が公式発表されています。',
+        'カスタムモデル・LoRA・ControlNetなどの拡張により高度なカスタマイズが可能ですが、<b>モデルごとにライセンスが異なる</b>ため、商用利用前は必ず使用するモデルのライセンスを確認する必要があります。2026年5月20日更新の公式Core Models一覧にはStable Diffusion 3.5 Medium・Large・Large Turboが掲載され、公式Stable ImageページでもSD 3.5が現行の主要画像モデル群として案内されています。',
         'Stable Diffusion系の公式寄りサービスを確認したい場合は、<a href="/tools/dreamstudio/">Brand Studio（旧DreamStudio）の料金・商用利用条件</a>も参考になります。Midjourneyなど他の画像生成ツールとの違いは<a href="/comparisons/stable-diffusion-vs-midjourney/">Stable Diffusion vs Midjourney比較</a>も参考になります。',
       ]}
       aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
@@ -165,11 +165,11 @@ const jsonLd = JSON.stringify([
         ],
       }}
       commercial={{
-        lead: '利用するモデルのバージョンによってライセンスが異なります。商用利用前は必ず使用するモデルのライセンスを個別に確認してください。',
+        lead: '現行のStability AI Core ModelsはCommunity Licenseで整理されていますが、旧モデル・第三者配布モデル・派生モデル・LoRA等は別条件の場合があります。商用利用前は使用するモデル名と配布元のライセンスを個別確認してください。',
         points: [
-          '<b>SD 1.x / 2.x</b>：CreativeML Open RAIL-M ライセンス。収益制限なしで条件付き商用利用できる場合があります',
-          '<b>SDXL</b>：CreativeML Open RAIL++-M ライセンス（SD 1.x/2.xとは別のライセンス）。収益制限なしで条件付き商用利用できる場合があります',
-          '<b>SD 3.x / SD 3.5以降</b>：Stability AI Community License。年間総収益100万ドル未満の場合に商用利用できる場合があるとされています。100万ドル以上はEnterprise Licenseが必要とされています',
+          '<b>現行Stability AI Core Models</b>：Community Licenseの対象として案内。年間総収益100万ドル未満は商用利用可、100万ドル以上の組織はEnterprise Licenseが必要とされています',
+          '<b>Stable Diffusion 3.5</b>：2026年5月20日更新のCore Models一覧にMedium・Large・Large Turboが掲載されています',
+          '<b>旧モデル・第三者配布モデル</b>：現行Core Modelsと同じライセンスと決めつけず、各モデルの配布元・ライセンス本文を個別確認してください',
           '<b>コミュニティ公開モデル・派生モデル（Civitai等）</b>：各モデル・配布者ごとに独自のライセンスが設けられている場合があります',
           'ライセンス条件は変更される可能性があります。利用前に必ず該当モデルの配布ページで最新のライセンスをご確認ください',
         ],
@@ -229,23 +229,25 @@ const jsonLd = JSON.stringify([
       ]}
       watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
       checklist={[
-        { html: '利用するモデルのバージョン（SD 1.x/SDXL か SD 3.x以降 か）' },
+        { html: '利用するモデル名・バージョンと、Stability AI公式Core Modelか第三者配布モデルか' },
         { html: 'コミュニティモデルを使う場合は各モデルのライセンス' },
-        { html: '年間総収益が100万ドルを超えていないか（SD 3.x以降）' },
+        { html: '現行Community License対象Core Modelを商用利用する場合、年間総収益100万ドル以上に該当しないか' },
         { html: 'ControlNet・拡張機能などのライセンス' },
         { html: 'img2img等で使用する入力画像の権利関係' },
         { html: 'ローカル実行かクラウドAPIかの利用形態' },
         { html: '最新のStability AI公式ライセンス情報' },
       ]}
-      lastChecked={d?.lastReviewed ?? '2026-06-06'}
-      nextCheck={d?.nextReviewDue ?? '2026-07-06'}
-      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      lastChecked={d?.lastReviewed ?? '2026-11-05'}
+      nextCheck={d?.nextReviewDue ?? '2027-02-05'}
+      verifiedDate={d?.verifiedAt ?? '2026-11-05'}
       sources={[
         { tag: 'ライセンス', label: 'Stability AI Community License（公式）', href: 'https://stability.ai/license' },
         { tag: 'ライセンス', label: 'SD 3.5 Large ライセンス本文（公式配布・Hugging Face）', href: 'https://huggingface.co/stabilityai/stable-diffusion-3.5-large/blob/main/LICENSE.md' },
         { tag: 'ライセンス', label: 'SDXL ライセンス本文（公式配布・Hugging Face）', href: 'https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/LICENSE.md' },
         { tag: '料金', label: 'Stability AI Platform 料金（公式）', href: 'https://platform.stability.ai/pricing' },
         { tag: '公式', label: 'Stability AI公式サイト', href: 'https://stability.ai' },
+        { tag: 'モデル', label: 'Stability AI Core Models（公式）', href: 'https://stability.ai/core-models' },
+        { tag: 'モデル', label: 'Stable Image / Stable Diffusion 3.5（公式）', href: 'https://stability.ai/stable-image' },
         { tag: 'モデル', label: 'Stable Diffusion 3.5 リリースアナウンス（公式）', href: 'https://stability.ai/news-updates/introducing-stable-diffusion-3-5' },
         { tag: 'ツール', label: 'AUTOMATIC1111 Web UI（GitHub）', href: 'https://github.com/AUTOMATIC1111/stable-diffusion-webui' },
         { tag: 'ツール', label: 'ComfyUI 公式ドキュメント', href: 'https://docs.comfy.org' },
@@ -254,14 +256,14 @@ const jsonLd = JSON.stringify([
         { q: 'Stable Diffusionとは何ですか？', a: 'Stability AIが公開したオープンソースのAI画像生成モデルです。特定の1社が運営するホスト型SaaSツールとは異なり、モデルウェイトが公開されているため、ローカル環境（GPU搭載PC）での実行、Stability AI公式API、第三者のホスト型サービス、Civitai等で配布される派生モデルなど、複数の方法で利用できるエコシステムです。' },
         { q: '初心者はローカル版とWebサービスのどちらを使うべきですか？', a: 'GPU搭載PCがあり、カスタムモデルやLoRAで細かく制御したい場合はローカル実行（AUTOMATIC1111やComfyUI）が向いています。環境構築なしですぐ試したい場合は、Stability AI公式APIや第三者のホスト型サービスの利用が手軽です。用途と環境に応じて選択してください。' },
         { q: 'Stable Diffusionは無料で使えますか？', a: 'ローカル環境での実行は無料です。ただしGPU搭載PCと環境構築が必要です。Stability AI PlatformのクラウドAPI経由では別途料金が発生します。' },
-        { q: 'Stable Diffusionは商用利用できますか？', a: '一律に「できる」「できない」と答えられるものではなく、使用するモデルのバージョン・配布元によって条件が異なります。SD 1.x/2.xはCreativeML Open RAIL-M、SDXLはCreativeML Open RAIL++-M、SD 3.x/3.5以降はStability AI Community Licenseが適用されており、条件を満たせばいずれも商用利用できる場合があります（SD 3.x以降は年間総収益100万ドル未満が目安とされています）。Civitai等で配布される派生モデル・LoRAは別のライセンス条件が設定されている場合があります。商用利用前は、使用するモデルの配布ページで最新の公式ライセンスを個別にご確認ください。このページは法的助言ではありません。' },
+        { q: 'Stable Diffusionは商用利用できますか？', a: '一律には判断できません。現行のStability AI Core ModelsはCommunity Licenseの対象として案内され、年間総収益100万ドル未満の場合に商用利用できます。100万ドル以上の組織はEnterprise Licenseが必要です。旧モデル、第三者配布モデル、派生モデル、LoRA等は別ライセンスが適用される場合があるため、モデル名・配布元ごとに個別確認してください。このページは法的助言ではありません。' },
         { q: 'Stable Diffusionは日本語で使えますか？', a: '標準では英語環境ですが、AUTOMATIC1111 Web UIなど一部の実装で日本語化拡張機能を導入することで日本語UIにできる場合があります。日本語プロンプトは一部対応ですが英語の方が精度が高い傾向があります。' },
         { q: '透かしは入りますか？', a: 'バージョン・実装によって異なります。一部バージョンでは不可視透かしが埋め込まれる場合があるとされています。詳細は利用する実装ごとにご確認ください。' },
         { q: 'AUTOMATIC1111とComfyUIの違いは何ですか？', a: 'どちらもStable Diffusionを動かすためのフロントエンドツールです。AUTOMATIC1111はチュートリアルが豊富で導入事例が多く、ComfyUIはノードベースのワークフロー構築が可能で新モデルへの対応速度に優れています。用途に合わせて選択することを推奨します。' },
-        { q: 'SD 3.5とは何ですか？', a: '2024年10月に公式発表されたStability AIのモデル系統です。Large（8.1Bパラメータ）・Large Turbo・Mediumのバリアントが公開されています。ライセンスはSD 3.x系と同様にStability AI Community Licenseが適用されています。詳細は公式サイトをご確認ください。' },
+        { q: 'SD 3.5とは何ですか？', a: 'Stable Diffusion 3.5はStability AIの現行画像モデル系統です。2026年5月20日更新の公式Core Models一覧にはMedium・Large・Large Turboが掲載され、公式Stable Imageページでも主要な現行画像モデル群として案内されています。詳細はCore Modelsと公式Licenseをご確認ください。' },
         { q: 'コミュニティモデル（Civitai等）のライセンスはどうなりますか？', a: 'Civitaiなどで公開されているカスタムモデル・LoRAはそれぞれ独自のライセンスを持つ場合があります。商用利用する際は各モデルのライセンス・配布ページで利用条件を確認する必要があります。' },
         { q: 'Stable Diffusionの生成画像の著作権は誰にありますか？', a: '生成物の権利関係は、国や地域、利用するモデル、配布元のライセンス、入力素材、用途によって判断が異なる場合があります。商用利用や公開利用を行う場合は、利用しているモデルのライセンスと配布元の規約を確認し、必要に応じて専門家へ相談してください。本記事は法的助言ではありません。' },
-        { q: 'CreativeML Open RAIL-MとStability AI Community Licenseは何が違いますか？', a: 'Stable Diffusionのモデルによって適用されるライセンスは異なります。SD 1.x / 2.xはCreativeML Open RAIL-M、SDXLはCreativeML Open RAIL++-M（RAIL-Mとは別のライセンス）が適用されており、SD 3.x / 3.5系ではStability AI Community Licenseが案内されています。利用前に、使用するモデル名、配布元、ライセンス本文、商用利用条件を確認してください。' },
+        { q: 'モデルごとのライセンスはどう確認すればよいですか？', a: '現行Stability AI Core Modelsは公式LicenseページでCommunity License対象として整理されています。一方、旧モデル・第三者配布モデル・派生モデル・LoRA等は別ライセンスの場合があります。使用するモデル名と配布元を特定し、その配布ページのライセンス本文を確認してください。' },
       ]}
       relatedTools={[
         { name: 'Midjourney', slug: 'midjourney', initial: 'M', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'na', label: '無料枠：なし' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Discord', 'Web'], official: 'https://www.midjourney.com' },

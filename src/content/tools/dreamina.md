@@ -19,8 +19,8 @@ strengths:
 weaknesses:
   - "モデルや提供条件は時期や地域によって変わる可能性がある"
   - "日本向けの商用条件とプラン別出力権利は確認を要する"
-lastReviewed: "2026-11-06"
-nextReviewDue: "2026-12-06"
+lastReviewed: "2026-11-05"
+nextReviewDue: "2026-12-05"
 officialSourceUrl: "https://dreamina.capcut.com/"
 pricingModel: "unknown"
 freePlanNote: "無料枠の有無、利用回数、利用可能地域は確認中です。最新の公式案内を参照してください。"

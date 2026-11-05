@@ -39,7 +39,7 @@ const jsonLd = JSON.stringify([
 
 <BaseLayout
   title="Tensor.Artの商用利用・料金・無料枠まとめ｜AIクリエイティブナビ"
-  description="Tensor.ArtのSD系モデル・LoRA活用・商用利用条件・料金プラン・無料枠を公式情報をもとに整理。モデルごとのライセンス確認の重要性も解説。最新情報は公式サイトをご確認ください。"
+  description="Tensor.Artの料金・無料枠・商用利用を現行公式情報で整理。Daily Creditsは50までtop-up、Monthly Pro $9.9、Quarterly Pro $19.9。モデル・LoRAごとのライセンス確認も解説します。"
   canonicalPath="/tools/tensor-art/"
   ogType="article"
   jsonLd={jsonLd}
@@ -60,13 +60,13 @@ const jsonLd = JSON.stringify([
       sampleImage={sampleImage}
       toolName="Tensor.Art"
       category="AI画像生成（コミュニティ型）"
-      checkedDate={d?.lastReviewed ?? '2026-05-14'}
+      checkedDate={d?.lastReviewed ?? '2026-11-05'}
       headingHtml='Tensor.Artの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="Tensor.ArtはStable Diffusion系モデル・LoRA・Checkpoint・Workflowを活用してブラウザ上で画像生成できるコミュニティ型プラットフォームです。無料利用枠があり、豊富なモデルライブラリと他ユーザーの作例を参考にしながら使えます。商用利用については、Tensor.Art側はAI生成画像の著作権を主張しないとされていますが、利用するモデル・LoRAごとのライセンス確認が必須です。"
+      lead="Tensor.ArtはStable Diffusion系モデル・LoRA・Checkpoint・Workflowを活用できるコミュニティ型画像生成プラットフォームです。公式Feature UpdateではDaily Creditsを毎日50 creditsまでtop-upする仕組みが案内され、Pro MembershipではDaily Pass $1、Monthly Pro $9.9、Quarterly Pro $19.9が掲載されています。商用利用はモデル・LoRA・AI Toolごとのライセンス確認が必要です。"
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '条件あり（モデル依存）' } },
-        { lb: '無料枠', badge: { s: 'ok', label: '無料利用枠あり' } },
-        { lb: '料金目安', text: '無料〜Proプラン（公式確認）', mono: true },
+        { lb: '無料枠', badge: { s: 'ok', label: 'Daily Credits 最大50' } },
+        { lb: '料金目安', text: 'Daily $1 / Monthly $9.9〜', mono: true },
         { lb: '透かし', badge: { s: 'na', label: '要確認' } },
         { lb: '日本語UI', badge: { s: 'na', label: '要確認' } },
         { lb: '入力素材', badge: { s: 'na', label: '要注意' } },
@@ -80,12 +80,12 @@ const jsonLd = JSON.stringify([
           det: '公式Terms（terms-of-service-new）では、Tensor.Art側はモデルやAI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で自由に使用できると案内されています。ただし、利用するモデル・LoRA・AI Toolsが商用利用可能かどうかは個別確認が必要です。商用利用不可モデルを使った場合の責任はユーザー側にあるとされています。アップロードする元画像の著作権・使用権の確認も必要です。商用利用を前提にする場合は最新の公式規約とモデルごとのライセンスをご確認ください。このページは法的助言ではありません。',
         },
         {
-          title: '無料枠', badge: { s: 'ok', label: '無料利用枠あり' },
-          det: '無料利用枠が案内されています。クレジット制の仕組みや利用回数は変更される可能性があるため、最新の状況は公式サイトでご確認ください。',
+          title: '無料枠', badge: { s: 'ok', label: 'Daily Credits 最大50' },
+          det: '公式Feature UpdateではDaily Creditsは毎日50 creditsまでtop upされる仕組みと案内されています。未使用残高がある場合は50 creditsを追加するのではなく、上限50まで補充されます。条件は変更される可能性があります。',
         },
         {
-          title: '最安料金目安', sum: '無料〜Proプラン（Daily Pass・Monthly等・要公式確認）', sumMono: true,
-          det: '無料利用枠のほか、Daily Pass・Monthly Pro Subscription・Quarterly・Yearly・Credits Packなどの有料プランが案内されています。詳細は公式Proプランページでご確認ください。',
+          title: '料金', sum: 'Daily Pass $1 / Monthly Pro $9.9 / Quarterly Pro $19.9', sumMono: true,
+          det: '2026-11-05に公式Pro Membership Adjustmentsページを再確認。Monthly Proは1k bonus credits、Quarterly Proは5k bonus creditsが案内されています。Yearly $59.9はspecial offer表記のため恒常価格として扱いません。',
         },
         {
           title: '透かし', badge: { s: 'na', label: '要確認' },
@@ -111,7 +111,7 @@ const jsonLd = JSON.stringify([
       pros={[
         'モデル・LoRA・Checkpointが豊富でスタイルの選択肢が広い',
         'コミュニティ型プラットフォームで作例・設定例を探しやすい',
-        '無料利用枠があり始めやすい',
+        'Daily Creditsを毎日最大50までtop-upする無料枠が案内されている',
         'ブラウザ上で動作しローカル環境の構築が不要',
         'Workflow機能で画像生成フローを作成・共有できる',
       ]}
@@ -124,7 +124,7 @@ const jsonLd = JSON.stringify([
       ]}
       limits={[
         '商用利用時はモデル・LoRAごとのライセンス確認が必要',
-        '無料枠・クレジット条件は予告なく変更される可能性がある',
+        'Daily CreditsやPro料金・特典は変更される可能性がある',
         '日本語UIは公式情報のみでは確認不可',
         '透かし条件はモデル・機能・プランにより変わる可能性がある',
       ]}
@@ -132,8 +132,8 @@ const jsonLd = JSON.stringify([
         kind: 'spec',
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成（Stable Diffusion系・コミュニティ型）' }],
-          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>無料利用枠あり</span><br>クレジット数・条件は変更の可能性あり。最新情報は公式確認要。' }],
-          [{ html: '最安料金', rk: true }, { html: '<span class="mono">無料〜Proプラン（要公式確認）</span><br>Daily Pass・Monthlyなど複数プランあり。最新料金は公式確認要。' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>Daily Credits 最大50</span><br>毎日50 creditsまでtop-up。条件は変更の可能性あり。' }],
+          [{ html: '料金', rk: true }, { html: '<span class="mono">Daily $1 / Monthly $9.9 / Quarterly $19.9</span><br>Yearly specialは恒常価格扱いせず最新購入画面で確認。' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり（モデル依存）</span><br>Tensor.Art側は著作権主張しないが、利用するモデル・LoRAのライセンス個別確認が必須。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>モデル・機能・プランにより変わる可能性あり。' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>公式情報のみでは確認できていません。' }],
@@ -154,16 +154,16 @@ const jsonLd = JSON.stringify([
           kind: 'cmp',
           headers: ['プラン', '料金目安'],
           rows: [
-            [{ html: '無料利用枠', rk: true }, { html: '無料（クレジット制限あり）', mono: false }],
-            [{ html: 'Daily Pass', rk: true }, { html: '公式Proページで確認', mono: false }],
-            [{ html: 'Monthly Pro Subscription', rk: true }, { html: '公式Proページで確認', mono: false }],
-            [{ html: 'Credits Pack', rk: true }, { html: '公式Proページで確認', mono: false }],
+            [{ html: 'Daily Credits', rk: true }, { html: '毎日最大50までtop-up', mono: false }],
+            [{ html: 'Daily Pass', rk: true }, { html: '$1', mono: true }],
+            [{ html: 'Monthly Pro', rk: true }, { html: '$9.9 / 1k bonus credits', mono: true }],
+            [{ html: 'Quarterly Pro', rk: true }, { html: '$19.9 / 5k bonus credits', mono: true }],
           ],
         },
         notes: [
-          '無料枠の回数・クレジット量は変更される可能性があります',
-          '有料プランの料金・特典はProプランページでご確認ください',
-          '<b>最新料金は公式サイトでご確認ください</b>',
+          'Daily Creditsは公式Feature Updateの案内に基づきます',
+          'Yearly $59.9はspecial offer表記のため恒常価格として扱いません',
+          '<b>最新料金・特典は公式購入画面でご確認ください</b>',
         ],
       }}
       commercial={{
@@ -171,6 +171,7 @@ const jsonLd = JSON.stringify([
         points: [
           '<b>Tensor.Artの基本方針</b>：AI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で使用できると案内されています',
           '<b>モデル・LoRAのライセンス</b>：商用利用可否はモデルごとに異なります。商用利用不可モデルを使った場合の責任はユーザー側にあるとされています',
+          '<b>Pro Model / Pro AI Tool</b>：参加要件として生成画像の商用利用が可能であることを求めています。ただし全Assetが商用利用可能という意味ではありません',
           '<b>入力画像の権利</b>：img2imgで使用する入力画像の著作権・使用権の確認も必要です',
           '<b>第三者の権利</b>：第三者の権利・素材を使用する場合は権利確認が必要です',
         ],
@@ -229,18 +230,21 @@ const jsonLd = JSON.stringify([
         { html: '透かしの有無（公式画面で最新状況を確認）' },
         { html: '最新の公式利用規約の内容' },
       ]}
-      lastChecked={d?.lastReviewed ?? '2026-05-14'}
-      nextCheck={d?.nextReviewDue ?? '2026-06-14'}
-      verifiedDate={d?.verifiedAt ?? '2026-06-08'}
+      lastChecked={d?.lastReviewed ?? '2026-11-05'}
+      nextCheck={d?.nextReviewDue ?? '2027-02-05'}
+      verifiedDate={d?.verifiedAt ?? '2026-11-05'}
       sources={[
         { tag: '公式', label: 'Tensor.Art公式サイト', href: 'https://tensor.art/' },
         { tag: '規約', label: 'Tensor.Art利用規約（公式）', href: 'https://tensor.art/about/terms-of-service-new' },
         { tag: '料金', label: 'Tensor.Art Proプラン案内（公式）', href: 'https://tensor.art/event/proupdate' },
-        { tag: 'ドキュメント', label: 'Tensor.Art Workflow（公式）', href: 'https://tensorart.me/workflow' },
+        { tag: '無料枠', label: 'Tensor.Art Daily Credits案内（公式）', href: 'https://tensor.art/event/notice' },
+        { tag: '商用', label: 'Tensor.Art Pro Model（公式）', href: 'https://tensor.art/event/vipmodels-learn-more' },
+        { tag: '商用', label: 'Tensor.Art Pro AI Tool（公式）', href: 'https://tensor.art/event/proaitool' },
       ]}
       faqs={[
-        { q: 'Tensor.Artは無料で使えますか？', a: '無料利用枠が案内されています。ただしクレジット制の仕組みや利用回数は変更される可能性があるため、最新の状況はTensor.Art公式サイトでご確認ください。' },
-        { q: 'Tensor.Artは商用利用できますか？', a: '公式Termsでは、Tensor.Art側はAI生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で使用できると案内されています。ただし、利用するモデル・LoRAが商用利用可能かどうかは個別確認が必要です。商用利用不可モデルを使った場合の責任はユーザー側にあるとされています。最新の公式規約とモデルごとのライセンスをご確認ください。このページは法的助言ではありません。' },
+        { q: 'Tensor.Artは無料で使えますか？', a: '公式Feature UpdateではDaily Creditsは毎日50 creditsまでtop upされる仕組みと案内されています。未使用残高がある場合は上限50まで補充されます。条件は変更される可能性があるため最新の公式画面をご確認ください。' },
+        { q: 'Tensor.Artは商用利用できますか？', a: '公式TermsではTensor.Art側は生成画像の所有権・著作権を主張せず、作成コンテンツはユーザー自身で使用できると案内しています。ただしモデル・LoRA・AI Toolごとのライセンス確認が必要です。Pro Model / Pro AI Toolは商用利用可能であることが参加要件ですが、全Assetが商用利用可能という意味ではありません。本記事は法的助言ではありません。' },
+        { q: '料金はいくらですか？', a: '公式Pro Membership AdjustmentsではDaily Pass $1、Monthly Pro $9.9、Quarterly Pro $19.9が案内されています。Yearly $59.9はspecial offer表記のため恒常価格として扱わず、最新購入画面をご確認ください。' },
         { q: '日本語プロンプトは使えますか？', a: '日本語プロンプトでも使える場合がありますが、Stable Diffusion系モデルやLoRAでは英語プロンプトの方が意図通りに生成されやすい傾向があります。意図した画像が生成されない場合は英語プロンプトも試してみてください。' },
         { q: '透かしは入りますか？', a: '透かし条件はモデル・機能・プランにより変わる可能性があります。公式情報のみでは断定できないため、最新の条件はTensor.Art公式画面でご確認ください。' },
         { q: 'LoRAやCheckpointはどう使いますか？', a: 'Tensor.Artではプラットフォーム上でモデル・LoRA・Checkpointを選択して利用できます。商用利用時は選択するモデルごとのライセンスを必ず確認してください。' },

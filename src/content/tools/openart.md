@@ -4,6 +4,8 @@ shortDescription: "AIによる画像・動画制作をまとめて扱えるク�
 category: "both"
 officialUrl: "https://openart.ai/"
 freePlan: "limited"
+lowestPaidPlan: "Starter USD 14/月（商用許諾はPlus以上。料金は購入画面で再確認）"
+currency: "USD"
 commercialUse: "paid-only"
 commercialUseNote: "2026-07-30更新のOpenArt公式Terms §4.1は全プランで非商用利用を認め、商用利用はPlus以上に限ると明記。旧FAQや旧サービスの商用利用一般案内より現行Termsを優先。無料生成物の可視透かしを切り取り・隠すことはTerms §4.5で原則禁止。"
 japaneseUi: "unknown"

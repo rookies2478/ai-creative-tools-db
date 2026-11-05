@@ -25,6 +25,7 @@ target_files:
   - src/pages/comparisons/google-flow-vs-kling-ai/index.astro
   - src/pages/comparisons/seedream-vs-seedance/index.astro
   - src/components/ComparisonHub.astro
+  - src/pages/sitemap.xml.ts
 reference_files:
   - docs/tasks/LATEST.md
   - docs/tasks/TEMPLATE.md

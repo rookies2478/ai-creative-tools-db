@@ -1,0 +1,69 @@
+---
+import ComparisonVsArticle from '../../../components/ComparisonVsArticle.astro';
+const jsonLd = JSON.stringify([{ '@context': 'https://schema.org', '@type': 'Article', headline: "SeedreamとSeedanceの違い・選び方", description: "2026年11月6日時点の公式情報をもとに用途・機能・料金確認ポイントを整理。未検証条件は明示しています。", url: 'https://aicreative-db.com/comparisons/seedream-vs-seedance/', datePublished: '2026-11-06', dateModified: '2026-11-06', author: { '@type':'Organization', name:'AIクリエイティブナビ編集部' } }, { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement:[{ '@type':'ListItem', position:1,name:'トップ',item:'https://aicreative-db.com/' },{ '@type':'ListItem', position:2,name:'比較記事',item:'https://aicreative-db.com/comparisons/' },{ '@type':'ListItem', position:3,name:"SeedreamとSeedanceの比較",item:'https://aicreative-db.com/comparisons/seedream-vs-seedance/' }] }]);
+const comparisonRows = [
+  { item: "主な制作対象", toolA: "静止画の制作", toolB: "動画クリップの制作" },
+  { item: "制作工程の役割", toolA: "素材やキーフレームなどを作る工程", toolB: "映像化・動きのある表現を作る工程" },
+  { item: "サービスとの関係", toolA: "Dreaminaなどで扱われる画像生成モデル名", toolB: "Dreaminaなどで扱われる動画生成モデル名" },
+  { item: "入力素材", toolA: "文章や画像など（機能・環境による）", toolB: "文章や画像など（機能・環境による）" },
+  { item: "結果の評価", toolA: "解像感・レイアウト・文字の再現性を確認", toolB: "動き・連続性・時間・音声の可否を確認" },
+  { item: "料金と無料枠", toolA: "Dreaminaの該当モデル・プランを確認", toolB: "Dreaminaの該当モデル・プランを確認" },
+  { item: "商用利用・透かし", toolA: "プランと出力条件・元素材の権利を確認", toolB: "プランと出力条件・元素材の権利を確認" },
+];
+const faqs = [
+  {
+    "q": "SeedreamとSeedanceは何が違いますか？",
+    "a": "静止画、商品ビジュアル、構図やデザインのラフを作る場合はSeedream、画像素材に動きを与え、映像表現の試作をする場合はSeedanceを選択候補として検討できます。プランと利用条件は公式サイトで確認してください。"
+  },
+  {
+    "q": "無料で利用できますか？",
+    "a": "無料利用やクレジット付与、生成回数は時期・地域・アカウント・プランで変動するため、各公式料金・ヘルプページをご確認ください。"
+  },
+  {
+    "q": "商用利用や透かしの条件は？",
+    "a": "生成物だけでなく入力画像・実在人物・ブランド素材の権利にも注意が必要です。商用利用の可否、可視透かし、識別情報は最新の公式規約と機能説明で確認してください。本記事は法的助言ではありません。"
+  },
+  {
+    "q": "どちらの画質が上ですか？",
+    "a": "両者を同一プロンプト・同一条件で比較する独自生成検証は行っていません。モデルや設定によって結果が異なるため優劣は断定できません。"
+  }
+];
+const sources = [
+  { href: "https://dreamina.capcut.com/", label: "Dreamina公式" },
+  { href: "https://dreamina.capcut.com/ja-jp/pricing/dreamina-price", label: "Dreamina料金" },
+  { href: "https://dreamina.capcut.com/help", label: "Dreaminaヘルプ" },
+];
+const relatedLinks = [
+  {href:'/tools/dreamina/',label:"Seedream関連ツール詳細"},
+  {href:'/tools/dreamina/',label:"Seedance関連ツール詳細"},
+  {href:'/comparisons/',label:'比較記事一覧'},
+  {href:'/tools/',label:'AIクリエイティブツール一覧'},
+];
+---
+<ComparisonVsArticle
+  title="SeedreamとSeedanceを比較｜使い方・料金・商用利用確認点 | AIクリエイティブナビ"
+  description="SeedreamとSeedanceの特徴・使い分け・無料枠・商用利用・透かしの確認ポイントを整理。2026年11月の公式情報を参照し、未検証の性能・金額は断定しません。"
+  canonicalPath="/comparisons/seedream-vs-seedance/"
+  jsonLd={jsonLd}
+  breadcrumbLabel="SeedreamとSeedanceの比較"
+  h1="SeedreamとSeedanceの違い・選び方"
+  lead="静止画、商品ビジュアル、構図やデザインのラフを作る場合はSeedream、画像素材に動きを与え、映像表現の試作をする場合はSeedanceが検討候補です。料金・無料枠・商用利用・透かしの条件は公式情報で確認してください。本記事には独自の同一条件による生成比較は含みません。"
+  category="画像生成と動画生成の使い分け"
+  latestDate="2026-11-06"
+  toolAName="Seedream"
+  toolASlug="dreamina"
+  toolBName="Seedance"
+  toolBSlug="dreamina"
+  conclusionA={{label:'こんな用途なら',toolName:"Seedream",toolHref:'/tools/dreamina/',body:"静止画、商品ビジュアル、構図やデザインのラフを作る場合。サービスの対応機能と契約条件を確認し、用途と一致するか判断してください。"}}
+  conclusionB={{label:'こんな用途なら',toolName:"Seedance",toolHref:'/tools/dreamina/',body:"画像素材に動きを与え、映像表現の試作をする場合。サービスの対応機能と契約条件を確認し、用途と一致するか判断してください。"}}
+  conclusionNote="Seedream/Seedanceはモデル名で、独立したサブスクリプションサービスと誤認させない。生成した独自サンプルは未掲載。"
+  quickDecisionRows={[
+    {purpose:"静止画、商品ビジュアル、構図やデザインのラフを作る場合",candidate:"Seedream",checkPoint:'最新の料金・利用条件を確認'},
+    {purpose:"画像素材に動きを与え、映像表現の試作をする場合",candidate:"Seedance",checkPoint:'最新の料金・利用条件を確認'},
+  ]}
+  comparisonRows={comparisonRows}
+  faqs={faqs}
+  relatedLinks={relatedLinks}
+  sources={sources}
+  noticeItems={['2026年11月6日調査の公式情報を参照。提供機能・料金・利用条件は変更される可能性があります。','商用利用、透かし、無料枠、日本語対応の未確認項目は断定していません。','実際の画像・動画生成による同条件の比較は未実施です。','本記事は法的助言ではありません。']}
+/>

@@ -4,8 +4,8 @@ shortDescription: "カメラワークを活かしたAI映像や広告向けク�
 category: "both"
 officialUrl: "https://higgsfield.ai/"
 freePlan: "limited"
-commercialUse: "ok"
-commercialUseNote: "公式ヘルプ『Who owns my generations and can I use them commercially?』は全ユーザーの生成物の商用利用を認め、別途商用ライセンス購入不要と明記。広告・ブランド・受託制作を例示。入力素材の肖像・著作権等は別。無料出力に可視透かしが付くため実務では有料プランで新規生成することが適切。"
+commercialUse: "limited"
+commercialUseNote: "公式ヘルプは「全ユーザーが商用利用可能」と案内する一方、公式料金比較表のCommercial use欄ではFreeはNot included、Basic以上はIncludedと明記しており矛盾する。安全側ではFreeを商用利用不可扱いとし、有料Basic以上を商用利用可能な候補とする。無料素材の商用利用を希望する場合はHiggsfieldサポートに書面確認する。"
 japaneseUi: "unknown"
 japanesePrompt: "unknown"
 watermark: "limited"
@@ -23,8 +23,8 @@ lastReviewed: "2026-11-05"
 nextReviewDue: "2026-12-05"
 officialSourceUrl: "https://higgsfield.ai/"
 pricingModel: "subscription_credit"
-freePlanNote: "無料アカウントの提供があり、Free出力は原則可視Higgsfield透かし付き。提供モデル・無料クレジット数は時期とアカウント画面で変動。"
-paidPlanNote: "公式ヘルプは有料契約なら新規生成物の可視透かしなしと説明。金額・クレジット・モデル制限は公式料金画面で確認。"
+freePlanNote: "公式料金表ではFree Limited use、生成クレジット0、限定的な無料アクセスあり。無料アカウントの生成物は可視Higgsfield透かし付き。"
+paidPlanNote: "公式料金比較では年額払い月換算のBasic USD 9/月・120クレジット、Pro USD 23/月・600、Max USD 59/月・1800。有料で新規生成した出力は可視透かしなし。単月払い・税は公式購入画面で確認。"
 platforms:
   - web
 signupRequired: true
@@ -52,12 +52,12 @@ sourceRefs:
     url: "https://higgsfield.ai/pricing"
     type: pricing
 usagePolicy:
-  commercialUseStatus: ok
+  commercialUseStatus: limited
   commercialUseByPlan:
-    free: "公式ヘルプは商用利用の禁止なしと説明。ただし無料出力は可視透かし付き。"
-    paid: "公式ヘルプは商用利用の禁止なしと説明。有料で新規生成した出力は可視透かしなし。"
+    free: "ヘルプと料金表が矛盾。料金表上Freeは商用利用Not includedなので広告や受託利用を避け、書面確認を推奨。"
+    paid: "料金表でBasic/Pro/MaxはCommercial use Included。有料で新規生成した出力は可視透かしなし。"
     enterprise: "個別契約・追加許諾がある場合は契約条件を優先。"
-  commercialUseNote: "公式ヘルプ『Who owns my generations and can I use them commercially?』は全ユーザーの生成物の商用利用を認め、別途商用ライセンス購入不要と明記。広告・ブランド・受託制作を例示。入力素材の肖像・著作権等は別。無料出力に可視透かしが付くため実務では有料プランで新規生成することが適切。"
+  commercialUseNote: "公式ヘルプは「全ユーザーが商用利用可能」と案内する一方、公式料金比較表のCommercial use欄ではFreeはNot included、Basic以上はIncludedと明記しており矛盾する。安全側ではFreeを商用利用不可扱いとし、有料Basic以上を商用利用可能な候補とする。無料素材の商用利用を希望する場合はHiggsfieldサポートに書面確認する。"
   rightsStatus: unknown
   rightsNote: "生成サービス利用許諾は著作権の独占的保有を保証しません。人物・ブランド・第三者素材などの権利は別途確認。"
   inputMaterialRisk: medium
@@ -91,12 +91,12 @@ faqs:
 
 ## 公式情報による確認結果（2026年11月6日・日本時間）
 
-**商用利用：公式ヘルプは全ユーザーに認めると明記。** 無料出力は可視透かし付き、有料契約後に新しく生成した出力は可視透かしなし。無料時の透かしを後から削除することはできず再生成が必要。
+**商用利用：公式情報が矛盾。** ヘルプは全ユーザーが利用可能とするが、現行料金表はFreeにCommercial useなし、Basic以上にはありと記載。Freeは商用利用せず、Basic以上を候補にする。有料で新規生成した出力は可視透かしなし。
 
 ### 商用利用・無料プラン・有料プラン
-- **無料プラン：** 無料アカウントの提供があり、Free出力は原則可視Higgsfield透かし付き。提供モデル・無料クレジット数は時期とアカウント画面で変動。
-- **商用利用：** 公式ヘルプ『Who owns my generations and can I use them commercially?』は全ユーザーの生成物の商用利用を認め、別途商用ライセンス購入不要と明記。広告・ブランド・受託制作を例示。入力素材の肖像・著作権等は別。無料出力に可視透かしが付くため実務では有料プランで新規生成することが適切。
-- **有料プランと金額：** 公式ヘルプは有料契約なら新規生成物の可視透かしなしと説明。金額・クレジット・モデル制限は公式料金画面で確認。
+- **無料プラン：** 公式料金表ではFree Limited use、生成クレジット0、限定的な無料アクセスあり。無料アカウントの生成物は可視Higgsfield透かし付き。
+- **商用利用：** 公式ヘルプは「全ユーザーが商用利用可能」と案内する一方、公式料金比較表のCommercial use欄ではFreeはNot included、Basic以上はIncludedと明記しており矛盾する。安全側ではFreeを商用利用不可扱いとし、有料Basic以上を商用利用可能な候補とする。無料素材の商用利用を希望する場合はHiggsfieldサポートに書面確認する。
+- **有料プランと金額：** 公式料金比較では年額払い月換算のBasic USD 9/月・120クレジット、Pro USD 23/月・600、Max USD 59/月・1800。有料で新規生成した出力は可視透かしなし。単月払い・税は公式購入画面で確認。
 - **透かし：** 公式ヘルプでは無料アカウントの全生成物に可視透かし。有料プランで新規生成した出力は可視透かしなし。無料時に生成した素材の透かしは後払いで消えず再生成が必要。不可視識別メタデータの付与可能性あり。
 - **日本語UI・日本語プロンプト：** 言語別の公開規格が確認できていないため未確認（日本語の公式ヘルプがあることは、UI完全対応や日本語プロンプト品質の保証ではありません）。
 - **入力と出力の権利：** 生成物の商用利用許諾は著作権・肖像権・商標権・第三者素材に対する独立の許諾ではありません。個別に確認してください。

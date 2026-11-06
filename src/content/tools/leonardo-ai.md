@@ -4,7 +4,7 @@ shortDescription: "ゲーム・イラスト向けのカスタムモデルが豊�
 category: "image"
 officialUrl: "https://leonardo.ai"
 freePlan: "limited"
-lowestPaidPlan: "$10/月（Apprenticeプラン・年払い）／$12/月（月払い）"
+lowestPaidPlan: "Essential USD12/月（月払い）・USD10/月相当（年払い）"
 currency: "USD"
 commercialUse: "limited"
 commercialUseNote: "2026年1月更新の規約では、無料プランでも非独占的ライセンスにより商用利用が可能とされています。ただし無料プランの生成画像はLeonardo.AIが所有権を保持し、他ユーザーも同一画像を使用できます。有料プランでは完全な所有権・知的財産権がユーザーに帰属するとされています。商用利用前に最新の利用規約をご確認ください。"
@@ -25,14 +25,14 @@ weaknesses:
   - "日本語UIの有無は公式情報から未確認"
   - "日本語プロンプトは英語より精度が低い傾向がある"
   - "生成画像への透かし有無は公式情報から未確認"
-lastReviewed: "2026-06-15"
-nextReviewDue: "2026-09-15"
+lastReviewed: "2026-11-06"
+nextReviewDue: "2026-12-06"
 verifiedAt: "2026-06-15"
 officialSourceUrl: "https://leonardo.ai/pricing/"
 pricingModel: "subscription_credit"
 pricingStatus: "confirmed"
-freePlanNote: "1日150トークン程度（変更の可能性あり）"
-paidPlanNote: "Apprentice $10/月〜（年払い）。公式情報では、有料プランやPrivate設定などの条件が関係すると案内されています。利用前に最新の公式規約をご確認ください。"
+freePlanNote: "公式料金：Free 0米ドル/月、150 Fast Tokens/日、生成物は公開設定。無料ユーザーも非独占・ロイヤリティフリーの商用利用許諾があるが、所有権は有料ユーザーと異なる。"
+paidPlanNote: "公式の現行個人プランはEssential 12米ドル/月・8500トークン、Premium 30米ドル/月・25000、Ultimate 60米ドル/月・60000。年払いでは月換算10/24/48米ドル。表示価格は税別。旧Apprenticeの名称は現行公式表と異なる。"
 platforms:
   - web
   - api
@@ -78,6 +78,9 @@ reviewed:
   terms: "2026-06-15"
   features: "2026-05-04"
 sourceRefs:
+  - label: "2026-11-06 公式確認情報"
+    url: "https://leonardo.ai/pricing/"
+    type: pricing
   - label: "Leonardo AI料金プラン（公式）"
     url: "https://leonardo.ai/pricing/"
     type: pricing
@@ -91,6 +94,8 @@ sourceRefs:
     url: "https://leonardo.ai/faq/"
     type: help
 sources:
+  - title: "2026-11-06 公式確認情報"
+    url: "https://leonardo.ai/pricing/"
   - title: "Leonardo AI 料金プラン（公式）"
     url: "https://leonardo.ai/pricing/"
   - title: "Leonardo AI 利用規約（公式）"
@@ -238,3 +243,9 @@ Leonardo AIはゲーム・イラスト・キャラクター画像の生成に強
 
 [AIツール一覧へ](/tools/) ／ [無料で使えるAIツール](/conditions/free/) ／ [商用利用と著作権について](/guides/commercial-use-copyright/) ／ [MidjourneyとLeonardo AIを比較する](/comparisons/midjourney-vs-leonardo-ai/)
 
+
+## 公式公開情報による追加確認（2026-11-06）
+
+現行の個人向けプラン名はFree / Essential / Premium / Ultimate。無料枠150 Fast Tokens/日。Essential月12米ドル（年払い月換算10米ドル）。無料商用利用は非独占ライセンスで、所有権はLeonardo側とされる。
+
+[leonardo-ai公式](https://leonardo.ai/pricing/)。日本の最終決済額、モデル別の生成品質、未ログインの商用利用詳細は検証済みと見なさない。

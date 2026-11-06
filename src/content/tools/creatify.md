@@ -8,8 +8,8 @@ lowestPaidPlan: "Starter $39/月（USD・公式日本語料金の通常表示）
 currency: "USD"
 commercialUse: "unknown"
 commercialUseNote: "公式料金ページ（creatify.ai/pricing）では商用利用可否についての明示的な記載を確認できませんでした。広告クリエイティブ生成という製品の性質上、商用利用が前提になっていると考えられますが、断定はできません。商用利用を前提にする場合は、最新の公式利用規約を必ずご確認ください。本記事は法的助言ではありません。"
-japaneseUi: "partial"
-japanesePrompt: "partial"
+japaneseUi: "unknown"
+japanesePrompt: "unknown"
 watermark: "limited"
 watermarkCondition: "日本語公式料金表では無料プランのエクスポートに透かしあり。Starter以上の比較表には『透かしなし』が明記される。モデル・素材の個別制約は別途確認。"
 bestFor:
@@ -24,7 +24,7 @@ strengths:
 weaknesses:
   - "無料プランは月10クレジット（動画約2本相当）と少なく、透かしあり"
   - "商用利用可否が公式料金ページ上で明示されていない（要確認）"
-  - "日本語対応の詳細は公式情報のみでは確認できていない（要確認）"
+  - "日本語の公式製品・料金ページは公開。ログイン後の制作UI・日本語プロンプト品質は未検証"
   - "汎用の画像生成・動画生成ツールではなく、広告クリエイティブに特化している"
 lastReviewed: "2026-11-06"
 nextReviewDue: "2026-12-06"

@@ -4,7 +4,7 @@ shortDescription: "テキスト入り画像やタイポグラフィ表現に強�
 category: "image"
 officialUrl: "https://ideogram.ai/"
 freePlan: "limited"
-lowestPaidPlan: "要公式確認"
+lowestPaidPlan: "Plus USD20/月（月払い、2026年10月時点のIdeogram公式比較記事）、年間一括USD180"
 currency: "USD"
 commercialUse: "limited"
 commercialUseNote: "Ideogram公式FAQでは、生成画像について所有権を主張せず、利用を制限しない旨が説明されています。ただし、法律・第三者の権利・利用規約に違反しないことは利用者側で確認する必要があります。最新情報は公式FAQと利用規約をご確認ください。"
@@ -23,16 +23,16 @@ strengths:
 weaknesses:
   - "日本語UIや日本語テキスト生成の扱いは確認が必要"
   - "商用利用時は第三者権利や利用規約の確認が必要"
-lastReviewed: "2026-06-21"
-nextReviewDue: "2026-09-21"
+lastReviewed: "2026-11-06"
+nextReviewDue: "2026-12-06"
 verifiedAt: "2026-06-21"
 officialSourceUrl: "https://docs.ideogram.ai/plans-and-pricing/available-plans"
 pricingSourceUrl: "https://docs.ideogram.ai/plans-and-pricing/available-plans"
 pricingSourceNote: "公式ドキュメントの料金プランページ。currency=USDと推定されるが月額・プラン構成は要公式確認。最新情報は公式サイトをご確認ください。"
 pricingModel: "subscription_credit"
 pricingStatus: "partial"
-freePlanNote: "公式ドキュメントでは、無料プランで週10クレジットが案内されています（2026-06-21確認）。クレジット数や生成条件は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
-paidPlanNote: "有料プランでは生成容量や優先処理などが増える場合があります。クレジット数・料金・対象機能は変更される可能性があるため、最新情報は公式サイトをご確認ください。"
+freePlanNote: "2026-10-11付のIdeogram公式比較記事では無料枠を『eligible accountsで変動する週次slow credits』と表記。旧DBの『無料10クレジット/週』を現在の固定値としては扱わない。ログイン後の実際の残量と選択モデル別の消費量を確認。"
+paidPlanNote: "Ideogram公式比較記事（2026-10-11確認と記載）でPlus USD20/月、年払い一括USD180、優先クレジット2,400と案内。価格は2026年10月の確認値で、購入画面・地域・税により変わる可能性がある。"
 platforms:
   - web
 signupRequired: true
@@ -74,6 +74,9 @@ reviewed:
   terms: "2026-05-26"
   features: "2026-05-26"
 sourceRefs:
+  - label: "Ideogram公式比較記事（2026年10月の価格）"
+    url: "https://ideogram.ai/blog/adobe-firefly-alternatives/"
+    type: pricing
   - label: "Ideogram 公式サイト"
     url: "https://ideogram.ai/"
     type: official
@@ -96,6 +99,8 @@ sourceRefs:
     url: "https://docs.ideogram.ai/using-ideogram/getting-started/signup-and-registration"
     type: docs
 sources:
+  - title: "Ideogram公式比較記事・2026年10月の料金調査"
+    url: "https://ideogram.ai/blog/adobe-firefly-alternatives/"
   - title: "Ideogram 公式サイト"
     url: "https://ideogram.ai/"
   - title: "Ideogram よくある質問（公式）"
@@ -242,3 +247,9 @@ UIは英語のみです。日本語テキスト生成の精度については公
 > **免責事項：** このページの情報は公式ソースをもとに作成していますが、内容は変更される可能性があります。法的助言ではありません。利用前に必ず最新の公式情報をご確認ください。
 
 [AIツール一覧へ](/tools/) ／ [無料で使えるAIツール](/conditions/free/) ／ [商用利用と著作権について](/guides/commercial-use-copyright/)
+
+## 2026年11月の未確定枠の再検証
+
+Ideogram公式の比較記事はPlus USD20/月・年払い一括USD180（2,400 priority credits）、無料はアカウントにより週次slow creditsが変動すると案内。従来の無料10クレジット/週を現在の確定値とは扱わない。モデル別のクレジット消費と現在の購入金額はログイン画面で確認する。
+
+[Ideogram公式比較記事](https://ideogram.ai/blog/adobe-firefly-alternatives/)

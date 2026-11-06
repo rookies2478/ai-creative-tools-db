@@ -23,8 +23,8 @@ strengths:
   - "Enterprise向けにセキュリティ・管理機能の情報がある"
 weaknesses:
   - "無料プランは商用利用・販売・再配布・マネタイズに制限がある"
-  - "無料プランは動画が最大1分・透かし付き"
-  - "今回の実機確認では、無料プランで作成した動画ファイルをダウンロードできなかった"
+  - "公式日本語料金では無料プランは月3本・1本最長1分。透かし付き"
+  - "過去の当サイト実機確認では無料ファイル取得に失敗したが、全アカウント共通の禁止仕様とは断定しない"
   - "日本語UIの対応状況は公式情報で明記されていない（要確認）"
   - "人物画像・音声を使う場合は本人同意・第三者権利の確認が必要"
 lastReviewed: "2026-07-05"
@@ -33,8 +33,8 @@ verifiedAt: "2026-07-05"
 officialSourceUrl: "https://www.heygen.com/pricing"
 pricingModel: "subscription"
 pricingStatus: "partial"
-freePlanNote: "無料プランあり。クレジットカード不要、動画最大1分、透かし付きとされています。商用利用・販売・再配布・マネタイズには制限があるため公式Termsをご確認ください。無料で動画作成は可能ですが、今回の実機確認では生成した動画ファイルを無料でダウンロードできませんでした。保存・掲載には有料プランが必要となる可能性があります。"
-paidPlanNote: "Creator / Pro / Business / Enterpriseなどのプランがあるとされています。Creator以上で透かし削除に対応する案内がありますが、料金・条件は変更される場合があるため公式サイトをご確認ください。"
+freePlanNote: "公式日本語料金表は無料プランで月3本・各最長1分、30以上の言語を明示。透かし・利用権利は公式Termsを確認。過去の当サイト実機確認で無料ファイルのダウンロードに失敗したが、すべての環境で不可とは断定しない。"
+paidPlanNote: "公式日本語料金ページ（/ja-jp/pricing）があり、Creator $29/月（月払い）と年払い月額換算$24/月が参考。地域・税・請求額は最終の購入画面で確認。日本語公式サイトの存在はログイン後編集画面の全日本語化を保証しない。"
 platforms:
   - web
 signupRequired: true
@@ -43,7 +43,7 @@ features:
   imageToVideo: true
   voiceoverLanguages: "多言語対応（日本語含む可能性あり・要確認）"
 watermarkCondition: "無料プランでは透かしが付与されるとされています。Creator以上のプランでは透かし削除機能があるとされていますが、最新仕様は公式サイトでご確認ください。"
-japaneseDocs: false
+japaneseDocs: true
 useCases:
   - video
   - business
@@ -62,6 +62,8 @@ sources:
     url: "https://www.heygen.com/"
   - title: "HeyGen 料金プラン（公式）"
     url: "https://www.heygen.com/pricing"
+  - title: "HeyGen 日本語公式料金"
+    url: "https://www.heygen.com/ja-jp/pricing"
   - title: "HeyGen 利用規約（公式）"
     url: "https://www.heygen.com/terms"
   - title: "HeyGen Enterprise（公式）"
@@ -72,6 +74,9 @@ sourceRefs:
     type: official
   - label: "HeyGen料金プラン（公式）"
     url: "https://www.heygen.com/pricing"
+    type: pricing
+  - label: "HeyGen 日本語公式料金"
+    url: "https://www.heygen.com/ja-jp/pricing"
     type: pricing
   - label: "HeyGen利用規約（公式）"
     url: "https://www.heygen.com/terms"

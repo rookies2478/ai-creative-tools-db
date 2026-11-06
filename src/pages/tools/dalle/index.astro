@@ -31,15 +31,15 @@ const jsonLd = JSON.stringify([
     name: 'DALL·E',
     operatingSystem: 'Web',
     applicationCategory: 'DesignApplication',
-    description: 'OpenAI開発のAI画像生成モデル。ChatGPTと統合されており、プロンプトへの忠実度が高い画像生成が可能。',
-    url: 'https://openai.com/dall-e-3',
+    description: 'DALL·E 3の歴史的情報。ChatGPT公式DALL·E GPTは2026年8月30日に提供終了。現在はChatGPT画像で生成・編集。',
+    url: 'https://help.openai.com/ja-jp/articles/11084440-images-in-chatgpt',
   },
 ]);
 ---
 
 <BaseLayout
-  title="DALL·Eの商用利用・料金・無料枠まとめ｜AIクリエイティブナビ"
-  description="DALL·Eの商用利用条件・料金プラン・無料枠・透かし・日本語対応状況を、公式情報をもとに整理しています。最新情報は公式サイトをご確認ください。"
+  title="DALL·Eの提供終了とChatGPT画像への移行｜料金・商用利用｜AIクリエイティブナビ"
+  description="公式DALL·E GPTは2026年8月30日に終了しました。現在のChatGPT画像生成への移行と、過去のDALL·E 3との違い・商用利用規約を整理。"
   canonicalPath="/tools/dalle/"
   ogType="article"
   jsonLd={jsonLd}
@@ -61,8 +61,8 @@ const jsonLd = JSON.stringify([
       toolName="DALL·E"
       category="AI画像生成"
       checkedDate={d?.lastReviewed ?? '2026-05-26'}
-      headingHtml='DALL·Eの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="OpenAI開発のAI画像生成モデル。ChatGPTと統合されており、テキスト指示への忠実度が高い画像生成が可能。料金・商用利用条件・日本語対応を公式情報をもとに整理しています。"
+      headingHtml='DALL·Eの<span class="hl"><span class="phrase-nowrap">提供終了</span>とChatGPT画像への移行</span>まとめ'
+      lead="【重要：提供終了】ChatGPT公式DALL·E GPTは2026年8月30日に廃止されました。現在の画像生成・編集は『ChatGPT画像』を使います。このURLでは旧DALL·E 3の記事・作例を歴史資料として残し、現行サービスとは区別します。"
       specs={[
         { lb: '商用利用', badge: { s: 'ok', label: '案内あり' } },
         { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
@@ -71,7 +71,7 @@ const jsonLd = JSON.stringify([
         { lb: '日本語UI', badge: { s: 'ok', label: '〇 対応' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
       ]}
-      primaryCta={{ label: '公式サイトで確認する', href: 'https://openai.com/dall-e-3' }}
+      primaryCta={{ label: '現行のChatGPT画像を確認（公式）', href: 'https://help.openai.com/ja-jp/articles/11084440-images-in-chatgpt' }}
       secondaryCta={{ label: 'OpenAI利用規約（公式）', href: 'https://openai.com/policies/usage-policies' }}
       basicInfo={[
         {
@@ -142,7 +142,7 @@ const jsonLd = JSON.stringify([
         note: '※ 値は確認日時点の参考値です。プランや用途により異なる場合があります。最新情報は必ず公式サイトでご確認ください。',
       }}
       about={[
-        'DALL·EはOpenAIが開発したAI画像生成モデルです。現行バージョンはDALL·E 3で、<b>ChatGPTと統合</b>されており、テキストから画像を生成できます。プロンプトへの忠実度が高いとされ、指示に沿った画像を生成しやすい傾向があります。',
+        'DALL·EはOpenAIの旧画像生成モデルです。公式DALL·E GPTは2026年8月30日に提供終了しました。現行ChatGPTの画像生成は『ChatGPT画像』をご利用ください。プロンプトへの忠実度が高いとされ、指示に沿った画像を生成しやすい傾向があります。',
         'アイデア出し・SNS投稿画像・ブログアイキャッチ・プレゼン資料ビジュアルの素早い試作など、テキスト指示から素早くビジュアルを確認したい用途に向いています。API提供もあり、開発・業務フローへの組み込みも可能です。',
       ]}
       aboutMore={{ label: 'AI画像生成ツール一覧で比較する →', href: '/categories/image-generation/' }}
@@ -172,7 +172,7 @@ const jsonLd = JSON.stringify([
         more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
       }}
       integrationTitle="ChatGPTとAPIとの連携"
-      integration="DALL·EはChatGPTと統合されており、ChatGPTのインターフェースから直接画像生成を依頼できます。OpenAI APIを使って開発・業務フローに組み込むことも可能です。API利用は従量課金制で、料金・条件は公式APIページをご確認ください。"
+      integration="公式DALL·E GPTは2026年8月30日に提供終了。現行のChatGPT画像ではチャット画面から画像を生成・編集できます。旧DALL·E APIと現行GPT Image系APIを同じサービスとして扱わず、API利用時は公式モデル一覧と廃止日を確認してください。"
       whoFor={[
         'ChatGPTをすでに使っており、そのまま画像生成も試したい人',
         'テキスト指示に忠実な画像生成が必要な人',
@@ -242,9 +242,9 @@ const jsonLd = JSON.stringify([
         { q: 'DALL·Eは商用利用できますか？', a: 'OpenAI公式情報上、生成画像の商用利用ができる場合があります。用途・生成内容・第三者の権利により制限される場合があるため、利用前に最新の利用規約をご確認ください。このページは法的助言ではありません。' },
         { q: 'DALL·Eは日本語で使えますか？', a: 'ChatGPT経由のためChatGPTの日本語UIに準拠して利用できる場合があります。日本語プロンプトも一部対応していますが、画像内への日本語テキスト生成は精度が低い傾向があります。' },
         { q: 'DALL·Eに透かしは入りますか？', a: '従来型の可視透かしは付与されませんが、C2PA標準の不可視メタデータが埋め込まれる場合があります。最新の仕様は公式情報でご確認ください。' },
-        { q: 'DALL·EはどのプラットフォームやAPIで使えますか？', a: 'ChatGPT経由（Web）とOpenAI API経由での利用が可能です。APIは別途従量課金です。最新の料金は公式APIページでご確認ください。' },
+        { q: 'DALL·EはどのプラットフォームやAPIで使えますか？', a: '公式DALL·E GPTは2026年8月30日に終了。現在のChatGPT画像とは別の旧モデルです。API開発ではGPT Image系の現行モデルと廃止情報をOpenAI公式APIドキュメントで確認してください。' },
         { q: 'DALL·Eで人物や著名人・ブランドロゴを含む画像を作成できますか？', a: '技術的には生成可能な場合がありますが、実在の人物・著名人・ブランドロゴ・第三者の著作物を含む画像を作成・利用する際は、肖像権・商標権・著作権などの観点から別途確認が必要です。本記事は法的助言ではありません。' },
-        { q: 'DALL·EとMidjourneyはどう違いますか？', a: 'DALL·EはChatGPTと統合されておりテキスト指示への忠実度が高い傾向があります。Midjourneyはアートやイラストなどスタイリッシュなビジュアルやクリエイティブな表現を得意とするとされています。用途や優先事項に応じて選び分けることが有効です。' },
+        { q: 'DALL·EとMidjourneyはどう違いますか？', a: 'DALL·EはOpenAIの旧画像生成モデル。現在のChatGPT画像・Midjourneyと比較する際はモデル世代と利用条件を区別してください。DALL·E GPTは2026年8月30日に終了しました。' },
       ]}
       relatedTools={[
         { name: 'Midjourney', slug: 'midjourney', initial: 'M', cat: '画像生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'na', label: '無料枠なし' }, { s: 'na', label: '日本語UI：なし' }], platforms: ['Discord', 'Web'], official: 'https://www.midjourney.com' },

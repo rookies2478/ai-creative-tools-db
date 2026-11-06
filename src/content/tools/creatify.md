@@ -4,14 +4,14 @@ shortDescription: "商品URLを入力してUGC風の広告動画・画像広告�
 category: "video"
 officialUrl: "https://creatify.ai"
 freePlan: "limited"
-lowestPaidPlan: "Starter 約$39/月〜（要公式確認）"
+lowestPaidPlan: "Starter $39/月（USD・公式日本語料金の通常表示）"
 currency: "USD"
 commercialUse: "unknown"
 commercialUseNote: "公式料金ページ（creatify.ai/pricing）では商用利用可否についての明示的な記載を確認できませんでした。広告クリエイティブ生成という製品の性質上、商用利用が前提になっていると考えられますが、断定はできません。商用利用を前提にする場合は、最新の公式利用規約を必ずご確認ください。本記事は法的助言ではありません。"
 japaneseUi: "unknown"
 japanesePrompt: "unknown"
 watermark: "limited"
-watermarkCondition: "無料プランでは生成物に透かしが入るとされています。有料プランでの透かし有無は公式サイトでご確認ください。"
+watermarkCondition: "日本語公式料金表では無料プランのエクスポートに透かしあり。Starter以上の比較表には『透かしなし』が明記される。モデル・素材の個別制約は別途確認。"
 bestFor:
   - "商品URLからのUGC風広告動画の自動生成"
   - "SNS広告・ECサイト向けの動画広告・画像広告クリエイティブ制作"
@@ -24,16 +24,16 @@ strengths:
 weaknesses:
   - "無料プランは月10クレジット（動画約2本相当）と少なく、透かしあり"
   - "商用利用可否が公式料金ページ上で明示されていない（要確認）"
-  - "日本語対応の詳細は公式情報のみでは確認できていない（要確認）"
+  - "日本語の公式製品・料金ページは公開。ログイン後の制作UI・日本語プロンプト品質は未検証"
   - "汎用の画像生成・動画生成ツールではなく、広告クリエイティブに特化している"
-lastReviewed: "2026-08-13"
-nextReviewDue: "2026-11-13"
-verifiedAt: "2026-08-13"
+lastReviewed: "2026-11-06"
+nextReviewDue: "2026-12-06"
+verifiedAt: "2026-11-06"
 officialSourceUrl: "https://creatify.ai/pricing"
 pricingModel: "credit"
-pricingStatus: "unconfirmed"
+pricingStatus: "confirmed"
 freePlanNote: "無料プランは月10クレジット（動画広告約2本、または画像広告約20本相当とされています）まで、透かしあり。"
-paidPlanNote: "Starter（約$39/月、100クレジット）、Pro（約$99/月、300〜5,000クレジット、最大5席）、Enterpriseは個別見積もりとされています。クレジット制で、年払いで最大50%割引、クレジットの繰越なしとされています。正確な料金・条件は公式サイトでご確認ください。"
+paidPlanNote: "公式日本語料金表ではStarter $39/月・100クレジット、Pro $99/月・300〜5,000クレジット、Enterprise個別見積もり。年払い割引あり。最終請求通貨・税・割引条件は購入画面で確認。"
 platforms:
   - web
 signupRequired: true
@@ -60,6 +60,8 @@ sources:
     url: "https://creatify.ai"
   - title: "Creatify料金プラン（公式）"
     url: "https://creatify.ai/pricing"
+  - title: "Creatify 日本語公式料金"
+    url: "https://creatify.ai/ja/pricing"
 sourceRefs:
   - label: "Creatify公式サイト"
     url: "https://creatify.ai"
@@ -67,13 +69,16 @@ sourceRefs:
   - label: "Creatify料金プラン（公式）"
     url: "https://creatify.ai/pricing"
     type: pricing
+  - label: "Creatify 日本語公式料金"
+    url: "https://creatify.ai/ja/pricing"
+    type: pricing
 faqs:
   - question: "無料で使えますか？"
     answer: "無料プランがあり、月10クレジット（動画広告約2本または画像広告約20本相当とされています）まで利用できます。ただし透かしが入ります。最新情報は公式サイトをご確認ください。"
   - question: "商用利用できますか？"
     answer: "公式料金ページでは商用利用可否についての明示的な記載を確認できませんでした。広告クリエイティブ生成という製品の性質上、商用利用が前提と考えられますが、断定はできません。商用利用を前提にする場合は最新の公式利用規約をご確認ください。本記事は法的助言ではありません。"
   - question: "日本語で使えますか？"
-    answer: "日本語UI・日本語プロンプト・日本語ナレーションの対応状況は、本記事の調査時点では公式情報から確認できていません。多言語ナレーション機能があるとされていますが、日本語特化機能としての対応は未確認です。最新情報は公式サイトをご確認ください。"
+    answer: "Creatifyには日本語公式サイト・日本語の料金と制作説明ページがあります。ただし、公開の日本語サイトとログイン後の制作UI・日本語プロンプト品質は別項目です。今回の実機調査は行っていないため、制作UIと日本語プロンプトは未確認としています。"
   - question: "InVideo AIやCapCut AIとの違いは何ですか？"
     answer: "Creatifyは商品URLからUGC風の広告動画・画像広告を自動生成することに特化しています。InVideo AIやCapCut AIはより汎用的な動画制作・編集ツールです。広告クリエイティブ・UGC風広告に特化した用途であればCreatifyが候補になります。"
 reviewed:
@@ -91,7 +96,7 @@ japanBilling:
   taxDisplay: "unknown"
   purchaseChannels: ["web"]
   pricingCheckedAt: "2026-08-13"
-  pricingNote: "公式料金ページでStarter/Pro/Enterpriseのプラン構成とクレジット制を確認しました。日本円建て請求・日本語対応・商用利用条件の明示は本タスクの調査範囲では確認できていません。最新情報は公式サイトをご確認ください。"
+  pricingNote: "2026-11-06 Creatify日本語公式料金ページでStarter $39/月・Pro $99/月、Free月10クレジットを確認。日本語の料金ページはあるが、円建て請求とログイン後の編集UI/日本語プロンプトは未確認。"
   billingCategory: "E"
   sourceUrls:
     - "https://creatify.ai/pricing"
@@ -131,7 +136,7 @@ Creatifyは、商品URLを入力するだけでUGC（ユーザー生成コンテ
 
 ## 日本語対応について
 
-本記事の調査時点では、Creatifyの日本語UI・日本語プロンプト・日本語ナレーションの対応状況について公式情報から確認できていません。多言語ナレーション機能があるとされていますが、日本語が対応言語に含まれるかどうかは未確認です。実際の対応状況は公式サイトでご確認ください。
+日本語の[公式製品ページ](https://creatify.ai/ja/)と[日本語公式料金表](https://creatify.ai/ja/pricing)を確認しました。公式料金表は75以上の言語対応を案内しています。ただし日本語の制作エディタ全画面・日本語プロンプトの対応品質は未検証のため、言語対応を無条件に保証しません。
 
 ## InVideo AI・CapCut AIとの使い分け
 

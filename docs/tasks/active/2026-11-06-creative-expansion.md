@@ -8,11 +8,11 @@ production_required: false
 db_change: true
 ui_change: true
 official_verification_required: true
-goal: "新規6ツールの日本語公式サイトを調査して日本語対応と日本向け料金表を具体化し、商用利用の判定矛盾を解消する"
+goal: "既存32ツールの日本向け公式サイト・料金・商用利用・日本語対応を比較監査し、裏付けのある不一致を修正して監査結果を残す"
 non_goals:
-  - 既存のDBスキーマや計測設定の変更
-  - 実機未確認サンプルの掲載
-  - 既存DALL-Eレガシー記事の改訂
+  - 既存サイトのURL・スラッグ変更、スキーマ変更
+  - 実機未検証なのに操作画面の完全な日本語対応を主張すること
+  - アフィリエイト・GA4・Clarity・公開設定変更
 target_files:
   - docs/tasks/active/2026-11-06-creative-expansion.md
   - src/content/tools/dreamina.md
@@ -26,6 +26,22 @@ target_files:
   - src/pages/comparisons/seedream-vs-seedance/index.astro
   - src/components/ComparisonHub.astro
   - src/pages/sitemap.xml.ts
+  - src/content/tools/dalle.md
+  - src/content/tools/dreamstudio.md
+  - src/content/tools/creatify.md
+  - src/content/tools/synthesia.md
+  - src/content/tools/heygen.md
+  - src/content/tools/vidu-ai.md
+  - src/content/tools/capcut-ai.md
+  - src/content/tools/photoroom.md
+  - src/content/tools/pika.md
+  - src/pages/tools/pika/index.astro
+  - src/content/tools/canva-ai-image-generator.md
+  - src/pages/tools/dalle/index.astro
+  - src/pages/tools/dreamstudio/index.astro
+  - src/pages/tools/synthesia/index.astro
+  - src/pages/tools/heygen/index.astro
+  - docs/audits/existing-tools-jp-official-audit-2026-11-06.md
 reference_files:
   - docs/tasks/LATEST.md
   - docs/tasks/TEMPLATE.md
@@ -47,11 +63,11 @@ required_checks:
   - git diff --check
   - npm run validate:scope
 acceptance_criteria:
-  - 各ツールの公式URL、公式ソースと確認日を記録する
-  - 6件のツールの公式根拠、プラン別のライセンス条件、注意点を記録する
-  - 日本語公式ページで確認できた料金・UI・日本語プロンプト情報を反映し、未検証範囲を明記する
-  - 比較ハブから3記事を発見できる
-  - 本番反映しない
+  - 既存32件すべてを公式情報照合の監査台帳へ記録（検証不能事項は理由付きで保留）
+  - DALL-E提供終了やBrand Studio料金など根拠確定の重要不一致を改訂する
+  - 日本語公式ページとUIの日本語化を混同しない
+  - 専用Astroページに残るハードコードの不一致も修正する
+  - ビルド・データ・公開HTML品質チェックが通る
 forbidden_operations:
   - PRODUCTION_DEPLOY
 ---
@@ -62,6 +78,8 @@ forbidden_operations:
 GitHub Issue #55。32件掲載のAIクリエイティブナビに、画像・動画生成の新規6サービスと比較記事3本を追加する。実機での生成作例や検索順位実績を装わず、公式URLと情報不確実性を明示する。
 
 ## Implementation Notes
+Issue #61: 2026-11-06の日本向け公式情報横断監査。既存32件全ての公式ページ・DB・専用ページを分類し、客観的に判明した差分のみ修正。日本語公式ページが存在しないサービスには架空のローカライズ情報を記載しない。
+
 Issue #59: 日本語公式サイトを照合し、具体的な記載が既にある情報をunknownのままにしない。既存6件の正本のみ編集し、global schemaやaffiliate/analyticsは変更しない。
 
 2026-11-06 user request follow-up: 11/06の公開後に、公式規約および一次情報を調査して正本DBのunknownを更新する継続タスク。調査は公開範囲のみであり、ログインが必要な個別契約条件は確認できない。URL/DB schema変更なし。

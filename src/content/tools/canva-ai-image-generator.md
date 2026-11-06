@@ -4,8 +4,8 @@ shortDescription: "Canvaのデザインツールに統合されたAI画像生成
 category: "image"
 officialUrl: "https://www.canva.com"
 freePlan: "limited"
-lowestPaidPlan: "Canva Pro ¥1,180/月（App Store日本の公式表記）／Web契約の通貨は要公式確認"
-currency: "unknown"
+lowestPaidPlan: "Canva Pro ¥11,800/年（日本向け公式Web料金表・年払い）／App Store日本 ¥1,180/月（購入経路別）"
+currency: "JPY"
 commercialUse: "limited"
 commercialUseNote: "Canva公式情報上、AI生成画像は個人・商用問わず利用できるとされています。ただし多くの法域（米国を含む）ではAI生成コンテンツに著作権保護が付与されない場合があるとされており、他者による複製を排除できない可能性があります。商用利用に適しているかどうかの確認はユーザーの責任とされています。利用前にCanva AI Product Termsをご確認ください。"
 japaneseUi: true
@@ -25,15 +25,15 @@ weaknesses:
   - "AI生成画像は商用利用可とされているが、著作権保護が付与されない法域があり排他的権利が保証されない（AI Product Terms確認推奨）"
   - "専門的な画像生成ツールと比べて表現の自由度が限定的"
   - "生成画像への透かし有無は公式情報から未確認"
-lastReviewed: "2026-06-15"
-nextReviewDue: "2026-09-15"
+lastReviewed: "2026-11-06"
+nextReviewDue: "2026-12-06"
 verifiedAt: "2026-06-15"
 officialSourceUrl: "https://www.canva.com/pricing/"
 pricingStatus: "confirmed"
 needsReview: false
 pricingModel: "subscription_credit"
-freePlanNote: "無料プランでDream Lab月20プロンプトまで（月初リセット、変更の可能性あり）"
-paidPlanNote: "Canva Pro ¥1,180/月〜・¥11,800/年〜（App Store日本の公式表記）。Web契約時の価格・通貨は要公式確認です。有料プランはPremium AI toolsの月間利用枠が無料プランより多く案内されています。利用枠はプランとAIツール種別によって異なるため、最新の状況はCanva公式ヘルプをご確認ください。"
+freePlanNote: "日本語公式料金表は無料版のAI利用枠について標準/高品質モデルを最大20回と案内。Dream Lab個別のプロンプト上限とは区別し、各機能の残枠はCanvaのアカウント画面で確認。"
+paidPlanNote: "日本向け公式Web料金表はCanva Pro ¥11,800/年（年払い・1人）を明記。App Store日本の月額¥1,180とは購入経路・請求周期が異なる。無料版のAI利用は最大20回（モデルによって異なる）。ProのAI利用上限は無料版の10倍と説明。画像生成機能ごとのクレジット換算は公式画面で確認。"
 platforms:
   - web
   - ios
@@ -172,7 +172,7 @@ japanBilling:
   taxDisplay: "unknown"
   purchaseChannels: ["web", "appstore", "googleplay", "enterprise"]
   pricingCheckedAt: "2026-07-13"
-  pricingNote: "App Store日本のアプリ内課金ではCanva Proが日本円建て（¥1,180/月・¥11,800/年）であることを公式ページで確認しています。日本語の公式料金ページはありますが、Web契約時の表示通貨・請求通貨は要公式確認です。Web版とアプリ版では価格・通貨・税・キャンペーン条件が異なる場合があります。現行プラン名はCanva Pro／Canva Business等です。"
+  pricingNote: "2026-11-06日本向け公式Web料金表はCanva Pro 年額¥11,800・無料版¥0。日本App Store月額¥1,180は別の請求経路。無料版AIは最大20回、Proは10倍の利用枠と記載。Web購入金額とApp Store金額を同じ課金周期と扱わない。"
   billingCategory: "D"
   sourceUrls:
     - "https://www.canva.com/ja_jp/pricing/"

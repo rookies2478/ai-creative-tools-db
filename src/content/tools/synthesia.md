@@ -26,14 +26,14 @@ weaknesses:
   - "日本語UIの対応状況は公式情報で明確に確認できない（要確認）"
   - "生成動画の権利は組織（契約主体）に帰属するとされ、個人利用の位置づけが分かりにくい"
   - "ストックアバターの用途（広告・放送・商標利用など）には制限がある"
-lastReviewed: "2026-07-05"
-nextReviewDue: "2026-10-05"
+lastReviewed: "2026-11-06"
+nextReviewDue: "2026-12-06"
 verifiedAt: "2026-07-05"
 officialSourceUrl: "https://www.synthesia.io/pricing"
 pricingModel: "subscription"
 pricingStatus: "partial"
-freePlanNote: "Basic（無料）プランがあり、クレジットカード不要で試用できるとされています。月10分までの制限や透かしなど条件があるため、最新仕様は公式Pricingでご確認ください。"
-paidPlanNote: "Basic / Starter / Creator / Enterpriseなどのプランがあるとされ、Starter以上でロゴ（透かし）削除機能が案内されています。クレジット制・分数制・席数課金が組み合わさる料金体系のため、料金や条件は変更される場合があります。最新情報は公式サイトをご確認ください。"
+freePlanNote: "Basicは公式料金ページで月$0・500クレジット・10分までの動画作成または吹き替え等を案内し、透かし付き。言語・生成物・契約条件で消費は変わる。"
+paidPlanNote: "2026-11-06公式料金ページ（region=japan）はStarter月払い$29/月・1,250クレジット/月の表示。英語ページに地域指定あり、表示はUSD。年額契約割引・クレジット消費・税は購入画面で確認。"
 platforms:
   - web
 signupRequired: true
@@ -41,7 +41,7 @@ features:
   textToVideo: true
   voiceoverLanguages: "160以上の言語に対応（日本語を含むか、日本語音声・UIの品質は要個別確認）"
 watermarkCondition: "Basic（無料）プランではロゴ（透かし）が付与されるとされています。Starter以上のプランではロゴ削除機能があるとされていますが、最新仕様は公式Pricingページでご確認ください。"
-japaneseDocs: false
+japaneseDocs: true
 useCases:
   - video
   - business
@@ -59,6 +59,8 @@ sources:
     url: "https://www.synthesia.io/"
   - title: "Synthesia 料金プラン（公式）"
     url: "https://www.synthesia.io/pricing"
+  - title: "Synthesia 公式料金（日本地域パラメーター）"
+    url: "https://www.synthesia.io/pricing?region=japan"
   - title: "Synthesia Acceptable Use Policy（公式）"
     url: "https://www.synthesia.io/legal/acceptable-use-policy"
   - title: "Synthesia Enterprise（公式）"
@@ -69,6 +71,9 @@ sourceRefs:
     type: official
   - label: "Synthesia料金プラン（公式）"
     url: "https://www.synthesia.io/pricing"
+    type: pricing
+  - label: "Synthesia 公式料金（日本地域パラメーター）"
+    url: "https://www.synthesia.io/pricing?region=japan"
     type: pricing
   - label: "Synthesia Acceptable Use Policy（公式）"
     url: "https://www.synthesia.io/legal/acceptable-use-policy"

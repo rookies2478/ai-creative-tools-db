@@ -34,7 +34,7 @@ nextReviewDue: "2027-02-01"
 verifiedAt: "2026-11-01"
 officialSourceUrl: "https://www.vidu.com/pricing"
 pricingSourceUrl: "https://www.vidu.com/pricing"
-pricingSourceNote: "2026-11-02に公式consumer料金ページを再確認。Subscription Credits / Purchased Credits / Bonus Credits、月払い・年払いの自動更新、Stripe課金は確認できたが、公開取得では具体的な現行プラン金額を安定して取得できない。価格・通貨・税は公式購入画面で確認する。API Platformのcredit pack料金とは別。"
+pricingSourceNote: "2026-11-06日本語公式料金ページ（/ja/pricing）を確認。Subscription Credits（有効30日）、Purchased Credits（有効2年間）、Bonus Credits（有効2年間）が日本語で説明されている。価格表示は公開HTMLで安定取得できないためプランの金額を推測しない。Stripe決済は月次・年次自動更新。APIとconsumer料金は別。"
 pricingStatus: "partial"
 needsReview: true
 pricingModel: "subscription_credit"
@@ -49,7 +49,7 @@ features:
   videoExtend: true
   maxVideoDuration: "最大16秒（Vidu Q4 / Q4 Preview）"
 watermarkCondition: "無料プランでは透かしあり。有料プランの条件は公式サイトをご確認ください。"
-japaneseDocs: false
+japaneseDocs: true
 useCases:
   - video
   - youtube
@@ -87,12 +87,17 @@ sources:
     url: "https://www.vidu.com/terms"
   - title: "Vidu AI 料金ページ"
     url: "https://www.vidu.com/pricing"
+  - title: "Vidu 日本語公式料金・クレジット"
+    url: "https://www.vidu.com/ja/pricing"
 sourceRefs:
   - label: "Vidu AI公式サイト"
     url: "https://www.vidu.com"
     type: official
   - label: "Vidu AI料金ページ"
     url: "https://www.vidu.com/pricing"
+    type: pricing
+  - label: "Vidu 日本語公式料金・クレジット"
+    url: "https://www.vidu.com/ja/pricing"
     type: pricing
   - label: "Vidu AI利用規約"
     url: "https://www.vidu.com/terms"

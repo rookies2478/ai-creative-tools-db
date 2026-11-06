@@ -26,14 +26,14 @@ weaknesses:
   - "商用利用には有料プランが必須"
   - "汎用のテキスト→画像生成ツールではなく、商品写真編集に特化している"
   - "日本語プロンプト対応は公式情報のみでは確認できていない（要確認）"
-lastReviewed: "2026-08-13"
-nextReviewDue: "2026-11-13"
+lastReviewed: "2026-11-06"
+nextReviewDue: "2026-12-06"
 verifiedAt: "2026-08-13"
 officialSourceUrl: "https://help.photoroom.com/en/collections/12478554-plans-and-pricing"
 pricingModel: "subscription"
 pricingStatus: "partial"
 freePlanNote: "無料プランは月250エクスポートまで、透かしあり、個人的・非商用目的限定とされています。"
-paidPlanNote: "Pro（約$7.50/月〜）、Max（約$20.99/月〜）、Ultra（新設、約$82.50/月〜）、Enterpriseは個別見積もりとされています。有料プランは公正利用ポリシー下での「無制限」手動エクスポートとされています。API利用は別料金（パートナー規模で約$0.01/画像との情報あり）。正確な料金・条件は公式サイトでご確認ください。"
+paidPlanNote: "2026-11-06公式日本語料金表：Proは月8,000 AIクレジット・1,000エクスポート（動画生成なし）。Maxは25,000クレジット・3,000エクスポート（動画生成あり）。Ultraは75,000クレジット・10,000エクスポート。コアツールはフェアユース内で無制限だが書き出し回数には上限がある。日本向けの最終金額は料金UIで確認。"
 platforms:
   - web
   - ios
@@ -64,6 +64,8 @@ usagePolicy:
   inputMaterialRisk: "medium"
   inputMaterialNote: "商品写真・人物・ブランドロゴを含む画像をアップロードして編集する用途が中心のため、元画像の著作権・第三者権利の確認が必要です。"
 sources:
+  - title: "Photoroom 日本語公式料金表（上限あり）"
+    url: "https://www.photoroom.com/ja/pricing"
   - title: "Photoroom公式サイト"
     url: "https://www.photoroom.com"
   - title: "Photoroom料金プラン（公式ヘルプ）"
@@ -73,6 +75,9 @@ sources:
   - title: "Photoroom 言語設定について（公式ヘルプ）"
     url: "https://help.photoroom.com/en/articles/7323117-change-the-language-of-photoroom"
 sourceRefs:
+  - label: "Photoroom 日本語公式料金表（上限あり）"
+    url: "https://www.photoroom.com/ja/pricing"
+    type: pricing
   - label: "Photoroom公式サイト"
     url: "https://www.photoroom.com"
     type: official
@@ -111,7 +116,7 @@ japanBilling:
   taxDisplay: "unknown"
   purchaseChannels: ["web", "ios", "android"]
   pricingCheckedAt: "2026-08-13"
-  pricingNote: "公式ヘルプセンターでPro/Max/Ultra/Enterpriseのプラン構成と、無料プランの非商用限定条件を確認しました。日本円建て請求・日本語対応の有無は本タスクの調査範囲では確認できていません。最新情報は公式サイトをご確認ください。"
+  pricingNote: "2026-11-06日本語公式料金表はPro 8,000 AIクレジット・1,000エクスポート、Max 25,000・3,000、Ultra 75,000・10,000。コア編集機能の公正利用内無制限とエクスポート制限を区別。税表示は公式FAQにVAT/GST込とあるが最終金額は購入画面を確認。"
   billingCategory: "E"
   sourceUrls:
     - "https://help.photoroom.com/en/collections/12478554-plans-and-pricing"

@@ -1,10 +1,10 @@
 ---
 name: "DALL·E"
-shortDescription: "OpenAI開発のAI画像生成モデル。ChatGPTと統合されており、プロンプトへの忠実度が高い画像生成が可能。"
+shortDescription: "DALL·E 3の過去情報を整理するレガシー記事。ChatGPT公式DALL·E GPTは2026年8月30日に提供終了。現在の画像制作・編集にはChatGPT画像を使用する。"
 category: "image"
-officialUrl: "https://openai.com/dall-e-3"
+officialUrl: "https://help.openai.com/ja-jp/articles/11084440-images-in-chatgpt"
 freePlan: "limited"
-lowestPaidPlan: "有料プランで利用枠が拡大する場合があります（例：ChatGPT Plus等）"
+lowestPaidPlan: "現行ChatGPT画像はChatGPT無料枠・有料プランで提供。旧DALL·E GPTは提供終了"
 currency: "USD"
 commercialUse: "ok"
 commercialUseNote: "OpenAI公式情報上、生成画像の商用利用ができる場合があります。ただし用途・生成内容・第三者の権利・OpenAIポリシーにより制限される場合があります。このページは法的助言ではありません。利用前にOpenAIの最新規約・ポリシーをご確認ください。"
@@ -25,9 +25,9 @@ weaknesses:
   - "スタイルの自由度・表現の幅が限定的な傾向がある"
   - "画像内への日本語テキスト生成は精度が低い傾向がある"
   - "API利用は別途従量課金（料金は公式ページで要確認）"
-lastReviewed: "2026-06-15"
-nextReviewDue: "2026-09-15"
-verifiedAt: "2026-06-15"
+lastReviewed: "2026-11-06"
+nextReviewDue: "2026-12-06"
+verifiedAt: "2026-11-06"
 officialSourceUrl: "https://openai.com/policies/usage-policies"
 pricingSourceUrl: "https://openai.com/chatgpt/pricing/"
 pricingSourceNote: "ChatGPT料金ページ（公式）。DALL·Eは独立した月額プランを持たず、ChatGPT Plus等の有料プランに内包される。月額・プラン詳細は公式サイトをご確認ください。"
@@ -64,7 +64,13 @@ reviewed:
   terms: "2026-05-26"
   features: "2026-05-26"
 sourceRefs:
-  - label: "DALL·E 3公式ページ（OpenAI）"
+  - label: "ChatGPT画像（現行・OpenAI公式日本語）"
+    url: "https://help.openai.com/ja-jp/articles/11084440-images-in-chatgpt"
+    type: official
+  - label: "DALL·E GPT終了（OpenAI公式日本語リリースノート）"
+    url: "https://help.openai.com/ja-jp/articles/6825453-chatgpt-release-notes"
+    type: help
+  - label: "DALL·E 3公式ページ（OpenAI・レガシー）"
     url: "https://openai.com/dall-e-3"
     type: official
   - label: "OpenAI利用規約（公式）"
@@ -83,7 +89,11 @@ sourceRefs:
     url: "https://openai.com/chatgpt/pricing/"
     type: pricing
 sources:
-  - title: "DALL·E 3 公式ページ（OpenAI）"
+  - title: "ChatGPT画像（現行・OpenAI公式日本語）"
+    url: "https://help.openai.com/ja-jp/articles/11084440-images-in-chatgpt"
+  - title: "DALL·E GPT終了（OpenAI公式日本語リリースノート）"
+    url: "https://help.openai.com/ja-jp/articles/6825453-chatgpt-release-notes"
+  - title: "DALL·E 3 公式ページ（OpenAI・レガシー）"
     url: "https://openai.com/dall-e-3"
   - title: "OpenAI 利用規約（公式）"
     url: "https://openai.com/policies/usage-policies"
@@ -97,7 +107,7 @@ sources:
     url: "https://openai.com/chatgpt/pricing/"
 faqs:
   - question: "DALL·Eは無料で使えますか？"
-    answer: "ChatGPTの無料プランで制限付きの利用ができる場合があります。利用可能回数はプランや時期により変わる可能性があるため、最新の状況はOpenAI公式ヘルプをご確認ください。"
+    answer: "ChatGPT公式DALL·E GPTは2026年8月30日に提供終了しました。現行の画像生成はChatGPT画像で無料利用枠などの提供条件を確認してください。"
   - question: "DALL·Eは商用利用できますか？"
     answer: "OpenAI公式情報上、生成画像の商用利用ができる場合があります。用途・生成内容・第三者の権利により制限される場合があるため、利用前に最新の利用規約をご確認ください。このページは法的助言ではありません。"
   - question: "DALL·Eは日本語で使えますか？"
@@ -105,11 +115,11 @@ faqs:
   - question: "DALL·Eに透かしは入りますか？"
     answer: "従来型の可視透かしは付与されませんが、C2PA標準の不可視メタデータおよびSynthID（不可視ウォーターマーク）が埋め込まれる場合があります。openai.com/research/verify/ でAI生成の確認が可能です。最新の仕様は公式情報でご確認ください。"
   - question: "DALL·EはどのプラットフォームやAPIで使えますか？"
-    answer: "ChatGPT経由（Web）とOpenAI API経由での利用が可能です。APIは別途従量課金です。最新の料金は公式APIページでご確認ください。"
+    answer: "公式DALL·E GPTは2026年8月30日に終了しました。現在はChatGPT画像から作成でき、開発用途には現行のGPT Image系APIが別途提供されています。旧DALL·E APIの提供状況はOpenAIのdeprecationsとモデル一覧を確認してください。"
   - question: "DALL·Eで人物や著名人・ブランドロゴを含む画像を作成できますか？"
     answer: "技術的には生成可能な場合がありますが、実在の人物・著名人・ブランドロゴ・第三者の著作物を含む画像を作成・利用する際は、肖像権・商標権・著作権などの観点から別途確認が必要です。本記事は法的助言ではありません。"
   - question: "DALL·EとMidjourneyはどう違いますか？"
-    answer: "DALL·EはChatGPTと統合されておりテキスト指示への忠実度が高い傾向があります。Midjourneyはアートやイラストなどスタイリッシュなビジュアルやクリエイティブな表現を得意とするとされています。用途や優先事項に応じて選び分けることが有効です。"
+    answer: "DALL·Eは旧世代のOpenAI画像生成モデルです。現在のChatGPT画像やMidjourneyと比較する場合、提供状況・モデル世代・各プランを区別してください。旧DALL·E GPTは2026年8月30日に終了しています。"
 japanBilling:
   japanOfficialUrl: "https://openai.com/ja-JP/chatgpt/pricing/"
   providerName: "OpenAI"
@@ -129,9 +139,13 @@ japanBilling:
     - "https://openai.com/ja-JP/chatgpt/pricing/"
 ---
 
+## 重要：ChatGPT公式DALL·E GPTは提供終了
+
+2026年8月30日をもってChatGPTの公式DALL·E GPTは提供終了しました。現在のChatGPT内の画像制作・編集には[ChatGPT画像（OpenAI公式日本語ヘルプ）](https://help.openai.com/ja-jp/articles/11084440-images-in-chatgpt)を利用してください。以下は過去のDALL·E 3に関する参考記録であり、旧モデルが現在もChatGPTから選択できるという意味ではありません。
+
 ## DALL·Eとは
 
-DALL·EはOpenAIが開発したAI画像生成モデルです。現行バージョンはDALL·E 3で、ChatGPTと統合されており、テキストから画像を生成できます。プロンプトへの忠実度が高いとされ、指示に沿った画像を生成しやすい傾向があります。
+DALL·EはOpenAIが開発した旧画像生成モデルのシリーズです。以前はDALL·E 3をChatGPTから利用できましたが、公式DALL·E GPTは2026年8月30日に終了しました。プロンプトへの忠実度が高いとされ、指示に沿った画像を生成しやすい傾向があります。
 
 [AI画像生成ツール一覧](/categories/image-generation/) ／ [すべてのAIツールを比較する](/tools/) ／ [無料・低コストのAIツールを比較する](/conditions/free/)
 

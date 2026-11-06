@@ -1,6 +1,6 @@
 ---
 name: "Brand Studio（旧DreamStudio）"
-shortDescription: "Stability AI公式のAI画像生成サービス。DreamStudioからBrand Studioに移行した可能性があります。最新情報は公式サイトをご確認ください。ブラウザ上でプロンプト・ネガティブプロンプト・画像サイズを調整して画像生成できる。"
+shortDescription: "Stability AIが旧DreamStudioから展開するBrand Studio。公式料金ではCreator・Core・Enterpriseの各プランを提供。画像生成・編集機能や選択されたAIモデルを使用できる。"
 category: "image"
 officialUrl: "https://stability.ai/brandstudio"
 freePlan: "limited"
@@ -26,18 +26,18 @@ weaknesses:
   - "商用利用時はライセンス・禁止事項・第三者権利の確認が必要"
   - "日本語UIは公式情報のみでは確認できない"
   - "初心者には設定項目がやや多く感じる場合がある"
-lastReviewed: "2026-06-21"
-nextReviewDue: "2026-09-21"
-verifiedAt: "2026-06-21"
+lastReviewed: "2026-11-06"
+nextReviewDue: "2026-12-06"
+verifiedAt: "2026-11-06"
 officialSourceUrl: "https://stability.ai/brand-studio-plans"
 pricingSourceUrl: "https://stability.ai/brand-studio-plans"
-pricingSourceNote: "Brand Studio料金ページ（Stability AI公式）。2026-06-21確認：Trial（無料・1000クレジット・クレジット使用後終了）/ Core $50/月（USD・5000クレジット/月・翌月繰越なし）/ Enterprise（カスタム価格）。旧DreamStudioからBrand Studioにリブランド済み。料金・クレジット条件は変更の可能性あり。最新情報は公式サイトをご確認ください。"
-freePlanNote: "Trial（1000クレジット・クレジット使用後終了）。Coreプランの全機能利用可。詳細・最新情報は公式サイトをご確認ください。"
+pricingSourceNote: "2026-11-06確認：公式料金ページはTrial 1,000クレジット、Creator $19/月・2,000クレジット、Core $50/月・5,000クレジットと表示。一方、Stability AI公式Knowledge BaseはTrial 500クレジット、Core 6,000クレジットと記載しており公式資料間に差異がある。契約画面で付与量を確認する。料金・ライセンスはAPIやローカルのStable Diffusionとは別。"
+freePlanNote: "Trial無料。公式料金ページは初回1,000クレジット、公式Knowledge Baseは500クレジットと不一致。どちらも使い切りで終了。付与量は登録時の実際の画面を優先。"
 currency: "USD"
-pricingStatus: "confirmed"
-needsReview: false
-lowestPaidPlan: "Core $50/月（USD）"
-pricingModel: "credit"
+pricingStatus: "partial"
+needsReview: true
+lowestPaidPlan: "Creator $19/月（USD・2,000クレジット/月）"
+pricingModel: "subscription_credit"
 platforms:
   - web
 signupRequired: true
@@ -88,6 +88,8 @@ sources:
     url: "https://stability.ai/brandstudio"
   - title: "Brand Studio プラン・料金（公式）"
     url: "https://stability.ai/brand-studio-plans"
+  - title: "Brand Studio 公式Knowledge Base（クレジット差異あり）"
+    url: "https://kb.stability.ai/knowledge-base/brand-studio-subscription-plans-overview"
   - title: "Stability AIライセンス（公式）"
     url: "https://stability.ai/license"
   - title: "Stability AI Acceptable Use Policy（公式）"

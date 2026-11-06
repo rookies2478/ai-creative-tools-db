@@ -67,7 +67,7 @@ const jsonLd = JSON.stringify([
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '条件あり' } },
         { lb: '無料枠', badge: { s: 'cond', label: '限定的' } },
-        { lb: '料金目安', text: '$10/月〜', mono: true },
+        { lb: '料金目安', text: 'Essential $12/月（月払い）', mono: true },
         { lb: '透かし', badge: { s: 'na', label: '要確認' } },
         { lb: '日本語UI', badge: { s: 'na', label: '要確認' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
@@ -82,11 +82,11 @@ const jsonLd = JSON.stringify([
         },
         {
           title: '無料枠', badge: { s: 'cond', label: '限定的' },
-          det: '1日150トークン程度が付与される場合があります（変更の可能性あり）。',
+          det: '公式Freeプランでは150 Fast Tokens/日。。',
         },
         {
-          title: '最安料金目安', sum: '$10/月（Apprentice・年払い）', sumMono: true,
-          det: 'Apprentice $10/月〜（年払い）。月払いは$12/月〜。公式情報では、有料プランやPrivate設定などの条件が関係すると案内されています。',
+          title: '最安料金目安', sum: 'Essential $12/月（月払い）／年払い月換算$10', sumMono: true,
+          det: '現行公式表はEssential $12/月（月払い）・年払い月換算$10、Premium $30/月、Ultimate $60/月（税別）。公式情報では、有料プランやPrivate設定などの条件が関係すると案内されています。',
         },
         {
           title: '透かし', badge: { s: 'na', label: '要確認' },
@@ -132,7 +132,7 @@ const jsonLd = JSON.stringify([
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI画像生成' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>限定的</span><br>1日150トークン程度（変更の可能性あり）' }],
-          [{ html: '最安料金', rk: true }, { html: '<span class="mono">$10/月〜</span><br>Apprentice $10/月〜（年払い）。月払い$12/月〜。' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">$10/月〜</span><br>Essential $10/月〜（年払い）。月払い$12/月〜。' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>条件あり</span><br>無料プランも非独占的ライセンスで商用利用可とされていますが所有権はLeonardo.AI帰属。有料プランは完全な所有権＋Private設定が可能です。最新情報は公式サイトをご確認ください。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span><br>通常は透かしなしとされているが詳細未確認' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st na sm"><span class="d"></span>要確認</span>' }],
@@ -154,7 +154,7 @@ const jsonLd = JSON.stringify([
           headers: ['プラン', '料金', 'トークン'],
           rows: [
             [{ html: '無料', rk: true }, { html: '無料', mono: true }, { html: '1日150トークン程度（変更の可能性あり）' }],
-            [{ html: 'Apprentice', rk: true }, { html: '$10/月〜（年払い）', mono: true }, { html: '月8,500トークン程度' }],
+            [{ html: 'Essential', rk: true }, { html: '$10/月〜（年払い）', mono: true }, { html: '月8,500トークン程度' }],
           ],
         },
         notes: [
@@ -236,7 +236,7 @@ const jsonLd = JSON.stringify([
       lastChecked={d?.lastReviewed ?? '2026-05-24'}
       nextCheck={d?.nextReviewDue ?? '2026-06-24'}
       verifiedDate={d?.verifiedAt ?? '2026-06-08'}
-      sources={[
+      sources={[{tag:'料金',label:'現行Leonardo料金（Essential・Premium等）',href:'https://leonardo.ai/pricing/'},
         { tag: '料金', label: 'Leonardo AI料金プラン（公式）', href: 'https://leonardo.ai/pricing/' },
         { tag: '規約', label: 'Leonardo AI利用規約（公式）', href: 'https://leonardo.ai/terms-of-service/' },
         { tag: '商用', label: 'Leonardo AI商用利用ガイド（公式）', href: 'https://leonardo.ai/news/can-you-use-ai-generated-images-commercially/' },

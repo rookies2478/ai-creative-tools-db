@@ -1,0 +1,64 @@
+---
+task_id: "2026-11-06-guide-rights-pricing-consistency"
+created_at: "2026-11-06"
+status: READY
+risk: MEDIUM
+current_phase: editorial-accuracy
+production_required: false
+db_change: false
+ui_change: true
+official_verification_required: true
+goal: "既存ガイド内のPika無料商用/透かし、DALL·E GPT終了、Luma App/API、Canva日本向け料金・利用枠の矛盾を正本と一次資料に合わせて修正する"
+non_goals:
+  - 全38ツールの料金・規約を再更新すること
+  - 生成サンプルや外部アカウント・アフィリエイトURLを作成・変更すること
+  - 収益・広告・計測・DNS・CI・スキーマを変更すること
+target_files:
+  - docs/tasks/active/2026-11-06-guide-rights-pricing-consistency.md
+  - src/content/guides/commercial-use-cost-comparison.md
+  - src/pages/guides/commercial-use-cost-comparison/index.astro
+  - src/content/guides/free-ai-image-tools.md
+  - src/components/FreeAiImageTools.astro
+reference_files:
+  - AGENTS.md
+  - CLAUDE.md
+  - docs/tasks/LATEST.md
+  - docs/tasks/TEMPLATE.md
+  - src/content/tools/pika.md
+  - src/content/tools/luma-ai.md
+  - src/content/tools/dalle.md
+  - src/content/tools/canva-ai-image-generator.md
+  - docs/audits/existing-tools-jp-official-audit-2026-11-06.md
+unknowns:
+  - Luma AppとAPIの現行ライセンス・料金の分離がサービス更新で変わる可能性
+  - Canva画像生成モデル別の実際のAI利用枠はアカウントごとに異なる
+preexisting_untracked_files: []
+required_checks:
+  - npm run validate:task
+  - npm run build
+  - npm run validate:data
+  - npm run validate:publish
+  - npm run validate:affiliate-links
+  - git diff --check
+  - npm run validate:scope
+acceptance_criteria:
+  - Pika無料Basicの商用利用・無透かし案内が比較表・説明・FAQで整合する
+  - DALL·E GPTと現在のChatGPT画像をサービス終了日を含め区別する
+  - Luma AppとAPIの料金・無料試用・商用利用・透かしを混同しない
+  - Canva日本向けWeb年額とApp Store月額を区別し画像生成固有の上限を捏造しない
+  - Markdown正本とAstroコンポーネントの両方を同期する
+  - GitHubビルド・公開HTML検証の結果を残す
+forbidden_operations:
+  - PRODUCTION_DEPLOY
+---
+
+# Why these two guides require a scoped correction
+
+Source-of-truth drift confirmed after production PR #62. The legacy guide tables and FAQs still contradict canonical tool entries. Source evidence as of 2026-11-06:
+
+- [Pika official pricing](https://pika.art/pricing): Basic Free 80 monthly video credits, Commercial use, no-watermark download.
+- [OpenAI release notes](https://help.openai.com/en/articles/6825453-chatgpt-release-notes): official DALL·E GPT retired 2026-08-30, current image generation is [ChatGPT Images](https://help.openai.com/en/articles/11084440-images-in-chatgpt).
+- [Luma license explanation](https://lumalabs.ai/learning-hub/licensing) and canonical `src/content/tools/luma-ai.md`: do not map historical Dream Machine Plus $30 to current Luma App/Trial or conflate API commercial terms with App.
+- [Canva Japanese pricing](https://www.canva.com/ja_jp/pricing/): Web Pro JPY 11,800/year, Free up to 20 simple AI uses; per-model usage cost differs. App Store JPY 1,180/month is separate billing channel.
+
+Use primary-source-supported statements only. Do not change existing affiliate URLs, generated examples, permissions, tracking, or deployment. CI is evidence for build/data/publish, not for the unavailable local validate:task/validate:scope checks. Leave this task open on the branch for Claude Code to run missing checks if needed.

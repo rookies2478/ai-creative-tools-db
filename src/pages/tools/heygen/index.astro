@@ -56,7 +56,7 @@ const jsonLd = JSON.stringify([
       lead="HeyGenは、AIアバター、リップシンク、動画翻訳、ボイスクローンなどを使って、研修・マーケティング・セールス・ローカライズ向けの動画を作成できるAI動画生成ツールです。<b>無料プランと有料プランで商用利用や出力条件が異なる可能性があるため、利用前に公式Termsの確認が必要です。</b>"
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: 'プランにより異なる（要確認）' } },
-        { lb: '無料枠', badge: { s: 'cond', label: '無料作成可／無料ダウンロード不可' } },
+        { lb: '無料枠', badge: { s: 'cond', label: '月3本・各最長1分（公式日本語料金）' } },
         { lb: '料金目安', text: 'Creator $29/月（公式日本語料金ページ参考）', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: '無料あり・有料は要確認' } },
         { lb: '日本語UI', badge: { s: 'cond', label: '不明（要確認）' } },
@@ -71,8 +71,8 @@ const jsonLd = JSON.stringify([
           det: 'HeyGenはAIアバター・音声を扱うサービスのため、商用利用時は出力条件に加えて肖像権・音声権・なりすまし禁止事項の確認が重要です。このページは法的助言ではありません。',
         },
         {
-          title: '無料枠', badge: { s: 'cond', label: '無料作成可／無料ダウンロード不可' },
-          det: '無料プランでは動画を作成できますが、今回の実機確認では動画ファイルを無料でダウンロードできませんでした。保存・掲載には有料プランが必要となる可能性があります。クレジットカード不要で利用できるとされ、動画は最大1分・透かし付きです。詳細は公式サイトでご確認ください。',
+          title: '無料枠', badge: { s: 'cond', label: '月3本・各最長1分' },
+          det: '公式日本語料金ページは無料で月3本・各最長1分と案内。過去の当サイト実機確認では無料ダウンロードに失敗しましたが、全環境でダウンロードが禁止とは限りません。クレジットカード不要で利用できるとされ、動画は最大1分・透かし付きです。詳細は公式サイトでご確認ください。',
         },
         {
           title: '最安料金目安', sum: 'Creator $29/月（月払い・公式日本語料金ページ参考）', sumMono: true,
@@ -123,7 +123,7 @@ const jsonLd = JSON.stringify([
         kind: 'spec',
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AIアバター動画生成' }],
-          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料作成可／無料ダウンロード不可</span><br>今回の実機確認では動画ファイルを無料でダウンロードできませんでした（透かし・1分制限あり）。' }],
+          [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>月3本・各最長1分（公式日本語料金）</span><br>今回の実機確認では動画ファイルを無料でダウンロードできませんでした（透かし・1分制限あり）。' }],
           [{ html: '最安料金', rk: true }, { html: '<span class="mono">Creator $29/月（月払い・日本語公式料金参照）</span>' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>プランにより異なる（要確認）</span><br>無料プランは商用利用・販売・再配布に制限あり。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料あり・有料は要確認</span>' }],
@@ -145,7 +145,7 @@ const jsonLd = JSON.stringify([
           kind: 'cmp',
           headers: ['プラン', '料金', '備考'],
           rows: [
-            [{ html: '無料', rk: true }, { html: '無料' }, { html: '動画最大1分・透かしあり・商用利用等に制限あり。今回の実機確認では動画ファイルの無料ダウンロードは不可でした。' }],
+            [{ html: '無料', rk: true }, { html: '無料' }, { html: '動画最大1分・透かしあり・商用利用等に制限あり。過去の当サイト環境ではダウンロード不可でした（一般仕様の確定ではありません）。' }],
             [{ html: 'Creator', rk: true }, { html: '$29/月（月払い）／年払い時$24/月', mono: true }, { html: '商用利用に対応する条件が案内・透かし削除機能あり（要確認）' }],
           ],
         },

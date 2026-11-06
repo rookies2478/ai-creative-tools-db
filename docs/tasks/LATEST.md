@@ -1,18 +1,18 @@
 # Latest Project State
 
 - updated_at: 2026-11-06
-- latest_publication_commit: ce38b3589e31084b709b630405976573615931ba（PR #62: 既存32件の日本語公式照合・9件修正、master merge）
+- latest_publication_commit: 3e9ff9aef8aefb08f2069441099354decfc53c4c（PR #67: 38ツール未確認事項公式再調査・更新、master merge）
 - source_branch: master
-- published_qa: PASS — https://github.com/rookies2478/ai-creative-tools-db/actions/runs/42151021534 （102 sitemap URLs, HTTP 200, canonical/stale-copy guards）
-- November editorial expansion: PR #56（新規6ツールと比較3記事）、#58（料金と商用利用の規約根拠）、#60（日本向け公式/円建て）、#62（既存32件監査）。38 tool records on master.
-- latest_completed_task: docs/tasks/completed/2026-11-06-pixverse-impact-research-sync.md（PixVerse Impact契約の研究用メタデータのみ同期・公開CTAはHOLD）
-- previous_completed_task: docs/tasks/completed/2026-11-06-creative-expansion.md（公開とGrowth Loopドキュメント整合のクローズアウト）
-- current_active_task: none（完了済みリリースをactiveに残さない）
+- published_qa: PASS — https://github.com/rookies2478/ai-creative-tools-db/actions/runs/42162351865 （102 sitemap URLs, HTTP 200, canonical/stale-copy guards; deployed commit marker一致）
+- November editorial expansion: PR #56（新規6ツール・比較3記事）、#58（ライセンス）、#60（日本向け公式/円建て）、#62（32件監査）、#67（38件残存未確認の再調査・一次資料による修正）。38 tool records on master.
+- latest_completed_task: docs/tasks/completed/2026-11-06-unresolved-38.md（PR #67公開・本番102 URL PASS、監査台帳38件）
+- previous_completed_task: docs/tasks/completed/2026-11-06-pixverse-impact-research-sync.md（PixVerse Impact契約の研究用メタデータのみ同期・公開CTAはHOLD）
+- current_active_task: none（PR #67監査公開済、タスク完了ドキュメントへ移管）
 - Growth Loop: Core `rookies2478/movance-growth-loop/sites/ai-creative-db.json` は enabled:true, GSC VERIFIED。2026-W45 read-only run PASS（2026-11-02, 58/74 page rows）。以前の本repo記録にあった enabled:false は過去時点の内容。最新は `docs/analytics/growth-loop.md` を参照。
 - SEO: W45 READYの Tensor.Art/Luma AI/Stable Diffusion は PR #52-#54 で対応済み。次の新しいGSC確定データなしに見出し変更しない。
 - Affiliate: 公開承認済みリンクは InVideo AI + Fotor AI。PixVerseはImpact承認済み・リンク未公開（Issue #36）、Runway提携は未確認（Issue #38）。GSC成績・アフィリエイト収益を推測しない。
 - Freshness: ローリングIssue #48の最初の週次確認が2026-11-09予定。2026-11-02の39件/35 OVERDUEは歴史値であり、2026-11-06の実測値ではない。
-- open_followups: #36 PixVerse掲載条件/リンクQA、#38 Runway実審査確認、#40 W45 Growth Loop記録、#48ローリング鮮度。#55/#59/#61は公開証拠付きでclosed。
+- open_followups: #66 契約/アカウント固有の未解決点（Dreamina・Krea・Higgsfield・Brand Studio等）、#36 PixVerse掲載条件/リンクQA、#38 Runway実審査確認、#40 W45 Growth Loop記録、#48ローリング鮮度。#55/#59/#61は公開証拠付きでclosed。
 - production_policy: アフィリエイトURL・計測・DNS・独自生成サンプルは未承認の変更を加えない。
 
 ---

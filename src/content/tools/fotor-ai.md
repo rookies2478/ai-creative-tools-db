@@ -29,16 +29,16 @@ weaknesses:
   - "無料クレジット数・料金条件は変更される可能性がある"
   - "商用利用時は第三者権利や最新公式規約の確認が必要"
   - "AI生成物の法的扱いは国・地域の著作権法によって変わる可能性がある"
-lastReviewed: "2026-06-19"
-nextReviewDue: "2026-09-19"
+lastReviewed: "2026-11-06"
+nextReviewDue: "2026-12-06"
 verifiedAt: "2026-06-19"
 officialSourceUrl: "https://www.fotor.com/jp/pricing/"
 pricingSourceUrl: "https://www.fotor.com/jp/pricing/"
-pricingSourceNote: "日本語公式料金ページ（fotor.com/jp）。公式ページでUSD建てを確認（Basic: US$0表記）。Pro・Pro+プランの月額は動的ロードのため公式サイトで要確認。最新情報は公式サイトをご確認ください。"
+pricingSourceNote: "日本語公式ではBasic USD0、ProとPro+の月額とクレジットがJS動的表示で未確定。Proは同時生成10件・保存2GB・透かしなし、Pro+は同時生成30件・保存100GB・透かしなし。"
 currency: "USD"
 pricingStatus: "partial"
 pricingModel: "subscription_credit"
-freePlanNote: "公式料金ページではBasic無料プランが案内されているが、無料クレジット・生成回数・保存期間・機能制限は変更される可能性があるため、最新の公式情報確認が必要。"
+freePlanNote: "Fotor日本語公式表：Basic無料・限定クレジット・同時生成1件、AI Agentチャット2回、作品保存30日、クラウド512MB、透かし付き書き出し。"
 platforms:
   - web
 signupRequired: true
@@ -67,6 +67,9 @@ reviewed:
   terms: "2026-05-14"
   features: "2026-05-14"
 sourceRefs:
+  - label: "2026-11-06 公式確認情報"
+    url: "https://www.fotor.com/jp/pricing/"
+    type: pricing
   - label: "Fotor AI画像生成（公式・日本語）"
     url: "https://www.fotor.com/jp/ai-image-generator/"
     type: official
@@ -86,6 +89,8 @@ sourceRefs:
     url: "https://www.fotor.com/privacy"
     type: policy
 sources:
+  - title: "2026-11-06 公式確認情報"
+    url: "https://www.fotor.com/jp/pricing/"
   - title: "Fotor AI画像生成（公式・日本語）"
     url: "https://www.fotor.com/jp/ai-image-generator/"
   - title: "Fotor料金プラン（公式・日本語）"
@@ -226,3 +231,9 @@ Basicプランでは書き出し時に透かしが入る場合があります。
 
 **Q. どの環境で使えますか？**
 Webブラウザから利用できます。インストールは不要です。
+
+## 公式公開情報による追加確認（2026-11-06）
+
+Fotor Basicは無料で、30日保存・512MB・透かしあり。Proは同時生成10件と透かしなし、Pro+は同時生成30件。公式ページの有料金額と月間クレジットは動的なため推定しない。
+
+[fotor-ai公式](https://www.fotor.com/jp/pricing/)。日本の最終決済額、モデル別の生成品質、未ログインの商用利用詳細は検証済みと見なさない。

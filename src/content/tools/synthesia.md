@@ -8,8 +8,8 @@ lowestPaidPlan: "Starter $18/月（USD・年払い時）／$29/月（月払い�
 currency: "USD"
 commercialUse: "limited"
 commercialUseNote: "生成動画の権利は個人ではなく組織（契約主体）に帰属するとされています。商用利用の可否や条件はプラン・契約内容によって異なるため、Customer Terms / User Terms / Acceptable Use Policyなど最新の公式規約を必ずご確認ください。人物アバター・音声を扱う場合は本人同意や第三者権利、なりすまし禁止事項の確認も必要です。本記事は法的助言ではありません。"
-japaneseUi: "partial"
-japanesePrompt: "partial"
+japaneseUi: "unknown"
+japanesePrompt: "unknown"
 watermark: "limited"
 bestFor:
   - "研修・eラーニング向けのアバター解説動画"

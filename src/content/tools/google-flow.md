@@ -23,7 +23,7 @@ lastReviewed: "2026-11-05"
 nextReviewDue: "2026-12-05"
 officialSourceUrl: "https://labs.google/fx/tools/flow"
 pricingModel: "subscription_credit"
-freePlanNote: "Google公式ヘルプではGoogle AIプラン未契約者に1日50 Flowクレジット。混雑時（UTC 14:00〜17:00）は無料ユーザーが動画生成できない場合がある。クレジット消費はモデル別。"
+freePlanNote: "Google公式ヘルプではAIプラン未契約者に1日50 Flowクレジット。日本は利用可能な地域。混雑時（UTC 14:00〜17:00）は無料ユーザーが動画生成できない場合がある。クレジット消費はモデル別。"
 paidPlanNote: "公式クレジット説明にGoogle AI Plus 200/月、Pro 1000/月等の案内。AIクレジット追加購入は日本非対応とされる。現行の日本円請求額はGoogle Oneの購入画面で確認。"
 platforms:
   - web

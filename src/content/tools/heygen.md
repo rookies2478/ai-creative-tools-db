@@ -8,7 +8,7 @@ lowestPaidPlan: "Creator $29/月（USD・月払い）／年払い時$24/月"
 currency: "USD"
 commercialUse: "limited"
 commercialUseNote: "無料プランは商用利用・販売・再配布・マネタイズに制限があるとされています。有料プラン（Creator以上）で商用利用に対応する条件が案内されていますが、プランや用途によって条件が異なるため、最新の公式Terms（利用規約）を必ずご確認ください。人物画像・音声を扱う場合は本人同意や第三者権利の確認も必要です。本記事は法的助言ではありません。"
-japaneseUi: "unknown"
+japaneseUi: "partial"
 japanesePrompt: true
 watermark: "limited"
 bestFor:
@@ -34,7 +34,7 @@ officialSourceUrl: "https://www.heygen.com/pricing"
 pricingModel: "subscription"
 pricingStatus: "partial"
 freePlanNote: "無料プランあり。クレジットカード不要、動画最大1分、透かし付きとされています。商用利用・販売・再配布・マネタイズには制限があるため公式Termsをご確認ください。無料で動画作成は可能ですが、今回の実機確認では生成した動画ファイルを無料でダウンロードできませんでした。保存・掲載には有料プランが必要となる可能性があります。"
-paidPlanNote: "Creator / Pro / Business / Enterpriseなどのプランがあるとされています。Creator以上で透かし削除に対応する案内がありますが、料金・条件は変更される場合があるため公式サイトをご確認ください。"
+paidPlanNote: "公式日本語料金ページ（/ja-jp/pricing）があり、Creator $29/月（月払い）と年払い月額換算$24/月が参考。地域・税・請求額は最終の購入画面で確認。日本語公式サイトの存在はログイン後編集画面の全日本語化を保証しない。"
 platforms:
   - web
 signupRequired: true
@@ -43,7 +43,7 @@ features:
   imageToVideo: true
   voiceoverLanguages: "多言語対応（日本語含む可能性あり・要確認）"
 watermarkCondition: "無料プランでは透かしが付与されるとされています。Creator以上のプランでは透かし削除機能があるとされていますが、最新仕様は公式サイトでご確認ください。"
-japaneseDocs: false
+japaneseDocs: true
 useCases:
   - video
   - business
@@ -62,6 +62,8 @@ sources:
     url: "https://www.heygen.com/"
   - title: "HeyGen 料金プラン（公式）"
     url: "https://www.heygen.com/pricing"
+  - title: "HeyGen 日本語公式料金"
+    url: "https://www.heygen.com/ja-jp/pricing"
   - title: "HeyGen 利用規約（公式）"
     url: "https://www.heygen.com/terms"
   - title: "HeyGen Enterprise（公式）"
@@ -72,6 +74,9 @@ sourceRefs:
     type: official
   - label: "HeyGen料金プラン（公式）"
     url: "https://www.heygen.com/pricing"
+    type: pricing
+  - label: "HeyGen 日本語公式料金"
+    url: "https://www.heygen.com/ja-jp/pricing"
     type: pricing
   - label: "HeyGen利用規約（公式）"
     url: "https://www.heygen.com/terms"

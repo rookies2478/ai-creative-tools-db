@@ -6,7 +6,7 @@ officialUrl: "https://labs.google/fx/tools/flow"
 freePlan: "limited"
 commercialUse: "unknown"
 commercialUseNote: "Google Flowでの生成物の商用利用について、全モデル・全地域・全プランを対象に無条件に許諾するFlow固有の一次資料は今回確定できていない。Google利用規約・生成AIの利用禁止規定・素材権利を参照し、広告・再販売等はアカウント条件に照らして判断する。"
-japaneseUi: "true"
+japaneseUi: true
 japanesePrompt: "partial"
 watermark: "limited"
 bestFor:

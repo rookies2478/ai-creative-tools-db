@@ -8,8 +8,8 @@ lowestPaidPlan: "Basic USD 15/月（通常表示、購入画面で確定）"
 currency: "USD"
 commercialUse: "limited"
 commercialUseNote: "日本向け適用規約ではサービスを原則私的・非商用と説明し、知財条項では無許可の商用利用を制限。一方、公式ヘルプでは機能別・適用規約別と案内。料金支払いだけで商用利用が許されるとは判断できない。日本での広告・受託・販売等はDreaminaに書面で確認したうえで利用すること。"
-japaneseUi: "unknown"
-japanesePrompt: "unknown"
+japaneseUi: "partial"
+japanesePrompt: "partial"
 watermark: "limited"
 bestFor:
   - "Seedreamによる画像素材の作成"
@@ -43,6 +43,10 @@ sources:
     url: "https://dreamina.capcut.com/help"
   - title: "Dreamina 日本向け料金表"
     url: "https://dreamina.capcut.com/ja-jp/pricing/dreamina-price"
+  - title: "Dreamina 日本語公式 動画生成"
+    url: "https://dreamina.capcut.com/ja-jp/tools/text-to-video-ai"
+  - title: "Dreamina 日本語料金"
+    url: "https://dreamina.capcut.com/ja-jp/pricing/dreamina-price"
 sourceRefs:
   - label: "Dreamina 日本向け利用規約"
     url: "https://www.capcut.com/clause/dreamina-terms-of-service?lang=ja-JP&region=JP"
@@ -51,6 +55,12 @@ sourceRefs:
     url: "https://dreamina.capcut.com/help"
     type: help
   - label: "Dreamina 日本向け料金表"
+    url: "https://dreamina.capcut.com/ja-jp/pricing/dreamina-price"
+    type: pricing
+  - label: "Dreamina 日本語公式 動画生成"
+    url: "https://dreamina.capcut.com/ja-jp/tools/text-to-video-ai"
+    type: official
+  - label: "Dreamina 日本語料金"
     url: "https://dreamina.capcut.com/ja-jp/pricing/dreamina-price"
     type: pricing
 usagePolicy:
@@ -100,13 +110,25 @@ faqs:
 - **商用利用：** 日本向け適用規約ではサービスを原則私的・非商用と説明し、知財条項では無許可の商用利用を制限。一方、公式ヘルプでは機能別・適用規約別と案内。料金支払いだけで商用利用が許されるとは判断できない。日本での広告・受託・販売等はDreaminaに書面で確認したうえで利用すること。
 - **有料プランと金額：** 公式日本語料金ページはBasic USD 15/月・1575クレジット、Standard USD 36/月・3885、Advanced USD 79/月・8645（通常価格）。割引、決済通貨、税、地域は購入画面で確認。
 - **透かし：** 公式料金表ではBasic以上に『ダウンロード時のDreamina透かし削除』の特典を表示。無料プランの透かし挙動はモデル・生成方式別に確認。不可視識別の有無は未確認。
-- **日本語UI・日本語プロンプト：** 言語別の公開規格が確認できていないため未確認（日本語の公式ヘルプがあることは、UI完全対応や日本語プロンプト品質の保証ではありません）。
+- **日本語UI・日本語プロンプト：** Dreamina公式に/ja-jp/の日本語制作ガイド・料金表・日本語の入力説明が存在。動画生成の公式ページはメニューが日本語でも一部英語表示が混在するため、制作画面の全項目が日本語とは断定しない。
 - **入力と出力の権利：** 生成物の商用利用許諾は著作権・肖像権・商標権・第三者素材に対する独立の許諾ではありません。個別に確認してください。
 
 ### 一次資料
 - [Dreamina 日本向け利用規約](https://www.capcut.com/clause/dreamina-terms-of-service?lang=ja-JP&region=JP)
 - [Dreamina ヘルプ・商用利用に関する説明](https://dreamina.capcut.com/help)
 - [Dreamina 日本向け料金表](https://dreamina.capcut.com/ja-jp/pricing/dreamina-price)
+
+## 日本向け公式情報の確認（2026年11月6日）
+
+**日本語対応の判定：** Dreamina公式に/ja-jp/の日本語制作ガイド・料金表・日本語の入力説明が存在。動画生成の公式ページはメニューが日本語でも一部英語表示が混在するため、制作画面の全項目が日本語とは断定しない。
+
+**日本向けの料金・ライセンス補足：** 公式の日本語ページに文章から動画を作る操作とプロンプトの説明が掲載。日本語での指示方法を案内する一方、モデル別の日本語生成品質やアプリ内UIの完全翻訳はログイン後未検証。日本向け商用利用は別途日本向け利用規約に従うため、日本語対応の確認と商用許諾を混同しない。
+
+### 日本語公式・利用条件へのリンク
+- [Dreamina 日本語公式 動画生成](https://dreamina.capcut.com/ja-jp/tools/text-to-video-ai)
+- [Dreamina 日本語料金](https://dreamina.capcut.com/ja-jp/pricing/dreamina-price)
+
+**判定上の注意：** 日本語の宣伝ページ／公式ブログがあることは、ログイン後の制作エディタが全面的に日本語化されている証明ではありません。実機のモデル別生成品質や地域別購入条件は確認が必要です。
 
 ## 公式情報
 - [Dreamina（ドリーミナ） 公式サイト](https://dreamina.capcut.com/)

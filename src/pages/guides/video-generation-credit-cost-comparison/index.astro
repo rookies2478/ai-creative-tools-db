@@ -25,7 +25,7 @@ const basicRows = [
   ],
   [
     { text: 'Pika' },
-    { text: '月80クレジット程度（毎月更新）' },
+    { text: '無料Basic：80クレジット/月（公式料金）' },
     { text: '$8/月（年払い）' },
     { text: '一部あり' },
     { text: 'あり' },
@@ -33,10 +33,10 @@ const basicRows = [
   ],
   [
     { text: 'Luma AI' },
-    { text: '制限付き月間クレジット' },
-    { text: '$30/月（Plusプラン）' },
+    { text: 'Appの恒常無料枠は現行情報で未確認' },
+    { text: '現行Appの契約画面で確認' },
     { text: '要確認' },
-    { text: 'あり（non-commercial）' },
+    { text: 'Trialの出力条件は要確認' },
     { text: '詳細を見る', href: '/tools/luma-ai/' },
   ],
   [
@@ -72,11 +72,11 @@ const basicRows = [
     { text: '詳細を見る', href: '/tools/hailuo-ai/' },
   ],
   [
-    { text: 'Haiper' },
-    { text: 'あり（詳細は公式確認）' },
-    { text: '要公式確認' },
-    { text: '要確認' },
-    { text: 'あり' },
+    { text: 'Haiper（旧サービス）' },
+    { text: '一般向けWebは2025-02終了' },
+    { text: '現行consumer料金なし' },
+    { text: '該当なし' },
+    { text: '該当なし' },
     { text: '詳細を見る', href: '/tools/haiper/' },
   ],
 ];
@@ -102,7 +102,7 @@ const pricingRows = [
     { text: 'Pika' },
     { text: '無料' },
     { text: '$0' },
-    { text: '月80クレジット程度（毎月更新・商用利用不可）', muted: true },
+    { text: '80クレジット/月、商用利用・無透かしDL可', muted: true },
     { text: '2026-06-04', muted: true },
   ],
   [
@@ -114,16 +114,16 @@ const pricingRows = [
   ],
   [
     { text: 'Luma AI' },
-    { text: '無料' },
-    { text: '$0' },
-    { text: '制限付き月間クレジット（詳細は公式確認）', muted: true },
+    { text: 'Trial（提供条件要確認）' },
+    { text: '購入画面で確認' },
+    { text: 'App Trialは評価・テスト用途。恒常無料枠は未確認', muted: true },
     { text: '2026-06-04', muted: true },
   ],
   [
-    { text: 'Luma AI' },
-    { text: 'Plus' },
-    { text: '$30/月' },
-    { text: '詳細は公式確認' },
+    { text: 'Luma AI（App）' },
+    { text: '現行プラン' },
+    { text: 'App契約画面で確認' },
+    { text: 'AppとAPIで別条件' },
     { text: '2026-06-04', muted: true },
   ],
   [
@@ -162,10 +162,10 @@ const pricingRows = [
     { text: '2026-06-04', muted: true },
   ],
   [
-    { text: 'Haiper' },
-    { text: '有料プラン' },
-    { text: '要公式確認' },
-    { text: '要公式確認' },
+    { text: 'Haiper（旧サービス）' },
+    { text: '一般向けWeb提供終了' },
+    { text: '該当なし' },
+    { text: '旧料金は現在購入できる価格ではない' },
     { text: '2026-06-04', muted: true },
   ],
 ];
@@ -219,7 +219,7 @@ const credit5sRows = [
     { text: 'Haiper' },
     { text: '詳細は公式確認' },
     { text: '詳細は公式確認' },
-    { text: 'クレジット消費量は公式ドキュメントで案内されている場合があります。要確認', muted: true },
+    { text: '2025年2月に一般向けサービス終了。旧仕様を現行と扱わない', muted: true },
   ],
 ];
 
@@ -287,15 +287,15 @@ const watermarkRows = [
   ],
   [
     { text: 'Pika' },
-    { text: 'あり' },
-    { text: '有料プランで透かしなし' },
+    { text: '無料Basicも透かしなしDL' },
+    { text: '無料Basic・有料プランで透かしなしDLを案内' }
     { text: '最新情報は公式料金ページを確認', muted: true },
   ],
   [
     { text: 'Luma AI' },
-    { text: 'あり（non-commercial use only）' },
-    { text: 'Plus以上（$30/月〜）でno watermarksと案内' },
-    { text: '透かし除去と商用利用はセット。詳細は公式確認', muted: true },
+    { text: 'App Trialの現行条件を確認' },
+    { text: 'API出力は公式FAQで透かしなし。Appは別' },
+    { text: 'AppとAPIの契約条件を混同しない', muted: true }
   ],
   [
     { text: 'Kling AI' },
@@ -322,10 +322,10 @@ const watermarkRows = [
     { text: '要確認', muted: true },
   ],
   [
-    { text: 'Haiper' },
-    { text: 'あり' },
-    { text: '有料プランで条件変更（詳細は公式確認）' },
-    { text: '要確認', muted: true },
+    { text: 'Haiper（旧サービス）' },
+    { text: '該当なし' },
+    { text: 'consumerサービス終了' },
+    { text: '旧料金・透かし説明は現在適用されない', muted: true }
   ],
 ];
 
@@ -340,19 +340,19 @@ const commercialRows = [
   ],
   [
     { text: 'Pika' },
-    { text: '商用利用不可とされている' },
-    { text: '商用利用可能なプランが案内されている（詳細は公式確認）' },
-    { text: '有料プランへの移行が必要。利用規約を確認', muted: true },
+    { text: '無料BasicにもCommercial use明記' },
+    { text: '有料プランにもCommercial use明記' },
+    { text: '第三者素材と利用規約を確認', muted: true }
   ],
   [
     { text: 'Luma AI' },
-    { text: 'non-commercial use onlyと案内' },
-    { text: 'Plus以上でcommercial use allowedと案内' },
-    { text: 'Plus（$30/月〜）以上が商用利用の前提', muted: true },
+    { text: 'Trialは内部評価・テスト用途' },
+    { text: 'API出力は公式FAQで商用可。Appは契約確認' },
+    { text: '旧Dream Machineの料金をAppに流用しない', muted: true }
   ],
   [
     { text: 'Kling AI' },
-    { text: '商用利用不可（公式確認には制限あり）' },
+    { text: '最新の公式一次規約を確認できず未確定' },
     { text: '要公式確認（本DBではunknownとして扱っている）' },
     { text: '商用利用前に公式規約を直接確認すること', muted: true },
   ],
@@ -375,10 +375,10 @@ const commercialRows = [
     { text: '要公式確認', muted: true },
   ],
   [
-    { text: 'Haiper' },
-    { text: '要確認' },
-    { text: '有料プランで商用利用が案内されている可能性あり（詳細は公式確認）' },
-    { text: '要公式確認', muted: true },
+    { text: 'Haiper（旧サービス）' },
+    { text: '該当なし' },
+    { text: '一般向けサービス終了。旧商用許諾は適用しない' },
+    { text: '現行consumer商品として扱わない', muted: true }
   ],
 ];
 

@@ -25,7 +25,7 @@ lastReviewed: "2026-11-05"
 nextReviewDue: "2026-12-05"
 officialSourceUrl: "https://openart.ai/"
 pricingModel: "subscription_credit"
-freePlanNote: "公式旧FAQでは試用クレジット等の案内があるが、旧ワークスペースは2026-11-16終了予定のため、現行ワークスペースの提供状況とクレジットはログイン後に確認。"
+freePlanNote: "OpenArtの日本語公式ページは『無料で始める』と案内。日本語公式の紹介記事には7日間40クレジットという記載があるが、旧ワークスペースの条件の可能性があり、現行のアカウント画面や料金表で確認。無料生成物の商用利用は現行規約で許諾対象外。"
 paidPlanNote: "公式料金表はStarter 4000クレジット/月、Plus 12000、Pro 24000、Wonder 106000を掲載。月額・年額表示と割引が混在するため最終請求額は購入画面で確認。商用利用権はPlus以上、Starterには明記なし。"
 platforms:
   - web

@@ -34,6 +34,8 @@ target_files:
   - src/content/tools/vidu-ai.md
   - src/content/tools/capcut-ai.md
   - src/content/tools/photoroom.md
+  - src/content/tools/pika.md
+  - src/pages/tools/pika/index.astro
   - src/content/tools/canva-ai-image-generator.md
   - src/pages/tools/dalle/index.astro
   - src/pages/tools/dreamstudio/index.astro

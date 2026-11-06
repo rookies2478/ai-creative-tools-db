@@ -33,6 +33,8 @@ target_files:
   - src/content/tools/heygen.md
   - src/content/tools/vidu-ai.md
   - src/content/tools/capcut-ai.md
+  - src/content/tools/photoroom.md
+  - src/content/tools/canva-ai-image-generator.md
   - src/pages/tools/dalle/index.astro
   - src/pages/tools/dreamstudio/index.astro
   - src/pages/tools/synthesia/index.astro

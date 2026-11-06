@@ -64,7 +64,7 @@ usagePolicy:
   inputMaterialRisk: "medium"
   inputMaterialNote: "image-to-image・インペインティングで参照画像のアップロードが可能。limitationsにて「入力素材（参照画像等）の著作権・権利はユーザーが事前に確認する必要があります」と明記されている。Stability AI Acceptable Use Policyの確認も必要。"
 reviewed:
-  pricing: "2026-06-21"
+  pricing: "2026-11-06"
   terms: "2026-05-14"
   features: "2026-05-14"
 sourceRefs:
@@ -120,7 +120,7 @@ japanBilling:
   taxDisplay: "unknown"
   purchaseChannels: ["web"]
   pricingCheckedAt: "2026-07-13"
-  pricingNote: "DreamStudioはStability AI公式ヘルプで「Brand Studio（Formerly Dream Studio）」と明記されており、Brand Studioへ改称されています。料金はクレジット制で、無料Trial（1,000クレジットまで）／Core $50/月（5,000クレジット・繰越なし）／Enterprise（個別見積り）の構成です。公式料金は米ドル建てのため、日本円での実際の支払額は決済時の為替レート、カード会社の海外事務手数料、税等により変動します。税表示は公式料金ページ上では確認できません。"
+  pricingNote: "2026-11-06公式表示：Creator $19/月・2,000crが最安有料。Core $50/月。TrialとCoreの付与量はstability.ai料金ページ（1,000/5,000）と公式Knowledge Base（500/6,000）で不一致。請求画面で確認し、旧DreamStudioの料金と混同しない。最終日本円請求額と税は要確認。"
   billingCategory: "C"
   sourceUrls:
     - "https://stability.ai/brandstudio"

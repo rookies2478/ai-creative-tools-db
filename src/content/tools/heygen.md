@@ -8,7 +8,7 @@ lowestPaidPlan: "Creator $29/月（USD・月払い）／年払い時$24/月"
 currency: "USD"
 commercialUse: "limited"
 commercialUseNote: "無料プランは商用利用・販売・再配布・マネタイズに制限があるとされています。有料プラン（Creator以上）で商用利用に対応する条件が案内されていますが、プランや用途によって条件が異なるため、最新の公式Terms（利用規約）を必ずご確認ください。人物画像・音声を扱う場合は本人同意や第三者権利の確認も必要です。本記事は法的助言ではありません。"
-japaneseUi: "partial"
+japaneseUi: "unknown"
 japanesePrompt: true
 watermark: "limited"
 bestFor:
@@ -33,7 +33,7 @@ verifiedAt: "2026-07-05"
 officialSourceUrl: "https://www.heygen.com/pricing"
 pricingModel: "subscription"
 pricingStatus: "partial"
-freePlanNote: "無料プランあり。クレジットカード不要、動画最大1分、透かし付きとされています。商用利用・販売・再配布・マネタイズには制限があるため公式Termsをご確認ください。無料で動画作成は可能ですが、今回の実機確認では生成した動画ファイルを無料でダウンロードできませんでした。保存・掲載には有料プランが必要となる可能性があります。"
+freePlanNote: "公式日本語料金表は無料プランで月3本・各最長1分、30以上の言語を明示。透かし・利用権利は公式Termsを確認。過去の当サイト実機確認で無料ファイルのダウンロードに失敗したが、すべての環境で不可とは断定しない。"
 paidPlanNote: "公式日本語料金ページ（/ja-jp/pricing）があり、Creator $29/月（月払い）と年払い月額換算$24/月が参考。地域・税・請求額は最終の購入画面で確認。日本語公式サイトの存在はログイン後編集画面の全日本語化を保証しない。"
 platforms:
   - web

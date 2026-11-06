@@ -6,8 +6,8 @@ officialUrl: "https://labs.google/fx/tools/flow"
 freePlan: "limited"
 commercialUse: "unknown"
 commercialUseNote: "Google Flowでの生成物の商用利用について、全モデル・全地域・全プランを対象に無条件に許諾するFlow固有の一次資料は今回確定できていない。Google利用規約・生成AIの利用禁止規定・素材権利を参照し、広告・再販売等はアカウント条件に照らして判断する。"
-japaneseUi: "unknown"
-japanesePrompt: "unknown"
+japaneseUi: "true"
+japanesePrompt: "partial"
 watermark: "limited"
 bestFor:
   - "AI映像のシーン設計"
@@ -40,6 +40,10 @@ sources:
     url: "https://support.google.com/flow/answer/16353333?hl=ja"
   - title: "Google利用規約"
     url: "https://policies.google.com/terms?hl=ja"
+  - title: "Google Flow 日本語・利用可能地域と対応言語（公式）"
+    url: "https://support.google.com/flow/answer/16353544?hl=ja"
+  - title: "Google Flow 日本語公式トップ"
+    url: "https://labs.google/fx/ja/tools/flow"
 sourceRefs:
   - label: "Google Flowクレジット（日本語公式）"
     url: "https://support.google.com/flow/answer/16526234?hl=ja"
@@ -50,6 +54,12 @@ sourceRefs:
   - label: "Google利用規約"
     url: "https://policies.google.com/terms?hl=ja"
     type: terms
+  - label: "Google Flow 日本語・利用可能地域と対応言語（公式）"
+    url: "https://support.google.com/flow/answer/16353544?hl=ja"
+    type: help
+  - label: "Google Flow 日本語公式トップ"
+    url: "https://labs.google/fx/ja/tools/flow"
+    type: official
 usagePolicy:
   commercialUseStatus: unknown
   commercialUseByPlan:
@@ -97,13 +107,25 @@ GoogleのAI映像制作環境。映像の生成やシーンづくりの作業に
 - **商用利用：** Google Flowでの生成物の商用利用について、全モデル・全地域・全プランを対象に無条件に許諾するFlow固有の一次資料は今回確定できていない。Google利用規約・生成AIの利用禁止規定・素材権利を参照し、広告・再販売等はアカウント条件に照らして判断する。
 - **有料プランと金額：** 公式クレジット説明にGoogle AI Plus 200/月、Pro 1000/月等の案内。AIクレジット追加購入は日本非対応とされる。現行の日本円請求額はGoogle Oneの購入画面で確認。
 - **透かし：** Google公式ヘルプ：FlowのVeo/Omni/Nano Banana出力には不可視のSynthIDが常時付与。可視透かしは生成物や地域・設定・プランで変動し、公式UIで切替可能な場合がある。不可視透かしは非表示化できない。
-- **日本語UI・日本語プロンプト：** 言語別の公開規格が確認できていないため未確認（日本語の公式ヘルプがあることは、UI完全対応や日本語プロンプト品質の保証ではありません）。
+- **日本語UI・日本語プロンプト：** 日本語公式サポートページがGoogle Flowの対応言語として日本語を列挙し、日本を対応国に含める。最良の結果には英語プロンプトを推奨。日本語プロンプトは利用可能でも品質は内容により変動。
 - **入力と出力の権利：** 生成物の商用利用許諾は著作権・肖像権・商標権・第三者素材に対する独立の許諾ではありません。個別に確認してください。
 
 ### 一次資料
 - [Google Flowクレジット（日本語公式）](https://support.google.com/flow/answer/16526234?hl=ja)
 - [Google Flow生成と透かし（日本語公式）](https://support.google.com/flow/answer/16353333?hl=ja)
 - [Google利用規約](https://policies.google.com/terms?hl=ja)
+
+## 日本向け公式情報の確認（2026年11月6日）
+
+**日本語対応の判定：** 日本語公式サポートページがGoogle Flowの対応言語として日本語を列挙し、日本を対応国に含める。最良の結果には英語プロンプトを推奨。日本語プロンプトは利用可能でも品質は内容により変動。
+
+**日本向けの料金・ライセンス補足：** Google公式の対応言語一覧に日本語が明記されているため、日本語UIは対応と判定。日本語プロンプトの出力品質は英語推奨の但し書きがあり部分対応扱い。日本でAIクレジットの追加購入が非対応とされる注意事項はプランに含まれる月間クレジットと区別する。
+
+### 日本語公式・利用条件へのリンク
+- [Google Flow 日本語・利用可能地域と対応言語（公式）](https://support.google.com/flow/answer/16353544?hl=ja)
+- [Google Flow 日本語公式トップ](https://labs.google/fx/ja/tools/flow)
+
+**判定上の注意：** 日本語の宣伝ページ／公式ブログがあることは、ログイン後の制作エディタが全面的に日本語化されている証明ではありません。実機のモデル別生成品質や地域別購入条件は確認が必要です。
 
 ## 公式情報
 - [Google Flow 公式サイト](https://labs.google/fx/tools/flow)

@@ -5,7 +5,8 @@
 - source_branch: master
 - published_qa: PASS — https://github.com/rookies2478/ai-creative-tools-db/actions/runs/42151021534 （102 sitemap URLs, HTTP 200, canonical/stale-copy guards）
 - November editorial expansion: PR #56（新規6ツールと比較3記事）、#58（料金と商用利用の規約根拠）、#60（日本向け公式/円建て）、#62（既存32件監査）。38 tool records on master.
-- latest_completed_task: docs/tasks/completed/2026-11-06-creative-expansion.md（公開とGrowth Loopドキュメント整合のクローズアウト）
+- latest_completed_task: docs/tasks/completed/2026-11-06-pixverse-impact-research-sync.md（PixVerse Impact契約の研究用メタデータのみ同期・公開CTAはHOLD）
+- previous_completed_task: docs/tasks/completed/2026-11-06-creative-expansion.md（公開とGrowth Loopドキュメント整合のクローズアウト）
 - current_active_task: none（完了済みリリースをactiveに残さない）
 - Growth Loop: Core `rookies2478/movance-growth-loop/sites/ai-creative-db.json` は enabled:true, GSC VERIFIED。2026-W45 read-only run PASS（2026-11-02, 58/74 page rows）。以前の本repo記録にあった enabled:false は過去時点の内容。最新は `docs/analytics/growth-loop.md` を参照。
 - SEO: W45 READYの Tensor.Art/Luma AI/Stable Diffusion は PR #52-#54 で対応済み。次の新しいGSC確定データなしに見出し変更しない。

@@ -115,11 +115,11 @@ faqs:
   - question: "DALL·Eに透かしは入りますか？"
     answer: "従来型の可視透かしは付与されませんが、C2PA標準の不可視メタデータおよびSynthID（不可視ウォーターマーク）が埋め込まれる場合があります。openai.com/research/verify/ でAI生成の確認が可能です。最新の仕様は公式情報でご確認ください。"
   - question: "DALL·EはどのプラットフォームやAPIで使えますか？"
-    answer: "ChatGPT経由（Web）とOpenAI API経由での利用が可能です。APIは別途従量課金です。最新の料金は公式APIページでご確認ください。"
+    answer: "公式DALL·E GPTは2026年8月30日に終了しました。現在はChatGPT画像から作成でき、開発用途には現行のGPT Image系APIが別途提供されています。旧DALL·E APIの提供状況はOpenAIのdeprecationsとモデル一覧を確認してください。"
   - question: "DALL·Eで人物や著名人・ブランドロゴを含む画像を作成できますか？"
     answer: "技術的には生成可能な場合がありますが、実在の人物・著名人・ブランドロゴ・第三者の著作物を含む画像を作成・利用する際は、肖像権・商標権・著作権などの観点から別途確認が必要です。本記事は法的助言ではありません。"
   - question: "DALL·EとMidjourneyはどう違いますか？"
-    answer: "DALL·EはChatGPTと統合されておりテキスト指示への忠実度が高い傾向があります。Midjourneyはアートやイラストなどスタイリッシュなビジュアルやクリエイティブな表現を得意とするとされています。用途や優先事項に応じて選び分けることが有効です。"
+    answer: "DALL·Eは旧世代のOpenAI画像生成モデルです。現在のChatGPT画像やMidjourneyと比較する場合、提供状況・モデル世代・各プランを区別してください。旧DALL·E GPTは2026年8月30日に終了しています。"
 japanBilling:
   japanOfficialUrl: "https://openai.com/ja-JP/chatgpt/pricing/"
   providerName: "OpenAI"

@@ -8,7 +8,7 @@
 
 ## サマリー
 
-- 正本32件を全数点検。公式情報との差分が明確な **8件**（DALL·E、Brand Studio、Creatify、Canva、Photoroom、HeyGen、Synthesia、Vidu）をコード変更対象とした。
+- 正本32件を全数点検。公式情報との差分が明確な **9件**（DALL·E、Brand Studio、Creatify、Canva、Photoroom、HeyGen、Synthesia、Vidu、Pika）をコード変更対象とした。
 - 公式情報に矛盾がある / 公開ページだけで足りない項目は無理に数値を断定しない（例: Brand Studioクレジット、Pikaの条件、Kling AIのアクセス制限）。
 - 日本語公式トップがあることは、ログイン後の制作UIの完全日本語化と等価ではない。言語と著作権許諾は個別に判定。
 - 現時点の完了判定は編集・ソース点検に対してのみ。CI・本番反映はこの文書単体では保証しない。
@@ -39,7 +39,7 @@
 | `midjourney` | 保留 | 公式利用規約に年売上100万USD超のプラン条件。日本語公式料金・UIを確認できない。既存USDプランを維持 | [公式](https://docs.midjourney.com/hc/en-us/articles/27870375276557-Using-Images-Videos-Commercially) |
 | `nightcafe` | 保留 | 公式商用FAQに入力画像/権利要件あり。日本語公式UI・料金を確認できず | [公式](https://help.nightcafe.studio/portal/en/kb/articles/does-the-license-allow-me-to-sell-my-creations-or-use-them-for-commercial-purposes) |
 | `photoroom` | 修正・重要 | 日本語公式表のPro月8000cr・1000エクスポート/Max25000・3000/Ultra75000・10000。『無制限エクスポート』は不正確で修正 | [公式](https://www.photoroom.com/ja/pricing) |
-| `pika` | 要追加確認 | 当サイト専用Astroページ内でも無料クレジットが『未明示』と『80/月』で矛盾。現行公式価格ページの動的/変動表示と照合必要 | [公式](https://pika.art/pricing) |
+| `pika` | 修正・重大 | 2026-11-06公式料金表Basic無料・月80cr・480p・『Commercial use』『Download videos with no watermark』明記。旧DBの無料商用不可/透かしありを修正 | [公式](https://pika.art/pricing) |
 | `pixverse` | 既存確認事項 | 2026-11の公式Termsでは有料時の自社モデル出力のみ商用可・他社モデルは別条件。既存DBの判定は維持 | [公式](https://pixverse.ai/en/terms-of-service) |
 | `playground-ai` | 保留 | 料金表Free非商用・Pro以上商用ライセンスとTerms全体の記述差を正本に記録済み。日本語公式料金未確認 | [公式](https://playgroundai.com/design/pricing) |
 | `recraft` | 既存重要注意 | 公式Terms無料作品の所有者と商用制限、有料の権利条件を区別。日本語公式価格の確証なし | [公式](https://www.recraft.ai/terms) |
@@ -51,6 +51,12 @@
 | `vidu-ai` | 修正 | 日本語公式料金ページを出典追加。Subscription 30日、Purchased/Bonus各2年。金額はJS動的表示で確定せず | [公式](https://www.vidu.com/ja/pricing) |
 
 ## エビデンス／相違が重大なもの
+
+### Pika（無料プランの商用利用と透かし）
+- [Pika公式プラン比較](https://pika.art/pricing) のBasic $0に80 monthly video credits、Commercial use、Download videos with no watermarkが明記。
+- 旧記事の『無料は商用不可・透かしあり』は誤記。無料Basicの商用利用は許されると表示されているが、第三者著作権・利用規約・素材の権利まで保証するわけではない。
+- データベースと専用Astroページ両方を修正し、無料クレジット80/月の整合も確保。
+
 
 ### DALL·E
 - [ChatGPT画像（OpenAI公式・日本語）](https://help.openai.com/ja-jp/articles/11084440-images-in-chatgpt)
@@ -73,7 +79,7 @@
 
 ## 未解決項目・優先順
 
-1. **P0** `pika`: DBと専用ページ内に無料クレジットの相反する記述が共存。現行ログイン後の料金・商用許諾を確認して同期する必要がある。
+1. **解消（重大）** `pika`: 公式料金表でFree Basic月80cr・商用利用可・透かしなしダウンロードと確認。DBおよび専用ページの誤表記を改訂。モデル別ライセンス、不可視メタデータは別途確認。
 2. **P0** `kling-ai`: 現行公式規約へのアクセス制約がある。第三者の転載を一次資料と誤認して商用条件を断定しない。
 3. **P1** `capcut-ai`, `fotor-ai`, `seaart-ai`, `invideo-ai`: 現行の日本向け正式プラン・請求額が環境依存で、公式ログイン済み価格表示の確認が必要。
 4. **P1** 既存専用Astroページのハードコード全件監査。正本更新が自動反映されない箇所（FAQ、表、構造化データ）があるため横断置換は禁止。ページごとに整合を検証。

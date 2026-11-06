@@ -4,6 +4,8 @@ shortDescription: "動画編集アプリCapCutでAI動画生成・自動字幕�
 category: "video"
 officialUrl: "https://www.capcut.com/"
 freePlan: true
+currency: "USD"
+lowestPaidPlan: "Pro USD19.99/月（日本語公式参考価格、最終請求額はログイン後）"
 commercialUse: "limited"
 commercialUseNote: "CapCutの利用規約では、ユーザーがアップロード・利用する素材について必要な権利や許諾を持つ必要があると案内されています。第三者AI技術を使う機能では追加条件に従う必要があります。また、利用規約では「音源および楽曲への権利ライセンスは付与されない」と明記されており、CapCut内の音源を商用目的で利用する場合は別途確認が必要です。AI生成コンテンツの合法性はユーザーが責任を負うとされています。商用利用・広告利用・クライアントワークを前提にする場合は、CapCut本体の利用規約だけでなく、素材・音源・テンプレート・AI機能ごとの条件確認が必要です。このページは法的助言ではありません。"
 japaneseUi: true
@@ -31,14 +33,14 @@ weaknesses:
   - "料金・機能・透かし条件がプランや地域・時期によって変わる可能性がある"
   - "無料利用時の出力条件（透かし・書き出し品質等）に注意が必要"
   - "ビジネス利用・クライアントワークでは規約の詳細確認が重要"
-lastReviewed: "2026-06-15"
-nextReviewDue: "2026-09-15"
+lastReviewed: "2026-11-06"
+nextReviewDue: "2026-12-06"
 verifiedAt: "2026-06-15"
 officialSourceUrl: "https://www.capcut.com/help/new-capcut-subscription-pricing"
 pricingModel: "subscription"
-pricingStatus: "no_fixed_price"
-freePlanNote: "CapCutには無料で使える機能がある一方、AI機能・素材・テンプレート・書き出し条件・料金は地域やプラットフォーム、アプリ内のサブスクリプション表示によって変わる可能性があります。最新の公式情報確認が必要です。"
-paidPlanNote: "CapCut公式ヘルプでは、最新価格はアプリ内サブスクリプションページで確認するよう案内されています。プラン名・料金・機能制限は地域・プラットフォーム・時期で変わる可能性があるため、必ず最新の公式情報をご確認ください。"
+pricingStatus: "partial"
+freePlanNote: "日本語公式料金ページ：Free USD0、無料テンプレートと基本編集機能に対応。AIモデルや高品質書き出しは有料プラン・個別クレジット条件がある。"
+paidPlanNote: "2026-11-06の日本語公式料金ページの参考表示：Pro USD19.99/月・月1,200 AIクレジット、Ultra USD79/月・月8,645 AIクレジット、Teams USD12.49/席/月・各1,200。年払いPro USD179.99/年など別表示。公式が明示する通り、最終価格・税・キャンペーンはログイン後に確定。"
 platforms:
   - web
   - ios
@@ -73,6 +75,9 @@ reviewed:
   terms: "2026-05-15"
   features: "2026-05-15"
 sourceRefs:
+  - label: "CapCut 日本語公式料金表（参考表示）"
+    url: "https://www.capcut.com/ja-jp/pricing"
+    type: pricing
   - label: "CapCut 公式サイト"
     url: "https://www.capcut.com/"
     type: official
@@ -95,6 +100,8 @@ sourceRefs:
     url: "https://www.capcut.com/help/remove-watermark-when-exporting-video"
     type: help
 sources:
+  - title: "CapCut 日本語公式料金表（参考表示）"
+    url: "https://www.capcut.com/ja-jp/pricing"
   - title: "CapCut 公式サイト"
     url: "https://www.capcut.com/"
   - title: "CapCut AI動画生成（公式）"
@@ -258,3 +265,9 @@ CapCutには日本語の公式ページ（[capcut.com/ja-jp](https://www.capcut.
 - [Luma AI](/tools/luma-ai/) — 画像・テキストから高品質な動画を生成するAIツール
 - [Haiper](/tools/haiper/) — 手軽に使えるAI動画生成ツール
 - [商用利用・著作権ガイド](/guides/commercial-use-copyright/) — AI生成コンテンツの商用利用と著作権の確認ポイント
+
+## 日本語公式料金の確認（2026-11-06）
+
+Pro USD19.99/月・1,200 AIクレジット、Ultra USD79/月・8,645 AIクレジットの参考表示を確認。最終料金・税金・割引はログイン後の購入画面で確定。編集した動画、テンプレート、商用音楽、第三者素材とAIモデルの利用規約はそれぞれ別に確認が必要。
+
+[CapCut日本語公式料金表](https://www.capcut.com/ja-jp/pricing)

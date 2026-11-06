@@ -69,6 +69,9 @@ reviewed:
   terms: "2026-11-01"
   features: "2026-06-06"
 sourceRefs:
+  - label: "2026-11-06 公式確認情報"
+    url: "https://www.seaart.ai/ja"
+    type: official
   - label: "SeaArt AI 公式サイト（日本語）"
     url: "https://www.seaart.ai/ja"
     type: official
@@ -85,6 +88,8 @@ sourceRefs:
     url: "https://image.cdn2.seaart.me/20250710/e6a1e6bb-9c1b-4f63-af4e-011f28596d77.html"
     type: policy
 sources:
+  - title: "2026-11-06 公式確認情報"
+    url: "https://www.seaart.ai/ja"
   - title: "SeaArt AI 公式サイト（日本語）"
     url: "https://www.seaart.ai/ja"
   - title: "SeaArt AI 公式サイト"
@@ -196,3 +201,9 @@ SeaArt AIは画像生成・画像編集・キャラクター作成・動画生�
 ---
 
 > **免責事項：** このページの情報は公式ソースをもとに作成していますが、内容は変更される可能性があります。法的助言ではありません。利用前に必ず最新の公式情報をご確認ください。
+
+## 公式公開情報による追加確認（2026-11-06）
+
+日本語公式トップでAI画像・動画・モデル等の日本語ナビを確認。VIP/SVIP金額は公開URLでの確定表示に乏しく、ログイン後の通貨・請求画面を確認する必要がある。
+
+[seaart-ai公式](https://www.seaart.ai/ja)。日本の最終決済額、モデル別の生成品質、未ログインの商用利用詳細は検証済みと見なさない。

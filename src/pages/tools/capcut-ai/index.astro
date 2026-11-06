@@ -62,7 +62,7 @@ const jsonLd = JSON.stringify([
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '要確認（素材ごとに条件あり）' } },
         { lb: '無料枠', badge: { s: 'cond', label: 'あり（機能・条件制限）' } },
-        { lb: '料金目安', text: 'アプリ内で確認（地域・プラットフォームで変動）', mono: true },
+        { lb: '料金目安', text: 'Pro参考USD19.99/月（最終額はログイン後）', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: '通常編集は透かしなし（テンプレは要確認）' } },
         { lb: '日本語UI', badge: { s: 'ok', label: '対応' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
@@ -80,8 +80,8 @@ const jsonLd = JSON.stringify([
           det: 'CapCutには無料で使える機能があります。ただし、AI機能・テンプレート・素材・書き出し条件はプランや地域、プラットフォームによって異なる可能性があります。最新の公式情報を確認してください。',
         },
         {
-          title: '最安料金目安', sum: 'アプリ内サブスクリプションページで確認（地域・プラットフォームで変動）', sumMono: false,
-          det: 'CapCut公式ヘルプでは、最新価格はアプリ内サブスクリプションページで確認するよう案内されています。プラン名・料金・機能制限は地域・プラットフォーム（iOS / Android / Web / PC）・時期によって変わる可能性があります。',
+          title: '最安料金目安', sum: 'Pro参考USD19.99/月、Ultra参考USD79/月', sumMono: false,
+          det: 'CapCut日本語公式価格表にはPro USD19.99/月とUltra USD79/月の参考表示があります。最終請求額や税金はログイン後の購入画面で確認してください。プラン名・料金・機能制限は地域・プラットフォーム（iOS / Android / Web / PC）・時期によって変わる可能性があります。',
         },
         {
           title: '透かし', badge: { s: 'cond', label: '通常編集は透かしなし（テンプレは要確認）' },
@@ -126,7 +126,7 @@ const jsonLd = JSON.stringify([
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AI動画編集・生成' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>あり（機能・条件制限）</span><br>プラン・地域によって異なる。' }],
-          [{ html: '最安料金', rk: true }, { html: 'アプリ内で確認（地域・プラットフォームで変動）' }],
+          [{ html: '最安料金', rk: true }, { html: 'Pro参考USD19.99/月（最終額はログイン後）' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>要確認（素材ごとに条件あり）</span><br>素材・音源・テンプレートの個別確認が必要。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>通常編集は透かしなし（テンプレは要確認）</span><br>テンプレートのブランドクリップは削除可能。Pro素材・AI機能は要確認。' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span>' }],
@@ -231,7 +231,7 @@ const jsonLd = JSON.stringify([
       lastChecked={d?.lastReviewed ?? '2026-05-24'}
       nextCheck={d?.nextReviewDue ?? '2026-06-24'}
       verifiedDate={d?.verifiedAt ?? '2026-06-08'}
-      sources={[
+      sources={[{tag:'料金',label:'日本語公式料金表（参考価格）',href:'https://www.capcut.com/ja-jp/pricing'},
         { tag: '公式', label: 'CapCut 公式サイト', href: 'https://www.capcut.com/' },
         { tag: 'AI動画生成', label: 'CapCut AI動画生成（公式）', href: 'https://www.capcut.com/ja-jp/tools/ai-video-generator' },
         { tag: '料金', label: 'CapCut サブスクリプション・料金（公式ヘルプ）', href: 'https://www.capcut.com/help/new-capcut-subscription-pricing' },
@@ -247,7 +247,7 @@ const jsonLd = JSON.stringify([
         { q: '透かしはありますか？', a: 'CapCut公式ヘルプによると、通常の編集機能で作成した動画は、多くの場合、無料でも透かしなしで書き出せるとされています。テンプレート利用時はCapCutのブランドクリップ（アウトロ等）が末尾に自動追加される場合がありますが、タイムラインから削除できます。Pro素材・AI機能ごとの透かし条件は公式情報で明確に確認できていないため、最新の公式画面でご確認ください。' },
         { q: 'Runway・Kling AIなどとどう違いますか？', a: 'CapCut AIは動画編集・テンプレート・自動字幕・AI機能を組み合わせたSNS動画向けの編集ツールです。RunwayやKling AIのような純粋なAI動画生成ツールとは異なり、編集・加工・テンプレート活用を中心に設計されています。' },
         { q: 'テンプレートや音楽の商用利用はできますか？', a: 'CapCut内で使用できるテンプレート・BGM・素材は、それぞれ個別のライセンス条件が設定されている場合があります。商用利用前は各素材のライセンス条件を公式サイトで確認してください。このページは法的助言ではありません。' },
-        { q: '料金プランはどうなっていますか？', a: 'CapCut公式ヘルプでは、最新価格はアプリ内サブスクリプションページで確認するよう案内されています。プラン名・料金・機能制限は地域・プラットフォーム・時期で変わる可能性があるため、必ず最新の公式情報をご確認ください。' },
+        { q: '料金プランはどうなっていますか？', a: 'CapCut日本語公式価格表にはPro USD19.99/月とUltra USD79/月の参考表示があります。最終請求額や税金はログイン後の購入画面で確認してください。プラン名・料金・機能制限は地域・プラットフォーム・時期で変わる可能性があるため、必ず最新の公式情報をご確認ください。' },
         { q: 'CapCut AIはAI動画生成ツールですか？', a: 'AI動画生成そのものより、AIを使った編集補助・自動字幕生成・テンプレート活用・SNS投稿向け調整などで使われることが多いです。テキストや画像からの映像生成を中心に比較する場合は、RunwayやKling AI・Luma AIなども候補として確認することをおすすめします。' },
         { q: 'CapCut AIの使い方を教えてください', a: '基本的な流れは、素材の読み込みまたはテンプレートの選択、AI機能（自動字幕・背景削除・AI音声など）の適用、テキスト・エフェクト・音源の調整、書き出しという流れとされています。機能名やUI構成は変更される場合があるため、最新の操作手順は公式サイトまたはアプリ内のガイドでご確認ください。なお、使用するテンプレート・音源・素材はそれぞれ利用条件が異なる場合があります。' },
         { q: 'CapCut AIはスマホで使えますか？', a: '公式情報ではiOS・Android向けのスマートフォンアプリが案内されています。ただし利用できる機能や書き出し形式・透かし条件は端末・OS・プランによって異なる場合があります。最新の対応状況は公式サイトまたはアプリストアでご確認ください。スマホでの動作・品質を断定することは難しいため、実際の環境で確認することをおすすめします。' },

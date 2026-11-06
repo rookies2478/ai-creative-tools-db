@@ -16,6 +16,8 @@ non_goals:
 target_files:
   - docs/tasks/active/2026-11-06-pixverse-impact-research-sync.md
   - src/data/affiliatePrograms.ts
+  - docs/tasks/completed/2026-11-06-pixverse-impact-research-sync.md
+  - docs/tasks/LATEST.md
 reference_files:
   - AGENTS.md
   - CLAUDE.md
@@ -42,6 +44,7 @@ acceptance_criteria:
   - 日本の購入者適格と日本居住パブリッシャーの支払適格を混同しない
   - toolAffiliateLinks.tsと本番公開CTA・計測・DNSは一切変更しない
   - 正式な確認事項をIssue #36に記録し、次のゲートを明記する
+  - 研究メタデータ同期後、完了タスクをアーカイブしactiveを空にする
 forbidden_operations:
   - PRODUCTION_DEPLOY
 ---

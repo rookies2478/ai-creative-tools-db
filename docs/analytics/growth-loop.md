@@ -1,42 +1,48 @@
-# Growth Loop: AI Creative DB site record
+# Growth Loop — AIクリエイティブナビのサイト別状態（2026-11-06）
 
-Common procedure: shared Core `docs/OPERATIONS.md` (movance-growth-loop). This file holds only site-specific facts. Record date: 2026-11-01. States: VERIFIED / NOT_VERIFIED / HOLD.
+> 共通Coreの運用手順は `rookies2478/movance-growth-loop/docs/OPERATIONS.md` を参照。本ファイルはサイト固有の証拠・制約のみを記す。以前の2026-11-01レコードにあった `enabled:false` / GSC `NOT_VERIFIED` は、2026-11-02実行証拠により陳腐化したため更新した。
 
-## Current state
+## 現行の接続・運用状態
 
-| Item | State | Evidence |
+| 項目 | 現行の確認結果 | 根拠・留意点 |
 |---|---|---|
-| Core registration | `sites/ai-creative-db.json` `enabled:false`, GSC `NOT_VERIFIED` | Core main; draft profile in Core PR #23 (Draft) |
-| Core run | **HOLD**: not run. A disabled site is SKIPPED; enabling needs a human-reviewed change and a verified read-only GSC grant | `growth run --site ai-creative-db --source gsc` -> SKIPPED, nothing collected |
-| GSC (legacy path) | Last data 2026-08-13 (manual export) and 2026-08-10 (API); nothing since | `docs/analytics/gsc/`, `scripts/analytics-gsc-fetch.mjs` (needs `GOOGLE_APPLICATION_CREDENTIALS`, value never read) |
-| GA4 | Tag `G-YTH7GM5ZGT` loads only on exact host `aicreative-db.com` (PR #29); Realtime verified in that task. No Core property registered | `docs/tasks/completed/2026-11-01-measurement-safety.md` |
-| Clarity | Project `wo9noh1ex6`, one prior analysis (2026-07-27, quality LOW) | `docs/analytics/clarity/` |
-| Affiliate | Only InVideo AI has an approved link; every other tool falls back to the official URL | `src/data/toolAffiliateLinks.ts`, `validate:affiliate-links` |
-| Issue #1 (InVideo CTA GA4 event) | Implemented in code (PR #2); live HTML attributes NOT_VERIFIED. Close or live-check separately | task record 2026-10-10 |
+| Core登録 | **VERIFIED / enabled:true** | `rookies2478/movance-growth-loop/sites/ai-creative-db.json`（2026-11-06 GitHub master read-back） |
+| GSC | **VERIFIED** — `sc-domain:aicreative-db.com` | Core登録は siteFullUser の権限確認済み・GSC専用読み取り実行のPASSを記録（2026-11-02） |
+| W45 Growth Loop | **PASS / 実行済み** | [本repo Issue #40](https://github.com/rookies2478/ai-creative-tools-db/issues/40)。期間2026-10-03..10-30（現行）対2026-09-05..10-02（前期）。ページ行58/74、確定データ遅延あり |
+| GSCレガシー取り込み | 別系統の古い記録 | `docs/analytics/gsc/` の従来スクリプト/手動輸入と共通Coreの最新PASSを混同しない。2026-08時点の古い手動データを『最新』と呼ばない |
+| GA4 | 計測タグ**本番検証済み**、共通Coreは未登録 | `G-YTH7GM5ZGT` は canonical hostnameでのみロード（PR #29）。CoreにGA4プロパティ未登録。CoreでGA4指標を取得済みとは主張しない |
+| Clarity | 本番タグ存在、Core集計は **NOT_CONFIGURED** | プロジェクト `wo9noh1ex6`、旧解析は低品質。W45では tokenRef未設定のため未評価＝ゼロではない |
+| アフィリエイト | **InVideo AI + Fotor AI 公開済み** | `src/data/toolAffiliateLinks.ts`の承認済み有効エントリ。InVideo primary/pricing、Fotor primary/pricing（PR #51） |
+| PixVerse | **承認済み・公開CTAはHOLD** | [Issue #36](https://github.com/rookies2478/ai-creative-tools-db/issues/36)。Impact契約と個別Link Creator URLは操作者確認済み。最終リダイレクト、媒体の掲載条件、国内パブリッシャー支払条件は未確認 |
+| Runway | **提携審査状態 UNKNOWN** | [Issue #38](https://github.com/rookies2478/ai-creative-tools-db/issues/38)。個人承認・コードは未確認。普通の製品メールを承認と扱わない |
+| 本番コンテンツ | 38ツールのDB + 比較記事群 | PR #56 / #58 / #60 / #62を統合。最終公開検証 [102 URL PASS](https://github.com/rookies2478/ai-creative-tools-db/actions/runs/42151021534) |
 
-## Differences from AI議事録ナビ (for the third site)
+## W45 SEO候補の処理状況
 
-- Routes: `/tools/`, `/comparisons/`, `/use-cases/`, `/guides/` (not `/compare/`); protected legal pages include `/editorial-policy/`.
-- Tool titles/meta mostly live in `src/pages/tools/<slug>/index.astro` (STATIC_OVERRIDES), not in `.md` front matter; `src/content/tools/*.md` is the protected DB. A CTR change therefore touches `.astro`, which needs its own task and the accuracy gate.
-- Accuracy risk is commercial use / copyright / watermark / pricing; these need dated official sources (see PR #24 removing unsupported claims).
-- Hosting Cloudflare Pages; measurement host-gated; one active task file per work item with `validate:task` / `validate:scope`.
-- Very small volume (about 2,200 impressions per 14 days in 2026-08), so navi thresholds are not tuned here (profile is DRAFT).
+共通Core実行（2026-11-02）のREADY 4候補は [Issue #40の2026-11-05コメント](https://github.com/rookies2478/ai-creative-tools-db/issues/40) により**対応済み**と確認。二重にタイトルだけ変更しない。
 
-## Per-site setup needed for a new site
+- `/tools/luma-ai/`: PR #52。モデル／無料枠／利用条件を公式根拠で更新。title/descriptionに推測的な変更を加えない。
+- `/tools/tensor-art/`: PR #53。日次クレジット・Pro料金・モデル依存ライセンスを再確認。ブランド検索比率が高く、情報系クエリの十分な証拠がないためCTR目的の見出し修正は保留。
+- `/tools/stable-diffusion/`: PR #54。Stability Community License・Core Modelsを更新。API料金は別監査済みで据え置き。
 
-1. `sites/<id>.json` + `profiles/<id>/{thresholds,routing}.json` (Core).
-2. Local credential map entry for `credentialRef` and a read-only GSC grant (human).
-3. Site repo: task/validate scripts, host-gated tags, result file.
+**NEXT:** 次の週次確定データを待ち、GSCの新しいページ別・必要ならクエリ別根拠で次の1ページを選択する。GSCデータの再実行は既存Coreで行い、重複する収集ツールを新設しない。
 
-## Candidates (evidence-limited; none implemented)
+## 運用・鮮度（公開品質の制約）
 
-- Tensor.Art CTR: HOLD (brand-dependent, 2.6% informational); re-evaluate with finalized 2026-11-01..11-28 data (`docs/audits/tensor-art-ctr-review-2026-10-31.md`).
-- Banner-generation comparison pages lost impressions; possible cannibalization with `/categories/design/` (2026-08 summary, stale).
-- Stale `nextReviewDue` on some tool pages (for example runway, 2026-08-11): needs official-source review.
-- No candidate is ranked from current data: the newest page-level data is 2.5 months old.
+- [Issue #48](https://github.com/rookies2478/ai-creative-tools-db/issues/48) が週次コンテンツ鮮度チェックのローリング管理。初回予定は**2026-11-09（月）JST**。既存スクリプト `scripts/generate-freshness-queue.mjs` を利用。
+- 2026-11-02歴史スナップショットは39件中35件OVERDUEだったが、その後新規6ツール登録や複数記事レビューが行われた。**旧件数を現行の件数とみなさない**。初回実行で新たな実測値を記録。
+- 日付が期限切れだからといって料金・規約が誤っているとは限らない。商用・料金・透かし情報は出典確認を伴って見直し、`lastReviewed` / `nextReviewDue`を日付だけ更新しない。
+- 外部リンク・アフィリエイト・公式料金・権利情報には、人間の公開許可と公式の一次資料が必要。自動リンク有効化、収益額の推測、自己購入は不可。
 
-## Human gates
+## 次の優先順位
 
-- Approve and verify read-only GSC access for `ai-creative-db-gsc`, then a reviewed change setting `enabled:true`; then one manual GSC-only run.
-- Optional GA4 property registration; schedule stays disabled.
-- Any content/CTA/affiliate/pricing change: own Issue, active task, official-source check.
+1. **収益化ギャップ:** PixVerseの最新Impact契約は確認済みだが、`affiliatePrograms.ts`の研究メタデータが古い。公開リンクは変えずに研究記録を別スコープで整合させる。最後の媒体条件と遷移先確認は [#36](https://github.com/rookies2478/ai-creative-tools-db/issues/36) に残す。
+2. **週次GSC:** 次回の週次実測後、新たなREADY候補を優先し、既に完了した3ページの重複作業を避ける。
+3. **独自作例:** 新規6ツールの一部に実機生成サンプルなし。制作アカウント・許諾・モデル・日付・設定・実出力を証拠として揃えるまでは、第三者画像やGPT生成画像を当該製品の作例と偽装しない。
+4. **収益計測:** GA4/Clarityの共通Core登録は別途読み取り資格情報とアカウント権限を確認し、データ不在をゼロと扱わない。
+
+## 運用上の境界
+
+- サイト側は `/tools/`, `/comparisons/`, `/use-cases/`, `/guides/` を持つ。静的ツール詳細にハードコードがあり、正本Markdownの更新だけでは見出し/FAQの更新が保証されない。
+- GA4/Clarityを設定変更する場合はホスト制限と既存同意・タグ構成を維持。プロダクトの評価・著作権・法的条件は公式ソースの日付を示す。
+- Coreは `riskGate: manual-only`。GSC候補・公開PR・本番反映は別のゲートとして証跡を残す。

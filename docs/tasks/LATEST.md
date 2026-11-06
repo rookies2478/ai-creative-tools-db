@@ -1,5 +1,23 @@
 # Latest Project State
 
+- updated_at: 2026-11-06
+- latest_publication_commit: ce38b3589e31084b709b630405976573615931ba（PR #62: 既存32件の日本語公式照合・9件修正、master merge）
+- source_branch: master
+- published_qa: PASS — https://github.com/rookies2478/ai-creative-tools-db/actions/runs/42151021534 （102 sitemap URLs, HTTP 200, canonical/stale-copy guards）
+- November editorial expansion: PR #56（新規6ツールと比較3記事）、#58（料金と商用利用の規約根拠）、#60（日本向け公式/円建て）、#62（既存32件監査）。38 tool records on master.
+- latest_completed_task: docs/tasks/completed/2026-11-06-creative-expansion.md（公開とGrowth Loopドキュメント整合のクローズアウト）
+- current_active_task: none（完了済みリリースをactiveに残さない）
+- Growth Loop: Core `rookies2478/movance-growth-loop/sites/ai-creative-db.json` は enabled:true, GSC VERIFIED。2026-W45 read-only run PASS（2026-11-02, 58/74 page rows）。以前の本repo記録にあった enabled:false は過去時点の内容。最新は `docs/analytics/growth-loop.md` を参照。
+- SEO: W45 READYの Tensor.Art/Luma AI/Stable Diffusion は PR #52-#54 で対応済み。次の新しいGSC確定データなしに見出し変更しない。
+- Affiliate: 公開承認済みリンクは InVideo AI + Fotor AI。PixVerseはImpact承認済み・リンク未公開（Issue #36）、Runway提携は未確認（Issue #38）。GSC成績・アフィリエイト収益を推測しない。
+- Freshness: ローリングIssue #48の最初の週次確認が2026-11-09予定。2026-11-02の39件/35 OVERDUEは歴史値であり、2026-11-06の実測値ではない。
+- open_followups: #36 PixVerse掲載条件/リンクQA、#38 Runway実審査確認、#40 W45 Growth Loop記録、#48ローリング鮮度。#55/#59/#61は公開証拠付きでclosed。
+- production_policy: アフィリエイトURL・計測・DNS・独自生成サンプルは未承認の変更を加えない。
+
+---
+
+## Previous snapshot（2026-11-03、当時の状態を保存）
+
 - updated_at: 2026-11-03
 - latest_commit: 3b5d5ba6205e1282e8390d38dd17f4928b67f446（PR #29 GA4/Clarity計測安全修正をmasterへsquash merge）
 - branch: master

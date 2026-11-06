@@ -8,7 +8,7 @@ production_required: false
 db_change: false
 ui_change: true
 official_verification_required: true
-goal: "既存ガイド内のPika無料商用/透かし、DALL·E GPT終了、Luma App/API、Canva日本向け料金・利用枠の矛盾を正本と一次資料に合わせて修正する"
+goal: "既存ガイドのPika無料商用/透かし、DALL·E GPT終了、Luma App/API、Canva日本向け料金・利用枠、Haiper提供状況の矛盾を正本と一次資料に合わせて修正する"
 non_goals:
   - 全38ツールの料金・規約を再更新すること
   - 生成サンプルや外部アカウント・アフィリエイトURLを作成・変更すること
@@ -19,6 +19,8 @@ target_files:
   - src/pages/guides/commercial-use-cost-comparison/index.astro
   - src/content/guides/free-ai-image-tools.md
   - src/components/FreeAiImageTools.astro
+  - src/content/guides/video-generation-credit-cost-comparison.md
+  - src/pages/guides/video-generation-credit-cost-comparison/index.astro
 reference_files:
   - AGENTS.md
   - CLAUDE.md
@@ -28,6 +30,7 @@ reference_files:
   - src/content/tools/luma-ai.md
   - src/content/tools/dalle.md
   - src/content/tools/canva-ai-image-generator.md
+  - src/content/tools/haiper.md
   - docs/audits/existing-tools-jp-official-audit-2026-11-06.md
 unknowns:
   - Luma AppとAPIの現行ライセンス・料金の分離がサービス更新で変わる可能性
@@ -48,6 +51,7 @@ acceptance_criteria:
   - Canva日本向けWeb年額とApp Store月額を区別し画像生成固有の上限を捏造しない
   - Markdown正本とAstroコンポーネントの両方を同期する
   - GitHubビルド・公開HTML検証の結果を残す
+  - 動画比較ガイドの終了済みHaiper、旧Luma料金とPika条件も整合させる
 forbidden_operations:
   - PRODUCTION_DEPLOY
 ---

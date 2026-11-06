@@ -99,7 +99,8 @@ japanBilling:
   purchaseChannels: ["web"]
   pricingCheckedAt: "2026-11-05"
   pricingNote: "日本語公式価格はPremium 2,900円/月（月払い）、年払い月換算1,950円。Premium+ 6,600円/月・年払い月換算4,875円。Pro 42,200円/月・年払い月換算31,650円。税・決済通貨と最新キャンペーンは購入画面で確認。"
-  sourceUrls: ["https://www.magnific.com/jp/pricing"]
+  sourceUrls:
+    - "https://www.magnific.com/jp/pricing"
 faqs:
   - question: "Magnific（旧Freepik）は何ができますか？"
     answer: "旧Freepikが2026年4月に改称したAI制作プラットフォーム。画像・動画・音声・高画質化機能を提供し、旧Magnific.aiのアップスケーラーも関連サービスとして扱われる。"

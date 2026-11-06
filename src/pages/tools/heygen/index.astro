@@ -57,7 +57,7 @@ const jsonLd = JSON.stringify([
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: 'プランにより異なる（要確認）' } },
         { lb: '無料枠', badge: { s: 'cond', label: '無料作成可／無料ダウンロード不可' } },
-        { lb: '料金目安', text: '要確認（公式Pricing参照）', mono: true },
+        { lb: '料金目安', text: 'Creator $29/月（公式日本語料金ページ参考）', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: '無料あり・有料は要確認' } },
         { lb: '日本語UI', badge: { s: 'cond', label: '不明（要確認）' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり（肖像権・音声権）' } },
@@ -75,7 +75,7 @@ const jsonLd = JSON.stringify([
           det: '無料プランでは動画を作成できますが、今回の実機確認では動画ファイルを無料でダウンロードできませんでした。保存・掲載には有料プランが必要となる可能性があります。クレジットカード不要で利用できるとされ、動画は最大1分・透かし付きです。詳細は公式サイトでご確認ください。',
         },
         {
-          title: '最安料金目安', sum: '要確認（公式Pricing参照）', sumMono: true,
+          title: '最安料金目安', sum: 'Creator $29/月（月払い・公式日本語料金ページ参考）', sumMono: true,
           det: 'Free / Creator / Pro / Business / Enterpriseなどのプランがあるとされていますが、料金は変更される場合があります。最新のプラン内容は必ず公式サイトでご確認ください。',
         },
         {
@@ -124,7 +124,7 @@ const jsonLd = JSON.stringify([
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AIアバター動画生成' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料作成可／無料ダウンロード不可</span><br>今回の実機確認では動画ファイルを無料でダウンロードできませんでした（透かし・1分制限あり）。' }],
-          [{ html: '最安料金', rk: true }, { html: '<span class="mono">要確認（公式Pricing参照）</span>' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">Creator $29/月（月払い・日本語公式料金参照）</span>' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>プランにより異なる（要確認）</span><br>無料プランは商用利用・販売・再配布に制限あり。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>無料あり・有料は要確認</span>' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>不明（要確認）</span>' }],

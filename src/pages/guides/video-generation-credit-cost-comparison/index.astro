@@ -388,16 +388,16 @@ const useCaseRows = [
   [
     { text: 'YouTube Shorts・縦型短尺動画' },
     { text: 'Pika・Kling AI・Hailuo AI' },
-    { text: '短尺・縦型フォーマット（9:16）対応を確認。無料プランの商用利用条件を事前確認（Pikaの無料プランは商用利用不可）' },
+    { text: '短尺・縦型フォーマット（9:16）対応を確認。無料枠の権利を確認。Pika無料Basicは公式料金表で商用利用可' },
   ],
   [
     { text: '広告動画・SNS広告素材' },
     { text: 'Runway・Luma AI' },
-    { text: '商用利用条件が確認しやすいツールを優先。Runwayは全プランで商用利用可と案内。Luma AIはPlus以上（$30/月〜）が条件。有料プランへの移行と最新規約確認が必須' },
+    { text: '商用利用条件が確認しやすいツールを優先。Runwayは全プランで商用利用可と案内。Luma Appは現行の商用利用条件を契約画面で確認。APIは別契約' },
   ],
   [
     { text: 'SNS動画（収益化なし）' },
-    { text: 'Pika・Kling AI・Haiper・PixVerse' },
+    { text: 'Pika・Kling AI・PixVerse' },
     { text: '収益化を伴わない投稿でも商用利用条件を確認することを推奨。無料プランの透かし条件に注意' },
   ],
   [
@@ -412,8 +412,8 @@ const useCaseRows = [
   ],
   [
     { text: 'コスト重視の商用利用' },
-    { text: 'Pika（有料・$8/月〜）' },
-    { text: '最低有料プランが比較的低価格。ただし商用利用条件・クレジット消費・出力品質は最新情報を要確認' },
+    { text: 'Pika（無料Basic・有料Standard）' },
+    { text: 'Pika無料Basicにも商用利用と無透かしDLが公式料金表で明記。必要なモデルと第三者権利は確認' },
   ],
 ];
 
@@ -434,7 +434,7 @@ const checklistItems = [
 const faqItems = [
   {
     q: 'AI動画生成ツールの無料プランで商用利用できますか？',
-    a: 'ツールによって異なります。Pikaの無料プランは商用利用不可と明確に案内されています。Luma AIの無料プランもnon-commercial use onlyとされています。Runwayの無料プランは全プランで商用利用可と案内されていますが、クレジットが初回125のみで実用に制限があります。Kling AIは商用利用条件が公式情報から確認しにくい状況です。いずれも最新の公式規約を確認してください。本記事は法的助言ではありません。',
+    a: 'ツールによって異なります。Pika公式料金表は無料Basicの商用利用可を明記。Luma App Trialは内部評価・テスト用途です。Runwayの無料プランは全プランで商用利用可と案内されていますが、クレジットが初回125のみで実用に制限があります。Kling AIは商用利用条件が公式情報から確認しにくい状況です。いずれも最新の公式規約を確認してください。本記事は法的助言ではありません。',
   },
   {
     q: '1動画あたりのクレジット消費はどのくらいですか？',
@@ -442,15 +442,15 @@ const faqItems = [
   },
   {
     q: '月額料金が低いツールはどれですか？',
-    a: '確認時点での最低有料プラン目安はPika（$8/月・年払い）が最も低く、次いでRunway（$12/月・年払い）、Hailuo AI（$14.99/月）、Luma AI（$30/月）の順です。ただし月額料金はクレジット付与数・出力品質・商用利用条件とセットで評価することが重要です。最新の料金情報は各ツールの公式料金ページでご確認ください。',
+    a: '確認時点での最低有料プラン目安はPika（$8/月・年払い）が最も低く、次いでRunway（$12/月・年払い）、Hailuo AI（$14.99/月）、Luma Appの現行料金は契約画面で確認が必要です。ただし月額料金はクレジット付与数・出力品質・商用利用条件とセットで評価することが重要です。最新の料金情報は各ツールの公式料金ページでご確認ください。',
   },
   {
     q: 'YouTube収益化チャンネルにAI動画生成ツールで作った動画を使えますか？',
-    a: 'YouTube収益化への利用は商用利用に該当する場合があります。各ツールの商用利用条件（プランごとの可否）と、YouTubeのAI生成コンテンツに関するポリシーを別途確認してください。無料プランでは商用利用が制限されているツールが多く、有料プランへの移行が前提となる場合がほとんどです。本記事は法的助言ではありません。',
+    a: 'YouTube収益化への利用は商用利用に該当する場合があります。各ツールの商用利用条件（プランごとの可否）と、YouTubeのAI生成コンテンツに関するポリシーを別途確認してください。Pika無料Basicのように商用利用を案内するサービスもあり、無料か有料かだけで判断できません。本記事は法的助言ではありません。',
   },
   {
     q: '広告動画に使う場合はどのツールが確認しやすいですか？',
-    a: 'Runwayは公式ヘルプで全プランのOutput商用利用を制限しないと案内しており、条件が比較的確認しやすいとされています。Luma AIはPlus以上でcommercial use allowedと明記されています。Kling AIは公式情報から条件を確認しにくいため慎重な事前確認が必要です。ただし広告利用には各ツールの利用規約に加え、広告媒体のポリシーも別途確認が必要です。本記事は法的助言ではありません。',
+    a: 'Runwayは公式ヘルプで全プランのOutput商用利用を制限しないと案内しており、条件が比較的確認しやすいとされています。Luma API出力は公式FAQで商用利用が案内されていますが、現行Appのプラン条件は別途確認してください。Kling AIは公式情報から条件を確認しにくいため慎重な事前確認が必要です。ただし広告利用には各ツールの利用規約に加え、広告媒体のポリシーも別途確認が必要です。本記事は法的助言ではありません。',
   },
   {
     q: 'クレジット制とサブスクリプション制の違いは何ですか？',
@@ -518,7 +518,7 @@ const breadcrumb = JSON.stringify({
     <GuideSummaryBox title="このガイドの結論">
       <p>
         AI動画生成ツールのコストは<strong class="font-semibold text-slate-900">月額料金・クレジット付与数・1動画あたり消費クレジット・透かし条件・商用利用可否</strong>を組み合わせて評価することが重要です。
-        無料プランで商用利用できるツールは限られており、広告動画・YouTube収益化・クライアント納品を前提とする場合は有料プランへの移行と最新規約の確認が前提となります。
+        Pika無料Basicのように商用利用が案内されるサービスもあります。広告や受託制作では個別モデル・第三者素材の権利を確認してください。
         クレジット消費量はツール・モデル・解像度・動画の長さによって大きく変わるため、定期的な公式ページ確認を推奨します。
       </p>
     </GuideSummaryBox>
@@ -526,6 +526,15 @@ const breadcrumb = JSON.stringify({
     <!-- 免責事項 -->
     <GuideWarningBox variant="warning" title="免責事項・重要事項">
       このガイドは情報提供を目的としており、法的アドバイスではありません。料金・クレジット数・商用利用条件は各ツールの判断で変更される場合があります。利用前に必ず各ツールの最新公式サイト・利用規約をご確認ください。
+    </GuideWarningBox>
+
+    <GuideWarningBox variant="info" title="2026年11月の重要な料金・ライセンス更新">
+      <p>Pika無料Basicは商用利用・透かしなしDL対応。Luma AppとAPIは別条件。Haiperの一般向けWebサービスは2025年2月に終了しており、旧価格を現行と扱いません。</p>
+      <ul class="mt-2 list-disc pl-5 space-y-1">
+        <li><a href="https://pika.art/pricing" target="_blank" rel="noopener noreferrer">Pika公式料金</a></li>
+        <li><a href="https://lumalabs.ai/learning-hub/licensing" target="_blank" rel="noopener noreferrer">Luma公式ライセンス</a></li>
+        <li><a href="/tools/haiper/">Haiperの終了検証記録</a></li>
+      </ul>
     </GuideWarningBox>
 
     <!-- 関連ガイドへの導線 -->
@@ -612,7 +621,7 @@ const breadcrumb = JSON.stringify({
         比較表5：透かし除去条件
       </h2>
       <p class="mb-4 text-sm text-slate-500">
-        ほぼすべてのツールで無料プランでは生成動画に透かしが付与されます。商用利用・広告利用には透かし除去が前提となる場合がほとんどです。
+        Pika無料Basicのように透かしなしダウンロードが公式に案内される場合があります。可視透かしと商用利用は別に確認してください。
       </p>
       <GuideComparisonTable
         caption="AI動画生成ツール透かし条件比較"
@@ -687,7 +696,7 @@ const breadcrumb = JSON.stringify({
             <a href="/tools/pika/" class="text-blue-700 hover:underline">Pika</a>
           </h3>
           <p class="leading-relaxed">
-            無料プランは月80クレジット程度（毎月更新）。無料プランは商用利用不可とされています。
+            無料Basicは公式料金表で毎月80クレジット・商用利用可・透かしなしダウンロードと明記されています。
             Standard $8/月〜（年払い）で月700クレジット程度が付与されます。
             短尺動画の生成に向いているとされており、操作がシンプルです。
           </p>
@@ -702,8 +711,8 @@ const breadcrumb = JSON.stringify({
             <a href="/tools/luma-ai/" class="text-blue-700 hover:underline">Luma AI</a>
           </h3>
           <p class="leading-relaxed">
-            無料プランはnon-commercial use only・watermarksとされています。
-            Plus（$30/月）以上でcommercial use allowed・no watermarksと公式料金ページで案内されています。
+            Luma App Trialは内部評価・テスト用途で、現行プランの商用条件は契約画面で確認が必要です。
+            Luma APIは公式FAQで出力の商用利用可・無透かしと案内されますが、Appの権利・料金とは分けて確認してください。
             プランによって月間クレジット付与数・生成できる動画の解像度が異なります。詳細は公式料金ページをご確認ください。
           </p>
           <p class="mt-2 text-xs text-slate-400">
@@ -808,7 +817,7 @@ const breadcrumb = JSON.stringify({
       <GuideWarningBox variant="info">
         <ul class="space-y-1.5 list-disc list-inside">
           <li>料金・クレジット数・商用利用条件はツール側の判断で予告なく変更される場合があります</li>
-          <li>このガイドの情報は2026年6月4日時点のものです。利用前に必ず各公式サイトで最新情報をご確認ください</li>
+          <li>Pika・Luma・Haiperについて2026年11月に重要差分を更新。旧調査値の残るモデル別クレジット目安は各社の現行画面で再確認してください</li>
           <li>商用利用・著作権の判断は本記事の情報だけでなく、各ツールの最新利用規約を直接確認してください</li>
           <li>重要な商用利用の場面では、法律の専門家（弁護士等）への相談を推奨します</li>
         </ul>
@@ -853,7 +862,7 @@ const breadcrumb = JSON.stringify({
     </section>
 
     <p class="mb-6 text-xs text-slate-500 leading-relaxed">
-      最新情報は各公式サイトで確認してください。掲載内容は2026年6月4日時点のものであり、法的助言ではありません。
+      最新情報は各公式サイトで確認してください。2026年11月にPika・Luma・Haiperの重要差分を反映。その他の旧クレジット概算は再検証が必要。法的助言ではありません。
     </p>
 
     <nav class="border-t border-slate-200 pt-6 text-sm" aria-label="ページナビゲーション">

@@ -54,6 +54,8 @@ usagePolicy:
   inputMaterialRisk: "medium"
   inputMaterialNote: "公式利用規約（invideo.io/terms-and-conditions/）では、使用するストック素材・音楽・テンプレートはStoryblocks等の別途ライセンスに従い、サブライセンス・素材単体の再販は禁止とされている。人物が含まれる場合は書面による同意が必要とされている。入力・使用素材ごとのライセンス確認が必要。"
 sources:
+  - title: "2026-11-06 公式確認情報"
+    url: "https://invideo.io/jp/"
   - title: "InVideo AI 公式サイト"
     url: "https://invideo.io"
   - title: "InVideo AI 料金プラン（公式）"
@@ -65,6 +67,9 @@ sources:
   - title: "InVideo AI Get started with AI filmmaking（公式ヘルプ）"
     url: "https://help.invideo.io/en/articles/14717491-get-started-with-ai-filmmaking"
 sourceRefs:
+  - label: "2026-11-06 公式確認情報"
+    url: "https://invideo.io/jp/"
+    type: official
   - label: "InVideo AI公式サイト"
     url: "https://invideo.io"
     type: official
@@ -173,3 +178,9 @@ RunwayやPika、Kling AIは映像生成機能そのものが中心のツール�
 
 - [AI動画生成ツール一覧](/categories/video-generation/) — 主要AI動画生成ツールの比較・選び方
 - [商用利用を確認しやすいAIツール](/conditions/commercial-use/) — 商用利用条件比較
+
+## 公式公開情報による追加確認（2026-11-06）
+
+日本語向け公式入口が存在するが、公開HTMLはJavaScriptアプリの起動案内のみ。ログイン後の編集画面全体の日本語化や最終請求額、無料プラン透かしを確証できないため従来の未確認判定を維持。
+
+[invideo-ai公式](https://invideo.io/jp/)。日本の最終決済額、モデル別の生成品質、未ログインの商用利用詳細は検証済みと見なさない。

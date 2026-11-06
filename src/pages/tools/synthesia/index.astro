@@ -57,7 +57,7 @@ const jsonLd = JSON.stringify([
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: 'プランにより異なる（要確認）' } },
         { lb: '無料枠', badge: { s: 'cond', label: 'あり（透かし・分数制限）' } },
-        { lb: '料金目安', text: '要確認（公式Pricing参照）', mono: true },
+        { lb: '料金目安', text: 'Starter $29/月（月払い・公式日本地域表示）', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: 'Basicあり・有料は要確認' } },
         { lb: '日本語UI', badge: { s: 'cond', label: '不明（要確認）' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり（肖像権・音声権）' } },
@@ -75,7 +75,7 @@ const jsonLd = JSON.stringify([
           det: 'Basic（無料）プランがあり、クレジットカード不要で試用できるとされています。ただし月10分までの制限やロゴ（透かし）があります。詳細は公式サイトでご確認ください。',
         },
         {
-          title: '最安料金目安', sum: '要確認（公式Pricing参照）', sumMono: true,
+          title: '最安料金目安', sum: 'Starter $29/月（月払い・公式日本地域表示）', sumMono: true,
           det: 'Basic / Starter / Creator / Enterpriseなどのプランがあるとされていますが、料金は変更される場合があります。最新のプラン内容は必ず公式サイトでご確認ください。',
         },
         {
@@ -122,7 +122,7 @@ const jsonLd = JSON.stringify([
         rows: [
           [{ html: 'カテゴリ', rk: true }, { html: 'AIアバター動画生成' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>あり（透かし・分数制限）</span><br>クレジットカード不要とされています。' }],
-          [{ html: '最安料金', rk: true }, { html: '<span class="mono">要確認（公式Pricing参照）</span>' }],
+          [{ html: '最安料金', rk: true }, { html: '<span class="mono">Starter $29/月（月払い・公式日本地域表示）</span>' }],
           [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>プランにより異なる（要確認）</span><br>生成動画の権利は組織（契約主体）に帰属するとされる。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>Basicあり・有料は要確認</span>' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>不明（要確認）</span>' }],
@@ -144,7 +144,7 @@ const jsonLd = JSON.stringify([
           headers: ['プラン', '料金', '備考'],
           rows: [
             [{ html: 'Basic（無料）', rk: true }, { html: '無料' }, { html: '月10分まで・ロゴ（透かし）あり' }],
-            [{ html: 'Starter以上', rk: true }, { html: '要確認（公式Pricing参照）', mono: true }, { html: 'ロゴ削除機能あり（要確認）・クレジット制/分数制/席数課金が組み合わさる' }],
+            [{ html: 'Starter以上', rk: true }, { html: '$29/月（月払い・地域指定公式ページの参考表示）', mono: true }, { html: 'ロゴ削除機能あり（要確認）・クレジット制/分数制/席数課金が組み合わさる' }],
           ],
         },
         notes: [

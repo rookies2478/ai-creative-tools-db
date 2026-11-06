@@ -7,7 +7,7 @@ freePlan: "limited"
 lowestPaidPlan: "要公式確認（会員プラン価格はログイン後表示・USD建て）"
 currency: "USD"
 commercialUse: "paid-only"
-commercialUseNote: "公式規約（2026年4月21日付）では、Standard以上の有料プランで商用利用が認められているとされています。無料プランは個人・非商用利用のみで、商用利用は認められていないとされています。公式ページへの直接アクセスはHTTP 446により確認できなかったため、第三者情報源を参照しています。プランや用途によって条件が異なる場合があります。人物、ロゴ、商標、第三者素材を含む動画では別途権利確認が必要になる場合があります。最新の公式規約・料金ページを必ずご確認ください。本記事は法的助言ではありません。"
+commercialUseNote: "公式一般利用規約（2026-04-21）§4.6は書面許可なしの生成物商用利用を制限。ただし公式有料会員規約§3.1.2は会員の出力の商用利用・配布・改変を許可（競合AIサービス開発は除外）。有料規約の前文は一般規約との矛盾時に有料規約優先と明記。よって有効な有料会員の出力は規約の範囲で商用利用可能。無料利用者は一般規約の書面許可条件に注意。第三者素材・肖像・ロゴの権利は別途確認。"
 japaneseUi: "partial"
 japanesePrompt: true
 watermark: "limited"
@@ -23,13 +23,13 @@ weaknesses:
   - "無料プランでは透かしが入る場合がある"
   - "商用利用条件が複雑で公式規約の確認が必要"
   - "日本語UIはネイティブ対応ではなく拡張機能に依存する場合がある"
-lastReviewed: "2026-06-21"
-nextReviewDue: "2026-09-21"
+lastReviewed: "2026-11-06"
+nextReviewDue: "2026-12-06"
 verifiedAt: "2026-06-21"
 officialSourceUrl: "https://kling.ai/membership/membership-plan"
 pricingModel: "subscription_credit"
-freePlanNote: "1日66クレジット程度（翌日繰越なし・透かしあり・商用利用不可）"
-paidPlanNote: "会員プランはUSD建てで、価格はログイン後の公式購入画面に表示されます（過去に案内されていた$6.99/月は初回割引価格の可能性があり要公式確認）。クレジットの繰越不可・生成失敗時の返金なしに注意。最新の料金・プラン内容は公式サイト（kling.ai）でご確認ください。"
+freePlanNote: "無料クレジット数はアカウント・地域・時期で変わり、旧情報の66/日を確定値として表示しない。一般規約§4.6により商用利用には原則書面許可が必要。有料会員向け商用許諾は無料利用に自動適用されない。"
+paidPlanNote: "公式有料会員規約§3.1.2で商用利用が許諾され、規約冒頭で一般利用規約との矛盾時の優先を明記。購入価格・資格・クレジット付与は会員画面で要確認。会員特典には透かし削除も挙げられている。"
 platforms:
   - web
 signupRequired: true
@@ -69,10 +69,10 @@ pricingDecision:
 usagePolicy:
   commercialUseStatus: "paid-only"
   commercialUseByPlan:
-    free: "個人・非商用利用のみとされている"
-    paid: "Standard以上で商用利用可とされている（公式規約2026年4月21日付）"
+    free: "無料の場合、一般規約§4.6の商用利用には書面許可が必要"
+    paid: "有料会員規約§3.1.2の商用許諾を適用。一般規約に優先、競合サービス開発は除外"
     enterprise: "要確認"
-  commercialUseNote: "無料プランは商用利用不可とされている。有料プランでも第三者権利・コンテンツ内容によって制限がある場合あり。公式規約への直接アクセスはHTTP 446により確認困難なため第三者情報を参照。"
+  commercialUseNote: "公式一般利用規約（2026-04-21）§4.6は書面許可なしの生成物商用利用を制限。ただし公式有料会員規約§3.1.2は会員の出力の商用利用・配布・改変を許可（競合AIサービス開発は除外）。有料規約の前文は一般規約との矛盾時に有料規約優先と明記。よって有効な有料会員の出力は規約の範囲で商用利用可能。無料利用者は一般規約の書面許可条件に注意。第三者素材・肖像・ロゴの権利は別途確認。"
   rightsStatus: "unknown"
   rightsNote: "生成物の権利帰属は公式規約で確認が必要。最新の公式利用規約を参照すること。"
   inputMaterialRisk: "medium"
@@ -109,6 +109,12 @@ reviewed:
   terms: "2026-06-04"
   features: "2026-06-04"
 sourceRefs:
+  - label: "公式有料会員規約 §3.1.2"
+    url: "https://kling.ai/docs/payment-policy"
+    type: terms
+  - label: "公式一般利用規約 §4.6"
+    url: "https://kling.ai/docs/user-policy"
+    type: terms
   - label: "Kling AI公式サイト"
     url: "https://kling.ai"
     type: official
@@ -122,6 +128,10 @@ sourceRefs:
     url: "https://kling.ai/docs/payment-policy"
     type: official
 sources:
+  - title: "公式有料会員規約 §3.1.2"
+    url: "https://kling.ai/docs/payment-policy"
+  - title: "公式一般利用規約 §4.6"
+    url: "https://kling.ai/docs/user-policy"
   - title: "Kling AI 公式サイト"
     url: "https://kling.ai"
   - title: "Kling AI 料金ページ（公式）"
@@ -275,3 +285,10 @@ Kling AIは、AI動画生成ツールの中でもリアル寄りの動画表現�
 - [AI動画編集ツール一覧](/categories/video-editing/) — AI動画編集ツールの比較・選び方
 - [無料で試せるAIツール](/conditions/free/) — 無料枠のあるAIツール一覧
 - [商用利用できるAI動画ツール](/conditions/commercial-use/) — 商用利用条件を確認できるツール一覧
+
+## 2026年11月6日：一般規約と有料会員規約の照合
+
+公式一般利用規約（2026-04-21）§4.6は書面許可なしの生成物商用利用を制限。ただし公式有料会員規約§3.1.2は会員の出力の商用利用・配布・改変を許可（競合AIサービス開発は除外）。有料規約の前文は一般規約との矛盾時に有料規約優先と明記。よって有効な有料会員の出力は規約の範囲で商用利用可能。無料利用者は一般規約の書面許可条件に注意。第三者素材・肖像・ロゴの権利は別途確認。
+
+- [Kling AI一般利用規約](https://kling.ai/docs/user-policy)
+- [Kling AI有料会員規約](https://kling.ai/docs/payment-policy)

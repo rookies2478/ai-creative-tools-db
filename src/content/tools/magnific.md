@@ -25,7 +25,7 @@ lastReviewed: "2026-11-05"
 nextReviewDue: "2026-12-05"
 officialSourceUrl: "https://www.magnific.com/ai"
 pricingModel: "subscription_credit"
-freePlanNote: "公式『Plans and pricing』Freeは基本AI画像を最大20生成/日（一部モデルに限定）、無料ストックのダウンロードは10点/日。FreeのAI生成物は個人利用向け、帰属表示が必要。"
+freePlanNote: "無料プランは基本モデルのAI画像を最大20回/日、無料ストックは10件/日（公式プラン案内）。無料AI生成物は個人向けで、帰属表示が必要。日本語料金表にはPremium以上の商用AIライセンスと日本円料金を明記。両者を混同しない。"
 paidPlanNote: "日本円表示の公式料金（確認時点）：Premium月払い2,900円、年払いの月額換算1,950円。Premium+月払い6,600円、年払いの月額換算4,875円。Pro月払い42,200円、年払いの月額換算31,650円。いずれも年払いは月次請求と同一ではない。商用AIライセンスはPremium以上。音楽利用権はPremium+以上で別条件。 料金の確認先：https://www.magnific.com/jp/pricing"
 platforms:
   - web
@@ -35,7 +35,7 @@ features:
   textToVideo: true
   imageToVideo: true
   upscale: true
-pricingStatus: "unconfirmed"
+pricingStatus: "confirmed"
 watermarkCondition: "公式料金・ライセンス資料は帰属表示（credit）と画像への可視透かし（watermark）を区別。AI生成物の可視透かし有無はモデル・出力方法ごとの公式説明を確認できていないため一律断定しない。"
 sources:
   - title: "Magnific AI生成物と著作権"
@@ -87,6 +87,19 @@ usagePolicy:
   officialSourceUrl: "https://www.magnific.com/ai/docs/ai-content-and-copyright"
   termsUrl: "https://www.magnific.com/ai/docs/ai-content-and-copyright"
   lastReviewed: "2026-11-05"
+japanBilling:
+  japanOfficialUrl: "https://www.magnific.com/jp"
+  providerName: "Magnific（旧Freepik）"
+  isJapaneseService: false
+  pricingUrl: "https://www.magnific.com/jp/pricing"
+  billingCurrency: "JPY（日本語料金表示。最終請求通貨は購入画面確認）"
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: true
+  taxDisplay: "unknown"
+  purchaseChannels: ["web"]
+  pricingCheckedAt: "2026-11-05"
+  pricingNote: "日本語公式価格はPremium 2,900円/月（月払い）、年払い月換算1,950円。Premium+ 6,600円/月・年払い月換算4,875円。Pro 42,200円/月・年払い月換算31,650円。税・決済通貨と最新キャンペーンは購入画面で確認。"
+  sourceUrls: ["https://www.magnific.com/jp/pricing"]
 faqs:
   - question: "Magnific（旧Freepik）は何ができますか？"
     answer: "旧Freepikが2026年4月に改称したAI制作プラットフォーム。画像・動画・音声・高画質化機能を提供し、旧Magnific.aiのアップスケーラーも関連サービスとして扱われる。"

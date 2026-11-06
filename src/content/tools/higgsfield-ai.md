@@ -8,7 +8,7 @@ lowestPaidPlan: "Basic USD 9/月相当（年額契約時、月次契約価格は
 currency: "USD"
 commercialUse: "limited"
 commercialUseNote: "公式ヘルプは「全ユーザーが商用利用可能」と案内する一方、公式料金比較表のCommercial use欄ではFreeはNot included、Basic以上はIncludedと明記しており矛盾する。安全側ではFreeを商用利用不可扱いとし、有料Basic以上を商用利用可能な候補とする。無料素材の商用利用を希望する場合はHiggsfieldサポートに書面確認する。"
-japaneseUi: "unknown"
+japaneseUi: "partial"
 japanesePrompt: "unknown"
 watermark: "limited"
 bestFor:
@@ -43,6 +43,10 @@ sources:
     url: "https://higgsfield.ai/creator-hub/help-center/credits/watermark-and-how-to-remove"
   - title: "Higgsfield料金表"
     url: "https://higgsfield.ai/pricing"
+  - title: "Higgsfield 日本語サイト"
+    url: "https://higgsfield.ai/ja"
+  - title: "Higgsfield 日本語ブログ"
+    url: "https://higgsfield.ai/ja/blog/generating-with-seedance-2-0"
 sourceRefs:
   - label: "Higgsfield 商用利用・権利（公式ヘルプ）"
     url: "https://higgsfield.ai/creator-hub/help-center/account/who-owns-my-generations-and-can-i-use-them-commercially"
@@ -53,6 +57,12 @@ sourceRefs:
   - label: "Higgsfield料金表"
     url: "https://higgsfield.ai/pricing"
     type: pricing
+  - label: "Higgsfield 日本語サイト"
+    url: "https://higgsfield.ai/ja"
+    type: official
+  - label: "Higgsfield 日本語ブログ"
+    url: "https://higgsfield.ai/ja/blog/generating-with-seedance-2-0"
+    type: docs
 usagePolicy:
   commercialUseStatus: limited
   commercialUseByPlan:
@@ -100,13 +110,25 @@ faqs:
 - **商用利用：** 公式ヘルプは「全ユーザーが商用利用可能」と案内する一方、公式料金比較表のCommercial use欄ではFreeはNot included、Basic以上はIncludedと明記しており矛盾する。安全側ではFreeを商用利用不可扱いとし、有料Basic以上を商用利用可能な候補とする。無料素材の商用利用を希望する場合はHiggsfieldサポートに書面確認する。
 - **有料プランと金額：** 公式料金比較では年額払い月換算のBasic USD 9/月・120クレジット、Pro USD 23/月・600、Max USD 59/月・1800。有料で新規生成した出力は可視透かしなし。単月払い・税は公式購入画面で確認。
 - **透かし：** 公式ヘルプでは無料アカウントの全生成物に可視透かし。有料プランで新規生成した出力は可視透かしなし。無料時に生成した素材の透かしは後払いで消えず再生成が必要。不可視識別メタデータの付与可能性あり。
-- **日本語UI・日本語プロンプト：** 言語別の公開規格が確認できていないため未確認（日本語の公式ヘルプがあることは、UI完全対応や日本語プロンプト品質の保証ではありません）。
+- **日本語UI・日本語プロンプト：** Higgsfieldの日本語向けページ（/ja/）と日本語の記事が存在。公開ページの日本語化は確認できるが、実際の制作エディタのメニュー、モデル別日本語プロンプト出力はログイン環境で未検証。
 - **入力と出力の権利：** 生成物の商用利用許諾は著作権・肖像権・商標権・第三者素材に対する独立の許諾ではありません。個別に確認してください。
 
 ### 一次資料
 - [Higgsfield 商用利用・権利（公式ヘルプ）](https://higgsfield.ai/creator-hub/help-center/account/who-owns-my-generations-and-can-i-use-them-commercially)
 - [Higgsfield 透かしの削除（公式ヘルプ）](https://higgsfield.ai/creator-hub/help-center/credits/watermark-and-how-to-remove)
 - [Higgsfield料金表](https://higgsfield.ai/pricing)
+
+## 日本向け公式情報の確認（2026年11月6日）
+
+**日本語対応の判定：** Higgsfieldの日本語向けページ（/ja/）と日本語の記事が存在。公開ページの日本語化は確認できるが、実際の制作エディタのメニュー、モデル別日本語プロンプト出力はログイン環境で未検証。
+
+**日本向けの料金・ライセンス補足：** 日本語公式のトップと記事の存在により日本語情報の提供は確認。一方、利用者がログイン後に操作する全UIと入力プロンプトのモデル別対応状況は未確認。一般の日本語案内の有無を、制作ツールの完全な日本語対応と同一視しない。
+
+### 日本語公式・利用条件へのリンク
+- [Higgsfield 日本語サイト](https://higgsfield.ai/ja)
+- [Higgsfield 日本語ブログ](https://higgsfield.ai/ja/blog/generating-with-seedance-2-0)
+
+**判定上の注意：** 日本語の宣伝ページ／公式ブログがあることは、ログイン後の制作エディタが全面的に日本語化されている証明ではありません。実機のモデル別生成品質や地域別購入条件は確認が必要です。
 
 ## 公式情報
 - [Higgsfield AI 公式サイト](https://higgsfield.ai/)

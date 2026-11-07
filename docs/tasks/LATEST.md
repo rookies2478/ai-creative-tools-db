@@ -1,6 +1,30 @@
 # Latest Project State
 
 - updated_at: 2026-11-07
+- source_branch: master
+- latest_confirmed_master_commit: fb0c1e861bed5c2043da0ea4738fc6d4273ff653 (PR #83 merged, 2026-11-07)
+- current_tools: 59 (38 baseline + PR #81 new image/video 15 + PR #83 voice/music/design/presentation 6)
+- category_expansion: docs/tasks/completed/2026-11-07-jp-creative-categories.md (PR #83; Issue #82 closed completed)
+- image_video_expansion: docs/tasks/completed/2026-11-07-creative-tools-expansion.md (PR #81; Issue #80 closed completed)
+- current_active_task: docs/tasks/active/2026-11-07-fotor-search-intent.md (READY; **only active task**)
+- fotor_existing_implementation: PR #78/#79 both merged; static Fotor route content, 4-row intent table and regression test already exist. No duplicate content edit authorized by this closeout.
+- fotor_remaining: dated official-source reconciliation (free plan/watermark/commercial-use by feature), production DOM copy recheck, and GSC Page×Query verification if available; do not claim completed account-level licensing or SEO outcomes.
+- CI_master: PASS — https://github.com/rookies2478/ai-creative-tools-db/actions/runs/42360844417 (affiliate/data/CTA/build/publish/Fotor HTML regression). PR-only active-task/scope gate is **skipped** on push by workflow design.
+- Production_routes: PASS — https://github.com/rookies2478/ai-creative-tools-db/actions/runs/42360844176 (125 sitemap URLs HTTP 200, canonical/stale-copy guards; commit marker needs independent read-back for any newer release).
+- Fotor_earlier_live_QA: PASS — https://github.com/rookies2478/ai-creative-tools-db/actions/runs/42350278868 (2026-11-07 desktop/mobile 1440/375px; live SHA 6e5a99238ac0cfc9a120e3c28bbe00724e8c4433, before #81/#83).
+- Open_draft_PRs: #65 (guide rights/pricing sync), #77 (38-tool official fact re-audit). Neither is merged, and their diffs must be reconciled against current 59-tool master before any release.
+- closed_issues: #69 (38-tool registry structure, PR #70/#76; facts still require periodic checks), #82 (six-category expansion), #80 (fifteen-tool image/video expansion).
+- outstanding_seo_parent_issue: #71 remains open; do not represent the site-wide GSC/query-intent audit as completed.
+- controls: No changes to product URLs, affiliate links, analytics IDs, production deployment, release branch, or secrets in the closeout PR.
+- verification_limit: New articles and previously published source claims are not validated by a successful route check; account-specific billing, rights, and payout still need official or account evidence.
+
+---
+
+## Prior snapshot retained — registry closeout and older records
+
+# Latest Project State
+
+- updated_at: 2026-11-07
 - registry_closeout: docs/tasks/completed/2026-11-06-official-source-registry.md（Issue #69 / PR #70 38ツール公式URL台帳。構造検証のみ、last_content_verified_atは全件空欄=事実未検証。Issue #66の事実監査は未実施）
 - current_active_task: none（#69クローズアウト後）
 

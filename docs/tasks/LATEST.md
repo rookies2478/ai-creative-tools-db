@@ -1,6 +1,18 @@
 # Latest Project State
 
 - updated_at: 2026-11-07
+- current_active_task: docs/tasks/active/2026-11-07-pika-official-license-drift.md (only active, READY)
+- latest_completed_task: docs/tasks/completed/2026-11-06-guide-rights-pricing-consistency.md (PR #85 merged, guide-copy changes)
+- current_tool_catalog: 59, unchanged count
+- Pika_source_conflict: new official Free monthly credits 0 / no commercial license, older Basic 80 / commercial yes; Starter commercial license pricing NO vs support YES. See https://pika.art/pricing?interval=month and https://pika.art/support ; individual account terms NOT_VERIFIED.
+- safe_boundary: dedicated Pika edits only, no affiliate URL, analytics, site configuration or direct production publication.
+- previous_snapshots_below: retained verbatim
+
+---
+
+# Latest Project State
+
+- updated_at: 2026-11-07
 - current_active_task: docs/tasks/active/2026-11-06-guide-rights-pricing-consistency.md (READY, sole task; original content proposal PR #65)
 - latest_completed_task: docs/tasks/completed/2026-11-07-fotor-search-intent.md (Fotor implementation PR #78/#79 + source/live QA, per-task PASS_WITH_LIMITATIONS; SEO umbrella #71 open)
 - pending_guides: 3 comparison/guides text+Astro sync awaiting PR CI and release review; no claim of live publication until deployed SHA verified.

@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-06-runway-commercial-source"
 created_at: "2026-11-06"
-status: READY
+status: COMPLETED
 risk: LOW
 current_phase: search-traffic-launch
 production_required: false
@@ -12,7 +12,7 @@ goal: "Remove an ambiguous and potentially misleading statement about plan-depen
 non_goals:
   - "Change pricing, models, plan entitlements, rights policy fields, CTA, affiliate, canonical, UI, schema, or deployment"
 target_files:
-  - docs/tasks/active/2026-11-06-runway-commercial-source.md
+  - docs/tasks/completed/2026-11-06-runway-commercial-source.md
   - src/pages/tools/runway/index.astro
 reference_files:
   - CLAUDE.md
@@ -53,3 +53,12 @@ It states generated content is not restricted to non-commercial use by Runway (i
 # Validation
 
 Current master readback; patch exclusively lead and sources. GitHub Actions will verify build/data/publish/CTA but not local active task gate. Do not merge until all local checks PASS and owner approves. Production must stay unchanged.
+
+## Release closeout evidence (2026-11-07 JST)
+
+- PR: https://github.com/rookies2478/ai-creative-tools-db/pull/74; source article HEAD: `11b45ce1958dab9dc9adb534c6595026ab25f060`.
+- Existing isolated local checks: diff check, build, data, publish (0 errors), affiliate links and throwaway single-active-task validate:task all PASS. Dated Runway official commercial-use and usage-rights source verification recorded in original PR #74. Site production and live page validation remain NOT_VERIFIED.
+- This is a completed **implementation task**, not a statement of production publication or SEO gain. No new tool pricing or affiliate decisions are authorized.
+- The currently existing separate `docs/tasks/active/2026-11-06-official-source-registry.md` task is preserved and remains in progress; the PR-specific task is moved to completed to prevent creating two active tasks in master.
+- Latest CI must be rerun/read back on this record-only commit, and post-merge live checks and deployment SHA verification remain open.
+- RESULT: IMPLEMENTATION_REVIEWED / RELEASE_GATES_PENDING / PRODUCTION_NOT_DEPLOYED.

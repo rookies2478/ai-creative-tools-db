@@ -21,7 +21,7 @@ const basicRows = [
   [{ text: 'Leonardo AI' }, { text: '画像' }, { text: 'あり（制限付）' }, { text: '$12/月〜（月払い）' }, { text: '要確認' }],
   [{ text: 'Canva AI' }, { text: '画像' }, { text: '制限付き無料' }, { text: 'Web Pro ¥11,800/年／App ¥1,180/月（経路別）' }, { text: 'あり' }],
   [{ text: 'Runway' }, { text: '動画' }, { text: 'あり（初回のみ）' }, { text: '$12/月〜（年払い）' }, { text: 'なし' }],
-  [{ text: 'Pika' }, { text: '動画' }, { text: 'あり（制限付）' }, { text: '$8/月〜（年払い）' }, { text: '一部あり' }],
+  [{ text: 'Pika' }, { text: '動画' }, { text: '新Freeは月額付与0' }, { text: '新Starter $8/月相当（年払い）' }, { text: '無透かしと商用許諾は別' }],
   [{ text: 'Luma AI（App）' }, { text: '動画' }, { text: 'Trial条件を要確認' }, { text: '現行Appの契約画面で確認' }, { text: '要確認' }],
   [{ text: 'Kling AI' }, { text: '動画' }, { text: 'あり（制限付）' }, { text: '要公式確認' }, { text: '一部あり' }],
   [{ text: 'Vidu AI' }, { text: '動画' }, { text: 'あり（制限付）' }, { text: '要公式確認' }, { text: 'なし' }],
@@ -68,8 +68,8 @@ const creditRows = [
   ],
   [
     { text: 'Pika' },
-    { text: '新Free：定期付与は新料金比較で要確認（旧Basicと異なる）' },
-    { text: '新Starter $8/月相当（年払い、クレジットは公式確認）' },
+    { text: '新Freeは月額付与0（旧Basic月80とは異なる）' },
+    { text: '新Starter年払い月$8相当・900クレジット/月' },
     { text: '動画の秒数・解像度によって消費量が変わる場合あり' },
   ],
   [
@@ -116,9 +116,9 @@ const videoUnitRows = [
   ],
   [
     { text: 'Pika' },
-    { text: 'Standard（年払い）' },
-    { text: '$8/月' },
-    { text: '新料金表で確認' },
+    { text: '新Starter（年払い）' },
+    { text: '$8/月相当' },
+    { text: '新比較表900クレジット/月' },
     { text: '詳細は公式確認' },
     { text: '要公式確認' },
   ],
@@ -195,10 +195,10 @@ const commercialRows = [
   ],
   [
     { text: 'Pika' },
-    { text: '無料BasicにもCommercial use明記' },
-    { text: '有料プランもCommercial use明記' },
+    { text: '新Freeは商用ライセンスなし' },
+    { text: 'Creator/Fancyは商用ライセンスあり。Starterは公式間で記載差あり' },
     { text: '記載なし' },
-    { text: '無料Basicの透かしなしDLも公式記載', muted: true },
+    { text: '無料の無透かしDLと商用権利を区別', muted: true },
   ],
   [
     { text: 'Luma AI' },
@@ -232,7 +232,7 @@ const watermarkRows = [
   [{ text: 'Leonardo AI' }, { text: '詳細は公式確認' }, { text: '通常は透かしなしとされている' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
   [{ text: 'Canva AI' }, { text: '詳細は公式確認' }, { text: '詳細は公式確認' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
   [{ text: 'Runway' }, { text: '透かしあり' }, { text: '透かしなし（有料プラン）' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
-  [{ text: 'Pika' }, { text: '新Freeは透かしなしDL（商用許諾と別）' }, { text: '有料でも無透かしDLを案内' }, { text: '不可視識別の有無は別確認' }, { text: '規約上の要件を確認' }],
+  [{ text: 'Pika' }, { text: '無料Basicも透かしなしDL' }, { text: '有料でも無透かしDLを案内' }, { text: '不可視識別の有無は別確認' }, { text: '規約上の要件を確認' }],
   [{ text: 'Luma AI' }, { text: '現行Trialの出力条件確認' }, { text: 'APIは公式FAQで透かしなし／App別' }, { text: 'Appの現行条件は要確認' }, { text: '規約上の要件を確認' }],
   [{ text: 'Kling AI' }, { text: '透かしあり（場合による）' }, { text: '条件は公式確認' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
   [{ text: 'Vidu AI' }, { text: '透かしあり' }, { text: '条件は公式確認' }, { text: '詳細は公式確認' }, { text: '規約上の要件を確認' }],
@@ -259,11 +259,11 @@ const useCaseRows = [
   [
     { text: 'SNS用ショート動画' },
     { text: 'Pika、Luma AI、Kling AI' },
-    { text: 'Pikaは新料金比較でFreeに商用ライセンスなし（無透かしDLと別）。第三者素材は別確認' },
+    { text: 'Pikaは新Freeに商用ライセンスなし、Creator以上に商用ライセンスあり。無透かしDLとは別' },
   ],
   [
     { text: 'コスト重視の商用利用' },
-    { text: 'Leonardo AI（プラン確認）、Pika Creator以上（商用利用は要契約確認）' },
+    { text: 'Leonardo AI（プラン確認）、Pika Creator以上（契約確認）' },
     { text: '月額が比較的低いプランが用意されている' },
   ],
 ];
@@ -283,7 +283,7 @@ const checklistItems = [
 const faqItems = [
   {
     q: '無料プランで商用利用できるツールはありますか？',
-    a: 'ツールによって対応が分かれます。Pika新料金比較ではFreeに商用ライセンスなし（旧表示と異なる）。一方、Luma App Trialは内部評価・テスト用途です。Leonardo AIは無料プランも非独占的ライセンスで商用利用できるとされていますが、生成画像の所有権はLeonardo.AIに帰属し他ユーザーも同一画像を使用できます。Adobe FireflyやCanva AIは一部の商用利用が案内されていますが条件があります。Runwayの無料プランはクレジットが初回のみで実用的でない場合が多いです。いずれも最新の公式規約をご確認ください。',
+    a: 'ツールによって条件が異なります。Pika新料金比較ではFreeに商用ライセンスなし、Creator/Fancyにはあり、Starterはサポート説明と相違するため要確認。Luma App Trialは内部評価・テスト用途です。Leonardo AIは無料でも非独占的利用権が案内されますが、所有権は別です。最新の各公式規約をご確認ください。',
   },
   {
     q: '商用利用と著作権は別の問題ですか？',
@@ -291,7 +291,7 @@ const faqItems = [
   },
   {
     q: '透かしなしで使えるプランはどれですか？',
-    a: 'Midjourney（有料プラン）、Runway（有料プラン）、Pika（新Freeの無透かしDL、商用許諾は別）、Luma API（Appは別確認）、Leonardo AI（有料プラン）などで透かしなしが案内されています。Adobe FireflyはC2PA不可視メタデータが全プランで埋め込まれます。詳しくは透かし・クレジット表記ガイドをご覧ください。',
+    a: 'Midjourney（有料）、Runway（有料）、Pika（新Freeは無透かしDL表示でも商用ライセンスなし）、Luma API（Appは別確認）などで透かしなしが案内されています。商用利用権とは別の問題です。',
   },
   {
     q: 'AI動画生成ツールのコスト計算の考え方は？',
@@ -366,7 +366,7 @@ const breadcrumb = JSON.stringify({
     </GuideWarningBox>
 
     <GuideWarningBox variant="info" title="2026年11月6日の一次資料による重要修正">
-      <p>Pikaは新料金比較でFreeに商用ライセンスなし（透かしなしDLとは別）。旧DALL·E GPTは提供終了し、現在はChatGPT画像を利用します。Luma AppとAPIの条件は区別し、CanvaのWeb年額とアプリ月額は別の購入条件です。</p>
+      <p>Pikaは新Freeで商用ライセンスなし、Creator/Fancyはライセンスあり。Starterは公式記載の差異を確認。旧DALL·E GPTは提供終了、現在はChatGPT画像です。Luma AppとAPI、Canva Web年額とApp月額は区別します。</p>
       <ul class="mt-2 list-disc pl-5 space-y-1">
         <li><a href="https://pika.art/pricing" rel="noopener noreferrer" target="_blank">Pika公式料金表</a></li>
         <li><a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" rel="noopener noreferrer" target="_blank">OpenAI公式DALL·E GPT終了案内</a></li>

@@ -76,3 +76,9 @@ Use primary-source-supported statements only. Do not change existing affiliate U
 - Fotor's separate task is moved to completed in this same scoped PR because its merged PR #78/#79 and live QA evidence are sufficient for that editorial phase; remaining GSC analysis stays under #71.
 - Claims spot-checked against primary pages: https://pika.art/pricing , https://help.openai.com/ja-jp/articles/6825453-chatgpt-release-notes , https://www.canva.com/ja_jp/pricing/ , https://lumalabs.ai/learning-hub/licensing . No new app login or billing evidence.
 - Deploy and link activation are separately gated; all current affiliate/GA4/Clarity/DB files are unchanged.
+
+
+## 2026-11-07 Pika conflict correction (review gate)
+- `https://pika.art/pricing` can return legacy Basic/Standard (80/700 credits and Basic commercial allowed) whereas newer price compare `https://pika.art/pricing?interval=month` describes Free 0 monthly credits (packs only), Free commercial-license NO, Starter 900/month, Creator/Fancy commercial YES. Current `https://pika.art/support` describes Starter commercial YES while the newer pricing matrix says NO: **unresolved official conflict**. Avoid recommending Starter for commercial work without account terms.
+- Modified the comparison guide Markdown and both relevant Astro source pages to avoid claiming Free commercial use or old monthly allowances as current. Limited to authorized guide files. Source-of-truth `src/content/tools/pika.md` has not been updated by this scoped task; reconcile separately under #66, with exact target files and current evidence.
+- Explicit prohibition: do not interpret a CI PASS as legal or pricing verification; verify public rendering after release and leave inconsistent vendor terms as HOLD.

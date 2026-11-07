@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-06-official-source-registry"
 created_at: "2026-11-06"
-status: READY
+status: COMPLETED
 risk: LOW
 current_phase: search-traffic-launch
 production_required: false
@@ -14,6 +14,8 @@ non_goals:
   - URLやDBスキーマと計測・アフィリエイト・CI・本番公開の変更
 target_files:
   - docs/tasks/active/2026-11-06-official-source-registry.md
+  - docs/tasks/completed/2026-11-06-official-source-registry.md
+  - docs/tasks/LATEST.md
   - docs/operations/official-source-registry.csv
   - docs/operations/official-source-review.md
   - scripts/validate-official-source-registry.mjs
@@ -55,3 +57,12 @@ forbidden_operations:
 Issue #69。過去26ツール時点のreportsアーカイブは正本にしない。現行DBを正本としてslugの存在確認を行い、各ツールの日本語公式があれば先に閲覧し、なければ英語公式へのフォールバックを記録する。リンク集と作業手順はdocs/operationsに保持し、公開サイトの事実は本タスクでは変更しない。
 
 RESULT: PASS | HOLD | BLOCKED
+
+## Completed outcome (closeout 2026-11-07)
+
+- Issue #69, deliverables merged to master via PR #70 (commit `3e6fe82`): official-source-registry.csv (38 rows), official-source-review.md, validate-official-source-registry.mjs.
+- Closeout re-ran on master 1cc9eda: validate:task, registry validator (38/38 exact match, 21 with identified JP references), build, validate:data (0 errors), validate:publish (0 errors, 102 sitemap URLs), validate:affiliate-links, validate:scope, git diff --check: all PASS.
+- last_content_verified_at is intentionally blank for all 38 rows: URLs are NOT live-fetched fact checks. Price, license, JP UI and watermark claims remain unverified here and belong to Issue #66.
+- Production deployment: NOT_DEPLOYED / not in scope. No content, affiliate, analytics, CI or deploy changes.
+
+RESULT: PASS

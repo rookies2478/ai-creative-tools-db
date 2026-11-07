@@ -1,5 +1,13 @@
 # Latest Project State
 
+- updated_at: 2026-11-07
+- registry_closeout: docs/tasks/completed/2026-11-06-official-source-registry.md（Issue #69 / PR #70 38ツール公式URL台帳。構造検証のみ、last_content_verified_atは全件空欄=事実未検証。Issue #66の事実監査は未実施）
+- current_active_task: none（#69クローズアウト後）
+
+---
+
+## Snapshot 2026-11-06（保存）
+
 - updated_at: 2026-11-06
 - latest_publication_commit: 3e9ff9aef8aefb08f2069441099354decfc53c4c（PR #67: 38ツール未確認事項公式再調査・更新、master merge）
 - source_branch: master

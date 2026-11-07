@@ -73,3 +73,27 @@ capcut-ai(通貨・金額・クレジット)、creatify(プラン名・金額)�
 
 ## 限界
 地域別・ログイン後・JS動的価格、403ページは未検証。WebFetchは要約モデル経由のため、引用は原文再確認前提の補助。検索要約のみの情報(Leonardo、Dreamina他ページ)は検証済みとしない。
+
+## 追補 2026-11-07: 公式原文(raw HTML)再確認と証拠区分
+
+上記表は WebFetch(要約モデル経由)の結果。本追補は同日、公式URLを `curl`(ブラウザ相当UA、Accept-Language: ja、実行PCの地域)で原文HTMLとして取得し、タグ除去後の本文を照合した結果。区分:
+- **RAW_CONFIRMED**: 原文本文で該当文言を直接確認。
+- **SUMMARY_ONLY**: WebFetch要約のみ。原文再確認前のため `last_content_verified_at` は空欄に戻した(18行: adobe-firefly, canva-ai-image-generator, google-flow, hailuo-ai, heygen, ideogram, invideo-ai, kling-ai, krea-ai, luma-ai, microsoft-designer, nightcafe, openart, photoroom, pixverse, recraft, runway, stable-diffusion)。
+- 日付が残るのは RAW_CONFIRMED の7行のみ(capcut-ai, creatify, dreamina, dreamstudio, higgsfield-ai, pika, synthesia)。
+
+### 8 CONFLICT の原文照合
+| slug | 区分 | 原文で確認できたこと(取得URL) | 反映の可否 |
+|---|---|---|---|
+| capcut-ai | RAW_CONFIRMED(地域依存) | /ja-jp/pricing/ 本文: 「表示されている料金は参考情報です。ログインすると…最終料金、税金…」、Pro JPY 2700/月・毎月800のAIクレジット、Ultra JPY 12600/月。DB現行(USD19.99/1,200cr)はJPY表示と相違。表示通貨は取得地域に依存する可能性 | 「日本向け表示: Pro JPY2,700/月・800cr(参考表示、最終額はログイン後)」と地域注記を付けた修正が可能。USD表記の根拠は今回再現せず |
+| creatify | RAW_CONFIRMED | /ja/pricing: スタンダード $10(打消し$15)、プロ $38(打消し$55・280クレジット/月)、年間プラン30%お得。DBの「Starter $39/100cr、Pro $99」は現行ページに存在せず | プラン名・金額の更新が可能(取得時点の表示、打消し価格=割引表示である旨を記載) |
+| pika | RAW_CONFIRMED | /pricing: Free「Included: No watermark / Not included: Commercial license」、Starter $10/月(600cr)は「Included: Commercial license」。DB現行の「無料Basicに商用可・月80cr」は2026-11-07取得の本文と相違。ページが短期間に変更された可能性 | Free商用「不可」への訂正が可能。日付つきで記載し、再確認を週次手順へ |
+| synthesia | RAW_CONFIRMED(一部) | ?region=japan: Starter「First month for $9 / then $19 per month」1,250 credits、Pro $89(初月$49)。DB現行の月払い$29は相違。年払い額は原文では未確認(WebFetchの$14は未裏取り) | 月払い$19(初月$9)への更新が可能。年払い額は反映しない |
+| dreamina | RAW_CONFIRMED(規約のみ) | 日本向け規約 (capcut.com/clause/dreamina-terms-of-service?lang=ja-JP&region=JP) 本文に「Our Services are generally provided for private, non-commercial use」。一般料金ページの価格は原文で再取得できず(SUMMARY_ONLY) | 規約の文言は引用可。Free/有料の商用可否は規約解釈を要し、書面確認まで断定しない |
+| higgsfield-ai | RAW_CONFIRMED(公式間矛盾) | ヘルプ(2026-08-02付): 出力の所有権はユーザー、生成コンテンツの商用利用を制限しない旨。ブログ料金解説の機能表: 商用利用 無料✗/Starter✓/Plus✓/Ultra✓。同一社の公式ページ間で矛盾 | 矛盾として記載を維持。Free商用は断定しない(書面確認) |
+| dreamstudio (Brand Studio) | RAW_CONFIRMED(KB) | kb.stability.ai: Free Trial 500 credits(一回のみ)、Creator $19/月・2,000cr、Core $50/月・6,000cr。DB記載の「1,000クレジット」側の公式根拠は再取得できず | KB記載値への更新案は可能。DB側根拠の出所確認後に反映 |
+| krea-ai | SUMMARY_ONLY(原文で未確定) | 原文に「Commercial license / Use all generated content for commercial purposes」の記載はあるが、フラット化した本文からどのプランのカードか特定できない(プラン別帰属は未確認) | 反映しない。ブラウザ目視で確認 |
+
+### 共通の限界
+- 取得は実行PCの地域・言語設定で、他地域の価格/通貨は未確認。ログイン後の最終額・税は未確認。
+- JS描画のみの価格は原文に出ない。「原文に無い」=「存在しない」ではない。
+- 上記「反映可能」は提案であり、顧客向け文言は変更していない。反映は別Draft PR(別のActive Task)で、`.md`と関連記事を同時更新する。

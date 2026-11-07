@@ -4,7 +4,6 @@ shortDescription: "VOICEVOXは日本語キャラクター音声生成・歌声�
 category: "audio"
 officialUrl: "https://voicevox.hiroshiba.jp/"
 freePlan: true
-lowestPaidPlan: "無料（ソフト本体）"
 currency: "JPY"
 commercialUse: "limited"
 commercialUseNote: "ソフトは商用利用可。ただしVOICEVOX表記、キャラクター・音声ライブラリの個別規約が必要。 業務・商用利用前は公式の契約条件、素材権利を確認してください。"
@@ -20,7 +19,7 @@ weaknesses:
 lastReviewed: "2026-11-07"
 nextReviewDue: "2026-12-07"
 officialSourceUrl: "https://voicevox.hiroshiba.jp/"
-pricingModel: "subscription"
+pricingModel: "local_free"
 freePlanNote: "ソフトは商用利用可。ただしVOICEVOX表記、キャラクター・音声ライブラリの個別規約が必要。"
 paidPlanNote: "無料（ソフト本体）。料金条件・請求時の税や対象プランは公式で再確認。"
 platforms:
@@ -51,13 +50,13 @@ japanBilling:
   japanOfficialUrl: "https://voicevox.hiroshiba.jp/"
   pricingUrl: "https://voicevox.hiroshiba.jp/"
   billingCurrency: "JPY（公式日本語価格）"
-  jpyDirectBilling: "jpy-direct"
-  localizedJpyDisplay: true
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: false
   taxDisplay: "unknown"
   purchaseChannels:
-    - web
+    - local
   pricingCheckedAt: "2026-11-07"
-  pricingNote: "日本語公式情報優先。日本語の税込料金を確認。"
+  pricingNote: "公式ソフトウェア本体は無料で、円建ての直接決済契約を伴わない。個別音声ライブラリは別規約。"
   sourceUrls:
     - "https://voicevox.hiroshiba.jp/"
     - "https://voicevox.hiroshiba.jp/term/"

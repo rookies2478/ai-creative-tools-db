@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-07-creative-tools-expansion"
 created_at: "2026-11-07"
-status: PAUSED
+status: COMPLETED
 risk: MEDIUM
 current_phase: search-traffic-launch
 production_required: false
@@ -47,8 +47,8 @@ reference_files:
 unknowns:
   - "日本国内適用料金・商用ライセンス・日本語プロンプトの一部は未検証"
   - "全ツールのログイン後UIと独自作例は未検証"
-pause_reason: "新カテゴリのスタックPRを先行するため。PR #81は作業中のまま保持"
-resume_condition: "新カテゴリPRのレビュー後に旧PRを先行マージし、再開・完了を判断"
+closeout_reason: "PR #81 merged and required PR checks PASS; paused historical task completed after the final release."
+completion_evidence: "PR #81 / Actions run 42355931021; master fb0c1e861bed5c2043da0ea4738fc6d4273ff653"
 preserved_changes:
   - docs/operations/creative-tools-jp-affiliate-audit-2026-11-07.csv
 preexisting_untracked_files: []
@@ -79,6 +79,9 @@ Parent Issue: https://github.com/rookies2478/ai-creative-tools-db/issues/80
 
 このPRは基本掲載（公式情報ベース・実機未検証）。新規レジストリ行でlast_content_verified_atは空欄。商用・価格など契約別の断定は避け、現行規約で差がある場合の詳細は実機/法務再確認へ持ち越す。
 
-Fotorタスクはmasterから切ったこの作業ブランチ内でPAUSEDに移動するが、masterの進行作業は変更しない。PRのマージはFotorタスク完了・復帰順序の再確認後とする。
+Fotorタスクは一時停止のまま保持されていたが、PR #81 と #83 が master にマージされたため、別個に再開可能。
 
-RESULT: HOLD（CIと人間レビュー待ち）
+RESULT: PASS — PR #81 merged; CI run 42355931021 PASS. 15件の基本掲載の完了であり実機検証・日本の最終課金・商用権利・提携承認は未完了。
+
+
+Closeout 2026-11-07: PR #81 merged into master; resulting catalog total 59 after PR #83. Keep audit CSV unchanged for follow-up quality work.

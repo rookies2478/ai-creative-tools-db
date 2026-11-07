@@ -6,7 +6,7 @@ const RELEASES=[
  {label:'speaker-diarization',url:'https://www.ai-gijiroku-navi.com/guides/speaker-diarization/',expected:'導入前の確認方法'},
  {label:'fotor-ai',url:'https://aicreative-db.com/tools/fotor-ai/',expected:'無料・透かし・商用利用：用途別の確認ポイント'}
 ];
-const REQUIRED_SHA='a42b06cf3daf95bc93517618f7135128dbd0fe48';
+const REQUIRED_SHA='6e5a99238ac0cfc9a120e3c28bbe00724e8c4433';
 const OUT='qa-release-results';
 mkdirSync(OUT,{recursive:true});
 const results=[];

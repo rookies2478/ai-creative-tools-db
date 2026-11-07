@@ -4,7 +4,7 @@ import ToolCard from './ToolCard.astro';
 
 interface Props {
   currentSlug: string;
-  category: 'image' | 'video' | 'both';
+  category: 'image' | 'video' | 'both' | 'audio' | 'music' | 'design' | 'presentation';
 }
 
 const { currentSlug, category } = Astro.props;
@@ -14,7 +14,7 @@ function categoryMatches(toolCat: string, current: string): boolean {
   if (current === 'both') return toolCat === 'image' || toolCat === 'video' || toolCat === 'both';
   if (current === 'image') return toolCat === 'image' || toolCat === 'both';
   if (current === 'video') return toolCat === 'video' || toolCat === 'both';
-  return false;
+  return toolCat === current;
 }
 
 const related = allTools

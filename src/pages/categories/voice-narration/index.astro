@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import ToolCard from '../../../components/ToolCard.astro';
+const newVoiceTools = (await getCollection('tools')).filter((t) => t.data.category === 'audio');
 
 const faqs = [
   {
@@ -279,6 +282,11 @@ const faqJsonLd = JSON.stringify({
 
     </div>
   </div>
+  <section class="mx-auto max-w-5xl px-6 py-12" aria-label="AI音声ツールDB">
+    <h2 class="mb-3 text-2xl font-bold">日本語公式情報を確認できるAI音声ツール</h2>
+    <p class="mb-6 text-gray-600">公式料金と利用規約から比較します。キャラクター音声など個別の権利条件に注意してください。</p>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{newVoiceTools.map((tool) => <ToolCard tool={tool} />)}</div>
+  </section>
 </BaseLayout>
 
 <style>

@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolCard from '../../../components/ToolCard.astro';
+const tools=(await getCollection('tools')).filter(t=>t.data.category==='presentation');
+---
+<BaseLayout title="AIスライド作成ツール比較｜AIクリエイティブナビ" description="AIプレゼン資料とスライドの自動生成を比較します。" canonicalPath="/categories/ai-presentations/">
+  <main class="mx-auto max-w-5xl px-6 py-12">
+    <nav class="mb-6 text-sm text-slate-500"><a href="/">トップ</a> / <a href="/tools/">ツール一覧</a> / AIスライド作成</nav>
+    <h1 class="mb-4 text-3xl font-bold text-slate-900">AIスライド作成ツール比較</h1>
+    <p class="mb-8 text-slate-600">AIプレゼン資料とスライドの自動生成を比較します。 各公式料金・規約をご確認ください。</p>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{tools.map(tool=><ToolCard tool={tool}/>)}</div>
+    <p class="mt-8 text-sm text-slate-500">商用・無料・料金条件は変更される場合があります。未検証の事項は要確認です。</p>
+  </main>
+</BaseLayout>

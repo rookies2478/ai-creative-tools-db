@@ -29,10 +29,17 @@ const toolPageUrl = `${siteUrl}/tools/${entry.slug}/`;
 
 const isVideo = data.category === 'video' || data.category === 'both';
 const isImage = data.category === 'image' || data.category === 'both';
-const categoryUrl = isVideo ? `${siteUrl}/categories/video-generation/` : `${siteUrl}/categories/image-generation/`;
-const categoryName = data.category === 'both'
-  ? 'AI画像・動画生成ツール一覧'
-  : isVideo ? 'AI動画生成ツール一覧' : 'AI画像生成ツール一覧';
+const catDetails: Record<string, {url:string;name:string}> = {
+  image:{url:'/categories/image-generation/',name:'AI画像生成ツール一覧'},
+  video:{url:'/categories/video-generation/',name:'AI動画生成ツール一覧'},
+  both:{url:'/tools/',name:'AI画像・動画生成ツール一覧'},
+  audio:{url:'/categories/voice-narration/',name:'AI音声・ナレーションツール一覧'},
+  music:{url:'/categories/music-generation/',name:'AI音楽生成ツール一覧'},
+  design:{url:'/categories/design/',name:'AIデザインツール一覧'},
+  presentation:{url:'/categories/ai-presentations/',name:'AIスライド作成ツール一覧'},
+};
+const categoryUrl = `${siteUrl}${catDetails[data.category].url}`;
+const categoryName = catDetails[data.category].name;
 
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -112,9 +119,8 @@ function catBadgeCls(cat: string): string {
 }
 
 function catLabel(cat: string): string {
-  if (cat === 'image') return 'AI画像生成';
-  if (cat === 'video') return 'AI動画生成';
-  return 'AI画像・動画生成';
+  const map: Record<string,string> = {image:'AI画像生成',video:'AI動画生成',both:'AI画像・動画生成',audio:'AI音声・ナレーション',music:'AI音楽生成',design:'AIデザイン',presentation:'AIスライド作成'};
+  return map[cat] ?? 'AIクリエイティブ';
 }
 
 const cu  = cuInfo(data.commercialUse);
@@ -174,11 +180,7 @@ function styleCtrlLabel(v: string): string {
   return v === 'high' ? '高' : v === 'medium' ? '中' : '低';
 }
 
-const descCategory = data.category === 'video'
-  ? 'AI動画生成ツール'
-  : data.category === 'both'
-  ? 'AI画像・動画生成ツール'
-  : 'AI画像生成ツール';
+const descCategory = categoryName.replace('一覧', '');
 const pageDescription = `${data.name}の特徴、料金、無料プランの有無、日本語対応、商用利用条件の確認ポイントを整理。${descCategory}としての使い方や注意点もまとめています。最新情報は公式サイトをご確認ください。`;
 ---
 

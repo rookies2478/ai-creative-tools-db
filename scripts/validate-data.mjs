@@ -190,7 +190,7 @@ function parseFrontmatter(yamlText) {
 // Schema knowledge (derived from src/content/config.ts, tools collection)
 // ---------------------------------------------------------------------------
 
-const CATEGORY_ENUM = ["image", "video", "both"];
+const CATEGORY_ENUM = ["image", "video", "both", "audio", "music", "design", "presentation"];
 const COMMERCIAL_USE_ENUM = ["ok", "paid-only", "limited", "no", "unknown"];
 const CURRENCY_ENUM = ["JPY", "USD", "EUR", "unknown"];
 const WATERMARK_ENUM = ["yes", "no", "limited", "unknown"];

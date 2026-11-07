@@ -9,6 +9,12 @@ import '../../styles/tools-page.css';
 const allTools = await getCollection('tools');
 const imageTools = allTools.filter((t) => t.data.category === 'image' || t.data.category === 'both');
 const videoTools = allTools.filter((t) => t.data.category === 'video' || t.data.category === 'both');
+const otherCategories = [
+  {key:'audio',label:'AI音声・ナレーション',href:'/categories/voice-narration/'},
+  {key:'music',label:'AI音楽',href:'/categories/music-generation/'},
+  {key:'design',label:'AIデザイン',href:'/categories/design/'},
+  {key:'presentation',label:'AIスライド',href:'/categories/ai-presentations/'},
+] as const;
 const totalCount  = allTools.length;
 const imageCount  = imageTools.length;
 const videoCount  = videoTools.length;
@@ -16,15 +22,15 @@ const videoCount  = videoTools.length;
 const jsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "AI画像生成・AI動画生成ツール一覧",
+  "name": "AIクリエイティブ制作ツール一覧",
   "url": "https://aicreative-db.com/tools/",
   "numberOfItems": totalCount,
 });
 ---
 
 <BaseLayout
-  title="AI画像生成・AI動画生成ツール一覧｜商用利用・料金・無料枠を比較"
-  description="AI画像生成・AI動画生成ツールを一覧で比較。商用利用条件・料金・無料枠・透かし・日本語対応を確認しながら仕事や副業に使うツールを探せます。最新情報は公式サイトをご確認ください。"
+  title="AIクリエイティブツール一覧｜画像・動画・音声・音楽・デザイン・資料作成"
+  description="画像・動画・音声・音楽・デザイン・資料作成向けAIツールを一覧で比較。日本語公式・料金・商用利用条件も確認できます。"
   canonicalPath="/tools/"
   homePage={true}
   jsonLd={jsonLd}
@@ -39,7 +45,7 @@ const jsonLd = JSON.stringify({
         <span class="cur">ツール一覧</span>
       </nav>
       <span class="eyebrow">TOOL INDEX</span>
-      <h1>AI画像・動画生成<span class="hl">ツール一覧</span></h1>
+      <h1>AIクリエイティブ<span class="hl">ツール一覧</span></h1>
       <p class="page-lead">
         AI画像生成・動画生成ツールを、商用利用・無料枠・日本語対応・透かし・料金目安とあわせて一覧で確認できます。
         仕事や副業で使う前の比較にご活用ください。
@@ -73,6 +79,7 @@ const jsonLd = JSON.stringify({
         <button class="fchip" data-filter="all"        aria-pressed="true">すべて表示</button>
         <button class="fchip" data-filter="image" data-cat="image" aria-pressed="false">AI画像生成</button>
         <button class="fchip" data-filter="video" data-cat="video" aria-pressed="false">AI動画生成</button>
+        {otherCategories.map((cat)=><button class="fchip" data-filter={cat.key} data-cat={cat.key} aria-pressed="false">{cat.label}</button>)}
         <button class="fchip" data-filter="free"       aria-pressed="false"><span class="ld"></span>無料で試せる</button>
         <button class="fchip" data-filter="commercial" aria-pressed="false"><span class="ld"></span>商用利用の案内あり</button>
         <button class="fchip" data-filter="comm-free"  aria-pressed="false"><span class="ld"></span>無料プランで商用条件あり</button>
@@ -145,6 +152,16 @@ const jsonLd = JSON.stringify({
         </div>
       </div>
 
+      {otherCategories.map((cat) => {
+        const these = allTools.filter((t) => t.data.category === cat.key);
+        return <div class="tool-block" id={`block-${cat.key}`}>
+          <div class="tool-block-head video"><span class="dot"></span><h2>{cat.label}ツール</h2><span class="cnt" data-count-for={cat.key}>{these.length}件</span><span class="line"></span><a class="jump textlink" href={cat.href}>カテゴリを見る →</a></div>
+          <div class="tools-list" id={`grid-${cat.key}`}>
+            {these.map((tool) => <ToolsListCard tool={tool}/>)}
+            <div class="empty-note" data-empty-for={cat.key} style="display:none;">条件に一致するツールはありません。</div>
+          </div>
+        </div>;
+      })}
       <ComparisonFootnote />
     </div>
   </section>
@@ -326,6 +343,7 @@ const jsonLd = JSON.stringify({
   const cntVideo    = document.getElementById('cntVideo');
   const blockImage  = document.getElementById('block-image');
   const blockVideo  = document.getElementById('block-video');
+  const extraKeys = ['audio','music','design','presentation'];
   const imgEmpty    = document.getElementById('imgEmpty');
   const vidEmpty    = document.getElementById('vidEmpty');
   let activeFilter  = 'all';
@@ -337,6 +355,7 @@ const jsonLd = JSON.stringify({
       case 'all':        return true;
       case 'image':      return card.getAttribute('data-cat') === 'image';
       case 'video':      return card.getAttribute('data-cat') === 'video';
+      case 'audio': case 'music': case 'design': case 'presentation': return card.getAttribute('data-cat') === activeFilter;
       case 'free':       return card.getAttribute('data-free') === '1';
       case 'commercial': return card.getAttribute('data-commercial') === '1';
       case 'comm-free':  return card.getAttribute('data-comm-free') === '1';
@@ -350,11 +369,18 @@ const jsonLd = JSON.stringify({
   function apply(): void {
     const allCards = document.querySelectorAll<HTMLElement>('.tools-list .tool');
     let nImg = 0, nVid = 0;
+    const extraCounts: Record<string,number> = {audio:0,music:0,design:0,presentation:0};
     allCards.forEach((card) => {
       const show = matches(card);
       card.classList.toggle('hide', !show);
       if (show) {
-        card.getAttribute('data-cat') === 'image' ? nImg++ : nVid++;
+        const grid = card.closest('.tools-list')?.id;
+        if (grid === 'imgGrid') nImg++;
+        else if (grid === 'vidGrid') nVid++;
+        else {
+          const key = grid?.replace('grid-','') ?? '';
+          if (key in extraCounts) extraCounts[key]++;
+        }
       }
     });
 
@@ -363,10 +389,18 @@ const jsonLd = JSON.stringify({
     if (imgEmpty) imgEmpty.style.display = nImg === 0 ? '' : 'none';
     if (vidEmpty) vidEmpty.style.display = nVid === 0 ? '' : 'none';
 
-    if (blockImage) blockImage.style.display = activeFilter === 'video' ? 'none' : '';
-    if (blockVideo) blockVideo.style.display = activeFilter === 'image' ? 'none' : '';
+    if (blockImage) blockImage.style.display = ['video',...extraKeys].includes(activeFilter) ? 'none' : '';
+    if (blockVideo) blockVideo.style.display = ['image',...extraKeys].includes(activeFilter) ? 'none' : '';
+    extraKeys.forEach((key)=>{
+      const block=document.getElementById('block-'+key);
+      if(block) block.style.display=['image','video'].includes(activeFilter)||(extraKeys.includes(activeFilter)&&activeFilter!==key)?'none':'';
+      const count=document.querySelector('[data-count-for="'+key+'"]');
+      if(count) count.textContent=extraCounts[key]+'件';
+      const empty=document.querySelector<HTMLElement>('[data-empty-for="'+key+'"]');
+      if(empty) empty.style.display=extraCounts[key]===0?'':'none';
+    });
 
-    const total = nImg + nVid;
+    const total = nImg+nVid+Object.values(extraCounts).reduce((sum,n)=>sum+n,0);
     if (resultCount) resultCount.innerHTML = '<b>' + total + '</b> 件';
     sortCards();
   }
@@ -384,7 +418,7 @@ const jsonLd = JSON.stringify({
   const sortSelect = document.getElementById('sortSelect') as HTMLSelectElement | null;
 
   // 初期DOM順を記録
-  ['imgGrid', 'vidGrid'].forEach((id) => {
+  ['imgGrid', 'vidGrid',...extraKeys.map(k=>'grid-'+k)].forEach((id) => {
     const grid = document.getElementById(id);
     if (!grid) return;
     grid.querySelectorAll<HTMLElement>('.tool').forEach((card, i) => {
@@ -393,7 +427,7 @@ const jsonLd = JSON.stringify({
   });
 
   function sortCards(): void {
-    ['imgGrid', 'vidGrid'].forEach((id) => {
+    ['imgGrid', 'vidGrid',...extraKeys.map(k=>'grid-'+k)].forEach((id) => {
       const grid = document.getElementById(id);
       if (!grid) return;
       const cards = Array.from(grid.querySelectorAll<HTMLElement>('.tool'));

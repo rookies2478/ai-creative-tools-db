@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-07-creative-tools-expansion"
 created_at: "2026-11-07"
-status: READY
+status: PAUSED
 risk: MEDIUM
 current_phase: search-traffic-launch
 production_required: false
@@ -47,6 +47,10 @@ reference_files:
 unknowns:
   - "日本国内適用料金・商用ライセンス・日本語プロンプトの一部は未検証"
   - "全ツールのログイン後UIと独自作例は未検証"
+pause_reason: "新カテゴリのスタックPRを先行するため。PR #81は作業中のまま保持"
+resume_condition: "新カテゴリPRのレビュー後に旧PRを先行マージし、再開・完了を判断"
+preserved_changes:
+  - docs/operations/creative-tools-jp-affiliate-audit-2026-11-07.csv
 preexisting_untracked_files: []
 required_checks:
   - npm run validate:task

@@ -168,10 +168,9 @@ export function getPlatformLabel(platform: string): string {
 
 // ---- カテゴリラベル ----
 
-export function getCategoryLabel(cat: 'image' | 'video' | 'both'): string {
-  if (cat === 'image') return '画像生成';
-  if (cat === 'video') return '動画生成';
-  return '画像・動画生成';
+export function getCategoryLabel(cat: 'image' | 'video' | 'both' | 'audio' | 'music' | 'design' | 'presentation'): string {
+  const map: Record<string,string> = {image:'画像生成',video:'動画生成',both:'画像・動画生成',audio:'AI音声・ナレーション',music:'AI音楽',design:'AIデザイン',presentation:'AIスライド'};
+  return map[cat] ?? 'AIクリエイティブ';
 }
 
 // ---- 免責フッター（共通テキスト） ----

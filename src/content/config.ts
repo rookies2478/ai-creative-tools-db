@@ -16,7 +16,7 @@ const tools = defineCollection({
     name: z.string(),
     shortDescription: z.string(),
     // slug はファイル名から自動生成されるため schema 定義不要 (entry.slug で参照)
-    category: z.enum(['image', 'video', 'both']),
+    category: z.enum(['image', 'video', 'both', 'audio', 'music', 'design', 'presentation']),
     officialUrl: z.string().url(),
     affiliateUrl: z.string().url().optional(),
     freePlan: freePlanSchema,

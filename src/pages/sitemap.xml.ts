@@ -12,6 +12,8 @@ const STATIC_PATHS = [
   '/categories/image-generation/',
   '/categories/design/',
   '/categories/voice-narration/',
+  '/categories/music-generation/',
+  '/categories/ai-presentations/',
   '/comparisons/',
   '/comparisons/chatgpt-image-vs-gemini-image/',
   '/comparisons/google-flow-vs-kling-ai/',

@@ -24,6 +24,7 @@ target_files:
   - src/components/RelatedTools.astro
   - src/pages/tools/[slug].astro
   - src/pages/tools/index.astro
+  - src/pages/sitemap.xml.ts
   - src/pages/categories/music-generation/index.astro
   - src/pages/categories/ai-presentations/index.astro
   - docs/operations/official-source-registry.csv

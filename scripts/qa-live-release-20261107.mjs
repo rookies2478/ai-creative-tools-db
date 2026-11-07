@@ -72,6 +72,16 @@ for(const cfg of RELEASES){
       pass:response?.status()===200&&data.exists&&data.h1.length>0&&
        data.docWidth<=width+10&&data.mainExists&&data.visibleLinks>0};
      results.push(result);
+     // Trigger reveal/lazy-loaded sections as an actual scrolling reader would.
+     await page.evaluate(async()=>{
+       const step=Math.max(550,Math.round(innerHeight*0.8));
+       for(let y=0;y<document.documentElement.scrollHeight;y+=step){
+         window.scrollTo(0,y);
+         await new Promise(resolve=>setTimeout(resolve,85));
+       }
+       window.scrollTo(0,0);
+       await new Promise(resolve=>setTimeout(resolve,400));
+     });
      await page.screenshot({path:OUT+'/'+cfg.label+'-'+width+'.png',fullPage:true,animations:'disabled',timeout:15000});
      console.log('VIEW '+JSON.stringify(result));
    }catch(err){

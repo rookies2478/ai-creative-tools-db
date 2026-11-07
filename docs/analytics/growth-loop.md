@@ -1,3 +1,17 @@
+# MOVANCE shared Growth Loop — AI Creative DB (2026-11-07 routing reconciliation)
+
+**Canonical routing:** `rookies2478/movance-growth-loop` is the first/sole routine GSC, GA4, Clarity, search-intent and SEO analytics engine for this site (Strategy OS PR #275, Core PR #46). No parallel standalone analytics app/collector by default. Distinct task or explicit owner exception required for an alternative.
+
+**Evidence and HOLD:**
+- Site registry `sites/ai-creative-db.json`: `enabled:true`, GSC `sc-domain:aicreative-db.com` status VERIFIED; permission and read-only W45 PASS occurred **2026-11-02** using prior local credential route (58 current / 74 previous page rows).
+- Site's GA4 canonical tag `G-YTH7GM5ZGT` is historical production evidence, **not** Core GA4 query access; Core property registration is missing (NOT_CONFIGURED).
+- Site Clarity `wo9noh1ex6` tag has historical evidence, **not** verified Core API token/query access (NOT_CONFIGURED).
+- Core cloud GitHub Actions OIDC/WIF runtime is **UNVERIFIED**, owned by `rookies2478/movance-growth-loop` Issue #44. Do not describe old local GSC runs as a cloud success, or missing query rows as zero.
+- Fotor Page-only historical GSC (2026-08-07..11-04) does not prove brand/nonbrand Query×Page split; sitewide Issue #71 stays open.
+- No credentials, GA4/Clarity setup, user permissions, measurements or site application settings changed by this PR.
+
+---
+
 # Growth Loop — AIクリエイティブナビのサイト別状態（2026-11-06）
 
 > 共通Coreの運用手順は `rookies2478/movance-growth-loop/docs/OPERATIONS.md` を参照。本ファイルはサイト固有の証拠・制約のみを記す。以前の2026-11-01レコードにあった `enabled:false` / GSC `NOT_VERIFIED` は、2026-11-02実行証拠により陳腐化したため更新した。

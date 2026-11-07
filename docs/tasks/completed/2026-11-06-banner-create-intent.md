@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-06-banner-create-intent"
 created_at: "2026-11-06"
-status: READY
+status: COMPLETED
 risk: LOW
 current_phase: search-traffic-launch
 production_required: false
@@ -12,7 +12,7 @@ goal: "Clarify 'バナー作成AI' and 'バナー生成AI' as two ways to descri
 non_goals:
   - "Change tool rankings, facts, product prices, CTA, affiliate, URL, canonical, schemas or production"
 target_files:
-  - docs/tasks/active/2026-11-06-banner-create-intent.md
+  - docs/tasks/completed/2026-11-06-banner-create-intent.md
   - src/pages/comparisons/ad-banner-ai-tools/index.astro
 reference_files:
   - CLAUDE.md
@@ -52,3 +52,12 @@ Scope: existing `/comparisons/ad-banner-ai-tools/` only. Distinguish this tool-c
 **Change:** Replace the existing 'おすすめ' headline with a description of the actual comparative scope. Page covers template editing, image generation and text-oriented banner production, including free/commercial use/Japanese-text considerations. No unverified score or ranking claims.
 
 **Validation:** Check changed HTML title/meta/H1 and actual tool contents; CI checks must pass. After explicit production approval, compare same-length finalized GSC periods and Page×Query to assess whether the intervention helped; avoid attributing all movement to the snippet.
+
+## Release closeout evidence (2026-11-07 JST)
+
+- PR: https://github.com/rookies2478/ai-creative-tools-db/pull/73; source article HEAD: `6f12d82dd9cdbde2a05e75e164b3703ae172d0c4`.
+- Existing isolated local checks: diff check, build, data, publish (0 errors), affiliate links and throwaway single-active-task validate:task all PASS. User-facing title/meta/H1 was reviewed for factual scope; live snippet/ranking, full visual browser QA and production delivery remain NOT_VERIFIED.
+- This is a completed **implementation task**, not a statement of production publication or SEO gain. No new tool pricing or affiliate decisions are authorized.
+- The currently existing separate `docs/tasks/active/2026-11-06-official-source-registry.md` task is preserved and remains in progress; the PR-specific task is moved to completed to prevent creating two active tasks in master.
+- Latest CI must be rerun/read back on this record-only commit, and post-merge live checks and deployment SHA verification remain open.
+- RESULT: IMPLEMENTATION_REVIEWED / RELEASE_GATES_PENDING / PRODUCTION_NOT_DEPLOYED.

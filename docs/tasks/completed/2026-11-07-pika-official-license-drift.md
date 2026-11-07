@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-07-pika-official-license-drift"
 created_at: "2026-11-07"
-status: READY
+status: COMPLETED
 risk: HIGH
 current_phase: editorial-accuracy
 production_required: false
@@ -51,3 +51,9 @@ forbidden_operations:
 # Pika official pricing and rights source drift
 
 Source URLs https://pika.art/pricing?interval=month and https://pika.art/support (2026-11-07). Legacy pricing at https://pika.art/pricing and some query-param variants conflicts with the new pricing matrix. New matrix has Free 0 monthly credits/commercial NO, Starter 900/month/commercial NO, Creator/Fancy commercial YES. Support says Starter commercial YES. Preserve conflict as NOT_VERIFIED, not a legal guarantee. Commercial rights and transparent exports are separate.
+
+
+## 2026-11-07 completion
+- PR #86 merged as e1131f3e629d6a8d4cabaacab9a42f599ddfb88d; dedicated Pika Markdown, static route and Runway comparison consistent with current official Free-vs-paid distinction and Starter uncertainty.
+- Github PR Build and Cloudflare Pages checks both PASS. Existing site deployment/check remains separate from this PR result.
+- Account-specific checkout / Starter licensing remains HOLD under Issue #66 and weekly Issue #48.

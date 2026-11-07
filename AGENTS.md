@@ -14,6 +14,12 @@
 - GSC/GA4 read-only analysis is distinct from external data writes. Never commit `.env`, Google credentials, tokens or raw personal/analytics exports. Local `docs/analytics/**/raw/**` and secrets must not be read or copied by the worker.
 - Protected paths and operations include affiliate approval/link tables, financial/promotional claims, site tracking initialization, global DB/schema/comparison logic, legal/disclosure pages, CI and deployment settings, public assets and governance rules.
 
+## MOVANCE Growth Loop — analytics-first routing
+- For AI Creative DB and other registered MOVANCE sites, treat `rookies2478/movance-growth-loop` as the **first and sole shared engine** for GSC, GA4, Clarity-assisted site analytics, keyword/search-intent analysis and SEO/content improvement proposals. Before asserting a connector is live, read the site's current `sites/ai-creative-db.json`, shared Core run evidence, and `docs/analytics/growth-loop.md`.
+- Never switch routine site measurement to standalone ChatGPT GSC/GA4 integrations, HYPD, Windsor.ai or a second site-specific collector by default. Only use an alternative for a genuinely distinct purpose or with explicit owner authorization. Preserve legacy site scripts and safe local workflows until an evidence-backed migration; do not remove them solely because the common Core exists.
+- As of 2026-11-07: shared Core has **historically verified local GSC read-only** access for this site (2026-11-02 W45 page-only 58/74 rows), but GA4 **not configured in Core**, Clarity token/API **not configured**, and cloud OIDC/WIF runtime **not live-verified** (Core Issue #44). Distinguish missing/unknown from zero; do not fabricate current Query×Page, GA4 or Clarity figures.
+- No credentials, token changes, raw analytics exports, new schedules, network writes, PR auto-merge or production publishing from this routing rule. Site editorial/source accuracy is still controlled by the task scope and dated official evidence.
+
 ## Development and evidence
 - One scoped active task only. It must contain explicit `target_files` and `reference_files`. No multiple active tasks, no unscoped edits, no circumventing `validate:task`/`validate:scope`.
 - Normal preflight: current `master`, task target files, GitHub issue, governance references, known dirty state and deploy/runtime boundary. Dedicated branch and PR for Meaningful Changes.

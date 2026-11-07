@@ -1,6 +1,17 @@
 # Latest Project State
 
 - updated_at: 2026-11-07
+- current_active_task: docs/tasks/active/2026-11-07-growth-loop-route-policy.md (one READY task)
+- latest_completed_task: docs/tasks/completed/2026-11-07-pika-official-license-drift.md (PR #86 merged e1131f3e629d6a8d4cabaacab9a42f599ddfb88d; Starter terms still unknown)
+- Growth Loop canonical routing: Core `rookies2478/movance-growth-loop` first/sole routine site analytics engine; local GSC W45 VERIFIED; GA4 Core NOT_CONFIGURED, Clarity Core NOT_CONFIGURED, cloud OIDC Issue #44 HOLD.
+- current tool count: 59; unpublished affiliate claims/links remain unchanged.
+- pending Issue #75 governance PR: docs-only, no new collectors/credentials, no live data claims.
+
+---
+
+# Latest Project State
+
+- updated_at: 2026-11-07
 - current_active_task: docs/tasks/active/2026-11-07-pika-official-license-drift.md (only active, READY)
 - latest_completed_task: docs/tasks/completed/2026-11-06-guide-rights-pricing-consistency.md (PR #85 merged, guide-copy changes)
 - current_tool_catalog: 59, unchanged count

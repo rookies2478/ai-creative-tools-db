@@ -19,8 +19,14 @@ async function readPublishedSha(){
       exactMatch:r.ok&&text===REQUIRED_SHA};
  }catch(e){return {status:'ERROR',actual:String(e?.message??e),expected:REQUIRED_SHA,exactMatch:false}}
 }
-const marker=await readPublishedSha();
-console.log('PUBLIC_SHA '+JSON.stringify(marker));
+let marker=await readPublishedSha();
+let markerAttempts=1;
+for (; !marker.exactMatch && markerAttempts<15; markerAttempts++){
+  console.log('PUBLIC_SHA_PENDING '+JSON.stringify({attempt:markerAttempts,...marker}));
+  await new Promise(r=>setTimeout(r,8000));
+  marker=await readPublishedSha();
+}
+console.log('PUBLIC_SHA '+JSON.stringify({attempts:markerAttempts,...marker}));
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 for(const cfg of RELEASES){
  for(const width of [1440,375]){
@@ -50,6 +56,17 @@ for(const cfg of RELEASES){
          tableCount:visibleTables.length,bodyCharacters:txt.length,
          mainExists:!!document.querySelector('main')};
      },{expected:cfg.expected});
+     if(!data.exists && marker.exactMatch) {
+       console.log('RETRY_STALE_HTML '+cfg.label+' '+width);
+       await page.waitForTimeout(5000);
+       response=await page.reload({waitUntil:'domcontentloaded',timeout:35000});
+       await page.waitForTimeout(800);
+       Object.assign(data,await page.evaluate(({expected})=>{
+         const d=document.documentElement,b=document.body,txt=b?.innerText??'';
+         return {exists:txt.includes(expected),docWidth:d.scrollWidth,bodyWidth:b?.scrollWidth??0,
+           viewportWidth:innerWidth,bodyCharacters:txt.length};
+       },{expected:cfg.expected}));
+     }
      const result={label:cfg.label,viewport:width,http:response?.status(),...data,
       jsPageErrors:pageErrors,consoleErrors:consoleErrors.slice(0,6),
       pass:response?.status()===200&&data.exists&&data.h1.length>0&&

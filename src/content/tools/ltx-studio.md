@@ -3,9 +3,11 @@ name: "LTX Studio"
 shortDescription: "LTX Studioは動画制作・絵コンテのためのAIクリエイティブサービス。料金と商用利用条件はプランやモデルで異なるため、公式で再確認が必要です。"
 category: "video"
 officialUrl: "https://ltx.studio/"
-freePlan: "unknown"
-commercialUse: "unknown"
-commercialUseNote: "映像生成のモデル名とLTX Studio制作サービスを混同しない。最新の契約・商用・出力仕様を個別に確認する。 出力権利・日本国内適用条件は保証していません。"
+currency: "USD"
+lowestPaidPlan: "Lite US$15/月、商用はStandard US$35/月から"
+freePlan: "limited"
+commercialUse: "paid-only"
+commercialUseNote: "公式FAQでFreeとLiteは個人利用のみ。商用ライセンスはStandard、Pro、Enterprise。 未確認のモデル別・入力素材の第三者権利は別確認。"
 japaneseUi: "unknown"
 japanesePrompt: "unknown"
 watermark: "unknown"
@@ -18,10 +20,10 @@ weaknesses:
   - "実機生成による画質・日本語品質の比較は未実施"
 lastReviewed: "2026-11-07"
 nextReviewDue: "2026-12-07"
-officialSourceUrl: "https://ltx.studio/"
+officialSourceUrl: "https://website.ltx.studio/studio/pricing"
 pricingModel: "unknown"
-freePlanNote: "無料枠・試用条件は最新公式案内と契約画面で確認。"
-paidPlanNote: "現行の日本向け請求金額・課金周期・税・モデル別消費量は未検証。"
+freePlanNote: "公式料金表はFree 800クレジット一度のみ・個人用途。"
+paidPlanNote: "Lite US$15/月、商用はStandard US$35/月から。日本での実際の請求通貨・税・割引は購入時に確認。"
 platforms:
   - web
 signupRequired: true
@@ -46,9 +48,21 @@ faqs:
   - question: "LTX Studioは何ができますか？"
     answer: "絵コンテ・シーン設計を伴う映像制作。ストーリーボードから動画制作を整理できる。"
   - question: "無料で使えますか？"
-    answer: "最新の公式料金とログイン後画面で無料枠を確認してください。今回の調査では確定していません。"
+    answer: "公式料金表はFree 800クレジット一度のみ・個人用途。"
   - question: "商用利用できますか？"
-    answer: "商用利用の条件は未検証です。契約プランや選択モデルに応じた最新の公式利用規約をご確認ください。"
+    answer: "公式FAQでFreeとLiteは個人利用のみ。商用ライセンスはStandard、Pro、Enterprise。 選択モデル・第三者の権利も確認してください。"
+japanBilling:
+  pricingUrl: "https://website.ltx.studio/studio/pricing"
+  billingCurrency: "公式公開額が米ドル表示の場合も日本での請求通貨は未確認"
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: "unknown"
+  taxDisplay: "unknown"
+  purchaseChannels:
+    - "web"
+  pricingCheckedAt: "2026-11-07"
+  pricingNote: "日本語公式製品ページ未特定. 日本での課金・税・割引、ログイン後画面の状況は未検証。"
+  sourceUrls:
+    - "https://website.ltx.studio/studio/pricing"
 ---
 
 ## LTX Studioとは
@@ -74,3 +88,13 @@ LTX Studioは動画制作・絵コンテを検討する際の候補サービス�
 ## 編集上の注記
 
 2026年11月7日の追加候補調査に基づく基本掲載です。**このツールによる独自生成サンプルは未制作・実機検証は未実施**であり、生成品質の順位・実測クレジット消費を保証しません。
+
+## 日本語公式・料金・アフィリエイト確認（2026年11月7日）
+
+- **日本語公式サイト：** 日本語の公式製品サイトを今回の調査では特定できず、英語公式を使用
+- **料金：** Lite US$15/月、商用はStandard US$35/月から。[公式料金・プラン情報](https://website.ltx.studio/studio/pricing)。日本円の請求額・税は未確認。
+- **無料枠：** 公式料金表はFree 800クレジット一度のみ・個人用途。
+- **商用利用：** 公式FAQでFreeとLiteは個人利用のみ。商用ライセンスはStandard、Pro、Enterprise。
+- **アフィリエイト：** 第三者の紹介情報のみで公式制度の確認未了。外部ASP・比較サイトに提携掲載情報あり。ただしLTX公式による制度の現行承認と日本向け条件を未確認。
+
+今回の調査時点でAIクリエイティブナビ専用の**承認済みアフィリエイトリンクは未取得・未登録**です。制度の存在、審査への合格、日本からの報酬受取可否は別々に確認してください。生成の実機検証・独自作例は未実施です。

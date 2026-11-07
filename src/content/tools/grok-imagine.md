@@ -5,7 +5,7 @@ category: "both"
 officialUrl: "https://grok.com/imagine"
 freePlan: "unknown"
 commercialUse: "unknown"
-commercialUseNote: "Grok Imagineという生成機能を、GrokのチャットやxAI APIと混同しない。利用できる環境・商用許諾はプラン別に確認する。 出力権利・日本国内適用条件は保証していません。"
+commercialUseNote: "Grok Imagine、xAI API、Xサブスクリプションの商用・地域条件を混同しない。 未確認のモデル別・入力素材の第三者権利は別確認。"
 japaneseUi: "unknown"
 japanesePrompt: "unknown"
 watermark: "unknown"
@@ -18,10 +18,10 @@ weaknesses:
   - "実機生成による画質・日本語品質の比較は未実施"
 lastReviewed: "2026-11-07"
 nextReviewDue: "2026-12-07"
-officialSourceUrl: "https://grok.com/imagine"
+officialSourceUrl: "https://grok.com/subscription/imagine"
 pricingModel: "unknown"
-freePlanNote: "無料枠・試用条件は最新公式案内と契約画面で確認。"
-paidPlanNote: "現行の日本向け請求金額・課金周期・税・モデル別消費量は未検証。"
+freePlanNote: "Grok Imagineの利用可能なプランと無料利用の上限は加入画面で確認。"
+paidPlanNote: "金額は公式表示の差異または動的表示のため未確定。日本での請求通貨・税・割引を購入画面で確認。"
 platforms:
   - web
 signupRequired: true
@@ -48,9 +48,21 @@ faqs:
   - question: "Grok Imagineは何ができますか？"
     answer: "プロンプトによる画像・短尺動画の生成。画像生成と動画化を一連の操作で扱える。"
   - question: "無料で使えますか？"
-    answer: "最新の公式料金とログイン後画面で無料枠を確認してください。今回の調査では確定していません。"
+    answer: "Grok Imagineの利用可能なプランと無料利用の上限は加入画面で確認。"
   - question: "商用利用できますか？"
-    answer: "商用利用の条件は未検証です。契約プランや選択モデルに応じた最新の公式利用規約をご確認ください。"
+    answer: "Grok Imagine、xAI API、Xサブスクリプションの商用・地域条件を混同しない。 選択モデル・第三者の権利も確認してください。"
+japanBilling:
+  pricingUrl: "https://grok.com/subscription/imagine"
+  billingCurrency: "公式公開額が米ドル表示の場合も日本での請求通貨は未確認"
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: "unknown"
+  taxDisplay: "unknown"
+  purchaseChannels:
+    - "web"
+  pricingCheckedAt: "2026-11-07"
+  pricingNote: "日本語公式製品ページ未特定. 日本での課金・税・割引、ログイン後画面の状況は未検証。"
+  sourceUrls:
+    - "https://grok.com/subscription/imagine"
 ---
 
 ## Grok Imagineとは
@@ -76,3 +88,13 @@ Grok Imagineという生成機能を、GrokのチャットやxAI APIと混同し
 ## 編集上の注記
 
 2026年11月7日の追加候補調査に基づく基本掲載です。**このツールによる独自生成サンプルは未制作・実機検証は未実施**であり、生成品質の順位・実測クレジット消費を保証しません。
+
+## 日本語公式・料金・アフィリエイト確認（2026年11月7日）
+
+- **日本語公式サイト：** 日本語の公式製品サイトを今回の調査では特定できず、英語公式を使用
+- **料金：** 金額は要確認。[公式料金・プラン情報](https://grok.com/subscription/imagine)。日本円の請求額・税は未確認。
+- **無料枠：** Grok Imagineの利用可能なプランと無料利用の上限は加入画面で確認。
+- **商用利用：** Grok Imagine、xAI API、Xサブスクリプションの商用・地域条件を混同しない。
+- **アフィリエイト：** 米国向けの非現金紹介制度のみ確認。公式Grok Bot紹介は米国在住の対象者限定かつ非金銭の利用上限リセット。日本向け現金報酬アフィリエイトとは異なる。 [公式の制度確認先](https://docs.x.ai/x-subscription/referral-program)
+
+今回の調査時点でAIクリエイティブナビ専用の**承認済みアフィリエイトリンクは未取得・未登録**です。制度の存在、審査への合格、日本からの報酬受取可否は別々に確認してください。生成の実機検証・独自作例は未実施です。

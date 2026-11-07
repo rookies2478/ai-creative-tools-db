@@ -36,3 +36,15 @@ OpenArt、Krea AI、Google Flow、Higgsfield AI、Dreamina、Midjourney、Recraf
 ## 実装安全範囲
 
 新規Tool MDと公式URL台帳・タスク文書のみ。画像作例・動画ファイル・GA4/Clarity・アフィリエイト・既存専用ルート・配置デザインは変更しない。現行Fotorタスクとの並走を避けるため、このブランチに限りpause。masterは無変更。
+
+## 日本語公式優先・価格・アフィリエイト再監査（2026-11-07）
+
+- 日本語公式製品サイト確認：6件（piclumen, getimg-ai, pixai, promeai, pixelcut, pollo-ai）。日本語公式ドキュメントのみ：1件（NovelAI）。日本語公式製品ページ未特定：8件。
+- 公式現金型アフィリエイトの一次資料確認：8件（imagineart, getimg-ai, dzine-ai, scenario, promeai, pixelcut, pollo-ai, hedra）。全15件とも当サイトの加入・提携承認・専用URL・日本への支払い適格性は未検証。
+- 紹介クレジット等のみ：PicLumen/PixAI。Grok Botの紹介制度は米国居住者向けの非現金報酬。Kaiberはブランド付きRewardful申請ポータル（料率未確認）、LTX Studioは第三者ASP掲載のみ。NovelAI/Pebblelyは現金型公式情報を未特定。
+- 金額の内部差：getimg.ai（日本語製品ページと料金ページ）、Hedra（Studio料金と用途ページ）。ImagineArt/Pollo/PromeAIは動的料金表示などで確定金額は掲載保留。日本語公式でもUSD表記なら日本円請求を推測しない。
+- 商用差：PicLumen Basic不可、Dzine Free不可、Scenario Free評価目的、Pixelcut Pro/Business許諾、LTX Studio Free/Lite個人用途のみ、Kaiber Creator以上で商用。
+- **重要な収益化制約：Pixelcut公式アフィリエイトは、主要検索エンジンからのクリックを成果としてカウントしない**。SEOメディアが扱う際は、通常の検索流入による報酬を見込まない。PromeAIは10/20/30%の段階報酬（一定条件で15/25/35%）であり単一30%固定ではない。
+- 制度そのものと当サイトの提携承認を区別し、affiliateUrl・計測・独自作例・デプロイは変更しない。
+
+詳細は `docs/operations/creative-tools-jp-affiliate-audit-2026-11-07.csv`、今後の登録ルールは `docs/operations/tool-intake-jp-affiliate-checklist.md` を参照。

@@ -2,10 +2,12 @@
 name: "Pixelcut"
 shortDescription: "Pixelcutは商品写真のためのAIクリエイティブサービス。料金と商用利用条件はプランやモデルで異なるため、公式で再確認が必要です。"
 category: "image"
-officialUrl: "https://www.pixelcut.ai/"
-freePlan: "unknown"
-commercialUse: "unknown"
-commercialUseNote: "AI画像生成だけでなく商品写真・背景編集を扱うサービスとして紹介。汎用画像生成AIと別の用途軸で比較する。 出力権利・日本国内適用条件は保証していません。"
+officialUrl: "https://www.pixelcut.ai/ja"
+currency: "USD"
+lowestPaidPlan: "Pro US$10/月（月払い・年払い換算US$8/月）"
+freePlan: "limited"
+commercialUse: "limited"
+commercialUseNote: "公式日本語料金表はProとBusinessに商用ライセンスを明記。Freeの全機能での商用利用は未確認。 未確認のモデル別・入力素材の第三者権利は別確認。"
 japaneseUi: "unknown"
 japanesePrompt: "unknown"
 watermark: "unknown"
@@ -20,8 +22,8 @@ lastReviewed: "2026-11-07"
 nextReviewDue: "2026-12-07"
 officialSourceUrl: "https://www.pixelcut.ai/ja/pricing"
 pricingModel: "unknown"
-freePlanNote: "無料枠・試用条件は最新公式案内と契約画面で確認。"
-paidPlanNote: "現行の日本向け請求金額・課金周期・税・モデル別消費量は未検証。"
+freePlanNote: "日本語公式料金表でFree US$0。背景除去等の制限あり。"
+paidPlanNote: "Pro US$10/月（月払い・年払い換算US$8/月）。日本での実際の請求通貨・税・割引は購入時に確認。"
 platforms:
   - web
 signupRequired: true
@@ -46,9 +48,21 @@ faqs:
   - question: "Pixelcutは何ができますか？"
     answer: "EC商品画像と背景編集。商品写真とSNS向けクリエイティブの制作補助。"
   - question: "無料で使えますか？"
-    answer: "最新の公式料金とログイン後画面で無料枠を確認してください。今回の調査では確定していません。"
+    answer: "日本語公式料金表でFree US$0。背景除去等の制限あり。"
   - question: "商用利用できますか？"
-    answer: "商用利用の条件は未検証です。契約プランや選択モデルに応じた最新の公式利用規約をご確認ください。"
+    answer: "公式日本語料金表はProとBusinessに商用ライセンスを明記。Freeの全機能での商用利用は未確認。 選択モデル・第三者の権利も確認してください。"
+japanBilling:
+  pricingUrl: "https://www.pixelcut.ai/ja/pricing"
+  billingCurrency: "公式公開額が米ドル表示の場合も日本での請求通貨は未確認"
+  jpyDirectBilling: "unknown"
+  localizedJpyDisplay: "unknown"
+  taxDisplay: "unknown"
+  purchaseChannels:
+    - "web"
+  pricingCheckedAt: "2026-11-07"
+  pricingNote: "公式日本語製品ページを優先. 日本での課金・税・割引、ログイン後画面の状況は未検証。"
+  sourceUrls:
+    - "https://www.pixelcut.ai/ja/pricing"
 ---
 
 ## Pixelcutとは
@@ -74,3 +88,13 @@ AI画像生成だけでなく商品写真・背景編集を扱うサービスと
 ## 編集上の注記
 
 2026年11月7日の追加候補調査に基づく基本掲載です。**このツールによる独自生成サンプルは未制作・実機検証は未実施**であり、生成品質の順位・実測クレジット消費を保証しません。
+
+## 日本語公式・料金・アフィリエイト確認（2026年11月7日）
+
+- **日本語公式サイト：** 日本語の公式製品ページを確認。[日本語公式](https://www.pixelcut.ai/ja)
+- **料金：** Pro US$10/月（月払い・年払い換算US$8/月）。[公式料金・プラン情報](https://www.pixelcut.ai/ja/pricing)。日本円の請求額・税は未確認。
+- **無料枠：** 日本語公式料金表でFree US$0。背景除去等の制限あり。
+- **商用利用：** 公式日本語料金表はProとBusinessに商用ライセンスを明記。Freeの全機能での商用利用は未確認。
+- **アフィリエイト：** 公式サイト上に現金型アフィリエイト制度を確認。公式日本語制度は初年度30%・Cookie60日・PayPal最低$20。ただしGoogle等の検索エンジン由来クリックは成果対象外。SEOサイトでは重要な制約。 [公式の制度確認先](https://www.pixelcut.ai/ja/affiliate)
+
+今回の調査時点でAIクリエイティブナビ専用の**承認済みアフィリエイトリンクは未取得・未登録**です。制度の存在、審査への合格、日本からの報酬受取可否は別々に確認してください。生成の実機検証・独自作例は未実施です。

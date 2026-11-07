@@ -150,6 +150,10 @@ const jsonLd = JSON.stringify([
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span><br>日本語ページが提供されています。' }],
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st ok sm"><span class="d"></span>対応</span><br>モデルや用途によっては英語の方が安定する場合あり。' }],
           [{ html: '対応環境', rk: true }, { html: 'Web（ブラウザ）' }],
+          [{ html: '無料で試す', rk: true }, { html: 'Basic（無料）はありますが、使う生成機能・モデル・出力方法によってクレジットや利用枠が異なります。公式料金表で対象機能を確認してください。' }],
+          [{ html: '透かしなしで納品', rk: true }, { html: '有料プランでは透かしなし書き出しが案内されています。対象機能、出力形式、契約プラン別の制限を確認してください。' }],
+          [{ html: '広告・仕事での利用', rk: true }, { html: 'AI画像生成・提供素材やテンプレート・高画質化機能では条件が異なる場合があります。無料での書き出し可否と商用利用の許諾は別です。' }],
+          [{ html: '日本語での制作', rk: true }, { html: '日本語版AI画像生成ページがあります。利用するモデルで日本語入力が意図どおり反映されるか試してください。' }],
           [{ html: '情報確認日', rk: true }, { html: d?.lastReviewed ?? '2026-05-14', mono: true }],
           [{ html: '公式サイト', rk: true }, { html: '<a href="https://www.fotor.com/jp/ai-image-generator/" target="_blank" rel="noopener noreferrer">公式サイトで確認 ↗</a>' }],
         ],
@@ -187,6 +191,10 @@ const jsonLd = JSON.stringify([
         ],
         disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず最新の公式利用規約をご確認ください。',
         more: { label: '商用利用・著作権の注意点ガイド →', href: '/guides/commercial-use-copyright/' },
+      }}
+      commercialExtra={{
+        title: '無料・透かし・商用利用：用途別の確認ポイント',
+        html: 'Fotorで「画像をAI生成した」「提供テンプレートを使った」「画像を高画質化した」は同じ利用条件とは限りません。<b>無料利用・透かしなし書き出し・商用利用の可否は各機能とプランごとに確認</b>してください。AI生成画像の商用利用を案内する公式ヘルプがある一方、高画質化機能の公式案内では無料プランでの商用利用が制限される場合があります。クライアント納品や広告では、使った素材の権利、契約条件、最新の公式規約を確認してください。',
       }}
       whoFor={[
         '日本語UIでAI画像生成・編集を始めたい人',

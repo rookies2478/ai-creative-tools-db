@@ -63,3 +63,6 @@ jobs:
 
       - name: Validate published output
         run: npm run validate:publish
+
+      - name: Regression - Fotor static HTML includes latest intent section
+        run: node scripts/verify-fotor-intent-output.mjs

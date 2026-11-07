@@ -59,7 +59,7 @@ const jsonLd = JSON.stringify([
       category="AI動画生成"
       checkedDate={d?.lastReviewed ?? '2026-06-05'}
       headingHtml='Runwayの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="Runwayの商用利用条件はプランによって異なり、確認すべきポイントがいくつかあります。RunwayはGen-4モデルによるAI動画生成・映像編集ツールで、テキストや画像から動画を生成でき、動画延長・背景除去・APIも提供。無料プランでは125クレジット（初回のみ）が付与されます。"
+      lead="Runway公式ヘルプでは、生成した動画・画像は無料プランを含めて商用利用を制限しないと案内されています。ただし、アップロードする素材や生成内容に関わる第三者の権利、利用規約・禁止事項の確認は必要です。利用できるモデルやクレジット数などの機能・料金条件はプランによって異なります。RunwayはAI動画生成・映像編集ツールで、テキストや画像から動画を生成できます。"
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '条件あり（要確認）' } },
         { lb: '無料枠', badge: { s: 'cond', label: '125クレジット（初回のみ）' } },
@@ -239,6 +239,7 @@ const jsonLd = JSON.stringify([
       sources={[
         { tag: '料金', label: 'Runway 料金プラン（公式）', href: 'https://runwayml.com/pricing/' },
         { tag: '利用規約', label: 'Runway Terms of Use（公式）', href: 'https://runwayml.com/terms-of-use/' },
+        { tag: '商用利用', label: 'Runway生成コンテンツの商用利用（公式ヘルプ）', href: 'https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes' },
         { tag: '公式', label: 'Runway 公式サイト', href: 'https://runwayml.com' },
       ]}
       faqs={[

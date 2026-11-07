@@ -6,7 +6,7 @@ risk: MEDIUM
 current_phase: search-traffic-launch
 production_required: false
 db_change: false
-ui_change: false
+ui_change: true
 official_verification_required: true
 goal: "Fotorの無料枠・透かし・商用利用を機能別の公式根拠で整理して公開済み記事の検索目的別案内を改善する"
 non_goals:
@@ -15,6 +15,8 @@ non_goals:
 target_files:
   - docs/tasks/active/2026-11-07-fotor-search-intent.md
   - .github/workflows/build.yml
+  - src/pages/tools/fotor-ai/index.astro
+  - scripts/verify-fotor-intent-output.mjs
   - src/content/tools/fotor-ai.md
   - docs/audits/fotor-search-intent-2026-11-07.md
 reference_files:
@@ -33,11 +35,13 @@ required_checks:
   - npm run build
   - npm run validate:data
   - npm run validate:publish
+  - node scripts/verify-fotor-intent-output.mjs
   - npm run validate:affiliate-links
   - npm run validate:scope
   - git diff --check
 acceptance_criteria:
   - Fotor無料・透かし・商用利用の機能別の条件差を公式URLで区別
+  - 静的オーバーライドルートのビルド済みHTMLに新しい本文が存在することをテスト
   - 新規料金額や保証の追加がなくCTA・affiliate・スキーマが不変
   - source registryの完了処理はマージ済みPR #76に保持し、本PRはその履歴を変更しない
   - 必須のtask・build・data・publish・affiliate・scopeチェックが全PASSした場合のみマージに進める

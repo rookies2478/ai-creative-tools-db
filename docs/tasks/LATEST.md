@@ -1,6 +1,18 @@
 # Latest Project State
 
 - updated_at: 2026-11-07
+- active_task: docs/tasks/active/2026-11-07-official-fact-audit-report-integration.md (READY, one task)
+- completed: docs/tasks/completed/2026-11-07-growth-loop-route-policy.md (PR #87 merged, Issue #75 closed)
+- historical_official_audit: docs/audits/official-fact-reaudit-2026-11-07.md (old 38/59 subset, 7 RAW_CONFIRMED, 18 SUMMARY_ONLY, no source-registry date claims)
+- current_catalog: 59, registry 59; full 59-tool re-verification Issue #66 remains OPEN.
+- Pika canonical copy changed PR #86; Free no commercial-license in new pricing, Starter official conflict remains.
+- affiliate/payout/account limitations: PixVerse #36 and Runway #38 unresolved. SEO GSC query coverage #71 remains open. Freshness #48 first planned Nov 9.
+
+---
+
+# Latest Project State
+
+- updated_at: 2026-11-07
 - current_active_task: docs/tasks/active/2026-11-07-growth-loop-route-policy.md (one READY task)
 - latest_completed_task: docs/tasks/completed/2026-11-07-pika-official-license-drift.md (PR #86 merged e1131f3e629d6a8d4cabaacab9a42f599ddfb88d; Starter terms still unknown)
 - Growth Loop canonical routing: Core `rookies2478/movance-growth-loop` first/sole routine site analytics engine; local GSC W45 VERIFIED; GA4 Core NOT_CONFIGURED, Clarity Core NOT_CONFIGURED, cloud OIDC Issue #44 HOLD.

@@ -31,7 +31,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 商用利用の可否は**ツールとプランの組み合わせ**で変わります。主なパターンは次の3つです。
 
 1. **有料プランで商用利用条件が案内されている** — Midjourney、Adobe Firefly、Leonardo AI、Luma Appなど（AppとAPIの条件は別）
-2. **有料・無料ともに商用利用条件が案内されているが確認が必要** — Pika新Free、現行ChatGPT画像、Canva AIなど
+2. **プラン別に条件が異なり、公式の改定にも注意** — Pikaの新Freeには商用ライセンスなし、現行ChatGPT画像・Canva AIも各規約を確認
 3. **公式情報から条件が確認しにくい** — Kling AI（HTTP 446で公式ページ直接確認不可）、Vidu AI（詳細は公式規約参照）
 
 どのツールも「商用利用できる」と断言するのではなく、**利用前に最新の公式規約を確認する**ことが前提となります。
@@ -40,7 +40,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 
 ## 2026年11月6日の一次資料照合（重要事項）
 
-- [Pika公式料金](https://pika.art/pricing)：Freeは月額クレジットは新料金表で要確認、商用ライセンスなし（新料金比較）。透かしなしダウンロードとは別。
+- [Pika公式料金](https://pika.art/pricing)：新しい比較表はFreeの月額クレジット0・商用ライセンスなし・透かしなし。Starterは年払い月$8相当。旧Basic（月80クレジット・無料で商用可）の表示が残るため、申込時の現行規約を確認。
 - [OpenAI公式リリースノート](https://help.openai.com/en/articles/6825453-chatgpt-release-notes)：公式DALL·E GPTは2026年8月30日に提供終了。現行は[ChatGPT画像](https://help.openai.com/ja-jp/articles/11084440-images-in-chatgpt)。
 - [Luma公式ライセンス](https://lumalabs.ai/learning-hub/licensing)：AppのTrialとAPI出力、現行契約と過去のDream Machine Plusは区別する。
 - [Canva日本語料金](https://www.canva.com/ja_jp/pricing/)：Web Pro年11,800円、App Store日本の月額表示は別。無料の「最大20回」は画像枚数固定ではなく、AI枠の消費条件による。
@@ -75,7 +75,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 | Leonardo AI | 画像 | あり（制限付） | $12/月〜（月払い） | 要確認 |
 | Canva AI | 画像 | 制限付き無料 | Web Pro ¥11,800/年／App Store ¥1,180/月（経路別） | あり |
 | Runway | 動画 | あり（初回のみ） | $12/月〜（年払い） | なし |
-| Pika | 動画 | あり（制限付） | $8/月〜（年払い） | 一部あり |
+| Pika | 動画 | Freeあり（定期付与0の新表示） | Starter $8/月相当（年払い） | 無透かしと商用許諾は別 |
 | Luma AI（App） | 動画 | Trial条件を要確認 | 現行Appの契約画面で確認 | 要確認 |
 | Kling AI | 動画 | あり（制限付） | 要公式確認 | 一部あり |
 | Vidu AI | 動画 | あり（制限付） | 要公式確認 | なし |
@@ -92,7 +92,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 | Leonardo AI | 1日150トークン程度 | Apprentice $12/月〜 | 生成サイズ・品質設定でトークン消費量が変わる |
 | Canva AI | 共通AI枠の軽いタスクで最大20回 | Web Pro ¥11,800/年（App月額とは別） | モデルとタスクで消費が異なる。画像固有の枚数ではない |
 | Runway | 125クレジット（初回のみ） | Standard $12/月〜（月625クレジット程度） | 動画の長さ・解像度で消費量が変わる |
-| Pika | Free 新料金表で要確認 | 新Starter $8/月相当（年払い）、付与クレジットは要確認 | モデル・秒数・解像度で消費量が異なる |
+| Pika | 新Freeは月額付与0（追加クレジット購入可） | 新Starter $8/月相当（年払い） | 新料金表ではStarter 900クレジット/月。旧Basic/Standardと混同しない |
 | Luma AI（App） | 恒常無料枠は未確認 | 最新App契約画面で確認 | TrialとAPIを混同しない |
 | Kling AI | 1日66クレジット程度（翌日繰越なし） | 要公式確認 | 動画の長さ・解像度・モデルによって消費量が異なる |
 | Vidu AI | あり（詳細は公式確認） | 要公式確認 | 動画の長さ・解像度によって消費量が変わる場合あり |
@@ -125,7 +125,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 | ツール | プラン | 月額費用 | 月間クレジット目安 | 5秒動画の目安クレジット | 実質単価目安 |
 |--------|--------|----------|------------------|------------------------|------------|
 | Runway | Standard | $12/月（年払い） | 月625クレジット程度 | 5〜10クレジット程度（要確認） | 要公式確認 |
-| Pika | Starter | $8/月相当（年払い） | 新料金表で確認 | 詳細は公式確認 | 要公式確認 |
+| Pika | 新Starter | $8/月相当（年払い） | 新比較表900クレジット/月 | モデル別消費量を確認 | 要公式確認 |
 | Luma AI（App） | 現行プラン | App契約画面で確認 | モデル別 | Trial/APIと別条件 | 一律単価は未算定 |
 | Kling AI | 要確認 | 要公式確認 | 要公式確認 | 要公式確認 | 要公式確認 |
 | Vidu AI | 要確認 | 要公式確認 | 要公式確認 | 要公式確認 | 要公式確認 |
@@ -141,10 +141,10 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 | Midjourney | 無料プランなし | 有料プランで商用利用が案内されている | 年間総収益100万ドル超はPro/Megaプラン必要とされる | 最新規約を要確認 |
 | Adobe Firefly | 有料プランが前提（無料枠はβ扱いに注意） | 商用利用が想定された設計と案内されている | 記載なし | ベータ機能（β表示）は商用利用対象外とされる |
 | ChatGPT画像（DALL·E GPTは終了） | 適用規約と利用制限による | OpenAI規約・プラン別の条件 | 記載なし | 旧DALL·E GPTは2026-08-30終了 |
-| Leonardo AI | 非独占ライセンスで新料金比較では商用ライセンスなし（所有権はLeonardo.AI） | 有料プラン＋Private設定で完全な所有権が案内 | 記載なし | 無料プランは所有権・独占権なしの点に注意 |
+| Leonardo AI | 非独占ライセンスで商用利用可（所有権はLeonardo.AI） | 有料プラン＋Private設定で完全な所有権が案内 | 記載なし | 無料プランは所有権・独占権なしの点に注意 |
 | Canva AI | 商用利用が案内されているが独占的権利は保証されない | 同上 | 記載なし | 独占的権利を必要とする用途は要確認 |
 | Runway | 実用制限あり（透かし・クレジット数） | すべてのプランでOutput商用利用を制限しないと案内 | 記載なし | 最新規約を要確認 |
-| Pika | FreeにもCommercial useあり | 新Creator/Fancyに商用ライセンスあり（Starterは表示が矛盾） | 記載なし | Freeも無透かしDL。第三者素材の権利は別 |
+| Pika | 新料金表でFreeは商用ライセンスなし | Creator/Fancyは商用ライセンスあり。Starterは料金表と公式サポートで記載差があり要確認 | 記載なし | Freeでも無透かしDL表示だが商用許諾とは別 |
 | Luma AI | Trialは内部評価・テスト目的 | 現行Appは契約確認／API出力は公式FAQで商用可 | 記載なし | AppとAPI・過去のDream Machine条件を区別 |
 | Kling AI | 要確認（公式ページ直接確認不可） | 要確認 | 要確認 | 公式情報確認に制限あり |
 | Vidu AI | 要確認 | 有料ユーザーに商用利用が拡張される旨が案内 | 要確認 | 詳細は最新規約を要確認 |
@@ -161,7 +161,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 | Leonardo AI | 詳細は公式確認 | 通常は透かしなしとされている | 詳細は公式確認 | 規約上の要件を確認 |
 | Canva AI | 詳細は公式確認 | 詳細は公式確認 | 詳細は公式確認 | 規約上の要件を確認 |
 | Runway | 透かしあり | 透かしなし（有料プラン） | 詳細は公式確認 | 規約上の要件を確認 |
-| Pika | Freeも透かしなしDL | 有料も透かしなしDL案内 | 不可視識別は別途確認 | 規約上の要件を確認 |
+| Pika | 無料Basicも透かしなしDL | 有料も透かしなしDL案内 | 不可視識別は別途確認 | 規約上の要件を確認 |
 | Luma AI | 現行Trial条件は別確認 | API出力は公式FAQで透かしなし、App別 | 現行Appは要確認 | 規約上の要件を確認 |
 | Kling AI | 透かしあり（場合による） | 条件は公式確認 | 詳細は公式確認 | 規約上の要件を確認 |
 | Vidu AI | 透かしあり | 条件は公式確認 | 詳細は公式確認 | 規約上の要件を確認 |
@@ -178,10 +178,10 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 | SNS投稿用画像 | Canva AI、Adobe Firefly、Leonardo AI | Canvaはデザイン作業と一体利用可。Fireflyは日本語UI対応 |
 | ゲーム・イラスト素材 | Leonardo AI | カスタムモデルが豊富。有料プラン＋Private設定が推奨 |
 | 広告動画・PR動画 | Runway、Luma AI | Runwayは映像編集機能が豊富。Luma APIの商用条件とAppは別確認 |
-| SNS用ショート動画 | Pika、Luma AI、Kling AI | Pika新Freeの商用ライセンスはなし（新料金比較）。透かしなしDLとは別。Luma App Trialは業務利用前に確認 |
+| SNS用ショート動画 | Pika、Luma AI、Kling AI | Pika新Freeは透かしなしDLと商用許諾を区別（商用ライセンスなし）。Luma App Trialは業務利用前に確認 |
 | 映像プロトタイプ・検証 | Luma AI、Runway | 多くのツールで無料枠での試用が可能（商用利用条件は別途確認） |
 | 日本語環境での業務利用 | Adobe Firefly、Canva AI | 両者とも日本語UI・日本語プロンプト対応 |
-| コスト重視の商用利用 | Leonardo AI（権利確認）、Pika新Free | Pika Basicは新料金比較ではFree/Starterに商用ライセンスなし。第三者素材は別確認 |
+| コスト重視の商用利用 | Leonardo AI（権利確認）、Pika Creator以上（契約確認） | Pika新Freeに商用ライセンスなし。Starterの商用表示にも公式間の差があるため要確認 |
 
 ---
 
@@ -189,7 +189,7 @@ Stable Diffusion系ツールとしての[DreamStudio](/tools/dreamstudio/)の料
 
 ### 1. 利用プランで商用利用が許可されているか
 
-商用利用の可否はプランによって異なります。無料利用と商用許諾は別に確認します。Pika新Freeは公式料金表で新料金比較では商用ライセンスなし、Luma App Trialは内部評価・テスト用途とされています。
+商用利用の可否はプランによって異なります。無料利用と商用許諾は別に確認します。Pika新Freeは最新の料金比較で商用ライセンスなし、Creator/Fancyにあり、Starterは公式案内に差があるため契約画面で再確認。Luma App Trialは内部評価・テスト用途とされています。
 
 ### 2. 透かしや生成クレジット表記が必要か
 
@@ -239,7 +239,7 @@ Adobe公式のAI画像生成サービス。商用利用を想定した設計と�
 
 ### Leonardo AI
 
-ゲーム・イラスト向けのカスタムモデルが豊富。無料プランも非独占的ライセンスで商用利用できるとされていますが、生成画像の所有権はLeonardo.AIに帰属し、画像はPublic公開となる場合があります。有料プラン＋Private設定で、ユーザーが画像の完全な知的財産権を保有できる旨が案内されています。新料金比較では商用ライセンスなし能であることと、所有権・独占権の有無は別の問題です。
+ゲーム・イラスト向けのカスタムモデルが豊富。無料プランも非独占的ライセンスで商用利用できるとされていますが、生成画像の所有権はLeonardo.AIに帰属し、画像はPublic公開となる場合があります。有料プラン＋Private設定で、ユーザーが画像の完全な知的財産権を保有できる旨が案内されています。商用利用可能であることと、所有権・独占権の有無は別の問題です。
 
 参照：[Leonardo AI料金プラン（公式）](https://leonardo.ai/pricing/) / [Leonardo AI利用規約（公式）](https://leonardo.ai/terms-of-service/)
 
@@ -263,7 +263,7 @@ Gen-4など最新の動画生成モデルを提供。公式情報によると、
 
 ### Pika
 
-公式料金表でBasic無料・毎月額クレジットは新料金表で要確認・新料金比較では商用ライセンスなし・透かしなしダウンロードが明記されています。短尺動画向けですが、他者の権利を含む入力素材は別確認が必要です。
+Pika公式の新料金比較ではFreeは月額クレジット付与0、商用ライセンスなし、透かしなしDLと案内されています。Creator/Fancyは商用ライセンスあり。旧Basic（月80クレジット・商用利用可）の表示も見られるため、契約画面・最新版規約と第三者素材の権利を確認してください。
 
 参照：[Pika料金プラン（公式）](https://pika.art/pricing) / [Pika利用規約（公式）](https://pika.art/terms-of-service)
 
@@ -271,7 +271,7 @@ Gen-4など最新の動画生成モデルを提供。公式情報によると、
 
 ### Luma AI
 
-Lumaは現行AppとAPIの契約を分けて案内しています。AppのTrialは内部評価・テスト用途。公式API FAQは出力新料金比較では商用ライセンスなし・無透かしと説明していますが、Appの現行価格・商用条件は契約画面で別確認してください。旧Dream MachineのPlus料金を流用しません。
+Lumaは現行AppとAPIの契約を分けて案内しています。AppのTrialは内部評価・テスト用途。公式API FAQは出力商用利用可・無透かしと説明していますが、Appの現行価格・商用条件は契約画面で別確認してください。旧Dream MachineのPlus料金を流用しません。
 
 参照：[Luma AI料金プラン（公式）](https://lumalabs.ai/pricing)
 
@@ -287,7 +287,7 @@ Lumaは現行AppとAPIの契約を分けて案内しています。AppのTrial�
 
 ### Vidu AI
 
-中国Shengshu Technology開発。公式利用規約では、有料ユーザーについて商用利用に拡張される旨が案内されています。無料プランでの新料金比較では商用ライセンスなし否・詳細条件は最新の公式規約をご確認ください。日本語UIは非対応。
+中国Shengshu Technology開発。公式利用規約では、有料ユーザーについて商用利用に拡張される旨が案内されています。無料プランでの商用利用可否・詳細条件は最新の公式規約をご確認ください。日本語UIは非対応。
 
 参照：[Vidu AI利用規約（公式）](https://www.vidu.com/terms) / [Vidu AI料金ページ（公式）](https://www.vidu.com/pricing)
 
@@ -297,15 +297,15 @@ Lumaは現行AppとAPIの契約を分けて案内しています。AppのTrial�
 
 ### Q1. 無料プランで商用利用できるツールはありますか？
 
-ツールによって対応が分かれます。PikaはFreeでも新料金比較では商用ライセンスなしと料金表に明記。一方、Luma App Trialは評価・テスト目的に限定されています。Leonardo AIは無料プランも非独占的ライセンスで商用利用できるとされていますが、生成画像の所有権はLeonardo.AIに帰属し他ユーザーも同一画像を使用できます。Adobe FireflyやCanva AIは一部の商用利用が案内されていますが、条件があります。Runwayの無料プランはクレジットが初回のみで実用的でない場合が多いです。いずれも最新の公式規約をご確認ください。
+ツールによって条件が異なります。Pikaの新料金比較ではFreeに商用ライセンスはなく、Creator/Fancyには含まれています。Starterは公式サポートとの説明差があるため要確認。Luma App Trialは評価・テスト用途に限定されています。Leonardo AIの無料プランは非独占的ライセンスで商用利用できるとされていますが、所有権・独占権とは別です。各社の最新規約をご確認ください。
 
 ### Q2. 商用利用と著作権は別の問題ですか？
 
-はい、**別の問題**です。ツールの利用規約上「新料金比較では商用ライセンスなし」であっても、生成した画像・動画の内容に既存の著作物・商標・有名人の肖像が含まれる場合は別途権利上のリスクが生じます。詳しくは [AI画像生成の商用利用と著作権ガイド](/guides/commercial-use-copyright/) をご覧ください。
+はい、**別の問題**です。ツールの利用規約上「商用利用可」であっても、生成した画像・動画の内容に既存の著作物・商標・有名人の肖像が含まれる場合は別途権利上のリスクが生じます。詳しくは [AI画像生成の商用利用と著作権ガイド](/guides/commercial-use-copyright/) をご覧ください。
 
 ### Q3. 透かしなしで使えるプランはどれですか？
 
-Midjourney（有料プラン）、Runway（有料プラン）、Pika（Free含む）、Luma API（Appは別確認）、Leonardo AI（有料プラン）などで透かしなしが案内されています。Adobe FireflyはC2PA不可視メタデータが全プランで埋め込まれます。詳しくは [透かし・クレジット表記ガイド](/guides/watermark-credit-guide/) をご覧ください。
+Midjourney（有料プラン）、Runway（有料プラン）、Pika（新Freeにも無透かしDL表示。ただし商用ライセンスなし）、Luma API（Appは別確認）、Leonardo AI（有料プラン）などで透かしなしが案内されています。透かしなしと商用許諾は別です。
 
 ### Q4. APIで大量生成する場合のコストはどう計算しますか？
 

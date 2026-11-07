@@ -25,7 +25,7 @@ const basicRows = [
   ],
   [
     { text: 'Pika' },
-    { text: '月80クレジット程度（毎月更新）' },
+    { text: '無料Basic：80クレジット/月（公式料金）' },
     { text: '$8/月（年払い）' },
     { text: '一部あり' },
     { text: 'あり' },
@@ -33,10 +33,10 @@ const basicRows = [
   ],
   [
     { text: 'Luma AI' },
-    { text: '制限付き月間クレジット' },
-    { text: '$30/月（Plusプラン）' },
+    { text: 'Appの恒常無料枠は現行情報で未確認' },
+    { text: '現行Appの契約画面で確認' },
     { text: '要確認' },
-    { text: 'あり（non-commercial）' },
+    { text: 'Trialの出力条件は要確認' },
     { text: '詳細を見る', href: '/tools/luma-ai/' },
   ],
   [
@@ -72,11 +72,11 @@ const basicRows = [
     { text: '詳細を見る', href: '/tools/hailuo-ai/' },
   ],
   [
-    { text: 'Haiper' },
-    { text: 'あり（詳細は公式確認）' },
-    { text: '要公式確認' },
-    { text: '要確認' },
-    { text: 'あり' },
+    { text: 'Haiper（旧サービス）' },
+    { text: '一般向けWebは2025-02終了' },
+    { text: '現行consumer料金なし' },
+    { text: '該当なし' },
+    { text: '該当なし' },
     { text: '詳細を見る', href: '/tools/haiper/' },
   ],
 ];
@@ -102,29 +102,29 @@ const pricingRows = [
     { text: 'Pika' },
     { text: '無料' },
     { text: '$0' },
-    { text: '月80クレジット程度（毎月更新・商用利用不可）', muted: true },
-    { text: '2026-06-04', muted: true },
+    { text: '80クレジット/月、商用利用・無透かしDL可', muted: true },
+    { text: '2026-11-05', muted: true },
   ],
   [
     { text: 'Pika' },
     { text: 'Standard（年払い）' },
     { text: '$8/月' },
     { text: '月700クレジット程度' },
-    { text: '2026-06-04', muted: true },
+    { text: '2026-11-05', muted: true },
   ],
   [
     { text: 'Luma AI' },
-    { text: '無料' },
-    { text: '$0' },
-    { text: '制限付き月間クレジット（詳細は公式確認）', muted: true },
-    { text: '2026-06-04', muted: true },
+    { text: 'Trial（提供条件要確認）' },
+    { text: '購入画面で確認' },
+    { text: 'App Trialは評価・テスト用途。恒常無料枠は未確認', muted: true },
+    { text: '2026-11-05', muted: true },
   ],
   [
-    { text: 'Luma AI' },
-    { text: 'Plus' },
-    { text: '$30/月' },
-    { text: '詳細は公式確認' },
-    { text: '2026-06-04', muted: true },
+    { text: 'Luma AI（App）' },
+    { text: '現行プラン' },
+    { text: 'App契約画面で確認' },
+    { text: 'AppとAPIで別条件' },
+    { text: '2026-11-05', muted: true },
   ],
   [
     { text: 'Kling AI' },
@@ -162,11 +162,11 @@ const pricingRows = [
     { text: '2026-06-04', muted: true },
   ],
   [
-    { text: 'Haiper' },
-    { text: '有料プラン' },
-    { text: '要公式確認' },
-    { text: '要公式確認' },
-    { text: '2026-06-04', muted: true },
+    { text: 'Haiper（旧サービス）' },
+    { text: '一般向けWeb提供終了' },
+    { text: '該当なし' },
+    { text: '旧料金は現在購入できる価格ではない' },
+    { text: '2026-11-05', muted: true },
   ],
 ];
 
@@ -219,7 +219,7 @@ const credit5sRows = [
     { text: 'Haiper' },
     { text: '詳細は公式確認' },
     { text: '詳細は公式確認' },
-    { text: 'クレジット消費量は公式ドキュメントで案内されている場合があります。要確認', muted: true },
+    { text: '2025年2月に一般向けサービス終了。旧仕様を現行と扱わない', muted: true },
   ],
 ];
 
@@ -287,15 +287,15 @@ const watermarkRows = [
   ],
   [
     { text: 'Pika' },
-    { text: 'あり' },
-    { text: '有料プランで透かしなし' },
+    { text: '無料Basicも透かしなしDL' },
+    { text: '無料Basic・有料プランで透かしなしDLを案内' },
     { text: '最新情報は公式料金ページを確認', muted: true },
   ],
   [
     { text: 'Luma AI' },
-    { text: 'あり（non-commercial use only）' },
-    { text: 'Plus以上（$30/月〜）でno watermarksと案内' },
-    { text: '透かし除去と商用利用はセット。詳細は公式確認', muted: true },
+    { text: 'App Trialの現行条件を確認' },
+    { text: 'API出力は公式FAQで透かしなし。Appは別' },
+    { text: 'AppとAPIの契約条件を混同しない', muted: true },
   ],
   [
     { text: 'Kling AI' },
@@ -322,10 +322,10 @@ const watermarkRows = [
     { text: '要確認', muted: true },
   ],
   [
-    { text: 'Haiper' },
-    { text: 'あり' },
-    { text: '有料プランで条件変更（詳細は公式確認）' },
-    { text: '要確認', muted: true },
+    { text: 'Haiper（旧サービス）' },
+    { text: '該当なし' },
+    { text: 'consumerサービス終了' },
+    { text: '旧料金・透かし説明は現在適用されない', muted: true }
   ],
 ];
 
@@ -340,19 +340,19 @@ const commercialRows = [
   ],
   [
     { text: 'Pika' },
-    { text: '商用利用不可とされている' },
-    { text: '商用利用可能なプランが案内されている（詳細は公式確認）' },
-    { text: '有料プランへの移行が必要。利用規約を確認', muted: true },
+    { text: '無料BasicにもCommercial use明記' },
+    { text: '有料プランにもCommercial use明記' },
+    { text: '第三者素材と利用規約を確認', muted: true }
   ],
   [
     { text: 'Luma AI' },
-    { text: 'non-commercial use onlyと案内' },
-    { text: 'Plus以上でcommercial use allowedと案内' },
-    { text: 'Plus（$30/月〜）以上が商用利用の前提', muted: true },
+    { text: 'Trialは内部評価・テスト用途' },
+    { text: 'API出力は公式FAQで商用可。Appは契約確認' },
+    { text: '旧Dream Machineの料金をAppに流用しない', muted: true }
   ],
   [
     { text: 'Kling AI' },
-    { text: '商用利用不可（公式確認には制限あり）' },
+    { text: '最新の公式一次規約を確認できず未確定' },
     { text: '要公式確認（本DBではunknownとして扱っている）' },
     { text: '商用利用前に公式規約を直接確認すること', muted: true },
   ],
@@ -375,10 +375,10 @@ const commercialRows = [
     { text: '要公式確認', muted: true },
   ],
   [
-    { text: 'Haiper' },
-    { text: '要確認' },
-    { text: '有料プランで商用利用が案内されている可能性あり（詳細は公式確認）' },
-    { text: '要公式確認', muted: true },
+    { text: 'Haiper（旧サービス）' },
+    { text: '該当なし' },
+    { text: '一般向けサービス終了。旧商用許諾は適用しない' },
+    { text: '現行consumer商品として扱わない', muted: true }
   ],
 ];
 
@@ -388,16 +388,16 @@ const useCaseRows = [
   [
     { text: 'YouTube Shorts・縦型短尺動画' },
     { text: 'Pika・Kling AI・Hailuo AI' },
-    { text: '短尺・縦型フォーマット（9:16）対応を確認。無料プランの商用利用条件を事前確認（Pikaの無料プランは商用利用不可）' },
+    { text: '短尺・縦型フォーマット（9:16）対応を確認。無料枠の権利を確認。Pika無料Basicは公式料金表で商用利用可' },
   ],
   [
     { text: '広告動画・SNS広告素材' },
     { text: 'Runway・Luma AI' },
-    { text: '商用利用条件が確認しやすいツールを優先。Runwayは全プランで商用利用可と案内。Luma AIはPlus以上（$30/月〜）が条件。有料プランへの移行と最新規約確認が必須' },
+    { text: '商用利用条件が確認しやすいツールを優先。Runwayは全プランで商用利用可と案内。Luma Appは現行の商用利用条件を契約画面で確認。APIは別契約' },
   ],
   [
     { text: 'SNS動画（収益化なし）' },
-    { text: 'Pika・Kling AI・Haiper・PixVerse' },
+    { text: 'Pika・Kling AI・PixVerse' },
     { text: '収益化を伴わない投稿でも商用利用条件を確認することを推奨。無料プランの透かし条件に注意' },
   ],
   [
@@ -412,8 +412,8 @@ const useCaseRows = [
   ],
   [
     { text: 'コスト重視の商用利用' },
-    { text: 'Pika（有料・$8/月〜）' },
-    { text: '最低有料プランが比較的低価格。ただし商用利用条件・クレジット消費・出力品質は最新情報を要確認' },
+    { text: 'Pika（無料Basic・有料Standard）' },
+    { text: 'Pika無料Basicにも商用利用と無透かしDLが公式料金表で明記。必要なモデルと第三者権利は確認' },
   ],
 ];
 
@@ -434,7 +434,7 @@ const checklistItems = [
 const faqItems = [
   {
     q: 'AI動画生成ツールの無料プランで商用利用できますか？',
-    a: 'ツールによって異なります。Pikaの無料プランは商用利用不可と明確に案内されています。Luma AIの無料プランもnon-commercial use onlyとされています。Runwayの無料プランは全プランで商用利用可と案内されていますが、クレジットが初回125のみで実用に制限があります。Kling AIは商用利用条件が公式情報から確認しにくい状況です。いずれも最新の公式規約を確認してください。本記事は法的助言ではありません。',
+    a: 'ツールによって異なります。Pika公式料金表は無料Basicの商用利用可を明記。Luma App Trialは内部評価・テスト用途です。Runwayの無料プランは全プランで商用利用可と案内されていますが、クレジットが初回125のみで実用に制限があります。Kling AIは商用利用条件が公式情報から確認しにくい状況です。いずれも最新の公式規約を確認してください。本記事は法的助言ではありません。',
   },
   {
     q: '1動画あたりのクレジット消費はどのくらいですか？',
@@ -442,15 +442,15 @@ const faqItems = [
   },
   {
     q: '月額料金が低いツールはどれですか？',
-    a: '確認時点での最低有料プラン目安はPika（$8/月・年払い）が最も低く、次いでRunway（$12/月・年払い）、Hailuo AI（$14.99/月）、Luma AI（$30/月）の順です。ただし月額料金はクレジット付与数・出力品質・商用利用条件とセットで評価することが重要です。最新の料金情報は各ツールの公式料金ページでご確認ください。',
+    a: '確認時点での最低有料プラン目安はPika（$8/月・年払い）が最も低く、次いでRunway（$12/月・年払い）、Hailuo AI（$14.99/月）、Luma Appの現行料金は契約画面で確認が必要です。ただし月額料金はクレジット付与数・出力品質・商用利用条件とセットで評価することが重要です。最新の料金情報は各ツールの公式料金ページでご確認ください。',
   },
   {
     q: 'YouTube収益化チャンネルにAI動画生成ツールで作った動画を使えますか？',
-    a: 'YouTube収益化への利用は商用利用に該当する場合があります。各ツールの商用利用条件（プランごとの可否）と、YouTubeのAI生成コンテンツに関するポリシーを別途確認してください。無料プランでは商用利用が制限されているツールが多く、有料プランへの移行が前提となる場合がほとんどです。本記事は法的助言ではありません。',
+    a: 'YouTube収益化への利用は商用利用に該当する場合があります。各ツールの商用利用条件（プランごとの可否）と、YouTubeのAI生成コンテンツに関するポリシーを別途確認してください。Pika無料Basicのように商用利用を案内するサービスもあり、無料か有料かだけで判断できません。本記事は法的助言ではありません。',
   },
   {
     q: '広告動画に使う場合はどのツールが確認しやすいですか？',
-    a: 'Runwayは公式ヘルプで全プランのOutput商用利用を制限しないと案内しており、条件が比較的確認しやすいとされています。Luma AIはPlus以上でcommercial use allowedと明記されています。Kling AIは公式情報から条件を確認しにくいため慎重な事前確認が必要です。ただし広告利用には各ツールの利用規約に加え、広告媒体のポリシーも別途確認が必要です。本記事は法的助言ではありません。',
+    a: 'Runwayは公式ヘルプで全プランのOutput商用利用を制限しないと案内しており、条件が比較的確認しやすいとされています。Luma API出力は公式FAQで商用利用が案内されていますが、現行Appのプラン条件は別途確認してください。Kling AIは公式情報から条件を確認しにくいため慎重な事前確認が必要です。ただし広告利用には各ツールの利用規約に加え、広告媒体のポリシーも別途確認が必要です。本記事は法的助言ではありません。',
   },
   {
     q: 'クレジット制とサブスクリプション制の違いは何ですか？',
@@ -518,7 +518,7 @@ const breadcrumb = JSON.stringify({
     <GuideSummaryBox title="このガイドの結論">
       <p>
         AI動画生成ツールのコストは<strong class="font-semibold text-slate-900">月額料金・クレジット付与数・1動画あたり消費クレジット・透かし条件・商用利用可否</strong>を組み合わせて評価することが重要です。
-        無料プランで商用利用できるツールは限られており、広告動画・YouTube収益化・クライアント納品を前提とする場合は有料プランへの移行と最新規約の確認が前提となります。
+        Pika無料Basicのように商用利用が案内されるサービスもあります。広告や受託制作では個別モデル・第三者素材の権利を確認してください。
         クレジット消費量はツール・モデル・解像度・動画の長さによって大きく変わるため、定期的な公式ページ確認を推奨します。
       </p>
     </GuideSummaryBox>
@@ -526,6 +526,15 @@ const breadcrumb = JSON.stringify({
     <!-- 免責事項 -->
     <GuideWarningBox variant="warning" title="免責事項・重要事項">
       このガイドは情報提供を目的としており、法的アドバイスではありません。料金・クレジット数・商用利用条件は各ツールの判断で変更される場合があります。利用前に必ず各ツールの最新公式サイト・利用規約をご確認ください。
+    </GuideWarningBox>
+
+    <GuideWarningBox variant="info" title="2026年11月の重要な料金・ライセンス更新">
+      <p>Pika無料Basicは商用利用・透かしなしDL対応。Luma AppとAPIは別条件。Haiperの一般向けWebサービスは2025年2月に終了しており、旧価格を現行と扱いません。</p>
+      <ul class="mt-2 list-disc pl-5 space-y-1">
+        <li><a href="https://pika.art/pricing" target="_blank" rel="noopener noreferrer">Pika公式料金</a></li>
+        <li><a href="https://lumalabs.ai/learning-hub/licensing" target="_blank" rel="noopener noreferrer">Luma公式ライセンス</a></li>
+        <li><a href="/tools/haiper/">Haiperの終了検証記録</a></li>
+      </ul>
     </GuideWarningBox>
 
     <!-- 関連ガイドへの導線 -->
@@ -612,7 +621,7 @@ const breadcrumb = JSON.stringify({
         比較表5：透かし除去条件
       </h2>
       <p class="mb-4 text-sm text-slate-500">
-        ほぼすべてのツールで無料プランでは生成動画に透かしが付与されます。商用利用・広告利用には透かし除去が前提となる場合がほとんどです。
+        Pika無料Basicのように透かしなしダウンロードが公式に案内される場合があります。可視透かしと商用利用は別に確認してください。
       </p>
       <GuideComparisonTable
         caption="AI動画生成ツール透かし条件比較"
@@ -687,7 +696,7 @@ const breadcrumb = JSON.stringify({
             <a href="/tools/pika/" class="text-blue-700 hover:underline">Pika</a>
           </h3>
           <p class="leading-relaxed">
-            無料プランは月80クレジット程度（毎月更新）。無料プランは商用利用不可とされています。
+            無料Basicは公式料金表で毎月80クレジット・商用利用可・透かしなしダウンロードと明記されています。
             Standard $8/月〜（年払い）で月700クレジット程度が付与されます。
             短尺動画の生成に向いているとされており、操作がシンプルです。
           </p>
@@ -702,8 +711,8 @@ const breadcrumb = JSON.stringify({
             <a href="/tools/luma-ai/" class="text-blue-700 hover:underline">Luma AI</a>
           </h3>
           <p class="leading-relaxed">
-            無料プランはnon-commercial use only・watermarksとされています。
-            Plus（$30/月）以上でcommercial use allowed・no watermarksと公式料金ページで案内されています。
+            Luma App Trialは内部評価・テスト用途で、現行プランの商用条件は契約画面で確認が必要です。
+            Luma APIは公式FAQで出力の商用利用可・無透かしと案内されますが、Appの権利・料金とは分けて確認してください。
             プランによって月間クレジット付与数・生成できる動画の解像度が異なります。詳細は公式料金ページをご確認ください。
           </p>
           <p class="mt-2 text-xs text-slate-400">
@@ -761,8 +770,7 @@ const breadcrumb = JSON.stringify({
             <a href="/tools/haiper/" class="text-blue-700 hover:underline">Haiper</a>
           </h3>
           <p class="leading-relaxed">
-            操作がシンプルで初心者向けとされています。無料枠あり（詳細は公式確認）。日本語プロンプトへの対応が案内されています。
-            有料プランの料金・クレジット条件・商用利用条件の詳細は公式サイトでご確認ください。
+            Haiperのコンシューマー向けWebサービスは2025年2月に終了しました。過去の機能や料金は参考資料であり、現在購入・利用できるものではありません。提供状況は公式サイトで別途確認してください。
           </p>
         </div>
 
@@ -808,7 +816,7 @@ const breadcrumb = JSON.stringify({
       <GuideWarningBox variant="info">
         <ul class="space-y-1.5 list-disc list-inside">
           <li>料金・クレジット数・商用利用条件はツール側の判断で予告なく変更される場合があります</li>
-          <li>このガイドの情報は2026年6月4日時点のものです。利用前に必ず各公式サイトで最新情報をご確認ください</li>
+          <li>Pika・Luma・Haiperについて2026年11月に重要差分を更新。旧調査値の残るモデル別クレジット目安は各社の現行画面で再確認してください</li>
           <li>商用利用・著作権の判断は本記事の情報だけでなく、各ツールの最新利用規約を直接確認してください</li>
           <li>重要な商用利用の場面では、法律の専門家（弁護士等）への相談を推奨します</li>
         </ul>
@@ -853,7 +861,7 @@ const breadcrumb = JSON.stringify({
     </section>
 
     <p class="mb-6 text-xs text-slate-500 leading-relaxed">
-      最新情報は各公式サイトで確認してください。掲載内容は2026年6月4日時点のものであり、法的助言ではありません。
+      最新情報は各公式サイトで確認してください。2026年11月にPika・Luma・Haiperの重要差分を反映。その他の旧クレジット概算は再検証が必要。法的助言ではありません。
     </p>
 
     <nav class="border-t border-slate-200 pt-6 text-sm" aria-label="ページナビゲーション">

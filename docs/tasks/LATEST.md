@@ -1,6 +1,18 @@
 # Latest Project State
 
 - updated_at: 2026-11-07
+- current_active_task: docs/tasks/active/2026-11-06-guide-rights-pricing-consistency.md (READY, sole task; original content proposal PR #65)
+- latest_completed_task: docs/tasks/completed/2026-11-07-fotor-search-intent.md (Fotor implementation PR #78/#79 + source/live QA, per-task PASS_WITH_LIMITATIONS; SEO umbrella #71 open)
+- pending_guides: 3 comparison/guides text+Astro sync awaiting PR CI and release review; no claim of live publication until deployed SHA verified.
+- tool_catalog: 59 (unchanged); billing, affiliate and account-specific license unknowns remain UNKNOWN.
+- source_snapshot_master: f3f3270694b8bcad83d8470cd96e09a3df693f27 (before this task PR).
+- preserved: old project history below.
+
+---
+
+# Latest Project State
+
+- updated_at: 2026-11-07
 - source_branch: master
 - latest_confirmed_master_commit: fb0c1e861bed5c2043da0ea4738fc6d4273ff653 (PR #83 merged, 2026-11-07)
 - current_tools: 59 (38 baseline + PR #81 new image/video 15 + PR #83 voice/music/design/presentation 6)

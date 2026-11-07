@@ -85,4 +85,3 @@ AI作曲・BGM生成を扱うツールです。
 [公式プログラム・提携窓口](https://affiliates.soundraw.io/program-details/commissions)を確認。分類：portal_only。承認・日本向け報酬支払・適用媒体は未確認。
 
 当サイトが審査承認されたことを示す情報はなく、専用のアフィリエイトURLは未登録です。実機制作サンプルも未制作。
-

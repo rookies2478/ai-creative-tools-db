@@ -1,0 +1,36 @@
+name: QA three released articles - mobile and desktop
+on:
+  push:
+    branches:
+      - qa/live-3-article-verification-20261107
+    paths:
+      - scripts/qa-live-release-20261107.mjs
+      - .github/workflows/qa-live-release-20261107.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Install temporary browser QA dependencies
+        run: |
+          npm install --no-save --package-lock=false playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Verify exact public Creative commit and 3 responsive pages
+        run: node scripts/qa-live-release-20261107.mjs
+      - name: Preserve screenshot and factual QA report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-release-visual-qa
+          path: qa-release-results/
+          if-no-files-found: warn
+          retention-days: 14

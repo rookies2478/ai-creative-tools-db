@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-07-fotor-search-intent"
 created_at: "2026-11-07"
-status: READY
+status: PAUSED
 risk: MEDIUM
 current_phase: search-traffic-launch
 production_required: false
@@ -29,6 +29,10 @@ unknowns:
   - GSC Query×Pageは集計全量を取得できず検索意図比率は未検証
   - 公式Commercial Useと機能別FAQの有料条件に差があり最新の契約を要確認
   - 日本の最終課金額やログイン後モデル別機能は未確認
+pause_reason: "Issue #80のツール追加を別ブランチで先行するため一時停止。master側の実作業は変更しない"
+resume_condition: "Issue #80がクローズし新規tool DBの検証が完了した後にこのタスクを復帰する"
+preserved_changes:
+  - src/pages/tools/fotor-ai/index.astro
 preexisting_untracked_files: []
 required_checks:
   - npm run validate:task

@@ -1,7 +1,11 @@
 ---
 task_id: "2026-11-09-official-facts-higgsfield-luma-recraft"
 created_at: "2026-11-09"
-status: READY
+status: PAUSED
+pause_reason: "Fotor公式日本語表で実証された記載誤りを別スコープtaskで先に最小修正するため（active 1件制約）"
+resume_condition: "2026-11-09-official-facts-fotor-agent-chat の人間レビュー後、active/が空になった時点（本taskの変更はcommit 6842796に保存済み）"
+preserved_changes:
+  - "src/content/tools/higgsfield-ai.md, luma-ai.md, recraft.md の修正（commit 6842796、未push）"
 risk: HIGH
 current_phase: editorial-source-audit
 production_required: false

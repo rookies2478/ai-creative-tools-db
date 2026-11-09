@@ -4,10 +4,10 @@ shortDescription: "Luma AppとRay3.2を中心に、テキスト・画像から�
 category: "video"
 officialUrl: "https://lumalabs.ai/"
 freePlan: false
-lowestPaidPlan: "Plus（現行金額は公式サイトで要確認）"
+lowestPaidPlan: "Plus（公式料金ページ表示：月払い$30／年払い$300、USD）"
 currency: "USD"
 commercialUse: "limited"
-commercialUseNote: "現行の公式API FAQではAPI出力の商用利用が認められ、API出力には透かしが付かないと案内されています。一方、Luma Appの現行プラン別の商用利用・透かし条件は公開情報だけでは十分に確認できません。Trialは公式利用規約上、内部評価・テスト目的に限定されています。AppとAPIを混同せず、商用利用前に最新の公式利用規約・契約画面をご確認ください。本記事は法的助言ではありません。"
+commercialUseNote: "現行の公式API FAQではAPI出力の商用利用が認められ、API出力には透かしが付かないと案内されています。Luma Appの公式料金ページ（2026-11-09確認）は「All plans include free trial credits and commercial use」と記載し、Plusのプラン項目にもCommercial useが列挙されています。ただしTrialは公式利用規約上、内部評価・テスト目的に限定され、透かし条件は料金ページに記載がなく契約画面での確認が必要です。AppとAPIを混同せず、商用利用前に最新の公式利用規約・契約画面をご確認ください。本記事は法的助言ではありません。"
 japaneseUi: false
 japanesePrompt: true
 watermark: "limited"
@@ -28,8 +28,8 @@ strengths:
   - "API出力は公式FAQで商用利用可・透かしなしと案内"
 weaknesses:
   - "恒常的な無料プランは現行公式プラン構成で確認できず、free trial creditsの案内に留まる"
-  - "Luma Appの現行プラン金額を公開公式面から安全に確認できない"
-  - "Luma Appの商用利用・透かし条件は現行契約条件の確認が必要"
+  - "App料金は公式ページ上USD表示（Plus $30/月・年払い$300、Pro $90/$900、Ultra $300/$3,000）。税込・日本円請求・地域差は未確認"
+  - "Appの透かし条件は料金ページに記載がなく、商用利用の詳細範囲も最新規約・契約画面での確認が必要"
   - "日本語UI・日本語プロンプトの公式対応範囲は明確に確認できていない"
   - "AppとAPIで料金・無料枠・権利条件が異なるため混同に注意"
 lastReviewed: "2026-11-05"
@@ -39,7 +39,7 @@ officialSourceUrl: "https://lumalabs.ai/llm-info"
 pricingModel: "subscription_credit"
 pricingStatus: "partial"
 freePlanNote: "現行公式情報ではPlus / Pro / Ultra / Enterpriseのプラン構成とfree trial creditsが案内されていますが、恒常的なFreeプランは確認できません。開発者向けAPIには無料枠がなく、最初の生成から従量課金と案内されています。"
-paidPlanNote: "現行公式情報では個人向けにPlus / Pro / Ultra、法人向けにEnterpriseが案内されています。年払いは最大20%節約とされていますが、現行の具体的な月額金額は公開公式面から安全に確認できないため断定しません。Luma Appは月次クレジット制、APIは従量課金で別体系です。"
+paidPlanNote: "現行公式情報では個人向けにPlus / Pro / Ultra、法人向けにEnterpriseが案内されています。公式料金ページ（2026-11-09確認）ではUSD表示でPlus 月払い$30／年払い$300（月換算$25）、Pro $90／$900（$75）、Ultra $300／$3,000（$250）、年払いは最大20%節約と案内されています。税込・日本円請求・地域差は未確認です。Luma Appは月次クレジット制、APIは従量課金で別体系です。"
 platforms:
   - web
   - api
@@ -61,7 +61,7 @@ useCases:
   - product_image
   - business
 limitations:
-  - "Luma Appの恒常無料プラン・現行金額・プラン別商用利用条件は契約画面で要確認"
+  - "Luma Appの恒常無料プラン・税込/日本円請求条件・透かし条件は契約画面で要確認"
   - "APIは無料枠なしの従量課金で、Luma Appのサブスクリプションとは別体系"
   - "Trial出力は公式規約上、内部評価・テスト目的に限定"
   - "動画生成・編集はモデル・解像度・長さに応じてクレジット消費が異なる"
@@ -70,7 +70,7 @@ notFor:
   - "AppとAPIの料金・権利条件を確認せず商用案件へ使いたい人"
   - "長尺動画編集を単一生成で完結したい人"
 notBestFor:
-  - "現行価格を事前に固定金額で把握したい人（公式契約画面で要確認）"
+  - "日本円・税込の確定金額を事前に把握したい人（公式料金はUSD表示、契約画面で要確認）"
   - "日本語UIが必須の人（現行公式情報で対応範囲を明確に確認できていない）"
   - "無料API枠を必要とする開発者（APIは無料枠なし）"
 difficulty: "beginner"
@@ -80,12 +80,12 @@ pricingDecision:
   watermarkStatus: "unknown"
   creditSystem: true
   paidPlanRequiredForExport: false
-  pricingNote: "Luma AppはPlus / Pro / Ultra / Enterpriseの現行プラン構成。具体的な現行金額は公開公式面から安全に確認できず、pricingStatus=partial。APIは別体系の従量課金。"
+  pricingNote: "Luma AppはPlus / Pro / Ultra / Enterpriseの現行プラン構成。公式料金ページ（USD）：Plus $30/月・$300/年、Pro $90/$900、Ultra $300/$3,000。税込・日本円請求は未確認のためpricingStatus=partial。APIは別体系の従量課金。"
 usagePolicy:
   commercialUseStatus: "limited"
   commercialUseByPlan:
     free: "恒常無料プランは現行公式構成で確認できない。Trial出力は内部評価・テスト目的に限定。"
-    paid: "Luma Appの現行プラン別商用利用条件は最新規約・契約画面で要確認。API出力は公式FAQで商用利用可と案内。"
+    paid: "公式料金ページは全プランにcommercial useを含むと記載（2026-11-09確認）。詳細範囲・透かしは最新規約・契約画面で要確認。API出力は公式FAQで商用利用可と案内。"
     enterprise: "契約条件を個別確認"
   commercialUseNote: "AppとAPIを混同しないこと。API出力は公式FAQで商用利用可・透かしなし。Trialは内部評価・テスト目的に限定。Luma Appの現行プラン別権利条件は最新規約と契約画面で確認する。"
   rightsStatus: "unknown"
@@ -165,7 +165,7 @@ faqs:
   - question: "動画の長さはどのくらいですか？"
     answer: "Ray3.2の新規動画生成は5秒または10秒が公式仕様です。Modify Video V2では最大20秒・1080pの編集に対応します。処理によって上限が異なるため、最新仕様を公式ドキュメントで確認してください。"
   - question: "料金プランはどうなっていますか？"
-    answer: "現行公式情報では個人向けPlus・Pro・Ultra、法人向けEnterpriseが案内されています。具体的な現行金額は公開公式面から安全に確認できないため、本サイトでは断定していません。"
+    answer: "現行公式情報では個人向けPlus・Pro・Ultra、法人向けEnterpriseが案内されています。公式料金ページ（USD）ではPlus 月$30／年$300、Pro $90／$900、Ultra $300／$3,000です。税込・日本円請求・地域差は未確認のため契約画面で確認してください。"
   - question: "APIは使えますか？"
     answer: "利用できます。Luma APIはLuma Appのサブスクリプションとは別の従量課金体系で、公式FAQでは無料枠なしと案内されています。"
   - question: "透かしは入りますか？"
@@ -185,7 +185,7 @@ japanBilling:
   taxDisplay: "unknown"
   purchaseChannels: ["web", "appstore"]
   pricingCheckedAt: "2026-11-05"
-  pricingNote: "現行公式情報ではLuma AppにPlus / Pro / Ultra / Enterpriseのプランとfree trial creditsが案内されています。具体的な現行金額・日本円請求条件は公開公式面から安全に確認できないため、契約画面で確認してください。APIはAppとは別の従量課金です。"
+  pricingNote: "現行公式情報ではLuma AppにPlus / Pro / Ultra / Enterpriseのプランとfree trial creditsが案内されています。公式料金ページのUSD金額はPlus $30/月（年払い$300）、Pro $90/$900、Ultra $300/$3,000。日本円請求・税込条件は未確認のため契約画面で確認してください。APIはAppとは別の従量課金です。"
   billingCategory: "D"
   sourceUrls:
     - "https://lumalabs.ai/pricing"
@@ -224,13 +224,13 @@ Ray3.2では、テキスト・画像からの動画生成に加え、動画編�
 
 ## 料金・トライアル・クレジットに関する注意点
 
-現行の公式情報では、Luma Appの個人向けプランとして**Plus / Pro / Ultra**、法人向けに**Enterprise**が案内されています。各プランにはfree trial creditsの案内がありますが、従来の記事にあった恒常的なFreeプランや固定の$30 / $90 / $300という金額は、現行の公開公式面から安全に確認できないため削除しました。
+現行の公式情報では、Luma Appの個人向けプランとして**Plus / Pro / Ultra**、法人向けに**Enterprise**が案内されています。各プランにはfree trial creditsの案内がありますが、恒常的なFreeプランは確認できません。2026-11-09に公式料金ページを再確認し、Plus $30 / Pro $90 / Ultra $300（月払い、USD）の金額を確認しました。
 
 - **Luma App：** サブスクリプションごとに月次クレジットが付与される仕組み。未使用クレジットは請求サイクル終了時に失効すると公式Billing Policyで案内されています
 - **Free trial credits：** 現行プランに試用クレジットの案内があります。恒常的な無料プランとは区別してください
 - **Luma API：** Appとは別体系で、公式FAQでは無料枠なし・最初の生成から従量課金と案内されています
 - **年払い：** 現行公式情報では年払いで最大20%節約との案内があります
-- **具体的な現行金額：** 契約画面・公式料金ページで確認してください。本サイトでは未確認金額を推測しません
+- **現行金額（公式料金ページ、USD）：** Plus 月$30／年払い$300、Pro $90／$900、Ultra $300／$3,000。税込・日本円請求・地域差は未確認のため契約画面で確認してください
 
 ### クレジット・生成時間に関する注意
 

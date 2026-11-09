@@ -8,12 +8,13 @@ production_required: false
 db_change: false
 ui_change: false
 official_verification_required: true
-goal: "Fotor日本語公式料金表(2026-11-09ブラウザ描画確認)で実証されたBasicのAI Agentチャット回数の記載のみ最小修正する"
+goal: "Fotor日本語公式料金表およびPika公式料金ページ(2026-11-09ブラウザ描画確認)で実証された記載誤り(FotorのAI Agentチャット回数、Pikaのクレジット数とStarter商用可否)のみ最小修正する"
 non_goals:
   - "透かし・商用利用・価格・通貨の記述を断定変更しない"
   - "アフィリエイトURL、計測、デプロイ、本番サイト、台帳を変更しない"
 target_files:
   - src/content/tools/fotor-ai.md
+  - src/content/tools/pika.md
   - docs/tasks/active/2026-11-09-official-facts-fotor-agent-chat.md
   - docs/tasks/paused/2026-11-09-official-facts-higgsfield-luma-recraft.md
 reference_files:

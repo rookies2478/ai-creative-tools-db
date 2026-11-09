@@ -32,8 +32,8 @@ officialSourceUrl: "https://www.canva.com/pricing/"
 pricingStatus: "confirmed"
 needsReview: false
 pricingModel: "subscription_credit"
-freePlanNote: "日本語公式料金表は無料版のAI利用枠について標準/高品質モデルを最大20回と案内。Dream Lab個別のプロンプト上限とは区別し、各機能の残枠はCanvaのアカウント画面で確認。"
-paidPlanNote: "日本向け公式Web料金表はCanva Pro ¥11,800/年（年払い・1人）を明記。App Store日本の月額¥1,180とは購入経路・請求周期が異なる。無料版のAI利用は最大20回（モデルによって異なる）。ProのAI利用上限は無料版の10倍と説明。画像生成機能ごとのクレジット換算は公式画面で確認。"
+freePlanNote: "日本語公式料金表（2026-11-10確認）は無料版のAI利用枠を「標準モデルと高品質モデルを一部利用可能」と案内し、回数は明記していません（旧記載の「最大20回」は現行料金表になし）。Dream Lab個別のプロンプト上限とは区別し、各機能の残枠はCanvaのアカウント画面で確認。"
+paidPlanNote: "日本向け公式Web料金表はCanva Pro ¥11,800/年（年払い・1人）を明記。App Store日本の月額¥1,180とは購入経路・請求周期が異なる。無料版のAI利用は標準/高品質モデルを一部利用可能（回数の明記なし・2026-11-10確認）。ProのAI利用上限は無料版の10倍と説明。画像生成機能ごとのクレジット換算は公式画面で確認。"
 platforms:
   - web
   - ios
@@ -172,7 +172,7 @@ japanBilling:
   taxDisplay: "unknown"
   purchaseChannels: ["web", "appstore", "googleplay", "enterprise"]
   pricingCheckedAt: "2026-07-13"
-  pricingNote: "2026-11-06日本向け公式Web料金表はCanva Pro 年額¥11,800・無料版¥0。日本App Store月額¥1,180は別の請求経路。無料版AIは最大20回、Proは10倍の利用枠と記載。Web購入金額とApp Store金額を同じ課金周期と扱わない。"
+  pricingNote: "2026-11-06日本向け公式Web料金表はCanva Pro 年額¥11,800・無料版¥0。日本App Store月額¥1,180は別の請求経路。無料版AIは標準/高品質モデルを一部利用可能（現行料金表は回数を明記せず）、Proは無料版の10倍と記載。Web購入金額とApp Store金額を同じ課金周期と扱わない。"
   billingCategory: "D"
   sourceUrls:
     - "https://www.canva.com/ja_jp/pricing/"

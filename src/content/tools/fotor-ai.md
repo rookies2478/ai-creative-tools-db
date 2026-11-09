@@ -38,7 +38,7 @@ pricingSourceNote: "日本語公式ではBasic USD0、ProとPro+の月額とク�
 currency: "USD"
 pricingStatus: "partial"
 pricingModel: "subscription_credit"
-freePlanNote: "Fotor日本語公式表：Basic無料・限定クレジット・同時生成1件、AI Agentチャット2回、作品保存30日、クラウド512MB、透かし付き書き出し。"
+freePlanNote: "Fotor日本語公式表：Basic無料・限定クレジット・同時生成1件、AI Agentチャット50回・タスク1件・メッセージ履歴7日間、クラウド512MB（2026-11-09 日本語公式料金表で確認。旧記載の「チャット2回・作品保存30日」は現行表に該当なし）。透かし：料金表の「透かしなし」行はBasicが×、Pro以上が✓（2026-11-10 描画DOMで確認）のため、Basicの書き出しは透かし付き。"
 platforms:
   - web
 signupRequired: true

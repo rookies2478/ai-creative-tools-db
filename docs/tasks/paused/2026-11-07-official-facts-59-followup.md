@@ -1,7 +1,11 @@
 ---
 task_id: "2026-11-07-official-facts-59-followup"
 created_at: "2026-11-07"
-status: READY
+status: PAUSED
+pause_reason: "Higgsfield/Luma/Recraftの事実修正を別スコープtaskで優先実施するため"
+resume_condition: "2026-11-09-official-facts-higgsfield-luma-recraft のPRが人間レビュー後にマージされ、active/が空になった時点"
+preserved_changes:
+  - "docs/tasks/paused/2026-11-07-official-facts-59-followup.md（taskファイルのみ、未commit差分なし）"
 risk: HIGH
 current_phase: editorial-source-audit
 production_required: false

@@ -31,7 +31,7 @@ officialSourceUrl: "https://pika.art/pricing"
 pricingModel: "subscription_credit"
 pricingStatus: "confirmed"
 freePlanNote: "2026-11-07の新Pika料金比較はFree月額クレジット付与0（追加パック購入可）、無透かしDL、商用ライセンスなし。旧Basic（月80cr・商用可）表示は過去の別バージョン。現行アカウントへの適用条件は要確認。"
-paidPlanNote: "公式新料金比較では公式料金ページ（2026-11-09、ブラウザ描画・月払い表示・USD）：Starter $10/月で600cr/月、Creator $35/月で2,600cr/月、Fancy $95/月で8,550cr/月。Starter・Creator・Fancyは商用ライセンスあり、Freeは透かしなし・商用ライセンスなし。年払い（$8/$28/$76相当）時のクレジット数は今回未確認。2026-11-07の旧記載（Starter 900cr・Creator 3,150cr、Starterの商用可否が矛盾）は現行ページと一致しないため置換。プラン名・金額・税・最終請求は契約画面で再確認。"
+paidPlanNote: "公式新料金比較では公式料金ページ（2026-11-09、ブラウザ描画・月払い表示・USD）：Starter $10/月で600cr/月、Creator $35/月で2,600cr/月、Fancy $95/月で8,550cr/月。Starter・Creator・Fancyは商用ライセンスあり、Freeは透かしなし・商用ライセンスなし。年払い表示（$8/$28/$76相当）に切り替えてもクレジット数は600/2,600で変わらないことを確認（2026-11-10）。2026-11-07の旧記載（Starter 900cr・Creator 3,150cr、Starterの商用可否が矛盾）は現行ページと一致しないため置換。プラン名・金額・税・最終請求は契約画面で再確認。"
 platforms:
   - web
 signupRequired: true

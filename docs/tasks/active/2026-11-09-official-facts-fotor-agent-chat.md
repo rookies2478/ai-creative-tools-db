@@ -15,6 +15,8 @@ non_goals:
 target_files:
   - src/content/tools/fotor-ai.md
   - src/content/tools/pika.md
+  - src/content/tools/canva-ai-image-generator.md
+  - src/content/tools/heygen.md
   - docs/tasks/active/2026-11-09-official-facts-fotor-agent-chat.md
   - docs/tasks/paused/2026-11-09-official-facts-higgsfield-luma-recraft.md
 reference_files:

@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-17-official-facts-66-pilot"
 created_at: "2026-11-17"
-status: READY
+status: DONE
 risk: MEDIUM
 current_phase: editorial-source-audit
 production_required: false
@@ -47,3 +47,6 @@ forbidden_operations:
 # Issue #66 field-level follow-up
 
 Source of truth: Issue #66 comment dated 2026-11-17 from the local-first official re-check. Only the three explicitly verified field-level corrections are in scope.
+
+## Closeout 2026-11-17
+PR #91 was squash-merged to master as 558bea0c215c5236deee50052a63ca2a272648b5 on 2026-11-17. This task slot is closed so the next scoped Issue #66 follow-up can use the single active slot; no vendor claims are changed by this closeout.

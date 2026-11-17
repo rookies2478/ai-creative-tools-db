@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-09-official-facts-fotor-agent-chat"
 created_at: "2026-11-09"
-status: READY
+status: DONE
 risk: MEDIUM
 current_phase: editorial-source-audit
 production_required: false
@@ -51,3 +51,7 @@ Evidence: https://www.fotor.com/jp/pricing/ rendered in headless Chrome (ja-JP, 
 Previous task paused: docs/tasks/paused/2026-11-09-official-facts-higgsfield-luma-recraft.md (commit 6842796 retained)
 
 PR #90 CI remediation (2026-11-10): CI compared the whole PR against origin/master, including preserved first commit 6842796 and paused task move. The previous active task target_files omitted four already-committed paths (Higgsfield, Luma, Recraft, prior 59-followup task), causing scope validation failure. This task now explicitly records all of the **actual existing PR changes**; no additional vendor claims or article content changed in this fix.
+
+
+## Closeout 2026-11-17
+PR #90 was already merged to master on 2026-11-09. This task slot is closed to allow Issue #66 follow-up work; no vendor claims are changed by this closeout.

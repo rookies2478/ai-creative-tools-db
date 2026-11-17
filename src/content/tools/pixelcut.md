@@ -10,7 +10,8 @@ commercialUse: "limited"
 commercialUseNote: "公式日本語料金表はProとBusinessに商用ライセンスを明記。Freeの全機能での商用利用は未確認。 未確認のモデル別・入力素材の第三者権利は別確認。"
 japaneseUi: "unknown"
 japanesePrompt: "unknown"
-watermark: "unknown"
+watermark: "no"
+watermarkCondition: "2026-11-17確認の公式日本語料金表でFreeに「透かしなしの無料エクスポート」と案内。これはFreeの全AI生成物の商用利用許諾を意味せず、Pro/Businessの商用ライセンス表記とは別条件。"
 bestFor:
   - "EC商品画像と背景編集"
 strengths:
@@ -18,7 +19,7 @@ strengths:
 weaknesses:
   - "背景素材のライセンスと無料利用範囲は要確認"
   - "実機生成による画質・日本語品質の比較は未実施"
-lastReviewed: "2026-11-07"
+lastReviewed: "2026-11-17"
 nextReviewDue: "2026-12-07"
 officialSourceUrl: "https://www.pixelcut.ai/ja/pricing"
 pricingModel: "unknown"

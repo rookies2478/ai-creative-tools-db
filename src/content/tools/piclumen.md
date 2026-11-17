@@ -9,6 +9,7 @@ commercialUseNote: "公式日本語料金FAQではBasic無料は商用不可、L
 japaneseUi: "unknown"
 japanesePrompt: "unknown"
 watermark: "unknown"
+watermarkCondition: "2026-11-17確認の公式日本語料金表ではLite / Standard / Proに「ウォーターマークなしの創作」と案内。Basicの透かし条件は明記を確認できないためunknownを維持。商用利用権は別条件。"
 bestFor:
   - "複数画像モデルの比較と画像・動画生成"
 strengths:
@@ -16,7 +17,7 @@ strengths:
 weaknesses:
   - "無料Basicには商用ライセンスが付かない"
   - "実機生成による画質・日本語品質の比較は未実施"
-lastReviewed: "2026-11-07"
+lastReviewed: "2026-11-17"
 nextReviewDue: "2026-12-07"
 officialSourceUrl: "https://www.piclumen.com/ja/pricing/"
 lowestPaidPlan: "Lite US$7.59/月（月払い・表示条件要確認）"

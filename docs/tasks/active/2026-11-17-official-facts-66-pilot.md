@@ -23,6 +23,7 @@ target_files:
 reference_files:
   - AGENTS.md
   - CLAUDE.md
+preexisting_untracked_files: []
 unknowns:
   - "Scenario無料枠の補充時刻・繰越条件は公式公開ページだけでは確定できない"
   - "Pixelcutの透かしなし無料エクスポートは、Freeの全AI生成物の商用利用許諾を意味しない"

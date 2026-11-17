@@ -16,13 +16,13 @@ strengths:
 weaknesses:
   - "カスタムモデル学習は上位プラン中心"
   - "実機生成による画質・日本語品質の比較は未実施"
-lastReviewed: "2026-11-07"
+lastReviewed: "2026-11-17"
 nextReviewDue: "2026-12-07"
 officialSourceUrl: "https://www.scenario.com/pricing"
 lowestPaidPlan: "Starter US$15/月（月払い）"
 currency: "USD"
 pricingModel: "unknown"
-freePlanNote: "公式の無料評価クレジット（50 credits）案内あり。最新の補充条件は未確認。"
+freePlanNote: "公式料金ページには「50 free daily credits」の案内がある一方、FAQは「a free tier with 50 credits」と記載。無料枠の補充時刻・繰越条件は公式公開情報だけでは確定できないため、利用時に確認。"
 paidPlanNote: "Starter US$15/月（月払い）。日本での実際の請求通貨・税・割引は購入時に確認。"
 platforms:
   - web
@@ -48,7 +48,7 @@ faqs:
   - question: "Scenarioは何ができますか？"
     answer: "ゲーム素材やキャラクターの一貫性維持。カスタムモデル学習とチーム制作の機能。"
   - question: "無料で使えますか？"
-    answer: "公式の無料評価クレジット（50 credits）案内あり。最新の補充条件は未確認。"
+    answer: "公式料金ページには「50 free daily credits」の案内がある一方、FAQは「a free tier with 50 credits」と記載。補充時刻・繰越条件は公開情報だけでは確定できないため、利用時に確認してください。"
   - question: "商用利用できますか？"
     answer: "公式料金FAQは無料利用を個人・評価用途に限定。有料プランに商用ライセンスあり。 選択モデル・第三者の権利も確認してください。"
 japanBilling:
@@ -93,7 +93,7 @@ Scenarioはゲーム・キャラクター素材を検討する際の候補サー
 
 - **日本語公式サイト：** 日本語の公式製品サイトを今回の調査では特定できず、英語公式を使用
 - **料金：** Starter US$15/月（月払い）。[公式料金・プラン情報](https://www.scenario.com/pricing)。日本円の請求額・税は未確認。
-- **無料枠：** 公式の無料評価クレジット（50 credits）案内あり。最新の補充条件は未確認。
+- **無料枠：** 公式料金ページには「50 free daily credits」の案内がある一方、FAQは「a free tier with 50 credits」と記載。補充時刻・繰越条件は公開情報だけでは確定できないため、断定しません。
 - **商用利用：** 公式料金FAQは無料利用を個人・評価用途に限定。有料プランに商用ライセンスあり。
 - **アフィリエイト：** 公式サイト上に現金型アフィリエイト制度を確認。Scenario公式ブランドのTolt提携申請ポータルに有料紹介20%の案内あり。参加承認・日本送金は別途確認。 [公式の制度確認先](https://affiliates.scenario.com/)
 

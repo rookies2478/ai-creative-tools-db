@@ -10,7 +10,8 @@ commercialUse: "paid-only"
 commercialUseNote: "公式FAQでFreeとLiteは個人利用のみ。商用ライセンスはStandard、Pro、Enterprise。 未確認のモデル別・入力素材の第三者権利は別確認。"
 japaneseUi: "unknown"
 japanesePrompt: "unknown"
-watermark: "unknown"
+watermark: "limited"
+watermarkCondition: "2026-11-17確認の公式ヘルプ・料金ページFAQで、Freeの書き出しは透かし入り・低解像度、有料プランの書き出しは透かしなしと案内（料金表のLiteにも「No watermarking」）。透かしなしは商用ライセンスを意味せず、LiteはFreeと同じく個人利用のみ。"
 bestFor:
   - "絵コンテ・シーン設計を伴う映像制作"
 strengths:
@@ -18,11 +19,11 @@ strengths:
 weaknesses:
   - "映像制作枠・利用権利はプランによる"
   - "実機生成による画質・日本語品質の比較は未実施"
-lastReviewed: "2026-11-07"
+lastReviewed: "2026-11-17"
 nextReviewDue: "2026-12-07"
 officialSourceUrl: "https://website.ltx.studio/studio/pricing"
 pricingModel: "unknown"
-freePlanNote: "公式料金表はFree 800クレジット一度のみ・個人用途。"
+freePlanNote: "公式ヘルプでは、Freeは対象の新規ユーザーの多くに一度だけ800クレジットが付与される案内（地域・提供状況により付与されない場合あり、有料プランへのアップグレード時に未使用分は置き換え）。Freeは個人用途のみ。"
 paidPlanNote: "Lite US$15/月、商用はStandard US$35/月から。日本での実際の請求通貨・税・割引は購入時に確認。"
 platforms:
   - web
@@ -41,6 +42,15 @@ sourceRefs:
   - label: "公式料金・プラン情報"
     url: "https://website.ltx.studio/studio/pricing"
     type: pricing
+  - label: "公式ヘルプ：商用ライセンス対象プラン"
+    url: "https://help.ltx.io/hc/en-us/articles/32046651702290-Which-LTX-Studio-plans-include-a-commercial-use-license"
+    type: help
+  - label: "公式ヘルプ：無料クレジットの付与と有効期限"
+    url: "https://help.ltx.io/hc/en-us/articles/33219919181074-Do-LTX-Studio-free-credits-expire"
+    type: help
+  - label: "公式ヘルプ：LTX Studio FAQ（透かし）"
+    url: "https://help.ltx.io/hc/en-us/p/ltx-studio"
+    type: help
   - label: "利用規約確認先（個別適用条件は未検証）"
     url: "https://ltx.studio/terms-of-use"
     type: terms
@@ -48,7 +58,7 @@ faqs:
   - question: "LTX Studioは何ができますか？"
     answer: "絵コンテ・シーン設計を伴う映像制作。ストーリーボードから動画制作を整理できる。"
   - question: "無料で使えますか？"
-    answer: "公式料金表はFree 800クレジット一度のみ・個人用途。"
+    answer: "公式ヘルプでは、Freeは対象の新規ユーザーの多くに一度だけ800クレジットが付与される案内（地域・提供状況により付与されない場合あり、有料プランへのアップグレード時に未使用分は置き換え）。Freeは個人用途のみ。"
   - question: "商用利用できますか？"
     answer: "公式FAQでFreeとLiteは個人利用のみ。商用ライセンスはStandard、Pro、Enterprise。 選択モデル・第三者の権利も確認してください。"
 japanBilling:
@@ -93,7 +103,8 @@ LTX Studioは動画制作・絵コンテを検討する際の候補サービス�
 
 - **日本語公式サイト：** 日本語の公式製品サイトを今回の調査では特定できず、英語公式を使用
 - **料金：** Lite US$15/月、商用はStandard US$35/月から。[公式料金・プラン情報](https://website.ltx.studio/studio/pricing)。日本円の請求額・税は未確認。
-- **無料枠：** 公式料金表はFree 800クレジット一度のみ・個人用途。
+- **無料枠：** 公式ヘルプでは、Freeは対象の新規ユーザーの多くに一度だけ800クレジットが付与される案内（地域・提供状況により付与されない場合あり、有料プランへのアップグレード時に未使用分は置き換え）。Freeは個人用途のみ。
+- **透かし（2026年11月17日確認）：** 公式ヘルプではFreeの書き出しは透かし入り、有料プランは透かしなし。透かしの有無は商用利用の可否とは別条件です。
 - **商用利用：** 公式FAQでFreeとLiteは個人利用のみ。商用ライセンスはStandard、Pro、Enterprise。
 - **アフィリエイト：** 第三者の紹介情報のみで公式制度の確認未了。外部ASP・比較サイトに提携掲載情報あり。ただしLTX公式による制度の現行承認と日本向け条件を未確認。
 

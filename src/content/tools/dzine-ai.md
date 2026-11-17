@@ -18,11 +18,11 @@ strengths:
 weaknesses:
   - "無料利用時の商用条件は未確認"
   - "実機生成による画質・日本語品質の比較は未実施"
-lastReviewed: "2026-11-07"
+lastReviewed: "2026-11-17"
 nextReviewDue: "2026-12-07"
 officialSourceUrl: "https://www.dzine.ai/pricing/"
 pricingModel: "unknown"
-freePlanNote: "公式英語料金表でFree US$0。無料生成物はNon-Commercial Use。"
+freePlanNote: "公式英語料金表でFree US$0。無料生成物はPublic Generation・Non-Commercial Use。2026-11-17確認の同ページでは、新規無料ユーザーは登録後に100クレジット（12か月有効）を付与され、従来の1日32クレジットへの日次リセットは提供終了と案内。"
 paidPlanNote: "Beginner US$8.99/月（月払い）。日本での実際の請求通貨・税・割引は購入時に確認。"
 platforms:
   - web
@@ -50,7 +50,7 @@ faqs:
   - question: "Dzine AIは何ができますか？"
     answer: "構図やデザインの制御を伴うAI制作。画像の編集・構図制御と動画向け機能を提供。"
   - question: "無料で使えますか？"
-    answer: "公式英語料金表でFree US$0。無料生成物はNon-Commercial Use。"
+    answer: "公式英語料金表でFree US$0。無料生成物はPublic Generation・Non-Commercial Use。2026-11-17確認の同ページでは、新規無料ユーザーは登録後に100クレジット（12か月有効）を付与され、従来の1日32クレジットへの日次リセットは提供終了と案内。"
   - question: "商用利用できますか？"
     answer: "公式料金表でFreeは非商用、有料Beginner以上にCommercial Useを明記。 選択モデル・第三者の権利も確認してください。"
 japanBilling:
@@ -95,7 +95,7 @@ Dzine AIは画像デザイン・動画を検討する際の候補サービスで
 
 - **日本語公式サイト：** 日本語の公式製品サイトを今回の調査では特定できず、英語公式を使用
 - **料金：** Beginner US$8.99/月（月払い）。[公式料金・プラン情報](https://www.dzine.ai/pricing/)。日本円の請求額・税は未確認。
-- **無料枠：** 公式英語料金表でFree US$0。無料生成物はNon-Commercial Use。
+- **無料枠：** 公式英語料金表でFree US$0。無料生成物はPublic Generation・Non-Commercial Use。2026-11-17確認の同ページでは、新規無料ユーザーは登録後に100クレジット（12か月有効）を付与され、従来の1日32クレジットへの日次リセットは提供終了と案内。
 - **商用利用：** 公式料金表でFreeは非商用、有料Beginner以上にCommercial Useを明記。
 - **アフィリエイト：** 公式サイト上に現金型アフィリエイト制度を確認。公式Rewardfulプログラムは30% recurring・Cookie30日・最大12か月。Team/API/追加クレジット購入は対象外。 [公式の制度確認先](https://www.dzine.ai/Affiliate-program/)
 

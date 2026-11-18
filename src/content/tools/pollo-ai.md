@@ -5,10 +5,11 @@ category: "both"
 officialUrl: "https://pollo.ai/ja"
 freePlan: "limited"
 commercialUse: "paid-only"
-commercialUseNote: "公式日本語FAQは有料プラン生成物の商用利用を案内。無料生成と第三者素材の権利は未確認。 未確認のモデル別・入力素材の第三者権利は別確認。"
+commercialUseNote: "公式FAQは有料プラン生成物の商用利用を案内し、無料ユーザーの生成物は商用利用不可と明記。選択モデル・入力素材・第三者権利は別確認。"
 japaneseUi: "unknown"
 japanesePrompt: "unknown"
-watermark: "unknown"
+watermark: "limited"
+watermarkCondition: "公式Pollo AI FAQは無料プランの生成物に透かしが付く一方、有料プランでは透かしを削除できると案内。"
 bestFor:
   - "複数モデルを横断する動画・画像制作"
 strengths:
@@ -16,12 +17,12 @@ strengths:
 weaknesses:
   - "選択モデルごとに利用条件が異なる可能性"
   - "実機生成による画質・日本語品質の比較は未実施"
-lastReviewed: "2026-11-07"
+lastReviewed: "2026-11-18"
 nextReviewDue: "2026-12-07"
 officialSourceUrl: "https://pollo.ai/ja/pricing"
 pricingModel: "unknown"
-freePlanNote: "公式日本語サイトに無料開始とクレジット制度の案内あり。表示が動的で正確な無料上限は要確認。"
-paidPlanNote: "金額は公式表示の差異または動的表示のため未確定。日本での請求通貨・税・割引を購入画面で確認。"
+freePlanNote: "公式FAQで無料プランを確認。無料生成物は透かしあり・商用利用不可。正確な無料クレジット上限は利用画面で確認。"
+paidPlanNote: "公式日本語ページ内料金表（2026-11-18確認、年払い表示）: Lite US$15/月・400 credits、Pro US$29/月・800 credits、Ultra US$129/月・5,000 credits。いずれも透かしなし。キャンペーン・月払い価格・税は購入画面で確認。"
 platforms:
   - web
 signupRequired: true
@@ -48,9 +49,9 @@ faqs:
   - question: "Pollo AIは何ができますか？"
     answer: "複数モデルを横断する動画・画像制作。画像から動画・テキストから動画を比較できる。"
   - question: "無料で使えますか？"
-    answer: "公式日本語サイトに無料開始とクレジット制度の案内あり。表示が動的で正確な無料上限は要確認。"
+    answer: "公式FAQで無料プランを確認。無料生成物には透かしが付き、正確な無料クレジット上限は利用画面で確認が必要です。"
   - question: "商用利用できますか？"
-    answer: "公式日本語FAQは有料プラン生成物の商用利用を案内。無料生成と第三者素材の権利は未確認。 選択モデル・第三者の権利も確認してください。"
+    answer: "公式FAQでは有料プラン生成物は商用利用可能、無料ユーザーの生成物は商用利用不可と案内しています。選択モデル・入力素材・第三者の権利も確認してください。"
 japanBilling:
   pricingUrl: "https://pollo.ai/ja/pricing"
   billingCurrency: "公式公開額が米ドル表示の場合も日本での請求通貨は未確認"
@@ -59,7 +60,7 @@ japanBilling:
   taxDisplay: "unknown"
   purchaseChannels:
     - "web"
-  pricingCheckedAt: "2026-11-07"
+  pricingCheckedAt: "2026-11-18"
   pricingNote: "公式日本語製品ページを優先. 日本での課金・税・割引、ログイン後画面の状況は未検証。"
   sourceUrls:
     - "https://pollo.ai/ja/pricing"
@@ -92,9 +93,9 @@ Pollo AIはAI動画生成を検討する際の候補サービスです。複数�
 ## 日本語公式・料金・アフィリエイト確認（2026年11月7日）
 
 - **日本語公式サイト：** 日本語の公式製品ページを確認。[日本語公式](https://pollo.ai/ja)
-- **料金：** 金額は要確認。[公式料金・プラン情報](https://pollo.ai/ja/pricing)。日本円の請求額・税は未確認。
-- **無料枠：** 公式日本語サイトに無料開始とクレジット制度の案内あり。表示が動的で正確な無料上限は要確認。
-- **商用利用：** 公式日本語FAQは有料プラン生成物の商用利用を案内。無料生成と第三者素材の権利は未確認。
+- **料金：** 公式日本語ページ内料金表（2026年11月18日確認、年払い表示）でLite US$15/月・400 credits、Pro US$29/月・800、Ultra US$129/月・5,000を確認。[公式料金・プラン情報](https://pollo.ai/ja/pricing)。月払い価格・税・キャンペーンは購入時に確認。
+- **無料枠：** 公式FAQで無料プランあり。無料生成物は透かしあり。正確な無料クレジット上限は利用画面で確認。
+- **商用利用：** 公式FAQで有料プラン生成物は商用利用可能、無料ユーザーの生成物は商用利用不可と案内。第三者素材・モデル固有条件は別確認。
 - **アフィリエイト：** 公式サイト上に現金型アフィリエイト制度を確認。日本語公式は直接紹介30%、二次紹介10%、最低支払額US$100、PayPal。加入申請・審査と専用リンク発行が必要。 [公式の制度確認先](https://pollo.ai/ja/affiliate-program)
 
 今回の調査時点でAIクリエイティブナビ専用の**承認済みアフィリエイトリンクは未取得・未登録**です。制度の存在、審査への合格、日本からの報酬受取可否は別々に確認してください。生成の実機検証・独自作例は未実施です。

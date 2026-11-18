@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-17-official-facts-66-ltx-dzine"
 created_at: "2026-11-17"
-status: READY
+status: DONE
 risk: MEDIUM
 current_phase: editorial-source-audit
 production_required: false

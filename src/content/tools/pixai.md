@@ -6,11 +6,12 @@ officialUrl: "https://pixai.art/ja"
 currency: "JPY"
 lowestPaidPlan: "Starter ¥1,680/月（公式日本語ページのJPY表示、2026-11-18確認。年払い割引は変動）"
 freePlan: "limited"
-commercialUse: "unknown"
-commercialUseNote: "ユーザー生成画像、コミュニティ公開作品、追加モデル・LoRAの利用権利は別途確認。 未確認のモデル別・入力素材の第三者権利は別確認。"
+commercialUse: "limited"
+commercialUseNote: "PixAI公式TermsはAI生成画像の所有権・著作権を主張せず、生成物を自由に使用できると記載。公式生成ページも商用利用可と案内。ただし他ユーザーのUGC、コミュニティモデル・LoRA、入力素材、第三者権利は各ライセンスを確認。"
 japaneseUi: "unknown"
 japanesePrompt: "unknown"
-watermark: "unknown"
+watermark: "no"
+watermarkCondition: "公式の無料AI画像生成ページは、無料の日次クレジットで生成・ダウンロードでき、no watermarkと案内。モデル・機能別の例外は利用画面で確認。"
 bestFor:
   - "アニメキャラクターとイラスト生成"
 strengths:
@@ -22,7 +23,7 @@ lastReviewed: "2026-11-18"
 nextReviewDue: "2026-12-07"
 officialSourceUrl: "https://pixai.art/ja/membership/plans"
 pricingModel: "unknown"
-freePlanNote: "日本語公式会員案内で無料クレジットあり。日次配布、画像と動画の対象モデルに差がある。"
+freePlanNote: "公式Wikiで非会員は毎日10,000クレジット（UTC 0時 / JST 9時更新）と案内。公式生成ページは無料の日次クレジット・no watermarkを案内。機能・モデルごとの消費量は要確認。"
 paidPlanNote: "公式日本語プランページ（2026-11-18、実画面確認）のJPY表示: Starter ¥1,680/月・毎月30万クレジット、Plus ¥5,000/月・100万、Premium ¥8,400/月・200万。年払いは合計 ¥13,440 / ¥38,640 / ¥67,200（割引表示は変動）。実際の請求通貨・税・割引は購入時に確認。"
 platforms:
   - web
@@ -48,9 +49,9 @@ faqs:
   - question: "PixAIは何ができますか？"
     answer: "アニメキャラクターとイラスト生成。アニメ画風に焦点を当てた制作コミュニティ。"
   - question: "無料で使えますか？"
-    answer: "日本語公式会員案内で無料クレジットあり。日次配布、画像と動画の対象モデルに差がある。"
+    answer: "公式Wikiで非会員は毎日10,000クレジットと案内。公式生成ページは無料の日次クレジットと透かしなしの生成を案内しています。"
   - question: "商用利用できますか？"
-    answer: "ユーザー生成画像、コミュニティ公開作品、追加モデル・LoRAの利用権利は別途確認。 選択モデル・第三者の権利も確認してください。"
+    answer: "PixAI公式Termsは生成画像を自由に使用できるとし、公式生成ページも商用利用可と案内しています。ただしコミュニティモデル・LoRA・他ユーザー作品・入力素材のライセンスと第三者権利は別途確認してください。"
 japanBilling:
   pricingUrl: "https://pixai.art/ja/membership/plans"
   billingCurrency: "公式公開額が米ドル表示の場合も日本での請求通貨は未確認"
@@ -93,8 +94,8 @@ PixAIはアニメ調画像の生成を中心とするサービス。公開画像
 
 - **日本語公式サイト：** 日本語の公式製品ページを確認。[日本語公式](https://pixai.art/ja)
 - **料金：** 公式日本語プランページのJPY表示（2026-11-18確認）: Starter ¥1,680/月・毎月30万クレジット、Plus ¥5,000/月・100万、Premium ¥8,400/月・200万。年払いは合計 ¥13,440 / ¥38,640 / ¥67,200。[公式料金・プラン情報](https://pixai.art/ja/membership/plans)。日本円の請求額・税は未確認。
-- **無料枠：** 日本語公式会員案内で無料クレジットあり。日次配布、画像と動画の対象モデルに差がある。
-- **商用利用：** ユーザー生成画像、コミュニティ公開作品、追加モデル・LoRAの利用権利は別途確認。
+- **無料枠：** 公式Wikiで非会員は毎日10,000クレジット。公式生成ページでは無料の日次クレジットと透かしなしを案内。モデル・機能ごとの消費量は要確認。
+- **商用利用：** 公式TermsはAI生成画像についてPixAIが所有権・著作権を主張せず自由に使用できると記載し、公式生成ページも商用利用可と案内。コミュニティモデル・LoRA・他ユーザー作品・入力素材は個別ライセンスを確認。
 - **アフィリエイト：** サービス内クレジット等の紹介特典のみ確認。日本語公式EAPと友達紹介はクレジット・会員等の特典。売上歩合の現金提携として確認できない。 [公式の制度確認先](https://blog.pixai.art/ja/pixai-elite-ambassador-program-eap-ja/)
 
 今回の調査時点でAIクリエイティブナビ専用の**承認済みアフィリエイトリンクは未取得・未登録**です。制度の存在、審査への合格、日本からの報酬受取可否は別々に確認してください。生成の実機検証・独自作例は未実施です。

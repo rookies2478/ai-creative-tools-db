@@ -40,7 +40,7 @@ sourceRefs:
     url: "https://www.hedra.com/"
     type: pricing
   - label: "利用規約確認先（個別適用条件は未検証）"
-    url: "https://www.hedra.com/terms-of-service"
+    url: "https://www.hedra.com/terms"
     type: terms
 faqs:
   - question: "Hedraは何ができますか？"
@@ -81,7 +81,7 @@ Hedraはキャラクター動画を検討する際の候補サービスです。
 
 - [公式サイト](https://www.hedra.com/)
 - [料金・プラン確認](https://www.hedra.com/)
-- [規約・権利確認](https://www.hedra.com/terms-of-service)
+- [規約・権利確認](https://www.hedra.com/terms)
 
 ## 編集上の注記
 

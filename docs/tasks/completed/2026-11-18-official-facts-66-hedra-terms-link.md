@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-18-official-facts-66-hedra-terms-link"
 created_at: "2026-11-18"
-status: READY
+status: DONE
 risk: LOW
 current_phase: editorial-source-audit
 production_required: false

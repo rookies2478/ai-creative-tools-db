@@ -3,8 +3,8 @@ name: "PixAI"
 shortDescription: "PixAIはアニメ画像のためのAIクリエイティブサービス。料金と商用利用条件はプランやモデルで異なるため、公式で再確認が必要です。"
 category: "image"
 officialUrl: "https://pixai.art/ja"
-currency: "USD"
-lowestPaidPlan: "Starter 通常US$10/月（月払い・割引変動）"
+currency: "JPY"
+lowestPaidPlan: "Starter ¥1,680/月（公式日本語ページのJPY表示、2026-11-18確認。年払い割引は変動）"
 freePlan: "limited"
 commercialUse: "unknown"
 commercialUseNote: "ユーザー生成画像、コミュニティ公開作品、追加モデル・LoRAの利用権利は別途確認。 未確認のモデル別・入力素材の第三者権利は別確認。"
@@ -18,12 +18,12 @@ strengths:
 weaknesses:
   - "モデル・投稿・商用利用の条件は要確認"
   - "実機生成による画質・日本語品質の比較は未実施"
-lastReviewed: "2026-11-07"
+lastReviewed: "2026-11-18"
 nextReviewDue: "2026-12-07"
 officialSourceUrl: "https://pixai.art/ja/membership/plans"
 pricingModel: "unknown"
 freePlanNote: "日本語公式会員案内で無料クレジットあり。日次配布、画像と動画の対象モデルに差がある。"
-paidPlanNote: "Starter 通常US$10/月（月払い・割引変動）。日本での実際の請求通貨・税・割引は購入時に確認。"
+paidPlanNote: "公式日本語プランページ（2026-11-18、実画面確認）のJPY表示: Starter ¥1,680/月・毎月30万クレジット、Plus ¥5,000/月・100万、Premium ¥8,400/月・200万。年払いは合計 ¥13,440 / ¥38,640 / ¥67,200（割引表示は変動）。実際の請求通貨・税・割引は購入時に確認。"
 platforms:
   - web
 signupRequired: true
@@ -55,11 +55,11 @@ japanBilling:
   pricingUrl: "https://pixai.art/ja/membership/plans"
   billingCurrency: "公式公開額が米ドル表示の場合も日本での請求通貨は未確認"
   jpyDirectBilling: "unknown"
-  localizedJpyDisplay: "unknown"
+  localizedJpyDisplay: true
   taxDisplay: "unknown"
   purchaseChannels:
     - "web"
-  pricingCheckedAt: "2026-11-07"
+  pricingCheckedAt: "2026-11-18"
   pricingNote: "公式日本語製品ページを優先. 日本での課金・税・割引、ログイン後画面の状況は未検証。"
   sourceUrls:
     - "https://pixai.art/ja/membership/plans"
@@ -92,7 +92,7 @@ PixAIはアニメ調画像の生成を中心とするサービス。公開画像
 ## 日本語公式・料金・アフィリエイト確認（2026年11月7日）
 
 - **日本語公式サイト：** 日本語の公式製品ページを確認。[日本語公式](https://pixai.art/ja)
-- **料金：** Starter 通常US$10/月（月払い・割引変動）。[公式料金・プラン情報](https://pixai.art/ja/membership/plans)。日本円の請求額・税は未確認。
+- **料金：** 公式日本語プランページのJPY表示（2026-11-18確認）: Starter ¥1,680/月・毎月30万クレジット、Plus ¥5,000/月・100万、Premium ¥8,400/月・200万。年払いは合計 ¥13,440 / ¥38,640 / ¥67,200。[公式料金・プラン情報](https://pixai.art/ja/membership/plans)。日本円の請求額・税は未確認。
 - **無料枠：** 日本語公式会員案内で無料クレジットあり。日次配布、画像と動画の対象モデルに差がある。
 - **商用利用：** ユーザー生成画像、コミュニティ公開作品、追加モデル・LoRAの利用権利は別途確認。
 - **アフィリエイト：** サービス内クレジット等の紹介特典のみ確認。日本語公式EAPと友達紹介はクレジット・会員等の特典。売上歩合の現金提携として確認できない。 [公式の制度確認先](https://blog.pixai.art/ja/pixai-elite-ambassador-program-eap-ja/)

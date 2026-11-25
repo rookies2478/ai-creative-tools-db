@@ -294,6 +294,7 @@ Runwayは主に3つの使い方があります。
 - [AI動画生成の用途別選び方](/use-cases/) — 用途に合わせたAIツールの確認ポイント
 - [RunwayとPikaを比較](/comparisons/runway-vs-pika/) — 料金・無料枠・商用利用・用途別の選び方を比較
 - [RunwayとKling AIを比較](/comparisons/runway-vs-kling-ai/) — 映像クオリティ・料金・商用利用条件の比較
+- [SeedreamとSeedanceの違い](/comparisons/seedream-vs-seedance/) — Runway DevのAPI料金とDreaminaの提供条件を比較
 - [AI動画生成ツール比較](/comparisons/ai-image-video-tools/) — AI画像・動画生成ツールの横断比較
 - [AI動画編集ツール一覧](/categories/video-editing/) — AI動画編集ツールの比較・選び方
 - [透かしなしAI動画ツール](/conditions/no-watermark/) — 透かしの有無・条件をまとめた一覧

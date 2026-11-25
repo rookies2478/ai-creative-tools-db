@@ -7,18 +7,43 @@ current_phase: ui-fix
 production_required: false
 db_change: false
 ui_change: true
-official_verification_required: false
+official_verification_required: true
 
-goal: "共通ヘッダー(BaseLayout)がスマホ幅(320-414px)で内側幅を超えて横溢れする問題を、ロゴ・CTA・メニューの寸法調整で解消し、回帰テストを追加する。"
+goal: "【統合タスク 2026-11-26】Issue #98 全ページ横溢れ根本修正、#99 Dreamina円建て料金整合と逆リンク、#100 実データ範囲内のSEOスニペット改善を1PRに統合。元の目的: 共通ヘッダー(BaseLayout)がスマホ幅(320-414px)で内側幅を超えて横溢れする問題を、ロゴ・CTA・メニューの寸法調整で解消し、回帰テストを追加する。"
 
 non_goals:
   - "overflow:hidden等で溢れを隠さない"
   - "URL構造・ナビ項目・アフィリエイトリンク・計測の変更をしない"
-  - "ヘッダー以外のページ内容（/tools/ のfilter-chips等）の横溢れは本タスクで修正しない"
+  - "アフィリエイトリンク・CTA・価格以外の未確認事実の追加をしない"
+  - "URL変更・リダイレクト・avatar-video統合をしない"
 
 target_files:
   - src/layouts/BaseLayout.astro
   - scripts/test-header-overflow.mjs
+  - scripts/test-page-overflow.mjs
+  - docs/operations/regression-tests.md
+  - docs/operations/weekly-growth-loop.md
+  - docs/analytics/seo-improvements-2026-11-26.md
+  - docs/tasks/LATEST.md
+  - src/styles/global.css
+  - src/styles/tools-page.css
+  - src/components/ComparisonHub.astro
+  - src/components/ComparisonVsArticle.astro
+  - src/components/ToolDetailPage.astro
+  - src/content/tools/dreamina.md
+  - src/content/tools/runway.md
+  - src/content/tools/fotor-ai.md
+  - src/pages/categories/avatar-video/index.astro
+  - src/pages/categories/design/index.astro
+  - src/pages/comparisons/canva-ai-vs-adobe-firefly/index.astro
+  - src/pages/comparisons/runway-vs-kling-ai/index.astro
+  - src/pages/comparisons/runway-vs-pika/index.astro
+  - src/pages/comparisons/seedream-vs-seedance/index.astro
+  - src/pages/guides/commercial-use-copyright/index.astro
+  - src/pages/tools/dreamstudio/index.astro
+  - src/pages/tools/fotor-ai/index.astro
+  - src/pages/tools/tensor-art/index.astro
+  - src/pages/use-cases/faceless-video/index.astro
   - docs/tasks/active/2026-11-26-header-overflow-360.md
   - docs/tasks/completed/2026-11-25-seedream-vs-seedance-update.md
   - docs/tasks/active/2026-11-25-seedream-vs-seedance-update.md
@@ -36,6 +61,11 @@ required_checks:
   - git diff --check
   - npm run validate:scope
   - node scripts/test-header-overflow.mjs
+  - node scripts/test-page-overflow.mjs
+  - npm run validate:data
+  - npm run validate:publish
+  - npm run validate:affiliate-links
+  - npm run audit:cta:test
 
 acceptance_criteria:
   - "320/360/375/390/414/768/1024/1366/1440pxでヘッダー内容が内側幅に収まる"

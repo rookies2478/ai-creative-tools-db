@@ -1,5 +1,17 @@
 # Latest Project State
 
+- updated_at: 2026-11-26
+- current_active_task: docs/tasks/active/2026-11-26-header-overflow-360.md（統合タスク: #98 横溢れ根本修正 / #99 Dreamina円建て料金整合 / #100 SEOスニペット改善。ローカル検証済み・未push・本番未反映）
+- latest_completed_task: PR #97 seedream-vs-seedance 更新（eddba6e, merged 2026-11-25）。Issue #96 の完了条件は #97 で充足
+- overflow: html の overflow-x:clip を撤去し原因側を修正。全127ページ×9幅の回帰 `scripts/test-page-overflow.mjs`（手順 docs/operations/regression-tests.md）
+- dreamina: 日本向け公式料金ページを2026-11-26 JSTに確認。月次/初月キャンペーン/年額を区別して記載。未確認項目は docs/analytics/seo-improvements-2026-11-26.md
+- seo: 効果測定は 2026-11-28以降のGSCで、初回12-09頃・確定12-23頃。週次手順 docs/operations/weekly-growth-loop.md
+- 本番: NOT_DEPLOYED。GitHub Actions未起動（PR作成前で停止）
+
+---
+
+# Latest Project State
+
 - updated_at: 2026-11-07
 - current_active_task: docs/tasks/active/2026-11-07-official-facts-59-followup.md (READY, exactly one)
 - latest_completed_task: docs/tasks/completed/2026-11-07-official-fact-audit-report-integration.md (PR #88 merged 07a39c434ec6013e7ba3e8a1ab5e6e282279a82b, historical 38-tool audit report retained)

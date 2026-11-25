@@ -182,7 +182,7 @@
   font-family: var(--f-jp); font-weight: 600; font-size: 13.5px;
   padding: 9px 16px; border-radius: 999px; background: var(--surface);
   border: 1px solid var(--line-strong); color: var(--ink-soft);
-  display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 7px; max-width: 100%;
   transition: transform .16s var(--ease), background .16s, border-color .16s, color .16s;
 }
 .taglink:hover { border-color: var(--brand); color: var(--brand-ink); background: var(--brand-tint); transform: translateY(-1px); }
@@ -268,7 +268,9 @@
 }
 @media (max-width: 720px) {
   .tools-list { grid-template-columns: 1fr; }
-  .toolbar-inner { flex-direction: column; align-items: stretch; gap: 10px; }
+  /* flex-wrap must be nowrap: in a wrapping column flex container each line is as wide as its widest
+     item (the 1700px nowrap chip row), so align-items:stretch could not constrain it to the viewport. */
+  .toolbar-inner { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 10px; }
   .tb-label { display: none; }
   .filter-chips {
     flex-wrap: nowrap;

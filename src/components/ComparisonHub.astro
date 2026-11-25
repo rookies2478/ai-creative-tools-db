@@ -332,7 +332,7 @@ const pad2 = (i: number) => String(i + 1).padStart(2, '0');
   .chub-x .router{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:8px 30px;box-shadow:var(--shadow-sm);}
   .chub-x .router-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid var(--line);}
   .chub-x .router-row:last-child{border-bottom:none;}
-  .chub-x .router-row .goal{display:flex;align-items:center;gap:14px;flex:1;min-width:280px;font-size:15px;color:var(--ink-soft);font-weight:500;line-height:1.5;}
+  .chub-x .router-row .goal{display:flex;align-items:center;gap:14px;flex:1;min-width:min(280px,100%);font-size:15px;color:var(--ink-soft);font-weight:500;line-height:1.5;}
   .chub-x .router-row .goal .qn{font-family:var(--f-latin);font-weight:700;font-size:13px;color:var(--brand);background:var(--brand-tint);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;}
   .chub-x .router-row .links{display:flex;gap:8px;flex-wrap:wrap;}
   .chub-x .router-row a.go{font-family:var(--f-jp);font-weight:700;font-size:13px;color:var(--brand-ink);background:var(--brand-tint);padding:9px 15px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:transform .16s var(--ease),background .16s,color .16s;}

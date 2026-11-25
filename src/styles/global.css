@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
-/* 横スクロール防止: body 自体ではなく html レベルでクリップ */
-html { overflow-x: clip; }
+/* NOTE: do NOT hide horizontal overflow on html/body (e.g. overflow-x: clip). It masks real
+   layout bugs; fix the overflowing element instead. scripts/test-page-overflow.mjs enforces this. */
 *, *::before, *::after { box-sizing: border-box; min-width: 0; }
 .phrase-nowrap { white-space: nowrap; }
 
@@ -145,6 +145,14 @@ html { overflow-x: clip; }
 }
 .btn-ghost:hover { border-color: var(--brand); color: var(--brand-ink); transform: translateY(-1px); }
 .btn-lg { padding: 16px 28px; font-size: 16px; }
+/* Long CTA labels must never push the page wider than the viewport. */
+.btn { max-width: 100%; }
+@media (max-width: 520px) {
+  .btn { white-space: normal; line-height: 1.4; }
+  /* Page-scoped .taglink pills (categories / use-cases) are declared nowrap in many files; on phones
+     a long label must wrap rather than push the page wider than the viewport. */
+  .taglink { max-width: 100%; white-space: normal !important; }
+}
 
 /* Text link */
 .textlink {

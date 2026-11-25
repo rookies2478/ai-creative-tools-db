@@ -51,7 +51,7 @@ const jsonLd = JSON.stringify([
 
 <BaseLayout
   title="Fotor AIの使い方｜無料でのAIペイント生成と商用利用の注意点"
-  description="Fotor AIを無料で使う方法、AIペイント生成・AI画像生成の使い方、料金プラン、商用利用、透かし、日本語対応の確認ポイントを整理します。利用前に確認したい規約や権利の注意点もまとめます。"
+  description="Fotor AIは無料のBasicプランで使えますが、書き出しには透かしが入り、透かしなしは有料プランの案内です。AIペイント生成・AI画像生成の使い方、料金プラン、商用利用の注意点、日本語対応を公式情報で整理します。"
   canonicalPath="/tools/fotor-ai/"
   ogType="article"
   jsonLd={jsonLd}
@@ -74,7 +74,7 @@ const jsonLd = JSON.stringify([
       category="AI画像生成・画像編集"
       checkedDate={d?.lastReviewed ?? '2026-05-14'}
       headingHtml='Fotor AIの<span class="hl"><span class="phrase-nowrap">商用利用</span>・料金・無料枠</span>まとめ'
-      lead="Fotor AIは無料プランでも一部の画像生成・編集機能を利用できますが、範囲には制限があります。AI画像生成・写真編集・背景除去・デザインテンプレートをブラウザ上でまとめて使えるオンライン画像編集・デザインツールで、日本語ページ対応で初心者にも扱いやすい構成です。商用利用については公式ヘルプで案内がありますが、第三者権利や最新規約の確認はユーザー側で必要です。"
+      lead="Fotor AIは無料のBasicプランでも一部の画像生成・編集機能を利用できますが、範囲には制限があり、Basicの書き出しは透かし付きです（透かしなしは有料プランの案内）。AI画像生成・写真編集・背景除去・デザインテンプレートをブラウザ上でまとめて使えるオンライン画像編集・デザインツールで、日本語ページ対応で初心者にも扱いやすい構成です。商用利用については公式ヘルプで案内がありますが、第三者権利や最新規約の確認はユーザー側で必要です。"
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: '条件あり（要規約確認）' } },
         { lb: '無料枠', badge: { s: 'ok', label: 'Basicプランあり' } },
@@ -135,7 +135,7 @@ const jsonLd = JSON.stringify([
         'AI生成物の法的扱いは国・地域の著作権法によって変わる可能性がある',
       ]}
       limits={[
-        'Basicプランでは透かき・クレジット制限・機能制限あり（条件は変更の可能性あり）',
+        'Basicプランでは透かし・クレジット制限・機能制限あり（条件は変更の可能性あり）',
         'テンプレートや素材の商用利用条件はプラン・素材ごとに異なる場合がある',
         '商用利用前は公式利用規約の確認が必要',
       ]}
@@ -278,6 +278,7 @@ const jsonLd = JSON.stringify([
         { name: 'SeaArt AI', slug: 'seaart-ai', initial: 'S', cat: '画像生成', badges: [{ s: 'cond', label: '商用：要確認' }, { s: 'ok', label: '無料枠：あり' }, { s: 'ok', label: '日本語UI：対応' }], platforms: ['Web'], official: 'https://www.seaart.ai/ja' },
       ]}
       nextReads={[
+        { href: '/comparisons/ad-banner-ai-tools/', title: 'バナー作成AI・バナー生成AIの比較', desc: 'Fotor AIを含むテンプレート編集型・画像生成型のバナー向けツールをタイプ別に比較' },
         { href: '/comparisons/ai-image-generation-sample-comparison/', title: 'AI画像生成ツールの作例比較', desc: '実際の生成結果を比較したい方向け（15ツールの作例）' },
         { href: '/comparisons/free-ai-image-generation-samples/', title: '無料で試せるAI画像生成の作例比較', desc: '無料プランや無料クレジットで試せる範囲を作例で確認' },
         { href: '/use-cases/sns-post-image-samples/', title: 'SNS投稿画像向けAI画像生成の作例比較', desc: 'SNS投稿画像を作る用途での作例比較' },

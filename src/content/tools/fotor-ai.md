@@ -57,7 +57,7 @@ useCases:
   - blog
   - design
 limitations:
-  - "無料プランでは透かき・クレジット制限・機能制限あり（条件は変更の可能性あり）"
+  - "無料プランでは透かし・クレジット制限・機能制限あり（条件は変更の可能性あり）"
   - "AI生成物の著作権の法的扱いは国・地域で異なる可能性がある"
 usagePolicy:
   inputMaterialRisk: "medium"

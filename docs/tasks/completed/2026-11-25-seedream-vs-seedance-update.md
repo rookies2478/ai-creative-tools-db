@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-25-seedream-vs-seedance-update"
 created_at: "2026-11-25"
-status: READY
+status: DONE
 risk: MEDIUM
 current_phase: editorial-source-audit
 production_required: false

@@ -13,7 +13,7 @@ non_goals:
   - "既存記事のURL、canonical、H1、初回公開日（datePublished）を変更しない"
   - "新規記事の追加、アフィリエイト・計測・共通テンプレート（ComparisonVsArticle等）の変更をしない"
   - "未検証の性能・品質・実請求額・商用利用条件を断定しない"
-  - "GitHub Actionsの実行・変更、PR作成、master直接push、本番公開をしない"
+  - "GitHub Actionsのworkflow定義の変更、master直接push（PR経由のsquash merge以外）をしない"
 target_files:
   - src/pages/comparisons/seedream-vs-seedance/index.astro
   - docs/tasks/active/2026-11-25-seedream-vs-seedance-update.md
@@ -46,7 +46,6 @@ acceptance_criteria:
   - "PC・スマートフォン幅で表が崩れず横スクロール可能"
 forbidden_operations:
   - PRODUCTION_DEPLOY
-  - GITHUB_ACTIONS
 ---
 
 # Seedream・Seedance比較記事の更新
@@ -54,3 +53,4 @@ forbidden_operations:
 Source: GitHub Issue #96（パッチ本体の転送経路）。Base master d9c95193c6f00d340d4675802edae6f5319a3816。
 
 Prior active task 2026-11-18-official-facts-66-p7-chrome-facts: PR #95 merged (d9c9519, 2026-11-18T04:06:31Z) and the completed copy (status DONE) already exists on master; the stale READY copy under active/ is removed here. Issue #66 itself stays open for other tools. Not moved to completed to skip validation.
+2026-11-25 user authorization (chat): GitHub Actions (PR Build) use, PR creation, squash merge and production publication via the normal master release path are explicitly permitted for this task only. Workflow files stay unchanged. PRODUCTION_DEPLOY remains listed because validate:task requires it; the release itself is the user-authorized merge.

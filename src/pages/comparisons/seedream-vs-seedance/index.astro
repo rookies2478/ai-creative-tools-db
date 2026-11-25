@@ -1,71 +1,205 @@
 ---
 import ComparisonVsArticle from '../../../components/ComparisonVsArticle.astro';
-const jsonLd = JSON.stringify([{ '@context': 'https://schema.org', '@type': 'Article', headline: "SeedreamとSeedanceの違い・選び方", description: "2026年11月6日時点の公式情報をもとに用途・機能・料金確認ポイントを整理。未検証条件は明示しています。", url: 'https://aicreative-db.com/comparisons/seedream-vs-seedance/', datePublished: '2026-11-06', dateModified: '2026-11-06', author: { '@type':'Organization', name:'AIクリエイティブナビ編集部' } }, { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement:[{ '@type':'ListItem', position:1,name:'トップ',item:'https://aicreative-db.com/' },{ '@type':'ListItem', position:2,name:'比較記事',item:'https://aicreative-db.com/comparisons/' },{ '@type':'ListItem', position:3,name:"SeedreamとSeedanceの比較",item:'https://aicreative-db.com/comparisons/seedream-vs-seedance/' }] }]);
+const articleDescription = 'SeedreamとSeedanceの違い、Seedream 5.5・Layers・Seedance 2.5 Flashの選び方、透過PNG、DreaminaとRunway Devの料金・商用利用条件を公式情報から整理。';
+const jsonLd = JSON.stringify([{ '@context': 'https://schema.org', '@type': 'Article', headline: "SeedreamとSeedanceの違い・選び方", description: articleDescription, url: 'https://aicreative-db.com/comparisons/seedream-vs-seedance/', datePublished: '2026-11-06', dateModified: '2026-11-25', author: { '@type':'Organization', name:'AIクリエイティブナビ編集部' } }, { '@context':'https://schema.org', '@type':'BreadcrumbList', itemListElement:[{ '@type':'ListItem', position:1,name:'トップ',item:'https://aicreative-db.com/' },{ '@type':'ListItem', position:2,name:'比較記事',item:'https://aicreative-db.com/comparisons/' },{ '@type':'ListItem', position:3,name:"SeedreamとSeedanceの比較",item:'https://aicreative-db.com/comparisons/seedream-vs-seedance/' }] }]);
 const comparisonRows = [
-  { item: "主な制作対象", toolA: "静止画の制作", toolB: "動画クリップの制作" },
-  { item: "制作工程の役割", toolA: "素材やキーフレームなどを作る工程", toolB: "映像化・動きのある表現を作る工程" },
-  { item: "サービスとの関係", toolA: "Dreaminaなどで扱われる画像生成モデル名", toolB: "Dreaminaなどで扱われる動画生成モデル名" },
-  { item: "入力素材", toolA: "文章や画像など（機能・環境による）", toolB: "文章や画像など（機能・環境による）" },
-  { item: "結果の評価", toolA: "解像感・レイアウト・文字の再現性を確認", toolB: "動き・連続性・時間・音声の可否を確認" },
-  { item: "料金と無料枠", toolA: "Dreamina Freeあり、Basic USD15/月・1575クレジット（モデル消費量は別確認）", toolB: "Dreamina Freeあり、Basic USD15/月・1575クレジット（モデル消費量は別確認）" },
-  { item: "商用利用・透かし", toolA: "Dreamina日本向け規約は原則非商用。許諾の書面確認が必要。Basic以上は可視透かし削除を案内", toolB: "Dreamina日本向け規約は原則非商用。許諾の書面確認が必要。Basic以上は可視透かし削除を案内" },
+  { item: "主な制作対象", toolA: "静止画・画像素材", toolB: "動画クリップ" },
+  { item: "制作工程の役割", toolA: "商品画像・透過素材・キーフレームの制作や編集", toolB: "映像化・動きのある表現の試作" },
+  { item: "サービスとの関係", toolA: "画像系モデル名。Dreamina・Runway Devなどで提供", toolB: "動画系モデル名。Dreamina・Runway Devなどで提供" },
+  { item: "入力素材", toolA: "文章・画像。Layersは既存画像を入力（対応モデル・環境による）", toolB: "文章・画像・動画など（対応モデル・環境による）" },
+  { item: "新モデル", toolA: "5.5：透過PNG生成。5.5 Layers：ベース画像と透過レイヤーへの分割", toolB: "2.5 Flash：480p・720p向けの低コスト版" },
+  { item: "結果の評価", toolA: "解像感・レイアウト・文字の再現性・透過境界を確認", toolB: "動き・連続性・時間・音声の可否を確認" },
+  { item: "Dreamina料金・無料枠", toolA: "無料プランと有料プランあり。5.5の利用可否・消費量は契約・地域別に確認", toolB: "無料プランと有料プランあり。2.5 Flashの利用可否・消費量は契約・地域別に確認" },
+  { item: "Runway Dev料金", toolA: "5.5・5.5 Layers：出力1枚2〜4クレジット＋画像入力料（課金式は下記）", toolB: "2.5 Flash：出力1秒13〜20クレジット＋動画入力料、最低52クレジット" },
+  { item: "商用利用・透かし", toolA: "モデル名では判断不可。DreaminaとRunway Devの各契約・利用規約を確認", toolB: "モデル名では判断不可。DreaminaとRunway Devの各契約・利用規約を確認" },
 ];
 const faqs = [
-  {
-    "q": "SeedreamとSeedanceは何が違いますか？",
-    "a": "静止画、商品ビジュアル、構図やデザインのラフを作る場合はSeedream、画像素材に動きを与え、映像表現の試作をする場合はSeedanceを選択候補として検討できます。プランと利用条件は公式サイトで確認してください。"
-  },
-  {
-    "q": "無料で利用できますか？",
-    "a": "Dreaminaの公式日本語料金表に無料プランがあります。通常表示はBasic USD15/月・1575クレジット、Standard USD36/月・3885、Advanced USD79/月・8645。最終的な料金・税・割引は購入画面で確認してください。"
-  },
-  {
-    "q": "商用利用や透かしの条件は？",
-    "a": "Dreamina日本向け利用規約はサービスを原則として私的・非商用用途と説明しています。一方、別の公式ヘルプは商用利用を適用規約・機能別条件によると記載しており、矛盾しています。日本向け広告・受託・販売は有料プランでも事前の書面確認を推奨します。Basic以上の透かし削除特典は商用許諾ではありません。"
-  },
-  {
-    "q": "どちらの画質が上ですか？",
-    "a": "両者を同一プロンプト・同一条件で比較する独自生成検証は行っていません。モデルや設定によって結果が異なるため優劣は断定できません。"
-  }
+  { q: "SeedreamとSeedanceは何が違いますか？", a: "Seedreamは静止画の生成・編集、Seedanceは動画生成が主な役割です。Seedreamで素材や構図を作り、Seedanceで動きを試す組み合わせも候補です。使えるモデルは提供サービスごとに確認してください。" },
+  { q: "Seedream 5.5と5.5 Layersの違いは？", a: "5.5は画像を生成・編集し、透過PNGも直接出力できるモデルです。Runway Devの5.5 Layersは既存の画像をベース画像と透過PNGレイヤーに分割するモデルです。単に透過背景の素材が欲しい場合と、既存画像を要素ごとに編集したい場合で使い分けます。" },
+  { q: "Seedream 5.5 Layersで100枚のレイヤーを作れますか？", a: "Runway DevのmaxImagesは2〜100の返却画像数の上限で、100枚の分割を保証する設定ではありません。ベース画像も返却枚数と課金対象に含まれます。実際の枚数や境界精度は画像によって確認が必要です。" },
+  { q: "Seedance 2.5 Flashは通常版より安いですか？", a: "Runway Devの同じ解像度の出力単価では、480pが20から13、720pが30から20クレジット/秒になります。Flashは1080p・4Kに対応していません。独自の速度・品質比較は未実施です。" },
+  { q: "無料で利用できますか？", a: "Dreaminaには無料プランがありますが、新モデルや無制限特典の利用は地域・プラン・期間によって異なります。Runway Devは従量課金で、公開料金表では1クレジット0.01米ドルです。両サービスのクレジットは別体系として比較してください。" },
+  { q: "商用利用や透かしの条件は？", a: "Dreaminaの一般規約は原則私的・非商用とし、公式ヘルプは適用規約と追加条件によると案内しています。日本での契約条件・追加許諾を確認してください。Runway Devは規約とUsage Policyの遵守を条件に生成物の商用利用を制限しない方針です。透かし削除や出力の所有権は第三者の権利処理や商用許諾の代わりにはなりません。" },
+  { q: "どちらの画質が上ですか？", a: "画像と動画では評価対象が異なります。5.5の透過境界、Layersの分割精度、2.5 Flashと通常版の画質・速度についても、編集部による同条件の生成検証は行っていません。" }
 ];
 const sources = [
   { href: "https://dreamina.capcut.com/", label: "Dreamina公式" },
-  { href: "https://dreamina.capcut.com/ja-jp/pricing/dreamina-price", label: "Dreamina料金" },
+  { href: "https://dreamina.capcut.com/ja-jp/pricing/dreamina-price", label: "Dreamina料金・プラン" },
   { href: "https://dreamina.capcut.com/help", label: "Dreaminaヘルプ" },
-  { href: "https://www.capcut.com/clause/dreamina-terms-of-service?lang=ja-JP&region=JP", label: "日本向けDreamina利用規約" },
+  { href: "https://web-sg.capcut.com/clause/dreamina-terms-of-service?lang=en", label: "Dreamina一般利用規約（英語・第1条、第7条、第8条）" },
+  { href: "https://www.capcut.com/clause/dreamina-terms-of-service?lang=ja-JP&region=JP", label: "Dreamina規約の日本向け指定URL（表示地域を要確認）" },
   { href: "https://dreamina.capcut.com/ja-jp/tools/text-to-video-ai", label: "Dreamina 日本語公式 動画生成ガイド" },
+  { href: "https://dreamina.capcut.com/seedream/seedream-5-5", label: "Dreamina Seedream 5.5 公式機能案内" },
+  { href: "https://dreamina.capcut.com/resource/dreamina-unlimited-generation-faq", label: "Dreamina Unlimited Generation FAQ（地域・プラン別条件）" },
+  { href: "https://docs.dev.runwayml.com/changelog/", label: "Runway Dev変更履歴（2026年11月12日・16日）" },
+  { href: "https://docs.dev.runwayml.com/guides/models/", label: "Runway Dev提供モデル一覧" },
+  { href: "https://docs.dev.runwayml.com/guides/pricing/", label: "Runway Dev公式料金・課金式" },
+  { href: "https://runway.com/terms-of-use", label: "Runway Terms of Use（第4.4条、API利用は第1条）" },
+  { href: "https://runway.com/safety/usage-policy", label: "Runway Usage Policy" },
+  { href: "https://dev.runway.com/learn/commercial-use", label: "Runway Dev公式 商用利用ガイド" },
 ];
 const relatedLinks = [
-  {href:'/tools/dreamina/',label:"Seedream関連ツール詳細"},
-  {href:'/tools/dreamina/',label:"Seedance関連ツール詳細"},
+  {href:'/tools/dreamina/',label:"Dreaminaの詳細"},
+  {href:'/tools/runway/',label:"Runwayの詳細（WebサービスとAPIの条件は別途確認）"},
   {href:'/comparisons/',label:'比較記事一覧'},
   {href:'/tools/',label:'AIクリエイティブツール一覧'},
 ];
 ---
 <ComparisonVsArticle
-  title="SeedreamとSeedanceを比較｜使い方・料金・商用利用確認点 | AIクリエイティブナビ"
-  description="SeedreamとSeedanceの特徴・使い分け・無料枠・商用利用・透かしの確認ポイントを整理。2026年11月の公式情報を参照し、未検証の性能・金額は断定しません。"
+  title="SeedreamとSeedanceの違い｜5.5・Layers・2.5 Flashの料金と商用利用 | AIクリエイティブナビ"
+  description={articleDescription}
   canonicalPath="/comparisons/seedream-vs-seedance/"
   jsonLd={jsonLd}
   breadcrumbLabel="SeedreamとSeedanceの比較"
   h1="SeedreamとSeedanceの違い・選び方"
-  lead="静止画、商品ビジュアル、構図やデザインのラフを作る場合はSeedream、画像素材に動きを与え、映像表現の試作をする場合はSeedanceが検討候補です。料金・無料枠・商用利用・透かしの条件は公式情報で確認してください。本記事には独自の同一条件による生成比較は含みません。"
+  lead="静止画や商品ビジュアルを作るならSeedream、映像化するならSeedanceが候補です。Seedream 5.5の透過PNG生成、5.5 Layersのレイヤー分割、Seedance 2.5 Flashの低コスト動画生成を、DreaminaとRunway Devの提供条件・料金・商用利用の違いとともに整理します。独自の生成比較は未実施です。"
   category="画像生成と動画生成の使い分け"
-  latestDate="2026-11-06"
+  latestDate="2026-11-25"
   toolAName="Seedream"
-  toolASlug="dreamina"
   toolBName="Seedance"
-  toolBSlug="dreamina"
-  conclusionA={{label:'こんな用途なら',toolName:"Seedream",toolHref:'/tools/dreamina/',body:"静止画、商品ビジュアル、構図やデザインのラフを作る場合。サービスの対応機能と契約条件を確認し、用途と一致するか判断してください。"}}
-  conclusionB={{label:'こんな用途なら',toolName:"Seedance",toolHref:'/tools/dreamina/',body:"画像素材に動きを与え、映像表現の試作をする場合。サービスの対応機能と契約条件を確認し、用途と一致するか判断してください。"}}
-  conclusionNote="Seedream/Seedanceはモデル名で、独立したサブスクリプションサービスと誤認させない。生成した独自サンプルは未掲載。"
+  conclusionA={{label:'こんな用途なら',toolName:"Seedream",body:"静止画・透過素材・構図のラフを作るなら5.5、既存画像の要素を個別に編集したいなら5.5 Layersが候補です。Layersの利用可否は提供サービスで確認してください。"}}
+  conclusionB={{label:'こんな用途なら',toolName:"Seedance",body:"画像素材の映像化や動画広告の試作なら2.5 Flash、1080p・4Kの出力が必要ならRunway Devの2.5通常版が候補です。品質や速度の優劣は独自検証していません。"}}
+  conclusionNote="SeedreamとSeedanceはモデル名です。契約先がDreaminaかRunway Devかで、料金・機能・商用利用条件が異なります。"
   quickDecisionRows={[
-    {purpose:"静止画、商品ビジュアル、構図やデザインのラフを作る場合",candidate:"Seedream",checkPoint:'最新の料金・利用条件を確認'},
-    {purpose:"画像素材に動きを与え、映像表現の試作をする場合",candidate:"Seedance",checkPoint:'最新の料金・利用条件を確認'},
+    {purpose:"静止画・商品素材の制作",candidate:"Seedream 5.5",checkPoint:'必要な解像度と編集機能'},
+    {purpose:"背景透過のPNG素材",candidate:"Seedream 5.5",checkPoint:'出力形式と実際のアルファチャンネル'},
+    {purpose:"既存画像の要素別編集",candidate:"Seedream 5.5 Layers",checkPoint:'返却枚数・分割精度・課金上限'},
+    {purpose:"短い動画の試作",candidate:"Seedance 2.5 Flash",checkPoint:'480p・720pの解像度で十分か'},
+    {purpose:"高解像度の動画出力",candidate:"Seedance 2.5（Runway Dev）",checkPoint:'1080p・4Kの単価と対応設定'},
   ]}
   comparisonRows={comparisonRows}
   faqs={faqs}
   relatedLinks={relatedLinks}
   sources={sources}
-  noticeItems={['2026年11月6日調査の公式情報を参照。提供機能・料金・利用条件は変更される可能性があります。','商用利用、透かし、無料枠、日本語対応の未確認項目は断定していません。','実際の画像・動画生成による同条件の比較は未実施です。','本記事は法的助言ではありません。']}
-/>
+  noticeItems={['2026年11月25日（日本時間）に公開公式情報を確認。日本の各アカウントでの提供状況・実請求額は未確認です。','DreaminaとRunway Devの契約条件・クレジット・透かし条件は別々に確認してください。','実際の画像・動画生成、同条件での品質・速度比較は未実施です。','本記事は法的助言ではありません。']}
+>
+  <section class="cp-body-sec" aria-labelledby="seed-models-h">
+    <h2 class="cp-body-h2" id="seed-models-h">Seedream 5.5・Layers・Seedance 2.5 Flashの違い</h2>
+    <p>Runway Devの公式変更履歴では、画像系の2モデルは2026年11月12日、Flashは11月16日に提供開始。以下はRunway Devで確認した仕様で、他サービスにも同じ設定があるとは限りません。</p>
+    <div class="seed-model-cards">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Seedream 5.5：画像生成・透過PNG</h3>
+        <p>1K・1.5K・2K、8種類の縦横比と解像度別の自動比率指定に対応します。参照画像は最大10枚、出力は1回につき1〜4枚。PNGで透過背景を指定でき、JPEGには透過背景指定はありません。</p>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Seedream 5.5 Layers：既存画像のレイヤー分割</h3>
+        <p>1枚のPNGまたはJPEGをベース画像と透過PNGレイヤーに分割します。分割の指示は任意で、解像度は1K・1.5K・2K・auto。maxImagesで返却画像数の上限を2〜100（初期値30）に設定できます。希望する枚数への分割は保証されません。PSD形式の直接出力は確認できていません。</p>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Seedance 2.5 Flash：低コストの動画生成</h3>
+        <p>480p・720p、4〜30秒の動画に対応。テキスト、開始画像（終了画像は任意）、動画からの生成ができ、音声生成も選択可能です。Runway Devでは1080p・4K非対応のため、高解像度が必要なら2.5通常版を検討します。</p>
+      </div>
+    </div>
+    <p class="seed-source">出典：<a href="https://docs.dev.runwayml.com/changelog/">Runway Dev変更履歴</a>・<a href="https://docs.dev.runwayml.com/guides/models/">提供モデル一覧</a>。</p>
+  </section>
+
+  <section class="cp-body-sec" aria-labelledby="seed-transparent-h">
+    <h2 class="cp-body-h2" id="seed-transparent-h">透過素材制作では5.5とLayersをどう使い分ける？</h2>
+    <div class="seed-model-cards">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">最初から背景透過の素材が欲しい場合</h3>
+        <p>商品パーツ、ステッカー、Webバナーの装飾など、単体素材を作る用途なら5.5で透過PNGを指定します。Runway Devではbackgroundをtransparent、outputFormatをpngに設定します。保存後に実際のアルファチャンネル、輪郭や半透明部分を確認します。</p>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">既存の広告や商品ビジュアルを再編集したい場合</h3>
+        <p>商品・背景・装飾などの分離をLayersで試し、返されたPNGを画像編集ソフトで組み合わせる方法が候補です。分割結果の位置合わせや欠損、文字の崩れを確認してください。元画像を完全再現できるか、要素ごとの分離精度が十分かは未検証です。</p>
+      </div>
+    </div>
+    <p>動画化する場合は、完成した静止画をSeedanceの開始画像などとして使う方法もあります。ただし透過動画の生成やアルファチャンネルの維持を保証する機能としては紹介しません。</p>
+  </section>
+
+  <section class="cp-body-sec" aria-labelledby="seed-platform-h">
+    <h2 class="cp-body-h2" id="seed-platform-h">DreaminaとRunway Devで利用できるモデル</h2>
+    <div class="seed-table-wrap" tabindex="0" role="region" aria-label="提供サービス別のモデル対応表">
+      <table class="seed-table">
+        <thead><tr><th scope="col">モデル</th><th scope="col">Dreamina</th><th scope="col">Runway Dev</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Seedream 5.5</th><td>公式機能・対象プランの案内あり。地域・アカウント別</td><td>API・Playgroundの公式提供案内あり</td></tr>
+          <tr><th scope="row">Seedream 5.5 Layers</th><td>提供・料金は今回の公開公式情報で未確認</td><td>API・Playgroundの公式提供案内あり</td></tr>
+          <tr><th scope="row">Seedance 2.5 Flash</th><td>公式FAQに480p・720pの対象プラン特典あり。地域別</td><td>API・Playgroundの公式提供案内あり</td></tr>
+          <tr><th scope="row">Seedance 2.5</th><td>公式FAQに案内あり。プラン・地域別</td><td>API提供あり。480p・720p・1080p・4Kの料金を公開</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Dreaminaはブラウザの制作環境、Runway Devは開発者向けAPIとPlaygroundを中心に比較しています。Dreaminaの5.5では透過RGBAの公式案内がありますが、日本のアカウントでの出力設定は未確認です。一般向けRunway Webのプランや、他の提供サービスにはRunway Devの価格を適用できません。</p>
+    <p class="seed-source">出典：<a href="https://dreamina.capcut.com/seedream/seedream-5-5">Dreamina 5.5公式案内</a>・<a href="https://dreamina.capcut.com/resource/dreamina-unlimited-generation-faq">Dreamina特典FAQ</a>・<a href="https://docs.dev.runwayml.com/guides/models/">Runway Devモデル一覧</a>。</p>
+  </section>
+
+  <section class="cp-body-sec" aria-labelledby="seed-pricing-h">
+    <h2 class="cp-body-h2" id="seed-pricing-h">料金比較：Dreaminaの月額制とRunway Devの従量課金</h2>
+    <div class="cp-card">
+      <h3 class="cp-card-h3">Dreamina：プラン・地域・対象期間で変動</h3>
+      <p>日本向けの公式料金ページ（日本語）には、無料で試せるオプションと有料プランがあります。2026年11月25日にChromeの実ブラウザで表示を確認した月次請求の料金は次のとおりです。</p>
+      <div class="seed-table-wrap" tabindex="0" role="region" aria-label="Dreamina日本向け月次プラン料金表">
+        <table class="seed-table">
+          <thead><tr><th scope="col">プラン</th><th scope="col">月額（2か月目以降）</th><th scope="col">月間クレジット</th><th scope="col">初月の表示</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Basic</th><td>2,380円</td><td>2,514</td><td>45円（カード・デビット・PayPal払い）／1,430円（その他の決済）</td></tr>
+            <tr><th scope="row">Standard</th><td>5,700円</td><td>6,163</td><td>3,420円</td></tr>
+            <tr><th scope="row">Advanced</th><td>12,600円</td><td>13,821（表示の初期値。上位のクレジット帯の選択肢あり）</td><td>5,040円（カード・デビット・PayPal払い）／6,300円（その他の決済）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>サブスクリプションは自動更新で、いつでも解約可能と表示されています。四半期・年次への切替表示には65%オフの表記がありますが、その金額・クレジット付与条件は今回確認していません。税込・税別の扱いは表示から確認できず、請求通貨は表示地域に依存する可能性があります。英語版ページには米ドル建てのプランが別に表示されるため、日本向けの表示と混同せず、契約画面で最終金額を確認してください。</p>
+      <p>公式FAQはSeedream 5.5の期間限定クレジット消費なしの特典や、Seedance 2.5 Flashの対象プラン向け動画特典を案内しています。たとえばFlashはStandard四半期・年額契約で480p・720pを7日間と掲載されていますが、Free・Basic・月額Standardはこの動画特典の対象外とされています。モデルの提供状況と特典は地域・アカウントによって異なります。各モデルの通常消費量・日本での実購入価格は未確認です。</p>
+    </div>
+    <h3>Runway Dev：画像生成・分割の料金</h3>
+    <p>1クレジットは0.01米ドル（税・手数料を含まない単純計算）。以下は2026年11月25日に確認した開発者向け料金です。</p>
+    <div class="seed-table-wrap" tabindex="0" role="region" aria-label="Runway Dev画像モデル料金表">
+      <table class="seed-table">
+        <thead><tr><th scope="col">モデル</th><th scope="col">1K・1.5K</th><th scope="col">2K</th><th scope="col">入力画像</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Seedream 5.5</th><td>2cr/出力枚</td><td>4cr/出力枚</td><td>参照画像1枚0.8cr（各出力に加算）</td></tr>
+          <tr><th scope="row">Seedream 5.5 Layers</th><td>2cr/返却枚</td><td>4cr/返却枚（autoも同額）</td><td>入力1枚0.8cr</td></tr>
+          <tr><th scope="row">Seedream 5 Pro Layers（旧版）</th><td>3cr/返却枚</td><td>5cr/返却枚（autoも同額）</td><td>公開課金式は返却枚数分</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Seedream 5.5は出力枚数 ×（出力単価＋参照枚数 × 0.8）をリクエストごとに整数へ切り上げます。例：2Kを4枚、参照2枚なら23クレジット（0.23米ドル）。自動比率指定でも選んだ解像度の料金が適用されます。</p>
+    <p>Layersはベース画像も課金対象です。返却枚数 × 単価＋0.8を整数に切り上げます。2Kでベース画像1枚と8レイヤー（計9枚）が返った場合は37クレジット（0.37米ドル）。1K・1.5Kなら19クレジット（0.19米ドル）です。初期上限30枚の場合、実行前に61クレジット（1K・1.5K）または121クレジット（2K・auto）が必要となり、返却枚数に応じて精算されます。</p>
+    <h3>Runway Dev：Seedance 2.5とFlashの料金</h3>
+    <div class="seed-table-wrap" tabindex="0" role="region" aria-label="Runway Dev動画モデル料金表">
+      <table class="seed-table">
+        <thead><tr><th scope="col">モデル・解像度</th><th scope="col">出力1秒</th><th scope="col">入力・参照動画1秒</th><th scope="col">出力10秒（参照動画なし）</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">2.5 Flash 480p</th><td>13cr</td><td>7cr</td><td>1.30米ドル</td></tr>
+          <tr><th scope="row">2.5 Flash 720p</th><td>20cr</td><td>10cr</td><td>2.00米ドル</td></tr>
+          <tr><th scope="row">2.5 480p</th><td>20cr</td><td>10cr</td><td>2.00米ドル</td></tr>
+          <tr><th scope="row">2.5 720p</th><td>30cr</td><td>15cr</td><td>3.00米ドル</td></tr>
+          <tr><th scope="row">2.5 1080p</th><td>68cr</td><td>34cr</td><td>6.80米ドル</td></tr>
+          <tr><th scope="row">2.5 4K</th><td>110cr</td><td>57cr</td><td>11.00米ドル</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>cr＝Runway Devクレジット。Flashは最低52cr、通常版は最低80cr。参照画像・音声の追加料金はありませんが、入力動画・参照動画は追加課金の対象です。Flashの出力単価は通常版より480pで35%、720pで約33%低く設定されています。表は公開単価による計算例で、実請求や生成品質は未検証です。</p>
+    <p>DreaminaとRunway Devは別のクレジット体系で、単純なクレジット数では比較できません。Dreaminaの通常消費量が確認できないため、どちらが総額で安いかは断定しません。</p>
+    <p class="seed-source">出典：<a href="https://dreamina.capcut.com/ja-jp/pricing/dreamina-price">Dreamina料金</a>・<a href="https://dreamina.capcut.com/resource/dreamina-unlimited-generation-faq">特典FAQ</a>・<a href="https://docs.dev.runwayml.com/guides/pricing/">Runway Dev公式料金</a>。</p>
+  </section>
+
+  <section class="cp-body-sec" aria-labelledby="seed-rights-h">
+    <h2 class="cp-body-h2" id="seed-rights-h">商用利用・透かし：モデル名ではなく契約先を確認</h2>
+    <div class="seed-model-cards">
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Dreamina：適用規約と追加許諾を確認</h3>
+        <p>一般利用規約（第1条・第7条）には私的・非商用を原則とする記載があり、公式ヘルプは商用利用が適用規約や機能・コンテンツ別条件によると説明しています。日本向け指定URLの取得結果には米国向け規約が表示されたため、日本の契約者に適用される最新版の本文は今回の公開情報だけでは確定できません。広告・受託制作・販売の前にアカウントの適用規約と追加許諾を確認し、必要に応じて書面で確認してください。有料プランのDreamina透かし削除特典は商用許諾と別です。</p>
+      </div>
+      <div class="cp-card">
+        <h3 class="cp-card-h3">Runway Dev：規約遵守を条件に商用利用を制限しない方針</h3>
+        <p>Runwayの利用規約第4.4条と開発者向け公式ガイドは、入力・出力の所有権を主張せず、契約・Usage Policyの遵守を条件に生成物の商用利用を制限しないと案内しています。各モデル固有の追加条件、注文・契約条件、入力素材の権利、肖像・商標・著作権、掲載先のルールは別途確認してください。3モデルの出力の透かし・識別情報は未検証です。APIを組み込んで第三者へ提供する場合は、規約第1条の表示義務なども確認が必要です。</p>
+      </div>
+    </div>
+    <p>サービスによる商用利用の許可は、著作権の成立、第三者権利の非侵害、出力の独占利用を保証するものではありません。</p>
+    <p class="seed-source">出典：<a href="https://web-sg.capcut.com/clause/dreamina-terms-of-service?lang=en">Dreamina一般規約</a>・<a href="https://dreamina.capcut.com/help">Dreaminaヘルプ</a>・<a href="https://runway.com/terms-of-use">Runway利用規約</a>・<a href="https://runway.com/safety/usage-policy">Usage Policy</a>・<a href="https://dev.runway.com/learn/commercial-use">Runway Dev商用利用ガイド</a>。</p>
+  </section>
+</ComparisonVsArticle>
+
+<style>
+  .seed-model-cards { display: grid; gap: 12px; }
+  .seed-table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--line, #e3e2d9); border-radius: 12px; margin: 12px 0; }
+  .seed-table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 13px; }
+  .seed-table th, .seed-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line, #e3e2d9); vertical-align: top; }
+  .seed-table thead th { background: var(--brand-tint, #ecebfb); color: var(--brand-ink, #2e25a6); }
+  .seed-table tbody tr:last-child > * { border-bottom: 0; }
+  .seed-source { color: var(--muted, #6a7180); font-size: 12px; }
+  .seed-source a { text-decoration: underline; }
+</style>

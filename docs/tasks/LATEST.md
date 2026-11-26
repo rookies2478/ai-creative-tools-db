@@ -1,5 +1,17 @@
 # Latest Project State
 
+- updated_at: 2026-11-26
+- current_active_task: docs/tasks/active/2026-11-26-header-overflow-360.md（統合タスク: #98 横溢れ根本修正 / #99 Dreamina円建て料金整合 / #100 SEOスニペット改善。ローカル検証済み・未push・本番未反映）
+- latest_completed_task: PR #97 seedream-vs-seedance 更新（eddba6e, merged 2026-11-25）。Issue #96 の完了条件は #97 で充足
+- overflow: html の overflow-x:clip を撤去し原因側を修正。統合後の最終ローカルQA（Chromium・低メモリ・逐次）: test-page-overflow 127ページ×9幅=1143件 PASS、test-header-overflow --all 126ページ×9幅=1134件 PASS、変更18ページのブラウザQA 90件 PASS。統合後に発見した /guides/commercial-use-copyright/ の溢れは .cuc-taglink の nowrap が原因で修正済み。手順 docs/operations/regression-tests.md
+- dreamina: 日本向け公式料金ページを2026-11-26 JSTに確認。月次/初月キャンペーン/年額を区別して記載。未確認項目は docs/analytics/seo-improvements-2026-11-26.md
+- seo: 効果測定は 2026-11-28以降のGSCで、初回12-09頃・確定12-23頃。週次手順 docs/operations/weekly-growth-loop.md
+- 本番: NOT_DEPLOYED。GitHub Actions未起動（PR作成前で停止）
+
+---
+
+## Previous snapshot (history)
+
 - updated_at: 2026-11-07
 - current_active_task: docs/tasks/active/2026-11-07-official-facts-59-followup.md (READY, exactly one)
 - latest_completed_task: docs/tasks/completed/2026-11-07-official-fact-audit-report-integration.md (PR #88 merged 07a39c434ec6013e7ba3e8a1ab5e6e282279a82b, historical 38-tool audit report retained)
@@ -12,7 +24,7 @@
 
 ---
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - active_task: docs/tasks/active/2026-11-07-official-fact-audit-report-integration.md (READY, one task)
@@ -24,7 +36,7 @@
 
 ---
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - current_active_task: docs/tasks/active/2026-11-07-growth-loop-route-policy.md (one READY task)
@@ -35,7 +47,7 @@
 
 ---
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - current_active_task: docs/tasks/active/2026-11-07-pika-official-license-drift.md (only active, READY)
@@ -47,7 +59,7 @@
 
 ---
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - current_active_task: docs/tasks/active/2026-11-06-guide-rights-pricing-consistency.md (READY, sole task; original content proposal PR #65)
@@ -59,7 +71,7 @@
 
 ---
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - source_branch: master
@@ -83,7 +95,7 @@
 
 ## Prior snapshot retained — registry closeout and older records
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - registry_closeout: docs/tasks/completed/2026-11-06-official-source-registry.md（Issue #69 / PR #70 38ツール公式URL台帳。構造検証のみ、last_content_verified_atは全件空欄=事実未検証。Issue #66の事実監査は未実施）

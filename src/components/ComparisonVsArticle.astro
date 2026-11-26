@@ -733,7 +733,7 @@ function formatDate(iso: string): string {
     color: var(--ink-soft);
     text-decoration: none;
     transition: background .14s, border-color .14s, color .14s, transform .14s var(--ease);
-    white-space: nowrap;
+    max-width: 100%; /* long labels wrap instead of widening the page */
   }
   .cp-tag:hover {
     border-color: var(--brand);

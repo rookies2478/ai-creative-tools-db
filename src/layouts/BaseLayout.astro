@@ -496,9 +496,25 @@ const canonicalUrl = canonicalPath && Astro.site
     }
   }
 
+  /* ヘッダー内訳（ロゴ+CTA+メニュー）が内側幅を超えないよう段階的に縮める */
+  @media (max-width: 420px) {
+    .nv-inner { padding: 0 12px; gap: 6px; }
+    .nv-logo { gap: 8px; }
+    .nv-mark { width: 30px; height: 30px; font-size: 15px; }
+    .nv-name { font-size: 14px; }
+    .nv-menu { width: 40px; height: 40px; }
+  }
+
   @media (max-width: 360px) {
     .nv-sub { display: none; }
     .nv-mobile-top-cta { font-size: 12px; padding: 0 10px; }
+  }
+
+  @media (max-width: 340px) {
+    .nv-logo { gap: 6px; }
+    .nv-mark { width: 28px; height: 28px; font-size: 14px; }
+    .nv-name { font-size: 13px; }
+    .nv-mobile-top-cta { font-size: 11.5px; padding: 0 8px; }
   }
 
   /* ===== FOOTER ===== */

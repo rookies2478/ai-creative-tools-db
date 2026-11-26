@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-25-seedream-vs-seedance-update"
 created_at: "2026-11-25"
-status: READY
+status: DONE
 risk: MEDIUM
 current_phase: editorial-source-audit
 production_required: false
@@ -52,5 +52,5 @@ forbidden_operations:
 
 Source: GitHub Issue #96（パッチ本体の転送経路）。Base master d9c95193c6f00d340d4675802edae6f5319a3816。
 
-Prior active task 2026-11-18-official-facts-66-p7-chrome-facts: PR #95 merged (d9c9519, 2026-11-18T04:06:31Z) and the completed copy (status DONE) already exists on master; the stale READY copy under active/ is removed here. Issue #66 itself stays open for other tools. Not moved to completed to skip validation.
+Prior active task 2026-11-18-official-facts-66-p7-chrome-facts: PR #95 merged (d9c9519, 2026-11-18T04:06:31Z) and the completed copy (status DONE) already exists on master; the stale READY copy under active/ is removed here. Issue #66 itself stays open for other tools. (Historical note: that completed copy was moved under docs/tasks/completed/ on master; this file is the completed record of the Seedream/Seedance task, PR #97 merged as eddba6e on 2026-11-25.)
 2026-11-25 user authorization (chat): GitHub Actions (PR Build) use, PR creation, squash merge and production publication via the normal master release path are explicitly permitted for this task only. Workflow files stay unchanged. PRODUCTION_DEPLOY remains listed because validate:task requires it; the release itself is the user-authorized merge.

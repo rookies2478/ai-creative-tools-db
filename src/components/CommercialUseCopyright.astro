@@ -589,7 +589,7 @@ const toolUrl = (slug?: string) => slug ? `${toolsBase}${slug}/` : undefined;
   .cuc-finder .lead { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
   .cuc-taglinks { display: flex; flex-wrap: wrap; gap: 10px; }
   .cuc-taglinks.row { margin-top: 16px; padding-top: 18px; border-top: 1px dashed var(--line-strong); }
-  .cuc-taglink { font-family: var(--f-jp); font-weight: 600; font-size: 13.5px; padding: 9px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink-soft); display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; transition: transform .16s var(--ease), background .16s, border-color .16s, color .16s; }
+  .cuc-taglink { font-family: var(--f-jp); font-weight: 600; font-size: 13.5px; padding: 9px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink-soft); display: inline-flex; align-items: center; gap: 7px; max-width: 100%; white-space: normal; text-align: left; line-height: 1.5; transition: transform .16s var(--ease), background .16s, border-color .16s, color .16s; }
   .cuc-taglink:hover { border-color: var(--brand); color: var(--brand-ink); background: var(--brand-tint); transform: translateY(-1px); }
   .cuc-taglink .ld { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex: none; }
   .cuc-taglink.solid { background: var(--ink); color: var(--surface); border-color: var(--ink); }

@@ -18,14 +18,15 @@
 // are blocked.
 //
 // Usage: node scripts/test-page-overflow.mjs [--widths=320,360] [--filter=/tools/] [--limit=N]
+//        [--progress-file=<f> [--resume]] [--shard=i/n] [--only=/tools/] [--restart-every=40] [--min-free-mb=200]
 
-import { createServer } from "node:http";
-import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
-import { join, extname, resolve, sep } from "node:path";
-import { createRequire } from "node:module";
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
+import { arg, loadPlaywright, listPages, startServer, selectPages, runCases, NotRun } from "./lib/qa-browser.mjs";
 
+// Low-memory options (see docs/operations/regression-tests.md): --progress-file=<f> --resume --shard=i/n
+// --only=<route-prefix> --restart-every=N --min-free-mb=200 --max-mem-waits=30 (one page at a time).
 const DIST = resolve("dist");
-const arg = (name) => process.argv.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
 const WIDTHS = (arg("widths") || "320,360,375,390,414,768,1024,1366,1440").split(",").map(Number);
 const FILTER = arg("filter");
 const LIMIT = Number(arg("limit") || 0);
@@ -35,78 +36,18 @@ if (!existsSync(DIST)) {
   process.exit(2);
 }
 
-function loadPlaywright() {
-  const require = createRequire(import.meta.url);
-  for (const c of [process.env.PLAYWRIGHT_CORE_PATH, "playwright-core", "playwright"].filter(Boolean)) {
-    try {
-      return require(c);
-    } catch {}
-  }
-  return null;
-}
-
-function findChromium() {
-  if (process.env.CHROMIUM_PATH && existsSync(process.env.CHROMIUM_PATH)) return process.env.CHROMIUM_PATH;
-  return [
-    "C:/Program Files/Google/Chrome/Application/chrome.exe",
-    "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
-    "/usr/bin/google-chrome",
-    "/usr/bin/chromium",
-  ].find((p) => existsSync(p));
-}
-
-function listPages(dir, base = "") {
-  const out = [];
-  for (const name of readdirSync(dir)) {
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) out.push(...listPages(p, `${base}/${name}`));
-    else if (name === "index.html") out.push(`${base}/`);
-    else if (name === "404.html" && base === "") out.push("/404.html");
-  }
-  return out;
-}
-
-const MIME = {
-  ".html": "text/html; charset=utf-8",
-  ".css": "text/css",
-  ".js": "text/javascript",
-  ".svg": "image/svg+xml",
-  ".png": "image/png",
-  ".jpg": "image/jpeg",
-  ".webp": "image/webp",
-  ".woff2": "font/woff2",
-  ".json": "application/json",
-};
-
 const pw = loadPlaywright();
 if (!pw) {
   console.log("NOT_RUN: playwright-core not found (set PLAYWRIGHT_CORE_PATH).");
   process.exit(2);
 }
 
-const server = createServer((req, res) => {
-  let path = decodeURIComponent((req.url || "/").split("?")[0]);
-  if (path.endsWith("/")) path += "index.html";
-  const file = join(DIST, path);
-  if (!file.startsWith(DIST + sep) || !existsSync(file) || statSync(file).isDirectory()) {
-    res.writeHead(404);
-    res.end("not found");
-    return;
-  }
-  res.writeHead(200, { "content-type": MIME[extname(file)] || "application/octet-stream" });
-  res.end(readFileSync(file));
-});
-await new Promise((r) => server.listen(0, "127.0.0.1", r));
-const port = server.address().port;
+const { server, port } = await startServer(DIST);
 
-let pages = listPages(DIST).sort();
+let pages = listPages(DIST, "", true).sort();
 if (FILTER) pages = pages.filter((p) => p.includes(FILTER));
+pages = selectPages(pages);
 if (LIMIT) pages = pages.slice(0, LIMIT);
-
-const launchOpts = { headless: true };
-const exe = findChromium();
-if (exe) launchOpts.executablePath = exe;
-const browser = await pw.chromium.launch(launchOpts);
 
 function measure() {
   const de = document.documentElement;
@@ -154,41 +95,62 @@ function measure() {
   return out;
 }
 
+const cases = [];
+for (const width of WIDTHS) {
+  for (const path of pages) {
+    cases.push({
+      page: path,
+      width,
+      async run(page) {
+        await page.goto(`http://127.0.0.1:${port}${path}`, { waitUntil: "load" });
+        const m = await page.evaluate(measure);
+        const over = m.docScroll > m.vw || m.bodyScroll > m.vw;
+        // root-level overflow clipping that masks wide content is itself a failure
+        const masked = m.hiddenXOnRoot && m.offenders.length > 0;
+        if (over || masked) {
+          const off = m.offenders.map((o) => `${o.el}[${o.left}..${o.right}]`).join(", ");
+          return { status: "FAIL", scrollers: m.scrollers, detail: `doc ${m.docScroll}/body ${m.bodyScroll} > viewport ${m.vw}${masked ? " (masked by overflow-x on html/body)" : ""}; offenders: ${off || "none-detected"}` };
+        }
+        return { status: "PASS", scrollers: m.scrollers };
+      },
+    });
+  }
+}
+
+let records;
+try {
+  records = await runCases(pw, cases, { ctxOptions: (width) => ({ viewport: { width, height: 800 } }) });
+} catch (e) {
+  server.close();
+  if (e instanceof NotRun) {
+    console.log(`NOT_RUN: ${e.message}`);
+    process.exit(2);
+  }
+  throw e;
+}
+server.close();
+
 const failures = [];
 const perWidth = new Map(WIDTHS.map((w) => [w, { pages: 0, fail: 0, scrollers: 0 }]));
-let checked = 0;
-for (const width of WIDTHS) {
-  const ctx = await browser.newContext({ viewport: { width, height: 800 } });
-  await ctx.route((url) => url.hostname !== "127.0.0.1", (route) => route.abort());
-  const page = await ctx.newPage();
-  for (const path of pages) {
-    await page.goto(`http://127.0.0.1:${port}${path}`, { waitUntil: "load" });
-    const m = await page.evaluate(measure);
-    checked++;
-    const st = perWidth.get(width);
-    st.pages++;
-    st.scrollers += m.scrollers;
-    const over = m.docScroll > m.vw || m.bodyScroll > m.vw;
-    // root-level overflow clipping that masks wide content is itself a failure
-    const masked = m.hiddenXOnRoot && m.offenders.length > 0;
-    if (over || masked) {
-      st.fail++;
-      const off = m.offenders.map((o) => `${o.el}[${o.left}..${o.right}]`).join(", ");
-      failures.push(`${width}px ${path}: doc ${m.docScroll}/body ${m.bodyScroll} > viewport ${m.vw}${masked ? " (masked by overflow-x on html/body)" : ""}; offenders: ${off || "none-detected"}`);
-    }
+for (const r of records) {
+  const st = perWidth.get(r.width);
+  st.pages++;
+  st.scrollers += r.scrollers || 0;
+  if (r.status !== "PASS") {
+    st.fail++;
+    failures.push(`${r.width}px ${r.page}: ${r.detail}`);
   }
-  await ctx.close();
 }
-await browser.close();
-server.close();
+const checked = records.length;
+const resumed = records.resumed || 0;
 
 for (const [w, s] of perWidth) {
   console.log(`${String(w).padStart(5)}px: ${s.pages} pages, ${s.fail} overflowing, ${s.scrollers} intentional in-container scrollers (info)`);
 }
 if (failures.length) {
-  console.error(`FAIL: ${failures.length} overflowing page/width combination(s) in ${checked} checks`);
+  console.error(`FAIL: ${failures.length} overflowing page/width combination(s) in ${checked} checks (${resumed} resumed from progress file)`);
   for (const f of failures.slice(0, 60)) console.error(`  - ${f}`);
   if (failures.length > 60) console.error(`  ... ${failures.length - 60} more`);
   process.exit(1);
 }
-console.log(`PASS: no page-level horizontal overflow (${pages.length} pages x ${WIDTHS.length} widths = ${checked} checks)`);
+console.log(`PASS: no page-level horizontal overflow (${pages.length} pages x ${WIDTHS.length} widths = ${checked} checks, ${resumed} resumed)`);

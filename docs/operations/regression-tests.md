@@ -49,6 +49,32 @@ node scripts/test-header-overflow.mjs --all                 # header, every page
 
 Exit codes: 0 PASS, 1 FAIL (offenders listed), 2 NOT_RUN.
 
+## Low-memory procedure (small RAM / user browser running)
+
+Both scripts (and `scripts/qa-changed-pages.mjs`) share `scripts/lib/qa-browser.mjs`. Assertions and the page x width
+matrix are unchanged; only the execution is memory-safe. Defaults are already low-memory: one Chromium, one page at a
+time, a fresh context and page per case (closed right after), Chromium relaunched every 40 cases, and flags
+`--disable-gpu --disable-dev-shm-usage --disable-extensions --js-flags=--max-old-space-size=256`.
+
+| Option | Meaning |
+| --- | --- |
+| `--progress-file=<path>` | Append one JSON line per completed case: `{page,width,status,detail,t}`. |
+| `--resume` | Skip cases already `PASS` in the progress file (FAIL/missing cases are re-run). Resumed count is reported. |
+| `--shard=i/n` | Run every n-th page (1-based i) of the sorted page list, e.g. `--shard=1/4`. |
+| `--only=<route-prefix>` | Only routes starting with the prefix, e.g. `--only=/tools/` (`--filter=` in test-page-overflow is substring). |
+| `--restart-every=N` | Relaunch Chromium every N cases (default 40). |
+| `--min-free-mb=200`, `--max-mem-waits=30` | Before each case wait (5 s steps) while `os.freemem()` is below the threshold; after 30 consecutive waits print `NOT_RUN` and exit 2 cleanly. Re-run with `--resume` later. |
+| `--no-lowmem-args` | Do not add the low-memory Chromium flags. |
+| `--max-pages-parallel` | Accepted for clarity; always 1. |
+
+```sh
+node scripts/test-page-overflow.mjs --progress-file=C:/tmp/po.jsonl --resume          # interrupted? just re-run
+node scripts/test-header-overflow.mjs --all --progress-file=C:/tmp/ho.jsonl --resume
+node scripts/qa-changed-pages.mjs --progress-file=C:/tmp/qa.jsonl --resume              # SEO / Dreamina page QA
+```
+
+A run killed by the OS leaves a valid progress file; `NOT_RUN` (exit 2) is reported, never PASS, when memory stays low.
+
 ## Serving and offline behaviour
 
 The scripts do not need `npm run preview`: each starts its own static server on `127.0.0.1:<random port>` over `./dist`.

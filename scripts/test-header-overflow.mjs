@@ -13,15 +13,15 @@
 //   CHROMIUM_PATH=<path to chrome/chromium/msedge exe>  (optional)
 // If playwright-core cannot be found the script exits 2 (NOT_RUN).
 //
-// Usage: node scripts/test-header-overflow.mjs [--all]
+// Usage: node scripts/test-header-overflow.mjs [--all] [--progress-file=<f> [--resume]] [--shard=i/n] [--only=/tools/]
 //   default: representative pages; --all: every page in dist.
 
-import { createServer } from "node:http";
-import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
-import { join, extname, resolve } from "node:path";
-import { createRequire } from "node:module";
-import { homedir } from "node:os";
+import { existsSync, readdirSync } from "node:fs";
+import { join, resolve } from "node:path";
+import { arg, loadPlaywright, listPages, startServer, selectPages, runCases, NotRun } from "./lib/qa-browser.mjs";
 
+// Low-memory options (see docs/operations/regression-tests.md): --progress-file=<f> --resume --shard=i/n
+// --only=<route-prefix> --restart-every=N --min-free-mb=200 --max-mem-waits=30 (one page at a time).
 const DIST = resolve("dist");
 const WIDTHS = [320, 360, 375, 390, 414, 768, 1024, 1366, 1440];
 const REPRESENTATIVE = [
@@ -38,72 +38,15 @@ if (!existsSync(DIST)) {
   process.exit(2);
 }
 
-function loadPlaywright() {
-  const require = createRequire(import.meta.url);
-  const candidates = [process.env.PLAYWRIGHT_CORE_PATH, "playwright-core", "playwright"].filter(Boolean);
-  for (const c of candidates) {
-    try {
-      return require(c);
-    } catch {}
-  }
-  return null;
-}
-
-function findChromium() {
-  if (process.env.CHROMIUM_PATH && existsSync(process.env.CHROMIUM_PATH)) return process.env.CHROMIUM_PATH;
-  const fixed = [
-    "C:/Program Files/Google/Chrome/Application/chrome.exe",
-    "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
-    "/usr/bin/google-chrome",
-    "/usr/bin/chromium",
-  ];
-  return fixed.find((p) => existsSync(p));
-}
-
-function listPages(dir, base = "") {
-  const out = [];
-  for (const name of readdirSync(dir)) {
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) out.push(...listPages(p, `${base}/${name}`));
-    else if (name === "index.html") out.push(`${base}/`);
-  }
-  return out;
-}
-
-const MIME = {
-  ".html": "text/html; charset=utf-8",
-  ".css": "text/css",
-  ".js": "text/javascript",
-  ".svg": "image/svg+xml",
-  ".png": "image/png",
-  ".jpg": "image/jpeg",
-  ".webp": "image/webp",
-  ".woff2": "font/woff2",
-  ".json": "application/json",
-};
-
 const pw = loadPlaywright();
 if (!pw) {
   console.log("NOT_RUN: playwright-core not found (set PLAYWRIGHT_CORE_PATH).");
   process.exit(2);
 }
 
-const server = createServer((req, res) => {
-  let path = decodeURIComponent((req.url || "/").split("?")[0]);
-  if (path.endsWith("/")) path += "index.html";
-  const file = join(DIST, path);
-  if (!file.startsWith(DIST) || !existsSync(file) || statSync(file).isDirectory()) {
-    res.writeHead(404);
-    res.end("not found");
-    return;
-  }
-  res.writeHead(200, { "content-type": MIME[extname(file)] || "application/octet-stream" });
-  res.end(readFileSync(file));
-});
-await new Promise((r) => server.listen(0, "127.0.0.1", r));
-const port = server.address().port;
+const { server, port } = await startServer(DIST);
 
-const pages = process.argv.includes("--all") ? listPages(DIST).sort() : REPRESENTATIVE.filter((p) => existsSync(join(DIST, p, "index.html")));
+let pages = process.argv.includes("--all") ? listPages(DIST).sort() : REPRESENTATIVE.filter((p) => existsSync(join(DIST, p, "index.html")));
 // add one tool detail, one comparison article, one guide article
 if (!process.argv.includes("--all")) {
   for (const dir of ["tools", "comparisons", "guides"]) {
@@ -112,88 +55,97 @@ if (!process.argv.includes("--all")) {
   }
 }
 
-const launchOpts = { headless: true };
-const exe = findChromium();
-if (exe) launchOpts.executablePath = exe;
-const browser = await pw.chromium.launch(launchOpts);
+pages = selectPages(pages);
 
-const failures = [];
-const rows = [];
-let checked = 0;
+const cases = [];
 for (const width of WIDTHS) {
-  const ctx = await browser.newContext({ viewport: { width, height: 800 } });
-  // Block external hosts (web fonts, analytics) so the run is offline and deterministic.
-  await ctx.route((url) => url.hostname !== "127.0.0.1", (route) => route.abort());
-  const page = await ctx.newPage();
   for (const path of pages) {
-    await page.goto(`http://127.0.0.1:${port}${path}`, { waitUntil: "domcontentloaded" });
-    const m = await page.evaluate(() => {
-      const de = document.documentElement;
-      const inner = document.querySelector(".nv-topbar .nv-inner");
-      if (!inner) return { noHeader: true };
-      const vw = de.clientWidth;
-      // right edge of the inner content box (viewport minus right padding, capped by max-width)
-      const ir = inner.getBoundingClientRect();
-      const limit = ir.right - parseFloat(getComputedStyle(inner).paddingRight);
-      let maxRight = 0;
-      let worst = "";
-      for (const el of inner.querySelectorAll("*")) {
-        const cs = getComputedStyle(el);
-        if (cs.display === "none" || cs.position === "fixed") continue;
-        if (el.closest(".nv-mobile-panel")) continue;
-        const r = el.getBoundingClientRect();
-        if (r.width === 0) continue;
-        if (r.right > maxRight) {
-          maxRight = r.right;
-          worst = el.className || el.tagName;
+    cases.push({
+      page: path,
+      width,
+      async run(page) {
+        const failures = [];
+        await page.goto(`http://127.0.0.1:${port}${path}`, { waitUntil: "domcontentloaded" });
+        const m = await page.evaluate(() => {
+          const de = document.documentElement;
+          const inner = document.querySelector(".nv-topbar .nv-inner");
+          if (!inner) return { noHeader: true };
+          const vw = de.clientWidth;
+          // right edge of the inner content box (viewport minus right padding, capped by max-width)
+          const ir = inner.getBoundingClientRect();
+          const limit = ir.right - parseFloat(getComputedStyle(inner).paddingRight);
+          let maxRight = 0;
+          let worst = "";
+          for (const el of inner.querySelectorAll("*")) {
+            const cs = getComputedStyle(el);
+            if (cs.display === "none" || cs.position === "fixed") continue;
+            if (el.closest(".nv-mobile-panel")) continue;
+            const r = el.getBoundingClientRect();
+            if (r.width === 0) continue;
+            if (r.right > maxRight) {
+              maxRight = r.right;
+              worst = el.className || el.tagName;
+            }
+          }
+          return {
+            vw,
+            pageScroll: de.scrollWidth,
+            innerScroll: inner.scrollWidth,
+            innerClient: inner.clientWidth,
+            limit: Math.round(limit * 10) / 10,
+            maxRight: Math.round(maxRight * 10) / 10,
+            worst: String(worst),
+          };
+        });
+        if (m.noHeader) return { status: "FAIL", detail: `${width}px ${path}: .nv-topbar not found` };
+        if (m.innerScroll > m.innerClient) failures.push(`${width}px ${path}: header inner scrollWidth ${m.innerScroll} > clientWidth ${m.innerClient}`);
+        if (m.maxRight > m.limit + 0.5) failures.push(`${width}px ${path}: header element "${m.worst}" right edge ${m.maxRight} > header content limit ${m.limit}`);
+        // Page-level scrollWidth is reported (VERBOSE) but not asserted: other page content
+        // (filter chips, router rows, CTA buttons) is outside this test's scope.
+        if (width <= 720) {
+          await page.click(".nv-mobile-details > summary");
+          const pr = await page.evaluate(() => {
+            const r = document.querySelector(".nv-mobile-panel").getBoundingClientRect();
+            return { left: r.left, right: r.right, vw: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth };
+          });
+          if (pr.left < 0 || pr.right > pr.vw + 0.5) failures.push(`${width}px ${path}: open mobile panel outside viewport (${pr.left}..${pr.right} / ${pr.vw})`);
+          await page.click(".nv-mobile-details > summary");
         }
-      }
-      return {
-        vw,
-        pageScroll: de.scrollWidth,
-        innerScroll: inner.scrollWidth,
-        innerClient: inner.clientWidth,
-        limit: Math.round(limit * 10) / 10,
-        maxRight: Math.round(maxRight * 10) / 10,
-        worst: String(worst),
-      };
+        return { status: failures.length ? "FAIL" : "PASS", detail: failures.join(" | "), m };
+      },
     });
-    checked++;
-    if (m.noHeader) {
-      failures.push(`${width}px ${path}: .nv-topbar not found`);
-      continue;
-    }
-    rows.push({ width, path, ...m });
-    if (m.innerScroll > m.innerClient) failures.push(`${width}px ${path}: header inner scrollWidth ${m.innerScroll} > clientWidth ${m.innerClient}`);
-    if (m.maxRight > m.limit + 0.5) failures.push(`${width}px ${path}: header element "${m.worst}" right edge ${m.maxRight} > header content limit ${m.limit}`);
-    // Page-level scrollWidth is reported (VERBOSE) but not asserted: other page content
-    // (filter chips, router rows, CTA buttons) is outside this test's scope.
-    if (width <= 720) {
-      await page.click(".nv-mobile-details > summary");
-      const pr = await page.evaluate(() => {
-        const r = document.querySelector(".nv-mobile-panel").getBoundingClientRect();
-        return { left: r.left, right: r.right, vw: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth };
-      });
-      if (pr.left < 0 || pr.right > pr.vw + 0.5) failures.push(`${width}px ${path}: open mobile panel outside viewport (${pr.left}..${pr.right} / ${pr.vw})`);
-      await page.click(".nv-mobile-details > summary");
-    }
   }
-  await ctx.close();
 }
-await browser.close();
+
+let records;
+try {
+  records = await runCases(pw, cases, { ctxOptions: (width) => ({ viewport: { width, height: 800 } }) });
+} catch (e) {
+  server.close();
+  if (e instanceof NotRun) {
+    console.log(`NOT_RUN: ${e.message}`);
+    process.exit(2);
+  }
+  throw e;
+}
 server.close();
+
+const checked = records.length;
+const resumed = records.resumed || 0;
+const failures = records.filter((r) => r.status !== "PASS").flatMap((r) => r.detail.split(" | "));
 
 if (process.env.VERBOSE) {
   for (const w of WIDTHS) {
-    const r = rows.filter((x) => x.width === w);
-    console.log(`${w}px: max header right=${Math.max(...r.map((x) => x.maxRight))} inner=${Math.max(...r.map((x) => x.innerScroll))}/${r[0]?.innerClient} page=${Math.max(...r.map((x) => x.pageScroll))}/${r[0]?.vw}`);
+    const r = records.filter((x) => x.width === w && x.m);
+    if (!r.length) continue;
+    console.log(`${w}px: max header right=${Math.max(...r.map((x) => x.m.maxRight))} inner=${Math.max(...r.map((x) => x.m.innerScroll))}/${r[0].m.innerClient} page=${Math.max(...r.map((x) => x.m.pageScroll))}/${r[0].m.vw}`);
   }
 }
 
 if (failures.length) {
   const uniq = [...new Set(failures)];
-  console.error(`FAIL: ${uniq.length} issue(s) in ${checked} checks`);
+  console.error(`FAIL: ${uniq.length} issue(s) in ${checked} checks (${resumed} resumed)`);
   for (const f of uniq.slice(0, 30)) console.error(`  - ${f}`);
   process.exit(1);
 }
-console.log(`PASS: header has no horizontal overflow (${pages.length} pages x ${WIDTHS.length} widths = ${checked} checks)`);
+console.log(`PASS: header has no horizontal overflow (${pages.length} pages x ${WIDTHS.length} widths = ${checked} checks, ${resumed} resumed)`);

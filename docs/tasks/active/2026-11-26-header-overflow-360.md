@@ -21,6 +21,9 @@ target_files:
   - src/layouts/BaseLayout.astro
   - scripts/test-header-overflow.mjs
   - scripts/test-page-overflow.mjs
+  - scripts/lib/qa-browser.mjs
+  - scripts/qa-changed-pages.mjs
+  - src/components/CommercialUseCopyright.astro
   - docs/operations/regression-tests.md
   - docs/operations/weekly-growth-loop.md
   - docs/analytics/seo-improvements-2026-11-26.md

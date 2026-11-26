@@ -10,7 +10,7 @@
 
 ---
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - current_active_task: docs/tasks/active/2026-11-07-official-facts-59-followup.md (READY, exactly one)
@@ -24,7 +24,7 @@
 
 ---
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - active_task: docs/tasks/active/2026-11-07-official-fact-audit-report-integration.md (READY, one task)
@@ -36,7 +36,7 @@
 
 ---
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - current_active_task: docs/tasks/active/2026-11-07-growth-loop-route-policy.md (one READY task)
@@ -47,7 +47,7 @@
 
 ---
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - current_active_task: docs/tasks/active/2026-11-07-pika-official-license-drift.md (only active, READY)
@@ -59,7 +59,7 @@
 
 ---
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - current_active_task: docs/tasks/active/2026-11-06-guide-rights-pricing-consistency.md (READY, sole task; original content proposal PR #65)
@@ -71,7 +71,7 @@
 
 ---
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - source_branch: master
@@ -95,7 +95,7 @@
 
 ## Prior snapshot retained — registry closeout and older records
 
-# Latest Project State
+## Previous snapshot (history)
 
 - updated_at: 2026-11-07
 - registry_closeout: docs/tasks/completed/2026-11-06-official-source-registry.md（Issue #69 / PR #70 38ツール公式URL台帳。構造検証のみ、last_content_verified_atは全件空欄=事実未検証。Issue #66の事実監査は未実施）

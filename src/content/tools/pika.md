@@ -7,7 +7,7 @@ freePlan: "limited"
 lowestPaidPlan: "$8/月（年払い）"
 currency: "USD"
 commercialUse: "limited"
-commercialUseNote: "2026-11-07にPika公式新料金比較を確認。Freeは商用ライセンスなし、Creator/Fancyはライセンスあり。Starterは料金比較と公式サポートの説明が相違するため要個別確認。旧Basicが商用可とする旧表示もあり、契約時の最新版を確認。"
+commercialUseNote: "2026-11-07にPika公式新料金比較を確認。Freeは商用ライセンスなし、Creator/Fancyはライセンスあり。Starterにも商用ライセンスの表示あり。旧Basicが商用可とする旧表示もあり、契約時の最新版を確認。"
 japaneseUi: "partial"
 japanesePrompt: "partial"
 watermark: "no"
@@ -21,12 +21,12 @@ strengths:
   - "操作が比較的シンプルとされる"
 weaknesses:
   - "Freeは新料金比較で可視透かしなしダウンロード。ただし商用ライセンスなし"
-  - "旧Basicでは無料商用可との表示が残るが、新Freeでは商用ライセンスなし。Starterも公式間の相違がある"
+  - "旧Basicでは無料商用可との表示が残るが、新Freeでは商用ライセンスなし。Starter以上は商用ライセンスあり（2026-11-26確認）"
   - "日本語プロンプトでの動画生成の対応状況は不明確"
   - "生成動画の長さ・解像度に制限がある場合がある"
-lastReviewed: "2026-11-07"
-nextReviewDue: "2026-11-14"
-verifiedAt: "2026-11-07"
+lastReviewed: "2026-11-26"
+nextReviewDue: "2026-12-26"
+verifiedAt: "2026-11-26"
 officialSourceUrl: "https://pika.art/pricing"
 pricingModel: "subscription_credit"
 pricingStatus: "confirmed"
@@ -52,7 +52,7 @@ limitations:
   - "有料プランでも商用利用条件はプランごとに異なる可能性があり、最新の公式利用規約・料金ページの確認が必要"
   - "生成動画の長さ・解像度に制限がある場合あり（プランによって異なる）"
   - "入力素材・生成コンテンツの権利関係は公式規約を要確認"
-  - "Pika公式サポートと料金比較でStarterの商用許諾に説明差あり。契約前に最新の公式情報を確認"
+  - "商用ライセンスはStarter以上に表示（2026-11-26 公式料金ページ）。契約前に最新の規約を確認"
 notFor:
   - "第三者の権利許諾を確認せず商用案件に使用したい人"
   - "モデル固有の識別メタデータまで一切ないことを保証したい人"
@@ -68,14 +68,14 @@ pricingDecision:
   watermarkStatus: "none"
   creditSystem: true
   paidPlanRequiredForExport: false
-  pricingNote: "新Freeは月額0cr・商用ライセンスなし。Starter年払い月$8相当・900cr、Creator年払い月$28相当・3,150cr。Starter商用権利は公式案内が矛盾。最新契約を確認。"
+  pricingNote: "新Freeは月額0cr・商用ライセンスなし。Starter $10/月（年払い月$8相当）・600cr、Creator $35/月（年払い月$28相当）・2,600cr。Starter以上は商用ライセンスあり（2026-11-26 公式料金ページ）。最新契約を確認。"
 usagePolicy:
   commercialUseStatus: "limited"
   commercialUseByPlan:
     free: "新料金比較で商用ライセンスなし。旧Basicの無料商用可表示は過去バージョンの可能性があり適用しない。"
     paid: "Creator/Fancyは新料金比較で商用ライセンスあり。Starterは料金比較NO／サポートYESで不一致、契約者の条件確認が必要。"
     enterprise: "要確認"
-  commercialUseNote: "Freeは新料金比較で商用ライセンスなし。Creator/Fancyはあり。StarterはPika公式間で表示相違。第三者素材や著作権は別途確認。"
+  commercialUseNote: "Freeは新料金比較で商用ライセンスなし。Creator/Fancyはあり。Starterにも商用ライセンスの表示あり。第三者素材や著作権は別途確認。"
   rightsStatus: "unknown"
   rightsNote: "生成物の権利帰属は最新の公式利用規約で確認が必要。"
   inputMaterialRisk: "medium"
@@ -100,9 +100,9 @@ capabilityFit:
   consistencyControl: "low"
 conversionGuide:
   primaryCtaLabel: "無料枠・透かし・商用利用条件を公式サイトで確認する"
-  primaryCtaReason: "旧Basicと新Freeの無料付与・商用条件が異なるため、最新版の料金比較と公式サポートの両方を確認。"
+  primaryCtaReason: "旧Basicと新Freeの無料付与・商用条件が異なるため、公式料金ページの現行表示と利用規約を確認。"
   beforeClickChecklist:
-    - "新Freeは商用ライセンスなし、Starterは公式案内に相違がある点を確認したか？"
+    - "新Freeは商用ライセンスなし、Starterにも商用ライセンスの表示あり"
     - "可視透かしなしダウンロードが対象モデル・出力に適用されるか確認したか？"
     - "商用利用する場合、生成内容と入力素材に必要な権利・同意を確保したか？"
     - "生成に使う素材（画像・動画）に第三者の権利が含まれていないか確認したか？"
@@ -132,7 +132,7 @@ faqs:
   - question: "無料で使えますか？"
     answer: "新料金比較ではFreeは月額クレジット付与0で追加パック購入が可能。旧Basic（月80cr）の表示が残るため、現行アカウントの実際の条件を確認してください。無透かしと商用許諾は別です。"
   - question: "商用利用できますか？"
-    answer: "新料金比較ではFreeに商用ライセンスなし、Creator/Fancyにはあり。Starterは料金比較でNO、公式サポートでYESと説明が異なり、個別確認が必要です。入力素材など第三者権利も別途確認してください。"
+    answer: "新料金比較ではFreeに商用ライセンスなし、Starter/Creator/Fancyにあり（2026-11-26 公式料金ページ）。契約前に最新の規約をご確認ください。入力素材など第三者権利も別途確認してください。"
   - question: "日本語で使えますか？"
     answer: "UIは英語ベースですが、一部で翻訳表示に対応している場合があります。日本語プロンプトの入力も可能ですが、英語プロンプトの方が生成品質が高い場合があるとされています。"
   - question: "透かしは入りますか？"
@@ -178,8 +178,8 @@ Pikaはテキストや画像から短尺AI動画を生成するサービス。�
 | プラン | 料金 | 新料金比較（2026-11-07に取得。契約時に確認） |
 |---|---|---|
 | Free | 無料 | 月額付与0cr、追加パック購入可、無透かしDL、商用ライセンスなし |
-| Starter | $10/月（月払い）・$8/月相当（年払い） | 900cr/月。商用許諾は料金比較と公式サポートの記載に相違あり |
-| Creator | $35/月（月払い）・$28/月相当（年払い） | 3,150cr/月、商用ライセンスあり（第三者権利は別） |
+| Starter | $10/月（月払い）・$8/月相当（年払い） | 600cr/月、商用ライセンスあり |
+| Creator | $35/月（月払い）・$28/月相当（年払い） | 2,600cr/月、商用ライセンスあり（第三者権利は別） |
 | Fancy | $95/月（月払い）・$76/月相当（年払い） | 8,550cr/月、商用ライセンスあり（追加条件・上位クレジット別） |
 
 - プラン名、料金、クレジット数は変更される可能性があります
@@ -202,8 +202,7 @@ Pikaの動画生成には、通常生成とPikaframes（延長・フレーム補
 公式情報上、プランによって商用利用の可否が分かれているとされています。
 
 - **Free：** 新料金比較では商用ライセンスなし、無透かしDLとは別条件
-- **有料プラン：** Creator/Fancyには商用ライセンスあり。Starterは新料金比較と公式サポートの記載が相違するため契約確認が必要
-- 条件・規約は変更される可能性があります
+- **有料プラン：** Creator/Fancyには商用ライセンスあり。Starterにも商用ライセンスの表示ありあります
 
 > **免責事項：** このページは情報提供を目的としており、法的助言ではありません。商用利用前は必ず[Pika利用規約](https://pika.art/terms-of-service)の最新版をご確認ください。
 
@@ -277,7 +276,7 @@ Pikaは短尺動画のシンプルな生成に特化しているとされてい�
 
 ## 実務利用前に確認したいポイント
 
-- [ ] 新Freeの商用ライセンスなし、Starterの公式案内の相違、Creator/Fancyの利用権と第三者素材を確認
+- [ ] 新Freeの商用ライセンスなし、Starter以上の商用ライセンス表示、利用権と第三者素材を確認
 - [ ] 透かしの有無とプランごとの条件
 - [ ] 生成物の利用範囲（掲載媒体・収益化・クライアントワークの可否）
 - [ ] 人物・著名人・ブランドロゴ・第三者素材を使う場合の権利関係
@@ -296,7 +295,7 @@ Pikaは短尺動画のシンプルな生成に特化しているとされてい�
 
 ## 他ツールも比較したいケース
 
-- **商用利用を前提にしたい場合** → 新料金比較でCreator/Fancyに商用ライセンスあり。Freeは対象外で、Starterは公式説明が矛盾するため契約画面の確認が必要です。入力素材や配布先の規則も確認してください。
+- **商用利用を前提にしたい場合** → 新料金比較でCreator/Fancyに商用ライセンスあり。Freeは対象外で、Starterにも商用ライセンスの表示あり。入力素材や配布先の規則も確認してください。
 - **映像クオリティ・編集機能を重視する場合** → [Runway](/tools/runway/) が候補になります
 - **リアル系の動きを比較したい場合** → [Kling AI](/tools/kling-ai/)・[Luma AI](/tools/luma-ai/) も比較候補です
 - **日本語UIを優先したい場合** → PikaはUIが英語ベースのため、他ツールも確認してください

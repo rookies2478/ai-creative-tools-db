@@ -3,6 +3,7 @@
 - updated_at: 2026-11-26
 - current_active_task: docs/tasks/active/2026-11-26-header-overflow-360.md（統合タスク: #98 横溢れ根本修正 / #99 Dreamina円建て料金整合 / #100 SEOスニペット改善。ローカル検証済み・未push・本番未反映）
 - latest_completed_task: PR #97 seedream-vs-seedance 更新（eddba6e, merged 2026-11-25）。Issue #96 の完了条件は #97 で充足
+- laneH (2026-11-26, branch lane/h-acdb-20261126): Pika/Luma/Fotor旧記載を2026-11-26公式料金ページ（描画）に整合。本番未反映・PR未作成
 - overflow: html の overflow-x:clip を撤去し原因側を修正。統合後の最終ローカルQA（Chromium・低メモリ・逐次）: test-page-overflow 127ページ×9幅=1143件 PASS、test-header-overflow --all 126ページ×9幅=1134件 PASS、変更18ページのブラウザQA 90件 PASS。統合後に発見した /guides/commercial-use-copyright/ の溢れは .cuc-taglink の nowrap が原因で修正済み。手順 docs/operations/regression-tests.md
 - dreamina: 日本向け公式料金ページを2026-11-26 JSTに確認。月次/初月キャンペーン/年額を区別して記載。未確認項目は docs/analytics/seo-improvements-2026-11-26.md
 - seo: 効果測定は 2026-11-28以降のGSCで、初回12-09頃・確定12-23頃。週次手順 docs/operations/weekly-growth-loop.md

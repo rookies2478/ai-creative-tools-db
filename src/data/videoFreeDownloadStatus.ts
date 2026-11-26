@@ -63,7 +63,7 @@ export const videoFreeDownloadStatus: VideoFreeDownloadStatus[] = [
     verifiedAt: '2026-06-24',
     evidenceType: 'repository-record',
     evidenceNote: 'generatedVideos.tsのusageNoteには「管理者が生成した」との記載のみで、無料プランでの生成・ダウンロードであることの明記がない。',
-    limitationNote: '毎月80クレジット付与・480p・透かしあり・商用利用不可（src/content/tools/pika.md freePlanNote、公式確認2026-07-24）。',
+    limitationNote: '月額クレジット付与0（追加パック購入可）・透かしなし・商用ライセンスなし（公式料金ページ 2026-11-26 確認。旧Basicの月80クレジット表示は現行ページになし）。',
     generatedVideoExists: true,
     detailUrl: '/tools/pika/',
   },

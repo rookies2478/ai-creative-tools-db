@@ -32,7 +32,7 @@ const jsonLd = JSON.stringify([
     name: 'Pika',
     operatingSystem: 'Web',
     applicationCategory: 'VideoApplication',
-    description: 'Pikaの新料金比較ではFreeの商用ライセンスなし、Creator/Fancyにはあり。Starterは公式説明に差があります。',
+    description: 'Pikaの新料金比較ではFreeの商用ライセンスなし、Creator/Fancyにはあり。Starter/Creator/Fancyとも商用ライセンスあり。',
     url: 'https://pika.art',
   },
 ]);
@@ -40,7 +40,7 @@ const jsonLd = JSON.stringify([
 
 <BaseLayout
   title="Pikaの料金・商用利用・無料枠を比較｜AIクリエイティブナビ"
-  description="Pikaの料金・Freeの月額付与0と商用ライセンス条件、Starterの公式説明の差異、透かし・日本語対応を整理。"
+  description="Pikaの料金・Freeの月額付与0と商用ライセンス条件、Starter以上の商用ライセンス、透かし・日本語対応を整理。"
   canonicalPath="/tools/pika/"
   ogType="article"
   jsonLd={jsonLd}
@@ -77,8 +77,8 @@ const jsonLd = JSON.stringify([
       basicInfo={[
         {
           title: '商用利用', badge: { s: 'cond', label: '新Freeは商用ライセンスなし' }, wide: true,
-          sum: '新料金比較でFreeは商用不可。Creator/Fancyは商用ライセンスあり。Starterは公式ページ間の差異を確認。',
-          det: '無料・無透かしDLと商用許諾は別。Starterは料金比較と公式サポートで説明が矛盾。入力素材・人物・商標権も別途確認してください。',
+          sum: '新料金比較でFreeは商用不可。Creator/Fancyは商用ライセンスあり。Starter/Creator/Fancyとも商用ライセンスあり。',
+          det: '無料・無透かしDLと商用許諾は別。Starter/Creator/Fancyとも商用ライセンスあり。入力素材・人物・商標権も別途確認してください。',
         },
         {
           title: '無料枠', badge: { s: 'cond', label: '新Freeは月額付与0・パック購入可' },
@@ -106,7 +106,7 @@ const jsonLd = JSON.stringify([
         '<b>手軽なAI動画生成の入門</b>（無料枠あり・低コスト有料プラン）',
         '<b>短尺動画・SNS向けコンテンツ</b>のAI生成',
         '<b>Pikaframes機能</b>で最大25秒の動画生成',
-        '<b>商用利用は契約プランで確認</b>（新Freeは商用ライセンスなし、Starterは公式表示が矛盾）',
+        '<b>商用利用は契約プランで確認</b>（新Freeは商用ライセンスなし、Starter/Creator/Fancyとも商用ライセンスあり',
       ]}
       pros={[
         '新Freeは月額クレジット付与0で追加パック購入が必要',
@@ -132,7 +132,7 @@ const jsonLd = JSON.stringify([
           [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>新Free：月額付与0</span><br>追加パック購入可。旧Basic月80crの表示と区別。' }],
           [{ html: '最安料金', rk: true }, { html: '<span class="mono">$8/月〜（年払い）</span><br>月払いでは料金が異なる場合あり。最新料金は公式サイトで確認。' }],
-          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>Freeは商用ライセンスなし</span><br>Creator/Fancyはあり、Starterは公式説明の差異を確認。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>Freeは商用ライセンスなし</span><br>Creator/Fancyはあり、Starter/Creator/Fancyとも商用ライセンスあり。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>新料金比較でFreeも無透かしDL</span><br>商用ライセンスとは別条件。' }],
           [{ html: '日本語UI', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>部分対応</span>' }],
           [{ html: '日本語プロンプト', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>△ 一部対応</span>' }],
@@ -143,8 +143,8 @@ const jsonLd = JSON.stringify([
         note: '※ 料金・クレジット数・商用利用条件は変更される可能性があります。最新情報は必ず公式サイトでご確認ください。',
       }}
       about={[
-        'Pikaはテキスト・画像から短尺動画を生成するサービスです。新Freeは月額付与0（追加パック購入可）、Starterは年払い月$8相当ですが商用許諾の公式説明に差があります。',
-        '新Freeは無透かしDLでも商用ライセンスなし。Creator/Fancyは商用ライセンスを案内。第三者の権利も別確認。',
+        'Pikaはテキスト・画像から短尺動画を生成するサービスです。新Freeは月額付与0（追加パック購入可）、Starter/Creator/Fancyとも商用ライセンスあり。',
+        '新Freeは無透かしDLでも商用ライセンスなし。Starter/Creator/Fancyは商用ライセンスを案内。第三者の権利も別確認。',
       ]}
       aboutMore={{ label: 'AI動画生成ツール一覧で比較する →', href: '/categories/video-generation/' }}
       pricing={{
@@ -153,7 +153,7 @@ const jsonLd = JSON.stringify([
           headers: ['プラン', '料金', '備考'],
           rows: [
             [{ html: '無料', rk: true }, { html: 'Free（月額付与0）' }, { html: '追加パック購入可・無透かしDL・商用ライセンスなし' }],
-            [{ html: '有料（Starter）', rk: true }, { html: '$8/月相当（年払い）', mono: true }, { html: '900cr/月。商用許諾は公式説明に差異あり' }],
+            [{ html: '有料（Starter）', rk: true }, { html: '$8/月相当（年払い）', mono: true }, { html: '600cr/月。商用ライセンスあり' }],
             [{ html: '上位プラン', rk: true }, { html: '要公式確認', mono: true }, { html: '要公式確認' }],
           ],
         },
@@ -164,10 +164,10 @@ const jsonLd = JSON.stringify([
         ],
       }}
       commercial={{
-        lead: '新Freeは商用ライセンスなし。Creator/Fancyは商用ライセンスあり。Starterは公式説明に差があるため利用規約を確認。',
+        lead: '新Freeは商用ライセンスなし。Starter/Creator/Fancyは商用ライセンスあり。',
         points: [
           '新Freeでは商用ライセンスなし',
-          'Creator/Fancyは商用ライセンスあり。Starterは公式説明が矛盾',
+          'Starter/Creator/Fancyは商用ライセンスあり',
           '商用利用条件はプランによって異なる場合があります',
           '利用規約は変更される可能性があります',
         ],
@@ -224,7 +224,7 @@ const jsonLd = JSON.stringify([
       watermarkMore={{ label: '透かしなしツール一覧を見る →', href: '/conditions/no-watermark/' }}
       usagePolicy={d?.usagePolicy}
       checklist={[
-        { html: '新Freeの商用ライセンスなしとStarterの公式説明の差異を確認したか' },
+        { html: '新Freeは商用ライセンスなし、Starter以上は商用ライセンスあり（2026-11-26確認）。契約前に最新の規約を確認したか' },
         { html: '最新のPika利用規約・商用利用条件を公式サイトで確認したか' },
         { html: '第三者の著作権・肖像権等を侵害するコンテンツでないか' },
         { html: '生成動画に使用する入力画像・映像の権利関係' },
@@ -241,7 +241,7 @@ const jsonLd = JSON.stringify([
       ]}
       faqs={[
         { q: 'Pikaは無料で使えますか？', a: '新Freeは月額付与0（クレジットパックを追加購入可能）と料金比較にあります。旧Basic月80crは現行条件として扱わず、契約画面を確認してください。' },
-        { q: 'Pikaは商用利用できますか？', a: '新料金比較ではFreeに商用ライセンスなし、Creator/Fancyにあり。Starterは公式料金比較とサポートの説明が一致しないため契約前に確認が必要です。第三者権利も別です。' },
+        { q: 'Pikaは商用利用できますか？', a: '新料金比較ではFreeに商用ライセンスなし、Starter/Creator/Fancyにあり（2026-11-26 公式料金ページ）。第三者権利も別です。' },
         { q: 'Pikaは日本語で使えますか？', a: 'UIは部分的に日本語対応しています。プロンプトは一部対応ですが、英語の方が精度が高い傾向があります。' },
         { q: '動画の最大長はどのくらいですか？', a: '通常は最大10秒の動画生成が可能です。Pikaframes機能を使用すると最大25秒まで延長できるとされています。最新仕様は公式サイトでご確認ください。' },
         { q: '透かしはありますか？', a: '新料金比較ではFreeも透かしなしDLと案内。商用ライセンスとは別で、過去生成動画への適用も確認が必要です。' },
@@ -254,7 +254,7 @@ const jsonLd = JSON.stringify([
       relatedTools={[
         { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
         { name: 'Kling AI', slug: 'kling-ai', initial: 'K', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料のみ' }, { s: 'cond', label: '無料：1日66cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://kling.ai' },
-        { name: 'Luma AI', slug: 'luma-ai', initial: 'L', cat: '動画生成', badges: [{ s: 'paid', label: '商用：Plus以上' }, { s: 'cond', label: '無料：限定' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://lumalabs.ai/' },
+        { name: 'Luma AI', slug: 'luma-ai', initial: 'L', cat: '動画生成', badges: [{ s: 'paid', label: '商用：全プラン記載（規約確認）' }, { s: 'cond', label: '無料：限定' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://lumalabs.ai/' },
       ]}
       nextReads={buildNextReads('pika')}
       conditions={[

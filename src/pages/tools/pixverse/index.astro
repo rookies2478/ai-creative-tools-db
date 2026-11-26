@@ -227,7 +227,7 @@ const jsonLd = JSON.stringify(jsonLdEntries);
           [{ html: '商用利用', rk: true }, { html: '有料サービスで可（条件あり）', me: true }, { html: '全プラン・条件あり' }, { html: '有料プランのみ' }, { html: 'Plus以上' }, { html: '有料プランで可' }],
           [{ html: '透かし（無料）', rk: true }, { html: 'あり', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
           [{ html: '日本語UI', rk: true }, { html: '対応', me: true }, { html: '非対応' }, { html: '部分対応' }, { html: '非対応' }, { html: '部分対応' }],
-          [{ html: '無料枠', rk: true }, { html: '初回60＋毎日30cr', me: true }, { html: '125cr（初回）' }, { html: '1日66cr' }, { html: '限定クレジット' }, { html: '月80cr' }],
+          [{ html: '無料枠', rk: true }, { html: '初回60＋毎日30cr', me: true }, { html: '125cr（初回）' }, { html: '1日66cr' }, { html: '限定クレジット' }, { html: '月0cr（パック購入可）' }],
         ],
         note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
       }}
@@ -274,7 +274,7 @@ const jsonLd = JSON.stringify(jsonLdEntries);
       relatedTools={[
         { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
         { name: 'Kling AI', slug: 'kling-ai', initial: 'K', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料のみ' }, { s: 'cond', label: '無料：1日66cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://kling.ai' },
-        { name: 'Pika', slug: 'pika', initial: 'P', cat: '動画生成', badges: [{ s: 'cond', label: '商用：有料で可' }, { s: 'cond', label: '無料：月80cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://pika.art' },
+        { name: 'Pika', slug: 'pika', initial: 'P', cat: '動画生成', badges: [{ s: 'cond', label: '商用：有料で可' }, { s: 'cond', label: '無料：月0cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://pika.art' },
       ]}
       nextReads={[
         { href: '/comparisons/ai-video-generation-sample-comparison/', title: 'AI動画生成ツールの作例比較', desc: '動画生成ツール全体の作例比較（Kling AI・Pika・Runway・Luma AIの作例を掲載）' },

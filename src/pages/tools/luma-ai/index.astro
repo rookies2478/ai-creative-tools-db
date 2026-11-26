@@ -63,7 +63,7 @@ const jsonLd = JSON.stringify([
       specs={[
         { lb: '商用利用', badge: { s: 'cond', label: 'App/APIで条件確認' } },
         { lb: '無料枠', badge: { s: 'cond', label: 'free trial credits' } },
-        { lb: '料金目安', text: 'Plus〜（現行金額は要公式確認）', mono: true },
+        { lb: '料金目安', text: 'Plus $30/月〜（USD・月払い）', mono: true },
         { lb: '透かし', badge: { s: 'cond', label: 'APIなし / App要確認' } },
         { lb: '日本語UI', badge: { s: 'na', label: '要確認' } },
         { lb: '入力素材', badge: { s: 'cond', label: '注意あり' } },
@@ -73,7 +73,7 @@ const jsonLd = JSON.stringify([
       basicInfo={[
         {
           title: '商用利用', badge: { s: 'cond', label: 'App/APIで条件確認' }, wide: true,
-          sum: 'Luma APIの公式FAQではAPI出力の商用利用が認められています。Luma Appの現行プラン別条件は最新規約・契約画面で確認が必要です。',
+          sum: '公式料金ページ（2026-11-26確認）は全プランにcommercial useを含むと記載。API出力も公式FAQで商用利用可。Trialは内部評価・テスト目的に限定。',
           det: 'Trial出力は公式利用規約上、内部評価・テスト目的に限定されています。API出力は公式FAQで商用利用可と案内されていますが、Luma Appのプラン別権利条件を旧Dream Machineの条件から引き継いで断定しないでください。利用経路ごとに最新規約を確認してください。',
         },
         {
@@ -81,8 +81,8 @@ const jsonLd = JSON.stringify([
           det: '現行公式情報ではPlus・Pro・Ultra・Enterpriseの各プランにfree trial creditsが案内されています。恒常的なFreeプランは確認できません。APIには無料枠がなく、最初の生成から従量課金です。',
         },
         {
-          title: '料金', sum: 'Plus / Pro / Ultra / Enterprise（現行金額は要公式確認）', sumMono: false,
-          det: 'Luma Appは月次クレジット制です。具体的な現行金額は公開公式面から安全に確認できないため断定しません。APIはAppとは別の従量課金体系です。',
+          title: '料金', sum: 'Plus $30/月・Pro $90/月・Ultra $300/月（USD・月払い）', sumMono: false,
+          det: 'Luma Appは月次クレジット制です。公式料金ページ（2026-11-26確認）の表示はPlus $30/月（年払い月$25）・Pro $90/月（年払い月$75）・Ultra $300/月（年払い月$250）（USD。税込・日本円請求・地域差は未確認）。APIはAppとは別の従量課金体系です。',
         },
         {
           title: '透かし', badge: { s: 'cond', label: 'APIなし / App要確認' },
@@ -112,7 +112,7 @@ const jsonLd = JSON.stringify([
       ]}
       cons={[
         '恒常的な無料プランは現行公式構成で確認できず、free trial creditsの案内に留まる',
-        'Luma Appの現行金額を公開公式面から安全に確認できない',
+        'Luma Appの金額はUSD表示のみ確認（税込・日本円請求・地域差は未確認）',
         'AppとAPIで料金・無料枠・商用利用条件が異なる',
         '日本語UI・日本語プロンプトの公式対応範囲は要確認',
       ]}
@@ -120,7 +120,7 @@ const jsonLd = JSON.stringify([
         'Ray3.2の新規生成は5秒または10秒。Modify Video V2は最大20秒・1080p',
         'APIは無料枠なしの従量課金',
         'Trial出力は内部評価・テスト目的に限定',
-        'Luma Appの現行プラン金額・商用利用・透かし条件は契約画面で確認が必要',
+        'Luma Appの透かし条件は料金ページに記載がなく、税込・日本円請求は契約画面で確認が必要',
       ]}
       quickTable={{
         kind: 'spec',
@@ -128,8 +128,8 @@ const jsonLd = JSON.stringify([
           [{ html: 'カテゴリ', rk: true }, { html: 'AI動画生成・動画編集' }],
           [{ html: '現行モデル', rk: true }, { html: '<span class="mono">Ray3.2</span><br>新規動画生成は5秒/10秒。' }],
           [{ html: '無料枠', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>free trial credits</span><br>恒常Freeプランは現行公式構成で未確認。APIは無料枠なし。' }],
-          [{ html: '料金', rk: true }, { html: 'Plus / Pro / Ultra / Enterprise<br>現行金額は公式契約画面で確認。APIは別の従量課金。' }],
-          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>App/APIで条件確認</span><br>API出力は公式FAQで商用利用可。Trialは内部評価・テスト目的に限定。' }],
+          [{ html: '料金', rk: true }, { html: 'Plus / Pro / Ultra / Enterprise<br>Plus $30/月（年払い月$25）・Pro $90/月（年払い月$75）・Ultra $300/月（年払い月$250）（2026-11-26確認、USD）。APIは別の従量課金。' }],
+          [{ html: '商用利用', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>App/APIで条件確認</span><br>料金ページは全プランにcommercial useを記載。API出力は公式FAQで商用利用可。Trialは内部評価・テスト目的に限定。' }],
           [{ html: '透かし', rk: true }, { html: '<span class="tdp-st cond sm"><span class="d"></span>APIなし / App要確認</span>' }],
           [{ html: '日本語対応', rk: true }, { html: '現行公式情報で明確な対応範囲を確認できず' }],
           [{ html: '動画長', rk: true }, { html: '生成5秒/10秒、Modify Video V2は最大20秒・1080p' }],
@@ -148,7 +148,7 @@ const jsonLd = JSON.stringify([
           kind: 'cmp',
           headers: ['区分', '現行構成', '備考'],
           rows: [
-            [{ html: 'Luma App', rk: true }, { html: 'Plus / Pro / Ultra' }, { html: '個人向け。現行金額は公式契約画面で確認' }],
+            [{ html: 'Luma App', rk: true }, { html: 'Plus / Pro / Ultra' }, { html: '個人向け。Plus $30/月・Pro $90/月・Ultra $300/月（2026-11-26確認）' }],
             [{ html: 'Enterprise', rk: true }, { html: 'Enterprise' }, { html: '法人向け。契約条件を個別確認' }],
             [{ html: 'Trial', rk: true }, { html: 'free trial credits' }, { html: '恒常Freeプランとは別。利用規約上のTrial制限あり' }],
             [{ html: 'API', rk: true }, { html: '従量課金', mono: false }, { html: '無料枠なし。Luma Appサブスクリプションとは別体系' }],
@@ -157,15 +157,15 @@ const jsonLd = JSON.stringify([
         notes: [
           '現行公式情報では年払いで最大20%節約との案内があります',
           'Luma Appの未使用月次クレジットは請求サイクル終了時に失効すると公式Billing Policyで案内されています',
-          '<b>具体的な現行金額は公式料金・契約画面でご確認ください</b>',
+          '<b>金額は2026-11-26の公式料金ページ表示（USD）です。税込・日本円請求は契約画面でご確認ください</b>',
         ],
       }}
       commercial={{
-        lead: 'Luma APIの公式FAQではAPI出力の商用利用が認められています。一方、Luma Appの現行プラン別条件は最新規約・契約画面で確認が必要です。Trial出力は内部評価・テスト目的に限定されています。',
+        lead: 'Luma APIの公式FAQではAPI出力の商用利用が認められています。一方、Luma Appは公式料金ページ（2026-11-26確認）で全プランにcommercial useを記載しています。Trial出力は内部評価・テスト目的に限定されています。',
         points: [
           'Luma API出力：公式FAQで商用利用可と案内',
           'Trial：公式利用規約上、内部評価・テスト目的に限定',
-          'Luma App：現行プラン別の商用利用条件は最新規約・契約画面で確認',
+          'Luma App：公式料金ページは全プランにcommercial useを記載（最新規約・契約画面も確認）',
           '入力素材・人物・ブランド等の第三者権利は別途確認が必要',
         ],
         disclaimer: 'このページは情報提供を目的としており、法的助言ではありません。App / API / Trialの利用経路ごとに最新のLuma AI公式利用規約・契約条件をご確認ください。',
@@ -201,10 +201,10 @@ const jsonLd = JSON.stringify([
         headers: ['比較軸', 'Luma AI', 'Runway', 'Kling AI', 'Pika', 'Hailuo AI'],
         rows: [
           [{ html: '最大動画長', rk: true }, { html: '生成5/10秒・編集最大20秒', me: true }, { html: '要公式確認' }, { html: '10秒（延長3分）' }, { html: '最大25秒' }, { html: '最大10秒' }],
-          [{ html: '商用利用', rk: true }, { html: 'API可 / App要確認', me: true }, { html: '全プラン・条件あり' }, { html: '有料プランのみ' }, { html: '有料プランで可' }, { html: 'Standard以上' }],
+          [{ html: '商用利用', rk: true }, { html: 'API可 / App：料金ページに記載（規約も確認）', me: true }, { html: '全プラン・条件あり' }, { html: '有料プランのみ' }, { html: '有料プランで可' }, { html: 'Standard以上' }],
           [{ html: '透かし（無料）', rk: true }, { html: 'APIなし / App要確認', me: true }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }, { html: 'あり' }],
           [{ html: '日本語UI', rk: true }, { html: '要確認', me: true }, { html: '非対応' }, { html: '部分対応' }, { html: '部分対応' }, { html: '非対応' }],
-          [{ html: '無料枠', rk: true }, { html: 'trial credits', me: true }, { html: '125cr（初回）' }, { html: '1日66cr' }, { html: '月80cr' }, { html: '生成回数制限' }],
+          [{ html: '無料枠', rk: true }, { html: 'trial credits', me: true }, { html: '125cr（初回）' }, { html: '1日66cr' }, { html: '月0cr（パック購入可）' }, { html: '生成回数制限' }],
         ],
         note: '※ 各ツールの最新条件は公式サイトをご確認ください。',
       }}
@@ -241,10 +241,10 @@ const jsonLd = JSON.stringify([
       ]}
       faqs={[
         { q: 'Luma AIは無料で使えますか？', a: '現行公式情報では恒常的なFreeプランは確認できず、free trial creditsが案内されています。APIには無料枠がなく、最初の生成から従量課金です。' },
-        { q: 'Luma AIは商用利用できますか？', a: 'Luma APIの公式FAQではAPI出力の商用利用が認められています。Luma Appの現行プラン別条件は最新規約・契約画面で確認してください。Trial出力は内部評価・テスト目的に限定されています。本記事は法的助言ではありません。' },
+        { q: 'Luma AIは商用利用できますか？', a: 'Luma APIの公式FAQではAPI出力の商用利用が認められています。Luma Appは公式料金ページ（2026-11-26確認）で全プランにcommercial useを記載していますが、最新規約・契約画面もご確認ください。Trial出力は内部評価・テスト目的に限定されています。本記事は法的助言ではありません。' },
         { q: '現在の動画モデルは何ですか？', a: '現行動画モデルはRay3.2です。公式情報では旧Dream MachineやRay2を現行モデルとして混同しないよう明記されています。' },
         { q: '動画の最大長はどのくらいですか？', a: 'Ray3.2の新規動画生成は5秒または10秒です。Modify Video V2では最大20秒・1080pの編集に対応します。' },
-        { q: '料金プランはどうなっていますか？', a: '現行公式情報ではPlus・Pro・Ultra・Enterpriseが案内されています。具体的な現行金額は公式契約画面でご確認ください。APIは別の従量課金です。' },
+        { q: '料金プランはどうなっていますか？', a: '現行公式情報ではPlus・Pro・Ultra・Enterpriseが案内されています。金額はPlus $30/月（年払い月$25）・Pro $90/月（年払い月$75）・Ultra $300/月（年払い月$250）（2026-11-26確認、USD、税込・日本円請求は未確認）。APIは別の従量課金です。' },
         { q: '透かしはありますか？', a: 'Luma APIは公式FAQで出力に透かしなしと案内されています。Luma Appの現行プラン別条件は契約画面で確認してください。' },
         { q: '日本語で使えますか？', a: '現行公式情報だけでは日本語UI・日本語プロンプトの正式対応範囲を明確に確認できていません。実際のLuma Appでご確認ください。' },
         { q: 'APIは利用できますか？', a: '利用できます。Luma APIはLuma Appのサブスクリプションとは別の従量課金体系で、公式FAQでは無料枠なしと案内されています。' },
@@ -252,7 +252,7 @@ const jsonLd = JSON.stringify([
       relatedTools={[
         { name: 'Runway', slug: 'runway', initial: 'R', cat: '動画生成', badges: [{ s: 'cond', label: '商用：条件あり' }, { s: 'cond', label: '無料：125cr（初回）' }, { s: 'na', label: '日本語UI：非対応' }], platforms: ['Web', 'API'], official: 'https://runwayml.com' },
         { name: 'Kling AI', slug: 'kling-ai', initial: 'K', cat: '動画生成', badges: [{ s: 'paid', label: '商用：有料のみ' }, { s: 'cond', label: '無料：1日66cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://kling.ai' },
-        { name: 'Pika', slug: 'pika', initial: 'P', cat: '動画生成', badges: [{ s: 'cond', label: '商用：有料で可' }, { s: 'cond', label: '無料：月80cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://pika.art' },
+        { name: 'Pika', slug: 'pika', initial: 'P', cat: '動画生成', badges: [{ s: 'cond', label: '商用：有料で可' }, { s: 'cond', label: '無料：月0cr' }, { s: 'cond', label: '日本語UI：部分' }], platforms: ['Web'], official: 'https://pika.art' },
       ]}
       nextReads={buildNextReads('luma-ai')}
       conditions={[

@@ -10,7 +10,8 @@ commercialUse: "limited"
 commercialUseNote: "公式日本語料金表はProとBusinessに商用ライセンスを明記。Freeの全機能での商用利用は未確認。 未確認のモデル別・入力素材の第三者権利は別確認。"
 japaneseUi: "unknown"
 japanesePrompt: "unknown"
-watermark: "unknown"
+watermark: "no"
+watermarkCondition: "日本語公式料金表（2026-11-17確認）のFreeに「透かしなしの無料エクスポート」と明記。Pro/Businessの透かし記載はないが商用ライセンスあり。透かしがないことはFreeでの商用利用許可を意味しない。"
 bestFor:
   - "EC商品画像と背景編集"
 strengths:

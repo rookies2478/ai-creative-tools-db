@@ -22,7 +22,7 @@ officialSourceUrl: "https://www.scenario.com/pricing"
 lowestPaidPlan: "Starter US$15/月（月払い）"
 currency: "USD"
 pricingModel: "unknown"
-freePlanNote: "公式の無料評価クレジット（50 credits）案内あり。最新の補充条件は未確認。"
+freePlanNote: "公式料金ページ（2026-11-17確認）はバナーで「毎日50無料クレジット」、FAQで「50クレジットの無料枠」と記載し表記が一致しない。補充時刻・繰越条件は料金ページに明記なし。無料利用は個人・評価用途のみ。"
 paidPlanNote: "Starter US$15/月（月払い）。日本での実際の請求通貨・税・割引は購入時に確認。"
 platforms:
   - web

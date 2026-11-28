@@ -1,7 +1,7 @@
 ---
 task_id: "2026-11-26-header-overflow-360"
 created_at: "2026-11-26"
-status: READY
+status: DONE
 risk: LOW
 current_phase: ui-fix
 production_required: false

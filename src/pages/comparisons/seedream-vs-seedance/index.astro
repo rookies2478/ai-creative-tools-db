@@ -38,6 +38,21 @@ const sources = [
   { href: "https://runway.com/safety/usage-policy", label: "Runway Usage Policy" },
   { href: "https://dev.runway.com/learn/commercial-use", label: "Runway Dev公式 商用利用ガイド" },
 ];
+const tocItems = [
+  { href: "#cp-conclusion-h", label: "結論：どちらを選ぶべきか" },
+  { href: "#cp-table-h", label: "比較表" },
+  { href: "#seed-models-h", label: "Seedream 5.5・Layers・Seedance 2.5 Flashの違い" },
+  { href: "#seed-transparent-h", label: "透過素材制作での5.5とLayersの使い分け" },
+  { href: "#seed-platform-h", label: "DreaminaとRunway Devで利用できるモデル" },
+  { href: "#seed-pricing-h", label: "料金比較：Dreaminaの月額制とRunway Devの従量課金" },
+  { href: "#seed-rights-h", label: "商用利用・透かし：契約先を確認" },
+  { href: "#faq-heading", label: "よくある質問" },
+];
+const officialChecks = [
+  { href: "https://dreamina.capcut.com/ja-jp/pricing/dreamina-price", label: "Dreamina料金・プラン", note: "Dreaminaの月額プランとクレジット数を確認" },
+  { href: "https://docs.dev.runwayml.com/guides/pricing/", label: "Runway Dev公式料金・課金式", note: "Runway Devの従量課金とクレジット消費を確認" },
+  { href: "https://dev.runway.com/learn/commercial-use", label: "Runway Dev公式 商用利用ガイド", note: "商用利用・透かしの条件は契約先ごとに確認（Dreaminaの規約は下部の出典欄）" },
+];
 const relatedLinks = [
   {href:'/tools/dreamina/',label:"Dreaminaの詳細"},
   {href:'/tools/runway/',label:"Runwayの詳細（WebサービスとAPIの条件は別途確認）"},
@@ -68,6 +83,8 @@ const relatedLinks = [
     {purpose:"高解像度の動画出力",candidate:"Seedance 2.5（Runway Dev）",checkPoint:'1080p・4Kの単価と対応設定'},
   ]}
   comparisonRows={comparisonRows}
+  tocItems={tocItems}
+  officialChecks={officialChecks}
   faqs={faqs}
   relatedLinks={relatedLinks}
   sources={sources}

@@ -27,6 +27,10 @@ export interface QuickDecisionRow {
 
 export interface TableFootnote { mark: string; text: string; }
 
+export interface TocItem { href: string; label: string; }
+
+export interface OfficialCheck { href: string; label: string; note: string; }
+
 export interface Props {
   title: string;
   description: string;
@@ -48,6 +52,8 @@ export interface Props {
   quickDecisionRows?: QuickDecisionRow[];
   comparisonRows: ComparisonRow[];
   tableFootnotes?: TableFootnote[];
+  tocItems?: TocItem[];
+  officialChecks?: OfficialCheck[];
   faqs: { q: string; a: string }[];
   relatedLinks: RelatedLink[];
   sources: SourceLink[];
@@ -78,6 +84,8 @@ const {
   quickDecisionRows,
   comparisonRows,
   tableFootnotes,
+  tocItems,
+  officialChecks,
   faqs,
   relatedLinks,
   sources,
@@ -174,6 +182,31 @@ function formatDate(iso: string): string {
         </ul>
       </div>
     </div>
+
+    <!-- ===== 目次・まず確認する公式情報（任意） ===== -->
+    {tocItems && tocItems.length > 0 && (
+      <nav class="cp-toc" aria-labelledby="cp-toc-h">
+        <h2 class="cp-toc-h" id="cp-toc-h">この記事の目次</h2>
+        <ol class="cp-toc-list">
+          {tocItems.map(({ href, label }) => (
+            <li><a href={href}>{label}</a></li>
+          ))}
+        </ol>
+      </nav>
+    )}
+    {officialChecks && officialChecks.length > 0 && (
+      <section class="cp-official" aria-labelledby="cp-official-h">
+        <h2 class="cp-official-h" id="cp-official-h">まず確認する公式情報{officialChecks.length}点</h2>
+        <ul class="cp-official-list">
+          {officialChecks.map(({ href, label, note }) => (
+            <li>
+              <a href={href} target="_blank" rel="noopener noreferrer">{label}</a>
+              <span class="cp-official-note">{note}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
 
     <!-- ===== 結論カード ===== -->
     <section class="cp-sec" aria-labelledby="cp-conclusion-h">
@@ -326,6 +359,47 @@ function formatDate(iso: string): string {
     font-family: "Noto Sans JP", system-ui, sans-serif;
     line-height: 1.7;
   }
+
+
+  /* 目次・まず確認する公式情報（任意ブロック） */
+  .cp-toc,
+  .cp-official {
+    background: var(--surface, #fff);
+    border: 1px solid var(--line, #e2e8f0);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 24px;
+  }
+  .cp-toc-h,
+  .cp-official-h {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+  .cp-toc-list,
+  .cp-official-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .cp-toc-list { counter-reset: cp-toc; }
+  .cp-toc-list li { counter-increment: cp-toc; display: flex; gap: 8px; align-items: baseline; }
+  .cp-toc-list li::before { content: counter(cp-toc) "."; color: var(--muted); font-size: 13px; min-width: 1.4em; }
+  .cp-toc-list a,
+  .cp-official-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    overflow-wrap: anywhere;
+  }
+  .cp-toc-list a,
+  .cp-official-list a { color: var(--brand-ink); text-decoration: underline; text-underline-offset: 3px; }
+  .cp-official-list li { display: flex; flex-direction: column; gap: 0; }
+  .cp-official-note { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+  .cp-toc + .cp-official { margin-top: -8px; }
 
   /* パンくず */
   .cp-crumb {
